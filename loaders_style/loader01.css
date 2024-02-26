@@ -1,0 +1,26 @@
+body {
+    background-image: linear-gradient(100deg, #b60088 10%, #ff0080);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 97vh;
+}
+
+.loader {
+    width: 100px;
+    height: 100px;
+    border: 8px solid rgb(245, 245, 245);
+    border-radius: 50%;
+    border-top-color: green;
+    animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+    0%{
+        transform: rotate(0deg);
+    }
+    
+    100%{
+        transform: rotate(360deg);
+    }
+}
