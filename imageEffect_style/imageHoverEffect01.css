@@ -19,7 +19,7 @@ body {
 
 .container:hover {
     border: 6px solid rgb(189, 255, 255);
-    transition: linear .5s;
+    transition: .5s;
 }
 
 .container img {
@@ -33,4 +33,5 @@ body {
     width: 140%;
     height: 140%;
     filter: none;
+    transition: .7s;
 }

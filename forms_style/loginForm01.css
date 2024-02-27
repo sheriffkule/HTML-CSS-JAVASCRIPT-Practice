@@ -37,6 +37,11 @@ body {
     background-color: rgb(201, 199, 193);
 }
 
+.login-form input:hover {
+    background-color: rgb(179, 206, 174);
+    transition: .4s;
+}
+
 .login-form input:nth-last-child(2) {
     background-color: rgba(40, 168, 7, 0.8);
     width: 80%;
