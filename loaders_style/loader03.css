@@ -39,7 +39,6 @@ body {
 }
 
 .dots>div {
-    background-color: whitesmoke;
     height: 15px;
     width: 15px;
     margin: 10px 0 8px 8px;
@@ -49,11 +48,11 @@ body {
 
 @keyframes bubble_animation {
     0% {
-        transform: scale(0);
+        transform: scale(0.1);
         background-color: black;
     }
     50% {
-        transform: scale(1);
+        transform: scale(1.2);
         background-color: #e21515;
     }
     100% {

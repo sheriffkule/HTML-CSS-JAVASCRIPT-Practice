@@ -1,0 +1,102 @@
+body {
+    background-image: linear-gradient(#00ffdd 0%, #376285 100%);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    background-color: rgba(255, 255, 255, 0.4);
+    width: 400px;
+    height: 420px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(204, 204, 204, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-icon {
+    background-color: hsl(215, 100%, 69%);
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transform: translateY(20px);
+}
+
+.user-icon img {
+    width: 100%;
+    height: 100%;
+}
+
+.text {
+    font-family: Helvetica;
+    font-weight: 500;
+    transform: translateY(10px);
+    letter-spacing: 2px;
+}
+
+.login {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login input {
+    padding: 10px 16px;
+    margin: 10px;
+}
+
+.login input[type=text],
+input[type=password] {
+    width: 70%;
+    border-radius: 6px;
+    border: 1px solid #a8ffd3;
+    outline: none;
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.login input[type=text]:focus,
+.login input[type=password]:focus {
+    background-color: rgb(179, 255, 249);
+    font-size: 15px;
+}
+
+.login input:last-child {
+    width: 79%;
+    border: none;
+    border-radius: 6px;
+    background-color: #4e82ad;
+    font-size: 16px;
+    font-family: Helvetica;
+    letter-spacing: 2px;
+    color: white;
+}
+
+.login input:last-child:hover {
+    background-color: #376285;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.suggestions {
+    width: 79%;
+    display: flex;
+    justify-content: space-between;
+    font-family: Calibri;
+    margin-top: 10px;
+}
+
+.suggestions .forgot:hover {
+    color: red;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
