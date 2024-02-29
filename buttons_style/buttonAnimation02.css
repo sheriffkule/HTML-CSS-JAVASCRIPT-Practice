@@ -1,0 +1,45 @@
+body {
+    background-color: #252525;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 97vh;
+}
+
+.main_btn {
+    position: relative;
+    height: 40px;
+    width: 100px;
+    background-color: transparent;
+    color: blanchedalmond;
+    border: none;
+    outline: 1px solid white;
+    border-radius: 4px;
+    transition: 0.8s ease;
+    font-size: 14px;
+}
+
+.main_btn:hover {
+    background-color: #c6fffa;
+    color: black;
+    font-weight: bold;
+}
+
+.main_btn::before {
+    content: "";
+    position: absolute;
+    height: 40px;
+    width: 100px;
+    background-color: transparent;
+    top: 80%;
+    left: 0;
+    transform: perspective(1em)
+    rotateX(43deg) scale(1, 0.35);
+    transition: 1s ease;
+    filter: blur(1.1em);
+}
+
+.main_btn:hover::before {
+    top: 120%;
+    background-color: rgb(170, 255, 234);
+}
