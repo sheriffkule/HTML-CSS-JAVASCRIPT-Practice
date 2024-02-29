@@ -1,0 +1,50 @@
+body {
+    background-color: #181818;
+    height: 97vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+}
+
+.square {
+    height: 100px;
+    width: 100px;
+    background-color: greenyellow;
+
+}
+
+.rectangle {
+    height: 100px;
+    width: 200px;
+    background-color: aquamarine;
+}
+
+.circle {
+    height: 120px;
+    width: 120px;
+    background-color: blueviolet;
+    border-radius: 50%;
+}
+
+.triangle {
+    height: 0;
+    width: 0;
+    border-left: 75px solid transparent;
+    border-right: 75px solid transparent;
+    border-bottom: 150px solid #003780;
+}
+
+.diamond {
+    height: 120px;
+    width: 120px;
+    background-color: brown;
+    transform: rotate(45deg);
+}
+
+.parallelogram {
+    height: 100px;
+    width: 200px;
+    background-color: tomato;
+    transform: skew(-45deg);
+}
