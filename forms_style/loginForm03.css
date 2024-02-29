@@ -1,0 +1,79 @@
+body {
+    /* background-image: linear-gradient(90deg, #db0000 0%, #3f3fff 100%); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 97vh;
+    overflow: hidden;
+}
+
+.form-bg {
+    position: absolute;
+    width: 105%;
+    height: 105%;
+    background-image: linear-gradient(90deg, #db0000 0%, #3f3fff 100%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -99;
+    filter: blur(20px);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 200px;
+}
+
+.form p {
+    font: 28px Verdana;
+    color: rgba(199, 199, 224, 0.9);
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.form input {
+    padding: 0.8rem;
+    margin: 8px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.form input[type=text], input[type=password] {
+    width: 100%;
+    text-indent: 2rem;
+    font-family: Arial;
+}
+
+.form input:first-of-type {
+    background: url(/icons/user-16.png) aliceblue;
+    background-repeat: no-repeat;
+    background-size: 22px;
+    background-position: 6px center ;
+}
+
+.form input:nth-of-type(2) {
+    background: url(/icons/lock-16.png) aliceblue;
+    background-repeat: no-repeat;
+    background-size: 22px;
+    background-position: 6px center;
+}
+
+.form input:last-of-type {
+    padding: 12px 40px;
+    font: 18px bold;
+    background-image: linear-gradient(90deg, #b93312 0%, #3333a5 100%);
+    color: white;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.form input:last-of-type:hover {
+    background-image: none;
+    background-color: #b93312;
+    transition:  ease-out;
+}
