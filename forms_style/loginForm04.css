@@ -1,0 +1,105 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url(/images/dreamy-world.jpg);
+    background-size: cover;
+    height: 97vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    height: 400px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 10px rgba(255, 123, 0, 0.2);
+    border: 1px solid #685129;
+    border-radius: 6px;
+    align-items: center;
+    padding-top: 1rem;
+}
+
+h3 {
+    color: white;
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.login input,
+button {
+    margin: 10px;
+    padding: 10px 16px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    border-radius: 20px;
+}
+
+.login input {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+    letter-spacing: 1px;
+    text-indent: 30px;
+    background-image: url(/icons/user-16.png);
+    background-repeat: no-repeat;
+    background-size: 20px;
+    background-position: 12px center;
+    transition: 0.3s ease;
+}
+
+.login input:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    background-size: 24px;
+}
+
+.login input:nth-child(2) {
+    background-image: url(/icons/lock-16.png);
+}
+
+.login input::placeholder {
+    color: gainsboro;
+    font-size: 14px;
+}
+
+button {
+    background-color: #ca6200;
+    color: rgb(255, 255, 255);
+    font-size: 17px;
+    font-family: Calibri;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+button:hover {
+    background-color: #9b4b00cb;
+    font-weight: bold;
+}
+
+.suggests {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Calibri;
+    color: white;
+    margin-top: 1rem;
+}
+
+.forgot {
+    color: #ca6200;
+    cursor: pointer;
+}
+
+.forgot:hover {
+    color: #ff8717;
+}
