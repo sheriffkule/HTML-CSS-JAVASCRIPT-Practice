@@ -1,0 +1,42 @@
+body {
+    background-color: #181818;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 97vh;
+}
+
+.heart {
+    position: relative;
+    height: 320px;
+    width: 200px;
+    background-color: red;
+    transform: rotate(45deg);
+    border-radius: 200px 200px 0 0;
+}
+
+.heart::before {
+    content: "";
+    position: absolute;
+    top: 60px;
+    left: -60px;
+    height: 320px;
+    width: 200px;
+    background-color: red;
+    transform: rotate(-90deg);
+    border-radius: 200px 200px 0 0;
+}
+
+.heart::after {
+    content: "love";
+    position: absolute;
+    top: 150px;
+    left: 3%;
+    font-size: 60px;
+    transform: rotate(-45deg);
+    color: antiquewhite;
+}
+
+.heart::after:hover {
+    color: chocolate;
+}
