@@ -1,0 +1,89 @@
+body {
+    background-color: #300a53;
+    height: 200vh;
+}
+
+.sidenav {
+    position: absolute;
+    left: 0px;
+    top: 30%;
+    transform: translate(-50%, -50%);
+}
+
+.sidenav a {
+    position: absolute;
+    font-size: 18px;
+    font-family: calibri;
+    text-align: left;
+    padding: 16px 20px;
+    color: white;
+    border-radius: 0px 40px 40px 0px;
+    width: 110px;
+    text-decoration: none;
+    display: flex;
+    transition: 0.3s;
+    left: -92px;
+}
+
+.sidenav a img {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    top: 50%;
+    right: -12%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: #cccccc;
+}
+
+.sidenav a:hover {
+    left: 0px;
+    display: block;
+    text-align: left;
+}
+
+#facebook {
+    top: 30px;
+    background-color: #3b5998;
+}
+
+#instagram {
+    top: 90px;
+    background-color: #91255b;
+}
+
+#twitter {
+    top: 150px;
+    background-color: #185579;
+}
+
+#google {
+    top: 210px;
+    background-color: #803a1f;
+}
+
+#linkedin {
+    top: 270px;
+    background-color: #1c426e;
+}
+
+/* after hover */
+#facebook:hover {
+    background-color: #577bc9;
+}
+
+#instagram:hover {
+    background-color: #c755c7;
+}
+
+#twitter:hover {
+    background-color: #3b7e98;
+}
+
+#google:hover {
+    background-color: #bd6c3d;
+}
+
+#linkedin:hover {
+    background-color: #4161a7;
+}

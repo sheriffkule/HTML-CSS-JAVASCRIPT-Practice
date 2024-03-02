@@ -6,6 +6,14 @@ body {
     box-sizing: border-box;
 }
 
+main{
+    margin-top: 200px;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+}
+
 .navbar {
     background-color: #24252a;
     width: 100%;
@@ -24,8 +32,6 @@ body {
 
 .logo {
     margin-left: 20px;
-    justify-content: flex-start;
-    text-align: start;
     font-family: sans-serif;
     font-size: 22px;
     cursor: default;
@@ -33,6 +39,13 @@ body {
 
 .logo span:nth-of-type(1) {
     color: orangered;
+}
+
+.logo:hover {
+    position: relative;
+    font: 25px bold;
+    font-family: sans-serif;
+    transition: 0.5s ease-in-out;
 }
 
 .logo::selection, span::selection {
