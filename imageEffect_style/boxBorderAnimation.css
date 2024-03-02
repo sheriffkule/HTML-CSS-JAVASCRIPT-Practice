@@ -79,12 +79,15 @@ color: #797caa;
     background-color: #05253a;
     inset: 4px;
     border-radius: 20px;
-    transition: .3s ease-in-out;
+    transition: .4s ease-in-out;
 }
 
 .box:hover::after {
     content: "Hello";
+    font-size: large;
     color: darkkhaki;
     text-align: center;
+    padding-top: 20px;
+    align-content: baseline;
     background-color: #062b44;
 }
