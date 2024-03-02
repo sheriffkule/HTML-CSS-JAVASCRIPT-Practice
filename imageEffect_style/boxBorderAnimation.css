@@ -1,0 +1,90 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #05253a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.box {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    background-color: #00000040;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.box:hover{
+background-color: #0000007c;
+}
+
+.box h2 {
+    font-size: 5em;
+    font-weight: 100;
+    color: #c0c4ff;
+    z-index: 10;
+    transition: 0.25s;
+}
+
+.box h2:hover {
+color: #797caa;
+}
+
+.border1,
+.border2 {
+    position: absolute;
+    width: 25%;
+    height: 130%;
+    background-color: aqua;
+    animation: animate1 5s linear infinite;
+}
+
+.border2 {
+    background-color: #b615b6;
+    transform: rotate(90deg);
+    animation: animate2 2.5s linear infinite;
+}
+
+@keyframes animate1 {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes animate2 {
+    0% {
+        transform: rotate(90deg);
+    }
+    100% {
+        transform: rotate(270deg);
+    }
+}
+
+.box::after {
+    content: "";
+    position: absolute;
+    background-color: #05253a;
+    inset: 4px;
+    border-radius: 20px;
+    transition: .3s ease-in-out;
+}
+
+.box:hover::after {
+    content: "Hello";
+    color: darkkhaki;
+    text-align: center;
+    background-color: #062b44;
+}
