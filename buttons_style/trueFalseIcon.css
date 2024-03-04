@@ -1,0 +1,100 @@
+body {
+    display: flex;
+    flex-direction: column;
+    height: 97vh;
+    justify-content: center;
+    align-items: center;
+    background-color: indigo;
+}
+
+p {
+    width: 400px;
+    margin: 0;
+    text-align: center;
+    font-size: 30px;
+    color: white;
+    background-color: rgb(19, 100, 96);
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 400px;
+}
+
+.div1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+    width: 50%;
+    background-color: rgb(64, 255, 47);
+    transition: 0.3s;
+}
+
+.div1:hover {
+    background-color: rgb(159, 243, 90);
+}
+
+.div1 .t-icon {
+    position: relative;
+    height: 70px;
+    width: 12px;
+    background-color: black;
+    transform: rotate(45deg);
+    transition: 0.5s;
+}
+
+.div1 .t-icon::after {
+    content: "";
+    position: absolute;
+    height: calc(70px/2);
+    width: 12px;
+    background-color: black;
+    transform: rotate(-90deg)
+    translate(-47px, -11.5px);
+    transition: 0.5s;
+}
+
+.t-icon:hover,
+.t-icon:hover::after {
+    background-color: rgb(8, 70, 0);
+}
+
+.div2 {
+    position: relative;
+    display: flex;
+    background-color: red;
+    height: 150px;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.div2:hover {
+    background-color: brown;
+}
+
+.f-icon {
+    position: relative;
+    height: 70px;
+    width: 12px;
+    background-color: black;
+    transform: rotate(45deg);
+    transition: 0.5s;
+}
+
+.f-icon::after{
+    content: "";
+    position: absolute;
+    height: 70px;
+    width: 12px;
+    background-color: black;
+    transform: rotate(90deg);transition: 0.5s;
+}
+
+.f-icon:hover, .f-icon:hover::after {
+    background-color: rgb(29, 37, 124);
+}
