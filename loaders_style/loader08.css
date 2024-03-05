@@ -1,0 +1,59 @@
+body {
+    background-color: #181818;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    height: 100px;
+    display: flex;
+    align-items: center;
+}
+
+.waver {
+    height: 5px;
+    width: 20px;
+    background-color: silver;
+    margin: 0px 20px;
+    border-radius: 20px;
+    opacity: 0.5;
+    animation: waveloader 2s linear alternate infinite;
+}
+
+@keyframes waveloader {
+    to {
+        box-shadow: 0 0 20px 5px rgb(197, 255, 238);
+        height: 100px;
+        opacity: 1;
+    }
+}
+
+.waver:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.waver:nth-child(2) {
+    animation-delay: 1s;
+}
+
+
+.waver:nth-child(3) {
+    animation-delay: 2s;
+}
+
+.waver:nth-child(4) {
+    animation-delay: 3s;
+}
+
+.waver:nth-child(5) {
+    animation-delay: 4s;
+}
+
+p {
+    color: silver;
+    letter-spacing: 2px;
+    font: 20px arial;
+}
