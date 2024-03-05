@@ -1,0 +1,54 @@
+body {
+    background-color: #222222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.loader-bar {
+    height: 25px;
+    width: 200px;
+    border: 1px solid indianred;
+    border-radius: 4px;
+    overflow: hidden;
+    animation: shadow 4s linear;
+}
+
+@keyframes shadow {
+    to {
+        box-shadow: 0 0 10px 5px indianred;
+    }
+}
+
+.fill {
+    height: 100%;
+    width: 0%;
+    background-color: #dc143ccc;
+    animation: filling 4s linear;
+}
+
+@keyframes filling {
+    to {
+        width: 100%;
+    }
+}
+
+h2 {
+    font: 18px arial;
+    letter-spacing: 1px;
+    opacity: 0;
+    animation: showText 4s ease-in-out;
+    text-align: center;
+    color: indianred;
+}
+
+@keyframes showText {
+    0% {
+        opacity: 0.2;
+    }
+
+    90% {
+        opacity: 1;
+    }
+}
