@@ -1,0 +1,28 @@
+body {
+    background-color: #181818;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.loader {
+    width: 120px;
+    aspect-ratio: 1;
+    --_C: radial-gradient(farthest-side, #ff7a00 90%, #0000);
+    background: 
+    var(--_C) center,
+    var(--_C) top,
+    var(--_C) bottom,
+    var(--_C) left,
+    var(--_C) right;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    animation: spin 2.5s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(1turn);
+    }
+}
