@@ -1,0 +1,53 @@
+body {
+    background-color: #222222;
+}
+
+a {
+    position: absolute;
+    color: white;
+    top: 50%;
+    left: 20%;
+    height: 60px;
+    width: 200px;
+    background: linear-gradient(90deg, yellow, orange, red, violet, purple, blue, yellow);
+    background-size: 400%;
+    border-radius: 30px;
+    text-align: center;
+    line-height: 60px;
+    font-size: 24px;
+    font-family: Georgia;
+    text-decoration: none;
+}
+
+a:hover {
+    animation: animate 8s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        background-position: 0%;
+    }
+
+    100% {
+        background-position: 400%;
+    }
+}
+
+a::after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    bottom: -5px;
+    left: -5px;
+    right: -5px;
+    background: linear-gradient(45deg, #f15523, #ef3224, #7c3697);
+    z-index: -1;
+    border-radius: 40px;
+    opacity: 0.1;
+}
+
+a:hover::after {
+    opacity: 1;
+    filter: blur(10px);
+    animation: animate 8s linear infinite;
+}
