@@ -1,0 +1,83 @@
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(45deg, #6b0b98 30%, #ff00c8 150%);
+    display: grid;
+    justify-content: center;
+    align-items: baseline;
+    font-family: Arial;
+    font-weight: 300;
+}
+
+nav {
+    position: relative;
+    background: #ffdcfc;
+    padding: 20px 15px;
+    border-radius: 30px;
+    box-shadow: 0 1px 20px #222222d0;
+}
+
+nav a {
+    position: relative;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #303030;
+    border: 1px solid transparent;
+    z-index: 1;
+    transition: 0.3s;
+}
+
+nav span {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    height: 38px;
+    width: 85px;
+    background: linear-gradient(to left, #61045f, #aa076b);
+    border-radius: 25px;
+    transition: 0.3s;
+}
+
+nav a:nth-child(1) {
+    color: #00e1ff;
+}
+
+nav a:nth-child(1):hover {
+    color: white;
+}
+
+nav a:nth-child(2):hover {
+    color: white;
+}
+
+nav a:nth-child(2):hover ~ span {
+    left: 105px;
+    width: 106px;
+}
+
+nav a:nth-child(3):hover {
+    color: white;
+}
+
+nav a:nth-child(3):hover~span {
+    left: 216px;
+    width: 106px;
+}
+
+nav a:nth-child(4):hover {
+    color: white;
+}
+
+nav a:nth-child(4):hover~span {
+    left: 326px;
+    width: 102px;
+}
+
+nav a:nth-child(5):hover {
+    color: white;
+}
+
+nav a:nth-child(5):hover~span {
+    left: 434px;
+    width: 96px;
+}
