@@ -1,0 +1,128 @@
+:root {
+    --txtColor: #262027;
+    --linkColor: #b4ff00;
+}
+
+body {
+    height: 100vh;
+    background: url(/images/cityscape.jpg);
+    background-size: cover;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    font-family: arial;
+}
+
+.loginForm {
+    width: 400px;
+    background: #ffffff26;
+    box-shadow: 0 0 2vh silver ;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+}
+
+.loginForm h1 {
+    color: white;
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid silver;
+}
+
+.loginForm form {
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+form .inputField {
+    position: relative;
+    margin: 30px 0;
+    border-bottom: 2px solid var(--txtColor);
+}
+
+.inputField input {
+    width: 100%;
+    padding: 0 5px;
+    font-size: 16px;
+    height: 36px;
+    outline: none;
+    border: none;
+    background: none;
+}
+
+.inputField label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: var(--txtColor);
+    transform: translateY(-50%);
+    transition: 0.5s;
+}
+
+.inputField span::before {
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 0%;
+    background: white;
+    transition: 0.5s;
+}
+
+.inputField input:focus ~ label,
+.inputField input:valid ~ label {
+    color: white;
+    top: -5px;
+}
+
+.inputField input:focus ~ span::before,
+.inputField input:valid ~ span::before {
+    width: 100%;
+}
+
+.password-link {
+    margin: 5px 0 20px 0;
+    color: var(--linkColor);
+    cursor: pointer;
+}
+
+.password-link:hover {
+    text-decoration: underline;
+    color: white;
+}
+
+input[type=submit] {
+    width: 100%;
+    height: 40px;
+    border-radius: 25px;
+    border: 1px solid var(--txtColor);
+    background: none;
+    outline: none;
+    color: var(--txtColor);
+    font-size: 18px;
+    font-weight: 700;
+    transition: all 0.4s;
+}
+
+input[type=submit]:hover {
+    background: #2079b4;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 20px 2px #2079b4;
+    color: white;
+}
+
+.registration-link {
+    color: var(--txtColor);
+    margin: 30px 0;
+    text-align: center;
+}
+
+.registration-link a {
+    color: var(--linkColor);
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.registration-link a:hover {
+    text-decoration: underline;
+    color: white;
+}
