@@ -1,0 +1,41 @@
+body {
+    min-height: 97vh;
+    display: grid;
+    place-items: center;
+    background: #222222;
+}
+
+button {
+    position: relative;
+    padding: 10px 35px;
+    background: transparent;
+    border: 1px solid orange;
+    color: orange;
+    font: 600 20px Arial;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.5s;
+    overflow: hidden;
+}
+
+button:hover {
+    color: white;
+    filter: drop-shadow(0 0 10px rgba(255, 166, 0, 0.5));
+}
+
+button::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -70%;
+    transform: translate(-50%, -50%) skew(45deg);
+    height: 102%;
+    width: 120%;
+    background: orange;
+    transition: 0.4s;
+    z-index: -1;
+}
+
+button:hover::after {
+    transform: translate(50%, -50%) skew(45deg);
+}
