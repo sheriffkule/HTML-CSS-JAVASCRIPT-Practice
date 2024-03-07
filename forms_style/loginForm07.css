@@ -1,0 +1,106 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.1) url(/images/Aurora.jpeg) no-repeat;
+    background-size: cover;
+    background-blend-mode: color;
+    color: white;
+}
+
+.login-form {
+    width: 300px;
+}
+
+.login-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+form h1 {
+    position: relative;
+    font: 3em Arial;
+    padding: 12px 0;
+}
+
+form h1::after {
+    content: "";
+    position: absolute;
+    width: 130px;
+    height: 2px;
+    background: #00ff80;
+    bottom: 0;
+    left: 3px;
+}
+
+form h1:hover::after {
+    animation: 1s animate forwards;
+}
+
+@keyframes animate {
+    to {
+        transform: translateX(300px);
+        opacity: 0;
+    }
+}
+
+.inputs {
+    margin-top: 30px;
+}
+
+.inputs input {
+    width: 100%;
+    padding: 10px 0;
+    outline: none;
+    border: none;
+    /* border-bottom: 3px solid #00ff80; */
+    background: none;
+    font: 18px Arial;
+    text-indent: 40px;
+    color: #00ff80;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 26px;
+    margin: 12px 0;
+}
+
+.inputs input:focus {
+    transition: 0.4s;
+    border-bottom: 2px solid #00ff80;
+}
+
+.inputs input:focus::placeholder {
+    text-indent: 300px;
+    transition: 0.4s;
+}
+
+.inputs input::placeholder {
+    color: white;
+}
+
+.inputs input:nth-child(1) {
+    background-image: url(/icons/user-16.png);
+}
+
+.inputs input:nth-child(2) {
+    background-image: url(/icons/lock-16.png);
+}
+
+.inputs input:nth-child(3) {
+    text-indent: 0;
+    border: 2px solid #00ff0d;
+    border-radius: 24px;
+    color: white;
+    transition: all 0.4s;
+}
+
+.inputs input:nth-child(3):hover {
+    color: black;
+    background: #00ff0d;
+    filter: drop-shadow(0 0 10px #00ff0d80);
+}
