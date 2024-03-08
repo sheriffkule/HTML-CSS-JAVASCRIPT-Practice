@@ -1,0 +1,45 @@
+html {
+    block-size: 100%;
+    inline-size: 100%;
+}
+
+body {
+    height: 100vh;
+    box-sizing: border-box;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(#111, #444);
+}
+
+h1 {
+    position: relative;
+    font-size: 3rem;
+    transition: .3s;
+    cursor: pointer;
+}
+
+h1:hover {
+    color: rgb(0, 0, 82);
+}
+
+h1::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    inset: 0 0 0 0;
+    background: #99dfff;
+    z-index: -1;
+    border-radius: 8px;
+    transform: scale(0) translate(-100px, 50px);
+    transform-origin: top right;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 0 5px #99dfff);
+}
+
+h1:hover::before {
+    transform-origin: bottom left;
+    transform: scale(1);
+}
