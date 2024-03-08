@@ -1,0 +1,42 @@
+body {
+    padding: 0;
+    margin: 0;
+    background: linear-gradient(180deg, #111 -50%, #444 150%);
+
+}
+
+.container {
+    perspective: 800px;
+    perspective-origin: 50% 50%;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text {
+    font-size: 5rem;
+    color: lightcoral;
+    transform-style: preserve-3d;
+    animation: rotateText 8s infinite ease-in-out;
+    -webkit-text-stroke: 1px crimson;
+}
+
+@keyframes rotateText {
+    0% {
+        transform: rotateX(0deg) rotateY(0deg) translateZ(-200px);
+        filter: drop-shadow(0 0 1px lightgreen);
+    }
+
+    50% {
+        transform: rotateX(180deg) rotateY(180deg) translateZ(-200px);
+        filter: drop-shadow(0 0 10px lightgreen);
+    }
+
+    50% {
+        transform: rotateX(360deg) rotateY(360deg) translateZ(-200px);
+        filter: drop-shadow(0 0 20px lightgreen);
+    }
+}
