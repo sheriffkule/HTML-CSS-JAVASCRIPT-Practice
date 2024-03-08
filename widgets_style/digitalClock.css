@@ -1,0 +1,50 @@
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(130deg, rgb(46, 68, 109), rgb(0, 0, 0) 100%);
+    overflow: hidden;
+}
+
+h1 {
+    background: black;
+    color: yellow;
+    font: 8vw Arial;
+    padding: 10px 100px;
+    border-radius: 100px;
+}
+
+h1 {
+    animation: animate 5s ease-in-out infinite;
+    animation-delay: calc(0.1s a* vr(--i));
+}
+
+@keyframes animate {
+    0% {
+        color: white;
+        filter: blur(1px) hue-rotate(0deg);
+        text-shadow: 0 0 10px #fbb504,
+            0 0 20px #fbb504,
+            0 0 40px #fbb504,
+        0 0 80px #fbb504,
+        0 0 120px #fbb504,
+        0 0 200px #fbb504;
+    }
+
+    30%,
+    70% {
+        color: white;
+        filter: blur(1px) hue-rotate(360deg);
+        text-shadow: 0 0 10px #fbb504,
+            0 0 20px #fbb504,
+        0 0 40px #fbb504,
+        0 0 80px #fbb504;
+    }
+
+    100% {
+        color: #ffffff6e;
+        box-shadow: none;
+        filter: blur(2px) hue-rotate(0deg);
+    }
+}

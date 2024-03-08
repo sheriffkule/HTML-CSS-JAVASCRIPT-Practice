@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Digital Clock</title>
+    <link rel="stylesheet" href="/widgets_style/digitalClock.css">
+</head>
+
+<body>
+
+    <div>
+        <h1 id="clock"></h1>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+            const time = `${hours}:${minutes}:${seconds}`;
+            document.getElementById('clock').textContent = time;
+        }
+        setInterval(updateClock, 1000);
+    </script>
+</body>
+
+</html>
