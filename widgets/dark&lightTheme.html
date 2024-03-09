@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark & Light Theme</title>
+    <link rel="stylesheet" href="/widgets_style/dark&lightTheme.css">
+</head>
+<body>
+    <main>
+        <h1>Welcome to <span>Sheriff</span>Kule</h1>
+        <button id="darkbtn" onclick="changeTheme('dark')">Dark Theme</button>
+        <button id="lightbtn" onclick="changeTheme('light')">Light Theme</button>
+    </main>
+    <script>
+        function changeTheme(theme) {
+            let body = document.body;
+
+            if (theme === "dark") {
+                body.classList.add("dark");
+            } else {
+                body.classList.remove("dark");
+            }
+        }
+    </script>
+</body>
+</html>

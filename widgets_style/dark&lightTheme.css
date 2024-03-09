@@ -1,0 +1,59 @@
+body {
+    height: 100vh;
+    background: linear-gradient(#999999, #555555) no-repeat;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+main {
+    margin-top: 100px;
+}
+
+h1 {
+    color: black;
+}
+
+
+h1 span {
+    color: orange;
+    transition: .3s;
+    animation: animate 5s linear infinite;
+}
+
+h1 span:hover {
+    font-size: 40px;
+}
+
+main button {
+    padding: 6px 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: silver;
+    cursor: pointer;
+    transition: .2s;
+    margin: 10px 20px;
+}
+
+main button:hover {
+    background-color: teal;
+
+    box-shadow: 0 0 15px rgba(0, 128, 128, 0.5);
+}
+
+.dark {
+    background: linear-gradient(#111111, #333333);
+    color: white;
+
+}
+
+.dark h1 {
+    color: silver;
+}
+
+@keyframes animate {
+    to {
+        filter: hue-rotate(360deg);
+        text-shadow: 0 0 20px lightskyblue;
+    }
+}
