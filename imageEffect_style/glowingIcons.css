@@ -1,0 +1,77 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: linear-gradient(#111111, #444444) no-repeat;
+    height: 100vh;
+}
+
+.container {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    place-items: center;
+    gap: 150px;
+    top:25%;
+}
+
+#fb,
+#ggl,
+#ins,
+#lnd,
+#tw,
+#tlg {
+    font-size: 8em;
+    background-color: transparent;
+    color: white;
+    box-shadow: 2px 2px 2px #ffffff80, 
+    10px 1px 12px #ffffff80, 
+    2px 2px 10px #00000080, 
+    2px 2px 3px #00000080, 
+    inset 2px 2px 10px #00000080,
+    inset 2px 2px 10px #00000080,
+    inset 2px 2px 10px #00000080;
+    border-radius: 30px;
+    padding: 12px 20px;
+    margin: 0 40px;
+    animation: animate 3s linear infinite;
+    text-shadow: 0 0 50px #0072ff,
+    0 0 100px #0072ff,
+    0 0 150px #0072ff,
+    0 0 200px #0072ff;
+}
+
+#fb {
+    animation-delay: .2s;
+}
+#ggl {
+    animation-delay: .4s;
+}
+
+#ins {
+    animation-delay: .6s;
+}
+
+#lnd {
+    animation-delay: .8s;
+}
+
+#tw {
+    animation-delay: 1s;
+}
+#tlg {
+    animation-delay: 1.2s;
+}
+
+@keyframes animate {
+    from {
+        box-shadow: 0 0 0 lightblue;
+        filter: hue-rotate(0deg);
+    }
+    to {
+        box-shadow: 0px 0px 30px lightseagreen;
+        filter: hue-rotate(360deg);
+    }
+}
