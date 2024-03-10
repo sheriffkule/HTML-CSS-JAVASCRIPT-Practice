@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animated Tab Bar</title>
+  <link rel="stylesheet" href="/widgets_style/tabBar.css">
+</head>
+
+<body>
+  <div class="tab">
+    <center>
+      <h1>Select Programing Language</h1>
+    </center>
+    <ul class="tab-items">
+      <li class="tab-item">
+        <a href="#" class="item-link" onclick="select(this)">HTML</a>
+      </li>
+      <li class="tab-item">
+        <a href="#" class="item-link" onclick="select(this)">CSS</a>
+      </li>
+      <li class="tab-item">
+        <a href="#" class="item-link" onclick="select(this)">JavaScript</a>
+      </li>
+      <li class="tab-item">
+        <a href="#" class="item-link" onclick="select(this)">React</a>
+      </li>
+      <li class="tab-item">
+        <a href="#" class="item-link" onclick="select(this)">React Native</a>
+      </li>
+      <br>
+      <center>
+        <button>Submit</button>
+      </center>
+      <div class="tab-indicator"></div>
+    </ul>
+  </div>
+
+  <script>
+    function select(link) {
+      const item = link.parentNode;
+      const tabs = item.parentNode;
+      const index = Array.prototype.indexOf.call(tabs.children, item);
+      const items = tabs.querySelectorAll('.tab-item');
+
+      tabs.style.setProperty('--index', index + 1);
+      items.forEach(item => item.classList.remove('active'));
+      item.classList.add('active')
+    }
+
+    const items = document.querySelectorAll('.item-link');
+    const randomItem = items[Math.round(Math.random() * (items.length - 1))];
+
+    select(randomItem);
+  </script>
+</body>
+
+</html>
