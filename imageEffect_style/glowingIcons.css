@@ -29,11 +29,21 @@ body {
     border-radius: 30px;
     padding: 12px 20px;
     margin: 0 40px;
+    transition: .5s ease;
     animation: animate 3s linear infinite;
 }
 
 #fb {
     animation-delay: .2s;
+}
+#fb:hover,
+#ggl:hover,
+#ins:hover,
+#lnd:hover,
+#tw:hover,
+#tlg:hover
+ {
+    scale: 1.5;
 }
 #ggl {
     animation-delay: .4s;

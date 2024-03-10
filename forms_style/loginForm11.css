@@ -1,0 +1,64 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: linear-gradient(#181818, #444444);
+    height: 100vh;
+}
+
+.box {
+    width: 300px;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #222222;
+    text-align: center;
+    border-radius: 14em;
+    box-shadow: 5px 5px 50px 50px rgba(252, 5, 5, 0.7);
+    animation: animateBg 5s linear infinite;
+}
+
+@keyframes animateBg {
+    to {
+        filter: hue-rotate(360deg);
+    }
+}
+
+.box h1 {
+    color: silver;
+}
+.box input {
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid lightseagreen;
+    padding: 14px 10px;
+    width: 200px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: all 0.3s ease;
+}
+
+.box input[type=text]:focus,
+.box input[type=password]:focus {
+    width: 280px;
+    border-color: chartreuse;
+    background: linear-gradient(rgb(48, 48, 48), rgb(104, 104, 104));
+    font-size: 16px;
+}
+
+.box input[type=submit] {
+    font-size: 100%;
+    border: 2px solid chartreuse;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.box input[type=submit]:hover {
+    background: chartreuse;
+    letter-spacing: 2px;
+}
