@@ -1,0 +1,77 @@
+body {
+    background: linear-gradient(#181818, #444444);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    background: #242429;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+    animation: glowing 2s linear infinite;
+}
+
+@keyframes glowing {
+    0% {
+        box-shadow: 0 0 8px #00dce7;
+    }
+
+    50% {
+        box-shadow: 0 0 25px #00dce7;
+    }
+
+    100% {
+        box-shadow: 0 0 8px #00dce7;
+    }
+}
+
+h1 {
+    color: #00dce7;
+    text-align: center;
+    margin: 5px 0 20px 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+input[type=text],
+input[type=password] {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background-color: #242429;
+    color: #00dce7;
+    outline: none;
+    font-weight: bold;
+    animation: glowing 2s infinite linear;
+    transition: .3s;
+}
+
+input[type=text]:focus,
+input[type=password]:focus {
+    background-color: #333333;
+}
+
+.btn {
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    background: #242429;
+    color: #00dce7;
+    font-weight: bold;
+    border-radius: 8px;
+    animation: glowing 2s infinite linear;
+    transition: .3s;
+}
+
+.btn:hover {
+    background: #303030;
+    cursor: pointer;
+}
