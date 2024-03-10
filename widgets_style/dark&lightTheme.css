@@ -1,6 +1,6 @@
 body {
     height: 100vh;
-    background: linear-gradient(#999999, #555555) no-repeat;
+    background: linear-gradient(#555555, #999999) no-repeat;
     display: flex;
     align-items: flex-start;
     justify-content: center;
