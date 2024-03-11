@@ -1,31 +1,121 @@
-body {
-    box-sizing: border-box;
-    display: flex;
+* {
     padding: 0;
     margin: 0;
-    align-items: center;
-    justify-content: center;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #121212, #303030);
     min-height: 100vh;
-    background: linear-gradient(180deg, #111 -50%, #444 150%);
-    overflow: hidden;
+    font-family: Verdana;
+    display: grid;
+    place-content: center;
 }
 
-.text {
-    transition: all .5s ease-in-out;
-    -webkit-text-stroke: 4px whitesmoke;
-    font-weight: 900;
-    font-kerning: normal;
-    font-size: 10rem;
-    text-align: center;
-    color: transparent;
-    text-shadow: 10px 10px 2px aqua,
-        20px 20px 2px coral,
-        30px 30px 2px crimson;
+button {
     cursor: pointer;
+    background-color: transparent;
+    color: lime;
+    padding: 1rem 2rem;
+    letter-spacing: 4px;
+    position: relative;
+    overflow: hidden;
+    font-weight: bold;
+    border: none;
+    transition: all .4s ease;
 }
 
-.text:hover {
-    text-shadow: none;
-    font-weight: 100;
-    font-variant: normal;
+button:hover {
+    background-color: lime;
+    color: #111111;
+    box-shadow: 0 0 30px 5px rgb(0, 255, 0, 0.5);
+}
+
+button span {
+    position: absolute;
+    display: block;
+    box-shadow: 0 0 20px 1px lime;
+}
+
+button span:nth-child(1) {
+    background: linear-gradient(90deg, lime, lightgreen);
+    width: 100%;
+    height: 2px;
+    top: 0;
+    left: 0;
+    animation: animate1 1s linear infinite;
+}
+
+@keyframes animate1 {
+    0% {
+        left: 100%;
+    }
+
+    50%,
+    100% {
+        left: -100%;
+    }
+}
+
+button span:nth-child(2) {
+    background: linear-gradient(180deg, lime, lightgreen);
+    width: 2px;
+    height: 100%;
+    top: -100%;
+    right: 0;
+    animation: animate2 1s linear infinite;
+    animation-delay: .2s;
+}
+
+@keyframes animate2 {
+    0% {
+        top: 100%;
+    }
+
+    50%,
+    100% {
+        top: -100%;
+    }
+}
+
+button span:nth-child(3) {
+    background: linear-gradient(270deg, lime, lightgreen);
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    right: 0;
+    animation: animate3 1s linear infinite;
+    animation-delay: .4s;
+}
+
+@keyframes animate3 {
+    0% {
+        right: 100%;
+    }
+
+    50%,
+    100% {
+        right: -100%;
+    }
+}
+
+button span:nth-child(4) {
+    background: linear-gradient(360deg, lime, lightgreen);
+    width: 2px;
+    height: 100%;
+    bottom: -100%;
+    left: 0;
+    animation: animate4 1s linear infinite;
+    animation-delay: .6s;
+}
+
+@keyframes animate4 {
+    0% {
+        bottom: 100%;
+    }
+
+    50%,
+    100% {
+        bottom: -100%;
+    }
 }

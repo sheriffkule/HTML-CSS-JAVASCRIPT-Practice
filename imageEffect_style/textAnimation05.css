@@ -1,0 +1,31 @@
+body {
+    box-sizing: border-box;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(180deg, #111 -50%, #444 150%);
+    overflow: hidden;
+}
+
+.text {
+    transition: all .5s ease-in-out;
+    -webkit-text-stroke: 4px whitesmoke;
+    font-weight: 900;
+    font-kerning: normal;
+    font-size: 10rem;
+    text-align: center;
+    color: transparent;
+    text-shadow: 10px 10px 2px aqua,
+        20px 20px 2px coral,
+        30px 30px 2px crimson;
+    cursor: pointer;
+}
+
+.text:hover {
+    text-shadow: none;
+    font-weight: 100;
+    font-variant: normal;
+}
