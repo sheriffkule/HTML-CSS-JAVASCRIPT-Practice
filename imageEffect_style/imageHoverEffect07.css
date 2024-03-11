@@ -1,0 +1,152 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Impact, sans-serif;
+}
+
+body {
+    background: linear-gradient(#121212, #343434);
+    padding: 0px 50px;
+}
+
+.container {
+    padding: 50px 0;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    place-items: center;
+    gap: 50px;
+}
+
+.parent {
+    height: 400px;
+    width: 300px;
+    padding: 20px;
+    perspective: 1000px;
+}
+
+.card {
+    padding-top: 100px;
+    transform-style: preserve-3d;
+    background-image: url(/images/pexels.jpeg);
+    background-position: center;
+    width: 100%;
+    transition: all .5s ease-in-out;
+    border-radius: 10px;
+}
+
+.card:hover{
+    background-position: 80% 20%;
+    transform: rotate3d(0.5, 1, 0, 30deg);
+}
+
+.content_box {
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0px 20px 50px -25px rgba(0, 115, 255, 0.9);
+    transition: all .5s ease-in-out;
+    padding: 50px 25px 25px 25px;
+    transform-style: preserve-3d;
+}
+
+.card_title {
+    color: white;
+    font-size: 25px;
+    font-weight: 900;
+    transition: all .5s ease-in-out;
+    transform: translate3d(0, 0px, 20px);
+}
+
+.card_title:hover {
+    transform: translate3d(0px, 0, 60px);
+    color: #00e1ff;
+}
+
+.card_content {
+padding-top: 15px;
+font-size: 12px;
+color: azure;
+transition: all .5s ease-in-out;
+transform: translate3d(0, 0, 20px);
+}
+
+.card_content:hover {
+    transform: translate3d(0px, 0, 50px);
+    color: #00e1ff;
+}
+
+.see_more {
+    display: block;
+    font-weight: 900;
+    font-size: 11px;
+    color: #00a2ff;
+    padding-top: 15px;
+    transition: all .5s ease-in-out;
+    transform: translate3d(0, 0, 20px);
+}
+
+.see_more:hover {
+    transform: translate3d(0px, 0, 50px);
+}
+
+.date_box {
+    position: absolute;
+    top: 75px;
+    left: 25px;
+    height: 60px;
+    width: 60px;
+    background-color: rgba(0, 0, 0, 0.45);
+    border-radius: 10px;
+    padding: 12px;
+    box-shadow: 0 20px 60px 0 rgb(0, 102, 255),
+    0 18px 36px -18px rgb(0, 200, 255);
+    transform: translateX(0);
+    transform-style: preserve-3d;
+    transition: .5s ease-in-out;
+}
+
+.card:hover .date_box {
+    transform: translate(16px, -10px);
+    filter: saturate(20);
+}
+
+.date_box span {
+    display: block;
+    text-align: center;
+}
+
+.date_box .month {
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.date_box .date {
+    font-size: 20px;
+    font-weight: 900;
+    color: rgb(0,136, 255);
+    margin-top: 2px;
+}
+
+.parent:nth-child(2) {
+    filter: hue-rotate(150deg);
+}
+
+.parent:nth-child(3) {
+    filter: hue-rotate(300deg);
+}
+
+.parent:nth-child(4) {
+    filter: hue-rotate(90deg);
+}
+
+.parent:nth-child(5) {
+    filter: hue-rotate(200deg);
+}
+
+.parent:nth-child(6) {
+    filter: hue-rotate(250deg);
+}
