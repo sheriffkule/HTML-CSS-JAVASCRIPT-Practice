@@ -1,0 +1,74 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #191919, #353535);
+}
+
+.text_effect {
+    overflow: hidden;
+    position: relative;
+    filter: contrast(110%) brightness(190%);
+}
+
+.neon {
+    position: relative;
+    background-color: black;
+    color: transparent;
+    font: 700 180px "Lato", sans-serif;
+    text-align: center;
+    margin: 0;
+}
+
+.neon::after,
+.neon::before {
+    content: attr(data-text);
+    color: white;
+    filter: blur(0.02em);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.neon::after {
+    mix-blend-mode: difference;
+}
+
+.gradient,
+.spotlight {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    pointer-events: none;
+    z-index: 11;
+}
+
+.gradient{
+    background: linear-gradient(45deg, red, blue,aqua,green,yellow);
+    mix-blend-mode: multiply;
+}
+
+.spotlight {
+    animation: animate 5s linear infinite;
+    background: radial-gradient(circle, white,transparent 25%) 0 0 / 25% 25%,
+    radial-gradient(circle, white, black 25%) 50% 50% / 12.5% 12.5%;
+    top: -100%;
+    left: -100%;
+    mix-blend-mode: color-dodge;
+}
+
+@keyframes animate {
+    100% {
+        transform: translate3d(50%, 50%, 0);
+    }
+}
