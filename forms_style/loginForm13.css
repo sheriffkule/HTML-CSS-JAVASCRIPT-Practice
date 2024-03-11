@@ -1,0 +1,97 @@
+body {
+    display: grid;
+    height: 100vh;
+    margin: 0;
+    place-items: center;
+    background: linear-gradient(90deg, rgb(11, 0, 36) 0%, rgba(69, 69, 255, 1), rgb(0, 123, 172) 100%);
+}
+
+.form {
+    border-radius: 20px;
+    position: relative;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 26px 42px rgba(0, 0, 0, 0.1);
+    width: 20em;
+    color: white;
+}
+
+input {
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 13px 21px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    height: 40px;
+    width: 80%;
+    color: white;
+    padding-left: 10px;
+    outline: none;
+}
+
+input:focus {
+    background: rgba(255, 255, 255, 0.25);
+    font-size: 16px;
+}
+
+input::placeholder {
+    color: white;
+    font-size: 15px;
+    transition: .4s;
+
+}
+
+input:focus::placeholder {
+    transform: translateX(300px);
+}
+
+input[type=button] {
+    background: #0909e7;
+    transition: all .2s;
+    font-size: 16px;
+    border: none;
+}
+
+input[type=button]:hover {
+    background: #2c2cdb;
+    cursor: pointer;
+    letter-spacing: 2px;
+    font-weight: bold;
+    box-shadow: 0 0 10px #2c2cdb;
+}
+
+.circleleft,
+.circleright {
+    position: absolute;
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    opacity: 0.6;
+}
+
+.circleleft {
+    transform: translate(-70px, -440px);
+    background: #00a7e9;
+}
+
+.circleright {
+    transform: translate(270px, -40px);
+    background: #00006f;
+}
+
+.account {
+    text-align: center;
+}
+
+.account a {
+    text-decoration: none;
+    transition: .2s;
+}
+
+.account a:hover {
+    letter-spacing: 1px;
+    color: deepskyblue;
+}
