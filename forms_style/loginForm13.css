@@ -35,13 +35,14 @@ input {
 input:focus {
     background: rgba(255, 255, 255, 0.25);
     font-size: 16px;
+    width: 90%;
+    transition: .4s;
 }
 
 input::placeholder {
     color: white;
     font-size: 15px;
     transition: .4s;
-
 }
 
 input:focus::placeholder {
