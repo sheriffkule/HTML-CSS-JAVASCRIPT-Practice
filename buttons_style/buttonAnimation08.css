@@ -1,0 +1,72 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: grid;
+    place-content: center;
+    background-color: #7800e9;
+    font-family: Helvetica, sans-serif;
+}
+
+.container {
+    background-color: silver;
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    border-radius: .8rem;
+}
+
+button {
+    cursor: pointer;
+    background-color: silver;
+    color: #111;
+    width: 12rem;
+    padding: .9rem 1.8rem;
+    margin: 1rem 0;
+    display: block;
+    position: relative;
+    outline: none;
+    border: none;
+    border-radius: .5rem;
+    box-shadow: 0 1px 10px rgba(120, 31, 209, .5);
+    overflow: hidden;
+    transition: all .3s ease;
+}
+
+.slide_btn {
+    background-color: #7800e9;
+    width: 50px;
+    height: 100%;
+    padding: .9rem;
+    position: absolute;
+    top: 0;
+    left: -50px;
+    transition: all .4s ease-in-out;
+}
+
+.btn_text {
+    transition: all .4s ease-in-out;
+}
+
+.slide_btn_text {
+    color: #fff;
+    text-align: center;
+}
+
+button:hover .slide_btn {
+    left: 0;
+}
+
+button:hover .btn_text {
+    margin-left: 60px;
+}
+
+button:active {
+    box-shadow: 1px 9px 70px -3px hsla(270, 74%, 47%, 0.9);
+}
