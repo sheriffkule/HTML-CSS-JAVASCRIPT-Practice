@@ -1,0 +1,151 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background-color: black;
+    background-image: url(/images/Aurora.jpeg);
+    background-size: cover;
+    background-position: center;
+}
+
+li {
+    list-style: none;
+    transition: .2s ease;
+}
+
+li:hover {
+    scale: 1.2;
+    letter-spacing: 1px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    transition: all .2s;
+}
+
+a:hover {
+    color: orange;
+}
+
+header {
+    position: relative;
+    padding: 0 2rem;
+}
+
+.navbar {
+    width: 100%;
+    height: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar .logo a{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.navbar .links {
+    display: flex;
+    gap: 2rem;
+}
+
+.navbar .toggle_btn {
+    cursor: pointer;
+    color: white;
+    font-size: 1.5rem;
+    display: none;
+}
+
+.action_btn {
+    background-color: orange;
+    padding: .5rem 1rem;
+    border: none;
+    border-radius: 20px;
+    font-size: .8rem;
+    font-weight: bold;
+}
+
+.action_btn:hover {
+    scale: 1.06;
+    color: black;
+}
+
+.action_btn:active {
+    scale: .95;
+}
+
+.dropdown_menu {
+    display: none;
+    position: absolute;
+    right: 2rem;
+    top: 3.5rem;
+    width: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: height .2s ease-in-out;
+}
+
+.dropdown_menu.open {
+    height: 240px;
+}
+
+.dropdown_menu li {
+    padding: .7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropdown_menu .action_btn {
+    width: 80%;
+    text-align: center;
+}
+
+section#hero {
+    height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+#hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .navbar .links,
+    .navbar .action_btn {
+        display: none;
+    }
+
+    .navbar .toggle_btn {
+        display: block;
+    }
+
+    .dropdown_menu.open {
+        display: inline-block;
+    }
+}
+
+@media (max-width: 576px) {
+    .dropdown_menu.open {
+        left: 2rem;
+        width: unset;
+        content-visibility: auto;
+    }
+}
