@@ -1,0 +1,113 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(#181818, #292929, #454545, silver 130%);
+    color: #fff;
+    min-height: 100vh;
+    font-family: Verdana;
+    line-height: 1.4;
+    display: grid;
+    place-content: center;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+button {
+    cursor: pointer;
+    background-color: #6383f5;
+    color: white;
+    padding: .5rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    transition: all .3s ease-in-out;
+}
+
+button:hover {
+    background-color: #2151ff;
+}
+
+.grid_card {
+    max-width: 800px;
+    margin: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.card {
+    background-color: #4265e2;
+    padding: 2rem;
+    border-radius: 8px;
+    transition: all .3s ease;
+}
+
+.card:hover {
+    transform: translate(-16px, -16px);
+    box-shadow: 3px 8px 5px -2px rgba(255, 255, 255, 0.75);
+}
+
+.card1 .item_description {
+    color: rgb(255, 255, 255);
+    margin-top: .5rem;
+    display: flex;
+}
+
+.card1 .item_description .arrow {
+    padding: 0 0.5rem 0 1rem;
+    font-size: 1.25rem;
+    transition: all .3s ease;
+}
+
+.card1:hover .arrow i {
+    margin-left: 2rem;
+}
+
+.card:nth-child(2) {
+    grid-row: span 2;
+}
+
+.card2 img {
+    margin-bottom: 1rem;
+    height: 150px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.card2 .date {
+    color: #7e96eb;
+    margin: .5rem 0 1.5rem 0;
+}
+
+.card3 .list_item {
+    margin: 1rem;
+}
+
+.card3 .list_item i {
+    margin-right: .5rem;
+}
+
+.card3 .list_item a {
+    color: white;
+}
+
+.card3 .list_item:hover .arrow {
+    padding-left: .5rem;
+    transition: all .3s ease;
+}
+
+@media (max-width: 768px) {
+    .grid_card {
+        grid-template-columns: 1fr;
+    }
+
+    .card:nth-child(2) {
+        grid-row: 1;
+    }
+}
