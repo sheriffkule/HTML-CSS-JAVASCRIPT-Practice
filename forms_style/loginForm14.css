@@ -1,0 +1,146 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    place-content: center;
+    min-height: 100vh;
+    background-color: #121212;
+    background-image:
+        radial-gradient(at 50% 30%, #f033bd, transparent 59%),
+        radial-gradient(at 65% 65%, #7dabe8, transparent 55%);
+}
+
+.container {
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+    background-color: rgba(116, 148, 168, .25);
+    color: white;
+    backdrop-filter: blur(10px) saturate(70%);
+    border: 1px solid rgba(0, 0, 0, 0.24);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: .5s ease;
+}
+
+.swith_buttons {
+    display: flex;
+}
+
+.sign_up_btn,
+.login_btn {
+    cursor: pointer;
+    width: 50%;
+    padding: 1rem;
+    border: 0;
+    outline: 0;
+    background-color: #121212;
+    color: silver;
+}
+
+.sign_up_btn.active,
+.login_btn.active {
+    background-color: lightgreen;
+    color: black;
+    font-size: 15px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 255, 0, 0.5);
+    overflow: visible;
+}
+
+.form_container {
+    padding: 1rem;
+}
+
+.form_container h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.sign_up_form_container,
+.login_form_container {
+    display: none;
+}
+
+.sign_up_form_container.active,
+.login_form_container.active {
+    display: block;
+}
+
+.sign_up_form {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+}
+
+.sign_up_item input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    outline: none;
+    border: 2px solid grey;
+}
+
+.sign_up_form div:nth-child(3),
+.sign_up_form div:nth-child(4),
+.sign_up_form div:nth-child(5),
+.sign_up_form div:nth-child(6) {
+    grid-column: span 2;
+}
+
+.sign_up_submit,
+.log_in_submit {
+    cursor: pointer;
+    background-color: lawngreen;
+    width: 100%;
+    padding: .75rem;
+    outline: none;
+    border: none;
+    transition: all .3s ease;
+}
+
+.sign_up_submit:hover,
+.log_in_submit:hover {
+    background-color: lime;
+    font-weight: bold;
+    box-shadow: 0 0 8px lime;
+}
+
+.log_in_form {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+}
+
+.log_in_item {
+    grid-column: span 2;
+    margin: 1rem;
+}
+
+.log_in_item input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid gray;
+    border-radius: 12px;
+    outline: none;
+}
+
+input {
+    transition: .4s ease;
+}
+
+input:focus {
+    background-color: #a1ffa1;
+    box-shadow: 0 0 8px lightgreen;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 80%;
+    }
+}

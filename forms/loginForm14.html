@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Glassmorphism Login Page</title>
+  <link rel="stylesheet" href="/forms_style/loginForm14.css">
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="swith_buttons">
+      <button id="sign_up" class="sign_up_btn active">Sign Up</button>
+      <button id="login" class="login_btn">Login</button>
+    </div>
+
+    <div class="form_container">
+
+      <div id="sign_up_form" class="sign_up_form_container active">
+        
+        <h2>SIGN UP</h2>
+        <form class="sign_up_form">
+          <div class="sign_up_item">
+            <label for="fname"></label>
+            <input type="text" id="fname" name="fname" placeholder="First Name">
+          </div>
+          <div class="sign_up_item">
+            <label for="lname"></label>
+            <input type="text" id="lname" name="lname" placeholder="Last Name">
+          </div>
+          <div class="sign_up_item">
+            <label for="email"></label>
+            <input type="text" id="email" name="email" placeholder="Email">
+          </div>
+          <div class="sign_up_item">
+            <label for="phonenum"></label>
+            <input type="text" id="phonenum" name="phonenum" placeholder="Phone Number">
+          </div>
+          <div class="sign_up_item">
+            <label for="password"></label>
+            <input type="password" id="password" name="password" placeholder="Password">
+          </div>
+          <div class="sign_up_item">
+            <button type="submit" class="sign_up_submit">Sign Up</button>
+          </div>
+        </form>
+      </div>
+
+      <div id="login_form" class="login_form_container">
+
+        <h2>LOG IN</h2>
+        <form id="log_in_form" class="log_in_form">
+          <div class="log_in_item">
+            <label for="email"></label>
+            <input type="text" id="email" name="email" placeholder="Email">
+          </div>
+          <div class="log_in_item">
+            <label for="password"></label>
+            <input type="text" id="password" name="password" placeholder="Password">
+          </div>
+          <div class="log_in_item">
+            <button type="submit" class="log_in_submit">Log In</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  const signUpBtn = document.getElementById('sign_up');
+  const logInBtn = document.getElementById('login');
+
+  const signUpForm = document.getElementById('sign_up_form');
+  const logInForm = document.getElementById('login_form');
+
+  signUpBtn.addEventListener('click', () => {
+    signUpBtn.classList.add('active');
+    logInBtn.classList.remove('active');
+    signUpForm.classList.add('active');
+    logInForm.classList.remove('active');
+  });
+
+  logInBtn.addEventListener('click', () => {
+    logInBtn.classList.add('active');
+    signUpBtn.classList.remove('active');
+    logInForm.classList.add('active');
+    signUpForm.classList.remove('active');
+  });
+  </script>
+</body>
+</html>
