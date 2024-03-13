@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #181818, #292929, #454545, silver 130%);
+    color: #fff;
+    min-height: 100vh;
+    font-family: Verdana;
+    line-height: 1.4;
+    display: grid;
+    place-content: center;
+}
+
+h1 {
+    color: #ffc943;
+    font-size: 1.15rem;
+    margin: .5rem 0;
+}
+
+button {
+    cursor: pointer;
+    background-color: #1d1d1d;
+    color: #ffc943;
+    width: 100%;
+    padding: 1.25rem 0;
+    margin-top: 2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    transition: all .4s ease;
+}
+
+button:hover {
+    background-color: #ffc943;
+    color: #1d1d1d;
+    letter-spacing: 2px;
+    box-shadow: 0 1px 10px #ffc943;
+}
+
+i {
+    color: #ffc943;
+    margin-right: .5rem;
+    font-size: 1.25rem;
+}
+
+.cards_container {
+    max-width: 1000px;
+    margin: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+}
+
+.card {
+    position: relative;
+    box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    transition: all .5s ease;
+}
+
+.card:hover {
+    transform: scale(1.1) translateY(-20px);
+    box-shadow: 0 -.5rem 2rem #ffc943;
+    z-index: 1;
+}
+
+.card:hover .plant_image i {
+    font-size: 4rem;
+}
+
+.card .price {
+    position: absolute;
+    top: 30px;
+    right: -70px;
+    width: 100%;
+    background-color: #03a9f5;
+    padding: .5rem .5rem;
+    font-weight: bold;
+    text-align: center;
+    transform: rotate(25deg);
+}
+
+.card .mid-tier {
+    background-color: #aa00ff;
+}
+
+.card .high-tier {
+    background-color: crimson;
+}
+
+.top_half {
+    background-color: #313131;
+    padding: 2rem 1.5rem;
+}
+
+.plant_image i {
+    font-size: 3rem;
+    transition: all .4s ease;
+}
+
+.bottom_half {
+    background-color: #242424;
+    padding: 3rem 1.5rem;
+}
+
+.card_benefits .benefit {
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+    .cards_container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 540px) {
+    .cards_container {
+        grid-template-columns: 1fr;
+    }
+}
