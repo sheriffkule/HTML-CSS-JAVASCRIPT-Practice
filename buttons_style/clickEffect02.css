@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial;
+    color: silver;
+}
+
+body {
+    background-color: #1d2741;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.showPopup {
+    height: 50px;
+    width: 160px;
+    color: #00ff00;
+    font-size: 20px;
+    background: transparent;
+    border: 2px solid #00ff00;
+    border-radius: 6px;
+    outline: none;
+    transition: .4s ease;
+    /* display: none; */
+    transition: .3s ease;
+}
+
+.showPopup:hover {
+    box-shadow: 0 0 8px #00ff00;
+    cursor: pointer;
+    filter: drop-shadow(0 0 4px #ffffff);
+    transform: scale(1.04);
+}
+
+.popUp {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    border-radius: 8px;
+    background: #1d2741;
+    padding: 0 30px 40px 30px;
+    text-align: center;
+    visibility: hidden;
+    transform: translate(-50%, -50%) scale(.1);
+    transition: transform .4s;
+}
+
+.popUp.active {
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.popUp ion-icon {
+    margin-top: -40px;
+    font-size: 80px;
+    background-color: #00ff00;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 255, 255, .5);
+}
+
+.popUp h2 {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 30px 0 10px;
+}
+
+.popUp .backBtn {
+    width: 80%;
+    height: 40px;
+    background-color: #00ff00;
+    font-weight: 600;
+    font-size: 18px;
+    padding: auto 0;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, .3);
+    cursor: pointer;
+    margin-top: 20px;
+}
