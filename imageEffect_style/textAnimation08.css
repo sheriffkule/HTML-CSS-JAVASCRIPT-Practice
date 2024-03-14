@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #191919;
+}
+
+h3 {
+    font-size: 75px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+h3 span {
+    color: #555;
+    transition: .25s;
+}
+
+h3:hover span{
+    color: #09aaef;
+    text-shadow: 0 0 5px #09aaef,
+    0 0 10px #09aaef,
+    0 0 30px #09aaef;
+}
