@@ -1,0 +1,74 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Verdana;
+    color: silver;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #191919;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text {
+    position: absolute;
+    cursor: pointer;
+}
+
+.text span {
+    font-size: 120px;
+    font-weight: 600;
+    color: #00aaff;
+    display: inline-block;
+    transition: 2s;
+}
+
+.container:hover span {
+    transform: rotate(45deg) translateY(-200px);
+    opacity: 0;
+    filter: hue-rotate(360deg) blur(30px);
+}
+
+.container:hover .text span:nth-child(2) {
+    transition-delay: .5s;
+}
+
+.container:hover .text span:nth-child(3) {
+    transition-delay: 1s;
+}
+
+.container:hover .text span:nth-child(4) {
+    transition-delay: 1.5s;
+}
+
+.container:hover .text span:nth-child(5) {
+    transition-delay: 2s;
+}
+
+.container .text2 span {
+    transform: rotate(-45deg) translateY(200px);
+    opacity: 0;
+    color: lime;
+    filter: blur(30px) hue-rotate(360deg);
+    transition-delay: .5s;
+}
+
+.container:hover .text2 span {
+    transform: rotate(0) translateY(0);
+    filter: blur(0);
+    opacity: 1;
+}
+
+.container:hover .text2 span:nth-child(1) {
+    transition-delay: -0.1s;
+}
