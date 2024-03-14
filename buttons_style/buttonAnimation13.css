@@ -21,11 +21,13 @@ body {
 .outer {
     position: relative;
     background: linear-gradient(Blue, DarkCyan, Cyan, DarkOliveGreen, Green, Yellow, Gold, LightPink, LightSalmon, OrangeRed, Red, RebeccaPurple, Purple);
-    transition: all 2.5s;
+    animation: animate 2s linear infinite;
 }
 
-.outer:hover {
-    filter: hue-rotate(180deg);
+@keyframes animate {
+    to {
+        filter: hue-rotate(360deg);
+    }
 }
 
 .button {
@@ -58,10 +60,34 @@ body {
     height: 60px;
     width: 190px;
     border-radius: 50px;
+    z-index: 2;
 }
 
 .circle button {
     height: 180px;
     width: 180px;
     border-radius: 50%;
+}
+
+.outer span {
+    height: 100%;
+    width: 100%;
+    background: inherit;
+}
+
+.outer.button span {
+    border-radius: 50px;
+}
+
+
+.outer.circle span {
+    border-radius: 50%;
+}
+
+.outer:hover span:nth-child(2) {
+    filter: blur(7px);
+}
+
+.outer:hover span:nth-child(3) {
+    filter: blur(14px);
 }
