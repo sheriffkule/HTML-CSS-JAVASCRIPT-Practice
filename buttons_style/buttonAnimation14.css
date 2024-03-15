@@ -1,0 +1,109 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+html,
+body {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    place-items: center;
+    background: #5277bd;
+}
+
+.icons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 4rem 8rem;
+}
+
+.icons a {
+    background: white;
+    position: relative;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    display: inline-flexbox;
+    text-decoration: none;
+    transition: all .3s ease;
+    box-shadow: -4px -4px 8px #ffffff,
+        4px 4px 6px #adadb9;
+}
+
+.icons a:hover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border-radius: 50%;
+    background: #ecf0f3;
+    box-shadow: inset -4px -4px 8px white,
+                inset 4px 4px 6px #adadb9;
+}
+
+.icons a i {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    line-height: 60px;
+    font-size: 30px;
+}
+
+.icons a:hover i {
+    transform: scale(.9);
+}
+
+.icons a:nth-child(1) {
+    color: #4267b2;
+}
+
+.icons a:nth-child(2) {
+    color: #1da1f2;
+}
+
+.icons a:nth-child(3) {
+    color: #e1306c;
+}
+
+.icons a:nth-child(4) {
+    color: #333;
+}
+
+.icons a:nth-child(5) {
+    color: #ff0000;
+}
+
+.icons a:nth-child(6) {
+    color: #0A66C2;
+}
+
+.icons a:nth-child(7) {
+    color: #0088cc;
+}
+
+.icons a:nth-child(8) {
+    color: #00fff8;
+}
+
+.icons a:nth-child(9) {
+    color: #000000;
+}
+
+.icons a:nth-child(10) {
+    color: #FF5700;
+}
+
+.icons a:nth-child(11) {
+    color: #E60023;
+}
+
+.icons a:nth-child(12) {
+    color: #075E54;
+}
