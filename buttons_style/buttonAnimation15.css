@@ -1,0 +1,74 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    background: linear-gradient(#121f1f, #003b3b);
+}
+
+.main_div{
+    position: relative;
+    height: 65px;
+    width: 250px;
+    background-color: silver;
+    border-radius: 4px;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0px 5px 10px 0px rgba(255, 255, 255, 0.35);
+}
+
+.main_div:before {
+    content: "Share";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 4px;
+    color: #121f1f;
+    font-size: 28px;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .5s linear;
+}
+
+.main_div:hover::before {
+    left: -250px;
+}
+
+.main_div .social_media {
+    position: absolute;
+    top: 0;
+    right: -250px;
+    height: 100%;
+    width: 100%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    opacity: 1;
+    transition: all .5s ease-in-out;
+}
+
+.main_div:hover .social_media {
+    right: 0;
+    opacity: 1;
+}
+
+.social_media i {
+    font-size: 22px;
+    color: #2662a3;
+    transition: all .2s;
+}
+
+.social_media i:hover {
+    color: rgb(79, 123, 255);
+    transform: scale(1.2) translateY(-4px);
+}
