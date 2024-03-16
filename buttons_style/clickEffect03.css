@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #292929;
+}
+
+.container {
+    width: 60px;
+    height: 100px;
+    margin: 100px auto;
+    cursor: pointer;
+}
+
+.bar {
+    width: 60px;
+    height: 5px;
+    background-color: silver;
+    margin: 6px 0;
+    border-radius: 10px;
+    transition: .4s;
+}
+
+.change .one {
+    -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+    transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.change .two {
+    opacity: 0;
+    margin-left: 20px;
+    transition: 1s;
+}
+
+.change .three {
+    -webkit-transform: rotate(45deg) translate(-8px, -8px);
+    transform: rotate(45deg) translate(-8px, -8px);
+}
