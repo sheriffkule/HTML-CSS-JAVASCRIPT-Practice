@@ -1,0 +1,53 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(90deg, #181818, #383838);
+    color: whitesmoke;
+}
+
+.container {
+    height: 80px;
+    width: 450px;
+    background-color: #777;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 0 6px #444;
+}
+
+.container li {
+    list-style: none;
+    margin: auto 12px;
+    position: relative;
+    padding: 15px;
+    border-radius: 20px;
+    transition: .5s ease;
+    top: 0;
+}
+
+.container li.active {
+    top: -50%;
+    background: #929292;
+    border-bottom: 2px solid aqua;
+    box-shadow: 0 0 5px #555;
+}
+
+.container li ion-icon {
+    font-size: 32px;
+    color: #222;
+    cursor: pointer;
+}
+
+.container li.active ion-icon {
+    color: aqua;
+    filter: drop-shadow(0 0 5px aqua);
+}
