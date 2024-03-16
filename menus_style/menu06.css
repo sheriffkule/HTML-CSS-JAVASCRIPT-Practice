@@ -1,0 +1,143 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url('/images/pexels.jpeg') right no-repeat;
+    background-size: cover;
+    color: whitesmoke;
+} */
+
+.header {
+    width: 100%;
+    min-height: 100vh;
+    background: url('/images/pexels.jpeg') center no-repeat;
+    background-size: cover;
+}
+
+.side_nav {
+    width: 110px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 30px 1px;
+    background: rgba(255, 255, 255, .2);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    transition: all .5s ease-in-out;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 40px;
+    font-size: 12px;
+    border-radius: 8px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.user div {
+    display: none;
+}
+
+.user h2 {
+    font-size: 18px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.user p {
+    font-size: 15px;
+}
+
+.user img {
+    width: 40px;
+    border-radius: 50%;
+    transition: .2s;
+}
+
+.user img:hover {
+    transform: scale(1.2);
+}
+
+.fa-star {
+    margin-left: 6px;
+    font-size: 18px;
+    color: royalblue;
+    display: none;
+}
+
+ul {
+    list-style: none;
+    padding: 0 15px;
+}
+
+ul li {
+    margin: 40px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+ul li:hover {
+    color: rgb(9, 255, 0);
+    padding-left: 10px;
+}
+
+ul li p {
+display: none;
+}
+
+ul li i {
+    font-size: 20px;
+    margin-right: 12px;
+    padding-bottom: 2px;
+}
+
+.side_nav:hover {
+    width: 250px;
+}
+
+.side_nav:hover .user div {
+    display: block;
+}
+
+.side_nav:hover .user { 
+    padding: 10px;
+    width: 100%;
+    background: rgba(255, 255, 255, .2);
+    backdrop-filter: blur(5px);
+}
+
+.side_nav:hover .fa-star {
+    display: block;
+}
+
+.side_nav:hover img {
+    margin: 0;
+}
+
+.side_nav:hover ul li p {
+    display: block;
+}
+
+.side_nav:hover ul li i {
+    margin-right: 10px;
+}
+
+.side_nav:hover ul li {
+    justify-content: flex-start;
+}
