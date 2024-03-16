@@ -1,0 +1,147 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #060c21;
+}
+
+.container {
+    position: relative;
+    width: 95%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-template-rows: auto;
+    gap: 10px 30px;
+}
+
+.container .box {
+    position: relative;
+    height: 400px;
+    background: #060c21;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .5s ease-in-out;
+    box-shadow: 0 0 10px rgba(105, 105, 105, .5);
+}
+
+.container .box:hover {
+    bottom: 8px;
+}
+
+.container .box::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: white;
+    transform: skew(2deg, 2deg);
+    z-index: -1;
+    transition: all .5s ease;
+    overflow: hidden;
+}
+
+.box:hover::before {
+    filter: blur(10px);
+}
+
+.container .box:nth-child(1):before {
+    background: linear-gradient(315deg, #ff0057, #e64a19);
+}
+
+.container .box:nth-child(2):before {
+    background: linear-gradient(315deg, #89ff00, #00bcd4);
+}
+
+.container .box:nth-child(3):before {
+    background: linear-gradient(315deg, #1e7de9, #5d02ff);
+}
+
+.container .box:nth-child(4):before {
+    background: linear-gradient(315deg, #ff0000, #ffc107);
+}
+
+.container .box:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: rgba(255, 255, 255, .05);
+    pointer-events: none;
+}
+
+.content {
+    position: relative;
+    padding: 20px;
+    transform: translateY(40px);
+}
+
+.box .content h2 {
+    position: absolute;
+    top: -60px;
+    right: 20px;
+    margin: 0;
+    padding: 0;
+    font-size: 10rem;
+    color: rgba(255, 255, 255, .05);
+    transition: all .5s;
+}
+
+.box:hover h2 {
+    top: -146px;
+    color: rgba(255, 255, 255, .2);
+}
+
+.box .content h3 {
+    margin: 0 0 10px;
+    padding: 0;
+    font-size: 24px;
+    font-weight: 500;
+    color: white;
+}
+
+.box .content p {
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-size: 16px;
+}
+
+.box .content a {
+    position: relative;
+    margin: 20px 0 0;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: 1px solid silver;
+    border-radius: 6px;
+    outline: none;
+    display: inline-block;
+    color: #fff;
+    transition: all .5s ease;
+    transform: translateY(-40px);
+    visibility: hidden;
+    opacity: 0;
+}
+
+.box:hover .content a {
+    visibility: visible;
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.box .content a:hover {
+    color: black;
+    background-color: white;
+
+}
