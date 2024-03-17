@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temperature Converter</title>
+  <link rel="stylesheet" href="/widgets_style/temperatureConverter.css">
+</head>
+
+<body>
+  <h1>Temperature Converter</h1>
+  <div class="wrapper">
+    <div class="input-box">
+      <h6>Celsius</h6>
+      <input type="number" id="celsius">
+    </div>
+    <span>&rdldhar;</span>
+    <div class="input-box">
+      <h6>Fahrenheit</h6>
+      <input type="number" id="fahrenheit">
+    </div>
+  </div>
+
+  <script>
+    const celsius = document.getElementById('celsius');
+    const fahrenheit = document.getElementById('fahrenheit');
+
+    window.addEventListener('load', () => celsius.focus());
+
+    celsius.addEventListener('input', () => {
+      fahrenheit.value = ((celsius.value * 9) / 5 + 32).toFixed(2);
+      if (!celsius.value) fahrenheit.value = '';
+    });
+
+    fahrenheit.addEventListener('input', () => {
+      celsius.value = (((fahrenheit.value - 32) * 5) / 9).toFixed(2);
+      if (!fahrenheit.value) celsius.value = '';
+    });
+
+  </script>
+</body>
+
+</html>
