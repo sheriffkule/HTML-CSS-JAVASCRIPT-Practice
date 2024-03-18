@@ -1,0 +1,118 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background: #202020;
+    overflow: hidden;
+}
+
+.glowing {
+    position: relative;
+    min-width: 750px;
+    height: 750px;
+    margin: -150px;
+    transform-origin: right;
+    animation: colorChange 5s linear infinite;
+}
+
+@keyframes colorChange {
+    0% {
+        filter: hue-rotate(0);
+        transform: rotate(0);
+    }
+
+    100% {
+        filter: hue-rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+.glowing:nth-child(even) {
+    transform-origin: left;
+}
+
+.glowing span {
+    position: absolute;
+    top: calc(var(--i) * 80px);
+    left: calc(var(--i) * 80px);
+    right: calc(var(--i) * 80px);
+    bottom: calc(var(--i) * 80px);
+}
+
+.glowing span::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -8px;
+    width: 15px;
+    height: 15px;
+    background: #f00;
+    border-radius: 50%;
+}
+
+.glowing span:nth-child(3n + 1)::before {
+background: #86ff00;
+box-shadow: 0 0 20px #86ff00,
+0 0 40px #86ff00,
+0 0 60px #86ff00,
+0 0 80px #86ff00,
+0 0 0 8px rgba(136, 255, 0, 0.1);
+}
+
+.glowing span:nth-child(3n + 2)::before {
+    background: #ffff00;
+    box-shadow: 0 0 20px #ffff00,
+        0 0 40px #ffff00,
+        0 0 60px #ffff00,
+        0 0 80px #ffff00,
+        0 0 0 8px #ffff001a;
+}
+
+.glowing span:nth-child(3n + 3)::before {
+    background: #f00;
+    box-shadow: 0 0 20px #f00,
+        0 0 40px #f00,
+        0 0 60px #f00,
+        0 0 80px #f00,
+        0 0 0 8px #ff00001a;
+}
+
+.glowing span:nth-child(3n + 1) {
+    animation: animate 10s alternate infinite;
+}
+
+.glowing span:nth-child(3n + 2) {
+    animation: animate-reverse 3s alternate infinite;
+}
+
+.glowing span:nth-child(3n + 3) {
+    animation: animate 7s alternate infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes animate-reverse {
+    0% {
+        transform: rotate(360deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
