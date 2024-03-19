@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #191919;
+}
+
+nav {
+    position: relative;
+    display: flex;
+    gap: 30px;
+    background: #222327;
+    padding: 15px 60px;
+}
+
+nav a {
+    position: relative;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    height: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 30px;
+    transition: all .5s;
+}
+
+nav a.active {
+    color: black;
+    z-index: 2;
+}
+
+#indicator {
+    position: absolute;
+    height: 75px;
+    width: 150px;
+    background: #29fc53;
+    z-index: 1;
+    transition: .5s;
+}
+
+#indicator::before {
+    content: "";
+    position: absolute;
+    left: -30px;
+    width: 50px;
+    height: 15px;
+    background: #29fc53;
+    border-radius: 15px;
+    box-shadow: 15px 30px #29fc53,
+        5px 60px #29fc53,
+        -15px 15px #222327,
+        -10px 45px #222327;
+    transition: all .5s;
+}
+
+#indicator::after {
+    content: "";
+    position: absolute;
+    right: -30px;
+    width: 50px;
+    height: 15px;
+    background: #29fc53;
+    border-radius: 15px;
+    box-shadow: 5px 30px #29fc53,
+        -15px 60px #29fc53,
+        15px 15px #222327,
+        10px 45px #222327;
+    transition: all .5s;
+}
+
+#indicator.change::before {
+    left: -10px;
+    box-shadow: -15px 30px #29fc53,
+    -5px 60px #29fc53,
+    -10px 15px #222327,
+    -20px 45px #222327;
+}
+
+#indicator.change::after {
+    right: -20px;
+    box-shadow: 10px 30px #29fc53,
+    20px 60px #29fc53,
+    15px 15px #222327,
+    25px 45px #222327;
+}
