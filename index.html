@@ -1,12 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="styles/style.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Home</title>
+	<link rel="stylesheet" href="styles/style.css">
 </head>
+
 <body>
-    
+	<header>
+		<nav>
+			<div class="logo">
+				<h2>SheriffKule</h2>
+				<h2>SheriffKule</h2>
+			</div>
+			<ul id="nav_links" class="nav_links">
+				<li class="close_btn" id="close_btn">X</li>
+				<li><a href="https://sheriffkule.vercel.app/">Home</a></li>
+				<li><a href="#">About & Contact</a></li>
+
+				<li id="components"><a href="#">Components &#9662;</a>
+					<div id="drop-items">
+						<a href="#">Button</a>
+						<a href="#">item-2</a>
+						<a href="#">item-3</a>
+						<a href="#">item-4</a>
+						<a href="#">item-5</a>
+					</div>
+				</li>
+			</ul>
+
+			<div id="menu_btn" class="menu_btn">&#8801;</div>
+		</nav>
+		<div id="menu_btn" class="menu_btn">&#8801;</div>
+		<div class="imgContainer">
+			<img src="/images/matrix.jpg" alt="">
+			<div class="neon">
+				<span class="text" data-text="SheriffKule">SheriffKule</span>
+				<span class="gradient"></span>
+				<span class="spotlight"></span>
+			</div>
+		</div>
+
+	</header>
+
+	<script>
+		let navLinks = document.getElementById('nav_links');
+		let menuBtn = document.getElementById('menu_btn');
+		let closeBtn = document.getElementById('close_btn');
+
+		menuBtn.addEventListener('click', () => {
+			navLinks.classList.add('show');
+		})
+
+		closeBtn.addEventListener('click', () => {
+			navLinks.classList.remove('show');
+		})
+	</script>
+
 </body>
+
 </html>

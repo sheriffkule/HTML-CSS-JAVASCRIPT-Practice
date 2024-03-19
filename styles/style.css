@@ -1,3 +1,209 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
 body {
-    background-color: darkslategray;
+    background: linear-gradient(#070709, #0f0c4e);
+    min-height: 100vh;
+}
+
+nav {
+    display: flex;
+    background: transparent;
+    color: whitesmoke;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem 1rem 2rem;
+}
+
+.logo {
+    position: relative;
+}
+
+.logo h2 {
+    color: white;
+    font-size: 2.5em;
+    position: absolute;
+    transform: translate(0%, -50%);
+}
+
+.logo h2:nth-child(1) {
+    color: transparent;
+    -webkit-text-stroke: 1px #38d1ec;
+}
+
+.logo h2:nth-child(2) {
+    color: #83e2ee;
+    animation: animate 4s ease-in-out infinite;
+}
+
+@keyframes animate {
+
+    0%,
+    100% {
+        clip-path: polygon(0% 40%,
+                16% 44%,
+                33% 50%,
+                54% 60%,
+                70% 61%,
+                84% 59%,
+                100% 52%,
+                100% 100%,
+                0% 100%);
+    }
+
+    50% {
+        clip-path: polygon(0% 60%,
+                15% 65%,
+                34% 66%,
+                51% 62%,
+                67% 50%,
+                84% 45%,
+                100% 46%,
+                100% 100%,
+                0% 100%);
+    }
+}
+
+.nav_links {
+    display: flex;
+    gap: 1rem;
+    list-style-type: none;
+    text-decoration: none;
+}
+
+.nav_links a {
+    color: #38d1ec;
+    transition: all .4 ease-in-out;
+}
+
+.nav_links a:hover {
+    color: #8cf2ff;
+    text-shadow: 0 5px 20px rgb(251, 255, 0);
+}
+
+.close_btn,
+.menu_btn {
+    display: none;
+    cursor: pointer;
+}
+
+#drop-items {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    transform: translate(30px, 30px);
+    background: linear-gradient(#070709, #0a083d);
+    padding: 15px 0;
+    border-radius: 6px;
+    box-shadow: 0 2px 10px rgba(140, 242, 255, 0.5);
+    transition: all 0.5s;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#drop-items a {
+    padding: 8px 30px;
+    transition: all 0.3s ease;
+}
+
+#components:hover #drop-items {
+    transform: translate(4px, 0px);
+    opacity: 1;
+    pointer-events: all;
+}
+
+@media (max-width: 768px) {
+    .nav_links {
+        flex-direction: column;
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: linear-gradient(#070709 60% ,#0a083d);
+        padding: 1rem 2rem;
+        height: 100%;
+        width: 50%;
+        border: 2px solid #5e5e5e;
+        transform: translateX(100%);
+        transition: all .3 ease;
+    }
+
+    .nav_links.show {
+        transform: translateX(0%);
+    }
+
+    .close_btn,
+    .menu_btn {
+        display: block;
+    }
+}
+
+header .imgContainer {
+    position: relative;
+    top: -60px;
+    z-index: -1;
+    width: 100%;
+    height: 300px;
+}
+
+header img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+header .imgContainer .neon {
+    position: absolute;
+    overflow: hidden;
+    filter: brightness(200%);
+    padding: 0 3px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+header .imgContainer .neon .text {
+    background-color: #000;
+    color: powderblue;
+    font-size: 100px;
+    font-weight: bold;
+    -webkit-text-stroke: 2px #0011ff;
+    position: relative;
+    user-select: none;
+}
+
+header .imgContainer .neon .text::before {
+    content: attr(data-text);
+    position: absolute;
+    color: white;
+    filter: blur(2px);
+    mix-blend-mode: difference;
+}
+
+header .imgContainer .neon .gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, red, gold, lightgreen, gold, red);
+    mix-blend-mode: multiply;
+}
+
+header .imgContainer .neon .spotlight {
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle, white, transparent 25%) center / 25% 25%,
+        radial-gradient(circle, #ffffff, black 25%) center / 12% 12%;
+    mix-blend-mode: color-dodge;
+    animation: move 10s linear infinite;
+}
+
+@keyframes move {
+    to {
+        transform: translate(50%, 50%);
+    }
 }
