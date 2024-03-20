@@ -4,11 +4,9 @@
     box-sizing: border-box;
 }
 
-
 body {
     background: linear-gradient(#070709, #0f0c4e);
     min-height: 100vh;
-    color: silver;
 }
 
 nav {
@@ -17,6 +15,11 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: .8rem 4rem .8rem 2rem;
+}
+
+a {
+    list-style-type: none;
+    text-decoration: none;
 }
 
 .logo {
@@ -71,8 +74,6 @@ nav {
 .nav_links {
     display: flex;
     gap: 2rem;
-    list-style-type: none;
-    text-decoration: none;
 }
 
 .nav_links a {
@@ -97,7 +98,7 @@ nav {
     position: absolute;
     display: flex;
     flex-direction: column;
-    transform: translate(30px, 30px);
+    transform: translate(-50px, 30px);
     background: linear-gradient(#070709, #0a083d);
     padding: 15px 0;
     border-radius: 6px;
@@ -148,9 +149,14 @@ nav {
     header .imgContainer .neon .text {
         font-size: 76px !important;
     }
+
     header .imgContainer {
         height: 200px !important;
     }
+        header .imgContainer .welcome {
+            top: 160px;
+            font-size: .6rem;
+        }
 }
 
 header .imgContainer {
@@ -218,4 +224,13 @@ header .imgContainer .neon .spotlight {
     to {
         transform: translate(50%, 50%);
     }
+}
+
+header .imgContainer .welcome {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    text-align: center;
+    color: #fff;
 }
