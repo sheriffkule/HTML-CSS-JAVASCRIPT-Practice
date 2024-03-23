@@ -84,16 +84,18 @@ transform: scaleX(2);
     70% {
         background: transparent;
         box-shadow: none;
+        filter: hue-rotate(360deg);
     }
 
     100% {
         background: transparent;
         box-shadow: none;
+        filter: hue-rotate(0deg);
     }
 }
 
 .circle2 {
-    transform: rotate(-100deg);
+    transform: rotate(-180deg);
 }
 
 .circle2 span::before {
