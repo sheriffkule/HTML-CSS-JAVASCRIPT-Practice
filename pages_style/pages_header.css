@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.neon {
+    position: absolute;
+    top: 0px;
+    left: -10px;
+    overflow: hidden;
+    filter: brightness(200%);
+    padding: 0 3px;
+    width: 104%;
+    height: 200px;
+    z-index: -1;
+}
+
+.neon img {
+    object-fit: cover;
+}
+
+.gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, red, gold, lightgreen, gold, red);
+    mix-blend-mode: multiply;
+}
+
+.spotlight {
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle, white, transparent 25%) center / 25% 25%,
+        radial-gradient(circle, #ffffff, black 25%) center / 12% 12%;
+    mix-blend-mode: color-dodge;
+    animation: move 20s linear infinite;
+}

@@ -5,7 +5,7 @@
 }
 
 body {
-    background: linear-gradient(#070709, #0f0c4e);
+    background: linear-gradient(#070709, #111025);
     min-height: 100vh;
 }
 
@@ -224,13 +224,4 @@ header .imgContainer .neon .spotlight {
     to {
         transform: translate(50%, 50%);
     }
-}
-
-header .imgContainer .welcome {
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    text-align: center;
-    color: #fff;
 }
