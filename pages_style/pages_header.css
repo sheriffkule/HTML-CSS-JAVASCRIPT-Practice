@@ -10,8 +10,7 @@
     left: -10px;
     overflow: hidden;
     filter: brightness(200%);
-    padding: 0 3px;
-    width: 104%;
+    width: 100%;
     height: 200px;
     z-index: -1;
 }
