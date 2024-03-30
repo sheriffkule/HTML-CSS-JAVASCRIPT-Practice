@@ -133,7 +133,11 @@ form h2 {
     width: 100%;
     font-weight: 500;
     color: #292929;
-    filter: drop-shadow(0 0 10px #01dbc2);
+    transition: .3s;
+}
+
+.inputBx input[type="submit"]:hover {
+    filter: drop-shadow(0 0 6px #01dbc2);
 }
 
 .group {
@@ -151,8 +155,8 @@ form h2 {
     font-size: 16px;
 }
 
-.group a:nth-child(2),
+/* .group a:nth-child(2), */
 .group a:hover {
     color: #01dbc2;
-    filter: drop-shadow(0 0 5px #01dbc2);
+    filter: drop-shadow(0 0 4px #01dbc2);
 }
