@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(#212121 20%, #1A237E 100%);
+}
+
+.navigation {
+    width: 450px;
+    height: 100px;
+    position: relative;
+    background: #2f2f2f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.navigation ul {
+    position: relative;
+    display: flex;
+    width: 400px;
+    transition: all .5 ease-in-out;
+}
+
+.navigation ul li {
+    position: relative;
+    list-style: none;
+    width: 100px;
+    height: 80px;
+    transition: all .5 ease-in-out;
+}
+
+.navigation ul li a {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    font-weight: 500;
+}
+
+.navigation ul li a .icon {
+    position: relative;
+    display: block;
+    line-height: 85px;
+    font-size: 28px;
+    transition: all .5;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.navigation ul li a:hover .icon {
+    color: white;
+    font-size: 30px;
+}
+
+.navigation ul li.active a .icon {
+    color: #29fd53;
+    transform: translateY(-12px);
+}
+
+.navigation ul li a .text {
+    position: absolute;
+    left: 12px;
+    top: 35px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #222327;
+    text-transform: uppercase;
+    transform: translateY(0px);
+    opacity: 0;
+    z-index: 10;
+}
+
+.navigation ul li.active a .text {
+    opacity: 1;
+    transform: translateY(16px);
+}
+
+.indicator {
+    position: absolute;
+    width: 90px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .5s;
+}
+
+.indicator::before {
+    content: '';
+    position: absolute;
+    bottom: 14px;
+    width: 95%;
+    height: 16px;
+    background-color: #29fd53;
+    border-radius: 10px;
+}
+
+.navigation ul li:nth-child(2).active ~ .indicator {
+    transform: translateX(calc(80px * 1));
+}
+
+.navigation ul li:nth-child(3).active~.indicator {
+    transform: translateX(calc(80px * 2));
+}
+
+.navigation ul li:nth-child(4).active~.indicator {
+    transform: translateX(calc(80px * 3));
+}
+
+.navigation ul li:nth-child(5).active~.indicator {
+    transform: translateX(calc(80px * 4));
+}
