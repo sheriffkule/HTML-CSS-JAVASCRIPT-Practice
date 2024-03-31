@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Ripple Hover Effect</title>
+    <link rel="stylesheet" href="/buttons_style/buttonAnimation18.css">
+</head>
+
+<body>
+    <div class="container">
+        <a href="#" class="btn" data-ripple=""><span>Hover Me!</span></a>
+        <a href="#" class="btn btn2" data-ripple=""><span>Click Me!</span></a>
+    </div>
+
+    <script>
+        document.body.addEventListener('mousemove', function (e) {
+            if (e.target.matches('.btn[data-ripple]')) {
+                const btn = e.target;
+                const x = e.pageX - btn.offsetLeft;
+                const y = e.pageY - btn.offsetTop;
+
+                btn.style.setProperty('--x', x + 'px');
+                btn.style.setProperty('--y', y + 'px');
+            }
+        });
+    </script>
+</body>
+
+</html>
