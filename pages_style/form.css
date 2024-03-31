@@ -1,0 +1,101 @@
+main {
+    position: relative;
+    top: 160px;
+    width: 96%;
+    left: 20px;
+    right: 20px;
+    color: #c0c0c0;
+}
+
+main .content {
+    width: 50%;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    margin-bottom: 16px;
+}
+
+main .content h2 {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.content p {
+    line-height: 1.4;
+    text-align: justify;
+}
+
+main .examples ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    list-style: none;
+    gap: 30px;
+}
+
+/* .examples ul li {
+    transition: all .3 ease;
+} */
+
+.examples ul li a {
+    min-width: 200px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #c0c0c038;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: inset 0 0 10px hsla(189, 83%, 57%, 0.25);
+    background: transparent;
+    padding: 12px 8px;
+    color: #38d1ec;
+    transition: all .3s ease;
+}
+
+.examples ul li:hover a {
+    scale: 1.05;
+    background: rgba(192, 192, 192, 0.05);
+    transform: translateY(-8px);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.examples ul li a ion-icon {
+    color: lime;
+    margin-right: 16px;
+    font-size: 20px;
+    transition: all .2s;
+}
+
+.examples ul li:hover a span {
+    color: white;
+    font-weight: 600;
+}
+
+.examples ul li:hover a ion-icon {
+    font-size: 22px;
+    filter: drop-shadow(0 0 10px lime);
+    margin-right: 30px;
+}
+
+footer {
+    position: relative;
+    top: 200px;
+    text-align: center;
+    background: transparent;
+    color: silver;
+}
+
+@media (max-width :768px) {
+    main {
+        top: 20px;
+        padding-right: 20px;
+    }
+
+    main .content {
+        width: 90%;
+        padding: 10px;
+        background-color: rgba(25, 25, 25, 0.7);
+    }
+
+    main .examples ul {
+        grid-template-columns: 1fr 1fr;
+    }
+}
