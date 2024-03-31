@@ -63,7 +63,8 @@ main .content {
 .examples li a {
     color: #38d1ec;
     display: flex;
-    align-items: center;
+    align-items:  center;
+    justify-content: space-between;
 }
 
 .examples li a ion-icon {
@@ -87,6 +88,10 @@ footer {
 @media (max-width: 768px) {
     main {
         top: 100px;
+    }
+
+    .content {
+        margin-bottom: -50px;
     }
 
     .examples ul {

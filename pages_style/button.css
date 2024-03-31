@@ -86,13 +86,15 @@ footer {
 
 @media (max-width :768px) {
     main {
-        top: 100px;
+        top: 20px;
+        padding-right: 20px;
     }
 
     main .content {
         width: 90%;
         margin: auto;
         padding: 10px;
+        background-color: #191919;
     }
 
     main section ul {
