@@ -5,7 +5,7 @@
 }
 
 body {
-    background: linear-gradient(#070709 -20%, #111025 100%);
+    background: linear-gradient(#070709 20%, #111025 100%);
     background-size: cover;
     min-height: 100vh;
     height: 100%;

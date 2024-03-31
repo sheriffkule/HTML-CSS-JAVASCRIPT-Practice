@@ -6,3 +6,18 @@ header .imgContainer .welcome {
     text-align: center;
     color: #fff;
 }
+
+main {
+    color: #c0c0c0;
+    margin-top: -40px;
+}
+
+footer {
+    margin-top: 20px;
+    vertical-align: bottom;
+    color: #c0c0c0;
+    font-size: 14px;
+    padding: 8px 36px;
+    background-color: transparent;
+    text-align: center;
+}
