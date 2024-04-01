@@ -29,6 +29,7 @@ main .content {
 }
 
 .examples li {
+    position: relative;
     min-width: 200px;
     border: 1px solid rgba(192, 192, 192, 0.22);
     border-radius: 8px;
@@ -60,7 +61,6 @@ main .content {
 
 .examples li a ion-icon {
     color: lime;
-    margin-right: 16px;
     font-size: 22px;
     transition: all .4s;
 }
@@ -73,6 +73,19 @@ main .content {
 
 .examples li a span {
     text-align: center;
+}
+
+.top {
+    position: absolute;
+    color: black;
+    background: yellow;
+    width: 70px;
+    text-align: center;
+    top: 0px;
+    right: 0px;
+    rotate: 45deg;
+    transform: translate(16px, -4px);
+    font-weight: 600;
 }
 
 footer {

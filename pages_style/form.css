@@ -32,11 +32,8 @@ main .examples ul {
     gap: 30px;
 }
 
-/* .examples ul li {
-    transition: all .3 ease;
-} */
-
 .examples ul li a {
+    position: relative;
     min-width: 200px;
     display: flex;
     align-items: center;
@@ -52,27 +49,43 @@ main .examples ul {
 
 .examples ul li:hover a {
     scale: 1.05;
-    background: rgba(192, 192, 192, 0.05);
+    background: rgba(0, 0, 128, 0.5);
     transform: translateY(-8px);
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.examples ul li a span {
+    transition: all .3s ease;
 }
 
 .examples ul li a ion-icon {
     color: lime;
     margin-right: 16px;
     font-size: 20px;
-    transition: all .2s;
+    transition: all .3s ease-in-out;
 }
 
 .examples ul li:hover a span {
     color: white;
-    font-weight: 600;
 }
 
 .examples ul li:hover a ion-icon {
-    font-size: 22px;
+    font-size: 24px;
     filter: drop-shadow(0 0 10px lime);
-    margin-right: 30px;
+    rotate: 360deg;
+}
+
+.top {
+    position: absolute;
+    color: black;
+    background: yellow;
+    width: 70px;
+    text-align: center;
+    top: 0px;
+    right: 0px;
+    rotate: 45deg;
+    transform: translate(20px, -12px);
+    font-weight: 600;
 }
 
 footer {

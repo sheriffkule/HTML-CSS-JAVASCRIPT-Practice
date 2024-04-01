@@ -1,0 +1,112 @@
+main {
+    position: relative;
+    left: 0;
+    padding-right: 40px;
+    top: 160px;
+    font-family: Arial;
+    color: #c0c0c0;
+    margin: 0 20px;
+    width: 96%;
+}
+
+main .content {
+    position: relative;
+    top: 30px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    text-align: center;
+}
+
+.examples ul {
+    position: relative;
+    top: 20px;
+    left: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 30px;
+    list-style: none;
+}
+
+.examples li {position: relative;
+    min-width: 200px;
+    border: 1px solid rgba(192, 192, 192, 0.22);
+    border-radius: 8px;
+    box-shadow: inset 0 0 10px rgba(54, 209, 236, 0.25);
+    transition: all .4s;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.examples li:hover {
+    background-color: rgb(0, 0, 82);
+    transform: translate(4px, -8px) scale(1.05);
+    box-shadow: 0 0 20px navy;
+}
+
+.examples li:hover a span {
+    color: white;
+}
+
+.examples li a {
+    padding: 16px 8px;
+    width: 100%;
+    height: 100%;
+    color: #38d1ec;
+    display: flex;
+    align-items: center;
+}
+
+.examples li a ion-icon {
+    color: lime;
+    margin-right: 16px;
+    font-size: 22px;
+    transition: all .4s;
+}
+
+.examples li:hover a ion-icon {
+    transform: rotate(360deg);
+    color: #a6daa6;
+    font-size: 25px;
+}
+
+.examples li a span {
+    text-align: left;
+}
+
+.top {
+    position: absolute;
+    color: black;
+    background: yellow;
+    width: 70px;
+    text-align: center;
+    top: 0px;
+    right: 0px;
+    rotate: 45deg;
+    transform: translate(16px, -4px);
+    font-weight: 600;
+}
+
+footer {
+    position: relative;
+    top: 200px;
+    text-align: center;
+    background: transparent;
+    color: silver;
+}
+
+@media (max-width: 768px) {
+    main {
+        top: 50px;
+    }
+
+    main .content {
+        margin-bottom: 30px;
+        background: rgba(0, 0, 0, 0.7);
+        width: 80%;
+    }
+
+    main .examples ul {
+        grid-template-columns: 1fr 1fr;
+    }
+}

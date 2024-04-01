@@ -11,7 +11,7 @@
   <title>Loaders</title>
   <link rel="stylesheet" href="/styles/header.css">
   <link rel="stylesheet" href="/pages_style/pages_header.css">
-  <link rel="stylesheet" href="/pages_style/background.css">
+  <link rel="stylesheet" href="/pages_style/loader.css">
 </head>
 
 <body>
@@ -24,7 +24,7 @@
       <ul id="nav_links" class="nav_links">
         <li class="close_btn" id="close_btn"><i class="fa-solid fa-x"></i></li>
         <li><a href="https://sheriffkule.vercel.app/">Home</a></li>
-        <li><a href="#">About & Contact</a></li>
+        <li><a href="/pages/about.html">About & Contact</a></li>
 
         <li id="components"><a href="#">Components &#9662;</a>
           <div id="drop-items">
@@ -53,9 +53,36 @@
   </header>
 
   <main>
+    <section class="content">
+      <h2>Examples of page loaders that can be used on websites</h2>
+    </section>
+
+    <section class="examples">
+      <ul>
+        <li><a href="/loaders/loader15.html"><ion-icon name="reload-outline"></ion-icon><span>Color Changer</span></a></li>
+        <li><a href="/loaders/loader14.html"><ion-icon name="water-outline"></ion-icon><span>Liquid Animation</span><div class="top">Top</div></a></li>
+        <li><a href="/loaders/loader13.html"><ion-icon name="refresh-circle-outline"></ion-icon><span>Amazing Modern Animation</span><div class="top">Top</div></a></li>
+        <li><a href="/loaders/loader12.html"><ion-icon name="refresh-outline"></ion-icon><span>Creative Animation</span><div class="top">Top</div></a></li>
+        <li><a href="/loaders/loader11.html"><ion-icon name="reload-circle-outline"></ion-icon><span>Spinning Dots</span><div class="top">Top</div></a></li>
+        <li><a href="/loaders/loader10.html"><ion-icon name="reload-outline"></ion-icon><span>Circula Progress Bar</span></a></li>
+        <li><a href="/loaders/loader09.html"><ion-icon name="battery-half-outline"></ion-icon><span>Filling Bar</span></a></li>
+        <li><a href="/loaders/loader08.html"><ion-icon name="radio-outline"></ion-icon><span>Music Wave</span></a></li>
+        <li><a href="/loaders/loader07.html"><ion-icon name="pulse-outline"></ion-icon><span>Pulsing Loader</span></a></li>
+        <li><a href="/loaders/loader06.html"><ion-icon name="refresh-circle-outline"></ion-icon><span>Four Sided Circle</span></a></li>
+        <li><a href="/loaders/loader05.html"><ion-icon name="refresh-outline"></ion-icon><span>Simple Circling</span></a></li>
+        <li><a href="/loaders/loader04.html"><ion-icon name="reload-circle-outline"></ion-icon><span>Text Loader</span></a></li>
+        <li><a href="/loaders/loader03.html"><ion-icon name="reload-outline"></ion-icon><span>Spinner with Bubbles</span></a></li>
+        <li><a href="/loaders/loader02.html"><ion-icon name="refresh-circle-outline"></ion-icon><span>Double Spinner</span></a>
+        </li>
+        <li><a href="/loaders/loader01.html"><ion-icon name="refresh-outline"></ion-icon><span>Simple
+              Spinning</span></a></li>
+      </ul>
+    </section>
 
   </main>
-
+  <footer>
+    <p>Copyright &copy; SheriffKule from XXIII Century</p>
+  </footer>
   <script>
     let navLinks = document.getElementById('nav_links');
     let menuBtn = document.getElementById('menu_btn');
@@ -69,7 +96,8 @@
       navLinks.classList.remove('show');
     })
   </script>
-
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>
