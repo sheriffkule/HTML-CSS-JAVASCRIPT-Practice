@@ -1,0 +1,177 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #25252b;
+}
+
+@property --a {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+}
+
+.box {
+    position: relative;
+    width: 400px;
+    height: 200px;
+    background: repeating-conic-gradient(from var(--a), #ff2770 0%, #ff2770 5%, transparent 5%, transparent 40%, #ff2770 50%);
+    filter: drop-shadow(0 15px 50px black);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: rotating 16s linear infinite;
+    transition: all .5s ease;
+}
+
+.box:hover {
+    width: 450px;
+    height: 500px;
+}
+
+@keyframes rotating {
+    to {
+        --a: 360deg;
+    }
+}
+
+.box::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: repeating-conic-gradient(from var(--a), #45f3ff 0%, #45f3ff 5%, transparent 5%, transparent 40%, #45f3ff 50%);
+    filter: drop-shadow(0 15px 50px black);
+    align-items: center;
+    animation: rotating 16s linear infinite;
+    animation-delay: -4s;
+    border-radius: 20px;
+}
+
+.box::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    background-color: #2d2d39;
+    border-radius: 20px;
+    border: 8px solid #25252b;
+}
+
+.login {
+    position: absolute;
+    inset: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, .2);
+    z-index: 10;
+    box-shadow: inset 0 10px 20px rgba(0, 0, 0, .2);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    transition: .5s;
+    color: white;
+    overflow: hidden;
+}
+
+.box:hover .login {
+    inset: 40px;
+}
+
+.loginBx {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    width: 70%;
+    transform: translateY(120px);
+    transition: all .5s;
+}
+
+.box:hover .loginBx {
+    transform: translateY(0px);
+}
+
+.loginBx h2 {
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+}
+
+.loginBx h2 i {
+    color: #ff2770;
+    text-shadow: 0 0 5px #ff2770,
+    0 0 25px #ff2770;
+}
+
+.loginBx input {
+    width: 100%;
+    padding: 10px 20px;
+    outline: none;
+    border: 2px solid white;
+    font-size: 16px;
+    color: white;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    transition: all .2s;
+}
+
+.loginBx input:focus {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid #45f3ff;
+}
+
+.loginBx input::placeholder {
+    color: #999;
+    transition: .3s;
+}
+
+.loginBx input:focus::placeholder {
+    transform: translateX(250px);
+}
+
+.loginBx input[type="submit"] {
+    background: aqua;
+    border: none;
+    font-weight: 500;
+    color: #111;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.loginBx input[type="submit"]:hover {
+    box-shadow: 0 0 10px aqua,
+    0 0 50px aqua;
+}
+
+.loginBx .group {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.group a {
+    color: white;
+    text-decoration: none;
+    transition: all .3s;
+}
+
+.group a:hover {
+    scale: 1.05;
+    filter: drop-shadow(0 0 10px #ff2770);
+}
+
+.group a:nth-child(2) {
+    color: #ff2770;
+    font-weight: 600;
+}
