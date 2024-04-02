@@ -94,7 +94,7 @@ main .content p{
 
 footer {
     position: relative;
-    top: 200px;
+    margin-top: 200px;
     text-align: center;
     background: transparent;
     color: silver;
@@ -120,5 +120,6 @@ footer {
     main .examples ul {
         grid-template-columns: 1fr;
         margin-top: -30px;
+        gap: 10px;
     }
 }

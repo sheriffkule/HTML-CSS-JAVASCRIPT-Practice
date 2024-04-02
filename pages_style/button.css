@@ -10,15 +10,12 @@ main {
 main .content {
     position: relative;
     color: #c0c0c0;
-    width: 50%;
+    width: 60%;
     top: 0;
-    left: 50%;
-    margin-left: 100px;
-    transform: translateX(-60%);
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
 }
 
 .content p {
@@ -31,7 +28,7 @@ main section ul {
     display: grid;
     gap: 30px;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    margin-top: 40px;
+    margin-top: 20px;
     list-style: none;
 }
 
@@ -46,7 +43,7 @@ main section ul li a {
     border: 1px solid rgba(192, 192, 192, 0.22);
     overflow: hidden;
     box-shadow: inset 0 0 10px hsla(189, 83%, 57%, 0.25);
-    padding: 16px 8px;
+    padding: 12px 8px;
     transition: all .3s;
     cursor: pointer;
     overflow: hidden;
@@ -95,7 +92,7 @@ main section ul li:hover a ion-icon {
 
 footer {
     position: relative;
-    top: 200px;
+    margin-top: 200px;
     color: #c0c0c0;
     text-align: center;
 }
@@ -115,5 +112,17 @@ footer {
 
     main section ul {
         grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 520px) {
+    main {
+        top: 0px;
+    }
+
+    main section ul {
+        grid-template-columns: 1fr;
+        margin-top: 0px;
+        gap: 10px;
     }
 }

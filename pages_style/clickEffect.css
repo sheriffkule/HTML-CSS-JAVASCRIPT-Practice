@@ -107,10 +107,22 @@ footer {
         width: 90%;
         margin: auto;
         padding: 10px;
-        background: #181818;
+        background: hsla(0, 0%, 0%, 0.7);
     }
 
     main section ul {
         grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 520px) {
+    main section ul {
+        grid-template-columns: 1fr;
+        margin-top: -40px;
+        gap: 10px;
+    }
+
+    main .content {
+        margin-bottom: 50px;
     }
 }

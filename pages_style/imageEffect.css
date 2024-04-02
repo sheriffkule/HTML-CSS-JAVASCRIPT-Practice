@@ -90,7 +90,7 @@ main .content {
 
 footer {
     position: relative;
-    top: 200px;
+    margin-top: 200px;
     text-align: center;
     background: transparent;
     color: silver;
@@ -109,5 +109,17 @@ footer {
 
     main .examples ul {
         grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 520px) {
+    main {
+        top: 80px;
+    }
+
+    main .examples ul {
+        grid-template-columns: 1fr;
+        margin-top: -40px;
+        gap: 10px;
     }
 }
