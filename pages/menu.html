@@ -11,7 +11,7 @@
   <title>Menus</title>
   <link rel="stylesheet" href="/styles/header.css">
   <link rel="stylesheet" href="/pages_style/pages_header.css">
-  <link rel="stylesheet" href="/pages_style/background.css">
+  <link rel="stylesheet" href="/pages_style/menu.css">
 </head>
 
 <body>
@@ -24,7 +24,7 @@
       <ul id="nav_links" class="nav_links">
         <li class="close_btn" id="close_btn"><i class="fa-solid fa-x"></i></li>
         <li><a href="https://sheriffkule.vercel.app/">Home</a></li>
-        <li><a href="#">About & Contact</a></li>
+        <li><a href="/pages/about.html">About & Contact</a></li>
 
         <li id="components"><a href="#">Components &#9662;</a>
           <div id="drop-items">
@@ -53,15 +53,48 @@
   </header>
 
   <main>
-
+    <section class="content">
+      <h2>Examples of Menus that can be used on Websites</h2>
+      <p>These menus are designed to provide a simple and intuitive way for users to navigate through website.</p>
+    </section>
+    <section class="examples">
+      <ul>
+        <li><a href="/menus/menu10.html"><ion-icon name="menu-outline"></ion-icon><span>Tab Nav Menu</span></a></li>
+        <li><a href="/menus/menu09.html"><ion-icon name="apps-outline"></ion-icon><span>3D Isometric Menu</span>
+            <div class="top">Top</div>
+          </a></li>
+        <li><a href="/menus/menu08.html"><ion-icon name="apps-outline"></ion-icon><span>Isometric Social Media</span>
+            <div class="top">Top</div>
+          </a></li>
+        <li><a href="/menus/menu07.html"><ion-icon name="apps-outline"></ion-icon><span>Isometric Menu</span></a></li>
+        <li><a href="/menus/menu06.html"><ion-icon name="menu-outline"></ion-icon><span>Sidebar Menu</span>
+            <div class="top">Top</div>
+          </a></li>
+        <li><a href="/menus/menu05.html"><ion-icon name="menu-outline"></ion-icon><span>Indicator Menu</span></a></li>
+        <li><a href="/menus/menu04.html"><ion-icon name="menu-outline"></ion-icon><span>Transparent Sidebar</span>
+            <div class="top">Top</div>
+          </a></li>
+        <li><a href="/menus/menu03.html"><ion-icon name="images-outline"></ion-icon><span>Image Gallery
+              Layout</span></a></li>
+        <li><a href="/menus/menu02.html"><ion-icon name="menu-outline"></ion-icon><span>Dropdown Menu</span></a></li>
+        <li><a href="/menus/menu01.html"><ion-icon name="menu-outline"></ion-icon><span>Simple Dropdown Menu</span></a>
+        </li>
+        <li><a href="/menus/searchBar03.html"><ion-icon name="search-outline"></ion-icon><span>Nice Search
+              Bar</span></a></li>
+        <li><a href="/menus/searchBar02.html"><ion-icon name="search-circle-outline"></ion-icon><span>Responsive Search
+              Bar</span></a></li>
+        <li><a href="/menus/searchBar01.html"><ion-icon name="search-circle-outline"></ion-icon><span>Simple Search
+              Bar</span></a></li>
+      </ul>
+    </section>
   </main>
-
+  <footer>
+    <p>Copyright &copy; SheriffKule from XXIII Century</p>
+  </footer>
   <script>
     let navLinks = document.getElementById('nav_links');
     let menuBtn = document.getElementById('menu_btn');
     let closeBtn = document.getElementById('close_btn');
-
-    // navLinks.classList.remove('show');
 
     menuBtn.addEventListener('click', () => {
       navLinks.classList.add('show');
@@ -71,7 +104,8 @@
       navLinks.classList.remove('show');
     })
   </script>
-
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>
