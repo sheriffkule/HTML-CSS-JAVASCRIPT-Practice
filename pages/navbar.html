@@ -11,7 +11,7 @@
   <title>Navigation Bars</title>
   <link rel="stylesheet" href="/styles/header.css">
   <link rel="stylesheet" href="/pages_style/pages_header.css">
-  <link rel="stylesheet" href="/pages_style/background.css">
+  <link rel="stylesheet" href="/pages_style/navbar.css">
 </head>
 
 <body>
@@ -24,7 +24,7 @@
       <ul id="nav_links" class="nav_links">
         <li class="close_btn" id="close_btn"><i class="fa-solid fa-x"></i></li>
         <li><a href="https://sheriffkule.vercel.app/">Home</a></li>
-        <li><a href="#">About & Contact</a></li>
+        <li><a href="/pages/navbar.html">About & Contact</a></li>
 
         <li id="components"><a href="#">Components &#9662;</a>
           <div id="drop-items">
@@ -53,15 +53,39 @@
   </header>
 
   <main>
+    <section class="content">
+      <h2>Examples of Navigation Bars that can be used on Websites</h2>
+      <p>This page contains examples of navigation bars, which are commonly found in web pages.These Navigation Bars are designed to provide a simple and intuitive way for users to navigate through website.</p>
+    </section>
+
+    <section class="examples">
+      <ul>
+        <li><a href="/navbar/navBar09.html"><ion-icon name="menu-outline"></ion-icon><span>Simple NavBar</span></a></li>
+        <li><a href="/navbar/navBar08.html"><ion-icon name="albums-outline"></ion-icon><span>Animated Sliding Bar</span></a></li>
+        <li><a href="/navbar/navBar07.html"><ion-icon name="logo-tableau"></ion-icon><span>Magic Indicator Bar</span></a></li>
+        <li><a href="/navbar/navBar06.html"><ion-icon name="menu-outline"></ion-icon><span>Nice Responsive NavBar</span></a></li>
+        <li><a href="/navbar/navBar05.html"><ion-icon name="menu-outline"></ion-icon><span>Responsive Navbar</span><div class="top">Top</div></a></li>
+        <li><a href="/navbar/navBar04.html"><ion-icon name="menu-outline"></ion-icon><span>Animated Hover Effect</span></a></li>
+        <li><a href="/navbar/navBar03.html"><ion-icon name="menu-outline"></ion-icon><span>Navbar Hover Effect</span></a></li>
+        <li><a href="/navbar/navBar02.html"><ion-icon name="log-out-outline"></ion-icon><span>Side NavBar</span><div class="top">Top</div></a></li>
+        <li><a href="/navbar/navBar01.html"><ion-icon name="menu-outline"></ion-icon><span>Simple NavBar</span></a></li>
+        <li><a href="/navbar/pagination01.html"><ion-icon name="ellipsis-horizontal-outline"></ion-icon><span>Pagination Example</span></a></li>
+        <li><a href="/navbar/footer04.html"><ion-icon name="footsteps-outline"></ion-icon><span>Responsive Footer</span></a></li>
+        <li><a href="/navbar/footer03.html"><ion-icon name="footsteps-outline"></ion-icon><span>Animated Footer</span></a></li>
+        <li><a href="/navbar/footer02.html"><ion-icon name="footsteps-outline"></ion-icon><span></span>Nice Footer</a></li>
+        <li><a href="/navbar/footer01.html"><ion-icon name="footsteps-outline"></ion-icon><span>Simple Footer</span></a>
+        </li>
+      </ul>
+    </section>
 
   </main>
-
+  <footer>
+    <p>Copyright &copy; SheriffKule from XXIII Century</p>
+  </footer>
   <script>
     let navLinks = document.getElementById('nav_links');
     let menuBtn = document.getElementById('menu_btn');
     let closeBtn = document.getElementById('close_btn');
-
-    // navLinks.classList.remove('show');
 
     menuBtn.addEventListener('click', () => {
       navLinks.classList.add('show');
