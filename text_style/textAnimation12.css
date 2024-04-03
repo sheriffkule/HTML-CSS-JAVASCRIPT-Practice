@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: radial-gradient(#2f3f60 10%, #2f3b73 50%, #08141e 90%);
+}
+
+h1 {
+    position: relative;
+    font-size: 6rem;
+    letter-spacing: 5px;
+    color: transparent;
+}
+
+h1::before,
+h1::after {-webkit-text-stroke: 1px #a2fafa;
+    content: attr(data-name);
+    position: absolute;
+    color: transparent;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: all .4s ease-in-out;
+}
+
+h1::before {
+    -webkit-clip-path: polygon(100% 0%, 0% 0%, 0% 100%, 2% 100%);
+    clip-path: polygon(100% 0%, 0% 0%, 0% 100%, 2% 100%);
+}
+
+h1::after {
+    -webkit-clip-path: polygon(100% 0%, 100% 0%, 0% 100%, 2% 100%);
+    clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 2% 100%);
+}
+
+h1:hover::before {
+    top: -35px;
+    rotate: -12deg;
+    text-shadow: 0 0 10px #2fb6c3;
+}
+
+h1:hover::after {
+    top: 25px;
+    left: 12px;
+    rotate: 12deg;
+    text-shadow: 0 0 10px #25739d;
+}
