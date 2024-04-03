@@ -35,7 +35,7 @@ main section ul {
 main section ul li a {
     position: relative;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: left;
     align-items: center;
     background-color: transparent;
     border-radius: 8px;
@@ -67,6 +67,7 @@ main section ul li:hover a span {
 
 main section ul li a ion-icon {
     color: lime;
+    margin-right: 16px;
     font-size: 20px;
     transition: .4s;
 }
