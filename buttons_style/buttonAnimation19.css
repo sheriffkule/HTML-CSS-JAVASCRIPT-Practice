@@ -1,0 +1,122 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: radial-gradient(circle at 0% 100%, #12336b, #09151c);
+}
+
+button {
+    width: 200px;
+    height: 60px;
+    border: none;
+    background: transparent;
+    color: white;
+    transform: rotate(-25deg) skew(25deg);
+    cursor: pointer;
+    margin: 0 50px;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: -10px;
+    background: navy;
+    width: 100%;
+    height: 20px;
+    transform: skewX(-41deg);transition: .3s ease-in;
+    opacity: .2;
+}
+
+button::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: -20px;
+    background: navy;
+    width: 20px;
+    height: 100%;
+    transform: skewY(-49deg);
+    transition: .3s ease-in;opacity: .3;
+}
+
+button:hover::after,
+button:hover::before {
+    background: #38696b;
+}
+
+button span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #20284e;
+    font-size: 25px;
+    transition: 1s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button:hover span {
+    z-index: 10;
+    transition: .3s;
+    filter: drop-shadow(-2px 0 8px rgba(255, 255, 255, 0.2));
+}
+
+button:hover span:nth-child(5) {
+    transform: translate(80px, -80px);
+    opacity: 1;
+}
+
+button:hover span:nth-child(4) {
+    transform: translate(60px, -60px);
+    opacity: .8;
+}
+
+button:hover span:nth-child(3) {
+    transform: translate(40px, -40px);
+    opacity: .6;
+}
+
+button:hover span:nth-child(2) {
+    transform: translate(20px, -20px);
+    opacity: .4;
+}
+
+button:hover span:nth-child(1) {
+    transform: translate(0, 0);
+    opacity: .2;
+}
+
+button:hover span {
+    background: #38696b;
+}
+
+button:active span:nth-child(5) {
+    transform: translate(20px, -20px);
+}
+
+button:active span:nth-child(4) {
+    transform: translate(15px, -15px);
+}
+
+button:active span:nth-child(3) {
+    transform: translate(10px, -10px);
+}
+
+button:active span:nth-child(2) {
+    transform: translate(5px, -5px);
+}
+
+button:active span {
+    cursor: grab;
+}
