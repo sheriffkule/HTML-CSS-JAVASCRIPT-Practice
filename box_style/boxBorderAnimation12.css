@@ -1,0 +1,115 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background:  linear-gradient( #101620, #0d3041);
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    position: relative;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.card {
+    position: relative;
+    overflow: hidden;
+}
+
+.card .face {
+    width: 300px;
+    height: 200px;
+    transition: .4s;
+}
+
+.card .front {
+    position: relative;
+    background: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    transform: translateY(100px);
+}
+
+.card:hover .front {
+    transform: translateY(0);
+    box-shadow: inset 0 0 60px whitesmoke,
+    inset 20px 0 80px #f0f,
+    inset -20px 0 80px #0ff,
+    inset 20px 0 300px #f0f,
+    inset -20px 0 300px #0ff,
+    0 0 50px #fff,
+    -10px 0 80px #f0f,
+    10px 0 80px #0ff;
+}
+
+.front .content {
+    opacity: .2;
+    color: white;
+    text-align: center;
+    transition: .5s;
+}
+
+.card:hover .front .content {
+    opacity: 1;
+}
+
+.card .front .content ion-icon {
+    font-size: 3rem;
+    display: inline-block;
+}
+
+.card .front .content h3 {
+    font-size: 1rem;
+}
+
+.back {
+    position: relative;
+    background: rgb(196, 196, 196);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+    transform: translateY(-100px);
+}
+
+.card:hover .back {
+    transform: translateY(0px);
+    border-radius:0 0 20px 20px;
+}
+
+.back p, .back a {
+    font-size: .8rem;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.back a {
+    text-decoration: none;
+    color: white;
+    outline: 1px dashed #333;
+    padding: 10px 16px;
+    margin-top: 16px;
+    display: inline-block;
+    background: darkmagenta;
+    border-radius: 6px;
+    transition: all .3s;
+}
+
+.back a:hover {
+    background: #333;
+    box-shadow: 0 0 20px #333;
+}
