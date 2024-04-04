@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+    background: #212121;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #fff;
+}
+
+.navigation {
+    position: fixed;
+    right: 50px;
+    top: 50px;
+    height: 50px;
+    width: 250px;
+    transition: all .5s;
+    z-index: 5;
+    overflow: hidden;
+}
+
+.navigation.active {
+    height: 350px;
+}
+
+.navigation .toggle {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: #2196f3;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 20px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.navigation .toggle::before {
+    content: 'Menu';
+    margin-right: 10px;
+}
+
+.navigation .toggle.active::before {
+    content: 'Close';
+}
+
+.navigation .toggle span {
+    position: relative;
+    width: 20px;
+    height: 50px;
+}
+
+.navigation .toggle span::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    transition: .4s;
+}
+
+.navigation .toggle span::after {
+    content: '';
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    transition: .4s;
+}
+
+.navigation .toggle.active span::before {
+    transform: rotate(225deg);
+    top: 24px;
+}
+
+.navigation .toggle.active span::after {
+    transform: rotate(135deg);
+    bottom: 24px;
+}
+
+.navigation ul {
+    position: relative;
+    background: #111;
+}
+
+.navigation ul li {
+    list-style: none;
+}
+
+.navigation ul li a {
+    position: relative;
+    text-decoration: none;
+    display: block;
+    padding: 10px 20px;
+    height: 50px;
+    color: #fff;
+    font-size: 18px;
+    transition: .8s;
+}
+
+.navigation ul li a:hover {
+    transition: 0s;
+    background: #2196f3;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+section {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background: linear-gradient(#212121 20%, #1A237E 100%);
+}
+
+section h2 {
+    font-size: 4rem;
+    color: rgba(33, 150, 243, .2);
+}
