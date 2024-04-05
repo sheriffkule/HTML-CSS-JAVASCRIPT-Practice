@@ -1,0 +1,157 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(45deg, rgb(38, 60, 217) 10%, rgb(0, 119, 255) 40%, rgb(0, 119, 255) 60%, rgb(38, 60, 217) 90%, rgb(38, 60, 217) 100%);
+}
+
+header {
+    position: absolute;
+    width: 100%;
+    min-height: 60px;
+    background: rgba(67, 165, 246, 0.3);
+    padding: 0 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo {
+    color: white;
+    font-size: 1.75em;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+header .logo span {
+    color: orangered;
+}
+
+header ul {
+    position: relative;
+}
+
+header ul li {
+    list-style: none;
+    position: relative;
+    float: left;
+}
+
+header ul li a {
+    color: #fff;
+    font-size: 1.1em;
+    padding: 20px 25px;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    transition: all .4s;
+}
+
+header ul li a:hover {
+    background: #2b93e3;
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+header ul li ul {
+    position: absolute;
+    left: 0;
+    width: 200px;
+    background: #2b5164;
+    display: none;
+}
+
+header ul li:hover > ul {
+    display: block;
+}
+
+header ul li ul li {
+    position: relative;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+header ul li ul li ul {
+    top: 0;
+    left: 200px;
+}
+
+@media (max-width: 900px) {
+    header {
+        padding: 10px 20px;
+    }
+
+    header nav {
+        position: absolute;
+        width: 100%;
+        top: 60px;
+        left: 0;
+        background: rgba(67, 91, 104, 0.6);
+        display: none;
+    }
+
+    header.active nav {
+        display: initial;
+    } 
+
+    header nav ul li {
+        width: 100%;
+    }
+
+    header nav ul li ul {
+        position: relative;
+        width: 100%;
+        left: 0;
+    }
+
+    header ul li ul li ul {
+        top: 0;
+        left: 0;
+    }
+
+    header nav ul li:hover ul li {
+        background: #546e7b;
+    }
+
+    .menuToggle {
+        position: relative;
+        width: 40px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .menuToggle::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 3px;
+        background: white;
+        transform: translateY(-12px);
+        box-shadow: 0 12px white;
+        transition: .3s;
+    }
+
+    .menuToggle::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 3px;
+        background: white;
+        transform: translateY(12px);
+        transition: .3s;
+    }
+
+    header.active .menuToggle::before {
+        transform: rotate(45deg);
+        box-shadow: 0 0 white;
+    }
+
+    header.active .menuToggle::after {
+        transform: rotate(315deg);
+    }
+}

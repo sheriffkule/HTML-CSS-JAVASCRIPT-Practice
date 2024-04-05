@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Navbar with Dropdown Menu</title>
+  <link rel="stylesheet" href="/navbar_style/navBar11.css">
+</head>
+
+<body>
+  <header>
+    <a href="#" class="logo"><span>Sheriff</span>Kule</a>
+    <div class="menuToggle"></div>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Dropdown <b>&#x25BC;</b></a>
+          <ul>
+            <li><a href="#">Product 01</a></li>
+            <li><a href="#">Product 02</a></li>
+            <li><a href="#">Product 03 <b>+</b></a>
+            <ul>
+              <li><a href="#">Html</a></li>
+              <li><a href="#">Css</a></li>
+              <li><a href="#">JavaScript</a></li>
+            </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#">Portfolio</a></li>
+        <li><a href="#">Blog <b>&#x25BC;</b></a>
+          <ul>
+            <li><a href="#">Post 01</a></li>
+            <li><a href="#">Post 02</a></li>
+            <li><a href="#">Post 03</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <script>
+    let menu = document.querySelector('.menuToggle'); 
+    let header = document.querySelector('header');
+    
+    menu.onclick = function() {
+      header.classList.toggle('active');
+    }
+  </script>
+</body>
+
+</html>
