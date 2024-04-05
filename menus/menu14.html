@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu Hover Text Animation</title>
+  <link rel="stylesheet" href="/menus_style/menu14.css">
+</head>
+
+<body>
+  <ul>
+    <li style="--clr:#00ade1">
+      <a href="#" data-text="&numsp;Home">&numsp;Home</a>
+    </li>
+    <li style="--clr:#ff6493">
+      <a href="#" data-text="&numsp;About">&numsp;About</a>
+    </li>
+    <li style="--clr:#ffdd1c">
+      <a href="#" data-text="&numsp;Services">&numsp;Services</a>
+    </li>
+    <li style="--clr:#00dc82">
+      <a href="#" data-text="&numsp;Team">&numsp;Team</a>
+    </li>
+    <li style="--clr:#dc00d4">
+      <a href="#" data-text="&numsp;Contact">&numsp;Contact</a>
+    </li>
+  </ul>
+
+  <script>
+    let text = document.querySelectorAll('ul li a').forEach(text => {
+      text.innerHTML = text.innerHTML.split('').map((letters, i) => `<span>${letters}</span>`).join('');
+      let spn = document.querySelectorAll('ul li a span').forEach(e => {
+        let duration = Math.random() * 5;
+        e.style.animationDuration = .25 + duration + 's';
+        e.style.animationDelay = .25 + duration + 's';
+      })
+    });
+  </script>
+</body>
+
+</html>
