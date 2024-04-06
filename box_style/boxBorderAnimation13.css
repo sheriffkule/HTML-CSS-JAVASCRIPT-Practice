@@ -1,0 +1,139 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(#9097d4, lightblue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 50px 0;
+    gap: 40px 60px;
+}
+
+.container .drop {
+    position: relative;
+    width: 350px;
+    height: 350px;
+    box-shadow: inset 20px 20px 20px rgba(0, 0, 0, 0.05),
+        25px 35px 20px rgba(0, 0, 0, 0.05),
+        25px 30px 30px rgba(0, 0, 0, 0.05),
+        inset -20px -20px 25px rgba(255, 255, 255, .5);
+    transition: .5s ease-in-out;
+        display: flex;
+            justify-content: center;
+            align-items: center;
+}
+
+.container .drop:nth-child(1) {
+    border-radius: 50% 50% 61% 39% / 38% 41% 59% 62%;
+}
+
+.container .drop:nth-child(2) {
+    border-radius: 74% 26% 40% 60% / 56% 34% 66% 44%;
+}
+
+.container .drop:nth-child(3) {
+    border-radius: 60% 40% 40% 60% / 56% 71% 29% 44%;
+}
+
+.container .drop:hover {
+    border-radius: 50%;
+}
+
+.container .drop::before {
+    content: '';
+    position: absolute;
+    top: 50px;
+    left: 90px;
+    width: 35px;
+    height: 35px;
+    background: #fff;
+    border-radius: 50%;
+    opacity: .7;
+}
+
+.container .drop::after {
+    content: '';
+    position: absolute;
+    top: 90px;
+    left: 120px;
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    border-radius: 50%;
+    opacity: .6;
+}
+
+.container .drop .content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 40px;
+    gap: 15px;
+}
+
+.container .drop .content h2 {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    background: #eff0f4;
+    border-radius: 50%;
+    box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.1),
+    inset -2px -5px 10px rgba(255, 255, 255, .2),
+    15px 15px 10px rgba(0, 0, 0, 0.1),
+    15px 10px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    color: var(--clr);
+}
+
+.container .drop .content a {
+    position: relative;
+    padding: 10px 25px;
+    background: var(--clr);
+    text-decoration: none;
+    color: #fff;
+    border-radius: 25px;
+    font-weight: 500;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
+    opacity: .75;
+    transition: .5s;
+}
+
+.container .drop .content a:hover {
+    opacity: 1;
+    box-shadow: 2px 6px 10px rgba(255, 255, 255, 0.5);
+}
+
+.container .drop .content a::before {
+    content: '';
+    position: absolute;
+    width: 65%;
+    height: 5px;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    transition: .5s;
+}
+
+.container .drop .content a:hover::before {
+    top: 0px;
+}
