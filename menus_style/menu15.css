@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(to bottom left, #0077ff, #ff216d);
+}
+
+.navigation {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    height: 20px;
+    width: 250px;
+    z-index: 5;
+}
+
+.toggle {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: #c3e9ff;
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: #ff216d;
+    padding: 5px 20px;
+    font-size: 20px;
+}
+
+.toggle::before {
+    content: 'Menu';
+    margin-right: 10px;
+}
+
+.toggle.active::before {
+    content: 'Close';
+}
+
+.toggle span {
+    position: relative;
+    width: 20px;
+    height: 50px;
+    top: -4px;
+}
+
+.toggle.active span {
+    top: 0;
+}
+
+.toggle span:before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background: #ff216d;
+    transition: .5s;
+}
+
+.toggle span:after {
+    content: '';
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background: #ff216d;
+    transition: .5s;
+    box-shadow: 0 8px #ff216d;
+}
+
+.toggle.active span::before {
+    transform: rotate(225deg);
+    top: 24px;
+}
+
+.toggle.active span::after {
+    transform: rotate(135deg);
+    bottom: 24px;
+    box-shadow: 0 0 #ff216d;
+}
+
+ul {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+ul li {
+    position: relative;
+    list-style: none;
+    transition: .5s;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(-300px);
+    transition-delay: calc(var(--i) * 0.1s);
+}
+
+.navigation.active ul li {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: calc(var(--i) * 0.1s);
+}
+
+ul li a {
+    position: relative;
+    text-decoration: none;
+    padding: 10px 30px;
+    height: 50px;
+    background: #a4d5ee;
+    color: #333;
+    transition: .5s;
+    display: flex;
+    align-items: center;
+}
+
+ul li a:hover {
+    background: #68adf3d9;
+    cursor: pointer;
+    transition: 0s;
+    box-shadow: 0 0 4px white;
+    padding-left: 36px;
+}
