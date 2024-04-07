@@ -1,7 +1,7 @@
 main {
     position: relative;
     left: 0;
-    padding-right: 40px;
+    padding-right: 20px;
     top: 160px;
     font-family: Arial;
     color: #c0c0c0;
@@ -18,7 +18,7 @@ main .content {
     text-align: center;
 }
 
-main .content p{
+main .content p {
     margin-top: 12px;
 }
 
@@ -101,12 +101,19 @@ footer {
 }
 
 @media (max-width: 768px) {
+    header .donation {
+        flex-direction: row;
+        top: 30px;
+        left: 10px;
+    }
+
     main {
-        top: 50px;
+        top: 60px;
+        margin: 0;
     }
 
     main .content {
-        margin-bottom: 0;
+        margin-bottom: -20px;
         background: rgba(0, 0, 0, 0.7);
         width: 80%;
     }
@@ -117,9 +124,13 @@ footer {
 }
 
 @media (max-width: 520px) {
+    main {
+        top: 70px;
+    }
+
     main .examples ul {
         grid-template-columns: 1fr;
-        margin-top: -30px;
+        margin-top: -40px;
         gap: 10px;
     }
 }

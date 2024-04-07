@@ -1,7 +1,7 @@
 main {
     position: relative;
     left: 0;
-    padding-right: 40px;
+    padding-right: 20px;
     top: 160px;
     font-family: Arial;
     color: #c0c0c0;
@@ -28,7 +28,8 @@ main .content {
     list-style: none;
 }
 
-.examples li {position: relative;
+.examples li {
+    position: relative;
     min-width: 200px;
     border: 1px solid rgba(192, 192, 192, 0.22);
     border-radius: 8px;
@@ -96,8 +97,15 @@ footer {
 }
 
 @media (max-width: 768px) {
+    header .donation {
+        flex-direction: row;
+        top: 30px;
+        left: 10px;
+    }
+
     main {
         top: 50px;
+        margin: 0;
     }
 
     main .content {
@@ -113,7 +121,7 @@ footer {
 
 @media (max-width: 520px) {
     main {
-        top: 80px;
+        top: 60px;
     }
 
     main .examples ul {

@@ -42,7 +42,7 @@ main section ul {
 
 main section ul li a {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-items: center;
     background-color: transparent;
     border-radius: 8px;
@@ -79,7 +79,9 @@ main section ul li a ion-icon {
     color: lime;
     font-size: 20px;
     transition: all .4s;
+    margin-right: 12px;
 }
+
 main section ul li:hover a ion-icon {
     filter: drop-shadow(0 0 10px lime);
     scale: 1.2;
@@ -98,13 +100,19 @@ footer {
 }
 
 @media (max-width :768px) {
+    header .donation {
+        flex-direction: row;
+        top: 30px;
+        left: 10px;
+    }
+
     main {
-        top: 20px;
+        top: 30px;
         padding-right: 20px;
     }
 
     main .content {
-        width: 90%;
+        width: 100%;
         margin: auto;
         padding: 10px;
         background: hsla(0, 0%, 0%, 0.7);
@@ -112,6 +120,8 @@ footer {
 
     main section ul {
         grid-template-columns: 1fr 1fr;
+        margin-top: 10px;
+        margin-left: -10px;
     }
 }
 

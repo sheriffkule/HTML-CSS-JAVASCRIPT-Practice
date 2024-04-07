@@ -1,7 +1,7 @@
 main {
     position: relative;
     left: 0;
-    padding-right: 40px;
+    padding-right: 20px;
     top: 160px;
     font-family: Arial;
     color: #c0c0c0;
@@ -56,13 +56,14 @@ main .content {
     color: #38d1ec;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: flex-start;
 }
 
 .examples li a ion-icon {
     color: lime;
     font-size: 22px;
     transition: all .4s;
+    margin-right: 12px;
 }
 
 .examples li:hover a ion-icon {
@@ -97,8 +98,15 @@ footer {
 }
 
 @media (max-width: 768px) {
+    header .donation {
+        flex-direction: row;
+        top: 30px;
+        left: 10px;
+    }
+
     main {
         top: 50px;
+        margin: 0;
     }
 
     main .content {
@@ -114,12 +122,12 @@ footer {
 
 @media (max-width: 520px) {
     main {
-        top: 80px;
+        top: 60px;
     }
 
     main .examples ul {
         grid-template-columns: 1fr;
-        margin-top: -40px;
+        margin-top: -30px;
         gap: 10px;
     }
 }

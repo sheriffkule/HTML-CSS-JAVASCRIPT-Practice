@@ -1,7 +1,7 @@
 main {
     position: relative;
     left: 0;
-    padding-right: 40px;
+    padding-right: 20px;
     top: 170px;
     font-family: Arial;
     color: #c0c0c0;
@@ -13,7 +13,7 @@ main .content {
     position: relative;
     top: 0px;
     margin: 0 auto;
-    width: 70%;
+    width: 80%;
     text-align: center;
 }
 
@@ -96,14 +96,21 @@ footer {
 }
 
 @media (max-width: 768px) {
+    header .donation {
+        flex-direction: row;
+        top: 30px;
+        left: 10px;
+    }
+
     main {
         top: 60px;
+        margin: 0;
     }
 
     main .content {
         margin-bottom: 60px;
         background: rgba(0, 0, 0, 0.7);
-        width: 80%;
+        width: 100%;
     }
 
     main .examples ul {

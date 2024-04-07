@@ -8,8 +8,16 @@ header .imgContainer .welcome {
 }
 
 main {
+    position: relative;
     color: #c0c0c0;
     margin-top: -40px;
+}
+
+main section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 footer {

@@ -66,4 +66,10 @@ footer {
     main ul {
         grid-template-columns: 1fr 1fr;
     }
+
+    header .donation {
+        flex-direction: row;
+        width: 100%;
+        top: 30px;
+    }
 }

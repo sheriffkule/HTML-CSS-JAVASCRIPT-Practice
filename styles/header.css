@@ -16,7 +16,8 @@ nav {
     background: transparent;
     justify-content: space-between;
     align-items: center;
-    padding: .8rem 4rem .8rem 2rem;z-index: 11;
+    padding: .8rem 4rem .8rem 2rem;
+    z-index: 11;
 }
 
 a {
@@ -135,7 +136,7 @@ a {
         width: 50%;
         border: 2px solid #5e5e5e;
         transform: translateX(100%);
-        transition: all .3 ease;
+        transition: .4;
         z-index: 1;
     }
 
@@ -158,10 +159,11 @@ a {
     header .imgContainer {
         height: 200px !important;
     }
-        header .imgContainer .welcome {
-            top: 160px;
-            font-size: .6rem;
-        }
+
+    header .imgContainer .welcome {
+        top: 160px;
+        font-size: .6rem;
+    }
 }
 
 header .imgContainer {
@@ -223,6 +225,21 @@ header .imgContainer .neon .spotlight {
         radial-gradient(circle, #ffffff, black 25%) center / 12% 12%;
     mix-blend-mode: color-dodge;
     animation: move 10s linear infinite;
+}
+
+header .donation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 44px;
+    right: 10px;
+}
+
+header .donation a {
+    width: 140px;
+    margin: 2px auto;
 }
 
 @keyframes move {

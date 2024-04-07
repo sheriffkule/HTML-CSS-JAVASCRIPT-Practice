@@ -99,8 +99,14 @@ footer {
 }
 
 @media (max-width :768px) {
+    header .donation {
+        flex-direction: row;
+        top: 30px;
+        left: 10px;
+    }
+
     main {
-        top: 20px;
+        top: 30px;
         padding-right: 20px;
     }
 
@@ -113,17 +119,18 @@ footer {
 
     main section ul {
         grid-template-columns: 1fr 1fr;
+        left: 0;
     }
 }
 
 @media (max-width: 520px) {
     main {
-        top: 0px;
+        top: 30px;
     }
 
     main section ul {
         grid-template-columns: 1fr;
-        margin-top: 0px;
         gap: 10px;
+        margin-top: -6px;
     }
 }
