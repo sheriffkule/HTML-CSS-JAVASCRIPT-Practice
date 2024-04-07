@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animated Dropdown Select Menu</title>
+  <link rel="stylesheet" href="/menus_style/menu16.css">
+</head>
+
+<body>
+  <div class="select_menu">
+    <div class="select_btn" id="select_btn">
+      <span id="text">Dropdown Select</span>
+      <ion-icon name="chevron-down-outline" class="icon-arrow"></ion-icon>
+    </div>
+
+    <ul class="list">
+      <li class="option" style="--i:5;">
+        <span class="option_text"><ion-icon name="logo-html5"></ion-icon>HTML</span>
+      </li>
+      <li class="option" style="--i:4;">
+        <span class="option_text"><ion-icon name="logo-css3"></ion-icon>CSS</span>
+      </li>
+      <li class="option" style="--i:3;">
+        <span class="option_text"><ion-icon name="logo-javascript"></ion-icon>JavaScript</span>
+      </li>
+      <li class="option" style="--i:2;">
+        <span class="option_text"><ion-icon name="logo-react"></ion-icon>React</span>
+      </li>
+      <li class="option" style="--i:1;">
+        <span class="option_text"><ion-icon name="logo-react"></ion-icon>React Native</span>
+      </li>
+    </ul>
+  </div>
+
+  <script>
+    const selectBtn = document.getElementById('select_btn');
+    const text = document.getElementById('text');
+    const option = document.getElementsByClassName('option');
+
+    selectBtn.addEventListener('click', function () {
+      selectBtn.classList.toggle('active');
+
+    });
+
+    for (const options of option) {
+      options.onclick = function () {
+        text.innerHTML = this.textContent;
+        selectBtn.classList.remove('active');
+      }
+    }
+
+    document.addEventListener('click', function (event) {
+      if (event.target === document.body ) {
+        selectBtn.classList.remove('active');
+      }
+    });
+  </script>
+
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
