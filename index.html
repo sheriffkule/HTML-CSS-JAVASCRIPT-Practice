@@ -74,9 +74,6 @@
         starting
         point or modified.</p>
     </section>
-    <section class="donation">
-
-    </section>
   </main>
 
   <footer>
@@ -89,11 +86,19 @@
 
     menuBtn.addEventListener('click', () => {
       navLinks.classList.add('show');
-    })
+    });
 
     closeBtn.addEventListener('click', () => {
       navLinks.classList.remove('show');
-    })
+    });
+
+    document.addEventListener('click', (event) => {
+      if(event.target === document.body) {
+        navLinks.classList.remove('show');
+      }
+    });
+
+
   </script>
 
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
