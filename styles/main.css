@@ -8,20 +8,193 @@ header .imgContainer .welcome {
 }
 
 main {
-    position: relative;
     color: #c0c0c0;
     margin-top: -40px;
 }
 
-main section {
+main .welcome {
+    padding: 0 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
 
+main .projects {
+margin-top: -20px;
+}
+
+.container {
+    padding: 50px 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+.parent {
+    height: 400px;
+    width: 300px;
+    padding: 10px;
+    perspective: 1000px;
+}
+
+.card {
+    padding: 100px 0 0px 0;
+    transform-style: preserve-3d;
+    background-image: url(/images/pexels.jpeg);
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    transition: all .5s ease-in-out;
+    border-radius: 10px;
+}
+
+.card:hover {
+    background-position: 80% 20%;
+    transform: rotate3d(0.5, 1, 0, 30deg);
+}
+
+.content_box {
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0px 20px 50px -25px rgba(0, 115, 255, 0.9);
+    transition: all .5s ease-in-out;
+    padding: 50px 25px 25px 25px;
+    transform-style: preserve-3d;
+}
+
+.card_title {
+    color: white;
+    font-size: 25px;
+    font-weight: 900;
+    transition: all .5s ease-in-out;
+    transform: translate3d(0, 0px, 20px);
+}
+
+.card_title:hover {
+    transform: translate3d(0px, 0, 60px);
+    color: #00e1ff;
+}
+
+.card_content {
+    padding-top: 15px;
+    font-size: 12px;
+    color: azure;
+    transition: all .5s ease-in-out;
+    transform: translate3d(0, 0, 20px);
+}
+
+.card_content:hover {
+    transform: translate3d(0px, 0, 50px);
+    color: #00e1ff;
+}
+
+.see_more {
+    display: block;
+    font-weight: 900;
+    /* font-size: 16px; */
+    padding-top: 15px;
+    transition: all .5s ease-in-out;
+    transform: translate3d(0, 0, 20px);
+}
+
+.see_more:hover {
+    transform: translate3d(0px, 0, 50px);
+}
+
+.see_more a {
+    color: #00a2ff;
+    transition: .2s;
+}
+
+.see_more a:hover {
+    color: #00e1ff;
+}
+
+.date_box {
+    position: absolute;
+    top: 75px;
+    left: 25px;
+    height: 60px;
+    width: 70px;
+    background-color: rgba(0, 0, 0, 0.45);
+    border-radius: 10px;
+    padding: 12px 0;
+    box-shadow: 0 20px 60px 0 rgb(0, 102, 255),
+        0 18px 36px -18px rgb(0, 200, 255);
+    transform: translateX(0);
+    transform-style: preserve-3d;
+    transition: .5s ease-in-out;
+}
+
+.card:hover .date_box {
+    transform: translate(16px, -10px);
+    filter: saturate(20);
+}
+
+.date_box span {
+    display: block;
+    text-align: center;
+}
+
+.date_box .month {
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.date_box .date {
+    font-size: 20px;
+    font-weight: 900;
+    color: rgb(0, 136, 255);
+    margin-top: 4px;
+}
+
+.parent:nth-child(2) {
+    filter: hue-rotate(32deg);
+}
+
+.parent:nth-child(3) {
+    filter: hue-rotate(64deg);
+}
+
+.parent:nth-child(4) {
+    filter: hue-rotate(96deg);
+}
+
+.parent:nth-child(5) {
+    filter: hue-rotate(128deg);
+}
+
+.parent:nth-child(6) {
+    filter: hue-rotate(160deg);
+}
+
+.parent:nth-child(7) {
+    filter: hue-rotate(192deg);
+}
+
+.parent:nth-child(8) {
+    filter: hue-rotate(224deg);
+}
+
+.parent:nth-child(9) {
+    filter: hue-rotate(256deg);
+}
+
+.parent:nth-child(10) {
+    filter: hue-rotate(288deg);
+}
+
+.parent:nth-child(11) {
+    filter: hue-rotate(310deg);
+}
+
 footer {
-    margin-top: 20px;
     vertical-align: bottom;
     color: #c0c0c0;
     font-size: 14px;

@@ -50,8 +50,6 @@ ul {
 }
 
 .list_item::after {
-    content: '';
-    position: absolute;
     height: 8em;
     background: #181818;
     bottom: -4.5em;
@@ -60,8 +58,6 @@ ul {
 }
 
 .list_item::before {
-    content: '';
-    position: absolute;
     height: 5em;
     background: #121212;
     top: .4em;
@@ -78,6 +74,8 @@ ul {
 
 .list_item::before,
 .list_item::after {
+    content: '';
+    position: absolute;
     transition: all .25s linear;
     width: 1em;
 }
