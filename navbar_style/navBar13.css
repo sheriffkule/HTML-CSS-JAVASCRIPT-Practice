@@ -1,0 +1,175 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial;
+}
+
+body {
+    min-height: 100vh;
+    background: url(/images/cityscape.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+header {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    z-index: 9;
+    box-shadow: 0 0 10px #000;
+    background: rgba(0, 0, 0, .5);
+    backdrop-filter: contrast(50%);
+}
+
+#chk1 {
+    display: none;
+}
+
+i {
+    color: #fff;
+    cursor: pointer;
+}
+
+header .logo {
+    flex: 1;
+    color: #fff;
+    margin-left: 40px;
+}
+
+header .logo h1 span {
+    color: orangered;
+}
+
+header .search_box {
+    flex: 1;
+    position: relative;
+}
+
+.search_box input {
+    width: 100%;
+    height: 40px;
+    border: none;
+    outline: none;
+    background: #dddddd;
+    border-radius: 30px;
+    color: grey;
+    text-align: center;
+    font-size: 16px;
+    padding-left: 5px;
+}
+
+.search_box button {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+    border: none;
+    top: 0;
+    right: 0;
+    position: absolute;
+    transform: scale(.9);
+    background: green;
+}
+
+header ul {
+    flex: 2;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+header ul li {
+    list-style: none;
+    display: inline-block;
+    position: relative;
+}
+
+header ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    padding: 10px 15px;
+    transition: .3s;
+}
+
+header ul li a:hover {
+    color: cadetblue;
+}
+
+header ul li a i {
+    font-size: 20px;
+    transition: .3s;
+}
+
+header ul li a:hover i {
+    color: cadetblue;
+}
+
+header ul li a span {
+    position: absolute;
+    width: 0;
+    height: 4px;
+    bottom: -6px;
+    left: 0;
+    background: cadetblue;
+    border-radius: 4px;
+    border-radius: 6px;
+    transition: width .4s ease-in-out;
+}
+
+header ul li a:hover span {
+    width: 100%;
+}
+
+header .menu {
+    font-size: 2rem;
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .search_box button {
+        position: absolute;
+    }
+
+    header ul {
+        position: fixed;
+        top: 80px;
+        right: -100%;
+        background: rgba(0, 0, 0, .5);
+        height: 300px;
+        width: 50%;
+        flex-direction: column;
+        align-items: center;
+        transition: right .5s linear;
+        border-radius: 0 0 10px 10px;
+    }
+
+    header .menu {
+        display: block;
+        width: 60px;
+        text-align: center;
+    }
+
+    header .menu:hover{
+        cursor: pointer;
+        text-shadow: 0 0 10px cadetblue;
+    }
+
+    #chk1:checked~ul {
+        right: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    header .logo {
+        font-size: 10px;
+        margin-left: 8px;
+    }
+
+    header ul {
+        width: 100%;
+    }
+}
