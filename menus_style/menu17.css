@@ -1,0 +1,98 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(35deg, #191919 20%, #20284e 20%, #20284e 21%, #12223c 21%, #12223c 79%, #20284e 79%, #20284e 80%, #191919 80%, #191919 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+ul {
+    position: relative;
+    transform: rotate(-35deg) skew(20deg, 5deg);
+}
+
+.list_item {
+    background: linear-gradient(90deg, #020024 0%, #27a7f3 35%, #00d4ff 100%);
+    color: #fff;
+    height: 5rem;
+    width: 8rem;
+    line-height: 5rem;
+    border-bottom: 1px solid #060606;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    text-decoration: none;
+    box-shadow: -4em 3em 20px #333;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.list_item a {
+    color: #fff;
+}
+
+.list_item a i {
+    font-size: 36px;
+    color: #1d3130;
+    transition: all .3s linear;
+}
+
+.list_item:hover a i {
+    color: white;
+    text-shadow: 10px 2px 10px rgba(255, 255, 255, 0.2);
+}
+
+.list_item::after {
+    content: '';
+    position: absolute;
+    height: 8em;
+    background: #181818;
+    bottom: -4.5em;
+    left: 3.5em;
+    transform: rotate(90deg) skew(0, 45deg);
+}
+
+.list_item::before {
+    content: '';
+    position: absolute;
+    height: 5em;
+    background: #121212;
+    top: .4em;
+    left: -.7em;
+    transform: skewY(-45deg);
+}
+
+.list_item:hover {
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(255,110,66,1) 35%, rgba(0,212,255,1) 100%);
+    color: #fffcfb;
+    transform: translate(.9em, -.9em);
+    box-shadow: -4em 4em 10px #333;
+}
+
+.list_item::before,
+.list_item::after {
+    transition: all .25s linear;
+    width: 1em;
+}
+
+.list_item:hover::before {
+    background: hsla(14, 56%, 46%, 0.5);
+    width: 2em;
+    top: 1em;
+    left: -2em;
+}
+
+.list_item:hover::after {
+    background: hsla(14, 56%, 46%, 0.5);
+    width: 2em;
+    bottom: -5em;
+    left: 2em;
+    height: 8em;
+}
