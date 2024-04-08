@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: #212121;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+p {
+    position: relative;
+    text-align: center;
+    font-weight: 500;
+    font-size: 60px;
+    background: linear-gradient(90deg, black, white, black);
+    letter-spacing: 5px;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-repeat: no-repeat;
+    background-size: 80%;
+    animation: animate 5s linear infinite;
+    overflow: hidden;
+}
+
+@keyframes animate {
+    0% {
+        background-position-x: -500%;
+    }
+
+    100% {
+        background-position-x: 500%;
+    }
+}
