@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Glassmorphism Navbar</title>
+  <link rel="stylesheet" href="/navbar_style/navBar12.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+  <header class="header">
+    <a href="#" class="logo"><span>Sheriff</span>Kule</a>
+    <i class='bx bx-menu' id="menu_icon"></i>
+    <nav class="navbar">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Portfolio</a>
+      <a href="#">Services</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+  <div class="nav_bg"></div>
+
+  <script>
+    const menuIcon = document.querySelector('#menu_icon');
+    const navbar = document.querySelector('.navbar');
+    const navbg = document.querySelector('.nav_bg');
+
+
+    menuIcon.addEventListener('click', () => {
+      menuIcon.classList.toggle('bx-x');
+      navbar.classList.toggle('active');
+      navbg.classList.toggle('active');
+    });
+  </script>
+</body>
+
+</html>
