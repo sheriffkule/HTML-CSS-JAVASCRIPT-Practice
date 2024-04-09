@@ -1,0 +1,72 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(#082933, rgb(0, 64, 255)) ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.social {
+    display: flex;
+}
+
+.social a {
+    display: block;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    transform: perspective(1000px) rotate(-25deg) skew(25deg) translate(0,0);
+    box-shadow: -20px 20px 10px rgba(0, 0, 0, 0.5);
+    margin: 40px;
+    border-radius: 0% 50%  0% 0;
+    transition: all.5s ease-in-out;
+}
+
+.social a::after {
+    display: block;
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: -10px;
+    height: 20px;
+    width: 100%;
+    border-radius: 0% 0% 50% 20%;
+    transform: rotate(0deg) skew(-45deg);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.social a::before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 20px;
+    height: 100%;
+    left: -20px;
+    top: 10px;
+    border-radius: 50% 0% 0% 20%;
+    background: rgba(0, 0, 0, 0.5);
+    transform: rotate(0deg) skewY(-45deg);
+}
+
+.social a i {
+    color:  #fff;
+    font-size: 30px;
+    transition: all .5s ease-in-out;
+}
+
+.social a:hover {
+    transform: perspective(1000px) rotate(-25deg) skew(25deg) translate(20px, -20px);
+    background: rgba(0, 0, 0, 0.1);
+    box-shadow: -50px 50px 30px rgba(0, 0, 0, 0.5);
+}
+
+.social a:hover i {
+    color: #2bff00;
+    transform: rotate(45deg);
+    text-shadow: 0 0 10px #00c3ff;
+}
