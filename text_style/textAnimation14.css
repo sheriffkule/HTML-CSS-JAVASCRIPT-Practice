@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: #212121;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+ul {
+    position: relative;
+}
+
+ul li {
+    position: relative;
+    list-style: none;
+}
+
+ul li a {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    font-size: 4em;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.1);
+    -webkit-text-stroke: .5px rgb(81, 191, 255);
+}
+
+ul li a::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url(/images/wave.png);
+    background-repeat: repeat-x;
+    background-clip: text;
+    animation: animate 5s linear infinite;
+    transition: all .9s;
+    width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+ul li a:hover::before {
+    width: 100%;
+}
+
+@keyframes animate {
+    0% {
+        background-position: 0;
+    }
+
+    50% {
+        background-position: 400px;
+    }
+
+    100% {
+        background-position: 0;
+    }
+}
