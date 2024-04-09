@@ -1,0 +1,63 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #1d2b3a;
+}
+
+.button {
+    position: fixed;
+    text-align: center;
+    font-size: 42px;
+    color: #19e646;
+    width: 350px;
+    height: 100px;
+    text-shadow: 0 5px 5px #0f8a1a,
+        0 10px 10px rgba(14, 201, 23, .2),
+        0 20px 20px rgba(14, 201, 23, .4);
+    box-shadow: 0 0 0 15px hsl(128, 90%, 50%),
+    0 10px 0 15px hsl(135, 80%, 32%),
+    0 20px 20px 15px rgba(51, 194, 16, .2);
+    cursor: pointer;
+    border-radius: 100px 30px 100px 30px;
+}
+
+.button p {
+    margin-top: 20px;
+    transform: rotate(-3deg);
+}
+
+.button:hover {
+    animation: wiggle .8s ease infinite;
+}
+
+.button:hover p {
+    animation: root .8s ease infinite;
+}
+
+@keyframes wiggle {
+    0%, 100% {
+        border-radius: 100px 30px 100px 30px;
+    }
+
+    50% {
+        border-radius: 30px 100px 30px 100px;
+    }
+}
+
+@keyframes root {
+    0%, 100% {
+        transform: rotate(-3deg);
+    }
+
+    50% {
+        transform: rotate(3deg);
+    }
+}
