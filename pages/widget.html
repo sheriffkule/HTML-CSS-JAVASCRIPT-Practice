@@ -62,8 +62,34 @@
   <main>
     <section class="content">
       <h2>Examples of various Widgets for Websites</h2>
-      <p>Small applications or modules that can be easily integrated on a webpage to perform a specific function or
-        display specific content to enhance user experience.</p>
+      <p>Widgets on Websites
+        Widgets are small applications or modules that can be easily integrated on a webpage to perform a specific
+        function or
+        set of functions. They are often used to enhance the user experience and engagement on a website.</p>
+      <br>
+      There are various types of widgets that can be added to a website, including: <br><br>
+      <p>Social Media Widgets: These allow users to share content on social media platforms directly from the website.
+        They can
+        also display recent posts or updates from a business's social media accounts.</p><br>
+      <p>Newsletter Widgets: These enable users to sign up for a newsletter or email list directly from the website.
+        They can
+        help businesses build their email marketing lists and keep users engaged with regular updates.</p><br>
+      <p>Contact Form Widgets: These allow users to contact the business or website owner directly from the website.
+        They can
+        include fields for the user's name, email address, message, and any other relevant information.</p><br>
+      <p>Weather Widgets: These display the current weather conditions and forecast for a specific location. They can be
+        useful
+        for websites that provide information or services related to outdoor activities or travel.</p><br>
+      <p>Currency Converter Widgets: These allow users to convert prices or amounts from one currency to another. They
+        can be
+        useful for websites that sell products or services to an international audience.</p><br>
+      <p>Calculator Widgets: These provide users with a calculator function directly on the website. They can be useful
+        for
+        websites that provide financial or mathematical information or services.</p><br>
+      <p>Feedback Widgets: These allow users to provide feedback or rate their experience directly on the website. They
+        can help
+        businesses improve their website and services based on user feedback.</p><br>
+      <p>Check out ones that I've created:</p>
     </section>
 
     <section class="examples">
@@ -108,13 +134,20 @@
     let menuBtn = document.getElementById('menu_btn');
     let closeBtn = document.getElementById('close_btn');
 
-    menuBtn.addEventListener('click', () => {
-      navLinks.classList.add('show');
-    })
+      menuBtn.addEventListener('click', () => {
+        navLinks.classList.add('show');
+      });
 
-    closeBtn.addEventListener('click', () => {
-      navLinks.classList.remove('show');
-    })
+      closeBtn.addEventListener('click', () => {
+        navLinks.classList.remove('show');
+      });
+
+      document.addEventListener('click', (event) => {
+        if (event.target === document.body) {
+          navLinks.classList.remove('show');
+        }
+        console.log(body);
+      });
   </script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: table;
+    width: 100%;
+    height: 100%;
+    background: #262626;
+    color: #000;
+    line-height: 1.6;
+    position: relative;
+    overflow: hidden;
+}
+
+.lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    margin: auto;
+    width: 90dvw;
+}
+
+.line {
+    position: absolute;
+    width: 10px;
+    height: 100%;
+    top: 0;
+    left: 50%;
+    background: rgba(255, 255, 255, 0.01);
+    overflow: hidden;
+}
+
+.line::after {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 10vh;
+    width: 100%;
+    top: -50%;
+    left: 0;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), 0%, #cbd9078f 75%, #eeff00 100%);
+    border-radius: 10px;
+    animation: drop 10s infinite;
+    animation-fill-mode: forwards;
+    animation-timing-function: (.4, .26, 0, .97);
+}
+
+.line:nth-child(1) {
+    margin-left: -25%;
+}
+
+.line:nth-child(1):after {
+    animation-delay: 2s;
+}
+
+.line:nth-child(2) {
+    margin-left: 25%;
+}
+
+.line:nth-child(2):after {
+    animation-delay: 2.5s;
+}
+
+.line:nth-child(3) {
+    margin-left: 50%;
+}
+
+.line:nth-child(3):after {
+    animation-delay: 3s;
+}
+
+.line:nth-child(4) {
+    margin-left: -50%;
+}
+
+.line:nth-child(4):after {
+    animation-delay: 3.5s;
+}
+
+@keyframes drop {
+    0% {
+        top: -50%;
+    }
+
+    100% {
+        top: 110%;
+    }
+}

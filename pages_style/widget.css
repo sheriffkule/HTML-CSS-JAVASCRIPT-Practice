@@ -13,12 +13,16 @@ main .content {
     position: relative;
     top: 0px;
     margin: 0 auto;
-    width: 70%;
+    width: 80%;
     text-align: center;
 }
 
 main .content h2 {
     margin-bottom: 10px;
+}
+
+main .content p {
+    text-align: left;
 }
 
 .examples ul {
@@ -127,7 +131,7 @@ footer {
     }
 
     footer {
-        margin-top: 40px;
+        margin-top: 70px;
     }
 }
 
