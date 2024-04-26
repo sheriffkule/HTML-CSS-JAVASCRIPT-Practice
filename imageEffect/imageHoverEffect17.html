@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Image Slider</title>
+  <link rel="stylesheet" href="/imageEffect_style/imageHoverEffect17.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="slide">
+      <div class="item" style="background-image: url(/images/matrix.jpg);">
+        <div class="content">
+          <div class="name">SheriffKule</div>
+          <div class="desc">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias sed reprehenderit est a, corporis
+            quisquam?</div>
+          <button>See More</button>
+        </div>
+      </div>
+
+      <div class="item" style="background-image: url(/images/darkhex.jpg);">
+        <div class="content">
+          <div class="name">SheriffKule</div>
+          <div class="desc">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias sed reprehenderit est a, corporis
+            quisquam?</div>
+          <button>See More</button>
+        </div>
+      </div>
+
+      <div class="item" style="background-image: url(/images/pexels.jpeg);">
+        <div class="content">
+          <div class="name">SheriffKule</div>
+          <div class="desc">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias sed reprehenderit est a, corporis
+            quisquam?</div>
+          <button>See More</button>
+        </div>
+      </div>
+
+      <div class="item" style="background-image: url(/images/dreamy-world.jpg);">
+        <div class="content">
+          <div class="name">SheriffKule</div>
+          <div class="desc">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias sed reprehenderit est a, corporis
+            quisquam?</div>
+          <button>See More</button>
+        </div>
+      </div>
+
+      <div class="item" style="background-image: url(/images/cityscape.jpg);">
+        <div class="content">
+          <div class="name">SheriffKule</div>
+          <div class="desc">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias sed reprehenderit est a, corporis
+            quisquam?</div>
+          <button>See More</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="btns">
+      <button class="prev"><i class="fa-solid fa-arrow-left"></i></button>
+      <button class="next"><i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+  </div>
+
+  <script>
+    let prev = document.querySelector('.prev');
+    let next = document.querySelector('.next');
+
+    next.addEventListener('click', () => {
+      let items = document.querySelectorAll(`.item`);
+      let slider = document.querySelector('.slide');
+      slider.appendChild(items[0]);
+    })
+
+    prev.addEventListener('click', () => {
+      let items = document.querySelectorAll(`.item`);
+      let slider = document.querySelector('.slide');
+      slider.insertBefore(items[items.length - 1], items[0]);
+    })
+  </script>
+</body>
+
+</html>
