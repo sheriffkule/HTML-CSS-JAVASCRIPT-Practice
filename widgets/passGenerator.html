@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password Generator</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" />
+  <link rel="stylesheet" href="/widgets_style/passGenerator.css">
+</head>
+
+<body>
+  <div class="container">
+    <h2>Password Generator<span class="material-symbols-rounded">
+        key
+      </span><span class="material-symbols-rounded">
+        lock
+      </span></h2>
+    <div class="wrapper">
+      <div class="input-box">
+        <input type="text" disabled>
+        <span class="material-symbols-rounded">copy_all</span>
+      </div>
+      <div class="pass-indicator"></div>
+      <div class="pass-length">
+        <div class="details">
+          <label class="title">Password Length</label>
+          <span class="counter"></span>
+        </div>
+        <input type="range" min="1" max="30" value="12" step="1">
+      </div>
+      <div class="pass-settings">
+        <label class="title">Password Settings</label>
+        <ul class="options">
+          <li class="option">
+            <label for="lowercase">Lowercase (a-z)</label>
+            <input type="checkbox" id="lowercase" checked>
+          </li>
+          <li class="option">
+            <label for="uppercase">Uppercase (A-Z)</label>
+            <input type="checkbox" id="uppercase">
+          </li>
+          <li class="option">
+            <label for="numbers">Numbers (0-9)</label>
+            <input type="checkbox" id="numbers">
+          </li>
+          <li class="option">
+            <label for="symbols">Symbols</label>
+            <input type="checkbox" id="symbols">
+          </li>
+        </ul>
+      </div>
+      <button class="generate-btn">Generate Password</button>
+    </div>
+  </div>
+
+  <script>
+const passwordInput = document.querySelector('.input-box input');
+const copyIcon = document.querySelector('.input-box span');
+const passIndicator = document.querySelector('.pass-indicator');
+const lengthSlider = document.querySelector('.pass-length input');
+const options = document.querySelectorAll('.option input');
+const generateBtn = document.querySelector('.generate-btn');
+
+    const characters = {
+      lowercase: 'abcdefghijklmnoprqstuvwxyz',
+      uppercase: 'ABCDEFGHIJKLMNOPRQSTUVWXYZ',
+      numbers: '0123456789',
+      symbols: '!@#$%^&*(){}[]<>~',
+    };
+
+  const generatePassword = () => {
+    let staticPassword = '',
+      randomPassword = '',
+      excludeDuplicate = false,
+      passLength = lengthSlider.value;
+
+      options.forEach((option) => {
+        if (option.checked) {
+          if (option.id !== "exc-duplicate" && option.id !== "spaces") {
+            staticPassword += characters[option.id];
+          } else if (option.id === "spaces") {
+            staticPassword += ` ${staticPassword} `;
+          } else {
+            excludeDuplicate = true;
+          }
+        }
+      });
+
+      for (let i = 0; i < passLength; i++) {
+        let randomChar = staticPassword[Math.floor(Math.random() * staticPassword.length)];
+        if (excludeDuplicate) {
+          !randomPassword.includes(randomChar) || randomChar == '' ? (randomPassword += randomChar) : i--;
+        } else {
+          randomPassword += randomChar;
+        }
+      }
+      passwordInput.value = randomPassword;
+    };
+
+    const updatePassIndicator = () => {
+      passIndicator.id = lengthSlider.value <= 8 ? 'weak' :
+        lengthSlider.value <= 16 ? 'medium' : 'strong';
+    };
+
+    const updateSlider = () => {
+      document.querySelector('.pass-length span').innerText = lengthSlider.value;
+      generatePassword();
+      updatePassIndicator();
+    };
+    updateSlider();
+
+    const copyPassword = () => {
+      navigator.clipboard.writeText(passIndicator.value);
+      copyIcon.innerHTML = 'check';
+      copyIcon.style.color = '#4285f4';
+      setTimeout(() => {
+        copyIcon.innerText = 'copy_all';
+        copyIcon.style.color = '#707070';
+      }, 1500);
+    };
+
+    copyIcon.addEventListener('click', copyPassword);
+    lengthSlider.addEventListener('input', updateSlider);
+    generateBtn.addEventListener('click', generatePassword);
+
+  </script>
+</body>
+
+</html>

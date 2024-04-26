@@ -94,6 +94,9 @@
 
     <section class="examples">
       <ul>
+        <li><a href="/widgets/passGenerator.html"><ion-icon name="key-outline"></ion-icon><span>Password Generator</span>
+            <div class="top">Top</div>
+          </a></li>
         <li><a href="/widgets/spinWheel.html"><ion-icon name="refresh-circle-outline"></ion-icon><span>Spin
               Wheel</span></a></li>
         <li><a href="/widgets/todoList.html"><ion-icon name="list-outline"></ion-icon><span>To Do List</span></a></li>
@@ -134,20 +137,20 @@
     let menuBtn = document.getElementById('menu_btn');
     let closeBtn = document.getElementById('close_btn');
 
-      menuBtn.addEventListener('click', () => {
-        navLinks.classList.add('show');
-      });
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.add('show');
+    });
 
-      closeBtn.addEventListener('click', () => {
+    closeBtn.addEventListener('click', () => {
+      navLinks.classList.remove('show');
+    });
+
+    document.addEventListener('click', (event) => {
+      if (event.target === document.body) {
         navLinks.classList.remove('show');
-      });
-
-      document.addEventListener('click', (event) => {
-        if (event.target === document.body) {
-          navLinks.classList.remove('show');
-        }
-        console.log(body);
-      });
+      }
+      console.log(body);
+    });
   </script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
