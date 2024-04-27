@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: monospace;
+    background: linear-gradient(180deg, #546E7A 0%, #263238 20%, #37474F 20%, #37474F 80%, #263238 80%, #546E7A 100%);
+    min-height: 100vh;
+}
+
+.container {
+    background: #066c70;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    width: 380px;
+    height: 280px;
+    border-radius: 8px;
+    transition: all .3s;
+}
+
+.container .app-title {
+    font-size: 18px;
+    font-family: Arial;
+    text-align: center;
+    color: #fff;
+}
+
+.app-title span {
+    color: rgb(0, 47, 100);
+    font-size: 1.2rem;
+}
+
+.container .timer {
+    height: 70px;
+    width: 300px;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    margin-left: 20px;
+    font-size: 2.2rem;
+}
+
+.container .timer span {
+    font-size: 60px;
+    word-spacing: 3px;
+}
+
+.container .timer .ms {
+    font-size: 13px;
+    position: relative;
+    top: -8px;
+    color: #fff;
+}
+
+.container button {
+    all: unset;
+    height: 40px;
+    width: 100px;
+    position: absolute;
+    top: 195px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    margin-left: 16px;
+    color: #fff;
+    border: 1px solid #000;
+    cursor: pointer;
+    text-align: center;
+}
+
+.container button:hover {
+    background-color: #000;
+    color: #fff;
+    transition: all .3s ease-in-out;
+}
+
+.container .other-side {
+    position: absolute;
+    right: 36px;
+}
+
+.container .stop,
+.container .lap {
+    display: none;
+}
+
+.container .lap-container {
+    height: 200px;
+    width: 100%;
+    position: relative;
+    top: 105px;
+    padding: 8px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.container .lap-container::-webkit-scrollbar {
+    display: block;
+}
+
+.container .lap-container li {
+    list-style-type: none;
+    height: 48px;
+    width: 100%;
+    border-bottom: 1px solid #000;
+    display: flex;
+    align-items: center;
+}
+
+.container .lap-container li .lap-num {
+    color: #000;
+    font-family: sans-serif;
+}
+
+.container .lap-container li .lap-timer {
+    position: absolute;
+    right: 10px;
+    color: #fff;
+}
+
+::selection {
+    background: #fff;
+    color: #222;
+}
