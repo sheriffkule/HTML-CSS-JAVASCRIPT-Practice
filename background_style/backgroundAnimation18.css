@@ -1,0 +1,76 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.pattern {
+    position: relative;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    animation: animateBg 10s ease-in-out infinite;
+}
+
+@keyframes animateBg {
+    0%, 100% {
+        transform: scale(1.6) rotate(-15deg);
+    }
+
+    50% {
+        transform: scale(1.6) rotate(15deg);
+    }
+}
+
+.pattern .face {
+    position: relative;
+    width: 100%;
+    height: 50vh;
+    background-image: url(/images/check.jpg);
+    background-size: 100px 100px;
+    animation: animate 4s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        background-position: 0;
+    }
+
+    100% {
+        background-position: 200px;
+    }
+}
+
+.pattern .face2 {
+    height: 100vh;
+    transform-origin: top;
+    transform: rotateX(70deg);
+}
+
+.pattern .face1::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 125px;
+    background: linear-gradient(0deg, rgba(0,0,0,0.5), transparent);
+}
+
+.pattern .face2::before {
+    content: '';
+    position: absolute;
+    bottom: top;
+    left: 0;
+    width: 100%;
+    height: 125px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.5), transparent);
+}
