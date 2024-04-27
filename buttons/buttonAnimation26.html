@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Social Media Icon Hover Effect</title>
+  <link rel="stylesheet" href="/buttons_style/buttonAnimation26.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <section class="social">
+    <ul class="sci">
+      <li data-text="Linux" data-color="#ebc506">
+        <a href="#" class="linux"><i class="fa-brands fa-linux" aria-hidden="true"></i></a>
+      </li>
+      <li data-text="Youtube" data-color="#D50000">
+        <a href="#" class="youtube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
+      </li>
+      <li data-text="Twitter" data-color="#1565C0">
+        <a href="#" class="twitter"><i class="fa-brands fa-twitter"></i></a>
+      </li>
+      <li data-text="Instagram" data-color="#D84315">
+        <a href="#" class="instagram"><i class="fa-brands fa-instagram"></i></a>
+      </li>
+      <li data-text="Linkedin" data-color="#1E88E5">
+        <a href="#" class="linkedin"><i class="fa-brands fa-linkedin"></i></a>
+      </li>
+    </ul>
+  </section>
+
+  <script src="/scripts/vanilla-tilt.min.js"></script>
+
+  <script>
+
+    VanillaTilt.init(document.querySelectorAll('.sci li a'), {
+        max: 50,
+        speed: 400,
+        glare: true,
+        'max-glare': 1
+      });
+
+    let list = document.querySelectorAll('.sci li');
+    let bg = document.querySelector('.social');
+
+    list.forEach(elements => {
+      elements.addEventListener('mouseenter', function (event) {
+        let color = event.target.getAttribute('data-color');
+        bg.style.backgroundColor = color;
+      })
+      elements.addEventListener('mouseleave', function (event) {
+        bg.style.backgroundColor = '#ccc';
+      })
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.social {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    transition: .5s;
+}
+
+.sci {
+    position: relative;
+    display: flex;
+}
+
+.sci li {
+    list-style: none;
+}
+
+.sci li::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, calc(-50% + 50px));
+    font-size: 14vw;
+    pointer-events: none;
+    font-weight: 700;
+    transition: .5s;
+    opacity: 0;
+}
+
+.sci li:hover::before {
+    opacity: 0.2;
+    transform: translate(-50%, calc(-50% + 150px));
+}
+
+.sci li a {
+    position: relative;
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    border-radius: 10px;
+    text-decoration: none;
+    margin: 20px;
+    font-size: 4em;
+    transform-style: preserve-3d;
+    perspective: 500px;
+    box-shadow: 0 25px 35px rgba(0, 0, 0, .5);
+    transition: background .25s;
+}
+
+.js-tilt-glare {
+    border-radius: 10px;
+}
+
+.sci li a:hover.linux {
+    background: #ebc506;
+}
+
+.sci li a:hover.youtube {
+    background: #D50000;
+}
+
+.sci li a:hover.twitter {
+    background: #1565C0;
+}
+
+.sci li a:hover.instagram {
+    background: #D84315;
+}
+
+.sci li a:hover.linkedin {
+    background: #1E88E5;
+}
+
+.sci li a .fa-brands {
+    transition: .3s;
+    pointer-events: none;
+}
+
+.sci li a:hover .fa-brands {
+    color: #fff;
+    box-shadow: inset 0 5px 15px rgba(0, 0, 0, .2);
+    transform: scale(1.5) translateZ(50px);
+}
