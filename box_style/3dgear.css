@@ -1,0 +1,147 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #111;
+    overflow: hidden;
+}
+
+.scene {
+    transform-style: preserve-3d;
+    animation: animateScene 30s linear infinite;
+}
+
+@keyframes animateScene {
+    0% {
+        transform: perspective(1500px) rotateY(0);
+    }
+
+    100% {
+        transform: perspective(1500px) rotateY(360deg);
+    }
+}
+
+.scene::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2000px;
+    height: 2000px;
+    background: url(/images/tiled-stones.jpg);
+    background-size: 400px;
+    transform: translate3d(-1000px, -700px, 0) rotateX(90deg);
+}
+
+.wall {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2000px;
+    height: 2000px;
+    background: url(/images/tiled-stones.jpg);
+    background-size: 800px;
+    filter: grayscale(1);
+    backface-visibility: hidden;
+    box-shadow: inset 0 0 500px rgba(0, 0, 0, .9);
+}
+
+.wall.wall1 {
+    transform: translate3d(-1000px, -1700px, -1000px);
+}
+
+.wall.wall2 {
+    transform: translate3d(0, -1700px, 0) rotateY(270deg);
+}
+
+.wall.wall3 {
+    transform: translate3d(-1000px, -1700px, 1000px) rotateY(180deg);
+}
+
+.wall.wall4 {
+    transform: translate3d(-2000px, -1700px, 0) rotateY(90deg);
+}
+
+.container {
+    transform-style: preserve-3d;
+    transform: rotateY(45deg);
+}
+
+.container .box {
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(-15deg);
+    animation: animate 14s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.cube {
+    position: absolute;
+    transform-style: preserve-3d;
+    width: 500px;
+    height: 100px;
+    transform: translate3d(-250px, -50px, 0) rotate(calc(var(--i)*60deg));
+}
+
+.cube .side {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    transform-style: preserve-3d;
+    box-shadow: inset 0 0 100px rgba(0, 0, 0, .3);
+}
+
+.cube .side:nth-child(1) {
+    height: 100px;
+    transform: rotateX(0deg) translate3d(0, 0, 100px);
+    background: #fefefe;
+}
+
+.cube .side:nth-child(2) {
+    height: 200px;
+    transform: rotateX(90deg) translate3d(0, 0, 0px);
+}
+
+.cube .side:nth-child(3) {
+    height: 100px;
+    transform: rotateX(180deg) translate3d(0, 0, 100px);
+    box-shadow: none;
+    background: #fefefe;
+}
+
+.cube .side:nth-child(4) {
+    height: 200px;
+    transform: rotateX(90deg) translate3d(0, 0, 100px);
+}
+
+.cube .side:nth-child(5) {
+    height: 100px;
+    transform: rotateY(90deg) translate3d(0, 0, 400px);
+    width: 200px;
+    background: #c7c7c7;
+}
+
+.cube .side:nth-child(6) {
+    height: 100px;
+    transform: rotateY(270deg) translate3d(0, 0, 100px);
+    width: 200px;
+    background: #c7c7c7;
+}
