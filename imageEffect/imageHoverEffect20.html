@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scroll Images Animation</title>
+  <link rel="stylesheet" href="/imageEffect_style/imageHoverEffect20.css">
+</head>
+
+<body>
+  <section>Scroll Down</section>
+  <div class="container">
+    <img src="/images/darkhex.jpg" class="item">
+    <img src="/images/matrix.jpg" class="item">
+    <img src="/images/cityscape.jpg" class="item">
+    <img src="/images/dreamy-world.jpg" class="item">
+    <img src="/images/pexels.jpeg" class="item">
+    <img src="/images/Aurora.jpeg" class="item">
+    <img src="/images/tiled-stones.jpg" class="item">
+  </div>
+  <section>Scroll Up</section>
+
+  <script>
+    let options = {
+      threshold: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
+    }
+
+    let callback = (entries, observer) => {
+      entries.forEach((entry) => {
+        entry.target.style.scale = entry.intersectionRatio;
+      });
+    };
+
+    let observer = new IntersectionObserver(callback, options);
+
+    for (const target of document.querySelectorAll('.item')) {
+      observer.observe(target);
+    }
+  </script>
+</body>
+
+</html>
