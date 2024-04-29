@@ -1,0 +1,160 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: #0c192c;
+}
+
+.bg {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.bubbles {
+    position: relative;
+    display: flex;
+}
+
+.bubbles span {
+    position: relative;
+    min-width: 30px;
+    height: 30px;
+    background: #4fc3dc;
+    border-radius: 50%;
+    box-shadow: 0 0 0 10px #4fc3dc44,
+    0 0 50px #4fc3dc,
+    0 0 100px #4fc3dc;
+    margin: 0 4px;
+    animation: animate 15s linear infinite;
+    animation-duration: calc(180s / var(--i));
+}
+
+.bubbles span:nth-child(even) {
+    animation-delay: .3s;
+    background: #ff2d75;
+    box-shadow: 0 0 0 10px #ff2d7544,
+            0 0 50px #ff2d75,
+            0 0 100px #ff2d75;
+}
+
+@keyframes animate {
+    0% {
+        transform: translateY(100vh) scale(0);
+    }
+
+    100% {
+        transform: translateY(-10vh) scale(1);
+    }
+}
+
+header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 80px;
+    padding: 0 50px;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+header .logo {
+    color: #fff;
+    font-size: 2em;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+header .logo span {
+    color: orangered;
+}
+
+header nav {
+    display: flex;
+    gap: 25px;
+}
+
+header nav a {
+    color: #fff;
+    font-size: 1.1em;
+    text-decoration: none;
+    transition: .2s;
+}
+
+header nav a.active,
+header nav a:hover {
+    color: #4fc3dc;
+}
+
+section {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+section .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    max-width: 800px;
+}
+
+section .content h2 {
+    font-size: 3.5em;
+    color: #ccc;
+}
+
+section .content h2 span {
+    color: orangered;
+}
+
+section .content p {
+    color: #ccc;
+    font-size: 1.1em;
+}
+
+section .content .buttons {
+    position: relative;
+    top: 10px;
+    display: flex;
+    gap: 25px;
+}
+
+section .content .buttons a {
+    display: inline-block;
+    padding: 12px 30px;
+    background: #4fc3dc;
+    color: #121212;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: 500;
+    border-radius: 6px;
+    letter-spacing: 1px;
+    transition: .2s;
+}
+
+section .content .buttons a:nth-child(1) {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #ccc;
+}
+
+section .content .buttons a:hover {
+    filter: brightness(1.2) saturate(1.5);
+    text-shadow: 0 0 22px #fff;
+}
