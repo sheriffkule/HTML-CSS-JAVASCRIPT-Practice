@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Mousemove Background Effect</title>
+    <link rel="stylesheet" href="/background_style/backgroundAnimation20.css">
+</head>
+<body>
+    <div id="container"></div>
+    <div id="cursor"></div>
+
+    <script>
+        for(let i = 0; i < 450; i++){
+            let box = document.createElement('span');
+            document.getElementById('container').appendChild(box);
+        }
+
+        let cursor = document.getElementById('cursor');
+        window.onmousemove = function(e) {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        }
+    </script>
+</body>
+</html>
