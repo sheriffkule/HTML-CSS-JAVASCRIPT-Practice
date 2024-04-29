@@ -1,0 +1,122 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(#921b2b, #490d15);
+    min-height: 100vh;
+}
+
+label {
+    font-size: 14px;
+}
+h1 {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.container {
+    background: silver;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    padding: 30px;
+    width: 70%;
+    border-radius: 25px;
+    box-shadow: 0 20px 40px rgba(2, 42, 83, .2);
+}
+
+.result {
+    padding: 40px 0 100px;
+}
+
+#preview {
+    background-color: #921b2b;
+    width: 200px;
+    height: 200px;
+    position: relative;
+    margin: auto;
+    border-radius: 50%;
+    box-shadow: 6px 15px 30px 6px rgba(0, 0, 0, .5);
+}
+
+.settings {
+    display: grid;
+    grid-template-columns: 6fr 6fr;
+    gap: 15px 25px;
+}
+
+.range-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+input[type="range"] {
+    width: 100%;
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.code-container {
+    display: grid;
+    grid-template-columns: 6fr 2fr;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.code-container button {
+    background: #921b2b;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    color: #fff;
+    font-size: 15px;
+    transition: all .4s ease-in-out;
+}
+
+.code-container button:hover {
+    color: #000;
+    transform: scale(1.1);
+}
+
+textarea {
+    resize: none;
+    padding: 5px;
+    border: 1px solid#000;
+    font-size: 14px;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.color-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+}
+
+input[type="color"] {
+    width: 35px;
+    height: 25px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+h4 {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}

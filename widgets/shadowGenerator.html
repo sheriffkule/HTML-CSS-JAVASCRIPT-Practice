@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shadow Generator</title>
+  <link rel="stylesheet" href="/widgets_style/shadowGenerator.css">
+</head>
+
+<body>
+  <h1>Shadow Generator</h1>
+  <div class="container">
+    <div class="result">
+      <div id="preview"></div>
+    </div>
+    <div class="settings">
+      <div class="range-wrapper">
+        <label for="x-shadow">Horizontal Shadow: </label>
+        <input type="range" id="x-shadow" min="-300" max="300" value="6" />
+      </div>
+      <div class="range-wrapper">
+        <label for="y-shadow">Vertical Shadow: </label>
+        <input type="range" id="y-shadow" min="-150" max="150" value="12" />
+      </div>
+      <div class="range-wrapper">
+        <label for="blur-r">Blur Radius: </label>
+        <input type="range" id="blur-r" min="0" max="100" value="10" />
+      </div>
+      <div class="range-wrapper">
+        <label for="spread-r">Spread Radius: </label>
+        <input type="range" id="spread-r" min="-100" max="100" value="0" />
+      </div>
+      <div class="range-wrapper">
+        <label for="border-r">Border radius: </label>
+        <input type="range" id="border-r" min="0" max="100" step="1" value="100" />
+      </div>
+      <div class="range-wrapper">
+        <label for="shadow-opacity">Shadow Opacity: </label>
+        <input type="range" id="shadow-opacity" min="0" max="1" step="0.01" value="0.5" />
+      </div>
+      <div class="input-wrapper">
+        <label for="inset-shadow">Inset Shadow: </label>
+        <input type="checkbox" id="inset-shadow" />
+      </div>
+      <div class="color-wrapper">
+        <label for="shadow-color">Shadow Color: </label>
+        <input type="color" id="shadow-color" />
+      </div>
+    </div>
+
+    <div class="code-container">
+      <textarea id="styles" rows="2"></textarea>
+      <button id="copy-styles" onclick="copyStyles()">Copy</button>
+    </div>
+  </div>
+
+  <h4>Made by &copy; SheriffKule</h4>
+
+  <script>
+    const preview = document.getElementById('preview');
+    const styles = document.getElementById('styles');
+    const ranges = document.querySelectorAll('.settings input');
+    const copyButton = document.getElementById('copy-styles');
+
+    ranges.forEach((slider) => {
+      slider.addEventListener('input', generateStyles);
+    });
+
+    function generateStyles() {
+      const xShadow = document.getElementById('x-shadow').value;
+      const yShadow = document.getElementById('y-shadow').value;
+      const blurRadius = document.getElementById('blur-r').value;
+      const spreadRadius = document.getElementById('spread-r').value;
+      const shadowOpacity = document.getElementById('shadow-opacity').value;
+      const borderRadius = document.getElementById('border-r').value;
+      const shadowColor = document.getElementById('shadow-color').value;
+      const shadowInset = document.getElementById('inset-shadow').checked;
+
+
+      const boxShadow = `${shadowInset ? 'inset' : ''} ${xShadow}px ${yShadow}px ${blurRadius}px ${spreadRadius}px ${hexToRgba(shadowColor, shadowOpacity)}`;
+
+      preview.style.boxShadow = boxShadow;
+      preview.style.borderRadius = `${borderRadius}px`;
+
+      styles.textContent = `box-shadow:${boxShadow}; \nborder-radius: ${borderRadius}px;`;
+    }
+
+    function hexToRgba(shadowColor, shadowOpacity) {
+      const r = parseInt(shadowColor.substr(1, 2), 16);
+      const g = parseInt(shadowColor.substr(3, 2), 16);
+      const b = parseInt(shadowColor.substr(5, 2), 16);
+      return `rgba(${r},${g},${b},${shadowOpacity })`;
+    };
+
+    function copyStyles() {
+      styles.select();
+      document.execCommand("copy");
+      copyButton.innerText = 'Copied!';
+      copyButton.style.background = '#03c03c';
+
+      setTimeout(() => {
+        copyButton.innerText = 'Copied!';
+        copyButton.style.background = '';
+        copyButton.innerText = 'Copy';
+      }, 1500);
+    }
+
+    generateStyles();
+
+  </script>
+</body>
+
+</html>
