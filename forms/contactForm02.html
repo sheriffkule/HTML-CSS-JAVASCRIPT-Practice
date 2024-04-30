@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Form</title>
+  <link rel="stylesheet" href="/forms_style/contactForm02.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="left-content">
+      <h1>Contact Us</h1>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis est non sint accusantium autem vitae,
+        perferendis consequatur numquam corrupti aliquam suscipit iure!</p>
+      <div class="contact-details">
+        <p><ion-icon name="location-outline"></ion-icon>Novi Sad, Serbia</p>
+        <p><ion-icon name="mail-outline"></ion-icon>sheriff.kule@gmail.com</p>
+        <p><ion-icon name="call-outline"></ion-icon>+381 6113 22 487</p>
+      </div>
+      <div class="social-media">
+        <h2>Conect with us:</h2>
+        <a href="https://www.linkedin.com/in/zeljko-vranjkovic-1bb834240/"><ion-icon name="logo-linkedin"></ion-icon></a>
+        <a href="https://www.youtube.com/channel/UCEvLJxDBkviT6X6yJhlhy7A"><ion-icon name="logo-youtube"></ion-icon></a>
+        <a href="https://github.com/sheriffkule"><ion-icon name="logo-github"></ion-icon></a>
+        <a href="https://www.facebook.com/sheriff.kule/"><ion-icon name="logo-facebook"></ion-icon></a>
+      </div>
+    </div>
+    <div class="right-content">
+
+      <h1>Contact Us</h1>
+      <form action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="32099d82-5080-4e66-866a-94c6fa02cf6f">
+        <input type="text" name="name" placeholder="NAME" required>
+        <input type="email" name="email" placeholder="EMAIL" required>
+        <input type="tel" name="phone" placeholder="PHONE">
+        <textarea name="message" cols="30" rows="6" placeholder="Message"></textarea>
+        <button class="btn" type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
