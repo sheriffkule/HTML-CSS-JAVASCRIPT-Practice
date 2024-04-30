@@ -18,8 +18,8 @@ h1 {
     text-align: center;
     font-size: 5em;
     background: url(/images/wave.png);
-    background-size: 150%;
-    background-position: left;
+    background-size: 120%;
+    background-position: top;
     background-repeat: no-repeat;
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
@@ -29,7 +29,7 @@ h1 {
 
 @keyframes animate {
     0%, 100% {
-        background-position: -400px;
+        background-position: -600px;
     }
     50% {
         background-position: 100px;

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weight Converter</title>
+  <link rel="stylesheet" href="/widgets_style/weightConverter.css">
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="container">
+      <h2>Weight Converter</h2>
+      <div class="input_wrapper">
+        <label for="kg">Kilograms:</label>
+        <input type="number" id="kg" value="10" step="0.1">
+      </div>
+      <div class="input_wrapper">
+        <label for="lb">Pounds:</label>
+        <input type="number" id="lb">
+      </div>
+      <div class="input_wrapper">
+        <label for="oz">Ounces:</label>
+        <input type="number" id="oz">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let kgRef = document.getElementById('kg');
+    let lbRef = document.getElementById('lb');
+    let ozRef = document.getElementById('oz');
+
+    let convertFromKg = () => {
+      let kg = kgRef.value;
+      lbRef.value = (kg  * 2.2046).toFixed(2);
+      ozRef.value = (kg  * 35.274).toFixed(2);
+    };
+
+    let convertFromLb = () => {
+      let lb = lbRef.value;
+      kgRef.value = (lb/2.205).toFixed(2);
+      ozRef.value = (lb * 16).toFixed(2);
+    };
+
+    let convertFromOz = () => {
+      let oz = ozRef.value;
+      kgRef.value = (oz / 35.274).toFixed(2);
+      lbRef.value = (oz / 16).toFixed(2);
+    };
+
+    kgRef.addEventListener('input', convertFromKg);
+    lbRef.addEventListener('input', convertFromLb);
+    ozRef.addEventListener('input', convertFromOz);
+    window.addEventListener('load', convertFromKg)
+
+  </script>
+</body>
+
+</html>

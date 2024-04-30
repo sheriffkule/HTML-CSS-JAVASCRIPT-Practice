@@ -1,0 +1,74 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: radial-gradient(circle at top left, #919D9D, #212322);
+}
+
+.wrapper {
+    width: 90vw;
+    font-size: 1.2em;
+    max-width: 28em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.container {
+    background: radial-gradient(circle at top left, #c1d1d1, #323533);
+    width: 100%;
+    padding: 3em;
+    box-shadow: 0 2em 3.2em rgba(1, 4, 45, .2);
+    border-radius: .6em;
+}
+
+h2 {
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 1.5em;
+    color: #0a0447;
+}
+
+.input_wrapper input {
+    display: block;
+    width: 100%;
+    font-size: 1.3em;
+    padding: .5em .4em .5em 1em;
+    border-radius: .3em;
+    background: #d4d4d4;
+    border: 1px solid silver;
+    outline: none;
+    color: #0a0447;
+}
+
+.input_wrapper input:focus {
+    border: 1px solid  #323533;
+    background-color: #e7ffff;
+}
+
+.input_wrapper label {
+    display: block;
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: .3em;
+    color: #0a0447;
+    cursor: text;
+}
+
+.input_wrapper:not(:last-child) {
+    margin-bottom: 1.2em;
+}
+
+@media screen and (max-width: 450px) {
+    .wrapper {
+        font-size: .9em;
+    }
+    .container {
+        padding: 1.5em;
+    }
+}
