@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gradient Generator</title>
+  <link rel="stylesheet" href="/widgets_style/gradientGeneratror.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css"
+    integrity="sha512-MqL4+Io386IOPMKKyplKII0pVW5e+kb+PI/I3N87G3fHIfrgNNsRpzIXEi+0MQC0sR9xZNqZqCYVcC61fL5+Vg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <h1>Gradient Generator</h1>
+  <div class="container">
+    <div class="colors">
+      <input type="color" id="color-a" value="#333F48">
+      <input type="color" id="color-b" value="#707372">
+    </div>
+
+    <div class="buttons">
+      <button onclick="setDirection('to top', this)"><i class="ri-arrow-up-line"></i></button>
+      <button onclick="setDirection('to bottom', this)"><i class="ri-arrow-down-line"></i></button>
+      <button class="active" onclick="setDirection('to right', this)"><i class="ri-arrow-right-line"></i></button>
+      <button onclick="setDirection('to left', this)"><i class="ri-arrow-left-line"></i></button>
+      <button onclick="setDirection('to top right', this)"><i class="ri-arrow-right-up-line"></i></button>
+      <button onclick="setDirection('to bottom right', this)"><i class="ri-arrow-right-down-line"></i></button>
+      <button onclick="setDirection('to top left', this)"><i class="ri-arrow-left-up-line"></i></button>
+    </div>
+    <button id="submit" onclick="generateCode()">Generate</button>
+    <div class="output">
+      <textarea id="code" rows="2"></textarea>
+      <button id="copy" onclick="copyText()"><i class="ri-file-copy-line"></i></button>
+    </div>
+  </div>
+  <h4>Made by &copy; SheriffKule</h4>
+  <script>
+    let colorOne = document.getElementById('color-a');
+    let colorTwo = document.getElementById('color-b');
+    let currentDirection = 'to bottom';
+    let outputCode = document.getElementById('code');
+
+    function setDirection(value, _this) {
+      let direction = document.querySelectorAll('.buttons button');
+      for (let i of direction) {
+        i.classList.remove('active');
+      }
+
+      _this.classList.add('active');
+      currentDirection = value;
+    }
+
+    function generateCode() {
+      outputCode.value = `background-image: linear-gradient(${currentDirection}, ${colorOne.value}, ${colorTwo.value})`;
+      document.getElementsByTagName('BODY')[0].style.backgroundImage = `linear-gradient(${currentDirection}, ${colorOne.value}, ${colorTwo.value})`;
+    }
+
+    function copyText() {
+      let copyBtn = document.querySelector('.ri-file-copy-line');
+      outputCode.select();
+      document.execCommand('copy');
+      copyBtn.style.color = '#00B74F';
+      alert('Gradient Copied!');
+      setTimeout(() => {
+        copyBtn.style.color = '';
+      }, 2000);
+    }
+    generateCode();
+
+  </script>
+</body>
+
+</html>
