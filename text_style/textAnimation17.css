@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: radial-gradient(circle at top, #565656 10%, #121212 90%);
+    min-height: 100vh;
+}
+
+h1 {
+    width: 100vw;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    text-align: center;
+    font-size: 5em;
+    background: url(/images/wave.png);
+    background-size: 150%;
+    background-position: left;
+    background-repeat: no-repeat;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    animation: animate 5s ease-in-out infinite;
+    -webkit-text-stroke: 1px #121212;
+}
+
+@keyframes animate {
+    0%, 100% {
+        background-position: -400px;
+    }
+    50% {
+        background-position: 100px;
+    }
+}
