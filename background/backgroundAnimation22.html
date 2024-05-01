@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animated Stars Background</title>
+  <link rel="stylesheet" href="/background_style/backgroundAnimation22.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <section class="sec"></section>
+
+  <script>
+    for (let i = 1; i <= 75; i++) {
+      let stars = document.createElement('div');
+      stars.classList.add('star');
+      let size = Math.random() * 20;
+      stars.style.fontSize = 10 + size + 'px';
+      stars.style.left = Math.random() * + innerWidth + 'px';
+      stars.style.top = Math.random() * - innerHeight + 'px';
+      stars.style.filter = `hue-rotate(${i * 5}deg)`;
+      document.querySelector('.sec').appendChild(stars);
+    }
+    function animateStars() {
+      let allStars = document.querySelectorAll('.star');
+      let num = Math.floor(Math.random() * allStars.length);
+      allStars[num].classList.toggle('animate');
+    }
+
+    setInterval(animateStars, 50);
+  </script>
+</body>
+
+</html>
