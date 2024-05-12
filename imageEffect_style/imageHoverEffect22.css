@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: radial-gradient(circle, #414a4d, #111);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    gap: 50px;
+}
+
+.container .box {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    cursor: pointer;
+}
+
+.container .box span {
+    position: absolute;
+    width: 300px;
+    height: 2px;
+    background: var(--img);
+    background-size: 300px;
+    pointer-events: none;
+    transition: .5s ease-in-out;
+}
+
+.container .box.active span {
+    transform: translateX(var(--x)) rotate(var(--r));
+}

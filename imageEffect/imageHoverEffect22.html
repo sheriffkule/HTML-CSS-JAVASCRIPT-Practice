@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Awesome Slice Image Effect</title>
+  <link rel="stylesheet" href="/imageEffect_style/imageHoverEffect22.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="box" style="--img:url(/images/clint.jpeg)"></div>
+    <div class="box" style="--img:url(/images/tuco-01.jpg)"></div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      let boxes = document.querySelectorAll('.box');
+      boxes.forEach(function (box) {
+        let spans = [];
+        for (let i = 0; i < 200; i++) {
+          let span = document.createElement('span');
+          spans.push(span);
+          box.appendChild(span);
+          span.style.top = `${i * 1.5}px`;
+          span.style.backgroundPositionY = `${i * -1}px`;
+          span.style.transitionDelay = (Math.random() * 1.5) + 0 + 's';
+        }
+        box.addEventListener('click', function () {
+          box.classList.toggle('active');
+          spans.forEach(function (span) {
+            span.style.setProperty('--x', Math.floor(Math.random() * 400 - 200) + 'px');
+            span.style.setProperty('--r', Math.floor(Math.random() * 360 - 0) + 'deg');
+          })
+        })
+      })
+    })
+  </script>
+</body>
+
+</html>
