@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: radial-gradient(#0f575c, #05252b 80%);
+}
+
+.container {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container span {
+    position: absolute;
+    left: 0;
+    width: 32px;
+    height: 6px;
+    background: red;
+    border-radius: 8px;
+    transform-origin: 150px;
+    transform: scale(2.2) rotate(calc(var(--i)*(360deg/50)));
+    animation: animate 5s linear infinite;
+    animation-delay: calc(var(--i)*(5s/50));
+}
+
+@keyframes animate {
+    0%, 30%, 70%, 100% {
+        background: red;
+    }
+
+    50% {
+        background: #93e2de;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+}
+
+.container .login {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.container .login h2 {
+    font-size: 3em;
+    color: #fff;
+    letter-spacing: 3px;
+    margin-top: -20px;
+}
+
+.container .login .inputBox {
+    position: relative;
+    width: 100%;
+}
+
+.container .login .inputBox input {
+    position: relative;
+    width: 100%;
+    padding: 12px 20px;
+    background: transparent;
+    border: 2px solid #ccc;
+    border-radius: 40px;
+    font-size: 1.2em;
+    color: #fff;
+    box-shadow: none;
+    outline: none;
+}
+
+.container .login .inputBox input::placeholder {
+    color: gray;
+    transition: .3s;
+}
+
+.container .login .inputBox input:focus::placeholder {
+    transform: translateY(-30px);
+}
+
+.container .login .inputBox input[type="submit"] {
+    background: linear-gradient(45deg, #001b4e, #009c87);
+    border: none;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.container .login .inputBox input[type="submit"]:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    color: #ccc;
+}
+
+.container .login .links {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.container .login .links a {
+    color: #fff;
+    text-decoration: none;
+    transition: .3s;
+}
+
+.container .login .links a:hover {
+    color: #ccc;
+    scale: 1.2;
+}
