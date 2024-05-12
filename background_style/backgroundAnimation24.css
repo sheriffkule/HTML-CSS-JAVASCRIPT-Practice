@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 600vh;
+}
+
+.box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: url(/images/darkhex.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    transition: background-image 0.5s;
+}
+
+.box h2 {
+    color: #fff;
+    font-size: 2em;
+    letter-spacing: 1px;
+    padding: 20px;
+}

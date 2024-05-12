@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Change Background Image on Scroll</title>
+  <link rel="stylesheet" href="/background_style/backgroundAnimation24.css">
+</head>
+
+<body>
+  <div class="box">
+    <h2>Scroll To Change Background</h2>
+  </div>
+
+  <script>
+    let box = document.querySelector('.box');
+    let images = ['/images/darkhex.jpg', '/images/matrix.jpg', '/images/glowing_globe.jpg', '/images/pexels.jpeg', '/images/cityscape.jpg', '/images/dreamy-world.jpg'];
+
+    window.addEventListener('scroll', () => {
+      let scrollPosition = window.scrollY;
+      let viewportHeight = window.innerHeight;
+
+      let imageIndex = Math.floor(scrollPosition / viewportHeight % images.length);
+
+      box.style.backgroundImage = `url(${images[imageIndex]})`;
+    })
+  </script>
+</body>
+
+</html>
