@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Glass Sidebar</title>
+  <link rel="stylesheet" href="/navbar_style/navBar15.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+  <section>
+    <div class="sidebar">
+      <div class="logo-content">
+        <div class="logo">
+          <i class="bx bxl-flutter"></i>
+          <h3><span>Sheriff</span>Kule</h3>
+        </div>
+        <i class="bx bx-menu" id="btn"></i>
+      </div>
+
+      <ul class="list">
+        <li class=" search">
+          <i class="bx bx-search"></i>
+          <input type="text" placeholder="      Search...">
+        </li>
+        <li class=" list-item active">
+          <a href="#">
+            <i class="bx bx-grid-alt"></i>
+            <span class="links-name">Dashboard</span>
+          </a>
+          <span class="tooltip">Dashboard</span>
+        </li>
+        <li class=" list-item">
+          <a href="#">
+            <i class="bx bx-user"></i>
+            <span class="links-name">User</span>
+          </a>
+          <span class="tooltip">User</span>
+        </li>
+        <li class=" list-item">
+          <a href="#">
+            <i class="bx bx-chat"></i>
+            <span class="links-name">Messages</span>
+          </a>
+          <span class="tooltip">Messages</span>
+        </li>
+        <li class=" list-item">
+          <a href="#">
+            <i class="bx bx-pie-chart-alt-2"></i>
+            <span class="links-name">Analytics</span>
+          </a>
+          <span class="tooltip">Analytics</span>
+        </li>
+        <li class=" list-item">
+          <a href="#">
+            <i class="bx bx-folder"></i>
+            <span class="links-name">File Manager</span>
+          </a>
+          <span class="tooltip">File Manager</span>
+        </li>
+        <li class=" list-item">
+          <a href="#">
+            <i class="bx bx-cart-alt"></i>
+            <span class="links-name">Order</span>
+          </a>
+          <span class="tooltip">Order</span>
+        </li>
+        <li class=" list-item">
+          <a href="#">
+            <i class="bx bx-heart"></i>
+            <span class="links-name">Saved</span>
+          </a>
+          <span class="tooltip">Saved</span>
+        </li>
+        <li class=" list-item">
+          <a href="#">
+            <i class="bx bx-cog"></i>
+            <span class="links-name">Settings</span>
+          </a>
+          <span class="tooltip">Settings</span>
+        </li>
+      </ul>
+
+      <ul class="list-logout">
+        <li>
+          <a href="#">
+            <i class="bx bx-log-out"></i>
+            <span class="links-name">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <script>
+    let btn = document.querySelector('#btn');
+    let sidebar = document.querySelector('.sidebar');
+    let searchBtn = document.querySelector('.bx-search');
+    let listItem = document.querySelectorAll('.list-item');
+
+    btn.onclick = function () {
+      sidebar.classList.toggle('active');
+    }
+
+    searchBtn.onclick = function () {
+      sidebar.classList.toggle('active');
+    }
+
+    function activeLink() {
+      listItem.forEach(item =>
+        item.classList.remove('active'));
+      this.classList.add('active');
+    }
+
+    listItem.forEach(item =>
+      item.onclick = activeLink);
+  </script>
+</body>
+
+</html>
