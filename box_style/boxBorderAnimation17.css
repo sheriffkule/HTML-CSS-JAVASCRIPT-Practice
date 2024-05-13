@@ -1,0 +1,144 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    place-content: center;
+    min-height: 100vh;
+    background: radial-gradient(#444,  #000f27);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+}
+
+img, i {
+    max-width: 100%;
+    display: block;
+}
+
+button:hover {
+    box-shadow: 0 0 15px 5px #3ffb2a81,
+    inset 0 0 4px #333;
+    transition: all .2s ease;
+}
+
+button:hover i {
+    color: #40fb2a;
+}
+
+.card {
+    background: radial-gradient(#333, #000);
+    padding: 2rem;
+    margin: 1rem;
+    max-width: 400px;
+    border-radius: .75rem;
+    transition: .5s ease-in-out;
+}
+
+.card:hover {
+    box-shadow: 0 0 15px 5px #3ffb2a81;
+    transition: all .2s ease-in-out;
+    transform: translateY(-.8rem);
+}
+
+.card .item-img {
+    margin-bottom: 1rem;
+    border-radius: .5rem;
+    overflow: hidden;
+}
+
+.card .tag {
+    padding: .15rem .5rem;
+    margin-bottom: 1rem;
+    width: fit-content;
+    font-size: .825rem;
+    border-radius: .5rem;
+    outline: 1px solid #fff;
+}
+
+.card .tag span {
+    color: #40fb2a;
+}
+
+.card h1 {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    line-height: 1.2;
+}
+
+.card .old-price {
+    color: #999;
+    font-size: .825rem;
+    text-decoration: line-through;
+}
+
+.card .new-price {
+    font-size: 2.25rem;
+    font-weight: 600;
+}
+
+.card .terms {
+    color: #999;
+    margin-bottom: 1.5rem;
+    font-size: .825rem;
+}
+
+.card .cart-btn {
+    cursor: pointer;
+    background: #40fb2a;
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border: none;
+    border-radius: .5rem;
+}
+
+.card .stock-number {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: .25rem;
+}
+
+.card .stock-number .green-dot {
+    width: 8px;
+    height: 8px;
+    margin-right: .3rem;
+    border-radius: 50%;
+    animation: flash 1s ease infinite alternate;
+}
+
+@keyframes flash {
+    to {
+        background: #40fb2a;
+    }
+}
+
+.card .btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .75rem;
+}
+
+.card .btns .reviews,
+.card .btns .favorites {
+    cursor: pointer;
+    background: #000;
+    color: #fff;
+    padding: .5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    outline: 1px solid #fff;
+    border-radius: .5rem;
+}
+
+.card .btns i {
+    width: 20px;
+    transition: .2s;
+}
