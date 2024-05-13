@@ -9,14 +9,7 @@ section {
     background: url(/images/darkhex.jpg) no-repeat;
     background-size: cover;
     background-position: center;
-    /* animation: animateBg 15s linear infinite; */
 }
-
-/* @keyframes animateBg {
-    to {
-        filter: hue-rotate(360deg);
-    }
-} */
 
 .sidebar {
     position: fixed;
