@@ -1,0 +1,133 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #008641, #60d697);
+}
+
+h1 {
+    text-align: center;
+    padding-top: 100px;
+    font-size: 40px;
+    color: #222;
+}
+
+.container {
+    background: transparent;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    width: 80vw;
+    max-width: 600px;
+    min-width: 350px;
+    padding: 60px 30px;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, .35);
+}
+
+label {
+    display: block;
+    font-size: 22px;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+input {
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 20px;
+    border-bottom: 2px solid #585858;
+    background: #ccc;
+    color: #585858;
+    padding: 2px 16px;
+    transition: .2s;
+}
+
+input:focus {
+    background-color: #fff;
+    outline: none;
+    border-bottom: 2.4px solid #01e26e;
+}
+
+.input-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.input-wrapper input {
+    width: 100%;
+}
+
+.time-wrapper input {
+    width: 60%;
+}
+
+select {
+    width: 30%;
+    border: 1px solid #585858;
+    font-size: 20px;
+    margin-left: 5%;
+    padding: 4px 0;
+    border-radius: 6px;
+    background: #dadada;
+    outline: none;
+}
+
+.buttons {
+    display: flex;
+}
+button {
+    display: inline-block;
+    background: #1a7747;
+    border: none;
+    color: #fff;
+    margin: 20px auto 0 auto;
+    padding: 15px 40px;
+    font-size: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+button:hover {
+    background: #009648;
+    box-shadow: 4px 8px 10px rgba(88, 88, 88, 0.3);
+    color: #222;
+}
+
+button:active {
+    scale: .95;
+}
+
+#result {
+    background: #c7ffe2;
+    margin-top: 30px;
+    color: #292929;
+    text-align: center;
+    font-size: 18px;
+    padding: 20px;
+    border-radius: 6px;
+}
+
+#result div {
+    margin-bottom: 10px;
+}
+
+#result span {
+    color: #000;
+    font-weight:600;
+}
+
+h4 {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%);
+}
