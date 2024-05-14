@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Pricing Plan Carousel Slider</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+  <link rel="stylesheet" href="/box_style/boxBorderAnimation18.css">
+</head>
+
+<body>
+  <h2>Pricing Plan</h2>
+  <div class="carousel">
+    <div class="carousel-item">
+      <div class="carousel-caption">
+        <div class="deal">
+          <h5>Free</h5>
+          <h3>$0/Month</h3>
+        </div>
+        <ul>
+          <li>50 GB Storage</li>
+          <li>100 Users</li>
+          <li>24/5 Support</li>
+          <li>Custom Branding</li>
+          <li>Dedicated Manager</li>
+        </ul>
+        <a href="#" class="btn">Sign Up</a>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="carousel-caption">
+        <div class="deal">
+          <h5>Basic</h5>
+          <h3>$9,99/Month</h3>
+        </div>
+        <ul>
+          <li>5 GB Storage</li>
+          <li>10 Users</li>
+          <li>24/5 Support</li>
+          <li>Custom Branding</li>
+          <li>Dedicated Manager</li>
+        </ul>
+        <a href="#" class="btn">Sign Up</a>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="carousel-caption">
+        <div class="deal">
+          <h5>Standard</h5>
+          <h3>$19.99/Month</h3>
+        </div>
+        <ul>
+          <li>50 GB Storage</li>
+          <li>100 Users</li>
+          <li>24/5 Support</li>
+          <li>Custom Branding</li>
+          <li>Dedicated Manager</li>
+        </ul>
+        <a href="#" class="btn">Sign Up</a>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="carousel-caption">
+        <div class="deal">
+          <h5>Premium</h5>
+          <h3>$29.99/Month</h3>
+        </div>
+        <ul>
+          <li>500 GB Storage</li>
+          <li>1000 Users</li>
+          <li>24/5 Support</li>
+          <li>Custom Branding</li>
+          <li>Dedicated Manager</li>
+        </ul>
+        <a href="#" class="btn">Sign Up</a>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="carousel-caption">
+        <div class="deal">
+          <h5>Ultra</h5>
+          <h3>$39.99/Month</h3>
+        </div>
+        <ul>
+          <li>Unlimited Storage</li>
+          <li>Unlimited Users</li>
+          <li>24/5 Support</li>
+          <li>Custom Branding</li>
+          <li>Dedicated Manager</li>
+        </ul>
+        <a href="#" class="btn">Sign Up</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('.carousel').carousel({
+        padding: 200
+      });
+      autoplay();
+      function autoplay() {
+        $('.carousel').carousel('next');
+        setTimeout(autoplay, 6000);
+      }
+    });
+  </script>
+</body>
+
+</html>

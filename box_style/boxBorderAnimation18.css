@@ -1,0 +1,62 @@
+body {
+    background: #08091d;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    color: #fff;
+    text-align: center;
+    margin: 40px 0 -30px;
+    padding-bottom: 20px;
+    background: #000933;
+}
+
+.carousel {
+    height: 600px;
+    perspective: 400px;
+}
+
+.carousel .carousel-item {
+    width: 400px;
+    height: 500px;
+    background: #111133;
+    border-radius: 50px;
+}
+
+.carousel-caption {
+    text-align: center;
+    color: #fff;
+}
+
+.deal {
+    background: #0367fe;
+    height: 150px;
+    padding: 10px 0;
+    border-radius: 50px 50px 0 0;
+}
+
+.deal h5 {
+    font-size: 60px;
+    margin: 0;
+}
+
+.deal h3 {
+    margin-top: 10px;
+}
+
+.carousel-caption ul {
+    list-style: none;
+}
+
+.carousel-caption ul li {
+    font-size: 20px;
+    line-height: 2.5;
+    font-size: 20px;
+}
+
+.carousel-caption a {
+    width: 100px;
+    height: auto;
+    background: #0367fe;
+}
