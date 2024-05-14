@@ -1,0 +1,122 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(45deg, #292c42, #6699cc);
+}
+
+.wrapper {
+    width: 90%;
+    max-width: 25em;
+    background: linear-gradient(45deg, #292c42, #6699cc);
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    padding: 2em;
+    border-radius: 14px;
+    box-shadow: 10px 10px 12px rgba(54, 54, 54, 0.5);
+}
+
+.app-details {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.app-details ion-icon {
+    font-size: 30px;
+    color: #1f2e3d;
+    padding: 0 12px;
+    margin-bottom: 22px;
+    filter: drop-shadow(0 10px 10px rgba(59, 59, 59, 0.5));
+}
+
+.app-title {
+    font-size: 30px;
+    margin-bottom: 16px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+#amount {
+    font-weight: 400;
+    font-size: 22px;
+    display: block;
+    width: 100%;
+    border-bottom: 2px solid #02002c;
+    color: #1d2c3a;
+    margin-bottom: 30px;
+    padding: 8px;
+}
+
+input#amount:focus {
+    border-color: #0a233b;
+    color: #1f2e3d;
+}
+
+.dropdowns {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 6px;
+    background: #45678a;
+    color: #fff;
+    cursor: pointer;
+}
+
+select option {
+    background: #ccc;
+    color: #02002c;
+}
+
+button {
+    font-size: 16px;
+    font-weight: 600;
+    background: #3d5b79;
+    color: #ccc;
+    padding: 16px 0;
+    width: 100%;
+    border-radius: 6px;
+    margin-top: 32px;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+button:hover {
+    background: #0d2e4d;
+    box-shadow: 0 0 10px  rgba(12, 42, 70, 0.4);
+}
+
+#result {
+    font-size: 20px;
+    text-align: center;
+    margin-top: 16px;
+    color: #02002c;
+    background-color: #c0c0c0;
+    padding: 14px 0;
+}
+
+h4 {
+    position: absolute;
+    left: 50%;
+    bottom: 10px;
+    transform: translateX(-50%);
+}
