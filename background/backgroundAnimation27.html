@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SheriffKule Having Fun</title>
+  <link rel="stylesheet" href="/background_style/backgroundAnimation27.css">
+</head>
+
+<body>
+  <h2>SheriffKule Having Fun</h2>
+  <div class="container"></div>
+
+  <script>
+    let container = document.querySelector(".container");
+    let count = 600;
+    for (let i = 0; i < count; i++) {
+      let box = document.createElement('div');
+      box.className = 'box';
+      container.appendChild(box);
+    };
+
+    let box = document.querySelectorAll('.box');
+    for(let i = 0; i < box.length; i++) {
+      let duration = Math.random() * 6;
+      let changeColor = Math.random() * 360;
+      box[i].addEventListener('mouseover', (e) => {
+        box[i].classList.add('active');
+        box[i].style.animationDuration = 1 +duration+ 's';
+        box[i].style.filter = 'hue-rotate(' + changeColor + 'deg)';
+      })
+    };
+  </script>
+</body>
+
+</html>
