@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: radial-gradient(circle at center, #444, #111);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+#container span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(/images/tiled-stones.jpg);
+    background-size: contain;
+    transition: .5s;
+    z-index: calc(1 + var(--i));
+}
+
+#container:hover span {
+    transform: rotate(-30deg) skew(25deg) translateX(calc(1.5px * var(--i))) translateY(calc(-1.5px * var(--i)));
+    box-shadow: -5px 5px 0 rgba(0, 0, 0, 0.05);
+}
+
+#container:hover span:last-child {
+    box-shadow: -50px 50px 0 rgba(0, 0, 0, 0.5);
+}

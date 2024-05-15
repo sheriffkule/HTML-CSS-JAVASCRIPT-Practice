@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2D to 3D Image Hover Effect</title>
+  <link rel="stylesheet" href="/imageEffect_style/imageHoverEffect23.css">
+</head>
+
+<body>
+  <div id="container"></div>
+
+  <script>
+    let container = document.getElementById('container');
+    for (let i = 50; i >= -50; i--) {
+      let span = document.createElement('span');
+      span.style.setProperty('--i', i);
+      container.appendChild(span);
+    }
+  </script>
+</body>
+
+</html>
