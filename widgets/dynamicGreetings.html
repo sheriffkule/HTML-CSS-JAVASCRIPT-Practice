@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Time Based Dynamic Greetings</title>
+  <link rel="stylesheet" href="/widgets_style/dynamicGreetings.css">
+</head>
+
+<body>
+  <div class="container">
+    demo text
+  </div>
+
+  <script>
+    let container = document.querySelector('.container');
+
+    let timeNow = new Date().getHours();
+    
+    let greeting = timeNow >= 5 && timeNow < 12
+      ? 'Good Morning' 
+      : timeNow >= 12 && timeNow < 18 
+      ? 'Good Afternoon'
+      : timeNow >= 18 && timeNow < 23
+      ? 'Good Evening'
+      : 'Good Night';
+      container.innerHTML = `<h1> ${greeting} </h1>`;
+  </script>
+</body>
+
+</html>
