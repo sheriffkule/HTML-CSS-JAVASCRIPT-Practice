@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    place-content: center;
+    min-height: 100vh;
+    background: radial-gradient(#444, #111);
+    overflow: hidden;
+}
+
+h1 {
+    color: #111;
+    font-size: 80px;
+    user-select: none;
+    text-align: center;
+}
+
+i {
+    position: absolute;
+    background: #fff;
+    pointer-events: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+@keyframes animate {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(var(--randomX), var( --randomY));
+    }
+}
