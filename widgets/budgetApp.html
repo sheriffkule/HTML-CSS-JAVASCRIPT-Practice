@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Budget App</title>
+  <link rel="stylesheet" href="/widgets_style/budgetApp.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <h1>My Budget App</h1>
+  <div class="wrapper">
+    <div class="container">
+      <div class="sub-container">
+        <div class="total-amount-container">
+          <h3>Budget $</h3>
+          <p class="hide error" id="budget-error">Value can not be negative or empty.</p>
+          <input type="number" id="total-amount" placeholder="Enter Total Amount">
+          <button class="submit" id="total-amount-button">Set Budget</button>
+        </div>
+
+        <div class="user-amount-container">
+          <h3>Expenses $</h3>
+          <p class="hide error" id="product-title-error">Values can not be empty.</p>
+          <input type="text" class="product-title" id="product-title" placeholder="Enter Title of Product">
+          <input type="number" id="user-amount" placeholder="Enter Cost of Product">
+          <button class="submit" id="check-amount">Check Amount</button>
+        </div>
+      </div>
+      <div class="output-container flex-space">
+        <div>
+          <p>Total Budget $</p>
+          <span id="amount">0</span>
+        </div>
+        <div>
+          <p>Expenses $</p>
+          <span id="expenditure-value">0</span>
+        </div>
+        <div>
+          <p>Balance $</p>
+          <span id="balance-amount">0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="list">
+      <h3>Expense List</h3>
+      <div class="list-container" id="list"></div>
+    </div>
+  </div>
+  <h4>Made by &copy; Sheriffkule</h3>
+
+  <script>
+    let totalAmount = document.getElementById('total-amount');
+    let userAmount = document.getElementById('user-amount');
+    const checkAmountButton = document.getElementById('check-amount');
+    const totalAmountButton = document.getElementById('total-amount-button');
+    const productTitle = document.getElementById('product-title');
+    const errorMessage = document.getElementById('budget-error');
+    const productTitleError = document.getElementById('product-title-error');
+    const amount = document.getElementById('amount');
+    const expenditureValue = document.getElementById('expenditure-value');
+    const balanceValue = document.getElementById('balance-amount');
+    let tempAmount = 0;
+
+    totalAmountButton.addEventListener('click', () => {
+      tempAmount = totalAmount.value;
+
+      if (tempAmount === '' || tempAmount < 0) {
+        errorMessage.classList.remove('hide');
+      } else {
+        errorMessage.classList.add('hide');
+        amount.innerHTML = tempAmount;
+        balanceValue.innerText = tempAmount - expenditureValue.innerText;
+        totalAmount.value = '';
+      }
+    });
+
+    const disableButtons = (bool) => {
+      let editButtons = document.getElementsByClassName('edit');
+      Array.from(editButtons).forEach((element) => {
+        element.disabled = bool;
+      });
+    };
+
+    const modifyElement = (element, edit = false) => {
+      let parentDiv = element.parentElement;
+      let currentBalance = balanceValue.innerText;
+      let currentExpense = expenditureValue.innerText;
+      let parrentAmount = parentDiv.querySelector('.amount').innerText;
+      if (edit) {
+        let parentText = parentDiv.querySelector('.product').innerText;
+        productTitle.value = parentText;
+        userAmount.value = parrentAmount;
+        disableButtons(true);
+      }
+      balanceValue.innerText = parseInt(currentBalance) + parseInt(parrentAmount);
+      expenditureValue.innerText = parseInt(currentExpense) - parseInt(parrentAmount);
+      parentDiv.remove();
+    };
+
+    const listCreator = (expenseName, expenseValue) => {
+      let sublistContent = document.createElement('div');
+      sublistContent.classList.add('sublist-content', 'flex-space');
+      list.appendChild(sublistContent);
+      sublistContent.innerHTML = `<p class='product'>${expenseName}</p><p  class='amount'>${'$ ' + expenseValue}</p>`;
+      let editButton = document.createElement('button');
+      editButton.classList.add('fa-solid', 'fa-pen-to-square', 'edit');
+      editButton.style.fontSize = '24px';
+      editButton.addEventListener('click', () => {
+        modifyElement(editButton, true);
+      });
+      let deleteButton = document.createElement('button');
+      deleteButton.classList.add('fa-solid', 'fa-trash-can', 'delete');
+      deleteButton.style.fontSize = '24px';
+      deleteButton.addEventListener('click', () => {
+        modifyElement(deleteButton);
+      });
+      sublistContent.appendChild(editButton);
+      sublistContent.appendChild(deleteButton);
+      document.getElementById('list').appendChild(sublistContent);
+    };
+
+    checkAmountButton.addEventListener('click', () => {
+      if(!userAmount.value || !productTitle.value) {
+        productTitleError.classList.remove('hide');
+        return false;
+      }
+      disableButtons(false);
+      let expenditure = parseInt(userAmount.value);
+      let sum = parseInt(expenditureValue.innerText) + expenditure;
+      expenditureValue.innerText = sum;
+      const totalBalance = tempAmount - sum;
+      balanceValue.innerText = totalBalance;
+      listCreator(productTitle.value, userAmount.value);
+      productTitle.value = '';
+      userAmount.value = '';
+    });
+
+
+  </script>
+</body>
+
+</html>
