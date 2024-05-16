@@ -1,0 +1,157 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #222;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 150px);
+    gap: 4px;
+}
+
+.container .box {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    background: rgba(45, 45, 45, 1);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .box::before {
+    content: '';
+    position: absolute;
+    top: var(--y);
+    left: var(--x);
+    transform: translate(-50%, -50%);
+    background: radial-gradient(var(--clr), transparent, transparent);
+    width: 300px;
+    height: 300px;
+    transition: .5s, top .1s, left .1s;
+}
+
+.container .box::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: rgba(45, 45, 45, .9);
+}
+
+.login {
+    position: absolute;
+    width: 450px;
+    height: 600px;
+    padding: 60px 40px;
+    text-align: center;
+    pointer-events: none;
+}
+
+.login h2 {
+    color: #fff;
+    font-size: 32px;
+    margin-bottom: 60px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    pointer-events: all;
+}
+
+.login .inputBox {
+    position: relative;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.login .inputBox input {
+    width: 100%;
+    padding: 20px 25px;
+    outline: none;
+    border-radius: 10px;
+    background: rgb(255, 255, 255, 0.1);
+    box-shadow: 0 5px 15px rgb(0, 0, 0, .25);
+    border: 1px solid #000;
+    backdrop-filter: blur(10px);
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: 2px;
+    pointer-events: all;
+}
+
+.login .inputBox span {
+    font-size: 16px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px 25px;
+    color: #fff;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    transition: .3s;
+    pointer-events: none;
+}
+
+.login .inputBox input:focus ~ span,
+.login .inputBox input:valid ~ span {
+    transform: translate(15px, -20px);
+    font-size: 14px;
+    background: #fff;
+    color: #222;
+    padding: 2px 5px;
+    border: 1px solid #000;
+}
+
+.login .inputBox input[type='submit'] {
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.login .inputBox input[type='submit']:hover {
+    background: #0f0;
+    color: #222;
+    border: 1px solid transparent;
+    box-shadow: 0 0 5px #0f0;
+}
+
+.group {
+    position: relative;
+    width: 100%;
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.group a {
+    color: #222;
+    background: #fff;
+    padding: 2px 5px;
+    text-decoration: none;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    pointer-events: all;
+    transition: .3s;
+}
+
+.group a:hover {
+    scale: 1.1;
+}
+
+.group a:nth-child(2) {
+    color: #fff;
+    background-color: #f0f;
+    font-weight: 500;
+    box-shadow: 0 0 15px #f0f,
+    0 0 30px #f0f,
+    0 0 60px #f0f;
+}
