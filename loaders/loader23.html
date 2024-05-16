@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transforming Circle Loader</title>
+  <link rel="stylesheet" href="/loaders_style/loader23.css">
+</head>
+
+<body>
+  <div class="loading"></div>
+
+  <script>
+    let loading = document.querySelector('.loading');
+    for(let i  = 1; i <= 20; i++) {
+      let span = document.createElement('span');
+      span.style.setProperty('--i', i);
+      loading.appendChild(span);
+    }
+  </script>
+</body>
+
+</html>
