@@ -1,0 +1,75 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #ccc;
+    transition: .5s;
+    transition-delay: .5s;
+}
+
+.aqua {
+    position: relative;
+    width: 500px;
+    padding: 10px;
+    border-radius: 50px;
+    box-shadow: inset 0 10px 5px  rgba(0, 0, 0, 0.1),
+    0 15px 8px rgba(0, 0, 0, 0.05),
+    0 10px 15px rgba(0, 0, 0, 0.05),
+    inset 0 -10px 15px rgba(255, 255, 255, 0.9);
+    transition: .5s;
+}
+
+.aqua::after {
+    content: '';
+    position: absolute;
+    width: 95%;
+    height: 5px;
+    top: 8px;
+    left: 50%;
+    background: #fff;
+    transform: translateX(-50%);
+    border-radius: 20px;
+    background: #fff;
+}
+
+.percentBar {
+    position: relative;
+    display: block;
+    width: 0%;
+    height: 10px;
+    background: #03a9f4;
+    border-radius: 20px;
+}
+
+.number {
+    position: absolute;
+    top: -64px;
+    right: -55px;
+    padding: 10px 15px;
+    color: #03a9f4;
+    border-radius: 20px;
+    border-bottom-left-radius: 0;
+    box-shadow: inset 0 10px 5px rgba(0, 0, 0, 0.1),
+            0 15px 8px rgba(0, 0, 0, 0.05),
+            0 10px 15px rgba(0, 0, 0, 0.05),
+            inset 0 -10px 15px rgba(255, 255, 255, 0.9);
+}
+
+h2 {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    font-weight: 600;
+    font-size: 64px;
+    letter-spacing: 8px;
+    transition: .5s;
+    transition-delay: 1s;
+    color: white;
+}
