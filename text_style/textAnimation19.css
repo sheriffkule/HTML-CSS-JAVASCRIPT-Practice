@@ -23,7 +23,7 @@ h2 {
 
 h2 span {
     position: relative;
-    color: rgba(255, 255, 255, .1);
+    color: #262626;
     animation: displayText 12s infinite;
     animation-delay: calc(var(--i) * -3s);
 }
@@ -48,15 +48,15 @@ h2 span::before {
     color: #01fe87;
     border-right: 4px solid #01fe87;
     filter: drop-shadow(0 0 5px #01fe8880) drop-shadow(0 0 20px #01fe8880);
-    animation: animate 4s linear infinite;
+    animation: animate 3s linear infinite;
 }
 
 @keyframes animate {
     0%, 10%, 100% {
-        width: 0;
+        width: 0%;
     }
 
     70%, 90% {
-        width: 100%;
+        width: 102%;
     }
 }
