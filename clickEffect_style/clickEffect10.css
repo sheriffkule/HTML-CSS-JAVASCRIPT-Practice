@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #1d2b3a;
+    overflow: hidden;
+}
+
+.circle {
+    display: grid;
+    place-items: center;
+    font-size: 22px;
+    font-weight: bold;
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(90deg, #f00, #0ff);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.circle:hover {
+    scale: 1.1;
+}
+
+.circle:active {
+    scale: 1;
+}
+
+.particles {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(90deg, #f00, #0ff);
+    box-shadow: 0 0 10px  rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.5),
+    0 0 60px rgba(255, 255, 255, 0.5);
+    z-index: -1;
+}
+
+@keyframes animate {
+    0%, 100% {
+        transform: translate(0,0);
+    }
+
+    50% {
+        transform: translate(var(--x), var(--y));
+    }
+}
+
+svg {
+    width: 0;
+    height: 0;
+}
