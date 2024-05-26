@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: monospace;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #0c0c0c;
+    width: 100%;
+    overflow: hidden;
+}
+
+.numbers {
+    position: relative;
+    cursor: default;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.numbers span {
+    position: relative;
+    font-size: 3.3em;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.07);
+    line-height: 1em;
+    transition: 1s;
+    user-select: none;
+}
+
+.numbers span:hover {
+    transition: 0s;
+    color: white;
+    text-shadow: 0 0 10px #0f0,
+    0 0 20px #0f0,
+    0 0 40px #0f0,
+    0 0 80px #0f0,
+    0 0 160px #0f0;
+    z-index: 3;
+}
