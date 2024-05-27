@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animated Dots Menu</title>
+  <link rel="stylesheet" href="/menus_style/menu20.css">
+</head>
+
+<body>
+
+  <div class="nav">
+    <span style="--i:0; --x:-1; --y:0">
+      <ion-icon name="home-outline"></ion-icon>
+    </span>
+    <span style="--i:1; --x:1; --y:0">
+      <ion-icon name="call-outline"></ion-icon>
+    </span>
+    <span style="--i:2; --x:0; --y:-1">
+      <ion-icon name="logo-twitter"></ion-icon>
+    </span>
+    <span style="--i:3; --x:0; --y:1">
+      <ion-icon name="logo-discord"></ion-icon>
+    </span>
+    <span style="--i:4; --x:1; --y:1">
+      <ion-icon name="logo-tiktok"></ion-icon>
+    </span>
+    <span style="--i:5; --x:-1; --y:-1">
+      <ion-icon name="logo-facebook"></ion-icon>
+    </span>
+    <span style="--i:6; --x:0; --y:0"  class="close">
+      <ion-icon name="close-outline"></ion-icon>
+    </span>
+    <span style="--i:7; --x:-1; --y:1">
+      <ion-icon name="logo-reddit"></ion-icon>
+    </span>
+    <span style="--i:8; --x:1; --y:-1">
+      <ion-icon name="logo-instagram"></ion-icon>
+    </span>
+  </div>
+
+  <script>
+    let navigation = document.querySelector('.nav');
+    navigation.addEventListener('click', function () {
+      navigation.classList.toggle('active');
+    });
+
+  </script>
+
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
