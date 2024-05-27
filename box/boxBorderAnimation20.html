@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mouse Wheel Controled Slider</title>
+  <link rel="stylesheet" href="/box_style/boxBorderAnimation20.css">
+</head>
+
+<body>
+  <div class="box"></div>
+
+  <script>
+    let box = document.querySelector('.box');
+    for( let i = 1; i <= 50; i++){
+      let div = document.createElement('div');
+      div.className = 'item';
+      div.textContent = i;
+      box.appendChild(div);
+    }
+
+    function moveNext(){
+      let item = document.querySelectorAll('.item');
+      box.appendChild(item[0]);
+    }
+
+    function movePrev(){
+      let item = document.querySelectorAll('.item');
+      box.prepend(item[item.length - 1]);
+    }
+
+    window.addEventListener('wheel', function(event){
+      if(event.deltaY > 0){
+        moveNext();
+      }else {
+        movePrev();
+      }
+    })
+  </script>
+</body>
+
+</html>
