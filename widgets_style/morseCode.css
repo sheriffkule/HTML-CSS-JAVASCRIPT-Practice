@@ -1,0 +1,87 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial;
+}
+
+body {
+    display: grid;
+    place-content: center;
+    min-height: 100vh;
+    background: radial-gradient(ellipse at center, #944d0f 0%, #212121 80%);
+}
+
+.container {
+    background: #b69862;
+    width: clamp(300, 500px, 90%);
+    padding: 3em;
+    border-radius: 1em;
+    box-shadow: 5px 5px 12px rgba(255, 208, 0, 0.2);
+}
+
+h1 {
+    font-size: 1.5em;
+    text-align: center;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin: 3em 0 .3em 0;
+    margin-bottom: 6px;
+}
+
+label:last-of-type {
+    margin-top: 1em;
+}
+
+textarea {
+    resize: none;
+    border: 1px solid black;
+    outline: none;
+    padding: .5em;
+    width: 100%;
+    font-size: 1.5em;
+    box-shadow: 0 0 10px rgba(255, 251, 0, 0.45);
+    transition: .2s;
+}
+
+textarea:focus {
+    border-color: darksalmon;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+button {
+    background: #5272ee;
+    color: #fff;
+    border: none;
+    padding: 1em 2em;
+    border-radius: .4em;
+    outline: none;
+    cursor: pointer;
+    margin: 1em 0;
+    box-shadow: 0 0 10px rgba(255, 251, 0, 0.45);
+    transition: .3s;
+}
+
+button:hover {
+    background: #4058b8;
+    scale: 1.05;
+}
+
+button:active {
+    scale: 1;
+}
+
+h4 {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
