@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Image Gallery</title>
+  <link rel="stylesheet" href="/imageEffect_style/imageHoverEffect24.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="box">
+      <span style="--i:1"><img src="/images/clint.jpeg"></span>
+      <span style="--i:2"><img src="/images/tuco-01.jpg"></span>
+      <span style="--i:3"><img src="/images/cityscape.jpg"></span>
+      <span style="--i:4"><img src="/images/pexels.jpeg"></span>
+      <span style="--i:5"><img src="/images/matrix.jpg"></span>
+      <span style="--i:6"><img src="/images/darkhex.jpg"></span>
+      <span style="--i:7"><img src="/images/tiled-stones.jpg"></span>
+      <span style="--i:8"><img src="/images/Aurora.jpeg"></span>
+    </div>
+    <div class="btns">
+      <div class="btn prev"></div>
+      <div class="btn next"></div>
+    </div>
+  </div>
+
+  <script>
+    let prev = document.querySelector('.prev');
+    let next = document.querySelector('.next');
+    let box = document.querySelector('.box');
+    let container = document.querySelector('.container')
+
+    let degrees = 0;
+
+    prev.addEventListener('click', function() {
+      degrees += 45;
+      box.style = `transform: perspective(1000px) rotateY( ${degrees}deg)`;
+    });
+    next.addEventListener('click', function() {
+      degrees -= 45;
+      box.style = `transform: perspective(1000px) rotateY( ${degrees}deg)`;
+    })
+
+    container.addEventListener('wheel'  , function(e){
+      if(e.deltaY > 0){
+        degrees += 45;
+        box.style = `transform: perspective(1000px) rotateY( ${degrees}deg)`;
+      }else{
+        degrees -= 45;
+        box.style = `transform: perspective(1000px) rotateY( ${degrees}deg)`;
+      }
+    });
+  </script>
+</body>
+
+</html>
