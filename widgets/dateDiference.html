@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Date Difference</title>
+  <link rel="stylesheet" href="/widgets_style/dateDiference.css">
+</head>
+
+<body>
+  <div class="wrapper">
+    <h2>Date Difference Calculator</h2>
+    <form>
+      <label>Start Date:</label>
+      <input type="date" id="firstDate" required>
+      <br>
+      <label>End Date:</label>
+      <input type="date" id="secondDate" required++>
+      <br>
+      <button type="button" onclick="X()">Find Difference</button>
+    </form>
+    <div id="dayCount"></div>
+  </div>
+  <h4>Made by :&copy; SheriffKule from XXIII Ceentury</h4>
+
+  <script>
+    function X() {
+      const firstDate = document.getElementById('firstDate').value;
+      const secondDate = document.getElementById('secondDate').value;
+
+      
+      const startTimestamp = new Date(firstDate).getTime();
+      const endTimestamp = new Date(secondDate).getTime();
+
+      const difference = endTimestamp - startTimestamp;
+      
+      const differenceCount = Math.round(difference / (1000 * 60 * 60 * 24));
+      
+      const dayCount = document.getElementById('dayCount');
+      if (!firstDate & !secondDate || !firstDate & secondDate || firstDate & !secondDate) {
+        dayCount.innerHTML = 'Please enter a date';
+      } else if (!firstDate) {
+        dayCount.innerHTML = 'Please enter a date';
+      } else if (!secondDate) {
+        dayCount.innerHTML = 'Please enter a date';
+      } else {
+        dayCount.innerHTML = `${differenceCount} days.`;
+        dayCount.style.backgroundColor = '#59a67d'
+      }
+    }
+  </script>
+</body>
+
+</html>
