@@ -1,0 +1,179 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial;
+}
+:root {
+    --dark: #000;
+    --light: #fff;
+    --success: #0abf30;
+    --error: #f24d4c;
+    --warning: #e9bd0c;
+    --info: #0a8fe9;
+}
+
+body {
+    background: linear-gradient(20deg, #0c356d 20%, transparent 20%),
+    linear-gradient(160deg, #0c356d 20%, #031630 20%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons {
+    background: var(--dark);
+    padding: 20px;
+    display: inline-flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.notifications {
+    position: fixed;
+    top: 30px;
+    right: 20px;
+}
+
+.notifications :where(.toast, .column) {
+    display: flex;
+    align-items: center;
+}
+
+.notifications .toast {
+    width: 400px;
+    position: relative;
+    overflow: hidden;
+    list-style: none;
+    border-radius: 6px;
+    padding: 16px;
+    margin-bottom: 10px;
+    padding-bottom: 30px;
+    background: var(--dark);
+    justify-content: space-between;
+    animation: show-toast .5s ease forwards;
+}
+
+@keyframes show-toast {
+    0% {transform: translateX(100%);}
+    40% {transform: translateX(-5%);}
+    80% {transform: translateX(0%);}
+    100% {transform: translateX(-10%);}
+}
+
+.notifications .toast.hide {
+    animation: hide-toast .5s ease forwards;
+}
+
+@keyframes hide-toast {
+    0% {transform: translateX(-10%);}
+    40% {transform: translateX(0%);}
+    80% {transform: translateX(-5%);}
+    100% {transform: translateX(calc(100% + 20px));}
+}
+
+.toast::before{
+    position: absolute;
+    content: '';
+    height: 3px;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    animation: progress 5s linear forwards;
+}
+
+.toast::after {
+    content: '';
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background-color: green;
+    animation: progress 5s linear forwards;
+    animation-delay: -1s;
+}
+
+@keyframes progress {
+    100% {width: 0;}
+}
+
+.toast.success::before,
+.toast.success::after,
+.btn#success{
+    background: var(--success);
+}
+
+.toast.error::before,
+.toast.error::after,
+.btn#error{
+    background: var(--error);
+}
+
+.toast.warning::before,
+.toast.warning::after,
+.btn#warning{
+    background: var(--warning);
+}
+
+.toast.info::before,
+.toast.info::after,
+.btn#info{
+    background: var(--info);
+}
+
+.toast .column i {
+    font-size: 1.75rem;
+}
+
+.toast.success .column i {
+    color: var(--success);
+}
+
+.toast.error .column i {
+    color: var(--error);
+}
+
+.toast.warning .column i {
+    color: var(--warning);
+}
+
+.toast.info .column i {
+    color: var(--info);
+}
+
+.toast .column span {
+    font-size: 1.07rem;
+    margin-left: 12px;
+}
+
+.toast i:last-child {
+    color: #aeb0d7;
+    cursor: pointer;
+}
+
+.toast i:last-child:hover {
+    color: var(--dark);
+}
+
+.buttons .btn {
+    border: none;
+    outline: none;
+    color: var(--dark);
+    cursor: pointer;
+    margin: 0 10px;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border-radius: 6px;
+    box-shadow: 0 10px 10px rgba(0, 110, 255, 0.3);
+    transition: all .3s ease-in-out;
+}
+
+.buttons .btn:hover {
+    scale: 1.1;
+}
+
+.buttons .btn:active {
+    transform: scale(.96);
+}

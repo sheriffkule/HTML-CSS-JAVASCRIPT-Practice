@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animated Toast Notification</title>
+  <link rel="stylesheet" href="/clickEffect_style/clickEffect11.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <ul class="notifications"></ul>
+  <div class="buttons">
+    <button class="btn" id="success">Success</button>
+    <button class="btn" id="error">Error</button>
+    <button class="btn" id="warning">Warning</button>
+    <button class="btn" id="info">Info</button>
+  </div>
+
+  <script>
+    let $ = document;
+
+    const notifications = $.querySelector('.notifications');
+    const buttons = $.querySelectorAll('.btn');
+
+    const toastDetails = {
+      timer: 5000,
+      success:{
+        icon:'fa-circle-check',
+        text:'Success: This is a success toast.'
+      },
+      error:{
+        icon:'fa-circle-xmark',
+        text:'Error: This is a error toast.',
+      },
+      warning:{
+        icon:'fa-circle-exclamation',
+        text:'Warning: This is a warning toast.',
+      },
+      info:{
+        icon:'fa-circle-info',
+        text:'Info: This is a info toast.',
+      }
+    }
+
+    const removeToast =  (toast) => {
+      toast.classList.add('hide');
+      if(toast.timeoutId) clearTimeout(toast.timeoutId);
+      setTimeout(() => toast.remove(), 500);
+    }
+
+    const createToast = (id) => {
+      const{icon, text} = toastDetails[id];
+      const toast = $.createElement('li');
+      toast.className = `toast ${id}`
+      toast.innerHTML = `<div class='column'>
+        <i class='fa-solid ${icon}'</i>
+          <span>${text}</span>
+          </div>`
+          notifications.appendChild(toast);
+          toast.timeoutId = setTimeout(() =>
+            removeToast(toast), toastDetails.timer);
+    }
+
+    buttons.forEach(btn => btn.addEventListener('click', () => createToast(btn.id)));
+  </script>
+</body>
+
+</html>
