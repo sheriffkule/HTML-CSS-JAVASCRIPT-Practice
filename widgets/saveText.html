@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Save Text App</title>
+  <link rel="stylesheet" href="/widgets_style/saveText.css">
+</head>
+
+<body>
+  <section>
+    <h1>Save Text App</h1>
+    <div class="wrapper">
+      <textarea placeholder="Type something..." required></textarea>
+      <div class="file-options">
+        <div class="option file-name">
+          <label>File Name</label>
+          <input type="text" placeholder="Enter file name">
+        </div>
+        <div class="option save-as">
+          <label>Save As</label>
+          <div class="select-menu">
+            <select>
+              <option value="text/plain">Text File (.txt)</option>
+              <option value="text/javascript">JS File (.js)</option>
+              <option value="text/html">HTML File (.html)</option>
+              <option value="text/css">CSS File (.css)</option>
+              <option value="image/svg+xml">SVG File (.svg)</option>
+              <option value="application/msword">DocFile (.doc)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <button class="save-btn">Save as Text File</button>
+    </div>
+    <h4>Made by &copy; SheriffKule from XXIII Century</h4>
+  </section>
+
+  <script>
+    const textarea = document.querySelector('textarea');
+    const fileNameInput = document.querySelector('.file-name input');
+    const selectMenu = document.querySelector('.select-menu select');
+    const saveBtn = document.querySelector('.save-btn');
+
+    selectMenu.addEventListener('change', () => {
+      let selectedOption = selectMenu.options[selectMenu.selectedIndex].text;
+      saveBtn.innerHTML = 'Save As ${selectedOption.split("")[0] File';
+    })
+
+    saveBtn.addEventListener('click', () => {
+      const blob = new Blob([textarea.value], { type: selectMenu.value });
+      const fileUrl = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.download = fileNameInput.value;
+      link.href = fileUrl;
+      link.click();
+      window.URL.revokeObjectURL(fileUrl);
+    });
+  </script>
+</body>
+
+</html>

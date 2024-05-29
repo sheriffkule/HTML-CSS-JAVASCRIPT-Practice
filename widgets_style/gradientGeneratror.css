@@ -13,9 +13,16 @@ body {
     background: #333;
 }
 
+section {
+    min-height: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 h1 {
-    text-align: center;
-    margin-top: 180px;
+    margin-bottom: 100px;
     color: #c0c0c0;
     font-size: 40px;
     text-shadow: 0 10px 20px rgba(192, 192, 192, 0.3);
@@ -25,10 +32,6 @@ h1 {
     background: radial-gradient(#c0c0c0, #333F48);
     width: 375px;
     padding: 50px 30px;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
-    position: absolute;
     border-radius: 12px;
     box-shadow: 0 20px 25px rgba(0, 0, 0, 0.25),
         0 50px 25px rgba(0, 0, 0, 0.2);
@@ -112,6 +115,7 @@ input[type="color" i]::-webkit-color-swatch {
 .output {
     background: #bbb;
     border-radius: 14px;
+    display: flex;
 }
 
 #code {
@@ -129,7 +133,7 @@ input[type="color" i]::-webkit-color-swatch {
     font-weight: 600;
     background-color: transparent;
     color: #d63838;
-    position: absolute;
+    /* position: relative; */
     left: 84%;
     top: 74%;
     padding: 3px;
@@ -143,10 +147,8 @@ input[type="color" i]::-webkit-color-swatch {
 }
 
 h4 {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
+    margin-top: 100px;
+    color: silver;
 }
 
 @media screen and (max-width:480px) {

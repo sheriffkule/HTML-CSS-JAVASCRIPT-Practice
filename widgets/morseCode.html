@@ -9,77 +9,79 @@
 </head>
 
 <body>
-  <div class="container">
-    <h1>Morse Code Translator</h1>
-    <label for="input">Enter Text or Morse Code:</label>
-    <textarea name="Translator" id="input" rows="4"></textarea>
-    <div class="btn-container">
-      <button id="copy">Copy</button>
-      <button id="translate">Translate</button>
+  <section>
+    <div class="container">
+      <h1>Morse Code Translator</h1>
+      <label for="input">Enter Text or Morse Code:</label>
+      <textarea name="Translator" id="input" rows="4"></textarea>
+      <div class="btn-container">
+        <button id="copy">Copy</button>
+        <button id="translate">Translate</button>
+      </div>
+      <label for="output">Output:</label>
+      <textarea id="output"></textarea>
     </div>
-    <label for="output">Output:</label>
-    <textarea id="output"></textarea>
-  </div>
-  <h4>Made by &copy; SheriffKule from XXIII Century</h4>
-    <script>
-      const morseCode = {
-        A: ".-", B: "-...", C: "-.-.", D: "-..", E: ".", F: "..-.", G: "--.", H: "....", I: "..", J: ".---", K: "-.-", L: ".-..", M: "--", N: "-.", O: "---", P: ".--.", Q: "--.-", R: ".-.", S: "...", T: "-", U: "..-", V: "...-", W: ".--", X: "-..-", Y: "-.--", Z: "--..", 0: "-----", 1: ".----", 2: "..---", 3: "...--", 4: "....-", 5: ".....", 6: "-....", 7: "--...", 8: "---..", 9: "----.", ".": ".-.-.-", ",": "--..--", "?": "..--..", "'": ".----.", "!": "-.-.--", "/": "-..-.", "(": "-.--.", ")": "-.--.-", "&": ".-...", ":": "---...", ";": "-.-.-.", "=": "-...-", "+": ".-.-.", "-": "-....-", _: "..--.-", '"': ".-..-.", $: "...-..-", "@": ".--.-.", " ": "/",
-      }; //Morse Code Dictionary
+    <h4>Made by &copy; SheriffKule from XXIII Century</h4>
+  </section>
+  <script>
+    const morseCode = {
+      A: ".-", B: "-...", C: "-.-.", D: "-..", E: ".", F: "..-.", G: "--.", H: "....", I: "..", J: ".---", K: "-.-", L: ".-..", M: "--", N: "-.", O: "---", P: ".--.", Q: "--.-", R: ".-.", S: "...", T: "-", U: "..-", V: "...-", W: ".--", X: "-..-", Y: "-.--", Z: "--..", 0: "-----", 1: ".----", 2: "..---", 3: "...--", 4: "....-", 5: ".....", 6: "-....", 7: "--...", 8: "---..", 9: "----.", ".": ".-.-.-", ",": "--..--", "?": "..--..", "'": ".----.", "!": "-.-.--", "/": "-..-.", "(": "-.--.", ")": "-.--.-", "&": ".-...", ":": "---...", ";": "-.-.-.", "=": "-...-", "+": ".-.-.", "-": "-....-", _: "..--.-", '"': ".-..-.", $: "...-..-", "@": ".--.-.", " ": "/",
+    }; //Morse Code Dictionary
 
-      const reverseMorseCode = {};
-      for (const key in morseCode) {
-        if (morseCode.hasOwnProperty(key)) {
-          const value = morseCode[key];
-          reverseMorseCode[value] = key;
-        }
+    const reverseMorseCode = {};
+    for (const key in morseCode) {
+      if (morseCode.hasOwnProperty(key)) {
+        const value = morseCode[key];
+        reverseMorseCode[value] = key;
+      }
+    }
+
+    const inputField = document.getElementById('input');
+    const translateButton = document.getElementById('translate');
+    const outputField = document.getElementById('output');
+
+    translateButton.addEventListener('click', () => {
+      const inputText = inputField.value.trim().toUpperCase();
+      if (inputField === '') {
+        outputField.textContent = 'No input Provided';
+        return;
       }
 
-      const inputField = document.getElementById('input');
-      const translateButton = document.getElementById('translate');
-      const outputField = document.getElementById('output');
-
-      translateButton.addEventListener('click', () => {
-        const inputText = inputField.value.trim().toUpperCase();
-        if (inputField === '') {
-          outputField.textContent = 'No input Provided';
-          return;
-        }
-
-        if (inputText.includes('.')) {
-          const morseWords = inputText.split('/');
-          const translateWords = morseWords.map(morseWord => {
-            const morseChars = morseWord.split('');
-            return morseChars.map((morseChar) => {
-              return reverseMorseCode[morseChar] || morseChar;
-            }).join('');
+      if (inputText.includes('.')) {
+        const morseWords = inputText.split('/');
+        const translateWords = morseWords.map(morseWord => {
+          const morseChars = morseWord.split('');
+          return morseChars.map((morseChar) => {
+            return reverseMorseCode[morseChar] || morseChar;
+          }).join('');
+        });
+        outputField.textContent = translateWords.join('');
+      } else {
+        const words = inputText.split('');
+        const translateWords = words.map((word) => {
+          const chars = word.split('');
+          const morseChars = chars.map((char) => {
+            return morseCode[char] || char;
           });
-          outputField.textContent = translateWords.join('');
-        } else {
-          const words = inputText.split('');
-          const translateWords = words.map((word) => {
-            const chars = word.split('');
-            const morseChars = chars.map((char) => {
-              return morseCode[char] || char;
-            });
-            return morseChars.join('');
-          });
-          outputField.textContent = translateWords.join('/')
-        }
-      });
+          return morseChars.join('');
+        });
+        outputField.textContent = translateWords.join('/')
+      }
+    });
 
-      const copyButton = document.getElementById('copy');
-      document.getElementById('copy').addEventListener('click', function () {
-        outputField.select();
-        document.execCommand('copy');
-        copyButton.innerText = 'Copied!';
-        copyButton.style.background = '#03c03c';
+    const copyButton = document.getElementById('copy');
+    document.getElementById('copy').addEventListener('click', function () {
+      outputField.select();
+      document.execCommand('copy');
+      copyButton.innerText = 'Copied!';
+      copyButton.style.background = '#03c03c';
 
-        setTimeout(() => {
-          copyButton.style.background = '';
-          copyButton.innerText = 'Copy';
-        }, 2000);
-      });
-    </script>
+      setTimeout(() => {
+        copyButton.style.background = '';
+        copyButton.innerText = 'Copy';
+      }, 2000);
+    });
+  </script>
 
 </body>
 

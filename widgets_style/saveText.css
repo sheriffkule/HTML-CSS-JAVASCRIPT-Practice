@@ -1,0 +1,118 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #292c42, #5882ad);
+}
+
+section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+section h1 {
+    font-size: 36px;
+    color: #fff;
+    margin-bottom: 100px;
+}
+
+.wrapper {
+    width: 450px;
+    border-radius: 8px;
+    background-color: #ccc;
+    padding: 30px 25px 40px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+.wrapper :where(textarea, input, select, button) {
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius: 6px;
+    font-size: 17px;
+}
+
+.wrapper textarea {
+    font-family: Arial;
+    height: 270px;
+    resize: none;
+    border: 1px solid grey;
+    padding: 8px 14px;
+}
+
+.wrapper textarea::placeholder,
+input::placeholder {
+    transition: .4s;
+}
+
+.wrapper textarea:focus::placeholder,
+input:focus::placeholder {
+    transform: translateY(-30px);
+}
+
+.wrapper .file-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    gap: 6px;
+}
+
+.file-options .option {
+    width: 100%;
+}
+
+.option :where(input, .select-menu) {
+    height: 50px;
+    border: 1px solid #afafaf;
+    border-radius: 6px;
+    padding: 0 15px;
+    margin-top: 10px;
+    box-shadow: 0 0 8px  rgba(0, 0, 0, 0.2);
+}
+
+.option input:focus,
+.wrapper textarea:focus,
+.wrapper .select-menu:active {
+    border: 1px solid #303664;
+    box-shadow: 0 0 10px rgba(29, 33, 59, 0.5);
+}
+
+.option .select-menu select {
+    height: 50px;
+    background: none;
+}
+
+.wrapper .save-btn {
+    margin-top: 20px;
+    padding: 16px 0;
+    cursor: pointer;
+    background: #303664;
+    color: #fff;
+    opacity: .6;
+    pointer-events: none;
+    transition: .3s ease-in-out;
+}
+
+.save-btn:hover {
+    background: #101c5e;
+    transform: translateY(-4px);
+    box-shadow: 0 0 10px rgba(29, 33, 59, 0.5),
+    inset 120px 0 0 #303664,
+    inset -120px 0 0 #303664;
+}
+
+.wrapper textarea:valid ~ .save-btn{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+section h4 {
+    margin-top: 100px;
+}

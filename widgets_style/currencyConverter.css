@@ -7,18 +7,22 @@
 }
 
 body {
-    min-height: 100vh;
     background: linear-gradient(45deg, #292c42, #6699cc);
 }
 
+section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .wrapper {
+    margin-top: 100px;
     width: 90%;
     max-width: 25em;
     background: linear-gradient(45deg, #292c42, #6699cc);
-    position: absolute;
-    transform: translate(-50%, -50%);
-    left: 50%;
-    top: 50%;
     padding: 2em;
     border-radius: 14px;
     box-shadow: 10px 10px 12px rgba(54, 54, 54, 0.5);
@@ -115,8 +119,5 @@ button:hover {
 }
 
 h4 {
-    position: absolute;
-    left: 50%;
-    bottom: 10px;
-    transform: translateX(-50%);
+    margin-top: 100px;
 }

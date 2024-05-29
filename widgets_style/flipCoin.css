@@ -8,25 +8,28 @@
 }
 
 body {
-    height: 100vh;
+    min-height: 100vh;
     background: radial-gradient(circle at top left, #f8bf03, #110a0a);
 }
 
+section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 h1 {
-    text-align: center;
-    position: relative;
-    top: 150px;
     text-shadow: 0 6px 12px #f8bf03;
+    margin-bottom: 50px;
+    font-size: 2em;
 }
 
 .container {
-    position: absolute;
     background: radial-gradient(circle at top left, #f8bf03 20%, #110a0a) ;
     padding: 50px;
     width: 400px;
-    top:50%;
-    left: 50%;
-    transform: translate( -50%, -50% );
     box-shadow: 15px 30px 35px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     -webkit-perspective: 300px;
@@ -134,8 +137,6 @@ button {
 }
 
 h4 {
-    position: absolute;
-    bottom: 10px;
-    left: 40%;
+    margin-top: 100px;
     color: silver;
 }

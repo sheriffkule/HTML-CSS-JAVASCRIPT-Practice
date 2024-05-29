@@ -80,8 +80,6 @@ button:active {
 }
 
 h4 {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
+    margin-top: 100px;
+    text-align: center;
 }

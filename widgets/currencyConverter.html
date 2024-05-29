@@ -9,28 +9,29 @@
 </head>
 
 <body>
-  <div class="wrapper">
-    <div class="app-details">
-      <div>
-        <ion-icon name="cash-outline"></ion-icon>
-        <ion-icon name="logo-usd"></ion-icon>
-        <ion-icon name="logo-yen"></ion-icon>
-        <ion-icon name="logo-euro"></ion-icon>
-        <ion-icon name="cash-outline"></ion-icon>
+  <section>
+    <div class="wrapper">
+      <div class="app-details">
+        <div>
+          <ion-icon name="cash-outline"></ion-icon>
+          <ion-icon name="logo-usd"></ion-icon>
+          <ion-icon name="logo-yen"></ion-icon>
+          <ion-icon name="logo-euro"></ion-icon>
+          <ion-icon name="cash-outline"></ion-icon>
+        </div>
+        <h1 class="app-title">Currency Converter</h1>
       </div>
-      <h1 class="app-title">Currency Converter</h1>
+      <label for="amount">Amount:</label>
+      <input type="number" id="amount" value="100">
+      <div class="dropdowns">
+        <select id="from-currency-select"></select>
+        <select id="to-currency-select"></select>
+      </div>
+      <button id="convert-button">Convert</button>
+      <p id="result"></p>
     </div>
-    <label for="amount">Amount:</label>
-    <input type="number" id="amount" value="100">
-    <div class="dropdowns">
-      <select id="from-currency-select"></select>
-      <select id="to-currency-select"></select>
-    </div>
-    <button id="convert-button">Convert</button>
-    <p id="result"></p>
-  </div>
-
-  <h4>Made by &copy; SheriffKule</h4>
+    <h4>Made by &copy; SheriffKule from XXIII Century</h4>
+  </section>
 
   <script>
     let apiKey = "f892e276175a55c14a0e4b71";
@@ -64,16 +65,16 @@
 
       if (amount.length != 0) {
         fetch(api)
-        .then((resp) => resp.json())
-        .then((data) => {
-        let fromExchangeRate = data.conversion_rates[fromCurrency];
-        let toExchangeRate = data.conversion_rates[toCurrency];
-        const convertedAmount = (amount / fromExchangeRate) *  toExchangeRate;
-        result.innerHTML = `${amount} ${fromCurrency} = ${convertedAmount.toFixed(2)} ${toCurrency}`;
-      });
+          .then((resp) => resp.json())
+          .then((data) => {
+            let fromExchangeRate = data.conversion_rates[fromCurrency];
+            let toExchangeRate = data.conversion_rates[toCurrency];
+            const convertedAmount = (amount / fromExchangeRate) * toExchangeRate;
+            result.innerHTML = `${amount} ${fromCurrency} = ${convertedAmount.toFixed(2)} ${toCurrency}`;
+          });
       } else {
-      alert('Please enter an amount');
-    }
+        alert('Please enter an amount');
+      }
     };
 
     document.querySelector('#convert-button').addEventListener('click', convertCurrency);

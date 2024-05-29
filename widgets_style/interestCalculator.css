@@ -9,19 +9,22 @@ body {
     background: linear-gradient(135deg, #008641, #60d697);
 }
 
+section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
 h1 {
-    text-align: center;
-    padding-top: 100px;
+    margin-bottom: 50px;
     font-size: 40px;
     color: #222;
 }
 
 .container {
     background: transparent;
-    position: absolute;
-    transform: translate(-50%,-50%);
-    top: 50%;
-    left: 50%;
     width: 80vw;
     max-width: 600px;
     min-width: 350px;
@@ -126,8 +129,6 @@ button:active {
 }
 
 h4 {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translate(-50%);
+    margin-top: 100px;
+    opacity: .8;
 }

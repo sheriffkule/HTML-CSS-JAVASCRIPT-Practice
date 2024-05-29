@@ -9,19 +9,20 @@
 </head>
 
 <body>
-  <h1>Number to Roman Number Converter</h1>
-  <div class="container">
-    <div class="input-wrapper">
-      <input type="number" id="input" placeholder="Enter a number...">
-      <button type="submit" id="submit">Convert</button>
+  <section>
+    <h1>Number to Roman Number Converter</h1>
+    <div class="container">
+      <div class="input-wrapper">
+        <input type="number" id="input" placeholder="Enter a number...">
+        <button type="submit" id="submit">Convert</button>
+      </div>
+      <p id="output">
+        <span>Enter The Number & Hit Convert</span>
+      </p>
+      <p id="error"></p>
     </div>
-    <p id="output">
-      <span>Enter The Number & Hit Convert</span>
-    </p>
-    <p id="error"></p>
-  </div>
-  <h3>Made by &copy; SheriffKule</h3>
-
+    <h3>Made by &copy; SheriffKule</h3>
+  </section>
   <script>
     let input = document.getElementById('input');
     let button = document.getElementById('submit');
@@ -29,7 +30,7 @@
     let output = document.getElementById('output');
 
     const romanObject = {
-      M: 1000, CM: 900, D: 500, CD: 400, C: 100, XC: 90, L: 50, XL: 40, XXX: 30, XX:20, X: 10, IX: 9, V: 5, IV: 4, I: 1
+      M: 1000, CM: 900, D: 500, CD: 400, C: 100, XC: 90, L: 50, XL: 40, XXX: 30, XX: 20, X: 10, IX: 9, V: 5, IV: 4, I: 1
     };
 
     button.addEventListener('click', () => {
@@ -40,12 +41,12 @@
     function inputToRoman(num) {
       let number = parseInt(num);
 
-      if(num.trim().length == 0) {
+      if (num.trim().length == 0) {
         errorMessage.innerHTML = 'Please Enter a Number';
         output.innerHTML = '';
         return false;
       }
-      if(number > 4999 || number < 1) {
+      if (number > 4999 || number < 1) {
         errorMessage.innerHTML = 'Input Out of Range';
         return false;
       }
@@ -55,7 +56,7 @@
       let result = '';
       let romanValues = Object.keys(romanObject);
       romanValues.forEach((key) => {
-        while(romanObject[key] <= number) {
+        while (romanObject[key] <= number) {
           number -= romanObject[key];
           result += key;
         }

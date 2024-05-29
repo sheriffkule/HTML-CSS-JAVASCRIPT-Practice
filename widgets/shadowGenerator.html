@@ -9,53 +9,55 @@
 </head>
 
 <body>
-  <h1>Shadow Generator</h1>
-  <div class="container">
-    <div class="result">
-      <div id="preview"></div>
-    </div>
-    <div class="settings">
-      <div class="range-wrapper">
-        <label for="x-shadow">Horizontal Shadow: </label>
-        <input type="range" id="x-shadow" min="-300" max="300" value="6" />
+  <section>
+    <h1>Shadow Generator</h1>
+    <div class="container">
+      <div class="result">
+        <div id="preview"></div>
       </div>
-      <div class="range-wrapper">
-        <label for="y-shadow">Vertical Shadow: </label>
-        <input type="range" id="y-shadow" min="-150" max="150" value="12" />
+      <div class="settings">
+        <div class="range-wrapper">
+          <label for="x-shadow">Horizontal Shadow: </label>
+          <input type="range" id="x-shadow" min="-300" max="300" value="6" />
+        </div>
+        <div class="range-wrapper">
+          <label for="y-shadow">Vertical Shadow: </label>
+          <input type="range" id="y-shadow" min="-150" max="150" value="12" />
+        </div>
+        <div class="range-wrapper">
+          <label for="blur-r">Blur Radius: </label>
+          <input type="range" id="blur-r" min="0" max="100" value="10" />
+        </div>
+        <div class="range-wrapper">
+          <label for="spread-r">Spread Radius: </label>
+          <input type="range" id="spread-r" min="-100" max="100" value="0" />
+        </div>
+        <div class="range-wrapper">
+          <label for="border-r">Border radius: </label>
+          <input type="range" id="border-r" min="0" max="100" step="1" value="100" />
+        </div>
+        <div class="range-wrapper">
+          <label for="shadow-opacity">Shadow Opacity: </label>
+          <input type="range" id="shadow-opacity" min="0" max="1" step="0.01" value="0.5" />
+        </div>
+        <div class="input-wrapper">
+          <label for="inset-shadow">Inset Shadow: </label>
+          <input type="checkbox" id="inset-shadow" />
+        </div>
+        <div class="color-wrapper">
+          <label for="shadow-color">Shadow Color: </label>
+          <input type="color" id="shadow-color" />
+        </div>
       </div>
-      <div class="range-wrapper">
-        <label for="blur-r">Blur Radius: </label>
-        <input type="range" id="blur-r" min="0" max="100" value="10" />
-      </div>
-      <div class="range-wrapper">
-        <label for="spread-r">Spread Radius: </label>
-        <input type="range" id="spread-r" min="-100" max="100" value="0" />
-      </div>
-      <div class="range-wrapper">
-        <label for="border-r">Border radius: </label>
-        <input type="range" id="border-r" min="0" max="100" step="1" value="100" />
-      </div>
-      <div class="range-wrapper">
-        <label for="shadow-opacity">Shadow Opacity: </label>
-        <input type="range" id="shadow-opacity" min="0" max="1" step="0.01" value="0.5" />
-      </div>
-      <div class="input-wrapper">
-        <label for="inset-shadow">Inset Shadow: </label>
-        <input type="checkbox" id="inset-shadow" />
-      </div>
-      <div class="color-wrapper">
-        <label for="shadow-color">Shadow Color: </label>
-        <input type="color" id="shadow-color" />
+
+      <div class="code-container">
+        <textarea id="styles" rows="2"></textarea>
+        <button id="copy-styles" onclick="copyStyles()">Copy</button>
       </div>
     </div>
 
-    <div class="code-container">
-      <textarea id="styles" rows="2"></textarea>
-      <button id="copy-styles" onclick="copyStyles()">Copy</button>
-    </div>
-  </div>
-
-  <h4>Made by &copy; SheriffKule</h4>
+    <h4>Made by &copy; SheriffKule</h4>
+  </section>
 
   <script>
     const preview = document.getElementById('preview');
@@ -90,7 +92,7 @@
       const r = parseInt(shadowColor.substr(1, 2), 16);
       const g = parseInt(shadowColor.substr(3, 2), 16);
       const b = parseInt(shadowColor.substr(5, 2), 16);
-      return `rgba(${r},${g},${b},${shadowOpacity })`;
+      return `rgba(${r},${g},${b},${shadowOpacity})`;
     };
 
     function copyStyles() {

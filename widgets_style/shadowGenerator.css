@@ -6,23 +6,27 @@
 
 body {
     background: linear-gradient(#921b2b, #490d15);
+}
+
+section {
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 label {
     font-size: 14px;
 }
+
 h1 {
-    text-align: center;
-    margin-top: 50px;
+    margin-bottom: 50px;
+    font-size: 2rem;
 }
 
 .container {
     background: silver;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
     padding: 30px;
     width: 70%;
     border-radius: 25px;
@@ -115,8 +119,5 @@ input[type="color"] {
 }
 
 h4 {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
+    margin-top: 100px;
 }

@@ -15,9 +15,16 @@ body {
     background-size:  50px 50px;
 }
 
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
 h1 {
     color: #e0e0e0;
-    text-align: center;
     padding-top: 20px;
     font-size: 36px;
 }
@@ -26,11 +33,7 @@ h1 {
     width: 45%;
     min-width: 550px;
     padding: 30px;
-    position: absolute;
-    transform: translate(-50%, -50%);
     background: rgba(190, 190, 190, 0.8);
-    top: 50%;
-    left: 50%;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
 }
@@ -129,8 +132,5 @@ button:active {
 
 h4 {
     color: #ccc;
-    position: absolute;
-    bottom: 6px;
-    left: 50%;
-    transform: translateX(-60%);
+    margin-top: 100px;
 }
