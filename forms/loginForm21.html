@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animated Login and Registration Form</title>
+  <link rel="stylesheet" href="/forms_style/loginForm21.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="form signup">
+      <h2>Sign Up</h2>
+      <div class="inputBox">
+        <input type="text" required><i class="fa-regular fa-user"></i>
+        <span>Username</span>
+      </div>
+      <div class="inputBox">
+        <input type="text" required><i class="fa-regular fa-envelope"></i>
+        <span>Email Address</span>
+      </div>
+      <div class="inputBox">
+        <input type="password" required><i class="fa-solid fa-lock"></i>
+        <span>Password</span>
+      </div>
+      <div class="inputBox">
+        <input type="password" required><i class="fa-solid fa-lock"></i>
+        <span>Confirm Password</span>
+      </div>
+      <div class="inputBox">
+        <input type="submit" value="Create Account">
+      </div>
+      <p>Already a member? <a href="#" class="login">Log In</a></p>
+    </div>
+
+    <div class="form signin">
+      <h2>Sign In</h2>
+      <div class="inputBox">
+        <input type="text" required><i class="fa-regular fa-user"></i>
+        <span>Username</span>
+      </div>
+      <div class="inputBox">
+        <input type="password" required><i class="fa-solid fa-lock"></i>
+        <span>Password</span>
+      </div>
+      <div class="inputBox">
+        <input type="submit" value="Log In">
+      </div>
+      <p>Not Registered? <a href="#" class="create">Create an Account</a></p>
+    </div>
+  </div>
+
+  <script>
+    let login = document.querySelector('.login');
+    let create = document.querySelector('.create');
+    let container = document.querySelector('.container');
+
+    login.onclick = function() {
+      container.classList.add('signinForm');
+    }
+
+    create.onclick = function() {
+      container.classList.remove('signinForm');
+    }
+  </script>
+</body>
+
+</html>
