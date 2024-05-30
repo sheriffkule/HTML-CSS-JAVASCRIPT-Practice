@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Swiping Effect</title>
+  <link rel="stylesheet" href="/imageEffect_style/imageHoverEffect25.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+
+<body>
+  <section>
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <h2>Blondy</h2>
+          <h3><span>10</span> / 10</h3>
+        </div>
+        <div class="swiper-slide">
+          <h2>Tuco</h2>
+          <h3><span>8.1</span> / 10</h3>
+        </div>
+        <div class="swiper-slide">
+          <h2>Angel Eyes</h2>
+          <h3><span>8</span> / 10</h3>
+        </div>
+        <div class="swiper-slide">
+          <h2>Matrix</h2>
+          <h3><span>9.5</span> / 10</h3>
+        </div>
+        <div class="swiper-slide">
+          <h2>Darkhex</h2>
+          <h3><span>7.9</span> / 10</h3>
+        </div>
+        <div class="swiper-slide">
+          <h2>Aurora</h2>
+          <h3><span>7.6</span> / 10</h3>
+        </div>
+        <div class="swiper-slide">
+          <h2>Dreamy World</h2>
+          <h3><span>7.4</span> / 10</h3>
+        </div>
+        <div class="swiper-slide">
+          <h2>City Scape</h2>
+          <h3><span>7.3</span> / 10</h3>
+        </div>
+        <div class="swiper-slide">
+          <h2>Tiled Stones</h2>
+          <h3><span>7.0</span> / 10</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    let swiper = new Swiper('.swiper', {
+      effect: 'cards',
+      grabcursor: true,
+      initialSlide: 0,
+      speed: 500,
+      rotate: true,
+      mousewheel: {
+        invert:false,
+      }
+    })
+  </script>
+</body>
+
+</html>

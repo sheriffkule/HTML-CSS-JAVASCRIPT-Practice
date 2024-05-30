@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+section {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at center, #293432, #110101);
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.swiper {
+    width: 600px;
+    height: 400px;
+    padding: 50px 0;
+}
+
+.swiper-slide {
+    position: relative;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+}
+
+.swiper-slide h3 {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 8px 12px;
+    margin: 0 20px 20px 20px;
+    border-radius: 20px;
+    font-size: .8rem;
+    font-weight: 800;
+    word-spacing: -1px;
+    background: #fff;
+    box-shadow: inset 2px -2px 2px #bfbfbf,
+        inset 3px -3px 3px #808080;
+}
+
+.swiper-slide h3 span {
+    font-size: 1.1rem;
+    color: #1a24b9;
+    font-weight: 900;
+}
+
+.swiper-slide h2 {
+    position: absolute;
+    width: 50%;
+    bottom: 0;
+    left: 0;
+    color: #fff;
+    font-size: 1.4rem;
+    margin: 0 0 20px 20px;
+}
+
+.swiper-slide:nth-child(1) {
+    background: linear-gradient(to top, #0f2027, #203a4300, #2c536400), url(/images/clint.jpeg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.swiper-slide:nth-child(2) {
+    background: linear-gradient(to top, #0f2027, #203a4300, #2c536400), url(/images/tuco-01.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.swiper-slide:nth-child(3) {
+    background: linear-gradient(to top, #0f2027, #203a4300, #2c536400), url(/images/Angel-Eyes.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.swiper-slide:nth-child(4) {
+    background: linear-gradient(to top, #0f2027, #203a4300, #2c536400), url(/images/matrix.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.swiper-slide:nth-child(5) {
+    background: linear-gradient(to top, #0f2027, #203a4300, #2c536400), url(/images/darkhex.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.swiper-slide:nth-child(6) {
+    background: linear-gradient(to top, #0f2027, #203a4300, #2c536400), url(/images/Aurora.jpeg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.swiper-slide:nth-child(7) {
+    background: linear-gradient(to top, #0f2027, #203a4300, #2c536400), url(/images/dreamy-world.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.swiper-slide:nth-child(8) {
+    background: linear-gradient(to top, #0f2027, #203a4300, #2c536400), url(/images/cityscape.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.swiper-slide:nth-child(9) {
+    background: linear-gradient(to top, #0f2027, #203a4300, #2c536400), url(/images/tiled-stones.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
