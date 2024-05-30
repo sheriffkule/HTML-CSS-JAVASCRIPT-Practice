@@ -1,0 +1,104 @@
+:root {
+    --body-color: #303030;
+    --text-color: #ccc;
+    --loading-font-size: 2rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: grid;
+    place-items:  center;
+    background: var(--body-color);
+    overflow: hidden;
+}
+
+.loading{
+    color: var(--text-color);
+    font-size: var(--loading-font-size);
+}
+
+.loading__dots {
+    display: inline-flex;
+    gap: .25rem;
+}
+
+.loading_dot {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    background: var(--text-color);
+    border-radius: 50%;
+}
+
+.loading_dot:nth-child(1) {
+    position: absolute;
+    transform: scale(0);
+}
+
+.loading_dot:nth-child(4) {
+    background: transparent;
+}
+
+.loading_dot_down {
+    display: block;
+    width: 8px;
+    height: 8px;
+    background: var(--text-color);
+    border-radius: 50%;
+    transform: translate(0);
+}
+
+.animate .loading_dot:nth-child(1) {
+    animation: scale-dot .8s .2s forwards;
+}
+
+.animate .loading_dot:nth-child(2),
+.animate .loading_dot:nth-child(3) {
+    animation: move-right .6s forwards;
+}
+
+.animate .loading_dot_down {
+    animation: move-right-down .8s .2s forwards linear,
+    move-down 2.8s .3s forwards ease-in;
+}
+
+@keyframes scale-dot {
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes move-right {
+    100% {
+        transform: translateX(.75rem);
+    }
+}
+
+@keyframes move-right-down {
+    50% {
+        transform: translate(1.5rem, .25rem);
+    }
+
+    100% {
+        transform: translate(2rem, .5rem);
+    }
+}
+
+@keyframes move-down {
+    0% {
+        box-shadow: 0 0 20px #0f0;
+    }
+    50% {
+        scale: 2;
+        box-shadow: 0 0 50px #0f0;
+    }
+    100% {
+        transform: translate(10rem, 80vh);
+    }
+}

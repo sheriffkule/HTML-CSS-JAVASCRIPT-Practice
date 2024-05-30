@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading Animated Dots</title>
+  <link rel="stylesheet" href="/loaders_style/loader26.css">
+</head>
+
+<body>
+  <h1 class="loading">Loading
+    <div class="loading__dots">
+      <span class="loading_dot"></span>
+      <span class="loading_dot"></span>
+      <span class="loading_dot"></span>
+      <span class="loading_dot">
+        <span class="loading_dot_down"></span>
+      </span>
+    </div>
+  </h1>
+
+  <script>
+    const dots = document.querySelector('.loading__dots');
+    const addAnimate = () => {
+      dots.classList.add('animate');
+      setTimeout(() => {
+        dots.classList.remove('animate');
+
+        setTimeout(() => {
+          addAnimate();
+        }, 100);
+      }, 2600);
+    };
+    addAnimate();
+  </script>
+</body>
+
+</html>
