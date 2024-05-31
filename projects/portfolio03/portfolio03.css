@@ -1,0 +1,152 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+:root {
+    --bgColor: #333333;
+    --textWhite:  #fff;
+}
+
+.white-mode {
+    --bgColor:  #fff;
+    --textWhite: #080e1c;
+}
+
+.hero {
+    min-height: 100vh;
+    background-color: var(--bgColor);
+    width: 100%;
+    overflow: hidden;
+}
+
+header nav {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10px;
+    box-shadow: 0 6px 6px  rgba(255, 255, 255, 0.2);
+}
+
+header nav .logo {
+    color: var(--textWhite);
+    font-size: 35px;
+    font-weight: 700;
+}
+
+nav .logo span {
+    color: #1088ff;
+}
+
+nav .nav-links a {
+    color: var(--textWhite);
+    margin: 0 20px;
+    transition: .3s ease;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+nav .nav-links a:hover {
+    color: #1088ff;
+    font-weight: 900;
+}
+
+nav .site-mode {
+    color: var(--textWhite);
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.hero .content {
+    width: 90%;
+    min-height: 90vh;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero .content .text {
+    padding-top: 50px;
+    max-width: 600px;
+}
+
+.content .image img {
+    max-width: 600px;
+    border-radius: 68% 32% 41% 59% / 39% 55% 45% 61%;
+}
+
+.content .text h4 {
+    color: var(--textWhite);
+}
+
+.content .text h2 {
+    color: var(--textWhite);
+    font-size: 50px;
+    margin: 15px 0 10px;
+}
+
+.content .text span {
+    color: #1088ff;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.content .text p {
+    color: var(--textWhite);
+    line-height: 1.8;
+    margin: 20px 0 30px;
+}
+
+.content .text .btn {
+    color: var(--textWhite);
+    background: #1088ff;
+    padding: 10px 24px;
+    border-radius: 10px;
+    transition: .4s ease-in-out;
+}
+
+.content .text .btn:hover {
+    top: -6px;
+    box-shadow: 0 0 12px #1088ff;
+}
+
+.content .social {
+    position: absolute;
+    right: 10px;
+    top: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.content .social a i {
+    font-size: 25px;
+    color: #1088ff;
+    transition: all .3s ease-in;
+}
+
+.content .social a:hover i {
+    transform: scale(1.4);
+    text-shadow: 0 0 10px #1088ff;
+    color: #0f0;
+}
+
+@media (max-width:800px) {
+    .content {
+        flex-direction: column-reverse;
+        overflow: auto;
+    }
+
+    .hero .content .text {
+        padding-top: 0px;
+    }
+
+    .content .image img {
+        width: 300px;
+    }
+}
