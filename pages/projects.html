@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="shortcut icon" href="/icons/favicon.png" type="image/x-icon">
+  <title>Navigation Bars</title>
+  <link rel="stylesheet" href="/pages_style/pages_header.css">
+  <link rel="stylesheet" href="/pages_style/projects.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+        <h2 title="Cool Logo">SheriffKule</h2>
+        <h2 title="Cool Logo">SheriffKule</h2>
+      </div>
+      <i class="bx bx-menu" id="btn"></i>
+      <ul id="nav_links" class="nav_links">
+        <li class="close_btn" id="close_btn"><i class="fa-solid fa-x"></i></li>
+        <li><a href="https://sheriffkule.vercel.app/">Home</a></li>
+        <li><a href="/pages/about.html">About & Contact</a></li>
+
+        <li id="components"><a href="#">Components &#9662;</a>
+          <div id="drop-items">
+            <a href="/pages/background.html">Background</a>
+            <a href="/pages/box.html">Box</a>
+            <a href="/pages/button.html">Button</a>
+            <a href="/pages/clickEffect.html">Click Effect</a>
+            <a href="/pages/form.html">Form</a>
+            <a href="/pages/imageEffect.html">Image Effect</a>
+            <a href="/pages/loader.html">Loader</a>
+            <a href="/pages/menu.html">Menu</a>
+            <a href="/pages/navbar.html">Navbar</a>
+            <a href="/pages/text.html">Text</a>
+            <a href="/pages/widget.html">Widget</a>
+          </div>
+        </li>
+        <li><a href="/pages/projects.html">Projects</a></li>
+      </ul>
+    </nav>
+    <div class="neon">
+      <img src="/images/matrix.jpg">
+      <span class="gradient"></span>
+      <span class="spotlight"></span>
+    </div>
+    <div class="donation"><a href="https://www.buymeacoffee.com/sheriffkule"><img src="/images/coffee.png"
+          alt="Buy Me a Coffee" title="Buy Me a Coffee"></a>
+      <a href="https://www.patreon.com/SheriffKule"><img src="/images/patreon.png" alt="patreon"
+          title="Support me on Patreon"></a>
+      <a href="https://paypal.me/sheriffkule?country.x=RS&locale.x=en_US"><img src="/images/paypal.png" alt="paypal"
+          title="PayPal"></a>
+    </div>
+  </header>
+  <section>
+    <div class="sidebar">
+      <div class="logo-content">
+        <div class="logo">
+          <i class='bx bx-code-alt'></i>
+          <h3><span>Sheriff</span>Kule</h3>
+        </div>
+      </div>
+
+      <ul class="list">
+        <li class=" list-item">
+          <a href="/index.html">
+            <i class='bx bx-home'></i>
+            <span class="links-name">Home</span>
+          </a>
+          <span class="tooltip">Home</span>
+        </li>
+        <li class=" list-item">
+          <a href="/pages/about.html">
+            <i class="bx bx-user"></i>
+            <span class="links-name">About & Contact</span>
+          </a>
+          <span class="tooltip">About</span>
+        </li>
+        <li class="list-item">
+          <a class="dropdown">
+            <i class="bx bx-cog"></i>
+            <span class="links-name toggle">Components &#9662;</span>
+            <span class="tooltip">Components</span>
+            <div class="navigation">
+              <ul>
+                <a href="/pages/background.html">Background</a>
+                <a href="/pages/box.html">Box</a>
+                <a href="/pages/button.html">Button</a>
+                <a href="/pages/clickEffect.html">Click Effect</a>
+                <a href="/pages/form.html">Form</a>
+                <a href="/pages/imageEffect.html">Image Effect</a>
+                <a href="/pages/loader.html">Loader</a>
+                <a href="/pages/menu.html">Menu</a>
+                <a href="/pages/navbar.html">Navbar</a>
+                <a href="/pages/text.html">Text</a>
+                <a href="/pages/widget.html">Widget</a>
+              </ul>
+            </div>
+          </a>
+        </li>
+        <li class=" list-item active">
+          <a href="/pages/projects.html">
+            <i class='bx bx-desktop'></i>
+            <span class="links-name">Projects</span>
+          </a>
+          <span class="tooltip">Projects</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <main>
+    <section class="content">
+      <h2>Examples of Webpages</h2>
+    </section>
+
+    <section class="examples">
+      <div class="container">
+        <div class="card">
+          <div class="box">
+            <a href="/projects/portfolio03/portfolio03.html">
+              <img src="/thumb/portfolio3.jpg" alt="portfolio" title="Personal Portfolio" />
+            </a>
+            <h3>Responsive Personal Portfolio with Dark and Light Mode</h3>
+            <a href="#">Visit Page</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="box">
+            <a href="/projects/portfolio02/portfolio02.html">
+              <img src="/thumb/portfolio2.jpg" alt="portfolio" title="Portfolio Webpage">
+            </a>
+            <h3>Responsive Personal Webpage</h3>
+            <a href="#">Visit Page</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="box">
+            <a href="/projects/poftfolio01/portfolio01.html">
+              <img src="/thumb/portfolio1.png" alt="portfolio" title="Portfolio Website"></a>
+            <h3>Responsive Personal Portfolio Landing Page</h3>
+            <a href="#">Visit Page</a>
+          </div>
+        </div>
+
+
+      </div>
+    </section>
+
+  </main>
+  <footer>
+    <p>Copyright &copy; SheriffKule from XXIII Century</p>
+  </footer>
+  <script>
+    let btn = document.querySelector('#btn');
+    let sidebar = document.querySelector('.sidebar');
+    let listItem = document.querySelectorAll('.list-item');
+
+    btn.onclick = function () {
+      sidebar.classList.toggle('active');
+    }
+
+    function activeLink() {
+      listItem.forEach(item =>
+        item.classList.remove('active'));
+      this.classList.add('active');
+    }
+
+    listItem.forEach(item =>
+      item.onclick = activeLink);
+
+    const navigation = document.querySelector('.navigation');
+
+    document.querySelector('.toggle').onclick = function () {
+      this.classList.toggle('dropMenu');
+      navigation.classList.toggle('dropMenu')
+    };
+
+    document.body.addEventListener('click', function (e) {
+      if (e.target !== document.querySelector('.toggle') && e.target !== document.querySelector('.navigation') && document.querySelector('.toggle').classList.contains('dropMenu')) {
+        document.querySelector('.toggle').classList.remove('dropMenu');
+        document.querySelector('.navigation').classList.remove('dropMenu');
+      }
+    });
+  </script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
