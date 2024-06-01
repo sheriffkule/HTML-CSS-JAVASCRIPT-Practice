@@ -1,0 +1,180 @@
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: Arial;
+    overflow: scroll;
+}
+
+#container {
+    transition: all 1s ease-in-out;
+}
+
+#container.menuopen {
+    filter: blur(8px);
+    transform: scale(1.2);
+}
+
+section {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+    position: relative;
+    background-size: cover;
+    padding: 50px;
+}
+
+section::after {
+    content: '';
+    position: absolute;
+    background-color: #000;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: .5;
+}
+
+section h1 {
+    font-size: 100px;
+    z-index: 2;
+}
+
+header {
+    z-index: 999;
+    position: relative;
+}
+
+header #logo {
+    position: fixed;
+    top: 30px;
+    left: 0;
+    right: 0;
+    width: 70px;
+    height: 70px;
+    border-radius: 40px;
+    margin: 0 auto;
+    opacity: 1;
+    transition: all .3s cubic-bezier(0.215, 0.610, 0.355, 1) .6s;
+}
+
+header nav {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 100px;
+    left: 0;
+    right: 0;
+    width: 420px;
+    z-index: 100;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, .2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, .1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, .4);
+    transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1) .6s;
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    padding: 10px 16px;
+    font-size: 18px;
+    letter-spacing: 2px;
+    transition: all .3s cubic-bezier(0.075, 0.82, 0.165, 1) .6s, .3s color ease;
+}
+
+header nav a:hover {
+    color: #0097fb;
+}
+
+header nav button {
+    background: rgba(255, 255, 255, .1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, .1);
+    width: 60px;
+    height: 60px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, .4);
+    position: absolute;
+    z-index: 100;
+    inset: 0;
+    margin: auto;
+    border-radius: 100%;
+    cursor: pointer;
+    transform: scale(0);
+    transition: all .3x cubic-bezier(0.075, 0.82, 0.165, 1) .2s;
+}
+
+header nav button span {
+    width: 50%;
+    background: #fff;
+    height: 3px;
+    display: block;
+    margin: 4px auto;
+    transform: scale(0);
+    transition: all .6s cubic-bezier(0.075, 0.82, 0.165, 1) 0s, .3s margin ease-in;
+}
+
+header nav button:hover span {
+    margin: 12px auto;
+}
+
+header.sticty #logo {
+    opacity: 0;
+}
+
+header.sticky nav {
+    top: 20px;
+    padding: 0;
+    width: 80px;
+    height: 80px;
+}
+
+header.sticky nav button {
+    transform: scale(1);
+    transition-delay: .3ss;
+}
+
+header.sticky nav button span {
+    transform: scaleX(1);
+    transition: .6s transform cubic-bezier(0.075, 0.82, 0.165, 1) .8s, .3s margin ease-in;
+}
+
+header.sticky nav a {
+    opacity: 0;
+    transform: scale(.3);
+    transition-delay: .1s;
+}
+
+@media screen and (max-width: 520px) {
+    header nav {
+        height: 60px;
+        width: 390px;
+    }
+
+    header nav button {
+        width: 50px;
+        height: 50px;
+    }
+
+    header nav a {
+        font-size: 16px;
+    }
+
+    section h1 {
+        font-size: 70px;
+    }
+
+    header.sticky nav {
+        width: 70px;
+        height: 70px;
+        top: 30px;
+    }
+}

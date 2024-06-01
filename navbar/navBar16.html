@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Awesome Animated Navbar</title>
+  <link rel="stylesheet" href="/navbar_style/navBar16.css">
+</head>
+
+<body>
+  <header>
+    <img src="/images/tuco-01.jpg" id="logo">
+    <nav>
+      <a href="#main">Main</a>
+      <a href="#profile">Profile</a>
+      <a href="#social">Social</a>
+      <a href="#about">About</a>
+      <button id="menu">
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <div id="container">
+    <section id="main" style="background-image: url(/images/matrix.jpg);">
+      <h1>SheriffKule</h1>
+    </section>
+    <section id="profile" style="background-image: url(/images/darkhex.jpg);">
+      <h1>Profile</h1>
+    </section>
+    <section id="social" style="background-image: url(/images/dreamy-world.jpg);">
+      <h1>Social</h1>
+    </section>
+    <section id="about" style="background-image: url(/images/tiled-stones.jpg);">
+      <h1>About</h1>
+    </section>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const header = document.querySelector('header');
+      const container = document.getElementById('container');
+      const menuButton = document.getElementById('menu');
+      const links = document.querySelectorAll('a[href^="#"]');
+
+      function handleScroll() {
+        container.classList.remove('menuopen');
+        header.classList.toggle('sticky', window.scrollY >= 100);
+      }
+
+      function handleMenuButtonClick() {
+        header.classList.remove('sticky');
+        container.classList.toggle('menuopen');
+      }
+
+      function handleLinkClick(event) {
+        event.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth'
+          });
+        }
+      }
+      function handleCloseOutside(event){
+        if(!menuButton.contains(event.target)){
+          container.classList.remove('menuopen');
+          header.classList.add('sticky');
+        }
+      }
+      window.addEventListener('scroll', handleScroll);
+      menuButton.addEventListener('click',  handleMenuButtonClick);
+      links.forEach(link => link.addEventListener('click', handleLinkClick));
+
+      document.addEventListener('click', handleCloseOutside);
+    })
+  </script>
+</body>
+
+</html>
