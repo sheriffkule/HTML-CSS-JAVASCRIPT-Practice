@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Hamburger Menu</title>
+  <link rel="stylesheet" href="/menus_style/menu21.css">
+</head>
+
+<body>
+  <div class="container">
+    <img src="/icons/menu.png" id="menuIcon" alt="menu">
+  </div>
+  <div class="menu-box" id="menuBox">
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Portfolio</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+<script>
+  let menuBox = document.getElementById('menuBox');
+  let menuIcon = document.getElementById('menuIcon');
+
+  menuIcon.addEventListener('click', () => {
+    menuBox.classList.toggle('open-menu');
+
+    if(menuBox.classList.contains( 'open-menu' )){
+      menuIcon.src = '/icons/close.png';
+    }else{
+      menuIcon.src = '/icons/menu.png';
+    }
+  })
+</script>
+</body>
+
+</html>
