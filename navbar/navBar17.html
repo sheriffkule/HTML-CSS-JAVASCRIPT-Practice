@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Navigation Menu</title>
+    <link rel="stylesheet" href="/navbar_style/navBar17.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css"
+      integrity="sha512-OQDNdI5rpnZ0BRhhJc+btbbtnxaj+LdQFeh0V9/igiEPDiWE2fG+ZsXl0JEH+bjXKPJ3zcXqNyP4/F/NegVdZg=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+      <div class="menu">
+        <div class="toggle-btn"> <i class="ri-menu-line"></i> </div>
+        <div class="profile-img">
+          <img src="/images/clint.jpeg" alt="profile" title="Profile">
+        </div>
+        <div class="username">SheriffKule</div>
+        <div class="links">
+          <ul>
+            <li><a class="active" href="#home"><i class="ri-home-8-line"></i> Home</a></li>
+            <li><a href="#about"><i class="ri-information-2-line"></i> About</a></li>
+            <li><a href="#projects"><i class="ri-list-check"></i>Projects</a></li>
+            <li><a href="#settings"><i class="ri-settings-line"></i> Settings</a></li>
+            <li><a href="#contact"><i class="ri-contacts-book-fill"></i> Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <main>
+        <section id="home" style="--i:#10253d;"><h1>Home</h1></section>
+        <section id="about" style="--i:#382F2D;"><h1>About</h1></section>
+        <section id="projects" style="--i:#1D252D;"><h1>Projects</h1></section>
+        <section id="settings" style="--i:#286140;"><h1>Settings</h1></section>
+        <section id="contact" style="--i:#1F2A44;"><h1>Contacts</h1></section>
+    </main>
+
+    <script>
+      const toggleBtn = document.querySelector('.toggle-btn');
+      const menu = document.querySelector('.menu');
+      const links = document.querySelectorAll('.links a');
+
+      toggleBtn.addEventListener('click', () => {
+        toggleBtn.classList.toggle('open');
+        menu.classList.toggle('open');
+
+        const isOpen = toggleBtn.classList.contains('open');
+        toggleBtn.innerHTML = isOpen ? '<i class="ri-close-line"></i>' : '<i class="ri-menu-line"></i>';
+      });
+
+      links.forEach(link => {
+        link.addEventListener('click', () => {
+          links.forEach(link =>  link.classList.remove('active'));
+          link.classList.add('active');
+          menuClose();
+        });
+      });
+
+      function menuClose() {
+        menu.classList.remove('open');
+        toggleBtn.classList.remove('open');
+      }
+    </script>
+</body>
+</html>
