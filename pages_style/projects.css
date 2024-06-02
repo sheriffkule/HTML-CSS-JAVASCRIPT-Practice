@@ -453,6 +453,24 @@ main {
     text-align: center;
 }
 
+.container .card .box h3 i {
+    color: #0f0;
+    margin-left: 6px;
+    animation: thumbanimate 10s linear infinite;
+}
+
+@keyframes thumbanimate {
+    0%, 100% {
+        color: #0f0;
+        text-shadow: 0 0 20px #0f0;
+    }
+
+    50% {
+        color: #a6ff00;
+        text-shadow: 0 0 0px #0f0;
+    }
+}
+
 .container .card .box a {
     display: inline-block;
     padding: 8px 20px;

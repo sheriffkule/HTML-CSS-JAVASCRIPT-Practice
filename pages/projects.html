@@ -121,6 +121,16 @@
       <div class="container">
         <div class="card">
           <div class="box">
+            <a href="/projects/cactusWebsite/cactusWebsite.html">
+              <img src="/thumb/cactusWebsite.jpg" alt="picture" title="Architecture Website" />
+            </a>
+            <h3>Responsive Cactus Website <i class='bx bxs-like'></i>
+            </h3>
+            <a href="#">Visit Page</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="box">
             <a href="/projects/architectureWebsite/architectureWebsite.html">
               <img src="/thumb/architectureWebsite.jpg" alt="picture" title="Architecture Website" />
             </a>
@@ -163,6 +173,7 @@
   <footer>
     <p>Copyright &copy; SheriffKule from XXIII Century</p>
   </footer>
+  <script src="/scripts/scrollreveal.min.js"></script>
   <script>
     let btn = document.querySelector('#btn');
     let sidebar = document.querySelector('.sidebar');
@@ -194,6 +205,15 @@
         document.querySelector('.navigation').classList.remove('dropMenu');
       }
     });
+
+    const sr = ScrollReveal({
+        origin: 'top',
+        distance: '80px',
+        duration: 2500,
+        delay: 300,
+      });
+
+      sr.reveal('.container')
   </script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
