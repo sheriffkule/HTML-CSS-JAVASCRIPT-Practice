@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Portfolio Website</title>
+  <link rel="stylesheet" href="/projects/portfolio04/portfolio04.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="logo"><span>Sheriff</span>Kule</div>
+      <div class="menu">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="banner">
+      <div class="side1">
+        <h1>I'm Web Developer <span>SheriffKule</span></h1>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente earum error porro consequuntur
+          perspiciatis ratione temporibus nostrum nihil odit placeat.</p>
+        <button>Learn More</button>
+      </div>
+      <div class="side2">
+        <img src="/images/clint.jpeg" alt="image" title="SheriffKule">
+      </div>
+    </div>
+  </header>
+
+  <div id="about" class="about section-padding">
+    <div class="about-content">
+      <div class="about-img"><img src="/images/tuco-01.jpg" alt="image" title="Tuco"></div>
+      <div class="about-text">
+        <h2><span>Professional </span>Web Development</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum similique corrupti beatae vitae ut.
+          Cupiditate, aut earum? Autem, in molestias!</p>
+        <a href="#">Learn More</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="section" class="services section-padding">
+    <div class="section-header">
+      <h2>Our <span> Services</span></h2>
+      <p>Lorem ipsum dolor sit amet.</p>
+    </div>
+    <div class="services-content">
+      <div class="single-service">
+        <div class="icon-area">
+          <i class="fa fa-laptop"></i>
+        </div>
+        <h2>Web Design</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae molestias a optio mollitia reprehenderit
+          dicta.</p>
+        <a href="#">Learn More</a>
+      </div>
+      <div class="single-service">
+        <div class="icon-area">
+          <i class="fa fa-umbrella"></i>
+        </div>
+        <h2>UX / UI Design</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae molestias a optio mollitia reprehenderit
+          dicta.</p>
+        <a href="#">Learn More</a>
+      </div>
+      <div class="single-service">
+        <div class="icon-area">
+          <i class="fa fa-newspaper"></i>
+        </div>
+        <h2>Graphical Design</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae molestias a optio mollitia reprehenderit
+          dicta.</p>
+        <a href="#">Learn More</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="contact" class="contact section-padding">
+    <div class="section-header">
+      <h2>Contact <span> Us</span></h2>
+      <p>Lorem ipsum dolor sit amet.</p>
+    </div>
+    <div class="contact-content">
+      <div class="single-contact">
+        <label for="">Your Name</label>
+        <input type="text" placeholder="Enter Your Name..." required>
+        <label for="">Your Email</label>
+        <input type="email" placeholder="Enter Your Email..." required>
+        <label for="">Your Question</label>
+        <textarea cols="20" rows="4" placeholder="Enter Your Question..."></textarea>
+        <a href="#">Send Now</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="section-padding">
+    <div class="socials">
+      <a href="#" title="Linkedin"><i class="fa-brands fa-linkedin" style="--i:#0077b5;"></i></a>
+      <a href="#" title="Github"><i class="fa-brands fa-github" style="--i:#333;"></i></a>
+      <a href="#" title="Facebook"><i class="fa-brands fa-facebook" style="--i:#1877f2"></i></a>
+      <a href="#" title="Twitter"><i class="fa-brands fa-twitter" style="--i:#1da1f2;"></i></a>
+      <a href="#" title="Instagram"><i class="fa-brands fa-instagram" style="--i:#e1306c;"></i></a>
+    </div>
+    <p>Made by &copy; SheriffKule</p>
+  </footer>
+
+  <button onclick="scrollToTop()" id="scrollToTopBtn" title="Go To Top">&#9650;</button>
+
+  <script src="/scripts/scrollreveal.min.js"></script>
+  <script src="/scripts/vanilla-tilt.min.js"></script>
+  <script src="/projects/portfolio04/portfolio04.js"></script>
+</body>
+
+</html>
