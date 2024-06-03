@@ -47,21 +47,8 @@
     </div>
   </section>
 
-  <script>
-    let section = document.querySelector('section');
-    let mode = document.querySelector('.site-mode');
-
-    mode.addEventListener('click', () => {
-      section.style.transition = '.5s';
-      if(mode.classList.contains( 'fa-sun')) {
-        section.classList.add('white-mode');
-        mode.classList.replace('fa-sun', 'fa-moon');
-      }else {
-        section.classList.remove('white-mode');
-        mode.classList.replace('fa-moon', 'fa-sun');
-      }
-    })
-  </script>
+  <script type="text/javascript" src="/scripts/scrollreveal.min.js"></script>
+  <script type="text/javascript" src="/projects/portfolio03/portfolio03.js"></script>
 </body>
 
 </html>
