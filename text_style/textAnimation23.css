@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 600vh;
+    background: linear-gradient(45deg, #02312c, #428585);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.box {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 40px;
+    column-count: 2;
+    column-rule-style: groove;
+}
+
+h2 {
+    color: #fff;
+    font-size: 2.5em;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+p span {
+    position: relative;
+    color: #000;
+    font-size: 1.4em;
+    transition: .25s;
+}
+
+p span.active {
+    color: #0f0;
+}

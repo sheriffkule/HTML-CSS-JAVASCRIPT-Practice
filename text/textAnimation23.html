@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Text Scroll Animation</title>
+  <link rel="stylesheet" href="/text_style/textAnimation23.css">
+</head>
+
+<body>
+  <article class="box">
+    <h2>Scroll Down to See the Magic!</h2>
+    <p class="text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta explicabo sequi saepe iure. Doloremque corrupti officia commodi harum inventore. Facilis, inventore cupiditate dignissimos in sunt perspiciatis doloremque tempore adipisci corrupti. Possimus vel, debitis in eveniet aliquam iste est ab nesciunt cupiditate, voluptatibus culpa. Voluptatibus aliquam rem, eaque exercitationem harum dignissimos, officiis dolore eligendi pariatur excepturi numquam quisquam quasi sapiente culpa explicabo! Maiores omnis non quae possimus, corrupti quis doloribus praesentium, assumenda cupiditate repellendus similique ullam laborum vero sapiente a repudiandae aut, in recusandae quo itaque facilis incidunt repellat! Accusantium nihil nostrum laudantium quod nobis numquam culpa exercitationem explicabo in quisquam?</p>
+  </article>
+
+  <script>
+    let textElement = document.querySelector('.text');
+    let textContent = textElement.textContent;
+    textElement.innerHTML = '';
+
+    for(let char of textContent) {
+      let span = document.createElement('span');
+      span.textContent = char;
+      textElement.appendChild(span);
+    }
+
+    let spans = textElement.querySelectorAll('span');
+    window.addEventListener('scroll', () => {
+      let scrollDistance = window.scrollY;
+      spans.forEach((span, index) => {
+        if(scrollDistance >= (index + 1) * 5) {
+          span.classList.add('active');
+        } else {
+          span.classList.remove('active');
+        }
+      })
+    })
+  </script>
+</body>
+
+</html>
