@@ -1,0 +1,115 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(45deg, #023a34, #1b3131);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+ul {
+    position: relative;
+    transform: skewY(-15deg);
+}
+
+ul li {
+    position: relative;
+    list-style: none;
+    width: 200px;
+    padding: 15px;
+    background: var(--clr);
+    z-index: calc(var(--i) * 1);
+    transition: .5s;
+}
+
+ul li:hover {
+    filter: saturate(1.5);
+    transform: translate(40px, 40px);
+}
+
+ul li::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -40px;
+    width: 40px;
+    height: 100%;
+    background: var(--clr);
+    transform-origin: right;
+    transform: skewY(45deg);
+    filter: brightness(.7);
+    transition: .5s ease;
+}
+
+ul li:hover::before {
+    filter: saturate(1.5);
+}
+
+ul li::after {
+    content: attr(data-text);
+    position: absolute;
+    top: -40px;
+    left: 0;
+    width: calc(100% - 20px);
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 20px;
+    color: rgba(0, 0, 0, .5);
+    font-weight: 600;
+    font-size: 1.5em;
+    background: var(--clr);
+    filter: brightness(.9);
+    transform-origin: bottom;
+    transform: skewX(45deg);
+    transition: .5s;
+}
+
+ul li:hover::after {
+    filter: brightness(1.2);
+}
+
+ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: block;
+    letter-spacing: 1px;
+    transition: .5s;
+}
+
+ul li:hover a {
+    color: #fff;
+}
+
+ul li:last-child:after {
+    box-shadow: -120px 120px 20px rgba(0, 0, 0, .25);
+}
+
+ul li a span {
+    position: absolute;
+    top: 0;
+    left: -40px;
+    width: 40px;
+    height: 100%;
+    transform-origin: right;
+    transform: skewY(45deg);
+    transition: .5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1em;
+    opacity: .5;
+}
+
+ul li:hover a span {
+    opacity: 1;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .25) inset;
+}
