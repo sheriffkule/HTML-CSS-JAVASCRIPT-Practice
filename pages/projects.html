@@ -121,6 +121,16 @@
       <div class="container">
         <div class="card">
           <div class="box">
+            <a href="/projects/portfolio04/portfolio05.html">
+              <img src="/thumb/portfolio5.jpg" alt="picture" title="Personal Portfolio" />
+            </a>
+            <h3>Responsive Portfolio Website <i class='bx bxs-like'></i>
+            </h3>
+            <a href="#">Visit Page</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="box">
             <a href="/projects/portfolio04/portfolio04.html">
               <img src="/thumb/portfolio04.jpg" alt="picture" title="Personal Portfolio" />
             </a>
@@ -217,13 +227,16 @@
     });
 
     const sr = ScrollReveal({
-        origin: 'top',
-        distance: '80px',
-        duration: 2500,
-        delay: 300,
-      });
+      origin: 'top',
+      distance: '100px',
+      duration: 2000,
+      delay: 300,
+      reset: true,
+      mobile: true,
+    });
 
-      sr.reveal('.container')
+    sr.reveal('.card', {
+        interval: 200})
   </script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
