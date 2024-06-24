@@ -377,14 +377,14 @@ main {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    max-width: 1200px;
+    /* max-width: 1200px; */
     margin: 40px 0;
     gap: 30px;
 }
 
 .container .card {
     position: relative;
-    min-width: 440px;
+    min-width: 400px;
     height: 420px;
     box-shadow: inset 5px 5px 5px rgba(0, 0, 0, .2),
         inset -5px -5px 15px rgba(255, 255, 255, .1),
