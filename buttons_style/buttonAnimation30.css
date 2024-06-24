@@ -1,0 +1,127 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    background:  linear-gradient(25deg, #181818, #424254);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+ul {
+    position: relative;
+    transform: rotate(-25deg) skew(25deg);
+    display: flex;
+    transform-style: preserve-3d;
+}
+
+ul li {
+    margin: 0 20px;
+    height: 60px;
+    width: 60px;
+    position: relative;
+    list-style: none;
+}
+
+ul li::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0px;
+    width: 100%;
+    height: 10px;
+    background: #333;
+    transform: skewX(-41deg);
+    transform-origin: top;
+}
+
+ul li::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: -9px;
+    width: 9px;
+    height: 100%;
+    background: #333;
+    transform: skewY(-49deg);
+    transform-origin: bottom;
+}
+
+ul li span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex !important;
+    background: #2e2e2e;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 30px;
+    transition: 1.5s ease-out;
+    border-radius: 0% 50% 0 0;
+}
+
+ul li:hover span {
+    z-index: 10;
+    transition-delay: 1s;
+    transition: .3s;
+    color: #fff;
+    box-shadow: -2px 2px 8px rgba(0, 0, 0, .5);
+}
+
+ul li:hover span:nth-child(5) {
+    transform: translate(40px, -40px);
+    opacity: 1;
+}
+
+ul li:hover span:nth-child(4) {
+    transform: translate(30px, -30px);
+    opacity: .8;
+}
+
+ul li:hover span:nth-child(3) {
+    transform: translate(20px, -20px);
+    opacity: .6;
+}
+
+ul li:hover span:nth-child(2) {
+    transform: translate(10px, -10px);
+    opacity: 4;
+}
+
+ul li:hover span:nth-child(1) {
+    transform: translate(0px, 0px);
+    opacity: .2;
+}
+
+ul li:nth-child(1):hover span {
+    background: #4d79ff;
+}
+
+ul li:nth-child(4):hover span {
+    background: #3a53ff;
+}
+
+ul li:nth-child(5):hover span {
+    background: #ff4d88;
+}
+
+ul li:nth-child(3):hover span {
+    background: #002db3;
+}
+
+ul li:nth-child(2):hover span {
+    background: red;
+}
+
+ul li:nth-child(6):hover span {
+    background: #696758;
+}
