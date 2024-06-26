@@ -121,6 +121,16 @@
       <div class="container">
         <div class="card">
           <div class="box">
+            <a href="/projects/fruitsWebsite/fruitsWebsite.html">
+              <img src="/thumb/FruitSite.jpg" alt="picture" title="Helloween Website" />
+            </a>
+            <h3>Burger Website <i class='bx bxs-like'></i>
+            </h3>
+            <a href="/projects/fruitsWebsite/fruitsWebsite.html">Visit Page</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="box">
             <a href="/projects/halloweenWebsite/halloweenWebsite.html">
               <img src="/thumb/helloweenSite.jpg" alt="picture" title="Helloween Website" />
             </a>
@@ -231,7 +241,7 @@
 
     btn.onclick = function () {
       sidebar.classList.toggle('active');
-    }
+    };
 
     function activeLink() {
       listItem.forEach(item =>
@@ -246,7 +256,7 @@
 
     document.querySelector('.toggle').onclick = function () {
       this.classList.toggle('dropMenu');
-      navigation.classList.toggle('dropMenu')
+      navigation.classList.toggle('dropMenu');
     };
 
     document.body.addEventListener('click', function (e) {
