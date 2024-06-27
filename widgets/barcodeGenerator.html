@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barcode Generator</title>
+    <link rel="stylesheet" href="/widgets_style/barcodeGenerator.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.6/JsBarcode.all.min.js"
+        integrity="sha512-k2wo/BkbloaRU7gc/RkCekHr4IOVe10kYxJ/Q8dRPl7u3YshAQmg3WfZtIcseEk+nGBdK03fHBeLgXTxRmWCLQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Barcode Generator</h1>
+        <input type="text" id="input" placeholder="Enter your text" maxlength="30">
+        <button id="btn-barcode-generator">Generate</button>
+        <svg id="barcode"></svg>
+    </div>
+    
+    <script>
+        let input = document.getElementById('input');
+        let btn = document.getElementById('btn-barcode-generator');
+        let barcode = document.getElementById('barcode');
+
+        btn.addEventListener('click', () => {
+            JsBarcode(barcode, input.value, {
+                format: 'code128',
+                displayValue: true,
+                fontSize: 24,
+                lineColor: '#000000',
+                margin: 10,
+            });
+        });
+
+        input.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') {
+                JsBarcode(barcode, input.value);
+            }
+        });
+
+        input.value = '';
+        JsBarcode(barcode, input.value);
+        input.focus();
+        input.select();
+    </script>
+</body>
+</html>
