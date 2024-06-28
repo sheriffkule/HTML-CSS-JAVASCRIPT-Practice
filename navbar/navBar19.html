@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Glass Side Navbar</title>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="/navbar_style/navBar19.css">
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="toggle">
+      <i class="bx bx-chevron-right"></i>
+    </div>
+    <div class="profile">
+      <img src="/images/clint.jpeg" alt="profile">
+      <h3>SheriffKule</h3>
+    </div>
+    <nav>
+      <div class="title">
+        Management
+      </div>
+      <ul>
+        <li class="item active">
+          <i class="bx bxs-dashboard"><span>Dashboard</span></i>
+        </li>
+      </ul>
+      <ul>
+        <li class="item">
+          <i class="bx bxs-bar-chart-alt-2"><span>Analytics</span></i>
+        </li>
+      </ul>
+      <ul>
+        <li class="item">
+          <i class="bx bxs-wallet"><span>Wallet</span></i>
+        </li>
+      </ul>
+      <ul>
+        <li class="item">
+          <i class="bx bxs-bell"><span>Notification</span></i>
+        </li>
+      </ul>
+      <ul>
+        <li class="item">
+          <i class="bx bxs-cog"><span>Settings</span></i>
+        </li>
+      </ul>
+      <hr>
+      <div class="title">
+        Support
+      </div>
+      <ul>
+        <li class="item">
+          <i class="bx bxs-help-circle"><span>Get Help</span></i>
+        </li>
+      </ul>
+      <ul>
+        <li class="item">
+          <i class="bx bxs-message-dots"><span>Send Feedback</span></i>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+
+  <script>
+    const sidebarToggle = document.querySelector('.sidebar .toggle');
+    const sidebar = document.querySelector('.sidebar');
+
+    sidebarToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+    });
+
+    const links = document.querySelectorAll('.item');
+
+    links.forEach(link => {
+      link.addEventListener('click', () => {
+        links.forEach(link => link.classList.remove('active'));
+        link.classList.add('active');
+      });
+    });
+  </script>
+</body>
+
+</html>
