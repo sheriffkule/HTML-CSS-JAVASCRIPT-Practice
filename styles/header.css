@@ -135,18 +135,19 @@ a {
         height: 100%;
         width: 50%;
         border: 2px solid #5e5e5e;
-        transform: translateX(100%);
-        transition: .4;
+        clip-path: circle(0.0% at 100% 0);
+        transition: all .4 ease-in;
         z-index: 1;
     }
 
     .nav_links.show {
-        transform: translateX(0%);
+        clip-path: circle(141.2% at 100% 0);
     }
 
     .close_btn,
     .menu_btn {
         display: block;
+        text-align: right;
     }
 }
 

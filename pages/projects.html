@@ -20,7 +20,6 @@
       </div>
       <i class="bx bx-menu" id="btn"></i>
       <ul id="nav_links" class="nav_links">
-        <li class="close_btn" id="close_btn"><i class="fa-solid fa-x"></i></li>
         <li><a href="https://sheriffkule.vercel.app/">Home</a></li>
         <li><a href="/pages/about.html">About & Contact</a></li>
 
@@ -274,18 +273,19 @@
       }
     });
 
-    // const sr = ScrollReveal({
-    //   origin: 'top',
-    //   distance: '120px',
-    //   duration: 2000,
-    //   delay: 200,
-    //   reset: true,
-    //   mobile: true,
-    // });
+    const sr = ScrollReveal({
+      origin: 'top',
+      distance: '120px',
+      duration: 2000,
+      opacity: 0.5,
+      delay: 200,
+      reset: true,
+      mobile: true,
+    });
 
-    // sr.reveal('.card', {
-    //   interval: 200,
-    // })
+    sr.reveal('.card', {
+      interval: 200,
+    })
   </script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

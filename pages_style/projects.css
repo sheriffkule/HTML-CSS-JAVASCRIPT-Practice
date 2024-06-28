@@ -151,10 +151,11 @@ header .donation a {
 .sidebar {
     display: none;
     position: fixed;
-    top: 30px;
+    top: 50px;
     right: -20px;
-    width: 0px;
-    height: 0%;
+    width: 240px;
+    height: 90%;
+    clip-path: circle(0% at 100% 0);
     background: rgba(0, 0, 0, 0.);
     border-right: 2px solid #373940;
     padding: 6px 14px;
@@ -162,7 +163,8 @@ header .donation a {
 }
 
 .sidebar.active {
-    width: 240px;
+    clip-path: circle(141.2% at 100% 0);
+    background: rgba(50, 122, 255, 0.6);
 }
 
 .sidebar .logo-content .logo {
@@ -197,7 +199,7 @@ header .donation a {
  #btn {
     display: none;
     visibility: hidden;
-    position: absolute;
+    position: fixed;
     top: 6px;
     right: 16px;
     color: #fff;
@@ -227,6 +229,7 @@ header .donation a {
 }
 
 .sidebar ul li a {
+    position: relative;
     display: flex;
     align-items: center;
     color: #fff;
@@ -236,12 +239,8 @@ header .donation a {
     transition: all 0.3s ease-in-out;
 }
 
-.sidebar ul li a {
-    transition: all .3s ease-in-out;
-}
-
 .sidebar ul li a:hover {
-    background: #373940;
+    /* background: #373940; */
     color: lightgreen;
     transition-delay: -1s;
     box-shadow: inset 0 0 10px rgba(0, 255, 221, 0.25);
@@ -256,7 +255,7 @@ header .donation a {
 }
 
 .sidebar ul .list-item.active a {
-    background: rgba(50, 122, 255, 0.5);
+    background: rgba(50, 122, 255, 0.7);
     font-weight: bold;
     letter-spacing: 1px;
 }
@@ -294,7 +293,7 @@ header .donation a {
 .sidebar ul li .tooltip {
     position: absolute;
     top: 0;
-    right: 30px;
+    right: 400px;
     transform: translate(-50%, -50%);
     width: 110px;
     height: 35px;
@@ -308,10 +307,11 @@ header .donation a {
     opacity: 0;
 }
 
-.sidebar ul li:hover .tooltip {
+.sidebar ul li a:hover .tooltip {
     transition: .5s ease;
     top: 50%;
     opacity: 1;
+    z-index: 11;
 }
 
 .sidebar.active ul li .tooltip {
@@ -495,6 +495,10 @@ main {
     .sidebar {
         display: block;
         z-index: 1;
+    }
+
+    .list {
+        background: rgba(50, 122, 255, 0.6);
     }
     #btn {
         display: block;
