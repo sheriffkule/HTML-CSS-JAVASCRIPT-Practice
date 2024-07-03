@@ -1,0 +1,121 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: radial-gradient(ellipse at center, #293432 0%, #14181c 80%, #1a1e2e 100%);
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container div {
+    box-shadow: 0 0 1vmin 0 rgba(56, 132, 255, 0.271),
+    -0.25vmin 0.25vmin 1vmin 0 #000b;
+    background-color: #3884ff45;
+    position: absolute;
+    animation: move 3s ease-in-out infinite alternate;
+    animation-delay: calc(var(--i) * 0.1s);
+}
+
+.container div:nth-child(1) {
+    width: 70vmin;
+    height: 70vmin;
+    filter: hue-rotate(15deg);
+}
+
+.container div:nth-child(2) {
+    width: 65vmin;
+    height: 65vmin;
+    filter: hue-rotate(30deg);
+}
+
+.container div:nth-child(3) {
+    width: 60vmin;
+    height: 60vmin;
+    filter: hue-rotate(45deg);
+}
+
+.container div:nth-child(4) {
+    width: 55vmin;
+    height: 55vmin;
+    filter: hue-rotate(60deg);
+}
+
+.container div:nth-child(5) {
+    width: 50vmin;
+    height: 50vmin;
+    filter: hue-rotate(75deg);
+}
+
+.container div:nth-child(6) {
+    width: 45vmin;
+    height: 45vmin;
+    filter: hue-rotate(90deg);
+}
+
+.container div:nth-child(7) {
+    width: 40vmin;
+    height: 40vmin;
+    filter: hue-rotate(105deg);
+}
+
+.container div:nth-child(8) {
+    width: 35vmin;
+    height: 35vmin;
+    filter: hue-rotate(120deg);
+}
+
+.container div:nth-child(9) {
+    width: 30vmin;
+    height: 30vmin;
+    filter: hue-rotate(135deg);
+}
+
+.container div:nth-child(10) {
+    width: 25vmin;
+    height: 25vmin;
+    filter: hue-rotate(150deg);
+}
+
+.container div:nth-child(11) {
+    width: 20vmin;
+    height: 20vmin;
+    filter: hue-rotate(165deg);
+}
+
+.container div:nth-child(12) {
+    width: 15vmin;
+    height: 15vmin;
+    filter: hue-rotate(180deg) brightness(1.5);
+}
+
+.container div:nth-child(13) {
+    width: 10vmin;
+    height: 10vmin;
+    filter: hue-rotate(195deg) brightness(2);
+    box-shadow: 0 0 1vmin #3884ff45,
+    -0.25vmin 0.25vmin 1vmin 0 #000b,
+    0 0 6vmin 0 #fffc inset;
+}
+
+@keyframes move {
+    0% {
+        border-radius: 1%;
+        transform: rotate(180deg);
+    }
+
+    100% {
+        border-radius: 50%;
+        transform: rotate(0deg);
+    }
+}
