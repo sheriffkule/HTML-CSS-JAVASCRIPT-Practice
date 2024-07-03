@@ -1,0 +1,100 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background: #222;
+}
+
+.container input {
+    appearance: none;
+}
+
+.container .dots {
+    position: absolute;
+    bottom: 70px;
+    z-index: 10;
+    display: flex;
+    gap: 10px;
+}
+
+.container .dots label {
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    cursor: pointer;
+    border-radius: 50%;
+    opacity: .5;
+    border: 2px solid #222;
+}
+
+.container input:nth-child(1):checked ~ .dots label:nth-child(1),
+.container input:nth-child(2):checked ~ .dots label:nth-child(2),
+.container input:nth-child(3):checked ~ .dots label:nth-child(3),
+.container input:nth-child(4):checked ~ .dots label:nth-child(4),
+.container input:nth-child(5):checked ~ .dots label:nth-child(5) {
+    opacity: 1;
+}
+
+.container .slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.container .slider .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--img);
+    background-size: cover;
+    clip-path: circle(0% at 0% 50%);
+    transition: 1.5s;
+    transition-delay: 0s;
+    background-position: left;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.container .slider .slide:nth-child(even) {
+    clip-path: circle(0% at 100% 50%);
+    background-position: right;
+} 
+
+.container input:nth-child(1):checked ~ .slider .slide:nth-child(1),
+.container input:nth-child(2):checked ~ .slider .slide:nth-child(2),
+.container input:nth-child(3):checked ~ .slider .slide:nth-child(3),
+.container input:nth-child(4):checked ~ .slider .slide:nth-child(4),
+.container input:nth-child(5):checked ~ .slider .slide:nth-child(5) {
+    clip-path: circle(150% at 50% 50%);
+    transition-delay: 1s;
+    background-position: center;
+}
+
+.content {
+    position: relative;
+    padding: 50px 50px 120px 80px;
+    max-width: 500px;
+}
+
+.content h2 {
+    color: #fff;
+    font-size: 3em;
+}
+
+.content p {
+    color: #fff;
+}
