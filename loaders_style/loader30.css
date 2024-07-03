@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow: hidden;
+    background: radial-gradient(#3f414b, #010b13);
+}
+
+:root {
+    --size: 50;
+    --speed: 5;
+}
+
+.cube {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    background-image: conic-gradient(from 90deg at 97.5% 97.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 95% 95%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 92.5% 92.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 90% 90%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 87.5% 87.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 85% 85%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 82.5% 82.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 80% 80%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 77.5% 77.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 75% 75%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 72.5% 72.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 70% 70%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 67.5% 67.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 65% 65%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 62.5% 62.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 60% 60%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 57.5% 57.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 55% 55%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 52.5% 52.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 50% 50%, #ff7500 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 47.5% 47.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 45% 45%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 42.5% 42.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 40% 40%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 37.5% 37.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 35% 35%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 32.5% 32.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 30% 30%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 27.5% 27.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 25% 25%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 22.5% 22.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 20% 20%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 17.5% 17.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 15% 15%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 12.5% 12.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 10% 10%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 7.5% 7.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 5% 5%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 2.5% 2.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 0% 0%, #ff7500 0 25%, #fff0 0 100%);
+
+    background-size: 200% 200%;
+    background-position: 0% 0%;
+    background-repeat: no-repeat;
+    transform: rotateX(45deg) rotateZ(45deg) translateZ(calc(calc(var(--size) * 1vmin) / 2));
+    transform-style: preserve-3d;
+    animation: top 8s linear infinite;
+}
+
+.cube::after,
+.cube::before {
+    content: '';
+    background: conic-gradient(from 90deg at 97.5% 97.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 95% 95%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 92.5% 92.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 90% 90%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 87.5% 87.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 85% 85%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 82.5% 82.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 80% 80%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 77.5% 77.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 75% 75%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 72.5% 72.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 70% 70%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 67.5% 67.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 65% 65%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 62.5% 62.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 60% 60%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 57.5% 57.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 55% 55%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 52.5% 52.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 50% 50%, #ff7500 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 47.5% 47.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 45% 45%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 42.5% 42.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 40% 40%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 37.5% 37.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 35% 35%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 32.5% 32.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 30% 30%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 27.5% 27.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 25% 25%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 22.5% 22.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 20% 20%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 17.5% 17.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 15% 15%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 12.5% 12.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 10% 10%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 7.5% 7.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 5% 5%, #46433f 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 2.5% 2.5%, #121212 0 25%, #fff0 0 100%),
+        conic-gradient(from 90deg at 0% 0%, #ff7500 0 25%, #fff0 0 100%);
+    background-size: 200% 200%;
+    background-position: 100% 100%;
+    background-repeat: no-repeat;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: -100%;
+    transform: rotate(90deg) rotateY(-90deg);
+    transform-origin: right bottom;
+    animation: side 8s linear calc(var(--speed) * -1.52s) infinite;
+    opacity: .65;
+}
+
+.cube::after {
+    transform: rotate(90deg) rotateY(-90deg) rotateX(90deg);
+    top: -100%;
+    left: 0;
+    opacity: .5;
+}
+
+@keyframes top {
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+@keyframes side {
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+p {
+    color: orangered;
+    font-size: 6vmin;
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-45%);
+}
