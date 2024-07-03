@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creative Menu Indicator</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/menus_style/menu23.css">
+</head>
+
+<body>
+  <div class="navigation">
+    <ul>
+      <li class="list active" data-color="#f53b57">
+        <a href="#">
+          <span class="icon"><i class="fa-solid fa-house"></i></span>
+          <span class="title">Home</span>
+        </a>
+      </li>
+      <li class="list" data-color="#3c40c6">
+        <a href="#">
+          <span class="icon"><i class="fa-solid fa-user"></i></span>
+          <span class="title">Profile</span>
+        </a>
+      </li>
+      <li class="list" data-color="#05c46b">
+        <a href="#">
+          <span class="icon"><i class="fa-solid fa-message"></i></span>
+          <span class="title">Message</span>
+        </a>
+      </li>
+      <li class="list" data-color="#0fbcf9">
+        <a href="#">
+          <span class="icon"><i class="fa-solid fa-circle-question"></i></span>
+          <span class="title">Help</span>
+        </a>
+      </li>
+      <li class="list" data-color="#ffa801">
+        <a href="#">
+          <span class="icon"><i class="fa-solid fa-gear"></i></span>
+          <span class="title">Settings</span>
+        </a>
+      </li>
+      <div class="indicator"></div>
+    </ul>
+  </div>
+
+  <script>
+    let list = document.querySelectorAll('li')
+    for (let i=0; i<list.length; i++) {
+      list[i].onmouseover = function() {
+        let j = 0;
+        while (j < list.length) {
+          list[j++].className = 'list';
+        }
+        list[i].className = 'list active';
+      }
+    }
+
+    list.forEach(Element => {
+      Element.addEventListener('mouseenter', function(event) {
+        let bg = document.querySelector('body');
+        let color = event.target.getAttribute('data-color');
+        bg.style.backgroundColor = color;
+      })
+    })
+  </script>
+</body>
+
+</html>
