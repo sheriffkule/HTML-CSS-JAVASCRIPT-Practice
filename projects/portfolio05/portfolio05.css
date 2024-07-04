@@ -39,6 +39,12 @@ header {
     transition: all .5s ease;
 }
 
+.shadow-header {
+    box-shadow: 0 8px 16px hsla(343, 39%, 81%, 0.3);
+    backdrop-filter:  blur(15px);
+    opacity: .9;
+}
+
 .logo {
     color: var(--ann-color);
     font-size: 2rem;
@@ -67,7 +73,7 @@ header {
     transform: scale(1.1) rotate(-4deg);
 }
 
-.menulist a.active {
+.menulist a.active-link {
     color: var(--main-color);
     box-shadow: 0 0 10px var(--main-color);
 }
@@ -581,22 +587,30 @@ footer {
     color: var(--ann-color);
 }
 
-.scroll-top i {
+.scroll-top {
+    position: fixed;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     height: 50px;
     width: 50px;
+    bottom: -50px;
+    right: -50px;
     background: linear-gradient(135deg, #e1bac5, var(--main-color));
     color: var(--bg-color);
     border-radius: 50%;
     font-size: 30px;
-    transition: all .3s;
+    transition: all .4s;
 }
 
-.scroll-top i:hover {
+.scroll-top:hover {
     transform: scale(1.1) translate3d(0, -6px, 0);
     box-shadow: 0 0 10px var(--main-color);
+}
+
+.show-scroll {
+    bottom: 2rem;
+    right: 1rem;
 }
 
 
