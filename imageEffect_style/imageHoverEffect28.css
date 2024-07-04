@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    grid-template-columns: repeat(3, 1fr);
+    background: linear-gradient(18deg, #e37682, #a58fe9);
+    overflow: hidden;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+}
+
+.icon {
+    position: relative;
+    width: 46%;
+    height: 80%;
+    margin: auto;
+    color: #fff;
+    background: linear-gradient(-180deg, #fff, #fda3b2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .4s ease-in-out;
+}
+
+i {
+    z-index: 1;
+    font-size: 50px;
+    color: transparent;
+    background: linear-gradient(45deg, #a58fe9, #e37682);
+    background-clip: text;
+    transition: all  .4s ease-in-out;
+}
+
+.icon::before,
+.icon::after {
+    content: '';
+    position: absolute;
+    background: inherit;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    transition: all .5s ease-in-out;
+    transform-origin: center;
+}
+
+.icon::before {
+    transform: rotateZ(60deg);
+}
+
+.icon::after {
+    transform: rotateZ(-60deg);
+}
+
+.icon:hover {
+    border-radius: 50px;
+}
+
+.icon:hover i {
+    font-size: 60px;
+    filter: hue-rotate(180deg);
+    transform: rotate(360deg);
+}
+
+.wrapper:nth-child(odd) .icon:hover::before,
+.wrapper:nth-child(odd) .icon:hover::after {
+    transform: rotateZ(0);
+    border-radius: 50px;
+}
+
+.wrapper:nth-child(even) .icon:hover::before,
+.wrapper:nth-child(even) .icon:hover::after {
+    border-radius: 50px;
+}
