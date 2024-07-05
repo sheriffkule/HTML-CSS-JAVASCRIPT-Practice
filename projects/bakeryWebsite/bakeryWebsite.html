@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+  <title>Bakery Website</title>
+  <link rel="stylesheet" href="/projects/bakeryWebsite/bakeryWebsite.css">
+</head>
+
+<body>
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="#" class="nav-logo">Bakery</a>
+
+      <div class="nav-menu" id="nav-menu">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="#home" class="nav-link" style="--i: 1">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="#new" class="nav-link" style="--i: 2">News</a>
+          </li>
+          <li class="nav-item">
+            <a href="#about" class="nav-link" style="--i: 3">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a href="#favorite" class="nav-link" style="--i: 4">Favorites</a>
+          </li>
+          <li class="nav-item">
+            <a href="#visit" class="nav-link" style="--i: 5">Location</a>
+          </li>
+
+          <div class="nav-close" id="nav-close">
+            <i class="ri-close-line"></i>
+          </div>
+        </ul>
+
+        <img src="bread-4.png" alt="bread" class="nav-img-1">
+        <img src="bread-1.png" alt="bread" class="nav-img-2">
+      </div>
+
+      <div class="nav-toggle" id="nav-toggle">
+        <i class="ri-menu-line"></i>
+      </div>
+    </nav>
+  </header>
+
+  <main class="main">
+    <section class="home section" id="home">
+      <img src="home-bg.jpg" alt="home" class="home-bg">
+      <div class="home-shadow"></div>
+
+      <div class="home-container container grid">
+        <div class="home-data">
+          <h1 class="home-title">
+            Select The Best <br> Quality Breads
+          </h1>
+
+          <a href="#" class="button">Select Breads</a>
+
+          <img src="bread-1.png" alt="bread" class="home-bread">
+        </div>
+
+        <div class="home-image">
+          <img src="home-bread.png" alt="bread" class="home-img">
+        </div>
+
+        <footer class="home-footer">
+          <div class="home-location">
+            <i class="ri-map-pin-line"></i>
+            <span>AV. The Sun #321 <br> Lima, Peru</span>
+          </div>
+
+          <div class="home-social">
+            <a href="https://www.facebook.com/">
+              <i class="ri-facebook-circle-line"></i>
+            </a>
+            <a href="https://www.instagram.com/">
+              <i class="ri-instagram-line"></i>
+            </a>
+            <a href="https://www.youtube.com/">
+              <i class="ri-youtube-line"></i>
+            </a>
+          </div>
+        </footer>
+      </div>
+    </section>
+
+    <section class="new section" id="new">
+      <h2 class="section-title">New Breads</h2>
+
+      <div class="new-container container grid">
+        <div class="new-content grid">
+          <article class="new-card">
+            <div class="new-data">
+              <h2 class="new-title">Rye Bread</h2>
+              <p class="new-description">Baked with healthy, gluten-free sourdough for good nutrition.</p>
+            </div>
+
+            <img src="new-bread-1.jpg" alt="image" class="new-img">
+          </article>
+
+          <article class="new-card">
+            <div class="new-data">
+              <h2 class="new-title">Whole Grain Bread</h2>
+              <p class="new-description">Crispy and homemade prepared from organic yeast-free flour.</p>
+            </div>
+
+            <img src="new-bread-2.jpg" alt="image" class="new-img">
+          </article>
+
+          <article class="new-card">
+            <div class="new-data">
+              <h2 class="new-title">Multigrain Bread</h2>
+              <p class="new-description">Tasty and made with different natural grains from the countryside.</p>
+            </div>
+
+            <img src="new-bread-3.jpg" alt="image" class="new-img">
+          </article>
+        </div>
+
+        <a href="#" class="new-button button">See More Breads</a>
+      </div>
+    </section>
+
+    <section class="about section" id="about">
+      <div class="about-container container grid">
+        <div class="about-data">
+          <h2 class="section-title">About Us</h2>
+
+          <p class="about-description">
+            We prepare all types of bread that are made at home,
+            maintaining the tradition of using only the best
+            ingredients made with local products whenever possible.
+            We have an extensive line of freshly prepared bakery
+            and coffee products.
+          </p>
+
+          <a href="#" class="button">Know More</a>
+
+          <img src="bread-2.png" alt="bread" class="about-bread">
+        </div>
+
+        <img src="about-bread.jpg" alt="image" class="about-img">
+      </div>
+    </section>
+
+    <section class="favorite section" id="favorite">
+      <h2 class="section-title">Customer Favorites</h2>
+
+      <div class="favorite-container container grid">
+        <article class="favorite-card">
+          <img src="favorite-bread-1.png" alt="bread" class="favorite-img">
+
+          <div class="favorite-data">
+            <h2 class="favorite-title">Whole Grain</h2>
+            <span class="favorite-subtitle">Bread</span>
+            <h3 class="favorite-price">$6.00</h3>
+          </div>
+
+          <button class="favorite-button button">
+            <i class="ri-add-line"></i>
+          </button>
+        </article>
+
+        <article class="favorite-card">
+          <img src="favorite-bread-2.png" alt="bread" class="favorite-img">
+
+          <div class="favorite-data">
+            <h2 class="favorite-title">Rye</h2>
+            <span class="favorite-subtitle">Bread</span>
+            <h3 class="favorite-price">$8.00</h3>
+          </div>
+
+          <button class="favorite-button button">
+            <i class="ri-add-line"></i>
+          </button>
+        </article>
+
+        <article class="favorite-card">
+          <img src="favorite-bread-3.png" alt="bread" class="favorite-img">
+
+          <div class="favorite-data">
+            <h2 class="favorite-title">Wheat</h2>
+            <span class="favorite-subtitle">Bread</span>
+            <h3 class="favorite-price">$3.00</h3>
+          </div>
+
+          <button class="favorite-button button">
+            <i class="ri-add-line"></i>
+          </button>
+        </article>
+
+        <article class="favorite-card">
+          <img src="favorite-bread-4.png" alt="bread" class="favorite-img">
+
+          <div class="favorite-data">
+            <h2 class="favorite-title">Multigrain</h2>
+            <span class="favorite-subtitle">Bread</span>
+            <h3 class="favorite-price">$5.00</h3>
+          </div>
+
+          <button class="favorite-button button">
+            <i class="ri-add-line"></i>
+          </button>
+        </article>
+
+        <article class="favorite-card">
+          <img src="favorite-bread-5.png" alt="bread" class="favorite-img">
+
+          <div class="favorite-data">
+            <h2 class="favorite-title">Sourdough</h2>
+            <span class="favorite-subtitle">Bread</span>
+            <h3 class="favorite-price">$7.00</h3>
+          </div>
+
+          <button class="favorite-button button">
+            <i class="ri-add-line"></i>
+          </button>
+        </article>
+
+        <article class="favorite-card">
+          <img src="favorite-bread-6.png" alt="bread" class="favorite-img">
+
+          <div class="favorite-data">
+            <h2 class="favorite-title">French</h2>
+            <span class="favorite-subtitle">Bread</span>
+            <h3 class="favorite-price">$3.00</h3>
+          </div>
+
+          <button class="favorite-button button">
+            <i class="ri-add-line"></i>
+          </button>
+        </article>
+      </div>
+    </section>
+
+    <section class="visit section" id="visit">
+      <div class="visit-container">
+        <img src="visit-bg.jpg" alt="visit" class="visit-bg">
+        <div class="visit-shadow"></div>
+
+        <div class="visit-content container grid">
+          <div class="visit-data">
+            <h2 class="section-title">Visit Us</h2>
+
+            <p class="visit-description">
+              Discover the best bread, we look forward to your visit.
+            </p>
+
+            <a href="#" class="button">See Location</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container container grid">
+      <div>
+        <a href="#" class="footer-logo">Bakery</a>
+        <p class="footer-description">
+          We make the best bread <br> in the city.
+        </p>
+      </div>
+
+      <div class="footer-content grid">
+        <div>
+          <h3 class="footer-title">Address</h3>
+
+          <ul class="footer-list">
+            <li>
+              <address class="footer-info">AV. The Sun #321 <br> Lima, Peru</address>
+            </li>
+            <li>
+              <address class="footer-info">9AM - 11PM</address>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="footer-title">Contact Us</h3>
+        
+          <ul class="footer-list">
+            <li>
+              <address class="footer-info">bakery@emai.com</address>
+            </li>
+            <li>
+              <address class="footer-info">+00 987 654 321</address>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="footer-title">Follow Us</h3>
+        
+          <div class="footer-social">
+            <a href="https://www.facebook.com/">
+              <i class="ri-facebook-line"></i>
+            </a>
+            <a href="https://www.instagram.com/">
+              <i class="ri-instagram-line"></i>
+            </a>
+            <a href="https://www.youtube.com/">
+              <i class="ri-youtube-line"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <img src="bread-4.png" alt="bread" class="footer-img-1">
+      <img src="bread-3.png" alt="bread" class="footer-img-2">
+    </div>
+
+    <span class="footer-copy">Made by &copy; SheriffKule from XXIII Century</span>
+  </footer>
+
+  <a href="#" class="scrollup" id="scroll-up">
+    <i class="ri-arrow-up-line"></i>
+  </a>
+
+  <script src="/scripts/scrollreveal.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
