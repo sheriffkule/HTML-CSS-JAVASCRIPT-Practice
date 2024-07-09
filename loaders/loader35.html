@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donut Loader</title>
+    <link rel="stylesheet" href="/loaders_style/loader35.css">
+</head>
+
+<body>
+    <ul class="list">
+
+    </ul>
+
+    <script>
+        let list = document.querySelector('.list');
+
+        for (let i = 0; i <= 53; i++) {
+            let item = document.createElement('li');
+            item.style.setProperty('--i', i);
+            list.appendChild(item);
+        }
+    </script>
+</body>
+
+</html>
