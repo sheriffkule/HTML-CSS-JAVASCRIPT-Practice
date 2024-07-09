@@ -1,0 +1,191 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-image: linear-gradient(#1b2a3a 2px, transparent 2px), linear-gradient(to right, #1b2a3a 2px, transparent 2px), radial-gradient(#18262e, #222, #111, #000);
+    background-size: 50px 50px;
+}
+
+.container {
+    background: #222;
+    width: 90vmin;
+    padding: 50px 30px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 12px;
+    box-shadow: 0 25px 50px rgba(13, 41, 70, 0.2);
+}
+
+.options {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
+}
+
+button {
+    min-height: 30px;
+    min-width: 30px;
+    display: grid;
+    place-items: center;
+    border-radius: 4px;
+    border: none;
+    background-color: #c0c0c0;
+    outline: none;
+    color: #020929;
+    font-size: 16px;
+}
+
+select {
+    padding: 8px;
+    border: 1px solid #616300;
+    outline: none;
+    border-radius: 4px;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+input[type='color'] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    width: 40px;
+    height: 28px;
+    cursor: pointer;
+    border: none;
+}
+
+input[type='color']::-webkit-color-swatch {
+    border-radius: 16px;
+    box-shadow: 0 0 0 1px #fff,
+        0 0 0 2px #616300;
+}
+
+input[type='color']::-moz-color-swatch {
+    border-radius: 16px;
+    box-shadow: 0 0 0 1px #fff,
+        0 0 0 2px #616300;
+}
+
+label {
+    color: #c0c0c0;
+}
+
+#text-input {
+    padding: 20px;
+    margin-top: 10px;
+    border: 1px solid #aaa;
+    min-height: 50vh;
+    outline: none;
+    color: #fff;
+}
+
+.active {
+    background-color: #fff599;
+}
+
+.container :where(.file-options input, .file-options select, .file-options button:nth-last-child()) {
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius: 6px;
+    font-size: 17px;
+}
+
+/* .container #text-input {
+    font-family: Arial;
+    height: 270px;
+    resize: none;
+    border: 1px solid grey;
+    padding: 8px 14px;
+} */
+
+input::placeholder {
+    transition: .4s;
+}
+
+input:focus::placeholder {
+    transform: translateY(-30px);
+}
+
+.container .file-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    gap: 6px;
+}
+
+.file-options .option {
+    width: 100%;
+}
+
+.option :where( .file-options input, .select-menu) {
+    height: 50px;
+    border: 1px solid #afafaf;
+    border-radius: 6px;
+    padding: 0 15px;
+    margin-top: 10px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.file-options .option input:focus,
+.container #text-input:focus,
+.container .select-menu:active {
+    border: 1px solid #a1a1a1;
+    box-shadow: 0 0 10px #c0c0c080;
+}
+
+.file-options .option .select-menu select {
+    height: 50px;
+    background: none;
+    color: #c0c0c0;
+}
+
+.file-options .option .select-menu select:active {
+    background: #222;
+}
+
+#save-btn {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+button:last-child {
+    width: 50%;
+    margin-top: 20px;
+    height: 50px;
+    cursor: pointer;
+    font-size: 20px;
+    background: #c0c0c0;
+    color: #111;
+    font-weight: 600;
+    opacity: .6;
+    border-radius: 8px;
+    border: none;
+    letter-spacing: 2px;
+    transition: .3s ease-in-out;
+}
+
+button:last-child:hover {
+    background: #dddddd;
+    transform: translateY(-4px);
+    box-shadow: 0 0 10px #ffffff80,
+        inset 50px 0 0 #303664,
+        inset -50px 0 0 #303664;
+}

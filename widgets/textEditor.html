@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Editor</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/widgets_style/textEditor.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="options">
+      <button id="bold" class="option-button format">
+        <i class="fa-solid fa-bold"></i>
+      </button>
+      <button id="italic" class="option-button format">
+        <i class="fa-solid fa-italic"></i>
+      </button>
+      <button id="underline" class="option-button format">
+        <i class="fa-solid fa-underline"></i>
+      </button>
+      <button id="strikethrough" class="option-button format">
+        <i class="fa-solid fa-strikethrough"></i>
+      </button>
+      <button id="superscript" class="option-button script">
+        <i class="fa-solid fa-superscript"></i>
+      </button>
+      <button id="subscript" class="option-button script">
+        <i class="fa-solid fa-subscript"></i>
+      </button>
+
+      <button id="insertOrderedList" class="option-button">
+        <i class="fa-solid fa-list-ol"></i>
+      </button>
+      <button id="insertUnorderedList" class="option-button">
+        <i class="fa-solid fa-list-ul"></i>
+      </button>
+
+      <button id="undo" class="option-button">
+        <i class="fa-solid fa-undo"></i>
+      </button>
+      <button id="redo" class="option-button">
+        <i class="fa-solid fa-redo"></i>
+      </button>
+
+      <button id="createLink" class="adv-option-button">
+        <i class="fa-solid fa-link"></i>
+      </button>
+      <button id="unlink" class="option-button">
+        <i class="fa-solid fa-unlink"></i>
+      </button>
+
+      <button id="justifyLeft" class="option-button align">
+        <i class="fa-solid fa-align-left"></i>
+      </button>
+      <button id="justifyCenter" class="option-button align">
+        <i class="fa-solid fa-align-center"></i>
+      </button>
+      <button id="justifyRight" class="option-button align">
+        <i class="fa-solid fa-align-right"></i>
+      </button>
+      <button id="justifyFull" class="option-button align">
+        <i class="fa-solid fa-align-justify"></i>
+      </button>
+      <button id="indent" class="option-button spacing">
+        <i class="fa-solid fa-indent"></i>
+      </button>
+      <button id="outdent" class="option-button spacing">
+        <i class="fa-solid fa-outdent"></i>
+      </button>
+
+      <select id="formatBlock" class="adv-option-button">
+        <option value="H1">H1</option>
+        <option value="H2">H2</option>
+        <option value="H3">H3</option>
+        <option value="H4">H4</option>
+        <option value="H5">H5</option>
+        <option value="H6">H6</option>
+      </select>
+
+      <select id="fontName" class="adv-option-button"></select>
+      <select id="fontSize" class="adv-option-button"></select>
+
+      <div class="input-wrapper">
+        <input type="color" id="foreColor" class="adv-option-button" value="#c0c0c0"/>
+        <label for="foreColor">Font Color</label>
+      </div>
+      <div class="input-wrapper">
+        <input type="color" id="backColor" class="adv-option-button" value="#ffffff"/>
+        <label for="backColor">Highlight Color</label>
+      </div>
+    </div>
+    <div id="text-input" class="text-input" contenteditable="true"></div>
+
+    <div class="file-options">
+      <div class="option file-name">
+        <label>File Name</label>
+        <input type="text" placeholder="Enter file name">
+      </div>
+      <div class="option save-as">
+        <label>Save As</label>
+        <div class="select-menu">
+          <select>
+            <option value="text/plain">Text File (.txt)</option>
+            <option value="text/javascript">JS File (.js)</option>
+            <option value="text/html">HTML File (.html)</option>
+            <option value="text/css">CSS File (.css)</option>
+            <option value="image/svg+xml">SVG File (.svg)</option>
+            <option value="application/msword">DocFile (.doc)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div id="save-btn">
+      <button class="save-btn">Save as</button>
+
+    </div>
+  </div>
+
+  <script src="/widgets_script/textEditor.js"></script>
+</body>
+
+</html>
