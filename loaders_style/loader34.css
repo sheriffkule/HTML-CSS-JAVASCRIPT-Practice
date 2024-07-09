@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #1c1c1c;
+}
+
+.circle {
+    width: 22px;
+    height: 22px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    box-shadow:0 0 12px silver,
+    0 0 30px silver;
+}
+
+.ellipse-1 {
+    position: absolute;
+    width: 240px;
+    height: 240px;
+    top: 27px;
+    left: 175px;
+    transform: rotate(30deg);
+}
+
+.motion-1,
+.motion-2,
+.motion-3 {
+    offset-path: path("M 120 5 A 70 115 0 1 1 120 237 A 1 1.7 0 1 1 120 5");
+    animation: move 4s linear  infinite;
+}
+
+@keyframes move {
+    100% {
+        offset-distance:  100%;
+    }
+}
+
+.ellipse-2 {
+    position: absolute;
+    width: 240px;
+    height: 240px;
+    top: 125px;
+    left: 35px;
+    transform: rotate(-90deg);
+}
+
+.ellipse-2 .circle {
+    background-color: #ff5c5c;
+}
+
+.ellipse-3 {
+    position: absolute;
+    width: 240px;
+    height: 240px;
+    top: 190px;
+    left: 188px;
+    transform: rotate(-215deg);
+}
+
+.ellipse-3 .circle {
+    background-color: #7590ff;
+}
+
+.container {
+    position: relative;
+    top: -200px;
+    left: -20%;
+}
+
+svg {
+    position: absolute;
+}
