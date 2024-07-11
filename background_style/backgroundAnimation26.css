@@ -1,0 +1,122 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --blue: #74abea;
+    --red: #f5766b;
+    --green: #00c74c;
+    --shadow: rgba(0, 0, 0, 0.2);
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #ce749e;
+    overflow: hidden;
+}
+
+@keyframes boxMove {
+    0% {
+        transform: scale(var(--initialScale)) rotate(var(--initialAngle));
+    }
+
+    100% {
+        transform: scale(var(--endScale)) rotate(var(--endAngle));
+    }
+}
+
+.box {
+    top: calc(50% - 10vmin);
+    left: calc(50% - 10vmin);
+    width: 20vmin;
+    height: 20vmin;
+    position: absolute;
+    background-color: var(--green);
+    background-image: radial-gradient(circle at 50% 10%, var(--blue) 5%, transparent 80%),
+    radial-gradient(circle at 50% 90%, var(--red));
+    border-radius: 3vmin;
+    box-shadow: 0 0 6vmin  var(--shadow);
+    animation: boxMove 4s linear infinite;
+}
+
+.box0 {
+    --initialScale: 0.3;
+    --endScale: 1;
+    --initialAngle: 10deg;
+    --endAngle: 0deg;
+}
+
+.box1 {
+    --initialScale: 1;
+    --endScale: 1.5;
+    --initialAngle: 0deg;
+    --endAngle: 10deg;
+}
+
+.box2 {
+    --initialScale: 1.5;
+    --endScale: 2;
+    --initialAngle: -10deg;
+    --endAngle: -20deg;
+}
+
+.box3 {
+    --initialScale: 2;
+    --endScale: 3;
+    --initialAngle: -20deg;
+    --endAngle: -25deg;
+}
+
+.box4 {
+    --initialScale: 3;
+    --endScale: 4;
+    --initialAngle: -25deg;
+    --endAngle: -30deg;
+}
+
+.box5 {
+    --initialScale: 4;
+    --endScale: 5;
+    --initialAngle: -30deg;
+    --endAngle: -40deg;
+}
+
+.box6 {
+    --initialScale: 5;
+    --endScale: 6.5;
+    --initialAngle: -40deg;
+    --endAngle: -50deg;
+}
+
+.box7 {
+    --initialScale: 6.5;
+    --endScale: 8;
+    --initialAngle: -50deg;
+    --endAngle: -60deg;
+}
+
+.box8 {
+    --initialScale: 8;
+    --endScale: 8;
+    --initialAngle: -30deg;
+    --endAngle: -40deg;
+}
+
+.box9 {
+    --initialScale: 10;
+    --endScale: 14;
+    --initialAngle: -70deg;
+    --endAngle: -85deg;
+}
+
+.box10 {
+    --initialScale: 14;
+    --endScale: 20;
+    --initialAngle: -85deg;
+    --endAngle: -99deg;
+}
