@@ -1,0 +1,210 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #001b3a;
+    flex-direction: column;
+    background: linear-gradient(#001b3a 1px, transparent 1px),
+    linear-gradient(to right, #001b3a 1px,transparent 1px),
+    radial-gradient(ellipse at center, #2b2b2b 80%, #0077ff 100%);
+    background-size: 50px 50px;
+}
+
+h1 {
+    font-size: 80px;
+    color: transparent;
+    margin-bottom: 20px;
+    -webkit-text-stroke: 1px #0077ff;
+    text-shadow: 0 0 50px rgba(127, 168, 255, 0.3);
+    font-weight: 600;
+    letter-spacing: 2px;
+    background-color: transparent;
+    backdrop-filter: blur(5px);
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    padding: 10px;
+    max-width: 1050px;
+}
+
+section {
+    background: #ccc;
+    border-radius: 8px;
+}
+
+.tools-board {
+    width: 210px;
+    padding: 15px 22px 0;
+}
+
+.tools-board .row {
+    margin-bottom: 20px;
+}
+
+.row .options {
+    list-style: none;
+    margin: 10px 0 0 5px;
+}
+
+.row .options .option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    cursor: pointer;
+}
+
+.option:is(:hover, .active) i {
+    filter: invert(17%) sepia(90%) saturate(3000%) hue-rotate(900deg);
+    scale: 1.2;
+    transition: all .3s ease;
+}
+
+.option :where(span, label) {
+    color: #5a6168;
+    padding-left: 10px;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.option:is(:hover, .active) :where(span, label) {
+    color: #4a98f7;
+    font-weight: 600;
+}
+
+.option #fill-color {
+    height: 14px;
+    width: 14px;
+    cursor: pointer;
+}
+
+#fill-color:checked ~ label {
+    color: #4a98f7;
+    font-weight: 600;
+}
+
+.option #size-slider {
+    width: 100%;
+    height: 5px;
+    margin-top: 10px;
+}
+
+.colors .options {
+    display: flex;
+    justify-content: space-between;
+}
+
+.colors .option {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    margin-top: 4px;
+    position: relative;
+}
+
+.colors .option:nth-child(1) {
+    background-color: #fff;
+    border: 1px solid #777777;
+}
+
+.colors .option:nth-child(2) {
+    background-color: #000;
+}
+
+.colors .option:nth-child(3) {
+    background-color: #e02020;
+}
+
+.colors .option:nth-child(4) {
+    background-color: #6dd400;
+}
+
+.colors .option:nth-child(5) {
+    background-color: #4a98f7;
+}
+
+.colors .option.selected::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 12px;
+    width: 12px;
+    background: inherit;
+    border-radius: inherit;
+    border: 2px solid #fff;
+}
+
+.colors .option:first-child.selected::before {
+    border-color: #777;
+}
+
+.option #color-picker {
+    opacity: 0;
+    cursor: pointer;
+}
+
+.buttons button {
+    width: 100%;
+    color: #fff;
+    border: none;
+    outline: none;
+    padding-block: 12px;
+    margin-bottom: 14px;
+    background: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.buttons button:active {
+    scale: 0.98;
+}
+
+.buttons .clear-canvas {
+    color: #6c757d;
+    border: 1px solid #6c757d;
+}
+
+.clear-canvas:hover {
+    color: #fff;
+    background: #6c757d;
+}
+
+.buttons .save-img {
+    background: #0077ff;
+    border: 1px solid #0077ff;
+}
+.buttons .save-img:hover {
+    background: #4293f7;
+    box-shadow: 0 8px 8px rgba(127, 168, 255, 0.3);
+}
+
+.drawing-board {
+    flex: 1;
+    overflow: hidden;
+}
+
+.drawing-board canvas {
+    width: 100%;
+    height: 100%;
+}
+
+h4 {
+    font-weight: 300;
+    color: #4a98f7;
+    margin-top: 60px;
+    background-color: transparent;
+    backdrop-filter:  blur(10px);
+}

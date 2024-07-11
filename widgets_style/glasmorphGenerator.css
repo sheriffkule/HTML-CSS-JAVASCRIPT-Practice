@@ -142,3 +142,11 @@ input[type='color'] {
 #copy-button:active {
     scale: .96;
 }
+
+h4 {
+    font-weight: 300;
+    color: #4a98f7;
+    margin-top: 60px;
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+}
