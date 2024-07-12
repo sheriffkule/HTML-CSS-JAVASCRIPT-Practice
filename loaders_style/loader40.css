@@ -43,7 +43,7 @@ body {
     }
 
     50% {
-        transform: rotateX(30deg) translateZ(50px) translateY(-90vmin);
+        transform: rotateX(30deg) translateZ(50px) translateY(-80vmin);
         filter: hue-rotate(360deg);
     }
 }
