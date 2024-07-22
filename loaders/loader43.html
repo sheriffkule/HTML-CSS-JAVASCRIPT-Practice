@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circling Plane</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/loaders_style/loader43.css">
+</head>
+<body>
+    <div class="container">
+        <div class="plane"><i class="bi bi-airplane"></i></div>
+    </div>
+
+    <script>
+        let container = document.querySelector('.container');
+
+        for(let i = 0; i < 20; i++){
+            let span = document.createElement('span');
+            span.style.setProperty('--i', i);
+            container.appendChild(span);
+        }
+    </script>
+</body>
+</html>
