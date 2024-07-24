@@ -24,21 +24,7 @@
     <div class="box"><i class="fa-brands fa-react"></i></div>
     <div id="marker"></div>
   </div>
-  <script>
-    let marker = document.getElementById('marker');
-    let item = document.querySelectorAll('.box');
-
-    function indicator(e) {
-      marker.style.left = e.offsetLeft + 'px';
-      marker.style.top = e.offsetTop + 'px';
-    }
-
-    item.forEach(link => {
-      link.addEventListener('mousemove', (e) => {
-        indicator(e.currentTarget);
-      })
-    })
-  </script>
+  <script src="/menus_script/menu18.js"></script>
 </body>
 
 </html>

@@ -17,21 +17,7 @@
         <li><ion-icon name="chatbubble"></ion-icon></li>
     </div>
 
-    <script>
-        const list = document.querySelectorAll('li');
-        list.forEach(li => {
-            li.addEventListener('click', () => {
-                list.forEach(li => {
-                    li.classList.remove('active');
-                })
-                li.classList.toggle('active');
-            });
-        });
-        document.body.addEventListener('click', (event) => {
-            if(event.target !== event.currentTarget) return;
-            list.forEach(li => li.classList.remove('active'));
-        });
-    </script>
+    <script src="/menus_script/menu05.js"></script>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

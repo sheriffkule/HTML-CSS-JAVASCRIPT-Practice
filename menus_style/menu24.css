@@ -1,0 +1,82 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #212121;
+}
+
+ul {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transform-style: preserve-3d;
+    gap: 2rem;
+}
+
+ul li {
+    position: relative;
+    list-style: none;
+    transform-style: preserve-3d;
+}
+
+ul li a {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    transform-style: preserve-3d;
+}
+
+ul li a span {
+    position: relative;
+    color: #fff;
+    font-size: 4em;
+    padding: 5px 20px;
+    font-weight: 700;
+    transform-style: preserve-3d;
+    transition: all .3s;
+}
+
+ul:hover li a span {
+    opacity: 0.1;
+}
+
+ul li a span:hover {
+    opacity: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px #fff;
+}
+
+ul li a span::before,
+ul li a span::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 5px 20px;
+    opacity: 0;
+    transform-style: preserve-3d;
+    -webkit-text-stroke: 1px #fff;
+    transform: translateZ(0px);
+    text-shadow: 0 5px 5px rgba(0, 0, 0, .5);
+}
+
+ul li a:hover span::before {
+    transform: translateZ(75px) translate(40px, 20px);
+    color: #ff3e7f;
+    opacity: 1;
+}
+
+ul li a:hover span::after {
+    transform: translateZ(150px) translate(80px, 40px);
+    color: #5cb7ff;
+    opacity: 1;
+}
