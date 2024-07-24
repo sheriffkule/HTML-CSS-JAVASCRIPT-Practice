@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tip Calculator</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/widgets_style/tipCalculator.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Tip Calculator</h1>
+
+    <form class="calculator">
+      <div class="bill-amount">
+        <label for="bill-amount">Bill Amount</label>
+        <input type="number" id="billAmount" value="0" min="0" step="0.01" onfocus="this.select()">
+      </div>
+
+      <div class="service-tip">
+        <label>Service Tip</label>
+        <div class="tips">
+          <div class="tip">
+            <input type="radio" name="tip" id="tip5" value="5" checked>
+            <label for="tip5">5%</label>
+          </div>
+          <div class="tip">
+            <input type="radio" name="tip" id="tip10" value="10">
+            <label for="tip10">10%</label>
+          </div>
+          <div class="tip">
+            <input type="radio" name="tip" id="tip15" value="15">
+            <label for="tip15">15%</label>
+          </div>
+          <div class="tip">
+            <input type="radio" name="tip" id="custom" value="0" onchange="customTip.select()">
+            <label for="custom">Custom</label>
+            <input type="number" id="customTip" value="0" min="0" onfocus="this.select()">
+          </div>
+        </div>
+      </div>
+
+      <div class="guest-count">
+        <label for="guestCount">
+          <span>No. of Guest</span>
+          <output id="count" for="guestCount">1</output>
+        </label>
+        <input type="range" id="guestCount" value="1" min="1" max="20" oninput="count.value = this.value">
+      </div>
+
+      <div class="actions">
+        <button type="reset">Reset</button>
+        <button type="submit">Calculate</button>
+      </div>
+    </form>
+
+    <div class="result">
+      <ul>
+        <li>
+          <strong>Tip Amount</strong>
+          <span class="tip-amount">0</span>
+        </li>
+        <li>
+          <strong>Tip <small>/ guest</small></strong>
+          <span class="tip-guest">0</span>
+        </li>
+        <li>
+          <strong>Total <small>/ guest</small></strong>
+          <span class="total-guest">0</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="/widgets_script/tipCalculator.js"></script>
+</body>
+
+</html>
