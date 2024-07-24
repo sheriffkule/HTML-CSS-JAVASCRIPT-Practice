@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Jost', sans-serif;
+}
+
+:root {
+    --blue-color: #357ded;
+    --gray-color: #77889926;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(120deg, #0b2400, #0f3f00);
+    color: #ffffff;
+}
+
+.container {
+    background: linear-gradient(#0b2400, #0f3f00);
+    padding: 30px;
+    border-radius: 12px;
+    width: min(480px, 90%);
+    box-shadow: 0 10px 20px rgba(255, 255, 255, .2);
+}
+
+.container h3 {
+    font-size: 2.5rem;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.range-slider {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    padding-block: 20px;
+}
+
+.range-slider.dragging {
+    cursor: ew-resize;
+}
+
+.range-slider > input {
+    border: none;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.2);
+    font-size: 1.5rem;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 6px;
+    min-width: 64px;
+    text-align: center;
+}
+
+.range {
+    width: 100%;
+    display: grid;
+    position: relative;
+    z-index: 5;
+}
+
+.range input {
+    grid-row: 2;
+    grid-column: 1;
+    pointer-events: none;
+    appearance: none;
+    background-color: transparent;
+}
+
+.range input::-webkit-slider-thumb {
+    pointer-events: auto;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    background-color: var(--blue-color);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.slider {
+    position: absolute;
+    height: 10px;
+    width: 100%;
+    background: var(--gray-color);
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 6px;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.progress {
+    position: absolute;
+    height: 100%;
+    background: var(--blue-color);
+    cursor: ew-resize;
+}
