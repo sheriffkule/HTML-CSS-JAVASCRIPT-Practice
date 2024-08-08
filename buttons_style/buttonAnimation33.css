@@ -118,7 +118,7 @@ body {
     height: 45px;
     left: -14px;
     top: 12px;
-    background: rgb(100, 104, 106, .5);
+    background: rgb(100, 104, 106);
     z-index: -1;
     transform: rotate(215deg);
 }
