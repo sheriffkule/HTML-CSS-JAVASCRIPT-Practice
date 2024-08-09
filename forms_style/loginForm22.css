@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(120deg, #1d2b3a, #324a64, #1d2b3a);
+}
+
+.container {
+    width: 400px;
+    height: 500px;
+    text-align: center;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.container h2 {
+    color: #fff;
+    margin-bottom: 2rem;
+}
+
+.toggle {
+    display: flex;
+    margin-bottom: 1.25rem;
+}
+
+.toggle span {
+    cursor: pointer;
+    padding: 10px 78px;
+    border: 1px solid #ccc;
+    transition: all .3s ease-in-out;
+    color: #fff;
+}
+
+.toggle span.active {
+    background-color: #fff;
+    color: #000;
+}
+
+.form-container {
+    position: relative;
+}
+
+.form {
+    position: absolute;
+    width: 100%;
+    transition: all .3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    left: 100%;
+}
+
+.form input {
+    width: 75%;
+    height: 36px;
+    backdrop-filter: blur(10px);
+    padding: 6px;
+    margin-bottom: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    outline: none;
+    color: #fff;
+    font-weight: 900;
+    font-size: 1rem;
+}
+
+.form input:focus {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.form input::placeholder,
+.form input::-webkit-input-placeholder {
+    transition: all .3s ease-in-out;
+}
+
+.form input:focus::placeholder, 
+.form input:focus::-webkit-input-placeholder {
+    transform: translateX(300px);
+}
+
+button {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter:  blur(10px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+    color: #000;
+    padding: 10px 35px;
+    font-weight: 900;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all .25s ease-in-out;
+}
+
+button:hover {
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.5);
+}
