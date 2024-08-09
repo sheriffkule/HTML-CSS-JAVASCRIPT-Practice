@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(#202020, #16212c);
+} */
+
+.wrapper {
+    overflow: hidden;
+    /* background-color: #222; */
+    background: linear-gradient(#202020, #16212c);
+}
+
+canvas {
+    display: block;
+}
