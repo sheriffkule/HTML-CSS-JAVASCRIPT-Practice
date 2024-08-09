@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(45deg, #1a1f1e, #001f18);
+    overflow: hidden;
+}
+
+.container {
+    perspective: 1000px;
+}
+
+.inner {
+    transform-style: preserve-3d;
+    position: relative;
+    display: grid;
+    place-items: center;
+    transform: rotateX(-45deg) rotateY(3deg);
+}
+
+.element {
+    width: 200px;
+    height: 150px;
+    background: orange;
+    position: absolute;
+    box-shadow: inset 0 0 50px #000;
+    transform-origin: center;
+    transition: all .35s;
+}
