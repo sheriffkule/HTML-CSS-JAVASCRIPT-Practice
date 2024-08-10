@@ -34,21 +34,7 @@
     <div class="next"></div>
   </div>
 
-  <script>
-    let prev = document.querySelector('.prev');
-    let next = document.querySelector('.next');
-    let box = document.querySelector('.box');
-    let degree = 0;
-
-    prev.addEventListener('click', function () {
-      degree += 90;
-      box.style = `transform: perspective(1000px) rotateY(${degree}deg)`;
-    })
-    next.addEventListener('click', function () {
-      degree -= 90;
-      box.style = `transform: perspective(1000px) rotateY(${degree}deg)`;
-    })
-  </script>
+  <script src="/imageEffect_script/imageHoverEffect21.js"></script>
 </body>
 
 </html>
