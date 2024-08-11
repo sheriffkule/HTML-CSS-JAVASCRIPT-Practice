@@ -248,3 +248,17 @@ header .donation a {
         transform: translate(50%, 50%);
     }
 }
+
+::-webkit-scrollbar {
+    background-color: #23213d;
+    width: .75rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #2b4153;
+    border-radius: 1rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #385768;
+}

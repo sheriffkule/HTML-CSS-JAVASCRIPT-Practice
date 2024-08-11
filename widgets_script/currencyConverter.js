@@ -49,3 +49,9 @@ document
 	.querySelector('#convert-button')
 	.addEventListener('click', convertCurrency);
 window.addEventListener('load', convertCurrency);
+
+const year = document.getElementById('year');
+const thisYear = new Date().getFullYear();
+
+year.setAttribute('datetime', thisYear);
+year.textContent = thisYear;

@@ -31,3 +31,9 @@ let reset = () => {
 calculateBtn.addEventListener('click', calculate);
 window.addEventListener('load', calculate);
 resetBtn.addEventListener('click', reset);
+
+const year = document.getElementById('year');
+const thisYear = new Date().getFullYear();
+
+year.setAttribute('datetime', thisYear);
+year.textContent = thisYear;

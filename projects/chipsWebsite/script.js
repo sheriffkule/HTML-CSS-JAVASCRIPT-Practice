@@ -96,3 +96,9 @@ sr.reveal('.home-tomato-1, .home-tomateo-2', { delay: 1400, interval: 100 });
 sr.reveal('.care-img, .contact-img', { origin: 'left' });
 sr.reveal('.care-list, .contact-data', { origin: 'right' });
 sr.reveal('.banner-item, .products-card', { interval: 100 });
+
+const year = document.getElementById('year');
+const thisYear = new Date().getFullYear();
+
+year.setAttribute('datetime', thisYear);
+year.textContent = thisYear;

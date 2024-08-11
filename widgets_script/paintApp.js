@@ -133,3 +133,9 @@ saveImg.addEventListener('click', () => {
 canvas.addEventListener('mousedown', startDraw);
 canvas.addEventListener('mousemove', drawing);
 canvas.addEventListener('mouseup', () => (isDrawing = false));
+
+const year = document.getElementById('year');
+const thisYear = new Date().getFullYear();
+
+year.setAttribute('datetime', thisYear);
+year.textContent = thisYear;

@@ -109,3 +109,9 @@ sr.reveal('.home-img, .about-text, .services-right, .contact-form', {
 	scale: 0.5,
 });
 sr.reveal('.row', { distance: '300px', origin: 'top', interval: 300 });
+
+const year = document.getElementById('year');
+const thisYear = new Date().getFullYear();
+
+year.setAttribute('datetime', thisYear);
+year.textContent = thisYear;

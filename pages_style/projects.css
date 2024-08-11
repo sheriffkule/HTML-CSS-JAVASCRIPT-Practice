@@ -7,7 +7,7 @@
 body {
     min-height: 100vh;
     background: url(/images/darkhex.jpg);
-    background-size: cover;
+    /* background-size: cover; */
     background-position: center;
 }
 
@@ -487,6 +487,12 @@ main {
     scale: 1.1;
 }
 
+footer {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #ccc;
+}
+
 @media (max-width: 600px) {
     .nav_links {
         display: none;
@@ -504,4 +510,18 @@ main {
         display: block;
         visibility: visible;
     }
+}
+
+::-webkit-scrollbar {
+    background-color: #23213d;
+    width: .75rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #2b4153;
+    border-radius: 1rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #385768;
 }

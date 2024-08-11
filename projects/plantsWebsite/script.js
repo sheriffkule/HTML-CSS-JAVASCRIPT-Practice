@@ -160,3 +160,9 @@ sr.reveal('.about-data, .contact-form', {
 sr.reveal('.steps-card, .product-card, .questions-group, .footer-content', {
 	interval: 200,
 });
+
+const year = document.getElementById('year');
+const thisYear = new Date().getFullYear();
+
+year.setAttribute('datetime', thisYear);
+year.textContent = thisYear;

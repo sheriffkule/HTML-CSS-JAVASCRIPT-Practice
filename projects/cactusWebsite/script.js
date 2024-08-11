@@ -75,3 +75,9 @@ sr.reveal('.home-img, .new-data, .care-img, .contact-content, .footer');
 sr.reveal('.home-title, .care-list, .contact-img',  { duration: 600 });
 sr.reveal('.new-card', { delay: 500, interval: 100 });
 sr.reveal('.shop-card', {interval: 100 });
+
+const year = document.getElementById('year');
+const thisYear = new Date().getFullYear();
+
+year.setAttribute('datetime', thisYear);
+year.textContent = thisYear;

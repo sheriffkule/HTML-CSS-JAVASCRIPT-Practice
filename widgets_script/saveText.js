@@ -17,3 +17,9 @@ saveBtn.addEventListener('click', () => {
 	link.click();
 	window.URL.revokeObjectURL(fileUrl);
 });
+
+const year = document.getElementById('year');
+const thisYear = new Date().getFullYear();
+
+year.setAttribute('datetime', thisYear);
+year.textContent = thisYear;

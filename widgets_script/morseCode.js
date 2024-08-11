@@ -56,3 +56,9 @@ document.getElementById('copy').addEventListener('click', function () {
 		copyButton.innerText = 'Copy';
 	}, 2000);
 });
+
+const year = document.getElementById('year');
+const thisYear = new Date().getFullYear();
+
+year.setAttribute('datetime', thisYear);
+year.textContent = thisYear;

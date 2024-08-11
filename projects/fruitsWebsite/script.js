@@ -104,3 +104,9 @@ sr.reveal('.home-img', { origin: 'bottom' });
 sr.reveal('.enjoy-card, .popular-card, .footer-container', { interval: 200 });
 sr.reveal('.about-data', { origin: 'right' });
 sr.reveal('.about-img', { origin: 'left' });
+
+const year = document.getElementById('year');
+const thisYear = new Date().getFullYear();
+
+year.setAttribute('datetime', thisYear);
+year.textContent = thisYear;

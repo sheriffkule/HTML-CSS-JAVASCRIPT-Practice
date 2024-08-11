@@ -83,3 +83,9 @@ sr.reveal('.popular-card, .recipe-card', {
 	interval: 300,
 	delay: 100,
 });
+
+const year = document.getElementById('year');
+const thisYear = new Date().getFullYear();
+
+year.setAttribute('datetime', thisYear);
+year.textContent = thisYear;

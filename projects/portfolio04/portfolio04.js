@@ -49,4 +49,10 @@ animation.reveal('footer', { delay: 500, origin: 'left' });
 		'max-glare': 0.5,
 		scale: 1.1,
 		perspective: 1000,
-	});
+    });
+    
+    const year = document.getElementById('year');
+	const thisYear = new Date().getFullYear();
+
+	year.setAttribute('datetime', thisYear);
+	year.textContent = thisYear;

@@ -94,4 +94,10 @@ sr.reveal('.new-card:nth-child(3) img', {rotate: { z: -30 },distance: 0,delay: 9
 
 sr.reveal('.favorite-card img', {interval: 200,rotate: { z: 15 },distance: 0,});
 
-sr.reveal('.footer-container', {scale: 1,});
+sr.reveal('.footer-container', { scale: 1, });
+
+const year = document.getElementById('year');
+const thisYear = new Date().getFullYear();
+
+year.setAttribute('datetime', thisYear);
+year.textContent = thisYear;

@@ -144,21 +144,9 @@
     </section>
   </main>
   <footer>
-    <p>Copyright &copy; SheriffKule from XXIII Century</p>
+    <p>Copyright &copy; <time id="year"></time> SheriffKule from XXIII Century</p>
   </footer>
-  <script>
-    let navLinks = document.getElementById('nav_links');
-    let menuBtn = document.getElementById('menu_btn');
-    let closeBtn = document.getElementById('close_btn');
-
-    menuBtn.addEventListener('click', () => {
-      navLinks.classList.add('show');
-    });
-
-    closeBtn.addEventListener('click', () => {
-      navLinks.classList.remove('show');
-    })
-  </script>
+  <script src="/scripts/main.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>

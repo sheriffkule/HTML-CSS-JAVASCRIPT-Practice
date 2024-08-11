@@ -25,3 +25,9 @@ function X() {
 		dayCount.style.backgroundColor = '#59a67d';
 	}
 }
+
+const year = document.getElementById('year');
+const thisYear = new Date().getFullYear();
+
+year.setAttribute('datetime', thisYear);
+year.textContent = thisYear;
