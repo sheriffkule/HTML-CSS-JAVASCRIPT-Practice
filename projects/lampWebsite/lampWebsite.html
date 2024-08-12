@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lamp Website</title>
+  <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/scripts/swiper-bundle.css">
+  <link rel="stylesheet" href="lampWebsite.css">
+</head>
+
+<body>
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="#" class="nav-logo">
+        SUN<span>LIGHT</span>
+      </a>
+
+      <div class="nav-menu" id="nav-menu">
+        <ul class="nav-list">
+          <li class="nav-item" style="--i:1;">
+            <a href="#home" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item" style="--i:2;">
+            <a href="#popular" class="nav-link">Popular</a>
+          </li>
+          <li class="nav-item" style="--i:3;">
+            <a href="#choose" class="nav-link">Choose</a>
+          </li>
+          <li class="nav-item" style="--i:4;">
+            <a href="#products" class="nav-link">Products</a>
+          </li>
+        </ul>
+
+        <div class="nav-close" id="nav-close">
+          <i class="ri-close-line"></i>
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <i class="ri-moon-line change-theme" id="theme-button"></i>
+        
+        <div class="nav-toggle" id="nav-toggle">
+          <i class="ri-menu-line"></i>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="main">
+    <section class="home section" id="home">
+      <div class="home-bg"></div>
+
+      <div class="home-container container grid">
+        <div class="home-content grid">
+          <div class="home-data">
+            <h3 class="home-subtitle">
+              The best light bulbs
+            </h3>
+
+            <h1 class="home-title">
+              Unique Light <br>
+              For Your Home
+            </h1>
+
+            <div class="home-buttons">
+              <a href="#" class="button">Discover Now</a>
+
+              <a href="#" class="button-link">
+                <i class="ri-play-circle-line"></i> Watch Video
+              </a>
+            </div>
+          </div>
+
+          <div class="home-info">
+            <div>
+              <h3 class="home-info-title">
+                9K<span>+</span>
+              </h3>
+              <span class="home-info-subtitle">
+                Premium <br> Product
+              </span>
+            </div>
+
+            <div>
+              <h3 class="home-info-title">
+                2K<span>+</span>
+              </h3>
+              <span class="home-info-subtitle">
+                Happy <br> Customer
+              </span>
+            </div>
+
+            <div>
+              <h3 class="home-info-title">
+                28<span>+</span>
+              </h3>
+              <span class="home-info-subtitle">
+                Awards <br> Winning
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="home-image">
+          <div class="home-blob">
+            <img src="home-lamp.png" alt="lamp" class="home-img">
+            <h1 class="home-blob-title">LIGHT</h1>
+          </div>
+
+          <div class="home-shadow"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="popular section" id="popular">
+      <div class="popular-container container">
+        <div class="popular-data">
+          <h2 class="section-title">Popular Products</h2>
+
+          <p class="popular-description">
+            Find out the best products faster and get the quality lights we have for you.
+          </p>
+        </div>
+
+        <div class="popular-content grid swiper">
+          <div class="swiper-wrapper">
+            <article class="popular-card swiper-slide">
+              <div class="popular-blob">
+                <img src="modern-lamp.png" alt="modern lamp" class="popular-img">
+              </div>
+
+              <h3 class="popular-name">Modern Light</h3>
+              <span class="popular-subtitle">Hanging Light</span>
+              <h3 class="popular-price"><span>$</span>14</h3>
+
+              <button class="popular-button">
+                <i class="ri-add-line"></i>
+              </button>
+            </article>
+
+            <article class="popular-card swiper-slide">
+              <div class="popular-blob">
+                <img src="industrial-lamp.png" alt="modern lamp" class="popular-img">
+              </div>
+
+              <h3 class="popular-name">Industrial Light</h3>
+              <span class="popular-subtitle">Hanging Light</span>
+              <h3 class="popular-price"><span>$</span>20</h3>
+
+              <button class="popular-button">
+                <i class="ri-add-line"></i>
+              </button>
+            </article>
+
+            <article class="popular-card swiper-slide">
+              <div class="popular-blob">
+                <img src="superbolw-lamp.png" alt="modern lamp" class="popular-img">
+              </div>
+
+              <h3 class="popular-name">Superbolw Light</h3>
+              <span class="popular-subtitle">Hanging Light</span>
+              <h3 class="popular-price"><span>$</span>18</h3>
+
+              <button class="popular-button">
+                <i class="ri-add-line"></i>
+              </button>
+            </article>
+
+            <article class="popular-card swiper-slide">
+              <div class="popular-blob">
+                <img src="ultrawide-lamp.png" alt="modern lamp" class="popular-img">
+              </div>
+
+              <h3 class="popular-name">Ultrawide Light</h3>
+              <span class="popular-subtitle">Hanging Light</span>
+              <h3 class="popular-price"><span>$</span>16</h3>
+
+              <button class="popular-button">
+                <i class="ri-add-line"></i>
+              </button>
+            </article>
+
+            <article class="popular-card swiper-slide">
+              <div class="popular-blob">
+                <img src="roundness-light.png" alt="modern lamp" class="popular-img">
+              </div>
+
+              <h3 class="popular-name">Roundness Light</h3>
+              <span class="popular-subtitle">Hanging Light</span>
+              <h3 class="popular-price"><span>$</span>17</h3>
+
+              <button class="popular-button">
+                <i class="ri-add-line"></i>
+              </button>
+            </article>
+          </div>
+
+          <div class="swiper-pagination"></div>
+
+          <div class="swiper-button-prev">
+            <i class="ri-arrow-left-s-line"></i>
+          </div>
+          <div class="swiper-button-next">
+            <i class="ri-arrow-right-s-line"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="choose section" id="choose">
+      <div class="choose-container container grid">
+        <div class="choose-image">
+          <div class="choose-blob">
+            <img src="choose-lamp.png" alt="choose image" class="choose-img">
+            <h1 class="choose-blob-title">LIGHT</h1>
+          </div>
+
+          <div class="choose-shadow"></div>
+        </div>
+
+        <div class="choose-content">
+          <div class="choose-data">
+            <h2 class="section-title">Why Choose Us?</h2>
+            <p class="choose-description">
+              Our products have won numerous awards
+              and we can guarantee the unlimited
+              quality of our products.
+            </p>
+          </div>
+
+          <div class="choose-faq">
+            <div class="choose-faq-item">
+              <div class="choose-faq-header">
+                <div class="choose-faq-icon">
+                  <i class="ri-add-line"></i>
+                </div>
+                <h3 class="choose-faq-title">Frequently New Design</h3>
+              </div>
+
+              <div class="choose-faq-content">
+                <p class="choose-faq-description">
+                  We make new designs every year,
+                  fashion designs, trending and of
+                  the best quality.
+                </p>
+              </div>
+            </div>
+
+            <div class="choose-faq-item">
+              <div class="choose-faq-header">
+                <div class="choose-faq-icon">
+                  <i class="ri-add-line"></i>
+                </div>
+                <h3 class="choose-faq-title">Original Production</h3>
+              </div>
+
+              <div class="choose-faq-content">
+                <p class="choose-faq-description">
+                  We are the industrial chain of
+                  quality lighting products and offer
+                  the most advantageous price.
+                </p>
+              </div>
+            </div>
+
+            <div class="choose-faq-item">
+              <div class="choose-faq-header">
+                <div class="choose-faq-icon">
+                  <i class="ri-add-line"></i>
+                </div>
+                <h3 class="choose-faq-title">Production With Large Stock</h3>
+              </div>
+
+              <div class="choose-faq-content">
+                <p class="choose-faq-description">
+                  You will not be left without the lamp
+                  you chose, we have a large stock
+                  possible in all models.
+                </p>
+              </div>
+            </div>
+
+            <div class="choose-faq-item">
+              <div class="choose-faq-header">
+                <div class="choose-faq-icon">
+                  <i class="ri-add-line"></i>
+                </div>
+                <h3 class="choose-faq-title">Professional Quality Control</h3>
+              </div>
+
+              <div class="choose-faq-content">
+                <p class="choose-faq-description">
+                  Our quality control does everything
+                  possible to send you the best
+                  possible product for your home.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features section">
+      <div class="features-container container grid">
+        <div class="features-image">
+          <div class="features-blob">
+            <img src="features-lamp.png" alt="features image" class="features-img">
+            <h1 class="features-blob-title">LIGHT</h1>
+          </div>
+
+          <div class="features-shadow"></div>
+        </div>
+
+        <div class="features-content">
+          <div class="features-data">
+            <h2 class="section-title">Latest Features</h2>
+
+            <p class="features-description">
+              We always provide the latest and best
+              features for your customer, don't worry, we
+              provide the latest technology for you.
+            </p>
+          </div>
+
+          <div class="features-info">
+            <div class="features-info-card">
+              <h3 class="features-info-title">Voltage <br> Settings</h3>
+            </div>
+
+            <div class="features-info-card">
+              <h3 class="features-info-title">Application <br> Control</h3>
+            </div>
+
+            <div class="features-info-card">
+              <h3 class="features-info-title">Voice <br> Control</h3>
+            </div>
+
+            <div class="features-info-card">
+              <h3 class="features-info-title">Schedule <br> Settings</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="products section" id="products">
+      <div class="products-container container grid">
+        <div class="products-data">
+          <h2 class="section-title">Our Products</h2>
+
+          <p class="products-description">
+            Discover all our unique products that
+            are suitable for your home.
+          </p>
+        </div>
+
+        <div class="products-content grid">
+          <article class="products-card">
+            <div class="products-blob">
+              <img src="modern-lamp.png" alt="Modern Lamp" class="products-img">
+            </div>
+
+            <h3 class="products-name">Modern Light</h3>
+            <span class="products-subtitle">Hanging Lights</span>
+            <h3 class="products-price"><span>$</span>14</h3>
+
+            <button class="products-button"><i class="ri-add-line"></i></button>
+          </article>
+
+          <article class="products-card">
+            <div class="products-blob">
+              <img src="industrial-lamp.png" alt="Modern Lamp" class="products-img">
+            </div>
+
+            <h3 class="products-name">Industrial Light</h3>
+            <span class="products-subtitle">Hanging Lights</span>
+            <h3 class="products-price"><span>$</span>20</h3>
+
+            <button class="products-button"><i class="ri-add-line"></i></button>
+          </article>
+
+          <article class="products-card">
+            <div class="products-blob">
+              <img src="superbolw-lamp.png" alt="Modern Lamp" class="products-img">
+            </div>
+
+            <h3 class="products-name">Superbolw Light</h3>
+            <span class="products-subtitle">Hanging Lights</span>
+            <h3 class="products-price"><span>$</span>18</h3>
+
+            <button class="products-button"><i class="ri-add-line"></i></button>
+          </article>
+
+          <article class="products-card">
+            <div class="products-blob">
+              <img src="ultrawide-lamp.png" alt="Modern Lamp" class="products-img">
+            </div>
+
+            <h3 class="products-name">Ultrawide Light</h3>
+            <span class="products-subtitle">Hanging Lights</span>
+            <h3 class="products-price"><span>$</span>16</h3>
+
+            <button class="products-button"><i class="ri-add-line"></i></button>
+          </article>
+
+          <article class="products-card">
+            <div class="products-blob">
+              <img src="roundness-light.png" alt="Modern Lamp" class="products-img">
+            </div>
+
+            <h3 class="products-name">Roundness Light</h3>
+            <span class="products-subtitle">Hanging Lights</span>
+            <h3 class="products-price"><span>$</span>17</h3>
+
+            <button class="products-button"><i class="ri-add-line"></i></button>
+          </article>
+
+          <article class="products-card">
+            <div class="products-blob">
+              <img src="stickness-light.png" alt="Modern Lamp" class="products-img">
+            </div>
+
+            <h3 class="products-name">Stickness Light</h3>
+            <span class="products-subtitle">Hanging Lights</span>
+            <h3 class="products-price"><span>$</span>28</h3>
+
+            <button class="products-button"><i class="ri-add-line"></i></button>
+          </article>
+
+          <article class="products-card">
+            <div class="products-blob">
+              <img src="superjet-light.png" alt="Modern Lamp" class="products-img">
+            </div>
+
+            <h3 class="products-name">Superjet Light</h3>
+            <span class="products-subtitle">Hanging Lights</span>
+            <h3 class="products-price"><span>$</span>15</h3>
+
+            <button class="products-button"><i class="ri-add-line"></i></button>
+          </article>
+
+          <article class="products-card">
+            <div class="products-blob">
+              <img src="nakedness-lamp.png" alt="Modern Lamp" class="products-img">
+            </div>
+
+            <h3 class="products-name">Nakedness Light</h3>
+            <span class="products-subtitle">Hanging Lights</span>
+            <h3 class="products-price"><span>$</span>10</h3>
+
+            <button class="products-button"><i class="ri-add-line"></i></button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="join section">
+      <div class="join-container container grid">
+        <div class="join-bg grid">
+          <div class="join-image">
+            <div class="join-blob">
+              <img src="join-lamp.png" alt="Join Lamp" class="join-img">
+              <h1 class="join-blob-title">LIGHT</h1>
+            </div>
+
+            <div class="join-shadow"></div>
+          </div>
+
+          <div class="join-content grid">
+            <div class="join-data">
+              <h2 class="section-title">Get Started</h2>
+
+              <p class="join-description">
+                Do not miss it, join us and get <br>
+                interesting discounts with us.
+              </p>
+            </div>
+
+            <form action="" class="join-form">
+              <input type="email" placeholder="Enter your email" class="join-input">
+              <button class="button join-button">Join Now</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container container grid">
+      <div class="footer-content grid">
+        <div>
+          <a href="#" class="footer-logo">SUN<span>LIGHT</span></a>
+
+          <div class="footer-description">
+            We have a vision to make <br>
+            lighting evenly distributed to all <br>
+            parts of the earth.
+          </div>
+        </div>
+
+        <div class="footer-data grid">
+          <div>
+            <h3 class="footer-title">About</h3>
+
+            <ul class="footer-links">
+              <li>
+                <a href="#" class="footer-link">AboutUs</a>
+              </li>
+
+              <li>
+                <a href="#" class="footer-link">Features</a>
+              </li>
+              <li>
+                <a href="#" class="footer-link">News & Blog</a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="footer-title">Movement</h3>
+
+            <ul class="footer-links">
+              <li>
+                <a href="#" class="footer-link">What Sunlight</a>
+              </li>
+
+              <li>
+                <a href="#" class="footer-link">Support Us</a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="footer-title">Company</h3>
+
+            <ul class="footer-links">
+              <li>
+                <a href="#" class="footer-link">Why Sunlight</a>
+              </li>
+
+              <li>
+                <a href="#" class="footer-link">Capital</a>
+              </li>
+              <li>
+                <a href="#" class="footer-link">Security</a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="footer-title">Follow Us</h3>
+
+            <div class="footer-social">
+              <a href="https://www.facebook.com/" target="_blank" class="footer-social-link">
+                <i class="ri-facebook-circle-line"></i>
+              </a>
+              <a href="https://twitter.com/" target="_blank" class="footer-social-link">
+                <i class="ri-twitter-line"></i>
+              </a>
+              <a href="https://www.instagram.com/" target="_blank" class="footer-social-link">
+                <i class="ri-instagram-line"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-group">
+        <div class="footer-terms">
+          <a href="#">Terms & Agreements</a>
+          <a href="#">Privacy Policy</a>
+        </div>
+
+        <span class="footer-copy"><time id="year"></time> &copy; Made by SheriffKule from XXIII Century.</span>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" class="scrollup" id="scroll-up">
+    <i class="ri-arrow-up-line"></i>
+  </a>
+
+  <script src="/scripts/swiper-bundle.min.js"></script>
+  <script src="/scripts/scrollreveal.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
