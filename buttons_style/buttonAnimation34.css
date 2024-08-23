@@ -1,0 +1,68 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f97794 10%, #623aa2);
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(5px);
+    z-index: -1;
+}
+
+a {
+    width: 100px;
+    height: 100px;
+    color: #fff;
+    font-size: 30px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(2px);
+    border: 1px solid  rgba(255, 255, 255, 0.2);
+    border-right-color: rgba(255, 255, 255, 0.1);
+    border-left-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 30px rgba(0, 0, 0, .2);
+    margin: 0 20px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .4s;
+}
+
+a::before {
+    content: '';
+    position: absolute;
+    left: 50px;
+    display: block;
+    width: 50%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(1px);
+    transition: all .4s;
+    transform: skewX(45deg) translateX(calc(100px + 50%));
+}
+
+a:hover::before {
+    transform: skewX(45deg) translateX(calc(100px - 500%));
+}
+
+a:hover {
+    transform: translateY(-20px);
+}
