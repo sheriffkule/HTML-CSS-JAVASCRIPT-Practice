@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expandable Bottom NavBar</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/navbar_style/navBar21.css">
+</head>
+
+<body>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li>
+        <a href="#home" class="nav-link" title="Home">
+          <i class="ri-home-smile-2-line"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#about" class="nav-link" title="About">
+          <i class="ri-user-line"></i>
+        </a>
+      </li>
+      <li>
+        <button class="nav-expand" id="nav-expand">
+          <i class="ri-add-line nav-expand-icon" id="nav-expand-icon"></i>
+        </button>
+
+        <ul class="nav-expand-list" id="nav-expand-list">
+          <li>
+            <a href="#" class="nav-expand-link">
+              <i class="ri-image-2-line"></i>
+              <span>Gallery</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-expand-link">
+              <i class="ri-archive-line"></i>
+              <span>Files</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-expand-link">
+              <i class="ri-bookmark-3-line"></i>
+              <span>Saved</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#projects" class="nav-link" title="Projects">
+          <i class="ri-briefcase-line"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#contact" class="nav-link" title="Contact">
+          <i class="ri-send-plane-line"></i>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <section class="section" id="home">
+      <h1>HOME</h1>
+    </section>
+    <section class="section" id="about">
+      <h1>ABOUT</h1>
+    </section>
+    <section class="section" id="projects">
+      <h1>PROJECTS</h1>
+    </section>
+    <section class="section" id="contact">
+      <h1>CONTACT</h1>
+    </section>
+  </main>
+
+  <script src="/navBar_script/navBar21.js"></script>
+</body>
+
+</html>
