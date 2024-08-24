@@ -1,0 +1,30 @@
+body {
+    min-height: 100vh;
+    background-image: radial-gradient(#333, #111);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.zoom {
+    width: max-content;
+    position: relative;
+}
+
+.zoom img {
+    width: 600px;
+    height: auto;
+}
+
+#imgZoom {
+    position: absolute;
+    left: 0;
+    top: 0;
+    --zoom-x: 50%;
+    --zoom-y: 50%;
+    transform: scale(1.5);
+    pointer-events: none;
+    clip-path: circle(100px at var(--zoom-x) var(--zoom-y));
+    opacity: 0;
+}
