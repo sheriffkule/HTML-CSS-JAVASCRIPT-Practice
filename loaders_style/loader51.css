@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #1b2a3a;
+}
+
+:root {
+    font-size: 8vh;
+}
+
+.anim {
+    height:10rem;
+    width:10rem;
+    perspective: 2000px;
+    position: relative;
+    transform: rotateY(-200deg) translateX(200px);
+    transform-style: preserve-3d;
+}
+
+.inner {
+    animation: rotate 6s linear infinite normal;
+    border: 5px solid;
+    border-radius: 100%;
+    position: absolute;
+    transform-origin: 5rem 5rem;
+    height: 50%;
+    width: 50%;
+    will-change: transform;
+}
+
+@keyframes rotate {
+    50%, 100% {
+        transform: rotateX(360deg);
+    }
+}
