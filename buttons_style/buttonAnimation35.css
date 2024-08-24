@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #121212;
+}
+
+button {
+    position: relative;
+    width: 150px;
+    height: 50px;
+    border: 3px solid #fff;
+    outline: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 20px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: 0 0 5px #0ef,
+        inset 0 0 10px #0ef,
+        0 0 20px #0ef,
+        inset 0 0 40px #0ef,
+        inset 0 0 40px #0ef,
+        0 0 80px #0ef,
+        0 0 160px #0ef;
+    transition: all .3s;
+}
+
+button:hover {
+    box-shadow: 0 0 5px #f0f,
+        inset 0 0 10px #f0f,
+        0 0 20px #f0f,
+        inset 0 0 40px #f0f,
+        inset 0 0 40px #f0f,
+        0 0 80px #f0f,
+        0 0 160px #f0f;
+}
+
+button::before {
+    content: 'Hover Me';
+    position: absolute;
+    text-shadow: 0 0 20px #0ef,
+        0 0 40px #0ef,
+        0 0 60px #0ef,
+        0 0 80px #0ef,
+        0 0 100px #0ef;
+    transition: all .3s;
+}
+
+button:hover::before {
+    transform: translateY(50px);
+    opacity: 0;
+}
+
+button::after {
+    content: 'Thanks';
+    position: absolute;
+    text-shadow: 0 0 20px #f0f,
+        0 0 40px #f0f,
+        0 0 60px #f0f,
+        0 0 80px #f0f,
+        0 0 100px #f0f;
+    transform: translateY(-50px);
+    opacity: 0;
+    transition: all .3s;
+}
+
+button:hover::after {
+    transform: translateY(0);
+    opacity: 1;
+}
