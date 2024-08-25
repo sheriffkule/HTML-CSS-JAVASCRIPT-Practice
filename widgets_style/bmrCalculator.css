@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(#332877, slateblue);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    color: #222;
+}
+
+.container {
+    width: 90%;
+    max-width: 480px;
+    background: #d8d8d8;
+    padding: 20px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, .2);
+    border-radius: 10px;
+}
+
+.container h1 {
+    line-height: 1;
+    text-align: center;
+}
+
+form {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+form label {
+    display: block;
+    font-size: .85rem;
+    font-weight: 500;
+}
+
+form input,
+form select {
+    width: 100%;
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    text-align: center;
+    font-size: 1rem;
+    outline-color: lightblue;
+}
+
+form button {
+    border: none;
+    padding: 10px 0;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, .2);
+    cursor: pointer;
+    color: #fff;
+    transition: all .3s;
+}
+
+form button[type='reset'] {
+    background: slateblue;
+}
+
+form button[type='submit'] {
+    background: #4caf50;
+}
+
+form button:hover {
+    filter: saturate(200%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, .2),
+    inset 0 6px 10px rgba(0, 0, 0, .3);
+    transform: translateY(-2px);
+}
+
+#result {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all cubic-bezier(0.755, 0.05, 0.24, 1) .3s;
+}
+
+#result.show {
+    max-height: 500px;
+    opacity: 1;
+}
+
+form button:active {
+    scale: .97;
+}
+
+.bmr {
+    margin-top: 20px;
+    display: grid;
+    justify-items: center;
+    gap: 10px;
+}
+
+.bmr span {
+    background: rgba(105, 90, 205, 0.2);
+    color: slateblue;
+    font-size: .85rem;
+    font-weight: 600;
+    padding: 0 16px;
+    border-radius: 10px;
+}
+
+.bmr h2 {
+    font-size: 4rem;
+    font-weight: 500;
+    line-height: 1;
+    color: slateblue;
+}
+
+.bmr p {
+    color: slateblue;
+    font-weight: 500;
+}
+
+.daily-calories {
+    margin-top: 12px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+}
+
+.daily-calories h3 {
+    padding: 5px 10px;
+    text-align: center;
+    color: slateblue;
+}
+
+.activity-levels {
+    list-style-type: none;
+    border-top: 1px solid#aaa;
+}
+
+.activity-levels li {
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.activity-levels li:nth-child(even) {
+    background: rgba(105, 90, 205, 0.1);
+}
+
+.activity-levels p {
+    line-height: 1.2;
+}
+
+.activity-levels .name {
+    display: block;
+    font-weight: 500;
+    color: #333;
+}
+
+.activity-levels .desc {
+    color: slategray;
+}
+
+.activity-levels .value {
+    font-weight: 500;
+}
+
+h4 {
+    color: #ccc;
+    margin-top: 3rem;
+    font-weight: 400;
+}

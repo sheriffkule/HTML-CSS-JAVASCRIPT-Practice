@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMR Calculator</title>
+  <link rel="stylesheet" href="/widgets_style/bmrCalculator.css">
+  <script src="/widgets_script/bmrCalculator.js" defer></script>
+</head>
+
+<body>
+  <section class="container">
+    <h1>BMR Calculator</h1>
+
+    <form id="calculator">
+      <div>
+        <label for="weight">Weight (kg)</label>
+        <input type="number" id="weight" placeholder="Enter your weight in kg" min="0" value="0" step="0.1">
+      </div>
+      <div>
+        <label for="height">Height (cm)</label>
+        <input type="number" id="height" placeholder="Enter your height in cm" min="0" value="0" step="1">
+      </div>
+      <div>
+        <label for="age">Age (years)</label>
+        <input type="number" id="age" placeholder="Enter your age in years" min="0" value="0" step="1">
+      </div>
+      <div>
+        <label for="gender">Gender</label>
+        <select id="gender">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+      <button type="reset">Reset</button>
+      <button type="submit">Calculate</button>
+    </form>
+
+    <article id="result">
+      <div class="bmr">
+        <span>BMR</span>
+        <h2 id="bmr">0</h2>
+        <p>kcal/day</p>
+      </div>
+
+      <div class="daily-calories">
+        <h3>Daily Calorie Needs</h3>
+
+        <ul class="activity-levels">
+          <li>
+            <p>
+              <strong class="name">Sedentary</strong>
+              <small class="desc">Little to no exercise.</small>
+            </p>
+            <span class="value" id="sedentary">0</span>
+          </li>
+          <li>
+            <p>
+              <strong class="name">Light Active</strong>
+              <small class="desc">Light exercise or sports (1-3 days/week).</small>
+            </p>
+            <span class="value" id="light">0</span>
+          </li>
+          <li>
+            <p>
+              <strong class="name">Moderately Active</strong>
+              <small class="desc">Moderate exercise or sports (3-5 days/week).</small>
+            </p>
+            <span class="value" id="moderate">0</span>
+          </li>
+          <li>
+            <p>
+              <strong class="name">Very Active</strong>
+              <small class="desc">Hard exercise or sports (6-7 days a week).</small>
+            </p>
+            <span class="value" id="very-active">0</span>
+          </li>
+          <li>
+            <p>
+              <strong class="name">Super Active</strong>
+              <small class="desc">Very hard exercise, physical job, or training twice a day.</small>
+            </p>
+            <span class="value" id="super-active">0</span>
+          </li>
+        </ul>
+      </div>
+    </article>
+  </section>
+  <h4>Made by &copy; <time id="year"></time> SheriffKule from XXIII Century</h4>
+</body>
+
+</html>
