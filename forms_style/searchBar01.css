@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --first-color: hsl(222, 80%, 58%);
+    --dark-color: hsl(222, 24%, 8%);
+    --title-color: hsl(222, 8%, 8%);
+    --text-color-light: hsl(222, 8%, 65%);
+    --white-color: #fff;
+    --body-color: linear-gradient(hsl(220, 100%, 50%), hsl(220, 100%, 88%));
+
+    --body-font: 'Poppins', sans-serif;
+    --small-font-size: .815rem;
+}
+
+@media screen and (min-width: 968px) {
+    :root {
+        --small-font-size: .875rem;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--body-color);
+}
+
+.container {
+    height: 100vh;
+    margin-inline: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 2rem;
+    padding-bottom: 2rem;
+}
+
+.search {
+    position: relative;
+    width: 76px;
+    height: 76px;
+    background-color: var(--white-color);
+    box-shadow: 0 8px 24px hsla(222, 68%, 12%, .2);
+    border-radius: 4rem;
+    padding: 10px;
+    overflow: hidden;
+    transition: width .5s cubic-bezier(0.895, 0.1, 0.3, 0.9);
+}
+
+.search-input {
+    background-color: antiquewhite;
+    border: none;
+    outline: none;
+    width: calc(100% - 64px);
+    height: 100%;
+    border-radius: 4rem;
+    padding-left: 14px;
+    font-family: var(--body-font);
+    font-size: var(--small-font-size);
+    font-weight: 500;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.5s;
+}
+
+.search-input::placeholder{
+    transform-origin: left;
+    transition: .4s;
+}
+
+.search-input:focus::placeholder {
+    transform: translateX(400px) rotate(-40deg);
+}
+
+.search-input:is(:-webkit-autofill, :autofill) {
+    box-shadow: 0 0 0 100px var(--white-color) inset;
+}
+
+.search-button {
+    width: 56px;
+    height: 56px;
+    background-color: var(--dark-color);
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 10px;
+    margin: auto;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: transform .6s cubic-bezier(0.895, 0.1, 0.3, 0.9);
+}
+
+.search-icon,
+.search-close {
+    color: var(--white-color);
+    font-size: 1.5rem;
+    position: absolute;
+    transition: opacity .5s cubic-bezier(0.895, 0.1, 0.3, 0.9);
+}
+
+.search-close {
+    opacity: 0;
+}
+
+.show-search {
+    width: 100%;
+}
+
+.show-search .search-input {
+    opacity: 1;
+    pointer-events: initial;
+}
+
+.show-search .search-button {
+    transform: rotate(90deg);
+}
+
+.show-search .search-icon {
+    opacity: 0;
+}
+
+.show-search .search-close {
+    opacity: 1;
+}
+
+@media screen and (min-width: 576px) {
+    .show-search {
+        width: 450px;
+    }
+}
