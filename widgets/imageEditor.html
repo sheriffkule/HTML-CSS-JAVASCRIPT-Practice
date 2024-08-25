@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Editor</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="/widgets_style/imageEditor.css">
+    <script src="/widgets_script/imageEditor.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="image-container">
+            <div class="image-preview">
+                <button class="remove-button">&times;</button>
+            </div>
+
+            <label for="image-input">
+                <span class="material-symbols-outlined">
+                    upload
+                </span>
+                Click to Upload Image</label>
+            <input type="file" accept="image/*" id="image-input">
+        </div>
+
+        <div class="settings">
+            
+        </div>
+
+        <div class="actions">
+            <button data-reset>Reset Filters</button>
+            <button data-save>Save Image</button>
+        </div>
+    </div>
+    <h4>&copy; <time id="year"></time> Made by SheriffKule from XXIII Century.</h4>
+</body>
+</html>
