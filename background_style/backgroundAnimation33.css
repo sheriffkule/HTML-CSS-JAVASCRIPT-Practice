@@ -1,0 +1,68 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: radial-gradient(#0a3643, #061f27);
+    overflow: hidden;
+}
+
+.pulse {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    box-shadow: inset 0 0 40px #12b9ff,
+    0 0 50px #12b9ff;
+    border-radius: 50%;
+    border: 1px solid  #12b9ff;
+    background: url(/images/earth.jpg);
+    background-size: cover;
+    filter: brightness(180%) hue-rotate(-10deg);
+    animation: animateEarth 40s linear infinite;
+}
+
+.pulse span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: transparent;
+    border: 1px solid  #12b9ff;
+    animation: animate 8s linear infinite;
+    border-radius: 50%;
+    animation-delay: calc(var(--i) * -1s);
+}
+
+@keyframes animate {
+    0% {
+        width: 200px;
+        height: 200px;
+        opacity: 1;
+        filter: hue-rotate(0);
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        width: 700px;
+        height: 700px;
+        opacity: 0;filter: hue-rotate(-90deg);
+    }
+}
+
+@keyframes animateEarth {
+    0% {
+        background-position-x: 0px;
+    }
+    100% {
+        background-position-x: 1200px;
+    }
+}
