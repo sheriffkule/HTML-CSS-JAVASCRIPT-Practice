@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --underweight: orange;
+    --normal: green;
+    --overweight: lightcoral;
+    --obese: crimson;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Jost', sans-serif;
+}
+
+body {
+    background: linear-gradient(160deg, #002929, #005f5f, #002929);
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+}
+
+h1 {
+    text-align: center;
+}
+main {
+    width: 100%;
+    max-width: 1200px;
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    grid-template-rows: 19fr 1fr;
+}
+
+.container {
+    width: 90%;
+    max-width: 420px;
+    background: linear-gradient(160deg, #aaa 10%, white 50%, #aaa 90%);
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+    display: grid;
+    gap: 1rem;
+}
+
+.calculator {
+    display: grid;
+    gap: 1rem;
+}
+
+.calculator div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.calculator label {
+    flex: 0 1 120px;
+    font-weight: 600;
+    font-size: 1.125rem;
+}
+
+.calculator input {
+    flex: 1;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 12px;
+    outline-color: #00a1a3;
+    font-size: 1.25rem;
+    text-align: center;
+}
+
+.calculator button {
+    width: 50%;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    padding: 12px;
+    background: #00a1a3;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    transition: all .3s;
+}
+
+.calculator button[type='reset'] {
+    background: #a52600;
+}
+
+.calculator button:hover {
+    filter: brightness(120%) saturate(140%);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    transform-origin: left bottom;
+    transform: rotate(-2deg);
+}
+
+.output {
+    text-align: center;
+}
+
+.output #bmi {
+    font-size: 3rem;
+}
+
+.output #desc strong {
+    text-transform: uppercase;
+}
+
+.bmi-scale {
+    display: flex;
+}
+
+.bmi-scale div {
+    flex: 1;
+    text-align: center;
+    text-transform: uppercase;
+    border-top: 5px solid var(--color);
+    padding: 10px;
+}
+
+.bmi-scale h4 {
+    font-size: .75rem;
+    color: #708090;
+}
+
+.underweight {
+    color: var(--underweight);
+}
+
+.healthy {
+    color: var(--normal);
+}
+
+.overweight {
+    color: var(--overweight);
+}
+
+.obese {
+    color: var(--obese);
+}
+
+h4 {
+    font-weight: 400;
+    position: relative;
+    bottom: 2rem;
+    position: relative;
+}

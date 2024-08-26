@@ -36,6 +36,11 @@ body {
     background: linear-gradient(135deg, #1e2125, var(--prussian-blue));
 }
 
+main {
+    display: grid;
+    place-content: center;
+}
+
 .container {
     background: var(--light-color);
     width: 90%;
@@ -224,4 +229,12 @@ body {
 .result span {
     font-size: 1.5rem;
     color: var(--pomp-and-power);
+}
+
+h4 {
+    color: var(--light-color);
+    font-weight: 200;
+    text-align: center;
+    padding-top: 100px;
+    transform: translateX(-10%);
 }
