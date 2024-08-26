@@ -41,6 +41,7 @@ main section ul {
 }
 
 main section ul li a {
+    position: relative;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -90,6 +91,19 @@ main section ul li:hover a ion-icon {
 
 main section ul li:hover a ion-icon {
     font-size: 22px;
+}
+
+.top {
+    position: absolute;
+    color: black;
+    background: yellow;
+    width: 70px;
+    text-align: center;
+    top: 0px;
+    right: 0px;
+    rotate: 45deg;
+    transform: translate(20px, -10px);
+    font-weight: 600;
 }
 
 footer {

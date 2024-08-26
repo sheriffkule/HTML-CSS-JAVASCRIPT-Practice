@@ -1,0 +1,112 @@
+:root {
+    --color-primary: #57ff15;
+    --indicator-color: #f00;
+    --indicator-color-transparent: #f00b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 70px;
+    font-weight: 700;
+    user-select: none;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #2f2f2f;
+}
+
+input {
+    display: none;
+}
+
+label {
+    position: relative;
+    display: block;
+    padding: 75px 200px;
+    border-radius: 10em;
+    background: linear-gradient(0deg, #333, #242424);
+    box-shadow: 0 1px 0 #404040,
+    0 -1px 0 #404040,
+    inset 0 6px 3px #111,
+    inset 0 14px 8px #191919;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+label .on,
+label .off {
+    position: absolute;
+    inset: 22px 40px 22px 50px;
+    color: var(--color-primary);
+    text-shadow: 0 0 30px var(--color-primary);
+}
+
+label .off {
+    --color-primary: #f00;
+    text-align: right;
+}
+
+label .switch {
+    position: absolute;
+    inset:  15px 200px 15px 15px;
+    border-radius: 10em;
+    background: linear-gradient(#242424, #333);
+    box-shadow: 0 6px 3px #111,
+    0 14px 8px #191919;
+    transition: 1s;
+    z-index: 10;
+}
+
+label .switch::before {
+    position: absolute;
+    content: '';
+    inset: 55px 80px;
+    border-radius: 10em;
+    background: var(--indicator-color);
+    box-shadow: 0 0 20px var(--indicator-color);
+    transition: 1s;
+    animation: blink .2s linear infinite;
+}
+
+@keyframes blink {
+    0% {
+        background: var(--indicator-color);
+        box-shadow: 0 0 20px var(--indicator-color);
+    }
+
+    100% {
+        background: var(--indicator-color-transparent);
+        box-shadow: 0 0 20px var(--indicator-color-transparent);
+    }
+}
+
+input:checked ~ label .switch {
+    inset: 15px 15px 15px 200px;
+}
+
+input:checked ~ label .switch::before {
+    --indicator-color: #57ff15;
+    --indicator-color-transparent: #57ff15be;
+}
+
+label .on,
+input:checked ~ label .off {
+    opacity: 0;
+    transition: all .5s ease 0s;
+}
+
+label .off,
+input:checked ~ label .on {
+    opacity: 1;
+    transition: all 1s ease 0.5s;
+}
