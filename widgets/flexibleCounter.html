@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexible Counter</title>
+    <link rel="stylesheet" href="/widgets_style/flexibleCounter.css">
+</head>
+
+<body>
+    <main class="container">
+        <h1>Counter App</h1>
+        <section class="counter">0</section>
+
+        <section class="buttons">
+            <button id="decrement">Decrement</button>
+            <button id="increment">Increment</button>
+            <button id="reset">Reset</button>
+        </section>
+
+        <section class="settings">
+            <p>
+                <label for="startCount">Start Count</label>
+                <input type="number" id="startCount" value="0" min="0">
+            </p>
+            <p>
+                <label for="maxcount">Max Count</label>
+                <input type="number" id="maxcount" value="0" min="0">
+            </p>
+        </section>
+        <h4>&copy; <time id="year"></time> Made by SheriffKule from XXIII Century</h4>
+    </main>
+
+    <script src="/widgets_script/flexibleCounter.js"></script>
+</body>
+
+</html>
