@@ -20,6 +20,10 @@ body {
     padding: 20px;
     box-shadow: 1px 1px 10px 2px rgba(8, 0, 8, 0.5);
     border: 2px solid #03e0fd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .container h3 {
@@ -54,7 +58,7 @@ body {
     height: 100%;
     background: linear-gradient(90deg, #343434, #03e0fd);
     border-radius: 5px;
-    transition: .3s linear;
+    transition: .3s cubic-bezier(.42, 0, .01, .98);
     box-shadow: 0 0 5px #03e0fd;
 }
 
@@ -74,4 +78,20 @@ p:nth-child(1) {
 
 p {
     color: white;;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    background: #03e0fd;
+    border-radius: 6px;
+    margin-top: 1rem;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+button:hover {
+    background: #0090ff;
+    box-shadow: 0 6px 8px rgba(0, 108, 122, 0.3);
+    letter-spacing: 1px;
 }

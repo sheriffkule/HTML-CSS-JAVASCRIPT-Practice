@@ -1,10 +1,11 @@
 let boxes = document.querySelectorAll('.box');
+let button = document.querySelector('button');
 
-window.onload = function () {
+button.addEventListener('click', function () {
 	setTimeout(() => {
 		load_bars();
-	}, 1000);
-};
+	}, 500);
+});
 
 function load_bars() {
 	boxes.forEach((box) => {

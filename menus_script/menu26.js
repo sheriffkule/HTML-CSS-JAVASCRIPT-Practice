@@ -38,3 +38,15 @@ boxes.forEach((box) => {
 		);
 	});
 });
+
+const year = document.getElementById('year');
+const thisYear = new Date().getFullYear();
+const thisMonth = new Date().getMonth() + 1;
+
+function getMonthName(monthNumber) {
+  const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  return monthNames[monthNumber - 1];
+}
+
+year.setAttribute('datetime', thisYear);
+year.textContent = `${getMonthName(thisMonth)}, ${thisYear}`;

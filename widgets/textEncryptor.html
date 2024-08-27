@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Encryptor App</title>
+    <link rel="stylesheet" href="/widgets_style/textEncryptor.css">
+</head>
+<body>
+    <section class="container">
+        <h1>Text Encryptor App</h1>
+        <label for="message">Message:</label>
+        <textarea id="message" rows="5" cols="50" placeholder="This is a secret message to encrypt!"></textarea>
+        <label for="key">Key:</label>
+        <input type="text" id="key" value="SheriffKule" size="50">
+        <div class="buttons">
+            <button id="enc-btn">Encrypt</button>
+            <button id="dec-btn">Decrypt</button>
+        </div>
+
+        <h2>Result:</h2>
+        <div id="result"></div>
+    </section>
+    
+    <h4>&copy; <time id="year"></time> Made by SheriffKule from XXIII Century</h4>
+
+    <script src="/widgets_script/textEncryptor.js"></script>
+</body>
+</html>
