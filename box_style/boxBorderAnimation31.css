@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #0c5a4a, #143a53);
+}
+
+h1 {
+    font-size: 50px;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1px  #fff;
+    -webkit-box-reflect: below 1px linear-gradient(transparent, rgba(0, 0, 0, 0.2));
+    margin-bottom: 30px;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    position: relative;
+    width: 250px;
+    height: 350px;
+    background-image: radial-gradient(circle at center,  #ffffff, #949494);
+    border-radius: 8px;
+    box-shadow: 0 15px 60px rgba(0, 0, 0, 0.5);
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.content h2 {
+    font-size: 26px;
+    text-align: center;
+}
+
+.content p {
+    margin-top: 12px;
+    line-height: 1.5;
+    font-size: 17px;
+}
+
+.face {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+}
+
+.face.hidden {
+    padding: 20px;
+}
+
+.card .face.hidden h2 {
+    margin: 0;
+    padding: 0;
+}
+
+.card .face.front {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #111;
+    text-align: center;
+    transition: all .5s ease-in-out;
+}
+
+.container .card:nth-child(1) .face.front {
+    background-color: #db4321;
+}
+
+.container .card:nth-child(2) .face.front {
+    background-color: #037fa1;
+}
+
+.container .card:nth-child(3) .face.front {
+    background-color: #3ec9be;
+}
+
+.card:hover .face.front {
+    width: 0;
+}
+
+.card .face.front::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.face.front i {
+    font-size: 80px;
+    color: #fff;
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: all .5s;
+}
+
+.card:hover .face.front i {
+    font-size: 0;
+}
+
+.face.front h2 {
+    font-size: 50px;
+    color: #eee;
+    transition: all .5s;
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+.card:hover .face.front h2 {
+    font-size: 0;
+}
