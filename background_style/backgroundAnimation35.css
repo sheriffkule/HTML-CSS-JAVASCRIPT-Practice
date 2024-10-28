@@ -1,0 +1,127 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: radial-gradient(circle, #24246e, #06051f);
+}
+
+span {
+    position: fixed;
+    top: -120px;
+    height: 50px;
+    width: 50px;
+    z-index: -1;
+    box-shadow: 0 0 10px  rgba(255, 255, 255, 0.5);
+    animation: move 10s linear infinite;
+}
+
+.wrapper span:nth-child(1) {
+    left: 60px;
+    animation-delay: .6s;
+    border: 5px solid cyan;
+}
+
+.wrapper span:nth-child(2) {
+    left: 60%;
+    animation-delay: 3s;
+    width: 60px;
+    height: 60px;
+    background-color: #ff4293;
+}
+
+.wrapper span:nth-child(3) {
+    left: 20%;
+    animation-delay: 2s;
+    border: 5px solid whitesmoke;
+}
+
+.wrapper span:nth-child(4) {
+    left: 30%;
+    animation-delay: 5s;
+    width: 80px;
+    height: 80px;
+    background-color: #befb46;
+}
+
+.wrapper span:nth-child(5) {
+    left: 40%;
+    animation-delay: 1s;
+    border: 5px solid #ff4293;
+}
+
+.wrapper span:nth-child(6) {
+    left: 50%;
+    animation-delay: 7s;
+    border: 5px solid deepskyblue;;
+}
+
+.wrapper span:nth-child(7) {
+    left: 60%;
+    animation-delay: 6s;
+    width: 100px;
+    height: 100px;
+    background-color: #ffa734;
+}
+
+.wrapper span:nth-child(8) {
+    left: 70%;
+    animation-delay: 8s;
+    border: 5px solid #befb46;
+}
+
+.wrapper span:nth-child(9) {
+    left: 80%;
+    animation-delay: 6s;
+    width: 90px;
+    height: 90px;
+    background: dodgerblue;
+}
+
+.wrapper span:nth-child(10) {
+    left: 90%;
+    animation-delay: 4s;
+    border: 5px solid #fff;
+}
+
+.banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+h2 {
+    -webkit-text-stroke: 3px #fff;
+    -webkit-box-reflect:  below 1px linear-gradient(transparent, rgba(0, 0, 0, 0.2));
+    -webkit-text-fill-color: #fff;
+    font-size: 80px;
+    letter-spacing: 10px;
+    text-align: center;
+    line-height: .9;
+}
+
+b {
+    -webkit-text-fill-color: transparent;
+    font-size: 70px;
+}
+
+@keyframes move {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    80% {
+        opacity: .7;
+    }
+    100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
