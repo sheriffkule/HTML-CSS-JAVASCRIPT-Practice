@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000;
+    overflow: hidden;
+}
+
+.text {
+    position: absolute;
+    top: -10px;
+    width: 100%;
+    height: 100%;
+    line-height: 45px;
+    color: #0e6b0e;
+    text-transform: uppercase;
+    text-shadow: 0 0 5px #149414,
+    0 0 15px #149414,
+    0 0 30px #149414;
+    transform-origin: bottom;
+    animation: move 20s linear forwards;
+    font-size: 40px;
+}
+
+@keyframes move {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+
+    70% {
+        transform: translateY(200%) scale(1);
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
