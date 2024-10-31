@@ -1,0 +1,63 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(#000, #414141, #000);
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+h1 {
+    color: #ccc;
+    font-size: 3em;
+    text-align: center;
+    position: relative;
+    z-index: 5;
+    text-shadow: 0 0 20px rgb(2, 61, 255);
+    -webkit-text-stroke: 1px rgb(2, 61, 255);
+    -webkit-box-reflect:  below 0 linear-gradient(transparent, rgba(0, 0, 0, 0.418)) 0 0;
+}
+
+.run {
+    width: 50%;
+    height: 5px;
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    top: calc(var(--i) * 30px);
+}
+
+.container>.run:nth-child(odd){
+    background: linear-gradient(90deg, transparent, rgb(2, 61, 255));
+    animation: move1 5s infinite;
+    animation-delay: calc(var(--i) * .3s);
+}
+
+.container>.run:nth-child(even) {
+    background: linear-gradient(90deg, rgb(0, 140, 255), transparent);
+    animation: move2 5s infinite;
+    animation-delay: calc(var(--i) * .3s);
+}
+
+@keyframes move1 {
+    0% { transform: translateX(-150%); }
+    100% { transform: translateX(150%); }
+}
+
+@keyframes move2 {
+    0% { transform: translateX(150%); }
+    100% { transform: translateX(-150%); }
+}
