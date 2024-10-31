@@ -52,7 +52,7 @@ main li:hover a {
 
 footer {
     position: relative;
-    top: 120px;
+    margin-top: 120px;
     text-align: center;
     background: transparent;
     color: silver;
