@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mega Menu</title>
+  <link rel="stylesheet" href="/menus_style/menu27.css">
+</head>
+
+<body>
+  <div id="header">
+    <div class="logo">
+      <a href="#">SheriffKule</a>
+    </div>
+    <nav>
+      <form class="search">
+        <input type="search" placeholder="Search...">
+      </form>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a>
+          <ul class="mega-dropdown">
+            <li class="row">
+              <ul class="mega-col">
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Service</a></li>
+                <li><a href="#">Blog</a></li>
+              </ul>
+              <ul class="mega-col">
+                <li><a href="#">Help</a></li>
+                <li><a href="#">Pricint</a></li>
+                <li><a href="#">Team</a></li>
+                <li><a href="#">Portfolio</a></li>
+              </ul>
+              <ul class="mega-col">
+                <li><a href="#">Coming Soon</a></li>
+                <li><a href="#">404 Error</a></li>
+                <li><a href="#">Service</a></li>
+                <li><a href="#">Pages</a></li>
+              </ul>
+              <ul class="mega-col">
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Service</a></li>
+                <li><a href="#">Blog</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown"><a href="#">Contact</a>
+          <ul>
+            <li><a href="#">Address</a></li>
+            <li><a href="#">Phone</a></li>
+            <li><a href="#">Email</a></li>
+            <li><a href="#">Social Media</a></li>
+            <li><a href="#">Contact Form</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Portfolio</a></li>
+        <li><a href="#">Team</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script type="text/javascript">
+    $('#header').prepend('<div id="menu-icon"><span class="first"></span><span class="second"></span><span class="third"></span></div>');
+    $("#menu-icon").on("click", function () {
+      $("nav").slideToggle();
+      $(this).toggleClass('active');
+    })
+  </script>
+</body>
+
+</html>
