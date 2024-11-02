@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(#060b13, #20292e);
+}
+
+.scene {
+    transform-style: preserve-3d;
+    animation: animateScene 30s linear infinite;
+}
+
+@keyframes animateScene {
+    0% {
+        transform: perspective(1500px) rotateY(0);
+    }
+
+    100% {
+        transform: perspective(1500px) rotateY(360deg);
+    }
+}
+
+.scene::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2000px;
+    height: 2000px;
+    background: url(/images/tiled-stones.jpg);
+    background-size: 400px;
+    transform: translate3d(-1000px, -700px, 0) rotateX(90deg);
+}
+
+.wall {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2000px;
+    height: 2000px;
+    background: url(/images/tiled-stones.jpg);
+    background-size: 800px;
+    backface-visibility: hidden;
+    box-shadow: inset 0 0 500px rgba(0, 0, 0, .9);
+}
+
+.wall.wall1 {
+    transform: translate3d(-1000px, -1700px, -1000px);
+}
+
+.wall.wall2 {
+    transform: translate3d(0, -1700px, 0) rotateY(270deg);
+}
+
+.wall.wall3 {
+    transform: translate3d(-1000px, -1700px, 1000px) rotateY(180deg);
+}
+
+.wall.wall4 {
+    transform: translate3d(-2000px, -1700px, 0) rotateY(90deg);
+}
+
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+}
+
+.cube {
+    position: absolute;
+    width: 120px;
+    transform-style: preserve-3d;
+    transform: rotateX(-30deg) rotateY(45deg);
+    transition: all .5s;
+    cursor: pointer;
+    animation: rotate 10s linear infinite;
+}
+
+.c-front,
+.c-back {
+    transform: translateX(120px) translateZ(-60px);
+    animation: none;
+}
+
+.c-top,
+.c-bottom {
+    transform:translateZ(60px);
+    animation: none;
+}
+
+.c-left,
+.c-right {
+    transform: translateX(120px) translateZ(-60px);
+    animation: none;
+}
+
+.face {
+    position: absolute;
+    transform-style: preserve-3d;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle at center, rgb(21, 46, 75) 0%, rgb(10, 14, 55) 100%);
+}
+
+.front {
+    transform: rotateY(0) translateZ(60px);
+}
+
+.back {
+    transform: rotateY(180deg) translateZ(60px);
+}
+
+.left {
+    transform: rotateY(-90deg) translateZ(60px);
+}
+
+.right {
+    transform: rotateY(90deg) translateZ(60px);
+}
+
+.top {
+    transform: rotateX(90deg) translateZ(60px);
+}
+
+.bottom {
+    transform: rotateX(-90deg) translateZ(60px);
+}
+
+.c-front:hover .face,
+.c-back:hover .face,
+.c-top:hover .face,
+.c-bottom:hover .face,
+.c-left:hover .face,
+.c-right:hover .face {
+    background: radial-gradient(circle at center, #fff 60%, rgb(157, 208, 255) 100%);
+    filter: drop-shadow(0 0 5px #e7faff)
+    drop-shadow(0 0 15px rgb(75, 168, 255))
+    drop-shadow(0 0 30px rgb(50, 156, 255));
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotateX(-30deg) rotateY(45deg);
+    }
+
+    100% {
+        transform: rotateX(-30deg) rotateY(405deg);
+    }
+}
