@@ -1,0 +1,120 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+section {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(#062527, #234d4d);
+}
+
+h1 {
+    font-size: 40px;
+    color: #525252;
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    -webkit-box-reflect: below 1px linear-gradient(transparent, #000);
+    z-index: 100;
+}
+
+section::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    right: 10%;
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    background: linear-gradient(to bottom, #f9d924, #ff2c24);
+    animation: move 5s ease-in-out infinite alternate;
+}
+
+section::after {
+    content: '';
+    position: absolute;
+    bottom: 30%;
+    left: 10%;
+    width: 250px;
+    height: 250px;
+    border-radius: 10px;
+    background: linear-gradient(to top, #01d6ff, #0f24f9);
+    animation: move 5s ease-in-out infinite;
+    animation-delay: 1s;
+}
+
+@keyframes move {
+    0%, 100% {
+        transform: translateY(200px);
+    }
+
+    50% {
+        transform: translateY(-100px);
+    }
+}
+
+.clock {
+    position: relative;
+    width: 700px;
+    height: 250px;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .1);
+    z-index: 90;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+time {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -40px;
+}
+
+h2 {
+    font-size: 6em;
+    color: white;
+}
+
+h2#seconds {
+    color: #f9d524;
+}
+
+#ampm {
+    position: relative;
+    top: -15%;
+    left: 2%;
+    font-size: 2em;
+    color: #fff;
+    font-weight: bold;
+}
+
+h4 {
+    font-weight: 300;
+    color: #ccc;
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
