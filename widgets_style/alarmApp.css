@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(to bottom, #121212, #333, #121212);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 50px 0;
+}
+
+body::after {
+    content: '';
+    position: absolute;
+    background-color: #ed2ff0;
+    width: 120px;
+    height: 120px;
+    left: 75%;
+    top: 20%;
+    filter: blur(90px);
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    background-color: #22a8cd;
+    width: 120px;
+    height: 120px;
+    left: 10%;
+    top: 80%;
+    filter: blur(90px);
+}
+
+.wrapper {
+    color: #ccc;
+    background: rgba(0, 0, 0, .44);
+    width: 50%;
+    max-width: 31.25em;
+    padding: 2em;
+    border-radius: 1em;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, .2);
+    backdrop-filter:  blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.current-time {
+    font-size: 2.2em;
+    text-align: center;
+}
+
+.inputs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    margin-top: 1.5em;
+}
+
+.inputs input {
+    width: 4em;
+    font-size: 1.2em;
+    border: 1px solid #ccc;
+    outline: none;
+    background-color: transparent;
+    color: #fff;
+    text-align: center;
+    border-radius: .3em;
+    padding: .4em .2em;
+}
+
+.inputs input:focus {
+    border-color: #0d47a1;
+    color: #1774ff;
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.1);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.buttons {
+    display: flex;
+    gap: 1.2em;
+}
+
+button#set {
+    background-color: transparent;
+    border: 1px solid #ccc;
+    color: #fff;
+    padding: .6em;
+    width: 100%;
+    margin: 1.5em auto 0 auto;
+    border-radius: .5em;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+button#set:hover {
+    border-color: #0d47a1;
+    color: #1774ff;
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.1);
+    scale: 1.1;
+}
+
+button#set:active {
+    scale: 1;
+}
+
+.alarm {
+    display: grid;
+    grid-template-columns: 9fr 1fr 2fr;
+    margin-top: 1.5em;
+    align-items: center;
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: .6em;
+}
+
+.alarm input[type='checkbox'] {
+    appearance: none;
+    height: 1.6em;
+    width: 3.75em;
+    margin-right: 12px;
+    background-color: #e2e2e2;
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+}
+
+.alarm input[type='checkbox']::before {
+    content: '';
+    position: absolute;
+    background-color: #757575;
+    height: 1.1em;
+    width: 1.5em;
+    border-radius: 4px;
+    top: .25em;
+    left: .3em;
+}
+
+.alarm input[type='checkbox']:checked {
+    background-color: #b3e5fc;
+}
+
+.alarm input[type='checkbox']:checked::before {
+    background-color: #0d47a1;
+    left: 2em;
+}
+
+.deleteButton {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5em;
+    transition: all .3s ease;
+}
+
+.deleteButton:hover {
+    color: #0d47a1;
+}
+
+@media screen and (max-width: 768px) {
+    .wrapper {
+        width: 80%;
+    }
+}

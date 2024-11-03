@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alarm App</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/widgets_style/alarmApp.css">
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="current-time">00:00:00</div>
+    <div class="container">
+      <div class="inputs">
+        <input type="number" id="hour-input" placeholder="00" min="0" max="23">
+        <input type="number" id="minute-input" placeholder="00" min="0" max="59">
+      </div>
+      <div class="buttons">
+        <button id="set">Add Alarm</button>
+        <button id="set" class="clear">Clear All</button>
+      </div>
+      <div class="alarms-list"></div>
+    </div>
+  </div>
+<audio src="/thumb/alarm.mp3"></audio>
+  <script src="/widgets_script/alarmApp.js"></script>
+</body>
+
+</html>
