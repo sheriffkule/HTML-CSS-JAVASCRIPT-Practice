@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Caveat Brush", serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: move 10s ease infinite;
+}
+
+#text {
+    position: relative;
+    left: 0;
+    top: 0;
+    color: #0099ff;
+    font-size: 12vw;
+    line-height: 1.1;
+    letter-spacing: 2px;
+    text-align: center;
+    transform: rotate(-28deg) skew(25deg);
+    user-select: none;
+    cursor: pointer;
+}
+
+#text::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 90px;
+    left: -180px;
+    color: rgba(0, 0, 0, .3);
+    text-shadow: none;
+    filter: blur(4px);
+    z-index: -1;
+}
+
+@keyframes move {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}
