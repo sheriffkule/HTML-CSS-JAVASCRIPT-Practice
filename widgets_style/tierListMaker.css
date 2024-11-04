@@ -1,0 +1,287 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-color: #27272a;
+    --tier-bg-color: #404040;
+    --tier-control-bg-color: #262626;
+    --border-color: #0a0a0a;
+    --card-size: 100px;
+}
+
+body {
+    background: var(--bg-color);
+}
+
+h1 {
+    color: transparent;
+    font-size: 3rem;
+    -webkit-text-stroke: 1px lime;
+    text-align: center;
+    text-shadow: 0 6px 12px rgba(0, 255, 0, 0.3);
+    margin: 3rem 0;
+    user-select: none;
+}
+
+img {
+    width: var(--card-size);
+    aspect-ratio: 1;
+    object-fit: cover;
+    cursor: grab;
+    transition: all .3s;
+    border-radius: 50%;
+}
+
+img:is(:hover, :active) {
+    scale: 1.2;
+    
+}
+
+img.dragging {
+    opacity: .1;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    transition: .4s;
+}
+
+.container {
+    width: min(1200px, 80%);
+    margin: auto;
+    border: 2px solid var(--border-color);
+}
+
+.tiers:empty::before {
+    content: 'click on the title to add a new tier.';
+    height: var(--card-size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #bbb;
+    font-size: 0.875rem;
+    background: var(--tier-bg-color);
+}
+
+.tier {
+    background-color: var(--bg-color);
+    display: flex;
+    gap: 2px;
+}
+
+.tier:not(:last-child) {
+    border-bottom: 2px solid var(--border-color);
+}
+
+.label {
+    flex-shrink: 0;
+    width: 100px;
+    min-height: var(--card-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color, lightcoral);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1rem;
+    text-align: center;
+    overflow-wrap: break-word;
+}
+
+.label:hover {
+    filter: saturate(1.5);
+}
+
+.label:focus {
+    outline: none;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    border: 1px double #262626;
+}
+
+
+.label span {
+    overflow: hidden;
+    padding: .5rem;
+}
+
+.items {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    flex: 1;
+}
+
+.controls {
+    width: 40px;
+    background: var(--tier-control-bg-color);
+    display: grid;
+    align-content: center;
+    justify-items: center;
+}
+
+.controls button {
+    font-size: 1.2rem;
+    background: transparent;
+    color: #fff;
+    opacity: .75;
+    transition: all .25s;
+}
+
+.controls button:is(:active, :hover) {
+    opacity: 1;
+    scale: 1.25;
+    filter: drop-shadow(0 0 10px royalblue);
+}
+
+@media screen and (min-width: 768px) {
+    .controls {
+        grid-template-columns: repeat(2, 1fr);
+        width: 64px;
+    }
+
+    .controls .settings {
+        grid-row: span 2;
+    }
+
+    .controls button {
+        font-size: 1.5rem;
+    }
+}
+
+.cards {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    min-height: calc(var(--card-size) * 2);
+    background: var(--tier-bg-color);
+}
+
+section {
+    background: #94a0e9;
+}
+
+.settings-modal[open] {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    border-radius: .25rem;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .25);
+}
+
+.settings-modal::backdrop {
+    background: rgba(0, 0, 0, .5);
+    cursor: pointer;
+}
+
+.settings-modal section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 2rem;
+    width: max-content;
+}
+
+.colors, .tier-label {
+    grid-column: span 2;
+    background: #bbb;
+}
+
+.colors {
+    display: flex;
+    justify-content: center;
+    gap: .5rem;
+}
+
+.colors input {
+    appearance: none;
+}
+
+.colors label {
+    width: 1rem;
+    height: 1rem;
+    background: var(--color);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: .3s;
+    position: relative;
+}
+
+.colors label:has(input:checked)::before {
+    content: '\F26A';
+    font-family: "bootstrap-icons";
+    background: black;
+    color: var(--color);
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+}
+
+.colors label:has(input:checked) {
+    box-shadow: 0 0 0 2px #fff,
+    0 0 0 4px var(--color),
+    0 0 8px rgba(0, 0, 0, .5);
+}
+
+.tier-label {
+    border: 1px solid lightgray;
+    border-radius: .25rem;
+    outline: none;
+    padding: .5rem;
+    resize: none;
+    transition: .3s ease-in-out;
+}
+.tier-label:focus {
+    background: #fff;
+    border-color: var(--border-color);
+}
+
+.settings-modal button {
+    text-wrap: nowrap;
+    padding: .25rem .5rem;
+    border-radius: .25rem;
+    color: #000;
+    background: #bbb;
+    font-size: .875rem;
+}
+
+.settings-modal button:is(:active, :hover) {
+    background: #999;
+    box-shadow: 0 6px 12px  rgba(0, 0, 0, .3);
+    transform: scale(1.07);
+}
+
+h4 {
+    text-align: center;
+    color: #ccc;
+    font-size: .75rem;
+    padding: 60px 0 20px 0;
+    font-weight: 100;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    background: #262626;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #666;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+
+abbr {
+    text-decoration: underline dotted #34552a 3px;
+}

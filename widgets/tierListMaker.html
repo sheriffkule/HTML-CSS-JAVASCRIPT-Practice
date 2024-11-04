@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tier List Maker</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="/widgets_style/tierListMaker.css">
+  <script type="module" src="/widgets_script/tierListMaker.js"></script>
+</head>
+
+<body>
+  <h1><abbr title="Drag & Drop items on list, arange them, add or delete rows.">Tier List Maker</abbr></h1>
+
+  <div class="tiers container"></div>
+
+  <div class="cards container">
+    <img src="https://placehold.co/100/orange/fff/?text=Orange"/>
+    <img src="https://placehold.co/200/dodgerblue/fff/?text=Dodgerblue" />
+    <img src="https://placehold.co/150x100/green/fff/?text=Green" />
+    <img src="https://placehold.co/120x150/red/fff//?text=Red" />
+    <img src="https://placehold.co/220x190/purple/fff//?text=Purple" />
+    <img src="https://placehold.co/300x120/teal/fff/?text=Teal" />
+    <img src="https://placehold.co/145/pink/fff//?text=Pink" />
+    <img src="https://placehold.co/90/hotpink/fff//?text=Hotpink" />
+    <img src="https://placehold.co/145/brown/fff/?text=Brown" />
+    <img src="https://placehold.co/110x165/darkorchid/fff/?text=Darkorchid" />
+    <img src="https://placehold.co/220/tomato/fff/?text=Tomato" />
+    <img src="https://placehold.co/135x150/lightseagreen/fff/?text=Lightseagreen" />
+    <img src="https://placehold.co/135x150/darkblue/fff/?text=DarkBlue" />
+    <img src="https://placehold.co/135x150/darkgreen/fff/?text=DarkGreen" />
+    <img src="https://placehold.co/135x150/darkslategrey/fff/?text=DarkSlateGrey" />
+    <img src="https://placehold.co/135x150/olivedrab/fff/?text=OliveDrab" />
+    <img src="https://placehold.co/135x150/lawngreen/fff/?text=LawnGreen" />
+    <img src="https://placehold.co/135x150/maroon/fff/?text=Maroon" />
+    <img src="https://placehold.co/135x150/olive/fff/?text=Olive" />
+    <img src="https://placehold.co/135x150/orangered/fff/?text=OrangeRed" />
+    <img src="https://placehold.co/135x150/seagreen/fff/?text=SeaGreen" />
+    <img src="https://placehold.co/135x150/steelblue/fff/?text=SteelBlue" />
+    <img src="https://placehold.co/135x150/slateblue/fff/?text=SlateBlue" />
+    <img src="https://placehold.co/220/black/fff/?text=Black" />
+    <img src="https://placehold.co/200/chocolate/fff/?text=Chocolate" />
+    <img src="https://placehold.co/200/dimgrey/fff/?text=DimGrey" />
+  </div>
+
+  <dialog class="settings-modal">
+    <section>
+      <div class="colors"></div>
+
+      <textarea class="tier-label" placeholder="Tier Label"></textarea>
+
+      <button id="delete">Delete Row</button>
+      <button id="clear">Clear Row</button>
+      <button id="prepend">Add a Above</button>
+      <button id="append">Add a Row Below</button>
+    </section>
+  </dialog>
+  <h4>Made by &copy; <time id="year"></time> SheriffKule from XXIII Century</h4>
+</body>
+
+</html>
