@@ -1,0 +1,67 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #d1d1d1;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+
+span {
+    font-size: 2rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    background: #c8dff7;
+    box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, .15),
+    -6px -6px 10px -1px rgba(255, 255, 255, .7);
+    transition: all .3s ease-in-out;
+    cursor: pointer;
+}
+
+.box span:hover {
+    box-shadow: inset 4px 4px 6px -1px rgba(0, 0, 0, .2),
+    inset -4px -4px 6px -1px rgba(255, 255, 255, .7),
+    -1px -1px 0 rgb(255, 255, 255),
+    1px 1px 0 rgba(0, 0, 0, .15),
+    0px 12px 10px -10px rgba(0, 0, 0, .05);
+    transform: scale(.95) translateY(5%);
+}
+
+#facebook {
+    color: blue;
+}
+
+#instagram {
+    color: #ff245b;
+}
+
+#github {
+    color: #1f2323;
+}
+
+#youtube {
+    color: #fc0404;
+}
+
+#telegram {
+    color: #0488fc;
+}
