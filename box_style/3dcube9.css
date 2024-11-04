@@ -1,0 +1,167 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #0b1111;
+}
+
+.cube {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    transform-style: preserve-3d;
+    transform: rotateX(-30deg);
+    animation: d1 16s linear infinite;
+}
+
+@keyframes d1 {
+    0% {
+        transform: rotateX(-15deg) rotateY(0);
+    }
+
+    100% {
+        transform: rotateX(-15deg)  rotateY(-360deg);
+    }
+}
+
+.cube div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform-style: preserve-3d;
+}
+
+.cube div span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: 2px solid #7dff99;
+    transform: rotateY(calc(var(--i) * 90deg)) translateZ(150px);
+}
+
+.top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 300px;
+    background: transparent;
+    border: 2px solid #7dff99;
+    transform: rotateX(90deg) translateZ(150px);
+}
+
+.top::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 300px;
+    border: 2px solid #7dff99;
+    transform: translateZ(-400px);
+    filter: blur(30px);
+    box-shadow: 0 0 120px rgba(125, 255, 153, .2),
+    0 0 200px rgba(125, 255, 153, .4),
+    0 0 300px rgba(125, 255, 153, .6),
+    0 0 400px rgba(125, 255, 153, .9),;
+}
+
+.cube2 {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    transform-style: preserve-3d;
+    animation: d2 8s ease-out infinite alternate;
+}
+
+@keyframes d2 {
+    0% {
+        transform: rotateX(0)  rotateY(0);
+    }
+
+    100% {
+        transform: rotateX(180deg) rotateY(-360deg);
+    }
+}
+
+.cube2 div {
+    position: absolute;
+    top: 35px;
+    left: 0;
+    width: 65%;
+    height: 65%;
+    transform-style: preserve-3d;
+}
+
+.cube2 div span {
+    position: absolute;
+    top: 20%;
+    left: 18%;
+    width: 65%;
+    height: 65%;
+    background: transparent;
+    border: 2px solid #7dff99;
+    transform: rotateY(calc(var(--i) *  90deg)) translateZ(62px);
+}
+
+.cube3 {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    transform-style: preserve-3d;
+    transform: rotateX(-30deg);
+    animation: d3 3s ease-out infinite alternate;
+}
+
+@keyframes d3 {
+    0% {
+        transform: rotateX(-90deg) rotateY(0);
+    }
+
+    100% {
+        transform: rotateX(90deg) rotateY(45deg);
+    }
+}
+
+.cube3 div {
+    position: absolute;
+    top: 70px;
+    left: 70px;
+    width: 15%;
+    height: 15%;
+    transform-style: preserve-3d;
+}
+
+.cube3 div span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width:  100%;
+    height: 100%;
+    background: #7dff99;
+    transform: rotateY(calc(var(--i) * 90deg)) translateZ(22px);
+    box-shadow: 0 0 12px #7dff99;
+}
+
+.top3 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #7dff99;
+    transform: rotateX(90deg) translateZ(24px);
+    box-shadow: 0 0 10px #7dff99;
+    width: 50px;
+    height: 50px;
+}
