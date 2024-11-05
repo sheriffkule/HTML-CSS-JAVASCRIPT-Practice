@@ -1,0 +1,57 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.banner {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: #131b31;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.banner::before {
+    content: attr(data-text);
+    position: absolute;
+    font-weight: 800;
+    font-size: 12em;
+    color: transparent;
+    -webkit-text-stroke: 2px #fff;
+    z-index: 1;
+}
+
+.banner::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    font-weight: 800;
+    font-size: 12em;
+    color: #4770ee;
+    -webkit-text-stroke: 2px #fff;
+    z-index: 2;
+    clip-path: circle(0 at var(--x) var(--y));
+    transition: clip-path 0.1s;
+    background: #f00;
+    background: url(/images/earth.jpg);
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner:hover::after {
+    clip-path: circle(200px at var(--x) var(--y));
+}
