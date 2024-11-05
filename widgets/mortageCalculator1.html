@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mortgage Calculator</title>
+  <link rel="stylesheet" href="/widgets_style/mortageCalculator.css">
+</head>
+
+<body>
+  <h1>Mortgage Calculator</h1>
+  <div class="container">
+    <div class="calculator">
+      <label for="principal">Principal Amount</label>
+      <input type="number" id="principal" placeholder="Enter the Principal Amount">
+
+      <label for="downpayment">Down Payment:</label>
+
+      <div class="input-group">
+        <input type="number" placeholder="Down Payment Amount" id="downpayment" oninput="updatePercentage()">
+      </div>
+
+      <div class="percentage-group">
+        <input type="number" placeholder="Percentage" id="downpayment-percentage" style="width: 25%;" min="0" max="100" step="0.1" oninput="updateDownpayment()">
+        <span style="display: inline-block; width: 75%;"> % of Principal</span>
+      </div>
+      <label for="interest">Annual Interest Rate (%)</label>
+      <input type="number" placeholder="Enter interest rate" id="interest" min="0" max="100"  step="0.1">
+
+      <label for="years">Loan Terms (Years):</label>
+      <input type="number" placeholder="Number of Years for Loan" id="years" min="1" max="30" step="0.5" value="30">
+      <label for="extra-payment">Extra Payment</label>
+      <input type="number" id="extra-payment" placeholder="Enter extra payment per month">
+
+      <div class="button-container">
+        <button class="calculate" onclick="calculateMortage()">Calculate</button>
+        <button class="clear" onclick="clearFields()">Clear</button>
+      </div>
+      <button id="amortization-button" onclick="viewAmortizationPage()" >View Amortization Table</button>
+    </div>
+    <div class="results">
+      <h2>Results</h2>
+      <div class="result-item">
+        <span>Monthly Payment: </span>
+        $
+        <span id="monthly-payment">0.00</span>
+      </div>
+
+      <div class="result-item">
+        <span>Total EMI: </span>
+        <span id="total-emi">0.00</span>
+      </div>
+
+      <div class="result-item">
+        <span>Total Principal: </span>
+        $
+        <span id="total-principal">0.00</span>
+      </div>
+
+      <div class="result-item">
+        <span>Total Interest: </span>
+        $
+        <span id="total-interest">0.00</span>
+      </div>
+
+      <div class="chart-container">
+        <canvas id="pie-chart"></canvas>
+      </div>
+    </div>
+  </div>
+  <h4>Made by &copy; <time id="year"></time> SheriffKule from XXIII Century.</h4>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/widgets_script/mortageCalculator.js"></script>
+</body>
+
+</html>
