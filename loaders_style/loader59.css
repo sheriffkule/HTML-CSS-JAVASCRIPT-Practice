@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    place-items: center;
+    background: radial-gradient(#444, #000);
+    min-height: 100vh;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.shape {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 50% 50% 0 50%;
+    transform-origin: 15px 15px;
+    mix-blend-mode: plus-lighter;
+    box-shadow: 10px 10px 5px #ff69b4,
+        5px 5px 50px #ff69b4;
+    animation: rotate 3s 1s linear infinite;
+}
+
+.shape:nth-child(odd) {
+    animation-direction: reverse;
+}
+
+@keyframes rotate {
+    to {
+        transform: rotate(1turn);
+    }
+}
