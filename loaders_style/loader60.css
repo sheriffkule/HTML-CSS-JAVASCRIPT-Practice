@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --z: 20px;
+}
+
+body {
+    background-color: #333;
+    min-height: 100vh;
+    perspective: 800px;
+}
+
+* {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-style: preserve-3d;
+}
+
+.external {
+    border: 10px solid #33ffcc;
+    width: 15em;
+    height: 15em;
+    transform: rotateX(45deg) rotateY(45deg) scale(1.2) translate(-50%, -50%);
+    animation: rotate 5s linear infinite;
+}
+
+.internal {
+    position: absolute;
+    border: 10px solid rgba(37, 168, 191, .5);
+    top: 10px;
+    left: 0px;
+    height: calc(100%);
+    width: calc(100%);
+}
+
+.front1 {
+    border: 10px solid #33ff66;
+    transform: translateZ(var(--z));
+}
+
+.front2 {
+    border: 10px solid #ffcc33;
+    transform: translateZ(calc(var(--z) * 2));
+}
+
+.front3 {
+    border: 10px solid #ff6633;
+    transform: translateZ(calc(var(--z) * 3));
+}
+
+.front4 {
+    border: 10px solid #ff3366;
+    transform: translateZ(calc(var(--z) * 4));
+}
+
+.back1 {
+    border: 10px solid #3366ff;
+    transform: rotateY(180deg) translateZ(calc(1 * var(--z)));
+}
+
+.back2 {
+    border: 10px solid #6633ff;
+    transform: rotateY(180deg) translateZ(calc(2 *  var(--z)));
+}
+
+.back3 {
+    border: 10px solid #a33afa;
+    transform: rotateY(180deg) translateZ(calc(3 * var(--z)));
+}
+
+.back4 {
+    border: 10px solid #cc33ff;
+    transform: rotateY(180deg) translateZ(calc(4 * var(--z)));
+}
+
+@keyframes rotate {
+    to {
+        transform: rotateX(45deg) rotateY(45deg) scale(1.2) translate(-50%, -50%) rotateZ(360deg);
+    }
+}
