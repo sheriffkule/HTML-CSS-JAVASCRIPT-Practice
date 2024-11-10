@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+.bg {
+    animation: move 12s ease-in-out infinite alternate;
+    background-image: linear-gradient(-60deg, rgb(202, 5, 196) 50%, rgb(43, 21, 241) 50%, rgb(80, 235, 3) 100%);
+    position: fixed;
+    bottom: 0;
+    left: -50%;
+    opacity: 1;
+    right: -50%;
+    top: 0;
+    z-index: -1;
+}
+
+.bg2 {
+    animation-direction: alternate-reverse;
+    animation-duration: 4s;
+}
+
+.bg3 {
+    animation-duration: 5s;
+}
+
+.content {
+    background: rgba(255, 6, 85, 0.6);
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+    left: 50%;
+    padding: 10vmin;
+    position: fixed;
+    text-align: center;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+h1 {
+    width: 500px;
+    color: #fff;
+}
+
+@keyframes move {
+    0% {
+        transform: translateX(-25%);
+    }
+    100% {
+        transform: translateX(25%);
+    }
+}
