@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-weight: 500;
+}
+
+.container {
+    background-color: #38332f;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: space-evenly;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.text {
+    height: 5vw;
+    width: 100%;
+    position: relative;
+}
+
+.text div:hover {
+    color: yellow;
+    box-shadow: 1rem 3rem yellow;
+}
+
+.text div {
+    align-items: center;
+    padding: 1.2rem;
+    background-color: #000;
+    color: #38332f;
+    font-size: 3vw;
+    width: 200%;
+    overflow: hidden;
+    animation: move 8s linear infinite;
+    position: absolute;
+    transition: all .8s;
+}
+
+@keyframes move {
+    0% {
+        right: 0;
+    }
+
+    100% {
+        right: -100%;
+    }
+}
