@@ -1,0 +1,100 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(to bottom right, #111, #303030, #111);
+}
+
+.container {
+    position: relative;
+    overflow: hidden;
+    width: 350px;
+    height: 350px;
+    background: transparent;
+}
+
+.container div {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    border: 5px solid;
+    animation: rotate 5s linear infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotateX(0) rotateY(var(--rotateY));
+    }
+
+    100% {
+        transform: rotateX(360deg) rotateY(var(--rotateY));
+    }
+}
+
+.container div:nth-child(1) {
+    --rotateY: 234deg;
+    border-color: rgb(139, 240, 0);
+    animation-delay: .2s;
+}
+
+.container div:nth-child(2) {
+    --rotateY: 145deg;
+    border-color: rgb(239, 216, 0);
+    animation-delay: .4s;
+}
+
+.container div:nth-child(3) {
+    --rotateY: 57deg;
+    border-color: rgb(82, 90, 162);
+    animation-delay: .6s;
+}
+
+.container div:nth-child(4) {
+    --rotateY: 114deg;
+    border-color: rgb(103, 96, 145);
+    animation-delay: .8s;
+}
+
+.container div:nth-child(5) {
+    --rotateY: 295deg;
+    border-color: rgb(89, 89, 73);
+    animation-delay: 1s;
+}
+
+.container div:nth-child(6) {
+    --rotateY: 343deg;
+    border-color: rgb(57, 66, 149);
+    animation-delay: .8s;
+}
+
+.container div:nth-child(7) {
+    --rotateY: 75deg;
+    border-color: rgb(210, 34, 66);
+    animation-delay: 1.4s;
+}
+
+.container div:nth-child(8) {
+    --rotateY: 118deg;
+    border-color: rgb(154, 102, 26);
+    animation-delay: 1.6s;
+}
+
+.container div:nth-child(9) {
+    --rotateY: 29deg;
+    border-color: rgb(87, 145, 162);
+    animation-delay: 1.8s;
+}
+
+.container div:nth-child(10) {
+    --rotateY: 146deg;
+    border-color: rgb(71, 87, 132);
+    animation-delay: 2s;
+}
