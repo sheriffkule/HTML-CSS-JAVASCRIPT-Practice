@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    gap: 80px;
+    min-height: 100vh;
+    background: #212529;
+    overflow: hidden;
+}
+
+.container {
+    width: 224px;
+    perspective: 2000px;
+}
+
+.cube {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    transform-style: preserve-3d;
+    transition: all 1.5s;
+}
+
+.cube:hover {
+    transform: rotateX(180deg) rotateY(720deg);
+}
+
+.side {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ccc;
+}
+
+.back {
+    transform: translateZ(-100px) rotateX(180deg);
+}
+
+.left {
+    transform: translateX(-100px) rotateY(-90deg);
+}
+
+.right {
+    transform: translateX(100px) rotateY(90deg);
+}
+
+.front {
+    transform: translateZ(100px);
+}
+
+.top {
+    transform: translateY(-100px) rotateX(90deg);
+}
+
+.bottom {
+    transform: translateY(100px) rotateX(90deg);
+}
+
+.side i {
+    font-size: 85px;
+}
+
+.youtube {
+    background: #ff0000;
+    color: #fff;
+}
+
+.twitter {
+    background: #01a0f5;
+    color: #fff;
+}
+
+.facebook {
+    background: #3b5998;
+    color: #fff;
+}
+
+.whatsapp {
+    background: #03f33f;
+    color: #fff;
+}
