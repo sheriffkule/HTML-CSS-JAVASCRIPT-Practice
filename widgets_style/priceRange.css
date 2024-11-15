@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(to bottom, #111, #272d58, #111);
+}
+
+.wrapper {
+    width: 400px;
+    background: linear-gradient(to bottom, #171b35, #2e3568, #171b35);;
+    padding: 20px 25px 40px;
+    border-radius: 10px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .3),
+    inset  0 0 10px rgba(255, 255, 255, .1);
+    color: #ff7700;
+}
+
+.wrapper header h2 {
+    font-size: 26px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.wrapper header p {
+    font-size: 15px;
+    text-align: center;
+}
+
+.wrapper .price-input {
+    display: flex;
+    width: 100%;
+    margin: 30px 0 35px;
+}
+
+.wrapper .price-input .field {
+    display: flex;
+    width: 100%;
+    height: 40px;
+    align-items: center;
+}
+
+.wrapper .price-input .field span {
+    font-size: 20px;
+}
+
+.price-input input {
+    width: 100%;
+    height: 100%;
+    outline: 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 18px;
+    margin-left: 12px;
+    font-weight: 500;
+}
+
+.price-input input:focus {
+    border-color: #00d9ff;
+    background: #94b2cf;
+}
+
+.price-input input::-webkit-outer-spin-button,
+.price-input input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    display: none;
+}
+
+.wrapper .separator {
+    width: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.wrapper .slider {
+    height: 5px;
+    position: relative;
+    background-color: #ddd;
+    border-radius: 5px;
+}
+
+.wrapper .slider .progress {
+    position: absolute;
+    height: 100%;
+    left: 4%;
+    right: 50%;
+    background-color: #4070f4;
+    border-radius: 6px;
+}
+
+.wrapper .range-input {
+    position: relative;
+}
+
+.wrapper .range-input input  {
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    top: -5px;
+    pointer-events: none;
+    background: none;
+    appearance: none;
+    accent-color:  #4070f4;
+}
+
+.wrapper .range-input input::-webkit-slider-thumb {
+    height: 15px;
+    width: 15px;
+    background-color: #4070f4;
+    border-radius: 50%;
+    pointer-events: auto;
+    box-shadow: 0 0 6px rgba(255, 255, 255, .1);
+}

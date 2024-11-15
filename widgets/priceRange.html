@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price Range</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/widgets_style/priceRange.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h2>Price Range</h2>
+            <p>Enter or Select Min and Max Price</p>
+        </header>
+
+        <div class="price-input">
+            <div class="field">
+                <span>Min:</span>
+                <input type="number" class="min-input" value="100" min="0" max="10000" pattern="[0-9]*">
+            </div>
+
+            <div class="separator">-</div>
+            <div class="field">
+                <span>Max:</span>
+                <input type="number" class="max-input" value="5000" min="100" max="10000" pattern="[0-9]*">
+            </div>
+        </div>
+
+        <div class="slider">
+            <div class="progress"></div>
+        </div>
+        <div class="range-input">
+            <input type="range" class="min-range" value="100" min="0" max="10000" pattern="[0-9]*">
+            <input type="range" class="max-range" value="5000" min="100" max="10000" pattern="[0-9]*">
+        </div>
+    </div>
+
+    <script src="/widgets_script/priceRange.js"></script>
+</body>
+
+</html>
