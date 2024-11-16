@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pizza Website</title>
+  <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/scripts/swiper-bundle.css">
+  <link rel="stylesheet" href="/projects/pizzaWebsite/pizzaWebsite.css">
+</head>
+
+<body>
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="#" class="nav__logo">
+        <img src="logo-pizza.svg" alt="Logo">Pizza
+      </a>
+
+      <div class="nav__menu" id="nav__menu">
+        <ul class="nav__list">
+          <li><a href="#home" class="nav__link">Home</a></li>
+          <li><a href="#about" class="nav__link">About Us</a></li>
+          <li><a href="#popular" class="nav__link">Popular</a></li>
+          <li><a href="#products" class="nav__link">Products</a></li>
+          <li><a href="#contact" class="nav__link">Contact</a></li>
+        </ul>
+
+        <div class="nav__close" id="nav__close">
+          <i class="ri-close-large-line"></i>
+        </div>
+      </div>
+
+      <div class="nav__toggle" id="nav__toggle">
+        <i class="ri-menu-line"></i>
+      </div>
+    </nav>
+  </header>
+
+  <main class="main">
+    <section class="home section" id="home">
+      <div class="home__container container grid">
+        <div class="home__data">
+          <h1 class="home__title">Crispy And <br> Delicious Pizza</h1>
+
+          <p class="home__description">
+            Order the best pizzas to end your hunger
+            and make your family moments more
+            memorable, place your order now.
+          </p>
+
+          <a href="#products" class="button">Order Pizza Now</a>
+
+          <img src="sticker-pizza.svg" alt="image" class="home__sticker-1">
+          <img src="sticker-leaf.svg" alt="image" class="home__sticker-2">
+        </div>
+
+        <div class="home__images">
+          <img src="home-pizza.png" alt="image" class="home__pizza">
+          <img src="home-board.png" alt="image" class="home__board">
+
+          <img src="home-leaf-1.png" alt="image" class="home__ingredient home__leaf-1">
+          <img src="home-leaf-2.png" alt="image" class="home__ingredient home__leaf-2">
+          <img src="home-pepperoni.png" alt="image" class="home__ingredient home__pepperoni">
+          <img src="home-mushroom.png" alt="image" class="home__ingredient home__mushroom">
+          <img src="home-olive.png" alt="image" class="home__ingredient home__olive">
+          <img src="home-tomato.png" alt="image" class="home__ingredient home__tomato">
+        </div>
+      </div>
+    </section>
+
+    <section class="about section" id="about">
+      <div class="about__container container grid">
+        <div class="about__data">
+          <h2 class="section__title">Learn More About <br> Our History</h2>
+
+          <p class="about__description">
+            The secret to success is the best ingredients
+            to make a better pizza. Today we strive for
+            perfection, just as we have been doing for 15 years
+            when we first opened the pizzeria in Verona - Italy.
+          </p>
+
+          <a href="#popular" class="button">The Best Pizzas</a>
+
+          <img src="sticker-cheese.svg" alt="image" class="about__sticker">
+        </div>
+
+        <img src="about-img.png" alt="image" class="about__img">
+      </div>
+    </section>
+
+    <section class="popular section" id="popular">
+      <div class="popular__container container grid">
+        <div class="popular__data">
+          <h2 class="section__title">Discover <br> Popular Orders</h2>
+
+          <p class="popular__description">
+            Our specialty is to provide you with the best
+            pizza options, so you can enjoy your meal
+            with the most enjoyable experience.
+          </p>
+        </div>
+
+        <div class="popular__swiper swiper">
+          <img src="popular-dish.png" alt="image" class="popular__dish">
+
+          <div class="swiper-wrapper">
+            <article class="popular__card swiper-slide">
+              <img src="popular-1.png" alt="image" class="popular__img">
+              <h3 class="popular__title">Margherita Pizza</h3>
+            </article>
+
+            <article class="popular__card swiper-slide">
+              <img src="popular-2.png" alt="image" class="popular__img">
+              <h3 class="popular__title">Mushroom Pizza</h3>
+            </article>
+
+            <article class="popular__card swiper-slide">
+              <img src="popular-3.png" alt="image" class="popular__img">
+              <h3 class="popular__title">Pepperoni Pizza</h3>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="/scripts/scrollreveal.min.js"></script>
+  <script src="/scripts/swiper-bundle.min.js"></script>
+  <script src="pizzaWebsite.js"></script>
+</body>
+
+</html>
