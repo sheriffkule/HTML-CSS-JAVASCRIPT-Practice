@@ -1,0 +1,185 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: radial-gradient(ellipse at center, #333, #111);
+    min-height: 100vh;
+    display: grid;
+    place-content: center;
+    text-align: center;
+}
+
+h1 {
+    color: #888;
+    margin: -20px 0 10px;
+}
+
+.container {
+    position: relative;
+    width: 400px;
+    background: radial-gradient(ellipse at center, #292929, #111);
+    padding: 20px 30px;
+    border: 1px solid #444;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container .post {
+    display: none;
+}
+
+.container .text {
+    font-size: 25px;
+    color: #777;
+    font-weight: 500;
+}
+
+.container .edit {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    font-size: 16px;
+    color: #777;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .25s;
+}
+
+.container .edit:hover {
+    text-decoration: underline;
+    color: #999;
+}
+
+.container .star-widget input {
+    display: none;
+}
+
+.star-widget label {
+    font-size: 42px;
+    color: #444;
+    padding: 10px;
+    float: right;
+    transition: all .2s ease-in-out;
+}
+
+input:not(:checked)~label:hover~label,
+input:not(:checked)~label:hover {
+    color: #fd4;
+    /* box-shadow: inset 0 0 10px rgba(255, 221, 68, 0.4); */
+    /* border-radius: 50%; */
+}
+
+input:checked~label {
+    color: #fd4;
+}
+
+input#rate-5:checked ~label {
+    color: #fde7;
+    text-shadow: 0 0 20px #952;
+}
+
+#rate-1:checked ~ form header::before {
+    content: "I just hate it... \f556";
+    font-family: 'FontAwesome';
+}
+
+#rate-2:checked~form header::before {
+    content: "I don't like it... \f57a";
+    font-family: 'FontAwesome';
+}
+
+#rate-3:checked~form header::before {
+    content: "I just like it... \f5b8";
+    font-family: 'FontAwesome';
+}
+
+#rate-4:checked~form header::before {
+    content: "It is awesome... \f599";
+    font-family: 'FontAwesome';
+}
+
+#rate-5:checked~form header::before {
+    content: "I just love it... \f598";
+    font-family: 'FontAwesome';
+}
+
+.container form {
+    display: none;
+}
+
+input:checked ~ form {
+    display: block;
+}
+
+form header {
+    width: 100%;
+    font-size: 20px;
+    color: #fe7;
+    font-weight: 500;
+    margin: 10px 0 20px 0;
+    text-align: center;
+    transition: all .25s ease;
+}
+
+form .textarea {
+    height: 100px;
+    width: 100%;
+    overflow: hidden;
+}
+
+form .textarea textarea {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: 1px solid #333;
+    background: #222;
+    padding: 10px;
+    font-size: 17px;
+    resize: none;
+    color: #eee;
+}
+
+form .textarea textarea::placeholder {
+    transition: all .3s ease-in-out;
+    transform-origin: top left;
+}
+
+form .textarea textarea:focus::placeholder {
+    transform: translateY(-32px) rotate(-30deg);
+}
+
+form .btn {
+    height: 45px;
+    width:  100%;
+    margin: 15px 0;
+}
+
+form .btn button {
+    height: 100%;
+    width: 100%;
+    border: 1px solid #444;
+    outline: none;
+    background: #222;
+    color: #aaa;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+form .btn button:hover {
+    background: #1b1b1b;
+    color: #fff;
+    box-shadow: 0 6px 12px rgba(255, 221, 68, 0.05),
+    inset 0 6px 12px rgba(255, 221, 68, 0.05),
+    inset 0 -6px 12px rgba(255, 221, 68, 0.05);
+    border-radius: 18px;
+}
