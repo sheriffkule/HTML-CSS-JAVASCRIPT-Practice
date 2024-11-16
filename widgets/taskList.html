@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task List Board</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="/widgets_style/taskList.css">
+  <script src="/widgets_script/taskList.js" defer></script>
+</head>
+
+<body>
+  <section class="container">
+    <h1>Task List</h1>
+  </section>
+
+  <section class="container columns">
+    <div class="column">
+      <div class="column-title">
+        <h3 data-tasks="0">Tasks To Do</h3>
+        <button data-add><i class="bi bi-plus"></i></button>
+      </div>
+      <div class="tasks"></div>
+    </div>
+    <div class="column">
+      <div class="column-title">
+        <h3 data-tasks="0">Tasks In Progress</h3>
+        <button data-add><i class="bi bi-plus"></i></button>
+      </div>
+      <div class="tasks"></div>
+    </div>
+    <div class="column">
+      <div class="column-title">
+        <h3 data-tasks="0">For Review</h3>
+        <button data-add><i class="bi bi-plus"></i></button>
+      </div>
+      <div class="tasks"></div>
+    </div>
+    <div class="column">
+      <div class="column-title">
+        <h3 data-tasks="0">Tasks Done</h3>
+        <button data-add><i class="bi bi-plus"></i></button>
+      </div>
+      <div class="tasks"></div>
+    </div>
+  </section>
+
+  <dialog class="confirm-modal">
+    <form method="dialog">
+      <h3>Delete Task</h3>
+      <p>Are you sure you want to delete this task?</p>
+      <div class="preview"></div>
+
+      <menu>
+        <button type="button" id="cancel">Cancel</button>
+        <button type="submit" id="confirm">Yes, Delete.</button>
+      </menu>
+    </form>
+  </dialog>
+  
+  <h4> &copy; Made by <time id="year"></time> <em>SheriffKule</em> from XXIII Century</h4>
+</body>
+
+</html>

@@ -11,6 +11,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     height: 100vh;
     background: linear-gradient(to bottom, #111, #272d58, #111);
 }
@@ -125,4 +126,14 @@ body {
     border-radius: 50%;
     pointer-events: auto;
     box-shadow: 0 0 6px rgba(255, 255, 255, .1);
+}
+
+h4 {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%);
+    font-weight: 200;
+    font-size: 14px;
+    color: #bbb;
 }
