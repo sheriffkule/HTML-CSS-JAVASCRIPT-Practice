@@ -24,6 +24,7 @@ html {
 
 body {
     color: var(--white-color);
+    background: var(--second-bg-color);
 }
 
 header {
@@ -37,6 +38,20 @@ header {
     justify-content: space-between;
     align-items: center;
     z-index: 100;
+    visibility: hidden;
+    opacity: 0;
+}
+
+header.active {
+    animation: show-header 1.5s linear forwards;
+    animation-delay: 1.2s;
+}
+
+@keyframes show-header {
+    to {
+        visibility: visible;
+        opacity: 1;
+    }
 }
 
 .logo {
@@ -80,21 +95,67 @@ nav a:hover::after {
     display: none;
 }
 
+.bars-box {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.bars-box .bar {
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+    animation: hide-bars .5s ease-in-out both;
+    animation-delay: calc(.1s * var(--i));
+}
+
+@keyframes hide-bars {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-100%);
+    }
+}
+
+.bars-box.active .bar {
+    animation: show-bars .5s ease-in-out both;
+    animation-delay: calc(.1s * var(--i));
+}
+
+@keyframes show-bars {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
 section {
     position: absolute;
     width: 100%;
     height: 100%;
     padding: 10rem 9% 2rem;
-    background-color: var(--bg-color);
     visibility: hidden;
     opacity: 0;
     overflow: hidden;
 }
 
 section.active {
-    visibility: visible;
-    opacity: 1;
-    overflow: auto;
+    animation: show-content 1.5s linear forwards;
+    animation-delay: 1.6s;
+}
+
+@keyframes show-content {
+    to {
+        visibility: visible;
+        opacity: 1;
+        overflow: auto;
+    }
 }
 
 .home {
@@ -350,7 +411,7 @@ section.active {
     cursor: pointer;
 }
 
-.resume-box .resume-btn.active{
+.resume-box .resume-btn.active {
     border-color: var(--main-color);
     color: var(--main-color);
 }
@@ -471,7 +532,7 @@ section.active {
 }
 
 .resume-detail.about .resume-item {
-    height: auto;    
+    height: auto;
     padding: 0 0 .5rem;
     background: transparent;
 }
@@ -498,6 +559,10 @@ section.active {
 
 .portfolio-detail.active {
     display: block;
+}
+
+.portfolio-box {
+    margin-top: 4rem;
 }
 
 .portfolio-box .numb {
@@ -539,7 +604,7 @@ section.active {
     margin-right: 1.5rem;
 }
 
-.portfolio-box .live-github a:first-child i{
+.portfolio-box .live-github a:first-child i {
     transform: rotate(135deg);
 }
 
@@ -552,7 +617,7 @@ section.active {
     position: absolute;
     top: 10%;
     left: -40%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) scale(.1);
     font-size: 1.5rem;
     white-space: nowrap;
     padding: .25rem .75rem;
@@ -561,7 +626,6 @@ section.active {
     background-color: var(--white-color);
     color: var(--bg-color);
     opacity: 0;
-    scale: .1;
     transition: all .4s ease-in-out;
 }
 
@@ -569,5 +633,301 @@ section.active {
     left: 50%;
     top: -70%;
     opacity: 1;
-    scale: 1;
+    transform: translateX(-50%) scale(1);
+}
+
+.portfolio-box .portfolio-carousel {
+    width: 100%;
+    height: 45rem;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.portfolio-carousel .img-slide {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 100%;
+    gap: 2rem;
+    height: inherit;
+    transition: all .4s;
+}
+
+.portfolio-carousel .img-item {
+    height: 80%;
+}
+
+.portfolio-carousel .img-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 1rem;
+}
+
+.portfolio-box .navigation {
+    text-align: right;
+    margin-top: -4rem;
+}
+
+.portfolio-box .navigation button {
+    display: inline-flex;
+    padding: .5rem;
+    background: var(--second-bg-color);
+    border: 3px solid var(--main-color);
+    border-radius: .6rem;
+    font-size: 4rem;
+    cursor: pointer;
+    color: var(--main-color);
+}
+
+.portfolio-box .navigation button.disabled {
+    border-color: var(--second-bg-color);
+    color: var(--disabled-color);
+}
+
+.portfolio-box .navigation .arrow-right {
+    margin-left: 1.5rem;
+}
+
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 3rem;
+}
+
+.contact-container .contact-box:first-child {
+    align-self: center;
+}
+
+.contact-box h2 {
+    font-size: 4rem;
+}
+
+.contact-box p {
+    font-size: 1.5rem;
+}
+
+.contact-box .desc {
+    margin: 1.5rem 0 2.5rem;
+}
+
+.contact-box .contact-detail {
+    display: flex;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+.contact-detail i {
+    display: inline-flex;
+    background: var(--second-bg-color);
+    color: var(--main-color);
+    font-size: 3rem;
+    padding: 1.25rem;
+    border-radius: 1.5rem;
+    margin-right: 1.5rem;
+}
+
+.contact-detail .detail p:first-child {
+    color: var(--main-color);
+}
+
+.contact-box form {
+    background: var(--second-bg-color);
+    padding: 2.5rem 3.5rem 3.5rem;
+    border-radius: 1rem;
+    text-align: center;
+}
+
+.contact-box .heading {
+    font-size: 3.5rem;
+}
+
+.contact-box .field-box {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.contact-box .field-box input,
+.contact-box .field-box textarea {
+    padding: 1.5rem;
+    background: var(--bg-color);
+    border-radius: .75rem;
+    font-size: 1.5rem;
+    color: var(--white-color);
+}
+
+.contact-box .field-box input::placeholder,
+.contact-box .field-box textarea::placeholder {
+    transition: .4s;
+}
+
+.contact-box .field-box input:focus::placeholder,
+.contact-box .field-box textarea:focus::placeholder {
+    transform: translateY(-40px);
+}
+
+.contact-box .field-box textarea {
+    grid-column: 1 / -1;
+    height: 26rem;
+    resize: none;
+}
+
+.contact-box .field-box input[type="number"]::-webkit-outer-spin-button,
+.contact-box .field-box input[type="number"]::-webkit-inner-spin-button {
+    appearance: none;
+}
+
+.contact-box .field-box input:focus,
+.contact-box .field-box textarea:focus {
+    border-color: var(--main-color);
+}
+
+.contact-box .btn {
+    margin-top: 2rem;
+
+}
+
+@media screen and (max-width: 1200px) {
+    html {
+        font-size: 55%;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    header {
+        padding: 2rem 4%;
+    }
+
+    section {
+        padding: 10rem 4% 2rem;
+    }
+}
+
+@media screen and (max-width: 810px) {
+    .contact-box .field-box {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #menu-icon {
+        display: block;
+        cursor: pointer;
+    }
+
+    nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        padding: 1rem 0;
+        border-top: 2px solid rgba(0, 0, 0, .2);
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
+        text-align: center;
+        clip-path: polygon(80% 0, 20% 0, 100% 0, 0 0);
+        transition: all .9s;
+    }
+
+    nav.active {
+        opacity: .95;
+        background: var(--second-bg-color);
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);border-radius: 0 0 5rem 5rem;
+    }
+
+    nav a {
+        display: flex;
+        flex-direction: column;
+        margin: 4rem 0;
+    }
+
+    .home {
+        flex-direction: column-reverse;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    .home-img .img-box {
+        width: 35rem;
+        height: 35rem;
+    }
+
+    .resume-container,
+    .contact-container,
+    .portfolio-container {
+        grid-template-columns: 1fr;
+    }
+
+    .resume-container {
+        gap: 3rem;
+    }
+
+    .portfolio-container .portfolio-box:first-child {
+        order: 1;
+    }
+
+    .portfolio-box .navigation {
+        margin-top: 2rem;
+    }
+
+    .contact-box .field-box {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .home-img .img-box {
+        width: 30rem;
+        height: 30rem;
+    }
+
+    .contact-box .field-box {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    html {
+        font-size: 50%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .home-details,
+    .resume-box h2,
+    .resume-box .heading,
+    .resume-box .desc, 
+    .resume-detail.about .resume-item {
+        text-align: center;
+    }
+
+    .home-details .btn-sci {
+        flex-direction: column-reverse;
+    }
+
+    .home-details .btn-sci .sci {
+        margin-left: 0;
+        margin-bottom: 2rem;
+    }
+
+    .contact-box form {
+        padding: 2.5rem 3rem 3.5rem;
+    }
+
+    .contact-box h2 {
+        font-size: 3.5rem;
+    }
+}
+
+::-webkit-scrollbar {
+    width: .6rem;
+    background-color: var(--second-bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(35, 52, 97);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--main-color);
 }
