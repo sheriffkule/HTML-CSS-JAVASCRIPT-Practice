@@ -1,0 +1,64 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #000;
+}
+
+.text {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    display: grid;
+    place-content: center;
+    overflow: hidden;
+    height: auto;
+}
+
+p {
+    color: #fff;
+    font-size: 1rem;
+    line-height: .75;
+}
+
+p:first-child {
+    font-size: 40px;
+    margin-bottom: -1px;
+}
+
+p.shadow {
+    font-size: 6rem;
+    position: relative;
+    perspective: 100px;
+    font-weight: 900;
+    color: rgb(2, 132, 199);
+}
+
+p.shadow::before {
+    content: 'SheriffKule';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    transform: scaleX(125%) scaleY(-1) rotateX(-40deg);
+    opacity: .3;
+    color: #fff;
+    z-index: -1;
+}
+
+p.shadow::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: -50%;
+    width: 200%;
+    height: 150%;
+    background: linear-gradient(to bottom, transparent, #000 85%);
+}
