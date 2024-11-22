@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #010b10;
+}
+
+.loader {
+    position: relative;
+    width: 500px;
+    height: 40px;
+    filter: url(#liquid);
+}
+
+.loader span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    display: block;
+    box-shadow: 0 0 40px #009ad4;
+    background: linear-gradient(#02edff, #009ad4);
+    animation: animate 5s ease-in-out infinite;
+    animation-delay: calc(.2s * var(--i));
+}
+
+@keyframes animate {
+    0% {
+        left: 0;
+    }
+
+    25% {
+        left: calc(100% - 40px);
+    }
+
+    50% {
+        left: calc(100% - 40px);
+    }
+
+    75%, 100% {
+        left: 0;
+    }
+}
+
+svg {
+    width: 0;
+    height: 0;
+}
