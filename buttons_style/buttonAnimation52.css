@@ -1,0 +1,72 @@
+* {
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(to bottom right, #111, #424242);
+    flex-direction: column;
+}
+
+button {
+    position: relative;
+    background-color: transparent;
+    width: 180px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 1px solid #fff;
+    margin: 16px 0;
+    border-radius: 25px;
+    outline: none;
+    overflow: hidden;
+    color: #fff;
+    transition: all .5s ease-in-out;
+}
+
+button span {
+    margin: 10px;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    border-radius: 50%;
+    width: 20em;
+    height: 20em;
+    left: -5em;
+    transition: all .5s ease-in-out;
+    z-index: -1;
+}
+
+button:hover {
+    color: #dadada;
+    transform: scale(1.1) skewY(-3deg);
+}
+
+button:hover::before {
+    box-shadow: inset 0 0 0 10em rgb(255, 0, 0);
+}
+
+button:nth-child(2):hover::before {
+    box-shadow: inset 0 0 0 10em rgb(16, 123, 245);
+}
+
+button:nth-child(3):hover::before {
+    box-shadow: inset 0 0 0 10em rgb(4, 226, 26);
+}
+
+button:nth-child(4):hover::before {
+    box-shadow: inset 0 0 0 10em rgb(255, 0, 17);
+}
