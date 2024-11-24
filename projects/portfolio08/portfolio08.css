@@ -126,7 +126,7 @@ a:hover .tooltip {
     height: 100%;
     transform-style: preserve-3d;
     transform-origin: 50% 50% -50vw;
-    transform: rotateY(-90deg);
+    transform: rotateY(-270deg);
 }
 
 .section {
@@ -144,6 +144,15 @@ a:hover .tooltip {
 
 .section.about {
     transform: translateX(50vw) translateZ(-50vw) rotateY(90deg);
+}
+
+.section.resume {
+    transform: translateZ(-100vw) rotateY(-180deg);
+    transform-origin: 50%;
+}
+
+.section.portfolio {
+    transform: translateX(-50vw) translateZ(-50vw) rotateY(-90deg);
 }
 
 .home,
@@ -268,4 +277,142 @@ a:hover .tooltip {
 
 .about-info .btn {
     padding: 1.2rem 4rem;
+}
+
+.resume,
+.portfolio {
+    padding-top: 2rem;
+    padding-bottom: 28rem;
+}
+
+.tab-box {
+    display: flex;
+    width: 100%;
+    height: 5rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.tab-list {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-bottom: .25rem solid var(--tab-list-color);
+    color: var(--tab-list-color);
+    transition: all .5s;
+}
+
+.tab-list.resume-list.active,
+.tab-list.portfolio-list.active {
+    border-color: var(--main-color);
+    color: var(--main-color);
+}
+
+.resume-list:nth-child(2) {
+    justify-content: center;
+}
+
+.resume-list:nth-child(3) {
+    justify-content: flex-end;
+}
+
+.tab-list h3 {
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+
+.tab-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.tab-grid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap: 2rem;
+    overflow-y: hidden;
+    overflow-x: auto;
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(.8);
+}
+
+.tab-grid.resume-box.active {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+    transition: all .5s;
+    overflow-y: auto;
+}
+
+.tab-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--third-bg-color);
+    border-radius: .75rem;
+    padding: 2rem;
+}
+
+.tab-item h4 {
+    font-size: 2.25rem;
+}
+
+.resume-item h4:nth-child(1),
+.resume-item h4:nth-child(3) {
+    font-size: 1.75rem;
+    color: var(--main-color);
+    font-weight: 400;
+}
+
+.resume-item h4:nth-child(3) {
+    position: relative;
+    color: var(--white-color);
+    margin-left: 2rem;
+}
+
+.resume-item h4:nth-child(3)::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1rem;
+    height: 1rem;
+    background: var(--main-color);
+    border-radius: 50%;
+}
+
+.tab-item p {
+    margin-top: 1rem;
+}
+
+.resume-box.skills {
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+}
+
+.resume-box.skills .resume-item {
+    align-items: center;
+}
+
+.resume-box.skills .resume-item i {
+    font-size: 8rem;
+    transition: all .3s ease-in-out;
+}
+
+.resume-box.skills .resume-item:hover i {
+    color: var(--main-color);
+    text-shadow: 0 0 18px var(--main-color);
+}
+
+.resume-box.skills .resume-item p {
+    margin-top: 0;
+}
+
+.portfolio-list:nth-child(2) {
+    justify-content: flex-end;
 }
