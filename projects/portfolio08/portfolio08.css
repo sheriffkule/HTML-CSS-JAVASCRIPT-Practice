@@ -91,7 +91,7 @@ p {
 
 .tooltip {
     position: absolute;
-    top: 4rem;
+    top: -1rem;
     left: 50%;
     transform: translateX(-50%);
     padding: .3rem 1rem;
@@ -107,7 +107,8 @@ p {
 }
 
 .nav-list li:hover .tooltip,
-a:hover .tooltip {
+a:hover .tooltip,
+.portfolio-item:hover .work-info {
     top: -4rem;
     visibility: visible;
     opacity: 1;
@@ -338,10 +339,11 @@ a:hover .tooltip {
     overflow-x: auto;
     visibility: hidden;
     opacity: 0;
-    transform: scale(.8);
+    transform: scale(.5);
 }
 
-.tab-grid.resume-box.active {
+.tab-grid.resume-box.active,
+.tab-grid.portfolio-box.active {
     visibility: visible;
     opacity: 1;
     transform: scale(1);
@@ -415,4 +417,132 @@ a:hover .tooltip {
 
 .portfolio-list:nth-child(2) {
     justify-content: flex-end;
+}
+
+.portfolio-box.work .portfolio-item {
+    position: relative;
+}
+
+.portfolio-box.work .portfolio-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--third-bg-color);
+    border-radius: .75rem;
+    z-index: 1;
+    opacity: 0;
+    transition: .3s;
+}
+
+.portfolio-box.work .portfolio-item:hover::before {
+    opacity: .9;
+}
+
+.portfolio-item .work-img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: .75rem;
+    overflow: hidden;
+}
+
+.portfolio-item .work-img img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transition: .3s;
+    object-fit: cover;
+}
+
+.portfolio-item:hover .work-img img {
+    transform: scale(1.2);
+}
+
+.portfolio-item .work-info {
+    z-index: 1;
+    visibility: hidden;
+    opacity: 0;
+    transition: .3s;
+}
+
+.portfolio-item .work-info h4 {
+    line-height: 1;
+}
+
+.portfolio-item .work-info .tech-used {
+    color: var(--main-color);
+    border-bottom: 2px solid var(--white-color);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+
+.portfolio-item .portfolio-icon a {
+    position: relative;
+    display: inline-flex;
+    padding: 1rem;
+    background: var(--white-color);
+    border-radius: 50%;
+    font-size: 2.5rem;
+    color: var(--bg-color);
+    transition: .3s;
+}
+
+.portfolio-item .work-icon a:hover {
+    background: var(--main-color);
+}
+
+.portfolio-item .work-icon a:nth-child(1) {
+    margin-right: 1rem;
+}
+
+.portfolio-item .work-icon a:nth-child(1) i {
+    transform: rotate(135deg);
+}
+
+.portfolio-item .service-icon {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .5rem;
+}
+
+.portfolio-item .service-icon .icon {
+    font-size: 7rem;
+    margin-left: -.3rem;
+    padding: .75rem;
+    transition: .3s;
+}
+
+.portfolio-item:hover .service-icon .icon {
+    color: var(--main-color);
+    box-shadow: 0 0 8px var(--main-color);
+    border-radius: 50%;
+}
+
+.portfolio-item:hover .service-icon a {
+    background: var(--main-color);
+}
+
+.portfolio-item .service-icon a i {
+    transform: rotate(-135deg);
+    transition: .3s;
+}
+
+.portfolio-item .service-icon a:hover i {
+    transform: rotate(-180deg);
+}
+
+.portfolio-box.service .portfolio-item h4 {
+    transition: .3s;
+}
+
+.portfolio-box.service .portfolio-item:hover h4 {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--main-color);
+    text-shadow: 0 0 22px var(--main-color);
 }
