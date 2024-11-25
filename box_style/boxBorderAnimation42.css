@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #191919;
+}
+
+.card {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    inset: 0;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+div::before {
+    content: '';
+    position: absolute;
+    background-image: conic-gradient(#de046d 20deg, transparent 120deg);
+    height: 150%;
+    width: 150%;
+    left: -25%;
+    top: -25%;
+    animation: rotate 5s linear infinite;
+}
+
+div.card::after {
+    content: 'SheriffKule';
+    position: absolute;
+    inset: 4px;
+    background-color: #050507;
+    width: 94%;
+    height: 94%;
+    left: 3%;
+    top: 3%;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #de046d;
+    text-shadow: 0 10px 10px #de046d;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(-360deg); }
+}
