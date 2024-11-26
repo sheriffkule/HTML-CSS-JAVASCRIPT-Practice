@@ -1,0 +1,74 @@
+*, ::after, ::before {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(to bottom right, #008CBA, #060e06);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding-top: 100px;
+    gap: 20px;
+    perspective: 900px;
+}
+
+.card {
+    height: 400px;
+    width: 300px;
+    box-shadow: 0 20px 50px #555;
+    padding: 20px;
+    transform: rotateX(60deg) scale(.7);
+    perspective: 900px;
+    border-radius: 20px;
+    transition: all .5s ease-in-out;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: rotateX(0deg) scale(1) translateY(10px);
+}
+
+#c1 {
+    background: url(/images/clint.jpeg) no-repeat center center/cover;
+}
+
+#c2 {
+    background: url(/images/tuco-01.jpg) no-repeat center center/cover;
+}
+
+#c3 {
+    background: url(/images/Angel-Eyes.jpg) no-repeat center center/cover;
+}
+
+h1 {
+    text-align: center;
+    padding-top: 50px;
+    letter-spacing: 1px;
+}
+
+.card-category {
+    color: rgba(255, 255, 255, .6);
+    margin-bottom: 10px;
+}
+
+.card-heading {
+    color: rgba(255, 255, 255, .9);
+    font-size: 30px;
+    line-height: 1.4;
+    word-spacing: 100vw;
+    font-weight: 400;
+}
