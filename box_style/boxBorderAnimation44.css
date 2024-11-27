@@ -1,0 +1,52 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #000;
+    overflow: hidden;
+}
+
+.container {
+    position: relative;
+    width: 700px;
+    display: flex;
+    justify-content: space-between;
+    filter: url(#liquid);
+}
+
+.circle {
+    position: relative;
+    min-width: 300px;
+    height: 300px;
+    border-radius: 50%;
+}
+
+.circle::before {
+    content: '';
+    position: absolute;
+    inset: -50px;
+    border-radius: 50%;
+    filter: blur(50px);
+}
+
+.circle1,
+.circle1::before {
+    background: linear-gradient(45deg, #ffeb3b, #da00ff);
+}
+
+.circle2,
+.circle2::before {
+    background: linear-gradient(45deg, #ff0c0c, #ffeb3b);
+}
+
+svg {
+    width: 0;
+    height: 0;
+}
