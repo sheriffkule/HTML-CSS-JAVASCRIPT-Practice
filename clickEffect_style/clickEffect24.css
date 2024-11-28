@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(#181818, #262626, #181818);
+}
+
+label {
+    position: relative;
+    margin: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+label input {
+    appearance: none;
+    display: none;
+}
+
+label span {
+    position: relative;
+    display: block;
+    width: 60px;
+    height: 160px;
+    border: 4px solid #111;
+    border-radius: 10px;
+    box-shadow: inset 0 2px 20px rgba(0, 0, 0, .9);
+}
+
+label span::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 25px);
+    background: linear-gradient(#222 0%, #222 50%, #222, #151515 100%);
+    border-radius: 6px;
+}
+
+label input:checked ~ span::before {
+    top: 25px;
+    background: linear-gradient(#151515 0%, #222 50%, #222, #222 100%);
+}
+
+label i {
+    position: absolute;
+    color: #111;
+    text-transform: uppercase;
+    font-style: initial;
+    font-weight: 700;
+    font-size: 1.5em;
+}
+
+label i.off {
+    bottom: 40px;
+    color: #f00;
+    text-shadow: 0 0 5px #f00,
+    0 0 15px #f00;
+}
+
+label input:checked ~ i.off {
+    bottom: 20px;
+    color: #111;
+    text-shadow: none;
+}
+
+label i.on {
+    top: 20px;
+    color: #111;
+}
+
+label input:checked ~ i.on {
+    top: 40px;
+    color: #0f0;
+    text-shadow: 0 0 5px #0f0,
+    0 0 15px #0f0;
+}
