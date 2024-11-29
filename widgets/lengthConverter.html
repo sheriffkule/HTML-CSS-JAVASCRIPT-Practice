@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Length Converter</title>
+    <link rel="stylesheet" href="/widgets_style/lengthConverter.css">
+</head>
+<body>
+    <div class="converter">
+        <h1 class="title">Length Converter</h1>
+
+        <div class="inputField">
+            <input type="number" placeholder="input" id="input-box">
+            <span>=</span>
+            <input type="number" placeholder="result" id="result-box">
+        </div>
+
+        <div class="unit">
+            <select id="inputCategory" style="--color: #00ffd0">
+                <option value="kilometer">Kilometer</option>
+                <option value="meter">Meter</option>
+                <option value="centimeter">Centimeter</option>
+                <option value="mile">Mile</option>
+                <option value="nauticalMile">Nautical Mile</option>
+                <option value="yard">Yard</option>
+                <option value="foot">Foot</option>
+                <option value="inch">Inch</option>
+            </select>
+
+            <select id="resultCategory" style="--color: #00ff1e">
+                <option value="kilometer">Kilometer</option>
+                <option value="meter">Meter</option>
+                <option value="centimeter">Centimeter</option>
+                <option value="millimeter">Milimeter</option>
+                <option value="micrometer">Micrometer</option>
+                <option value="nanometer">Nanometer</option>
+                <option value="mile">Mile</option>
+                <option value="nauticalMile">Nautical Mile</option>
+                <option value="yard">Yard</option>
+                <option value="foot">Foot</option>
+                <option value="inch">Inch</option>
+            </select>
+        </div>
+
+        <div class="btn">
+            <button>All Clear</button>
+        </div>
+    </div>
+    <h4> &copy; <time id="year"></time> Made by<em>SheriffKule</em> from XXIII Century</h4>
+
+    <script src="/widgets_script/lengthConverter.js"></script>
+</body>
+</html>

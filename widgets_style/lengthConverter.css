@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+}
+
+body {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #333 25%, #377985 50%, #333 75%);
+}
+
+.converter {
+    padding: 25px;
+    background: radial-gradient(#5f5f5f, #333);
+    border: 2px solid #495a69;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, .4);
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    width: clamp(400px, 90%, 600px);
+    align-self: self-end;
+    margin-bottom: -12px;
+}
+
+.converter .title {
+    margin-bottom: 30px;
+    text-shadow: 0 5px 12px rgba(255, 255, 255, .2);
+}
+
+.inputField {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+input {
+    background: #222;
+    font-size: 22px;
+    text-align: center;
+    padding: 15px 0;
+    border-radius: 4px;
+    color: #ddd;
+    caret-color: beige;
+    caret-shape: block;
+    width: 45%;
+    transition: .2s;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    display: none;
+}
+
+input:focus {
+    filter: brightness(110%);
+}
+
+#result-box {
+    pointer-events: none;
+}
+
+span {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+.converter .unit {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 38px;
+}
+
+.unit select {
+    width: 100%;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 6px;
+    background: #222;
+    color: var(--color);
+}
+
+.btn button {
+    border: none;
+    padding: 10px 30px;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: .3s;
+    background: #222;
+    color: #aaa;
+}
+
+.btn button:hover {
+    background: #111;
+    color: #ddd;
+    box-shadow: 0 4px 12px rgba(77, 139, 127, 0.5);
+    scale: 1.05;
+}
+
+.btn button:active {
+    transform: scale(0.95);
+}
+
+h4 {
+    font-weight: 400;
+    align-self: flex-end;
+    margin-bottom: 12px;
+}
