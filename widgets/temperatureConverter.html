@@ -9,36 +9,31 @@
 </head>
 
 <body>
-  <h1>Temperature Converter</h1>
-  <div class="wrapper">
-    <div class="input-box">
-      <h6>Celsius</h6>
-      <input type="number" id="celsius">
+  <div class="container">
+    <h1>Temperature Converter</h1>
+    <div class="wrapper">
+      <div class="input-box">
+        <h6>Celsius &deg;</h6>
+        <input type="number" id="celsius">
+      </div>
+      <span>&rdldhar;</span>
+      <div class="input-box">
+        <h6>Fahrenheit &#8457;</h6>
+        <input type="number" id="fahrenheit">
+      </div>
+      <span>&rdldhar;</span>
+      <div class="input-box">
+        <h6>Kelvin &#8490;</h6>
+        <input type="number" id="kelvin">
+      </div>
     </div>
-    <span>&rdldhar;</span>
-    <div class="input-box">
-      <h6>Fahrenheit</h6>
-      <input type="number" id="fahrenheit">
+    <div class="btn">
+      <button>Reset</button>
     </div>
   </div>
+  <h4> &copy; <time id="year"></time> Made by<em>SheriffKule</em> from XXIII Century</h4>
 
-  <script>
-    const celsius = document.getElementById('celsius');
-    const fahrenheit = document.getElementById('fahrenheit');
-
-    window.addEventListener('load', () => celsius.focus());
-
-    celsius.addEventListener('input', () => {
-      fahrenheit.value = ((celsius.value * 9) / 5 + 32).toFixed(2);
-      if (!celsius.value) fahrenheit.value = '';
-    });
-
-    fahrenheit.addEventListener('input', () => {
-      celsius.value = (((fahrenheit.value - 32) * 5) / 9).toFixed(2);
-      if (!fahrenheit.value) celsius.value = '';
-    });
-
-  </script>
+  <script src="/widgets_script/temperatureConverter.js"></script>
 </body>
 
 </html>
