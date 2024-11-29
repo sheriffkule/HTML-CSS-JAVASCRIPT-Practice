@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap');
+
+:root {
+    --teal: #177e89ff;
+    --midnight-green: #084c61ff;
+    --poppy: #db3a34ff;
+    --sunglow: #fdb629;
+    --jet: rgb(37, 36, 37);
+    --light-color: #ccc;
+    --border-color: #aaa;
+}
+
+* {
+    font-family: "Gabarito", sans-serif;
+    accent-color: var(--teal);
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: radial-gradient(var(--midnight-green), var(--jet));
+    color: #111;
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: teal;
+    color: var(--light-color);
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
+    transition: .3s;
+}
+
+button:is(:active, :hover) {
+    background: var(--midnight-green);
+}
+
+.container {
+    background: var(--light-color);
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 600px;
+    width: 90%;
+    align-self: flex-end;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .55),
+    inset 0 0 20px rgba(0, 0, 0, .5);
+}
+
+.title {
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.form {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    align-items: center;
+    gap: 20px;
+}
+
+.form label {
+    font-weight: 500;
+}
+
+.form input {
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    outline-color: teal;
+}
+
+.form p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form p label {
+    flex: 1;
+    cursor: pointer;
+}
+
+.form button {
+    grid-column: 1 / -1;
+}
+
+.countdown:not([hidden]) + .form {
+    display: none;
+}
+
+.running:not([hidden]) {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(80px, 1fr));
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.running div {
+    background: hsla(186, 71%, 31%, .2);
+    color: slategray;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: .85rem;
+    font-weight: 500;
+    display: grid;
+    justify-items: center;
+}
+
+.running span {
+    font-size: 3rem;
+    color: var(--poppy);
+}
+
+.running button {
+    grid-column: 1 / -1;
+    justify-self: center;
+}
+
+.expired:not([hidden]) {
+    display: grid;
+    justify-items: center;
+    gap: 20px;
+}
+
+.expired span {
+    font-size: 4rem;
+}
+
+.expired p {
+    font-size: 1.5rem;
+    color: var(--poppy);
+}
+
+h4 {
+    font-weight: 300;
+    align-self: flex-end;
+    margin-bottom: 12px;
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <link rel="stylesheet" href="/widgets_style/countdownTimer.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Countdown Timer</h1>
+
+        <div class="countdown" hidden>
+            <div class="running">
+                <div><span class="days">00</span>Days</div>
+                <div><span class="hours">00</span>Hours</div>
+                <div><span class="minutes">00</span>Minutes</div>
+                <div><span class="seconds">00</span>Seconds</div>
+                <button id="reset">Reset Countdown</button>
+            </div>
+
+            <div class="expired" hidden>
+                <span>&#8987;</span>
+                <p>Event has Expired</p>
+                <button id="new">New Countdown</button>
+            </div>
+        </div>
+
+        <form class="form">
+            <label for="event-name">Event Name</label>
+            <input type="text" id="event-name" required>
+
+            <label for="event-date">Target Date</label>
+            <input type="datetime-local" id="event-date" required>
+
+            <label for="enable-sound">Sound Notification</label>
+            <p>
+                <input type="checkbox" id="enable-sound">
+                <label for="enable-sound">Enable Sound</label>
+            </p>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <h4> &copy; <time id="year"></time> Made by<em>SheriffKule</em> from XXIII Century</h4>
+
+    <script src="/widgets_script/countdownTimer.js"></script>
+</body>
+</html>
