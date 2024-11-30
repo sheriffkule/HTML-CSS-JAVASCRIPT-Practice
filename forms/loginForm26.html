@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi Step Form</title>
+  <link rel="stylesheet" href="/forms_style/loginForm26.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="form">
+        <div class="left-side">
+          <div class="left-heading">
+            <h3>Progress Form</h3>
+          </div>
+          <div class="steps-content">
+            <h3>Step <span class="step-number">1</span></h3>
+            <p class="step-number-content active">Enter Your Personal Information to get closer to companies.</p>
+            <p class="step-number-content d-none">Get to know you better by adding your diplomas and certificates.</p>
+            <p class="step-number-content d-none">Help companies get to know you better by tellin us about you.</p>
+            <p class="step-number-content d-none">Add your profile picture and let companies find you fast.</p>
+          </div>
+          <ul class="progress-bar">
+            <li class="active">Personal Information</li>
+            <li>Education</li>
+            <li>Work Experience</li>
+            <li>User Photo</li>
+          </ul>
+        </div>
+        <div class="right-side">
+          <div class="main active">
+            <div class="text">
+              <h2>Your Personal Information</h2>
+              <p>Enter your Personal Information to get closer to companies.</p>
+            </div>
+            <div class="input-text">
+              <div class="input-div">
+                <input type="text" placeholder="Name" id="user_name">
+              </div>
+            </div>
+            <div class="input-text">
+              <div class="input-div">
+                <input type="email" placeholder="Email Address">
+              </div>
+            </div>
+            <div class="input-text">
+              <div class="input-div">
+                <input type="tel" placeholder="Phone Number">
+              </div>
+            </div>
+            <div class="buttons">
+              <button class="next_button">Next Step</button>
+            </div>
+          </div>
+          <div class="main">
+            <div class="text">
+              <h2>Your Education</h2>
+              <p>Inform companies about your education</p>
+            </div>
+            <div class="input-text">
+              <div class="input-div">
+                <input type="text" placeholder="School Name">
+              </div>
+              <div class="input-div">
+                <input type="text" placeholder="Board Name">
+              </div>
+            </div>
+            <div class="input-text">
+              <div class="input-div">
+                <input type="text" placeholder="College / University name">
+              </div>
+            </div>
+            <div class="input-text">
+              <div class="input-div">
+                <select>
+                  <option>Select Course</option>
+                  <option>Computer Science</option>
+                  <option>Graphic Design</option>
+                  <option>Electronics</option>
+                  <option>Mathematics</option>
+                  <option>Photography</option>
+                  <option>Programing</option>
+                </select>
+              </div>
+            </div>
+            <div class="buttons button_space">
+              <button class="back_button">Back</button>
+              <button class="next_button">Next Step</button>
+            </div>
+          </div>
+          <div class="main">
+            <div class="text">
+              <h2>Your Work Experience</h2>
+              <p>Tell companies about your work experience</p>
+            </div>
+            <div class="input-text">
+              <div class="input-div">
+                <input type="text" placeholder="Experience 1">
+              </div>
+            </div>
+            <div class="input-text">
+              <div class="input-div">
+                <input type="text" placeholder="Experience 2">
+              </div>
+            </div>
+            <div class="input-text">
+              <div class="input-div">
+                <input type="text" placeholder="Experience 3">
+              </div>
+            </div>
+            <div class="buttons button_space">
+              <button class="back_button">Back</button>
+              <button class="next_button">Next Step</button>
+            </div>
+          </div>
+          <div class="main">
+            <div class="text">
+              <h2>User Photo</h2>
+              <p>Upload your profile picture</p>
+            </div>
+            <div class="user_card">
+              <div class="card">
+                <div class="drop_box">
+                  <header>
+                    <h4>Select file</h4>
+                  </header>
+                  <p>Files Supported: PDF, TEXT, DOC, JPG</p>
+                  <input type="file" hidden accept=".pdf, .txt, .doc, .jpg">
+                  <button class="btn" id="uploadBtn">Chose File</button>
+                </div>
+              </div>
+            </div>
+            <div class="buttons button_space">
+              <button class="back_button">Back</button>
+              <button class="submit_button">Submit</button>
+            </div>
+          </div>
+
+          <div class="main" style="padding: 110px 50px;">
+            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+              <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+              <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+            </svg>
+
+            <div class="text congrats">
+              <h2>Thank you for completing the form!</h2>
+              <p>Thanks <span id="show_name"></span>. We will review your application and get back to you soon.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h4 class="footer__copy"><time id="year"></time> &copy; Made by <em>SheriffKule</em> from XXIII Century.</h4>
+
+  <script src="/forms_script/loginForm26.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,362 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(#22136b 30%, #110a36);
+}
+
+.container .card {
+    height: 500px;
+    width: 800px;
+    background-color: #f7f7f7;
+    position: relative;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    font-family: "Inter", sans-serif;
+    border-radius: 20px;
+}
+
+.container .card .form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.container .card .left-side {
+    width: 35%;
+    background-color: #5338cf;
+    height: 100%;
+    border-radius: 20px 0 0 20px;
+    padding: 20px 30px;
+    box-sizing: border-box;
+}
+
+.left-heading {
+    color: #fff;
+}
+
+.steps-content {
+    margin-top: 30px;
+    color: #fff;
+}
+
+.steps-content p {
+    font-size: 12px;
+    margin-top: 15px;
+}
+
+.progress-bar {
+    list-style: none;
+    margin-top: 30px;
+    font-size: 13px;
+    font-weight: 700;
+    counter-reset: container 0;
+}
+
+.progress-bar li {
+    position: relative;
+    margin-left: 40px;
+    margin-top: 50px;
+    counter-increment: container 1;
+    color: #8e8e8e;
+}
+
+.progress-bar li::before {
+    content: counter(container);
+    line-break: 25px;
+    text-align: center;
+    position: absolute;
+    line-height: 25px;
+    height: 25px;
+    width: 25px;
+    border: 1px solid #000;
+    border-radius: 50%;
+    left: -40px;
+    top: -5px;
+    z-index: 10;
+    background-color: #000;
+}
+
+.progress-bar li::after {
+    content: '';
+    position: absolute;
+    height: 90px;
+    width: 2px;
+    background-color: #000;
+    z-index: 1;
+    left: -27px;
+    top: -70px;
+}
+
+.progress-bar li.active::after {
+    background: #fff;
+}
+
+.progress-bar li:first-child::after {
+    display: none;
+}
+
+.progress-bar li.active::before {
+    color: #4f39c7;
+    border: 1px solid white;
+    background: white;
+}
+
+.progress-bar li.active {
+    color: white;
+}
+
+.d-none {
+    display: none;
+}
+
+.container .card .right-side {
+    width: 65%;
+    background-color: #c9bdff;
+    height: 100%;
+    border-radius: 0 20px 20px 0;
+}
+
+.main {
+    display: none;
+    padding: 67px 50px;
+}
+
+.active {
+    display: block;
+}
+
+.text {
+    margin-top: 20px;
+}
+
+.congrats {
+    text-align: center;
+}
+
+.text p {
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #727272;
+}
+
+.input-text {
+    margin: 30px 0;
+    display: flex;
+    gap: 20px;
+}
+
+.input-text .input-div {
+    width: 100%;
+    position: relative;
+}
+
+input {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #cbced4;
+    outline: none;
+    border-radius: 5px;
+    gap: 20px;
+    box-sizing: border-box;
+    padding: 0 10px;
+    transition: .25s;
+}
+
+input::placeholder {
+    transition: all .3s;
+}
+
+input:focus {
+    border-color: #4f39c7;
+}
+
+input:focus::placeholder {
+    transform: translateX(300px) skewX(90deg);
+}
+
+select {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #cbced4;
+    outline: none;
+    border-radius: 5px;
+    gap: 20px;
+    padding: 0 10px;
+}
+
+.buttons button {
+    height: 40px;
+    width: 100px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4f39c7;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    transition: all .25s;
+}
+
+.buttons button:hover {
+    background-color: #332891;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.button_space {
+    display: flex;
+    gap: 20px;
+}
+
+.button_space button:nth-child(1) {
+    background-color: white;
+    color: black;
+    border: 1px solid #000;
+}
+
+.user_card {
+    margin-top: 20px;
+    margin-bottom: 40px;
+    height: 200px;
+    width: 100%;
+    border-radius: 10px;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.drop_box {
+    margin: 10px 0;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 3px dotted #a3a3a3;
+    border-radius: 5px;
+}
+
+.drop_box h4 {
+    font-size: 16px;
+    font-weight: 400;
+    color: #2e2e2e;
+}
+
+.drop_box p {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #a3a3a3;
+}
+
+.btn {
+    text-decoration: none;
+    background-color: #4f39c7;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    transition: .3s;
+}
+
+.btn:hover {
+    background-color: white;
+    color: #4f39c7;
+    outline: 1px solid #010101;
+}
+
+.detail p {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.detail p a {
+    text-decoration: none;
+    container: blue;
+}
+
+.checkmark__circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+    stroke: #7ac142;
+    fill: none;
+    animation: stroke 0.6s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
+}
+
+.checkmark {
+    display: block;
+    text-align: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    stroke-width: 2;
+    stroke: white;
+    stroke-miterlimit: 10;
+    margin: 10% auto;
+    box-shadow: inset 0px 0px 0px #7ac142;
+    animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+}
+
+.checkmark__check {
+    transform-origin: 50% 50%;
+    stroke-dashoffset: 48;
+    animation: stroke .3s cubic-bezier(0.645, 0.045, 0.355, 1) 0.8s forwards;
+}
+
+@keyframes stroke {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes fill {
+    to {
+        box-shadow: 0 0 0 30px #7ac142;
+    }
+}
+
+@media screen and (max-width:750px) {
+    .container {
+        height: scroll;
+    }
+    .container .card {
+        max-width: 350px;
+        height: auto !important;
+        margin: 30px 0;
+    }
+    .container .card .right-side {
+        width: 100%;
+        border-radius: 20px;
+    }
+    .input-text {
+        display: block;
+    }
+    .input-text .input-div {
+        margin-top: 20px;
+    }
+    .user_card {
+        height: 260px;
+    }
+    .container .card .left-side {
+        display: none;
+    }
+}
+
+h4 {
+    font-weight: 400;
+    color: #aaa;
+    margin-top: -30px;
+    text-align: center;
+}
