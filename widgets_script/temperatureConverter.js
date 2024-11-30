@@ -3,7 +3,7 @@ const fahrenheit = document.getElementById('fahrenheit');
 const kelvin = document.getElementById('kelvin');
 const reset = document.querySelector('.btn button');
 
-// window.addEventListener('load', () => celsius.focus());
+window.addEventListener('load', () => celsius.focus());
 
 celsius.addEventListener('input', () => {
 	fahrenheit.value = ((celsius.value * 9) / 5 + 32).toFixed(2);
