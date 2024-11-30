@@ -1,0 +1,98 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: radial-gradient(#ccc, #777);
+    transition: all .3s ease-in-out;
+}
+
+.switch input {
+    display: none
+}
+
+.switch label {
+    display: block;
+    width: 120px;
+    height: 50px;scale: 1.5;
+    background: radial-gradient(#bbc0cc, #797c84);
+    border: 1px solid #5555;
+    border-radius: 40px;
+    box-shadow: 0 4px 15px #0005;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.switch label button {
+    pointer-events: none;
+    width: 80%;
+    height: 100%;
+    border-radius: inherit;
+    border: none;
+    background: linear-gradient(to right, #c1c4cc 47%, #dddfe5 53%);
+    box-shadow: inset -2px 0 2px -1px #fff5,
+    inset 2px 0 2px -1px #fff5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .3s;
+}
+
+.switch label button::before,
+.switch label button::after {
+    width: 50%;
+    content: 'o';
+    font-size: xx-large;
+    color: #787b84;
+}
+
+.switch label button::after {
+    content: '\2212';
+    text-shadow: 0 0 5px #fff;
+}
+
+.switch label button::before {
+    color: #eee;
+    transform: translateY(-3px);
+    text-shadow: 0 3px 3px #555,
+    0 0 5px #eee;
+}
+
+.switch label p {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.switch input:checked ~ label {
+    background: radial-gradient(#a787fe, #3c2777);
+}
+
+.switch input:checked ~ label > button {
+    margin-left: 20%;
+    background: linear-gradient(to right, #926afe 47%, #754de3);
+}
+
+.switch input:checked ~ label > button::before {
+    color: #754de3;
+    text-shadow: 0 0 5px #fff5;
+}
+
+.switch input:checked ~ label > button::after {
+    color: #eee;
+    text-shadow: 0 2px 2px #555,
+    0 0 5px #eee;
+}
+
+.darkTheme {
+    background-image: radial-gradient(#754de3, #201346);
+}
+
+.darkTheme p {
+    color: #eee;
+}
