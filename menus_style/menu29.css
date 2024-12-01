@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(to bottom left, #050919 10%, #009639);
+}
+
+.navigation-square {
+    position: absolute;
+    right: 25px;
+    top: 25px;
+    height: 50px;
+    width: 50px;
+    background: #ccc;
+    border-radius: 10px;
+    z-index: 10;
+    overflow: hidden;
+    transition: width .5s, height .5s;
+    transition-delay: 0s, 0.7s;
+}
+
+.navigation-square.active {
+    height: 350px;
+    width: 250px;
+    transition: width .5s, height .5s;
+    transition-delay: 0s, 0.7s;
+}
+
+.navigation-square .toggle {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #00ff62;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    cursor: pointer;
+}
+
+.toggle.active {
+    background: #00ff62;
+}
+
+.toggle::before {
+    content: '+';
+    position: absolute;
+    font-size: 44px;
+    font-weight: 600;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #050919;
+    transition: .5s;
+}
+
+.toggle.active::before {
+    rotate: 310deg;
+    color: #fff;
+}
+
+.navigation-square ul {
+    position: absolute;
+    left: 0;
+    width: 100%;
+}
+
+.navigation-square ul li {
+    position: relative;
+    list-style: none;
+    width: 100%;
+}
+
+.navigation-square ul li a {
+    position: relative;
+    display: flex;
+    width: 100%;
+    text-decoration: none;
+    color: #050919;
+    transition: .2s;
+}
+
+.navigation-square ul li a:hover {
+    background: #00ff62;
+    transition: 0s;
+}
+
+.navigation-square ul li a .icon {
+    position: relative;
+    display: block;
+    min-width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+}
+
+.navigation-square ul li a .icon i{
+    font-size: 20px;
+}
+
+.navigation-square .text-title {
+    position: relative;
+    display: block;
+    line-height: 50px;
+    transition: .25s;
+}
+
+.navigation-square ul li a:hover .text-title {
+    transform: translateX(10px);
+}
