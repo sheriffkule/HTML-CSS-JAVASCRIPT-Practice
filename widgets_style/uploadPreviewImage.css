@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: radial-gradient(circle at center, #007bff -10%, #000c1a 50%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.container {
+    display: grid;
+    justify-content: center;
+    width: 350px;
+    background: #002550;
+    color: #ccc;
+    padding: 60px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    position: relative;
+}
+
+.upload-upper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 40px 20px;
+    border: 4px dashed #0a90ff;
+}
+
+p {
+    color: #0a90ff;
+}
+
+.upload-upper i {
+    color: #0a90ff;
+    font-size: 60px;
+    margin-bottom: 10px;
+}
+
+#file {
+    position: absolute;
+    display: none;
+    opacity: 0;
+    inset: 0;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.upload-btn {
+    background: #0a90ff;
+    width: 220px;
+    border-radius: 6px;
+    padding: 10px;
+    text-align: center;
+    display: block;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.first-text {
+    color: #eee;
+}
+
+.image {
+    display: none;
+    padding-top: 20px;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    animation: zoom .7s ease forwards;
+}
+
+@keyframes zoom {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.image.active {
+    display: block;
+}
+
+.cancel-btn {
+    background: #0a90ff;
+    text-align: center;
+    width: 220px;
+    height: 40px;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    display: none;
+    transition: .3s;
+}
+
+.upload-btn:hover,
+.cancel-btn:hover {
+    background: #0866c6;
+    scale: 1.03;
+}
+
+.cancel-btn i {
+    color: #fff;
+    font-size: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.cancel-btn.active {
+    display: block;
+}
+
+h4 {
+    color: #ccc;
+    font-weight: 100;
+    font-size: 14px;
+    position: absolute;
+    bottom: 10px;
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload And Preview Image</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/widgets_style/uploadPreviewImage.css">
+</head>
+<body>
+    <form class="container">
+        <div class="upload-upper">
+            <i class="bx bxs-file-image"></i>
+            <p>Drag here to upload</p>
+            <input type="file" id="file" name="file" accept="image/*">
+            <br>
+            <label for="file" class="upload-btn">
+                <p><span class="first-text">Choose File</span></p>
+            </label>
+            <label for="" class="cancel-btn">
+                <p><i class="bx bx-x"></i></p>
+            </label>
+        </div>
+        <img src="" alt="" id="image" class="image">
+    </form>
+    <h4> &copy; <time id="year"></time> Made by<em> SheriffKule</em> from XXIII Century</h4>
+
+    <script src="/widgets_script/uploadPreviewImage.js"></script>
+</body>
+</html>
