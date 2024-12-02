@@ -1,0 +1,144 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 1440px;
+    min-height: 100vh;
+    margin: auto;
+    padding: 40px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 350px));
+    gap: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    background: radial-gradient(#222, #111);
+}
+
+.card {
+    --hue: 214;
+    --card-color: hsl(var(--hue), 80%, 40%);
+    --shadow-color: hsla(var(var(--hue), 80%, 40%, 0.2));
+    position: relative;
+    padding: 50px 30px;
+    text-align: center;
+    box-shadow: 0 10px 15px rgba(255, 255, 255, 0.1);
+    transition: all .5s ease;
+    background: #333;
+    color: #ccc;
+    border-radius: 12px;
+}
+
+.card:hover {
+    box-shadow: 0 20px 30px rgba(255, 255, 255, 0.15);
+}
+
+.card::after {
+    --right: 100%;
+    content: "";
+    position: absolute;
+    inset: calc(100% - 3px) var(--right) 0 0 ;
+    background-color: var(--card-color);
+    transition: all .5s ease;
+}
+
+.card:hover::after {
+    --right: 0;
+}
+
+.card__head {
+    position: relative;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card__head ion-icon {
+    font-size: 4em;
+    color: var(--card-color);
+    --ionicon-stroke-width: 0.5em;
+}
+
+.card__head .rounded-border {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border: 1px solid var(--card-color);
+    box-shadow: inset 0 10px 20px var(--shadow-color),
+    0 0 20px var(--shadow-color);
+    border-radius: 10cm;
+    transform: rotate(-45deg);
+    animation: rotate 3s linear infinite;
+    animation-play-state: paused;
+}
+
+.card:hover .rounded-border {
+    animation-play-state: running;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(-45deg);
+    }
+
+    to {
+        transform: rotate(315deg);
+    }
+}
+
+.card__head .circle {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: var(--card-color);
+    border-radius: 100%;
+    top: -7px;
+    transform: translateX(-50%);
+    box-shadow: 0 118px 0 var(--card-color);
+}
+
+.card__body {
+    margin-top: 30px;
+}
+
+.card__body h3 {
+    font-size: 1.5em;
+    color: hsl(232, 16%, 65%);
+    margin-bottom: 10px;
+}
+
+.card__body p {
+    font-size: 1.2em;
+    color: hsl(232, 16%, 65%);
+    margin-bottom: 30px;
+}
+
+.card__body .btn {
+    text-decoration: none;
+    color: var(--card-color);
+    font-weight: 600;
+    font-size: 1.1em;
+    opacity: .9;
+    transition: all .3s;
+}
+
+.card__body .btn:hover {
+    opacity: 1;
+    filter: brightness(120%);
+}
+
+.card--purple {
+    --hue: 30;
+}
+
+.card--mountain-meadow {
+    --hue: 168;
+}
+
+.card--pictorial_carmine {
+    --hue: 340;
+}
