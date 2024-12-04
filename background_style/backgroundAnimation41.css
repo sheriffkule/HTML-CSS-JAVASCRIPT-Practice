@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #323232;
+}
+
+section {
+    min-height: 100vh;
+}
+
+.bg {
+    position: relative;
+    width: 100%;
+    background: #1c7cac;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.bg::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 500px;
+    background: #323232;
+}
+
+.bg h2 {
+    position: relative;
+    color: #fff;
+    font-size: 3em;
+}
+
+.shape {
+    position: absolute;
+    bottom: 0;
+    width: 50%;
+    height: 500px;
+    background: #1c7cac;
+}
+
+.shape.left {
+    left: 0;
+}
+
+.shape.right {
+    right: 0;
+}
