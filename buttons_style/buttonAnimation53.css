@@ -1,0 +1,77 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(#1a1a2e, #16213e);
+    flex-direction: column;
+}
+
+button {
+    position: relative;
+    margin: 20px 0;
+    outline: 0;
+    border: none;
+    padding: 15px 60px;
+    font-size: 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    color: #fff;
+    transition: all .8s;
+    z-index: 1;
+    letter-spacing: 2px;
+    font-weight: 900;
+    overflow: hidden;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.5), transparent);
+    transform: rotate(-45deg);
+    z-index: -1;
+    transition: all .8s;
+}
+
+button:hover::before {
+    transform: rotate(0);
+    background: radial-gradient(circle, rgba(255, 255,255, 0.8), transparent);
+}
+
+button:hover {
+    transform: translateY(-6px);
+}
+
+.btn-1 {
+    background: linear-gradient(135deg, #c33764, #1d2671);
+}
+
+.btn-2 {
+    background: linear-gradient(135deg, #8b0000, #450000);
+}
+
+.btn-3 {
+    background: linear-gradient(135deg, #0f52ba, #001a4c);
+}
+
+.btn-4 {
+    background: linear-gradient(135deg, #014421, #006400);
+}
+
+.btn-5 {
+    background: linear-gradient(135deg, #ff4500, #8b0000);
+}
+
+.btn-6 {
+    background: linear-gradient(135deg, #4b0082, #000080);
+}
