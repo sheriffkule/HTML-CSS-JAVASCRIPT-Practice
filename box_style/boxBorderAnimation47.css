@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
+
+*,
+::before,
+::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    min-height: 100vh;
+}
+
+body {
+    display: grid;
+    place-items: center;
+    font-family: 'League Spartan', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.2;
+    background-color: #313131;
+    color: #ddd;
+}
+
+ul {
+    list-style: none;
+}
+
+.main {
+    max-width: 75rem;
+    padding: 3em 1.5em;
+}
+
+h1 {
+    font-weight: 600;
+    font-size: 2.25em;
+    margin-bottom: .75em;
+    text-align: center;
+    color: #eceff1;
+}
+
+.cards {
+    position: relative;
+}
+
+.cards__inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5em;
+}
+
+.card {
+    --flow-space: 0.5em;
+    --hsl: var(--hue), var(--saturation), var(--lightness);
+    flex: 1 1 14rem;
+    padding: 1.5em 2em;
+    display: grid;
+    grid-template-rows: auto auto auto 1fr;
+    align-items: start;
+    gap: 1.25em;
+    color: #eceff1;
+    background-color: #2b2b2b;
+    border: 1px solid #eceff133;
+    border-radius: 1rem;
+}
+
+.card:nth-child(1) {
+    --hue: 165;
+    --saturation: 82.26%;
+    --lightness: 51.28%;
+}
+
+.card:nth-child(2) {
+    --hue: 291;
+    --saturation: 95.9%;
+    --lightness: 61.85%;
+}
+
+.card:nth-child(3) {
+    --hue: 338;
+    --saturation: 100%;
+    --lightness: 48%;
+}
+
+.card__heading {
+    font-size: 1.05em;
+    font-weight: 600;
+}
+
+.card__price {
+    font-size: 1.75em;
+    font-weight: 700;
+}
+
+.card__bullets {
+    line-height: 1.4;
+}
+
+.cta {
+    display: block;
+    align-self: end;
+    margin: 1em 0 .5em 0;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #0d0d0d;
+    padding: .75em;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    user-select: none;
+    opacity: var(--opacity, 0);
+    -webkit-mask: radial-gradient(25rem 25rem at var(--x) var(--y), #000 1%, transparent 50%);
+    mask: radial-gradient(25rem 25rem at var(--x) var(--y),
+    #000 1%, transparent 50%);
+    transition: .4s mask ease;
+    will-change: mask;
+}
+
+.overlay .card {
+    background-color: hsla(var(--hsl), 0.15);
+    border-color: hsla(var(--hsl), 1);
+    box-shadow: 0 0 0 1px inset hsl(var(--hsl));
+}
+
+.overlay .cta {
+    display: block;
+    grid-row: -1;
+    width: 100%;
+    background-color: hsl(var(--hsl));
+    box-shadow: 0 0 0 1px hsl(var(--hsl));
+}
+
+:not(.overlay) > .card {
+    transition: .4s background ease;
+    will-change: background;
+}
+
+:not(.overlay) > .card:hover {
+    --lightness: 95%;
+    background: hsla(var(--hsl), 0.1);
+}
+
+.meta-link {
+    align-items: center;
+    backdrop-filter: blur(3px);
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    display: inline-flex;
+    gap: 5px;
+    left: 10px;
+    padding: 10px 20px;
+    position: fixed;
+    text-decoration: none;
+    transition: background-color .6s, border-color .6s;
+    z-index: 10;
+}
+
+.meta-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.meta-link > i,
+.meta-link > span {
+    height: 20px;
+    line-height: 20px;
+}
+
+.meta-link > span {
+    color: white;
+    transition: color .6s;
+}
+
+.flow > * + * {
+    margin-top: var(--flow-space, 1.25em);
+}
