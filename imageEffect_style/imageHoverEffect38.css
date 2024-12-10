@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #111, #444);
+}
+
+h1 {
+    font-size: 4rem;
+    -webkit-text-stroke: 1px white;
+    margin-bottom: 40px;
+    text-shadow: 0 0 40px rgba(0, 60, 255, 0);
+    animation: change 5s linear infinite;
+}
+
+@keyframes change {
+    0%, 100% {
+        text-shadow: 0 0 40px rgba(0, 60, 255, .1);
+        color: transparent;
+    }
+
+    50% {
+        text-shadow: 0 0 40px rgba(0, 60, 255, 0.8);
+        color: rgba(0, 60, 255, 0.8);
+    }
+}
+
+.container {
+    display: flex;
+    width: 90vw;
+}
+
+.panel {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 80vh;
+    cursor: pointer;
+    color: #fff;
+    border-radius: 50px;
+    margin: 10px;
+    flex: 0.5;
+    position: relative;
+    transition: all .7s ease-out;
+}
+
+.panel h3 {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2em;
+    margin: 0;
+    opacity: 0;
+}
+
+.panel.active {
+    flex: 5;
+    box-shadow: 12px 12px 24px rgba(255, 255, 255, 0.1);
+}
+
+.panel.active h3 {
+    opacity: 1;
+    transition: all .7s ease-in .4s;
+}
+
+@media screen and (max-width: 480px) {
+    .container {
+        width: 100vw;
+    }
+
+    .panel:nth-child(5),
+    .panel:nth-child(6) {
+        display: none;
+    }
+}
