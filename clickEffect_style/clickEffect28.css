@@ -1,0 +1,74 @@
+:root {
+    --bg-cloud: #f5f5da;
+    --bg-sun: #fff;
+    --bg-light-body: #ccd4da;
+    --bg-dark-body: #1d2234;
+    --bg-light-checkbox-one: #bfd6bb;
+    --bg-light-checkbox-two: #90d1c7;
+    --bg-dark-checkbox-one: #73abb9;
+    --bg-dark-checkbox-two: #335a63;
+}
+
+body {
+    background-color: var(--bg-light-body);
+    transition: .5s ease-in-out;
+}
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.checkboxDesign {
+    display: inline-block;
+    width: 200px;
+    height: 100px;
+    background-image: linear-gradient(to top,
+    var(--bg-light-checkbox-one), var(--bg-light-checkbox-two));
+    border-radius: 50px;
+    position: relative;
+    box-shadow: 0 0 0 5px var(--bg-light-body),
+    0 0 0 15px var(--bg-light-checkbox-one);
+    transition: .5s;
+}
+
+.checkboxDesign input {
+    display: none;
+}
+
+.checkboxDesign::before {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background-color: var(--bg-sun);
+    content: '';
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    box-shadow: 83px -5px 0 -25px var(--bg-cloud),
+    98px -21px 0 -30px var(--bg-cloud),
+    120px -7px 0 -27px var(--bg-cloud),
+    109px 5px 0 -28px var(--bg-cloud);
+    transition: .5s;
+}
+
+body:has(input[name='checkboxDesign']:checked) {
+    background-color: var(--bg-dark-body);
+}
+
+.checkboxDesign:has(input:checked) {
+    box-shadow: 0 0 0 5px var(--bg-dark-body),
+    0 0 0 15px var(--bg-dark-checkbox-one);
+    background-image: linear-gradient(to top, var(--bg-dark-checkbox-one), var(--bg-dark-checkbox-two));
+}
+
+.checkboxDesign:has(input:checked)::before {
+    left: calc(100% - 95px);
+    box-shadow: -80px 10px 0 -42px var(--bg-cloud),
+    -100px -12px 0 -30px var(--bg-cloud),
+    -120px 18px 0 -40px var(--bg-cloud),
+    -97px 28px 0 -41px var(--bg-cloud);
+}
