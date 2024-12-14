@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;;
+    background: linear-gradient(122deg, #446eac 50%, #446eac 0%, #c8102e 0%, #c8102e 50%);
+    background-size: 200% 100%;
+    overflow: hidden;
+    flex-direction: column;
+    animation: move 15s alternate infinite;
+}
+
+@keyframes move {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 100% 0%;
+    }
+}
+
+a {
+    position: relative;
+    padding: 20px 60px;
+    text-decoration: none;
+    font-size: 40px;
+    color: #fff;
+    letter-spacing: 2px;
+    margin: 20px 0;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+a::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .5), transparent);
+    transition: all 1s;
+    transition-delay: .5s;
+}
+
+a:hover::after {
+    left: 100%;
+}
+
+a > span {
+    position: absolute;
+    display: block;
+    transition: all .5s ease-in-out;
+}
+
+a > span:nth-child(1) {
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: #e80280;
+}
+
+a:hover > span:nth-child(1) {
+    width: 100%;
+    transform: translateX(101%);
+}
+
+a > span:nth-child(3) {
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 3px;
+    background: #035add;
+}
+
+a:hover > span:nth-child(3) {
+    width: 100%;
+    transform: translateX(-101%);
+}
+
+a > span:nth-child(2) {
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 0;
+    background: #e80280;
+}
+
+a:hover > span:nth-child(2) {
+    height: 100%;
+    transform: translateY(101%);
+}
+
+a > span:nth-child(4) {
+    bottom: 0;
+    right: 0;
+    width: 3px;
+    height: 0;
+    background: #035add;
+}
+
+a:hover > span:nth-child(4) {
+    height: 100%;
+    transform: translateY(-101%);
+}
