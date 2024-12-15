@@ -1,0 +1,154 @@
+*,
+::before,
+::after {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+:root {
+    --primary: #101010;
+    --secondary: #f0f0f0;
+}
+
+html {
+    font-size: max(100vw / 1920 * 10);
+}
+
+body {
+    background-color: var(--primary);
+    color: var(--secondary);
+}
+
+h1 {
+    font-size: 20rem;
+}
+
+h2 {
+    font-size: 12rem;
+}
+
+p {
+    font-size: 2rem;
+}
+
+li, span {
+    font-size: 2.4rem;
+    line-height: 1.2;
+}
+
+@media screen and (max-width: 768px) {
+    html {
+        font-size: max(100vw / 768 * 9);
+    }
+
+    h1 {
+        font-size: 12rem;
+    }
+
+    .loader_container {
+        align-items: flex-end;
+        gap: 16rem;
+    }
+
+    .header_nav-side-item {
+        display: none;
+    }
+}
+
+.loader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 200;
+}
+
+.loader_container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: inherit;
+    height: inherit;
+    gap: 50rem;
+}
+
+.loader_item {
+    overflow: hidden;
+}
+
+#loader-counter {
+    width: 30rem;
+    padding-left: 0;
+}
+
+.header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+
+.header_wrapper {
+    width: inherit;
+    height: inherit;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4rem 0;
+}
+
+.header_nav-side {
+    position: relative;
+    width: 16rem;
+    height: inherit;
+    padding: 2rem;
+}
+
+.header_nav-side-item {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-40%) rotate(90deg);
+}
+
+.header_nav-side-item span {
+    display: block;
+}
+
+.header_nav-side-line {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 1px;
+    opacity: .5;
+    background-color: var(--secondary);
+    z-index: 100;
+}
+
+.header_nav-side:nth-child(1) .header_nav-side-line {
+    right: 0;
+}
+
+.header_nav-side:nth-child(2) .header_nav-side-line {
+    left: 0;
+}
+
+.header_media {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    z-index: -1;
+}
+
+.header_media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
