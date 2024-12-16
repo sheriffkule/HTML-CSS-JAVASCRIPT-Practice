@@ -1,0 +1,142 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: radial-gradient(ellipse,#aaa, #555, #111);
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-left: 60px;
+    gap: 60px;
+}
+
+.row button {
+    position: relative;
+    display: inline;
+    width: 150px;
+    height: 55px;
+    margin: 0 20px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    text-shadow: 0 -2px 0 rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: 0 5px 5px 0;
+    transition: all .4s;
+    top: 0;
+}
+
+.row button:hover {
+    top: 3px;
+}
+
+.row button.facebook,
+.row button.facebook span {
+    background: #385999;
+    border-left: 1px solid #2e4476;
+    box-shadow: 0 6px 0 0px #2e4476;
+}
+
+.row button.facebook:hover {
+    box-shadow: 0 2px 0 0 #2e4476;
+}
+
+.row button.twitter,
+.row button.twitter span {
+    background: #46c1f9;
+    border-left: 1px solid #269bd0;
+    box-shadow: 0 6px 0 0px #269bd0;
+}
+
+.row button.twitter:hover {
+    box-shadow: 0 2px 0 0 #269bd0;
+}
+
+.row button.instagram,
+.row button.instagram span {
+    background: #e1306c;
+    border-left: 1px solid #c91d56;
+    box-shadow: 0 6px 0 0px #c91d56;
+}
+
+.row button.instagram:hover {
+    box-shadow: 0 2px 0 0 #c91d56;
+}
+
+.row button.youtube,
+.row button.youtube span {
+    background: #cc3333;
+    border-left: 1px solid #fa0000;
+    box-shadow: 0 6px 0 0px #fa0000;
+}
+
+.row button.youtube:hover {
+    box-shadow: 0 2px 0 0 #fa0000;
+}
+
+.row button span {
+    position: absolute;
+    width: 60px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: -60px;
+    font-size: 26px;
+    border-radius: 15px 0 0 15px;
+    transition: all .4s;
+}
+
+.row button:hover span {
+    top: -3px;
+}
+
+.row button.facebook span {
+    border-right: 2px solid #2e4476;
+}
+
+.row button.instagram span {
+    border-right: 2px solid #c91d56;
+}
+
+.row button.twitter span {
+    border-right: 2px solid #269bd0;
+}
+
+.row button.youtube span {
+    border-right: 2px solid #fa0000;
+}
+
+.row button.facebook:hover span {
+    box-shadow: 0 6px 0 0 #2e4476,
+    6px 4px 2px rgba(0, 0, 0, 0.8);
+}
+
+.row button.instagram:hover span {
+    box-shadow: 0 6px 0 0 #c91d56,
+        6px 4px 2px rgba(0, 0, 0, 0.8);
+}
+
+.row button.youtube:hover span {
+    box-shadow: 0 6px 0 0 #fa0000,
+        6px 4px 2px rgba(0, 0, 0, 0.8);
+}
+
+.row button.twitter:hover span {
+    box-shadow: 0 6px 0 0 #269bd0,
+        6px 4px 2px rgba(0, 0, 0, 0.8);
+}
