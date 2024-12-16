@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Kranky&display=swap');
+
+:root {
+    --primary: hsl(213, 30%, 32%);
+    --secondary: hsl(144, 100%, 80%);
+    --alternate: hsl(192, 73%, 36%);
+}
+
+body {
+    background-color: var(--primary);
+    color: var(--secondary);
+    font-family: "Kranky", serif;
+    overflow-y: hidden;
+}
+
+.app {
+    overflow: hidden;
+}
+
+.swiper {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+}
+
+.swiper-slide {
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.swiper-slide_figure {
+    position: relative;
+    width: 80rem;
+    height: 50rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 2rem;
+    overflow: hidden;
+}
+
+.swiper-slide_image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.swiper-slide_text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: max-content;
+    transform: translate(-50%, -50%);
+    z-index: 99;
+    overflow: hidden;
+    text-transform: uppercase;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 40rem;
+}
+
+.swiper-slide_text span {
+    font-size: 5rem;
+    line-height: 1.1;
+    text-shadow: 0 0 10px rgba(255, 255, 255, .5);
+}
+
+.ofh {
+    overflow: hidden;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: var(--alternate);
+    width: calc(var(--swiper-navigation-size) / 44 * 180);
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    opacity: 0.5;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 2rem;
+    font-family: monospace;
+}
+
+.swiper-button-next::after {
+    content: "next";
+}
+
+.swiper-button-prev::after {
+    content: "prev";
+}
