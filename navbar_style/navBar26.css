@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #bbb;
+    transition: all .4s;
+}
+
+body.dark {
+    background: #111;
+}
+
+.drawer {
+    position: relative;
+}
+
+.drawer .menu_toggle {
+    position: absolute;
+    right: -25px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 25px;
+    height: 50px;
+    background: #e0e0e0;
+    color: #111;
+    line-height: 55px;
+    font-size: 22px;
+    font-weight: 400;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    z-index: 100;
+    cursor: pointer;
+    transition: all .25s;
+}
+
+body.dark .drawer .menu_toggle {
+    background: #333;
+    color: #fff;
+}
+
+ion-icon {
+    transition: .3s;
+}
+
+.drawer .menu_toggle.active ion-icon {
+    rotate: 180deg;
+}
+
+.drawer .menu_toggle:hover {
+    width: 30px;
+    right: -30px;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 57px;
+}
+
+.drawer .navigation {
+    position: relative;
+    width: 80px;
+    background: #ccc;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    box-shadow: 20px 20px 50px rgba(0, 0, 0, .1);
+    border-radius: 10px;
+    transition: .5s;
+    overflow: hidden;
+}
+
+body.dark .drawer .navigation {
+    background: #333;
+}
+
+.drawer .navigation.active {
+    width: 300px;
+}
+
+.drawer .navigation .menu {
+    position: relative;
+    width: 100%;
+    padding: 30px 10px;
+    transition: 0.5s;
+}
+
+.drawer .navigation .menu li {
+    list-style: none;
+    margin-bottom: 4px;
+}
+
+.drawer .navigation .menu li a {
+    position: relative;
+    display: flex;
+    text-decoration: none;
+    color: #111;
+    border-radius: 30px;
+    transition: 0;
+    transition-delay: 0.1s;
+}
+
+body.dark .drawer .navigation .menu li a {
+    color: #fff;
+}
+
+.drawer .navigation .menu li a:hover {
+    background: #0069cc;
+    color: #fff;
+    transition: 0.2s;
+}
+
+.drawer .navigation .menu li a .icon {
+    position: relative;
+    min-width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+}
+
+.drawer .navigation .menu li a .text {
+    position: relative;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.25em;
+    margin-left: 10px;
+}
