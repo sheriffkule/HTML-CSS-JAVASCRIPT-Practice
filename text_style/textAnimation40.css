@@ -75,14 +75,9 @@ span {
     position: absolute;
     padding: 4rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     width: 100%;
     z-index: 2;
-}
-
-.r-container.abs-top {
-    left: 0;
-    top: 0;
 }
 
 .r-container.abs-bottom {
@@ -119,15 +114,29 @@ span {
 }
 
 .re-roll {
-    color: orangered;
+    background-color: rgb(180, 32, 0);
     cursor: pointer;
-    text-decoration: underline;
+    border: 1px solid var(--secondary);
+    padding: 10px 30px;
+    border-radius: 10px;
+    transition: .25s;
+    text-transform: capitalize;
+}
+
+.re-roll:hover {
+    background-color: #b84900;
+    scale: 1.05;
+}
+
+.re-roll:active {
+    scale: 1;
 }
 
 @media screen and (max-width: 769px) {
     :root {
         --letter-size: 24rem;
     }
+
     span {
         font-size: 6rem;
     }

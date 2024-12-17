@@ -30,7 +30,7 @@ const animateText = () => {
 	const rollingInners = document.querySelectorAll('.r-inner');
 
 	gsap.set(rollingInners, {
-		y: '700%',
+        y: '-700%',
 	});
 
 	const tl = gsap.timeline({
@@ -40,12 +40,12 @@ const animateText = () => {
 
 	tl.to(rollingInners, {
 		duration: 4,
-		y: '0',
+        y: '0',
 		stagger: {
 			grid: 'auto',
 			from: 'random',
 			ease: 'power4.inOut',
-			amount: 1.2,
+            amount: 1.2,
 		},
 	}).fromTo(
 		'r-letter',
@@ -58,7 +58,7 @@ const animateText = () => {
 			stagger: {
 				grid: 'auto',
 				ease: 'power4.inOut',
-				amount: 0.8,
+                amount: 0.8,
 			},
 		},
 		0
@@ -67,9 +67,13 @@ const animateText = () => {
 	tl.play();
 
 	document.querySelector('.re-roll').addEventListener('click', () => {
-		tl.reverse().then(() => {
-			tk.play();
-		});
+		if (tl.isActive()) {
+			tl.reverse().then(() => {
+				tk.play();
+			});
+		} else {
+			tl.play();
+		}
 	});
 };
 
