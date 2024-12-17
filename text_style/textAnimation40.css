@@ -1,0 +1,134 @@
+:root {
+    --primary: #000;
+    --secondary: #fff;
+    --letter-size: 20rem;
+}
+
+html {
+    font-size: max(100vw / 1920 * 10);
+}
+
+body {
+    background-color: var(--primary);
+    color: var(--secondary);
+    overflow: hidden;
+}
+
+span {
+    font-size: 3rem;
+}
+
+.app {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+.section_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: inherit;
+    height: inherit;
+}
+
+.section_media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.section_media::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary);
+    opacity: 0.75;
+}
+
+.section_media img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.r-container {
+    position: relative;
+    width: 100%;
+    z-index: 10;
+}
+
+.r-container.abs {
+    position: absolute;
+    padding: 4rem;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    z-index: 2;
+}
+
+.r-container.abs-top {
+    left: 0;
+    top: 0;
+}
+
+.r-container.abs-bottom {
+    left: 0;
+    bottom: 0;
+}
+
+.r-text {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    height: var(--letter-size);
+}
+
+.r-text:nth-child(1)::before {
+    content: '';
+    padding-left: 48rem;
+}
+
+.r-text:nth-child(2)::before {
+    content: '';
+    padding-left: 24rem;
+}
+
+.r-text:nth-child(1)::before {
+    content: '';
+    padding-left: 64rem;
+}
+
+.r-letter {
+    display: block;
+    font-size: var(--letter-size);
+    text-transform: uppercase;
+}
+
+.re-roll {
+    color: orangered;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 769px) {
+    :root {
+        --letter-size: 24rem;
+    }
+    span {
+        font-size: 6rem;
+    }
+}
