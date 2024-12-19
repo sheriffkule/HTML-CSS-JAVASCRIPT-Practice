@@ -1,0 +1,71 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #292b33;
+    overflow: hidden;
+}
+
+ul {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style-type: none;
+    flex-wrap: wrap;
+}
+
+input {
+    opacity: 0;
+    position: relative;
+}
+
+div.icon {
+    width: 80px;
+    height: 80px;
+    background: #18191f;
+    font-size: 2.5em;
+    border-radius: 8px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+    box-shadow: -1px -1px 4px rgba(255, 255, 255, .05),
+    4px 4px 6px rgba(0, 0, 0, .2),
+    inset -1px -1px 4px rgba(255, 255, 255, .05),
+    inset 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+input:checked ~ .icon {
+    box-shadow: inset 0 0 2px rgba(255, 255, 255, .8);
+}
+
+.icon > i {
+    color: #01f2ff;
+    display: inline-block;
+    transform: scale(1) rotate(0);
+}
+
+input:checked ~ .icon > i {
+    animation: move 4s linear infinite alternate;
+}
+
+@keyframes move {
+    0% {
+        transform: rotate(0deg) scale(1);
+        filter: hue-rotate(0);
+    }
+
+    100% {
+        transform: rotate(360deg) scale(2);
+        filter: hue-rotate(360deg);
+    }
+}
