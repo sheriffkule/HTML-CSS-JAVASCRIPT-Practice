@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Creepster", serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: radial-gradient(#700000, #222);
+}
+
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.btns {
+    position: relative;
+    width: 320px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.2);
+    font-size: 2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #ffbb00;
+    letter-spacing: 2px;
+    transition: .4s;
+    transition-delay: .4s;
+}
+
+.btns:hover {
+    filter: drop-shadow(0 0 10px #ffbb00) drop-shadow(0 0 30px #ffbb00);
+    color: #700000;
+}
+
+.btns span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #ffbb00;
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.25s ease-in-out;
+}
+
+.btns:hover span {
+    transform: scaleX(1);
+    transform-origin: left;
+}
