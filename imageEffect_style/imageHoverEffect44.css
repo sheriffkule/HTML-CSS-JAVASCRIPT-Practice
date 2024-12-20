@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+*,
+::after,
+::before {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --primary-color: #0e0e0e;
+    --secondary-color: #ddd7d0;
+}
+
+body {
+    font-family: "Montserrat", serif;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+p, span, li {
+    font-size: 1.25rem;
+}
+
+button {
+    background: rgba(0, 0, 0, 0.2);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border: 1px solid var(--secondary-color);
+    border-radius: 1rem;
+    padding: .75rem 1.75rem;
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    transition: .3s;
+}
+
+button:hover {
+    box-shadow: 0 5px 5px rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px) skew(3deg);
+}
+
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+.hero_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: inherit;
+    height: inherit;
+    padding: 2rem;
+}
+
+.hero_text {
+    position: absolute;
+    top: 0;
+    padding: 2rem;
+}
+
+.hero_text_row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.hero_text_row:nth-child(2) {
+    gap: 40rem;
+    color: #879bb3;
+}
+
+.logo {
+    color: #fff;
+    background: linear-gradient(-90deg, rgb(241, 221, 208) 0%, rgb(65, 105, 225) 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 4px;
+}
+
+.hero_paragraph {
+    position: absolute;
+    bottom: 0;
+    padding: 2rem 2rem 0 2rem;
+}
+
+.hero_paragraph p{
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.slider {
+    position: relative;
+    width: 38rem;
+    height: 28rem;
+    overflow: hidden;
+}
+
+.slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    background-color: transparent;
+}
+
+.slide_image {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.slider_buttons {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 4rem 1rem;
+    z-index: 999;
+}
+
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    p, span, li {
+        font-size: 1rem;
+    }
+
+    button {
+        font-size: 1rem;
+        padding: 0.75rem 1.25rem;
+    }
+
+    .hero_text_row:nth-child(2) {
+        gap: 2rem;
+    }
+
+    .slider {
+        width: 30rem;
+        height: 20rem;
+    }
+}
