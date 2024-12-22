@@ -1,0 +1,154 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #363636;
+    --secondary: #c02727;
+    --alternate: #0a3c4b;
+}
+
+html {
+    font-size: calc(100vw / 1920 * 10);
+}
+
+body {
+    background: var(--primary);
+    color: var(--secondary);
+}
+
+h1 {
+    font-size: 10rem;
+}
+
+p, span {
+    font-size: 2.5rem;
+}
+
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+.hero_wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: inherit;
+    padding: 2rem;
+}
+
+.hero_title,
+.hero_paragraph,
+.hero_media {
+    overflow: hidden;
+}
+
+.hero_title span,
+.hero_title h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10rem;
+    text-align: center;
+}
+
+.hero_paragraph {
+    text-align: center;
+    padding: 0 20rem;
+}
+
+.hero_paragraph_text {
+    font-size: 6rem;
+    line-height: 1.3;
+}
+
+.hero_paragraph_text#hidden-gallery {
+    background-color: var(--alternate);
+    border-radius: 1.6rem;
+    padding: 0.75rem;
+    cursor: pointer;
+}
+
+.hero_media {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.hero_media_image {
+    width: 20rem;
+    object-fit: cover;
+}
+
+.hero_hidden {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--alternate);
+    z-index: -1;
+}
+
+.hero_hidden_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: inherit;
+    height: inherit;
+}
+
+.hero_hidden_media {
+    position: relative;
+    width: 80rem;
+    height: 54rem;
+    overflow: hidden;
+    background-color: var(--alternate);
+}
+
+.hero_hidden_media_image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+@media screen and (max-width: 768px) {
+    html {
+        font-size: calc(100vw / 768 * 10);
+    }
+
+    p, span {
+        font-size: 1rem;
+    }
+
+    .hero_wrapper {
+        padding-top: 12rem;
+    }
+
+    .hero_title span,
+    .hero_title h1 {
+        font-size: 5rem;
+    }
+
+    .hero_paragraph {
+        padding: 0;
+    }
+
+    .hero_paragraph_text {
+        font-size: 3rem;
+    }
+
+    .hero_background_image {
+        height: 100%;
+    }
+
+    .hero_media {
+        justify-content: center;
+        gap: 2rem;
+    }
+}
