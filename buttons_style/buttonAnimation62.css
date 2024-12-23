@@ -1,0 +1,50 @@
+body {
+    background: #181818;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 3rem;
+    margin: 0;
+}
+
+.btn {
+    position: relative;
+    overflow: hidden;
+    padding: 0 2rem;
+    height: 3rem;
+    border: none;
+    border-radius: 1.5rem;
+    background: #3d3a4e;
+    color: #fff;
+    cursor: pointer;
+    transition: all .5s;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    border-radius: inherit;
+    background: linear-gradient(80deg, #222, var(--i), #222);
+    transition: all .5s;
+}
+
+.btn:nth-child(2)::before {
+    transform-origin: right;
+}
+
+.btn:nth-child(3)::before {
+    transform-origin: bottom;
+}
+
+.btn:hover::before {
+    transform: scaleX(1);
+}
+
+.btn span {
+    position: relative;
+}
