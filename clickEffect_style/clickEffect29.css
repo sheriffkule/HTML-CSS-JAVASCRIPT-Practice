@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: radial-gradient(ellipse at center, #333, #111);
+}
+
+.container {
+    position: relative;
+    /* display: block; */
+    width: 215px;
+    height: 130px;
+    border: 3px solid #d29de7;
+    border-radius: 100px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+input {
+    display: none;
+}
+
+label {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    box-shadow: 
+    0 0 0.2rem #fff,
+    0 0 0.1rem #fff,
+    0 0 1rem #bc13fe,
+    0 0 0.4rem #bc13fe,
+    0 0 1.8rem #bc13fe,
+    inset 0 0 1.3rem #bc13fe;
+    cursor: pointer;
+    transition: all .5s;
+}
+
+label::after {
+    content: '';
+    position: absolute;
+    width: 85px;
+    height: 85px;
+    left: 10px;
+    top: 20px;
+    box-shadow: 
+    0 0 0.2rem #fff,
+    0 0 0.1rem #fff,
+    0 0 1rem #bc13fe,
+    0 0 0.4rem #bc13fe,
+    0 0 1.8rem #bc13fe,
+    inset 0 0 1.3rem #bc13fe;
+    border-radius: 50%;
+    transition: all .5s linear;
+}
+
+input:checked ~ label::after {
+    left: 115px;
+    box-shadow: 
+    0 0 0.2rem #fff,
+    0 0 0.1rem #fff,
+    0 0 1rem #13fe56,
+    0 0 0.4rem #13fe56,
+    0 0 1.8rem #13fe56,
+    inset 0 0 1.3rem #13fe56;
+}
+
+input:checked ~ label {
+    box-shadow: 
+    0 0 0.2rem #fff,
+    0 0 0.1rem #fff,
+    0 0 1rem #13fe56,
+    0 0 0.4rem #13fe56,
+    0 0 1.8rem #13fe56,
+    inset 0 0 1.3rem #13fe56;
+}
