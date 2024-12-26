@@ -1,0 +1,72 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #071111;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 50px;
+    gap: 50px;
+}
+
+.container .box {
+    position: relative;
+    width: 280px;
+    height: 360px;
+    background: #fff;
+    border-radius: 20px;
+}
+
+.container .box::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background: #f00;
+}
+
+.container .box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background: #f00;
+    filter: blur(30px);
+}
+
+.container .box b {
+    position: absolute;
+    display: block;
+    inset: 4px;
+    border-radius: 16px;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 2;
+}
+
+.container .box:nth-child(1)::before,
+.container .box:nth-child(1)::after {
+    background: linear-gradient(45deg, #ffbc00, #ff0058);
+}
+
+.container .box:nth-child(2)::before,
+.container .box:nth-child(2)::after {
+    background: linear-gradient(45deg, #03a9f4, #ff0058);
+}
+
+.container .box:nth-child(3)::before,
+.container .box:nth-child(3)::after {
+    background: linear-gradient(45deg, #4dff03, #00d0ff);
+}
