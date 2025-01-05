@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: radial-gradient(#222, #000);
+}
+
+.container > span {
+    color: #fff;
+    font-size: 80px;
+    letter-spacing: 6px;
+    color: #333;
+    animation: shadow 3s ease-in-out infinite;
+}
+
+@keyframes shadow {
+    0%, 100% {
+        color: #fff;
+        text-shadow: 0 0 30px #0652dd,
+        0 0 80px #0652dd,
+        0 0 160px #0652dd;
+    }
+
+    10%, 90% {
+        color: #333;
+        text-shadow: none;
+    }
+}
+
+span:nth-child(2) {
+    animation-delay: .25s;
+}
+
+span:nth-child(3) {
+    animation-delay: .5s;
+}
+
+span:nth-child(4) {
+    animation-delay: .75s;
+}
+
+span:nth-child(4) {
+    animation-delay: 1s;
+}
+
+span:nth-child(5) {
+    animation-delay: 1.25s;
+}
+
+span:nth-child(6) {
+    animation-delay: 1.5s;
+}
+
+span:nth-child(7) {
+    animation-delay: 1.75s;
+}
+
+span:nth-child(8) {
+    animation-delay: 2s;
+}
+
+span:nth-child(9) {
+    animation-delay: 2.25s;
+}
+
+span:nth-child(10) {
+    animation-delay: 2.5s;
+}
+
+span:nth-child(11) {
+    animation-delay: 2.75s;
+}
+
+span:nth-child(12) {
+    animation-delay: 3s;
+}
