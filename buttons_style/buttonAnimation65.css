@@ -1,0 +1,96 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    background: radial-gradient(#333, #000);
+}
+
+button {
+    position: relative;
+    width: 300px;
+    height: 100px;
+    background: transparent;
+    margin: 20px 0;
+    border: 2px solid rgba(255, 255, 255, .4);
+    border-right: 2px solid rgba(255, 255, 255, .6);
+    border-bottom: 2px solid rgba(255, 255, 255, .6);
+    border-radius: 5px;
+    color: #fff;
+    font-size: 30px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: rgba(255, 255, 255, .07);
+}
+
+button::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(70deg, transparent, rgba(255, 255, 255, 0.1));
+    left: -100%;
+    top: 0;
+    transition: all 0.6s ease-in-out;
+}
+
+button:hover::after {
+    left: 100%;
+}
+
+span {
+    position: absolute;
+    box-shadow: 0 0 10px var(--clr),
+    0 0 30px var(--clr),
+    0 0 50px var(--clr),
+    0 0 80px var(--clr),
+    0 0 110px var(--clr),
+    0 0 130px var(--clr),
+    0 0 150px var(--clr);
+    background: var(--clr);
+    border-radius: 50%;
+}
+
+button > span:nth-child(1) {
+    width: 270px;
+    height: 3px;
+    left: 10px;
+    top: 10px;
+}
+
+button > span:nth-child(2) {
+    width: 270px;
+    height: 3px;
+    bottom: 10px;
+    left: 10px;
+}
+
+button > span:nth-child(3) {
+    width: 3px;
+    height: 60px;
+    bottom: 18px;
+    left: 5px;
+}
+
+button > span:nth-child(4) {
+    width: 3px;
+    height: 60px;
+    bottom: 18px;
+    right: 10px;
+}
