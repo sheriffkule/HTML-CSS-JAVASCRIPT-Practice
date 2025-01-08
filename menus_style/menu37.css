@@ -1,0 +1,98 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #000;
+}
+
+ul {
+    width: 600px;
+    height: 80px;
+    background: #0c0700;
+    list-style-type: none;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+ul > li {
+    position: relative;
+    width: 19%;
+    height: 50%;
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 2px solid rgba(255, 255, 255, 0.5);
+    border-left: 2px solid rgba(255, 255, 255, 0.5);
+    margin: 0 2px;
+}
+
+li:first-child {
+    border-left: none;
+}
+
+ul > li:nth-child(5) {
+    border-right: none;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 20px;
+    z-index: 5;
+}
+
+span {
+    position: absolute;
+    left: 12px;
+    width: 100px;
+    height: 70px;
+    background: #e705c1;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #e705c1,
+    0 0 30px #e705c1,
+    0 0 60px #e705c1,
+    0 0 80px #e705c1;
+    animation: back 4s linear infinite;
+    transition: all .8s;
+}
+
+@keyframes back {
+    0% {
+        filter: hue-rotate(0);
+    }
+    100% {
+        filter: hue-rotate(360deg);
+    }
+}
+
+ul > li:nth-child(1):hover ~ span {
+    left: 15px;
+}
+
+ul > li:nth-child(2):hover ~ span {
+    left: 135px;
+}
+
+ul > li:nth-child(3):hover ~ span {
+    left: 255px;
+}
+
+ul > li:nth-child(4):hover ~ span {
+    left: 370px;
+}
+
+ul > li:nth-child(5):hover ~ span {
+    left: 490px;
+}
