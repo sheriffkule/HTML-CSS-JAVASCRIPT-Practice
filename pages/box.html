@@ -1,286 +1,510 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="shortcut icon" href="/icons/favicon.png" type="image/x-icon" />
+    <title>Boxes</title>
+    <link rel="stylesheet" href="/styles/header.css" />
+    <link rel="stylesheet" href="/pages_style/pages_header.css" />
+    <link rel="stylesheet" href="/pages_style/box.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="shortcut icon" href="/icons/favicon.png" type="image/x-icon">
-  <title>Boxes</title>
-  <link rel="stylesheet" href="/styles/header.css">
-  <link rel="stylesheet" href="/pages_style/pages_header.css">
-  <link rel="stylesheet" href="/pages_style/box.css">
-</head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">
+          <h2>SheriffKule</h2>
+          <h2>SheriffKule</h2>
+        </div>
+        <ul id="nav_links" class="nav_links">
+          <li class="close_btn" id="close_btn"><i class="fa-solid fa-x"></i></li>
+          <li><a href="https://sheriffkule.vercel.app/">Home</a></li>
+          <li><a href="/pages/about.html">About & Contact</a></li>
 
-<body>
-  <header>
-    <nav>
-      <div class="logo">
-        <h2>SheriffKule</h2>
-        <h2>SheriffKule</h2>
+          <li id="components">
+            <a href="#">Components &#9662;</a>
+            <div id="drop-items">
+              <a href="/pages/background.html">Background</a>
+              <a href="/pages/box.html">Box</a>
+              <a href="/pages/button.html">Button</a>
+              <a href="/pages/clickEffect.html">Click Effect</a>
+              <a href="/pages/form.html">Form</a>
+              <a href="/pages/imageEffect.html">Image Effect</a>
+              <a href="/pages/loader.html">Loader</a>
+              <a href="/pages/menu.html">Menu</a>
+              <a href="/pages/navbar.html">Navbar</a>
+              <a href="/pages/text.html">Text</a>
+              <a href="/pages/widget.html">Widget</a>
+            </div>
+          </li>
+          <li><a href="/pages/projects.html">Projects</a></li>
+        </ul>
+
+        <div id="menu_btn" class="menu_btn"><i class="fa-solid fa-bars"></i></div>
+      </nav>
+      <div class="neon">
+        <img src="/images/matrix.jpg" />
+        <span class="gradient"></span>
+        <span class="spotlight"></span>
       </div>
-      <ul id="nav_links" class="nav_links">
-        <li class="close_btn" id="close_btn"><i class="fa-solid fa-x"></i></li>
-        <li><a href="https://sheriffkule.vercel.app/">Home</a></li>
-        <li><a href="/pages/about.html">About & Contact</a></li>
+      <div class="donation">
+        <a href="https://www.buymeacoffee.com/sheriffkule"
+          ><img src="/images/coffee.png" alt="Buy Me a Coffee" title="Buy Me a Coffee"
+        /></a>
+        <a href="https://paypal.me/sheriffkule?country.x=RS&locale.x=en_US"
+          ><img src="/images/paypal.png" alt="paypal" title="PayPal"
+        /></a>
+        <a href="https://www.patreon.com/SheriffKule"
+          ><img src="/images/patreon.png" alt="patreon" title="Support me on Patreon"
+        /></a>
+      </div>
+    </header>
 
-        <li id="components"><a href="#">Components &#9662;</a>
-          <div id="drop-items">
-            <a href="/pages/background.html">Background</a>
-            <a href="/pages/box.html">Box</a>
-            <a href="/pages/button.html">Button</a>
-            <a href="/pages/clickEffect.html">Click Effect</a>
-            <a href="/pages/form.html">Form</a>
-            <a href="/pages/imageEffect.html">Image Effect</a>
-            <a href="/pages/loader.html">Loader</a>
-            <a href="/pages/menu.html">Menu</a>
-            <a href="/pages/navbar.html">Navbar</a>
-            <a href="/pages/text.html">Text</a>
-            <a href="/pages/widget.html">Widget</a>
-          </div>
-        </li>
-        <li><a href="/pages/projects.html">Projects</a></li>
-      </ul>
+    <main>
+      <section class="content">
+        <h1>Examples of Cards and Boxes</h1>
+        <p>
+          This page contains various examples of cards, boxes with Background Image,
+          Rounded Corners, Shadow, Gradient, and Transparency effects that can be used in
+          your projects.
+        </p>
+      </section>
 
-      <div id="menu_btn" class="menu_btn"><i class="fa-solid fa-bars"></i></div>
-    </nav>
-    <div class="neon">
-      <img src="/images/matrix.jpg">
-      <span class="gradient"></span>
-      <span class="spotlight"></span>
-    </div>
-    <div class="donation"><a href="https://www.buymeacoffee.com/sheriffkule"><img src="/images/coffee.png"
-          alt="Buy Me a Coffee" title="Buy Me a Coffee"></a>
-      <a href="https://paypal.me/sheriffkule?country.x=RS&locale.x=en_US"><img src="/images/paypal.png" alt="paypal"
-          title="PayPal"></a>
-      <a href="https://www.patreon.com/SheriffKule"><img src="/images/patreon.png" alt="patreon"
-          title="Support me on Patreon"></a>
-    </div>
-  </header>
+      <section class="examples">
+        <ul>
+          <li>
+            <a href="/box/3drotate.html"
+              ><ion-icon name="settings-outline"></ion-icon><span>3D Rotation</span>
+            </a>
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation56.html"
+              ><ion-icon name="square-outline"></ion-icon><span>Simple Card</span>
+            </a>
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation55.html"
+              ><ion-icon name="square-outline"></ion-icon><span>Sci-fi Card</span>
+            </a>
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation54.html"
+              ><ion-icon name="water-outline"></ion-icon><span>Water Drops</span>
+            </a>
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation53.html"
+              ><ion-icon name="square-outline"></ion-icon
+              ><span>Glowing Gradient Border</span>
+            </a>
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation52.html"
+              ><ion-icon name="id-card-outline"></ion-icon><span>3D Card Animation</span>
+            </a>
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation51.html"
+              ><ion-icon name="square-outline"></ion-icon><span>Simple Card</span>
+            </a>
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation50.html"
+              ><ion-icon name="square-outline"></ion-icon><span>Bento Box Animation</span>
+              <div class="top">Top</div>
+            </a>
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation49.html"
+              ><ion-icon name="square-outline"></ion-icon
+              ><span>Simple Stacked Cards</span>
+            </a>
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation48.html"
+              ><ion-icon name="square-outline"></ion-icon><span>Box Shadow Stack</span>
+            </a>
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation47.html"
+              ><ion-icon name="id-card-outline"></ion-icon><span>Glowing Cards</span>
+            </a>
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation46.html"
+              ><ion-icon name="id-card-outline"></ion-icon
+              ><span>Animated Content Card</span>
+            </a>
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation45.html"
+              ><ion-icon name="id-card-outline"></ion-icon><span>Colorful Cards</span>
+            </a>
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation44.html"
+              ><ion-icon name="water-outline"></ion-icon><span>Liquid Effect</span>
+            </a>
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation43.html"
+              ><ion-icon name="id-card-outline"></ion-icon><span>Nice Cards</span>
+            </a>
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation42.html"
+              ><ion-icon name="square-outline"></ion-icon
+              ><span>Nice Rotating Border</span>
+            </a>
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation41.html"
+              ><ion-icon name="id-card-outline"></ion-icon
+              ><span>3D Glassmorphism Card</span>
+            </a>
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation40.html"
+              ><ion-icon name="square-outline"></ion-icon
+              ><span>Rotating Box Border</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation39.html"
+              ><ion-icon name="square-outline"></ion-icon
+              ><span>Simple Service Section</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation38.html"
+              ><ion-icon name="square-outline"></ion-icon
+              ><span>Rotating Box Border</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation37.html"
+              ><ion-icon name="square-outline"></ion-icon><span>Blur Cards</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation36.html"
+              ><ion-icon name="square-outline"></ion-icon
+              ><span>Services Box Effect</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation35.html"
+              ><ion-icon name="id-card-outline"></ion-icon
+              ><span>Amazing Card Design</span>
+              <div class="top">Top</div>
+            </a>
+          </li>
+          <li>
+            <a href="/box/3dcube9.html"
+              ><ion-icon name="cube-outline"></ion-icon><span>Rotating 3D Cubes</span>
+              <div class="top">Top</div>
+            </a>
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation34.html"
+              ><ion-icon name="bar-chart-outline"></ion-icon><span>Progress Bar</span>
+              <div class="top">Top</div>
+            </a>
+          </li>
+          <li>
+            <a href="/box/3dcross.html"
+              ><ion-icon name="settings-outline"></ion-icon><span>3D Rotating Cross</span>
+              <div class="top">Top</div>
+            </a>
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation33.html"
+              ><ion-icon name="square-outline"></ion-icon><span>Box Border Trick</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation32.html"
+              ><ion-icon name="id-card-outline"></ion-icon
+              ><span>Simple Profile Card</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation31.html"
+              ><ion-icon name="id-card-outline"></ion-icon><span>Book Like Cards</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation30.html"
+              ><ion-icon name="square-outline"></ion-icon
+              ><span>Simple Cards Effect</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation29.html"
+              ><ion-icon name="square-outline"></ion-icon><span>Flex Cards</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation28.html"
+              ><ion-icon name="square-outline"></ion-icon><span>New Design Cards</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation27.html"
+              ><ion-icon name="square-outline"></ion-icon
+              ><span>Services Section Cards</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation26.html"
+              ><ion-icon name="square-outline"></ion-icon
+              ><span>Interactive Colorful Cards</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation25.html"
+              ><ion-icon name="color-filter-outline"></ion-icon
+              ><span>Colorful Card Effect</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/3dcube8.html"
+              ><ion-icon name="cube-outline"></ion-icon><span>3D Box</span>
+              <div class="top">Top</div>
+            </a>
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation24.html"
+              ><ion-icon name="square-outline"></ion-icon
+              ><span>Fancy Border Trick</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/3dcube7.html"
+              ><ion-icon name="cube-outline"></ion-icon><span>Interactive Cube</span>
+            </a>
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation23.html"
+              ><ion-icon name="square-outline"></ion-icon
+              ><span>Box Ripple Effect</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation22.html"
+              ><ion-icon name="bowling-ball-outline"></ion-icon
+              ><span>Bowl Animation</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/3dcube6.html"
+              ><ion-icon name="cube-outline"></ion-icon><span>Cubes Animation</span>
+              <div class="top">Top</div>
+            </a>
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation21.html"
+              ><ion-icon name="square-outline"></ion-icon
+              ><span>Nice Cards Layout</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation20.html"
+              ><ion-icon name="square-outline"></ion-icon
+              ><span>Mouse Wheel Slider</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation19.html"
+              ><ion-icon name="square-outline"></ion-icon><span>Box Glow Effect</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation18.html"
+              ><ion-icon name="square-outline"></ion-icon><span>3D Card Slider</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation17.html"
+              ><ion-icon name="id-card-outline"></ion-icon><span>Product Card</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation16.html"
+              ><ion-icon name="id-card-outline"></ion-icon
+              ><span>Animated Service Section</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation15.html"
+              ><ion-icon name="archive-outline"></ion-icon
+              ><span>Simple Hover Animation</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation14.html"
+              ><ion-icon name="square-outline"></ion-icon
+              ><span>Real Glassmorphism Cards</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/3dgear.html"
+              ><ion-icon name="settings-outline"></ion-icon><span>3D Rotating Gear</span>
+              <div class="top">Top</div>
+            </a>
+          </li>
+          <li>
+            <a href="/box/3dstairs.html"
+              ><ion-icon name="cube-outline"></ion-icon><span>3D Animated Stairs</span>
+              <div class="top">Top</div>
+            </a>
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation13.html"
+              ><ion-icon name="water-outline"></ion-icon><span>Water Drop Cards</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/3dcube5.html"
+              ><ion-icon name="cube-outline"></ion-icon><span>Cube Hover Animation</span>
+              <div class="top">Top</div>
+            </a>
+          </li>
+          <li>
+            <a href="/box/3dcube4.html"
+              ><ion-icon name="cube-outline"></ion-icon><span>3D Cubes Hover Effect</span>
+              <div class="top">Top</div>
+            </a>
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation12.html"
+              ><ion-icon name="id-card-outline"></ion-icon
+              ><span>Stylish Glow Card</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation11.html"
+              ><ion-icon name="enter-outline"></ion-icon><span>Sliding Card Effect</span>
+              <div class="top">Top</div>
+            </a>
+          </li>
+          <li>
+            <a href="/box/3dcube3.html"
+              ><ion-icon name="cube-outline"></ion-icon><span>Animated 3D Cube</span>
+              <div class="top">Top</div>
+            </a>
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation10.html"
+              ><ion-icon name="square-outline"></ion-icon
+              ><span>Glassmorphism Cards</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/3dcube2.html"
+              ><ion-icon name="cube-outline"></ion-icon><span>Ambient Light 3D Cube</span>
+              <div class="top">Top</div>
+            </a>
+          </li>
+          <li>
+            <a href="/box/3dcube.html"
+              ><ion-icon name="cube-outline"></ion-icon><span>3D Cube</span>
+              <div class="top">Top</div>
+            </a>
+          </li>
+          <li>
+            <a href="/box/fireRing.html"
+              ><ion-icon name="flame-outline"></ion-icon><span>Fire Ring</span>
+              <div class="top">Top</div>
+            </a>
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation09.html"
+              ><ion-icon name="id-card-outline"></ion-icon
+              ><span>Gradient Border Cards</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation08.html"
+              ><ion-icon name="id-card-outline"></ion-icon
+              ><span>Card Hover Effect</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation07.html"
+              ><ion-icon name="id-card-outline"></ion-icon><span>Animated Cards</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation06.html"
+              ><ion-icon name="square-outline"></ion-icon
+              ><span>Border Gradient Animation</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation05.html"
+              ><ion-icon name="chatbubble-outline"></ion-icon
+              ><span>Bubble Animation Effect</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation04.html"
+              ><ion-icon name="id-card-outline"></ion-icon
+              ><span>Animated Border Card</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation03.html"
+              ><ion-icon name="square-outline"></ion-icon
+              ><span>Glassmorphism Box</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation02.html"
+              ><ion-icon name="id-card-outline"></ion-icon
+              ><span>Animated Card Border</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/boxBorderAnimation01.html"
+              ><ion-icon name="sync-circle-outline"></ion-icon
+              ><span>Rotating Border Box</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/heartShape.html"
+              ><ion-icon name="heart-outline"></ion-icon><span>Heart Shape</span></a
+            >
+          </li>
+          <li>
+            <a href="/box/shapes.html"
+              ><ion-icon name="shapes-outline"></ion-icon><span>Shapes Box</span></a
+            >
+          </li>
+        </ul>
+      </section>
+    </main>
+    <footer>
+      <p>Copyright &copy; <time id="year"></time> SheriffKule from XXIII Century</p>
+    </footer>
 
-  <main>
+    <script src="/scripts/main.js"></script>
 
-    <section class="content">
-      <h1>Examples of Cards and Boxes</h1>
-      <p>This page contains various examples of cards, boxes with Background Image, Rounded Corners, Shadow,
-        Gradient,
-        and Transparency effects that can be used in your projects.</p>
-    </section>
-
-    <section class="examples">
-      <ul>
-        <li><a href="/box/boxBorderAnimation56.html"><ion-icon name="square-outline"></ion-icon><span>Simple Card</span>
-      </a></li>
-        <li><a href="/box/boxBorderAnimation55.html"><ion-icon name="square-outline"></ion-icon><span>Sci-fi Card</span>
-        </a></li>
-        <li><a href="/box/boxBorderAnimation54.html"><ion-icon name="water-outline"></ion-icon><span>Water Drops</span>
-        </a></li>
-        <li><a href="/box/boxBorderAnimation53.html"><ion-icon name="square-outline"></ion-icon><span>Glowing Gradient Border</span>
-        </a></li>
-        <li><a href="/box/boxBorderAnimation52.html"><ion-icon name="id-card-outline"></ion-icon><span>3D Card Animation</span>
-        </a></li>
-        <li><a href="/box/boxBorderAnimation51.html"><ion-icon name="square-outline"></ion-icon><span>Simple Card</span>
-        </a></li>
-        <li><a href="/box/boxBorderAnimation50.html"><ion-icon name="square-outline"></ion-icon><span>Bento Box Animation</span><div class="top">Top</div>
-          </a></li>
-        <li><a href="/box/boxBorderAnimation49.html"><ion-icon name="square-outline"></ion-icon><span>Simple Stacked Cards</span>
-          </a></li>
-        <li><a href="/box/boxBorderAnimation48.html"><ion-icon name="square-outline"></ion-icon><span>Box Shadow Stack</span>
-          </a></li>
-        <li><a href="/box/boxBorderAnimation47.html"><ion-icon name="id-card-outline"></ion-icon><span>Glowing Cards</span>
-          </a></li>
-        <li><a href="/box/boxBorderAnimation46.html"><ion-icon name="id-card-outline"></ion-icon><span>Animated Content Card</span>
-          </a></li>
-        <li><a href="/box/boxBorderAnimation45.html"><ion-icon name="id-card-outline"></ion-icon><span>Colorful
-              Cards</span>
-          </a></li>
-        <li><a href="/box/boxBorderAnimation44.html"><ion-icon name="water-outline"></ion-icon><span>Liquid
-              Effect</span>
-          </a></li>
-        <li><a href="/box/boxBorderAnimation43.html"><ion-icon name="id-card-outline"></ion-icon><span>Nice Cards</span>
-          </a></li>
-        <li><a href="/box/boxBorderAnimation42.html"><ion-icon name="square-outline"></ion-icon><span>Nice Rotating
-              Border</span>
-          </a></li>
-        <li><a href="/box/boxBorderAnimation41.html"><ion-icon name="id-card-outline"></ion-icon><span>3D Glassmorphism
-              Card</span>
-          </a></li>
-        <li><a href="/box/boxBorderAnimation40.html"><ion-icon name="square-outline"></ion-icon><span>Rotating Box
-              Border</span></a>
-        </li>
-        <li><a href="/box/boxBorderAnimation39.html"><ion-icon name="square-outline"></ion-icon><span>Simple Service
-              Section</span></a>
-        </li>
-        <li><a href="/box/boxBorderAnimation38.html"><ion-icon name="square-outline"></ion-icon><span>Rotating Box
-              Border</span></a>
-        </li>
-        <li><a href="/box/boxBorderAnimation37.html"><ion-icon name="square-outline"></ion-icon><span>Blur
-              Cards</span></a>
-        </li>
-        <li><a href="/box/boxBorderAnimation36.html"><ion-icon name="square-outline"></ion-icon><span>Services Box
-              Effect</span></a>
-        </li>
-        <li><a href="/box/boxBorderAnimation35.html"><ion-icon name="id-card-outline"></ion-icon><span>Amazing Card
-              Design</span>
-            <div class="top">Top</div>
-          </a></li>
-        <li><a href="/box/3dcube9.html"><ion-icon name="cube-outline"></ion-icon><span>Rotating 3D Cubes</span>
-            <div class="top">Top</div>
-          </a></li>
-        <li><a href="/box/boxBorderAnimation34.html"><ion-icon name="bar-chart-outline"></ion-icon><span>Progress
-              Bar</span>
-            <div class="top">Top</div>
-          </a>
-        </li>
-        <li><a href="/box/3dcross.html"><ion-icon name="settings-outline"></ion-icon><span>3D Rotating
-              Cross</span>
-            <div class="top">Top</div>
-          </a>
-        </li>
-        <li><a href="/box/boxBorderAnimation33.html"><ion-icon name="square-outline"></ion-icon><span>Box Border
-              Trick</span></a>
-        </li>
-        <li><a href="/box/boxBorderAnimation32.html"><ion-icon name="id-card-outline"></ion-icon><span>Simple
-              Profile Card</span></a>
-        </li>
-        <li><a href="/box/boxBorderAnimation31.html"><ion-icon name="id-card-outline"></ion-icon><span>Book Like
-              Cards</span></a></li>
-        <li><a href="/box/boxBorderAnimation30.html"><ion-icon name="square-outline"></ion-icon><span>Simple
-              Cards Effect</span></a>
-        </li>
-        <li><a href="/box/boxBorderAnimation29.html"><ion-icon name="square-outline"></ion-icon><span>Flex
-              Cards</span></a>
-        </li>
-        <li><a href="/box/boxBorderAnimation28.html"><ion-icon name="square-outline"></ion-icon><span>New Design
-              Cards</span></a>
-        </li>
-        <li><a href="/box/boxBorderAnimation27.html"><ion-icon name="square-outline"></ion-icon><span>Services Section
-              Cards</span></a>
-        </li>
-        <li><a href="/box/boxBorderAnimation26.html"><ion-icon name="square-outline"></ion-icon><span>Interactive
-              Colorful Cards</span></a>
-        </li>
-        <li><a href="/box/boxBorderAnimation25.html"><ion-icon name="color-filter-outline"></ion-icon><span>Colorful
-              Card Effect</span></a>
-        </li>
-        <li><a href="/box/3dcube8.html"><ion-icon name="cube-outline"></ion-icon><span>3D Box</span>
-            <div class="top">Top</div>
-          </a></li>
-        <li><a href="/box/boxBorderAnimation24.html"><ion-icon name="square-outline"></ion-icon><span>Fancy Border
-              Trick</span></a>
-        </li>
-        <li><a href="/box/3dcube7.html"><ion-icon name="cube-outline"></ion-icon><span>Interactive
-              Cube</span>
-          </a></li>
-        <li><a href="/box/boxBorderAnimation23.html"><ion-icon name="square-outline"></ion-icon><span>Box Ripple
-              Effect</span></a>
-        </li>
-        <li><a href="/box/boxBorderAnimation22.html"><ion-icon name="bowling-ball-outline"></ion-icon><span>Bowl
-              Animation</span></a>
-        </li>
-        <li><a href="/box/3dcube6.html"><ion-icon name="cube-outline"></ion-icon><span>Cubes
-              Animation</span>
-            <div class="top">Top</div>
-          </a></li>
-        <li><a href="/box/boxBorderAnimation21.html"><ion-icon name="square-outline"></ion-icon><span>Nice Cards
-              Layout</span></a>
-        </li>
-        <li><a href="/box/boxBorderAnimation20.html"><ion-icon name="square-outline"></ion-icon><span>Mouse Wheel
-              Slider</span></a>
-        </li>
-        <li><a href="/box/boxBorderAnimation19.html"><ion-icon name="square-outline"></ion-icon><span>Box Glow
-              Effect</span></a>
-        </li>
-        <li><a href="/box/boxBorderAnimation18.html"><ion-icon name="square-outline"></ion-icon><span>3D
-              Card
-              Slider</span></a></li>
-        <li><a href="/box/boxBorderAnimation17.html"><ion-icon name="id-card-outline"></ion-icon><span>Product
-              Card</span></a></li>
-        <li><a href="/box/boxBorderAnimation16.html"><ion-icon name="id-card-outline"></ion-icon><span>Animated Service
-              Section</span></a></li>
-        <li><a href="/box/boxBorderAnimation15.html"><ion-icon name="archive-outline"></ion-icon><span>Simple Hover
-              Animation</span></a></li>
-        <li><a href="/box/boxBorderAnimation14.html"><ion-icon name="square-outline"></ion-icon><span>Real Glassmorphism
-              Cards</span></a></li>
-        <li><a href="/box/3dgear.html"><ion-icon name="settings-outline"></ion-icon><span>3D Rotating
-              Gear</span>
-            <div class="top">Top</div>
-          </a>
-        </li>
-        <li><a href="/box/3dstairs.html"><ion-icon name="cube-outline"></ion-icon><span>3D Animated
-              Stairs</span>
-            <div class="top">Top</div>
-          </a></li>
-        <li><a href="/box/boxBorderAnimation13.html"><ion-icon name="water-outline"></ion-icon><span>Water Drop
-              Cards</span></a></li>
-        <li><a href="/box/3dcube5.html"><ion-icon name="cube-outline"></ion-icon><span>Cube Hover
-              Animation</span>
-            <div class="top">Top</div>
-          </a></li>
-        <li><a href="/box/3dcube4.html"><ion-icon name="cube-outline"></ion-icon><span>3D Cubes Hover
-              Effect</span>
-            <div class="top">Top</div>
-          </a></li>
-        <li><a href="/box/boxBorderAnimation12.html"><ion-icon name="id-card-outline"></ion-icon><span>Stylish Glow
-              Card</span></a></li>
-        <li><a href="/box/boxBorderAnimation11.html"><ion-icon name="enter-outline"></ion-icon><span>Sliding Card
-              Effect</span>
-            <div class="top">Top</div>
-          </a></li>
-        <li><a href="/box/3dcube3.html"><ion-icon name="cube-outline"></ion-icon><span>Animated 3D
-              Cube</span>
-            <div class="top">Top</div>
-          </a></li>
-        <li><a href="/box/boxBorderAnimation10.html"><ion-icon name="square-outline"></ion-icon><span>Glassmorphism
-              Cards</span></a></li>
-        <li><a href="/box/3dcube2.html"><ion-icon name="cube-outline"></ion-icon><span>Ambient Light 3D
-              Cube</span>
-            <div class="top">Top</div>
-          </a></li>
-        <li><a href="/box/3dcube.html"><ion-icon name="cube-outline"></ion-icon><span>3D Cube</span>
-            <div class="top">Top</div>
-          </a></li>
-        <li><a href="/box/fireRing.html"><ion-icon name="flame-outline"></ion-icon><span>Fire
-              Ring</span>
-            <div class="top">Top</div>
-          </a></li>
-        <li><a href="/box/boxBorderAnimation09.html"><ion-icon name="id-card-outline"></ion-icon><span>Gradient Border
-              Cards</span></a></li>
-        <li><a href="/box/boxBorderAnimation08.html"><ion-icon name="id-card-outline"></ion-icon><span>Card Hover
-              Effect</span></a></li>
-        <li><a href="/box/boxBorderAnimation07.html"><ion-icon name="id-card-outline"></ion-icon><span>Animated
-              Cards</span></a></li>
-        <li><a href="/box/boxBorderAnimation06.html"><ion-icon name="square-outline"></ion-icon><span>Border Gradient
-              Animation</span></a></li>
-        <li><a href="/box/boxBorderAnimation05.html"><ion-icon name="chatbubble-outline"></ion-icon><span>Bubble
-              Animation Effect</span></a></li>
-        <li><a href="/box/boxBorderAnimation04.html"><ion-icon name="id-card-outline"></ion-icon><span>Animated Border
-              Card</span></a></li>
-        <li><a href="/box/boxBorderAnimation03.html"><ion-icon name="square-outline"></ion-icon><span>Glassmorphism
-              Box</span></a></li>
-        <li><a href="/box/boxBorderAnimation02.html"><ion-icon name="id-card-outline"></ion-icon><span>Animated Card
-              Border</span></a></li>
-        <li><a href="/box/boxBorderAnimation01.html"><ion-icon name="sync-circle-outline"></ion-icon><span>Rotating
-              Border Box</span></a></li>
-        <li><a href="/box/heartShape.html"><ion-icon name="heart-outline"></ion-icon><span>Heart
-              Shape</span></a></li>
-        <li><a href="/box/shapes.html"><ion-icon name="shapes-outline"></ion-icon><span>Shapes
-              Box</span></a></li>
-      </ul>
-    </section>
-
-  </main>
-  <footer>
-    <p>Copyright &copy; <time id="year"></time> SheriffKule from XXIII Century</p>
-  </footer>
-
-  <script src="/scripts/main.js"></script>
-
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
-</body>
-
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
 </html>
