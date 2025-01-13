@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Creepster", serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    background: radial-gradient(#303030, #111);
+}
+
+#text {
+    position: absolute;
+    font-size: 4em;
+    cursor: pointer;
+    transition: 0.25s;
+    letter-spacing: 4px;
+    color: red;
+    font-weight: 100;
+}
