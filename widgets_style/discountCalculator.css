@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    background: radial-gradient(#333, #222, #141a1f);
+    background-size: 100px 10px;
+}
+
+.wrapper {
+    width: 500px;
+    margin: auto;
+    background: radial-gradient(#ccc, #606060);
+    border: 2px solid#555;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+}
+
+.title {
+    width: 100%;
+    background: linear-gradient(#405050, #606060);
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+    letter-spacing: 1px;
+}
+
+form {
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.form-group {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+label {
+    flex: 1;
+    padding: 10px;
+    border-bottom: 2px solid #555;
+    font-size: 17px;
+    margin-top: 1.5px;
+}
+
+input {
+    flex: 1;
+    outline: none;
+    border: 2px solid #555;
+    font-size: 17px;
+    padding: 10px;
+    text-align: center;
+    width: 150px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input::placeholder {
+    transition: .3s;
+}
+
+input:focus::placeholder {
+    transform: translateY(-30px);
+}
+
+input {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+#saveAmount,
+#finalPrice {
+    color: blue;
+    font-weight: 600;
+}
+
+#symbol {
+    position: absolute;
+    top: 12px;
+    right: 5px;
+    font-weight: 600;
+    font-size: 17px;
+    font-weight: 600;
+    display: none;
+}
+
+#resetBtn {
+    text-align: center;
+}
+
+#resetBtn button {
+    font-size: 18px;
+    font-weight: 600;
+    border: 2px solid #555;
+    padding: 8px 28px;
+    margin: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #405050;
+    color: #fff;
+    letter-spacing: 2px;
+    transition: .3s;
+}
+
+#resetBtn button:hover {
+    background: #004949;
+    transform: scale(1.02) translateY(-4px);
+}
+
+#resetBtn button:active {
+    transform: scale(0.98) translateY(-2px);
+}
+
+h4 {
+    font-size: 16px;
+    font-weight: 200;
+    color: #646e7a;
+    pointer-events: none;
+    margin: 12px;
+}
