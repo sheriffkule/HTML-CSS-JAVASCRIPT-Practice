@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Titan+One&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Titan One", sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(60deg, #999, #111);
+}
+
+#text {
+    position: relative;
+    color: rgb(51,69,204);
+    font-weight: 100;
+    font-size: 8em;
+    letter-spacing: 3px;
+    transform: rotate(-28deg) skew(25deg);
+    user-select: none;
+    cursor: pointer;
+}
+
+#text::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 30px;
+    left: -30px;
+    color: rgba(0, 0, 0, 0.5);
+    filter: blur(7px);
+    z-index: -1;
+}
