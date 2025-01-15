@@ -1,0 +1,149 @@
+:root {
+    --secondary: #181818;
+    --primary: #bdbfbe;
+}
+
+html {
+    font-size: calc(100vw / 1920 * 12);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--primary);
+    color: var(--secondary);
+}
+
+main {
+    background-color: var(--secondary);
+}
+
+h1 {
+    font-size: 8rem;
+}
+
+p, span {
+    font-size: 8rem;
+}
+
+img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.section_heading {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--primary);
+    z-index: 1;
+}
+
+.section_thumbnail {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 0.8rem;
+    height: inherit;
+    padding: 3rem;
+    counter-reset: item;
+    z-index: 20;
+}
+
+.section_thumbnail_item {
+    cursor: pointer;
+    transition: border 0.8s ease-in-out, opacity 0.8s ease-in-out;
+}
+
+.section_thumbnail_item::before {
+    display: block;
+    padding-bottom: 0.8rem;
+    counter-increment: item;
+    content: '[ 0' counter(item) ' ]';
+    font-size: 1.5rem;
+    color: var(--primary);
+    transition: color .8s ease-in-out;
+}
+
+.section_thumbnail_item_figure {
+    position: relative;
+    width: 16rem;
+    height: 12rem;
+    border-radius: 1.5rem;
+    overflow: hidden;
+}
+
+.section_thumbnail_item_figure.active {
+    border: 1px solid var(--primary);
+    transition: all .8s ease-in-out;
+}
+
+.section_thumbnail_item_image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.section_bg_media {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 5;
+    overflow: hidden;
+}
+
+.section_bg_media_image {
+    position: inherit;
+    object-position: top;
+    z-index: 10;
+}
+
+.section_bg_media_text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    z-index: 20;
+}
+
+.section_bg_media_text span {
+    display: block;
+    color: royalblue;
+    font-weight: 900;
+}
+
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 8rem;
+    }
+
+    .section_heading {
+        top: 90%;
+        left: 60%;
+    }
+
+    .section_thumbnail {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+}
