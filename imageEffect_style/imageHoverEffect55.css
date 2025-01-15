@@ -1,0 +1,58 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: radial-gradient(#212d31, #111);
+    overflow: hidden;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 50px;
+    width: 100%;
+    gap: 50px;
+    -webkit-box-reflect: below -100px linear-gradient(transparent, transparent, #0005);
+}
+
+.container .imgBx {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    width: 300px;
+    height: 300px;
+}
+
+.container .imgBx:hover {
+    z-index: 10;
+}
+
+.container .imgBx i {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    
+    background-size: 300px 300px;
+    background-position: center;
+    transition: transform .3s ease;
+}
+
+.container .imgBx:first-of-type i{
+    background-image: url(/images/clint.jpeg);
+}
+
+.container .imgBx:last-of-type i{
+    background-image: url(/images/tuco-01.jpg);
+}
