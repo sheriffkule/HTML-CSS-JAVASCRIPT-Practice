@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #ccc;
+    background: #2c2f48;
+}
+
+::-webkit-scrollbar {
+    width: .75rem;
+    background: #2c2f48;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3d3f52;
+}
+
+.contact-container {
+    max-width: 960px;
+    margin: auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    background: #363953;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, .2);
+    overflow: hidden;
+}
+
+.form-container {
+    padding: 20px;
+}
+
+.form-container h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.contact-form {
+    display: grid;
+    row-gap: 1rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: #2c2f48;
+    padding: 10px;
+    font-size: .9rem;
+    color: #fff;
+    border-radius: 8px;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    transition: .3s;
+}
+
+.contact-form input:focus::placeholder,
+.contact-form textarea:focus::placeholder {
+    transform: translateY(-30px);
+}
+
+.contact-form textarea {
+    resize: none;
+    height: 200px;
+}
+
+.contact-form .send-button {
+    border: none;
+    outline: none;
+    background: #00dbde;
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: #000;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all .3s linear;
+}
+
+.contact-form .send-button:hover {
+    filter: brightness(70%);
+    scale: 1.02;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.map iframe {
+    width: 100%;
+    height: 100%;
+}
+
+@media screen and (max-width: 964px) {
+    .contact-container {
+        margin: 0 auto;
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .map iframe {
+        height: 400px;
+    }
+}
