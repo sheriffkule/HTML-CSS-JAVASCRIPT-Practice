@@ -12,7 +12,49 @@
     <link rel="stylesheet" href="/projects/restaurantWebsite/restaurantWebsite.css" />
   </head>
   <body>
-    <header class="header" id="header"></header>
+    <header class="header" id="header">
+      <nav class="nav container">
+        <a href="#home" class="nav__logo">
+          <img src="logo.png" alt="logo" class="nav__logo-img">
+        </a>
+
+        <div class="nav__menu" id="nav-menu">
+          <a href="#home" class="logo__mobile">
+            <img src="logo-dark.png" alt="logo" class="logo__mobile-img">
+          </a>
+
+          <ul class="nav__list">
+            <li class="nav__item">
+              <a href="#home" class="nav__link active-link">Home</a>
+            </li>
+            <li class="nav__item">
+              <a href="#about" class="nav__link">About</a>
+            </li>
+            <li class="nav__item">
+              <a href="#menu" class="nav__link">Menu</a>
+            </li>
+            <li class="nav__item">
+              <a href="#services" class="nav__link">Services</a>
+            </li>
+            <li class="nav__item">
+              <a href="#reservation" class="nav__link">Reservation</a>
+            </li>
+          </ul>
+
+          <div class="nav__close" id="nav-close">
+            <i class="ri-close-circle-line"></i>
+          </div>
+        </div>
+
+        <div class="nav__btns">
+          <div class="nav__toggle" id="nav-toggle">
+            <i class="ri-menu-line"></i>
+          </div>
+
+          <a href="#reservation" class="button reservation__btn">Reserve A Table</a>
+        </div>
+      </nav>
+    </header>
 
     <main class="main">
       <section class="home" id="home">
@@ -74,8 +116,19 @@
               <img src="slide-4.png" alt="food image" class="home__img">
             </div>
           </div>
+
+          <div class="swiper-pagination"></div>
+
+          <div class="swiper-button-next">
+            <i class="ri-arrow-right-line"></i>
+          </div>
+          <div class="swiper-button-prev">
+            <i class="ri-arrow-left-line"></i>
+          </div>
         </div>
       </section>
+      
+      <section class="about" id="about"></section>
     </main>
 
     <script src="/scripts/swiper-bundle.min.js"></script>

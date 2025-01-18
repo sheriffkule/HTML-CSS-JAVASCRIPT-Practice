@@ -21,7 +21,7 @@
     --large-font-size: 1.125rem;
     --normal-font-size: 1rem;
 
-    --weight-400: 400;
+    --weight-600: 600;
 
     --transition: ease-in-out;
 }
@@ -37,10 +37,11 @@ button,
 body {
     font-family: var(--second-font);
     font-size: var(--normal-font-size);
+    font-weight: var(--weight-600);
 }
 
 body {
-    background-color: var(--body-color);
+    background-color: var(--body-font);
     color: var(--text-color);
 }
 
@@ -57,7 +58,7 @@ h3,
 h4 {
     color: var(--title-color);
     font-family: var(--second-font);
-    font-weight: var(--weight-400);
+    font-weight: var(--weight-600);
 }
 
 ul {
@@ -75,4 +76,198 @@ p {
 img {
     max-width: 100%;
     height: auto;
+}
+
+.container {
+    max-width: 1320px;
+    margin-inline: auto;
+    padding-inline: 0.75rem;
+}
+
+.grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+.nav,
+.nav__list {
+    display: flex;
+}
+
+.nav {
+    height: calc(var(--header-height) + 1.5rem);
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav__list {
+    column-gap: 3rem;
+}
+
+.nav__link {
+    color: var(--body-color);
+    font-family: var(--second-color);
+    font-size: var(--large-font-size);
+    font-weight: var(--weight-600);
+    transition: all .3s var(--transition);
+    position: relative;
+}
+
+.nav__link::before {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background-color: var(--second-color);
+    bottom: -5px;
+    left: 45%;
+    transition: all .3s;
+}
+
+.nav__link:hover::before {
+    width: 100%;
+    left: 0;
+}
+
+.nav__close,
+.logo__mobile,
+.nav__toggle {
+    display: none;
+}
+
+.active-link,
+.nav__link:hover {
+    color: var(--second-color);
+    letter-spacing: 1px;
+}
+
+.home {
+    background-image: url(home-bg.jpg);
+    padding-block: 10.5rem 3.25rem;
+    position: relative;
+}
+
+.home::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 30%;
+    width: 880px;
+    height: 400px;
+    background-color: var(--second-color);
+    border-radius: 12rem 0 0 12rem;
+}
+
+.home__content {
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+}
+
+.home__subtitle {
+    color: var(--second-color);
+    font-size: var(--h3-font-size);
+}
+
+.home__title {
+    color: var(--first-color);
+    font-size: var(--biggest-font-size);
+    margin-bottom: .5rem;
+}
+
+.home__description {
+    color: var(--body-color);
+    font-size: var(--larger-font-size);
+    max-width: 420px;
+    margin-bottom: 3.75rem;
+}
+
+.swiper-pagination {
+    position: initial;
+    margin-top: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: .25rem;
+}
+
+.swiper-pagination-bullet {
+    opacity: 1;
+    width: 14px;
+    height: 14px;
+    background-color: hsl(0, 0%, 70%);
+}
+
+.swiper-pagination-bullet-active {
+    border: 5px solid var(--second-color);
+    background-color: transparent;
+    padding: .25rem;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    content: '';
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    border: 1px solid var(--body-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: var(--body-color);
+    font-size: var(--larger-font-size);
+    top: 95%;
+    transition: all .3s var(--transition);
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    background-color: var(--second-color);
+    border-color: var(--second-color);
+    font-size: var(--h3-font-size);
+}
+
+.swiper-button-next {
+    right: 1rem;
+}
+
+.swiper-button-prev {
+    left: 1rem;
+}
+
+.button {
+    display: inline-block;
+    color: var(--body-color);
+    background-color: var(--second-color);
+    padding: 1.25rem 2.5rem;
+    font-family: var(--second-font);
+    position: relative;
+}
+
+.button::before {
+    content: '';
+    position: absolute;
+    inset-block: -0.5rem;
+    right: -0.5rem;
+    border: 3px solid var(--second-color);
+    width: calc(100% - 1rem);
+    z-index: -1;
+    transition: all .3s var(--transition);
+}
+
+.button,
+.button::before {
+    border-radius: .75rem;
+}
+
+.button:hover::before {
+    width: 30%;
 }
