@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@100..900&family=Fredoka:wght@300..700&display=swap');
+
+:root {
+    --header-height: 5.5rem;
+
+    --first-color: hsl(49, 100%, 53%);
+    --second-color: hsl(349, 89%, 55%);
+    --title-color: hsl(0, 0%, 0%);
+    --text-color: hsl(0, 0%, 20%);
+    --body-color: hsl(0, 0%, 80%);
+    --container-color: hsl(218, 67%, 90%);
+
+    --body-font: "Epilogue", serif;
+    --second-font: "Fredoka", serif;
+    --biggest-font-size: 5.5rem;
+    --bigger-font-size: 3.75rem;
+    --h1-font-size: 2.5rem;
+    --h2-font-size: 1.75rem;
+    --h3-font-size: 1.5rem;
+    --larger-font-size: 1.25rem;
+    --large-font-size: 1.125rem;
+    --normal-font-size: 1rem;
+
+    --weight-400: 400;
+
+    --transition: ease-in-out;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+input,
+button,
+body {
+    font-family: var(--second-font);
+    font-size: var(--normal-font-size);
+}
+
+body {
+    background-color: var(--body-color);
+    color: var(--text-color);
+}
+
+input,
+button {
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    color: var(--title-color);
+    font-family: var(--second-font);
+    font-weight: var(--weight-400);
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+p {
+    line-height: 1.875rem;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
