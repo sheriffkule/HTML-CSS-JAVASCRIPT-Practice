@@ -31,3 +31,19 @@ tabs.forEach((tab) => {
     tab.classList.add('active-tab');
   });
 });
+
+const scrollUp = () => {
+	const scrollUp = document.getElementById('scroll-up');
+
+	this.scrollY >= 350
+		? scrollUp.classList.add('show-scroll')
+		: scrollUp.classList.remove('show-scroll');
+};
+
+window.addEventListener('scroll', scrollUp);
+
+const year = document.getElementById('year');
+const thisYear = new Date().getFullYear();
+
+year.setAttribute('datetime', thisYear);
+year.textContent = thisYear;
