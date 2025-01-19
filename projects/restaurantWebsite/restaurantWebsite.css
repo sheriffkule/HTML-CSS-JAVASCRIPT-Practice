@@ -122,6 +122,7 @@ img {
 .section__title,
 .section__description {
   width: 80%;
+  text-wrap: balance;
 }
 
 .title-center {
@@ -277,6 +278,7 @@ img {
   font-size: var(--larger-font-size);
   max-width: 420px;
   margin-bottom: 3.75rem;
+  text-wrap: balance;
 }
 
 .swiper-pagination {
@@ -499,6 +501,16 @@ img {
 .menu__img {
   z-index: 10;
   position: relative;
+}
+
+.menu-two .menu__img {
+  animation: rotate 30s linear infinite;
+}
+
+@keyframes rotate {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .menu__title {
@@ -1067,6 +1079,10 @@ img {
   bottom: 1.5rem;
 }
 
+.show-scroll:hover {
+  background-color: var(--first-color);
+}
+
 @media screen and (max-width: 1400px) {
   .container {
     max-width: 1140px;
@@ -1080,7 +1096,7 @@ img {
     --h3-font-size: 1.25rem;
     --larger-font-size: 1.125rem;
     --large-font-size: 1rem;
-    --normal-font-size: .9375rem;
+    --normal-font-size: 0.9375rem;
   }
 
   .home::before {
@@ -1130,22 +1146,329 @@ img {
 }
 
 @media screen and (max-width: 1200px) {
-    .container {
-        max-width: 960px;
+  .container {
+    max-width: 960px;
+  }
+
+  .nav__logo-img,
+  .footer__logo-img {
+    width: 130px;
+  }
+
+  .reservation__btn {
+    display: none;
+  }
+
+  .logo__mobile {
+    display: block;
+  }
+
+  .nav__close,
+  .nav__toggle {
+    display: block;
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    overflow: hidden;
+  }
+
+  .nav__menu {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 400px;
+    height: 500px;
+    border-radius: 0 0 50% 0;
+    clip-path: circle(0% at 0 0);
+    background-color: var(--body-color);
+    padding: 3rem 2.5rem;
+    box-shadow: 2px 0 4px hsla(0, 0%, 0%, 0.1);
+    transition: 0.7s var(--transition);
+  }
+
+  .show-menu {
+    clip-path: circle(140% at 0 0);
+  }
+
+  .logo__mobile {
+    margin-bottom: 2.5rem;
+  }
+
+  .nav__list {
+    flex-direction: column;
+    row-gap: 1.5rem;
+  }
+
+  .nav__item {
+    transform: translateX(500px);
+    transition: all 0.5s var(--transition);
+    transition-delay: calc(var(--i) * 0.1s);
+  }
+
+  .show-menu .nav__item {
+    transform: translateX(0);
+  }
+
+  .nav__link:not(.active-link) {
+    color: var(--title-color);
+  }
+
+  .nav__link {
+    font-size: var(--h3-font-size);
+  }
+
+  .nav__close,
+  .nav__toggle {
+    cursor: pointer;
+  }
+
+  .nav__close {
+    position: absolute;
+    top: 1rem;
+    right: 1.25rem;
+    color: var(--title-color);
+    font-size: 2.5rem;
+  }
+
+  .nav__toggle {
+    color: var(--body-color);
+    font-size: 1.75rem;
+  }
+
+  .home__content,
+  .section__container {
+    grid-template-columns: 1fr;
+  }
+
+  .home__content {
+    row-gap: 2.5rem;
+  }
+
+  .home::before {
+    all: unset;
+  }
+
+  .home__data {
+    text-align: center;
+  }
+
+  .home__description,
+  .home__img {
+    margin-inline: auto;
+  }
+
+  .section__container {
+    row-gap: 1.25rem;
+  }
+
+  .section__title,
+  .section__description {
+    width: 100%;
+  }
+
+  .about__container,
+  .menu-one .menu__container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .opening {
+    padding: 1.75rem;
+  }
+
+  .opening__data {
+    padding: 1rem;
+  }
+
+  .services__container,
+  .menu-two .menu__container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .tab__btns {
+    padding: 2rem;
+  }
+
+  .tab__item {
+    padding: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .container {
+    max-width: 720px;
+  }
+
+  .menu-one .menu__container,
+  .deals__container,
+  .reservation__container,
+  .footer__container {
+    grid-template-columns: 1fr;
+  }
+
+  .services__container,
+  .menu-two .menu__container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .deals__container,
+  .footer__container {
+    row-gap: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    max-width: 540px;
+  }
+
+  :root {
+    --biggest-font-size: 4rem;
+    --bigger-font-size: 2.5rem;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    top: 97%;
+  }
+
+  .section {
+    padding-block: 6rem;
+  }
+
+  .about__container,
+  .services__container,
+  .menu-two .menu__container {
+    grid-template-columns: 1fr;
+  }
+
+  .title-center::after {
+    width: 200px;
+    height: 8px;
+  }
+
+  .menu-two .menu__item {
+    padding: 1.5rem;
+    padding-top: 6rem;
+    margin-top: 6rem;
+    border-radius: 1rem;
+  }
+
+  .menu-two .menu__item-wrapper {
+    left: 1.5rem;
+    transform: translateX(0);
+  }
+
+  .menu-two .menu__item-wrapper::before {
+    all: unset;
+  }
+
+  .reservation__form-group {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery__container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .scroll__up {
+    width: 50px;
+    height: 50px;
+    border-width: 4px;
+  }
+
+  .scrollUp__icon {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .nav {
+    height: calc(var(--header-height) + 0.5rem);
+  }
+
+  .nav__logo-img {
+    width: 120px;
+  }
+
+  .nav__menu {
+    width: 100%;
+    padding-inline: 2rem;
+  }
+
+  .show-menu {
+    z-index: 100;
+  }
+
+  .home {
+    padding-block: 9rem 2.5rem;
+  }
+
+  :root {
+    --biggest-font-size: 2.5rem;
+    --bigger-font-size: 2rem;
+    --h1-font-size: 1.75rem;
+  }
+
+  .services__img-wrapper {
+    width: 120px;
+    height: 120px;
+  }
+
+  .services__img {
+    width: 60px;
+  }
+
+  .tab__btn::before {
+    width: 12px;
+    height: 12px;
+  }
+
+  .quality__list {
+    grid-template-columns: 1fr;
+    row-gap: 1.25rem;
+  }
+
+  .reservation__icon-wrapper {
+    width: 60px;
+    height: 60px;
+  }
+
+  .reservation__icon {
+    width: 30px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+    .about__top {
+        inset: 1rem;
     }
 
-    .nav__logo-img,
-    .footer__logo-img {
-        width: 130px;
+    .about__hover {
+        padding-inline: 1.5rem;
     }
 
-    .reservation__btn {
-        display: none;
-    }
+    .menu-one .menu__item {
+        padding: 1.5rem;
+        padding-top: 6rem;
+        margin-top: 6rem;
+        margin-left: 0;
+        border-radius: 1rem;
+      }
+    
+      .menu-one .menu__item-wrapper {
+        width: 175px;
+        height: 154px;
+        top: -38%;
+        left: 1.5rem;
+        transform: translateY(0);
+      }
 
-    .logo__mobile,
-    .nav__close,
-    .nav__toggle {
-        display: block;
-    }
+      .tab__item{
+        padding: 1.75rem;
+      }
+
+      .gallery__container {
+        grid-template-columns: repeat(2, 1fr);
+      }
 }
