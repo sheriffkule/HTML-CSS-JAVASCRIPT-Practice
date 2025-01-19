@@ -158,6 +158,10 @@ img {
     font-size: var(--h3-font-size);
 }
 
+.main {
+    overflow: hidden;
+}
+
 .header {
     position: absolute;
     top: 0;
@@ -432,7 +436,7 @@ img {
     background-color: var(--container-color);
 }
 
-.menu__container {
+.menu-one .menu__container {
     grid-template-columns: repeat(3, 1fr);
     align-items: flex-start;
 }
@@ -441,6 +445,9 @@ img {
     background-color: var(--body-color);
     border-radius: 1.5rem;
     position: relative;
+}
+
+.menu-one .menu__item {
     margin-left: 5.25rem;
     padding: 3.25rem 1.5rem 3.25rem 7.5rem;
 }
@@ -448,11 +455,15 @@ img {
 .menu__item-wrapper,
 .menu__item-wrapper::before {
     position: absolute;
+}
+
+.menu-one .menu__item-wrapper,
+.menu-one .menu__item-wrapper::before {
     top: 50%;
     transform: translateY(-50%);
 }
 
-.menu__item-wrapper {
+.menu-one .menu__item-wrapper {
     left: -5.25rem;
 }
 
@@ -460,6 +471,9 @@ img {
     content: '';
     background-color: var(--second-color);
     border-radius: 5.5rem;
+}
+
+.menu-one .menu__item-wrapper::before {
     left: 0;
     width: 70%;
     height: 115%;
@@ -749,4 +763,181 @@ img {
 
 .deals__price del {
     font-size: var(--h3-font-size);
+}
+
+.menu-two .menu__container {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.menu-two .menu__item {
+    padding: 2.5rem;
+    padding-top: 6.5rem;
+    margin-top: 7rem;
+}
+
+.menu-two .menu__item-wrapper,
+.menu-two .menu__item-wrapper::before {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.menu-two .menu__item-wrapper {
+    top: -28%;
+    width: max-content;
+}
+
+.menu-two .menu__item-wrapper::before {
+    width: 154%;
+    height: 100px;
+    top: 5rem;
+}
+
+.menu__grams {
+    font-family: var(--second-font);
+    font-weight: var(--weight-600);
+    display: block;
+    margin-bottom: .5rem;
+}
+
+.reservation .section__title {
+    max-width: 800px;
+    margin-bottom: 3rem;
+    text-wrap: balance;
+}
+
+.reservation__container {
+    grid-template-columns: 4fr 8fr;
+}
+
+.reservation__card {
+    display: flex;
+    align-items: center;
+    column-gap: 1.25rem;
+}
+
+.reservation__card:not(:last-child) {
+    margin-bottom: 2.25rem;
+}
+
+.reservation__icon-wrapper {
+    background-color: var(--first-color);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reservation__icon {
+    width: 40px;
+}
+
+.reservation__card-title {
+    color: var(--second-color);
+    font-size: var(--normal-font-size);
+    margin-bottom: .25rem;
+}
+
+.reservation__card-data {
+    color: var(--title-color);
+    font-family: var(--second-font);
+    font-size: var(--large-font-size);
+    font-weight: var(--weight-600);
+}
+
+.reservation__form-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 1.5rem;
+}
+
+.reservation__form-div {
+    margin-bottom: 1.25rem;
+}
+
+.reservation__form-input {
+    border: 3px solid hsl(0, 0%, 80%);
+    padding: 1.25rem;
+    width: 100%;
+    border-radius: .5rem;
+}
+
+.reservation__button {
+    margin-top: 1.25rem;
+}
+
+.reservation input::placeholder {
+    transition: .3s;
+}
+
+.reservation input:focus::placeholder {
+    transform: translateY(-40px);
+}
+
+.gallery {
+    margin-bottom: 1.25rem;
+}
+
+.gallery__container {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.25rem;
+}
+
+.gallery__item {
+    position: relative;
+}
+
+.gallery__img {
+    vertical-align: middle;
+}
+
+.gallery__hover {
+    position: absolute;
+    inset: 0;
+    background-color: hsla(349, 89%, 55%, 0.8);
+    cursor: pointer;
+    opacity: 0;
+    transition: all .5s var(--transition);
+}
+
+.gallery__item:hover .gallery__hover {
+    opacity: 1;
+}
+
+.gallery__hover::before,
+.gallery__hover::after {
+    content: '';
+    position: absolute;
+    background-color: var(--body-color);
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all .5s var(--transition);
+}
+
+.gallery__hover::before {
+    left: 50%;
+    top: 100%;
+    height: 40px;
+    width: 3px;
+}
+
+.gallery__hover::after {
+    left: 100%;
+    top: 50%;
+    width: 40px;
+    height: 3px;
+}
+
+.gallery__item:hover .gallery__hover::before,
+.gallery__item:hover .gallery__hover::after {
+    opacity: 1;
+}
+
+.gallery__item:hover .gallery__hover::before {
+    top: 50%;
+}
+
+.gallery__item:hover .gallery__hover::after {
+    left: 50%;
 }
