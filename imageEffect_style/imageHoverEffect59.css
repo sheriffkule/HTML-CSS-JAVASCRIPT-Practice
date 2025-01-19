@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #181818;
+    --secondary-color: #84bb9f;
+    --text-h1: 3.2rem;
+    --text-paragraph: 2rem;
+}
+
+html {
+    font-size: calc(100vw / 1920 * 12);
+}
+
+body {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+h1 {
+    font-size: var(--text-h1);
+    line-height: 1;
+}
+
+span,
+p {
+    font-size: var(--text-paragraph);
+}
+
+img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.innovation {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.innovation_wrapper {
+    height: inherit;
+    padding: 0 6rem;
+}
+
+.innovation_bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.innovation_bg_media {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-position: center;
+}
+
+.innovation_bg_figure {
+    position: relative;
+    width: inherit;
+    height: inherit;
+}
+
+.innovation_side {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: inherit;
+}
+
+.innovation_card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48rem;
+    height: 40rem;
+    background-color: #ffe4c1;
+}
+
+.innovation_card_container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 4.5rem;
+    padding: 3.25rem;
+    background-color: var(--primary-color);
+}
+
+.innovation_card_index {
+    height: var(--text-paragraph);
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.innovation_card_index_container {
+    overflow: hidden;
+}
+
+.innovation_card_index_container span {
+    display: block;
+}
+
+.innovation_card_heading {
+    height: var(--text-h1);
+    text-align: center;
+    overflow: hidden;
+}
+
+.innovation_card_paragraph {
+    height: 12rem;
+    text-align: center;
+    overflow: hidden;
+}
+
+.innovation_card_paragraph_container p {
+    height: 12rem;
+    text-wrap: balance;
+}
+
+.innovation_card_thumbnail {
+    position: relative;
+    width: 100%;
+    height: 24rem;
+}
+
+.innovation_card_thumbnail img {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.innovation_card_index_container,
+.innovation_card_heading_container,
+.innovation_card_paragraph_container {
+    transition: transform 0.3s ease-in-out;
+}
+
+@media screen and (max-width: 769px) {
+    html {
+        font-size: calc(100vw / 769 * 10);
+    }
+}
