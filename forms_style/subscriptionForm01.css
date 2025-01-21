@@ -1,0 +1,249 @@
+:root {
+    --bg: #555454;
+    --primary: #fc5d57;
+    --secondary: #d7d2c9;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100vw;
+    min-height: 100vh;
+    background-color: #0f0f0f;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.wrapper {
+    min-height: 100vh;
+}
+
+.hero-image-wrapper {
+    position: relative;
+    flex: 2;
+}
+
+.hero-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-image-wrapper .bg-img {
+    position: relative;
+    transform: rotate(-180deg);
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+}
+
+.hero-image-wrapper .front-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 400px;
+    z-index: 2;
+}
+
+.content-wrapper {
+    flex: 3;
+    background: var(--bg);
+    padding: 2em 3em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.content-wrapper nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+}
+
+.content-wrapper nav p {
+    color: var(--secondary);
+}
+
+.content-wrapper nav a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.content-wrapper nav button {
+    position: relative;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 16px;
+}
+
+.content-wrapper nav button::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    top: 26px;
+    background: #000;
+}
+
+header h1, header h2 {
+    font-weight: lighter;
+    letter-spacing: 1rem;
+    margin: 0.2em 0;
+}
+
+header h2 {
+    font-size: 2rem;
+    color: var(--secondary);
+}
+
+header h1 {
+    font-size: 4rem;
+}
+
+.form-wrapper {
+    position: relative;
+    margin: 3em 0;
+    z-index: 2;
+}
+
+.form-wrapper form {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-wrapper form input {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 1em;
+    outline: none;
+    font-size: 18px;
+    border-bottom: 2px solid #000;
+}
+
+.form-wrapper form input::placeholder {
+    color: #222;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+
+.form-wrapper form button {
+    background: var(--bg);
+    outline: none;
+    border: 2px solid #000;
+    padding: 1em 2em;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--primary);
+    letter-spacing: 2px;
+    transition: all .3s;
+}
+
+.form-wrapper form button:hover {
+    background: var(--primary);
+    color: var(--bg);
+}
+
+.form-wrapper p {
+    padding: 2em 0;
+    width: 70%;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--secondary);
+}
+
+footer p, footer span {
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 2rem;
+    font-weight: lighter;
+}
+
+footer span {
+    position: relative;
+}
+
+footer span::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 5rem;
+    height: 1.5px;
+    top: 40px;
+    right: 0.3rem;
+    background: var(--primary);
+}
+
+header .h1, header h2 {
+    position: relative;
+}
+
+header h1 header h2 {
+    position: relative;
+    top: 120px;
+}
+
+.hero-image-wrapper,
+.content-wrapper,
+.front-img {
+    overflow: clip;
+    clip-path: inset(0 0 0 0);
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    header h2 {
+        font-size: 1rem;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .form-wrapper form {
+        width: 100%;
+    }
+
+    .form-wrapper form input,
+    .form-wrapper form input::placeholder,
+    .form-wrapper form button {
+        font-size: 12px;
+    }
+
+    .form-wrapper p {
+        display: none;
+    }
+
+    .form-wrapper button {
+        padding: 1em 2em;
+    }
+
+    footer p,
+    footer p span {
+        font-size: 24px;
+    }
+
+    footer span::after {
+        display: none;
+    }
+}
