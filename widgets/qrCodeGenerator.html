@@ -99,18 +99,18 @@
 
         <div class="qr-output">
             <div class="button-container">
-                <button>Generate QR Code</button>
-                <button>Clear</button>
+                <button onclick="generateQRCode()">Generate QR Code</button>
+                <button onclick="clearQRCode()">Clear</button>
             </div>
         </div>
 
         <div class="qr-output">
             <div id="qr-code"></div>
-            <button>Download QR Code</button>
+            <button onclick="downloadQRCode()">Download QR Code</button>
         </div>
     </div>
 
-    <!-- <h4> &copy; <time id="year"></time> Made by<em>SheriffKule</em> from XXIII Century</h4> -->
+    <h4> &copy; <time id="year"></time> Made by<em>SheriffKule</em> from XXIII Century</h4>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="/widgets_script/qrCodeGenerator.js"></script>

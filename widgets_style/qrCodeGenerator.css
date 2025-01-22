@@ -7,8 +7,9 @@
 body {
     font-family: Arial, sans-serif;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
     min-height: 100vh;
     overflow-x: auto;
     background: linear-gradient(#001525, #162a33);
@@ -103,7 +104,7 @@ h2 {
     border: 2px solid #ccc;
     border-radius: 8px;
     font-size: 15px;
-    color: #ccc;
+    color: #222;
     outline: none;
     transition: all .3s;
 }
@@ -182,4 +183,26 @@ h2 {
 
 .button-container button {
     width: 48%;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    background: #123bb4;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3253b6;
+    border-radius: 16px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #4663bb;
+}
+
+h4 {
+    font-size: 16px;
+    font-weight: 200;
+    color: #3a4452;
+    pointer-events: none;
+    margin-top: 30px;
 }
