@@ -1,0 +1,158 @@
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+ }
+
+ html, body {
+    width: 100%;
+    height: 100%;
+    background: #081d27;
+ }
+
+ img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+ }
+
+ a {
+    text-decoration: none;
+    color: #000;
+    transition: .25s;
+ }
+
+nav, footer {
+    position: fixed;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 2em;
+    background: #92ac94;
+}
+
+nav p {
+    color: #000;
+    text-transform: uppercase;
+    font-weight: 500;
+    line-height: 1;
+}
+
+nav a p {
+    color: #000;
+}
+
+footer {
+    align-items: center;
+    bottom: 0;
+}
+
+.socials {
+    display: flex;
+    gap: 2em;
+    font-weight: 500;
+}
+
+.socials a:hover {
+    transform: scale(1.3);
+    text-decoration: underline teal wavy 1px;
+}
+
+.ctas {
+    display: flex;
+    gap: 1em;
+}
+
+button {
+    padding: 1.5em 3em;
+    background: none;
+    text-transform: uppercase;
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    color: rgba(0, 0, 0, 0.75);
+    cursor: pointer;
+    border-radius: 50px;
+    font-weight: bolder;;
+    transition: .3s;
+}
+
+button:hover {
+    background: rgba(0, 0, 0, 0.1);
+    transform: scale(1.05);
+}
+
+.cube-container {
+    height: 200px;
+    width: 500px;
+    margin: 0 auto;
+    position: relative;
+    perspective: 1000;
+    perspective-origin: 50% 50%;
+}
+
+.item {
+    width: 100%;
+    height: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cube {
+    width: 200px;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+}
+
+.cube-container .cube:child {
+    background: red;
+}
+
+.cube .side {
+    width: 300px;
+    height: 200px;
+    position: absolute;
+    overflow: hidden;
+}
+
+.cube .front {
+    transform: translateZ(100px);
+}
+
+.cube .back {
+    transform: rotateX(180deg) translateZ(100px);
+}
+
+.cube .top {
+    transform: rotateX(90deg) translateZ(100px);
+}
+
+.cube .bottom {
+    transform: rotateX(-90deg) translateZ(100px);
+}
+
+.front, .back {
+    background-color: #83dd6d;
+    display: grid;
+    place-items: center;
+}
+
+.top, .bottom {
+    background: #86c2ba;
+    display: grid;
+    place-items: center;
+}
+
+.cube p {
+    width: max-content;
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    text-transform: uppercase;
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    line-height: 1;
+}
