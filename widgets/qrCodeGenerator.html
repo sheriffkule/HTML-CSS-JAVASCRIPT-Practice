@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <link rel="stylesheet" href="/widgets_style/qrCodeGenerator.css">
+</head>
+<body>
+    <div class="container">
+        <h2>QR Code Generator</h2>
+        <div class="options">
+            <button onclick="showForm('link')">Link</button>
+            <button onclick="showForm('email')">E-mail</button>
+            <button onclick="showForm('text')">Text</button>
+            <button onclick="showForm('call')">Call</button>
+            <button onclick="showForm('sms')">SMS</button>
+            <button onclick="showForm('whatsapp')">Whatsapp</button>
+            <button onclick="showForm('wifi')">Wi-Fi</button>
+            <button onclick="showForm('event')">Event</button>
+            <button onclick="showForm('social-media')">Social Media</button>
+        </div>
+
+        <div class="form-container">
+            <form class="qr-form" id="link" style="display: none;">
+                <label for="link-url">URL:</label>
+                <input type="text" id="link-url" placeholder="https://www.example.com">
+            </form>
+
+            <form id="email" class="qr-form" style="display: none;">
+                <label for="email-address">Email-Address: </label>
+                <input type="email" id="email-address" placeholder="example@example.com" required>
+                <label for="email-subject">Subject: </label>
+                <input type="text" id="email-subject" placeholder="Example Subject" required>
+                <label for="email-message">Message: </label>
+                <textarea id="email-message" placeholder="Example Message" required></textarea><br>
+            </form>
+
+            <form id="text" class="qr-form" style="display: none;">
+                <label for="text-message">Message</label>
+                <textarea id="text-message" placeholder="Example Message"></textarea>
+            </form>
+
+            <form id="call" class="qr-form" style="display: none;">
+                <label for="call-number">Phone Number: </label>
+                <input type="tel" id="call-number" placeholder="+12 345 678 90">
+            </form>
+
+            <form id="sms" class="qr-form" style="display: none;">
+                <label for="sms-number">Phone Number: </label>
+                <input type="tel" id="sms-number" placeholder="+12 345 678
+                90">
+                <label for="sms-message">Message: </label>
+                <textarea id="sms-message" placeholder="Enter your SMS Message"></textarea>
+            </form>
+
+            <form id="whatsapp" class="qr-form" style="display: none;">
+                <label for="whatsapp-number">Whatsapp Number: </label>
+                <input type="tel" id="whatsapp-number" placeholder="+12 345 678 90">
+            </form>
+
+            <form id="wifi" class="qr-form" style="display: none;">
+                <label for="wifi-ssid">Wi-Fi SSID:</label>
+                <input type="text" id="wifi-ssid" placeholder="Enter Wi-Fi SSID">
+                <label for="wifi-password">Password:</label>
+                <input type="password" id="wifi-password" placeholder="Enter Wi-Fi Password">
+            </form>
+
+            <form id="event" class="qr-form" style="display: none;">
+                <label for="event-title">Event Title (Name): </label>
+                <input type="text" id="event-title" placeholder="Enter Event Name">
+
+                <label for="event-start-date">Start Date (YYYY-MM-DD): </label>
+                <input type="date" id="event-start-date" required><br>
+
+                <label for="event-end-date">End Date (YYYY-MM-DD): </label>
+                <input type="date" id="event-end-date" required><br>
+
+                <label for="event-location">Location: </label>
+                <input type="text" id="event-location" placeholder="Enter Event Location" required><br>
+            </form>
+
+            <form id="social-media" class="qr-form" style="display: none;">
+                <label for="social-media-url">Social Media URL: </label>
+                <input type="url" id="social-media-url" placeholder="Enter Social Media URL" required><br>
+            </form>
+
+
+        </div>
+    </div>
+
+    <script src="/widgets_script/qrCodeGenerator.js"></script>
+</body>
+</html>
