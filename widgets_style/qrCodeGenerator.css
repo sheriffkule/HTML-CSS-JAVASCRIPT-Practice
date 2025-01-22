@@ -17,8 +17,8 @@ body {
 }
 
 .container {
-    background: #000;
-    width: 400px;
+    background: #111;
+    width: 420px;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
     overflow: hidden;
@@ -73,4 +73,113 @@ h2 {
 
 .qr-form {
     display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.qr-form label {
+    display: block;
+    font-weight: 900;
+    margin-bottom: 6px;
+    color: #ddd;
+}
+
+.qr-form input,
+.qr-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #ccc;
+    outline: none;
+    transition: all .3s;
+}
+
+.qr-form input:focus,
+.qr-form textarea:focus {
+    border-color: #123bb4;
+    outline: none;
+}
+
+.color-options {
+    margin: 16px 0;
+}
+
+.color-options label {
+    display: inline-block;
+    font-weight: 900;
+    margin-right: 10px;
+}
+
+.color-options input[type='color'] {
+    width: 40px;
+    height: 26px;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+}
+
+.color-options input[type='text'] {
+    width: 120px;
+    padding: 8px;
+    border: 1px solid #123bb4;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.qr-output button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background-color: #15367e;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.qr-output button:hover {
+    background-color: #183fb6;
+}
+
+.qr-output {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#qr-code {
+    margin: 20px auto;
+    width: 200px;
+    height: 200px;
+    background-color: #aaa;
+    border: 3px solid #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.button-container button {
+    width: 48%;
 }

@@ -37,7 +37,7 @@
             </form>
 
             <form id="text" class="qr-form" style="display: none;">
-                <label for="text-message">Message</label>
+                <label for="text-message">Message: </label>
                 <textarea id="text-message" placeholder="Example Message"></textarea>
             </form>
 
@@ -48,8 +48,7 @@
 
             <form id="sms" class="qr-form" style="display: none;">
                 <label for="sms-number">Phone Number: </label>
-                <input type="tel" id="sms-number" placeholder="+12 345 678
-                90">
+                <input type="tel" id="sms-number" placeholder="+12 345 678 90">
                 <label for="sms-message">Message: </label>
                 <textarea id="sms-message" placeholder="Enter your SMS Message"></textarea>
             </form>
@@ -84,11 +83,36 @@
                 <label for="social-media-url">Social Media URL: </label>
                 <input type="url" id="social-media-url" placeholder="Enter Social Media URL" required><br>
             </form>
+        </div>
 
+        <div class="color-options">
+            <label for="qr-color">QR Code Color: </label>
+            <input type="color" id="qr-color" value="#000000">
+            <input type="text" id="qr-color-hex" value="#000000" placeholder="Enter Hex Color">
+        </div>
 
+        <div class="color-options">
+            <label for="qr-bg-color">Background Color: </label>
+            <input type="color" id="qr-bg-color" value="#ffffff">
+            <input type="text" id="qr-bg-color-hex" value="#ffffff" placeholder="Enter Hex #ffffff">
+        </div>
+
+        <div class="qr-output">
+            <div class="button-container">
+                <button>Generate QR Code</button>
+                <button>Clear</button>
+            </div>
+        </div>
+
+        <div class="qr-output">
+            <div id="qr-code"></div>
+            <button>Download QR Code</button>
         </div>
     </div>
 
+    <!-- <h4> &copy; <time id="year"></time> Made by<em>SheriffKule</em> from XXIII Century</h4> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="/widgets_script/qrCodeGenerator.js"></script>
 </body>
 </html>
