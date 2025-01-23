@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
 
 * {
     margin: 0;
@@ -29,7 +30,10 @@ img {
 .container h1 {
     text-align: center;
     color: #fff;
-    font-size: 4rem;
+    font-family: "Bungee", serif;
+    font-size: 3rem;
+    letter-spacing: 2px;
+    word-spacing: 5px;
     margin-bottom: 1rem;
     background: url(/images/darkhex.jpg);
     -webkit-background-clip: text;
@@ -75,7 +79,7 @@ img {
 }
 
 .search-form button {
-    padding-right: 40px;
+    padding-right: 12px;
     border: none;
     cursor: pointer;
     background: transparent;
@@ -139,8 +143,44 @@ img {
     font-size: 1.5rem;
 }
 
+.no-result {
+    text-align: center;
+    color: #fff;
+    grid-column: 1 / -1;
+    font-size: 20px;
+}
+
+.loader {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.5);
+    display: grid;
+    place-items: center;
+}
+
+.loader::before {
+    content: '';
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 4px solid rgba(0, 0, 0, 0.25);
+    border-top: 4px solid #da4453;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 .footer {
-    padding: 2rem;
+    padding: 1rem;
     text-align: center;
     margin-top: auto;
 }
@@ -156,7 +196,7 @@ img {
 h4 {
     font-size: 15px;
     font-weight: 200;
-    color: #979797;
+    color: #aaa;
     pointer-events: none;
     margin-bottom: 14px;
     text-align: center;
