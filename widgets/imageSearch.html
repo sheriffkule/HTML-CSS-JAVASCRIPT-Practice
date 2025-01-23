@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pexels Image Search App</title>
+    <link rel="stylesheet" href="/widgets_style/imageSearch.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Image Search</h1>
+      <form id="search-form" class="search-form">
+        <input type="search" id="query" placeholder="Search Images" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+        />
+        <button type="submit">
+          <span class="material-symbols-outlined">search</span>
+        </button>
+      </form>
+
+      <div id="result" class="grid">
+        <div class="grid-item">
+          <a href="#" target="_blank">
+            <img src="/images/earth.jpg" loading="lazy" />
+            <div class="image-content">
+              <h3 class="photographer">SheriffKule</h3>
+            </div>
+          </a>
+        </div>
+        <div class="grid-item">
+          <a href="#" target="_blank">
+            <img src="/images/earth.jpg" loading="lazy" />
+            <div class="image-content">
+              <h3 class="photographer">SheriffKule</h3>
+            </div>
+          </a>
+        </div>
+        <div class="grid-item">
+          <a href="#" target="_blank">
+            <img src="/images/earth.jpg" loading="lazy" />
+            <div class="image-content">
+              <h3 class="photographer">SheriffKule</h3>
+            </div>
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+        <a href="https://www.pexels.com">
+            <img src="https://images.pexels.com/lib/api/pexels-white.png">
+        </a>
+    </footer>
+    <h4> &copy; <time id="year"></time> Made by <em>SheriffKule</em> from XXIII Century</h4>
+    <script src="/widgets_script/imageSearch.js"></script>
+  </body>
+</html>
