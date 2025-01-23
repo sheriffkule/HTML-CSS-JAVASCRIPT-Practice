@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #111;
+    overflow: hidden;
+    height: 100vh;
+}
+
+div {
+    position: absolute;
+    height: 210px;
+    border: 0 0 5px 5px;
+    box-shadow: 0 5px 8px rgba(255, 255, 255, 0.1);
+    background: linear-gradient(transparent, #fff);
+    animation: move 10s linear infinite;
+}
+
+div:nth-child(3n + 1) {
+    background: linear-gradient(transparent, #0ff);
+}
+
+div:nth-child(3n + 2) {
+    background: linear-gradient(transparent, #0f0);
+}
+
+div:nth-child(3n + 3) {
+    background: linear-gradient(transparent, #f00);
+}
+
+div:nth-child(4n + 1) {
+    background: linear-gradient(transparent, #ff0);
+}
+
+@keyframes move {
+    0% {
+        transform: translateY(-200px);
+    }
+
+    100% {
+        transform: translateY(100vh);
+    }
+}
