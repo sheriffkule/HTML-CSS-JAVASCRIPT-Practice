@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Zen+Dots&display=swap');
+
+:root {
+    --first-color: hsl(11, 72%, 55%);
+    --first-color-dark: hsl(11, 63%, 40%);
+    --title-color: hsl(180, 4%, 98%);
+    --title-color-black: hsl(180, 4%, 12%);
+    --text-color: hsl(180, 4%, 72%);
+    --body-color: hsl(180, 12%, 8%);
+    --container-color: hsl(180, 6%, 12%);
+
+    --body-font: "Space Grotesk", serif;
+    --second-font: "Zen Dots", serif;
+
+    --big-font-size: 5rem;
+    --h1-font-size: 2.75rem;
+    --h2-font-size: 2.25rem;
+    --h3-font-size: 1.25rem;
+    --normal-font-size: 1rem;
+    --small-font-size: 0.875rem;
+
+    --font-regular: 400;
+    --font-semibold: 600;
+}
+
+@media screen and (max-width: 1024px) {
+    root {
+        --big-font-size: 2rem;
+        --h1-font-size: 1.75rem;
+        --h2-font-size: 1.5rem;
+        --h3-font-size: 1rem;
+        --normal-font-size: 0.938rem;
+        --small-font-size: 0.813rem;
+      }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body,
+button,
+input {
+    color: var(--text-color);
+    font-family: var(--body-color);
+    font-size: var(--normal-font-size);
+}
+
+body {
+    background-color: var(--body-color);
+}
+
+h1,
+h2,
+h3 {
+  color: var(--title-color);
+  font-family: var(--second-font);
+  font-weight: var(--font-regular);
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+p {
+  line-height: 150%;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+button {
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+.main-logo {
+    display: flex;
+    align-items: center;
+    column-gap: .5rem;
+    color: var(--title-color);
+    font-family: var(--second-font);
+    font-size: var(--h3-font-size);
+}
+
+.main-logo-img {
+    width: 20px;
+}
+
+.button {
+    display: inline-block;
+    background-color: var(--first-color);
+    padding: 1.25rem 2rem;
+    color: var(--title-color-black);
+    font-weight: var(--font-semibold);
+    transition: .3s;
+}
+
+.button:hover {
+    background-color: var(--first-color-dark);
+    border-radius: 30px;
+}
+
+.container {
+    max-width: 1124px;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+}
+
+.header {
+    background-color: transparent;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.nav,
+.nav-list {
+    display: flex;
+    align-items: center;
+}
+
+.nav {
+    justify-content: space-between;
+    height: 5.5rem;
+}
+
+.nav-link,
+.nav-close,
+.nav-toggle {
+    color: var(--title-color);
+}
+
+.nav-list {
+    column-gap: 4rem;
+}
+
+.nav-link {
+    transition: color .3s;
+}
+
+.nav-link:hover {
+    color: var(--first-color);
+}
+
+.nav-button {
+    background-color: var(--title-color);
+}
+
+.nav-toggle,
+.nav-close {
+    display: none;
+}
