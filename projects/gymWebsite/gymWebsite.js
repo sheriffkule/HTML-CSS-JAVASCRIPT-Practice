@@ -21,23 +21,76 @@ const calculateBmi = (e) => {
     const bmi = Math.round(kg / (cm * cm));
 
     if (bmi < 18.5) {
-        calculateMessage.classList.add('color-first');
-        calculateMessage.textContent = `Your BMI is ${bmi}. You are underweight.`;
+      calculateMessage.classList.add('color-first');
+      calculateMessage.textContent = `Your BMI is ${bmi}. You are underweight.`;
     } else if (bmi < 25) {
-        calculateMessage.classList.add('color-first');
-        calculateMessage.textContent = `Your BMI is ${bmi}. You are normal weight.`;
+      calculateMessage.classList.add('color-first');
+      calculateMessage.textContent = `Your BMI is ${bmi}. You are normal weight.`;
     } else {
-        calculateMessage.classList.add('color-first');
-        calculateMessage.textContent = `Your BMI is ${bmi}. You are overweight.`;
+      calculateMessage.classList.add('color-first');
+      calculateMessage.textContent = `Your BMI is ${bmi}. You are overweight.`;
     }
 
     calculateCm.value = '';
     calculateKg.value = '';
 
     setTimeout(() => {
-        calculateMessage.textContent = '';
+      calculateMessage.textContent = '';
     }, 4000);
   }
 };
 
 calculateForm.addEventListener('submit', calculateBmi);
+
+const scrollHeader = () => {
+  const header = document.getElementById('header');
+
+  this.scrollY >= 100
+    ? header.classList.add('bg-header')
+    : header.classList.remove('bg-header');
+};
+
+window.addEventListener('scroll', scrollHeader);
+
+const sections = document.querySelectorAll('section[id]');
+
+const scrollActive = () => {
+  const scrollY = window.pageYOffset;
+
+  sections.forEach((current) => {
+    const sectionHeight = current.offsetHeight;
+    const sectionTop = current.offsetTop - 58;
+    const sectionId = current.getAttribute('id');
+    const sectionClass = document.querySelector('.nav-menu a[href*=' + sectionId + ']');
+    if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+      sectionClass.classList.add('active-link');
+    } else {
+      sectionClass.classList.remove('active-link');
+    }
+  });
+};
+
+window.addEventListener('scroll', scrollActive);
+
+const scrollUp = () => {
+  const scrollUp = document.getElementById('scroll-up');
+
+  this.scrollY >= 350
+    ? scrollUp.classList.add('show-scroll')
+    : scrollUp.classList.remove('show-scroll');
+};
+
+window.addEventListener('scroll', scrollUp);
+
+const sr = ScrollReveal({
+  origin: 'top',
+  distance: '200px',
+  duration: 2500,
+  delay: 400,
+});
+
+sr.reveal('.home-data, .footer-container, .footer-group');
+sr.reveal('.home-img', { delay: 700, origin: 'bottom' });
+sr.reveal('.logo-img, .program-card, .pricing-card', { interval: 200 });
+sr.reveal('.choose-group, .calculate-content', { origin: 'left' });
+sr.reveal('.choose-content, .calculate-images', { origin: 'right' });

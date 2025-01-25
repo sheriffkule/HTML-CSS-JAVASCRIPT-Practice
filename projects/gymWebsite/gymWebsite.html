@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/projects/gymWebsite/gymWebsite.css" />
   </head>
   <body>
-    <header class="header">
+    <header class="header" id="header">
       <nav class="nav container">
         <a href="#" class="main-logo">
           <img src="logo.png" alt="GymNorth" class="main-logo-img" />GymNorth
@@ -21,19 +21,19 @@
         <div class="nav-menu">
           <ul class="nav-list">
             <li class="nav-item">
-              <a href="#" class="nav-link">Home</a>
+              <a href="#home" class="nav-link active-link">Home</a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">Contact Us</a>
+              <a href="#choose" class="nav-link">Choose Us</a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">Program</a>
+              <a href="#program" class="nav-link">Program</a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">Pricing</a>
+              <a href="#pricing" class="nav-link">Pricing</a>
             </li>
             <li class="nav-item">
-              <a href="#" class="button nav-button">Register Now</a>
+              <a href="#footer" class="button nav-button">Register Now</a>
             </li>
           </ul>
 
@@ -49,9 +49,9 @@
     </header>
 
     <main class="main">
-      <section class="home section">
+      <section class="home section" id="home">
         <div class="home-container container grid">
-          <div class="home-da">
+          <div class="home-data">
             <h2 class="home-subtitle">Keep Your</h2>
             <h1 class="home-title">Body Fit & Strong</h1>
 
@@ -79,7 +79,7 @@
         </div>
       </section>
 
-      <section class="choose section">
+      <section class="choose section" id="choose">
         <div class="choose-container container grid">
           <div class="choose-group">
             <img src="choose-img.png" alt="choose" class="choose-img" />
@@ -120,7 +120,7 @@
         </div>
       </section>
 
-      <section class="program container section">
+      <section class="program container section" id="program">
         <h1 class="section-title title-center" data-title="Our Program">
           Build Your Best Body
         </h1>
@@ -156,7 +156,7 @@
         </div>
       </section>
 
-      <section class="pricing container section">
+      <section class="pricing container section" id="pricing">
         <h1 class="section-title title-center" data-title="Pricing">Our Special Plan</h1>
 
         <div class="pricing-container">
@@ -322,7 +322,7 @@
       </section>
     </main>
 
-    <footer class="footer container section">
+    <footer class="footer container section" id="footer">
       <div class="footer-container grid">
         <div>
           <a href="#" class="main-logo footer-logo">
@@ -407,6 +407,11 @@
       </div>
     </footer>
 
+    <a href="#" class="scrollUp" id="scroll-up">
+      <i class="ri-arrow-up-line"></i>
+    </a>
+
+    <script src="/scripts/scrollreveal.min.js"></script>
     <script src="gymWebsite.js"></script>
   </body>
 </html>
