@@ -265,13 +265,23 @@
               weight and height.
             </p>
 
-            <form class="calculate-form grid">
+            <form class="calculate-form grid" id="calculate-form">
               <div class="calculate-box">
-                <input type="number" placeholder="Height" class="calculate-input" />
+                <input
+                  type="number"
+                  placeholder="Height"
+                  class="calculate-input"
+                  id="calculate-cm"
+                />
                 <label for="" class="calculate-label">cm</label>
               </div>
               <div class="calculate-box">
-                <input type="number" placeholder="Weight" class="calculate-input" />
+                <input
+                  type="number"
+                  placeholder="Weight"
+                  class="calculate-input"
+                  id="calculate-kg"
+                />
                 <label for="" class="calculate-label">kg</label>
               </div>
               <button class="button button-flex" type="submit">
@@ -280,15 +290,122 @@
               </button>
             </form>
 
-            <p class="calculate-message"></p>
+            <p class="calculate-message" id="calculate-message"></p>
           </div>
 
           <div class="calculate-images">
-            <img src="calculate-img.png" alt="pretty girl" class="calculate-img">
+            <img src="calculate-img.png" alt="pretty girl" class="calculate-img" />
           </div>
         </div>
       </section>
+
+      <section class="marquee section">
+        <div class="marquee-bg">
+          <ul class="marquee-list">
+            <li class="marquee-item"><i class="ri-asterisk"></i> Live Classes</li>
+            <li class="marquee-item"><i class="ri-asterisk"></i> On-Demand Workouts</li>
+            <li class="marquee-item"><i class="ri-asterisk"></i> Personal Trainers</li>
+            <li class="marquee-item">
+              <i class="ri-asterisk"></i> Outdoor & Online Trainers
+            </li>
+          </ul>
+
+          <ul class="marquee-list" aria-hidden="true">
+            <li class="marquee-item"><i class="ri-asterisk"></i> Live Classes</li>
+            <li class="marquee-item"><i class="ri-asterisk"></i> On-Demand Workouts</li>
+            <li class="marquee-item"><i class="ri-asterisk"></i> Personal Trainers</li>
+            <li class="marquee-item">
+              <i class="ri-asterisk"></i> Outdoor & Online Trainers
+            </li>
+          </ul>
+        </div>
+      </section>
     </main>
+
+    <footer class="footer container section">
+      <div class="footer-container grid">
+        <div>
+          <a href="#" class="main-logo footer-logo">
+            <img src="logo.png" alt="logo image" class="main-logo-img" />GymNorth
+          </a>
+
+          <p class="footer-description">Subscribe for company updates bellow.</p>
+
+          <form action="" class="footer-form">
+            <input type="email" placeholder="Enter your email" class="footer-input" />
+            <button class="button" type="submit">Subscribe</button>
+          </form>
+        </div>
+
+        <div class="footer-content grid">
+          <div>
+            <h3 class="footer-title">Services</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="#" class="footer-link">Flex Muscle</a>
+              </li>
+              <li>
+                <a href="#" class="footer-link">Basic Yoga</a>
+              </li>
+              <li>
+                <a href="#" class="footer-link">Weight Lifting</a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="footer-title">Pricing</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="#" class="footer-link">Basic</a>
+              </li>
+              <li>
+                <a href="#" class="footer-link">Premium</a>
+              </li>
+              <li>
+                <a href="#" class="footer-link">Diamond</a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="footer-title">Company</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="#" class="footer-link">About Us</a>
+              </li>
+              <li>
+                <a href="#" class="footer-link">Careers</a>
+              </li>
+              <li>
+                <a href="#" class="footer-link">Customers</a>
+              </li>
+              <li>
+                <a href="#" class="footer-link">Partners</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-group">
+        <p class="footer-copy">
+          <time id="year"></time> &#169; Made by <em>SheriffKule</em> from XXIII Century
+        </p>
+
+        <div class="footer-socials">
+          <a href="https://www.facebook.com/" target="_blank" class="footer-social-link">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a href="https://twitter.com/" target="_blank" class="footer-social-link">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a href="https://www.linkedin.com/" target="_blank" class="footer-social-link">
+            <i class="ri-linkedin-fill"></i>
+          </a>
+        </div>
+      </div>
+    </footer>
 
     <script src="gymWebsite.js"></script>
   </body>
