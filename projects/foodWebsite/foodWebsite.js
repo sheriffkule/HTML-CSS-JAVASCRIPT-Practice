@@ -1,6 +1,14 @@
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+// import { ScrollTrigger } from 'gsap/ScrollTrigger';
 $(document).ready(function ($) {
   'use strict';
+
+  jQuery(".menu-toggle").click(function () {
+    jQuery(".main-navigation").toggleClass("toggled");
+  })
+
+  jQuery(".header-menu ul li a").click(function() {
+    jQuery(".main-navigation").removeClass("toggled");
+  })
 
   gsap.registerPlugin(ScrollTrigger);
 
