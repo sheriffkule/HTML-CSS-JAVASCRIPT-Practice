@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Bangers", serif;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: radial-gradient(#00559d, #001b33);
+    overflow: hidden;
+}
+
+h1 {
+    letter-spacing: 8px;
+    font-size: 80px;
+    line-height: 60px;
+    position: relative;
+    z-index: 2;
+}
+
+#shadow1 {
+    background: url(/images/mountains.jpg);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 50% 50%;
+    animation: move 4s linear infinite;
+}
+
+#shadow2 {
+    color: #000;
+    position: relative;
+    z-index: 1;
+    top: -57px;
+    pointer-events: none;
+    transform-origin: bottom;
+    transform: rotateX(180deg) skewY(48.25deg) translateX(0.4825px) scaleY(-1.4);
+}
+
+@keyframes move {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    100% {
+        background-position: 100% 100%;
+    }
+}
