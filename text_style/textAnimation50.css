@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Bangers", serif;
+}
+
+body {
+    background: radial-gradient(#2e2c39, #221e38);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.cursor {
+    position: absolute;
+    pointer-events: none;
+    top: 20px;
+    left: 30px;
+}
+
+.text {
+    position: absolute;
+    font-size: 20px;
+    color: #fff;
+    line-height: 1em;
+    height: 35px;
+    width: 15px;
+    text-transform: uppercase;
+    transform: translate(-50%, -50%);
+    text-shadow: 0 -30px 0 #C6363C,
+    0 -50px 0 #C6363C,
+    0 -70px 0 #C6363C,
+    0 50px 0 #fff,
+    0 70px 0 #fff,
+    0 90px 0 #fff;
+    background-color: #0C4076;
+    box-shadow: 0 -7px 0 #0C4076;
+}
+
+span:nth-child(17) {
+    z-index: 2;
+}
+
+span:nth-child(17)::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    background: url(/images/darkhex.jpg);
+    background-size: cover;
+    z-index: 1000;
+    animation: animate 20px linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
