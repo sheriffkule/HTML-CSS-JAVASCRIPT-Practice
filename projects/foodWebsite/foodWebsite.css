@@ -425,3 +425,326 @@ ul {
         height: auto !important;
     }
 }
+
+@media screen and (max-width: 575px) {
+    .container,
+    .container-fluid {
+        padding: 0 30px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .container,
+    .container-fluid {
+        padding: 0 15px;
+    }
+
+    .header-btn {
+        margin-right: 56px;
+    }
+
+    .menu-toggle {
+        right: 15px;
+    }
+
+    .site-header .container .row .col-lg-2 {
+        left: 15px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    #viewport {
+        overflow-x: hidden;
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        inset: 0;
+    }
+
+    #js-scroll-content {
+        position: absolute;
+        overflow: hidden;
+        width: 100%;
+        top: 0;
+        left: 0;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    #js-scroll-content {
+        transform: unset !important;
+    }
+}
+
+.main-banner {
+    padding: 150px 0 300px;
+    min-height: 100vh;
+    position: relative;
+}
+
+.js-parallax-scene {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.banner-img-wp {
+    width: 100%;
+    height: 100%;
+    padding-left: 30px;
+}
+
+.banner-img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    animation: biani 4.5s linear infinite alternate;
+    box-shadow: 0 0 20px rgba(36, 39, 37, .3);
+}
+
+@keyframes biani {
+    0% {
+        border-radius: 48% 52% 57% 43% / 34% 44% 56% 66%;
+    }
+
+    25% {
+        border-radius: 62% 38% 64% 36% / 34% 55% 45% 66%;
+    }
+
+    50% {
+        border-radius: 43% 57% 51% 49% / 33% 42% 58% 67%;
+    }
+
+    100% {
+        border-radius: 40% 60% 43% 57% / 52% 32% 68% 48%;
+    }
+}
+
+.banner-img-text .h5-title {
+    text-transform: capitalize;
+    letter-spacing: 1px;
+}
+
+.banner-img-text {
+    max-width: 400px;
+}
+
+.banner-shape-1 img {
+    position: absolute;
+    left: 85%;
+    top: 60px;
+    max-width: 150px;
+    pointer-events: none;
+    filter: blur(3px);
+}
+
+.banner-shape-2 {
+    top: auto !important;
+    bottom: 0;
+}
+
+.banner-shape-2 img {
+    position: absolute;
+    bottom: 0;
+    right: 82% !important;
+    max-width: 410px;
+    pointer-events: none;
+    filter: blur(3px);
+}
+
+.sec-wp {
+    position: relative;
+    z-index: 4;
+}
+
+.h1-title {
+    font-size: 90px;
+    line-height: 108px;
+    text-transform: capitalize;
+    margin-bottom: 25px;
+    font-weight: 900;
+}
+
+.h1-title span {
+    color: #ff8243;
+    background-image: linear-gradient(0deg, rgba(13, 13, 37, 0.08), rgba(13, 13, 37, 0.08));
+    background-size: 100% 15px;
+    background-position: 0 90%;
+    background-repeat: no-repeat;
+    display: inline;
+    transition: all .8s cubic-bezier(0.215, 0.610, 0.355, 1);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #0d0d25;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+}
+
+p {
+    font-size: 16px;
+    line-height: 30px;
+}
+
+.sec-btn {
+    min-width: 120px;
+    min-height: 58px;
+    background: #f3f3f5;
+    box-shadow: 9px 9px 12px #b2b2b3,
+    -9px -9px 12px #ffffff;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    color: #0d0d25;
+    text-transform: capitalize;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    outline: none !important;
+    transition: all .8s cubic-bezier(0.215, 0.610, 0.355, 1);
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+    padding: 6px 30px;
+}
+
+.sec-btn:hover {
+    border-color: #0d0d25;
+    box-shadow: inset 9px 9px 12px #ccc,
+    inset -9px -9px 12px #ffffff;
+    color: #0d0d25;
+}
+
+.brands-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 -15px;
+}
+
+.brands-box {
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.brands-box:hover {
+    filter: brightness(0.5);
+    opacity: 0.9;
+}
+
+.brand-title .h5-title {
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 2px;
+    opacity: 0.7;
+}
+
+.section {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    position: relative;
+}
+
+.sec-sub-title {
+    text-transform: uppercase;
+    display: inline-block;
+    background: #f3f3f5;
+    box-shadow: 9px 9px 12px #e4e4e4,
+    -9px -9px 12px #ffffff;
+    padding: 3px 20px;
+    border-radius: 60px;
+    color: #ff8243;
+    font-size: 14px;
+}
+
+.h2-title {
+    font-size: 46px;
+    line-height: 56px;
+    margin-bottom: 15px;
+    text-transform: capitalize;
+    position: relative;
+}
+
+.h2-title span,
+.h3.title span,
+.h4.title span,
+.h5.title span,
+.sub.title span {
+    display: block;
+}
+
+.about-video-img {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 55vh;
+    min-height: 400px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 40px;
+    box-shadow: 0 0 20px rgba(36, 39, 37, .3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.play-btn {
+    width: 90px;
+    height: 90px;
+    background: #f3f3f5;
+    box-shadow: 9px 9px 12px #b2b2b3,
+    -9px -9px 12px #ffffff;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .5s;
+    vertical-align: middle;
+    position: relative;
+    z-index: 2;
+    padding-left: 4px;
+    padding-top: 4px;
+    font-size: 40px;
+}
+
+.play-btn:hover {
+    box-shadow: inset 9px 9px 12px #ccc,
+    inset -9px -9px 12px #ffffff;
+}
+
+.play-btn-wp {
+    text-align: center;
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.play-btn-wp span {
+    margin-left: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #bfbfbf;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #bfbfbf;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ff8243;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #f16620;
+}
