@@ -24,14 +24,14 @@
 }
 
 @media screen and (max-width: 1024px) {
-    /* root {
+    root {
         --big-font-size: 2rem;
         --h1-font-size: 1.75rem;
         --h2-font-size: 1.5rem;
         --h3-font-size: 1rem;
         --normal-font-size: 0.938rem;
         --small-font-size: 0.813rem;
-      } */
+      }
 }
 
 * {
@@ -689,4 +689,202 @@ button {
 
 .show-scroll {
     bottom: 1.5rem;
+}
+
+@media screen and (max-width: 1200px) {
+    .choose-container,
+    .calculate-container {
+        column-gap: 4rem;
+    }
+
+    .footer-container {
+        column-gap: 3.5rem;
+    }
+
+    .scrollUp {
+        right: 1rem;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .nav {
+        height: 3.5rem;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        border-left: 2px solid var(--text-color);
+        background-color: hsla(180, 12%, 8%, 0.85);
+        backdrop-filter: blur(30px);
+        width: 50%;
+        height: 100%;
+        transition: .3s;
+    }
+
+    .show-menu {
+        right: 0;
+    }
+
+    .nav-list {
+        flex-direction: column;
+        align-items: flex-start;
+        row-gap: 2.5rem;
+        padding: 5rem 0 0 3rem;
+    }
+
+    .nav-close,
+    .nav-toggle {
+        display: inline-flex;
+        cursor: pointer;
+    }
+
+    .nav-close {
+        font-size: 1.5rem;
+        position: absolute;
+        top: 1rem;
+        right: 1.5rem;
+    }
+
+    .nav-toggle {
+        font-size: 1.25rem;
+    }
+
+    .section {
+        padding-top: 6rem;
+    }
+
+    .home-img {
+        width: 320px;
+        margin-inline: auto;
+    }
+
+    .logo-img {
+        width: 120px;
+    }
+
+    .choose-container,
+    .calculate-container {
+        column-gap: 2.5rem;
+    }
+
+    .choose-timing {
+        padding: 1rem;
+    }
+
+    .program-container,
+    .pricing-container {
+        padding-top: 1rem;
+    }
+
+    .calculate-container {
+        grid-template-columns: 6.5fr 5.5fr;
+    }
+
+    .marquee-bg {
+        padding-block: 1.25rem;
+    }
+
+    .footer {
+        padding-bottom: 2rem;
+    }
+
+    .footer-form {
+        flex-direction: column;
+    }
+
+    .show-scroll {
+        bottom: 2rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .nav-menu {
+        width: 80%;
+    }
+
+    .home-container,
+    .choose-container,
+    .calculate-container,
+    .footer-container {
+        grid-template-columns: 1fr;
+        row-gap: 3rem;
+    }
+
+    .home-data {
+        padding-top: 0;
+    }
+
+    .home-data,
+    .choose-content,
+    .calculate-content {
+        text-align: center;
+    }
+
+    .description,
+    .choose-group,
+    .calculate-form,
+    .calculate-images {
+        margin-inline: auto;
+    }
+
+    .logos-container {
+        --column: 2;
+    }
+
+    .choose-group,
+    .footer-copy {
+        order: 1;
+    }
+
+    .choose-group,
+    .calculate-images {
+        max-width: 320px;
+    }
+
+    .choose-group,
+    .calculate-images,
+    .calculate-form {
+        width: 100%;
+    }
+
+    .calculate-form {
+        max-width: 505px;
+        grid-template-columns: 1fr;
+    }
+
+    .calculate-form .button {
+        grid-column: initial;
+    }
+
+    .footer-content {
+        --column: 2;
+        row-gap: 2.5rem;
+    }
+
+    .footer-group {
+        flex-direction: column;
+        row-gap: 2rem;
+        margin-top: 5rem;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .container {
+        padding-inline: 1rem;
+    }
+
+    .program-card,
+    .pricing-card {
+        --min-width: 100%;
+    }
+
+    .program-card {
+        padding-inline: 1.5rem;
+    }
+
+    .pricing-card {
+        padding-inline: 2rem;
+    }
 }
