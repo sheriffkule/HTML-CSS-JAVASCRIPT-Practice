@@ -454,7 +454,7 @@ ul {
 
 @media screen and (min-width: 992px) {
     #viewport {
-        overflow-x: hidden;
+        overflow: auto;
         position: fixed;
         height: 100%;
         width: 100%;
@@ -747,4 +747,38 @@ p {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #f16620;
+}
+
+.repeat-img {
+    background-size: contain;
+    background-repeat: repeat;
+}
+
+.menu-tab-wp {
+    margin-bottom: 80px;
+}
+
+.menu-tab ul {
+    padding: 10px;
+    display: inline-block;
+    border-radius: 60px;
+    background: linear-gradient(145deg, #ececec, #ffffff);
+    box-shadow: 28px 28px 55px #d4d4d4,
+    -28px -28px 55px #ffffff;
+    position: relative;
+    z-index: 2;
+}
+
+.menu-tab ul li,
+.menu-tab ul .filter-active {
+    display: inline-flex;
+    text-transform: capitalize;
+    font-size: 18px;
+    line-height: normal;
+    cursor: pointer;
+    padding: 10px 26px;
+    border-radius: 30px;
+    transition: all .3s;
+    justify-content: center;
+    align-items: center;
 }

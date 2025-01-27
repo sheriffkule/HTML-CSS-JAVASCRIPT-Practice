@@ -1,14 +1,38 @@
-// import { ScrollTrigger } from 'gsap/ScrollTrigger';
 $(document).ready(function ($) {
   'use strict';
 
-  jQuery(".menu-toggle").click(function () {
-    jQuery(".main-navigation").toggleClass("toggled");
-  })
+  jQuery('.filters').on('click', function () {
+    jQuery('#menu-dish').removeClass('byDefault_show');
+  });
 
-  jQuery(".header-menu ul li a").click(function() {
-    jQuery(".main-navigation").removeClass("toggled");
-  })
+  $(function () {
+    let filterList = {
+      init: function () {
+        $('#menu-dish').mixItUp({
+          selectors: {
+            target: '.dish-box-wp',
+            filter: '.filter',
+          },
+          animation: {
+            effects: 'fade',
+            easing: 'ease-in-out',
+          },
+          load: {
+            filter: '.all, .breakfast, .lunch, .dinner',
+          },
+        });
+      },
+    };
+    filterList.init();
+  });
+
+  jQuery('.menu-toggle').click(function () {
+    jQuery('.main-navigation').toggleClass('toggled');
+  });
+
+  jQuery('.header-menu ul li a').click(function () {
+    jQuery('.main-navigation').removeClass('toggled');
+  });
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -25,6 +49,6 @@ $(document).ready(function ($) {
     elementFirst.classList.toggle('sticky_head');
   }
 
-  let scene = $(".js-parallax-scene").get(0);
+  let scene = $('.js-parallax-scene').get(0);
   let parallaxInstance = new Parallax(scene);
 });
