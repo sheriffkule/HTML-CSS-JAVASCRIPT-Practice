@@ -1437,3 +1437,283 @@ p {
 .sec-btn.primary-btn:hover {
     background: linear-gradient(145deg, #0c0c21, #0e0e28);
 }
+
+.top-footer,
+.bottom-footer {
+    border-top: 1px solid rgba(204, 204, 204, 0.4);
+    position: relative;
+}
+
+.footer-logo {
+    margin-bottom: 30px;
+}
+
+.footer-info .social-icon {
+    margin-top: 20px;
+}
+
+.footer-flex-box {
+    display: flex;
+    margin: 0 -10px;
+}
+
+.footer-flex-box>div {
+    flex: 1;
+    padding: 0 10px;
+}
+
+.footer-flex-box .h3-title {
+    text-transform: capitalize;
+    margin-bottom: 23px;
+}
+
+.footer-menu ul li a {
+    color: #0d0d25;
+    transition: all .3s;
+    text-transform: capitalize;
+}
+
+.footer-menu ul li a:hover,
+.footer-menu ul li .footer-active-menu {
+    color: #ff8243;
+}
+
+.footer-menu ul li {
+    margin-bottom: 8px;
+}
+
+.footer-table-info ul li {
+    margin-bottom: 10px;
+    text-transform: capitalize;
+}
+
+.uil-clock {
+    font-size: 17px;
+}
+
+.copyright-text {
+    padding: 20px 0;
+}
+
+.copyright-text h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 200;
+    color: #3a4452;
+    pointer-events: none;
+    margin-top: 50px;
+}
+
+.copyright-text h4 em {
+    color: #ff8243;
+    font-weight: 600;
+}
+
+.scrollTop {
+    position: fixed;
+    bottom: 10px;
+    right: -50px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: #f3f3f5;
+    box-shadow: 9px 9px 12px #b2b2b3,
+    -9px -9px 12px #ffffff;
+    cursor: pointer;
+    color: #ff8243;
+    font-size: 26px;
+    transition: all .5s cubic-bezier(0.215, 0.610, 0.355, 1);
+    border: none;
+}
+
+.scrollTop:hover {
+    box-shadow: inset 9px 9px 12px #ccc,
+    inset -9px -9px 12px #ffffff;
+    color: #0d0d25;
+    transform: translateY(-6px) scale(1.1);
+}
+
+.show-scroll {
+    right: 30px;
+}
+
+@media screen and (min-width: 2100px) {
+    .container {
+        max-width: 1400px;
+    }
+
+    p, body, button, input {
+        font-size: 18px;
+        line-height: 32px;
+    }
+}
+
+@media screen and (max-width: 1399px) {
+    .h1-title {
+        font-size: 80px;
+        line-height: 90px;
+    }
+
+    .h3-title {
+        font-size: 26px;
+        line-height: 36px;
+    }
+
+    .h4-title {
+        font-size: 24px;
+        line-height: 34px;
+    }
+
+    .h2-title {
+        font-size: 38px;
+        line-height: 48px;
+    }
+
+    .team-img {
+        height: 400px;
+    }
+
+    .blog-box {
+        padding: 30px 20px;
+    }
+
+    .dist-bottom-row ul li b {
+        font-size: 25px;
+    }
+}
+
+@media screen and (max-width: 1199px) {
+    .main-banner {
+        padding: 200px 0;
+    }
+
+    .banner-img-wp {
+        height: 360px;
+    }
+
+    .dish-box {
+        padding: 0 0 40px;
+    }
+
+    .dist-img img {
+        width: 220px;
+    }
+
+    .dist-img {
+        margin-top: -110px;
+    }
+
+    .dist-bottom-row ul li b {
+        font-size: 28px;
+    }
+
+    .sec-text {
+        padding: 0;
+    }
+
+    .team-img {
+        height: 340px;
+    }
+
+    .testimonials-box {
+        padding: 30px 20px;
+        margin: 26px 0 30px;
+    }
+
+    .testimonials-box-img {
+        min-width: 80px;
+        min-height: 80px;
+        margin-top: -80px;
+    }
+
+    .faq-box .h4-title {
+        padding: 16px 20px;
+    }
+
+    .faq-box p {
+        padding: 8px 20px 20px;
+    }
+
+    .blog-img {
+        height: 240px;
+    }
+
+    .newsletter-box-text {
+        padding: 0;
+    }
+
+    .footer-flex-box>div {
+        padding: 0 10px;
+    }
+
+    .star-rating {
+        font-size: 19px;
+    }
+
+    .testimonial-box-top {
+        margin-bottom: 10px;
+    }
+
+    .call-now a {
+        font-size: 28px;
+    }
+
+    .menu-box {
+        padding: 50px 20px 30px 20px;
+    }
+
+    .menu-img {
+        width: 140px;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .js-parallax-scene {
+        display: none;
+    }
+
+    .main-banner {
+        padding: 140px 0 60px;
+    }
+
+    .h1-title {
+        font-size: 60px;
+        line-height: 80px;
+    }
+
+    .banner-img-wp {
+        padding: 0;
+        height: 75vw;
+        padding-top: 50px;
+    }
+
+    .brands-box {
+        padding: 0 30px;
+    }
+
+    .brands-row {
+        margin: 0 -30px;
+    }
+
+    .menu-tab ul {
+        white-space: nowrap;
+        overflow: hidden;
+        overflow-x: auto;
+    }
+
+    .menu-tab::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100px;
+        height: 100%;
+        pointer-events: none;
+        opacity: 0.2;
+        border-radius: 0 60px 60px 0;
+        background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 1) 100%);
+    }
+}
