@@ -38,13 +38,6 @@ $(document).ready(function ($) {
       disableOnInteraction: false,
     },
     speed: 2000,
-    // effect: 'cube',
-    // cubeEffect: {
-    //   slideShadows: true,
-    //   shadow: true,
-    //   shadowOffset: 20,
-    //   shadowScale: 0.94,
-    // },
 
     navigation: {
       nextEl: '.swiper-button-next',

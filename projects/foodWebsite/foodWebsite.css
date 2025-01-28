@@ -1182,3 +1182,135 @@ p {
 .social-icon ul li a:hover i {
     color: #ffffff;
 }
+
+.testimonials-img {
+    position: relative;
+}
+
+.testimonials-img img {
+    position: absolute;
+    top: 60px;
+    right: 30px;
+    width: calc(100% + 5vw);
+    max-width: initial;
+    height: auto;
+}
+
+.testimonials-box {
+    display: flow-root;
+    position: relative;
+    padding: 30px;
+    border-radius: 30px;
+    margin: 50px 10px 30px;
+    background: linear-gradient(145deg, #ececec, #ffffff);
+    box-shadow: 28px 28px 45px #e2e2e2,
+    -28px -28px 45px #ffffff;
+    transition: all .5s cubic-bezier(0.215, 0.610, 0.355, 1);
+}
+
+.testimonials-box:hover {
+    transform: scale(1.05);
+    z-index: 2;
+}
+
+.testimonial-box-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.testimonials-box-img {
+    min-width: 100px;
+    min-height: 200px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    margin-top: -50px;
+    box-shadow: 10px 10px 60px #bdbdbd;
+}
+
+.testimonials-box-text .h3-title {
+    margin-bottom: 10px;
+    text-transform: capitalize;
+}
+
+.testimonials-box-text p {
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.star-rating-wp {
+    display: block;
+}
+
+.star-rating {
+    font-size: 22px;
+    position: relative;
+    margin-top: 20px;
+    display: inline-block;
+}
+
+.star-rating::before {
+    content: '\f005\f005\f005\f005\f005';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    color: #c8c8c8;
+    filter: drop-shadow(0 0.6rem 0.3rem rgba(0,0,0,0.05));
+    letter-spacing: 4px;
+}
+
+.star-rating__fill {
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    animation: fill-star 2s ease-in-out;
+}
+
+.star-rating__fill::after {
+    content: '\f005\f005\f005\f005\f005';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    color: #ff8243;
+    letter-spacing: 4px;
+}
+
+@keyframes fill-star {
+    0% {
+        width: 0;
+    }
+}
+
+.faq-row {
+    column-count: 3;
+    margin: 10px -5px;
+}
+
+.faq-box {
+    border: 1px solid #bfbfbf;
+    border-radius: 30px;
+    background-image: linear-gradient(145deg, #a1a1a1, #ffffff);
+    break-inside: avoid;
+    margin: 0 5px 30px;
+    box-shadow: 10px 10px 30px rgba(207, 207, 208, 0.2),
+    -10px -10px 30px rgba(255, 255, 255, 0.9);
+}
+
+.faq-box .h4-title {
+    padding: 16px 30px;
+    border-bottom: 1px solid #bfbfbf;
+    text-transform: capitalize;
+    font-weight: 600;
+}
+
+.faq-box p {
+    padding: 8px 30px 20px;
+    margin: 0;
+    text-wrap: balance;
+}
