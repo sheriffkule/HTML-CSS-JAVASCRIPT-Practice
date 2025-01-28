@@ -832,6 +832,10 @@ p {
     animation: rotateImg 30s linear infinite;
 }
 
+.sec-img {
+    animation: rotateImg 30s linear infinite;
+}
+
 @keyframes rotateImg {
     to {
         transform: rotate(360deg);
@@ -1313,4 +1317,123 @@ p {
     padding: 8px 30px 20px;
     margin: 0;
     text-wrap: balance;
+}
+
+.blog-text .h4-title {
+    text-transform: capitalize;
+    margin-bottom: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-weight: 900;
+    font-family: 'Playfair Display', serif;
+    color: #0d0d25;
+    text-wrap: balance;
+    transition: all .3s;
+}
+
+.blog-text .h4-title:hover {
+    color: #ff8243;
+}
+
+.blog-date {
+    padding: 5px;
+    background: #f8f9fa;
+    box-shadow: inset 5px 5px 10px #e2e2e2,
+    inset -5px -5px 10px #e8e8e8;
+    display: inline-block;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.blog-img {
+    width: 100%;
+    height: 280px;
+    border-radius: 30px;
+    margin-bottom: 20px;
+}
+
+.blog-box {
+    padding: 30px 25px;
+    border-radius: 30px;
+    background: linear-gradient(145deg, #ececec, #fdfdfd);
+    box-shadow: 30px 30px 50px #c4c4c4,
+    -30px -30px 50px #ffffff;
+    transition: all .5s cubic-bezier(0.215, 0.610, 0.355, 1);
+    margin-bottom: 30px;
+}
+
+.blog-box:hover {
+    transform: scale(1.04);
+}
+
+.newsletter-box {
+    padding: 60px;
+    border-radius: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.newsletter-form {
+    margin-top: 20px;
+    position: relative;
+}
+
+.newsletter-form button {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.newsletter-form .form-input {
+    height: 68px;
+    border-radius: 60px;
+    padding: 0 150px 0 40px;
+    background: linear-gradient(-145deg, #c4c4c4, #f9f9f9);
+}
+
+.newsletter-form .form-input::placeholder {
+    transition: all .3s;
+}
+
+.newsletter-form .form-input:focus-within::placeholder {
+    color: #ff8243;
+    transform: skewX(90deg);
+}
+
+.newsletter-box-text {
+    padding: 0 60px;
+    color: #fff;
+}
+
+.newsletter-box-text .h2-title {
+    color: #fff;
+}
+
+.bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: #f8f9fa;
+    opacity: 0.9;
+}
+
+.dark-overlay {
+    background: #0d0d25;
+    opacity: 0.5;
+}
+
+.sec-btn.primary-btn {
+    background: linear-gradient(145deg, #e26a2c, #ff8243);
+    color: #fff;
+    border: none;
+    box-shadow: 4px 4px 8px #9e9e9e,
+    -4px -4px 8px #fff;
+}
+
+.sec-btn.primary-btn:hover {
+    background: linear-gradient(145deg, #0c0c21, #0e0e28);
 }
