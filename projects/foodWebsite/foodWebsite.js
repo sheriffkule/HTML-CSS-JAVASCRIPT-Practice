@@ -185,6 +185,26 @@ const scrollUp = () => {
 
 window.addEventListener('scroll', scrollUp);
 
+
+const scrollActive = () => {
+  const sections = document.querySelectorAll('section[id]');
+  const scrollY = window.pageYOffset;
+
+  sections.forEach((current) => {
+    const sectionHeight = current.offsetHeight;
+    const sectionTop = current.offsetTop - 58;
+    const sectionId = current.getAttribute('id');
+    const sectionClass = document.querySelector('.nav-menu a[href*=' + sectionId + ']');
+    if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+      sectionClass.classList.add('active-link');
+    } else {
+      sectionClass.classList.remove('active-link');
+    }
+  });
+};
+
+window.addEventListener('scroll', scrollActive);
+
 const year = document.getElementById('year');
 const thisYear = new Date().getFullYear();
 

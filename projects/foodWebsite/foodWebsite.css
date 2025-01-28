@@ -4,6 +4,7 @@ body {
     font-family: "Poppins", serif;
     text-rendering: optimizeLegibility !important;
     background: #e3e3e6;
+    scroll-behavior: smooth;
 }
 
 .body-fixed {
@@ -113,6 +114,11 @@ ul {
     background: #e3e3e6;
     box-shadow: inset 8px 8px 12px #e2e2e2,
     inset -8px -8px 12px #fff;
+}
+
+.active-link {
+    color: #0400ff !important;
+    text-decoration: underline !important;
 }
 
 .header-right {
@@ -1715,5 +1721,312 @@ p {
         opacity: 0.2;
         border-radius: 0 60px 60px 0;
         background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 1) 100%);
+    }
+
+    .sec-text {
+        margin-top: 40px;
+    }
+
+    .call-now {
+        border: none;
+        margin: 40px 0;
+        border-top: 3px dotted rgba(14, 14, 14, .5);
+        border-bottom: 3px dotted rgba(14, 14, 14, .5);
+        padding: 30px 0;
+    }
+
+    .book-table-info {
+        max-width: 300px;
+        margin: 30px auto 0;
+    }
+
+    .swiper-button-wp .swiper-button {
+        display: none !important;
+    }
+
+    .testimonials-img img {
+        position: unset;
+        width: 100%;
+    }
+
+    .testimonials-img {
+        margin-bottom: 60px;
+    }
+
+    .faq-row {
+        column-count: 1;
+        margin: 0;
+    }
+
+    .newsletter-box {
+        padding: 40px;
+    }
+
+    .footer-info {
+        margin-bottom: 50px;
+    }
+
+    .footer-flex-box {
+        display: block;
+        margin: 0;
+    }
+
+    .footer-flex-box>div {
+        padding: 0;
+        margin-bottom: 30px;
+    }
+
+    .faq-box {
+        margin: 0;
+        margin-bottom: 30px;
+    }
+
+    .footer-flex-box>div:last-child {
+        margin: 0;
+    }
+
+    .scrollTop {
+        bottom: 50px;
+    }
+
+    .footer-menu ul {
+        max-width: 300px;
+    }
+
+    #gallery {
+        padding-top: 90px;
+    }
+
+    .swiper-pagination-bullet {
+        margin: 0 5px !important;
+        width: 8px;
+        height: 8px;
+    }
+
+    .swiper-pagination {
+        padding: 6px 20px;
+    }
+
+    .swiper-button-wp {
+        margin-top: 40px;
+    }
+
+    .swiper-pagination-bullet-active {
+        width: 16px;
+    }
+
+    .dish-title .h3-title {
+        display: block;
+        min-height: auto;
+        margin-bottom: 12px;
+    }
+
+    .menu-img {
+        width: 180px;
+        margin-inline: auto;
+        margin-bottom: 20px;
+    }
+
+    #js-scroll-content {
+        transform: unset !important;
+    }
+
+    body {
+        height: auto !important;
+    }
+
+    .menu-tab ul::-webkit-scrollbar {
+        height: 0;
+    }
+
+    .menu-tab {
+        position: relative;
+        display: flex;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .banner-img-wp {
+        height: 75vw;
+        min-height: 60vw;
+        width: auto;
+    }
+
+    .dist-img img {
+        width: 180px;
+    }
+
+    .dist-img {
+        margin-top: -80px;
+    }
+
+    .menu-tab-wp {
+        margin-bottom: 60px;
+    }
+
+    .dish-box {
+        margin: 80px 0 30px;
+    }
+
+    .book-table-img {
+        min-height: 340px;
+    }
+
+    .team-img {
+        height: 430px;
+    }
+
+    .dish-info ul li p {
+        font-size: 16px;
+        line-height: 26px;
+        margin: 0;
+    }
+
+    .dish-info ul li b {
+        font-size: 14px;
+    }
+
+    .brands-box {
+        padding: 0 25px;
+    }
+
+    .brands-row {
+        margin: 0 -25px;
+    }
+
+    .menu-tab ul li {
+        padding: 10px 20px;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .container,
+    .container-fluid {
+        padding: 0 30px;
+    }
+
+    .h1-title {
+        font-size: 40px;
+        line-height: 60px;
+        margin-bottom: 20px;
+    }
+
+    .h1-title span {
+        background-size: 100% 8px;
+    }
+
+    .banner-img-wp {
+        height: 90vw;
+    }
+
+    .about-video-img {
+        height: 30vw;
+        min-height: 280px;
+        border-radius: 30px;
+    }
+
+    .brands-box {
+        padding: 0 15px;
+        flex: 0 0 33%;
+        margin-bottom: 30px;
+    }
+
+    .brands-row {
+        margin: 0 -15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .dish-box {
+        max-width: 340px;
+        margin: 80px auto 30px;
+        padding: 0 0 30px;
+    }
+
+    .blog-sec.section {
+        padding-bottom: 0;
+    }
+
+    .brands-box img {
+        text-align: center;
+    }
+
+    .play-btn {
+        width: 70px;
+        height: 70px;
+    }
+
+    .play-btn-wp span {
+        font-size: 18px;
+    }
+
+    .newsletter-box {
+        padding: 15px;
+    }
+
+    .newsletter-form .form-input {
+        padding: 0 130px 0 12px;
+    }
+
+    .menu-box {
+        display: block;
+        text-align: center;
+    }
+
+    .menu-box-right .dish-title .h3-title {
+        padding: 0;
+    }
+
+    .gallery-img {
+        height: 50vw;
+    }
+
+    .contact-info a {
+        font-size: 18px;
+        line-height: 28px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .team-img {
+        height: 330px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .container,
+    .container-fluid {
+        padding: 0 15px;
+    }
+
+    .section {
+        padding: 60px 0;
+    }
+
+    .newsletter-form button {
+        position: unset;
+        transform: translate(0);
+        box-shadow: none !important;
+        margin-top: 20px;
+    }
+
+    .newsletter-form .form-input {
+        padding: 0 30px;
+    }
+
+    .team-box .h3-title {
+        min-height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .team-box img {
+        height: 280px;
+    }
+
+    .blog-box {
+        padding: 20px;
     }
 }
