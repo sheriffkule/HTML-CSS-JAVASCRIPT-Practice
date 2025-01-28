@@ -1109,3 +1109,76 @@ p {
     background: #fcbc30;
     width: 30px;
 }
+
+.team-slider {
+    position: relative;
+}
+
+.team-box {
+    padding: 20px;
+    border-radius: 30px;
+    background: linear-gradient(145deg, #ececec, #ffffff);
+    box-shadow: 28px 28px 45px #e2e2e2,
+    -28px -28px 45px #ffffff;
+    transition: all .5s cubic-bezier(0.215, 0.610, 0.355, 1);
+}
+
+.team-box:hover {
+    transform: scale(1.04);
+}
+
+.team-img {
+    width: 100%;
+    height: 480px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    box-shadow: 9px 9px 18px rgba(194, 194, 194, 0.5),
+    -9px -9px 18px rgba(255, 255, 255, 0.5);
+}
+
+.team-box .h3-title {
+    text-transform: capitalize;
+    color: #0d0d25;
+    font-weight: 600;
+}
+
+.social-icon {
+    margin: 15px 0 10px;
+}
+
+.social-icon ul li {
+    display: inline-block;
+    margin: 0 6px;
+}
+
+.social-icon ul li:last-child {
+    margin-right: 0;
+}
+
+.social-icon ul li:first-child {
+    margin-left: 0;
+}
+
+.social-icon ul li a {
+    width: 50px;
+    height: 50px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #e2e2e2, #ffffff);
+    box-shadow: 4px 4px 8px #9e9e9e,
+    -4px -4px 8px #ffffff;
+    color: #0d0d25;
+    font-size: 19px;
+    transition: all .3s;
+}
+
+.social-icon ul li a:hover {
+    background: #ff8243;
+    transform: scale(1.1) translateY(-6px) rotate(360deg);
+}
+
+.social-icon ul li a:hover i {
+    color: #ffffff;
+}

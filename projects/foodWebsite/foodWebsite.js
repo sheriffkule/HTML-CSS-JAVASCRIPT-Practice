@@ -1,7 +1,7 @@
 $(document).ready(function ($) {
   'use strict';
 
-  let book_table = new Swiper(".book-table-img-slider", {
+  let book_table = new Swiper('.book-table-img-slider', {
     slidesPerView: 1,
     spaceBetween: 20,
     loop: true,
@@ -26,6 +26,51 @@ $(document).ready(function ($) {
     pagination: {
       el: '.swiper-pagination',
       clickable: true,
+    },
+  });
+
+  let team_slider = new Swiper('.team-slider', {
+    slidesPerView: 3,
+    spaceBetween: 30,
+    loop: true,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+    speed: 2000,
+    // effect: 'cube',
+    // cubeEffect: {
+    //   slideShadows: true,
+    //   shadow: true,
+    //   shadowOffset: 20,
+    //   shadowScale: 0.94,
+    // },
+
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    breakpoints: {
+      0: {
+        slidesPerView: 1.2,
+        spaceBetween: 10,
+      },
+      768: {
+        slidesPerView: 2,
+        spaceBetween: 20,
+      },
+      992: {
+        slidesPerView: 3,
+        spaceBetween: 30,
+      },
+      1200: {
+        slidesPerView: 3,
+        spaceBetween: 30,
+      },
     },
   });
 
