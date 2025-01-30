@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 1100vh;
+    background: #333;
+}
+
+.box {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 40px;
+}
+
+.box h2 {
+    color: #00ff89;
+    font-size: 2.5em;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.box .text {
+    color: #fff;
+    max-width: 750px;
+    line-height: 1.4;
+    text-wrap: pretty;
+    text-align: justify;
+}
+
+.box .text span {
+    position: relative;
+    font-size: 1.25em;
+    color: transparent;
+    background: #00ff89;
+    transition: .25s;
+    letter-spacing: 0.1em;
+}
+
+.box .text span.active {
+    color: #fff;
+    background: transparent;
+}
+
+.box .text span:before {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    background: #333;
+}
+.box .text span.active::before {
+    opacity: 0;
+
+}
