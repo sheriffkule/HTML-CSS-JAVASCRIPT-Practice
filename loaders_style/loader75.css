@@ -1,0 +1,104 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: radial-gradient(#12202e, #091017);
+}
+
+.container {
+  width: 400px;
+  height: 400px;
+  position: relative;
+  animation: rotate 4s linear infinite;
+}
+
+.ring {
+    background: #fff;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    border-radius: 50%;
+    translate: -50%;
+    left: 50%;
+    bottom: 0;
+    transform-origin: bottom center;
+}
+
+.inner>.ring {
+    transform-origin: top center;
+    top: 0;
+    bottom: 0;
+}
+
+.ring:nth-child(even) {
+    background: #000;
+}
+
+.ring:nth-child(1) {
+    transform: scale(1);
+}
+
+.ring:nth-child(2) {
+    transform: scale(0.91);
+}
+
+.ring:nth-child(3) {
+    transform: scale(0.82);
+}
+
+.ring:nth-child(4) {
+    transform: scale(0.75);
+}
+
+.ring:nth-child(5) {
+    transform: scale(0.65);
+}
+
+.ring:nth-child(6) {
+    transform: scale(0.58);
+}
+
+.ring:nth-child(7) {
+    transform: scale(0.5);
+}
+
+.ring:nth-child(8) {
+    transform: scale(0.41);
+}
+
+.ring:nth-child(9) {
+    transform: scale(0.3);
+}
+
+.ring:nth-child(10) {
+    transform: scale(0.25);
+}
+
+.ring:nth-child(11) {
+    transform: scale(0.16);
+}
+
+.ring:nth-child(12) {
+    transform: scale(0.1);
+}
+
+.ring:nth-child(13) {
+    transform: scale(0.05);
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
