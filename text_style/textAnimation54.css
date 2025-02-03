@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    background: linear-gradient(#000, #012b00);
+}
+
+.reflection {
+    color: #3fdf39;
+    font-family: 'Monoton', cursive;
+    font-size: clamp(2rem, 10vw, 15rem);
+    position: relative;
+    text-underline-offset: 4px;
+    text-decoration: underline 1px;
+}
+
+.reflection::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 70%;
+    left: 0;
+    background: linear-gradient(to bottom, #000, #3fdf39);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transform: scaleY(-1.5);
+}
