@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    background: linear-gradient(to bottom right, #111, #333);
+    min-height: 100vh;
+}
+
+.menu-icon,
+.menu-toggle {
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    background: #ccc;
+    color: #222;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.menu-toggle {
+    transform: rotate(180deg);
+    z-index: 9;
+}
+
+.menu-toggle.rotate {
+    transform: rotate(0deg);
+}
+
+.menu-icon {
+    opacity: 0;
+    transition: color 0.3s ease-in-out, transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.menu-icon.show {
+    opacity: 1;
+}
+
+.menu-icon:hover,
+.menu-toggle:hover {
+    color: rgb(139, 0, 0);
+}
