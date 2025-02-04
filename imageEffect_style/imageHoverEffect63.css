@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Bebas Neue", serif;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    background: #202020;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #555;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #888;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+section {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.hero, .outro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1em;
+    background: radial-gradient(ellipse at 50% 100%, darkolivegreen, #000000);
+    color: #fff;
+}
+
+.outro {
+    background: radial-gradient(ellipse at 50% 0%, darkolivegreen, #202020);
+}
+
+.hero h1, .outro h1 {
+    font-size: 3rem;
+    letter-spacing: 2px;
+    text-wrap: pretty;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.sticky-cards {
+    background: radial-gradient(ellipse at center, darkolivegreen,rgb(53, 66, 29));
+    position: relative;
+}
+
+.card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    will-change: transform;
+    width: auto;
+    height: auto;
+    padding: 0.5em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    background-color: #202020;
+    color: #fff;
+}
+
+.card-img {
+    /* flex: 1 1 0; */
+    min-height: 0;
+    width: 100%;
+}
+
+.card-content {
+    flex: 0 0 12px;
+    display: flex;
+    align-items: center;
+}
+
+.card-content p {
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+
+@media screen and (max-width: 900px) {
+    .card {
+        width: 70%;
+    }
+}
