@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --plasma-color-1: #f0f;
+    --plasma-color-2: #00f;
+    --plasma-color-3: #0ff;
+    --plasma-color-4: #ff0;
+}
+
+.container {
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+    background: linear-gradient(45deg, #303, #003);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+.plasma {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 50% 50%, var(--plasma-color-1), transparent 60%),
+    radial-gradient(circle at 100% 100%, var(--plasma-color-2), transparent 60%),
+    radial-gradient(circle at 0 100%, var(--plasma-color-3), transparent 60%),
+    radial-gradient(circle at 100% 0, var(--plasma-color-4), transparent 60%);
+    background-size: 200% 200%;
+    background-position: 0 0;
+    mix-blend-mode: screen;
+    filter: blur(20px);
+    animation: plasmaFlow 20s ease-in-out infinite alternate;
+}
+
+@keyframes plasmaFlow {
+    0%, 100% {
+        background-position: 0 0, 100% 100%, 0 100%, 100% 0;
+    }
+
+    25% {
+        background-position: 100% 0, 0 100%, 100% 100%, 0 0;
+    }
+
+    50% {
+        background-position: 100% 100%, 0 0, 100% 0, 0 100%;
+    }
+
+    75% {
+        background-position: 0 100%, 100% 0, 0 0, 100% 100%;
+    }
+}
+
+.title {
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: .25rem;
+    -webkit-box-reflect: below -15px linear-gradient(transparent, #fff5);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--plasma-color-4);
+}
