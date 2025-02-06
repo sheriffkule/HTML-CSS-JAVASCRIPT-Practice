@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Bangers', serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #001e2e;
+}
+
+span {
+  letter-spacing: 40px;
+  font-size: 15rem;
+}
+
+span:nth-child(1) {
+  position: absolute;
+  font-weight: bold;
+  filter: blur(10rem);
+  color: #0067ff;
+}
+
+span:nth-child(2) {
+  position: absolute;
+  font-weight: bold;
+  filter: blur(1.3rem);
+}
+
+span:nth-child(3) {
+  position: absolute;
+  font-weight: 700;
+  filter: blur(0.3rem);
+  color: rgba(0, 0, 0, 0.4);
+}
+
+span:nth-child(4) {
+  position: absolute;
+  font-weight: 700;
+  background: linear-gradient(
+    85deg,
+    #084d92 20%,
+    #76d8fe 21%,
+    #149dcc,
+    #76d8fe 31%,
+    #084d92 33%,
+    #084d92 50%,
+    #76d8fe 52%,
+    #149dcc,
+    #76d8fe 72%,
+    #084d92 74%,
+    #76d8fe
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+span:nth-child(5) {
+  position: absolute;
+  color: #000;
+  filter: blur(1px);
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.4);
+}
+
+span:nth-child(6) {
+  position: relative;
+  background: linear-gradient(#76d8fe, #084d92);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
