@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Awesome Contact Form</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/forms_style/contactForm05.css" />
+  </head>
+  <body>
+    <section class="container">
+      <canvas id="effect"></canvas>
+      <span class="big-circle"></span>
+      <span class="right-circle"></span>
+      <div class="form">
+        <div class="contact-info">
+          <h3 class="title">Let's get in touch.</h3>
+          <p class="text">
+            Fill out this form and I'll get back to you as soon as possible
+          </p>
+          <div class="info">
+            <div class="information">
+              <i class="fas fa-map-marker-alt"></i> &emsp;
+              <address style="display: inline">
+                Fuente Osmeña Cir, 6000 Cebu City, Philippines
+              </address>
+            </div>
+            <div class="information">
+              <i class="fas fa-envelope"></i> &emsp;
+              <a href="mailto:sheriff.kule@gmail.com">sheriff.kule@gmail.com</a>
+            </div>
+            <div class="information">
+              <i class="fas fa-phone"></i> &emsp;
+              <a href="tel:+0123-456-789">+0123-456-789</a>
+            </div>
+          </div>
+
+          <div class="social-media">
+            <p>Connect with us:</p>
+            <div class="social-icons">
+              <a href="#" class="social-icon" style="--i: 1"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" class="social-icon" style="--i: 2"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" class="social-icon" style="--i: 3"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="social-icon" style="--i: 4"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+              <a href="#" class="social-icon" style="--i: 5"
+                ><i class="fab fa-youtube"></i
+              ></a>
+              <a href="#" class="social-icon" style="--i: 6"
+                ><i class="fab fa-github"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form">
+          <span class="circle one"></span>
+          <span class="circle two"></span>
+
+          <form action="#">
+            <h3 class="title">Contact Us</h3>
+            <div class="input-container">
+              <input type="text" name="name" class="input" required />
+              <label for="name">Username</label>
+              <span>Username</span>
+            </div>
+
+            <div class="input-container">
+              <input type="email" name="email" class="input" required />
+              <label for="email">Email</label>
+              <span>Email</span>
+            </div>
+
+            <div class="input-container">
+              <input type="tel" name="phone" class="input" required />
+              <label for="phone">Phone Number</label>
+              <span>Phone Number</span>
+            </div>
+
+            <div class="input-container textarea">
+              <textarea name="message" class="input" required></textarea>
+              <label for="message">Message</label>
+              <span>Message</span>
+            </div>
+            <input type="button" value="Send" class="btn" />
+          </form>
+        </div>
+      </div>
+      <h4>
+        &copy; <time id="year"></time> Made by
+        <em> <abbr title="Frontend Master">Sheriffkule</abbr></em> from XXIII Century
+      </h4>
+    </section>
+
+    <script src="/scripts/scrollreveal.min.js"></script>
+    <script src="/forms_script/contactForm05.js"></script>
+  </body>
+</html>
