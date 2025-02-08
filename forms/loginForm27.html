@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LogIn & SignUp</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="/forms_style/loginForm27.css" />
+  </head>
+  <body>
+    <canvas id="snowfall"></canvas>
+    <div class="container" id="container">
+      <div class="form-container sign_up">
+        <form action="#">
+          <h1>Create Acount</h1>
+          <div class="social-icons">
+            <a href="#" class="icon"><i class="fa-brands fa-google"></i></a>
+            <a href="#" class="icon"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" class="icon"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="icon"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+          </div>
+          <span>Or use your email for registration.</span>
+          <input type="text" placeholder="Your Name" required />
+          <input type="email" placeholder="Your Email" required />
+          <input type="password" placeholder="Password" required />
+          <button>Sign Up</button>
+        </form>
+      </div>
+
+      <div class="form-container sign_in">
+        <form action="#">
+          <h1>Log In</h1>
+          <div class="social-icons">
+            <a href="#" class="icon"><i class="fa-brands fa-google"></i></a>
+            <a href="#" class="icon"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" class="icon"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="icon"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+          </div>
+          <span>Or use your account.</span>
+          <input type="email" placeholder="Your Email" required />
+          <input type="password" placeholder="Password" required />
+        </form>
+      </div>
+
+      <div class="toggle_container">
+        <div class="toggle">
+          <div class="toggle-panel toggle_left">
+            <h1>Welcome Back</h1>
+            <p>Sign in to access all features and personalized content waiting for you.</p>
+            <button class="hidden" id="login">Sign In</button>
+          </div>
+          <div class="toggle-panel toggle_right">
+            <h1>Don't have an account?</h1>
+            <p>
+              Create an account to access all features and enjoy full site experience.
+            </p>
+            <button class="hidden" id="register">Sign In</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h4>&copy; <time id="year"></time> Made by <em>SheriffKule</em> from XXIII Century</h4>
+    <script src="/forms_script/loginForm27.js"></script>
+  </body>
+</html>
