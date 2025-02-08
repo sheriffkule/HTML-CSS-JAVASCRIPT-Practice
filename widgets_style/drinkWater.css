@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(#3064ff, #053ada);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+h1 {
+    margin: 10px 0 0;
+    font-size: 46px;
+    -webkit-text-stroke: 1px #fff;
+    color: transparent;
+}
+
+h3 {
+    font-weight: 500;
+    margin: 10px 0;
+}
+
+.cup {
+    background: #ddd;
+    border: 4px solid #144fc6;
+    color: #144fc6;
+    border-radius: 0 0 40px 40px;
+    height: 330px;
+    width: 250px;
+    margin: 30px 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.cups .cup-small {
+    height: 95px;
+    width: 60px;
+    border-radius: 0 0 15px 15px;
+    background-color: #ddd;
+    color: #144fc6;
+    cursor: pointer;
+    font-size: 14px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 5px;
+    transition: all .3s ease-in;
+}
+
+.cups .cup-small.full {
+    background-color: #6ab3f8;
+    color: #000;
+}
+
+.cups {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 280px;
+}
+
+.remained {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    flex: 1;
+    transition: all .3s ease-in;
+}
+
+.remained span {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.remained small {
+    font-size: 12px;
+}
+
+.percentage {
+    background-color: #6ab3f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 30px;
+    height: 0;
+    transition: all .3s;
+}
+
+.text {
+    text-align: center;
+    margin: 0 0 10px;
+}
+
+h4 {
+    font-size: 15px;
+    font-weight: 200;
+    color: #aaa;
+    pointer-events: none;
+    margin-top: 100px;
+    text-align: center;
+}
+
+h4 em {
+    color: #daa644;
+}
+
+#snowfall {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    color: #fffafa;
+}
