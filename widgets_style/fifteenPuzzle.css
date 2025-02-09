@@ -1,0 +1,106 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    background: radial-gradient(#a7c9ae, #546b58);
+}
+
+h1 {
+    font-size: 3em;
+    color: #fff;
+    background: linear-gradient(#3d8d4e, #7ba383, #ffff85);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-box-reflect: below -20px -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.5));
+}
+
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.puzzle-container {
+    width: 390px;
+    height: 390px;
+    background: #7ba383;
+    border-radius: 6px;
+    box-shadow: 0 0 0 20px #638d6c;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.puzzle-container .tile {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    background: #ffff85;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: .5s;
+}
+
+.puzzle-container .tile:hover {
+    background: #fff;
+}
+
+.tile.empty,
+.tile.empty:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+#shuffle-btn {
+    position: relative;
+    top: 50px;
+    display: block;
+    padding: 20px;
+    font-size: 1.5em;
+    line-height: 0.1em;
+    cursor: pointer;
+    background: #ffff85;
+    border: none;
+    border-radius: 6px;
+    transition: .5s;
+}
+
+#shuffle-btn:active {
+    background: #7ba383;
+    color: #fff;
+}
+
+#message {
+    text-align: center;
+    font-size: 1.5em;
+    color: #333;
+    margin-top: 70px;
+}
+
+h4 {
+    font-size: 15px;
+    margin-top: 50px;
+    font-weight: 200;
+    color: #ffffff;
+    pointer-events: none;
+    margin-bottom: 14px;
+    text-align: center;
+}
+
+h4 em {
+    color: #dac444;
+}
