@@ -1,0 +1,108 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: black;
+}
+
+.loader {
+    position: absolute;
+    top: 50%;
+    left: calc(50% + 88px);
+    transform: translate(-50%, -50%) rotate(-90deg) scale(4);
+}
+
+.loader span {
+    position: relative;
+    display: block;
+    height: 58px;
+    width: 2px;
+    margin-top: -46px;
+    background-color: transparent;
+    animation: animate 4s linear infinite;
+}
+
+.loader span::before,
+.loader span::after {
+    content: '';
+    position: absolute;
+    height: 10px;
+    width: 10px;
+    left: 50%;
+    border-radius: 50%;
+    background-color: #ff0;
+    transform: translateX(-50%);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.loader span::before {
+    top: 0;
+}
+
+.loader span::after {
+    bottom: 0;
+}
+
+.loader span:nth-child(1)::before,
+.loader span:nth-child(1)::after {
+    background-color: #ff0;
+}
+
+.loader span:nth-child(2)::before,
+.loader span:nth-child(2)::after {
+    background-color: #f0f;
+}
+
+.loader span:nth-child(3)::before,
+.loader span:nth-child(3)::after {
+    background-color: #0f0;
+}
+
+.loader span:nth-child(4)::before,
+.loader span:nth-child(4)::after {
+    background-color: #0ff;
+}
+
+.loader span:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.loader span:nth-child(2) {
+    animation-delay: 1s;
+}
+
+.loader span:nth-child(3) {
+    animation-delay: 2s;
+}
+
+.loader span:nth-child(4) {
+    animation-delay: 3s;
+}
+
+@keyframes animate {
+    0%, 75% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(180deg);
+    }
+}
+
+h1 {
+    margin-top: 200px;
+    color: #ff0;
+    animation: hue 4s linear infinite;
+}
+
+@keyframes hue {100% {
+        filter: hue-rotate(360deg);
+    }
+}
