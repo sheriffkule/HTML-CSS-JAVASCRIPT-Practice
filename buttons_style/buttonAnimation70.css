@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Bangers", serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(90deg, #001e2b, #004461, #001e2b);
+}
+
+a {
+    position: relative;
+    background: transparent;
+    text-decoration: none;
+    padding: 20px 40px;
+    color: #fff;
+    font-size: 20px;
+    letter-spacing: 2px;
+    word-spacing: 8px;
+}
+
+a::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    top: -5px;
+    left: 0;
+    background: #00ed64;
+    transform: skewX(30deg);
+    z-index: -1;
+    transition: all .5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+a:hover::before {
+    transform: skewX(0deg);
+    left: 50%;
+    top: 0;
+}
+
+a::after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    top: 5px;
+    left: 51%;
+    background: #0080a7;
+    transform: skewX(30deg);
+    z-index: -1;
+    transition: all .5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+a:hover::after {
+    transform: skewX(0deg);
+    left: 0;
+    top: 0;
+}
