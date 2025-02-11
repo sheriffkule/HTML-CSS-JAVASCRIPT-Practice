@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Bangers", serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: linear-gradient(#001822,#003850, #001822);
+}
+
+h1 {
+    position: relative;
+}
+
+h1, h1::after {
+    font-size: 80px;
+    background: linear-gradient(90deg, yellow, orangered, royalblue, orangered, yellow);
+    background-size: 500% 100%;
+    background-position: center;
+    color: transparent;
+    background-clip: text;
+    letter-spacing: 10px;
+    -webkit-box-reflect: below -12px linear-gradient(to bottom, transparent, #fff8);
+    animation: move 10s linear infinite;
+}
+
+h1::after {
+    content: 'SheriffKule';
+    position: absolute;
+    left: 0;
+    filter: blur(8px);
+}
+
+@keyframes move {
+    0% {
+        background-position: 0 100%;
+        font-size: 80px;
+    }
+    50% {
+        font-size: 100px;
+    }
+    100% {
+        background-position: -500% 100%;
+        font-size: 80px;
+    }
+}
