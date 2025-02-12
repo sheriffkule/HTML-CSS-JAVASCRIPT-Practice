@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Bangers", serif;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(#000, #333 30%, #2d444d 50%, #333, #000 100%);
+    flex-direction: column;
+}
+
+h1 {
+    font-size: 12vw;
+    display: flex;
+    line-height: 1;
+    letter-spacing: 12px;
+    font-weight: 400;
+    -webkit-text-stroke: 2px #fff;
+    color: transparent;
+    visibility: hidden;
+    overflow: hidden;
+}
+
+h1 span {
+    display: block;
+    position: relative;
+}
+
+h1 span::before {
+    content: attr(data-char);
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #fff;
+    transform: translateY(-150%);
+}
