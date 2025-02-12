@@ -1,0 +1,90 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(#357443 30%, #d1dad3 30%, #d1dad3 70%, #357443 70%, #357443 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    transition: .3s;
+}
+
+body.dark {
+    background: linear-gradient(#263238 30%, #8bb1c9 30%, #8bb1c9 70%, #263238 70%, #263238 100%);
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.holder {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: -8px -8px 15px rgba(175, 175, 175, 0.5),
+    10px 10px 10px rgba(0, 0, 0, 0.2),
+    inset 8px 8px 15px rgba(175, 175, 175, 0.5),
+    inset 10px 10px 10px rgba(0, 0, 0, 0.2);
+    justify-content: space-between;
+    align-items: center;
+}
+
+.label {
+    width: 200px;
+}
+
+input {
+    display: none;
+}
+
+.label i {
+    margin-right: 8px;
+}
+
+.toggle > input + label {
+    position: relative;
+    display: inline-block;
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    margin: 0;
+    cursor: pointer;
+    box-shadow: inset -8px -8px 15px rgba(175, 175, 175, 0.5),
+    inset 10px 10px 10px rgba(0, 0, 0, 0.25);
+}
+
+label::before {
+    content: 'OFF';
+    position: absolute;
+    font-size: 18px;
+    text-align: center;
+    line-height: 26px;
+    top: 8px;
+    left: 8px;
+    width: 46px;
+    height: 25px;
+    background: red;
+    transition: all .8s;
+    box-shadow: -3px -3px 5px rgba(175, 175, 175, 0.5),
+    3px 3px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+}
+
+input:checked + label::before {
+    content: 'ON';
+    left: 47%;
+    color: #fff;
+    background: #00b33c;
+    box-shadow: -3px -3px 5px rgba(175, 175, 175,
+    0.5),
+    3px 3px 5px #00b33c;
+}
