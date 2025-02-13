@@ -1,0 +1,93 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #222;
+}
+
+.container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    display: grid;
+    place-content: center;
+}
+
+h1 {
+    color: #0f0;
+    font-size: 2rem;
+    animation: hueRotate 6s linear infinite;
+}
+
+@keyframes hueRotate {
+    0%, 100% {
+        color: orangered;
+    }
+    50% {
+        color: limegreen;
+    }
+}
+
+.dot {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #fff;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: rotate(calc(360deg / 60 * var(--i))) translateX(200px);
+}
+
+.dot:nth-child(even)::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    background: #0f0;
+    border-radius: 50%;
+    animation: animate 6s ease-in-out infinite;
+    animation-delay: calc(0.1s * var(--i));
+}
+
+@keyframes animate {
+    0% {
+        transform: translate(0, 0);
+    }
+    10% {
+        transform: translate(50px, 0);
+    }
+
+    20%, 100% {
+        transform: translate(0, 0);
+    }
+}
+
+.dot:nth-child(odd)::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    background: rgb(255, 115, 0);
+    border-radius: 50%;
+    animation: animateOdd 6s ease-in-out infinite;
+    animation-delay: calc(0.1s * var(--i));
+}
+
+@keyframes animateOdd {
+    0% {
+        transform: translate(0, 0);
+    }
+    10% {
+        transform: translate(-150px, 0);
+    }
+
+    20%, 100% {
+        transform: translate(0, 0);
+    }
+}
