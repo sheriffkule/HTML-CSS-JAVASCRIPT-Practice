@@ -227,7 +227,7 @@ header {
 }
 
 .btn:hover img {
-  transform: translateX(5px);
+  transform: translateX(8px);
   filter: invert(100%);
 }
 
@@ -277,7 +277,7 @@ header {
     top: 0;
     left: 0;
     background: var(--main-color);
-    height: 200px;
+    height: 300px;
     width: 100%;
     border-radius: 2.5rem;
     z-index: -1;
@@ -296,4 +296,223 @@ header {
     position: absolute;
     left: 0;
     bottom: 20px;
+}
+
+.category-content h2 {
+    text-align: center;
+    margin: 0 0 1rem;
+    color: var(--bg-color);
+    padding-top: 2rem;
+}
+
+.categorySwiper {
+  max-width: 80%;
+}
+
+.category-box {
+  background: var(--second-color);
+  border-radius: 1.5rem;
+  text-align: center;
+  padding: 14px;
+}
+
+.category-box img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.category-box h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+.swiper-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 4.5rem;
+  gap: 4rem;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  position: static;
+  margin: 0 0 0 10px;
+  scale: 1.5;
+  transition: all .3s;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  filter: drop-shadow(0 0 20px var(--main-color));
+  scale: 2;
+}
+
+.swiper-button-next {
+  background: url(images/right-arrow.png);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+}
+
+.swiper-button-next::after {
+  display: none;
+}
+
+.swiper-button-prev {
+  background: url(images/left-arrow.png);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+}
+
+.swiper-button-prev::after {
+  display: none;
+}
+
+.product-desc {
+  max-width: 80%;
+  width: 100%;
+  text-align: center;
+  text-wrap: balance;
+  margin: auto auto 2rem auto;
+}
+
+.product-content {
+  display: grid;
+  grid-template-columns: repeat(3, 250px);
+  justify-content: space-between;
+  gap: 2rem;
+  background: var(--second-color);
+  border-radius: 1.75rem;
+  padding: 40px 60px;
+}
+
+.product-box {
+  background: var(--bg-color);
+  padding: 20px;
+  border-radius: 1.75rem;
+  position: relative;
+}
+
+.product-box span {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: var(--main-color);
+  color: var(--bg-color);
+  font: 1rem;
+  padding: 4px 10px;
+  border-radius: 2rem;
+  border: 4px solid var(--second-color);
+  z-index: 2;
+}
+
+.product-box img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+}
+
+.product-box h2 {
+  font-size: 1.075rem;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  color: var(--yellow-color);
+  margin: 10px 0;
+}
+
+.p-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price s {
+  color: #82828d;
+  font-size: 0.94rem;
+}
+
+.price h3 {
+  color: var(--main-color);
+  margin-top: 6px;
+}
+
+.product-box a i {
+  position: relative;
+  background: var(--text-neutral-3);
+  color: var(--text-color);
+  padding: 8px;
+  border-radius: 50%;
+  font-size: 20px;
+  transition: all .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.product-box a i:hover {
+  background: var(--main-color);
+  color: var(--bg-color);
+  font-size: 24px;
+}
+
+.backpack {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.backpack-content {
+  position: relative;
+  padding: 40px;
+}
+
+.backpack-grid {
+  width: 70px;
+  position: absolute;
+  top: -30px;
+  left: -10px;
+  z-index: -1;
+}
+
+.backpack-content h2 {
+  font-size: 2.4rem;
+}
+
+.backpack-content h2 span {
+  color: var(--main-color);
+  text-transform: uppercase;
+  position: relative;
+}
+
+.backpack-content h2 span::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 16px;
+  background-color: var(--second-color);
+  z-index: -1;
+  left: 0;
+  bottom: -5px;
+}
+
+.backpack-content p {
+  margin: 1rem 0 2rem;
+  text-wrap: balance;
+}
+
+.selling-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
 }
