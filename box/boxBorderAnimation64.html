@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corner Cutout</title>
+    <link rel="stylesheet" href="/box_style/boxBorderAnimation64.css">
+</head>
+<body>
+    <div class="box">
+        <div class="cutout"></div>
+    </div>
+    <svg width="0" height="0">
+        <defs>
+            <mask id="mask">
+                <rect width="300" height="400" fill="#fff" />
+                <circle cx="0" cy="0" r="50" />
+                <circle cx="300" cy="0" r="50" />
+                <circle cx="0" cy="400" r="50" />
+                <circle cx="300" cy="400" r="50" />
+            </mask>
+        </defs>
+    </svg>
+</body>
+</html>

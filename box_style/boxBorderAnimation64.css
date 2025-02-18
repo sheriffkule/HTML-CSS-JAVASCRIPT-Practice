@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #262626;
+}
+
+.box {
+    filter: drop-shadow(30px 30px 5px #000);
+}
+
+.box .cutout {
+    width: 360px;
+    height: 400px;
+    background: url(/images/clint.jpeg);
+    background-size: cover;
+    mask: url(#mask);
+}
