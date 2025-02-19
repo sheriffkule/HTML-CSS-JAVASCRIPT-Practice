@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: radial-gradient(#133130, #1c1c1c);
+}
+
+ul {
+    list-style-type: none;
+    position: relative;
+    width: 500px;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+    transform: rotate(-25deg) skew(20deg);
+}
+
+a {
+    text-decoration: none;
+    color: #00ffaa;
+}
+
+ul > li {
+    position: relative;
+    background: radial-gradient(#313131, #1c1c1c);
+    width: 25%;
+    height: 200px;
+    transition: all 0.5s;
+    margin: 0 4px;
+}
+
+ul > li::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -9px;
+    background: #242424;
+    height: 100%;
+    width: 9px;
+    transform-origin: right;
+    transform: skewY(-45deg);
+}
+
+ul > li::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0px;
+    background: #2b2b2b;
+    height: 20px;
+    width: 100%;
+    transform-origin: top;
+    transform: skewX(-45deg);
+}
+
+ul > li > a > span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 80;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    transition: all .4s;
+}
+
+li:hover > a span:nth-last-of-type(5) {
+    transform: translate(10px, -10px);
+}
+
+li:hover > a span:nth-last-of-type(4) {
+    transform: translate(20px, -20px);
+}
+
+li:hover > a span:nth-last-of-type(3) {
+    transform: translate(30px, -30px);
+}
+
+li:hover > a span:nth-last-of-type(2) {
+    transform: translate(40px, -40px);
+}
+
+li:hover > a span:nth-last-of-type(1) {
+    transform: translate(50px, -50px);
+}
+
+a > span:nth-of-type(1) {
+    opacity: .2;
+}
+
+a > span:nth-of-type(2) {
+    opacity: .4;
+}
+
+a > span:nth-of-type(3) {
+    opacity: .6;
+}
+
+a > span:nth-of-type(4) {
+    opacity: .8;
+}
+
+a > span:nth-of-type(5) {
+    opacity: 1;
+}
+
+li:nth-of-type(1):hover span {
+    background: #d6249f;
+}
+
+li:nth-of-type(2):hover span {
+    background: #3b5998;
+}
+
+li:nth-of-type(3):hover span {
+    background: #0077f2;
+}
+
+li:nth-of-type(4):hover span {
+    background: #6441a5;
+}
+
+li:nth-of-type(5):hover span {
+    background: #192d41;
+}
+
+li:nth-of-type(6):hover span {
+    background: #0077B5;
+}
