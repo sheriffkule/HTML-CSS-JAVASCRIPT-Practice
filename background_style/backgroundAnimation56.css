@@ -1,0 +1,20 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: radial-gradient(#202726, #111);
+    overflow: hidden;
+}
+
+span {
+    position: absolute;
+    width: 40px;
+    height: 2px;
+    background: #7ef0ff;
+    pointer-events: none;
+    transition: .1s;
+}
