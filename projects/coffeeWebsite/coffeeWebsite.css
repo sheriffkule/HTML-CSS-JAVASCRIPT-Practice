@@ -116,3 +116,233 @@ img {
 .main {
     overflow: hidden;
 }
+
+.header {
+    position: fixed;
+    width: 100%;
+    top: 10px;
+    left: 0;
+    background-color: var(--body-color);
+    border-radius: 4rem;
+    z-index: var(--z-fixed);
+    transition: all .4s;
+}
+
+.nav {
+    position: relative;
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav__logo {
+    color: var(--white-color);
+    font-family: var(--second-font);
+    font-weight: var(--font-semi-bold);
+    transition: all .4s;
+}
+
+.nav__logo:hover {
+    color: var(--first-color);
+    scale: 1.08;
+    letter-spacing: 1px;
+}
+
+.nav__toggle,
+.nav__close {
+    display: flex;
+    color: var(--white-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+@media screen and (max-width:1150px) {
+    .nav__menu {
+        position: fixed;
+        top: -120%;
+        left: 0;
+        background-color: var(--body-color);
+        width: 100%;
+        padding-block: 4rem;
+        box-shadow: 0 8px 16px hsla(166, 85%, 8%, .3);
+        transition: all .5s;
+    }
+}
+
+.nav__list {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+}
+
+.nav__link {
+    color: var(--white-color);
+    font: var(--font-medium) var(--h1-font-size) var(--second-font);
+    line-height: 1.1;
+    transition: all .4s;
+    position: relative;
+}
+
+.nav__link::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 100%;
+    top: 0;
+    left: -10%;
+    background: var(--dark-color);
+    z-index: -1;
+    transition: all .4s;
+}
+
+.nav__link:hover::before {
+    width: 120%;
+}
+
+.nav__link:hover {
+    color: var(--first-color);
+    letter-spacing: 2px;
+}
+
+.nav__close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+}
+
+.show-menu {
+    top: 0;
+}
+
+.scroll-header {
+    box-shadow: 0 4px 16px hsla(166, 85%, 8%, .3);
+    opacity: 0.8;
+}
+
+.home__container {
+    position: relative;
+    padding-top: 3rem;
+    row-gap: 0;
+}
+
+.home__title {
+    color: var(--white-color);
+    font-size: var(--biggest-font-size);
+    font-weight: var(--font-semi-bold);
+    text-align: center;
+    text-shadow: 0 10px 12px rgba(255, 255, 255, 0.2);
+}
+
+.home__images {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    justify-self: center;
+
+}
+
+.home__shape {
+    width: 280px;
+    height: 280px;
+    background-color: var(--first-color);
+    border-radius: 50%;
+    clip-path: inset(50% 0 0 0);
+}
+
+.home__images img {
+    position: absolute;
+}
+
+.home__coffee {
+    width: 160px;
+    top: -3.5rem;
+    rotate: 10deg;
+}
+
+.home__splash {
+    max-width: initial;
+    width: 350px;
+    rotate: 10deg;
+    left: -3rem;
+    bottom: .5rem;
+}
+
+.home__bean-1,
+.home__bean-2,
+.home__ice-2 {
+    width: 40px;
+}
+
+.home__bean-1 {
+    left: 1.5rem;
+    top: 1.5rem;
+}
+
+.home__bean-2 {
+    right: 3.5rem;
+    bottom: 6.5rem;
+    rotate: -90deg;
+    filter: blur(2px);
+}
+
+.home__ice-1,
+.home__leaf {
+    width: 50px;
+}
+
+.home__ice-1 {
+    left: 1.5rem;
+    bottom: 3rem;
+}
+
+.home__ice-2 {
+    top: 4rem;
+    right: 1.25rem;
+    rotate: 60deg;
+}
+
+.home__leaf {
+    right: 6rem;
+    bottom: -1rem;
+    rotate: -15deg;
+}
+
+.home__sticker {
+    position: absolute;
+    width: 50px;
+    right: .5rem;
+    bottom: -2rem;
+    rotate: 15deg;
+}
+
+.home__data {
+    margin-top: 2.5rem;
+    text-align: center;
+}
+
+.home__description {
+    color: var(--white-color);
+    margin-bottom: 1.5rem;
+    text-wrap: balance;
+}
+
+.button {
+    display: inline-flex;
+    justify-content: center;
+    background-color: var(--first-color);
+    color: var(--white-color);
+    padding: 1rem 2rem;
+    font-weight: var(--font-semi-bold);
+    transition: all .4s;
+}
+
+.button:hover {
+    background-color: var(--first-color-alt);
+    box-shadow: 0 8px 24px hsla(166, 85%, 8%, .3),
+    inset 0 8px 24px hsla(166, 85%, 8%, .3);
+    transform: translateY(-6px);
+    border-radius: 2rem;
+}
+

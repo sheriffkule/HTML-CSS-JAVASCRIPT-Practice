@@ -9,12 +9,75 @@
       href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/scripts/swiper-bundle.css">
-    <link rel="stylesheet" href="coffeeWebsite.css">
+    <link rel="stylesheet" href="/scripts/swiper-bundle.css" />
+    <link rel="stylesheet" href="coffeeWebsite.css" />
   </head>
   <body>
-    <header class="header" id="header"></header>
+    <header class="header" id="header">
+      <nav class="nav container">
+        <a href="#" class="nav__logo">STARCOFFEE</a>
 
+        <div class="nav__menu" id="nav-menu">
+          <ul class="nav__list">
+            <li>
+              <a href="#home" class="nav__link">HOME</a>
+            </li>
+            <li>
+              <a href="#popular" class="nav__link">POPULAR</a>
+            </li>
+            <li>
+              <a href="#about" class="nav__link">ABOUT US</a>
+            </li>
+            <li>
+              <a href="#products" class="nav__link">PRODUCTS</a>
+            </li>
+            <li>
+              <a href="#contact" class="nav__link">CONTACT</a>
+            </li>
+          </ul>
+
+          <div class="nav__close" id="nav-close">
+            <i class="ri-close-large-line"></i>
+          </div>
+        </div>
+
+        <div class="nav__toggle" id="nav-toggle">
+          <i class="ri-apps-2-fill"></i>
+        </div>
+      </nav>
+    </header>
+
+    <main class="main">
+      <section class="home section" id="home">
+        <div class="home__container container grid">
+          <h1 class="home__title">COLD COFFEE</h1>
+
+          <div class="home__images">
+            <div class="home__shape"></div>
+            <img src="images/home-splash.png" alt="image" class="home__splash" />
+            <img src="images/bean-img.png" alt="image" class="home__bean-2" />
+            <img src="images/home-coffee.png" alt="image" class="home__coffee" />
+            <img src="images/bean-img.png" alt="image" class="home__bean-1" />
+            <img src="images/ice-img.png" alt="image" class="home__ice-1" />
+            <img src="images/ice-img.png" alt="image" class="home__ice-2" />
+            <img src="images/leaf-img.png" alt="image" class="home__leaf" />
+            <img src="images/home-sticker.svg" alt="" class="home__sticker" />
+          </div>
+
+
+          <div class="home__data">
+            <p class="home__description">
+              Find delicious hot and cold coffees with the best varieties, calm the
+              pleasure and enjoy a good coffee, order now.
+            </p>
+
+            <a href="#about" class="button">Learn More</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="popular section" id="popular"></section>
+    </main>
 
     <script src="/scripts/scrollreveal.min.js"></script>
     <script src="/scripts/swiper-bundle.min.js"></script>
