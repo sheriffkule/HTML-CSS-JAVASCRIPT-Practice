@@ -1,7 +1,9 @@
 let menu = document.querySelector('.menu-icon');
+let navbar = document.querySelector('.navbar');
 
 menu.addEventListener('click', function () {
   menu.classList.toggle('move');
+  navbar.classList.toggle('open-menu');
 });
 
 let swiper = new Swiper('.categorySwiper', {
@@ -67,3 +69,29 @@ let swiper2 = new Swiper('.selling-slider', {
     },
   },
 });
+
+const animate = ScrollReveal({
+  origin: 'top',
+  distance: '150px',
+  duration: 2500,
+  delay: 400,
+});
+
+animate.reveal('.nav, .heading, .hero-content h2', { distance: '60px' });
+animate.reveal('.backpack-content', { origin: 'left' });
+animate.reveal('.hero-img img, .btn, .btn img, .backpack img, .single-post', {
+  origin: 'bottom',
+});
+animate.reveal(
+  '.category-box, .product-box, .brand-box, .blog-box, .link-box, .footer-box h3, .footer-box a, .footer-box p',
+  { interval: 200 }
+);
+
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+  yearElement.dateTime = currentYear;
+  yearElement.textContent = currentYear;
+}
+
+updateYear();
