@@ -11,7 +11,7 @@
   --dark-color: hsl(166, 95%, 12%);
   --body-color: hsl(166, 56%, 18%);
   --body-white-color: hsl(0, 0%, 100%);
-  --body-first-color: hsl(166, 80%, 40%);
+  --body-first-color: hsl(166, 80%, 30%);
 
   --body-font: "Montserrat", serif;
   --second-font: "Saira", serif;
@@ -103,7 +103,7 @@ img {
 }
 
 .section {
-    padding-block: 5rem 4rem;
+    padding-block: 6rem 5rem;
 }
 
 .section__title {
@@ -231,6 +231,7 @@ img {
     color: var(--white-color);
     font-size: var(--biggest-font-size);
     font-weight: var(--font-semi-bold);
+    margin-bottom: 3rem;
     text-align: center;
     text-shadow: 0 10px 12px rgba(255, 255, 255, 0.2);
 }
@@ -346,3 +347,259 @@ img {
     border-radius: 2rem;
 }
 
+.button-dark {
+    background-color: var(--dark-color);
+}
+
+.button-dark:hover {
+    background-color: var(--dark-color);
+}
+
+.popular {
+    background-color: var(--body-white-color);
+}
+
+.popular .section__title {
+    color: var(--title-color);
+}
+
+.popular__swiper {
+    padding-top: 1.5rem;
+}
+
+.popular__card {
+    width: 270px;
+    display: grid;
+    row-gap: 1.5rem;
+}
+
+.popular__images {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    justify-self: center;
+}
+
+.popular__shape {
+    width: 195px;
+    height: 195px;
+    background-color: var(--first-color);
+    border-radius: 50%;
+    clip-path: inset(50% 0 0 0);
+}
+
+.popular__images img {
+    position: absolute;
+}
+
+.popular__coffee {
+    width: 130px;
+    top: -1.5rem;
+}
+
+.popular__bean-1 {
+    width: 30px;
+    top: 3rem;
+    left: .5rem;
+    transition: transform .5s .1s;
+}
+
+.popular__bean-2 {
+    width: 20px;
+    right: 2rem;
+    bottom: 2rem;
+    rotate: 75deg;
+    filter: blur(1px);
+    transition: transform .5s .1s;
+}
+
+.popular__data {
+    text-align: center;
+}
+
+.popular__name {
+    font-size: var(--h1-font-size);
+    color: var(--title-color);
+    margin-bottom: .5rem;
+}
+
+.popular__description {
+    margin-bottom: 1.5rem;
+}
+
+.popular__card:hover .popular__bean-1 {
+    transform: translate(-.5rem, -.25rem);
+}
+
+.popular__card:hover .popular__bean-2 {
+    transform: translate(.5rem, -.25rem);
+}
+
+.swiper {
+    overflow: visible;
+    margin-inline: initial;
+}
+
+.about__container {
+    row-gap: 3rem;
+}
+
+.about__data {
+    text-align: center;
+}
+
+.about .section__title,
+.about__description {
+    color: var(--white-color);
+    margin-bottom: 1.5rem;
+    text-wrap: balance;
+}
+
+.about__images {
+    position: relative;
+    display: grid;
+    place-items: center;
+    justify-self: center;
+}
+
+.about__shape {
+    width: 300px;
+    height: 300px;
+    background-color: var(--first-color);
+    border-radius: 50%;
+}
+
+.about__images img {
+    position: absolute;
+}
+
+.about__coffee {
+    width: 280px;
+    filter: drop-shadow(0 8px 16px hsla(166, 85%, 8%, .5));
+}
+
+.about__leaf-1,
+.about__leaf-2 {
+    width: 50px;
+}
+
+.about__leaf-1 {
+    top: .5rem;
+    left: 3.5rem;
+    rotate: -105deg;
+}
+
+.about__leaf-2 {
+    top: 7.75rem;
+    right: 2.5rem;
+    rotate: -15rem;
+}
+
+.products {
+    background-color: var(--body-first-color);
+}
+
+.products .section__title {
+    color: var(--dark-color);
+}
+
+.products__container {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.products__card {
+    position: relative;
+    background-color: var(--dark-color);
+    padding: 1rem .5rem 1.25rem;
+}
+
+.products__images {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    justify-self: center;
+}
+
+.products__shape {
+    width: 120px;
+    height: 120px;
+    background-color: var(--first-color);
+    border-radius: 50%;
+    clip-path: inset(50% 0 0 0);
+}
+
+.products__images img {
+    position: absolute;
+}
+
+.products__coffee {
+    width: 80px;
+    top: 0;
+    transition: all .4s;
+}
+
+.products__ice-1 {
+    width: 30px;
+    left: .5rem;
+    bottom: 0;
+    transition: transform .5s .1s;
+}
+
+.products__ice-2 {
+    width: 20px;
+    top: 3.25rem;
+    right: .75rem;
+    rotate: 60deg;
+    transition: transform .5s .1s;
+}
+
+.products__data {
+    margin-top: 1.25rem;
+}
+
+.products__name {
+    color: var(--white-color);
+    font-size: var(--h3-font-size);
+    margin-bottom: 1.25rem;
+}
+
+.products__price {
+    color: var(--first-color);
+    font-size: var(--h3-font-size);
+    font-weight: var(--font-medium);
+}
+
+.products__button {
+    position: absolute;
+    right: .5rem;
+    bottom: 1.25rem;
+    width: 32px;
+    height: 32px;
+    background-color: var(--first-color);
+    color: var(--dark-color);
+    font-size: 1.5rem;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px hsla(166, 85%, 8%, .4);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.products__button:hover {
+    background-color: var(--first-color-alt);
+    scale: 1.1;
+    box-shadow: 0 4px 8px hsla(166, 85%, 80%, .4);
+}
+
+.products__card:hover .products__coffee {
+    transform: translateY(-.5rem) rotate(-3deg);
+}
+
+.products__card:hover .products__ice-1 {
+    transform: translate(-.75rem, -.75rem) rotate(-6deg);
+}
+
+.products__card:hover .products__ice-2 {
+    transform: translate(-.75rem, -.75rem);
+}
