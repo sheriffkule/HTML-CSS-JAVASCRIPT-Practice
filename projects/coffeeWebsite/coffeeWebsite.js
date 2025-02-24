@@ -33,15 +33,46 @@ const scrollHeader = () => {
 window.addEventListener('scroll', scrollHeader);
 
 const swiperPopular = new Swiper('.popular__swiper', {
-    loop: true,
-    grabCursor: true,
-    spaceBetween: 32,
-    slidesPerView: 'auto',
-    centeredSlides: 'auto',
+  loop: true,
+  grabCursor: true,
+  spaceBetween: 32,
+  slidesPerView: 'auto',
+  centeredSlides: 'auto',
 
-    breakpoints: {
-        1150: {
-            spaceBetween: 80,
-        }    
+  breakpoints: {
+    1150: {
+      spaceBetween: 80,
+    },
+  },
+});
+
+const scrollUp = () => {
+  const scrollUp = document.getElementById('scroll-up');
+
+  this.scrollY >= 350
+    ? scrollUp.classList.add('show-scroll')
+    : scrollUp.classList.remove('show-scroll');
+};
+
+window.addEventListener('scroll', scrollUp);
+
+const section = document.querySelectorAll('section[id]');
+
+const scrollActive = () => {
+  const scrollDown = window.scrollY;
+
+  section.forEach((current) => {
+    const sectionHeight = current.offsetHeight;
+    const sectionTop = current.offsetTop - 50;
+    const sectionId = current.getAttribute('id');
+    const sectionsClass = document.querySelector('.nav__menu a[href*=' + sectionId + ']');
+
+    if (scrollDown > sectionTop && scrollDown <= sectionTop + sectionHeight) {
+      sectionsClass.classList.add('active-link');
+    } else {
+      sectionsClass.classList.remove('active-link');
     }
-})
+  });
+};
+
+window.addEventListener('scroll', scrollActive);
