@@ -76,3 +76,46 @@ const scrollActive = () => {
 };
 
 window.addEventListener('scroll', scrollActive);
+
+const sr = ScrollReveal({
+  origin: 'top',
+  distance: '120px',
+  duration: 2000,
+  delay: 300,
+  reset: true,
+});
+
+sr.reveal(`.popular__swiper, .footer__container, .footer__copy`, { interval: 250 });
+sr.reveal(`.home__shape`, { origin: 'bottom' });
+sr.reveal(`.home__coffee`, { delay: 1000, distance: '200px', duration: 1500 });
+sr.reveal(`.home__splash`, { delay: 1600, scale: 0, duration: 1500 });
+sr.reveal(`.home__bean-1, .home__bean-2`, {
+  delay: 2200,
+  scale: 0,
+  duration: 1500,
+  rotate: { z: 180 },
+});
+sr.reveal(`.home__ice-1, .home__ice-2`, {
+  delay: 2600,
+  scale: 0,
+  duration: 1500,
+  rotate: { z: 180 },
+});
+sr.reveal(`.home__leaf`, { delay: 2800, scale: 0, duration: 1500, rotate: { z: 90 } });
+sr.reveal(`.home__title`, { delay: 3500 });
+sr.reveal(`.about__data`, { origin: 'left' });
+sr.reveal(`.about__images`, { origin: 'right' });
+sr.reveal(`.about__coffee`, { delay: 1000 });
+sr.reveal(`.about__leaf-1, .about__leaf-2`, { delay: 1400, rotate: { z: 90 } });
+sr.reveal(`.products__card, .contact__info`, { interval: 300 });
+sr.reveal(`.contact__shape`, { delay: 600, scale: 0 });
+sr.reveal(`.contact__delivery`, { delay: 1200, scale: 0 });
+
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+  yearElement.dateTime = currentYear;
+  yearElement.textContent = currentYear;
+}
+
+updateYear();
