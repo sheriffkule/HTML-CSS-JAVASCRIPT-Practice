@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #000;
+    overflow: hidden;
+}
+
+svg {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+path {
+    stroke: #0ff;
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+    filter: drop-shadow(0 0 8px #0ff);
+    stroke-dasharray: 250;
+    stroke-dashoffset: 0;
+    animation: move 5s linear infinite;
+}
+
+@keyframes move {
+    from {
+        stroke-dashoffset: 980;
+    }
+
+    to {
+        stroke-dashoffset: 0;
+    }
+}
