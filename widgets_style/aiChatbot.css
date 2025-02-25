@@ -22,7 +22,7 @@ body {
     overflow: hidden;
     border-radius: 15px;
     box-shadow: 0 0 128px 0 rgba(255, 255, 255, 0.1),
-    0 32px 64px -48px rgba(255, 255, 255, 0.5);
+    0 32px 64px -48px rgba(255, 255, 255, 0.3);
 }
 
 .chat-header {
@@ -81,6 +81,8 @@ body {
     overflow-y: auto;
     height: 460px;
     margin-bottom: 82px;
+    scrollbar-width: thin;
+    scrollbar-color: #505050 transparent;
 }
 
 .chat-body .message {
@@ -127,6 +129,12 @@ body {
     border-radius: 13px 13px 3px 13px;
 }
 
+.chat-body .user-message .attachment {
+    width: 70%;
+    margin-top: -7px;
+    border-radius: 13px 3px 13px 13px;
+}
+
 .chat-body .bot-message .thinking-indicator {
     display: flex;
     gap: 4px;
@@ -139,7 +147,7 @@ body {
     opacity: 0.7;
     border-radius: 50%;
     background: #6f6bc2;
-    /* animation: dotPulse 1.8s ease-in-out infinite; */
+    animation: dotPulse 1.8s ease-in-out infinite;
 }
 
 .chat-body .bot-message .thinking-indicator .dot:nth-child(1) {
