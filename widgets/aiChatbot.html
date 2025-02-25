@@ -4,10 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI Chatbot</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
     <link rel="stylesheet" href="/widgets_style/aiChatbot.css" />
   </head>
   <body>
+    <canvas id="snowfall"></canvas>
+    <button id="chatbot-toggler">
+      <span class="material-symbols-rounded">mode_comment</span>
+      <span class="material-symbols-rounded">close</span>
+    </button>
+
     <div class="chatbot-popup">
       <div class="chat-header">
         <div class="header-info">
@@ -46,17 +52,21 @@
         <form action="#" class="chat-form">
           <textarea class="message-input" required placeholder="Message..."></textarea>
           <div class="chat-controls">
-            <button type="button" class="material-symbols-rounded">sentiment_satisfied</button>
+            <button type="button" id="emoji-picker" class="material-symbols-outlined">sentiment_satisfied</button>
             <div class="file-upload-wrapper">
               <input type="file" accept="images/*" id="file-input" hidden>
+              <img src="">
               <button type="button" id="file-upload" class="material-symbols-rounded">attach_file</button>
+              <button type="button" id="file-cancel" class="material-symbols-rounded">close</button>
             </div>
             <button type="submit" id="send-message" class="material-symbols-rounded">arrow_upward</button>
           </div>
         </form>
       </div>
     </div>
+    <h4>&copy; <time id="year"></time> Made by <em>SheriffKule</em> from XXIII Century</h4>
 
+    <script src="https://cdn.jsdelivr.net/npm/emoji-mart@latest/dist/browser.js"></script>
     <script src="/widgets_script/aiChatbot.js"></script>
   </body>
 </html>

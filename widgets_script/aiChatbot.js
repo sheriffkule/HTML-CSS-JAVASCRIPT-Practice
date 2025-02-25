@@ -2,6 +2,10 @@ const chatBody = document.querySelector('.chat-body');
 const messageInput = document.querySelector('.message-input');
 const sendMessageButton = document.getElementById('send-message');
 const fileInput = document.getElementById('file-input');
+const fileUploadWrapper = document.querySelector('.file-upload-wrapper');
+const fileCancelButton = document.getElementById('file-cancel');
+const chatbotToggler = document.getElementById('chatbot-toggler');
+const closeChatbot = document.getElementById('close-chatbot');
 
 const API_KEY = 'AIzaSyCH0EzBVFWPXV0GA6KCYudiXPOkMap3hr4';
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
@@ -14,6 +18,9 @@ const userData = {
   },
 };
 
+const chatHistory = [];
+const initialInputHeight = messageInput.scrollHeight;
+
 const createMessageElement = (content, ...classes) => {
   const div = document.createElement('div');
   div.classList.add('message', ...classes);
@@ -23,19 +30,19 @@ const createMessageElement = (content, ...classes) => {
 
 const generateBotResponse = async (incomingMessageDiv) => {
   const messageElement = incomingMessageDiv.querySelector('.message-text');
+  chatHistory.push({
+    role: 'user',
+    parts: [
+      { text: userData.message },
+      ...(userData.file.data ? [{ inline_data: userData.file }] : []),
+    ],
+  });
 
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      contents: [
-        {
-          parts: [
-            { text: userData.message },
-            ...(userData.file.data ? [{ inline_data: userData.file }] : []),
-          ],
-        },
-      ],
+      contents: chatHistory,
     }),
   };
 
@@ -48,11 +55,18 @@ const generateBotResponse = async (incomingMessageDiv) => {
       .replace(/\*\*(.*?)\*\*/g, '$1')
       .trim();
     messageElement.innerText = apiResponseText;
+
+    chatHistory.push({
+        role: 'model',
+        parts: [
+          { text: apiResponseText }],
+      });
   } catch (error) {
     console.log(error);
     messageElement.innerText = error.message;
     messageElement.style.color = '#ff0000';
   } finally {
+    userData.file = {};
     incomingMessageDiv.classList.remove('thinking');
     chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: 'smooth' });
   }
@@ -62,6 +76,8 @@ const handleOutgoingMessage = (e) => {
   e.preventDefault();
   userData.message = messageInput.value.trim();
   messageInput.value = '';
+  fileUploadWrapper.classList.remove('file-upload');
+  messageInput.dispatchEvent(new Event('input'));
 
   const messageContent = `<div class="message-text"></div>
   ${
@@ -110,9 +126,16 @@ const handleOutgoingMessage = (e) => {
 messageInput.addEventListener('keydown', (e) => {
   const userMessage = e.target.value.trim();
 
-  if (e.key === 'Enter' && userMessage) {
+  if (e.key === 'Enter' && userMessage && !e.shiftKey && window.innerWidth > 768) {
     handleOutgoingMessage(e);
   }
+});
+
+messageInput.addEventListener('input', () => {
+  messageInput.style.height = `${initialInputHeight}px`;
+  messageInput.style.height = `${messageInput.scrollHeight}px`;
+  document.querySelector('.chat-form').style.borderRadius =
+    messageInput.scrollHeight > initialInputHeight ? '15px' : '32px';
 });
 
 fileInput.addEventListener('change', () => {
@@ -121,6 +144,8 @@ fileInput.addEventListener('change', () => {
 
   const reader = new FileReader();
   reader.onload = (e) => {
+    fileUploadWrapper.querySelector('img').src = e.target.result;
+    fileUploadWrapper.classList.add('file-uploaded');
     const base64String = e.target.result.split(',')[1];
 
     userData.file = {
@@ -134,5 +159,99 @@ fileInput.addEventListener('change', () => {
   reader.readAsDataURL(file);
 });
 
+fileCancelButton.addEventListener('click', () => {
+  userData.file = {};
+  fileUploadWrapper.classList.remove('file-uploaded');
+});
+
+const picker = new EmojiMart.Picker({
+  theme: 'light',
+  skinTonePosition: 'none',
+  previewPosition: 'none',
+  onEmojiSelect: (emoji) => {
+    const { selectionStart: start, selectionEnd: end } = messageInput;
+    messageInput.setRangeText(emoji.native, start, end, 'end');
+    messageInput.focus();
+  },
+  onClickOutside: (e) => {
+    if (e.target.id === 'emoji-picker') {
+      document.body.classList.toggle('show-emoji-picker');
+    } else {
+      document.body.classList.remove('show-emoji-picker');
+    }
+  },
+});
+
+document.querySelector('.chat-form').appendChild(picker);
+
 sendMessageButton.addEventListener('click', (e) => handleOutgoingMessage(e));
 document.querySelector('#file-upload').addEventListener('click', () => fileInput.click());
+chatbotToggler.addEventListener('click', () =>
+  document.body.classList.toggle('show-chatbot')
+);
+closeChatbot.addEventListener('click', () =>
+  document.body.classList.remove('show-chatbot')
+);
+
+function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+    yearElement.dateTime = currentYear;
+    yearElement.textContent = currentYear;
+  }
+  
+  updateYear();
+
+  const canvas = document.getElementById('snowfall');
+const ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let numOfflakes = 50;
+const snowFlakes = [];
+
+function createSnowFlake() {
+	const snowFlake = {
+		x: Math.random() * canvas.width,
+		y: Math.random() * canvas.height,
+		size: Math.random() * 5,
+		speedX: Math.random() * 1.1,
+		speedY: Math.random() * 1.7,
+	};
+	snowFlakes.push(snowFlake);
+}
+
+for (let i = 0; i < numOfflakes; i++) {
+	createSnowFlake();
+}
+
+function drawSnowFlake(snowFlake) {
+	ctx.beginPath();
+	ctx.arc(snowFlake.x, snowFlake.y, snowFlake.size, 0, Math.PI * 2);
+	ctx.fillStyle = '#fffafa';
+	ctx.fill();
+}
+
+function updateSnowFlakes(snowFlake) {
+	snowFlake.x += snowFlake.speedX;
+	snowFlake.y += snowFlake.speedY;
+
+	if (snowFlake.y > canvas.height) {
+		snowFlake.x = Math.random() * canvas.width - 200;
+		snowFlake.y = -50;
+	}
+}
+
+function snowFall() {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+	for (let i = 0; i < snowFlakes.length; i++) {
+		drawSnowFlake(snowFlakes[i]);
+		updateSnowFlakes(snowFlakes[i]);
+	}
+
+	requestAnimationFrame(snowFall);
+}
+
+snowFall();
