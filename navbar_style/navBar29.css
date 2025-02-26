@@ -14,6 +14,22 @@ body {
     background-color: var(--background-color);
 }
 
+body.light {
+    --background-color: #ccc;
+}
+
+body.dark {
+    --background-color: #1f0030;
+}
+
+body.sky {
+    --background-color: #12c8e0;
+}
+
+body.grass {
+    --background-color: green;
+}
+
 .navigation {
     position: fixed;
     inset: 20px;
@@ -101,7 +117,7 @@ body {
 .navigation ul li:nth-child(1) {
     top: 20px;
     margin-bottom: 40px;
-    background-color: none;
+    background-color: transparent;
 }
 
 .navigation ul li:not(:first-child):hover::before,
@@ -173,10 +189,145 @@ body {
     z-index: 101;
     padding: .75rem .5rem;
     border-radius: 4px;
-    transition: all .3s;
-    transform: translate(0);
+    transition: all .3s cubic-bezier(0.6, 0.24, 0.78, 0.335);
+    transform: translateX(100%);
 }
 
 .style-switcher-wrapper.open {
-    transform: translate(0);
+    transform: translateX(0);
+}
+
+.style-switcher-wrapper.open .icon-1 {
+    border-radius: 5px;
+    margin-right: 25px;
+}
+
+.style-switcher-wrapper .icon-1 {
+    position: absolute;
+    top: 0;
+    width: 50px;
+    height: 50px;
+    background-color: var(--background-color);
+    box-shadow: -3px 0 10px -2px rgba(0, 0, 0, .2);
+    text-align: center;
+    font-size: 30px;
+    right: 99%;
+    transition: all .3s;
+    border: 5px 0 0 5px;
+    cursor: pointer;
+    color: var(--main-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.style-toggler {
+    margin-top: .5rem;
+    top: 40%;
+    color: #fefefe;
+}
+
+.colors {
+    color: #808080;
+}
+
+h3 {
+    color: var(--main-color);
+    margin: .5rem;
+}
+
+.colors p {
+    font-size: 12px;
+    margin: .5rem;
+}
+
+.colors span {
+    width: 45px;
+    height: 35px;
+    cursor: pointer;
+    display: inline-block;
+    margin: .25rem;
+    padding: .5rem;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.red {
+    background-color: red;
+}
+
+.golden {
+    background-color: goldenrod;
+}
+
+.green {
+    background-color: green;
+}
+
+.purple {
+    background-color: darkmagenta;
+}
+
+.orange {
+    background-color: #ff651c;
+}
+
+.yellowgreen {
+    background-color: yellowgreen;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.olive {
+    background-color: olive;
+}
+
+.cyan {
+    background-color: cyan;
+}
+
+.colors .default {
+    width: 100%;
+    height: 40px;
+    font-size: 18px;
+    letter-spacing: 1px;
+    background-color: black;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.theme span {
+    width: 60px;
+    height: 35px;
+    background-color: #000;
+    display: inline-block;
+    margin: .25rem;
+    cursor: pointer;
+}
+
+.theme .light {
+    background-color: #ccc;
+    box-shadow: -3px 0 10px -2px rgba(0, 0, 0, .2);
+}
+
+.theme .dark {
+    background-color: #1f0030;
+    box-shadow: -3px 0 10px -2px rgba(0, 0, 0, .2);
+}
+
+.theme .sky {
+    box-shadow: -3px 0 10px -2px rgba(0, 0, 0, .2);
+    background-color: #12c8e0;
+}
+
+.theme .grass {
+    box-shadow: -3px 0 10px -2px rgba(0, 0, 0, .2);
+    background-color: green;
 }
