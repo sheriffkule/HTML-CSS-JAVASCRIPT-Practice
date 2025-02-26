@@ -1,0 +1,281 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100..900&display=swap');
+
+:root {
+  --granite-gray: hsl(210, 1%, 37%);
+  --eerie-black: hsl(240, 2%, 11%);
+  --slimy-green: hsl(91, 100%, 30%);
+  --fuzzy-wuzzy: hsl(0, 42%, 57%);
+  --davys-gray: hsl(220, 2%, 28%);
+  --cultured-1: hsl(228, 17%, 94%);
+  --cultured-2: hsl(0, 17%, 96%);
+  --dim-gray: hsl(240, 1%, 41%);
+  --white_80: hsla(0, 0%, 100%, 0.8);
+  --white_70: hsla(0, 0%, 100%, 0.7);
+  --white_40: hsla(0, 0%, 100%, 0.4);
+  --white_10: hsla(0, 0%, 100%, 0.1);
+  --black_05: hsla(0, 0%, 0%, 0.05);
+  --black_50: hsla(0, 0%, 0%, 0.5);
+  --black_25: hsla(0, 0%, 0%, 0.25);
+  --white-2: hsl(0, 0%, 95%);
+  --white-1: hsl(0, 0%, 100%);
+  --black: hsl(0, 0%, 0%);
+
+  --hue: 227;
+  --theme-bg: linear-gradient(to bottom, hsl(var(--hue, 227), 40%, 50%),
+    hsl(var(--hue, 227), 40%, 60%));
+  --theme-color: hsl(var(--hue, 227), 42%, 57%);
+
+  --ff-roboto: 'Roboto', serif;
+  --fs-1: 2.6rem;
+  --fs-2: 2.2rem;
+  --fs-3: 1.8rem;
+  --fs-4: 1.4rem;
+  --fs-5: 1.2rem;
+  --fw-500: 500;
+
+  --radius-4: 4px;
+  --radius-6: 6px;
+  --radius-10: 10px;
+
+  --shadow-1: 0 0 5px hsla(0, 0%, 0%, 0.05);
+  --shadow-2: 0 0 10px hsla(0, 0, 0, 0.1);
+
+  --transition: 0.25s ease-in-out;
+  --cubic-out: cubic-bezier(0.05, 0.65, 0.25, 1);
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a,
+img,
+span,
+input,
+label,
+button,
+strong,
+ion-icon {
+  display: block;
+}
+
+img {
+  height: auto;
+}
+
+input,
+button {
+  background: none;
+  border: none;
+  font: inherit;
+}
+
+input {
+  width: 100%;
+}
+
+button {
+  cursor: pointer;
+}
+
+strong {
+  font-weight: normal;
+}
+
+ion-icon {
+  pointer-events: none;
+}
+
+html {
+  font-family: var(--ff-roboto);
+  font-size: 12px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-image: var(--theme-bg);
+  color: var(--eerie-black);
+  font-size: 1.6rem;
+  min-height: 100vh;
+  padding-block: 30px;
+  display: grid;
+  grid-template-columns: 1fr;
+  overflow: hidden;
+  opacity: 0;
+  transition: 0.3s ease;
+}
+
+body.loaded {
+  opacity: 1;
+}
+
+:focus-visible {
+  outline-offset: 4px;
+}
+
+:focus-visible:active {
+  outline-offset: 2px;
+}
+
+.container {
+    padding-inline: 20px;
+}
+
+.container,
+.main,
+.app-box {
+    height: 100%;
+}
+
+.h1,
+.h2 {
+    font-weight: var(--fw-500);
+}
+
+.h1 {
+    font-size: var(--fs-1);
+}
+
+.h2 {
+    font-size: var(--fs-2);
+}
+
+.app-box {
+    position: relative;
+    z-index: 1;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.header-title {
+    color: var(--white-1);
+    margin-block-end: 5px;
+}
+
+.header-time {
+    color: var(--white-1);
+    font-size: var(--fs-5);
+}
+
+.dropdown-wrapper {
+    position: relative;
+}
+
+.menu-btn {
+    color: var(--white-1);
+    font-size: 16px;
+    padding: 6px;
+    border-radius: var(--radius-6);
+    transition: var(--transition);
+}
+
+.menu-btn:is(:hover, :focus) {
+    background-color: var(--white_40);
+}
+
+.dropdown-container {
+    position: absolute;
+    top: calc(100% + 5px);
+    right: 0;
+    width: 200px;
+    overflow: hidden;
+    z-index: 3;
+    visibility: hidden;
+}
+
+.dropdown-container.active {
+    visibility: visible;
+}
+
+.dropdown-list {
+    background-color: var(--white-1);
+    border-radius: var(--radius-6);
+    transform: translateY(-50%);
+    box-shadow: var(--shadow-2);
+    transition: none;
+}
+
+.dropdown-container.active .dropdown-list {
+    transform: translateY(0);
+    transition: .5s var(--cubic-out);
+    transition-delay: .25s;
+}
+
+.dropdown-item {
+    padding: 15px;
+}
+
+.item-title {
+    color: black;
+    font-size: var(--fs-4);
+    margin-block-end: 15px;
+}
+
+.theme-btn-group {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.theme-btn {
+    background-image: linear-gradient(to bottom, hsl(var(--hue, 227), 40%, 50%), hsl(var(--hue, 227), 40%, 60%));
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
+
+.theme-btn:is(:hover, :focus) {
+    outline-color: var(--cultured-1);
+}
+
+.theme-btn.active {
+    outline-color: var(--slimy-green);
+}
+
+.theme-btn:active {
+    transform: scale(0.98);
+}
+
+.dropdown-link {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 15px;
+}
+
+.dropdown-link:is(:hover, :focus) {
+    background-color: var(--black_05);
+}
+
+.dropdown-link:active {
+    --black_05: hsla(0, 0%, 0%, 0.15)
+}
+
+.dropdown-link ion-icon {
+    color: var(--dim-gray);
+    font-size: 22px;
+}
+
+.dropdown-link .span {
+    color: var(--eerie-black);
+    font-size: var(--fs-4);
+}

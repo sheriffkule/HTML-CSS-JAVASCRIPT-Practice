@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Buddy</title>
+    <link rel="stylesheet" href="/widgets_style/taskBuddy.css" />
+  </head>
+  <body class="loaded">
+    <div class="container">
+      <main class="main">
+        <article class="app-box">
+          <header class="header">
+            <div>
+              <h1 class="h1 header-title">My Day</h1>
+
+              <p class="header-time" data-header-time="Saturday, July 1">Saturday, July 1</p>
+            </div>
+
+            <div class="dropdown-wrapper">
+              <button class="menu-btn" aria-label="Toggle menu" data-menu-toggler>
+                <ion-icon name="ellipsis-horizontal" aria-hidden="true"></ion-icon>
+              </button>
+
+              <div class="dropdown-container" data-menu>
+                <ul class="dropdown-list">
+                  <li class="dropdown-item">
+                    <p class="item-title">Theme</p>
+
+                    <div class="theme-btn-group">
+                      <button class="theme-btn active" style="--hue:227" data-theme-btn data-hue="227"></button>
+
+                      <button class="theme-btn" style="--hue:298" data-theme-btn data-hue="227"></button>
+
+                      <button class="theme-btn" style="--hue:344" data-theme-btn data-hue="227"></button>
+
+                      <button class="theme-btn" style="--hue:2" data-theme-btn data-hue="227"></button>
+
+                      <button class="theme-btn" style="--hue:153" data-theme-btn data-hue="227"></button>
+
+                      <button class="theme-btn" style="--hue:177" data-theme-btn data-hue="227"></button>
+
+                      <button class="theme-btn" style="--hue:206" data-theme-btn data-hue="227"></button>
+                    </div>
+                  </li>
+
+                  <li>
+                    <button class="dropdown-link" data-modal-toggler data-menu-toggler>
+                      <ion-icon name="information-circle-outline"></ion-icon>
+
+                      <span class="span">App Info</span>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </header>
+        </article>
+
+        
+      </main>
+    </div>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <script src="/widgets_script/taskBuddy.js"></script>
+  </body>
+</html>
