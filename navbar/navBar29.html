@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Side Navbar with Skins & Themes</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/navbar_style/navBar29.css" />
+  </head>
+  <body>
+    <nav class="navigation">
+      <ul>
+        <li><a href="#">
+            <span class="icon"><i class="bx bxl-slack"></i></span>
+            <span class="title">Brand Name</span>
+          </a></li>
+        <li><a href="#">
+            <span class="icon"><i class="bx bxs-home-heart"></i></span>
+            <span class="title">Dashboard</span>
+          </a></li>
+        <li><a href="#">
+            <span class="icon"><i class="bx bxs-user-plus"></i></span>
+            <span class="title">Customers</span>
+          </a></li>
+        <li><a href="#">
+            <span class="icon"><i class="bx bxs-chat"></i></span>
+            <span class="title">Message</span>
+          </a></li>
+        <li><a href="#">
+            <span class="icon"><i class="bx bxs-info-square"></i></span>
+            <span class="title">Help</span>
+          </a></li>
+        <li><a href="#">
+            <span class="icon"><i class="bx bxs-cog"></i></span>
+            <span class="title">Settings</span>
+          </a></li>
+        <li><a href="#">
+            <span class="icon"><i class="bx bxs-lock"></i></span>
+            <span class="title">Password</span>
+          </a></li>
+        <li><a href="#">
+            <span class="icon"><i class="bx bxs-log-out-circle"></i></span>
+            <span class="title">Sign Out</span>
+          </a></li>
+          <div class="toggle"></div>
+      </ul>
+    </nav>
+    <div class="style-switcher-wrapper">
+      <div class="style-toggler icon-1">
+        <i class="bx bx-cog bx-spin"></i>
+      </div>
+      <div class="colors">
+        <h3>Color Picker</h3>
+        <p>Here is some awesome colors</p>
+        <span class="default" onclick="setActiveStyle('#941aff')"></span>
+        <span class="blue" onclick="setActiveStyle('blue')"></span>
+        <span class="red" onclick="setActiveStyle('red')"></span>
+        <span class="golden" onclick="setActiveStyle('golden')"></span>
+        <span class="green" onclick="setActiveStyle('green')"></span>
+        <span class="purple" onclick="setActiveStyle('purple')"></span>
+        <span class="orange" onclick="setActiveStyle('orange')"></span>
+        <span class="yellowgreen" onclick="setActiveStyle('yellowgreen')"></span>
+        <span class="yellow" onclick="setActiveStyle('yellow')"></span>
+        <span class="olive" onclick="setActiveStyle('olive')"></span>
+        <span class="cyan" onclick="setActiveStyle('cyan')"></span>
+      </div>
+    </div>
+
+    <script src="/navBar_script/navBar29.js"></script>
+  </body>
+</html>
