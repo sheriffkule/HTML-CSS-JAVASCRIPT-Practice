@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    width: 100vw;
+    background: radial-gradient(ellipse at center, rgb(21, 81, 92), #111);
+    background-size: 33.33% 10%;
+    overflow: hidden;
+}
+
+span {
+    position: absolute;
+    width: 20px;
+    height: 4px;
+    border-radius: 4px;
+    background: #0ff;
+    pointer-events: none;
+    transform-origin: 50px;
+    box-shadow: 0 0 10px #0ff,
+    0 0 20px #0ff,
+    0 0 40px #0ff;
+    transition: .1s;
+    animation: animate 10s linear infinite;
+}
+
+@keyframes animate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
