@@ -74,60 +74,120 @@ const monthOfDay = date.getDate();
 
 headerTime.textContent = `${weekDayName}, ${monthName} ${monthOfDay}.`;
 
-const elemToggler = function(elem) {
-    elem.classList.toggle('active');
-}
+const elemToggler = function (elem) {
+  elem.classList.toggle('active');
+};
 
-const addEventOnMultiElem = function(elem, event) {
-    for(let i = 0; i < elem.length; i++) {
-        elem[i].addEventListener('click', event);
-    }
-}
+const addEventOnMultiElem = function (elem, event) {
+  for (let i = 0; i < elem.length; i++) {
+    elem[i].addEventListener('click', event);
+  }
+};
 
-const taskItemNode = function(taskText) {
-    const createTaskItem = document.createElement('li');
-    createTaskItem.classList.add('task-item');
-    createTaskItem.setAttribute('data-task-item', '')
+const taskItemNode = function (taskText) {
+  const createTaskItem = document.createElement('li');
+  createTaskItem.classList.add('task-item');
+  createTaskItem.setAttribute('data-task-item', '');
 
-    createTaskItem.innerHTML = `
+  createTaskItem.innerHTML = `
         <button class="item-icon" data-task-remove="complete">
             <span class="check-icon"></span>
         </button>
 
         <p class="item-text">${taskText}</p>
 
-        <button class="item-action-btn" aria-label="data-task-remove">
+        <button class="item-action-btn" data-task-remove>
             <ion-icon name="trash-outline" aria-hidden="true"></ion-icon>
         </button>
     `;
 
-    return createTaskItem
-}
+  return createTaskItem;
+};
 
-const taskInputValidation = function(taskIsValid) {
-    if(taskIsValid) {
-        if (taskList.childElementCount > 0) {
-            taskList.insertBefore(taskItemNode(taskInput.value), taskItem[0])
-        } else {
-            taskList.appendChild(taskItemNode(taskInput.value));
-        }
-
-        taskInput.value = '';
-
-        welcomeNote.classList.add('hide');
-
-        taskItem = document.querySelectorAll('[data-task-item]');
-        taskRemover = document.querySelectorAll('[data-task-remove]');
+const taskInputValidation = function (taskIsValid) {
+  if (taskIsValid) {
+    if (taskList.childElementCount > 0) {
+      taskList.insertBefore(taskItemNode(taskInput.value), taskItem[0]);
     } else {
-        alert('please write something!');
+      taskList.appendChild(taskItemNode(taskInput.value));
     }
-}
+
+    taskInput.value = '';
+
+    welcomeNote.classList.add('hide');
+
+    taskItem = document.querySelectorAll('[data-task-item]');
+    taskRemover = document.querySelectorAll('[data-task-remove]');
+  } else {
+    alert('please write something!');
+  }
+};
 
 const removeWelcomeNote = function () {
-    if(taskList.childElementCount > 0) {
-        welcomeNote.classList.add('hide');
-    } else {
-        welcomeNote.classList.remove('hide');
+  if (taskList.childElementCount > 0) {
+    welcomeNote.classList.add('hide');
+  } else {
+    welcomeNote.classList.remove('hide');
+  }
+};
+
+const removeTask = function () {
+  const parentElement = this.parentElement;
+
+  if (this.dataset.taskRemover === 'complete') {
+    parentElement.classList.add('complete');
+    taskCompleteSound.play();
+
+    setTimeout(function () {
+      removeWelcomeNote();
+    }, 250);
+  } else {
+    parentElement.remove();
+    removeWelcomeNote();
+  }
+};
+
+const addTask = function () {
+  taskInputValidation(taskInput.value);
+
+  addEventOnMultiElem(taskRemover, removeTask);
+};
+
+taskInput.addEventListener('keypress', function (e) {
+  switch (e.key) {
+    case 'Enter':
+      addTask();
+      break;
+  }
+});
+
+const toggleMenu = function () {
+  elemToggler(menu);
+};
+
+addEventOnMultiElem(menuTogglers, toggleMenu);
+
+const toggleModal = function () {
+  elemToggler(modal);
+};
+
+addEventOnMultiElem(modalTogglers, toggleModal);
+
+window.addEventListener('load', function() {
+    document.body.classList.add('loaded')
+});
+
+const themeChanger = function () {
+    const hueValue = this.dataset.hue;
+
+    document.documentElement.style.setProperty('--hue', hueValue);
+    for(let i = 0; i < themeBtns.length; i++) {
+        if (themeBtns[i].classList.contains('active')) {
+            themeBtns[i].classList.remove('active')
+        }
     }
+
+    this.classList.add('active')
 }
 
+addEventOnMultiElem(themeBtns, themeChanger);

@@ -115,11 +115,13 @@ body {
   grid-template-columns: 1fr;
   overflow: hidden;
   opacity: 0;
-  transition: 0.3s ease;
+  transform: scale(0);
+  transition: 0.7s ease-in;
 }
 
 body.loaded {
   opacity: 1;
+  transform: scale(1);
 }
 
 :focus-visible {
@@ -595,4 +597,43 @@ body.loaded {
 .modal-btn:active {
     color: var(--dim-gray);
     box-shadow: none;
+}
+
+@media screen and (min-width: 550px) {
+    :root {
+        --fs-1: 3rem;
+        --fs-2: 2.2rem;
+        --fs-3: 1.4rem;
+    }
+
+    .dropdown-container {
+        width: 280px;
+    }
+
+    .theme-btn-group {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .container {
+        max-width: 650px;
+        width: 100%;
+        margin-inline: auto;
+    }
+
+    .app-box {
+        background-color: var(--white_10);
+        border-radius: var(--radius-10);
+    }
+
+    .task-list {
+        max-width: calc(100vh - 250px);
+    }
+
+    .input-wrapper {
+        bottom: 25px;
+        left: 25px;
+        right: 25px;
+    }
 }
