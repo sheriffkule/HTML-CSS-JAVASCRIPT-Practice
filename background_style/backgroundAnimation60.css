@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #222;
+    cursor: none;
+}
+
+.content {
+    position: relative;
+    padding: 80px;
+}
+
+.content h2 {
+    color: #fff;
+    font-size: 4em;
+    margin-bottom: 40px;
+}
+
+.content p {
+    color: #555;
+    font-size: 1.25em;
+    line-height: 1.5;
+    text-align: justify;
+}
+
+#circleIndicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+}
