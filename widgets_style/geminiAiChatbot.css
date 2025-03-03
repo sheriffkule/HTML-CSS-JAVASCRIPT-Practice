@@ -23,7 +23,10 @@ body {
 }
 
 .container {
+    overflow-y: auto;
     padding: 32px 0 60px;
+    max-height: calc(100vh - 128px);
+    scrollbar-color: var(--scrollbar-color) transparent;
 }
 
 .container :where(.app-header, .suggestions, .message, .prompt-wrapper, .disclaimer-text) {
@@ -219,7 +222,7 @@ body {
     transition: .3s;
 }
 
-.prompt-wrapper button:hover {
+.prompt-wrapper :is(button:hover, .file-icon, #cancel-file-btn) {
     background-color: var(--secondary-hover-color);
     scale: 1.05;
 }
@@ -229,7 +232,8 @@ body {
     margin-right: 7px;
 }
 
-.prompt-form .prompt-action button {
+.prompt-wrapper .prompt-form :where(.file-upload-wrapper, button, img) {
+    position: relative;
     height: 45px;
     width: 45px;
 }
@@ -246,6 +250,32 @@ body {
 
 .prompt-form #send-prompt-btn:hover {
     background: #0264e3;
+}
+
+.prompt-form .file-upload-wrapper :where(button, img) {
+    position: absolute;
+    border-radius: 50%;
+    object-fit: cover;
+    display: none;
+}
+
+.prompt-form .file-upload-wrapper #add-file-btn,
+.prompt-form .file-upload-wrapper.active.img-attached img,
+.prompt-form .file-upload-wrapper.active.file-attached .file-icon,
+.prompt-form .file-upload-wrapper.active:hover #cancel-file-btn {
+    display: block;
+}
+
+.prompt-form .file-upload-wrapper.active #add-file-btn {
+    display: none;
+}
+
+.prompt-form #cancel-file-btn {
+    color: #d62939;
+}
+
+.prompt-form .file-icon {
+    color: #1d7efd;
 }
 
 .prompt-container .disclaimer-text {
