@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #111;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.inner {
+    --translateZ: calc((150px + 225px) + 0px);
+    position: absolute;
+    width: 150px;
+    height: 225px;
+    top: 25%;
+    left: calc(50% - (150px / 2) - 5px);
+    z-index: 2;
+    transform-style: preserve-3d;
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: perspective(1000px) rotateX(-15deg) rotateY(0);
+    }
+
+    to {
+        transform: perspective(1000px) rotateX(-15deg) rotateY(1turn);
+    }
+}
+
+.inner:hover {
+    animation-play-state: paused;
+}
+
+.card {
+    position: absolute;
+    border: 2px solid rgb(var(--color));
+    overflow: hidden;
+    border-radius: 12px;
+    inset: 0;
+    transform: rotateY(calc((360deg / var(--quantity)) * var(--index))) translateZ(var(--translateZ));
+}
+
+.img {
+    width: 100%;
+    height: 100%;
+    background: #0000 radial-gradient(circle, rgb(var(--color), 0.2) 0%, rgb(var(--color), 0.5) 70%, rgb(var(--color), 0.8) 100%);
+}
