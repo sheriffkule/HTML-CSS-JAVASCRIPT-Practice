@@ -15,48 +15,48 @@
           <h1>AI Image Generator</h1>
         </div>
 
-        <button class="theme-toggle"><i class="fa-solid fa-moon"></i></button>
+        <button class="theme-toggle" title="Change between dark and light theme"><i class="fa-solid fa-moon"></i></button>
       </header>
 
       <div class="main-content">
         <form action="#" class="prompt-form">
           <div class="prompt-container">
             <textarea placeholder="Describe your imagination in details..." required autofocus class="prompt-input"></textarea>
-            <button type="button" class="prompt-btn"><i class="fa-solid fa-dice"></i></button>
+            <button type="button" class="prompt-btn" title="Generate Random"><i class="fa-solid fa-dice"></i></button>
           </div>
 
           <div class="prompt-actions">
             <div class="selected-wrapper">
-              <select class="custom-select" required>
+              <select class="custom-select" id="model-select" required>
                 <option value="" selected disabled>Select Model</option>
                 <option value="black-forest-labs/FLUX.1-dev">FLUX.1-dev</option>
                 <option value="black-forest-labs/FLUX.1-schnell">FLUX.1.schnell</option>
-                <option value="stabilityai/stable-diffusion-x1-base-1.0">Stable Diffusion XL</option>
-                <option value="runwaym1/stable-diffusion-v1-5">Stable Diffusion v1.5</option>
+                <option value="stabilityai/stable-diffusion-xl-base-1.0">Stable Diffusion XL</option>
+                <option value="runwayml/stable-diffusion-v1-5">Stable Diffusion v1.5</option>
                 <option value="prompthero/openjourney">Open Journey</option>
               </select>
             </div>
 
             <div class="selected-wrapper">
-              <select class="custom-select" required>
+              <select class="custom-select" id="count-select" required>
                 <option value="" selected disabled>Image Count</option>
                 <option value="1">1 Image</option>
                 <option value="2">2 Images</option>
                 <option value="3">3 Images</option>
                 <option value="4">4 Images</option>
                 <option value="5">5 Images</option>
-                <option value="5">6 Images</option>
-                <option value="5">7 Images</option>
-                <option value="5">8 Images</option>
+                <option value="6">6 Images</option>
+                <option value="7">7 Images</option>
+                <option value="8">8 Images</option>
               </select>
             </div>
 
             <div class="selected-wrapper">
-              <select class="custom-select" required>
+              <select class="custom-select" id="ratio-select" required>
                 <option value="" selected disabled>Aspect Ratio</option>
                 <option value="1/1">Square (1:1)</option>
-                <option value="16/9">Landscape (1:1)</option>
-                <option value="9/16">Portrait (1:1)</option>
+                <option value="16/9">Landscape (16:9)</option>
+                <option value="9/16">Portrait (9:16)</option>
               </select>
             </div>
 
@@ -65,80 +65,15 @@
             </button>
           </div>
 
-          <div class="gallery-grid">
-            <div class="img-card error">
-              <div class="status-container">
-                <div class="spinner"></div>
-                <i class="fa-solid fa-triangle-exclamation"></i>
-                <p class="status-text">Generating...</p>
-              </div>
-              <img src="/images/clint.jpeg" alt="" class="result-img">
-              <div class="img-overlay">
-                <button class="img-download-btn">
-                  <i class="fa-solid fa-download"></i>
-                </button>
-              </div>
-            </div>
-            <div class="img-card">
-              <img src="/images/clint.jpeg" alt="" class="result-img">
-              <div class="img-overlay">
-                <button class="img-download-btn">
-                  <i class="fa-solid fa-download"></i>
-                </button>
-              </div>
-            </div>
-            <div class="img-card">
-              <img src="/images/clint.jpeg" alt="" class="result-img">
-              <div class="img-overlay">
-                <button class="img-download-btn">
-                  <i class="fa-solid fa-download"></i>
-                </button>
-              </div>
-            </div>
-            <div class="img-card">
-              <img src="/images/clint.jpeg" alt="" class="result-img">
-              <div class="img-overlay">
-                <button class="img-download-btn">
-                  <i class="fa-solid fa-download"></i>
-                </button>
-              </div>
-            </div>
-            <div class="img-card">
-              <img src="/images/clint.jpeg" alt="" class="result-img">
-              <div class="img-overlay">
-                <button class="img-download-btn">
-                  <i class="fa-solid fa-download"></i>
-                </button>
-              </div>
-            </div>
-            <div class="img-card">
-              <img src="/images/clint.jpeg" alt="" class="result-img">
-              <div class="img-overlay">
-                <button class="img-download-btn">
-                  <i class="fa-solid fa-download"></i>
-                </button>
-              </div>
-            </div>
-            <div class="img-card">
-              <img src="/images/clint.jpeg" alt="" class="result-img">
-              <div class="img-overlay">
-                <button class="img-download-btn">
-                  <i class="fa-solid fa-download"></i>
-                </button>
-              </div>
-            </div>
-            <div class="img-card">
-              <img src="/images/clint.jpeg" alt="" class="result-img">
-              <div class="img-overlay">
-                <button class="img-download-btn">
-                  <i class="fa-solid fa-download"></i>
-                </button>
-              </div>
-            </div>
-          </div>
+          <div class="gallery-grid"></div>
         </form>
       </div>
     </div>
+      <h4>
+        &copy; <time id="year"></time> Made by
+        <em> <abbr title="Frontend Master">Sheriffkule</abbr></em> from XXIII Century
+      </h4>
+    
 
     <script src="/widgets_script/aiImageGenerator.js"></script>
   </body>
