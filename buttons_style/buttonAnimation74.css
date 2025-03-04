@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    gap: 30px;
+    background: linear-gradient(#999, #ccc, #999);
+}
+
+button {
+    position: relative;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    border-radius: 100px;
+    background: #080808;
+    transition: all .5s;
+    box-shadow: inset 0 0.3rem 0.9rem rgba(255, 255, 255, 0.3),
+    inset 0 -0.1rem 0.3rem rgba(0, 0, 0, 0.7),
+    inset 0 -0.4rem 0.9rem rgba(255, 255, 255, 0.5),
+    0 3rem 3rem rgba(255, 255, 255, 0.3),
+    0 1rem 1rem -0.6rem rgba(0, 0, 0, 0.8);
+}
+
+.wrap {
+    font-size: 25px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 32px 45px;
+    border-radius: 100px;
+    position: relative;
+    overflow: hidden;
+}
+
+.wrap p {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all .0.5s;
+    transform: translateY(2%);
+    mask-image: linear-gradient(to bottom, #fff, transparent);
+}
+
+.wrap::after,
+.wrap::before {
+    content: '';
+    position: absolute;
+    transition: all .5s;
+}
+
+.wrap::before {
+    left: -15%;
+    right: -15%;
+    top: -100%;
+    bottom: 25%;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.wrap::after {
+    left: 6%;
+    right: 6%;
+    top: 12%;
+    bottom: 40%;
+    border-radius: 22px 22px 0 0;
+    box-shadow: inset 0 10px 8px -10px rgba(255, 255, 255, 0.8);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, transparent 50%, transparent 100%);
+}
+
+button:hover {
+    box-shadow: inset 0 0.3rem 0.5rem rgba(255, 255, 255, 0.4),
+    inset 0 -0.1rem 0.3rem rgba(0, 0, 0, 0.7);
+    transform: translateY(-.25rem) scale(1.05);
+}
