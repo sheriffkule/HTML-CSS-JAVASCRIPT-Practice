@@ -1,0 +1,256 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
+
+*, ::before, ::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #ff4757;
+    --secondary-color: #0e2334;
+    --white-color: #ffffff;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    vertical-align: middle;
+    color: inherit;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    font-weight: 400;
+    color: var(--primary-color);
+    background: var(--secondary-color);
+}
+
+.site {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container {
+    max-width: 480px;
+    width: 100%;
+    padding: 0 2em;
+}
+
+nav {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    max-width: 480px;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+}
+
+nav .link {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    margin-top: -20px;
+    right: inherit;
+    cursor: pointer;
+    z-index: 99;
+}
+
+nav .link::before {
+    content: '';
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    background-image: linear-gradient(to left, transparent 25%, var(--primary-color) 100%);
+    border-radius: 50% 0 0 50%;
+    transform: scale(2);
+    z-index: -2;
+}
+
+nav .link::after {
+    content: '';
+    position: absolute;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    background: var(--secondary-color);
+    border-radius: 50% 0 0 50%;
+    transform: scale(2);
+    z-index: -1;
+    opacity: .5;
+    transition: all .3s;
+}
+
+nav .link:hover::after {
+    opacity: .9;
+    box-shadow: -10px 0 24px -4px var(--primary-color);
+}
+
+nav .link .close,
+nav input:checked ~ label .menu {
+    display: none;
+}
+
+nav input:checked ~ label .close {
+    display: block;
+}
+
+nav ul.submenu {
+    position: absolute;
+    top: 0;
+    right: 4em;
+    width: 350px;
+    height: 500px;
+    transform: rotate(90deg);
+    visibility: hidden;
+    transition: visibility .1s;
+}
+
+nav > input:checked ~ ul.submenu {
+    visibility: inherit;
+}
+
+nav > input:checked ~ ul li {
+    transform: rotate(calc((-180deg / 8) * var(--item))) translateX(0px);
+    opacity: 1;
+}
+
+nav ul.submenu li {
+    --item: 1;
+    position: absolute;
+    width: 175px;
+    height: 60px;
+    transform: rotate(calc((-180deg / 8) * var(--item))) translateX(175px);
+    transform-origin: right center;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    transition: transform .7s, opacity .2s;
+    /* transition-delay: calc(var(--item) * .1s); */
+}
+
+nav ul.submenu li:nth-child(2) {
+    --item: 2;
+}
+
+nav ul.submenu li:nth-child(3) {
+    --item: 3;
+}
+
+nav ul.submenu li:nth-child(4) {
+    --item: 4;
+}
+
+nav ul.submenu li:nth-child(5) {
+    --item: 5;
+}
+
+nav ul.submenu li:nth-child(6) {
+    --item: 6;
+}
+
+nav ul.submenu li:nth-child(7) {
+    --item: 7;
+}
+
+nav ul li a {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li a i {
+    font-size: 20px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-color);
+    color: white;
+    border: 2px solid transparent;
+    transition: all .3s;
+}
+
+nav ul li a:hover i {
+    background-color: transparent;
+    border-color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+nav ul li a span {
+    position: absolute;
+    right: calc(100% + 1em);
+    text-align: center;
+    font-size: 16px;
+    padding: 0 10px;
+    border-radius: 25px;
+    background-image: linear-gradient(to right, transparent 25%, var(--primary-color));
+    z-index: -1;
+    transform: translateX(50px);
+    opacity: 0;
+    transition: color .3s, transform .3s .4s, opacity .2s .4s;
+}
+
+nav > input:checked ~ ul li a span {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+nav ul li a span::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    border-radius: 25px;
+    z-index: -1;
+    background-color: var(--secondary-color);
+    transition: all .3s;
+}
+
+nav ul li a:hover span::before {
+    background-color: transparent;
+}
+
+nav ul li a:hover span {
+    color: var(--white-color);
+    transform: scale(1.1);
+}
+
+nav ul li:nth-child(1) a i {
+    transform: rotate(292deg);
+}
+
+nav ul li:nth-child(2) a i {
+    transform: rotate(315deg);
+}
+
+nav ul li:nth-child(3) a i {
+    transform: rotate(337deg);
+}
+
+nav ul li:nth-child(5) a i {
+    transform: rotate(22deg);
+}
+
+nav ul li:nth-child(6) a i {
+    transform: rotate(45deg);
+}
+
+nav ul li:nth-child(7) a i {
+    transform: rotate(67deg);
+}
