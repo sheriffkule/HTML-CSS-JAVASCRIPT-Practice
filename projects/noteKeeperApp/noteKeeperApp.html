@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoteKeeper App - Your Everyday Notes</title>
+    <meta name="title" content="NoteKeeper App - Your Everyday Notes">
+    <meta name="description" content="Streamline your daily note-taking with NoteKeeper. Organize, access, and enhance productivity with ease. Your go-to platform for managing your everyday notes.">
+    <link rel="shortcut icon" href="favicon.svg" type="image/svg+xml">
+    <script src="theme.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="/projects/noteKeeperApp/noteKeeperApp.css">
+    <script type="module" src="app.js"></script>
+</head>
+<body>
+    <header class="sidebar" data-sidebar>
+      <div class="wrapper wrapper-1">
+        <a href="/">
+          <img src="logo-light.svg" class="logo-light" alt="NoteKeeper" title="NoteKeeper">
+          <img src="logo-dark.svg" class="logo-dark" alt="NoteKeeper" title="NoteKeeper">
+        </a>
+
+        <button class="menu-btn icon-btn large" aria-label="Close menu" data-sidebar-toggler>
+          <span class="material-symbols-rounded">close</span>
+          <div class="state-layer"></div>
+        </button>
+      </div>
+
+      <button class="fab" data-note-create-btn>
+        <span class="material-symbols-rounded" aria-hidden="true">add</span>
+
+        <span class="text text-label-large">New Note</span>
+
+        <div class="state-layer"></div>
+      </button>
+
+      <div class="wrapper wrapper-2">
+        <h2 class="text-title-small">NOTEBOOKS</h2>
+        <button class="icon-btn small" data-tooltip="Create New Notebook" aria-label="Create New Notebook" data-add-notebook>
+          <span class="material-symbols-rounded" aria-hidden="true">add</span>
+          <div class="state-layer"></div>
+        </button>
+      </div>
+
+      <nav class="nav custom-scrollbar" data-sidebar-list>
+        <div class="nav-item">
+          <span class="text text-label-large" data-notebook-field>My Notebook</span>
+          <button class="icon-btn small" aria-label="Edit notebook" data-tooltip="Edit-notebook" data-edit-btn>
+            <span class="material-symbols-rounded" aria-hidden="true">edit</span>
+            <div class="state-layer"></div>
+          </button>
+
+          <button class="icon-btn small" aria-label="Delete notebook" data-tooltip="Delete-notebook" data-delete-btn>
+            <span class="material-symbols-rounded" aria-hidden="true">delete</span>
+            <div class="state-layer"></div>
+          </button>
+
+          <div class="state-layer"></div>
+        </div>
+      </nav>
+    </header>
+</p>
+</body>
+</html>
