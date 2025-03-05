@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,7 +46,7 @@
       </div>
 
       <nav class="nav custom-scrollbar" data-sidebar-list>
-        <div class="nav-item">
+        <div class="nav-item active">
           <span class="text text-label-large" data-notebook-field>My Notebook</span>
           <button class="icon-btn small" aria-label="Edit notebook" data-tooltip="Edit-notebook" data-edit-btn>
             <span class="material-symbols-rounded" aria-hidden="true">edit</span>
@@ -61,7 +61,40 @@
           <div class="state-layer"></div>
         </div>
       </nav>
+
+      <div class="cp-info">
+        <span class="text-label-large">&copy; 2025 <strong>SheriffKule</strong></span>
+      </div>
     </header>
+
+    <div class="overlay" data-sidebar-overlay data-sidebar-toggler></div>
+
+    
+    <main class="main">
+      <div class="header">
+        <div class="wrapper">
+          <p class="title text-title-large" data-greeting>Good Morning</p>
+          <span class="text text-body-medium" data-current-date>Sat, Mar 7 2025.</span>
+        </div>
+
+        <button class="theme-btn icon-btn large" aria-label="Toggle theme" data-tooltip="Toggle theme" data-theme-btn>
+          <span class="material-symbols-rounded dark-icon" aria-hidden="true">dark_mode</span>
+          <span class="material-symbols-rounded light-icon" aria-hidden="true">light_mode</span>
+
+          <div class="state-layer"></div>
+        </button>
+
+        <button class="menu-btn icon-btn large" aria-label="Open Menu" data-sidebar-toggler>
+          <span class="material-symbols-rounded" aria-hidden="true">menu</span>
+
+          <div class="state-layer"></div>
+        </button>
+      </div>
+
+      <h2 class="title text-title-medium" data-note-panel-title>My Notebook</h2>
+
+      <div class="note-list" data-note-panel></div>
+    </main>
 </p>
 </body>
 </html>
