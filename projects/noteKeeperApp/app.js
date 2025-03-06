@@ -1,5 +1,7 @@
 'use strict';
 
+import { client } from './client.js';
+import { db } from './db.js';
 import { Tooltip } from './tooltip.js';
 import {
     activeNotebook,
@@ -54,8 +56,18 @@ const showNotebookField = function () {
 
 $addNotebookBtn.addEventListener('click', showNotebookField);
 
-const createNotebook = function(event){
-    if (event.key === 'Enter') {
-        console.log(event.key);
-    }
+const createNotebook = function (event) {
+  if (event.key === 'Enter') {
+    const notebookData = db.post.notebook(this.textContent || 'Untitled');
+    this.parentElement.remove();
+
+    client.notebook.create(notebookData);
+  }
+};
+
+const renderExistedNotebook = function() {
+    const notebookList = db.get.notebook();
+    client.notebook.read(notebookList);
 }
+
+renderExistedNotebook();

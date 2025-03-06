@@ -18,21 +18,29 @@ const getGreetingMsg = function (currentHour) {
       ? 'Evening'
       : 'Night';
 
-      return `Good ${greeting}`;
+  return `Good ${greeting}`;
 };
 
 let $lastActiveNavItem;
 
-const activeNotebook = function(){
-    $lastActiveNavItem?.classList.remove('active');
-    this.classList.add('active');
-    $lastActiveNavItem = this;
-}
+const activeNotebook = function () {
+  $lastActiveNavItem?.classList.remove('active');
+  this.classList.add('active');
+  $lastActiveNavItem = this;
+};
 
-const makeElemEditable = function($element){
-    $element.setAttribute('contenteditable', true);
-    $element.focus();
-}
+const makeElemEditable = function ($element) {
+  $element.setAttribute('contenteditable', true);
+  $element.focus();
+};
 
-export { activeNotebook, addEventOnElements, getGreetingMsg, makeElemEditable };
+const generateID = function () {
+  return new Date().getTime().toString();
+};
+
+export {
+    activeNotebook,
+    addEventOnElements, generateID, getGreetingMsg,
+    makeElemEditable
+};
 
