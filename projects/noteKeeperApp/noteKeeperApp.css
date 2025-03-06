@@ -146,7 +146,7 @@
   --outline: var(--outline-light);
   --outline-variant: var(--outline-variant-light);
   --inverse-surface: var(--inverse-surface-light);
-  --inverse-on-surface: var(--on-surface-light);
+  --inverse-on-surface: var(--inverse-on-surface-light);
 }
 
 [data-theme='dark'] {
