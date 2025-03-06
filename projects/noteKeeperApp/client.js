@@ -1,5 +1,6 @@
 'use strict';
 
+import { Card } from './Card.js';
 import { NavItem } from './NavItem.js';
 import { activeNotebook } from './utils.js';
 
@@ -30,17 +31,18 @@ export const client = {
     },
 
     update(notebookId, notebookData) {
-        const $oldNotebook = document.querySelector(`[data-notebook="${notebookId}]"`);
-        const $newNotebook = NavItem(notebookData.id, notebookData.name);
+      const $oldNotebook = document.querySelector(`[data-notebook="${notebookId}]"`);
+      const $newNotebook = NavItem(notebookData.id, notebookData.name);
 
-        $notePanelTitle.textContent = notebookData.name;
-        $sidebarList.replaceChild($newNotebook, $oldNotebook);
-        activeNotebook.call($newNotebook);
+      $notePanelTitle.textContent = notebookData.name;
+      $sidebarList.replaceChild($newNotebook, $oldNotebook);
+      activeNotebook.call($newNotebook);
     },
 
     delete(notebookId) {
       const $deletedNotebook = document.querySelector(`[data-notebook="${notebookId}"]`);
-      const $activeNavItem = $deletedNotebook.nextElementSibling ?? $deletedNotebook.previousElementSibling;
+      const $activeNavItem =
+        $deletedNotebook.nextElementSibling ?? $deletedNotebook.previousElementSibling;
 
       if ($activeNavItem) {
         $activeNavItem.click();
@@ -49,7 +51,14 @@ export const client = {
         // $notePanel.innerHTML = '';
       }
 
-      $deletedNotebook.remove()
-    }
+      $deletedNotebook.remove();
+    },
+  },
+
+  note: {
+    create(noteData) {
+      const $card = Card(noteData);
+      $notePanel.appendChild($card);
+    },
   },
 };

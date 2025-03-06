@@ -2,12 +2,13 @@
 
 import { client } from './client.js';
 import { db } from './db.js';
+import { NoteModal } from './modal.js';
 import { Tooltip } from './tooltip.js';
 import {
-    activeNotebook,
-    addEventOnElements,
-    getGreetingMsg,
-    makeElemEditable,
+  activeNotebook,
+  addEventOnElements,
+  getGreetingMsg,
+  makeElemEditable,
 } from './utils.js';
 
 const $sidebar = document.querySelector('[data-sidebar]');
@@ -71,3 +72,18 @@ const renderExistedNotebook = function() {
 }
 
 renderExistedNotebook();
+
+const $noteCreateBtns = document.querySelectorAll('[data-note-create-btn]');
+
+addEventOnElements($noteCreateBtns, 'click', function() {
+  const modal = NoteModal();
+  modal.open();
+
+  modal.onSubmit(noteObj => {
+    const activeNotebookId = document.querySelector('[data-notebook].active').dataset.notebook;
+
+    const noteData = db.post.note(activeNotebookId, noteObj);
+    client.note.create(noteData);
+    modal.close();
+  })
+})

@@ -14,7 +14,7 @@ const getGreetingMsg = function (currentHour) {
       ? 'Noon'
       : currentHour < 17
       ? 'Afternoon'
-      : currentHour < 20
+      : currentHour < 22
       ? 'Evening'
       : 'Night';
 
