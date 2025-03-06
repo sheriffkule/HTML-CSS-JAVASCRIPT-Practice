@@ -93,7 +93,53 @@
 
       <h2 class="title text-title-medium" data-note-panel-title>My Notebook</h2>
 
-      <div class="note-list" data-note-panel></div>
+      <div class="note-list" data-note-panel>
+        <div class="card">
+          <h3 class="card-title" text-title-medium>Note Title</h3>
+          <p class="card-text" text-body-large>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos amet natus voluptatum voluptates vitae nulla mollitia iste saepe inventore deleniti! Soluta consequatur eligendi illo quas numquam, iure possimus qui at aut neque laudantium unde eveniet placeat voluptates reiciendis ullam? Velit.
+          </p>
+
+          <div class="wrapper">
+            <span class="card-time" text-label-large>20 min ago</span>
+
+            <button class="icon-btn" aria-label="Delete note" data-tooltip="Delete note">
+              <span class="material-symbols-rounded" aria-hidden="true">delete</span>
+
+              <div class="state-layer"></div>
+            </button>
+          </div>
+
+          <div class="state-layer"></div>
+        </div>
+      </div>
+
+      <button class="fab" aria-label="New note" data-note-create-btn>
+        <span class="material-symbols-rounded" aria-hidden="true">add</span>
+
+        <div class="state-layer"></div>
+      </button>
+
+      <div class="modal">
+        <button class="icon-btn large" aria-label="Close modal">
+          <span class="material-symbols-rounded" aria-hidden="true">close</span>
+
+          <div class="state-"></div>
+        </button>
+
+        <input type="text" placeholder="Untitled" value="Untitled" class="modal-title text-title medium" data-note-field>
+        <textarea placeholder="Take a note..." class="modal-text text-body-large custom-scrollbar" data-note-field>Take a note...</textarea>
+
+        <div class="modal-footer">
+          <span class="time text-label-large">20 min ago</span>
+
+          <button class="btn text" data-submit-btn>
+            <span class="text-label-large">Save</span>
+
+            <div class="state-layer"></div>
+          </button>
+        </div>
+      </div>
     </main>
 </p>
 </body>

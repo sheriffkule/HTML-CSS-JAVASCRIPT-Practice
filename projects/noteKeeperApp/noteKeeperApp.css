@@ -596,3 +596,190 @@ body {
 .main > .title {
     margin-block: var(--spacing-3);
 }
+
+.card {
+    background-color: var(--surface);
+    padding: var(--spacing-4);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-large);
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    --state-layer-bg: var(--on-surface);
+    transition: var(--tr-duration-short) var(--tr-easing-linear);
+}
+
+.card:where(:hover, :focus-visible) {
+    border-color: var(--outline);
+}
+
+.card .card-title {
+    color: var(--on-surface);
+}
+
+.card .card-text {
+    color: var(--on-surface-variant);
+    margin-block: var(--spacing-4);
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.card .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-block-start: auto;
+}
+
+.card .card-time {
+    color: var(--on-surface-variant);
+}
+
+.card .icon-btn {
+    opacity: 0;
+    transition: opacity var(--tr-duration-short) var(--tr-easing-linear);
+}
+
+.card:where(:hover, :focus-visible) .icon-btn {
+    opacity: 1;
+}
+
+.note-list {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    align-content: flex-start;
+    align-items: stretch;
+    gap: var(--spacing-2);
+}
+
+.fab {
+    height: 56px;
+    max-width: max-content;
+    background-color: var(--primary-container);
+    color: var(--on-primary-container);
+    --state-layer-bg: var(--on-primary-container);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding-inline: var(--spacing-4);
+    border-radius: var(--radius-large);
+    box-shadow: var(--shadow-1);
+    transition: box-shadow var(--tr-duration-short) var(--tr-easing-linear);
+}
+
+.fab:hover {
+    box-shadow: var(--shadow-2);
+}
+
+.fab .text {
+    padding-inline-end: var(--spacing-2);
+}
+
+.main .fab {
+    position: fixed;
+    bottom: var(--spacing-4);
+    right: var(--spacing-4);
+    z-index: 2;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 560px;
+    width: calc(100% - var(--spacing-8));
+    background-color: var(--surface-container-highest);
+    border-radius: var(--radius-large);
+    padding: var(--spacing-6);
+    box-shadow: var(--shadow-3);
+    z-index: 8;
+    animation: modal-open var(--tr-duration-medium) var(--tr-easing-emphasized) forwards;
+}
+
+@keyframes modal-open {
+    0% {
+        transform: translate(-50%, calc(0% + var(--spacing-20)));
+        opacity: 0;
+        visibility: hidden;
+    }
+    100% {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.modal .icon-btn {
+    position: absolute;
+    top: var(--spacing-4);
+    right: var(--spacing-4);
+}
+
+.modal-title {
+    padding-inline-end: var(--spacing-10);
+    max-height: 48px;
+    color: var(--on-surface);
+    margin-block-end: var(--spacing-4);
+    overflow: hidden;
+}
+
+.modal-text {
+    min-height: 240px;
+    max-height: calc(100vh - 200px);
+    color: var(--on-surface-variant);
+    overflow-y: auto;
+    margin-block-end: var(--spacing-4);
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding-block-start: var(--spacing-2);
+}
+
+.modal-footer .time {
+    flex-grow: 1;
+    color: var(--on-surface-variant);
+}
+
+.btn {
+    height: 40px;
+    max-width: max-content;
+    display: grid;
+    align-items: center;
+    border-radius: var(--radius-full);
+}
+
+.btn.text {
+    color: var(--primary);
+    --state-layer-bg: var(--primary);
+    padding-inline: var(--spacing-3);
+}
+
+.btn.text:disabled {
+    color: var(--on-surface);
+}
+
+.btn.text:disabled .text-label-large {
+    opacity: .4;
+}
+
+.btn.fill {
+    background-color: var(--primary);
+    color: var(--on-primary);
+    --state-layer-bg: var(--on-primary);
+    padding-inline: var(--spacing-6);
+    transition: box-shadow var(--tr-duration-short) var(--tr-easing-linear);
+}
+
+.btn.fill:hover:not(:focus) {
+    box-shadow: var(--shadow-1);
+}
