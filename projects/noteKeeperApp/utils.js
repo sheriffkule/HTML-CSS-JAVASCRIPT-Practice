@@ -38,9 +38,15 @@ const generateID = function () {
   return new Date().getTime().toString();
 };
 
+const findNotebook = function (db, notebookId) {
+  return db.notebooks.find((notebook) => notebook.id === notebookId);
+};
+
+const findNotebookIndex = function (db, notebookId) {
+  return db.notebooks.findIndex(item => item.id === notebookId);
+}
+
 export {
-    activeNotebook,
-    addEventOnElements, generateID, getGreetingMsg,
-    makeElemEditable
+  activeNotebook, addEventOnElements, findNotebook, findNotebookIndex, generateID, getGreetingMsg, makeElemEditable
 };
 

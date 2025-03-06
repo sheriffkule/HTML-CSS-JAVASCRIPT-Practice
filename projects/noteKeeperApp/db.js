@@ -1,6 +1,6 @@
 'use strict';
 
-import { generateID } from './utils.js';
+import { findNotebook, findNotebookIndex, generateID } from './utils.js';
 
 let notekeeperDB = {};
 
@@ -50,4 +50,28 @@ export const db = {
       return notekeeperDB.notebooks;
     },
   },
+
+  update: {
+    notebook(notebookId, name) {
+      readDB();
+
+      const notebook = findNotebook(notekeeperDB, notebookId);
+      notebook.name = name;
+
+      writeDB();
+
+      return notebook;
+    },
+  },
+
+  delete: {
+    notebook(notebookId) {
+      readDB();
+
+      const notebookIndex = findNotebookIndex(notekeeperDB, notebookId);
+      notekeeperDB.notebooks.splice(notebookIndex, 1);
+
+      writeDB();
+    }
+  }
 };

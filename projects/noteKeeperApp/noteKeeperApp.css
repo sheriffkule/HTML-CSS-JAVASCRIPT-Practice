@@ -722,11 +722,13 @@ body {
         transform: translate(-50%, calc(0% + var(--spacing-20)));
         opacity: 0;
         visibility: hidden;
+        clip-path: circle(0% at 100% 0%);
     }
     100% {
         transform: translate(-50%, -50%);
         opacity: 1;
         visibility: visible;
+        clip-path: circle(100.0% at 50% 15%);
     }
 }
 
