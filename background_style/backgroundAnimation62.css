@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #111;
+    overflow: hidden;
+}
+
+.cursor {
+    position: relative;
+    pointer-events: none;
+}
+
+.cursor .box {
+    position: absolute;
+    top: -50px;
+    width: 10px;
+    height: 5px;
+    background: #00ff9a;
+    box-shadow: 0 0 15px #00ff9a,
+    0 0 50px #00ff9a;
+    transform-origin: center 50px;
+}
