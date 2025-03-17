@@ -1,0 +1,97 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    overflow: hidden;
+}
+
+.box {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40rem;
+    height: 15rem;
+}
+
+.box h1 {
+    font-size: 5rem;
+    color: rgb(65, 102, 225);
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px #dfff00,
+    0 0 20px #dfff00,
+    0 0 40px #dfff00,
+    0 0 80px #dfff00;
+}
+
+.lightBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 100%;
+    border-radius: 10px;
+    background: #fff;
+    z-index: 2;
+    box-shadow: 0 0 10px #dfff00,
+    0 0 20px #dfff00,
+    0 0 40px #dfff00,
+    0 0 80px #dfff00;
+    animation: animate 5s linear infinite;
+}
+
+@keyframes animate {
+    0%, 5% {
+        transform: scaleY(0) translateX(0);
+    }
+
+    10% {
+        transform: scaleY(1) translateX(0);
+    }
+
+    90% {
+        transform: scaleY(1) translateX(calc(40rem - 10px));
+    }
+
+    95%, 100% {
+        transform: scaleY(0) translateX(calc(40rem - 10px));
+    }
+}
+
+.topLayer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    animation: topLayerAnimate 10s linear infinite;
+    background: #000;
+}
+
+@keyframes topLayerAnimate {
+    0%, 5% {
+        transform: translateX(0);
+    }
+
+    45%, 50% {
+        transform: translateX(100%);
+    }
+
+    50.001%, 55% {
+        transform: translateX(-100%);
+    }
+
+    95%, 100% {
+        transform: translateX(0);
+    }
+}
