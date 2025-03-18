@@ -1,0 +1,148 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(45deg, #8a3409, #293ee2);
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.container {
+    display: grid;
+    place-items: center;
+    margin-inline: 1.5rem;
+    padding-block: 5rem;
+    height: 100vh;
+}
+
+.card {
+    display: grid;
+    row-gap: 3.5rem;
+    column-gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.article {
+    position: relative;
+    overflow: hidden;
+}
+
+.img {
+    max-width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1.5rem;
+}
+
+.data {
+    width: 280px;
+    background: #000000d1;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 8p  24px rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+    position: absolute;
+    bottom: -9rem;
+    color: #fff;
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    opacity: 0;
+    transition: opacity 1s 1s;
+}
+
+.heading {
+    position: absolute;
+    background: white;
+    padding: 3px 10px;
+    border-radius: 3px;
+    color: black;
+    top: -15px;
+}
+
+.description {
+    display: block;
+    font-size: 14px;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: .75rem;
+}
+
+.button {
+    text-decoration: none;
+    background: royalblue;
+    padding: 4px 10px;
+    font-size: 14px;
+    color: white;
+    border-radius: 4px;
+}
+
+.button:hover {
+    text-decoration: underline;
+}
+
+.article:hover .data {
+    animation: show-data 1s forwards;
+    opacity: 1;
+    transition: opacity .3s;
+}
+
+.article:hover {
+    animation: remove-overflow 2s forwards;
+}
+
+.article:not(:hover) {
+    animation: show-overflow 2s forwards;
+}
+
+.article:not(:hover) .data {
+    animation: remove-data 1s forwards;
+}
+
+@keyframes show-data {
+    50% {
+        transform: translateY(-10rem);
+    }
+    100% {
+        transform: translateY(-7rem);
+    }
+}
+
+@keyframes remove-overflow {
+    to {
+        overflow: initial;
+    }
+}
+
+@keyframes remove-data {
+    0% {
+        transform: translateY(-7rem);
+    }
+    50% {
+        transform: translateY(-10rem);
+    }
+    100% {
+        transform: translateY(.5rem);
+    }
+}
+
+@keyframes show-overflow {
+    0% {
+        pointer-events: none;
+        overflow: initial;
+    }
+    50% {
+        overflow: hidden;
+    }
+}
