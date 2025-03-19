@@ -1,6 +1,6 @@
 'use strict';
 
-import { findNotebook, findNotebookIndex, generateID } from './utils.js';
+import { findNote, findNotebook, findNotebookIndex, findNoteIndex, generateID } from './utils.js';
 
 let notekeeperDB = {};
 
@@ -87,16 +87,62 @@ export const db = {
 
       return notebook;
     },
+
+    note(noteId, object) {
+      readDB();
+
+      const oldNote = findNote(notekeeperDB, noteId);
+      const newNote = Object.assign(oldNote, object);
+
+      writeDB();
+
+      return newNote;
+    }
   },
+
+  // delete: {
+  //   notebook(notebookId) {
+  //     readDB();
+
+  //     const notebookIndex = findNotebookIndex(notekeeperDB, notebookId);
+  //     notekeeperDB.notebooks.splice(notebookIndex, 1);
+
+  //     writeDB();
+  //   },
+
+  //   note(notebookId, noteId) {
+  //     readDB();
+
+  //     const notebook = findNotebook(notekeeperDB, notebookId);
+  //     const noteIndex = findNoteIndex(notebook, noteId);
+
+  //     notebook.notes.splice(noteIndex, 1);
+
+  //     writeDB();
+
+  //     return notebook.notes;
+  //   }
+  // }
 
   delete: {
     notebook(notebookId) {
-      readDB();
-
       const notebookIndex = findNotebookIndex(notekeeperDB, notebookId);
-      notekeeperDB.notebooks.splice(notebookIndex, 1);
+      if (notebookIndex !== -1) {
+        notekeeperDB.notebooks.splice(notebookIndex, 1);
+        writeDB();
+      }
+    },
 
-      writeDB();
+    note(notebookId, noteId) {
+      const notebook = findNotebook(notekeeperDB, notebookId);
+      if (notebook) {
+        const noteIndex = findNoteIndex(notebook, noteId);
+        if (noteIndex !== -1) {
+          notebook.notes.splice(noteIndex, 1);
+          writeDB();
+          return notebook.notes;
+        }
+      }
     }
   }
 };

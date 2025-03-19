@@ -49,7 +49,7 @@ export const client = {
     },
 
     update(notebookId, notebookData) {
-      const $oldNotebook = document.querySelector(`[data-notebook="${notebookId}]"`);
+      const $oldNotebook = document.querySelector(`[data-notebook="${notebookId}"]`);
       const $newNotebook = NavItem(notebookData.id, notebookData.name);
 
       $notePanelTitle.textContent = notebookData.name;
@@ -79,7 +79,7 @@ export const client = {
       if (!$notePanel.querySelector('[data-note]')) $notePanel.innerHTML = '';
 
       const $card = Card(noteData);
-      $notePanel.appendChild($card);
+      $notePanel.prepend($card);
     },
 
     read(noteList) {
@@ -94,5 +94,16 @@ export const client = {
         $notePanel.innerHTML = emptyNotesTemplate;
       }
     },
+
+    update(noteId, noteData) {
+      const $oldCard = document.querySelector(`[data-note="${noteId}"]`);
+      const $newCard = Card(noteData);
+      $notePanel.replaceChild($newCard, $oldCard);
+    },
+
+    delete(noteId, isNoteExists) {
+      document.querySelector(`[data-note="${noteId}"]`).remove();
+      if (!isNoteExists) $notePanel.innerHTML = emptyNotesTemplate;
+    }
   },
 };

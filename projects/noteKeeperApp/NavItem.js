@@ -44,32 +44,32 @@ export const NavItem = function (id, name) {
 
   $navItemEditBtn.addEventListener('click', makeElemEditable.bind(null, $navItemField));
 
-  $navItemField.addEventListener('keydown', function(event) {
+  $navItemField.addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
-        this.removeAttribute('contenteditable');
+      this.removeAttribute('contenteditable');
 
-        const updateNotebookData = db.update.notebook(id, this.textContent);
+      const updateNotebookData = db.update.notebook(id, this.textContent);
 
-        client.notebook.update(id, updateNotebookData);
+      client.notebook.update(id, updateNotebookData);
     }
   });
 
   const $navItemDeleteBtn = $navItem.querySelector('[data-delete-btn]');
 
-  $navItemDeleteBtn.addEventListener('click', function() {
+  $navItemDeleteBtn.addEventListener('click', function () {
     const modal = DeleteConfirmModal(name);
 
     modal.open();
 
     modal.onSubmit(function (isConfirm) {
-        if (isConfirm) {
-            db.delete.notebook(id);
-            client.notebook.delete(id);
-        }
+      if (isConfirm) {
+        db.delete.notebook(id);
+        client.notebook.delete(id);
+      }
 
-        modal.close();
-    })
-  })
+      modal.close();
+    });
+  });
 
   return $navItem;
 };

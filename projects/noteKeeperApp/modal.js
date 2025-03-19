@@ -34,7 +34,7 @@ const NoteModal = function (title = 'Untitled', text = 'Add your note...', time 
 
   const enableSubmit = function () {
     $submitBtn.disabled = $titleField.value && !$textField.value;
-  }
+  };
 
   $textField.addEventListener('keyup', enableSubmit);
   $titleField.addEventListener('keyup', enableSubmit);
@@ -43,13 +43,13 @@ const NoteModal = function (title = 'Untitled', text = 'Add your note...', time 
     document.body.appendChild($modal);
     document.body.appendChild($overlay);
     $titleField.focus();
-  }
+  };
 
   const close = function () {
     document.body.removeChild($modal);
     document.body.removeChild($overlay);
     $titleField.focus();
-  }
+  };
 
   const $closeBtn = $modal.querySelector('[data-close-modal]');
   $closeBtn.addEventListener('click', close);
@@ -59,14 +59,14 @@ const NoteModal = function (title = 'Untitled', text = 'Add your note...', time 
       const noteData = {
         title: $titleField.value,
         text: $textField.value,
-      }
+      };
 
       callback(noteData);
-    })
-  }
+    });
+  };
 
-  return {open, close, onSubmit};
-}
+  return { open, close, onSubmit };
+};
 
 const DeleteConfirmModal = function (title) {
   const $modal = document.createElement('div');
