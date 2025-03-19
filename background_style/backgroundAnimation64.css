@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #202020;
+    overflow: hidden;
+}
+
+.container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+h1 {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgb(0, 140, 255);
+    background: #202020;
+    z-index: 1;
+}
+
+.circle {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    background: #fff;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+}
+
+.circle:nth-child(4n + 2) {
+    background: #6b5b95;
+}
+
+.circle:nth-child(4n + 3) {
+    background: #ca4848;
+}
+
+.circle:nth-child(4n + 4) {
+    background: royalblue;
+}
