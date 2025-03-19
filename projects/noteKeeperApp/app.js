@@ -66,24 +66,37 @@ const createNotebook = function (event) {
   }
 };
 
-const renderExistedNotebook = function() {
-    const notebookList = db.get.notebook();
-    client.notebook.read(notebookList);
-}
+const renderExistedNotebook = function () {
+  const notebookList = db.get.notebook();
+  client.notebook.read(notebookList);
+};
 
 renderExistedNotebook();
 
 const $noteCreateBtns = document.querySelectorAll('[data-note-create-btn]');
 
-addEventOnElements($noteCreateBtns, 'click', function() {
+addEventOnElements($noteCreateBtns, 'click', function () {
   const modal = NoteModal();
   modal.open();
 
-  modal.onSubmit(noteObj => {
-    const activeNotebookId = document.querySelector('[data-notebook].active').dataset.notebook;
+  modal.onSubmit((noteObj) => {
+    const activeNotebookId = document.querySelector('[data-notebook].active').dataset
+      .notebook;
 
     const noteData = db.post.note(activeNotebookId, noteObj);
     client.note.create(noteData);
     modal.close();
-  })
-})
+  });
+});
+
+const renderExistedNote = function() {
+  const activeNotebookId = document.querySelector('[data-notebook].active')?.dataset.notebook;
+
+  if(activeNotebookId) {
+    const noteList = db.get.note(activeNotebookId);
+    
+    client.note.read(noteList);
+  }
+}
+
+renderExistedNote();

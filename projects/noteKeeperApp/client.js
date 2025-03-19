@@ -7,6 +7,20 @@ import { activeNotebook } from './utils.js';
 const $sidebarList = document.querySelector('[data-sidebar-list]');
 const $notePanelTitle = document.querySelector('[data-note-panel-title]');
 const $notePanel = document.querySelector('[data-note-panel]');
+const $noteCreateBtns = document.querySelectorAll('[data-note-create-btn]');
+const emptyNotesTemplate = `
+  <div class="empty-notes">
+    <span class="material-symbols-rounded" aria-hidden="true">note_stack</span>
+
+    <div class="text-headline-small">No notes</div>
+  </div>
+`;
+
+const disableNoteCreateBtns = function(isThereAnyNotebooks) {
+  $noteCreateBtns.forEach($item => {
+    $item[isThereAnyNotebooks ? 'removeAttribute' : 'setAttribute']('disabled', '')
+  })
+}
 
 export const client = {
   notebook: {
@@ -15,9 +29,13 @@ export const client = {
       $sidebarList.appendChild($navItem);
       activeNotebook.call($navItem);
       $notePanelTitle.textContent = notebookData.name;
+      $notePanel.innerHTML = emptyNotesTemplate;
+      disableNoteCreateBtns(true);
     },
 
     read(notebookList) {
+      disableNoteCreateBtns(notebookList.length);
+
       notebookList.forEach((notebookData, index) => {
         const $navItem = NavItem(notebookData.id, notebookData.name);
 
@@ -48,7 +66,8 @@ export const client = {
         $activeNavItem.click();
       } else {
         $notePanelTitle.innerHTML = '';
-        // $notePanel.innerHTML = '';
+        $notePanel.innerHTML = '';
+        disableNoteCreateBtns(false);
       }
 
       $deletedNotebook.remove();
@@ -57,8 +76,23 @@ export const client = {
 
   note: {
     create(noteData) {
+      if (!$notePanel.querySelector('[data-note]')) $notePanel.innerHTML = '';
+
       const $card = Card(noteData);
       $notePanel.appendChild($card);
+    },
+
+    read(noteList) {
+      if (noteList.length) {
+        $notePanel.innerHTML = '';
+
+        noteList.forEach((noteData) => {
+          const $card = Card(noteData);
+          $notePanel.appendChild($card);
+        });
+      } else {
+        $notePanel.innerHTML = emptyNotesTemplate;
+      }
     },
   },
 };

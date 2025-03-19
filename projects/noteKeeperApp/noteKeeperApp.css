@@ -666,6 +666,7 @@ body {
 .note-list {
     position: relative;
     display: grid;
+    flex-grow: 1;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     align-content: flex-start;
     align-items: stretch;

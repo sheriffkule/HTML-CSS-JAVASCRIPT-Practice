@@ -67,6 +67,13 @@ export const db = {
 
       return notekeeperDB.notebooks;
     },
+
+    note(notebookID) {
+      readDB();
+
+      const notebook = findNotebook(notekeeperDB, notebookID);
+      return notebook.notes;
+    } 
   },
 
   update: {
