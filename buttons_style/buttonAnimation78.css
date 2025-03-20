@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: radial-gradient(rgb(255, 255, 228), #31312b);
+    flex-direction: column;
+    gap: 40px;
+}
+
+button {
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    height: 2.75em;
+    text-transform: uppercase;
+    padding: 0 1em;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16),
+    0 3px 6px rgba(110, 80, 20, 0.4),
+    inset 0 -2px 5px 1px rgb(139, 66, 8),
+    inset 0 -1px 1px 3px rgb(250, 227, 133);
+    background-image: linear-gradient(160deg, #a54e07, #b47e11, #fefa12, #bc881b, #a54e07);
+    border: 1px solid #a55d07;
+    color: rgb(120, 50, 5);
+    text-shadow: 0 2px 2px rgb(250, 227, 133);
+    cursor: pointer;
+    background-size: 100% 100%;
+    background-position: center;
+    touch-action: manipulation;
+    transition: all .3s;
+}
+
+button span {
+    font-weight: 600;
+}
+
+button:hover {
+    background-position: right;
+    background-size: 150% 150%;
+    transform: scale(1.05);
+}
