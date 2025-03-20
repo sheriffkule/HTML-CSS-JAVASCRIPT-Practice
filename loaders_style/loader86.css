@@ -1,0 +1,101 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #000;
+}
+
+.loader {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 250px;
+    -webkit-box-reflect: below 10px linear-gradient(transparent, #0005);
+}
+
+.loader .circle {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    animation: animate 4s linear infinite;
+}
+
+.loader .circle:nth-child(2),
+.loader .circle:nth-child(5) {
+    animation-delay: -1s;
+    filter: hue-rotate(290deg);
+}
+
+.loader .circle:nth-child(3),
+.loader .circle:nth-child(6) {
+    animation-delay: -2s;
+    filter: hue-rotate(220deg);
+}
+
+.loader .circle:nth-child(4),
+.loader .circle:nth-child(7) {
+    animation-delay: -3s;
+    filter: hue-rotate(150deg);
+}
+
+@keyframes animate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loader .circle:nth-child(1)::before,
+.loader .circle:nth-child(2)::before,
+.loader .circle:nth-child(3)::before,
+.loader .circle:nth-child(4)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to top, transparent, transparent, transparent, #00ff9955);
+    background-repeat: no-repeat;
+    background-size: 100px 180px;
+    border-top-left-radius: 120px;
+    border-bottom-left-radius: 120px;
+}
+
+.loader .circle i {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background: #00ff99;
+    border-radius: 50%;
+    z-index: 100;
+    box-shadow: 0 0 10px #00ff99,
+    0 0 20px #00ff99,
+    0 0 30px #00ff99,
+    0 0 40px #00ff99,
+    0 0 50px #00ff99,
+    0 0 60px #00ff99,
+    0 0 70px #00ff99,
+    0 0 80px #00ff99,
+    0 0 90px #00ff99,
+    0 0 100px #00ff99;
+}
+
+.loader .circle span {
+    position: absolute;
+    inset: 20px;
+    background: #000;
+    border-radius: 50%;
+}
