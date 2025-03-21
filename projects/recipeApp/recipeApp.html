@@ -62,5 +62,72 @@
         <span class="span">Saved Recipes</span>
       </a>
     </header>
+
+    <nav class="mobile-nav" aria-label="primary">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="recipes.html" class="nav-link">
+            <span class="item-icon">
+              <span class="material-symbols-outlined" aria-hidden="true">lunch_dining</span>
+            </span>
+            <span class="label-medium">Recipes</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link" aria-current="true">
+            <span class="item-icon">
+              <span class="material-symbols-outlined" aria-hidden="true">home</span>
+            </span>
+            <span class="label-medium">Home</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="saved-recipes.html" class="nav-link">
+            <span class="item-icon">
+              <span class="material-symbols-outlined" aria-hidden="true">book</span>
+            </span>
+            <span class="label-medium">Saved</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <main>
+      <article>
+        <section class="hero" aria-label="banner">
+          <div class="banner-card">
+            <h1 class="display-large">Your desired dish?</h1>
+
+            <div class="search-wrapper" data-search-form>
+              <span class="material-symbols-outlined leading-icon" aria-hidden="true">local_dining</span>
+              <input type="search" name="search" aria-label="Search recipes" id="" class="search-field body-medium" data-search-field placeholder="Search recipes...">
+              <button class="search-submit" aria-label="Submit" data-search-btn>
+                <span class="material-symbols-outlined" aria-hidden="true">search</span>
+              </button>
+            </div>
+
+            <p class="label-medium">Search any recipe e.g: burger, pizza, sandwich, toast.</p>
+          </div>
+        </section>
+
+        <section class="section tab">
+          <div class="container">
+            <div class="tab-list" data-tab-list role="tablist" aria-label="Meal type">
+              <button class="tab-btn title-small" role="tab" id="tab-1" tabindex="0" aria-controls="panel-1" aria-selected="true" data-tab-btn>Breakfast</button>
+              <button class="tab-btn title-small" role="tab" id="tab-2" tabindex="-1" aria-controls="panel-2" aria-selected="false" data-tab-btn>Lunch</button>
+              <button class="tab-btn title-small" role="tab" id="tab-3" tabindex="-2" aria-controls="panel-3" aria-selected="false" data-tab-btn>Dinner</button>
+              <button class="tab-btn title-small" role="tab" id="tab-4" tabindex="-3" aria-controls="panel-3" aria-selected="false" data-tab-btn>Snack</button>
+              <button class="tab-btn title-small" role="tab" id="tab-5" tabindex="-4" aria-controls="panel-4" aria-selected="false" data-tab-btn>Teatime</button>
+            </div>
+
+            <div class="tab-panel" role="tabpanel" id="panel-1" aria-labelledby="tab-1" tabindex="0" data-tab-panel>Breakfast</div>
+            <div class="tab-panel" role="tabpanel" id="panel-2" aria-labelledby="tab-2" tabindex="0" data-tab-panel hidden>Lunch</div>
+            <div class="tab-panel" role="tabpanel" id="panel-3" aria-labelledby="tab-3" tabindex="0" data-tab-panel hidden>Dinner</div>
+            <div class="tab-panel" role="tabpanel" id="panel-4" aria-labelledby="tab-4" tabindex="0" data-tab-panel hidden>Snack</div>
+            <div class="tab-panel" role="tabpanel" id="panel-5" aria-labelledby="tab-5" tabindex="0" data-tab-panel hidden>Teatime</div>
+          </div>
+        </section>
+      </article>
+    </main>
   </body>
 </html>

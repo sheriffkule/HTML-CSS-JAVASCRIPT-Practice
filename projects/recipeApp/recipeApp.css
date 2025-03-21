@@ -302,6 +302,17 @@ main {
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
 
+.section {
+    margin-block-end: var(--section-gap);
+}
+
+.container {
+    max-width: 1130px;
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: 16px;
+}
+
 .icon-btn {
     width: 40px;
     height: 40px;
@@ -372,5 +383,169 @@ main {
 
 [data-theme="light"] :where(.logo-dark, .theme-switch .light-icon),
 [data-theme="dark"] :where(.logo-light, .theme-switch .dark-icon) {
+    display: none;
+}
+
+.mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: var(--mobile-nav-height);
+    background-color: var(--primary-container);
+    color: var(--on-background-variant);
+    padding-block: 12px 16px;
+    z-index: 4;
+    box-shadow: var(--shadow-1);
+}
+
+.mobile-nav .nav-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+}
+
+.mobile-nav .item-icon {
+    width: 64px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    border-radius: var(--radius-pill);
+    margin-inline: auto;
+    margin-block-end: 4px;
+    transition: var(--transition-short);
+}
+
+.mobile-nav .nav-link:where(:hover, :focus-visible) .item-icon {
+    background-color: var(--alpha-10);
+    transform: translateY(-4px);
+}
+
+.mobile-nav .nav-link[aria-current="true"] {
+    color: var(--on-background);
+}
+
+.mobile-nav .nav-link[aria-current="true"] .item-icon {
+    background-color: var(--active-indicator);
+}
+
+.mobile-nav .nav-link[aria-current="true"] .material-symbols-outlined {
+    font-variation-settings: 'FILL' 1;
+}
+
+.hero {
+    padding-inline: 16px;
+}
+
+.banner-card {
+    background-color: var(--image-background);
+    color: var(--white);
+    background-image: url(images/hero-banner-small.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 480px;
+    display: grid;
+    grid-template-columns: 1fr;
+    place-content: center;
+    text-align: center;
+    padding-inline: 20px;
+    border-radius: var(--radius-8);
+}
+
+.hero .search-wrapper {
+    position: relative;
+    color: var(--on-background);
+    border-radius: var(--radius-4);
+    max-width: 480px;
+    width: 100%;
+    margin-inline: auto;
+    margin-block: 16px 12px;
+    overflow: hidden;
+}
+
+.hero .search-wrapper .leading-icon {
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    transform: translateY(-50%);
+}
+
+.search-field {
+    height: 56px;
+    background-color: var(--primary-container);
+    padding-inline: 56px;
+    outline: none;
+}
+
+.search-field::placeholder {
+    transition: .5s ease-out;
+}
+
+.search-field:focus::placeholder {
+    transform: translateX(500px);
+    opacity: .1;
+}
+
+.search-submit {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    bottom: 4px;
+    width: 48px;
+    display: grid;
+    place-items: center;
+    background-color: var(--primary);
+    color: var(--white);
+    border-radius: var(--radius-4);
+    transition: var(--transition-short);
+}
+
+.search-submit:where(:hover, :focus-visible):not(:active) {
+    background-color: var(--primary-hover);
+    scale: 1.03;
+}
+
+.tab-list {
+    display: flex;
+    color: var(--on-background-variant);
+    box-shadow: inset 0 -1px 0 var(--outline);
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.tab-list::-webkit-scrollbar {
+    display: none;
+}
+
+.tab-btn {
+    height: 48px;
+    padding-inline: 24px;
+    border-block-end: 2px solid transparent;
+    transition: var(--transition-short);
+    flex: 1 0 80px;
+}
+
+.tab-btn:where(:hover, :focus-visible):not(:active) {
+    background-color: var(--alpha-10);
+    transform: scale(1.03);
+}
+
+.tab-btn[aria-selected="true"] {
+    color: var(--on-background);
+    border-color: var(--primary);
+}
+
+.tab .tab-list {
+    background-color: var(--background);
+    position: sticky;
+    top: var(--header-height);
+    margin-inline: -16px;
+    padding-inline: 16px;
+    margin-block: 16px 12px;
+    z-index: 1;
+}
+
+.tab-panel[hidden] {
     display: none;
 }
