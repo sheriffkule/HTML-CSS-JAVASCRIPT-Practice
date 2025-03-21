@@ -1,0 +1,206 @@
+:root {
+  /* Colors */
+  --white: hsl(0, 0%, 100%);
+  --overlay-bg: hsla(0, 3%, 13%, 0.5);
+  /* Light theme */
+  --light-background: hsl(0, 0%, 96%);
+  --light-on-background: hsl(0, 3%, 13%);
+  --light-on-background-variant: hsl(20, 3%, 19%);
+  --light-primary: hsl(11, 87%, 59%);
+  --light-primary-hover: hsl(11, 60%, 50%);
+  --light-primary-container: hsl(14, 57%, 95%);
+  --light-error: hsl(1, 73%, 42%);
+  --light-active-indicator: hsl(12, 58%, 88%);
+  --light-image-background: hsl(0, 0%, 70%);
+  --light-badge-btn: hsl(30, 58%, 88%);
+  --light-on-badge-btn: hsl(24, 7%, 14%);
+  --light-outline: hsl(10, 19%, 88%);
+  --light-input-outline: hsl(7, 7%, 73%);
+  --light-input-outline-hover: hsl(9, 3%, 52%);
+  --light-alpha-10: hsla(0, 0%, 0%, 0.1);
+  --light-alpha-20: hsla(0, 0%, 0%, 0.2);
+  /* Dark theme */
+  --dark-background: hsl(0, 0%, 10%);
+  --dark-on-background: hsl(11, 3%, 87%);
+  --dark-on-background-variant: hsl(11, 3%, 81%);
+  --dark-primary: hsl(11, 87%, 64%);
+  --dark-primary-hover: hsl(11, 51%, 51%);
+  --dark-primary-container: hsl(15, 3%, 15%);
+  --dark-error: hsl(1, 69%, 59%);
+  --dark-active-indicator: hsl(15, 25%, 22%);
+  --dark-image-background: hsl(0, 0%, 30%);
+  --dark-badge-btn: hsl(30, 28%, 13%);
+  --dark-on-badge-btn: hsl(30, 8%, 86%);
+  --dark-outline: hsl(11, 3%, 20%);
+  --dark-input-outline: hsl(11, 3%, 29%);
+  --dark-input-outline-hover: hsl(0, 4%, 58%);
+  --dark-alpha-10: hsla(0, 0%, 100%, 0.1);
+  --dark-alpha-20: hsla(0, 0%, 100%, 0.2);
+  /* Font family */
+  --font-primary: 'DM Serif Display', serif;
+  --font-secondary: 'DM Sans', sans-serif;
+  /* Font size */
+  --fs-base: 62.5%;
+  --fs-display-large: 2.8rem;
+  --fs-display-medium: 3.2rem;
+  --fs-display-small: 2.6rem;
+  --fs-headline-small: 2.4rem;
+  --fs-title-medium: 1.6rem;
+  --fs-title-small: 1.4rem;
+  --fs-body-large: 1.6rem;
+  --fs-body-medium: 1.4rem;
+  --fs-label-large: 1.4rem;
+  --fs-label-medium: 1.2rem;
+  --fs-label-small: 1.1rem;
+  /* Font weight */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  /* ### Border Radius */
+  --radius-4: 4px;
+  --radius-8: 8px;
+  --radius-circle: 50%;
+  --radius-pill: 500px;
+  /* Box Shadow */
+  --shadow-1: 0 -1px 8px hsla(0, 0%, 0%, 0.2);
+  --shadow-2: 0 2px 4px 1px hsla(0, 0%, 0%, 0.3);
+  /* Others */
+  --header-height: 64px;
+  --mobile-nav-height: 80px;
+  --section-gap: 32px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    /* Transition */
+    --transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+    --transition-short: 200ms var(--transition-timing-function);
+    --transition-medium: 500ms var(--transition-timing-function);
+  }
+}
+
+[data-theme='light'] {
+  color-scheme: light;
+
+  --background: var(--light-background);
+  --on-background: var(--light-on-background);
+  --on-background-variant: var(--light-on-background-variant);
+  --primary: var(--light-primary);
+  --primary-hover: var(--light-primary-hover);
+  --primary-container: var(--light-primary-container);
+  --error: var(--light-error);
+  --active-indicator: var(--light-active-indicator);
+  --image-background: var(--light-image-background);
+  --badge-btn: var(--light-badge-btn);
+  --on-badge-btn: var(--light-on-badge-btn);
+  --outline: var(--light-outline);
+  --input-outline: var(--light-input-outline);
+  --input-outline-hover: var(--light-input-outline-hover);
+  --alpha-10: var(--light-alpha-10);
+  --alpha-20: var(--light-alpha-20);
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --background: var(--dark-background);
+  --on-background: var(--dark-on-background);
+  --on-background-variant: var(--dark-on-background-variant);
+  --primary: var(--dark-primary);
+  --primary-hover: var(--dark-primary-hover);
+  --primary-container: var(--dark-primary-container);
+  --error: var(--dark-error);
+  --active-indicator: var(--dark-active-indicator);
+  --image-background: var(--dark-image-background);
+  --badge-btn: var(--dark-badge-btn);
+  --on-badge-btn: var(--dark-on-badge-btn);
+  --outline: var(--dark-outline);
+  --input-outline: var(--dark-input-outline);
+  --input-outline-hover: var(--dark-input-outline-hover);
+  --alpha-10: var(--dark-alpha-10);
+  --alpha-20: var(--dark-alpha-20);
+}
+
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+}
+
+a,
+img,
+span,
+input,
+button {
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+button {
+  background: none;
+  border: none;
+  font: inherit;
+}
+
+input {
+  width: 100%;
+}
+
+button {
+  color: inherit;
+  cursor: pointer;
+}
+
+html {
+  font-family: var(--font-secondary);
+  font-size: var(--fs-base);
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--on-background);
+  font-size: var(--fs-body-medium);
+  font-weight: var(--weight-regular);
+  line-height: 20px;
+  letter-spacing: 0.25px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-block: calc(var(--header-height) + 16px) var(--mobile-nav-height);
+  opacity: 0;
+  animation: fade 0.3s var(--transition-timing-function) forwards;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+main {
+    flex-grow: 1;
+}
+
+:focus-visible {
+    outline-color: var(--primary);
+}
