@@ -1,0 +1,79 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    background: radial-gradient(#333, #111);
+}
+
+.btn {
+    position: relative;
+    padding: 14px 36px;
+    font-size: 1em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #fff;
+    background: #1c2526;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 1;
+    transition: all .3s;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg, #ff2e63, #00ddeb);
+    border-radius: 14px;
+    z-index: -1;
+    transition: all .3s;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: #1c2526;
+    border-radius: 10px;
+    z-index: -1;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(255, 255, 255, 0.1);
+    color: #00ddeb;
+}
+
+.btn:hover::before {
+    background: linear-gradient(45deg, #00ddeb, #ff2e63);
+    filter: blur(2px);
+}
+
+.btn:active {
+    transform: scale(0.97);
+}
+
+.shine {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(12deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%) skew(45deg);
+    transition: transform .3s;
+    z-index: 0;
+}
+
+.btn:hover .shine {
+    transform: translateX(100%) skew(45deg);
+}
