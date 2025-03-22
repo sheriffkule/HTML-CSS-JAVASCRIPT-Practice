@@ -648,6 +648,7 @@ main {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     overflow-y: hidden;
     transition: var(--transition-short);
 }
@@ -734,4 +735,59 @@ main {
   justify-content: center;
   align-items: center;
   gap: 8px;
+}
+
+.badge-btn {
+  height: 40px;
+  border-radius: var(--radius-pill);
+  background-color: var(--badge-btn);
+  color: var(--on-badge-btn);
+  max-width: max-content;
+  padding-inline: 16px;
+  display: grid;
+  place-items: center;
+}
+
+.tag {
+  text-align: center;
+}
+
+.tag .section-title {
+  max-width: 50ch;
+  margin-inline: auto;
+}
+
+.tag .section-text {
+  text-wrap: balance;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-block-start: 24px;
+}
+
+.footer .logo {
+  display: none;
+}
+
+.footer {
+  padding: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  column-gap: 12px;
+  border-block-start: 1px solid var(--outline);
+}
+
+.copyright {
+  opacity: 0.8;
+}
+
+.footer .edamam img {
+  width: 180px;
 }
