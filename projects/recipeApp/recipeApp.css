@@ -575,6 +575,15 @@ main {
   margin-block-end: 12px;
 }
 
+.snackbar-container {
+  position: fixed;
+  bottom: calc(var(--mobile-nav-height) + 16px);
+  left: 16px;
+  display: grid;
+  gap: 8px;
+  z-index: 4;
+}
+
 .skeleton {
     background-color: var(--on-background);
     animation: skeleton-loading .5s linear infinite alternate;
@@ -790,4 +799,32 @@ main {
 
 .footer .edamam img {
   width: 180px;
+}
+
+.snackbar {
+  height: 48px;
+  width: 100%;
+  background-color: var(--on-background-variant);
+  color: var(--background);
+  padding-inline: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: var(--radius-4);
+  box-shadow: var(--shadow-1);
+  animation: snackbar 3s var(--transition-timing-function) forwards;
+}
+
+@keyframes snackbar {
+  0% {
+    height: 0;
+    opacity: 0;
+  }
+  10%, 95% {
+    height: 48px;
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
