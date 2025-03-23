@@ -10,35 +10,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100..1000&family=DM+Serif+Display&display=swap"
-      rel="stylesheet"
-    />
+      rel="stylesheet" />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0"
-    />
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0" />
     <link rel="shortcut icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="/projects/recipeApp/recipeApp.css" />
     <script src="theme.js"></script>
     <script type="module" src="global.js"></script>
     <script type="module" src="home.js"></script>
   </head>
+
   <body>
     <header class="header" data-header>
       <a href="/" class="logo">
-        <img
-          src="images/logo-light.svg"
-          alt="Cook"
-          width="156"
-          height="32"
-          class="logo-light"
-        />
-        <img
-          src="images/logo-dark.svg"
-          alt="Cook"
-          width="156"
-          height="32"
-          class="logo-dark"
-        />
+        <img src="images/logo-light.svg" alt="Cook" width="156" height="32" class="logo-light" />
+        <img src="images/logo-dark.svg" alt="Cook" width="156" height="32" class="logo-dark" />
       </a>
 
       <nav class="navbar">
@@ -56,14 +43,9 @@
         class="icon-btn theme-switch has-state"
         aria-pressed="false"
         aria-label="Toggle light and dark theme"
-        data-theme-btn
-      >
-        <span class="material-symbols-outlined light-icon" aria-hidden="true"
-          >light_mode</span
-        >
-        <span class="material-symbols-outlined dark-icon" aria-hidden="true"
-          >dark_mode</span
-        >
+        data-theme-btn>
+        <span class="material-symbols-outlined light-icon" aria-hidden="true">light_mode</span>
+        <span class="material-symbols-outlined dark-icon" aria-hidden="true">dark_mode</span>
       </button>
 
       <a href="saved-recipes.html" class="btn btn-primary has-icon">
@@ -77,9 +59,7 @@
         <li class="nav-item">
           <a href="recipes.html" class="nav-link">
             <span class="item-icon">
-              <span class="material-symbols-outlined" aria-hidden="true"
-                >lunch_dining</span
-              >
+              <span class="material-symbols-outlined" aria-hidden="true">lunch_dining</span>
             </span>
             <span class="label-medium">Recipes</span>
           </a>
@@ -110,9 +90,7 @@
             <h1 class="display-large">Your desired dish?</h1>
 
             <div class="search-wrapper" data-search-form>
-              <span class="material-symbols-outlined leading-icon" aria-hidden="true"
-                >local_dining</span
-              >
+              <span class="material-symbols-outlined leading-icon" aria-hidden="true">local_dining</span>
               <input
                 type="search"
                 name="search"
@@ -120,16 +98,13 @@
                 id=""
                 class="search-field body-medium"
                 data-search-field
-                placeholder="Search recipes..."
-              />
+                placeholder="Search recipes..." />
               <button class="search-submit" aria-label="Submit" data-search-btn>
                 <span class="material-symbols-outlined" aria-hidden="true">search</span>
               </button>
             </div>
 
-            <p class="label-medium">
-              Search any recipe e.g: burger, pizza, sandwich, toast.
-            </p>
+            <p class="label-medium">Search any recipe e.g: burger, pizza, sandwich, toast.</p>
           </div>
         </section>
 
@@ -143,8 +118,7 @@
                 tabindex="0"
                 aria-controls="panel-1"
                 aria-selected="true"
-                data-tab-btn
-              >
+                data-tab-btn>
                 Breakfast
               </button>
               <button
@@ -154,8 +128,7 @@
                 tabindex="-1"
                 aria-controls="panel-2"
                 aria-selected="false"
-                data-tab-btn
-              >
+                data-tab-btn>
                 Lunch
               </button>
               <button
@@ -165,8 +138,7 @@
                 tabindex="-2"
                 aria-controls="panel-3"
                 aria-selected="false"
-                data-tab-btn
-              >
+                data-tab-btn>
                 Dinner
               </button>
               <button
@@ -176,8 +148,7 @@
                 tabindex="-3"
                 aria-controls="panel-4"
                 aria-selected="false"
-                data-tab-btn
-              >
+                data-tab-btn>
                 Snack
               </button>
               <button
@@ -187,8 +158,7 @@
                 tabindex="-4"
                 aria-controls="panel-5"
                 aria-selected="false"
-                data-tab-btn
-              >
+                data-tab-btn>
                 Teatime
               </button>
             </div>
@@ -199,49 +169,7 @@
               id="panel-1"
               aria-labelledby="tab-1"
               tabindex="0"
-              data-tab-panel
-            >
-              <div class="grid-list">
-                <div class="card">
-                  <figure class="card-media img-holder">
-                    <img
-                      src="images/recipe.jpg"
-                      width="200"
-                      height="200"
-                      loading="lazy"
-                      alt="Recipe name"
-                      class="img-cover"
-                    />
-                  </figure>
-                  <div class="card-body">
-                    <h3 class="title-small">
-                      <a href="./detail.html" class="card-link"
-                        >Recipe Name Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit. Aut earum deserunt asperiores qui doloremque amet numquam
-                        quas assumenda esse voluptatibus?</a
-                      >
-                    </h3>
-                    <div class="meta-wrapper">
-                      <div class="meta-item">
-                        <span class="material-symbols-outlined">schedule</span>
-                        <span class="label-medium">2 minutes</span>
-                      </div>
-                      <button
-                        class="icon-btn has-state removed"
-                        aria-label="Add to saved recipes"
-                      >
-                        <span class="material-symbols-outlined bookmark-add"
-                          >bookmark_add</span
-                        >
-                        <span class="material-symbols-outlined bookmark">bookmark</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <a href="./recipes.html" class="btn btn-secondary label-large has-state"
-                >Show More</a
-              >
+              data-tab-panel>
             </div>
             <div
               class="tab-panel"
@@ -250,8 +178,7 @@
               aria-labelledby="tab-2"
               tabindex="0"
               data-tab-panel
-              hidden
-            >
+              hidden>
               Lunch
             </div>
             <div
@@ -261,8 +188,7 @@
               aria-labelledby="tab-3"
               tabindex="0"
               data-tab-panel
-              hidden
-            >
+              hidden>
               Dinner
             </div>
             <div
@@ -272,8 +198,7 @@
               aria-labelledby="tab-4"
               tabindex="0"
               data-tab-panel
-              hidden
-            >
+              hidden>
               Snack
             </div>
             <div
@@ -283,22 +208,15 @@
               aria-labelledby="tab-5"
               tabindex="0"
               data-tab-panel
-              hidden
-            >
+              hidden>
               Teatime
             </div>
           </div>
         </section>
 
-        <section
-          class="section slider-section"
-          aria-labelledby="slider-label-1"
-          data-slider-section
-        >
+        <section class="section slider-section" aria-labelledby="slider-label-1" data-slider-section>
           <div class="container">
-            <h2 class="section-title headline-small" id="slider-label-1">
-              Latest Asian Recipes
-            </h2>
+            <h2 class="section-title headline-small" id="slider-label-1">Latest Asian Recipes</h2>
             <div class="slider">
               <ul class="slider-wrapper" data-slider-wrapper>
                 <li class="slider-item">
@@ -310,15 +228,13 @@
                         height="200"
                         loading="lazy"
                         alt="Recipe name"
-                        class="img-cover"
-                      />
+                        class="img-cover" />
                     </figure>
                     <div class="card-body">
                       <h3 class="title-small">
                         <a href="./detail.html" class="card-link"
-                          >Recipe Name Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit. Aut earum deserunt asperiores qui doloremque amet numquam
-                          quas assumenda esse voluptatibus?</a
+                          >Recipe Name Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut earum
+                          deserunt asperiores qui doloremque amet numquam quas assumenda esse voluptatibus?</a
                         >
                       </h3>
                       <div class="meta-wrapper">
@@ -326,13 +242,8 @@
                           <span class="material-symbols-outlined">schedule</span>
                           <span class="label-medium">2 minutes</span>
                         </div>
-                        <button
-                          class="icon-btn has-state removed"
-                          aria-label="Add to saved recipes"
-                        >
-                          <span class="material-symbols-outlined bookmark-add"
-                            >bookmark_add</span
-                          >
+                        <button class="icon-btn has-state removed" aria-label="Add to saved recipes">
+                          <span class="material-symbols-outlined bookmark-add">bookmark_add</span>
                           <span class="material-symbols-outlined bookmark">bookmark</span>
                         </button>
                       </div>
@@ -348,15 +259,13 @@
                         height="200"
                         loading="lazy"
                         alt="Recipe name"
-                        class="img-cover"
-                      />
+                        class="img-cover" />
                     </figure>
                     <div class="card-body">
                       <h3 class="title-small">
                         <a href="./detail.html" class="card-link"
-                          >Recipe Name Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit. Aut earum deserunt asperiores qui doloremque amet numquam
-                          quas assumenda esse voluptatibus?</a
+                          >Recipe Name Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut earum
+                          deserunt asperiores qui doloremque amet numquam quas assumenda esse voluptatibus?</a
                         >
                       </h3>
                       <div class="meta-wrapper">
@@ -364,13 +273,8 @@
                           <span class="material-symbols-outlined">schedule</span>
                           <span class="label-medium">2 minutes</span>
                         </div>
-                        <button
-                          class="icon-btn has-state removed"
-                          aria-label="Add to saved recipes"
-                        >
-                          <span class="material-symbols-outlined bookmark-add"
-                            >bookmark_add</span
-                          >
+                        <button class="icon-btn has-state removed" aria-label="Add to saved recipes">
+                          <span class="material-symbols-outlined bookmark-add">bookmark_add</span>
                           <span class="material-symbols-outlined bookmark">bookmark</span>
                         </button>
                       </div>
@@ -386,15 +290,13 @@
                         height="200"
                         loading="lazy"
                         alt="Recipe name"
-                        class="img-cover"
-                      />
+                        class="img-cover" />
                     </figure>
                     <div class="card-body">
                       <h3 class="title-small">
                         <a href="./detail.html" class="card-link"
-                          >Recipe Name Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit. Aut earum deserunt asperiores qui doloremque amet numquam
-                          quas assumenda esse voluptatibus?</a
+                          >Recipe Name Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut earum
+                          deserunt asperiores qui doloremque amet numquam quas assumenda esse voluptatibus?</a
                         >
                       </h3>
                       <div class="meta-wrapper">
@@ -402,13 +304,8 @@
                           <span class="material-symbols-outlined">schedule</span>
                           <span class="label-medium">2 minutes</span>
                         </div>
-                        <button
-                          class="icon-btn has-state removed"
-                          aria-label="Add to saved recipes"
-                        >
-                          <span class="material-symbols-outlined bookmark-add"
-                            >bookmark_add</span
-                          >
+                        <button class="icon-btn has-state removed" aria-label="Add to saved recipes">
+                          <span class="material-symbols-outlined bookmark-add">bookmark_add</span>
                           <span class="material-symbols-outlined bookmark">bookmark</span>
                         </button>
                       </div>
@@ -424,15 +321,13 @@
                         height="200"
                         loading="lazy"
                         alt="Recipe name"
-                        class="img-cover"
-                      />
+                        class="img-cover" />
                     </figure>
                     <div class="card-body">
                       <h3 class="title-small">
                         <a href="./detail.html" class="card-link"
-                          >Recipe Name Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit. Aut earum deserunt asperiores qui doloremque amet numquam
-                          quas assumenda esse voluptatibus?</a
+                          >Recipe Name Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut earum
+                          deserunt asperiores qui doloremque amet numquam quas assumenda esse voluptatibus?</a
                         >
                       </h3>
                       <div class="meta-wrapper">
@@ -440,13 +335,8 @@
                           <span class="material-symbols-outlined">schedule</span>
                           <span class="label-medium">2 minutes</span>
                         </div>
-                        <button
-                          class="icon-btn has-state removed"
-                          aria-label="Add to saved recipes"
-                        >
-                          <span class="material-symbols-outlined bookmark-add"
-                            >bookmark_add</span
-                          >
+                        <button class="icon-btn has-state removed" aria-label="Add to saved recipes">
+                          <span class="material-symbols-outlined bookmark-add">bookmark_add</span>
                           <span class="material-symbols-outlined bookmark">bookmark</span>
                         </button>
                       </div>
@@ -456,9 +346,7 @@
                 <li class="slider-item" data-slider-item>
                   <a href="./recipes.html" class="load-more-card has-state">
                     <span class="label-large">Show More</span>
-                    <span class="material-symbols-outlined" aria-hidden="true"
-                      >navigate_next</span
-                    >
+                    <span class="material-symbols-outlined" aria-hidden="true">navigate_next</span>
                   </a>
                 </li>
               </ul>
@@ -466,15 +354,9 @@
           </div>
         </section>
 
-        <section
-          class="section slider-section"
-          aria-labelledby="slider-label-1"
-          data-slider-section
-        >
+        <section class="section slider-section" aria-labelledby="slider-label-1" data-slider-section>
           <div class="container">
-            <h2 class="section-title headline-small" id="slider-label-1">
-              Latest French Recipes
-            </h2>
+            <h2 class="section-title headline-small" id="slider-label-1">Latest French Recipes</h2>
             <div class="slider">
               <ul class="slider-wrapper" data-slider-wrapper>
                 <li class="slider-item">
@@ -486,15 +368,13 @@
                         height="200"
                         loading="lazy"
                         alt="Recipe name"
-                        class="img-cover"
-                      />
+                        class="img-cover" />
                     </figure>
                     <div class="card-body">
                       <h3 class="title-small">
                         <a href="./detail.html" class="card-link"
-                          >Recipe Name Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit. Aut earum deserunt asperiores qui doloremque amet numquam
-                          quas assumenda esse voluptatibus?</a
+                          >Recipe Name Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut earum
+                          deserunt asperiores qui doloremque amet numquam quas assumenda esse voluptatibus?</a
                         >
                       </h3>
                       <div class="meta-wrapper">
@@ -502,13 +382,8 @@
                           <span class="material-symbols-outlined">schedule</span>
                           <span class="label-medium">2 minutes</span>
                         </div>
-                        <button
-                          class="icon-btn has-state removed"
-                          aria-label="Add to saved recipes"
-                        >
-                          <span class="material-symbols-outlined bookmark-add"
-                            >bookmark_add</span
-                          >
+                        <button class="icon-btn has-state removed" aria-label="Add to saved recipes">
+                          <span class="material-symbols-outlined bookmark-add">bookmark_add</span>
                           <span class="material-symbols-outlined bookmark">bookmark</span>
                         </button>
                       </div>
@@ -524,15 +399,13 @@
                         height="200"
                         loading="lazy"
                         alt="Recipe name"
-                        class="img-cover"
-                      />
+                        class="img-cover" />
                     </figure>
                     <div class="card-body">
                       <h3 class="title-small">
                         <a href="./detail.html" class="card-link"
-                          >Recipe Name Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit. Aut earum deserunt asperiores qui doloremque amet numquam
-                          quas assumenda esse voluptatibus?</a
+                          >Recipe Name Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut earum
+                          deserunt asperiores qui doloremque amet numquam quas assumenda esse voluptatibus?</a
                         >
                       </h3>
                       <div class="meta-wrapper">
@@ -540,13 +413,8 @@
                           <span class="material-symbols-outlined">schedule</span>
                           <span class="label-medium">2 minutes</span>
                         </div>
-                        <button
-                          class="icon-btn has-state removed"
-                          aria-label="Add to saved recipes"
-                        >
-                          <span class="material-symbols-outlined bookmark-add"
-                            >bookmark_add</span
-                          >
+                        <button class="icon-btn has-state removed" aria-label="Add to saved recipes">
+                          <span class="material-symbols-outlined bookmark-add">bookmark_add</span>
                           <span class="material-symbols-outlined bookmark">bookmark</span>
                         </button>
                       </div>
@@ -562,15 +430,13 @@
                         height="200"
                         loading="lazy"
                         alt="Recipe name"
-                        class="img-cover"
-                      />
+                        class="img-cover" />
                     </figure>
                     <div class="card-body">
                       <h3 class="title-small">
                         <a href="./detail.html" class="card-link"
-                          >Recipe Name Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit. Aut earum deserunt asperiores qui doloremque amet numquam
-                          quas assumenda esse voluptatibus?</a
+                          >Recipe Name Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut earum
+                          deserunt asperiores qui doloremque amet numquam quas assumenda esse voluptatibus?</a
                         >
                       </h3>
                       <div class="meta-wrapper">
@@ -578,13 +444,8 @@
                           <span class="material-symbols-outlined">schedule</span>
                           <span class="label-medium">2 minutes</span>
                         </div>
-                        <button
-                          class="icon-btn has-state removed"
-                          aria-label="Add to saved recipes"
-                        >
-                          <span class="material-symbols-outlined bookmark-add"
-                            >bookmark_add</span
-                          >
+                        <button class="icon-btn has-state removed" aria-label="Add to saved recipes">
+                          <span class="material-symbols-outlined bookmark-add">bookmark_add</span>
                           <span class="material-symbols-outlined bookmark">bookmark</span>
                         </button>
                       </div>
@@ -600,15 +461,13 @@
                         height="200"
                         loading="lazy"
                         alt="Recipe name"
-                        class="img-cover"
-                      />
+                        class="img-cover" />
                     </figure>
                     <div class="card-body">
                       <h3 class="title-small">
                         <a href="./detail.html" class="card-link"
-                          >Recipe Name Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit. Aut earum deserunt asperiores qui doloremque amet numquam
-                          quas assumenda esse voluptatibus?</a
+                          >Recipe Name Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut earum
+                          deserunt asperiores qui doloremque amet numquam quas assumenda esse voluptatibus?</a
                         >
                       </h3>
                       <div class="meta-wrapper">
@@ -616,13 +475,8 @@
                           <span class="material-symbols-outlined">schedule</span>
                           <span class="label-medium">2 minutes</span>
                         </div>
-                        <button
-                          class="icon-btn has-state removed"
-                          aria-label="Add to saved recipes"
-                        >
-                          <span class="material-symbols-outlined bookmark-add"
-                            >bookmark_add</span
-                          >
+                        <button class="icon-btn has-state removed" aria-label="Add to saved recipes">
+                          <span class="material-symbols-outlined bookmark-add">bookmark_add</span>
                           <span class="material-symbols-outlined bookmark">bookmark</span>
                         </button>
                       </div>
@@ -632,9 +486,7 @@
                 <li class="slider-item" data-slider-item>
                   <a href="./recipes.html" class="load-more-card has-state">
                     <span class="label-large">Show More</span>
-                    <span class="material-symbols-outlined" aria-hidden="true"
-                      >navigate_next</span
-                    >
+                    <span class="material-symbols-outlined" aria-hidden="true">navigate_next</span>
                   </a>
                 </li>
               </ul>
@@ -644,185 +496,96 @@
 
         <section class="section tag" aria-labelledby="tag-label">
           <div class="container">
-            <h2 class="section-title display-small" id="tag-label">
-              Chose your health preference.
-            </h2>
+            <h2 class="section-title display-small" id="tag-label">Chose your health preference.</h2>
             <p class="body-medium section-text">
-              Choosing your health preference is an important step towards achieving a
-              healthiear lifestyle.
+              Choosing your health preference is an important step towards achieving a healthiear lifestyle.
             </p>
             <div class="tag-list">
-              <a
-                href="./recipes.html?health=wheat-free"
-                class="badge-btn body-medium has-state"
+              <a href="./recipes.html?health=wheat-free" class="badge-btn body-medium has-state"
                 >Wheat-Free</a
               >
-              <a
-                href="./recipes.html?health=vegetarian"
-                class="badge-btn body-medium has-state"
+              <a href="./recipes.html?health=vegetarian" class="badge-btn body-medium has-state"
                 >Vegetarian</a
               >
-              <a
-                href="./recipes.html?health=vegan"
-                class="badge-btn body-medium has-state"
-                >Vegan</a
-              >
-              <a
-                href="./recipes.html?health=tree-nut-free"
-                class="badge-btn body-medium has-state"
+              <a href="./recipes.html?health=vegan" class="badge-btn body-medium has-state">Vegan</a>
+              <a href="./recipes.html?health=tree-nut-free" class="badge-btn body-medium has-state"
                 >Tree-Nut-Free</a
               >
-              <a
-                href="./recipes.html?health=sulfite-free"
-                class="badge-btn body-medium has-state"
+              <a href="./recipes.html?health=sulfite-free" class="badge-btn body-medium has-state"
                 >Sulfite-Free</a
               >
-              <a
-                href="./recipes.html?health=sugar-conscious"
-                class="badge-btn body-medium has-state"
+              <a href="./recipes.html?health=sugar-conscious" class="badge-btn body-medium has-state"
                 >Sugar-Conscious</a
               >
-              <a
-                href="./recipes.html?health=soy-free"
-                class="badge-btn body-medium has-state"
-                >Soy-Free</a
-              >
-              <a
-                href="./recipes.html?health=shellfish-free"
-                class="badge-btn body-medium has-state"
+              <a href="./recipes.html?health=soy-free" class="badge-btn body-medium has-state">Soy-Free</a>
+              <a href="./recipes.html?health=shellfish-free" class="badge-btn body-medium has-state"
                 >Shellfish-Free</a
               >
-              <a
-                href="./recipes.html?health=sesame-free"
-                class="badge-btn body-medium has-state"
+              <a href="./recipes.html?health=sesame-free" class="badge-btn body-medium has-state"
                 >Sesame-Free</a
               >
-              <a
-                href="./recipes.html?health=red-meat-free"
-                class="badge-btn body-medium has-state"
+              <a href="./recipes.html?health=red-meat-free" class="badge-btn body-medium has-state"
                 >Red-Meat-Free</a
               >
-              <a
-                href="./recipes.html?health=pork-free"
-                class="badge-btn body-medium has-state"
-                >Pork-Free</a
-              >
-              <a
-                href="./recipes.html?health=pecatarian"
-                class="badge-btn body-medium has-state"
+              <a href="./recipes.html?health=pork-free" class="badge-btn body-medium has-state">Pork-Free</a>
+              <a href="./recipes.html?health=pecatarian" class="badge-btn body-medium has-state"
                 >Pescatarian</a
               >
-              <a
-                href="./recipes.html?health=peanut-free"
-                class="badge-btn body-medium has-state"
+              <a href="./recipes.html?health=peanut-free" class="badge-btn body-medium has-state"
                 >Peanut-Free</a
               >
-              <a
-                href="./recipes.html?health=paleo"
-                class="badge-btn body-medium has-state"
-                >Paleo</a
-              >
-              <a
-                href="./recipes.html?health=No-oil-added"
-                class="badge-btn body-medium has-state"
+              <a href="./recipes.html?health=paleo" class="badge-btn body-medium has-state">Paleo</a>
+              <a href="./recipes.html?health=No-oil-added" class="badge-btn body-medium has-state"
                 >No oil added</a
               >
-              <a
-                href="./recipes.html?health=mustard-free"
-                class="badge-btn body-medium has-state"
+              <a href="./recipes.html?health=mustard-free" class="badge-btn body-medium has-state"
                 >Mustard-Free</a
               >
-              <a
-                href="./recipes.html?health=mollusk-free"
-                class="badge-btn body-medium has-state"
+              <a href="./recipes.html?health=mollusk-free" class="badge-btn body-medium has-state"
                 >Mollusk-Free</a
               >
-              <a
-                href="./recipes.html?health=Mediterranean"
-                class="badge-btn body-medium has-state"
+              <a href="./recipes.html?health=Mediterranean" class="badge-btn body-medium has-state"
                 >Mediterranean</a
               >
-              <a
-                href="./recipes.html?health=lupine-free"
-                class="badge-btn body-medium has-state"
+              <a href="./recipes.html?health=lupine-free" class="badge-btn body-medium has-state"
                 >Lupine-Free</a
               >
-              <a
-                href="./recipes.html?health=low-sugar"
-                class="badge-btn body-medium has-state"
-                >Low Sugar</a
-              >
-              <a
-                href="./recipes.html?health=low-potassium"
-                class="badge-btn body-medium has-state"
+              <a href="./recipes.html?health=low-sugar" class="badge-btn body-medium has-state">Low Sugar</a>
+              <a href="./recipes.html?health=low-potassium" class="badge-btn body-medium has-state"
                 >Low Potassium</a
               >
-              <a
-                href="./recipes.html?health=kosher"
-                class="badge-btn body-medium has-state"
-                >Kosher</a
-              >
-              <a
-                href="./recipes.html?health=kidney-friendly"
-                class="badge-btn body-medium has-state"
+              <a href="./recipes.html?health=kosher" class="badge-btn body-medium has-state">Kosher</a>
+              <a href="./recipes.html?health=kidney-friendly" class="badge-btn body-medium has-state"
                 >Kidney-Friendly</a
               >
-              <a
-                href="./recipes.html?health=keto-friendly"
-                class="badge-btn body-medium has-state"
+              <a href="./recipes.html?health=keto-friendly" class="badge-btn body-medium has-state"
                 >Keto-Friendly</a
               >
-              <a
-                href="./recipes.html?health=immuno-supportive"
-                class="badge-btn body-medium has-state"
+              <a href="./recipes.html?health=immuno-supportive" class="badge-btn body-medium has-state"
                 >Immuno-Supportive</a
               >
-              <a
-                href="./recipes.html?health=gluten-free"
-                class="badge-btn body-medium has-state"
+              <a href="./recipes.html?health=gluten-free" class="badge-btn body-medium has-state"
                 >Gluten-Free</a
               >
-              <a
-                href="./recipes.html?health=fodmap-free"
-                class="badge-btn body-medium has-state"
+              <a href="./recipes.html?health=fodmap-free" class="badge-btn body-medium has-state"
                 >FODMAP-Free</a
               >
-              <a
-                href="./recipes.html?health=fish-free"
-                class="badge-btn body-medium has-state"
-                >Fish-Free</a
-              >
-              <a
-                href="./recipes.html?health=egg-free"
-                class="badge-btn body-medium has-state"
-                >Egg-Free</a
-              >
-              <a href="./recipes.html?health=DASH" class="badge-btn body-medium has-state"
-                >DASH</a
-              >
-              <a
-                href="./recipes.html?health=dairy-free"
-                class="badge-btn body-medium has-state"
+              <a href="./recipes.html?health=fish-free" class="badge-btn body-medium has-state">Fish-Free</a>
+              <a href="./recipes.html?health=egg-free" class="badge-btn body-medium has-state">Egg-Free</a>
+              <a href="./recipes.html?health=DASH" class="badge-btn body-medium has-state">DASH</a>
+              <a href="./recipes.html?health=dairy-free" class="badge-btn body-medium has-state"
                 >Dairy-Free</a
               >
-              <a
-                href="./recipes.html?health=crustacean-free"
-                class="badge-btn body-medium has-state"
+              <a href="./recipes.html?health=crustacean-free" class="badge-btn body-medium has-state"
                 >Crustcean-Free</a
               >
-              <a
-                href="./recipes.html?health=celery-free"
-                class="badge-btn body-medium has-state"
+              <a href="./recipes.html?health=celery-free" class="badge-btn body-medium has-state"
                 >Celery-Free</a
               >
-              <a
-                href="./recipes.html?health=alcohol-free"
-                class="badge-btn body-medium has-state"
+              <a href="./recipes.html?health=alcohol-free" class="badge-btn body-medium has-state"
                 >Alcohol-Free</a
               >
-              <a
-                href="./recipes.html?health=alcohol-cocktail"
-                class="badge-btn body-medium has-state"
+              <a href="./recipes.html?health=alcohol-cocktail" class="badge-btn body-medium has-state"
                 >Alcohol-Cocktail</a
               >
             </div>
@@ -834,23 +597,11 @@
     <footer class="footer">
       <p class="copyright body-medium">Copyright 2025. SheriffKule</p>
       <a href="/" class="logo">
-      <img
-          src="images/logo-light.svg"
-          alt="Cook"
-          width="156"
-          height="32"
-          class="logo-light"
-        />
-        <img
-          src="images/logo-dark.svg"
-          alt="Cook"
-          width="156"
-          height="32"
-          class="logo-dark"
-        />
+        <img src="images/logo-light.svg" alt="Cook" width="156" height="32" class="logo-light" />
+        <img src="images/logo-dark.svg" alt="Cook" width="156" height="32" class="logo-dark" />
       </a>
       <a href="https://www.edamam.com/" target="_blank" class="edamam">
-        <img src="./images/edamam.svg" width="200" height="40" loading="lazy" alt="edamam free recipe api">
+        <img src="./images/edamam.svg" width="200" height="40" loading="lazy" alt="edamam free recipe api" />
       </a>
     </footer>
   </body>
