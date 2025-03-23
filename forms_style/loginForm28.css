@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #c4c3ca;
+    background: linear-gradient(45deg, #085078, #85d8ce);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+a {
+    cursor: pointer;
+    transition: all .3s linear;
+}
+
+a:where(:hover, :focus-visible) {
+    text-decoration: none;
+}
+
+.link {
+    color: #ffeba7;
+}
+
+p {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+h4 {
+    font-weight: 600;
+}
+
+h6 span {
+    padding: 0 20px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #121212;
+}
+
+.section {
+    position: relative;
+    width: 100%;
+    display: block;
+}
+
+.full-height {
+    min-height: 100vh;
+}
+
+[type="checkbox"]:checked,
+[type="checkbox"]:not(:checked) {
+    position: absolute;
+    left: -2000px;
+}
+
+.checkbox:checked + label,
+.checkbox:not(:checked) + label {
+    position: relative;
+    display: block;
+    text-align: center;
+    width: 60px;
+    height: 16px;
+    border-radius: 8px;
+    padding: 0;
+    margin: 10px auto;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+.checkbox:checked + label::before,
+.checkbox:not(:checked) + label::before {
+    position: absolute;
+    display: block;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    color: #ffeba7;
+    background-color: #121212;
+}
