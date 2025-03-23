@@ -43,7 +43,7 @@ h4 {
 h6 span {
     padding: 0 20px;
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 00;
     font-size: 1.5rem;
     color: #121212;
 }
@@ -87,4 +87,187 @@ h6 span {
     border-radius: 50%;
     color: #ffeba7;
     background-color: #121212;
+    font-family: 'FontAwesome';
+    content: '\f062';
+    transform: rotate(-45deg);
+    z-index: 20;
+    top: -10px;
+    left: -10px;
+    line-height: 36px;
+    text-align: center;
+    font-size: 24px;
+    transition: all .5s;
+}
+
+.checkbox:checked + label::before {
+    transform: translateX(44px) rotate(45deg);
+}
+
+.card-3d-wrap {
+    position: relative;
+    width: clamp(300px, 100%, 440px);
+    /* max-width: 100%; */
+    height: 400px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    margin-top: 60px;
+}
+
+.card-3d-wrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    transition: all .6s ease-out;
+}
+
+.card-front,
+.card-back {
+    width: 100%;
+    height: 100%;
+    background-color: #121212;
+    /* background-position: bottom center;
+    background-size: 300%; */
+    position: absolute;
+    border-radius: 6px;
+    left: 0;
+    top: 0;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+}
+
+.checkbox:checked ~ .card-3d-wrap .card-3d-wrapper {
+    transform: rotateY(180deg);
+}
+
+.center-wrap {
+    position: absolute;
+    width: 100%;
+    padding: 0 35px;
+    top: 50%;
+    left: 0;
+    transform: translate3d(0, -50%, 50px) perspective(100px);
+    z-index: 20;
+    display: block;
+}
+
+.form-group {
+    position: relative;
+    display: block;
+    margin: 0 0 20px;
+    padding: 0;
+}
+
+.form-style {
+    padding: 14px 20px;
+    padding-left: 55px;
+    width: 100%;
+    height: 48px;
+    font-weight: 500;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: normal;
+    outline: none;
+    color: #c4c3ca;
+    background-color: #1f2029;
+    border: none;
+    transition: all .25s linear;
+    box-shadow: 0 4px 8px 0 rgba(21, 21, 21, 0.2);
+}
+
+.form-style:focus,
+.form-style:active {
+    border: none;
+    outline: none;
+    background-color: #2c2d3a;
+    box-shadow: 0 4px 8px 0 rgba(21, 21, 21, 0.5);
+}
+
+.input-icon {
+    position: absolute;
+    top: 0;
+    left: 18px;
+    line-height: 48px;
+    height: 48px;
+    font-size: 20px;
+    text-align: left;
+    color: #ffeba7;
+    transition: all .25s linear;
+}
+
+.form-group input::-webkit-input-placeholder {
+    color: #c4c3ca;
+    opacity: .7;
+    -webkit-transition: all .25s linear;
+    transition: all .25s linear;
+}
+
+.form-group input::-ms-input-placeholder {
+    color: #c4c3ca;
+    opacity: .7;
+    -webkit-transition: all .25s linear;
+    transition: all .25s linear;
+}
+
+.form-group input::-moz-placeholder {
+    color: #c4c3ca;
+    opacity: .7;
+    -webkit-transition: all .25s linear;
+    transition: all .25s linear;
+}
+
+.form-group input:focus::-webkit-input-placeholder {
+    opacity: 0;
+    transform: translateX(300px);
+    -webkit-transition: all .25s linear;
+    transition: all .25s linear;
+}
+
+.form-group input:focus::-ms-input-placeholder {
+    opacity: 0;
+    transform: translateX(300px);
+    -webkit-transition: all .25s linear;
+    transition: all .25s linear;
+}
+
+.form-group input:focus::-moz-placeholder {
+    opacity: 0;
+    transform: translateX(300px);
+    -webkit-transition: all .25s linear;
+    transition: all .25s linear;
+}
+
+.btn {
+    border-radius: 4px;
+    height: 44px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all .25s linear;
+    padding: 0 30px;
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffeba7;
+    color: #121212;
+    box-shadow: 0 8px 24px 0 rgba(255, 255, 255, .15);
+}
+
+.btn:hover {
+    background-color: #ffe180;
+    color: #121212;
+    box-shadow: 0 8px 24px 0 rgba(100, 128, 218, 0.3)
 }
