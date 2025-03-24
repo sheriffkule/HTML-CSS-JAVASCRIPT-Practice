@@ -89,7 +89,7 @@
           <div class="title-wrapper">
             <span class="material-symbols-outlined" aria-hidden="true">filter_list</span>
             <p class="title-medium">Filters</p>
-            <button class="close-btn has-state" aria-label="Close filter bar" data-filter-toggle>
+            <button class="icon-btn close-btn has-state" aria-label="Close filter bar" data-filter-toggle>
               <span class="material-symbols-outlined" aria-hidden="true">close</span>
             </button>
           </div>
@@ -269,7 +269,7 @@
                 <div class="accordion-overflow" data-filter="health">
                   <label class="filter-chip label-large">
                     Alcohol Cocktail
-                    <input type="checkbox" name="Alcohol Cocktail" aria-label="Alcohol Cocktail" value="alcohol-cocktail class="checkbox">
+                    <input type="checkbox" name="Alcohol Cocktail" aria-label="Alcohol Cocktail" value="alcohol-cocktail" class="checkbox">
                   </label>
                   <label class="filter-chip label-large">
                     AlcoholFree
@@ -285,7 +285,7 @@
                   </label>
                   <label class="filter-chip label-large">
                     Dairy Free
-                    <input type="checkbox" name="Dairy Free" aria-label="Dairy Free" value="dairy-free class="checkbox">
+                    <input type="checkbox" name="Dairy Free" aria-label="Dairy Free" value="dairy-free" class="checkbox">
                   </label>
                   <label class="filter-chip label-large">
                     DASH
@@ -610,6 +610,25 @@
           <div class="filter-actions">
             <button class="btn btn-secondary label-large has-state" data-filter-clear>Clear</button>
             <button class="btn btn-primary label-large" data-filter-toggler data-filter-submit>Apply</button>
+          </div>
+        </div>
+
+        <div class="overlay" data-overlay data-filter-toggler></div>
+
+        <div class="recipe-container container">
+          <div class="title-wrapper">
+            <h2 class="headline-small">All Recipes</h2>
+            <button class="btn btn-secondary btn-filter has-icon has-state" aria-label="Open filter bar" data-filter-toggler data-filter-btn>
+              <span class="material-symbols-outlined" aria-hidden="true">filter_list</span>
+              <div class="wrapper">
+                <span class="label-large">Filters</span>
+                <div class="badge label-small" data-filter-count>9</div>
+              </div>
+            </button>
+          </div>
+          <div class="grid-list" data-grid-list></div>
+          <div class="load-more grid-list" data-load-more>
+            <p class="body-medium info-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore, vel!</p>
           </div>
         </div>
       </article>
