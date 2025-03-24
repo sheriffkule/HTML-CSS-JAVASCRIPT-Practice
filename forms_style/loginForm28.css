@@ -43,7 +43,7 @@ h4 {
 h6 span {
     padding: 0 20px;
     text-transform: uppercase;
-    font-weight: 00;
+    font-weight: 800;
     font-size: 1.5rem;
     color: #121212;
 }
@@ -106,7 +106,6 @@ h6 span {
 .card-3d-wrap {
     position: relative;
     width: clamp(300px, 100%, 440px);
-    /* max-width: 100%; */
     height: 400px;
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
@@ -129,9 +128,7 @@ h6 span {
 .card-back {
     width: 100%;
     height: 100%;
-    background-color: #121212;
-    /* background-position: bottom center;
-    background-size: 300%; */
+    background: linear-gradient(45deg, #121212, #111c1f);
     position: absolute;
     border-radius: 6px;
     left: 0;
