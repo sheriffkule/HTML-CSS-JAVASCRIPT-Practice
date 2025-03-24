@@ -89,7 +89,7 @@
           <div class="title-wrapper">
             <span class="material-symbols-outlined" aria-hidden="true">filter_list</span>
             <p class="title-medium">Filters</p>
-            <button class="icon-btn close-btn has-state" aria-label="Close filter bar" data-filter-toggle>
+            <button class="icon-btn close-btn has-state" aria-label="Close filter bar" data-filter-toggler>
               <span class="material-symbols-outlined" aria-hidden="true">close</span>
             </button>
           </div>
@@ -98,7 +98,7 @@
             <div class="search-wrapper">
               <div class="input-outlined">
                 <label for="search" class="body-large label">Search</label>
-                <input type="text" name="search" id="search" placeholder="Search recipes..." class="input-field body-large">
+                <input type="search" name="search" id="search" placeholder="Search recipes..." class="input-field body-large">
               </div>
             </div>
 
@@ -606,15 +606,15 @@
               </div>
             </div>
           </div>
-
+          
           <div class="filter-actions">
             <button class="btn btn-secondary label-large has-state" data-filter-clear>Clear</button>
             <button class="btn btn-primary label-large" data-filter-toggler data-filter-submit>Apply</button>
           </div>
         </div>
-
+        
         <div class="overlay" data-overlay data-filter-toggler></div>
-
+        
         <div class="recipe-container container">
           <div class="title-wrapper">
             <h2 class="headline-small">All Recipes</h2>

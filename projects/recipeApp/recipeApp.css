@@ -1029,6 +1029,7 @@ main {
 }
 
 .overlay.active {
+  z-index: 3;
   opacity: 1;
   pointer-events: all;
 }
