@@ -1,6 +1,7 @@
 'use strict';
 import { fetchData } from './api.js';
 import { $skeletonCard, cardQueries } from './global.js';
+import { getTime } from './module.js';
 
 const $accordions = document.querySelectorAll('[data-accordion]');
 const initAccordion = function ($element) {
@@ -43,7 +44,7 @@ $filterSubmit.addEventListener('click', function () {
     }
   }
 
-  window.location = queries.length ? `?${queries.join('&').replace(/,/g, '=')}` : '/recipes.html';
+  window.location = queries.length ? `?${queries.join('&').replace(/,/g, '=')}` : 'recipes.html';
 });
 
 $filterSearch.addEventListener('keydown', (e) => {
@@ -96,15 +97,90 @@ const defaultQueries = [
 ];
 
 $gridList.innerHTML = $skeletonCard.repeat(20);
+let nextPageUrl = '';
 
 const renderRecipe = (data) => {
   data.hits.map((item, index) => {
     const {
       recipe: { image, label: title, totalTime: cookingTime, uri },
     } = item;
+
+    const recipeId = uri.slice(uri.lastIndexOf('_') + 1);
+    const isSaved = window.localStorage.getItem(`cookio-recipe${recipeId}`);
+
+    const $card = document.createElement('div');
+    $card.classList.add('card');
+    $card.style.animationDelay = `${100 * index}ms`;
+
+    $card.innerHTML = `
+      <figure class="card-media img-holder">
+        <img src="${image}" width="195" height="195" loading="lazy" alt="${title}" class="img-cover" />
+      </figure>
+      <div class="card-body">
+        <h3 class="title-small">
+          <a href="./detail.html?recipe=${recipeId}" class="card-link">${title ?? 'Untitled'}</a>
+        </h3>
+        <div class="meta-wrapper">
+          <div class="meta-item">
+            <span class="material-symbols-outlined">schedule</span>
+            <span class="label-medium">
+              ${getTime(cookingTime).time || '<1'} ${getTime(cookingTime).timeUnit}</span>
+          </div>
+          <button
+            class="icon-btn has-state ${isSaved ? 'saved' : 'removed'}"
+            aria-label="Add to saved recipes"
+            onclick="saveRecipe(this, '${recipeId}')">
+            <span class="material-symbols-outlined bookmark-add">bookmark_add</span>
+            <span class="material-symbols-outlined bookmark">bookmark</span>
+          </button>
+        </div>
+      </div>
+    `;
+
+    $gridList.appendChild($card);
   });
 };
 
 let requestedBefore = true;
 
-fetchData(queries);
+fetchData(queries || defaultQueries, (data) => {
+  const {
+    _links: { next },
+  } = data;
+  nextPageUrl = next?.href;
+
+  $gridList.innerHTML = '';
+  requestedBefore = false;
+
+  if (data.hits.length) {
+    renderRecipe(data);
+  } else {
+    $loadMore.innerHTML = `<p class="body-medium info-text">No recipe found</p>`;
+  }
+});
+
+const CONTAINER_MAX_WIDTH = 1200;
+const CONTAINER_MAX_CARD = 6;
+
+window.addEventListener('scroll', async (e) => {
+  if ($loadMore.getBoundingClientRect().top < window.innerHeight && !requestedBefore && nextPageUrl) {
+    $loadMore.innerHTML = $skeletonCard.repeat(
+      Math.round(($loadMore.clientWidth / CONTAINER_MAX_WIDTH) * CONTAINER_MAX_CARD)
+    );
+    requestedBefore = true;
+
+    const response = await fetch(nextPageUrl);
+    const data = await response.json();
+
+    const {
+      _links: { next },
+    } = data;
+    nextPageUrl = next?.href;
+
+    renderRecipe(data);
+    $loadMore.innerHTML = '';
+    requestedBefore = false;
+  }
+
+  if (!nextPageUrl) $loadMore.innerHTML = `<p class="body-medium info-text">No more recipes</p>`;
+});
