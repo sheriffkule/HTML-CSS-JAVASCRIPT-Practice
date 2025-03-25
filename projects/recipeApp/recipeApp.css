@@ -1108,3 +1108,92 @@ main {
   font-weight: var(--weight-medium);
   opacity: 0.7;
 }
+
+.detail-banner {
+  border-radius: var(--radius-8);
+}
+
+.detail-content {
+  margin-block: 32px;
+}
+
+.detail-page .title-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.detail-content .btn-secondary {
+  flex-shrink: 0;
+}
+
+.detail-page .saved .unsaved-text,
+.detail-page .removed .save-text {
+  display: block;
+}
+
+.detail-page .saved .save-text,
+.detail-page .removed .unsaved-text {
+  display: none;
+}
+
+.detail-author {
+  color: var(--on-background-variant);
+  margin-block: 16px;
+}
+
+.detail-author .span {
+  display: inline;
+  opacity: 0.8;
+}
+
+.detail-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.detail-stats .stats-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding-block: 16px;
+}
+
+.detail-stats .stats-item:not(:last-child) {
+  border-inline-end: 1px solid var(--outline);
+}
+
+.detail-stats .stats-item .label-medium {
+  text-transform: capitalize;
+  opacity: .8;
+}
+
+.detail-page .tag-list {
+  justify-content: flex-start;
+  margin-block: 16px 32px;
+}
+
+.ingr-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ingr-title .label-medium {
+  opacity: 0.8;
+}
+
+.ingr-list {
+  margin-block-start: 16px;
+  border-block-start: 1px solid var(--outline);
+  padding-block-start: 8px;
+}
+
+.ingr-item {
+  color: var(--on-background-variant);
+  margin-block: 8px;
+  list-style-type: disc;
+  margin-inline-start: 24px;
+}
