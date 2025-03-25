@@ -1,0 +1,58 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: radial-gradient(#ddd 8%, #111 8%);
+    background-size: 20px 20px;
+    animation: moveBg 30s linear infinite;
+}
+
+@keyframes moveBg {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 0% -100%;
+    }
+}
+
+aside {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    position: relative;
+}
+
+.element {
+    width: 50%;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: -30px;
+    transform: translateY(-50%) rotate(calc(360deg / 90 * var(--i)));
+    transform-origin: 240px;
+    animation: rotate 8s linear infinite;
+    animation-delay: calc(var(--i) * -50ms);
+}
+
+.element:nth-child(even) {
+    background: dodgerblue;
+}
+
+.element:nth-child(odd) {
+    background: crimson;
+}
+
+@keyframes rotate {
+    to {
+        rotate: 360deg;
+    }
+}
