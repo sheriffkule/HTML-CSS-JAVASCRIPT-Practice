@@ -1,0 +1,76 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #111;
+  overflow: hidden;
+}
+
+.container {
+  position: relative;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text {
+  position: absolute;
+  transition: all 0.5s;
+  font-size: clamp(50px, 12vw, 110px);
+  font-weight: 900;
+  transition: .5s ease-in-out;
+}
+
+.splatter {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  opacity: 0;
+  transition: all 0.8s ease-in-out;
+}
+
+.splatter span {
+    width: 12px;
+    height: 12px;
+    background: white;
+    clip-path: polygon(0% 0%, 0% 100%, 25% 100%, 25% 25%, 75% 25%, 75% 75%, 25% 75%, 25% 100%, 100% 100%, 100% 0%);
+    transform: translate(0, 0) scale(1);
+    transition: all .8s ease-in-out;
+}
+
+.splatter span:nth-child(odd) {
+    background: cornflowerblue;
+}
+
+.container:hover .text {
+    opacity: 0;
+}
+
+.container:hover .splatter {
+    opacity: 1;
+}
+
+.container:hover .splatter span {
+    transform: 
+      translateX(calc(-255px + 250px * var(--x)))
+      translateY(calc(-255px + 250px * var(--y)))
+      rotate(calc(360deg * var(--x)));
+    opacity: 0;
+    transform-origin: center;
+  }
+.container:not(:hover) .splatter span {
+    transform: translate(0, 0) rotate(0) scale(1);
+    opacity: 1;
+}
