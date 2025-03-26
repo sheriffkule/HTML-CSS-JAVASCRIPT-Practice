@@ -69,7 +69,7 @@ const addTabContent = ($currentTabBtn, $currentTabPanel) => {
 
     for (let i = 0; i < 10; i++) {
       const {
-        recipe: { image, label: title, totalTime: cookingTime, uri },
+        recipe: { image, label: title, totalTime: cookingTime, uri }
       } = data.hits[i];
 
       const recipeId = uri.slice(uri.lastIndexOf('_') + 1);
@@ -90,13 +90,14 @@ const addTabContent = ($currentTabBtn, $currentTabPanel) => {
           <div class="meta-wrapper">
             <div class="meta-item">
               <span class="material-symbols-outlined">schedule</span>
-              <span class="label-medium">${getTime(cookingTime).time || '<1'} ${
-        getTime(cookingTime).timeUnit
-      }</span>
+              <span class="label-medium"
+                >${getTime(cookingTime).time || '<1'} ${getTime(cookingTime).timeUnit}</span
+              >
             </div>
-            <button class="icon-btn has-state ${
-              isSaved ? 'saved' : 'removed'
-            }" aria-label="Add to saved recipes" onclick="saveRecipe(this, '${recipeId}')">
+            <button
+              class="icon-btn has-state ${isSaved ? 'saved' : 'removed'}"
+              aria-label="Add to saved recipes"
+              onclick="saveRecipe(this, '${recipeId}')">
               <span class="material-symbols-outlined bookmark-add">bookmark_add</span>
               <span class="material-symbols-outlined bookmark">bookmark</span>
             </button>

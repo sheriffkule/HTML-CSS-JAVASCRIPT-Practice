@@ -552,7 +552,7 @@ main {
 
 .grid-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(172px, 1fr));
+    grid-template-columns: 1fr 1fr;
     gap: 12px 8px;
 }
 
@@ -1214,4 +1214,61 @@ main {
 
 .filter.content-skeleton .filter-chip-skeleton {
   width: 80px;
+}
+
+.saved-recipe-page {
+  padding-block-end: 24px;
+}
+
+.saved-recipe-page .section-title {
+  line-height: 40px;
+}
+
+@media screen and (min-width: 600px) {
+  :root {
+    --fs-display-large: 3.6rem;
+    --fs-display-medium: 3.3rem;
+    --fs-display-small: 3rem;
+  }
+  .container {
+    padding-inline: 32px;
+  }
+  .grid-list {
+    grid-template-columns: repeat(auto-fit, minmax(172px, 1fr));
+  }
+  .section-title {
+    margin-block-end: 24px;
+  }
+  .snackbar-container {
+    right: auto;
+    bottom: 32px;
+    left: 32px;
+    max-width: 360px;
+    width: 100%;
+  }
+  .display-large,
+  .display-medium {
+    line-height: 44px;
+  }
+  .display-small {
+    line-height: 36px;
+  }
+  .title-small {
+    font-size: 1.6rem;
+    font-weight: var(--weight-medium);
+    line-height: 24px;
+    letter-spacing: .15px;
+  }
+  .banner-card {
+    background-image: url(images/hero-banner-medium.jpg);
+  }
+  .search-field {
+    height: 72px;
+  }
+  .search-wrapper .search-submit {
+    width: 100px;
+  }
+  .hero .search-wrapper {
+    margin-block: 24px;
+  }
 }
