@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: radial-gradient(ellipse at 50% -50%, #333,#111, transparent) #111;
+    background-size: 50px 50px;
+    overflow: hidden;
+}
+
+.molecular-motion {
+    position: relative;
+    width: 300px;
+    transform-style: preserve-3d;
+}
+
+.particle {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: #0fc;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #0fc,
+    0 0 20px #0fc;
+    animation: move-particle 4s ease-in-out infinite;
+}
+
+@keyframes move-particle {
+    0% {
+        transform: translateY(-100%) rotateX(0deg) rotateY(0deg);
+        opacity: 0;
+    }
+    25% {
+        transform: translateY(-50%) rotateX(180deg) rotateY(180deg);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(0%) rotateX(360deg) rotateY(360deg);
+        opacity: 0.5;
+    }
+    75% {
+        transform: translateY(50%) rotateX(540deg) rotateY(540deg);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(100%) rotateX(720deg) rotateY(720deg);
+        opacity: 0;
+    }
+}
+
+.background-particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: #0fc;
+    border-radius: 100% 0% 100% 0% / 100% 0% 100% 0%;
+    box-shadow: 0 0 5px #0fc,
+    0 0 10px #0fc;
+    animation: float 5s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0);
+        opacity: 0;
+    }
+    50% {
+        transform: translate(50vw, -50vh);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(0, 0);
+        opacity: 0;
+    }
+}
