@@ -1197,3 +1197,21 @@ main {
   list-style-type: disc;
   margin-inline-start: 24px;
 }
+
+.detail-banner-skeleton {
+  aspect-ratio: 1 / 1;
+}
+
+.detail-content-skeleton {
+  height: 32px;
+  width: 50%;
+}
+
+.detail-content-skeleton .text-skeleton {
+  height: 14px;
+  width: 80%;
+}
+
+.filter.content-skeleton .filter-chip-skeleton {
+  width: 80px;
+}
