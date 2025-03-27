@@ -114,6 +114,7 @@ body::before {
     background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
     top: -50%;
     left: -50%;
+    z-index: -1;
     opacity: .4;
 }
 
@@ -136,4 +137,155 @@ body::before {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     transition: all .3s;
+}
+
+.card:hover .icon-bg {
+    transform: scale(1.1) rotate(360deg);
+    box-shadow: 70px 0 0 -40px rgba(0, 0, 0, 0.1),
+    -70px 0 0 -40px rgba(0, 0, 0, 0.1),
+    0 70px 0 -40px rgba(0, 0, 0, 0.1),
+    0 -70px 0 -40px rgba(0, 0, 0, 0.1);
+}
+
+.icon span {
+    position: relative;
+    font-size: 54px;
+    z-index: 2;
+    filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.2));
+    color: transparent;
+    background: linear-gradient(135deg, #43229a 0%,  50%, #0a7bb8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+h2 {
+    margin-bottom: 15px;
+    font-weight: 600;
+    font-size: 26px;
+    background: linear-gradient(90deg, #fff, #00a6ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-front p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 300;
+    text-wrap: balance;
+}
+
+.card-back p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 300;
+    margin-bottom: 20px;
+    text-wrap: balance;
+}
+
+.btn {
+    padding: 10px 20px;
+    background: linear-gradient(90deg, #8a2be2, #4169e1);
+    border: none;
+    border-radius: 30px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .3s;
+    box-shadow: 0 5px 15px rgba(65, 105, 225, 0.4);
+    margin-top: 15px;
+}
+
+.btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 20px rgba(65, 105, 225, 0.6);
+    background-size: 120% 100%;
+}
+
+.shine {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0) 60%);
+    pointer-events: none;
+}
+
+.instruction {
+    position: fixed;
+    bottom: 20px;
+    background: rgba(0, 0, 0, 0.15);
+    padding: 12px 30px;
+    border-radius: 30px;
+    color: #fff;
+    font-size: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 300;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+        backdrop-filter: blur(10px);
+    }
+}
+
+.card-patterns {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    border-radius: 20px;
+    pointer-events: none;
+    opacity: .5;
+}
+
+.pattern-dots {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.15) 3px, transparent 3px);
+    background-size: 20px 20px;
+}
+
+.pattern-dots.top-right {
+    top: -50px;
+    right: -50px;
+}
+
+.pattern-dots.bottom-left {
+    bottom: -50px;
+    left: -50px;
+}
+
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.particle {
+    position: absolute;
+    display: block;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
 }
