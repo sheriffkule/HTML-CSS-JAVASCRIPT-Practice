@@ -24,6 +24,7 @@ body {
     background-color: var(--bg-light);
     color: var(--text-dark);
     line-height: 1.6;
+    transition: all .5s;
 }
 
 .dashboard {
@@ -39,6 +40,10 @@ header {
     border-radius: 12px;
     margin-bottom: 20px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+header p {
+    text-wrap: pretty;
 }
 
 h1 {
@@ -123,7 +128,7 @@ button:hover {
     color: var(--text-light);
 }
 
-.dar-mode .chart-card {
+.dark-mode .chart-card {
     background-color: #242444;
     color: var(--text-light);
 }
