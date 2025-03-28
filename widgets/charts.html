@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive & Animated Charts</title>
+    <link rel="stylesheet" href="/widgets_style/charts.css" />
+  </head>
+  <body>
+    <div class="dashboard">
+      <header>
+        <h1>Interactive Analytics Dashboard</h1>
+        <p>Charts are interactive and with light and dark mode</p>
+      </header>
+      <div class="controls">
+        <button id="refreshData">Refresh Data</button>
+        <button id="themeToggle" class="theme-toggle">Dark Mode</button>
+      </div>
+      <div class="charts-container">
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">Revenue Growth</div>
+          </div>
+          <div class="chart-container">
+            <canvas id="chart1"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">User Growth</div>
+          </div>
+          <div class="chart-container">
+            <canvas id="chart2"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">Market Share</div>
+          </div>
+          <div class="chart-container">
+            <canvas id="chart3"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">Sales by Region</div>
+          </div>
+          <div class="chart-container">
+            <canvas id="char4"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">Conversion Rate</div>
+          </div>
+          <div class="chart-container">
+            <canvas id="chart5"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">Customer Satisfaction</div>
+          </div>
+          <div class="chart-container">
+            <canvas id="chart6"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">Traffic Sources</div>
+          </div>
+          <div class="chart-container">
+            <canvas id="chart7"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">Platform Usage</div>
+          </div>
+          <div class="chart-container">
+            <canvas id="chart8"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">Monthly Performance</div>
+          </div>
+          <div class="chart-container">
+            <canvas id="chart9"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/widgets_script/charts.js"></script>
+  </body>
+</html>
