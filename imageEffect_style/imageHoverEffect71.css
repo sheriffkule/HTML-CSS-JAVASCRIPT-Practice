@@ -1,0 +1,79 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(#888 1px, transparent 1px),
+    linear-gradient(90deg, #888 1px, transparent 1px) darkslategray;
+  background-size: 50px 50px;
+  text-align: center;
+}
+
+h1,
+h2 {
+  text-align: center;
+  margin-block-end: 2rem;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  outline: 1px dashed;
+  outline-offset: 0.5rem;
+  place-self: center;
+  inline-size: 600px;
+  block-size: 600px;
+  margin-block-end: 40px;
+}
+
+.slide {
+  grid-area: 1 / 1;
+  font-size: 4rem;
+}
+
+img {
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+}
+
+@property --position {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
+
+.wipe-effect-1 .slide:nth-child(2) {
+  --size: 40%;
+  --step: 10%;
+  /*you can change linear to radial or conic */
+  mask-image: linear-gradient(
+    90deg,
+    #000 calc(var(--position) - var(--size)),
+    rgba(0, 0, 0, 0.75) 0 calc(var(--position) - var(--size) + var(--step) * 1),
+    rgba(0, 0, 0, 0.5) 0 calc(var(--position) - var(--size) + var(--step) * 2),
+    rgba(0, 0, 0, 0.25) 0 calc(var(--position) - var(--size) + var(--step) * 3),
+    #0000 0 calc(var(--position))
+  );
+  transition: --position 1s ease-in-out;
+}
+
+.wipe-effect-2 .slide:nth-child(2) {
+  --size: 40%;
+
+  mask-image: radial-gradient(circle, #000 calc(var(--position) - var(--size)), #0000 calc(var(--position)));
+  transition: --position 1s ease-in-out;
+}
+
+.wipe-effect-3 .slide:nth-child(2) {
+  --size: 40%;
+
+  mask-image: conic-gradient(#000 calc(var(--position) - var(--size)), #0000 calc(var(--position)));
+  transition: --position 1s ease-in-out;
+}
+
+.slide:nth-child(2):hover {
+    --position: calc(100% + var(--size));
+  }
