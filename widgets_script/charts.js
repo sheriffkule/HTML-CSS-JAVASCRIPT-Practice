@@ -447,3 +447,12 @@ themeToggle.addEventListener('click', () => {
 });
 
 initTheme();
+
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+  yearElement.dateTime = currentYear;
+  yearElement.textContent = currentYear;
+}
+
+updateYear();
