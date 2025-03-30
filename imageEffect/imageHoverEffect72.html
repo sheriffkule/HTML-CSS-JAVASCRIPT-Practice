@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D Cube Image Gallery</title>
+    <link rel="stylesheet" href="/imageEffect_style/imageHoverEffect72.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>SheriffKule</h1>
+      <div class="gallery-container">
+        <div class="cube">
+          <div class="face front">
+            <img src="/images/earth.jpg" alt="image" />
+          </div>
+          <div class="face back">
+            <img src="/images/dreamy-world.jpg" alt="image" />
+          </div>
+          <div class="face right">
+            <img src="/images/cityscape.jpg" alt="image" />
+          </div>
+          <div class="face left">
+            <img src="/images/glowing_globe.jpg" alt="image" />
+          </div>
+          <div class="face top">
+            <img src="/images/darkhex.jpg" alt="image" />
+          </div>
+          <div class="face bottom">
+            <img src="/images/matrix.jpg" alt="image" />
+          </div>
+        </div>
+      </div>
+      <div class="controls">
+        <button onclick="rotateCube('left')"> Rotate Left</button>
+        <button onclick="rotateCube('right')"> Rotate Right</button>
+        <button onclick="rotateCube('up')"> Rotate Up</button>
+        <button onclick="rotateCube('down')"> Rotate Down</button>
+      </div>
+    </div>
+    <script src="/imageEffect_script/imageHoverEffect72.js"></script>
+  </body>
+</html>
