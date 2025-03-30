@@ -1,0 +1,85 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #000;
+}
+
+p {
+  position: relative;
+  font-weight: 700;
+  font-size: 10em;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(
+    90deg,
+    transparent 10px,
+    red 10px,
+    orange 94px,
+    yellow 210px,
+    green 322px,
+    aqua 395px,
+    blue 520px,
+    purple 579px,
+    darkslategray 720px
+  );
+}
+
+p::after,
+p::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  background: linear-gradient(to bottom, #000, transparent, #000),
+    linear-gradient(
+      90deg,
+      transparent 10px,
+      red 10px,
+      red 32px,
+      transparent 32px,
+      transparent 94px,
+      orange 94px,
+      orange 120px,
+      transparent 120px,
+      transparent 210px,
+      yellow 210px,
+      yellow 232px,
+      transparent 232px,
+      transparent 318px,
+      green 318px,
+      green 342px,
+      transparent 342px,
+      transparent 395px,
+      aqua 395px,
+      aqua 415px,
+      transparent 415px,
+      transparent 500px,
+      blue 500px,
+      blue 530px,
+      transparent 530px,
+      transparent 635px,
+      purple 635px,
+      purple 660px,
+      transparent 660px,
+      transparent 760px,
+      darkslategray 760px,
+      darkslategray 790px,
+      transparent 790px
+    );
+    filter: blur(50px);
+    inset: -30svh 0;
+}
+
+p::after {
+    filter: blur(2px);
+    opacity: .5;
+}

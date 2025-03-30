@@ -167,7 +167,6 @@ h4 {
     font-size: 14px;
     font-weight: 200;
     color: #c9c9c9;
-    pointer-events: none;
     justify-self: center;
     align-self: flex-end;
     margin-block-end: 12px;
