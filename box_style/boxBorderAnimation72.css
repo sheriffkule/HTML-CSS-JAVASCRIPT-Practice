@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #222;
+}
+
+.container {
+    display: flex;
+    gap: 50px;
+}
+
+.container .card {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    background: #363636;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.container .card:hover {
+    background: #555;
+}
+
+.container .card .ripple {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: #fff;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(255, 255, 255,0.3) 0%, transparent 70%);
+    animation: ripple .8s ease-out forwards;
+}
+
+@keyframes ripple {
+    from {
+        width: 0px;
+        height: 0px;
+        opacity: 1;
+    }
+    to {
+        width: 400px;
+        height: 400px;
+        opacity: 0;
+    }
+}
