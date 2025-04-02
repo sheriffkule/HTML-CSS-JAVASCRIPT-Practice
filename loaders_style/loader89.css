@@ -1,0 +1,157 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #000;
+    overflow: hidden;
+}
+
+.container {
+    width: 600px;
+    height: 400px;
+    margin: 0 auto;
+    perspective: 1000px;
+}
+
+.wrapper {
+    width: 100%;
+    height: 100%;
+    transform: rotateX(45deg) rotateY(45deg);
+    transform-style: preserve-3d;
+}
+
+.ball {
+    position: relative;
+    width: 70%;
+    height: 70%;
+    margin: 0 auto;
+    transform-style: preserve-3d;
+    list-style-type: none;
+    animation: rotate 7.5s linear infinite;
+}
+
+.ball li {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 3px;
+    border-style: dashed;
+    border-radius: 50%;
+    animation: opacity .75s ease-in-out forwards;
+    opacity: 0;
+    transform: rotateY(calc(var(--i) * 6deg));
+    animation-delay: calc(var(--i) * 0.1s);
+}
+
+li:nth-child(1) {
+    color: #8df435;
+}
+
+li:nth-child(2) {
+    color: #a8e526;
+}
+
+li:nth-child(3) {
+    color: #c2d11c;
+}
+
+li:nth-child(4) {
+    color: #c8cb1b;
+}
+
+li:nth-child(5) {
+    color: #deb21a;
+}
+
+li:nth-child(6) {
+    color: #ef9621;
+}
+
+li:nth-child(7) {
+    color: #f29122;
+}
+
+li:nth-child(8) {
+    color: #fb7430;
+}
+
+li:nth-child(9) {
+    color: #fe5944;
+}
+
+li:nth-child(10) {
+    color: #fe5548;
+}
+
+li:nth-child(11) {
+    color: #f83d61;
+}
+
+li:nth-child(12) {
+    color: #ec2b7d;
+}
+
+li:nth-child(13) {
+    color: #e82983;
+}
+
+li:nth-child(14) {
+    color: #d41e9f;
+}
+
+li:nth-child(15) {
+    color: #bd1aba;
+}
+
+li:nth-child(16) {
+    color: #b81ac0;
+}
+
+li:nth-child(7) {
+    color: #9c1fd7;
+}
+
+li:nth-child(18) {
+    color: #802aea;
+}
+
+li:nth-child(19) {
+    color: #7a2dee;
+}
+
+li:nth-child(20) {
+    color: #5f40f9;
+}
+
+li:nth-child(21) {
+    color: #4657fe;
+}
+
+li:nth-child(22) {
+    color: #425cfe;
+}
+
+li:nth-child(23) {
+    color: #2f77fb;
+}
+
+@keyframes rotate {
+    to {
+        transform: rotateY(360deg) rotateX(360deg);
+    }
+}
+
+@keyframes opacity {
+    to {
+        opacity: 1;
+    }
+}
