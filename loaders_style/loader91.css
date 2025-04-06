@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #000;
+  overflow: hidden;
+}
+
+.loader {
+  width: 300px;
+  height: 300px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: perspective(500px) rotateX(60deg);
+}
+
+.loader .element {
+  position: absolute;
+  inset: calc(var(--i) * 10px);
+  box-shadow: 0 0 80px dodgerblue !important;
+  border-radius: 50%;
+  /* clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); */
+  animation: move 6s ease-in-out infinite both;
+  animation-delay: calc(var(--i) * 0.2s);
+}
+
+@keyframes move {
+    0%, 100% {
+        transform: translateZ(-120px) scaleX(-1);
+    }
+    50% {
+        transform: translateZ(120px) scaleX(1);
+    }
+}
