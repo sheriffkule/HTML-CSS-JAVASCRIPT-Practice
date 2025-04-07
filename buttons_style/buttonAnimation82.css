@@ -1,0 +1,122 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(#232323 1px, transparent 1px),
+    linear-gradient(90deg, #232323 1px, transparent 1px) #000;
+    background-size: 50px 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 10rem;
+}
+
+h1 {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    color: #ccc;
+    margin-block-end: 8rem;
+}
+
+.social {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+a {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    inline-size: 5rem;
+    aspect-ratio: 1;
+    font-size: 2rem;
+    color: #707070;
+    background-color: #2b2b2b;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: color .6s ease-in-out;
+}
+
+@property --fill {
+    syntax: '<percentage>';
+    inherits: true;
+    initial-value: 0%;
+}
+
+a::after,
+a::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: -5px;
+    border-radius: inherit;
+    background: conic-gradient(currentColor var(--fill), transparent var(--fill));
+    transition: --fill .6s .3s ease-in-out;
+}
+
+a:hover {
+    color: greenyellow;
+    outline: 1px solid transparent;
+}
+
+a:hover,
+a:hover::after,
+a:hover::before {
+    transition-delay: 0s;
+}
+
+a:nth-child(1):hover {
+    --fill: 100%
+}
+
+a:nth-child(1)::after {
+    display: none;
+}
+
+a:nth-child(2):hover {
+    --fill: 100%
+}
+
+a:nth-child(2)::before {
+    transform: rotateY(180deg);
+}
+
+a:nth-child(2)::after {
+    display: none;
+}
+
+a:nth-child(3):hover {
+    --fill: 50%
+}
+
+a:nth-child(3)::after {
+    transform: rotateY(180deg);
+}
+
+a:nth-child(4):hover {
+    --fill: 50%
+}
+
+a:nth-child(4)::before {
+    transform: rotateX(180deg);
+}
+
+a:nth-child(4)::after {
+    transform: rotate(180deg);
+}
+
+a:nth-child(5):hover {
+    --fill: 50%
+}
+
+a:nth-child(5)::after {
+    transform: rotate(180deg);
+}
