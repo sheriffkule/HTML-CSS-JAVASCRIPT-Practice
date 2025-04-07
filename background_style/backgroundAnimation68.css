@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(#0000, #0010ff33),
+    radial-gradient(circle, rgb(255, 15, 184) 0%, rgb(0, 0, 0) 100%);
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.container div {
+    z-index: 1;
+    position: relative;
+}
+
+h1 {
+    font-size: 36px;
+    transform: translateX(20px);
+    user-select: none;
+}
+
+#canvas {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+}
