@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Bangers", system-ui;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #000;
+}
+
+div {
+    position: relative;
+    font-size: clamp(60px, 15vw, 150px);
+    background-image: linear-gradient(
+        90deg,
+        red,
+        orange,
+        yellow,
+        green,
+        blue,
+        indigo,
+        violet
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: move 40s linear infinite;
+    letter-spacing: 5px;
+}
+
+div::before {
+    content: 'SHERIFFKULE';
+    position: absolute;
+    top: 100px;
+    background-image: linear-gradient(
+        90deg,
+        red,
+        orange,
+        yellow,
+        green,
+        blue,
+        indigo,
+        violet
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: move 40s linear infinite;
+    transform: rotateY(180deg) scale(-1);
+    opacity: .8;
+    mask-image: linear-gradient(transparent, #000);
+}
+
+@keyframes move {
+    to {
+        background-position: 1000vh;
+    }
+}
