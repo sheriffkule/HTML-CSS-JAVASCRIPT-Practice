@@ -7,14 +7,19 @@
     text-decoration: none;
 }
 
+a {
+    color: #333;
+}
+
 html {
     font-size: 62.5%;
 }
 
 .container {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     position: relative;
+    background: #999;
 }
 
 .menu {
@@ -43,6 +48,7 @@ html {
     perspective: 100rem;
     position: relative;
     top: 0;
+    z-index: 10;
     transition: top .5s ease-in;
 }
 
@@ -84,4 +90,74 @@ html {
 
 .menu-btn div:last-child:hover span {
     transform: rotateX(90deg);
+}
+
+.nav {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    background-color: #c0ff61;
+    width: 50rem;
+    height: 60rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10rem 0 5rem 5rem;
+    box-sizing: border-box;
+    transform: scale(.2, 0.06);
+    transform-origin: 100% 0;
+    transition: transform .5s .5s ease-in-out, top .5s .5s, right .5s .5s;
+}
+
+.change .nav {
+    transform: scale(1);
+    top: 0;
+    right: 0;
+}
+
+.nav-link {
+    font-size: 3.5rem;
+    font-weight: 200;
+    text-transform: uppercase;
+    transform: translate3d(2rem, 10rem, 0) rotateX(90deg);
+    opacity: 0;
+    display: block;
+    height: 7rem;
+}
+
+.change .nav-link {
+    transform: translate3d(0, 0, 0) rotateX(0);
+    opacity: 1;
+    transition: opacity .5s var(--i), transform .5s var(--i);
+}
+
+.social-media {
+    width: 30rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.social-media-group a {
+    font-size: 1.8rem;
+    font-weight: 200;
+    height: 3rem;
+}
+
+.letter {
+    transition: font-weight .4s;
+}
+
+.letter:hover {
+    font-weight: 900;
+    color: #777;
+}
+
+.letter:hover + .letter {
+    font-weight: 500;
+    color: #aaa;
+}
+
+.letter:has(+ .letter:hover) {
+    font-weight: 500;
+    color: #aaa;
 }
