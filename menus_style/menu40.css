@@ -1,0 +1,87 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    list-style-type: none;
+    text-decoration: none;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.menu {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+}
+
+.menu-btn {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 10rem;
+    height: 4rem;
+    border: none;
+    overflow: hidden;
+}
+
+.menu-btn div {
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    width: inherit;
+    height: inherit;
+    display: grid;
+    place-items: center;
+    perspective: 100rem;
+    position: relative;
+    top: 0;
+    transition: top .5s ease-in;
+}
+
+.change .menu-btn div {
+    top: -4rem;
+}
+
+.menu-btn div:first-child {
+    background-color: #c0ff61;
+    color: #333;
+}
+
+.menu-btn div:last-child {
+    background-color: #101e20;
+    color: #c0ff61;
+}
+
+.menu-btn span {
+    width: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transform-origin: top;
+    transition: transform 0.3s ease-in;
+}
+
+.menu-btn span::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    transform: rotateX(-90deg);
+    transform-origin: top;
+}
+
+.menu-btn div:first-child:hover span {
+    transform: rotateX(90deg);
+}
+
+.menu-btn div:last-child:hover span {
+    transform: rotateX(90deg);
+}
