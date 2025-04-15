@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #222;
+}
+
+.btn {
+    position: relative;
+    padding: 20px 50px;
+    background: #3498db;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    letter-spacing: .2em;
+    font-size: 1.5em;
+    font-weight: 600;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 1;
+    animation: animate 1s ease-out forwards;
+}
+
+@keyframes animate {
+    to {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty)) scale(4);
+    }
+}
