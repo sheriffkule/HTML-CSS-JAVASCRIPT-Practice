@@ -50,7 +50,7 @@ section {
 .section_title h2 {
     font-size: 3rem;
     font-family: var(--Parkinsans-font);
-    font-weight: 500;
+    font-weight: 400;
     text-transform: capitalize;
     color: var(--black);
     padding-bottom: 20px;
@@ -60,7 +60,7 @@ section {
     font-size: 1.1;
     font-weight: 400;
     font-family: var(--Parkinsans-font);
-    text-transform: capitalize;
+    text-transform: uppercase;
     color: var(--black);
     padding-bottom: 10px;
 }
@@ -180,6 +180,7 @@ section {
 }
 
 .navbar {
+    background-color: var(--secondary-dark);
     height: 90px;
     width: 100%;
     display: flex;
@@ -516,6 +517,144 @@ section {
     padding: 3px 5px;
 }
 
+.service {
+    flex-direction: column;
+}
+
+.service_title {
+    text-align: center;
+    align-items: center;
+    width: 100%;
+}
+
+.service_wrap {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    place-content: center;
+    place-items: center;
+    gap: 30px;
+}
+
+.service_item {
+    width: 100%;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    background: transparent;
+    background-image: linear-gradient(142deg, var(--primary-color) 0%, var(--secondary-light) 70%);
+    padding: 12px;
+    border-radius: 30px;
+}
+
+.service_image {
+    width: 100%;
+    overflow: hidden;
+    clip-path: polygon(50% 0%, 85% 1%, 100% 18%, 100% 85%, 83% 99%, 45% 97%, 14% 93%, 0 83%, 0 21%, 15% 1%);
+}
+
+.service_info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.service_info h4 {
+    font-size: 1.25rem;
+    font-weight: 400;
+    padding-bottom: 30px;
+}
+
+.service_item .btn {
+    width: 100%;
+    background-color: var(--white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.service_item .btn i {
+    color: var(--secondary-color);
+    background-color: var(--secondary-light);
+    font-size: .9rem;
+    padding: 12px 14px;
+    border-radius: 50%;
+}
+
+.testimonials_container {
+    width: 100%;
+    background-color: var(--primary-light);
+    border-radius: 10px;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px;
+}
+
+.testimonials_title {
+    text-align: center;
+    align-items: center;
+    padding-bottom: 30px;
+}
+
+.testimonials_swiper {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+}
+
+.testimonials_item {
+    width: 100%;
+    border-radius: 10px;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    background-color: var(--white);
+    padding: 30px;
+}
+
+.testimonials_item i {
+    font-size: 2rem;
+    padding-bottom: 20px;
+}
+
+.testimonials_item p {
+    font-size: 1rem;
+    font-family: var(--Parkinsans-font);
+    text-wrap: pretty;
+    line-height: 1.8rem;
+}
+
+.testimonials_user {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-top: 30px;
+}
+
+.testimonials_user img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.testimonials_user h4 {
+    font-size: 1rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-family: var(--Parkinsans-font);
+}
+
+.testimonials_user h4 span {
+    display: block;
+    font-size: .8rem;
+}
+
+
+
+
+
 
 
 
@@ -540,6 +679,14 @@ section {
 
     .section_title h2 {
         font-size: 2.5rem;
+    }
+
+    .service_wrap {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .teams_btn {
+        left: 43%;
     }
 }
 
@@ -599,6 +746,10 @@ section {
     .section_title h2 {
         font-size: 2rem;
     }
+
+    .teams_btn {
+        left: 40%;
+    }
 }
 
 @media screen and (max-width: 900px) {
@@ -652,6 +803,14 @@ section {
     .section_title {
         width: 100%;
     }
+
+    #team_element1 {
+        top: 9%;
+    }
+
+    .teams_btn {
+        left: 39%;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -694,6 +853,37 @@ section {
 
     .section_title h2 {
         font-size: 2rem;
+    }
+
+    .service_wrap {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .service_item {
+        width: 80%;
+        margin: auto;
+    }
+
+    .team_wrapper {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .counter {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .counter_col {
+        align-items: center;
+        text-align: center;
+        border: 0;
+    }
+
+    .teams_btn {
+        left: 38%;
+    }
+
+    #team_element2 {
+        top: 80%;
     }
 }
 
@@ -751,5 +941,14 @@ section {
 
     .section_title p {
         font-size: .9rem;
+    }
+
+    .service_item {
+        width: 100%;
+        margin: 0;
+    }
+
+    .testimonials_container {
+        padding: 30px;
     }
 }
