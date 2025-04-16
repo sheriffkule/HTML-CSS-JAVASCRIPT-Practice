@@ -20,7 +20,7 @@
     --secondary-light: #e8f5d3;
     --white: #ffffff;
     --black-light: #0000001a;
-    --gray: #ffffff33;
+    --gray: #00000033;
     --Parkinsans-font: 'Parkinsans', sans-serif;
     --Winky-font: "Winky Sans", sans-serif;
     --transition-fast: all .4s ease-in-out;
@@ -53,6 +53,7 @@ section {
     font-weight: 500;
     text-transform: capitalize;
     color: var(--black);
+    padding-bottom: 20px;
 }
 
 .section_title h6 {
@@ -61,6 +62,28 @@ section {
     font-family: var(--Parkinsans-font);
     text-transform: capitalize;
     color: var(--black);
+    padding-bottom: 10px;
+}
+
+.section_title p {
+    font-size: 1rem;
+    color: var(--gray-light);
+    text-wrap: pretty;
+    line-height: 1.5rem;
+}
+
+.section_image {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.section_image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .btn {
@@ -379,6 +402,7 @@ section {
 
 .works {
     flex-direction: column;
+    background-color: var(--secondary-light);
 }
 
 .works_title {
@@ -452,6 +476,46 @@ section {
     color: var(--secondary-color);
 }
 
+.about {
+    background-color: var(--primary-light);
+}
+
+.about_image {
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.about_image img {
+    transition: var(--transition-slow);
+}
+
+.about_image:hover img {
+    transform: scale(1.1);
+}
+
+.about_title ul {
+    width: 100%;
+    display: flex;
+    padding: 30px 0;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.about_title ul li {
+    display: flex;
+    align-items: center;
+}
+
+.about_title ul li i {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    border-radius: 50%;
+    margin-right: 4px;
+    font-size: .9rem;
+    padding: 3px 5px;
+}
+
 
 
 
@@ -472,6 +536,10 @@ section {
     .hero_container {
         background-position: top right;
         background-size: 160% auto;
+    }
+
+    .section_title h2 {
+        font-size: 2.5rem;
     }
 }
 
@@ -527,6 +595,10 @@ section {
         padding-left: 0;
         align-items: flex-end;
     }
+
+    .section_title h2 {
+        font-size: 2rem;
+    }
 }
 
 @media screen and (max-width: 900px) {
@@ -568,6 +640,18 @@ section {
         right: 0;
         top: 42px;
     }
+
+    section {
+        flex-direction: column;
+    }
+
+    .section_image {
+        width: 100%;
+    }
+
+    .section_title {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -596,6 +680,19 @@ section {
     }
 
     .hero_box h1 {
+        font-size: 2rem;
+    }
+
+    .works_wrapper {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 50px;
+    }
+
+    .arrow_icon1 {
+        display: none;
+    }
+
+    .section_title h2 {
         font-size: 2rem;
     }
 }
@@ -642,5 +739,17 @@ section {
     .hero_box {
         transform: translateY(80px);
         height: 350px;
+    }
+
+    .section_title h2 {
+        font-size: 1.5rem;
+    }
+
+    .section_title h6 {
+        font-size: .9rem;
+    }
+
+    .section_title p {
+        font-size: .9rem;
     }
 }
