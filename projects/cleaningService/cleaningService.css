@@ -895,6 +895,274 @@ section {
     font-family: var(--Parkinsans-font);
 }
 
+footer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 5% 4%;
+    padding-bottom: 0;
+    background-color: var(--secondary-light);
+}
+
+.footer_top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer_top_left  h2{
+    font-size: 2rem;
+    padding-bottom: 10px;
+    text-wrap: balance;
+    font-family: var(--Parkinsans-font);
+    font-weight: 500;
+}
+
+.footer_top_right {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.footer_top_right h6 {
+    font-size: 1rem;
+    font-family: var(--Parkinsans-font);
+    font-weight: 500;
+    padding-bottom: 10px;
+}
+
+.footer_input_box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer_input_box input {
+    height: 50px;
+    width: 250px;
+    padding-left: 12px;
+    border: none;
+    font-size: .9rem;
+    border-radius: 30px;
+    outline: none;
+}
+
+.footer_wrap {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    place-items: center;
+    place-content: center;
+    padding: 50px 0;
+    gap: 30px;
+}
+
+.footer_col {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.footer_col h6 {
+    font-size: 1rem;
+    font-family: var(--Parkinsans-font);
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.footer_col ul li {
+    font-size: .9rem;
+    padding: 12px 0;
+    font-weight: 300;
+}
+
+.footer_col ul li a {
+    font-family: var(--Parkinsans-font);
+    color: var(--black);
+    transition: var(--transition-fast);
+}
+
+.footer_col ul li a:hover {
+    color: var(--secondary-color);
+}
+
+.footer_col p {
+    padding: 20px 0;
+}
+
+.contact_email {
+    text-decoration: underline;
+    font-size: 1rem;
+    padding-top: 10px;
+    color: var(--black);
+}
+
+.times {
+    display: flex;
+    gap: 20px;
+}
+
+.footer_bottom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 0;
+    border-top: 1px solid var(--black-light);
+}
+
+.footer_bottom p {
+    font-size: 1rem;
+    font-family: var(--Parkinsans-font);
+}
+
+.footer_icon {
+    display: flex;
+    gap: 20px;
+}
+
+.footer_icon i {
+    font-size: 1rem;
+    transition: var(--transition-fast);
+    color: var(--black);
+    cursor: pointer;
+}
+
+.footer_icon i:hover {
+    color: var(--secondary-color);
+}
+
+.footer_number {
+    display: flex;
+    align-items: center;
+    border: 1px solid #0000001a;
+    padding: 5px 18px 5px 5px;
+    border-radius: 30px;
+    gap: 8px;
+    position: relative;
+}
+
+.footer_number_wrap {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 2px 0;
+    overflow: hidden;
+}
+
+.footer_number_wrap span {
+    transition: transform 1s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.footer_number i {
+    background-color: var(--primary-color);
+    padding: 9px ;
+    font-size: 1.5rem;
+    border-radius: 50%;
+}
+
+.footer_number_wrap span:nth-child(2){
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: translateY(20px);
+}
+
+.footer_number_wrap:hover span:nth-child(1){
+    transform: translateY(-20px);
+}
+
+.footer_number_wrap:hover span:nth-child(2){
+    transform: translateY(0);
+}
+/**service page**/
+.service_page {
+    flex-direction: column;
+}
+
+.service_page_title {
+    width: 100%;
+    background: transparent;
+    align-items: center;
+    text-align: center;
+    padding: 50px 0;
+    border-radius: 30px 30px 0 0;
+    background: linear-gradient(180deg, var(--primary-light) 0%, var(--white) 100%);
+}
+
+.service_page_wrap {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    place-content: center;
+    place-items: center;
+    gap: 50px;
+}
+
+.service_item {
+    width: 100%;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    background: var(--primary-light);
+    padding: 20px;
+    border-radius: 30px;
+}
+
+.service_image {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    clip-path: polygon(50% 0%, 85% 1%, 100% 18%, 100% 85%, 83% 99%, 45% 97%, 14% 93%, 0 83%, 0 21%, 15% 1%);
+}
+
+.service_image img {
+    height: 100%;
+}
+
+.service_info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.service_info h4 {
+    font-size: 1.25rem;
+    font-weight: 400;
+    padding-bottom: 30px;
+}
+
+.service_info p {
+    font-size: 1rem;
+    font-feature-settings: var(--Parkinsans-font);
+    font-weight: 400;
+    line-height: 1.5rem;
+    text-wrap: pretty;
+    padding-bottom: 20px;
+}
+
+.service_item .btn {
+    width: 100%;
+    background-color: var(--white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.service_item .btn i {
+    color: var(--secondary-color);
+    background-color: var(--secondary-light);
+    font-size: .9rem;
+    padding: 12px 14px;
+    border-radius: 50%;
+}
+
+
+
 
 
 
@@ -910,7 +1178,7 @@ section {
 @media screen and (max-width: 1400px) {
     .number {
         padding: 5px;
-        display: none;
+        display: flex;
     }
 
     .hero {
@@ -999,6 +1267,10 @@ section {
     .faq_question span {
         font-size: 1rem;
     }
+
+    .footer_wrap {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media screen and (max-width: 900px) {
@@ -1062,6 +1334,35 @@ section {
     }
 
     .faq_main {
+        width: 100%;
+    }
+
+    .footer_top {
+        flex-direction: column;
+        gap: 50px;
+    }
+
+    .footer_top_left {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer_top_right {
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .footer_input_box {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .footer_input_box input {
         width: 100%;
     }
 }
@@ -1216,5 +1517,30 @@ section {
     .faq_box h4 {
         font-size: 1.1rem;
         line-height: 1.5rem;
+    }
+
+    .footer_wrap {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .footer_bottom {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .footer_top_left {
+        width: 100%;
+    }
+
+    .footer_top_left h2 {
+        font-size: 1.25rem;
+    }
+
+    .footer_top_right {
+        width: 100%;
+    }
+
+    .footer_input_box {
+        flex-direction: column;
     }
 }
