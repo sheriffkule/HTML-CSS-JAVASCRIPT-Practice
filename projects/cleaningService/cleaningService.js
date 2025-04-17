@@ -19,3 +19,29 @@ let swiper = new Swiper('.testimonials_swiper', {
     }
   }
 });
+
+document.querySelectorAll('.faq_item').forEach(item => {
+  const question = item.querySelector('.faq_question');
+  const answer = item.querySelector('.faq_answer');
+  const icon = question.querySelector('i');
+
+  question.addEventListener('click', function() {
+    const isActive = item.classList.toggle('active');
+
+    document.querySelectorAll('.faq_item').forEach(otherItem => {
+      if(otherItem != item) {
+        otherItem.classList.remove('active');
+        otherItem.querySelector('.faq_answer').style.maxHeight = null;
+        otherItem.querySelector('.faq_question i').classList.replace('fa-minus', 'fa-plus')
+      }
+    });
+
+    if (isActive) {
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+      icon.classList.replace('fa-plus', 'fa-minus');
+    } else {
+      answer.style.maxHeight = null;
+      icon.classList.replace('fa-minus', 'fa-plus');
+    }
+  });
+})
