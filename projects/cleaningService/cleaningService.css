@@ -1101,9 +1101,9 @@ footer {
     gap: 50px;
 }
 
-.service_item {
+.service_page_item {
+    height: 500px;
     width: 100%;
-    height: 450px;
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -1112,30 +1112,31 @@ footer {
     border-radius: 30px;
 }
 
-.service_image {
+.service_page_image {
+    height: 350px;
     width: 100%;
-    height: 400px;
     overflow: hidden;
     clip-path: polygon(50% 0%, 85% 1%, 100% 18%, 100% 85%, 83% 99%, 45% 97%, 14% 93%, 0 83%, 0 21%, 15% 1%);
 }
 
-.service_image img {
+.service_page_image img {
     height: 100%;
 }
 
-.service_info {
+.service_page_info {
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.service_info h4 {
+.service_page_info h4 {
     font-size: 1.25rem;
     font-weight: 400;
-    padding-bottom: 30px;
+    font-family: var(--Parkinsans-font);
+    padding: 20px 0;
 }
 
-.service_info p {
+.service_page_info p {
     font-size: 1rem;
     font-feature-settings: var(--Parkinsans-font);
     font-weight: 400;
@@ -1144,16 +1145,21 @@ footer {
     padding-bottom: 20px;
 }
 
-.service_item .btn {
+.service_page_info .btn {
     width: 100%;
-    background-color: var(--white);
+    background-color: var(--primary-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 10px;
+    height: 50px;
 }
 
-.service_item .btn i {
+.service_page_info .btn span {
+    padding-left: 14px;
+}
+
+.service_page_info .btn i {
     color: var(--secondary-color);
     background-color: var(--secondary-light);
     font-size: .9rem;
@@ -1161,6 +1167,62 @@ footer {
     border-radius: 50%;
 }
 
+.deeper_clean {
+    flex-direction: column;
+}
+
+.deeper_clean_title {
+    align-items: center;
+    text-align: center;
+}
+
+.deeper_clean_wrap {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    place-items: center;
+    place-content: center;
+    gap: 30px;
+}
+
+.deeper_clean_item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: var(--primary-light);
+    border-radius: 30px;
+    padding: 30px;
+    border: 1px solid var(--secondary-light);
+    gap: 20px;
+}
+
+.deeper_clean_icon {
+    background-color: var(--white);
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.deeper_clean_icon i {
+    font-size: 40px;
+    color: var(--secondary-dark);
+}
+
+.deeper_clean_content h6 {
+    color: var(--secondary-color);
+    font-size: 1.1rem;
+    font-family: var(--Parkinsans-font);
+    font-weight: 500;
+}
+
+.deeper_clean_content p {
+    font-size: 1rem;
+    font-family: var(--Parkinsans-font);
+    text-wrap: pretty;
+}
 
 
 
@@ -1200,6 +1262,22 @@ footer {
 
     .teams_btn {
         left: 43%;
+    }
+
+    .service_page_wrap {
+        gap: 30px;
+    }
+
+    .service_page_info h4 {
+        font-size: 1.3rem;
+    }
+
+    .service_page_info p {
+        font-size: .9rem;
+    }
+
+    .deeper_clean_wrap {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
@@ -1270,6 +1348,14 @@ footer {
 
     .footer_wrap {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .service_page_wrap {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .service_page_image {
+        height: auto;
     }
 }
 
@@ -1364,6 +1450,16 @@ footer {
 
     .footer_input_box input {
         width: 100%;
+    }
+
+    .service_page_wrap {
+        grid-template-columns: repeat(1, 1fr);
+        margin: auto;
+        width: 80%;
+    }
+
+    .deeper_clean_wrap {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -1542,5 +1638,14 @@ footer {
 
     .footer_input_box {
         flex-direction: column;
+    }
+    
+    .service_page_wrap {
+        width: 100%;
+        margin: 0;
+    }
+
+    .deeper_clean_wrap {
+        grid-template-columns: repeat(1, 1fr);
     }
 }
