@@ -1224,6 +1224,101 @@ footer {
     text-wrap: pretty;
 }
 
+.service_page_box {
+    background-image: linear-gradient(142deg, var(--primary-color) 0%, var(--secondary-light) 70%);
+}
+
+.location {
+    flex-direction: column;
+    padding-top: 8%;
+}
+
+.location_title {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+}
+
+.glow_image {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.glow_image img:nth-child(1) {
+    width: 40px;
+}
+
+.glow_image img:nth-child(2) {
+    width: 120px;
+    transform: translateX(-50px) translateY(-40px);
+}
+
+.glow_image img:nth-child(3) {
+    width: 70px;
+    transform: translateY(-40px);
+}
+
+.location_container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+}
+
+.location_title2 {
+    width: 50%;
+}
+
+.location_info {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.location_info p {
+    font-size: 1rem;
+    font-family: var(--Parkinsans-font);
+    color: var(--gray-light);
+    line-height: 1.5rem;
+    padding-bottom: 20px;
+}
+
+.view_service_title {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+}
+
+.view_service_title h2 {
+    padding-bottom: 30px;
+}
+
+.view_service_title ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.view_service_title ul li button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--secondary-light);
+    border: 0;
+}
+
+.view_service_title ul li button i{
+    background-color: var(--primary-light);
+    color: var(--secondary-color);
+    padding: 4px;
+    border-radius: 50%;
+}
 
 
 
@@ -1461,6 +1556,23 @@ footer {
     .deeper_clean_wrap {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .location {
+        padding-top: 14%;
+    }
+
+    .location_container {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .location_title2 {
+        width: 100%;
+    }
+
+    .location_info {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -1647,5 +1759,9 @@ footer {
 
     .deeper_clean_wrap {
         grid-template-columns: repeat(1, 1fr);
+    }
+
+    .location {
+        padding-top: 22%;
     }
 }
