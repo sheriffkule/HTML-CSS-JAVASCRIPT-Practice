@@ -1436,6 +1436,21 @@ footer {
     font-family: var(--Parkinsans-font);
 }
 
+.contact_page {
+    padding-top: 8%;
+    flex-direction: column;
+    gap: 0;
+}
+
+.contact_page_title {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    border-radius: 30px;
+    background-image: linear-gradient(180deg, var(--primary-light) 0%, var(--white) 60%);
+    padding: 50px;
+}
+
 .contact_page_wrap {
     width: 100%;
     display: grid;
@@ -1446,7 +1461,7 @@ footer {
 }
 
 .contact_page_item {
-    height: 350px;
+    height: 300px;
     width: 100%;
     background-color: #e8f5d356;
     backdrop-filter: blur(30px);
@@ -1467,16 +1482,46 @@ footer {
 }
 
 .contact_page_item h4 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 400;
     font-family: var(--Parkinsans-font);
-    line-height: 3rem;
+    line-height: 2rem;
 }
 
 .contact_page_item p {
     color: var(--gray-light);
     font-size: 1rem;
     line-height: 1.5rem;
+}
+
+.our_client p {
+    width: 50%;
+    font-family: var(--Parkinsans-font);
+    color: var(--gray-light);
+    font-size: 1rem;
+    line-height: 1.8rem;
+    text-wrap: pretty;
+}
+
+.about_page {
+    padding-top: 8%;
+    flex-direction: column;
+    gap: 0;
+}
+
+.about_page_title {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    border-radius: 30px;
+    background-image: linear-gradient(180deg, var(--primary-light) 0%, var(--white) 60%);
+    padding: 50px;
+}
+
+.about_banner {
+    width: 100%;
+    border-radius: 30px;
+    overflow: hidden;
 }
 
 
@@ -1633,6 +1678,14 @@ footer {
     .blog_page_image {
         width: 100%;
     }
+
+    .contact_page {
+        padding-top: 12%;
+    }
+
+    .contact_page_wrap {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media screen and (max-width: 900px) {
@@ -1755,6 +1808,10 @@ footer {
         width: 100%;
     }
 
+    .our_client {
+        margin-top: 500px;
+    }
+
     .our_client_info {
         width: 100%;
         align-items: center;
@@ -1763,6 +1820,11 @@ footer {
 
     .our_client_title {
         align-items: center;
+        text-align: center;
+    }
+
+    .our_client p {
+        width: 100%;
         text-align: center;
     }
 }
@@ -1849,6 +1911,14 @@ footer {
     }
 
     .blog_wrap {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .contact_page {
+        padding-top: 18%;
+    }
+
+    .contact_page_wrap {
         grid-template-columns: repeat(1, 1fr);
     }
 }
