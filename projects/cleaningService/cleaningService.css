@@ -17,7 +17,7 @@
     --primary-light: #e4f1ca;
     --secondary-color: #3ca20c;
     --secondary-dark: #3ca2004d;
-    --secondary-light: #e8f5d3;
+    --secondary-light: #d8ecb7;
     --white: #ffffff;
     --black-light: #0000001a;
     --gray: #00000033;
@@ -74,7 +74,6 @@ section {
 }
 
 .section_image {
-    width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -489,6 +488,7 @@ section {
 }
 
 .about_image img {
+    width: 100%;
     transition: var(--transition-slow);
 }
 
@@ -1370,7 +1370,7 @@ footer {
     padding: 50px;
 }
 
-.blog_wrap {
+.blog_page_container {
     height: 350px;
     width: 100%;
     display: flex;
@@ -1405,6 +1405,7 @@ footer {
     border-radius: 50%;
 }
 
+.blog_content span,
 .blog_page_content h6 {
     color: var(--secondary-color);
     text-transform: uppercase;
@@ -1414,6 +1415,68 @@ footer {
     height: 100%;
     border-radius: 20px;
     overflow: hidden;
+}
+
+.blog_wrap {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    place-items: center;
+    place-content: center;
+    gap: 30px;
+}
+
+.blog_content {
+    padding-top: 10px;
+}
+
+.blog_content h4 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    font-family: var(--Parkinsans-font);
+}
+
+.contact_page_wrap {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    place-items: center;
+    place-content: center;
+    gap: 30px;
+}
+
+.contact_page_item {
+    height: 350px;
+    width: 100%;
+    background-color: #e8f5d356;
+    backdrop-filter: blur(30px);
+    padding: 50px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.contact_page_item i {
+    background-color: var(--white);
+    min-width: 70px;
+    min-height: 70px;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 3rem;
+}
+
+.contact_page_item h4 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    font-family: var(--Parkinsans-font);
+    line-height: 3rem;
+}
+
+.contact_page_item p {
+    color: var(--gray-light);
+    font-size: 1rem;
+    line-height: 1.5rem;
 }
 
 
@@ -1469,6 +1532,10 @@ footer {
 
     .deeper_clean_wrap {
         grid-template-columns: repeat(3, 1fr);
+    }
+
+    .blog_wrap {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -1553,7 +1620,7 @@ footer {
         padding-top: 12%;
     }
 
-    .blog_wrap {
+    .blog_page_container {
         flex-direction: column;
         height: auto;
     }
@@ -1775,6 +1842,14 @@ footer {
 
     .faq_box {
         max-width: 100%;
+    }
+
+    .blog_page {
+        padding-top: 18%;
+    }
+
+    .blog_wrap {
+        grid-template-columns: repeat(1, 1fr);
     }
 }
 
