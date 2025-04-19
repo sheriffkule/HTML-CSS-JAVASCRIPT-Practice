@@ -27,6 +27,13 @@
     --transition-slow: all .6s ease-in-out;
 }
 
+.scrolled {
+    background-color: var(--secondary-dark);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    transition: background-color .4s ease-in, box-shadow .4s ease-in, backdrop-filter .4s ease-in;
+}
+
 section {
     width: 100%;
     display: flex;
@@ -180,7 +187,6 @@ section {
 }
 
 .navbar {
-    background-color: var(--secondary-dark);
     height: 90px;
     width: 100%;
     display: flex;
@@ -191,7 +197,6 @@ section {
     top: 0;
     left: 0;
     z-index: 99;
-    backdrop-filter: blur(10px);
 }
 
 .logo h2 {
@@ -1503,6 +1508,10 @@ footer {
     text-wrap: pretty;
 }
 
+.about {
+    background-color: #fcfdfb;
+}
+
 .about_page {
     padding-top: 8%;
     flex-direction: column;
@@ -1524,6 +1533,117 @@ footer {
     overflow: hidden;
 }
 
+.our_mission {
+    flex-direction: column;
+}
+
+.our_mission_title {
+    align-items: center;
+    text-align: center;
+}
+
+.our_mission_wrap {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    place-items: center;
+    place-content: center;
+    margin-bottom: 100px;
+    gap: 10px;
+}
+.our_mission_item {
+    height: 300px;
+    width: 100%;
+    background-color: #e8f5d356;
+    backdrop-filter: blur(30px);
+    padding: 50px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.our_mission_item i {
+    background-color: var(--white);
+    min-width: 70px;
+    min-height: 70px;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 3rem;
+}
+
+.our_mission_item h4 {
+    font-size: 1.25rem;
+    font-weight: 400;
+    font-family: var(--Parkinsans-font);
+    line-height: 2rem;
+}
+
+.our_mission_item p {
+    color: var(--gray-light);
+    font-size: 1rem;
+    line-height: 1.5rem;
+    text-wrap: pretty;
+}
+
+.why_us {
+    flex-direction: column;
+}
+
+.why_us_title {
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.why_us_wrap {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    place-items: center;
+    place-content: center;
+    gap: 30px;
+    margin-top: 120px;
+}
+
+.why_us_item {
+    width: 100%;
+    padding: 30px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.why_us_item:nth-child(2) {
+    transform: translateY(-120px);
+}
+
+.why_us_item h4 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-wrap: pretty;
+    padding-bottom: 20px;
+}
+
+.why_us_item p {
+    font-size: .9rem;
+    font-family: var(--Parkinsans-font);
+    line-height: 1.5rem;
+    text-wrap: pretty;
+}
+
+.contact_banner {
+    height: 600px;
+    width: 90%;
+    margin: 0 auto;
+    background-image: url(images/contact_banner.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left -160px center;
+    border-radius: 30px;
+}
 
 
 
@@ -1581,6 +1701,14 @@ footer {
 
     .blog_wrap {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .why_us_item p {
+        font-size: .8rem;
+    }
+
+    .why_us_item h4 {
+        font-size: 1.3rem;
     }
 }
 
@@ -1685,6 +1813,27 @@ footer {
 
     .contact_page_wrap {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .our_mission_wrap {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .about_page {
+        padding-top: 12%;
+    }
+
+    .why_us_wrap {
+        margin-top: 0;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .why_us_item:nth-child(2) {
+        transform: translateY(0);
+    }
+
+    .why_us_item:nth-child(3) {
+        grid-column: 3/1;
     }
 }
 
@@ -1808,7 +1957,7 @@ footer {
         width: 100%;
     }
 
-    .our_client {
+    .contact .our_client {
         margin-top: 500px;
     }
 
@@ -1906,7 +2055,8 @@ footer {
         max-width: 100%;
     }
 
-    .blog_page {
+    .blog_page,
+    .about_page {
         padding-top: 18%;
     }
 
@@ -1918,8 +2068,14 @@ footer {
         padding-top: 18%;
     }
 
-    .contact_page_wrap {
+    .contact_page_wrap,
+    .our_mission_wrap,
+    .why_us_wrap {
         grid-template-columns: repeat(1, 1fr);
+    }
+
+    .why_us_item:nth-child(3) {
+        grid-column: auto;
     }
 }
 
