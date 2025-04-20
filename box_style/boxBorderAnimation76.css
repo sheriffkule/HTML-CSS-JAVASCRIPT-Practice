@@ -1,0 +1,70 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #548cff;
+}
+
+div {
+    width: 150px;
+    height: 150px;
+    border-radius: 53% 47% 51% 49% / 49% 41% 59% 51%;
+    box-shadow: inset 10px 10px 30px rgba(0, 0, 0, 0.1),
+    15px 25px 20px rgba(0, 0, 0, 0.08),
+    15px 25px 25px rgba(0, 0, 0, 0.1),
+    inset -10px -10px 15px rgba(255, 255, 255, 0.6);
+    position: relative;
+    animation: move 4s linear infinite;
+}
+
+@keyframes move {
+    50% {
+        border-radius:32% 61% 52% 29% / 40% 57% 37% 52% ;
+    }
+}
+
+div::after,
+div::before {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.6);
+}
+
+div::before {
+    width: 20px;
+    height: 30px;
+    border-radius: 32% 68% 40% 60% / 36% 53% 47% 64%;
+    top: 35px;
+    left: 105px;
+    transform: rotate(-5deg);
+}
+
+div::after {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    top: 75px;
+    left: 110px;
+}
+
+div:nth-child(1) {
+    transform: translate(-10px, 80px);
+}
+
+div:nth-child(2) {
+    width: 250px;
+    height: 250px;
+}
+
+div:nth-child(3) {
+    width: 150px;
+    height: 150px;
+    transform: translate(50px, 100px);
+}
