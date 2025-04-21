@@ -1,0 +1,122 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(#555 1px, transparent 1px), linear-gradient(90deg, #555 1px, transparent 1px),
+    radial-gradient(#333 0%, #111 18%);
+  background-size: 100px 100px;
+  background-position: 50px 50px, 50px 50px, top left;
+  background-blend-mode: color-dodge;
+}
+
+a {
+  position: relative;
+  display: inline-block;
+  padding: 25px 30px;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.6s;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+a:hover {
+  background: #fff;
+  color: #000;
+  box-shadow: 0 0 5px #fff, 0 0 25px #fff, 0 0 50px #fff, 0 0 200px #fff;
+  -webkit-box-reflect: below 1px linear-gradient(transparent, #00000096);
+}
+
+a span {
+  position: absolute;
+  display: block;
+}
+
+span:nth-child(1) {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background: linear-gradient(90deg, transparent, #fff);
+  animation: animate1 1s linear infinite;
+}
+
+@keyframes animate1 {
+  from {
+    left: -100%;
+  }
+  50%,
+  100% {
+    left: 100%;
+  }
+}
+
+span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  height: 100%;
+  width: 10px;
+  background: linear-gradient(180deg, transparent, #fff);
+  animation: animate2 1s linear infinite;
+  animation-delay: 0.25s;
+}
+
+@keyframes animate2 {
+  from {
+    top: -100%;
+  }
+  50%,
+  100% {
+    top: 100%;
+  }
+}
+
+span:nth-child(3) {
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 10px;
+  background: linear-gradient(270deg, transparent, #fff);
+  animation: animate3 1s linear infinite;
+  animation-delay: 0.5s;
+}
+
+@keyframes animate3 {
+  from {
+    right: -100%;
+  }
+  50%,
+  100% {
+    right: 100%;
+  }
+}
+
+span:nth-child(4) {
+    bottom: -100%;
+    left: 0;
+    height: 100%;
+    width: 10px;
+    background: linear-gradient(360deg, transparent, #fff);
+    animation: animate4 1s linear infinite;
+    animation-delay: 0.75s;
+  }
+  
+  @keyframes animate4 {
+    from {
+      bottom: -100%;
+    }
+    50%,
+    100% {
+      bottom: 100%;
+    }
+  }
