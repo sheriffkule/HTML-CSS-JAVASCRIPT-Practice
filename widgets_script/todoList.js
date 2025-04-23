@@ -1,24 +1,76 @@
-let inputBox = document.querySelector('#inputBox');
-let list = document.querySelector('#list');
+const inputBox = document.querySelector('#inputBox');
+const list = document.querySelector('#list');
 
-inputBox.addEventListener('keyup', function (event) {
-	if (event.key === 'Enter') {
-		addItem(this.value);
-		this.value = '';
-	}
-});
+loadListFromLocalStorage();
 
-let addItem = (inputBox) => {
-	let listItem = document.createElement('li');
-	listItem.innerHTML = `${inputBox} <i></i> `;
+inputBox.addEventListener('keyup', handleEnterKeyPress);
 
-	listItem.addEventListener('click', function () {
-		this.classList.toggle('done');
-	});
+function handleEnterKeyPress(event) {
+  if (event.key === 'Enter') {
+    const inputValue = inputBox.value.trim();
+    if (inputValue) {
+      addItem(inputValue);
+      inputBox.value = '';
+    }
+  }
+}
 
-	listItem.querySelector('i').addEventListener('click', function () {
-		listItem.remove();
-	});
+function addItem(inputValue) {
+  const listItem = document.createElement('li');
+  listItem.innerHTML = `${inputValue} <i></i>`;
 
-	list.appendChild(listItem);
-};
+  listItem.addEventListener('click', toggleDoneClass);
+
+  listItem.querySelector('i').addEventListener('click', removeListItem);
+
+  list.appendChild(listItem);
+
+  saveListToLocalStorage();
+}
+
+function toggleDoneClass(event) {
+  if (event.target.tagName === 'LI') {
+    event.target.classList.toggle('done');
+    saveListToLocalStorage();
+  }
+}
+
+function removeListItem(event) {
+  event.stopPropagation();
+  const listItem = event.target.parentNode;
+  listItem.remove();
+  saveListToLocalStorage();
+}
+
+function loadListFromLocalStorage() {
+  const storedList = localStorage.getItem('todoList');
+  if (storedList) {
+    const listItems = JSON.parse(storedList);
+    listItems.forEach((item) => {
+      const listItem = document.createElement('li');
+      listItem.innerHTML = `${item.text} <i></i>`;
+      listItem.classList.toggle('done', item.done);
+      listItem.addEventListener('click', toggleDoneClass);
+      listItem.querySelector('i').addEventListener('click', removeListItem);
+      list.appendChild(listItem);
+    });
+  }
+}
+
+function saveListToLocalStorage() {
+  const listItems = Array.from(list.children);
+  const todoList = listItems.map((item) => ({
+    text: item.textContent.replace('<i></i>', ''),
+    done: item.classList.contains('done'),
+  }));
+  localStorage.setItem('todoList', JSON.stringify(todoList));
+}
+
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+  yearElement.dateTime = currentYear;
+  yearElement.textContent = currentYear;
+}
+
+updateYear();

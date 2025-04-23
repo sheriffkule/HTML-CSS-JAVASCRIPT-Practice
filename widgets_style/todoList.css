@@ -5,15 +5,21 @@
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    place-content: center;
     min-height: 100vh;
     background: radial-gradient(circle at 90% 10%, #081F20 20%, #2e4f83 100%);
 }
 
+.container {
+    display: grid;
+    min-height: 100vh;
+    padding-top: 20px;
+}
+
 .box {
     position: relative;
+    align-self: flex-end;
     width: 450px;
     height: 550px;
     border-radius: 30px;
@@ -30,9 +36,13 @@ h2 {
     width: 100%;
     font-weight: 600;
     text-align: center;
-    color: #fff;
+    color: transparent;
+    background: linear-gradient(#607d8b, #2e4f83);
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: 0 4px 6px rgba(31, 129, 242, 0.3);
     font-size: 1.75em;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 #inputBox {
@@ -141,4 +151,19 @@ h2 {
 
 ::-webkit-scrollbar-thumb {
     background: #fff;
+}
+
+footer {
+    text-align: center;
+    align-self: flex-end;
+    padding-bottom: 10px;
+    font-size: 16px;
+}
+
+footer h4 {
+    font-weight: 400;
+}
+
+footer h4 em {
+    color: cadetblue;
 }
