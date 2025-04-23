@@ -1,35 +1,76 @@
-const celsius = document.getElementById('celsius');
-const fahrenheit = document.getElementById('fahrenheit');
-const kelvin = document.getElementById('kelvin');
-const reset = document.querySelector('.btn button');
+const temperatureFields = {
+  celsius: document.getElementById('celsius'),
+  fahrenheit: document.getElementById('fahrenheit'),
+  kelvin: document.getElementById('kelvin'),
+};
 
-window.addEventListener('load', () => celsius.focus());
+const resetButton = document.querySelector('.btn button');
 
-celsius.addEventListener('input', () => {
-	fahrenheit.value = ((celsius.value * 9) / 5 + 32).toFixed(2);
-	kelvin.value = (parseFloat(celsius.value) + 273.15).toFixed(2);
-	if (!celsius.value) fahrenheit.value = '';
-	if (!celsius.value) kelvin.value = '';
-});
+const convertToCelsius = (value) => {
+  switch (true) {
+    case temperatureFields.fahrenheit.value === value:
+      return (((value - 32) * 5) / 9).toFixed(2);
+    case temperatureFields.kelvin.value === value:
+      return (value - 273.15).toFixed(2);
+    default:
+      return value;
+  }
+};
 
-fahrenheit.addEventListener('input', () => {
-	celsius.value = (((fahrenheit.value - 32) * 5) / 9).toFixed(2);
-	kelvin.value = (((fahrenheit.value - 32) * 5) / 9 + 273.15).toFixed(2);
-	if (!fahrenheit.value) celsius.value = '';
-	if (!fahrenheit.value) kelvin.value = '';
-});
+const convertToFahrenheit = (value) => {
+  switch (true) {
+    case temperatureFields.celsius.value === value:
+      return ((value * 9) / 5 + 32).toFixed(2);
+    case temperatureFields.kelvin.value === value:
+      return (((value - 273.15) * 9) / 5 + 32).toFixed(2);
+    default:
+      return value;
+  }
+};
 
-kelvin.addEventListener('input', () => {
-	celsius.value = (kelvin.value - 273.15).toFixed(2);
-	fahrenheit.value = (((kelvin.value - 273.15) * 9) / 5 + 32).toFixed(2);
-	if (!kelvin.value) celsius.value = '';
-	if (!kelvin.value) fahrenheit.value = '';
-});
+const convertToKelvin = (value) => {
+  switch (true) {
+    case temperatureFields.celsius.value === value:
+      return (parseFloat(value) + 273.15).toFixed(2);
+    case temperatureFields.fahrenheit.value === value:
+      return (((value - 32) * 5) / 9 + 273.15).toFixed(2);
+    default:
+      return value;
+  }
+};
 
-reset.addEventListener('click', () => {
-	celsius.value = '';
-	fahrenheit.value = '';
-	kelvin.value = '';
+const updateTemperatureFields = (field, value) => {
+  if (!value) {
+    Object.values(temperatureFields).forEach((field) => (field.value = ''));
+    return;
+  }
+
+  switch (field) {
+    case temperatureFields.celsius:
+      temperatureFields.fahrenheit.value = convertToFahrenheit(value);
+      temperatureFields.kelvin.value = convertToKelvin(value);
+      break;
+    case temperatureFields.fahrenheit:
+      temperatureFields.celsius.value = convertToCelsius(value);
+      temperatureFields.kelvin.value = convertToKelvin(value);
+      break;
+    case temperatureFields.kelvin:
+      temperatureFields.celsius.value = convertToCelsius(value);
+      temperatureFields.fahrenheit.value = convertToFahrenheit(value);
+      break;
+    default:
+      break;
+  }
+};
+
+window.addEventListener('load', () => temperatureFields.celsius.focus());
+
+Object.values(temperatureFields).forEach((field) =>
+  field.addEventListener('input', (e) => updateTemperatureFields(field, e.target.value))
+);
+
+resetButton.addEventListener('click', () => {
+  Object.values(temperatureFields).forEach((field) => (field.value = ''));
 });
 
 const year = document.getElementById('year');
