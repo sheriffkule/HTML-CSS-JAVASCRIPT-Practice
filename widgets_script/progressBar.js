@@ -1,20 +1,24 @@
-document.addEventListener('DOMContentLoaded', function (event) {
-	let circle = document.querySelectorAll('.circle');
-	circle.forEach(function (progress) {
-		let degree = 0;
-		var targetDegree = parseInt(progress.getAttribute('data-degree'));
-		let color = progress.getAttribute('data-color');
-		let number = progress.querySelector('.number');
+document.addEventListener('DOMContentLoaded', () => {
+  const circles = document.querySelectorAll('.circle');
 
-		var interval = setInterval(function () {
-			degree += 1;
-			if (degree > targetDegree) {
-				clearInterval(interval);
-				return;
-			}
-			progress.style.background = `conic-gradient(${color} ${degree}%, #222 0%)`;
-			number.innerHTML = degree + '<span>%</span>';
-			number.style.color = color;
-		}, 50);
-	});
+  circles.forEach((circle) => {
+    const targetDegree = parseInt(circle.getAttribute('data-degree'));
+    const color = circle.getAttribute('data-color');
+    const numberElement = circle.querySelector('.number');
+
+    let degree = 0;
+
+    const intervalId = setInterval(() => {
+      degree++;
+
+      if (degree > targetDegree) {
+        clearInterval(intervalId);
+        return;
+      }
+
+      circle.style.background = `conic-gradient(${color} ${degree}%, #222 0%)`;
+      numberElement.innerHTML = `${degree}<span>%</span>`;
+      numberElement.style.color = color;
+    }, 50);
+  });
 });
