@@ -10,6 +10,7 @@ body {
   place-items: center;
   flex-direction: column;
   min-height: 100vh;
+  overflow: hidden;
 }
 
 .container {
@@ -17,9 +18,45 @@ body {
   width: min(38em, 90%);
   margin-top: 20px;
   padding: 3em;
+  position: relative;
   align-self: flex-end;
   border-radius: 0.5em;
   opacity: 0.9;
+  backdrop-filter: blur(20px);
+  z-index: 100;
+  transform: scale(.01) translateY(-1000px);
+  animation: appear .3s linear forwards;
+}
+
+.container::after {
+    content: '';
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    opacity: .6;
+    background: linear-gradient(135deg, #0c346d, #196ee6);
+    top: -50px;
+    left: -50px;
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #0c346d, #196ee6);
+    opacity: .6;
+    bottom: -50px;
+    right: -50px;
+    border-radius: 50%;
+    z-index: -1;
+}
+
+@keyframes appear {to {
+        transform: scale(1) translateY(0);
+    }
 }
 
 h1 {
@@ -28,7 +65,10 @@ h1 {
   font-weight: 600;
   color: transparent;
   letter-spacing: 1px;
-  color: #1b76f2;
+  text-shadow: 0 5px 10px rgba(27, 117, 242, 0.4);
+  color: transparent;
+  background: linear-gradient(90deg, #1b76f2, #9ec6ff);
+  background-clip: text;
 }
 
 .btn {
@@ -58,6 +98,7 @@ h1 {
   border-radius: 50%;
   pointer-events: none;
   opacity: 1;
+  z-index: -1;
   animation: animate 1s ease-out forwards;
 }
 
