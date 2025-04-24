@@ -6,6 +6,13 @@
 
 body {
     background: linear-gradient(#921b2b, #490d15);
+    overflow: hidden;
+}
+
+#canvas {
+    display: block;
+    position: absolute;
+    z-index: -1;
 }
 
 section {
@@ -14,6 +21,8 @@ section {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    z-index: 1;
+    position: relative;
 }
 
 label {
@@ -21,8 +30,23 @@ label {
 }
 
 h1 {
-    margin-bottom: 50px;
-    font-size: 2rem;
+    margin: 50px 0;
+    font-size: 4rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+h1 span {
+    color: #333;
+    transition: .25s;
+}
+
+h1:hover span{
+    color: #09aaef;
+    text-shadow: 0 0 5px #09aaef,
+    0 0 10px #09aaef,
+    0 0 30px #09aaef;
 }
 
 .container {
