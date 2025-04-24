@@ -9,6 +9,7 @@ body {
     place-content: center;
     min-height: 100vh;
     background: radial-gradient(circle at 90% 10%, #081F20 20%, #2e4f83 100%);
+    overflow: hidden;
 }
 
 .container {
@@ -17,12 +18,41 @@ body {
     padding-top: 20px;
 }
 
+.text {
+    position: absolute;
+    top: -10px;
+    width: 100%;
+    height: 100%;
+    line-height: 45px;
+    text-transform: uppercase;
+    text-shadow: 0 0 5px #149414;
+    transform-origin: bottom;
+    animation: move 25s linear forwards;
+    font-size: 40px;
+    z-index: -1;
+}
+
+@keyframes move {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+
+    70% {
+        transform: translateY(200%) scale(1);
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
+
 .box {
     position: relative;
     align-self: flex-end;
     width: 450px;
     height: 550px;
     border-radius: 30px;
+    opacity: .8;
     background: radial-gradient(circle at 90% 10%, #181e24 20%, #2f363e 100%);
     box-shadow: 25px 25px 75px rgba(0, 0, 0, .25),
         10px 10px 70px rgba(0, 0, 0, .25),

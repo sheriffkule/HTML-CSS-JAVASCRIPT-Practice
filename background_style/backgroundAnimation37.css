@@ -15,13 +15,10 @@ body {
     width: 100%;
     height: 100%;
     line-height: 45px;
-    color: #0e6b0e;
     text-transform: uppercase;
-    text-shadow: 0 0 5px #149414,
-    0 0 15px #149414,
-    0 0 30px #149414;
+    text-shadow: 0 0 5px #149414;
     transform-origin: bottom;
-    animation: move 20s linear forwards;
+    animation: move 25s linear forwards;
     font-size: 40px;
 }
 
