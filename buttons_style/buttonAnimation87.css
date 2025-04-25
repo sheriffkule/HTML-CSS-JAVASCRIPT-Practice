@@ -1,0 +1,79 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: repeating-linear-gradient(180deg,#111 0 100px, transparent 100px 200px),
+    repeating-linear-gradient(90deg,#111 0 100px, #102b52 100px 200px);
+    cursor: none;
+}
+
+ul {
+    display: grid;
+    place-items: center;
+    max-width: 100vw;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 50px;
+}
+
+ul li {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background: #222;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transition: transform .2s ease-in-out;
+    font-size: 2.5em;
+    text-decoration: none;
+    border: 0px solid var(--clr);
+}
+
+ul li:hover {
+    background: transparent;
+    border: 2px solid var(--clr);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+ul li a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: none;
+}
+
+ul li i {
+    position: absolute;
+    pointer-events: none;
+}
+
+#cursor {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    transform: translate(-50%, -50%);
+    border: 1px solid #fff;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+    transition: all .15s, left 0s, top 0s;
+}
+
+ul li:hover ~ #cursor {
+    width: 100px;
+    height: 100px;
+    border: 2px solid #fff;
+}
+
+body:hover #cursor {
+    opacity: 1;
+}
