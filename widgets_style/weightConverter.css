@@ -5,18 +5,17 @@
 }
 
 body {
+    display: grid;
+    place-items: center;
     min-height: 100vh;
     background: radial-gradient(circle at top left, #919D9D, #212322);
 }
 
 .wrapper {
+    padding-block: 100px 50px;
     width: 90vw;
     font-size: 1.2em;
     max-width: 28em;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }
 
 .container {
@@ -62,6 +61,112 @@ h2 {
 
 .input_wrapper:not(:last-child) {
     margin-bottom: 1.2em;
+}
+
+.save_btn {
+    position: relative;
+    padding: 20px 40px;
+    margin: 0 auto;
+    font-size: 1.25em;
+    font-weight: 600;
+    color: #00093b;
+    background: radial-gradient(circle at top left, #919D9D, #212322);
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: .2s;
+    overflow: hidden;
+}
+
+.save_btn:hover {
+    transform: scale(1.04);
+}
+
+.save_btn:active {
+    background-position-x: 100%;
+    transform: scale(1);
+}
+
+.copy_btn {
+    background: radial-gradient(circle at top left, #919D9D, #212322);
+    padding: 4px 12px;
+    border: none;
+    outline: none;
+    margin-left: 12px;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, .8);
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 1;
+    transform: translate(0, 0);
+    animation: animate 1s ease-in-out forwards;
+}
+
+@keyframes animate {
+    100% {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty));
+    }
+}
+
+.favorites {
+    max-width: 28em;
+    margin-block: 30px;
+}
+
+.favorites h2 {
+    margin-bottom: 20px;
+}
+
+.favorite_list {
+    font-size: 18px;
+    border: 1px solid grey;
+    padding-inline: 20px;
+}
+
+.favorite_list li {
+    display: flex;
+    align-items: flex-end;
+    margin-block: 10px;
+    list-style-type: none;
+    position: relative;
+    border-bottom: 1px solid grey;
+}
+
+.favorite_list li::after {
+    content: 'Click to Delete';
+    position: absolute;
+    top: -40px;
+    background: #212322;
+    color: #fff;
+    border: 1px solid grey;
+    padding: 5px 10px;
+    left: 0;
+    display: none;
+    transition: .2s ease-in;
+}
+
+.favorite_list li:hover::after {
+    display: block;
+}
+
+.copy {
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+abbr {
+    color: #0a0447;
+    font-weight: 600;
 }
 
 @media screen and (max-width: 450px) {
