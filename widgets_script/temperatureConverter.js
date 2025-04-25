@@ -73,6 +73,79 @@ resetButton.addEventListener('click', () => {
   Object.values(temperatureFields).forEach((field) => (field.value = ''));
 });
 
+const saveFavoriteButton = document.getElementById('save-favorite');
+const favoriteList = document.getElementById('favorite-list');
+
+const saveFavorite = () => {
+  const celsiusValue = celsius.value;
+  const fahrenheitValue = fahrenheit.value;
+  const kelvinValue = kelvin.value;
+  const favoriteName = prompt('Enter a name for this favorite:');
+
+  if (favoriteName) {
+    const favorite = {
+      name: favoriteName,
+      celsius: celsiusValue,
+      fahrenheit: fahrenheitValue,
+      kelvin: kelvinValue,
+    };
+
+    const favoritesTemp = JSON.parse(localStorage.getItem('favoritesTemp')) || [];
+    favoritesTemp.push(favorite);
+    localStorage.setItem('favoritesTemp', JSON.stringify(favoritesTemp));
+
+    updateFavoriteList();
+  }
+};
+
+const updateFavoriteList = () => {
+  const favoritesTemp = JSON.parse(localStorage.getItem('favoritesTemp')) || [];
+  favoriteList.innerHTML = '';
+  
+  favoritesTemp.forEach((favorite) => {
+    const favoriteListItem = document.createElement('li');
+    const data = document.createElement('span');
+    const copyButton = document.createElement('button');
+    copyButton.classList.add('copy_btn');
+    copyButton.textContent = 'Copy';
+    copyButton.onclick = () => {
+      navigator.clipboard.writeText(
+        `${favorite.name} - Celsius: ${favorite.celsius}, Fahrenheit: ${favorite.fahrenheit}, Kelvin: ${favorite.kelvin}`
+      );
+      setTimeout(() => {
+        copyButton.style.color = '#fff';
+        copyButton.textContent = 'Copy';
+      }, 1500);
+      copyButton.style.color = '#0f0';
+      copyButton.style.fontWeight = 600;
+      copyButton.textContent = 'Copied';
+    };
+    data.textContent = `${favorite.name} - Celsius: ${favorite.celsius}°, Fahrenheit: ${favorite.fahrenheit}°F, Kelvin: ${favorite.kelvin} K`;
+    favoriteListItem.appendChild(data);
+    favoriteListItem.appendChild(copyButton);
+    favoriteList.appendChild(favoriteListItem);
+  });
+};
+
+saveFavoriteButton.addEventListener('click', saveFavorite);
+
+favoriteList.addEventListener('click', handleFavoriteListClick);
+
+function handleFavoriteListClick(event) {
+  if (event.target.tagName === 'LI') {
+    const favoriteName = event.target.textContent.split(' - ')[0];
+
+    const favorites = JSON.parse(localStorage.getItem('favoritesTemp')) || [];
+    const updatedFavorites = favorites.filter((favorite) => favorite.name !== favoriteName);
+
+    localStorage.setItem('favoritesTemp', JSON.stringify(updatedFavorites));
+
+    updateFavoriteList();
+  }
+}
+
+updateFavoriteList();
+
 const year = document.getElementById('year');
 const thisYear = new Date().getFullYear();
 

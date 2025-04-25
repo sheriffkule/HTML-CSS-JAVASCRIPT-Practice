@@ -8,8 +8,6 @@ body {
     display: grid;
     place-items: center;
     color: rgb(255, 136, 0);
-    justify-content: center;
-    align-items: center;
     min-height: 100vh;
     background: linear-gradient(#e61a1a, #e6611a, #e6a91a);
 }
@@ -22,13 +20,13 @@ body {
     justify-content: center;
     padding: 10px;
     width: clamp(500px, 90vw, 700px);
-    margin-bottom: -12px;
+    margin-top: 50px;
     border-radius: 10px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 h1 {
-    margin-bottom: 10px;
+    margin-block: 20px;
     font-size: 34px;
     color: #e6a91a;
 }
@@ -40,6 +38,7 @@ h1 {
     width: clamp(420px, 90%, 640px);
     background: rgba(0, 0, 0, 0.2);
     padding: 35px;
+    margin-bottom: 20px;
     border-radius: 16px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
@@ -93,9 +92,18 @@ h1 {
     transition: 0.3s;
 }
 
+.save_btn {
+    margin-left: 20px;
+}
+
 button:hover {
     background: #af0000;
     box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+    scale: 1.04;
+}
+
+button:active {
+    scale: 1;
 }
 
 .glass {
@@ -205,6 +213,75 @@ button:hover {
     animation-duration: 25s;
 }
 
+.favorites {
+    max-width: 40em;
+    margin-block: 0 30px;
+}
+
+.favorites h2 {
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #af0000;
+}
+
+.favorite_list {
+    font-size: 18px;
+    padding-inline: 20px;
+    z-index: 10;
+}
+
+.favorite_list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-block: 10px;
+    list-style-type: none;
+    color: #000;
+    position: relative;
+}
+
+.favorite_list li:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.favorite_list li span {
+    text-wrap: pretty;
+}
+
+.favorite_list li span::after {
+    content: 'Click to Delete';
+    position: absolute;
+    top: 0px;
+    background: #241313;
+    color: #fff;
+    border: 1px solid grey;
+    padding: 5px 10px;
+    left: 0;
+    scale: 0;
+    pointer-events: none;
+    transition: .2s ease-in;
+    animation: fade 2s linear forwards;
+}
+
+@keyframes fade {
+    to {
+        display: none;
+    }
+}
+
+.favorite_list li span:hover::after {
+    scale: 1;
+    top: -40px;
+}
+
+.copy_btn {
+    margin-inline-start: 16px;
+    align-self: center;
+    margin-top: 0;
+}
+
 @keyframes spin {
     0% {
         transform: translateY(0) rotate(0deg);
@@ -224,4 +301,9 @@ h4 {
     color: #444;
     align-self: flex-end;
     margin-bottom: 12px;
+}
+
+abbr {
+    color: #af0000;
+    cursor: default;
 }

@@ -1,52 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Temperature Converter</title>
+    <link rel="stylesheet" href="/widgets_style/temperatureConverter.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Temperature Converter</title>
-  <link rel="stylesheet" href="/widgets_style/temperatureConverter.css">
-</head>
-
-<body>
-  <div class="container">
-    <h1>Temperature Converter</h1>
-    <div class="wrapper">
-      <div class="input-box">
-        <h6>Celsius &deg;</h6>
-        <input type="number" id="celsius">
+  <body>
+    <div class="container">
+      <h1>Temperature Converter</h1>
+      <div class="wrapper">
+        <div class="input-box">
+          <h6>Celsius &deg;</h6>
+          <input type="number" id="celsius" />
+        </div>
+        <span>&rdldhar;</span>
+        <div class="input-box">
+          <h6>Fahrenheit &#8457;</h6>
+          <input type="number" id="fahrenheit" />
+        </div>
+        <span>&rdldhar;</span>
+        <div class="input-box">
+          <h6>Kelvin &#8490;</h6>
+          <input type="number" id="kelvin" />
+        </div>
       </div>
-      <span>&rdldhar;</span>
-      <div class="input-box">
-        <h6>Fahrenheit &#8457;</h6>
-        <input type="number" id="fahrenheit">
+      <div class="btn">
+        <button>Reset</button>
+        <button class="save_btn" id="save-favorite">Save as Favorite</button>
       </div>
-      <span>&rdldhar;</span>
-      <div class="input-box">
-        <h6>Kelvin &#8490;</h6>
-        <input type="number" id="kelvin">
+      <div class="glass">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
       </div>
     </div>
-    <div class="btn">
-      <button>Reset</button>
+    
+    <div class="favorites" id="favorites">
+      <h2>Favorites</h2>
+      <ul class="favorite_list" id="favorite-list"></ul>
     </div>
-  </div>
-  <div class="glass">
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-</div>
-  <h4> &copy; <time id="year"></time> Made by<em>SheriffKule</em> from XXIII Century</h4>
+  
+    <h4>&copy; <time id="year"></time> Made by <em><abbr title="Web Developer">SheriffKule</abbr></em> from XXIII Century</h4>
 
-  <script src="/widgets_script/temperatureConverter.js"></script>
-</body>
-
+    <script src="/widgets_script/temperatureConverter.js"></script>
+  </body>
 </html>
