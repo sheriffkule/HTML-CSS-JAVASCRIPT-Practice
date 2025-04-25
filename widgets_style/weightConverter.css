@@ -16,6 +16,17 @@ body {
     width: 90vw;
     font-size: 1.2em;
     max-width: 28em;
+    scale: 0;
+    transform: translateY(-300px);
+    transform-origin: top;
+    animation: intro .5s linear forwards
+}
+
+@keyframes intro {
+    to {
+        transform: translateX(0);
+        scale: 1;
+    }
 }
 
 .container {
@@ -77,6 +88,11 @@ h2 {
     cursor: pointer;
     transition: .2s;
     overflow: hidden;
+    scale: 0;
+    transform: translateY(-300px);
+    transform-origin: top;
+    animation: intro .5s linear forwards;
+    animation-delay: .25s;
 }
 
 .save_btn:hover {
@@ -93,7 +109,7 @@ h2 {
     padding: 4px 12px;
     border: none;
     outline: none;
-    margin-left: 12px;
+    margin-left: 16px;
     border-radius: 5px;
     font-weight: 600;
     cursor: pointer;
@@ -121,6 +137,11 @@ h2 {
 .favorites {
     max-width: 28em;
     margin-block: 30px;
+    scale: 0;
+    transform: translateY(-300px);
+    transform-origin: top;
+    animation: intro .5s linear forwards;
+    animation-delay: .5s;
 }
 
 .favorites h2 {
@@ -136,27 +157,41 @@ h2 {
 .favorite_list li {
     display: flex;
     align-items: flex-end;
+    justify-content: space-between;
     margin-block: 10px;
     list-style-type: none;
     position: relative;
     border-bottom: 1px solid grey;
 }
 
+.favorite_list li:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
 .favorite_list li::after {
     content: 'Click to Delete';
     position: absolute;
-    top: -40px;
+    top: 0px;
     background: #212322;
     color: #fff;
     border: 1px solid grey;
     padding: 5px 10px;
     left: 0;
-    display: none;
+    scale: 0;
+    pointer-events: none;
     transition: .2s ease-in;
+    animation: fade 2s linear forwards;
+}
+
+@keyframes fade {
+    to {
+        display: none;
+    }
 }
 
 .favorite_list li:hover::after {
-    display: block;
+    scale: 1;
+    top: -40px;
 }
 
 .copy {

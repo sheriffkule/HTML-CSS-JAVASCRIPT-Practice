@@ -28,7 +28,7 @@ window.addEventListener('load', convertFromKg);
 const saveFavoriteButton = document.getElementById('save-favorite');
 const favoriteList = document.getElementById('favorite-list');
 
-saveFavoriteButton.addEventListener('click', function (e) {
+saveFavoriteButton.addEventListener('mousemove', function (e) {
   let rect = saveFavoriteButton.getBoundingClientRect();
   let x = e.clientX - rect.left;
   let y = e.clientY - rect.top;

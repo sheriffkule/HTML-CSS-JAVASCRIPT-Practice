@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: radial-gradient(ellipse at top left, #103f00,#000);
+}
+
+.grid {
+    position: relative;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(12, 50px);
+    grid-gap: 5px;
+}
+
+.grid-cell {
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border: 2px solid #555;
+}
+
+.grid-cell.active {
+    background: radial-gradient(#41ff00 20%, #175c00 20%);
+    border: 2px solid #222;clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
