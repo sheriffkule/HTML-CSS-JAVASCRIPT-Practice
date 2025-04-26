@@ -2,6 +2,7 @@ const playBoard = document.querySelector('.play-board');
 const scoreElement = document.querySelector('.score');
 const highScoreElement = document.querySelector('.high-score');
 const controls = document.querySelectorAll('.controls i');
+const skinContainer = document.getElementById('skin-container');
 
 let gameOver = false;
 let foodX = 18;
@@ -18,8 +19,8 @@ let highScore = localStorage.getItem('high-score') || 0;
 highScoreElement.innerText = `High Score: ${highScore * 10}`;
 
 const changeFoodPosition = () => {
-  foodX = Math.floor(Math.random() * 30) + 1;
-  foodY = Math.floor(Math.random() * 30) + 1;
+  foodX = Math.floor(Math.random() * 29) + 1;
+  foodY = Math.floor(Math.random() * 29) + 1;
 };
 
 const handleGameOver = () => {
@@ -29,18 +30,33 @@ const handleGameOver = () => {
 };
 
 const changeDirection = (e) => {
-  if (e.key === 'ArrowUp' && velocityY !== 1) {
-    velocityX = 0;
-    velocityY = -1;
-  } else if (e.key === 'ArrowDown' && velocityY !== -1) {
-    velocityX = 0;
-    velocityY = 1;
-  } else if (e.key === 'ArrowLeft' && velocityX !== 1) {
-    velocityX = -1;
-    velocityY = 0;
-  } else if (e.key === 'ArrowRight' && velocityX !== -1) {
-    velocityX = 1;
-    velocityY = 0;
+  switch (e.key) {
+    case 'ArrowUp':
+      if (velocityY !== 1) {
+        velocityX = 0;
+        velocityY = -1;
+      }
+      break;
+    case 'ArrowDown':
+      if (velocityY !== -1) {
+        velocityX = 0;
+        velocityY = 1;
+      }
+      break;
+    case 'ArrowLeft':
+      if (velocityX !== 1) {
+        velocityX = -1;
+        velocityY = 0;
+      }
+      break;
+    case 'ArrowRight':
+      if (velocityX !== -1) {
+        velocityX = 1;
+        velocityY = 0;
+      }
+      break;
+    default:
+      break;
   }
 };
 
@@ -86,9 +102,80 @@ const initGame = () => {
 };
 
 changeFoodPosition();
-setIntervalId = setInterval(initGame, 175);
+setIntervalId = setInterval(initGame, 180);
 
 document.addEventListener('keydown', changeDirection);
+
+const pauseElement = document.createElement('div');
+pauseElement.classList.toggle('paused')
+pauseElement.textContent = 'PAUSED';
+
+document.body.appendChild(pauseElement);
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === ' ') {
+    if (setIntervalId) {
+      clearInterval(setIntervalId);
+      setIntervalId = null;
+      pauseElement.style.display = 'block';
+    } else {
+      setIntervalId = setInterval(initGame, 175);
+      pauseElement.style.display = 'none';
+    }
+  }
+});
+
+const snakeSkins = [
+  { name: 'Default', color: '#60cbff'},
+  { name: 'Green', color: 'rgb(38,217,59)' },
+  { name: 'Pink', color: 'rgb(242,13,175)' },
+  { name: 'Blue', color: 'rgb(0,30,255)' },
+  { name: 'Yellow', color: 'rgb(242,255,0)' },
+  { name: 'Silver', color: 'silver' },
+  { name: 'White', color: 'white'},
+  { name: 'Black', color: 'black'},
+  { name: 'Transparent', color: 'transparent'}
+];
+
+function createSkinButton(skin) {
+  const button = document.createElement('button');
+  button.classList.add('btn');
+  button.setAttribute('data-ripple', " ")
+  const buttonSpan = document.createElement('span');
+  buttonSpan.textContent = skin.name;
+  button.appendChild(buttonSpan);
+  button.style.backgroundColor = skin.color;
+  button.addEventListener('click', () => {
+    updateHeadElements(skin.color);
+  });
+  return button;
+}
+
+function updateHeadElements(color) {
+  const headElements = document.querySelectorAll('.head');
+  headElements.forEach((head) => {
+    head.style.backgroundColor = color;
+  });
+  requestAnimationFrame(() => {
+    updateHeadElements(color);
+  });
+}
+
+snakeSkins.forEach((skin) => {
+  const button = createSkinButton(skin);
+  skinContainer.appendChild(button);
+});
+
+document.body.addEventListener('mousemove', function (e) {
+  if (e.target.matches('.btn[data-ripple]')) {
+      const btn = e.target;
+      const x = e.pageX - btn.offsetLeft;
+      const y = e.pageY - btn.offsetTop;
+
+      btn.style.setProperty('--x', x + 'px');
+      btn.style.setProperty('--y', y + 'px');
+  }
+});
 
 function updateYear() {
   const currentYear = new Date().getFullYear();

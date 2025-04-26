@@ -15,6 +15,7 @@ body {
 .wrapper {
   width: 65vmin;
   height: 70vmin;
+  margin-top: 100px;
   display: flex;
   flex-direction: column;
   align-self: flex-end;
@@ -65,6 +66,98 @@ body {
   border-right: 1px solid #171b26;
 }
 
+.paused {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 50px;
+  font-weight: bold;
+  color: transparent;
+  display: none;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 200px 300px;
+  -webkit-text-stroke: 1px #60cbff;
+  letter-spacing: 1px;
+  text-shadow: 0 6px 12px rgba(96, 202, 255, 0.3);
+}
+
+.skins {
+  margin-top: 40px;
+}
+
+.skins h3 {
+  font-size: 22px;
+  color: #b8c6dc;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.skin-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.skin-container .btn {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding: 10px 30px;
+  background: #363636;
+  color: transparent;
+  text-decoration: none;
+  letter-spacing: 1px;
+  overflow: hidden;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all .3 ease;
+}
+
+.btn:hover {
+  box-shadow: 0 0 10px royalblue;
+  font-weight: 600;
+}
+
+.btn span {
+  font-size: 18px;
+  color: #000;
+  position: relative;
+  z-index: 1;
+}
+
+.btn:nth-child(4) span {
+  color: #fff;
+}
+
+.btn:nth-child(9) span {
+  color: #fff;
+}
+
+.btn:nth-child(8) span {
+  color: #fff;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  transform: translate(-50%, -50%);
+  width: 0px;
+  height: 0px;
+  border-radius: 50%;
+  background: royalblue;
+  transition: all .4s ease;
+}
+
+.btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
 h4 {
     font-size: 14px;
     font-weight: 200;
@@ -72,7 +165,7 @@ h4 {
     cursor: default;
     justify-self: center;
     align-self: flex-end;
-    margin-block-end: 12px;
+    margin-block: 40px 10px;
     text-wrap: pretty;
 }
 
