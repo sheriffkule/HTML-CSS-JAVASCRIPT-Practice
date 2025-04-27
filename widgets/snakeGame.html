@@ -6,7 +6,6 @@
     <title>Snake Game</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="/widgets_style/snakeGame.css" />
-    <script src="/widgets_script/snakeGame.js" defer></script>
   </head>
   <body>
     <div class="wrapper">
@@ -23,9 +22,13 @@
       </div>
     </div>
     <div class="skins">
-      <h3>Chose Snake Color</h3>
+      <h3 class="skin_title">Chose Snake Color <i class="fa-solid fa-angle-down"></i></h3>
       <div class="skin-container" id="skin-container"></div>
+      <h3 class="skin_title">Chose Food Color <i class="fa-solid fa-angle-down"></i></h3>
+      <div class="skin-container" id="food-color-container"></div>
     </div>
     <h4> &copy; <time id="year"></time> Made by <em><abbr title="Frontend Master">Sheriffkule</abbr></em> from XXIII Century</h4>
+
+    <script src="/widgets_script/snakeGame.js"></script>
   </body>
 </html>

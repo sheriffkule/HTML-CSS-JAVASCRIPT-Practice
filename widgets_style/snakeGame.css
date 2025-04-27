@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
+  interpolate-size: allow-keywords;
 }
 
 body {
@@ -86,17 +87,43 @@ body {
   margin-top: 40px;
 }
 
-.skins h3 {
+.skin_title {
   font-size: 22px;
   color: #b8c6dc;
-  margin-bottom: 20px;
+  margin-block: 20px;
   text-align: center;
+  cursor: pointer;
+  transition: .25s ease-in-out;
+}
+
+.skin_title:hover {
+  text-shadow: 0 5px 8px #b8c6dc4f;
+  filter: contrast(150%);
+}
+
+.skin_title i {
+  transition: .3s;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
 }
 
 .skin-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  display: grid;
+  height: 0;
   gap: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .5s ease-in .2s, height .5s;
+}
+
+.skin-container.visible {
+  height: auto;
+  opacity: 1;
+  visibility: visible;
 }
 
 .skin-container .btn {
