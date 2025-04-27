@@ -53,4 +53,159 @@ function createStars() {
   }
 }
 
+function initPlayer() {
+  player.style.left = `${window.innerWidth / 2 - 30}px`;
+  player.style.top = `${window.innerHeight / 2 - 30}px`;
+}
+
+function setupEventListeners() {
+  document.addEventListener('keydown', (e) => {
+    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'w', 'a', 's', 'd'].includes(e.key)) {
+      keys[e.key] = true;
+    }
+
+    if ((e.key === ' ') & gameRunning) {
+      togglePause();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'w', 'a', 's', 'd'].includes(e.key)) {
+      keys[e.key] = false;
+    }
+  });
+
+  gameButton.addEventListener('click', togglePause);
+
+  restartButton.addEventListener('click', restartGame);
+
+  startButton.addEventListener('click', startGame);
+}
+
+function gameLoop() {
+  if (!gameRunning) return;
+
+  const playerRect = player.getBoundingClientRect();
+  let newX = parseFloat(player.style.left) || 0;
+  let newY = parseFloat(player.style.top) || 0;
+
+  if (keys['ArrowUp'] || keys['w']) newX -= playerSpeed;
+  if (keys['ArrowDown'] || keys['s']) newX += playerSpeed;
+  if (keys['ArrowLeft'] || keys['a']) newX -= playerSpeed;
+  if (keys['ArrowRight'] || keys['d']) newX -= playerSpeed;
+
+  newX = Math.max(0, Math.min(window.innerWidth - playerRect.width, newX));
+  newY = Math.max(0, Math.min(window.innerHeight - playerRect.height, newY));
+
+  player.style.left = `${newX}px`;
+  player.style.top = `${newY}px`;
+
+  enemies.forEach((enemy) => {
+    enemy.x += enemy.speedX;
+    enemy.y += enemy.speedY;
+
+    enemy.element.style.left = `${enemy.x}px`;
+    enemy.element.style.top = `${enemy.y}px`;
+
+    if (checkCollision(player, enemy.element)) {
+      takeDamage(50);
+      createExplosion(enemy.x, enemy.y);
+      enemy.element.remove();
+      enemies = enemies.filter((e) => e.element !== enemy.element);
+    }
+
+    if (
+      enemy.x < -100 ||
+      enemy.x > window.innerWidth + 100 ||
+      enemy.y < -100 ||
+      enemy.y > window.innerHeight + 100
+    ) {
+      enemy.element.remove();
+      enemies = enemies.filter((e) => e.element !== enemy.element);
+    }
+  });
+
+  coins.forEach((coin) => {
+    if (checkCollision(player, coin.element)) {
+      collectCoin(coin.element);
+      coins = coins.filter((c) => c.element !== coin.element);
+    }
+  });
+
+  powerUps.forEach((powerUp) => {
+    if (checkCollision(player, powerUp.element)) {
+      collectPowerUp(powerUp);
+      powerUps = powerUps.filter((p) => p.element !== powerUp.element);
+    }
+  });
+
+  if (score >= lastLevelUpScore + 50) {
+    levelUp();
+    lastLevelUpScore = score;
+  }
+
+  requestAnimationFrame(gameLoop);
+}
+
+function checkCollision(element1, element2) {
+  const rect1 = element1.getBoundingClientRect();
+  const rect2 = element2.getBoundingClientRect();
+
+  return !(
+    rect1.right < rect2.left ||
+    rect1.left > rect2.right ||
+    rect1.bottom < rect2.top ||
+    rect1.top > rect2.bottom
+  );
+}
+
+function takeDamage(amount) {
+    hitsTaken++;
+
+    if (shield > 0) {
+        shield -= amount;
+        if (shield < 0) {
+            health += shield;
+            shield = 0;
+        }
+        shieldBar.style.width = `${shield}%`;
+    } else {
+        health -= amount;
+    }
+
+    health = Math.max(0, health);
+    healthBar.style.width = `${health}%`;
+    healthBar.classList.add('damage');
+
+    player.style.animation = 'none';
+    setTimeout(() => {
+        player.style.animation = "pulse 2s infinite ease-in-out, float 4s infinite ease-in-out";
+        healthBar.classList.remove('damage');
+    }, 300);
+
+    if (hitsTaken >= 2) {
+        health = 0;
+        healthBar.style.widows = '0%';
+        gameOver();
+    }
+}
+
+function togglePause() {
+  gameRunning = !gameRunning;
+
+  if (gameRunning) {
+    gameButton.textContent = 'Pause';
+    document.querySelectorAll('.parallax-layer').forEach((layer) => {
+      layer.style.animationPlayState = 'running';
+    });
+    gameLoop();
+  } else {
+    gameButton.textContent = 'Resume';
+    document.querySelectorAll('.parallax-layer').forEach((layer) => {
+      layer.style.animationPlayState = 'paused';
+    });
+  }
+}
+
 createStars();
+initPlayer();

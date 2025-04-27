@@ -78,7 +78,7 @@ body {
     position: absolute;
     width: 60px;
     height: 60px;
-    background: radial-gradient(circle at 30% 30%, #4caf50, #2e7d32);
+    background: radial-gradient(circle at 30% 30%, #4caf50, #1c4d1f);
     z-index: 10;
     box-shadow: 0 0 20px #4caf50;
     border-radius: 50%;
@@ -104,4 +104,15 @@ body {
     50% {
         transform: translateY(-10px);
     }
+}
+
+.enemy {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: radial-gradient(circle at 30% 30%, #f44336, #c6282c);
+    border-radius: 50%;
+    box-shadow: 0 0 20px #f44336;
+    z-index: 9;
+    animation: float 3s infinite ease-in-out;
 }
