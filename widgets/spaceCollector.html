@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2D Space Collector</title>
+    <link rel="stylesheet" href="/widgets_style/spaceCollector.css" />
+  </head>
+  <body>
+    <div id="game-container">
+      <div class="parallax-layer layer-1"></div>
+      <div class="parallax-layer layer-2"></div>
+
+      <div id="stars"></div>
+
+      <div id="player"></div>
+
+      <div id="game-ui">
+        <div class="ui-panel">
+          <div id="score-display">Score: 0</div>
+          <div id="level-display">Level: 1</div>
+        </div>
+
+        <div class="ui-panel">
+          <div class="health-container">
+            <div id="health-bar"></div>
+          </div>
+          <div class="shield-container">
+            <div id="shield-bar"></div>
+          </div>
+        </div>
+
+        <button id="game-button">Pause</button>
+      </div>
+
+      <div id="game-over">
+        <h1>Game Over</h1>
+        <div id="final-score">Score: 0</div>
+        <button id="restart-button">Play Again</button>
+      </div>
+
+      <div id="start-screen">
+        <h1>COSMIC COLLECTOR</h1>
+        <div id="instructions">
+          <p>Collect the golden coins to score points. Avoid the red enemies!</p>
+          <p>Find power-ups to boost your abilities.</p>
+          <p>Use arrow keys or on-screen buttons to move.</p>
+        </div>
+        <button id="start-button">Start Game</button>
+      </div>
+    </div>
+
+    <script src="/widgets_script/spaceCollector.js"></script>
+  </body>
+</html>
