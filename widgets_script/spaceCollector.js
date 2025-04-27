@@ -3,7 +3,7 @@ let health = 100;
 let shield = 0;
 let level = 1;
 let gameRunning = false;
-let playerSpeed = 6;
+let playerSpeed = 10;
 let keys = {};
 let hitsTaken = 0;
 let enemySpawnInterval;
@@ -15,7 +15,9 @@ let baseCoinValue = 10;
 const player = document.getElementById('player');
 const gameContainer = document.getElementById('game-container');
 const healthBar = document.getElementById('health-bar');
+const healthBarText = document.getElementById('health-bar-text');
 const shieldBar = document.getElementById('shield-bar');
+const shieldBarText = document.getElementById('shield-bar-text');
 const scoreDisplay = document.getElementById('score-display');
 const levelDisplay = document.getElementById('level-display');
 const gameButton = document.getElementById('game-button');
@@ -64,12 +66,12 @@ function setupEventListeners() {
       keys[e.key] = true;
     }
 
-    if ((e.key === ' ') & gameRunning) {
+    if (e.key === ' ') {
       togglePause();
     }
   });
 
-  document.addEventListener('keydown', (e) => {
+  document.addEventListener('keyup', (e) => {
     if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'w', 'a', 's', 'd'].includes(e.key)) {
       keys[e.key] = false;
     }
@@ -82,6 +84,115 @@ function setupEventListeners() {
   startButton.addEventListener('click', startGame);
 }
 
+function spawnEnemy() {
+  if (!gameRunning) return;
+
+  const enemy = document.createElement('div');
+  enemy.className = 'enemy';
+
+  const side = Math.floor(Math.random() * 4);
+  let x, y;
+
+  switch (side) {
+    case 0:
+      x = Math.random() * window.innerWidth;
+      y = -50;
+      break;
+    case 1:
+      x = window.innerWidth;
+      y = Math.random() * window.innerHeight;
+      break;
+    case 2:
+      x = Math.random() * window.innerWidth;
+      y = window.innerHeight;
+      break;
+    case 3:
+      x = -50;
+      y = Math.random() * window.innerHeight;
+      break;
+  }
+
+  enemy.style.left = `${x}px`;
+  enemy.style.top = `${y}px`;
+  gameContainer.appendChild(enemy);
+
+  const baseSpeed = 1 + level * 0.2;
+  const speedVariation = 0.5;
+
+  enemies.push({
+    element: enemy,
+    x,
+    y,
+    speedX: (Math.random() * speedVariation + baseSpeed) * (x > window.innerWidth / 2 ? -1 : 1),
+    speedY: (Math.random() * speedVariation + baseSpeed) * (y > window.innerHeight / 2 ? -1 : 1),
+  });
+
+  setTimeout(() => {
+    if (enemy.parentNode) {
+      enemy.remove();
+      enemies = enemies.filter((e) => e.element !== enemy);
+    }
+  }, 10000);
+}
+
+function spawnCoin() {
+  if (!gameRunning) return;
+
+  const coin = document.createElement('div');
+  coin.className = 'coin';
+
+  const x = Math.random() * (window.innerWidth - 35);
+  const y = Math.random() * (window.innerHeight - 35);
+
+  coin.style.left = `${x}px`;
+  coin.style.top = `${y}px`;
+  gameContainer.appendChild(coin);
+
+  coins.push({
+    element: coin,
+    x,
+    y,
+  });
+
+  setTimeout(() => {
+    if (coin.parentNode) {
+      coin.remove();
+      coins = coins.filter((c) => c.element !== coin);
+    }
+  }, 10000);
+}
+
+function spawnPowerUp() {
+  if (!gameRunning) return;
+
+  if (Math.random() > 0.3) return;
+
+  const powerUp = document.createElement('div');
+  const type = Math.random() > 0.5 ? 'health-up' : 'shield';
+  powerUp.className = `powerUp ${type}`;
+
+  const x = Math.random() * (window.innerWidth - 40);
+  const y = Math.random() * (window.innerHeight - 40);
+
+  powerUp.style.left = `${x}px`;
+  powerUp.style.top = `${y}px`;
+  gameContainer.appendChild(powerUp);
+
+  powerUps.push({
+    element: powerUp,
+    x,
+    y,
+    type: type,
+  });
+
+  setTimeout(() => {
+    if (powerUp.parentNode) {
+      powerUp.remove();
+      powerUps = powerUps.filter((p) => p.element !== powerUp);
+    }
+  }, 8000);
+}
+
 function gameLoop() {
   if (!gameRunning) return;
 
@@ -89,10 +200,10 @@ function gameLoop() {
   let newX = parseFloat(player.style.left) || 0;
   let newY = parseFloat(player.style.top) || 0;
 
-  if (keys['ArrowUp'] || keys['w']) newX -= playerSpeed;
-  if (keys['ArrowDown'] || keys['s']) newX += playerSpeed;
+  if (keys['ArrowUp'] || keys['w']) newY -= playerSpeed;
+  if (keys['ArrowDown'] || keys['s']) newY += playerSpeed;
   if (keys['ArrowLeft'] || keys['a']) newX -= playerSpeed;
-  if (keys['ArrowRight'] || keys['d']) newX -= playerSpeed;
+  if (keys['ArrowRight'] || keys['d']) newX += playerSpeed;
 
   newX = Math.max(0, Math.min(window.innerWidth - playerRect.width, newX));
   newY = Math.max(0, Math.min(window.innerHeight - playerRect.height, newY));
@@ -108,7 +219,7 @@ function gameLoop() {
     enemy.element.style.top = `${enemy.y}px`;
 
     if (checkCollision(player, enemy.element)) {
-      takeDamage(50);
+      takeDamage(40);
       createExplosion(enemy.x, enemy.y);
       enemy.element.remove();
       enemies = enemies.filter((e) => e.element !== enemy.element);
@@ -139,7 +250,7 @@ function gameLoop() {
     }
   });
 
-  if (score >= lastLevelUpScore + 50) {
+  if (score >= lastLevelUpScore + 100) {
     levelUp();
     lastLevelUpScore = score;
   }
@@ -169,12 +280,15 @@ function takeDamage(amount) {
       shield = 0;
     }
     shieldBar.style.width = `${shield}%`;
+    shieldBarText.textContent = `${shield}%`;
   } else {
     health -= amount;
   }
 
   health = Math.max(0, health);
   healthBar.style.width = `${health}%`;
+
+  healthBarText.textContent = `${health}%`;
   healthBar.classList.add('damage');
 
   player.style.animation = 'none';
@@ -183,9 +297,9 @@ function takeDamage(amount) {
     healthBar.classList.remove('damage');
   }, 300);
 
-  if (hitsTaken >= 2) {
+  if (hitsTaken >= 30 || health === 0) {
     health = 0;
-    healthBar.style.widows = '0%';
+    healthBar.style.width = '0%';
     gameOver();
   }
 }
@@ -195,11 +309,25 @@ function collectPowerUp(powerUp) {
   powerUp.element.remove();
 
   if (type === 'health-up') {
-    health = Math.min(100, health + 30);
-    healthBar.style.width = `${health}%`;
+    if (health === 100) {
+      shield = Math.min(100, shield + 40);
+      shieldBar.style.width = `${shield}%`;
+      shieldBarText.textContent = `${shield}%`;
+    } else {
+      health = Math.min(100, health + 40);
+      healthBar.style.width = `${health}%`;
+      healthBarText.textContent = `${health}%`;
+    }
   } else if (type === 'shield') {
-    shield = Math.min(100, shield + 50);
-    shieldBar.style.width = `${shield}%`;
+    if (shield === 100) {
+      health = Math.min(100, health + 50);
+      healthBar.style.width = `${health}%`;
+      healthBarText.textContent = `${health}%`;
+    } else {
+      shield = Math.min(100, shield + 50);
+      shieldBar.style.width = `${shield}%`;
+      shieldBarText.textContent = `${shield}%`;
+    }
   }
 }
 
@@ -246,7 +374,7 @@ function levelUp() {
   levelUpEffect.style.zIndex = '100';
   levelUpEffect.style.pointerEvents = 'none';
   levelUpEffect.style.animation = 'fadeOut 1s forwards';
-  
+
   document.body.appendChild(levelUpEffect);
 
   setTimeout(() => {
@@ -282,49 +410,60 @@ function gameOver() {
 }
 
 function startGame() {
-    startScreen.style.display = 'none';
+  startScreen.style.display = 'none';
 
-    score = 0;
-    health = 100;
-    shield = 0;
-    level = 1;
-    lastLevelUpScore = 0;
-    gameRunning = true;
+  score = 0;
+  health = 100;
+  shield = 50;
+  level = 1;
+  lastLevelUpScore = 0;
+  gameRunning = true;
 
-    scoreDisplay.textContent = `SCORE: ${score}`;
-    levelDisplay.textContent = `LEVEL: ${level}`;
-    healthBar.style.width = '100%';
-    shieldBar.style.width = '0%';
-    gameOverScreen.style.display = 'none';
-    gameButton.textContent = 'Pause';
+  scoreDisplay.textContent = `SCORE: ${score}`;
+  levelDisplay.textContent = `LEVEL: ${level}`;
+  healthBar.style.width = '100%';
+  shieldBar.style.width = '50%';
+  healthBarText.textContent = '100%';
+  shieldBarText.textContent = '50%';
+  gameOverScreen.style.display = 'none';
+  gameButton.textContent = 'Pause';
 
-    enemies.forEach((enemy) => enemy.element.remove());
-    coins.forEach((coin) => coin.element.remove());
-    powerUps.forEach((powerUp) => powerUp.element.remove());
-    enemies = [];
-    coins = [];
-    powerUps = [];
+  enemies.forEach((enemy) => enemy.element.remove());
+  coins.forEach((coin) => coin.element.remove());
+  powerUps.forEach((powerUp) => powerUp.element.remove());
+  enemies = [];
+  coins = [];
+  powerUps = [];
 
-    initPlayer();
+  initPlayer();
 
-    document.querySelectorAll('.parallax-layer').forEach((layer) => {
-        layer.style.animationPlayState = 'running';
-    });
+  document.querySelectorAll('.parallax-layer').forEach((layer) => {
+    layer.style.animationPlayState = 'running';
+  });
 
-    enemySpawnInterval = setInterval(spawnEnemy, 2000);
-    coinSpawnInterval = setInterval(spawnCoin, 3000);
-    powerUpSpawnInterval = setInterval(spawnPowerUp, 10000);
+  enemySpawnInterval = setInterval(spawnEnemy, 2000);
+  coinSpawnInterval = setInterval(spawnCoin, 3000);
+  powerUpSpawnInterval = setInterval(spawnPowerUp, 10000);
 
-    gameLoop();
+  gameLoop();
 }
 
 function restartGame() {
-    gameOverScreen.style.display = 'none';
-    startGame();
+  gameOverScreen.style.display = 'none';
+  startGame();
 }
+
+function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+    yearElement.dateTime = currentYear;
+    yearElement.textContent = currentYear;
+  }
+  
+  updateYear();
 
 createStars();
 initPlayer();
 setupEventListeners();
 
-startScreen.style.display = 'flex';
+startScreen.style.display = 'grid';
