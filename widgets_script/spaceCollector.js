@@ -160,34 +160,98 @@ function checkCollision(element1, element2) {
 }
 
 function takeDamage(amount) {
-    hitsTaken++;
+  hitsTaken++;
 
-    if (shield > 0) {
-        shield -= amount;
-        if (shield < 0) {
-            health += shield;
-            shield = 0;
-        }
-        shieldBar.style.width = `${shield}%`;
-    } else {
-        health -= amount;
+  if (shield > 0) {
+    shield -= amount;
+    if (shield < 0) {
+      health += shield;
+      shield = 0;
     }
+    shieldBar.style.width = `${shield}%`;
+  } else {
+    health -= amount;
+  }
 
-    health = Math.max(0, health);
+  health = Math.max(0, health);
+  healthBar.style.width = `${health}%`;
+  healthBar.classList.add('damage');
+
+  player.style.animation = 'none';
+  setTimeout(() => {
+    player.style.animation = 'pulse 2s infinite ease-in-out, float 4s infinite ease-in-out';
+    healthBar.classList.remove('damage');
+  }, 300);
+
+  if (hitsTaken >= 2) {
+    health = 0;
+    healthBar.style.widows = '0%';
+    gameOver();
+  }
+}
+
+function collectPowerUp(powerUp) {
+  const type = powerUp.type;
+  powerUp.element.remove();
+
+  if (type === 'health-up') {
+    health = Math.min(100, health + 30);
     healthBar.style.width = `${health}%`;
-    healthBar.classList.add('damage');
+  } else if (type === 'shield') {
+    shield = Math.min(100, shield + 50);
+    shieldBar.style.width = `${shield}%`;
+  }
+}
 
-    player.style.animation = 'none';
-    setTimeout(() => {
-        player.style.animation = "pulse 2s infinite ease-in-out, float 4s infinite ease-in-out";
-        healthBar.classList.remove('damage');
-    }, 300);
+function createExplosion(x, y) {
+  const explosion = document.createElement('div');
+  explosion.className = 'explosion';
+  explosion.style.left = `${x}px`;
+  explosion.style.top = `${y}px`;
+  gameContainer.appendChild(explosion);
 
-    if (hitsTaken >= 2) {
-        health = 0;
-        healthBar.style.widows = '0%';
-        gameOver();
-    }
+  setTimeout(() => {
+    explosion.remove();
+  }, 600);
+}
+
+function collectCoin(coin) {
+  coin.remove();
+
+  const points = Math.round(baseCoinValue);
+  score += points;
+
+  scoreDisplay.textContent = `SCORE: ${score}`;
+
+  gameButton.classList.add('pressed');
+  setTimeout(() => {
+    gameButton.classList.remove('pressed');
+  }, 300);
+}
+
+function levelUp() {
+  level++;
+  levelDisplay.textContent = `LEVEL: ${level}`;
+
+  clearInterval(enemySpawnInterval);
+  enemySpawnInterval = setInterval(spawnEnemy, Math.max(500, 1000 - level * 100));
+
+  const levelUpEffect = document.createElement('div');
+  levelUpEffect.style.position = 'absolute';
+  levelUpEffect.style.top = '0';
+  levelUpEffect.style.left = '0';
+  levelUpEffect.style.width = '100%';
+  levelUpEffect.style.height = ' 100%';
+  levelUpEffect.style.backgroundColor = 'rgba(33, 150, 243, 0.3)';
+  levelUpEffect.style.zIndex = '100';
+  levelUpEffect.style.pointerEvents = 'none';
+  levelUpEffect.style.animation = 'fadeOut 1s forwards';
+  
+  document.body.appendChild(levelUpEffect);
+
+  setTimeout(() => {
+    levelUpEffect.remove();
+  }, 1000);
 }
 
 function togglePause() {
@@ -207,5 +271,60 @@ function togglePause() {
   }
 }
 
+function gameOver() {
+  gameRunning = false;
+  finalScoreDisplay.textContent = `SCORE: ${score}`;
+  gameOverScreen.style.display = 'flex';
+
+  clearInterval(enemySpawnInterval);
+  clearInterval(coinSpawnInterval);
+  clearInterval(powerUpSpawnInterval);
+}
+
+function startGame() {
+    startScreen.style.display = 'none';
+
+    score = 0;
+    health = 100;
+    shield = 0;
+    level = 1;
+    lastLevelUpScore = 0;
+    gameRunning = true;
+
+    scoreDisplay.textContent = `SCORE: ${score}`;
+    levelDisplay.textContent = `LEVEL: ${level}`;
+    healthBar.style.width = '100%';
+    shieldBar.style.width = '0%';
+    gameOverScreen.style.display = 'none';
+    gameButton.textContent = 'Pause';
+
+    enemies.forEach((enemy) => enemy.element.remove());
+    coins.forEach((coin) => coin.element.remove());
+    powerUps.forEach((powerUp) => powerUp.element.remove());
+    enemies = [];
+    coins = [];
+    powerUps = [];
+
+    initPlayer();
+
+    document.querySelectorAll('.parallax-layer').forEach((layer) => {
+        layer.style.animationPlayState = 'running';
+    });
+
+    enemySpawnInterval = setInterval(spawnEnemy, 2000);
+    coinSpawnInterval = setInterval(spawnCoin, 3000);
+    powerUpSpawnInterval = setInterval(spawnPowerUp, 10000);
+
+    gameLoop();
+}
+
+function restartGame() {
+    gameOverScreen.style.display = 'none';
+    startGame();
+}
+
 createStars();
 initPlayer();
+setupEventListeners();
+
+startScreen.style.display = 'flex';

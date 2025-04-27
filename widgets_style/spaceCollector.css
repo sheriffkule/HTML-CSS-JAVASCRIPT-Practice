@@ -116,3 +116,62 @@ body {
     z-index: 9;
     animation: float 3s infinite ease-in-out;
 }
+
+.coin {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    background: radial-gradient(circle at 30% 30%, gold, #ffd700);
+    border-radius: 50%;
+    box-shadow: 0 0 15px gold;
+    z-index: 8;
+    animation: spin 3s linear infinite, float 5s infinite ease-in-out;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.powerUp {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    z-index: 8;
+    animation: float 4s infinite ease-in-out, pulse 1.5s infinite alternate;
+}
+
+.health-up {
+    background: radial-gradient(circle at 30% 30%, #00e676, #00c853);
+    box-shadow: 0 0 15px #00e676;
+}
+
+.explosion {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, orange, red);
+    border-radius: 50%;
+    z-index: 11;
+    animation: explode 0.6s ease-out forwards;
+}
+
+@keyframes explode {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
