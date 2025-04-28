@@ -9,10 +9,36 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
     height: 100vh;
-    background: radial-gradient(circle at center, #a5b1c2, #213e66);
+    overflow: hidden;
+    background: radial-gradient(circle at center, #a5b1c2, #172b47);
     color: #fff;
+}
+
+#stars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle var(--duration) infinite ease-in-out;
+    opacity: 0;
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .container {
@@ -59,6 +85,8 @@ button {
     padding: 12px 24px;
     font-size: 1rem;
     border: none;
+    outline: none;
+    overflow: hidden;
     border-radius: 6px;
     background: #44bd32;
     color: #1e272e;
@@ -71,25 +99,65 @@ button:hover {
     box-shadow: 0 0 15px rgba(58, 227, 117, 0.5),
     0 0 30px rgba(50, 255, 125, 0.5);
     transform: translateY(-2px) scale(1.03);
-    font-weight: 600;
 }
 
-#result {
-    margin-top: 20px;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #fff;
+button:active {
+    box-shadow: 0 0 15px rgba(58, 227, 117, 0.5);
+    transform: scale(1);
+    transition: .1s ease-out;
+}
+
+.results-container {
+    border: 1px solid #44bd32;
+    display: grid;
+    /* display: none; */
+}
+
+/* .results-container.show {
+    display: block;
+  } */
+
+.results-container p {
+    font-size: 16px;
+    margin-block: 10px;
+}
+
+.copy-btn {
+    width: 50%;
+    justify-self: center;
+    margin: 10px 0 12px 0;
+}
+
+.particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, .8);
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 1;
+    z-index: -1;
+    transform: translate(0, 0);
+    animation: animate 1s ease-in-out forwards;
+}
+
+@keyframes animate {
+    100% {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty));
+    }
 }
 
 h4 {
     font-size: 14px;
     font-weight: 200;
     color: #c9c9c9;
-    pointer-events: none;
+    cursor: default;
     transform: translateX(-50%);
     left: 50%;
     position: fixed;
     bottom: 20px;
+    text-align: center;
     text-wrap: pretty;
 }
 

@@ -7,14 +7,23 @@
     <link rel="stylesheet" href="/widgets_style/ageCalculator.css" />
   </head>
   <body>
+    <div id="stars"></div>
     <div class="container">
       <h1>Age Calculator</h1>
       <label for="date">Enter your birthdate: </label>
       <input type="date" id="birthdate" name="birthdate" />
-      <button onclick="calculateAge()">Calculate Age</button>
-      <p id="result"></p>
+      <button class="btn" id="calculate" id="calculate">Calculate Age</button>
+      <div class="results-container">
+        <p id="result"></p>
+        <p id="total-months"></p>
+        <p id="total-weeks"></p>
+        <p id="total-days"></p>
+        <p id="total-hours"></p>
+        <button class="copy-btn btn" id="copy-btn">Copy</button>
+      </div>
+    
     </div>
-    <h4> &copy; <time id="year"></time> Made by <em>SheriffKule</em> from XXIII Century</h4>
+    <h4> &copy; <time id="year"></time> Made by <em><abbr title="Web Developer">SheriffKule</abbr></em> from XXIII Century</h4>
     <script src="/widgets_script/ageCalculator.js"></script>
   </body>
 </html>
