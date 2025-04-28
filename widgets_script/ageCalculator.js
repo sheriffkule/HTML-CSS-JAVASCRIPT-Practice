@@ -70,7 +70,7 @@ window.onload = function () {
     if (ageInDays < 0) {
       adjustedAgeInMonths -= 1;
       const daysInPreviousMonth = getDaysInPreviousMonth(today);
-      ageInDays += daysInPreviousMonth;
+      ageInDays = Math.max(ageInDays + daysInPreviousMonth, 0);
     }
     
     function getDaysInPreviousMonth(date) {
@@ -83,11 +83,14 @@ window.onload = function () {
     const totalAgeInDays = Math.floor((today - birthDate) / (1000 * 60 * 60 * 24));
     const totalAgeInHours = Math.floor((today - birthDate) / (1000 * 60 * 60));
 
+    const resultsContainer = document.getElementById('results-container');
+    resultsContainer.classList.add('shown');
+
     resultElement.innerText = `You are ${adjustedAgeInYears} years, ${adjustedAgeInMonths} months, and ${ageInDays} days old.`;
-    totalMonthsElement.innerText = `Total age is ${totalAgeInMonths} months.`;
-    totalWeeksElement.innerText = `Total age is ${totalAgeInWeeks} weeks.`;
-    totalDaysElement.innerText = `Total age is ${totalAgeInDays} days.`;
-    totalHoursElement.innerText = `Total age is ${totalAgeInHours} hours.`;
+    totalMonthsElement.innerText = `Total months: ${totalAgeInMonths} months.`;
+    totalWeeksElement.innerText = `Total weeks: ${totalAgeInWeeks} weeks.`;
+    totalDaysElement.innerText = `Total days: ${totalAgeInDays} days.`;
+    totalHoursElement.innerText = `Total hours: ${totalAgeInHours} hours.`;
 
     function handleCopyAgeInfo() {
       const elements = [
@@ -140,6 +143,37 @@ buttons.forEach((btn) => {
   });
 });
 
+function calculateCountdown(birthdate) {
+  const today = new Date();
+  const nextBirthday = new Date(today.getFullYear(), birthdate.getMonth(), birthdate.getDate());
+
+  if (today > nextBirthday) {
+    nextBirthday.setFullYear(today.getFullYear() + 1);
+  }
+
+  const timeDiff = nextBirthday.getTime() - today.getTime();
+  const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+  return { days, hours, minutes, seconds };
+}
+
+function updateCountdown(birthdate) {
+  const countdown = calculateCountdown(birthdate);
+  document.getElementById('days').innerText = countdown.days;
+  document.getElementById('hours').innerText = countdown.hours;
+  document.getElementById('minutes').innerText = countdown.minutes;
+  document.getElementById('seconds').innerText = countdown.seconds;
+}
+
+setInterval(() => {
+  const birthdateInput = document.getElementById('birthdate');
+  const birthdate = new Date(birthdateInput.value);
+  updateCountdown(birthdate);
+}, 1000);
+
 function createParticle(button, x, y) {
   const particle = document.createElement('div');
   particle.classList.add('particle');
@@ -161,6 +195,14 @@ function createParticle(button, x, y) {
     particle.remove();
   }, 500);
 }
+
+const zodiacTitle = document.querySelector('.zodiac-title');
+const zodiacContainer = document.querySelector('.zodiac-container');
+
+zodiacTitle.addEventListener('click', () => {
+  zodiacTitle.classList.toggle('active')
+  zodiacContainer.classList.toggle('shown');
+})
 
 function updateYear() {
   const currentYear = new Date().getFullYear();

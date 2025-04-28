@@ -13,17 +13,46 @@
       <label for="date">Enter your birthdate: </label>
       <input type="date" id="birthdate" name="birthdate" />
       <button class="btn" id="calculate" id="calculate">Calculate Age</button>
-      <div class="results-container">
+      <div class="results-container" id="results-container">
         <p id="result"></p>
         <p id="total-months"></p>
         <p id="total-weeks"></p>
         <p id="total-days"></p>
         <p id="total-hours"></p>
         <button class="copy-btn btn" id="copy-btn">Copy</button>
+        <div id="countdown-container">
+          <h2>Next Birthday Countdown</h2>
+          <div id="countdown">
+            <span id="days"></span> days,
+            <span id="hours"></span> hours,
+            <span id="minutes"></span> minutes,
+            <span id="seconds"></span> seconds,
+          </div>
+        </div>
       </div>
-    
     </div>
-    <h4> &copy; <time id="year"></time> Made by <em><abbr title="Web Developer">SheriffKule</abbr></em> from XXIII Century</h4>
+    <div class="zodiac">
+      <h2 class="zodiac-title">Zodiac Signs <span>&#8964;</span></h2>
+      <ul class="zodiac-container">
+        <li>Aries ♈︎ (March 21 – April 19)</li>
+        <li>Taurus ♉︎ (April 20 – May 20)</li>
+        <li>Gemini ♊︎ (May 21 – June 20)</li>
+        <li>Cancer ♋︎ (June 21 – July 22)</li>
+        <li>Leo ♌︎ (July 23 – August 22)</li>
+        <li>Virgo ♍︎ (August 23 – September 22)</li>
+        <li>Libra ♎︎ (September 23 – October 22)</li>
+        <li>Scorpio ♏︎ (October 23 – November 21)</li>
+        <li>Sagittarius ♐︎ (November 22 – December 21)</li>
+        <li>Capricorn ♑︎ (December 22 – January 19)</li>
+        <li>Aquarius ♒︎ (January 20 – February 18)</li>
+        <li>Pisces ♓︎ (February 19 – March 20)</li>
+      </ul>
+    </div>
+
+    <h4>
+      &copy; <time id="year"></time> Made by <em><abbr title="Web Developer">SheriffKule</abbr></em> from
+      XXIII Century
+    </h4>
     <script src="/widgets_script/ageCalculator.js"></script>
   </body>
 </html>
