@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.sec {
+    position: relative;
+    background: #111;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.box {
+    position: absolute;
+    color: #0005;
+}
+
+.box::before {
+    content: '\f005';
+    position: absolute;
+    font-family: 'fontAwesome';
+}
+
+.box.animate {
+    color: #ff0;
+    text-shadow: 0 0 5px #ff0,
+    0 0 20px #ff0,
+    0 0 50px #ff0;
+}
