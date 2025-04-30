@@ -1,0 +1,164 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: radial-gradient(#f1f1f1, #888);
+}
+
+ul {
+    position: absolute;
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+li {
+    position: relative;
+    list-style-type: none;
+    margin: 0 3px;
+}
+
+li::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    bottom: -4px;
+    width: 80px;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
+    transition: all .5s;
+    opacity: 0;
+    filter: blur(2px);
+    transform: scale(1);
+}
+
+li:hover::before {
+    transition-delay: .2s;
+    opacity: .8;
+    transform: scale(1.5);
+}
+
+li a {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    transition: all .5s;
+}
+
+li:hover a {
+    transform: translateY(-10px);
+}
+
+li a span {
+    width: 100%;
+    height: 100%;
+}
+
+ul li a span::before {
+    content: '';
+    font-family: fontAwesome;
+    font-size: 50px;
+    text-align: center;
+    line-height: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    color: #262626;
+    transform-origin: top;
+    transition: all .5s;
+}
+
+li:hover a span::before {
+    transform: rotateX(90deg) translateY(-50%);
+}
+
+li a span::after {
+    content: '';
+    font-family: fontAwesome;
+    font-size: 50px;
+    text-align: center;
+    line-height: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: bottom;
+    transition: all .5s;
+    transform: rotateX(90deg) translateY(50%);
+}
+
+li:hover a span::after {
+    transform: rotateX(0deg) translateY(0);
+}
+
+ul li:nth-child(1) a span::before,
+ul li:nth-child(1) a span::after {
+    content: '\f09a';
+}
+
+ul li:nth-child(2) a span::before,
+ul li:nth-child(2) a span::after {
+    content: '\f099';
+}
+
+ul li:nth-child(3) a span::before,
+ul li:nth-child(3) a span::after {
+    content: '\f0d5';
+}
+
+ul li:nth-child(4) a span::before,
+ul li:nth-child(4) a span::after {
+    content: '\f0e1';
+}
+
+ul li:nth-child(5) a span::before,
+ul li:nth-child(5) a span::after {
+    content: '\f232';
+}
+
+ul li:nth-child(6) a span::before,
+ul li:nth-child(6) a span::after {
+    content: '\f16d';
+}
+
+ul li:nth-child(1) a span::after {
+    background: #3b5999;
+    color: #fff;
+}
+
+ul li:nth-child(2) a span::after {
+    background: #55acce;
+    color: #fff;
+}
+ul li:nth-child(3) a span::after {
+    background: #dd4b39;
+    color: #fff;
+}
+
+ul li:nth-child(4) a span::after {
+    background: #0077b5;
+    color: #fff;
+}
+
+ul li:nth-child(5) a span::after {
+    background: #00b55b;
+    color: #fff;
+}
+
+ul li:nth-child(6) a span::after {
+    background: #fd0094;
+    color: #fff;
+}
