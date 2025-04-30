@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bleeding Button</title>
+    <link rel="stylesheet" href="/buttons_style/buttonAnimation89.css" />
+  </head>
+  <body>
+    <a href="#" class="btn"><div class="box" id="box"></div><span>Bleeding</span></a>
+
+    <svg>
+      <filter id="gooey">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="10"/>
+        <feColorMatrix
+          values="1 0 0 0 0
+          0 1 0 0 0
+          0 0 1 0 0
+          0 0 0 50 -10"
+          result="gooey"/>
+      </filter>
+    </svg>
+    <script src="/buttons_script/buttonAnimation89.js"></script>
+  </body>
+</html>
