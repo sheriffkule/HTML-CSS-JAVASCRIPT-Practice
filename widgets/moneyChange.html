@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Money Change Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/moneyChange.css" />
+  </head>
+  <body>
+    <div class="particles-container" id="particles-js"></div>
+
+    <div class="container">
+      <div class="card">
+        <header>
+          <div class="logo">
+            <i class="fas fa-money-bill-wave"></i>
+          </div>
+          <h1>Money Calculator</h1>
+          <p>Calculate the perfect combination of bills and coins</p>
+        </header>
+
+        <div class="input-section">
+          <div class="theme-toggle">
+            <span><i class="fas fa-sun"></i></span>
+            <label class="switch">
+              <input type="checkbox" id="theme-toggle" />
+              <span class="slider round"></span>
+            </label>
+            <span><i class="fas fa-moon"></i></span>
+          </div>
+
+          <div class="money-input">
+            <span class="currency-symbol">$</span>
+            <input type="number" id="amount" placeholder="Enter amount..." step="0.01" min="0" />
+            <div class="input-focus-effect"></div>
+          </div>
+
+          <div class="error" id="error-message"></div>
+
+          <div class="buttons">
+            <button class="primary-btn" id="calculate">
+              <div class="loading-dots">
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+              <span>Calculate</span>
+            </button>
+
+            <button id="random-amount" class="secondary-btn">
+              <i class="fas fa-random"></i>
+              <span>Random</span>
+            </button>
+          </div>
+
+          <div class="quick-amounts">
+            <button data-amount="10.00">$10</button>
+            <button data-amount="20.00">$20</button>
+            <button data-amount="50.00">$50</button>
+            <button data-amount="100.00">$100</button>
+            <button data-amount="42.91">$42.91</button>
+          </div>
+        </div>
+
+        <div class="results-container">
+          <div class="results-header">
+            <h2>Results</h2>
+            <div class="view-toggle">
+              <button id="grid-view" class="view-btn acti">
+                <i class="fas fa-th-large"></i>
+              </button>
+              <button id="list-view" class="view-btn">
+                <i class="fas fa-th-list"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="results grid-view" id="results">
+            <div class="empty-state">
+              <i class="fas fa-coins"></i>
+              <p>Enter an amount above to see the breakdown.</p>
+            </div>
+          </div>
+
+          <div class="summary" id="summary"></div>
+        </div>
+        <div class="info-tooltip">
+          <button id="info-button">
+            <i class="fas fa-info-circle"></i>
+          </button>
+          <div class="tooltip-content">
+            <h3>How it works</h3>
+            <p>This calculator uses a greedy algorithm to find the minimum number of bills and coins needed for the specified amount.</p>
+            <p>Supported denominations: $100, $50, $20, $10, $5, $1, Quarter, Dime, Nickel and Penny</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script src="/widgets_script/moneyChange.js"></script>
+  </body>
+</html>
