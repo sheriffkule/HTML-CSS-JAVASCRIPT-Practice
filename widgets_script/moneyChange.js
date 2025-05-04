@@ -62,7 +62,7 @@ const denominations = [
 ];
 
 const themeSwitch = document.getElementById('theme-switch');
-const amount = document.getElementById('amount');
+const amountInput = document.getElementById('amount');
 const calculateBtn = document.getElementById('calculate');
 const randomBtn = document.getElementById('random-amount');
 const resultsDiv = document.getElementById('results');
@@ -70,7 +70,7 @@ const summaryDiv = document.getElementById('summary');
 const errorMessage = document.getElementById('error-message');
 const gridViewBtn = document.getElementById('grid-view');
 const listViewBtn = document.getElementById('list-view');
-const quickAmountButtons = document.getElementById('.quick-amounts button');
+const quickAmountButtons = document.querySelectorAll('.quick-amounts button');
 
 function init() {
   const savedTheme = localStorage.getItem('theme');
@@ -94,9 +94,150 @@ function init() {
   listViewBtn.addEventListener('click', () => {
     setViewMode('list');
   });
+
+  quickAmountButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const amount = button.getAttribute('data-amount');
+      amountInput.value = amount;
+      handleCalculate();
+    });
+  });
 }
 
-function toggleTheme() {}
-function handleCalculate() {}
-function generateRandomAmount() {}
-function setViewMode() {}
+function toggleTheme() {
+  document.body.classList.toggle('dark-mode');
+  localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+}
+
+function generateRandomAmount() {
+  const randomAmount = (Math.random() * 1000 + 1).toFixed(2);
+  amountInput.value = randomAmount;
+  handleCalculate();
+}
+
+function handleCalculate() {
+  const amount = parseFloat(amountInput.value);
+  if (isNaN(amount) || amount <= 0) {
+    showError('Please enter a valid amount');
+  } else if (amount > 10000) {
+    showError("Amount can't exceed 10000");
+    return;
+  }
+
+  hideError();
+  showCalculatingState();
+
+  setTimeout(() => {
+    const result = calculateChange(amount);
+    displayResults(result);
+    hideCalculatingState();
+  }, 1000);
+}
+
+function showError(message) {
+  errorMessage.textContent = message;
+  errorMessage.classList.add('visible');
+}
+
+function hideError() {
+  errorMessage.classList.remove('visible');
+}
+
+function showCalculatingState() {
+  calculateBtn.classList.add('calculating');
+}
+
+function hideCalculatingState() {
+  calculateBtn.classList.remove('calculating');
+}
+
+function setViewMode(mode) {
+  const results = document.getElementById('results');
+
+  if (mode === 'grid') {
+    results.classList.remove('list-view');
+    results.classList.add('grid-view');
+    gridViewBtn.classList.add('active');
+    listViewBtn.classList.remove('active');
+  } else {
+    results.classList.remove('grid-view');
+    results.classList.add('list-view');
+    listViewBtn.classList.add('active');
+    gridViewBtn.classList.remove('active');
+  }
+
+  localStorage.setItem('viewMode', mode);
+}
+
+function calculateChange(amount) {
+  let remainingAmount = Math.round(amount * 100) / 100;
+  const result = [];
+
+  for (const denom of denominations) {
+    const count = Math.floor(remainingAmount / denom.value);
+
+    if (count > 0) {
+      result.push({
+        name: denom.name,
+        value: denom.value,
+        count: count,
+        total: denom.value * count,
+        type: denom.type,
+        icon: denom.icon,
+      });
+
+      remainingAmount = (remainingAmount - denom.value * count).toFixed(2);
+      remainingAmount = parseFloat(remainingAmount);
+    }
+  }
+  return {
+    amount: amount,
+    denominations: result,
+    totalCount: result.reduce((sum, item) => sum + item.count, 0),
+    billCount: result.filter((item) => item.type === 'bill').reduce((sum, item) => sum + item.count, 0),
+    coinCount: result.filter((item) => item.type === 'coin').reduce((sum, item) => sum + item.count, 0),
+  };
+}
+
+function displayResults(result) {
+  resultsDiv.innerHTML = '';
+
+  if (result.denominations.length === 0) {
+    resultsDiv.innerHTML = ` <div class="empty-state">
+      <i class="fas fa-cons"></i>
+      <p>No results to show. Please enter a valid amount.</p>
+    </div>`;
+    return;
+  }
+
+  result.denominations.forEach((item, index) => {
+    const denomElement = document.createElement('div');
+    denomElement.className = 'denomination ${item.type}';
+    denomElement.setAttribute('data-index', index);
+
+    denomElement.innerHTML = `
+    <div className="icon">
+        <i className="fas ${item.icon}"></i>
+    </div>
+    <div className="denom-info">
+        <h3>${item.name}</h3>
+        <p>${item.count}</p>
+    </div>
+    `;
+
+    denomElement.style.animationDelay = `${index * 0.1}`;
+    resultsDiv.appendChild(denomElement);
+
+    denomElement.addEventListener('mouseover', () => {
+      denomElement.classList.add('active');
+    });
+
+    denomElement.addEventListener('mouseout', () => {
+      denomElement.classList.remove('active');
+    });
+  });
+
+  displayResults(result);
+}
+
+window.addEventListener('DOMContentLoaded', init);

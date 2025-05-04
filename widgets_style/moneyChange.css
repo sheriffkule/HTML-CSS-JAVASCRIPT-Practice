@@ -548,3 +548,22 @@ input[type="number"]::-webkit-inner-spin-button {
     line-height: 1.6;
     text-wrap: pretty;
 }
+
+body.dark-mode {
+    --bg-gradient: var(--bg-gradient-dark);
+    --card-bg: var(--card-bg-dark);
+    --text-primary: var(--text-primary-dark);
+    --text-secondary: var(--text-secondary-dark);
+    --accent: var(--accent-dark);
+    --accent-secondary: var(--accent-secondary-dark);
+    --input-bg: var(--input-bg-dark);
+    --input-border: var(--input-border-dark);
+    --success: var(--success-dark);
+    --error: var(--error-dark);
+    --card-shadow: var(--card-shadow-dark);
+    --denom-bg: var(--denom-bg-dark);
+    --denom-shadow: var(--denom-shadow-dark);
+    --denom-active: var(--denom-active-dark);
+    --bill-color: var(--bill-color-dark);
+    --coin-color: var(--coin-color-dark);
+}
