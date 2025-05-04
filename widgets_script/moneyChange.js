@@ -1,3 +1,110 @@
+document.addEventListener('DOMContentLoaded', function () {
+  particlesJS('particles-js', {
+    particles: {
+      number: {
+        value: 50,
+        density: {
+          enable: true,
+          value_area: 800,
+        },
+      },
+      color: {
+        value: '#ffffff',
+      },
+      shape: {
+        type: 'circle',
+        stroke: {
+          width: 0,
+          color: '#000000',
+        },
+        polygon: {
+          nb_sides: 5,
+        },
+      },
+      opacity: {
+        value: 0.4,
+        random: false,
+        anim: {
+          enable: false,
+          speed: 1,
+          opacity_min: 0.1,
+          sync: false,
+        },
+      },
+      size: {
+        value: 5,
+        random: true,
+        anim: {
+          enable: false,
+          speed: 40,
+          size_min: 0.1,
+          sync: false,
+        },
+      },
+      line_linked: {
+        enable: true,
+        distance: 150,
+        color: '#ffffff',
+        opacity: 0.2,
+        width: 2,
+      },
+      move: {
+        enable: true,
+        speed: 2,
+        direction: 'none',
+        random: false,
+        out_mode: 'out',
+        bounce: false,
+        attract: {
+          enable: false,
+          rotateX: 600,
+          rotateY: 1200,
+        },
+      },
+    },
+    interactivity: {
+      detect_on: 'canvas',
+      events: {
+        onHover: {
+          enable: true,
+          mode: 'grab',
+        },
+        onclick: {
+          enable: true,
+          mode: 'push',
+        },
+        resize: true,
+      },
+      modes: {
+        grab: {
+          distance: 150,
+          line_linked: {
+            opacity: 0.3,
+          },
+        },
+        bubble: {
+          distance: 400,
+          size: 40,
+          duration: 2,
+          opacity: 8,
+          speed: 3,
+        },
+        repulse: {
+          distance: 200,
+          duration: 0.4,
+        },
+        push: {
+          particles_nb: 4,
+        },
+        remove: {
+          particles_nb: 2,
+        },
+      },
+    },
+    retina_detect: true,
+  });
+});
+
 const denominations = [
   {
     name: '$100 Bill',
@@ -105,8 +212,30 @@ function init() {
 }
 
 function toggleTheme() {
-  document.body.classList.toggle('dark-mode');
-  localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+//   document.body.classList.toggle('dark-mode');
+//   localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+
+//   const particles = document.querySelector('#particles-js canvas');
+
+//   if (particles) {
+//     const isDarkMode = document.body.classList.contains('dark-mode');
+//     pJSDom[0].pJS.particles.color.value = isDarkMode ? '#ffffff' : '#6c63ff';
+//     pJSDom[0].pJS.particles.line_linked.color = isDarkMode ? '#ffffff' : '#6c63ff';
+//     pJSDom[0].pJS.fn.particlesRefresh();
+//   } 
+
+document.body.classList.toggle('dark-mode');
+const isDarkMode = document.body.classList.contains('dark-mode');
+localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+
+const particlesCanvas = document.querySelector('#particles-js canvas');
+
+if (particlesCanvas) {
+  const particleColor = getComputedStyle(document.documentElement).getPropertyValue('--particle-color');
+  pJSDom[0].pJS.particles.color.value = particleColor;
+  pJSDom[0].pJS.particles.line_linked.color = particleColor;
+  pJSDom[0].pJS.fn.particlesRefresh();
+}
 }
 
 function generateRandomAmount() {
@@ -120,6 +249,7 @@ function handleCalculate() {
 
   if (isNaN(amount) || amount <= 0) {
     showError('Please enter a valid amount');
+    return;
   } else if (amount > 10000) {
     showError("Amount can't exceed 10000");
     return;
@@ -226,7 +356,7 @@ function displayResults(result) {
     </div>
     `;
 
-    denomElement.style.animationDelay = `${index * 0.1}`;
+    denomElement.style.animationDelay = `${index * 0.15}s`;
     resultsDiv.appendChild(denomElement);
 
     denomElement.addEventListener('mouseover', () => {
@@ -245,7 +375,7 @@ function displaySummary(result) {
   summaryDiv.innerHTML = `
     <div class="summary-item">
       <h3>Total Amount</h3>
-      <p>${result.amount.toFixed(2)}</p>
+      <p>$ ${result.amount.toFixed(2)}</p>
     </div>
     <div class="summary-item">
       <h3>Total Pieces</h3>
@@ -262,8 +392,17 @@ function displaySummary(result) {
   `;
 
   setTimeout(() => {
-    summaryDiv.classList.add('visible')
+    summaryDiv.classList.add('visible');
   }, 400);
 }
 
 window.addEventListener('DOMContentLoaded', init);
+
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+  yearElement.dateTime = currentYear;
+  yearElement.textContent = currentYear;
+}
+
+updateYear();
