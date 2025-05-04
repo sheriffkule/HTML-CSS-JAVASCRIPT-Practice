@@ -117,6 +117,7 @@ function generateRandomAmount() {
 
 function handleCalculate() {
   const amount = parseFloat(amountInput.value);
+
   if (isNaN(amount) || amount <= 0) {
     showError('Please enter a valid amount');
   } else if (amount > 10000) {
@@ -131,7 +132,7 @@ function handleCalculate() {
     const result = calculateChange(amount);
     displayResults(result);
     hideCalculatingState();
-  }, 1000);
+  }, 800);
 }
 
 function showError(message) {
@@ -204,7 +205,7 @@ function displayResults(result) {
 
   if (result.denominations.length === 0) {
     resultsDiv.innerHTML = ` <div class="empty-state">
-      <i class="fas fa-cons"></i>
+      <i class="fas fa-coins"></i>
       <p>No results to show. Please enter a valid amount.</p>
     </div>`;
     return;
@@ -212,14 +213,14 @@ function displayResults(result) {
 
   result.denominations.forEach((item, index) => {
     const denomElement = document.createElement('div');
-    denomElement.className = 'denomination ${item.type}';
+    denomElement.className = `denomination ${item.type}`;
     denomElement.setAttribute('data-index', index);
 
     denomElement.innerHTML = `
-    <div className="icon">
-        <i className="fas ${item.icon}"></i>
+    <div class="icon">
+        <i class="fas ${item.icon}"></i>
     </div>
-    <div className="denom-info">
+    <div class="denom-info">
         <h3>${item.name}</h3>
         <p>${item.count}</p>
     </div>
@@ -237,7 +238,32 @@ function displayResults(result) {
     });
   });
 
-  displayResults(result);
+  displaySummary(result);
+}
+
+function displaySummary(result) {
+  summaryDiv.innerHTML = `
+    <div class="summary-item">
+      <h3>Total Amount</h3>
+      <p>${result.amount.toFixed(2)}</p>
+    </div>
+    <div class="summary-item">
+      <h3>Total Pieces</h3>
+      <p>${result.totalCount}</p>
+    </div>
+    <div class="summary-item">
+      <h3>Bills</h3>
+      <p>${result.billCount}</p>
+    </div>
+    <div class="summary-item">
+      <h3>Coins</h3>
+      <p>${result.coinCount}</p>
+    </div>
+  `;
+
+  setTimeout(() => {
+    summaryDiv.classList.add('visible')
+  }, 400);
 }
 
 window.addEventListener('DOMContentLoaded', init);
