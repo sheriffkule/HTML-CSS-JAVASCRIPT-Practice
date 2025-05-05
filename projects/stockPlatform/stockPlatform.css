@@ -402,21 +402,21 @@ button:disabled {
 }
 
 .ripple {
-    top: 50%;
+    /* top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); */
     transform-origin: center;
     border-radius: var(--radius-circle);
-    opacity: 0.12;
+    opacity: 0.22;
     animation: ripple .8s var(--motion-easing-standard) forwards;
 }
 
 @keyframes ripple {
     from {
-        scale: 0;
+        transform: scale(0);
     }
     to {
-        scale: 2.5;
+        transform: scale(2.5);
     }
 }
 
@@ -443,10 +443,10 @@ button:disabled {
 
 @keyframes icon-button-ripple {
     from {
-        scale: 0;
+        transform: scale(0);
     }
     to {
-        scale: 1;
+        transform: scale(1);
     }
 }
 
