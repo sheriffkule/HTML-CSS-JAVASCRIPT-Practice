@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Stock Media Platform</title>
-    <meta name="title" content="Pixstock - A large stock library">
+    <meta name="title" content="PixStock - A large stock library">
     <meta name="description" content="This is a stock photos app made by SheriffKule">
     <link rel="shortcut icon" href="favicon.svg" type="image/svg+xml" />
     <script src="./js/theme.js"></script>
@@ -21,5 +21,90 @@
     <script src="./js/app.js" type="module"></script>
     <script type="module" src="./js/search.js"></script>
   </head>
-  <body></body>
+  <body>
+    <header class="top-app-bar" data-header>
+      <button class="icon-btn" aria-label="Open menu" data-nav-toggler data-ripple>
+        <span class="material-symbols-outlined" aria-hidden="true">menu</span>
+        <div class="state-layer"></div>
+      </button>
+
+      <a href="/" class="logo">PixStock</a>
+      <div class="search-view" data-search-view>
+        <div class="search-bar">
+          <button class="icon-btn search-open" aria-label="Close search" data-search-toggler data-ripple>
+            <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+            <div class="state-layer"></div>
+          </button>
+
+          <div class="input-wrapper">
+            <span class="material-symbols-outlined leading-icon" aria-hidden="true">search</span>
+            <input type="search" name="search" placeholder="Search..." class="input-field body-large" autocomplete="off" data-search-field>
+          </div>
+
+          <button class="icon-btn" aria-label="Clear search" data-search-clear-btn data-ripple>
+            <span class="material-symbols-outlined" aria-hidden="true">close</span>
+            <div class="state-layer"></div>
+          </button>
+
+          <button class="icon-btn search-btn" aria-label="Submit search" data-search-toggler data-ripple data-search-btn>
+            <span class="material-symbols-outlined" aria-hidden="true">search</span>
+            <div class="state-layer"></div>
+          </button>
+
+          <div class="state-layer"></div>
+        </div>
+
+        <div class="search-view-content">
+          <div class="btn-group" data-segment="search">
+            <button class="btn-segment selected" data-ripple data-segment-btn data-segment-value="photos">
+              <span class="material-symbols-outlined" aria-hidden="true">image</span>
+              <span class="label-large text">Photos</span>
+              <div class="state-layer"></div>
+            </button>
+            <button class="btn-segment selected" data-ripple data-segment-btn data-segment-value="videos">
+              <span class="material-symbols-outlined" aria-hidden="true">videocam</span>
+              <span class="label-large text">Videos</span>
+              <div class="state-layer"></div>
+            </button>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="list" data-search-list>
+            <button class="list-item" data-ripple>
+              <span class="material-symbols-outlined leading-icon" aria-hidden="true">history</span>
+              <span class="body-large text">Nature</span>
+              <div class="state-layer"></div>
+            </button>
+            <button class="list-item" data-ripple>
+              <span class="material-symbols-outlined leading-icon" aria-hidden="true">history</span>
+              <span class="body-large text">Tree</span>
+              <div class="state-layer"></div>
+            </button>
+            <button class="list-item" data-ripple>
+              <span class="material-symbols-outlined leading-icon" aria-hidden="true">history</span>
+              <span class="body-large text">Man Portrait</span>
+              <div class="state-layer"></div>
+            </button>
+            <button class="list-item" data-ripple>
+              <span class="material-symbols-outlined leading-icon" aria-hidden="true">history</span>
+              <span class="body-large text">Mountain</span>
+              <div class="state-layer"></div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <button class="icon-btn search-open" aria-label="Open search" data-search-toggler data-ripple>
+        <span class="material-symbols-outlined" aria-hidden="true">search</span>
+        <div class="state-layer"></div>
+      </button>
+      <button class="icon-btn theme-btn" aria-label="Switch Theme" data-theme-toggler data-ripple>
+        <span class="material-symbols-outlined dark-icon" aria-hidden="true">light_mode</span>
+        <span class="material-symbols-outlined light-icon" aria-hidden="true">dark_mode</span>
+        <div class="state-layer"></div>
+      </button>
+    </header>
+
+  </body>
 </html>

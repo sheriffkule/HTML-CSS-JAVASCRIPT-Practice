@@ -162,36 +162,205 @@
 }
 
 [data-theme='dark'] {
-    color-scheme: dark;
-  
-    --background: var(--dark-background);
-    --on-background: var(--dark-on-background);
-    --surface: var(--dark-surface);
-    --on-surface: var(--dark-on-surface);
-    --surface-variant: var(--dark-surface-variant);
-    --on-surface-variant: var(--dark-on-surface-variant);
-    --surface-container-high: var(--dark-surface-container-high);
-    --surface-container-highest: var(--dark-surface-container-highest);
-    --surface-container: var(--dark-surface-container);
-    --outline: var(--dark-outline);
-    --outline-variant: var(--dark-outline-variant);
-    --primary: var(--dark-primary);
-    --on-primary: var(--dark-on-primary);
-    --primary-container: var(--dark-primary-container);
-    --on-primary-container: var(--dark-on-primary-container);
-    --secondary: var(--dark-secondary);
-    --on-secondary: var(--dark-on-secondary);
-    --secondary-container: var(--dark-secondary-container);
-    --on-secondary-container: var(--dark-on-secondary-container);
-    --tertiary: var(--dark-tertiary);
-    --on-tertiary: var(--dark-on-tertiary);
-    --tertiary-container: var(--dark-tertiary-container);
-    --on-tertiary-container: var(--dark-on-tertiary-container);
-    --error: var(--dark-error);
-    --on-error: var(--dark-on-error);
-    --error-container: var(--dark-error-container);
-    --on-error-container: var(--dark-on-error-container);
-    --inverse-surface: var(--dark-inverse-surface);
-    --inverse-on-surface: var(--dark-inverse-on-surface);
-    --inverse-primary: var(--dark-inverse-primary);
-  }
+  color-scheme: dark;
+
+  --background: var(--dark-background);
+  --on-background: var(--dark-on-background);
+  --surface: var(--dark-surface);
+  --on-surface: var(--dark-on-surface);
+  --surface-variant: var(--dark-surface-variant);
+  --on-surface-variant: var(--dark-on-surface-variant);
+  --surface-container-high: var(--dark-surface-container-high);
+  --surface-container-highest: var(--dark-surface-container-highest);
+  --surface-container: var(--dark-surface-container);
+  --outline: var(--dark-outline);
+  --outline-variant: var(--dark-outline-variant);
+  --primary: var(--dark-primary);
+  --on-primary: var(--dark-on-primary);
+  --primary-container: var(--dark-primary-container);
+  --on-primary-container: var(--dark-on-primary-container);
+  --secondary: var(--dark-secondary);
+  --on-secondary: var(--dark-on-secondary);
+  --secondary-container: var(--dark-secondary-container);
+  --on-secondary-container: var(--dark-on-secondary-container);
+  --tertiary: var(--dark-tertiary);
+  --on-tertiary: var(--dark-on-tertiary);
+  --tertiary-container: var(--dark-tertiary-container);
+  --on-tertiary-container: var(--dark-on-tertiary-container);
+  --error: var(--dark-error);
+  --on-error: var(--dark-on-error);
+  --error-container: var(--dark-error-container);
+  --on-error-container: var(--dark-on-error-container);
+  --inverse-surface: var(--dark-inverse-surface);
+  --inverse-on-surface: var(--dark-inverse-on-surface);
+  --inverse-primary: var(--dark-inverse-primary);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+a,
+img,
+span,
+input,
+video,
+button {
+    display: block;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    height: auto;
+}
+
+input,
+button{
+    background: none;
+    border: none;
+    font: inherit;
+    outline: none;
+}
+
+input {
+    width: 100%;
+}
+
+button {
+    cursor: pointer;
+}
+
+html {
+    font-family: var(--ff-primary);
+    font-size: var(--fs-base);
+    scroll-behavior: smooth;
+    -webkit-top-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--on-background);
+    font-size: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: opacity var(--motion-duration-medium-2) var(--motion-easing-linear);
+    /* opacity: 0; */
+}
+
+button:disabled {
+    cursor: default;
+    opacity: 0.5;
+}
+
+.display-large {
+    font-size: var(--fs-display-large);
+    font-weight: var(--weight-regular);
+    line-height: 64px;
+}
+
+.display-medium {
+    font-size: var(--fs-display-medium);
+    font-weight: var(--weight-regular);
+    line-height: 52px;
+}
+
+.display-small {
+    font-size: var(--fs-display-small);
+    font-weight: var(--weight-regular);
+    line-height: 44px;
+}
+
+.headline-large {
+    font-size: var(--fs-headline-large);
+    font-weight: var(--weight-regular);
+    line-height: 40px;
+}
+
+.headline-medium {
+    font-size: var(--fs-headline-medium);
+    font-weight: var(--weight-regular);
+    line-height: 36px;
+}
+
+.headline-small {
+    font-size: var(--fs-headline-small);
+    font-weight: var(--weight-regular);
+    line-height: 32px;
+}
+
+.title-large {
+    font-size: var(--fs-title-large);
+    font-weight: var(--weight-regular);
+    line-height: 28px;
+}
+
+.title-medium {
+    font-size: var(--fs-title-medium);
+    font-weight: var(--weight-medium);
+    line-height: 24px;
+}
+
+.title-small {
+    font-size: var(--fs-title-small);
+    font-weight: var(--weight-medium);
+    line-height: 20px;
+    letter-spacing: 0.1px;
+}
+
+.label-large {
+    font-size: var(--fs-label-large);
+    font-weight: var(--weight-medium);
+    line-height: 20px;
+}
+
+.label-medium {
+    font-size: var(--fs-label-medium);
+    font-weight: var(--weight-medium);
+    line-height: 16px;
+    letter-spacing: 0.5px;
+}
+
+.label-small {
+    font-size: var(--fs-label-small);
+    font-weight: var(--weight-medium);
+    line-height: 16px;
+    letter-spacing: 0.5px;
+}
+
+.body-large {
+    font-size: var(--fs-body-large);
+    font-weight: var(--weight-regular);
+    line-height: 24px;
+    letter-spacing: 0.5px;
+}
+
+.body-medium {
+    font-size: var(--fs-body-medium);
+    font-weight: var(--weight-regular);
+    line-height: 20px;
+    letter-spacing: 0.25px;
+}
+
+.body-small {
+    font-size: var(--fs-body-small);
+    font-weight: var(--weight-regular);
+    line-height: 16px;
+    letter-spacing: 0.4px;
+}
+
+.search-view {
+    display: none;
+}
