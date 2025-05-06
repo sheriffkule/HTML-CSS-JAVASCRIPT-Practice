@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Stock Media Platform</title>
-    <meta name="title" content="PixStock - A large stock library">
-    <meta name="description" content="This is a stock photos app made by SheriffKule">
+    <meta name="title" content="PixStock - A large stock library" />
+    <meta name="description" content="This is a stock photos app made by SheriffKule" />
     <link rel="shortcut icon" href="favicon.svg" type="image/svg+xml" />
     <script src="./js/theme.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -38,7 +38,13 @@
 
           <div class="input-wrapper">
             <span class="material-symbols-outlined leading-icon" aria-hidden="true">search</span>
-            <input type="search" name="search" placeholder="Search..." class="input-field body-large" autocomplete="off" data-search-field>
+            <input
+              type="search"
+              name="search"
+              placeholder="Search..."
+              class="input-field body-large"
+              autocomplete="off"
+              data-search-field />
           </div>
 
           <button class="icon-btn" aria-label="Clear search" data-search-clear-btn data-ripple>
@@ -46,7 +52,12 @@
             <div class="state-layer"></div>
           </button>
 
-          <button class="icon-btn search-btn" aria-label="Submit search" data-search-toggler data-ripple data-search-btn>
+          <button
+            class="icon-btn search-btn"
+            aria-label="Submit search"
+            data-search-toggler
+            data-ripple
+            data-search-btn>
             <span class="material-symbols-outlined" aria-hidden="true">search</span>
             <div class="state-layer"></div>
           </button>
@@ -133,5 +144,132 @@
       </ul>
     </nav>
 
+    <div class="scrim" data-scrim data-nav-toggler></div>
+
+    <div class="main">
+      <article>
+        <section class="banner" aria-label="Banner">
+          <div class="banner-card primary">
+            <div class="card-content">
+              <h3 class="headline-medium card-title">High quality stock photos for free!</h3>
+              <p class="body-large card-text">
+                Explore our exceptional collection of high-quality stock photos.
+              </p>
+              <a href="./pages/photos/photos.html" class="btn btn-primary" data-ripple>
+                <span class="label-large text">Explore Now</span>
+                <div class="state-layer"></div>
+              </a>
+            </div>
+            <div class="card-grid">
+              <div
+                class="card-banner"
+                style="grid-area: b1; background-image: url(./assets/images/photo-banner-1.jpg)"></div>
+              <div
+                class="card-banner"
+                style="grid-area: b2; background-image: url(./assets/images/photo-banner-2.jpg)"></div>
+              <div
+                class="card-banner"
+                style="grid-area: b3; background-image: url(./assets/images/photo-banner-3.jpg)"></div>
+              <div
+                class="card-banner"
+                style="grid-area: b4; background-image: url(./assets/images/photo-banner-4.jpg)"></div>
+              <div
+                class="card-banner"
+                style="grid-area: b5; background-image: url(./assets/images/photo-banner-5.jpg)"></div>
+              <div
+                class="card-banner"
+                style="grid-area: b6; background-image: url(./assets/images/photo-banner-6.jpg)"></div>
+            </div>
+          </div>
+
+          <div class="banner-card secondary">
+            <div class="card-content">
+              <h3 class="headline-medium card-title">Top rated stock Videos for free!</h3>
+              <p class="body-large card-text">
+                Our curated selection of videos is sure to inspire and captivate.
+              </p>
+              <a href="./pages/videos/videos.html" class="btn btn-secondary" data-ripple>
+                <span class="label-large text">Explore Now</span>
+                <div class="state-layer"></div>
+              </a>
+            </div>
+            <div class="card-grid">
+              <div class="card-banner" style="grid-area: b1">
+                <video class="video" width="360" height="420" loading="lazy" autoplay muted loop>
+                  <source src="./assets/videos/video-banner-1.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <div class="card-banner" style="grid-area: b2">
+                <video class="video" width="360" height="640" loading="lazy" autoplay muted loop>
+                  <source src="./assets/videos/video-banner-2.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <div class="card-banner" style="grid-area: b3">
+                <video class="video" width="480" height="360" loading="lazy" autoplay muted loop>
+                  <source src="./assets/videos/video-banner-3.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <div class="card-banner" style="grid-area: b4">
+                <video class="video" width="360" height="640" loading="lazy" autoplay muted loop>
+                  <source src="./assets/videos/video-banner-4.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <div class="card-banner" style="grid-area: b5">
+                <video class="video" width="640" height="360" loading="lazy" autoplay muted loop>
+                  <source src="./assets/videos/video-banner-5.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <div class="card-banner" style="grid-area: b6">
+                <video class="video" width="480" height="360" loading="lazy" autoplay muted loop>
+                  <source src="./assets/videos/video-banner-6.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
+          </div>
+
+          <div class="banner-card tertiary">
+            <div class="card-content">
+              <h3 class="headline-medium card-title">Best collections with best medias!</h3>
+              <p class="body-large card-text">
+                Discover a treasure trove of stunning images, captivating videos.
+              </p>
+              <a href="./pages/collections/collection.html" class="btn btn-tertiary" data-ripple>
+                <span class="label-large text">Explore Now</span>
+                <div class="state-layer"></div>
+              </a>
+            </div>
+            <div class="card-grid">
+              <div
+                class="card-banner"
+                style="grid-area: b1; background-image: url(./assets/images/collection-banner-1.jpg)">
+              </div>
+              <div class="card-banner" style="grid-area: b2">
+                <video class="video" width="360" height="420" loading="lazy" autoplay muted loop>
+                  <source src="./assets/videos/collection-banner-2.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <div
+                class="card-banner"
+                style="grid-area: b3; background-image: url(./assets/images/collection-banner-3.jpg)">
+              </div>
+              <div
+                class="card-banner"
+                style="grid-area: b4; background-image: url(./assets/images/collection-banner-4.jpg)">
+              </div>
+              <div class="card-banner" style="grid-area: b5">
+                <video class="video" width="640" height="360" loading="lazy" autoplay muted loop>
+                  <source src="./assets/videos/collection-banner-5.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <div class="card-banner" style="grid-area: b6">
+                <video class="video" width="640" height="338" loading="lazy" autoplay muted loop>
+                  <source src="./assets/videos/collection-banner-6.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
+          </div>
+        </section>
+      </article>
+    </div>
   </body>
 </html>
