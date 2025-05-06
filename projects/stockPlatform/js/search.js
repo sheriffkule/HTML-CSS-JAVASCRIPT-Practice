@@ -32,8 +32,8 @@ $searchBtn.addEventListener('click', function () {
   }
 });
 
-$searchField.addEventListener('keydown', e => {
-  if (e.key === 'Enter' & $searchField.value.trim()) $searchBtn.click();
+$searchField.addEventListener('keydown', (e) => {
+  if ((e.key === 'Enter') & $searchField.value.trim()) $searchBtn.click();
 });
 
 let searchHistory = { items: [] };
@@ -57,7 +57,7 @@ const updateSearchHistory = (searchValue) => {
 const $searchList = document.querySelector('[data-search-list]');
 const historyLen = searchHistory.items.length;
 
-for (let i = 0; (i < historyLen) & (i < 5); i++) {
+for (let i = 0; (i < historyLen) & (i <= 5); i++) {
   const $listItem = document.createElement('button');
   $listItem.classList.add('list-item');
 
