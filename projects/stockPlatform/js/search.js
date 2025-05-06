@@ -2,6 +2,8 @@
 
 import { segment } from './segment_btn.js';
 import { addEventOnElements } from './utils/event.js';
+import { ripple } from './utils/ripple.js';
+import { updateUrl } from './utils/updateUrl.js';
 
 const $searchToggler = document.querySelectorAll('[data-search-toggler]');
 const $searchView = document.querySelector('[data-search-view]');
@@ -25,7 +27,13 @@ $searchBtn.addEventListener('click', function () {
   const searchValue = $searchField.value.trim();
   if (searchValue) {
     updateSearchHistory(searchValue);
+    window.filterObj.query = searchValue;
+    updateUrl(window.filterObj, window.searchType);
   }
+});
+
+$searchField.addEventListener('keydown', e => {
+  if (e.key === 'Enter' & $searchField.value.trim()) $searchBtn.click();
 });
 
 let searchHistory = { items: [] };
@@ -45,3 +53,26 @@ const updateSearchHistory = (searchValue) => {
 
   window.localStorage.setItem('search_history', JSON.stringify(searchHistory));
 };
+
+const $searchList = document.querySelector('[data-search-list]');
+const historyLen = searchHistory.items.length;
+
+for (let i = 0; (i < historyLen) & (i < 5); i++) {
+  const $listItem = document.createElement('button');
+  $listItem.classList.add('list-item');
+
+  $listItem.innerHTML = `
+    <span class="material-symbols-outlined leading-icon" aria-hidden="true">history</span>
+    <span class="body-large text">${searchHistory.items[i]}</span>
+    <div class="state-layer"></div>
+  `;
+
+  ripple($listItem);
+
+  $listItem.addEventListener('click', function () {
+    $searchField.value = this.children[1].textContent;
+    $searchBtn.click();
+  });
+
+  $searchList.appendChild($listItem);
+}
