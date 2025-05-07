@@ -562,6 +562,22 @@ button:disabled {
     z-index: 1;
 }
 
+.skeleton {
+  background-color: var(--surface-container-highest);
+  border-radius: var(--radius-medium);
+  aspect-ratio: 2 / 3;
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .btn-segment {
   color: var(--on-surface);
   --state-layer-bg: var(--on-surface);
