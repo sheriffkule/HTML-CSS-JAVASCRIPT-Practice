@@ -1,6 +1,8 @@
 'use strict';
 
 import { client } from './api_configure.js';
+import { photoCard } from './photo_card.js';
+import { gridInit } from './utils/masonry_grid.js';
 
 const $photoGrid = document.querySelector('[data-photo-grid]');
 
@@ -10,7 +12,7 @@ $photoGrid.innerHTML = `<div class="skeleton"></div>`.repeat(18);
 //     console.log(data);
 // });;
 
-async function fetchCuratedPhotos(page = 5, perPage = 20) {
+async function fetchCuratedPhotos(page = 1, perPage = 20) {
   try {
     const response = await new Promise((resolve, reject) => {
       client.photos.curated({ page, per_page: perPage }, (data, error) => {
@@ -20,10 +22,13 @@ async function fetchCuratedPhotos(page = 5, perPage = 20) {
           resolve(data);
         }
         $photoGrid.innerHTML = '';
-    
-        data.photos.forEach(photo => {
+        const photoGrid = gridInit($photoGrid);
+
+        data.photos.forEach((photo) => {
           const $photoCard = photoCard(photo);
-        })
+
+          $photoGrid.appendChild($photoCard);
+        });
       });
     });
 
@@ -34,7 +39,7 @@ async function fetchCuratedPhotos(page = 5, perPage = 20) {
   }
 }
 async function main() {
-  const data = await fetchCuratedPhotos(5, 20);
+  const data = await fetchCuratedPhotos(1, 20);
   console.log(data);
 }
 main();

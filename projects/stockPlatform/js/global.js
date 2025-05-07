@@ -23,3 +23,12 @@ addEventOnElements($navTogglers, 'click', function() {
 })
 
 window.filterObj = {};
+
+if (!window.localStorage.getItem('favorite')) {
+    const favoriteObj = {
+        photos: {},
+        videos: {}
+    }
+
+    window.localStorage.setItem('favorite', JSON.stringify(favoriteObj))
+}
