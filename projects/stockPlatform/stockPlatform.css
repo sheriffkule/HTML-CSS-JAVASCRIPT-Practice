@@ -534,7 +534,7 @@ button:disabled {
     display: grid;
     grid-template-columns: repeat(var(--column-count), minmax(0, 1fr));
     gap: var(--column-gap);
-    /* overflow: hidden; */
+    overflow: hidden;
 }
 
 .img-cover {
@@ -576,6 +576,23 @@ button:disabled {
   to {
     opacity: 1;
   }
+}
+
+.card-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  background-color: var(--light-secondary-container);
+  color: var(--light-on-secondary-container);
+  border-radius: var(--radius-small);
+}
+
+.card-badge .material-symbols-outlined {
+  font-size: 1.8rem;
 }
 
 .btn-segment {
@@ -1039,4 +1056,12 @@ button:disabled {
 .card .icon-btn.active {
     color: var(--light-inverse-primary);
     --state-layer-bg: var(var(--light-inverse-primary));
+}
+
+:where(.featured-photo, .popular-video) .column {
+  margin-block-end: -800px;
+}
+
+.card.video {
+  background-color: var(--surface-container-highest);
 }

@@ -5,7 +5,6 @@ import { ripple } from './utils/ripple.js';
 
 export const photoCard = (photo) => {
   const root = window.location.origin;
-  console.log(photo);
 
   const {
     alt,
@@ -54,7 +53,7 @@ export const photoCard = (photo) => {
 
   $rippleElems.forEach(($rippleElem) => ripple($rippleElem));
 
-  const $favoriteBtn = ($favoriteBtn = $card.querySelector('[data-favorite]'));
+  const $favoriteBtn = $card.querySelector('[data-favorite]');
   favorite($favoriteBtn, 'photos', id);
 
   return $card;

@@ -2,7 +2,8 @@
 
 import { client } from './api_configure.js';
 import { photoCard } from './photo_card.js';
-import { gridInit } from './utils/masonry_grid.js';
+import { gridInit, updateGrid } from './utils/masonry_grid.js';
+import { videoCard } from './video_card.js';
 
 const $photoGrid = document.querySelector('[data-photo-grid]');
 
@@ -27,7 +28,7 @@ async function fetchCuratedPhotos(page = 1, perPage = 20) {
         data.photos.forEach((photo) => {
           const $photoCard = photoCard(photo);
 
-          $photoGrid.appendChild($photoCard);
+          updateGrid($photoCard, photoGrid.columnsHeight, photoGrid.$columns);
         });
       });
     });
@@ -38,8 +39,43 @@ async function fetchCuratedPhotos(page = 1, perPage = 20) {
     throw error;
   }
 }
-async function main() {
+async function mainPhoto() {
   const data = await fetchCuratedPhotos(1, 20);
+}
+mainPhoto();
+
+const $videoGrid = document.querySelector('[data-video-grid]');
+
+$videoGrid.innerHTML = `<div class="skeleton"></div>`.repeat(18);
+
+async function fetchCuratedVideos(page = 1, perPage = 20) {
+  try {
+    const response = await new Promise((resolve, reject) => {
+      client.videos.popular({ page, per_page: perPage }, (data, error) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(data);
+        }
+        $videoGrid.innerHTML = '';
+        const videoGrid = gridInit($videoGrid);
+
+        data.videos.forEach((video) => {
+          const $videoCard = videoCard(video);
+
+          updateGrid($videoCard, videoGrid.columnsHeight, videoGrid.$columns);
+        });
+      });
+    });
+
+    return response;
+  } catch (error) {
+    console.error('Error fetching curated photos:', error);
+    throw error;
+  }
+}
+async function mainVideo() {
+  const data = await fetchCuratedVideos(1, 20);
   console.log(data);
 }
-main();
+mainVideo();
