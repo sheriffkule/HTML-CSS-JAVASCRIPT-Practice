@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Stock Media Platform</title>
-    <meta name="title" content="PixStock - A large stock library" />
+    <meta name="title" content="SheriffStock - A large stock library" />
     <meta name="description" content="This is a stock photos app made by SheriffKule" />
     <link rel="shortcut icon" href="favicon.svg" type="image/svg+xml" />
     <script src="./js/theme.js"></script>
@@ -28,7 +28,7 @@
         <div class="state-layer"></div>
       </button>
 
-      <a href="/" class="logo">PixStock</a>
+      <a href="#" class="logo">SheriffStock</a>
       <div class="search-view" data-search-view>
         <div class="search-bar">
           <button class="icon-btn search-open" aria-label="Close search" data-search-toggler data-ripple>
@@ -102,7 +102,7 @@
           <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
           <div class="state-layer"></div>
         </button>
-        <a href="/" class="logo">PixStock</a>
+        <a href="#" class="logo">SheriffStock</a>
       </div>
 
       <ul class="drawer-list">
@@ -114,7 +114,7 @@
           </a>
         </li>
         <li class="drawer-item">
-          <a href="./pages/photos/photos.html" class="drawer-link" data-drawer-link>
+          <a href="../stockPlatform/pages/photos/photos.html" class="drawer-link" data-drawer-link>
             <span class="material-symbols-outlined leading-icon" aria-hidden="true">image</span>
             <span class="label-large">Photos</span>
             <div class="state-layer"></div>
@@ -146,7 +146,7 @@
 
     <div class="scrim" data-scrim data-nav-toggler></div>
 
-    <div class="main">
+    <main class="main">
       <article>
         <section class="banner" aria-label="Banner">
           <div class="banner-card primary">
@@ -292,7 +292,36 @@
             </div>
           </div>
         </section>
+
+        <section class="section collection" aria-labelledby="collection-label">
+          <div class="container">
+            <h2 class="title-large section-title" id="collection-label">Featured Collections</h2>
+            <div class="collection-grid" data-collection-grid=""></div>
+            <a href="./pages/collections/collection.html" class="btn btn-primary" data-ripple>
+              <span class="label-large text">More Collections</span>
+              <div class="state-layer"></div>
+            </a>
+          </div>
+        </section>
       </article>
-    </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-card">
+          <div class="col">
+            <a href="#" class="logo">SheriffStock</a>
+            <p class="text body-small">SheriffStock is a stock photo app developed by <span class="color-primary">SheriffKule</span> and all Photos and Videos provided by <a href="https://pexels.com" target="_blank" class="color-primary">Pexels</a>.</p>
+          </div>
+          <div class="col">
+            <p class="title label-medium">Follow me on</p>
+            <div class="social-list">
+              <a href="https://github.com/sheriffkule" target="_blank" class="label-small color-primary">GitHub</a>
+              <a href="https://www.linkedin.com/in/zeljko-vranjkovic-1bb834240/" target="_blank" class="label-small color-primary">Linkedin</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

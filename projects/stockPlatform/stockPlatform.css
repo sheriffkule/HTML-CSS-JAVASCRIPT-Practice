@@ -595,6 +595,10 @@ button:disabled {
   font-size: 1.8rem;
 }
 
+.color-primary {
+  color: var(--primary);
+}
+
 .btn-segment {
   color: var(--on-surface);
   --state-layer-bg: var(--on-surface);
@@ -1065,3 +1069,64 @@ button:disabled {
 .card.video {
   background-color: var(--surface-container-highest);
 }
+
+.list-item.two-lines {
+  justify-content: space-between;
+  padding-inline-end: 12px;
+  height: 72px;
+}
+
+.list-item.two-lines .body-large {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  overflow: hidden;
+}
+
+.list-item.two-lines > .state-layer {
+  pointer-events: all;
+}
+
+.grid-card .label {
+  color: var(--on-surface-variant);
+}
+
+.collection-grid .list-item {
+  border-block-end: 1px solid var(--outline-variant);
+}
+
+.collection .btn {
+  margin-block: 12px;
+  margin-inline: auto;
+}
+
+.footer {
+  margin-block-start: 24px;
+  padding-block-end: 16px;
+}
+
+.footer-card {
+  background-color: var(--surface-container);
+  color: var(--on-surface-variant);
+  padding: 16px;
+  border-radius: var(--radius-large);
+}
+
+.footer-card .text {
+  line-height: 18px;
+  margin-block: 8px 16px;
+}
+
+.footer-card :where(span, a) {
+  display: inline-block;
+}
+
+.footer-card a:not(.logo) {
+  text-decoration: underline;
+}
+
+.footer-card .title {
+  margin-block-end: 4px;
+}
+

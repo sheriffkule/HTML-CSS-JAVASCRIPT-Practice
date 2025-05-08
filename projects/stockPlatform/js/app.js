@@ -1,6 +1,7 @@
 'use strict';
 
 import { client } from './api_configure.js';
+import { collectionCard } from './collection_card.js';
 import { photoCard } from './photo_card.js';
 import { gridInit, updateGrid } from './utils/masonry_grid.js';
 import { videoCard } from './video_card.js';
@@ -76,6 +77,36 @@ async function fetchCuratedVideos(page = 1, perPage = 20) {
 }
 async function mainVideo() {
   const data = await fetchCuratedVideos(1, 20);
-  console.log(data);
 }
 mainVideo();
+
+const $collectionGrid = document.querySelector('[data-collection-grid]');
+
+async function fetchCuratedCollection(perPage = 18) {
+  try {
+    const response = await new Promise((resolve, reject) => {
+      client.collections.featured({ per_page: perPage }, (data, error) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(data);
+        }
+
+        data.collections.forEach((collection) => {
+          const $collectionCard = collectionCard(collection);
+
+          $collectionGrid.appendChild($collectionCard);
+        });
+      });
+    });
+
+    return response;
+  } catch (error) {
+    console.error('Error fetching collections:', error);
+    throw error;
+  }
+}
+async function mainCollection() {
+  const data = await fetchCuratedCollection(18);
+}
+mainCollection();
