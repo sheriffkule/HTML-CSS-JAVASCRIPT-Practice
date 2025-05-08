@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Curated Photos - SheriffStock/title>
+    <title>Curated Photos - SheriffStock</title>
     <meta name="title" content="Curated Photos = SheriffStock" />
     <meta name="description" content="This is a stock photos app made by SheriffKule" />
     <link rel="shortcut icon" href="../../favicon.svg" type="image/svg+xml" />
@@ -107,14 +107,14 @@
 
       <ul class="drawer-list">
         <li class="drawer-item">
-          <a href="#" class="drawer-link" data-drawer-link>
+          <a href="../../stockPlatform.html" class="drawer-link" data-drawer-link>
             <span class="material-symbols-outlined leading-icon" aria-hidden="true">home</span>
             <span class="label-large">Home</span>
             <div class="state-layer"></div>
           </a>
         </li>
         <li class="drawer-item">
-          <a href="./photos.html active" class="drawer-link" data-drawer-link>
+          <a href="./photos.html" class="drawer-link active" data-drawer-link>
             <span class="material-symbols-outlined leading-icon" aria-hidden="true">image</span>
             <span class="label-large">Photos</span>
             <div class="state-layer"></div>
@@ -149,6 +149,88 @@
     <main class="main">
       <article class="container">
         <h2 class="page-title title-large" data-title>Curated Photos</h2>
+        <div class="filter-bar" data-filter-bar>
+          <div class="menu-wrapper" data-filter="orientation" data-menu-wrapper>
+            <div class="filter-chip" data-filter-chip>
+              <button class="chip-content" data-filter-btn data-menu-toggler>
+                <span class="material-symbols-outlined leading-icon" aria-hidden="true">check</span>
+                <span class="label-large text" data-filter-value="orientation">Orientation</span>
+                <span class="material-symbols-outlined trailing-icon arrow-icon" aria-hidden="true">arrow_drop_down</span>
+                <div class="state-layer"></div>
+              </button>
+              <button class="close-icon" data-filter-clear>
+                <span class="material-symbols-outlined trailing-icon" aria-hidden="true">close</span>
+                <div class="state-layer"></div>
+              </button>
+            </div>
+            <div class="menu" data-filter-menu data-menu>
+              <button class="menu-item" data-ripple data-menu-item="portrait">
+                <span class="label-large text">Portrait</span>
+                <div class="state-layer"></div>
+              </button>
+              <button class="menu-item" data-ripple data-menu-item="landscape">
+                <span class="label-large text">Landscape</span>
+                <div class="state-layer"></div>
+              </button>
+              <button class="menu-item" data-ripple data-menu-item="square">
+                <span class="label-large text">Square</span>
+                <div class="state-layer"></div>
+              </button>
+            </div>
+          </div>
+
+          <div class="menu-wrapper" data-filter="Size" data-menu-wrapper>
+            <div class="filter-chip" data-filter-chip>
+              <button class="chip-content" data-filter-btn data-menu-toggler>
+                <span class="material-symbols-outlined leading-icon" aria-hidden="true">check</span>
+                <span class="label-large text" data-filter-value="size">Size</span>
+                <span class="material-symbols-outlined trailing-icon arrow-icon" aria-hidden="true">arrow_drop_down</span>
+                <div class="state-layer"></div>
+              </button>
+              <button class="close-icon" data-filter-clear>
+                <span class="material-symbols-outlined trailing-icon" aria-hidden="true">close</span>
+                <div class="state-layer"></div>
+              </button>
+            </div>
+            <div class="menu" data-filter-menu data-menu>
+              <button class="menu-item" data-ripple data-menu-item="small">
+                <span class="label-large text">Small</span>
+                <div class="state-layer"></div>
+              </button>
+              <button class="menu-item" data-ripple data-menu-item="medium">
+                <span class="label-large text">Medium</span>
+                <div class="state-layer"></div>
+              </button>
+              <button class="menu-item" data-ripple data-menu-item="large">
+                <span class="label-large text">Large</span>
+                <div class="state-layer"></div>
+              </button>
+            </div>
+          </div>
+
+          <div class="menu-wrapper" data-filter="color">
+            <div class="filter-chip" data-filter-chip>
+              <button class="chip-content" data-filter-btn>
+                <input type="color" name="color" class="color-field" data-color-field>
+                <span class="material-symbols-outlined leading-icon" aria-hidden="true">check</span>
+                <span class="label-large text" data-filter-value="color">Color</span>
+                <span class="material-symbols-outlined trailing-icon arrow-icon" aria-hidden="true">arrow_drop_down</span>
+                <div class="state-layer"></div>
+              </button>
+              <button class="close-icon" data-filter-clear>
+                <span class="material-symbols-outlined trailing-icon" aria-hidden="true">close</span>
+                <div class="state-layer"></div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="media-grid" data-photo-grid></div>
+        <div class="load-more" data-loader role="progressbar">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
       </article>
     </main>
 
@@ -157,7 +239,7 @@
         <div class="footer-card">
           <div class="col">
             <a href="/" class="logo">SheriffStock</a>
-            <p class="text body-small">SheriffStock is a stock photo app developed by <span class="color-primary">SheriffKule</span> and all Photos and Videos provided by <a href="https://pexels.com" target="_blank" class="color-primary">Pexels</a>.</p>
+            <p class="text body-small">SheriffStock is a stock photo app developed by <span class="color-primary"><abbr title="Web Developer Frontend Master from XXIII Century 😃">SheriffKule</abbr></span> and all Photos and Videos provided by <a href="https://pexels.com" target="_blank" class="color-primary">Pexels</a>.</p>
           </div>
           <div class="col">
             <p class="title label-medium">Follow me on</p>
