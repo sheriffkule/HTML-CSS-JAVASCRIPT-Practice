@@ -76,3 +76,5 @@ for (let i = 0; (i < historyLen) & (i <= 5); i++) {
 
   $searchList.appendChild($listItem);
 }
+
+const search = urlDecode(window.location.search.slice(1));
