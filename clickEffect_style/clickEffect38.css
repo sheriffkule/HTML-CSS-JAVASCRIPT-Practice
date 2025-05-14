@@ -1,0 +1,52 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: conic-gradient(#fff 90deg, #bdc4ff 90deg 180deg, #fff 180deg 270deg, #bdc4ff 270deg 360deg);
+    background-size: 100px 100px;
+    background-repeat: round;
+}
+
+input {
+    display: none;
+}
+
+label {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90px;
+    height: 30px;
+    background-color: rgb(206, 206, 206);
+    border-radius: 40px;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+label::after {
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 30px;
+    left: 0;
+    background: conic-gradient(rgba(26, 26, 26, 0.5), #fff, rgba(26, 26, 26, 0.5), #fff, rgba(26, 26, 26, 0.5));
+    border-radius: 40px;
+    transition: all .3s;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.28);
+}
+
+input:checked + label::after {
+    transform: translateX(100%);
+}
+
+input:checked + label {
+    background: rgb(124, 179, 206);
+}
