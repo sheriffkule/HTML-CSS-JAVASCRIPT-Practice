@@ -1,0 +1,97 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: radial-gradient(#111 80%, #702200);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fire-container {
+    position: relative;
+    width: 100px;
+    height: 300px;
+}
+
+.fire-flame {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%/60%;
+    background: radial-gradient(circle, #ff4d00, transparent);
+    opacity: 0.7;
+    animation: flicker 1s infinite alternate;
+    filter: blur(2px);
+    transform-origin: bottom center;
+    will-change: transform, opacity;
+}
+
+.flame-medium {
+    width: 80%;
+    height: 90%;
+    animation-delay: -0.05s;
+    background: radial-gradient(circle, #ff4d00, transparent);
+}
+
+.flame-small {
+    width: 60%;
+    height: 80%;
+    animation-delay: -0.1s;
+    background: radial-gradient(circle, #ff4d00, transparent);
+}
+
+@keyframes flicker {
+    from {
+        transform: scale(1) rotate(0deg) skewX(0deg);
+        opacity: 0.6
+    }
+    to {
+        transform: scale(1.1) rotate(2deg) skewX(2deg);
+        opacity: 1;
+    }
+}
+
+.fire-base {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 20px;
+    background: radial-gradient(circle at center, #ff4d00, #330000);
+    border-radius: 50%;
+    box-shadow: 0 0 20px 10px rgba(255, 85, 0, 0.6);
+    z-index: -1;
+}
+
+.fire-container::before,
+.fire-container::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 10px 2px yellow;
+    animation: spark 1s infinite ease-out;
+}
+
+.fire-container::before {
+    left: 20px;
+    animation-delay: 0s;
+}
+
+.fire-container::after {
+    right: 20px;
+    animation-delay: 0.4s;
+}
+
+@keyframes spark {
+    from {
+        transform: translateY(0) scale(0.5);
+    }
+    to {
+        transform: translateY(-50px) scale(0);
+    }
+}
