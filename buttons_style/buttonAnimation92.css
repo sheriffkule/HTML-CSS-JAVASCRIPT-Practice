@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
+
+:root {
+    --first-color: hsl(239, 70%, 56%);
+    --title-color: hsl(216, 33%, 16%);
+    --text-color: hsl(216, 33%, 32%);
+    --white-color: hsl(216, 33%, 98%);
+    --body-color: hsl(210, 59%, 84%);
+
+    --body-font: "Montserrat", sans-serif;
+    --h2-font-size: 1.25rem;
+    --normal-font-size: 1rem;
+    --small-font-size: .875rem
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--body-color);
+    font-size: var(--normal-font-size);
+    background: radial-gradient(circle at center, var(--white-color) 60%, var(--body-color) 60%);
+    color: var(--text-color);
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.container {
+    height: 100vh;
+    margin-inline: 1.5rem;
+    display: grid;
+    place-items: center;
+}
+
+.card {
+    background-color: var(--body-color);
+    box-shadow: 0 4px 24px hsla(216, 50%, 20%, 0.2);
+    padding: 2rem 4.5rem 3rem;
+    border-radius: 3rem;
+    text-align: center;
+}
+
+.card__img {
+    width: 100px;
+    margin: 0 auto .75rem;
+    border-radius: 50%;
+    border: 4px solid var(--first-color);
+}
+
+.card__name {
+    font-size: var(--h2-font-size);
+    font-weight: 600;
+    color: var(--title-color);
+    margin-bottom: .25rem;
+}
+
+.card__profession {
+    font-size: var(--small-font-size);
+    margin-bottom: 1.5rem;
+}
+
+.button {
+    position: relative;
+    background-color: var(--body-color);
+    border: 3px solid var(--first-color);
+    outline: none;
+    padding: .75rem 1.5rem;
+    border-radius: 4rem;
+    cursor: pointer;
+}
+
+.button__social {
+    display: flex;
+    column-gap: .25rem;
+    z-index: 1;
+}
+
+.button__social a {
+    font-size: 1.5rem;
+    color: var(--first-color);
+    transition: transform .5s cubic-bezier(.2, .9, .2, 1.2);
+    transform: translateY(1rem);
+}
+
+.button__social a:nth-child(1) {
+    transition-delay: .1s;
+}
+
+.button__social a:nth-child(2) {
+    transition-delay: .2s;
+}
+
+.button__social a:nth-child(3) {
+    transition-delay: .3s;
+}
+
+.button__social a:nth-child(4) {
+    transition-delay: .4s;
+}
+
+.button__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--first-color);
+    width: 100%;
+    height: 100%;
+    border-radius: 4rem;
+    display: grid;
+    place-items: center;
+    transform: scale(1.03);
+    z-index: 5;
+    transition: transform .5s cubic-bezier(.2, .9, .2, 1.2);
+}
+
+.button__content span {
+    color: var(--white-color);
+    font: 600 var(--normal-font-size) var(--body-font);
+}
+
+.button:hover .button__content {
+    transform: translateY(-28px) scale(.4);
+}
+
+.button:hover .button__social a {
+    transform: translateY(0) scale(1);
+}
