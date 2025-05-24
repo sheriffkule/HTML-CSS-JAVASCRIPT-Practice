@@ -152,6 +152,7 @@ body {
 
 h1 {
     font-size: 4rem;
+    text-align: center;
     margin-bottom: 1.5rem;
     background: linear-gradient(90deg, var(--neon-pink), var(--electric-blue), var(--cyber-teal));
     -webkit-background-clip: text;
@@ -168,6 +169,169 @@ h1 {
     margin-bottom: 3rem;
     text-shadow: 0 0 5px rgba(114, 247, 182, 0.5);
     transform: translateZ(40px);
+}
+
+.color-palette {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+    transform: translateZ(30px);
+}
+
+.color-box {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: all .3s;
+    cursor: pointer;
+}
+
+.color-box:hover {
+    transform: translateY(-10px) scale(1.1);
+}
+
+.palette-name {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+}
+
+.tip-container {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 3rem 0;
+    border-left: 3px solid var(--neon-pink);
+    transform: translateZ(20px);
+}
+
+.tip {
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.tip::before {
+    content: '☑';
+    position: absolute;
+    left: 0;
+    top: 4px;
+    color: var(--cyber-teal);
+}
+
+.tip h3 {
+    color: var(--mint-green);
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.tip p {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+}
+
+.btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: linear-gradient(45deg, var(--neon-pink), var(--purple-haze));
+    color: #fff;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 1rem 0.5rem;
+    transition: all .3s;
+    box-shadow: 0 5px 15px rgba(255, 112, 206, 0.4);
+    border: none;
+    cursor: pointer;
+    transform: translateZ(30px);
+}
+
+.btn:hover {
+    transform: translateY(-5px) translateZ(40px);
+    box-shadow: 0 10px 25px rgba(255, 112, 206, 0.6);
+    filter: saturate(150%);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--electric-blue);
+    color: var(--electric-blue);
+    box-shadow: 0 5px 15px rgba(1, 205, 254, 0.3);
+}
+
+.btn-outline:hover {
+    background: 0 0 5px rgba(1, 205, 254, 0.1);
+}
+
+.pyramid-container {
+    width: 200px;
+    height: 200px;
+    margin: 3rem auto;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(20deg) rotateY(30deg);
+    animation: rotatePyramid 20s linear infinite;
+}
+
+.pyramid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.side {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-bottom: 150px solid;
+    transform-origin: bottom center;
+    opacity: 0.8;
+}
+
+.front {
+    border-bottom-color: var(--neon-pink);
+    transform: rotateY(0deg) translateZ(58px);
+}
+
+.back {
+    border-bottom-color: var(--electric-blue);
+    transform: rotateY(90deg) translateZ(58px);
+}
+
+.left {
+    border-bottom-color: var(--cyber-teal);
+    transform: rotateY(180deg) translateZ(58px);
+}
+
+.right {
+    border-bottom-color: var(--purple-haze);
+    transform: rotateY(270deg) translateZ(58px);
+}
+
+.base {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-color: var(--sunset-orange);
+    transform: rotateX(90deg) translateZ(-100px);
+    opacity: 0.6;
 }
 
 footer {
@@ -196,5 +360,53 @@ footer {
     }
     20% {
         left: 100%;
+    }
+}
+
+@keyframes rotatePyramid {
+    from {
+        transform: rotateX(20deg) rotateY(0deg);
+    }
+    to {
+        transform: rotateX(20deg) rotateY(360deg);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .subtitle {
+        font-size: 1.2rem;
+    }
+
+    .vapor-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .color-box {
+        width: 60px;
+        height: 60px;
+        font-size: 0.7rem;
+    }
+
+    .pyramid-container {
+        width: 150px;
+        height: 150px;
+        margin-bottom: 50px;
+    }
+
+    .side {
+        border-left-width: 75px;
+        border-right-width: 75px;
+        border-bottom-width: 130px;
+        transform-origin: bottom center;
+    }
+
+    .base {
+        width: 150px;
+        height: 150px;
+        transform: rotateX(90deg) translateZ(-75px);
     }
 }

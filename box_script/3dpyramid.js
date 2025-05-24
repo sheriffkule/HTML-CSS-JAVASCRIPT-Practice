@@ -2,7 +2,7 @@ const card = document.getElementById('card');
 
 card.addEventListener('mousemove', (e) => {
   const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-  const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+  const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
   card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg) translateZ(30px)`;
   card.style.boxShadow = `
     ${-xAxis * 5}px ${yAxis * 5}px 30px rgba(255, 112, 206, 0.3),
@@ -38,6 +38,7 @@ document.querySelectorAll('.color-box').forEach((box) => {
     }, 500);
 
     const ripple = document.createElement('div');
+    ripple.classList.add('palette-name');
     ripple.style.position = 'fixed';
     ripple.style.width = '10px';
     ripple.style.height = '10px';
