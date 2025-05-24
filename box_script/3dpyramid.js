@@ -23,8 +23,56 @@ setInterval(() => {
     setTimeout(() => {
       card.style.transform = 'translateX(5px)';
       setTimeout(() => {
-        card.style.transform = translateX(0);
+        card.style.transform = 'translateX(0px)';
       }, 50);
     }, 50);
   }
 }, 5000);
+
+document.querySelectorAll('.color-box').forEach((box) => {
+  box.addEventListener('click', () => {
+    const color = box.style.backgroundColor;
+    document.body.style.backgroundColor = color;
+    setTimeout(() => {
+      document.body.style.backgroundColor = 'var(--dark-bg)';
+    }, 500);
+
+    const ripple = document.createElement('div');
+    ripple.style.position = 'fixed';
+    ripple.style.width = '10px';
+    ripple.style.height = '10px';
+    ripple.style.backgroundColor = color;
+    ripple.style.borderRadius = '50%';
+    ripple.style.pointerEvents = 'none';
+    ripple.style.transform = 'translate(-50%, -50%) scale(0)';
+    ripple.style.opacity = '0.8';
+    ripple.style.zIndex = '100';
+    ripple.style.transition = 'transform 1s ease, opacity 1s ease';
+
+    const rect = box.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    ripple.style.left = `${x}px`;
+    ripple.style.top = `${y}px`;
+
+    document.body.appendChild(ripple);
+
+    setTimeout(() => {
+      ripple.style.transform = 'translate(-50%, -50%) scale(30)';
+      ripple.style.opacity = '0';
+    }, 20);
+
+    setTimeout(() => {
+      document.body.removeChild(ripple);
+    }, 1000);
+  });
+});
+
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+  yearElement.dateTime = currentYear;
+  yearElement.textContent = currentYear;
+}
+
+updateYear();
