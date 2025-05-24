@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100..900&display=swap');
+
+:root {
+    --neon-pink: #ff71ce;
+    --electric-blue: #01cdfe;
+    --purple-haze: #9678ff;
+    --mint-green: #72f7b6;
+    --sunset-orange: #ff8b39;
+    --cyber-teal: #05ffa1;
+    --dark-bg: #17141d;
+    --light-bg: #f5f5f5;
+    --grid-color: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    background-color: var(--dark-bg);
+    color: #ddd;
+    min-height: 100vh;
+    overflow-x: hidden;
+    perspective: 1000px;
+}
+
+.header {
+    padding: 1rem 2rem;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid var(--neon-pink);
+}
+
+.header h2 {
+    color: var(--electric-blue);
+    font-size: 2rem;
+    text-shadow: 0 0 10px var(--neon-pink);
+}
+
+.header p {
+    color: var(--mint-green);
+    text-shadow: 0 0 5px rgba(114, 247, 182, 0.5);
+}
+
+.grid-bg {
+    
+}
+
+footer {
+    padding: 1rem 2rem;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-top: 1px solid var(--electric-blue);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.75rem;
+    text-shadow: 0 0 5px var(--cyber-teal);
+    cursor: default;
+}
