@@ -947,13 +947,13 @@ button:disabled {
   padding-block-end: 18px;
   margin-block-end: 24px;
   overflow-x: auto;
-  scroll-snap-type: inline mandatory;
+  scroll-snap-type: inline proximity;
   scroll-snap-stop: always;
   overscroll-behavior-x: contain;
 }
 
 .banner::-webkit-scrollbar {
-    height: 6px;
+    height: 8px;
 }
 
 .banner::-webkit-scrollbar-track {
@@ -971,7 +971,7 @@ button:disabled {
 }
 
 .banner::-webkit-scrollbar-button {
-    width: calc(25% - 28px);
+    width: calc(20% - 28px);
 }
 
 .banner-card {

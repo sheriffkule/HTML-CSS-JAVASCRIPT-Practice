@@ -1,13 +1,17 @@
 'use strict';
 
-import { urlEncode } from "./urlEncode.js";
+import { urlEncode } from './urlEncode.js';
 
 export const updateUrl = (filterObj, searchType) => {
   setTimeout(() => {
-    const root = window.location.origin;
-    const searchQuery = urlEncode(filterObj);
-    const path = window.location.pathname.split('/').slice(0, -1).join('/');
+    try {
+      const root = window.location.origin;
+      const searchQuery = urlEncode(filterObj);
+      const path = window.location.pathname.split('/').slice(0, -1).join('/');
 
-    window.location = `${root}${path}/pages/${searchType}/${searchType}.html?${searchQuery}`;
+      window.location = `${root}/projects/stockPlatform/pages/${searchType}/${searchType}.html?${searchQuery}`;
+    } catch (error) {
+      console.error('Error updating URL:', error);
+    }
   }, 500);
 };
