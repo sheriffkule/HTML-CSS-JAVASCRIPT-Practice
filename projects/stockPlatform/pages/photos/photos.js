@@ -3,6 +3,7 @@ import { client } from '../../js/api_configure.js';
 import { filter } from '../../js/filter.js';
 import { photoCard } from '../../js/photo_card.js';
 import { gridInit, updateGrid } from '../../js/utils/masonry_grid.js';
+import { updateUrl } from '../../js/utils/updateUrl.js';
 import { urlDecode } from '../../js/utils/urlDecode.js';
 
 const $filterBar = document.querySelector('[data-filter-bar]');
@@ -13,7 +14,8 @@ const $filterWrappers = document.querySelectorAll('[data-filter]');
 
 $filterWrappers.forEach($filterWrapper => {
     filter($filterWrapper, window.filterObj, (newObj) => {
-        
+        window.filterObj = newObj;
+        updateUrl(newObj, 'photos');
     });
 })
 
