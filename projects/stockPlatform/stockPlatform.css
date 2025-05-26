@@ -1346,3 +1346,91 @@ abbr {
   opacity: 0;
   cursor: pointer;
 }
+
+.split-btn {
+  background: var(--primary);
+  color: var(--on-primary);
+  display: flex;
+  align-items: center;
+  height: 40px;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.split-btn .label {
+  --state-layer-bg: var(--on-primary);
+  padding-inline: 16px;
+  height: inherit;
+  display: grid;
+  place-items: center;
+  border-inline-end: 1px solid var(--outline-variant);
+}
+
+.split-btn .trailing-icon {
+  --state-layer-bg: var(--on-primary);
+  color: inherit;
+  height: inherit;
+  width: 40px;
+  display: grid;
+  place-items: center;
+}
+
+.split-btn .material-symbols-outlined {
+  font-size: 1.8rem;
+}
+
+.detail :is(.main, .footer) {
+  margin-inline-start: 0;
+}
+
+.detail .top-app-bar .icon-btn:first-child {
+  display: grid;
+}
+
+.detail .top-app-bar .logo {
+  display: block;
+}
+
+.detail .top-app-bar {
+  left: 0;
+  width: 100%;
+  gap: 4px;
+}
+
+.detail .menu-wrapper {
+  margin-inline-start: auto;
+}
+
+.detail .menu-wrapper .menu {
+  transform-origin: top right;
+  left: auto;
+  right: 0;
+}
+
+.detail-wrapper {
+  height: 588px;
+  display: grid;
+  grid-template-rows: 1fr max-content;
+  place-content: center;
+}
+
+.detail-banner {
+  max-width: 100%;
+  max-height: 100%;
+  margin-inline: auto;
+  border-radius: var(--radius-large);
+  overflow: hidden;
+  margin-block-end: 8px;
+}
+
+.detail-wrapper .title-small {
+  text-align: center;
+}
+
+.detail-wrapper .color-primary {
+  display: inline-block;
+}
+
+.detail .title-large {
+  margin-block: 32px 16px;
+}
