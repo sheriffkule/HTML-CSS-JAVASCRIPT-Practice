@@ -1104,6 +1104,7 @@ button:disabled {
     overflow: hidden;
     transition: box-shadow var(--motion-duration-short-2) var(--motion-easing-linear);
     --state-layer-bg: var(--on-surface);
+    cursor: pointer;
 }
 
 .card:hover {
