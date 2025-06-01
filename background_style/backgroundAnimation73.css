@@ -1,0 +1,122 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+  background: #000;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+}
+
+.container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.frame {
+  position: absolute;
+  border: 8px solid;
+  border-image: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #9c9227,
+    #25660b,
+    #17806f,
+    #1a2f95,
+    #7a00ff,
+    #8e1875,
+    #781717
+  );
+  border-image-slice: 1;
+  animation: move 20s linear infinite, rotate 30s linear infinite, colorChange 15s linear infinite;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.3), inset 0 0 30px rgba(255, 255, 255, 0.3);
+  transform-style: preserve-3d;
+}
+
+.title {
+  color: #fff;
+  text-align: center;
+  font-size: 3rem;
+  margin-top: 20px;
+}
+
+.desc {
+  justify-self: center;
+  width: max-content;
+  text-align: center;
+  color: transparent;
+  font-size: 2rem;
+  background: linear-gradient(90deg, #ff0000, #ff7300, #9c9227);
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: colorChange 15s linear infinite;
+}
+
+.controls {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+button {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  text-wrap: nowrap;
+  padding: 8px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+@keyframes move {
+  0%,
+  100% {
+    top: 0;
+    left: 0;
+  }
+  25% {
+    top: 0;
+    left: calc(100% - 100px);
+  }
+  50% {
+    top: calc(100% - 100px);
+    left: calc(100% - 100px);
+  }
+  75% {
+    left: 0;
+    top: calc(100% - 100px);
+  }
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+  }
+}
+
+@keyframes colorChange {
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
