@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Poppins:wght@400;500;600&display=swap');
+
+:root {
+    --primary: #4361ee;
+    --secondary: #3f37c9;
+    --accent: #4895ef;
+    --dark: #212529;
+    --light: #f8f9fa;
+    --success: #4cc9f0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    color: var(--dark);
+    line-height: 1.6;
+    transition: all .3s ease-in-out;
+}
+
+.container {
+    width: 90%;
+    max-width: 800px;
+    background: radial-gradient(#ddd, #bbb);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 2.5rem;
+    margin: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: all .3s ease-in-out;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--primary), var(--success));
+    transition: all .3s ease-out;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+    font-weight: 600;
+    transition: color .3s ease-in-out;
+}
+
+h1 i {
+    margin-right: 10px;
+}
+
+.description {
+    margin-bottom: 2rem;
+    color: #555;
+}
+
+.demo-area {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 8px;
+    margin: 2rem 0;
+    border-left: 6px solid var(--accent);
+    transition: all .3s ease-in-out;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.typing-wrapper {
+    display: inline-block;
+    position: relative;
+    width: auto;
+    max-width: 100%;
+}
+
+.typing-demo {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    font-family: 'Fira Code', monospace;
+    font-size: 1.3rem;
+    color: var(--dark);
+    line-height: 2rem;
+    position: relative;
+    padding: 3px;
+    max-width: 100%;
+}

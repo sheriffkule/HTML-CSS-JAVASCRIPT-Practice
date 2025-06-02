@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Typing Effect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/typingEffect.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1><i class="fas fa-keyboard"></i>TYPING EFFECT</h1>
+      <p class="description">Preview updates only when you click "Apply Changes" (Max 100 characters)</p>
+      <div class="demo-area">
+        <div class="typing-wrapper">
+          <div
+            id="typingElement"
+            class="typing-demo"
+            style="width: 0; animation: typing 3s steps(30) forwards">
+            Hello, this is created by: SheriffKule
+          </div>
+          <div class="typing-cursor"></div>
+        </div>
+      </div>
+      <div class="controls">
+        <div class="control-group">
+          <label for="textInput">Text Content (Max 70 chars)</label>
+          <input type="text" id="textInput" value="Hello, this is created by: SheriffKule" maxlength="100">
+          <div class="char-count">
+            <span id="cardCount">100</span> characters
+          </div>
+        </div>
+        <div class="control-group">
+          <label for="speedInput">Typing speed (seconds)</label>
+          <input type="number" id="speedInput" value="3" min="1" max="20" step="0.5">
+        </div>
+        <div class="control-group">
+          <label for="fontSelect">Font Style</label>
+          <select name="" id="fontSelect">
+            <option value="'Fira Code', monospace">Fira Code (monospace)</option>
+            <option value="'Courier New', Courier, monospace">Courier New</option>
+            <option value="'Poppins', sans-serif">Poppins (Sans-serif)</option>
+            <option value="'Times New Roman', serif"></option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label for="colorInput">Theme Color</label>
+          <div class="color-picker">
+            <input type="color" id="colorInput" value="#4361ee">
+            <span id="colorValue">#4361ee</span>
+          </div>
+        </div>
+      </div>
+      <button onclick="applySettings()"><i class="fas fa-sync-alt"></i> Apply Changes</button>
+      <div class="footer">
+        <h4> &copy; <time id="year"></time> Made by <em><abbr title="Frontend Master">Sheriffkule</abbr></em> from XXIII Century</h4>
+      </div>
+    </div>
+    <script src="/widgets_script/typingEffect.js"></script>
+  </body>
+</html>
