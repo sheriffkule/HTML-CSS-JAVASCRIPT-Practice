@@ -1,0 +1,207 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+  color: #ddd;
+  background-image: linear-gradient(#111, #333);
+}
+
+.header-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+h1 {
+  font-size: 3rem;
+  padding: 10px;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    perspective: 1000px;
+}
+
+.gallery {
+  position: relative;
+  width: 750px;
+  height: 450px;
+  transform-style: preserve-3d;
+  animation: rotate 30s linear infinite;
+}
+
+.gallery:hover {
+  animation-play-state: paused;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+.photo {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  left: 50%;
+  top: 45%;
+  margin-left: -150px;
+  margin-top: -150px;
+  transform-origin: center;
+  transition: 0.5s;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.photo-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+  z-index: 1;
+}
+
+.photo:hover .color-overlay {
+  opacity: 1;
+}
+
+.photo:hover {
+  transform: translateZ(100px) scale(1.1);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7);
+}
+
+.photo:nth-child(1) {
+  transform: rotateY(0deg) translateZ(400px);
+}
+
+.photo:nth-child(2) {
+  transform: rotateY(60deg) translateZ(400px);
+}
+
+.photo:nth-child(3) {
+  transform: rotateY(120deg) translateZ(400px);
+}
+
+.photo:nth-child(4) {
+  transform: rotateY(180deg) translateZ(400px);
+}
+
+.photo:nth-child(5) {
+  transform: rotateY(240deg) translateZ(400px);
+}
+
+.photo:nth-child(6) {
+  transform: rotateY(300deg) translateZ(400px);
+}
+
+.photo:nth-child(1) .color-overlay {
+  background: linear-gradient(45deg, #ff00cc, #3333ff);
+}
+
+.photo:nth-child(2) .color-overlay {
+  background: linear-gradient(45deg, #00ffcc, #ff0066);
+}
+
+.photo:nth-child(3) .color-overlay {
+  background: linear-gradient(45deg, #ffcc00, #6600ff);
+}
+
+.photo:nth-child(4) .color-overlay {
+  background: linear-gradient(45deg, #00ff66, #ff3300);
+}
+
+.photo:nth-child(5) .color-overlay {
+  background: linear-gradient(45deg, #0066ff, #ffcc00);
+}
+
+.photo:nth-child(6) .color-overlay {
+  background: linear-gradient(45deg, #ff0066, #00ccff);
+}
+
+.controls {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1f0944;
+  padding: 15px;
+  border-radius: 20px;
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+button {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+@media screen and (max-width: 900px) {
+  .gallery {
+    width: 100%;
+    height: 400px;
+  }
+  .photo {
+    width: 200px;
+    height: 200px;
+    margin-left: -125px;
+    margin-top: -175px;
+  }
+  .photo:nth-child(1) {
+    transform: rotateY(0deg) translateZ(300px);
+  }
+
+  .photo:nth-child(2) {
+    transform: rotateY(60deg) translateZ(300px);
+  }
+
+  .photo:nth-child(3) {
+    transform: rotateY(120deg) translateZ(300px);
+  }
+
+  .photo:nth-child(4) {
+    transform: rotateY(180deg) translateZ(300px);
+  }
+
+  .photo:nth-child(5) {
+    transform: rotateY(240deg) translateZ(300px);
+  }
+
+  .photo:nth-child(6) {
+    transform: rotateY(300deg) translateZ(300px);
+  }
+}
