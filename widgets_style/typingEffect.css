@@ -16,7 +16,7 @@
 }
 
 body {
-    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    background: linear-gradient(135deg, #204061, #2d3441);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,6 +24,7 @@ body {
     font-family: 'Poppins', sans-serif;
     color: var(--dark);
     line-height: 1.6;
+    overflow: hidden;
     transition: all .3s ease-in-out;
 }
 
@@ -63,6 +64,10 @@ h1 i {
     margin-right: 10px;
 }
 
+.container p {
+    text-wrap: pretty;
+}
+
 .description {
     margin-bottom: 2rem;
     color: #555;
@@ -71,7 +76,7 @@ h1 i {
 .demo-area {
     background: #f8f9fa;
     border-radius: 8px;
-    padding: 8px;
+    padding: 2rem 1rem 2rem 1rem;
     margin: 2rem 0;
     border-left: 6px solid var(--accent);
     transition: all .3s ease-in-out;
@@ -92,10 +97,178 @@ h1 i {
     white-space: nowrap;
     overflow: hidden;
     font-family: 'Fira Code', monospace;
-    font-size: 1.3rem;
+    font-size: 1rem;
     color: var(--dark);
     line-height: 2rem;
     position: relative;
-    padding: 3px;
+    padding-right: 3px;
     max-width: 100%;
+}
+
+.typing-cursor {
+    position: absolute;
+    right: -2px;
+    top: 0;
+    height: 2rem;
+    width: 3px;
+    background-color: var(--primary);
+    animation: blink 1s step-end infinite;
+    transition: background-color 0.3s ease-in-out;
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: var(--text-width);
+    }
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+label {
+    font-size: 0.9rem;
+    color: #636363;
+    font-weight: 500;
+}
+
+select, input, button {
+    padding: 0.6rem 1rem;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    transition: all .3s ease-in-out;
+}
+
+select:focus, input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+}
+
+#textInput {
+    width: 100%;
+    maxlength: 100;
+}
+
+button {
+    background-color: var(--primary);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all .25s ;
+    gap: .5rem;
+    font-weight: 500;
+}
+
+button:hover {
+    background-color: var(--secondary);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button i {
+    transition: transform .3s;
+}
+
+button:hover > i {
+    transform: rotate(180deg);
+}
+
+button:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+.color-picker {
+    display: flex;
+    align-items: center;
+    gap: 0.5;
+}
+
+#colorInput {
+    width: 100%;
+    height: 40px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.footer {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #555;
+    cursor: default;
+}
+
+.footer h4 {
+    font-weight: 500;
+}
+
+.char-count {
+    color: #777;
+    text-align: right;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+}
+
+.text {
+    position: absolute;
+    top: -10px;
+    width: 100%;
+    height: 100%;
+    line-height: 45px;
+    text-transform: uppercase;
+    text-shadow: 0 0 5px #149414;
+    transform-origin: bottom;
+    animation: move 25s linear forwards;
+    font-size: 40px;
+    z-index: -1;
+}
+
+@keyframes move {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+
+    70% {
+        transform: translateY(200%) scale(1);
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .container {
+        padding: 1.5rem;
+    }
+    h1 {
+        font-size: 1.1rem;
+    }
+    .controls {
+        grid-template-columns: 1fr;
+    }
 }
