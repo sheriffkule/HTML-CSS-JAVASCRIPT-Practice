@@ -143,9 +143,9 @@
         <div class="testimonial__container container grid">
           <img src="img/testimonial-img.png" alt="image" class="testimonial__img" />
 
-          <div class="testimonial__swiper">
-            <div>
-              <div class="testimonial__card">
+          <div class="testimonial__swiper swiper">
+            <div class="swiper-wrapper">
+              <div class="testimonial__card swiper-slide">
                 <h2 class="testimonial__title">Ama Dablam</h2>
                 <p class="testimonial__description">
                   I was delighted to visit the country because the scenery is beautiful. The residents also
@@ -161,7 +161,7 @@
                 </div>
               </div>
 
-              <div class="testimonial__card">
+              <div class="testimonial__card swiper-slide">
                 <h2 class="testimonial__title">Mount Fuji</h2>
                 <p class="testimonial__description">
                   I was delighted to visit the country because the scenery is beautiful. The residents also
@@ -177,7 +177,7 @@
                 </div>
               </div>
 
-              <div class="testimonial__card">
+              <div class="testimonial__card swiper-slide">
                 <h2 class="testimonial__title">Nanga Parbat</h2>
                 <p class="testimonial__description">
                   I was delighted to visit the country because the scenery is beautiful. The residents also
@@ -193,9 +193,63 @@
                 </div>
               </div>
             </div>
+            <div class="swiper-button-prev">
+              <i class="ri-arrow-left-long-line"></i>
+            </div>
+            <div class="swiper-button-next">
+              <i class="ri-arrow-right-long-line"></i>
+            </div>
           </div>
         </div>
       </section>
+
+      <section class="gallery section" id="gallery">
+        <h2 class="section__title">Gallery</h2>
+
+        <div class="gallery__container container grid">
+          <article class="gallery__card">
+            <img src="img/gallery-img-1.png" alt="image" class="gallery__img">
+            <div class="gallery__shadow"></div>
+
+            <div class="gallery__data">
+              <h3 class="gallery__subtitle">Nusa</h3>
+              <h2 class="gallery__title">Indonesia</h2>
+            </div>
+          </article>
+
+          <article class="gallery__card">
+            <img src="img/gallery-img-2.png" alt="image" class="gallery__img">
+            <div class="gallery__shadow"></div>
+
+            <div class="gallery__data">
+              <h3 class="gallery__subtitle">Cook</h3>
+              <h2 class="gallery__title">New Zeeland</h2>
+            </div>
+          </article>
+
+          <article class="gallery__card">
+            <img src="img/gallery-img-3.png" alt="image" class="gallery__img">
+            <div class="gallery__shadow"></div>
+
+            <div class="gallery__data">
+              <h3 class="gallery__subtitle">Bora Bora</h3>
+              <h2 class="gallery__title">Polynesia</h2>
+            </div>
+          </article>
+
+          <article class="gallery__card">
+            <img src="img/gallery-img-4.png" alt="image" class="gallery__img">
+            <div class="gallery__shadow"></div>
+
+            <div class="gallery__data">
+              <h3 class="gallery__subtitle">Santorini</h3>
+              <h2 class="gallery__title">Greece</h2>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="join section" id="join"></section>
     </main>
     <script src="/scripts/scrollreveal.min.js"></script>
     <script src="/scripts/swiper-bundle.min.js"></script>
