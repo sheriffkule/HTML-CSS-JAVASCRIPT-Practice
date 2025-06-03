@@ -209,6 +209,19 @@ img {
     top: 0;
 }
 
+.bg-header {
+    background-color: var(--body-color);
+    box-shadow: 0 8px 16px hsla(0, 0%, 0%, 0.2);
+}
+
+.bg-header :is(.nav__logo, .nav__toggle, .nav__theme) {
+    color: var(--title-color);
+}
+
+.bg-header .nav__logo img {
+    filter: invert(100%);
+}
+
 .home {
     position: relative;
 }
@@ -285,4 +298,88 @@ img {
 
 .button__opa-30 {
     background-color: var(--opacity-color-30);
+}
+
+.home__swiper .swiper-button-prev::after,
+.home__swiper .swiper-button-next::after {
+    content: '';
+}
+
+.home__swiper :is(.swiper-button-prev, .swiper-button-next) {
+    color: var(--white-color);
+    font-size: 1.5rem;
+    background-color: var(--opacity-color-30);
+    backdrop-filter: blur(24px);
+    width: 2rem;
+    height: 2rem;
+    border-radius: .25rem;
+    top: initial;
+    bottom: 1.25rem;
+    transition: background-color .3s;
+}
+
+.home__swiper .swiper-button-prev {
+    left: initial;
+    right: 4rem;
+}
+
+.home__swiper .swiper-button-next {
+    right: 1.25rem;
+}
+
+.destination__container {
+    grid-template-columns: 300px;
+    justify-content: center;
+}
+
+.destination__card {
+    position: relative;
+    border-radius: 1.5rem;
+    overflow: hidden;
+}
+
+.destination__img {
+    transition: transform .4s;
+}
+
+.destination__data {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 1.5rem;
+    background-color: var(--opacity-color-30);
+    backdrop-filter: blur(24px);
+    color: var(--white-color);
+    display: grid;
+    row-gap: .25rem;
+    border-radius: 1.5rem;
+    transition: background-color .4s;
+}
+
+.destination__subtitle {
+    font-size: var(--h2-font-size);
+    font-family: var(--second-font);
+}
+
+.destination__title {
+    font-size: var(--h1-font-size);
+}
+
+.destination__country {
+    display: flex;
+    align-items: center;
+    column-gap: .25rem;
+}
+
+.destination__country i {
+    font-size: 1rem;
+}
+
+.destination__country span {
+    font-size: var(--small-font-size);
+}
+
+.destination__card:hover .destination__img {
+    transform: scale(1.2);
 }
