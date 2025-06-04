@@ -34,8 +34,22 @@ const loadCollection = function (page) {
       }
 
       updateGrid($card, collectionGrid.columnsHeight, collectionGrid.$columns);
+
+      isLoaded = true;
+      if (currentPage >= totalPage) $loader.style.display = 'none';
     });
   });
 };
 
 loadCollection(currentPage);
+
+const $loader = document.querySelector('[data-loader]');
+let isLoading = true;
+
+window.addEventListener('scroll', function () {
+  if ($loader.getBoundingClientRect().top < window.innerHeight * 2 && currentPage <= totalPage && isLoading) {
+    currentPage++;
+    loadCollection(currentPage);
+    isLoading = false;
+  }
+});
