@@ -35,7 +35,7 @@ const loadCollection = function (page) {
 
       updateGrid($card, collectionGrid.columnsHeight, collectionGrid.$columns);
 
-      isLoaded = true;
+      isLoading = true;
       if (currentPage >= totalPage) $loader.style.display = 'none';
     });
   });

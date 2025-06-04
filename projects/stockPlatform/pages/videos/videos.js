@@ -45,7 +45,7 @@ const renderVideos = function (currentPage) {
         updateGrid($videoCard, videoGrid.columnsHeight, videoGrid.$columns);
       });
 
-      isLoading = true;
+      isLoaded = true;
 
       if (currentPage >= totalPage) $loader.style.display = 'none';
     }
@@ -55,12 +55,12 @@ const renderVideos = function (currentPage) {
 renderVideos(currentPage);
 
 const $loader = document.querySelector('[data-loader]');
-let isLoading = true;
+let isLoaded = true;
 
 window.addEventListener('scroll', function () {
-  if ($loader.getBoundingClientRect().top < window.innerHeight * 2 && currentPage <= totalPage && isLoading) {
+  if ($loader.getBoundingClientRect().top < window.innerHeight * 2 && currentPage <= totalPage && isLoaded) {
     currentPage++;
     renderVideos(currentPage);
-    isLoading = false;
+    isLoaded = false;
   }
 });

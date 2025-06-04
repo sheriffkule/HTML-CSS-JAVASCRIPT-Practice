@@ -121,7 +121,7 @@
     --motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
     --motion-easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
     --motion-easing-emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
-    --motion-easing-emphasized-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
+    --motion-easing-emphasized-accelerate: cubic-bezier(0.3, 0.2, 0.8, 0.15);
     --motion-easing-legacy: cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
@@ -798,6 +798,7 @@ button:disabled {
   height: 48px;
   width: 100%;
   --state-layer-bg: var(--on-surface);
+  cursor: pointer;
 }
 
 .list-item .text {
@@ -1287,6 +1288,11 @@ button:disabled {
   border-block-end: 1px solid var(--outline-variant);
 }
 
+.collection-link {
+  z-index: 100;
+  pointer-events: all;
+}
+
 .collection .btn {
   margin-block: 12px;
   margin-inline: auto;
@@ -1473,5 +1479,172 @@ abbr {
   }
   .top-app-bar .search-open {
     display: none;
+  }
+  .search-view {
+    all: unset;
+    align-self: flex-start;
+    margin-block-start: 8px;
+    margin-inline: auto;
+    max-width: 560px;
+    background-color: var(--surface-container-high);
+    border-radius: var(--radius-extra-large);
+    overflow: hidden;
+  }
+  .search-view:focus-within {
+    box-shadow: var(--elevation-2);
+  }
+  .search-bar {
+    height: 48px;
+  }
+  .search-view:not(:focus-within) .search-bar {
+    border: none;
+    --state-layer-bg: var(--on-surface);
+  }
+  .search-bar .icon-btn:first-child,
+  .search-view:not(:focus-within) :where(.icon-btn, .search-view-content) {
+    display: none;
+  }
+  .input-wrapper .leading-icon {
+    display: block;
+  }
+  .search-bar .input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-inline-start: 16px;
+  }
+  .card .card-content {
+    opacity: 0;
+    transition: opacity var(--motion-duration-short-2) var(--motion-easing-linear);
+  }
+  .card:where(:hover, :focus-within) .card-content {
+    opacity: 1;
+  }
+  .container {
+    padding-inline: 24px;
+  }
+  .section {
+    margin-block-end: 36px;
+  }
+  .section-title {
+    margin-block-end: 20px;
+  }
+  .media-grid {
+    --column-count: 3;
+    --column-gap: 12px;
+  }
+  .collection-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 24px;
+  }
+  .banner-card .card-content {
+    padding: 32px;
+  }
+  .banner-card .card-text {
+    display: block;
+    max-width: 40%;
+  }
+  .collection .btn {
+    margin-block: 24px;
+  }
+  .footer-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: flex-end;
+  }
+  .footer-card .text {
+    margin-block-end: 4px;
+  }
+}
+
+@media screen and (min-width: 1240px) {
+  .headline-medium {
+    font-size: var(--fs-display-large);
+    font-weight: var(--weight-regular);
+    line-height: 64px;
+  }
+  .title-large {
+    font-size: var(--fs-headline-medium);
+    font-weight: var(--weight-regular);
+    line-height: 36px;
+  }
+  .scrim {
+    display: none;
+  }
+  .top-app-bar {
+    left: 360px;
+    width: auto;
+    right: 0;
+  }
+  .top-app-bar,
+  .top-app-bar.active {
+    background-color: var(--background);
+  }
+  .top-app-bar :where(.icon-btn:first-child, .logo) {
+    display: none;
+  }
+  .search-view {
+    max-width: 720px;
+  }
+  .navigation {
+    --navigation-drawer-width: 360px;
+    visibility: visible;
+    width: var(--navigation-drawer-width);
+    height: 100%;
+    border-radius: 0;
+  }
+  .navigation :where(.navigation-header, .drawer-list) {
+    opacity: 1;
+  }
+  .navigation-header {
+    height: 64px;
+    padding-inline: 28px;
+  }
+  .navigation-header .icon-btn {
+    display: none;
+  }
+  .main,
+  .footer {
+    margin-inline-start: 360px;
+  }
+  .container {
+    max-width: 1128px;
+    width: 100%;
+    margin-inline: auto;
+  }
+  .media-grid {
+    --column-gap: 16px;
+  }
+  .collection-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .section-title {
+    margin-block-end: 24px;
+  }
+  .banner-card {
+    height: 420px;
+  }
+  .banner-card .card-content {
+    padding: 48px;
+  }
+  .detail-wrapper {
+    height: 788px;
+  }
+  .detail-banner {
+    max-height: 760px;
+  }
+  .detail .title-large {
+    margin-block-start: 40px;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .banner-card {
+    height: 560px;
+  }
+  .banner-card .card-content {
+    padding: 84px;
   }
 }

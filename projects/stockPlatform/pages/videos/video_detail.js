@@ -54,7 +54,7 @@ client.videos.detail(videoId, (data) => {
 
     $downloadMenu.innerHTML += `
       <a href="${link}" download class="menu-item">
-        <span class="label-large text">${quality.toUpperCase()}</span>
+        <span class="label-large text">${quality}</span>
         <span class="label-large trailing-text">${width}x${height}</span>
         <div class="state-layer"></div>
       </a>

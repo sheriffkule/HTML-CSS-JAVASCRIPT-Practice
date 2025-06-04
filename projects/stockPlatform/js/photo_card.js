@@ -31,7 +31,7 @@ export const photoCard = (photo) => {
         <div class="state-layer"></div>
       </button>
     </div>
-    <a href="${root}/pages/photos/photo_detail.html?id=${id}" class="state-layer"></a>
+    <a href="${root}/projects/stockPlatform/pages/photos/photo_detail.html?id=${id}" class="state-layer"></a>
   `;
 
   const $cardBanner = $card.querySelector('img');
