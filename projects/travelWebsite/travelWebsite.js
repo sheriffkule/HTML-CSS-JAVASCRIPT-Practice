@@ -33,10 +33,10 @@ const swiperHome = new Swiper('.home__swiper', {
     prevEl: '.swiper-button-prev',
   },
 
-  //   autoplay: {
-  //     delay: 3000,
-  //     disableOnInteraction: false,
-  //   }
+  autoplay: {
+    delay: 3000,
+    disableOnInteraction: false,
+  },
 });
 
 const bgHeader = () => {
@@ -58,10 +58,10 @@ const swiperTestimonial = new Swiper('.testimonial__swiper', {
     prevEl: '.swiper-button-prev',
   },
 
-  // autoplay: {
-  //   delay: 3000,
-  //   disableOnInteraction: false,
-  // }
+  autoplay: {
+    delay: 3000,
+    disableOnInteraction: false,
+  },
 });
 
 const scrollUp = () => {
@@ -117,3 +117,28 @@ themeButton.addEventListener('click', () => {
   localStorage.setItem('selected-theme', getCurrentTheme());
   localStorage.setItem('selected-icon', getCurrentIcon());
 });
+
+const sr = ScrollReveal({
+  origin: 'top',
+  distance: '120px',
+  duration: 2000,
+  delay: 300,
+});
+
+sr.reveal('.home__container, .testimonial__container, .footer__container');
+sr.reveal('.home__title, .section__title', { delay: 600 });
+sr.reveal('.home__description', { delay: 900 });
+sr.reveal('.home__data .button', { delay: 1200 });
+sr.reveal('.destination__card, .gallery__card', { interval: 150 });
+sr.reveal('.join__data', { origin: 'left' });
+sr.reveal('.join__img', { origin: 'right' });
+sr.reveal('.footer__content div', { interval: 200 });
+
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+  yearElement.dateTime = currentYear;
+  yearElement.textContent = currentYear;
+}
+
+updateYear();
