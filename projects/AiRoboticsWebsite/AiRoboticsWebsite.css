@@ -137,7 +137,7 @@ button:active {
 }
 
 .second_nav {
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     background-color: var(--nav-color);
@@ -148,6 +148,7 @@ button:active {
     height: 100%;
     z-index: 99;
     transition: .6s ease-in-out;
+    animation: navTopDown 0.5s forwards;
 }
 
 .nav_wrapper {
@@ -436,6 +437,138 @@ button:active {
 
 .trustSwiper {
     width: 80%;
+}
+
+.about {
+    justify-content: space-between;
+    gap: 50px;
+    position: relative;
+}
+
+.about_content {
+    width: 50%;
+}
+
+.about_content h1 {
+    font-size: 3rem;
+    font-weight: 500;
+}
+
+.about_content h1 span {
+    background: var(--gradient-color);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+.about_content h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 20px 0;
+    text-box-trim: trim-both;
+}
+
+.about_content .wrapper_info {
+    width: 50%;
+    margin: 20px 0;
+}
+
+.about_content p {
+    margin: 20px 0;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    text-box-trim: trim-both;
+}
+
+.about_bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.page_container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #121321;
+    padding: 5%;
+}
+
+.page_container p {
+    width: 90%;
+}
+
+.page_content {
+    width: 50%;
+}
+
+.page_content h1 span {
+    background: var(--gradient-color);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+.page_content p {
+    font-size: 1rem;
+    margin: 20px;
+}
+
+.page_box_container {
+    margin-top: 50px;
+}
+
+.page_box {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.page_box_txt {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.page_box i {
+    font-size: 3rem;
+    color: var(--primary-color);
+}
+
+.page_box h2 {
+    font-weight: 400;
+}
+
+.page_box p {
+    margin: 0;
+    font-weight: 400;
+}
+
+.page_image {
+    width: 40%;
+    z-index: 1;
+    position: relative;
+}
+
+.page_image img {
+    width: 100%;
+}
+
+.page_image::after {
+    content: '';
+    position: absolute;
+    top: 55%;
+    left: 0;
+    width: 150px;
+    height: 150px;
+    background-color: var(--primary-color);
+    z-index: -1;
+    filter: blur(100px);
 }
 
 @keyframes scaleText {
