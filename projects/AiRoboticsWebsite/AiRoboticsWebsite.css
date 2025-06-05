@@ -38,6 +38,7 @@ section {
 
 p {
     color: var(--p-text);
+    text-wrap: pretty;
 }
 
 i {
@@ -178,6 +179,7 @@ button:active {
     content: '';
     width: 2px;
     height: 100%;
+    left: 60%;
     background-color: var(--light-border-color);
 }
 
@@ -309,6 +311,142 @@ button:active {
     font-size: 2rem;
 }
 
+.hero {
+    padding: 0;
+    justify-content: space-between;
+    align-items: center;
+    background-image: url(images/hero-bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 100%;
+    height: 92vh;
+    position: relative;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.8), transparent);
+}
+
+.hero_content {
+    width: 100%;
+    padding-left: 12%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    color: var(--white-color);
+    z-index: 5;
+}
+
+.hero_content h1 {
+    font-size: 3rem;
+    line-height: 5rem;
+}
+
+.hero_content h1:nth-child(3) {
+    background: var(--gradient-color);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: scaleText 10s linear infinite;
+}
+
+.hero_content p {
+    margin: 10px 0;
+}
+
+.hero_content button {
+    background-color: var(--second-color);
+    color: var(--black-color);
+}
+
+.hero_content button:hover {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    box-shadow: 0 5px 6px rgba(89, 226, 252, 0.2);
+}
+
+.hero_image {
+    filter: brightness(1.4);
+    width: 70%;
+    height: 100%;
+    background-image: url(images/banner-img-1.png);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.watch_video {
+    position: absolute;
+    top: 87%;
+    right: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    z-index: 6;
+}
+
+.watch_video i {
+    font-size: 4rem;
+    background-color: var(--white-color);
+    color: var(--second-color);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    padding-left: 5%;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: .3s;
+    animation: glowing 2s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.watch_video h1 {
+    transition: .3s;
+    color: var(--white-color);
+}
+
+.watch_video:hover i {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+.watch_video:hover h1 {
+    color: var(--primary-color);
+}
+
+.trusted {
+    gap: 20px;
+}
+
+.trusted h1 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--white-color);
+}
+
+.trustSwiper {
+    width: 80%;
+}
+
+@keyframes scaleText {
+    0%, 100% {
+        font-size: 3.75rem;
+    }
+    70% {
+        font-size: 4rem;
+    }
+}
+
 @keyframes show_nav {
     from {
         opacity: 0;
@@ -319,10 +457,10 @@ button:active {
 }
 
 @keyframes glowing {
-    from {
+    0%, 100% {
         box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
     }
-    to {
+    50% {
         box-shadow: 0 0 20px rgba(255, 255, 255, 1);
     }
 }

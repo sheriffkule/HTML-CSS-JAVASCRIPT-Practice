@@ -26,3 +26,23 @@ nav_btn_show.addEventListener('click', () => {
   nav_icon_menu.classList.toggle('show_nav_icon_btn');
 });
 
+let swiper = new Swiper('.trustSwiper', {
+  slidesPerView: 5,
+  spaceBetween: 30,
+  loop: true,
+  autoplay: true,
+  breakpoints: {
+    1400: {
+      slidesPerView: 5,
+      spaceBetween: 30,
+    },
+    1200: {
+      slidesPerView: 4,
+      spaceBetween: 30,
+    },
+    1000: {
+      slidesPerView: 3,
+      spaceBetween: 30,
+    },
+  },
+});
