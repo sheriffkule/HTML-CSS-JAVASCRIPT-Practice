@@ -67,6 +67,12 @@ nav {
     animation: navTopDown .6s forwards linear;
 }
 
+.bg-nav {
+    background-color: rgba(6, 10, 20, 0.2);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 5px 10px rgba(255, 255, 255, 0.2);
+}
+
 nav ul {
     display: flex;
     align-items: center;
@@ -695,6 +701,135 @@ button:active {
     height: 250px;
     background-color: var(--primary-color);
     filter: blur(145px);
+}
+
+.testimonialSwiper {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.testimonial_img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.testimonial_head h1 span {
+    background: var(--gradient-color);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+.testimonial_box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    background-color: #13131e;
+    padding: 5%;
+    border-radius: 10px;
+}
+
+.testimonial_box .stars {
+    font-size: 1.5rem;
+    color: #ffee01;
+}
+
+.client_box {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.client_box i {
+    font-size: 3.5rem;
+    color: var(--primary-color);
+}
+
+.client_info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.blog {
+    flex-direction: column;
+}
+
+.blog_head  h1{
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.blog_head h1 span {
+    background: var(--gradient-color);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+.blog_cards {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.blog_card {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 3%;
+    background-color: #13131e;
+}
+
+.blog_det {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.blog_card span {
+    width: 50px;
+    height: 30px;
+    background-color: var(--second-color);
+    color: var(--black-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    transition: .3s;
+}
+
+.blog_card span:hover {
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+.blog_card h2 {
+    font-weight: 400;
+}
+
+.blog_card button {
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--white-color);
+}
+
+.blog_card button:hover {
+    background-color: var(--gradient-color);
+    color: var(--white-color);
 }
 
 

@@ -26,6 +26,14 @@ nav_btn_show.addEventListener('click', () => {
   nav_icon_menu.classList.toggle('show_nav_icon_btn');
 });
 
+const bgNav = () => {
+  const nav = document.querySelector('nav');
+
+  this.scrollY >= 100 ? nav.classList.add('bg-nav') : nav.classList.remove('bg-nav');
+};
+
+window.addEventListener('scroll', bgNav);
+
 let swiper = new Swiper('.trustSwiper', {
   slidesPerView: 5,
   spaceBetween: 30,
@@ -52,7 +60,7 @@ let swiper = new Swiper('.trustSwiper', {
 });
 
 let serviceSwiper = new Swiper('.serviceSwiper', {
-  slidesPerView: 5,
+  slidesPerView: 3,
   spaceBetween: 30,
   loop: true,
   autoplay: true,
@@ -63,6 +71,31 @@ let serviceSwiper = new Swiper('.serviceSwiper', {
     },
     1200: {
       slidesPerView: 3,
+      spaceBetween: 30,
+    },
+    1000: {
+      slidesPerView: 2,
+      spaceBetween: 30,
+    },
+    0: {
+      slidesPerView: 1,
+      spaceBetween: 30,
+    }
+  },
+});
+
+let testimonialSwiper = new Swiper('.testimonialSwiper', {
+  slidesPerView: 2,
+  spaceBetween: 30,
+  loop: true,
+  autoplay: true,
+  breakpoints: {
+    1400: {
+      slidesPerView: 2,
+      spaceBetween: 30,
+    },
+    1200: {
+      slidesPerView: 2,
       spaceBetween: 30,
     },
     1000: {
