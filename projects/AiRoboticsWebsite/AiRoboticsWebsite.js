@@ -40,9 +40,38 @@ let swiper = new Swiper('.trustSwiper', {
       slidesPerView: 4,
       spaceBetween: 30,
     },
-    1000: {
+    800: {
       slidesPerView: 3,
       spaceBetween: 30,
     },
+    0: {
+      slidesPerView: 2,
+      spaceBetween: 30,
+    },
+  },
+});
+
+let serviceSwiper = new Swiper('.serviceSwiper', {
+  slidesPerView: 5,
+  spaceBetween: 30,
+  loop: true,
+  autoplay: true,
+  breakpoints: {
+    1400: {
+      slidesPerView: 3,
+      spaceBetween: 30,
+    },
+    1200: {
+      slidesPerView: 3,
+      spaceBetween: 30,
+    },
+    1000: {
+      slidesPerView: 2,
+      spaceBetween: 30,
+    },
+    0: {
+      slidesPerView: 1,
+      spaceBetween: 30,
+    }
   },
 });
