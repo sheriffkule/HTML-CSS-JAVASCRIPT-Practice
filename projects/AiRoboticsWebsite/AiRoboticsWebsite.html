@@ -14,17 +14,17 @@
         <img src="images/logo-5.png" alt="logo">
       </div>
       <ul class="menu">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Service</a></li>
-        <li><a href="#">Pages</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a class="nav_link" href="#">Home</a></li>
+        <li><a class="nav_link" href="#about">About</a></li>
+        <li><a class="nav_link" href="#service">Service</a></li>
+        <li><a class="nav_link" href="#pages">Pages</a></li>
+        <li><a class="nav_link" href="#blog">Blog</a></li>
+        <li><a class="nav_link" href="#contact">Contact</a></li>
         <div class="nav_icon_btn">
           <i class="ri-search-2-line"></i>
           <button>Contact Us</button>
           <div class="bars">
-            <i class="ri-menu-line"></i>
+            <i class="ri-information-line"></i>
           </div>
         </div>
       </ul>
@@ -115,9 +115,9 @@
       </div>
     </section>
 
-    <section class="about">
+    <section class="about" id="about">
       <div class="about_content">
-        <h1>About th <span>Aoriv</span></h1>
+        <h1>About the <span>Aoriv</span></h1>
         <h2>AI and Robotics have witnessed significant advancements in recent years, driven by breakthroughs in machine learning, computer vision, natural language processing, and hardware capabilities.</h2>
 
         <div class="wrapper_info">
@@ -136,7 +136,7 @@
       <img src="images/about-shape.png" alt="shape" class="about_bg">
     </section>
 
-    <section class="page">
+    <section class="page" id="pages">
       <div class="page_container">
         <div class="page_content">
           <h1>Choosing <span>AI and Robotics</span> offers the opportunity for an innovative field</h1>
@@ -164,7 +164,7 @@
       </div>
     </section>
 
-    <section class="service">
+    <section class="service" id="service">
       <a href="#">View All Our Services</a>
       <div class="service_head">
         <h1>Explore All <span>Our Services</span></h1>
@@ -320,7 +320,7 @@
       </div>
     </section>
 
-    <section class="blog">
+    <section class="blog" id="blog">
       <div class="blog_head">
         <h1>Latest <span>Blog & Articles</span></h1>
       </div>
@@ -360,7 +360,7 @@
       </div>
     </section>
 
-    <section class="footer">
+    <section class="footer" id="contact">
       <div class="footer_head">
         <h1>Subscribe to our <span>newsletter</span></h1>
         <div class="inputs">
@@ -416,7 +416,11 @@
       </div>
     </section>
 
+    <h4 class="footer__copy"> &copy; <time id="year"></time> Made by <em><abbr title="Frontend Master">Sheriffkule</abbr></em> from XXIII Century</h4>
+
     <script src="/scripts/swiper-bundle.min.js"></script>
+    <script src="/scripts/scrollreveal.min.js"></script>
+    <script src="/scripts/vanilla-tilt.min.js"></script>
     <script src="/projects/AiRoboticsWebsite/AiRoboticsWebsite.js"></script>
   </body>
 </html>
