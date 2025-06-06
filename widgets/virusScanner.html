@@ -7,19 +7,32 @@
     <link rel="stylesheet" href="/widgets_style/virusScanner.css" />
   </head>
   <body>
+    <div id="stars"></div>
+
     <div class="container">
-      <h1>Virus Scanner</h1>
+      <header>
+        <h1>Virus Scanner</h1>
+        <div class="themeToggle">
+          <div class="switch">
+            <input type="checkbox" id="switch" />
+            <label for="switch">
+              <button></button>
+              <p class="themeText">Light Theme</p>
+            </label>
+          </div>
+        </div>
+      </header>
 
       <section>
         <h2>Scan a URL</h2>
         <input type="text" id="urlInput" placeholder="Enter URL (e.g., https://example.com)" />
-        <button onclick="scanURL()">Scan URL</button>
+        <button class="button" onclick="scanURL()">Scan URL</button>
       </section>
 
       <section>
         <h2>Scan a File</h2>
         <input type="file" id="fileInput" />
-        <button onclick="scanFile()">Scan File</button>
+        <button class="button" onclick="scanFile()">Scan File</button>
       </section>
 
       <div id="result"></div>
