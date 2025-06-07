@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Handlee&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+    'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+:root {
+  --size: 300px;
+}
+
+body {
+  background-color: #2f363e;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+h1 {
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-image: linear-gradient(to right, #6eff69, #fe4b74, #6eff69);
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 50px;
+  padding: 50px;
+}
+
+.container .notes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.container .notes .note {
+  position: relative;
+  width: var(--size);
+  height: var(--size);
+  background-color: #f7e98d;
+  padding: 20px;
+  box-shadow: 0 15px 35px rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.container .notes .note::before {
+  content: 'Click on text to edit.\A Double Click to Remove. \A Drag and Drop to Rearrange';
+  white-space: break-spaces;
+  position: absolute;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.15);
+  padding: 3px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.85em;
+  opacity: 0;
+  transition: all 0.4s;
+}
+
+.container .notes .note:hover::before {
+  bottom: 0;
+  opacity: 1;
+}
+
+#create {
+  position: relative;
+  width: var(--size);
+  height: var(--size);
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 6em;
+  cursor: pointer;
+}
+
+.createBox {
+  width: var(--size);
+  height: var(--size);
+  z-index: 1000;
+  display: none;
+}
+
+.createBox textarea {
+  position: absolute;
+  inset: 0;
+  top: 0;
+  left: 0;
+  width: var(--size);
+  height: var(--size);
+  padding: 20px;
+  outline: none;
+  font-size: 0.2em;
+  resize: none;
+}
+
+.details h3 {
+  font-family: 'Handlee', cursive;
+  user-select: none;
+  font-size: 1.4em;
+}
+
+.text {
+    position: absolute;
+    top: -10px;
+    width: 100%;
+    height: 100%;
+    line-height: 45px;
+    text-transform: uppercase;
+    text-shadow: 0 0 5px #149414;
+    transform-origin: bottom;
+    animation: move 25s linear forwards;
+    font-size: 40px;
+    z-index: -1;
+}
+
+@keyframes move {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+
+    70% {
+        transform: translateY(120%) scale(1);
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.footer {
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 0.875rem;
+    color: #3a8838;
+    cursor: default;
+}
+
+.footer h4 {
+    font-weight: 500;
+}
+
+em {
+  color: #6eff69;
+}
