@@ -28,10 +28,27 @@ const switchInput = document.getElementById('switch');
 const body = document.body;
 const themeText = document.querySelector('.themeText');
 
-switchInput.addEventListener('change', () => {
-  document.body.classList.toggle('darkTheme');
+switchInput.addEventListener('change', handleThemeSwitch);
+
+function handleThemeSwitch() {
+  body.classList.toggle('darkTheme');
 
   themeText.textContent = body.classList.contains('darkTheme') ? 'Dark Theme' : 'Light Theme';
+
+  localStorage.setItem('theme', body.classList.contains('darkTheme') ? 'dark' : 'light');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const savedTheme = localStorage.getItem('theme');
+  
+  if (savedTheme === 'dark') {
+    body.classList.add('darkTheme');
+    themeText.textContent = 'Dark Theme';
+    switchInput.checked = true;
+  } else {
+    body.classList.remove('darkTheme');
+    themeText.textContent = 'Light Theme';
+  }
 });
 
 let buttons = document.querySelectorAll('.button');
@@ -99,7 +116,7 @@ async function makeRequest(url, options = {}) {
 
 async function scanURL() {
   const url = getElement('urlInput').value.trim();
-  if (!url) return showError('Please enter a URL');
+  if (!url) return showError('Please enter a URL!');
 
   try {
     new URL(url);
@@ -133,9 +150,16 @@ async function scanURL() {
   }
 }
 
+getElement('urlInput').addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    scanURL();
+  }
+});
+
 async function scanFile() {
   const file = getElement('fileInput').files[0];
-  if (!file) return showError('Please select a file');
+  if (!file) return showError('Please select a file!');
   if (file.size > 32 * 1024 * 1024) return showError('File size exceeds 32MB limit.');
 
   try {
@@ -194,7 +218,7 @@ async function pollAnalysisResults(analysisId, fileName = '') {
         break;
       }
 
-      if (stars === 'failed') {
+      if (status === 'failed') {
         throw new Error('Analysis failed!');
       }
 
@@ -211,14 +235,16 @@ async function pollAnalysisResults(analysisId, fileName = '') {
   }
 }
 
+window.latestReportData = null;
 function showFormattedResult(data) {
+  window.latestReportData = data;
   if (!data?.data?.attributes.stats) return showError('Invalid response format!');
 
   const stats = data.data.attributes.stats;
   const total = Object.values(stats).reduce((sum, val) => sum + val, 0);
   if (!total) return showError('No analysis results available!');
 
-  const getPercent = (val = ((val / total) * 100).toFixed(1));
+  const getPercent = (val) => ((val / total) * 100).toFixed(1);
 
   const categories = {
     malicious: { color: 'malicious', label: 'Malicious' },
@@ -232,7 +258,7 @@ function showFormattedResult(data) {
     return acc;
   }, {});
 
-  const verdict = stats.malicious > 0 ? 'Malicious' : stats.suspicious > 0 ? 'Suspicious' : 'Clean';
+  const verdict = stats.malicious > 0 ? 'Malicious' : stats.suspicious > 0 ? 'Suspicious' : 'Safe';
   const verdictClass = stats.malicious > 0 ? 'malicious' : stats.suspicious > 0 ? 'suspicious' : 'safe';
 
   updateResult(`
@@ -249,13 +275,13 @@ function showFormattedResult(data) {
             .map(
               ([key, { color }]) => `
           <div class="progress-bar ${color}" style="width: ${percent[key]}%" title="${categories[key].label}: ${stats[key]} (${percent[key]}%)">
-            <span className="progress-label-overlay">${stats[key]}</span>
+            <span class="progress-label-overlay">${stats[key]}</span>
           </div>
           `
             )
             .join('')}
         </div>
-        <div className="progress-legend">
+        <div class="progress-legend">
           ${Object.entries(categories)
             .map(
               ([key, { color, label }]) => `
@@ -268,21 +294,21 @@ function showFormattedResult(data) {
             .join('')}
         </div>
       </div>
-      <div className="detection-details">
+      <div class="detection-details">
         ${Object.entries(categories)
           .map(
             ([key, { color, label }]) => `
               <div class="detail-item ${color}">
-                <span className="detail-label">${label}</span>
-                <span className="detail-value">${stats[key]}</span>
-                <span className="detail-percent">${percent[key]}</span>
+                <span class="detail-label">${label}</span>
+                <span class="detail-value">${stats[key]}</span>
+                <span class="detail-percent">${percent[key]}</span>
               </div>
             `
           )
           .join('')}
       </div>
     </div>
-    <button onclick="showFullReport(this.getAttribute('data-report'))" data-report="${JSON.stringify(data)}">
+    <button onclick="showFullReport()" type="button">
       View Full Report
     </button>
   `);
@@ -291,11 +317,33 @@ function showFormattedResult(data) {
 }
 
 function showFullReport(reportData) {
-  const data = typeof reportData === 'string' ? JSON.parse(reportData) : reportData;
-  const modal = getElement('fullReportModal');
-  const results = data.data?.attributes.results;
+  let data = window.latestReportData;
 
-  getElement('fullReportContent').innerHTML = `
+  if (!data) {
+    showError('No report data available!');
+    return;
+  }
+
+  if (typeof reportData === 'string') {
+    try {
+      data = JSON.parse(reportData);
+    } catch (e) {
+      console.error('Failed to parse report data:', e);
+      return;
+    }
+  }
+
+  const modal = getElement('fullReportModal');
+  const contentElem = getElement('fullReportContent');
+
+  if (!modal || !contentElem) {
+    showError('Report modal elements not found!');
+    return;
+  }
+
+  const results = data.data?.attributes?.results;
+
+  contentElem.innerHTML = `
     <h3>Full Report Details</h3>
     ${
       results
@@ -312,14 +360,14 @@ function showFullReport(reportData) {
                     <td>${engine}</td>
                     <td
                       class="${
-                        category === 'malicious'
-                          ? 'malicious'
-                          : category === 'suspicious'
-                          ? 'suspicious'
-                          : 'safe'
+                        category === "malicious"
+                          ? "malicious"
+                          : category === "suspicious"
+                          ? "suspicious"
+                          : "safe"
                       }">
                       ${category}
-                    </td>
+                    </tder>
                   </tr>
                 `
               )
@@ -345,3 +393,12 @@ window.addEventListener('load', () => {
   const modal = getElement('fullReportModal');
   window.addEventListener('click', (e) => e.target === modal && closeModal());
 });
+
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+  yearElement.dateTime = currentYear;
+  yearElement.textContent = currentYear;
+}
+
+updateYear();

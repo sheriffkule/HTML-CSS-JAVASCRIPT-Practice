@@ -24,19 +24,41 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     box-sizing: border-box;
-    overflow: hidden;
+    overflow: auto;
+    transition: .4s ease-in-out;
+}
+
+body.darkTheme {
+    --background: #212224;
+    --surface: #222222;
+    --text: #77a6f1;
+    --text-secondary: #97b0d3;
 }
 
 .container {
     background: var(--surface);
     padding: 1.5rem;
+    border: 1px solid var(--text-secondary);
     border-radius: var(--border-radius);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -2px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 540px;
     margin: 0 auto;
+    /* animation: enter 1s ease-in forwards; */
+}
+
+@keyframes enter {
+    from {
+        opacity: 0;
+        transform: rotateX(90deg) scale(0.1);
+    }
+    to {
+        opacity: 1;
+        transform: rotateX(0deg) scale(1);
+    }
 }
 
 header {
@@ -46,7 +68,11 @@ header {
 }
 
 h1 {
-    color: var(--text);
+    color: transparent;
+    background-image: linear-gradient(to right, var(--primary-color), var(--primary-hover));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     font-size: 1.75rem;
     font-weight: 700;
     margin-bottom: 1.5rem;
@@ -66,7 +92,7 @@ input[type='file'] {
     border-radius: var(--border-radius);
     background-color: var(--surface);
     color: var(--text);
-    font-size: 0.937rem;
+    font-size: 1rem;
     transition: all .25s;
     box-sizing: border-box;
     margin-bottom: 0.75rem;
@@ -74,6 +100,26 @@ input[type='file'] {
 
 input[type='text']::placeholder {
     transition: .3s ease-out;
+}
+
+input[type='file']::file-selector-button {
+    background-color: var(--primary-color);
+    padding: 6px 20px;
+    margin-right: 2rem;
+    border: none;
+    border-radius: var(--border-radius);
+    color: var(--surface);
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s, color 0.3s;
+}
+
+input[type='file']::file-selector-button:hover {
+    background-color: var(--primary-hover);
+    transform: scale(1.04);
+}
+
+input[type='file']::file-selector-button:active {
+    transform: scale(1);
 }
 
 input[type='text']:is(:focus, :focus-visible)::placeholder {
@@ -95,8 +141,9 @@ button {
     outline: none;
     border: none;
     border-radius: var(--border-radius);
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+    font-weight: 600;
     cursor: pointer;
     transition: all .3s;
 }
@@ -105,6 +152,7 @@ button:hover {
     background-color: var(--primary-hover);
     transform: translateY(-3px) scale(1.02);
     box-shadow: 0 5px 5px var(--primary-hover);
+    color: var(--text-secondary);
 }
 
 button:active {
@@ -279,7 +327,7 @@ button:active {
     padding: 1.5rem;
     background: var(--surface);
     border-radius: var(--border-radius);
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--text-secondary);
     display: none;
 }
 
@@ -295,9 +343,15 @@ button:active {
 #result .error {
     color: var(--danger);
     background: #fee2e2;
+    font-size: 1.25rem;
+    letter-spacing: 1px;
     padding: 1rem;
     border-radius: var(--border-radius);
     margin: 0;
+}
+
+.darkTheme #result .error {
+    background: #333;
 }
 
 .safe {
@@ -386,6 +440,7 @@ button:active {
 }
 
 #fullReportContent table {
+    border-collapse: collapse;
     margin-top: 1.5rem;
     width: 100%;
     border-radius: var(--border-radius);
@@ -408,9 +463,13 @@ button:active {
     background-color: #f8fafc;
 }
 
+.darkTheme #fullReportContent tr:hover {
+    background-color: #475569;
+}
+
 .scan-stats {
     background: var(--surface);
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--text-secondary);
     border-radius: var(--border-radius);
     padding: 1.5rem;
     margin: 1rem 0;
@@ -447,4 +506,216 @@ button:active {
 
 .scan-stats li span.safe::before {
     background-color: var(--success);
+}
+
+.progress-section {
+    margin: 2rem 0;
+}
+
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.progress-percent {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.progress-stacked {
+    height: 24px;
+    border-radius: var(--border-radius);
+    background-color: var(--text-secondary);
+    overflow: hidden;
+    display: flex;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--primary-hover);
+}
+
+.progress-stacked:not(.animate) .progress-bar {
+    width: 0 !important;
+}
+
+.progress-bar {
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: all 1s ease-in-out;
+    position: relative;
+    min-width: 2rem;
+}
+
+.progress-bar.malicious {
+    background: #dc2626;
+    background-image: linear-gradient(110deg, #ef4444 0%, #dc2626 50%, #b91c1c);
+    box-shadow: 0 1px 3px #dc2626;
+}
+
+.progress-bar.suspicious {
+    background: #f97316;
+    background-image: linear-gradient(110deg, #fb923c 0%, #f97316 50%, #ea580c);
+    box-shadow: 0 1px 3px #f97316;
+}
+
+.progress-bar.safe {
+    background: #22c55e;
+    background-image: linear-gradient(110deg, #4ade80 0%, #22c55e 50%, #16a34a);
+    box-shadow: 0 1px 3px #22c55e;
+}
+
+.progress-bar.undetected {
+    background: #64748b;
+    background-image: linear-gradient(110deg, #94a3b8 0%, #64748b 50%, #475569);
+    box-shadow: 0 1px 3px #64748b;
+}
+
+.progress-label-overlay {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    z-index: 1;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    font-weight: 700;
+}
+
+.progress-bar[style*="width: 1."] {
+    min-width: 2rem;
+}
+
+.progress-legend {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    font-size: .75rem;
+    color: var(--text-secondary);
+}
+
+.legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    margin-right: 0.5rem;
+}
+
+.legend-color.malicious {
+    background: #dc2626;
+}
+
+.legend-color.suspicious {
+    background: #f97316;
+}
+
+.legend-color.safe {
+    background: #22c55e;
+}
+
+.legend-color.undetected {
+    background: #64748b;
+}
+
+.detection-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.detail-item {
+    background-color: var(--background);
+    padding: 0.875rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--primary-hover);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.detail-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, currentColor, transparent);
+    opacity: 0.8;
+}
+
+.detail-item.malicious::before {
+    background: #dc2626;
+}
+
+.detail-item.suspicious::before {
+    background: #f97316;
+}
+
+.detail-item.safe::before {
+    background: #22c55e;
+}
+
+.detail-item :not(.malicious, .suspicious, .safe)::before {
+    background: #64748b;
+}
+
+.detail-label {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.detail-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.detail-percent {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.detail-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all .25s;
+}
+
+.footer__copy {
+  margin-top: 5rem;
+  color: var(--white-color);
+  text-align: center;
+  font-size: var(--small-font-size);
+  font-weight: var(--font-regular);
+  cursor: default;
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+    .container {
+        padding: 1.5rem;
+    }
+    .modal-content {
+        width: 95%;
+        margin: 2% auto;
+    }
 }
