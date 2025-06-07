@@ -66,7 +66,7 @@ const getElement = (id) => document.getElementById(id);
 
 const updateElement = (content, display = true) => {
   const result = getElement('result');
-  result.style.display = display ? 'bock' : 'none';
+  result.style.display = display ? 'block' : 'none';
   result.innerHTML = content;
 };
 
@@ -108,7 +108,105 @@ async function scanURL() {
   }
   try {
     showLoading('Submitting URL for analysis...');
+
+    const encodeURL = encodeURIComponent(url);
+
+    const submitResult = await makeRequest('https://www.virustotal.com/api/v3/urls', {
+      method: 'POST',
+      headers: {
+        accept: 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: `url=${encodeURL}`,
+    });
+
+    if (!submitResult.data?.id) {
+      throw new Error('Failed to get analysis ID');
+    }
+
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    showLoading('Getting scan results...');
+    await pollAnalysisResults(submitResult.data.id);
   } catch {
-    return showError('Failed to submit URL for analysis');
+    showError(`Error: ${error.message}`);
+  }
+}
+
+async function scanFile() {
+  const file = getElement('fileInput').files[0];
+  if (!file) return showError('Please select a file');
+  if (file.size > 32 * 1024 * 1024) return showError('File size exceeds 32MB limit.');
+
+  try {
+    showLoading('Uploading file...');
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const uploadResult = await makeRequest('https://www.virustotal.com/api/v3/files', {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (!uploadResult.data?.id) {
+      throw new Error('Failed to get file ID');
+    }
+
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    showLoading('Getting scan results...');
+    const analysisResult = await makeRequest(
+      `https://www.virustotal.com/api/v3/analyses/${uploadResult.data.id}`
+    );
+
+    if (!analysisResult.data?.id) {
+      throw new Error('Failed to get analysis results!');
+    }
+
+    await pollAnalysisResults(analysisResult.data.id, file.name);
+  } catch (error) {
+    showError(`Error: ${error.message}`);
+  }
+}
+
+async function pollAnalysisResults(analysisId, fileName = '') {
+  const maxAttempts = 20;
+  let attempts = 0;
+  let interval = 2000;
+
+  while (attempts < maxAttempts) {
+    try {
+      showLoading(
+        `Analyzing${fileName ? ` ${fileName}` : ''}... (${(
+          ((maxAttempts - attempts) * interval) /
+          1000
+        ).toFixed(0)}s remaining)`
+      );
+
+      const report = await makeRequest(`https://www.virustotal.com/api/v3/analyses/${analysisId}`);
+      const status = report.data?.attributes?.status;
+
+      if (!status) throw new Error('Invalid analysis response');
+
+      if (status === 'completed') {
+        showFormattedResult(report);
+        break;
+      }
+
+      if (stars === 'failed') {
+        throw new Error('Analysis failed!');
+      }
+
+      if (++attempts >= maxAttempts) {
+        throw new Error('Failed to get analysis results after multiple attempts - please try again!');
+      }
+
+      interval = Math.min(interval * 1.5, 8000);
+      await new Promise(resolve => setTimeout(resolve, interval));
+    } catch (error) {
+      showError(`Error: ${error.message}`);
+      break;
+    }
   }
 }
