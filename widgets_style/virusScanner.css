@@ -250,3 +250,201 @@ button:active {
     text-shadow: 0 2px 2px #555,
     0 0 5px #eee;
 }
+
+.loading {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 10px dotted var(--primary-color);
+    animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#result {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: var(--surface);
+    border-radius: var(--border-radius);
+    border: 1px solid #e2e8f0;
+    display: none;
+}
+
+#result h3 {
+    margin-block: 0 1rem;
+    color: var(--text);
+}
+
+#result button{
+    margin-top: 1rem;
+}
+
+#result .error {
+    color: var(--danger);
+    background: #fee2e2;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin: 0;
+}
+
+.safe {
+    color: var(--success);
+    font-weight: 600;
+}
+
+.malicious {
+    color: var(--danger);
+    font-weight: 600;
+}
+
+.suspicious {
+    color: var(--warning);
+    font-weight: 600;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0);
+    opacity: 0;
+    transition: background-color .3s, backdrop-filter 0.3s, opacity 0.3s;
+}
+
+.modal.show {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: var(--surface);
+    padding: 1.5rem;
+    margin: 5% auto;
+    width: 80%;
+    max-width: 800px;
+    max-height: 80vh;
+    border-radius: var(--border-radius);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    8px 10px -6px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.modal.show .modal-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.close {
+    position: absolute;
+    right: 1.5rem;
+    top: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color .25s;
+    width: auto;
+    background: none;
+    padding: 0;
+}
+
+.close:hover {
+    color: var(--danger);
+    background: none;
+    transform: none;
+}
+
+#fullReportModal .modal-content {
+    position: relative;
+    padding-top: 3rem;
+}
+
+#fullReportContent {
+    margin-top: 1rem;
+}
+
+#fullReportContent table {
+    margin-top: 1.5rem;
+    width: 100%;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+#fullReportContent th {
+    background-color: var(--primary-color);
+    color: #fff;
+    font-weight: 600;
+    padding: 1rem;
+}
+
+#fullReportContent td {
+    padding: 0.75rem;
+    border: 1px solid #e2e8f0;
+}
+
+#fullReportContent tr:hover {
+    background-color: #f8fafc;
+}
+
+.scan-stats {
+    background: var(--surface);
+    border: 1px solid #e2e8f0;
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin: 1rem 0;
+}
+
+.scan-stats ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0 0;
+}
+
+.scan-stats li {
+    padding: 0.5rem 0;
+    display: flex;
+    align-items: center;
+}
+
+.scan-stats li::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.scan-stats li span.malicious::before {
+    background-color: var(--danger);
+}
+
+.scan-stats li span.suspicious::before {
+    background-color: var(--warning);
+}
+
+.scan-stats li span.safe::before {
+    background-color: var(--success);
+}

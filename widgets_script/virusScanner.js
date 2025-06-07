@@ -64,7 +64,7 @@ const API_KEY = '4cd3b375fcf704667e2a77ebf21fd2709b008ad824fac586465b150289f4fd3
 
 const getElement = (id) => document.getElementById(id);
 
-const updateElement = (content, display = true) => {
+const updateResult = (content, display = true) => {
   const result = getElement('result');
   result.style.display = display ? 'block' : 'none';
   result.innerHTML = content;
@@ -72,13 +72,13 @@ const updateElement = (content, display = true) => {
 
 const showLoading = (message) =>
   updateResult(`
-    <div className="loading">
+    <div class="loading">
       <p>${message}</p>
-      <div className="spinner"></div>
+      <div class="spinner"></div>
     </div>
   `);
 
-const showError = (message) => updateResult(` <p className="error">${message}</p> `);
+const showError = (message) => updateResult(` <p class="error">${message}</p> `);
 
 async function makeRequest(url, options = {}) {
   const response = await fetch(url, {
@@ -128,7 +128,7 @@ async function scanURL() {
 
     showLoading('Getting scan results...');
     await pollAnalysisResults(submitResult.data.id);
-  } catch {
+  } catch (error) {
     showError(`Error: ${error.message}`);
   }
 }
@@ -290,23 +290,58 @@ function showFormattedResult(data) {
   setTimeout(() => getElement('result').querySelector('.progress-stacked').classList.add('animate'), 1000);
 }
 
-function showFullReport(reportData){
+function showFullReport(reportData) {
   const data = typeof reportData === 'string' ? JSON.parse(reportData) : reportData;
   const modal = getElement('fullReportModal');
   const results = data.data?.attributes.results;
 
-  getElement('fullReportContent').innerHTML = html`
+  getElement('fullReportContent').innerHTML = `
     <h3>Full Report Details</h3>
-    ${results ? html`
-      <table>
-        <tr>
-          <th>Engine</th>
-          <th>Result</th>
-        </tr>
-        ${Object.entries(results).map(([engine, {category}]) => `
-          
-        `)}
-      </table>
-    `}
-  `
+    ${
+      results
+        ? `
+          <table>
+            <tr>
+              <th>Engine</th>
+              <th>Result</th>
+            </tr>
+            ${Object.entries(results)
+              .map(
+                ([engine, { category }]) => `
+                  <tr>
+                    <td>${engine}</td>
+                    <td
+                      class="${
+                        category === 'malicious'
+                          ? 'malicious'
+                          : category === 'suspicious'
+                          ? 'suspicious'
+                          : 'safe'
+                      }">
+                      ${category}
+                    </td>
+                  </tr>
+                `
+              )
+              .join('')}
+          </table>
+        `
+        : '<p>No detailed results available!</p>'
+    }
+  `;
+
+  modal.style.display = 'block';
+  modal.offsetHeight;
+  modal.classList.add('show');
 }
+
+const closeModal = () => {
+  const modal = getElement('fullReportModal');
+  modal.classList.remove('show');
+  setTimeout(() => (modal.style.display = 'none'), 400);
+};
+
+window.addEventListener('load', () => {
+  const modal = getElement('fullReportModal');
+  window.addEventListener('click', (e) => e.target === modal && closeModal());
+});
