@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Image Detector</title>
+    <link rel="stylesheet" href="/widgets_style/aiImageDetector.css" />
+  </head>
+  <body>
+    <h1>AI Image Detector</h1>
+    <div class="wrapper">
+      <div class="upload-container">
+        <h3>Upload Your Image</h3>
+        <div class="buttons">
+          <input type="file" id="imageInput" accept="image/*" style="display: none" />
+          <button class="file-input-button" onclick="document.getElementById('imageInput').click()">
+            File
+          </button>
+          <button id="uploadButton">Analyze Image</button>
+        </div>
+        <img src="/images/clint.jpeg">
+      </div>
+
+      <div class="colors-container">
+        <p class="error">Nothing to show...</p>
+      </div>
+    </div>
+
+    <div class="tags-container">
+      <h3>Image Data</h3>
+      <p class="error">Nothing to show...</p>
+      <div class="results"></div>
+      <div class="buttons">
+        <button id="seeMoreButton" style="display: none;">See More</button>
+        <button id="exportTagsButton" style="display: none;">Export Tags</button>
+      </div>
+    </div>
+
+    <div id="uploadModal" class="modal">
+      <div class="modal-content">
+        <h3>Uploading Image...</h3>
+        <div class="progress-bar">
+          <div id="uploadProgress" class="progress"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/widgets_script/aiImageDetector.js"></script>
+  </body>
+</html>

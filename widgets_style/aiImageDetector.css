@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    font-family: "Lato", sans-serif;
+}
+
+body {
+    padding: 20px 30px;
+    background: linear-gradient(140deg, #07090e, #35446b);
+    color: #eee;
+    min-height: 100vh;
+}
+
+body > h1 {
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 30px;
+    color: transparent;
+    background: linear-gradient(140deg, #0048ff, #616670);
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: 0 6px 10px #35446b;
+    position: relative;
+    display: inline-block;
+}
+
+body h1::before {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(140deg, #0048ff, #35446b);
+    animation: titleUnderline 5s ease-in-out infinite alternate;
+}
+
+@keyframes titleUnderline {
+    0%, 100% {
+        width: 0%;
+    }
+    50% {
+        box-shadow: 0 0 10px #0048ff;
+        width: 100%;
+    }
+}
+
+.wrapper {
+    display: flex;
+    gap: 20px;
+}
+
+.upload-container,
+.colors-container {
+    background-color: #18181b;
+    padding: 30px;
+    border-radius: 10px;
+    width: 35%;
+}
+
+.upload-container h3 {
+    margin-bottom: 24px;
+}
+
+button {
+    padding: 8px 18px;
+    color: #fff;
+    background-color: #27292e;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+button:hover {
+    background-color: #d5224e;
+    transform: translateY(-3px) scale(1.03);
+}
+
+.upload-container .buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.upload-container img {
+    width: 100%;
+    height: 440px;
+    object-fit: cover;
+    display: block;
+    margin-top: 30px;
+    border-radius: 10px;
+}
+
+.colors-container {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tags-container {
+    margin-top: 20px;
+    background-color: #18181b;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.tags-container h3 {
+    margin-bottom: 30px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    background-color: #333;
+    margin: 20% auto;
+    padding: 20px;
+    max-width: 400px;
+    text-align: center;
+    border-radius: 10px;
+}
+
