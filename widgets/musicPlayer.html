@@ -20,18 +20,29 @@
         <img src="/images/darkhex.jpg" class="profile-img" id=" profile-img" alt="profile image" />
       </div>
 
+      <div class="visualizer">
+        <div class="bar" style="height: 50px"></div>
+        <div class="bar" style="height: 100px"></div>
+        <div class="bar" style="height: 150px"></div>
+        <div class="bar" style="height: 200px"></div>
+        <div class="bar" style="height: 150px"></div>
+        <div class="bar" style="height: 100px"></div>
+        <div class="bar" style="height: 50px"></div>
+      </div>
+
       <div class="progress-container">
         <div class="progress-bar" id="progress-bar">
           <div class="progress" id="progress"></div>
         </div>
         <div class="time-display">
-          <span class="current-time">0:00</span>
-          <span class="duration">0:00</span>
+          <span id="current-time">0:00</span>
+          <span id="duration">0:00</span>
         </div>
       </div>
 
       <button class="controls" id="play-pause">Play</button>
     </div>
+    <h4> &copy; <time id="year"></time> Made by <em><abbr title="Frontend Master">Sheriffkule</abbr></em> from XXIII Century</h4>
 
     <script src="/widgets_script/musicPlayer.js"></script>
   </body>
