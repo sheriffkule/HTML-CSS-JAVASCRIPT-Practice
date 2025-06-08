@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music Player App</title>
+    <link rel="stylesheet" href="/widgets_style/musicPlayer.css" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <h2>Playlist</h2>
+      <ul class="song-list"></ul>
+      <button class="upload-button" id="upload-button">Upload Music</button>
+      <input type="file" id="file-input" accept="audio/*" style="display: none" />
+    </div>
+
+    <div class="main-content">
+      <h1>SheriffKule</h1>
+      <div class="profile-image">
+        <img src="/images/darkhex.jpg" class="profile-img" id=" profile-img" alt="profile image" />
+      </div>
+
+      <div class="progress-container">
+        <div class="progress-bar" id="progress-bar">
+          <div class="progress" id="progress"></div>
+        </div>
+        <div class="time-display">
+          <span class="current-time">0:00</span>
+          <span class="duration">0:00</span>
+        </div>
+      </div>
+
+      <button class="controls" id="play-pause">Play</button>
+    </div>
+
+    <script src="/widgets_script/musicPlayer.js"></script>
+  </body>
+</html>
