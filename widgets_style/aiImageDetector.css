@@ -41,11 +41,11 @@ body h1::before {
 
 @keyframes titleUnderline {
     0%, 100% {
-        width: 0%;
+        transform: scaleX(0);
     }
     50% {
         box-shadow: 0 0 10px #0048ff;
-        width: 100%;
+        transform: scaleX(1);
     }
 }
 
