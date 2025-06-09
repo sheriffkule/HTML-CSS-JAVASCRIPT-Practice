@@ -1,20 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  interpolate-size: allow-keywords;
 }
 
 body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background: radial-gradient(#444, #111);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  height: 100vh;
+  background: radial-gradient(#0d447a, #111);
+}
+
+header {
+  display: flex;
+  justify-content: center;
+}
+
+.reflection {
+  display: inline-block;
+  color: skyblue;
+  font-family: 'Monoton', cursive;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  position: relative;
+  word-spacing: 0.75rem;
+  text-underline-offset: 4px;
+  text-decoration: underline 1px;
+  animation: glow 10s infinite alternate;
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    text-shadow: 0 0 0 skyblue;
+  }
+  50% {
+    text-shadow: 0 0 1rem skyblue;
+  }
+}
+
+.reflection::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 67%;
+  left: 0;
+  background: linear-gradient(to bottom, #000, skyblue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transform: scaleY(-1.2);
+}
+
+.info {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  transform: translate(30px, 10px);
+}
+
+.info > span {
+  color: #aaa;
+  font-size: 1.5rem;
+  font-weight: bold;
+  width: 30px;
+  height: 30px;
+  border: 2px solid #aaa;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: color 0.25s, border-color 0.25s, scale 0.25s;
+}
+
+.info span:hover {
+  color: #ddd;
+  border-color: #ddd;
+  scale: 1.1;
+}
+
+.instructions {
+  position: absolute;
+  right: 10px;
+  top: 30px;
+  padding: 10px;
+  border-radius: 1rem;
+  color: #eee;
+  border: none;
+  background: radial-gradient(#093158, #111);
+  text-wrap: pretty;
+  width: 0;
+  height: 0;
+  transition: display 0.3s, height 0.3s, width 0.3s;
+  overflow: clip;
+}
+
+.instructions p {
+  margin-block: 10px;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.info span:hover ~ .instructions {
+  width: 300px;
+  height: max-content;
+  border: 5px solid #093158;
+}
+
+.info span:hover ~ .instructions p {
+    visibility: visible;
+    opacity: 1;
 }
 
 #board {
-    background-color: #000;
-    border-top: 5px solid skyblue;
-    border-bottom: 5px solid skyblue;
-    color: orangered;
+  background-color: #000;
+  border-top: 5px solid skyblue;
+  border-bottom: 5px solid skyblue;
+  color: orangered;
+}
+
+h4 {
+  font-size: 14px;
+  font-weight: 300;
+  color: #888;
+  cursor: default;
+  align-self: center;
+  margin-block: 40px 10px;
+  text-wrap: pretty;
+  z-index: 2;
+}
+
+h4 em {
+  color: skyblue;
 }
