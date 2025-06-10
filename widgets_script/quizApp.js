@@ -589,3 +589,99 @@ const questions = [
   },
 ];
 
+const answerOptions = document.querySelector('.answer-options');
+const nextQuestionBtn = document.querySelector('.next-question-btn');
+const questionStatus = document.querySelector('.question-status');
+
+let quizCategory = 'programming';
+let numberOfQuestions = 10;
+let currentQuestion = null;
+const questionIndexHistory = [];
+
+const getRandomQuestion = () => {
+  const categoryQuestions =
+    questions.find((cat) => cat.category.toLowerCase() === quizCategory.toLowerCase()).questions || [];
+
+  const availableQuestions = categoryQuestions.filter((_, index) => !questionIndexHistory.includes(index));
+  const randomQuestion = availableQuestions[Math.floor(Math.random() * availableQuestions.length)];
+
+  questionIndexHistory.push(categoryQuestions.indexOf(randomQuestion));
+  return randomQuestion;
+};
+
+const highlightCorrectAnswer = () => {
+  if (
+    currentQuestion &&
+    Array.isArray(currentQuestion.options) &&
+    typeof currentQuestion.correctAnswer === 'number'
+  ) {
+    const optionsList = answerOptions.querySelectorAll('.answer-option');
+    const correctOption = optionsList[currentQuestion.correctAnswer];
+    if (correctOption) {
+      correctOption.classList.add('correct');
+      const iconHTML = `<span class="material-symbols-rounded">check_circle</span>`;
+      correctOption.insertAdjacentHTML('beforeend', iconHTML);
+    }
+  }
+};
+
+const handleAnswer = (option, answerIndex) => {
+  const isCorrect = currentQuestion.correctAnswer === answerIndex;
+  option.classList.add(isCorrect ? 'correct' : 'incorrect');
+  !isCorrect ? highlightCorrectAnswer() : '';
+
+  const iconHTML = `<span class="material-symbols-rounded"
+    >${isCorrect ? 'check_circle' : 'cancel'}</span
+  >`;
+  option.insertAdjacentHTML('beforeend', iconHTML);
+
+  answerOptions.querySelectorAll('.answer-option').forEach((option) => (option.style.pointerEvents = 'none'));
+
+  setTimeout(() => {
+    nextQuestionBtn.style.transition = '0.3s ease-In';
+    nextQuestionBtn.style.opacity = 1;
+    nextQuestionBtn.style.visibility = 'visible';
+  }, 300);
+};
+
+const renderQuestion = () => {
+  currentQuestion = getRandomQuestion();
+  if (!currentQuestion) return;
+  console.log(currentQuestion);
+
+  answerOptions.innerHTML = '';
+  nextQuestionBtn.style.visibility = 'hidden';
+  nextQuestionBtn.style.opacity = 0;
+  document.querySelector('.question-text').textContent = currentQuestion.question;
+  questionStatus.innerHTML = html`<b>${questionIndexHistory}</b> of <b>${numberOfQuestions}</b> Questions`;
+
+  currentQuestion.options.forEach((option, index) => {
+    const li = document.createElement('li');
+    li.classList.add('answer-option');
+    li.textContent = option;
+    answerOptions.appendChild(li);
+    li.addEventListener('click', () => handleAnswer(li, index));
+  });
+};
+
+renderQuestion();
+
+nextQuestionBtn.addEventListener('click', renderQuestion);
+
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+
+  if (yearElement) {
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.dateTime = currentYear;
+    yearElement.textContent = currentYear.toString();
+  }
+}
+
+window.addEventListener('load', updateYear);
