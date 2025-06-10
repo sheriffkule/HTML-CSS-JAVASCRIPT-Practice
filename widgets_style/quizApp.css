@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Montserrat:wght@100..900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  min-height: 100vh;
+  background: radial-gradient(rgb(16, 81, 145), #111);
+}
+
+.config-container {
+    /* display: none; */
+  min-width: 420px;
+  padding: 50px 30px;
+  text-align: center;
+  background: #bbb;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1), inset 0 0 20px 10px rgba(0, 0, 0, 0.4);
+}
+
+.config-container .config-title {
+  font-size: 1.75rem;
+  font-family: 'Bungee', sans-serif;
+  letter-spacing: 2px;
+  word-spacing: 4px;
+  color: transparent;
+  background: linear-gradient(#1978d8, blue);
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: glow 5s linear infinite;
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.config-container .config-option {
+  margin-top: 25px;
+}
+
+.config-option .option-title {
+  font-size: 1.25rem;
+  margin-bottom: 20px;
+}
+
+.config-option .category-options {
+    display: grid;
+    gap: 15px;
+    grid-template-columns: 1fr 1fr;
+}
+
+.config-option .question-options {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 12px;
+    padding: 0 30px;
+}
+
+.config-option button {
+  padding: 12px 24px;
+  font-size: 0.938rem;
+  font-weight: 500;
+  background: radial-gradient(#1978d8, blue);
+  border-radius: 8px;
+  outline: 1px solid lightblue;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.25s ease-out;
+}
+
+.config-option button.active {
+    background: blue;
+    outline-color: #ff00dd;
+}
+
+.config-option .category-options button:hover {
+    box-shadow: inset 0 -40px  0 0 rgba(0, 0, 0, 0.6);
+}
+
+.config-option button:hover {
+    transform: scale(1.03) translateY(-3px);
+    box-shadow: 0 10px 5px -5px rgba(0, 0, 0, 0.3);
+    filter: brightness(1.2) saturate(120%);
+    outline: none;
+}
+
+.config-option button:active {
+    transform: scale(1);
+}
+
+.question-options button {
+    flex: 1 1 10%;
+}
+
+.config-container .start-quiz-btn {
+    margin-top: 30px;
+    padding: 12px 30px;
+    font-size: 1rem;
+    border-radius: 6px;
+    background: radial-gradient(royalblue, navy);
+}
+
