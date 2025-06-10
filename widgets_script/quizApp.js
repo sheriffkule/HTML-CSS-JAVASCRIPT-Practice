@@ -589,18 +589,70 @@ const questions = [
   },
 ];
 
+const quizContainer = document.querySelector('.quiz-container');
+const configContainer = document.querySelector('.config-container');
 const answerOptions = document.querySelector('.answer-options');
 const nextQuestionBtn = document.querySelector('.next-question-btn');
 const questionStatus = document.querySelector('.question-status');
+const timerDisplay = document.querySelector('.time-duration');
+const resultContainer = document.querySelector('.result-container');
 
+const QUIZ_TIME_LIMIT = 30;
+let currentTIme = QUIZ_TIME_LIMIT;
 let quizCategory = 'programming';
-let numberOfQuestions = 10;
+let numberOfQuestions = 5;
 let currentQuestion = null;
+let timer = null;
 const questionIndexHistory = [];
+let correctAnswerCount = 0;
+
+const showQuizResult = () => {
+  quizContainer.style.display = 'none';
+  resultContainer.style.display = 'block';
+
+  const resultText = `You answered <b>${correctAnswerCount}</b> out of
+    <b>${numberOfQuestions}</b> questions correctly, Great effort!`;
+  document.querySelector('.result-message').innerHTML = resultText;
+};
+
+const resetTimer = () => {
+  clearInterval(timer);
+  currentTIme = QUIZ_TIME_LIMIT;
+  timerDisplay.textContent = `${currentTIme}s`;
+};
+
+const startTimer = () => {
+  timer = setInterval(() => {
+    currentTIme--;
+    timerDisplay.textContent = `${currentTIme}s`;
+
+    if (currentTIme <= 0) {
+      clearInterval(timer);
+      highlightCorrectAnswer();
+      setTimeout(() => {
+        nextQuestionBtn.style.transition = '0.3s ease-In';
+        nextQuestionBtn.style.opacity = 1;
+        nextQuestionBtn.style.visibility = 'visible';
+      }, 300);
+      quizContainer.querySelector('.quiz-timer').style.background = '#c31402';
+      quizContainer.querySelector('.quiz-timer').style.boxShadow = '0 0 10px #c31402';
+
+      answerOptions
+        .querySelectorAll('.answer-option')
+        .forEach((option) => (option.style.pointerEvents = 'none'));
+    }
+  }, 1000);
+};
 
 const getRandomQuestion = () => {
   const categoryQuestions =
     questions.find((cat) => cat.category.toLowerCase() === quizCategory.toLowerCase()).questions || [];
+
+  if (questionIndexHistory.length >= Math.min(categoryQuestions.length, numberOfQuestions)) {
+    // clearInterval(timer);
+    // nextQuestionBtn.style.visibility = 'hidden';
+    return showQuizResult();
+  }
 
   const availableQuestions = categoryQuestions.filter((_, index) => !questionIndexHistory.includes(index));
   const randomQuestion = availableQuestions[Math.floor(Math.random() * availableQuestions.length)];
@@ -610,25 +662,18 @@ const getRandomQuestion = () => {
 };
 
 const highlightCorrectAnswer = () => {
-  if (
-    currentQuestion &&
-    Array.isArray(currentQuestion.options) &&
-    typeof currentQuestion.correctAnswer === 'number'
-  ) {
-    const optionsList = answerOptions.querySelectorAll('.answer-option');
-    const correctOption = optionsList[currentQuestion.correctAnswer];
-    if (correctOption) {
-      correctOption.classList.add('correct');
-      const iconHTML = `<span class="material-symbols-rounded">check_circle</span>`;
-      correctOption.insertAdjacentHTML('beforeend', iconHTML);
-    }
-  }
+  const correctOption = answerOptions.querySelectorAll('.answer-option')[currentQuestion.correctAnswer];
+  correctOption.classList.add('correct');
+  const iconHTML = `<span class="material-symbols-rounded">check_circle</span>`;
+  correctOption.insertAdjacentHTML('beforeend', iconHTML);
 };
 
 const handleAnswer = (option, answerIndex) => {
+  clearInterval(timer);
+
   const isCorrect = currentQuestion.correctAnswer === answerIndex;
   option.classList.add(isCorrect ? 'correct' : 'incorrect');
-  !isCorrect ? highlightCorrectAnswer() : '';
+  !isCorrect ? highlightCorrectAnswer() : correctAnswerCount++;
 
   const iconHTML = `<span class="material-symbols-rounded"
     >${isCorrect ? 'check_circle' : 'cancel'}</span
@@ -647,13 +692,16 @@ const handleAnswer = (option, answerIndex) => {
 const renderQuestion = () => {
   currentQuestion = getRandomQuestion();
   if (!currentQuestion) return;
-  console.log(currentQuestion);
+
+  resetTimer();
+  startTimer();
 
   answerOptions.innerHTML = '';
   nextQuestionBtn.style.visibility = 'hidden';
+  quizContainer.querySelector('.quiz-timer').style.background = '#32313c';
   nextQuestionBtn.style.opacity = 0;
   document.querySelector('.question-text').textContent = currentQuestion.question;
-  questionStatus.innerHTML = html`<b>${questionIndexHistory}</b> of <b>${numberOfQuestions}</b> Questions`;
+  questionStatus.innerHTML = `<b>${questionIndexHistory.length}</b> of <b>${numberOfQuestions}</b> Questions`;
 
   currentQuestion.options.forEach((option, index) => {
     const li = document.createElement('li');
@@ -664,9 +712,108 @@ const renderQuestion = () => {
   });
 };
 
-renderQuestion();
+const startQuiz = () => {
+  configContainer.style.display = 'none';
+  quizContainer.style.display = 'block';
+
+  quizCategory = configContainer.querySelector('.category-option.active').textContent;
+  numberOfQuestions = parseInt(configContainer.querySelector('.question-option.active').textContent);
+
+  renderQuestion();
+};
+
+document.querySelectorAll('.category-option, .question-option').forEach((option) => {
+  option.addEventListener('click', () => {
+    option.parentNode.querySelector('.active').classList.remove('active');
+    option.classList.add('active');
+  });
+});
+
+const resetQuiz = () => {
+  resetTimer();
+  correctAnswerCount = 0;
+  questionIndexHistory.length = 0;
+  configContainer.style.display = 'block';
+  resultContainer.style.display = 'none';
+};
 
 nextQuestionBtn.addEventListener('click', renderQuestion);
+document.querySelector('.try-again-btn').addEventListener('click', resetQuiz);
+document.querySelector('.start-quiz-btn').addEventListener('click', startQuiz);
+
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach((btn) => {
+  btn.addEventListener('mousemove', function (e) {
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const numParticles = 10;
+
+    for (let i = 0; i < numParticles; i++) {
+      createParticle(btn, x, y);
+    }
+  });
+});
+
+function createParticle(button, x, y) {
+  const particle = document.createElement('div');
+  particle.classList.add('particle');
+
+  particle.style.left = x + 'px';
+  particle.style.top = y + 'px';
+
+  const angle = Math.random() * Math.PI * 2;
+  const distance = Math.random() * 80 + 20;
+  const tx = Math.cos(angle) * distance;
+  const ty = Math.sin(angle) * distance;
+
+  particle.style.setProperty('--tx', tx + 'px');
+  particle.style.setProperty('--ty', ty + 'px');
+
+  button.appendChild(particle);
+
+  setTimeout(() => {
+    particle.remove();
+  }, 500);
+}
+
+function randomText() {
+  let text = 'ABCDEFGHIJKLMNOPRQSTUWXYZ`~!@#$%^&*()-_=+/?.>,<';
+
+  letter = text[Math.floor(Math.random() * text.length)];
+
+  return letter;
+}
+
+function rain() {
+  const fontStyles = ['normal', 'bold', 'italic', 'oblique'];
+  let e = document.createElement('div');
+
+  let left = Math.floor(Math.random() * 110);
+  let size = Math.random() * 1.8;
+  let duration = Math.random() * 115;
+
+  e.classList.add('text');
+  e.innerText = randomText();
+  document.body.appendChild(e);
+
+  e.style.left = left + '%';
+  e.style.fontSize = 0.3 + size + 'em';
+  e.style.animationDuration = 30 + duration + 's';
+  e.style.color = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+  e.style.fontStyle = fontStyles[Math.floor(Math.random() * fontStyles.length)];
+  e.style.transform = `translateX(${Math.floor(Math.random() * 100)}px)`;
+
+  setTimeout(function () {
+    document.body.removeChild(e);
+  }, 30000);
+}
+
+setInterval(function () {
+  rain();
+}, 300);
 
 function updateYear() {
   const currentYear = new Date().getFullYear();

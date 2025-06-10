@@ -13,7 +13,14 @@ body {
   align-items: center;
   min-height: 100vh;
   padding: 8px;
-  background: radial-gradient(rgb(16, 81, 145), #111);
+  overflow: hidden;
+  background: radial-gradient(rgb(22, 117, 211), #111);
+}
+
+button {
+  position: relative;
+  overflow: hidden;
+  z-index: 11;
 }
 
 :where(.config-container, .quiz-container, .result-container) {
@@ -21,13 +28,65 @@ body {
   background: #bbb;
   border-radius: 8px;
   box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1), inset 0 0 20px 10px rgba(0, 0, 0, 0.4);
+  background: hsla(0, 0%, 73%, 0.6);
+  animation: show 0.5s linear;
 }
 
 .config-container {
+  display: block;
   min-width: 420px;
   padding: 50px 30px;
   text-align: center;
-  background: #bbb;
+  position: relative;
+}
+
+@keyframes show {
+  from {
+    transform: scale(0) rotateY(360deg);
+  }
+  to {
+    transform: scale(1) rotateY(0);
+  }
+}
+
+.config-container::after,
+.quiz-container::after,
+.result-container::after {
+  content: '';
+  position: absolute;
+  top: -70px;
+  left: -70px;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(rgb(16, 81, 145), #111);
+  border-radius: 50%;
+  z-index: -1;
+  animation: moveBall 15s infinite linear alternate;
+}
+
+@keyframes moveBall {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(550px);
+  }
+}
+
+.config-container::before,
+.quiz-container::before,
+.result-container::before {
+  content: '';
+  position: absolute;
+  top: -70px;
+  right: -60px;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(rgb(16, 81, 145), #111);
+  border-radius: 50%;
+  z-index: -1;
+  animation: moveBall 15s infinite linear alternate;
+  animation-delay: 7s;
 }
 
 .config-container .config-title,
@@ -60,7 +119,10 @@ body {
 }
 
 .config-option .option-title {
-  font-size: 1.25rem;
+  position: relative;
+  color: #111;
+  font-size: 1.5rem;
+  font-weight: 600;
   margin-bottom: 20px;
 }
 
@@ -141,8 +203,8 @@ body {
 }
 
 .quiz-container {
-  display: block;
   width: 500px;
+  position: relative;
 }
 
 .quiz-container .quiz-header {
@@ -163,6 +225,7 @@ body {
   font-weight: 600;
   border-radius: 8px;
   padding: 7px 9px;
+  transition: background 0.3s, box-shadow 0.3s;
 }
 
 .quiz-header .quiz-timer span {
@@ -248,6 +311,7 @@ body {
 }
 
 .result-container {
+  position: relative;
   text-align: center;
   padding: 40px;
   width: 410px;
@@ -286,4 +350,79 @@ h4 {
 
 h4 em {
   color: skyblue;
+}
+
+.particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.5;
+  z-index: -1;
+  transform: translate(0, 0);
+  animation: animate 1s ease-in-out forwards;
+}
+
+@keyframes animate {
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx), var(--ty));
+  }
+}
+
+.text {
+  position: absolute;
+  top: -10px;
+  width: 100%;
+  height: 100%;
+  line-height: 45px;
+  text-transform: uppercase;
+  text-shadow: 0 0 5px #149414;
+  transform-origin: bottom;
+  animation: move 25s linear forwards;
+  font-size: 40px;
+  z-index: -1;
+}
+
+@keyframes move {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+
+  70% {
+    transform: translateY(120%) scale(1);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media screen and (max-width: 625px) {
+  .config-container,
+  .quiz-container {
+    padding: 20px;
+  }
+  .quiz-content .answer-option {
+    padding: 12px 10px 12px 14px;
+  }
+  .config-container .question-options {
+    padding: 0 15px;
+  }
+  .quiz-container .quiz-header,
+  .quiz-container .quiz-footer {
+    padding: 12px 20px;
+  }
+  .quiz-header .quiz-title,
+  .quiz-content .question-text {
+    font-size: 1.25rem;
+  }
+  .result-container {
+    padding: 40px 30px;
+  }
+  .result-container .result-title {
+    font-size: 1.4rem;
+  }
 }

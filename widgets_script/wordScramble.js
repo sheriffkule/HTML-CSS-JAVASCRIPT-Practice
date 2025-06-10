@@ -213,6 +213,7 @@ const refreshBtn = document.querySelector('.refresh-word');
 const checkBtn = document.querySelector('.check-word');
 
 let correctWord;
+let timer = 0;
 
 const initTImer = (maxTime) => {
   timer = setInterval(() => {
@@ -228,6 +229,7 @@ const initTImer = (maxTime) => {
 };
 
 const initGame = () => {
+  clearInterval(timer);
   initTImer(30);
 
   let randomObj = words[Math.floor(Math.random() * words.length)];
