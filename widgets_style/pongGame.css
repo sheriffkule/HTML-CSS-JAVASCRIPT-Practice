@@ -99,7 +99,8 @@ header {
   text-wrap: pretty;
   width: 0;
   height: 0;
-  transition: display 0.3s, height 0.3s, width 0.3s;
+  visibility: hidden;
+  transition: visibility 0.3s, height 0.3s, width 0.3s;
   overflow: clip;
 }
 
@@ -111,6 +112,7 @@ header {
 
 .info span:hover ~ .instructions {
   width: 300px;
+  visibility: visible;
   height: max-content;
   border: 5px solid #093158;
 }
