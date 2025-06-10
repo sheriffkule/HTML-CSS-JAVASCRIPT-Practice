@@ -169,8 +169,121 @@ let words = [
   },
 ];
 
+function randomText() {
+  let text = 'ABCDEFGHIJKLMNOPRQSTUWXYZ';
+
+  letter = text[Math.floor(Math.random() * text.length)];
+
+  return letter;
+}
+
+function rain() {
+  const fontStyles = ['normal', 'bold', 'italic', 'oblique'];
+  let e = document.createElement('div');
+
+  let left = Math.floor(Math.random() * 110);
+  let size = Math.random() * 1.8;
+  let duration = Math.random() * 115;
+
+  e.classList.add('text');
+  e.innerText = randomText();
+  document.body.appendChild(e);
+
+  e.style.left = left + '%';
+  e.style.fontSize = 0.3 + size + 'em';
+  e.style.animationDuration = 30 + duration + 's';
+  e.style.color = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+  e.style.fontStyle = fontStyles[Math.floor(Math.random() * fontStyles.length)];
+  e.style.transform = `translateX(${Math.floor(Math.random() * 100)}px)`;
+
+  setTimeout(function () {
+    document.body.removeChild(e);
+  }, 30000);
+}
+
+setInterval(function () {
+  rain();
+}, 300);
+
+const wordText = document.querySelector('.word');
+const hintText = document.querySelector('.hint span');
+const timeText = document.querySelector('.time b');
+const inputField = document.querySelector('input');
+const refreshBtn = document.querySelector('.refresh-word');
+const checkBtn = document.querySelector('.check-word');
+
+let correctWord;
+
+const initTImer = (maxTime) => {
+  timer = setInterval(() => {
+    if (maxTime > 0) {
+      maxTime--;
+      return (timeText.innerText = maxTime);
+    }
+
+    clearInterval(timer);
+    alert(`Time off! The word was ${correctWord.toUpperCase()}`);
+    initGame();
+  }, 1000);
+};
+
 const initGame = () => {
-  let randomObj = words[Math.floor(Math.random()) * words.length];
+  initTImer(30);
+
+  let randomObj = words[Math.floor(Math.random() * words.length)];
+  let wordArray = randomObj.word.split('');
+
+  for (let i = wordArray.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [wordArray[i], wordArray[j]] = [wordArray[j], wordArray[i]];
+  }
+
+  wordText.innerText = wordArray.join('');
+  hintText.innerText = randomObj?.hint;
+  correctWord = randomObj.word.toLowerCase();
+  inputField.value = '';
+  inputField.setAttribute('maxlength', correctWord.length);
 };
 
 initGame();
+
+const checkWord = () => {
+  let userWord = inputField.value.toLocaleLowerCase();
+
+  if (!userWord) return alert('Please enter a word.');
+
+  if (userWord !== correctWord) {
+    alert(`Oops!, ${userWord.toUpperCase()} is not a correct word.`);
+  } else {
+    alert(`Yaaay!, ${userWord.toUpperCase()} is a correct word.`);
+  }
+
+  initGame();
+};
+
+inputField.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    checkWord();
+  }
+});
+
+refreshBtn.addEventListener('click', initGame);
+checkBtn.addEventListener('click', checkWord);
+
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+
+  if (yearElement) {
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.dateTime = currentYear;
+    yearElement.textContent = currentYear.toString();
+  }
+}
+
+window.addEventListener('load', updateYear);

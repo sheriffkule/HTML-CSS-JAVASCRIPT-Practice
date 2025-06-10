@@ -1,119 +1,190 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+    'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: radial-gradient(#4560ca, #0a1b35);
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: radial-gradient(#4560ca, #0a1b35);
 }
 
 .container {
-    width: 450px;
-    border-radius: 8px;
-    background: #ccc;
-    box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.25);
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 450px;
+  border-radius: 8px;
+  background: rgba(204, 204, 204, 0.4);
+  backdrop-filter: blur(4px);
+  box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+.container::before,
+.container::after {
+    content: '';
+    position: absolute;
+    top: -60px;
+    left: -60px;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    backdrop-filter: blur(10px);
+    background-image: linear-gradient(to bottom right, #4560ca28, #0a1b358f);
+    z-index: -1;
+}
+
+.container::after {
+    top: 85%;
+    left: 87%;
 }
 
 .container h2 {
-    font-size: 25px;
-    padding: 18px 26px;
-    border-bottom: 1px solid #999;
-    color: transparent;
-    text-align: center;
-    background: radial-gradient(#4560ca, #0a1b35);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: 0 6px 12px rgba(69, 96, 202, 0.4);
+  font-size: 25px;
+  padding: 18px 26px;
+  border-bottom: 1px solid #999;
+  color: transparent;
+  text-align: center;
+  background: radial-gradient(#4560ca, #0a1b35);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 6px 12px rgba(69, 96, 202, 0.4);
 }
 
 .content {
-    margin: 25px 20px;
+  margin: 25px 20px;
 }
 
 .word {
-    font-size: 33px;
-    font-weight: 500;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 20px;
-    margin-right: -20px;
+  font-size: 33px;
+  font-weight: 500;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 20px;
+  margin-right: -20px;
 }
 
 .content .details {
-    margin: 25px 0 20px;
+  margin: 25px 0 20px;
 }
 
 .details p {
-    font-size: 18px;
-    margin-bottom: 10px;
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 
 .details p b {
-    font-weight: 500;
+  font-weight: 500;
 }
 
 .content input {
-    width: 100%;
-    height: 60px;
-    outline: none;
-    padding: 0 16px;
-    font-size: 18px;
-    border-radius: 10px;
-    border: 1px solid #999;
+  width: 100%;
+  height: 60px;
+  outline: none;
+  padding: 0 16px;
+  font-size: 18px;
+  border-radius: 10px;
+  border: 1px solid #999;
 }
 
 .content input:where(:focus, :focus-within) {
-    border: 2px solid #95c0c0;
+  border: 2px solid #95c0c0;
 }
 
 .content input::placeholder {
-    transition: transform .3s ease-in-out;
-    transform: left bottom;
+  transition: transform 0.3s ease-in-out;
+  transform: left bottom;
 }
 
 .content input:where(:focus, :focus-within)::placeholder {
-    transform: translateX(400px) rotate(-15deg) translateY(-30px);
+  transform: translateX(400px) rotate(-15deg) translateY(-30px);
 }
 
 .content .buttons {
-    display: flex;
-    margin-top: 20px;
-    justify-content: space-between;
+  display: flex;
+  margin-top: 20px;
+  justify-content: space-between;
 }
 
 .buttons button {
-    border: none;
-    outline: none;
-    color: #fff;
-    cursor: pointer;
-    padding: 15px 0;
-    font-size: 17px;
-    border-radius: 8px;
-    width: calc(100% / 2 - 8px);
-    transition: .25s;
+  border: none;
+  outline: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 15px 0;
+  font-size: 17px;
+  border-radius: 8px;
+  width: calc(100% / 2 - 8px);
+  transition: 0.25s;
 }
 
 .buttons button:hover {
-    transform: scale(1.03) translateY(-2px);
-    border-radius: 20px;
-    box-shadow: inset 0 0 10px 2px #535353;
+  transform: scale(1.03) translateY(-2px);
+  border-radius: 20px;
+  box-shadow: inset 0 0 10px 2px #535353;
+  filter: saturate(150%);
 }
 
 .buttons button:active {
-    transform: scale(1);
+  transform: scale(1);
 }
 
 .buttons .refresh-word {
-    background: #6c757d;
+  background: #4560ca;
 }
 
 .buttons .check-word {
-    background: #5372f0;
+  background: #0a1b35;
+}
+
+.text {
+  position: absolute;
+  top: -10px;
+  width: 100%;
+  height: 100%;
+  line-height: 45px;
+  text-transform: uppercase;
+  text-shadow: 0 0 5px #149414;
+  transform-origin: bottom;
+  animation: move 25s linear forwards;
+  font-size: 40px;
+  z-index: -1;
+}
+
+@keyframes move {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+
+  70% {
+    transform: translateY(120%) scale(1);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+h4 {
+  font-size: 14px;
+  font-weight: 400;
+  cursor: default;
+  justify-self: flex-end;
+  align-self: center;
+  padding-bottom: 20px;
+  text-wrap: pretty;
+  z-index: 2;
+  margin-top: auto;
+}
+
+h4 em {
+  color: skyblue;
 }
