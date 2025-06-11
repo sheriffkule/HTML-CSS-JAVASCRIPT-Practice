@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Montserrat:wght@100..900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #251f41, #927dfc, #251f41);
+}
+
+.wrapper {
+  width: 470px;
+  max-width: 96%;
+  padding: 30px;
+  background: linear-gradient(135deg, #777, #ddd, #777);
+  border-radius: 10px;
+}
+
+.wrapper .upload-box {
+  height: 225px;
+  border: 2px dashed #606060;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.upload-box p {
+  font-size: 1.25rem;
+  margin-top: 20px;
+}
+
+.upload-box ion-icon {
+  font-size: 3rem;
+  color: navy;
+}
+
+.upload-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+    z-index: 12;
+}
+
+.wrapper .content {
+  margin-top: 20px;
+}
+
+.content .row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.content .row .column {
+  width: calc(100% / 2 - 15px);
+}
+
+.row .column label {
+  font-size: 1.1rem;
+}
+
+.sizes .column input {
+  width: 100%;
+  height: 40px;
+  padding: 0 15px;
+  margin-top: 8px;
+  font-size: 1.1rem;
+  border: 1px solid #515186;
+  outline: none;
+  border-radius: 6px;
+  transition: 0.25s;
+}
+
+.sizes .column input:where(:focus, :focus-within) {
+  padding: 0 12px;
+  border: 1px solid navy;
+  box-shadow: 0 0 5px navy;
+}
+
+.content .checkboxes {
+  margin-top: 20px;
+}
+
+.checkboxes .column {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.checkboxes .column input {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  accent-color: navy;
+}
+
+.content .download-btn {
+  width: 100%;
+  color: #fff;
+  background-color: navy;
+  outline: none;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.2rem;
+  padding: 12px 0;
+  margin: 30px 0 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: 0.3s;
+}
+
+.content .download-btn:hover {
+  border-radius: 16px 16px 0 0;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px -6px rgba(0, 0, 128, 0.8), inset 0 -48px 0 rgb(51, 51, 255);
+}
+
+h4 {
+  position: fixed;
+  bottom: 0;
+  color: #aaa;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: default;
+  padding-bottom: 10px;
+  text-wrap: pretty;
+}
+
+h4 em {
+  color: skyblue;
+}
