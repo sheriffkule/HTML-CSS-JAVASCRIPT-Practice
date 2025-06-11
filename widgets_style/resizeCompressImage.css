@@ -5,6 +5,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
+  interpolate-size: allow-keywords;
 }
 
 body {
@@ -13,14 +14,21 @@ body {
   align-items: center;
   min-height: 100vh;
   background: linear-gradient(135deg, #251f41, #927dfc, #251f41);
+  overflow: hidden;
 }
 
 .wrapper {
   width: 470px;
+  height: 280px;
   max-width: 96%;
   padding: 30px;
   background: linear-gradient(135deg, #777, #ddd, #777);
-  border-radius: 10px;
+  border-radius: 10px;z-index: 11;
+  transition: height 0.3s ease-in;
+}
+
+.wrapper.active {
+    height: auto;
 }
 
 .wrapper .upload-box {
@@ -31,9 +39,15 @@ body {
   justify-content: center;
   flex-direction: column;
   cursor: pointer;
+  position: relative;
+}
+
+.wrapper.active .upload-box {
+    border: none;
 }
 
 .upload-box p {
+    bottom: 60px;
   font-size: 1.25rem;
   margin-top: 20px;
 }
@@ -45,14 +59,38 @@ body {
 
 .upload-box img {
     width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 6px;
+    position: absolute;
+    bottom: 0;
+}
+
+.wrapper.active .upload-box p {
+    display: none;
+}
+
+.wrapper.active .upload-box ion-icon {
+    display: none;
+}
+
+.wrapper.active .upload-box img {
+    width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 6px;
-    z-index: 12;
 }
 
 .wrapper .content {
+    opacity: 0;
   margin-top: 20px;
+  pointer-events: none;
+}
+
+.wrapper.active .content {
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 0.5s 0.5s ease-in;
 }
 
 .content .row {
@@ -103,6 +141,29 @@ body {
   accent-color: navy;
 }
 
+abbr {
+  text-decoration: none;
+  border-bottom: 1px dotted #222;
+  cursor: help;
+  position: relative;
+}
+abbr:hover::after {
+  content: attr(title);
+  font-size: 0.8em;
+  color: #222;
+  position: absolute;
+  z-index: 1;
+  background-color: #fff;
+  padding: 2px 4px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 6px;
+}
+
 .content .download-btn {
   width: 100%;
   color: #fff;
@@ -137,4 +198,29 @@ h4 {
 
 h4 em {
   color: skyblue;
+}
+
+.sec {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 100vh;
+}
+
+.box {
+    position: absolute;
+    color: #0005;
+}
+
+.box::before {
+    content: '\f005';
+    position: absolute;
+    font-family: 'fontAwesome';
+}
+
+.box.animate {
+    color: #ff0;
+    text-shadow: 0 0 5px #ff0,
+    0 0 20px #ff0,
+    0 0 50px #ff0;
 }
