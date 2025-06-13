@@ -262,32 +262,73 @@ const wordList = [
 ];
 
 const keyboard = document.querySelector('.keyboard');
+const guessesText = document.querySelector('.guesses-text b');
 const wordDisplay = document.querySelector('.word-display');
+const hangmanImage = document.querySelector('.hangman-box img');
+const gameModal = document.querySelector('.game-modal');
+const playAgainBtn = document.querySelector('.play-again');
 
-let currentWord;
+let currentWord,
+  correctLetters = [],
+  wrongGuessCount = 0,
+  clickedButtons = [];
+const maxGuesses = 6;
+
+const resetGame = () => {
+  correctLetters = [];
+  wrongGuessCount = 0;
+
+  wordDisplay.innerHTML = currentWord
+    .split('')
+    .map(() => `<li class="letter"></li>`)
+    .join('');
+  hangmanImage.src = `../icons/hangmanGame/hangman-${wrongGuessCount}.svg`;
+  guessesText.innerText = `${wrongGuessCount} / ${maxGuesses}`;
+  keyboard.querySelectorAll('button').forEach((btn) => (btn.disabled = false));
+  gameModal.classList.remove('show');
+};
 
 const getRandomWord = () => {
   const { word, hint } = wordList[Math.floor(Math.random() * wordList.length)];
   currentWord = word;
 
   document.querySelector('.hint-text b').innerText = hint;
-  wordDisplay.innerHTML = word
-    .split('')
-    .map(() => `<li class="letter"></li>`)
-    .join('');
+  resetGame();
+};
+
+const gameOver = (isVictory) => {
+  setTimeout(() => {
+    const modalText = isVictory ? 'Congratulations! You won!' : 'The correct word was:';
+    gameModal.querySelector('img').src = `../icons/hangmanGame/${isVictory ? 'victory' : 'lost'}.gif`;
+    gameModal.querySelector('h4').innerText = `${isVictory ? 'Congratulations!' : 'Game Over!'}`;
+    gameModal.querySelector('p').innerHTML = `${modalText} <b>${currentWord}</b>`;
+    gameModal.classList.add('show');
+    clickedButtons.forEach((button) => {
+      button.disabled = false;
+    });
+    clickedButtons = [];
+  }, 300);
 };
 
 const initGame = (button, clickedLetter) => {
   if (currentWord.includes(clickedLetter)) {
     [...currentWord].forEach((letter, index) => {
       if (letter === clickedLetter) {
+        correctLetters.push(letter);
         wordDisplay.querySelectorAll('li')[index].innerHTML = letter;
         wordDisplay.querySelectorAll('li')[index].classList.add('guessed');
       }
     });
   } else {
-    console.log(clickedLetter, ' not found');
+    wrongGuessCount++;
+    hangmanImage.src = `../icons/hangmanGame/hangman-${wrongGuessCount}.svg`;
   }
+  button.disabled = true;
+  clickedButtons.push(button);
+  guessesText.innerText = `${wrongGuessCount} / ${maxGuesses}`;
+
+  if (wrongGuessCount === maxGuesses) return gameOver(false);
+  if (correctLetters.length === currentWord.length) return gameOver(true);
 };
 
 const fragment = document.createDocumentFragment();
@@ -300,7 +341,7 @@ for (let i = 97; i <= 122; i++) {
   buttonSpan.textContent = String.fromCharCode(i);
   button.appendChild(buttonSpan);
 
-  button.addEventListener('click', (e) => initGame(e.target, String.fromCharCode(i)));
+  button.addEventListener('click', (e) => initGame(button, String.fromCharCode(i)));
 
   const pixelContainer = document.createElement('div');
   pixelContainer.classList.add('pixel-container');
@@ -312,6 +353,7 @@ for (let i = 97; i <= 122; i++) {
 keyboard.appendChild(fragment);
 
 getRandomWord();
+playAgainBtn.addEventListener('click', getRandomWord);
 
 let buttons = document.querySelectorAll('.pixel-btn');
 
@@ -320,18 +362,111 @@ buttons.forEach((button) => {
   let pixelSize = 10;
   let btnWidth = button.offsetWidth;
   let btnHeight = button.offsetHeight;
-  let cols = Math.floor(btnWidth / pixelSize + 1);
+  let cols = Math.floor(btnWidth / pixelSize + 2);
   let rows = Math.floor(btnHeight / pixelSize + 1);
 
   for (let row = 0; row < rows; row++) {
     for (let col = 0; col < cols; col++) {
       let pixel = document.createElement('div');
+
       pixel.classList.add('pixel');
       pixel.style.left = `${col * pixelSize}px`;
       pixel.style.top = `${row * pixelSize}px`;
+
       let delay = Math.random() * 1;
+
       pixel.style.transitionDelay = `${delay}s`;
       pixelContainer.appendChild(pixel);
     }
   }
 });
+
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let canvasOffset = {
+  x0: ctx.canvas.offsetLeft,
+  y0: ctx.canvas.offsetTop,
+  x1: ctx.canvas.offsetLeft + ctx.canvas.width,
+  y1: ctx.canvas.offsetTop + ctx.canvas.height,
+};
+
+function clearCanvas() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+class Particle {
+  constructor(ctx) {
+    this.ctx = ctx;
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = 1.5;
+    this.color = '#fff';
+    this.vx = Math.random() * 0.5;
+    this.vy = Math.random() * 0.5;
+  }
+
+  draw() {
+    this.ctx.beginPath();
+    this.ctx.fillStyle = this.color;
+    this.ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    this.ctx.fill();
+    this.ctx.closePath();
+  }
+}
+
+let circle = [];
+for (let i = 0; i < 200; i++) {
+  circle.push(new Particle(ctx));
+}
+
+function animate() {
+  clearCanvas();
+  circle.forEach((item) => {
+    item.draw();
+
+    item.x += item.vx;
+    item.y += item.vy;
+
+    if (item.x + item.size > canvas.width || item.x - item.size < 0) {
+      item.vx *= -1;
+    }
+    if (item.y + item.size > canvas.height || item.y - item.size < 0) {
+      item.vy *= -1;
+    }
+  });
+  requestAnimationFrame(animate);
+}
+
+function handleResize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  circle.forEach((item) => {
+    item.x = Math.random() * canvas.width;
+    item.y = Math.random() * canvas.height;
+  });
+}
+
+window.addEventListener('resize', handleResize);
+animate();
+
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+
+  if (yearElement) {
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.dateTime = currentYear;
+    yearElement.textContent = currentYear.toString();
+  }
+}
+
+window.addEventListener('load', updateYear);
