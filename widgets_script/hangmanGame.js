@@ -262,8 +262,76 @@ const wordList = [
 ];
 
 const keyboard = document.querySelector('.keyboard');
+const wordDisplay = document.querySelector('.word-display');
+
+let currentWord;
+
+const getRandomWord = () => {
+  const { word, hint } = wordList[Math.floor(Math.random() * wordList.length)];
+  currentWord = word;
+
+  document.querySelector('.hint-text b').innerText = hint;
+  wordDisplay.innerHTML = word
+    .split('')
+    .map(() => `<li class="letter"></li>`)
+    .join('');
+};
+
+const initGame = (button, clickedLetter) => {
+  if (currentWord.includes(clickedLetter)) {
+    [...currentWord].forEach((letter, index) => {
+      if (letter === clickedLetter) {
+        wordDisplay.querySelectorAll('li')[index].innerHTML = letter;
+        wordDisplay.querySelectorAll('li')[index].classList.add('guessed');
+      }
+    });
+  } else {
+    console.log(clickedLetter, ' not found');
+  }
+};
+
+const fragment = document.createDocumentFragment();
+
 for (let i = 97; i <= 122; i++) {
   const button = document.createElement('button');
-  button.textContent = String.fromCharCode(i);
-  keyboard.appendChild(button);
+  button.classList.add('pixel-btn');
+
+  const buttonSpan = document.createElement('span');
+  buttonSpan.textContent = String.fromCharCode(i);
+  button.appendChild(buttonSpan);
+
+  button.addEventListener('click', (e) => initGame(e.target, String.fromCharCode(i)));
+
+  const pixelContainer = document.createElement('div');
+  pixelContainer.classList.add('pixel-container');
+  button.appendChild(pixelContainer);
+
+  fragment.appendChild(button);
 }
+
+keyboard.appendChild(fragment);
+
+getRandomWord();
+
+let buttons = document.querySelectorAll('.pixel-btn');
+
+buttons.forEach((button) => {
+  let pixelContainer = button.querySelector('.pixel-container');
+  let pixelSize = 10;
+  let btnWidth = button.offsetWidth;
+  let btnHeight = button.offsetHeight;
+  let cols = Math.floor(btnWidth / pixelSize + 1);
+  let rows = Math.floor(btnHeight / pixelSize + 1);
+
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
+      let pixel = document.createElement('div');
+      pixel.classList.add('pixel');
+      pixel.style.left = `${col * pixelSize}px`;
+      pixel.style.top = `${row * pixelSize}px`;
+      let delay = Math.random() * 1;
+      pixel.style.transitionDelay = `${delay}s`;
+      pixelContainer.appendChild(pixel);
+    }
+  }
+});
