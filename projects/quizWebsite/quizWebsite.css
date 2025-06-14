@@ -5,10 +5,12 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    interpolate-size: allow-keywords;
 }
 
 body {
     color: #fff;
+    background-color: black;
 }
 
 .header {
@@ -50,9 +52,16 @@ body {
 
 .main {
     min-height: 100vh;
-    background: url('background.jpg') no-repeat;
+    /* background: url('background.jpg') no-repeat; */
     background-size: cover;
     background-position: center;
+    pointer-events: auto;
+    transition: filter .3s ease-in;
+}
+
+.main.active {
+    filter: blur(15px);
+    pointer-events: none;
 }
 
 .home {
@@ -119,4 +128,88 @@ body {
 
 .home-content .start-btn:active {
     transform: translateY(0) scale(1);
+}
+
+.popup-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 150%) scale(0.1);
+    width: 0px;
+    height: 0;
+    background: linear-gradient(135deg, #aaa, #fff, #aaa);
+    border-image: linear-gradient(135deg, #c40094, orangered, #c40094) 1 / 5px / 10px;
+    border-radius: 6px;
+    padding: 10px 25px;
+    opacity: 0;
+    pointer-events: none;
+    transition: width 0.3s, height 0.3s, opacity 0.3s, transform 0.3s;
+}
+
+.popup-info.active {
+    opacity: 1;
+    pointer-events: auto;
+    width: 500px;
+    height: auto;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.popup-info h2 {
+    font-size: 50px;
+    -webkit-text-stroke: 2px #c40094;
+    color: transparent;
+}
+
+.popup-info .info {
+    display: inline-block;
+    font-size: 1rem;
+    color: #333;
+    font-weight: 500;
+    margin: 4px 0;
+}
+
+.popup-info .btn-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #999;
+    margin-top: 12px;
+    padding: 20px 0 8px;
+}
+
+.popup-info .btn-group .info-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 130px;
+    height: 45px;
+    background: #c40094;
+    outline: none;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: .3s;
+}
+
+.popup-info .btn-group .info-btn:nth-child(1) {
+    background: transparent;
+    color: #c40094;
+}
+
+.popup-info .btn-group .info-btn:nth-child(1):hover {
+    background: #c40094;
+    color: #fff;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4);
+    transform: translateY(-3px) scale(1.03);
+}
+
+.popup-info .btn-group .info-btn:nth-child(2):hover {
+    background: #950170;
+    border-color: #950170;
+    transform: translateY(-3px) scale(1.03);
 }
