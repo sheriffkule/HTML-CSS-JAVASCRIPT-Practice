@@ -5,6 +5,7 @@ const cardObjectDefinition = [
   { id: 4, imagePath: 'images/card-AceSpades.png' },
 ];
 
+const aceId = 4;
 const cardBackImgPath = 'images/card-back-Blue.png';
 const cardContainerElem = document.querySelector('.card-container');
 const playGameButtonElem = document.getElementById('playGame');
@@ -15,7 +16,83 @@ const numCards = cardObjectDefinition.length;
 let cards = [];
 let cardPositions = [];
 
+let gameInProgress = false;
+let shufflingInProgress = false;
+let cardsRevealed = false;
+
+const currentGameStatusElem = document.querySelector('.current-status');
+const scoreContainerElem = document.querySelector('.header-score-container');
+const scoreElem = document.querySelector('.score');
+const roundContainerElem = document.querySelector('.header-round-container');
+const roundElem = document.querySelector('.round');
+
+const winColor = '#0f0';
+const loseColor = '#f00';
+const primaryColor = 'white';
+
+let roundNum = 0;
+let maxRounds = 4;
+let score = 0;
+let round = 1;
+
 loadGame();
+
+function choseCard(card) {
+  if (canChooseCard()) {
+    evaluateCardChoice(card);
+  }
+}
+
+function calculateScoreToAdd(roundNum) {
+  if (roundNum == 1) {
+    return 100;
+  } else if (roundNum == 2) {
+    return 50;
+  } else if (roundNum == 3) {
+    return 25;
+  } else {
+    return 10;
+  }
+}
+
+function calculateScore() {
+  const scoreToAdd = calculateScoreToAdd(roundNum);
+  score = score + scoreToAdd;
+}
+
+function updateScore() {
+  calculateScore();
+}
+
+function updateStatusElement(elem, display, color, innerHTML) {
+  elem.style.display = display;
+
+  if (arguments.length > 2) {
+    elem.style.color = color;
+    elem.innerHTML = innerHTML;
+  }
+}
+
+function outputChoiceFeedBack(hit) {
+  if (hit) {
+    updateStatusElement(currentGameStatusElem, 'block', winColor, 'Hit!! - Well Done!! :)');
+  } else {
+    updateStatusElement(currentGameStatusElem, 'block', loseColor, 'Missed!! :(');
+  }
+}
+
+function evaluateCardChoice(card) {
+  if (card.id == aceId) {
+    updateScore();
+    outputChoiceFeedBack(true);
+  } else {
+    outputChoiceFeedBack(false);
+  }
+}
+
+function canChooseCard() {
+  return gameInProgress == true && !shufflingInProgress && !cardsRevealed;
+}
 
 function loadGame() {
   createCards();
@@ -30,7 +107,18 @@ function startGame() {
   startRound();
 }
 
-function initializeNewGame() {}
+function initializeNewGame() {
+  score = 0;
+  roundNum = 0;
+
+  shufflingInProgress = false;
+
+  updateStatusElement(scoreContainerElem, 'flex');
+  updateStatusElement(roundContainerElem, 'flex');
+
+  updateStatusElement(scoreElem, 'block', primaryColor, `Score <span class="badge">${score}</span>`);
+  updateStatusElement(roundElem, 'block', primaryColor, `Round <span class="badge">${round}</span>`);
+}
 
 function collectCards() {
   transformGridArea(collapsedGridAreaTemplate);
@@ -53,9 +141,20 @@ function startRound() {
   initializeNewRound();
   collectCards();
   flipCards(true);
+  shuffleCards();
 }
 
-function initializeNewRound() {}
+function initializeNewRound() {
+  roundNum++;
+  playGameButtonElem.disabled = true;
+
+  gameInProgress = true;
+  shufflingInProgress = true;
+  cardsRevealed = false;
+
+  updateStatusElement(currentGameStatusElem, 'block', primaryColor, 'Shuffling...');
+  updateStatusElement(roundElem, 'block', primaryColor, `Round <span class="badge">${round}</span>`);
+}
 
 function flipCard(card, flipToBack) {
   const innerCardElem = card.firstChild;
@@ -84,6 +183,7 @@ function shuffleCards() {
 
     if (shuffleCount == 500) {
       clearInterval(id);
+      dealCards();
     } else {
       shuffleCount++;
     }
@@ -98,6 +198,45 @@ function randomizeCardPositions() {
 
   cardPositions[random1 - 1] = cardPositions[random2 - 1];
   cardPositions[random2 - 1] = temp;
+}
+
+function dealCards() {
+  AddCardsToAppropriateCell();
+  const areasTemplate = returnGridAreasMappedToCardPos();
+
+  transformGridArea(areasTemplate);
+}
+
+function returnGridAreasMappedToCardPos() {
+  let firstPart = '';
+  let secondPart = '';
+  let areas = '';
+
+  cards.forEach((card, index) => {
+    if (cardPositions[index] == 1) {
+      areas = areas + 'a ';
+    } else if (cardPositions[index] == 2) {
+      areas = areas + 'b ';
+    } else if (cardPositions[index == 3]) {
+      areas = areas + 'c ';
+    } else if (cardPositions[index] == 4) {
+      areas = areas + 'd ';
+    }
+    if (index == 1) {
+      firstPart = areas.substring(0, areas.length - 1);
+      areas = '';
+    } else if (index == 3) {
+      secondPart = areas.substring(0, areas.length - 1);
+    }
+
+    return `"${firstPart}" "${secondPart}"`;
+  });
+}
+
+function AddCardsToAppropriateCell() {
+  cards.forEach((card) => {
+    addCardToGridCell(card);
+  });
 }
 
 function createCards() {
@@ -177,12 +316,22 @@ function addCardToGridCell(card) {
   addChildElement(cardPosElem, card);
 }
 
-function mapCardIdToGridCell(card) {
-  const cardPositions = {
-    1: '.card-pos-a',
-    2: '.card-pos-b',
-    3: '.card-pos-c',
-    4: '.card-pos-d',
-  };
-  return cardPositions[card.id];
+function mapCardIdToGridCell(card){
+   
+    if(card.id == 1)
+    {
+        return '.card-pos-a'
+    }
+    else if(card.id == 2)
+    {
+        return '.card-pos-b'
+    }
+    else if(card.id == 3)
+    {
+        return '.card-pos-c'
+    }
+    else if(card.id == 4)
+    {
+        return '.card-pos-d'
+    }
 }

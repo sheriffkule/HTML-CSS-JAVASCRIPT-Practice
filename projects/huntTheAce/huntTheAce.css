@@ -26,13 +26,15 @@ body {
   color: #ddd;
 }
 
+.current-status {
+    color: #ddd;
+}
+
 main {
     margin-top: 30px;
   height: 55%;
   display: flex;
   justify-content: center;
-  border: 1px solid olivedrab;
-  
 }
 
 .card-container {
@@ -45,23 +47,22 @@ main {
   grid-template-areas:
     'a b'
     'c d';
-    border: 1px solid olivedrab;
 }
 
 .card-pos-a {
-    grid-area: a;border: 1px solid olivedrab;
+    grid-area: a;
 }
 
 .card-pos-b {
-    grid-area: b;border: 1px solid olivedrab;
+    grid-area: b;
 }
 
 .card-pos-c {
-    grid-area: c;border: 1px solid olivedrab;
+    grid-area: c;
 }
 
 .card-pos-d {
-    grid-area: d;border: 1px solid olivedrab;
+    grid-area: d;
 }
 
 .card-pos-a, .card-pos-b, .card-pos-c, .card-pos-d {
