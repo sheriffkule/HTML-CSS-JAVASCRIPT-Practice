@@ -224,7 +224,8 @@ body {
 
 .quiz-section {
     position: relative;
-    left: -50%;
+    /* left: -50%; */
+    left: 0;
     width: 100%;
     background: linear-gradient(135deg, #09001d, #281849, #09001d);
     display: flex;
@@ -338,6 +339,22 @@ body {
     transition: 0s;
 }
 
+.option-list .option.correct {
+    background: #09001d;
+    color: #00a63d;
+    border-color: #00a63d;
+}
+
+.option-list .option.incorrect {
+    background: #09001d;
+    color: #a60045;
+    border-color: #a60045;
+}
+
+.option-list .option.disabled {
+    pointer-events: none;
+}
+
 .quiz-footer {
     display: flex;
     justify-content: space-between;
@@ -363,12 +380,86 @@ body {
     color: rgba(255, 255, 255, 0.3);
     font-weight: 600;
     cursor: pointer;
-    /* pointer-events: none; */
+    pointer-events: none;
     transition: .3s;
 }
 
-.next-btn:hover{
+.next-btn.active {
+    pointer-events: auto;
+    background: #c40094;
+    border-color: #c40094;
+    color: #fff;
+}
+
+.next-btn.active:hover{
     background: #950170;
     border-color: #950170;
-    color: white;
+}
+
+.quiz-section .result-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    background: transparent;
+    border: 2px solid #c40094;
+    border-radius: 6px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.result-box h2 {
+    font-size: 50px;
+    background: linear-gradient(90deg, orangered, #c40094, orangered);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    background-clip: text;
+}
+
+.result-box .percentage-container {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0 40px;
+}
+
+.percentage-container .circular-progress {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: conic-gradient(#c40094 3.6deg, rgba(255, 255, 255, 0.1) 0deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circular-progress .progress-value {
+    font-size: 45px;
+    font-weight: 600;
+}
+
+.percentage-container .score-text {
+    font-size: 26px;
+    font-weight: 600;
+    margin-top: 30px;
+}
+
+.buttons button {
+    width: 130px;
+    height: 47px;
+    background: #c40094;
+    border: 2px solid #c40094;
+    border-radius: 6px;
+    outline: none;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+    margin: 0 20px 20px;
+    cursor: pointer;
 }
