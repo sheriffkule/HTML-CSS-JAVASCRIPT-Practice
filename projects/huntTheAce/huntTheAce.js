@@ -33,13 +33,45 @@ const primaryColor = 'white';
 let roundNum = 0;
 let maxRounds = 4;
 let score = 0;
-let round = 1;
 
 loadGame();
+
+function gameOver() {
+  updateStatusElement(scoreContainerElem, 'none');
+  updateStatusElement(roundContainerElem, 'none');
+
+  const gameOverMessage = html`Game Over! Final Score - <span class="badge">${score}</span> Click 'Play Game
+    button to play again'`;
+
+  updateStatusElement(currentGameStatusElem, 'block', primaryColor, gameOverMessage);
+
+  gameInProgress = false;
+  playGameButtonElem.disabled = false;
+}
+
+function endRound() {
+  setTimeout(() => {
+    if (roundNum == maxRounds) {
+      gameOver();
+      return;
+    } else {
+      startRound();
+    }
+  }, 3000);
+}
 
 function choseCard(card) {
   if (canChooseCard()) {
     evaluateCardChoice(card);
+    flipCard(card, false);
+
+    setTimeout(() => {
+      flipCards(false);
+      updateStatusElement(currentGameStatusElem, 'block', primaryColor, 'Card positions revealed');
+
+      endRound();
+    }, 3000);
+    cardsRevealed = true;
   }
 }
 
@@ -62,6 +94,7 @@ function calculateScore() {
 
 function updateScore() {
   calculateScore();
+  updateStatusElement(scoreElem, 'block', primaryColor, `<span class="badge">${score}</span>`);
 }
 
 function updateStatusElement(elem, display, color, innerHTML) {
@@ -100,6 +133,9 @@ function loadGame() {
   cards = document.querySelectorAll('.card');
 
   playGameButtonElem.addEventListener('click', () => startGame());
+
+  updateStatusElement(scoreContainerElem, 'none');
+  updateStatusElement(roundContainerElem, 'none');
 }
 
 function startGame() {
@@ -117,7 +153,7 @@ function initializeNewGame() {
   updateStatusElement(roundContainerElem, 'flex');
 
   updateStatusElement(scoreElem, 'block', primaryColor, `Score <span class="badge">${score}</span>`);
-  updateStatusElement(roundElem, 'block', primaryColor, `Round <span class="badge">${round}</span>`);
+  updateStatusElement(roundElem, 'block', primaryColor, `Round <span class="badge">${roundNum}</span>`);
 }
 
 function collectCards() {
@@ -153,7 +189,7 @@ function initializeNewRound() {
   cardsRevealed = false;
 
   updateStatusElement(currentGameStatusElem, 'block', primaryColor, 'Shuffling...');
-  updateStatusElement(roundElem, 'block', primaryColor, `Round <span class="badge">${round}</span>`);
+  updateStatusElement(roundElem, 'block', primaryColor, `Round <span class="badge">${roundNum}</span>`);
 }
 
 function flipCard(card, flipToBack) {
@@ -175,15 +211,22 @@ function flipCards(flipToBack) {
 }
 
 function shuffleCards() {
-  const id = setInterval(shuffle, 12);
   let shuffleCount = 0;
+  const id = setInterval(shuffle, 12);
 
   function shuffle() {
     randomizeCardPositions();
 
     if (shuffleCount == 500) {
       clearInterval(id);
+      shufflingInProgress = false;
       dealCards();
+      updateStatusElement(
+        currentGameStatusElem,
+        'block',
+        primaryColor,
+        'Please click the card that you think is the Ace of Spades...'
+      );
     } else {
       shuffleCount++;
     }
@@ -284,6 +327,12 @@ function createCard(cardItem) {
   addCardToGridCell(cardElem);
 
   initializeCardPositions(cardElem);
+
+  attachClickEventHandlerToCard(cardElem);
+}
+
+function attachClickEventHandlerToCard(card) {
+  card.addEventListener('click', () => choseCard(card));
 }
 
 function initializeCardPositions(card) {
@@ -316,22 +365,14 @@ function addCardToGridCell(card) {
   addChildElement(cardPosElem, card);
 }
 
-function mapCardIdToGridCell(card){
-   
-    if(card.id == 1)
-    {
-        return '.card-pos-a'
-    }
-    else if(card.id == 2)
-    {
-        return '.card-pos-b'
-    }
-    else if(card.id == 3)
-    {
-        return '.card-pos-c'
-    }
-    else if(card.id == 4)
-    {
-        return '.card-pos-d'
-    }
+function mapCardIdToGridCell(card) {
+  if (card.id == 1) {
+    return '.card-pos-a';
+  } else if (card.id == 2) {
+    return '.card-pos-b';
+  } else if (card.id == 3) {
+    return '.card-pos-c';
+  } else if (card.id == 4) {
+    return '.card-pos-d';
+  }
 }
