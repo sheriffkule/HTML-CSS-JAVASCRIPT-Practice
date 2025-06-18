@@ -1,23 +1,96 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 #canvas1 {
-    border: 5px solid black;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #4d79bc;
-    max-width: 100%;
-    max-height: 100%;
+  border: 5px solid black;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #4d79bc;
+  max-width: 100%;
+  max-height: 100%;
+  font-family: 'Bangers', system-ui;
 }
 
 body {
-    background: radial-gradient(#213d68, #111);
-    min-height: 100vh;
+  background: radial-gradient(#213d68, #111);
+  min-height: 100vh;
+}
+
+.title {
+  width: 100%;
+  font-family: 'Bangers', system-ui;
+  text-align: center;
+  word-spacing: 1rem;
+  padding-top: 40px;
+}
+
+span {
+  display: inline-block;
+  letter-spacing: 8px;
+  padding-inline: 14px;
+  font-size: clamp(8vw, 10vw, 8rem);
+}
+
+span:nth-child(1) {
+  position: absolute;
+  font-weight: bold;
+  filter: blur(10rem);
+  color: #0067ff;
+}
+
+span:nth-child(2) {
+  position: absolute;
+  font-weight: bold;
+  filter: blur(1.3rem);
+}
+
+span:nth-child(3) {
+  position: absolute;
+  font-weight: 700;
+  filter: blur(0.3rem);
+  color: rgba(0, 0, 0, 0.4);
+}
+
+span:nth-child(4) {
+  position: absolute;
+  font-weight: 700;
+  background: linear-gradient(
+    85deg,
+    #084d92 20%,
+    #76d8fe 21%,
+    #149dcc,
+    #76d8fe 31%,
+    #084d92 33%,
+    #084d92 50%,
+    #76d8fe 52%,
+    #149dcc,
+    #76d8fe 72%,
+    #084d92 74%,
+    #76d8fe
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+span:nth-child(5) {
+  position: absolute;
+  color: #000;
+  filter: blur(1px);
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.4);
+}
+
+span:nth-child(6) {
+  position: relative;
+  background: linear-gradient(#76d8fe, #084d92);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 #layer1,
@@ -27,6 +100,8 @@ body {
 #player,
 #angler1,
 #angler2,
-#lucky {
-    display: none;
+#lucky,
+#projectile,
+#gears {
+  display: none;
 }
