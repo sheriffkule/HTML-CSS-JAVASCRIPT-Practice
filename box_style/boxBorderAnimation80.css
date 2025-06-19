@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #333;
+}
+
+.card {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    background-color: #ddd;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 50px rgba(255, 255, 255, 0.1);
+}
+
+.card .imgBx {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background: #a44a55;
+    overflow: hidden;
+}
+
+.card .imgBx img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card .content {
+    position: relative;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card .content h3 {
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.1em;
+    letter-spacing: 0.05em;
+    line-height: 1.1em;
+    text-transform: uppercase;
+    color: #0057c2;
+}
+
+.card .content h3 span {
+    font-weight: 400;
+    font-size: 0.7em;
+    letter-spacing: 0em;
+    text-transform: initial;
+    color: #333;
+}
+
+.scale {
+    position: absolute;
+    width: 100%;
+    height: 300px;
+    z-index: 1;
+    transform-origin: bottom;
+    transform: scaleY(0.5);
+}
+
+.card .scale .wave {
+    position: absolute;
+    left: calc(50% - 100px);
+    bottom: -150px;
+    width: 200px;
+    height: 200px;
+    background: #ddd;
+    border-radius: 50px;
+    transform: rotate(45deg);
+}
+
+.card .scale .wave::before {
+    content: '';
+    position: absolute;
+    bottom: 41px;
+    left: -150px;
+    width: 150px;
+    height: 150px;
+    background: transparent;
+    border-radius: 50px;
+    box-shadow: 45px 45px #ddd;
+}
+
+.card .scale .wave::after {
+    content: '';
+    position: absolute;
+    right: 41px;
+    top: -150px;
+    width: 150px;
+    height: 150px;
+    background: transparent;
+    border-radius: 50px;
+    box-shadow: 45px 45px #ddd;
+}
