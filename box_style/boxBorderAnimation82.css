@@ -1,0 +1,82 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    color: black;
+    overscroll-behavior-y: contain;
+}
+
+.timeline-container {
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+
+.timeline-section {
+    min-height: 100vh;
+    padding: 4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    scroll-snap-align: start;
+    position: relative;
+    overflow: hidden;
+}
+
+.section-1 {
+    background-color: black;
+}
+
+.section-2 {
+    background-color: white;
+}
+
+.section-3 {
+    background-color: black;
+}
+
+.section-4 {
+    background-color: white;
+}
+
+.section-5 {
+    background-color: black;
+}
+
+.content-wrapper {
+    max-width: 800px;
+    width: 100%;
+    padding: 2rem;
+    background: #6a0428;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    z-index: 2;
+    transform: translateY(50px);
+    opacity: 0;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+}
+
+.timeline-section.active .content-wrapper {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.timeline-connector {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 100vh;
+    background: linear-gradient(to bottom, #ad1047, #954964, #6a0428);
+}
