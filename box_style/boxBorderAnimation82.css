@@ -79,4 +79,63 @@ body {
     width: 4px;
     height: 100vh;
     background: linear-gradient(to bottom, #ad1047, #954964, #6a0428);
+    z-index: 1;
+}
+
+.date-indicator {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 2rem;
+    background: #6a0428;
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(34, 139, 230, 0.3);
+    z-index: 3;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #fff;
+    position: relative;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: #6a0428;
+    border-radius: 2px;
+}
+
+.section-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #fff;
+    margin-bottom: 2rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.milestone-marker {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #6a0428;
+    border: 4px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 0 2px #6a0428;
+    z-index: 2;
+    backdrop-filter: blur(5px);
+    /* -webkit-backdrop-filter: blur(5px); */
 }
