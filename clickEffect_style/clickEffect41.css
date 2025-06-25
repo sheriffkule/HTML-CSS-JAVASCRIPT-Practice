@@ -1,0 +1,31 @@
+body {
+    margin: 0;
+    height: 100vh;
+    padding: 0;
+    background: radial-gradient(#363636, #121212);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.confetti {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+@keyframes burst {
+    0% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--x), var(--y));
+        opacity: 0;
+    }
+}
