@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+    <title>Pros & Cons List Maker</title>
+    <link rel="stylesheet"
+          href="/widgets_style/prosConsList.css" />
+</head>
+
+<body>
+    <div class="topic-section"
+         id="topicSection">
+        <h1>What's your decision topic?</h1>
+        <input type="text"
+               id="topicInput"
+               placeholder="e.g. Should I do yoga" />
+        <button onclick="submitTopic()">Start</button>
+    </div>
+
+    <div id="appContent">
+        <h2 class="topic-title"
+            id="topicTitle"></h2>
+        <div class="input-section">
+            <input type="text"
+                   id="itemInput"
+                   placeholder="Enter A point" />
+            <button onclick="addItem('pros')">Add To Pros</button>
+            <button onclick="addItem('cons')">Add To Cons</button>
+        </div>
+        <div class="list-container">
+            <div class="list">
+                <h2>Pros</h2>
+                <ul id="prosLIst"></ul>
+            </div>
+            <div class="list">
+                <h2>Cons</h2>
+                <ul id="consList"></ul>
+            </div>
+        </div>
+    </div>
+    <div class="scoreboard"
+         id="scoreboard">Pros: 0 | Cons: 0 <br />Let's Decide</div>
+    </div>
+
+    <script src="/widgets_script/prosConsList.js"></script>
+</body>
+
+</html>

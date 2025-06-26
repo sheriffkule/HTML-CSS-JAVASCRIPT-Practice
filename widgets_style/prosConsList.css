@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #e0e0e0;
+    min-height: 100vh;
+    background: linear-gradient(#222 50%, #2b39ff 50%);
+}
+
+h1, .topic-title {
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    color: #ddd;
+    text-align: center;
+}
+
+.topic-section {
+    position: relative;
+    background: #000;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.08);
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    min-height: 60vh;
+    margin-block: auto;
+}
+
+.topic-section::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 0;
+    right: 0;
+    height: 10px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 2px;
+    box-shadow: 0 -8px 16px rgba(255, 255, 255, 0.1);
+    z-index: -1;
+}
+
+input[type="text"] {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 2px solid #888;
+    border-radius: 5px;
+    width: 300px;
+    max-width: 90%;
+    background: #111;
+    outline: none;
+    color: #ccc;
+}
+
+button {
+    font-family: inherit;
+    font-size: 1rem;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 0.75rem 2rem;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.topic-section button {
+    margin-top: 1.5rem;
+    background: #2b39ff;
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.topic-section button:hover {
+    background: #5947e6;
+    transform: scale(1.02);
+}
+
+.input-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.input-section input {
+    width: 240px;
+}
+
+.input-section button:nth-of-type(1) {
+    background: #28a745;
+}
+
+.input-section button:nth-of-type(2) {
+    background: #dc3545;
+}
+
+.input-section button:hover {
+    opacity: 0.9;
+}
+
+.list-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 800px;
+}
