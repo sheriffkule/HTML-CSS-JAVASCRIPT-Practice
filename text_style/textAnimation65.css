@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#canvas1 {
+    background-color: rgb(128, 128, 0);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#title1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 120px;
+    line-height: 110px;
+    white-space: none;
+    border-top: 5px solid black;
+}
+
+#title1::before {
+    content: 'is awesome';
+    position: absolute;
+    bottom: -70px;
+    font-size: 40px;
+    text-align: center;
+    width: 100%;
+}
