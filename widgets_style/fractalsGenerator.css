@@ -15,3 +15,54 @@ body {
     top: 50%;
     transform: translate(-50%, -50%);
 }
+
+#controls {
+    position: absolute;
+    padding: 20px;
+    border: 2px solid #ddd;
+    left: 20px;
+    top: 20px;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+button {
+    padding: 10px 40px;
+    width: 220px;
+    font-size: 20px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    outline: none;
+    transition: .2s;
+}
+
+button:hover {
+    scale: 1.01;
+    background-color: azure;
+}
+
+label, input {
+    color: white;
+    font-size: 20px;
+    width: 100%;
+}
+
+input {
+    margin-block: 6px;
+    outline: none;
+}
+
+.footer {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+  color: #aaa;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: default;
+  z-index: 1;
+}
+
+.footer em {
+  color: skyblue;
+}
