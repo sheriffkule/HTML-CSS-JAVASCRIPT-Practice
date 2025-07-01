@@ -1,0 +1,12 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#canvas1 {
+    position: absolute;
+    background: radial-gradient(circle at center, navy, #111);
+    width: 100%;
+    height: 100%;
+}
