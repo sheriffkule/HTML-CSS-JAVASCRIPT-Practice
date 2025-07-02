@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: #212121;
+}
+
+div {
+    display: flex;
+    background: #fff;
+    border-radius: 16px;
+    background: linear-gradient(173deg, #23272f 0%, #14161a);
+    box-shadow: 10px 10px 20px #0e1013,
+    -10px -10px 40px #383e4b;
+    padding: .3rem;
+}
+
+input {
+    background: #23272f;
+    border-radius: 15px;
+    box-shadow: inset 5px 5px 10px #0e1013,
+    inset -5px -5px 10px #383e4b,
+    0 0 100px rgba(255,255,59,0),
+    0 0 100px rgba(255, 102, 0,0);
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    outline: none;
+    color: #fff;
+    border: 1px solid transparent;
+    transition: all 0.8s ease;
+}
+
+input:focus {
+    border: 3px solid #ff4d3b;
+    outline: none;
+    box-shadow: inset 0 0 10px #ff4d3b,
+    inset 0 0 10px #f39f0d70;
+}
