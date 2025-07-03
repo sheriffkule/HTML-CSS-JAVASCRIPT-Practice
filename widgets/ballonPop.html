@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Balloon Pop Game</title>
+    <link rel="stylesheet" href="/widgets_style/ballonPop.css" />
+  </head>
+  <body>
+    <div id="start-screen">
+      <h1>
+        <ion-icon name="balloon-outline"></ion-icon>Balloon Pop Game<ion-icon
+          name="balloon-outline"></ion-icon>
+      </h1>
+      <button id="start-btn">Start Game</button>
+      <h4 class="footer">
+        &copy; <time id="year"></time> Made by
+        <em><abbr title="Web Development Frontend Master">Sheriffkule</abbr></em> from XXIII Century
+      </h4>
+    </div>
+    <div id="scoreboard" style="display: none">
+      Time: <span id="time"></span>s | Score: <span id="score">0</span>
+    </div>
+    <div id="balloon-container"></div>
+    <div id="end-screen" style="display: none">
+      <h1>Game Over!</h1>
+      <p>Your Score: <span id="final-score"></span></p>
+      <button onclick="location.reload()">Play Again</button>
+    </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="/widgets_script/ballonPop.js"></script>
+  </body>
+</html>
