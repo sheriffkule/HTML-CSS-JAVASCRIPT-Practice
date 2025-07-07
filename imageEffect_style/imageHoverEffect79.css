@@ -11,6 +11,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 700px;
-    height: 500px;
+    width: 460px;
+    height: 460px;
+    filter: saturate(1.5);
 }
