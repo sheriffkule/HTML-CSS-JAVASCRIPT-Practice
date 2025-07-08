@@ -13,7 +13,10 @@
       <nav class="nav container">
         <a href="#" class="nav__logo">
           <img src="img/logo.svg" alt="logo" />
-          <span>Fried <br /> Chicken</span>
+          <span
+            >Fried <br />
+            Chicken</span
+          >
         </a>
 
         <div class="nav__menu" id="nav-menu">
@@ -36,7 +39,92 @@
       </nav>
     </header>
 
-    <main class="main"></main>
+    <main class="main">
+      <section class="home section" id="home">
+        <div class="home__container container grid">
+          <div class="home__data">
+            <h1 class="home__title">
+              Crispy & <br />
+              Tasty <span>Fried</span><br />
+              <span>Chicken</span>
+            </h1>
+
+            <p class="home__description">
+              Come enjoy the best and crispiest fried chicken made with the best ingredients, one bite and
+              you'll want more.
+            </p>
+
+            <a href="#about" class="button">About Fried Chicken</a>
+
+            <img src="img/chicken-dam-1.png" alt="image" class="home__dam-1" />
+            <img src="img/chicken-dam-5.png" alt="image" class="home__dam-2" />
+          </div>
+
+          <div class="home__images">
+            <img src="img/home-img.png" alt="image" class="home__img" />
+            <img src="img/chicken-dam-1.png" alt="image" class="home__dam-3" />
+            <img src="img/chicken-dam-2.png" alt="image" class="home__dam-4" />
+            <img src="img/chicken-dam-4.png" alt="image" class="home__dam-5" />
+          </div>
+        </div>
+      </section>
+
+      <section class="about section" id="about">
+        <div class="about__container container grid">
+          <div class="about__data">
+            <span class="section__subtitle">You'll Want To Try</span>
+            <h2 class="section__title">More Than <br> One Bite</h2>
+
+            <p class="about__description">Our story begins with Grandma's recipe for the crispiest fried chicken. Selecting the finest ingredients and savoring it with your palate.</p>
+            <a href="#order" class="button">Order Fried Chicken</a>
+          </div>
+
+          <div class="about__images">
+            <img src="img/about-img-1.png" alt="imaga" class="about__img-1">
+            <img src="img/about-img-2.png" alt="imaga" class="about__img-2">
+
+            <span class="about__tooltip-1">Crispy & <br> Tasty</span>
+            <span class="about__tooltip-2">Best Recipe <br> Since 1990</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="order section" id="order">
+        <h2 class="section__title">The Tastiest <br> & <span>Most Bitten</span></h2>
+
+        <div class="order__container container grid">
+          <article class="order__card">
+            <div class="order__shape-1"></div>
+            <img src="img/order-img-1.png" alt="" class="order__img-1">
+
+            <div class="order__tooltip-1">
+              <h3 class="order__title">1 Mini <br> Bucket</h3>
+              <span class="order__subtitle">Fried Chicken</span>
+              <h3 class="order__price">$12</h3>
+
+              <button class="order__button">
+                <i class="ri-shopping-bag-4-fill"></i>
+              </button>
+            </div>
+          </article>
+
+          <article class="order__card">
+            <div class="order__shape-2"></div>
+            <img src="img/order-img-2.png" alt="" class="order__img-2">
+
+            <div class="order__tooltip-2">
+              <h3 class="order__title">2 Mini <br> Bucket</h3>
+              <span class="order__subtitle">Fried Chicken</span>
+              <h3 class="order__price">$20</h3>
+
+              <button class="order__button">
+                <i class="ri-shopping-bag-4-fill"></i>
+              </button>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
 
     <script src="/scripts/scrollreveal.min.js"></script>
     <script src="friedChickenSite.js"></script>
