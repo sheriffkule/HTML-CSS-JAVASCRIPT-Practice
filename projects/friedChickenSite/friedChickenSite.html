@@ -21,7 +21,7 @@
 
         <div class="nav__menu" id="nav-menu">
           <ul class="nav__list">
-            <li><a href="#home" class="nav__link">HOME</a></li>
+            <li><a href="#home" class="nav__link active-link">HOME</a></li>
             <li><a href="#about" class="nav__link">ABOUT US</a></li>
             <li><a href="#order" class="nav__link">ORDERS</a></li>
             <li><a href="#combo" class="nav__link">COMBO</a></li>
@@ -204,7 +204,45 @@
       </section>
     </main>
 
-    <footer class="footer"></footer>
+    <footer class="footer">
+      <div class="footer__container container grid">
+        <a href="#" class="footer__logo">
+          <img src="img/logo.svg" alt="image">
+          <span>Fried <br> Chicken</span>
+        </a>
+
+        <div class="footer__content grid">
+          <div>
+            <h3 class="footer__title">Social</h3>
+            <div class="footer__social">
+              <a href="https://www.facebook.com/" target="_blank" class="footer__social-link"><i class="ri-facebook-circle-fill"></i></a>
+              <a href="https://www.instagram.com/" target="_blank" class="footer__social-link"><i class="ri-instagram-fill"></i></a>
+              <a href="https://twitter.com/" target="_blank" class="footer__social-link"><i class="ri-twitter-x-fill"></i></a>
+            </div>
+          </div>
+          <div>
+            <h3 class="footer__title">Payment methods</h3>
+            <div class="footer__pay">
+              <img src="img/footer-card-1.png" alt="image" class="footer__pay-card">
+              <img src="img/footer-card-2.png" alt="image" class="footer__pay-card">
+              <img src="img/footer-card-3.png" alt="image" class="footer__pay-card">
+              <img src="img/footer-card-4.png" alt="image" class="footer__pay-card">
+            </div>
+          </div>
+          <div>
+            <h3 class="footer__title">Subscribe For Offers</h3>
+            <form action="" class="footer__form">
+              <input type="email" placeholder="Enter Your Email..." class="footer__input">
+              <button type="submit" class="footer__button button">Subscribe</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <span class="footer__copy"> &copy; <time id="year"></time> Made by <em><abbr title="Web Developer, Frontend Master">Sheriffkule</abbr></em> from XXIII Century</span>
+    </footer>
+
+    <a href="#" class="scrollup" id="scroll-up"><i class="ri-arrow-up-line"></i></a>
 
     <script src="/scripts/scrollreveal.min.js"></script>
     <script src="friedChickenSite.js"></script>
