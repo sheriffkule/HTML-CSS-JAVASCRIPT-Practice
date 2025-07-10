@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: radial-gradient(ellipse at center, #000024, #000);
+    height: 100vh;
+}
+
+.blackhole {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    perspective: 1200px;
+    overflow: hidden;
+}
+
+.ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 200px;
+    margin: -100px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-image: conic-gradient(from 0deg, #ff00cc, #ff8c00, #00f0ff, #ff00cc) 1;
+    opacity: 0;
+    transform-style: preserve-3d;
+    animation: move 6s linear infinite;
+    animation-fill-mode: both;
+    filter: blur(2px) drop-shadow(0 0 6px rgb(255, 0, 200, 0.2));
+    transform-origin: 52% 48%;
+}
+
+@keyframes move {
+    0% {
+        transform: translateZ(var(--z)) rotateY(var(--rotateY)) rotateX(var(--rotateX)) scale(0.8);
+    }
+    10% {
+        opacity: 0.3;
+    }
+    40% {
+        opacity: 0.6;
+    }
+    90% {
+        opacity: 0.4;
+    }
+    100% {
+        transform: translateZ(600px) rotateY(var(--rotateYEnd)) rotateX(var(--rotateXEnd)) scale(2);
+        opacity: 0;
+    }
+}
