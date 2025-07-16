@@ -9,9 +9,9 @@
 <body>
     <div class="container">
         <div class="clock">
-            <div class="circle" style="--clr:#04fc43"><i></i></div>
-            <div class="circle circle2" style="--clr:#fee800"><i></i></div>
-            <div class="circle circle3" style="--clr:#ff2972"><i></i></div>
+            <div class="circle" id="sc" style="--clr:#04fc43"><i></i></div>
+            <div class="circle circle2" id="mn" style="--clr:#fee800"><i></i></div>
+            <div class="circle circle3" id="hr" style="--clr:#ff2972"><i></i></div>
             <span style="--i:1"><b>1</b></span>
             <span style="--i:2"><b>2</b></span>
             <span style="--i:3"><b>3</b></span>
@@ -25,7 +25,17 @@
             <span style="--i:11"><b>11</b></span>
             <span style="--i:12"><b>12</b></span>
         </div>
+        <div id="time">
+            <div id="hours" style="--clr:#04fc43">00</div>
+            <div id="minutes" style="--clr:#fee800">00</div>
+            <div id="seconds" style="--clr:#ff2972">00</div>
+            <div id="ampm">AM</div>
+        </div>
     </div>
+    <h4 class="footer">
+        &copy; <time id="year"></time> Made by
+        <em><abbr title="Web Development Frontend Master">Sheriffkule</abbr></em> from XXIII Century
+      </h4>
     <script src="/widgets_script/amazingClock.js"></script>
 </body>
 </html>
