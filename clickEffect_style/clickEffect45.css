@@ -1,0 +1,67 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #212121;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input {
+    appearance: none;
+    width: 2em;
+    height: 2em;
+    background: #171717;
+    box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+    border-radius: 5px;
+    transition: all .8s;
+    margin: 0 10px;
+}
+
+input:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.plus1 {
+    position: relative;
+    top: 0.01em;
+    left: -1.45em;
+    width: 1.3em;
+    height: 0.2em;
+    background: red;
+    transform: rotate(45deg) scale(0);
+    border-radius: 5px;
+    transition: all .8s;
+}
+
+.plus2 {
+    position: relative;
+    width: 1.3em;
+    height: 0.2em;
+    background: red;
+    transform: rotate(90deg);
+    border-radius: 5px;
+    transition: all .8s;
+}
+
+input:checked {
+    box-shadow: none;
+}
+
+input:checked + .plus1 {
+    transform: rotate(180deg) scale(1) translateX(10px);
+}
