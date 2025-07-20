@@ -1,0 +1,162 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: repeating-conic-gradient(#3991f5 0 90deg, #0077ff  90deg 180deg);
+    background-size: 200px 200px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 700px;
+    background: linear-gradient(aliceblue, lightblue);
+    padding: 20px;
+    border-radius: 8px;
+    transform: translateX(-1000px) scaleY(0.1);
+    opacity: 0.2;
+    animation: intro 2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+    animation-delay: .5s;
+}
+
+@keyframes intro {
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+h1 {
+    text-align: center;
+    color: transparent;
+    background: linear-gradient(to left, #3991f5, #0077ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    margin-bottom: 20px;
+}
+
+.form-container {
+    width: clamp(300px, 100%, 700px);
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#book-title,
+#book-author {
+    flex: 1;
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-bottom: 1px solid #010849;
+    outline: none;
+}
+
+input::placeholder {
+    font-size: .9rem;
+    letter-spacing: .5px;
+    transition: .25s;
+}
+
+input:is(:focus, :focus-within)::placeholder {
+    transform: translateY(-30px);
+}
+
+#add-book,
+#export-txt {
+    padding: 10px 16px;
+    font-size: 1rem;
+    background: linear-gradient(to right, #3991f5, #0077ff);
+    outline: none;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.exportBtn {
+    margin-top: 1.5rem;
+    text-align: right;
+}
+
+#add-book:hover,
+#export-txt:hover  {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#add-book:active,
+#export-txt:active  {
+    transform: scale(1);
+}
+
+#book-list {
+    list-style: none;
+    padding: 0;
+}
+
+#book-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background: #d8d8d8;
+    border: 1px solid #c4c4c4;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+#book-list li:nth-child(even) {
+    background: #e7e7e7;
+}
+
+#book-list li .details {
+    flex: 1;
+}
+
+#book-list li button {
+    padding: 5px 12px;
+    font-size: 0.9em;
+    color: white;
+    background: #dc3545;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+#book-list li button:hover {
+    background: #c82333;
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.footer {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #222;
+  text-wrap: pretty;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: default;
+  z-index: -1;
+}
+
+.footer em {
+  color: #0400ff;
+}
+
+@media screen and (max-width: 576px) {
+    .form-container {
+        flex-direction: column;
+    }
+}

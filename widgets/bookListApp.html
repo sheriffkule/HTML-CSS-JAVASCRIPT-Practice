@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book List App</title>
+    <link rel="stylesheet" href="/widgets_style/bookListApp.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Book List App</h1>
+      <div class="form-container">
+        <input type="text" id="book-title" placeholder="Book Title" />
+        <input type="text" id="book-author" placeholder="Author" />
+        <button id="add-book">Add Book</button>
+      </div>
+      <ul id="book-list"></ul>
+      <div class="exportBtn">
+        <button id="export-txt">Export as TXT</button>
+      </div>
+    </div>
+    <h4 class="footer">
+      &copy; <time id="year"></time> Made by
+      <em><abbr title="Frontend Web Development">Sheriffkule</abbr></em> from XXIII Century
+    </h4>
+    <script src="/widgets_script/bookListApp.js"></script>
+  </body>
+</html>
