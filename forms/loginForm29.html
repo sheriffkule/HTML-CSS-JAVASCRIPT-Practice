@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login & Signup Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="/forms_style/loginForm29.css" />
+  </head>
+  <body>
+    <canvas id="canvas1"></canvas>
+    <button class="login-btn" onclick="openLoginForm()">Login</button>
+    <div class="form-container" id="loginForm">
+      <div class="form-box">
+        <h2>Login</h2>
+        <form onsubmit="return validateLogin()">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" required />
+          <label for="loginPassword">Password</label>
+          <div class="password-wrapper">
+            <input type="password" id="loginPassword" required />
+            <i class="fa-solid fa-eye toggle-password-icon" onclick="togglePassword('loginPassword', this)"></i>
+          </div>
+          <button type="submit">Login</button>
+        </form>
+        <a href="javascript:void(0)" onclick="openSignupForm()">Don't have an acount? Sign Up</a>
+      </div>
+    </div>
+
+    <div class="form-container" id="signupForm">
+      <div class="form-box">
+        <h2>Sign Up</h2>
+        <form onsubmit="return validateSignup()">
+          <label for="signUpEmail">Email</label>
+          <input type="email" id="signUpEmail" required />
+          <label for="signupPassword">Password</label>
+          <div class="password-wrapper">
+            <input type="password" id="signupPassword" required />
+            <i class="fa-solid fa-eye toggle-password-icon" onclick="togglePassword('signupPassword',this)"></i>
+          </div>
+          <label for="confirmPassword">Confirm Password</label>
+          <div class="password-wrapper">
+            <input type="password" id="confirmPassword" required />
+            <i class="fa-solid fa-eye toggle-password-icon" onclick="togglePassword('confirmPassword',this)"></i>
+          </div>
+          <button type="submit">SignUp</button>
+        </form>
+      </div>
+    </div>
+    <script src="/forms_script/loginForm29.js"></script>
+  </body>
+</html>

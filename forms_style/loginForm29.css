@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: rgb(79, 158, 132);
+}
+
+#canvas1 {
+    background: black;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.login-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 28px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    z-index: 100;
+    cursor: pointer;
+}
+
+.form-container {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.form-box {
+    background-color: #ccc;
+    padding: 20px 30px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.form-box h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.form-box label {
+    display: block;
+    text-align: left;
+    margin-block: 10px;
+    font-size: 14px;
+}
+
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.form-box input[type="password"],
+.form-box input[type="email"],
+.form-box input[type="text"] {
+    width: 100%;
+    height: 40px;
+    padding: 8px 35px 8px 10px;
+    border: 1px solid #aaa;
+    outline: none;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.toggle-password-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: #555;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .15s;
+}
+
+.toggle-password-icon:hover {
+    color: #222;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.form-box button[type="submit"] {
+    margin-top: 16px;
+    width: 100%;
+    padding: 10px 28px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    border-radius: 6px;
+}
+
+.form-box a {
+    display: inline-block;
+    margin-top: 15px;
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
