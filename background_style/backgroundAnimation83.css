@@ -1,0 +1,30 @@
+body {
+    background: #222;
+    overflow: hidden;
+}
+
+h1 {
+    text-align: center;
+    color: #0c6300;
+}
+
+i {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    background: #0f0;
+    pointer-events: none;
+    animation: animate 2s linear forwards;
+}
+
+@keyframes animate {
+    from {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+    to {
+        opacity: 0;
+        transform: translate(var(--x), var(--y));
+    }
+}
