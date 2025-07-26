@@ -1,0 +1,119 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(#0091ff, #4db2ff);
+}
+
+#box {
+  position: relative;
+  width: 260px;
+  height: 340px;
+  transform-style: preserve-3d;
+}
+
+#box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(#fff 40%, #bbb);
+    transform: rotateX(90deg) translateZ(130px);
+}
+
+#box::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(#111, #777);
+    transform: rotateX(90deg) translateZ(-300px);
+    border-radius: 20px;
+    filter: blur(20px);
+}
+
+#box div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+#box div span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+    background: linear-gradient(#ccc, #f1f1f1);
+}
+
+#box div span:nth-child(1) {
+    transform: rotateY(0deg) translate3d(0, 0, 130px);
+}
+
+#box div span:nth-child(2) {
+    transform: rotateY(90deg) translate3d(0, 0, 130px);
+}
+
+#box div span:nth-child(3) {
+    transform: rotateY(180deg) translate3d(0, 0, 130px);
+}
+
+#box div span:nth-child(4) {
+    transform: rotateY(270deg) translate3d(0, 0, 130px);
+}
+
+#box div span .container {
+    text-align: center;
+}
+
+#box div span .container .side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#box div span .container .side h2 {
+    font-size: 5em;
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    font-weight: 900;
+    line-height: 1.2em;
+    color: #0e2f56;
+}
+
+#box div span .container .side h3 {
+    font-size: 2.5em;
+    text-transform: uppercase;
+    writing-mode: vertical-lr;
+    color: #fff;
+    letter-spacing: 0.15em;
+    background-color: #0e2f56;
+    padding-inline: 20px 10px;
+    font-weight: 300;
+}
+
+#box div span .container .side h4 {
+    font-size: 2.2em;
+    writing-mode: vertical-lr;
+    text-transform: uppercase;
+    text-orientation: upright;
+    line-height: 2em;
+    color: #0e2f56;
+}
