@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login & Register</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+    <link rel="stylesheet" href="/forms_style/loginForm30.css" />
+  </head>
+  <body>
+    <div class="box">
+      <div class="innerBox">
+        <div class="form" id="lgForm">
+          <h2>Login</h2>
+          <p>Sign in to Continue</p>
+          <br />
+          <form>
+            <div class="inputBx">
+              <input type="email" required />
+              <span>Email</span>
+            </div>
+            <div class="inputBx password">
+              <input type="password" required />
+              <span>Password</span>
+            </div>
+            <p><a href="" class="forgot">Forgot Password</a></p>
+            <div class="inputBx">
+              <input type="submit" value="Log In" />
+            </div>
+            <a href="" class="fbbtn">
+              <i class="bx bxl-facebook-square">Connect With Facebook</i>
+            </a>
+            <p class="p1">I'm a new user, <a href="javascript:void(0)" id="signup">Sign Up</a></p>
+          </form>
+        </div>
+
+        <div class="rg-form form" id="rgForm">
+          <h2>Registration</h2>
+          <p>Sign up to get Started!</p>
+          <form>
+            <div class="inputBx">
+              <input type="text" required />
+              <span>Name</span>
+            </div>
+            <div class="inputBx">
+              <input type="email" required />
+              <span>Email</span>
+            </div>
+            <div class="inputBx password">
+              <input type="password" required />
+              <span>Password</span>
+            </div>
+            <div class="inputBx">
+              <input type="submit" value="Sign Up" />
+            </div>
+            <a href="javascript:void(0)" class="fbbtn">
+              <i class="bx bxl-facebook-square">Connect With Facebook</i>
+            </a>
+            <p class="p1">I'm already a member, <a href="" id="login">Sign In</a></p>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="/forms_script/loginForm30.js"></script>
+  </body>
+</html>

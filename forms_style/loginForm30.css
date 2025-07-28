@@ -1,0 +1,163 @@
+:root {
+    --primary-color: #6961ff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+    background: url(/images/darkhex.jpg) #121212 no-repeat;
+    height: 100vh;
+    background-size: cover;
+    width: 100%;
+    background-position: top;
+}
+
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.innerBox {
+    position: relative;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 20px;
+}
+
+.rg-form {
+    display: none;
+}
+
+.form h2 {
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.form p {
+    font-size: 15px;
+    margin-top: 5px;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form .inputBx {
+    position: relative;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.form .inputBx input {
+    width: 100%;
+    outline: none;
+    background: transparent;
+    padding-left: 20px;
+    font-size: 14px;
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    height: 55px;
+}
+
+.form .inputBx input[type="submit"] {
+    background: var(--primary-color);
+    width: 100%;
+    box-shadow: none;
+    letter-spacing: 1px;
+    cursor: pointer;
+    color: white;
+    margin-top: 10px;
+    font-size: 20px;
+    transition: 1.5s;
+    height: 50px;
+    border: none;
+    font-weight: 600;
+}
+
+.form .inputBx input[type="submit"]:hover {
+    background: white;
+    transition: .5s;
+    color: var(--primary-color);
+}
+
+.fbbtn {
+    padding: 15px 60px;
+    width: 100%;
+    background: #ebeef3;
+    color: #425690;
+    font-weight: 600;
+    text-decoration: dashed;
+    transition: .25s ease-in-out;
+}
+
+.fbbtn .bx {
+    font-size: 22px;
+    vertical-align: bottom;
+}
+
+.fbbtn:hover {
+    background: #46558c;
+    color: white;
+}
+
+.form .inputBx input::placeholder {
+    color: white;
+}
+
+.form .inputBx span {
+    position: absolute;
+    left: 0;
+    padding: 16px;
+    display: inline-block;
+    transition: 0.5s;
+    color: var(--primary-color);
+    pointer-events: none;
+}
+
+.form .inputBx input:focus ~ span,
+.form .inputBx input:valid ~ span {
+    transform: translate(15px, -12px);
+    text-transform: uppercase;
+    font-size: 12px;
+    border-radius: 5px;
+    background: white;
+    padding: 2px 10px;
+    transition: .5s ease-in-out;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border: 2px solid white;
+}
+
+.forgot {
+    float: right;
+    font-size: 12px;
+    margin-top: -15px;
+    color: var(--primary-color);
+}
+
+.p1, .p2 {
+    text-align: center;
+    padding-top: 20px;
+}
+
+.form p a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}
