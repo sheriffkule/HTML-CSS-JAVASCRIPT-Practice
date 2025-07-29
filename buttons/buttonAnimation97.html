@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Liquid Effect</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+      integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/buttons_style/buttonAnimation97.css" />
+  </head>
+  <body>
+    <div class="button">
+      <i class="fa-brands fa-github"></i>
+      <div class="blurred">
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <div class="button">
+      <i class="fa-brands fa-linkedin"></i>
+      <div class="blurred">
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <div class="button">
+      <i class="fa-brands fa-debian"></i>
+      <div class="blurred">
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <svg>
+<defs>
+  <filter id="goo">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="name" />
+    <feColorMatrix
+      in="name"
+      type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 30 -15"
+      result="aab" />
+    <feBlend in="SourceGraphic" in2="aab" />
+  </filter>
+</defs>
+</svg>
+
+  </body>
+</html>
