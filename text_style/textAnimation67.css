@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Bungee", sans-serif;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: #d1cccc;
+}
+
+div {
+    background: lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 90px;
+}
+
+h1 {
+    font-size: clamp(60px, 10vw, 120px);
+    position: relative;
+    color: rgba(255, 255, 255, 0.8);
+    z-index: 2;
+    padding: 10px 20px;
+    transform: skewX(10deg);
+}
+
+h1::after {
+    content: 'SheriffKule';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #000;
+    transform: translate(-52px, 20px) scaleY(0.7) skew(40deg);
+    z-index: -1;
+    filter: blur(5px);
+    mask: linear-gradient(transparent, #000);
+}
