@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: content-box;
+}
+
+html {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 5vw;
+    /* background: linear-gradient(#111, #333); */
+    background-color: #333;
+    color: ivory;
+    -webkit-text-stroke: 2px rgb(230, 16, 30);
+    text-shadow: 3px 3px;
+}
+
+h1 {
+    box-shadow: 0 0 5vw,
+    inset 2px 2px 5px #000;
+    overflow: hidden;
+    padding-inline: .25em;
+    border-radius: .15em;
+    border: 2px solid;
+    rotate: -2deg;
+}
+
+h1::before {
+    content: '';
+    height: 0.6em;
+    margin: 0 0 -0.55em;
+    margin-inline: -2px;
+    rotate: -1deg;
+    background: radial-gradient(circle at center, #333 25%, transparent 35%) center / 5px 5px;
+    box-shadow: 0 0 0.15em 0.1em #333,
+    inset 0 0 10px -5px #333;
+    display: block;
+}
