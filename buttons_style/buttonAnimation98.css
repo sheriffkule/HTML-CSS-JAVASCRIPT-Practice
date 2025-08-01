@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: radial-gradient(#020516, #000);
+}
+
+button {
+    padding: 12px 28px;
+    border: 2px solid #b21065;
+    border-radius: 10px;
+    background: linear-gradient(to bottom, #fff, transparent 50% 90%, #f5cbbcf6),
+    repeating-linear-gradient(60deg, #bc05829a 0 10px, transparent 10px 20px),
+    linear-gradient(to bottom, #fd01ae, #eee5e7);
+    color: #fff;
+    box-shadow: 0 10px 0 #0005,
+    0 5px 0 #b21065,
+    0 4px 0 7px #fff,
+    0 0 30px 10px #b21065;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 22px;
+    cursor: pointer;
+    transition: all .5s;
+}
+
+button:active {
+    box-shadow: 0 0 0 #0005,
+    0 0 0 #b21065,
+    0 0 0 7px #fff,
+    0 0 30px 10px #b21065;
+    transform: translateY(12px);
+}
