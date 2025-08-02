@@ -1,0 +1,176 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: black;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;
+}
+
+.container {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    background: rgba(20, 20, 20, 0.8);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 30px;
+    color: #ddd;
+    text-align: center;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.border-effect {
+    position: absolute;
+    border-radius: 12px;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.border-top {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #933066, #33f);
+    animation: border-flow 3s linear infinite;
+    background-size: 200% 100%;
+}
+
+.border-bottom {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #ff0, #f60);
+    animation: border-flow 3s linear infinite .75s;
+    background-size: 200% 100%;
+}
+
+.border-right {
+    top: 0;
+    right: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, #0fc, #c0f);
+    animation: border-flow 3s linear infinite 0.75s;
+    background-size: 200% 100%;
+}
+
+.border-left {
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, #0ff, #06f);
+    animation: border-flow 3s linear infinite 0.75s;
+    background-size: 200% 100%;
+}
+
+.corner {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 3px solid;
+    border-radius: 50%;
+    animation: corner-pulse 2s ease-in-out infinite;
+}
+
+.corner-tl {
+    top: -20px;
+    left: -20px;
+    border-color: #010b76;
+    animation-delay: 0s;
+}
+
+.corner-tr {
+    top: -20px;
+    right: -20px;
+    border-color: #0fc;
+    animation-delay: 0.5s;
+}
+
+.corner-br {
+    bottom: -20px;
+    right: -20px;
+    border-color: #ff0;
+    animation-delay: 1s;
+}
+
+.corner-bl {
+    bottom: -20px;
+    left: -20px;
+    border-color: #0821c3;
+    animation-delay: 1.5s;
+}
+
+@keyframes border-flow {
+    from {
+        background-position: 100% 0;
+    }
+    to {
+        background-position: -100% 0;
+    }
+}
+
+@keyframes corner-pulse {
+    0%, 100% {
+        transform: scale(0.8);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+h1 {
+    margin-bottom: 20px;
+    background: linear-gradient(90deg, blue, rgb(77, 9, 122), #ff0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    font-size: 2.5rem;
+}
+
+p {
+    line-height: 1.5;
+    opacity: 0.9;
+}
+
+.container::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg, #c0f, #0fc, #ff0, #33f);
+    background-size: 400%, 400%;
+    z-index: -2;
+    filter: blur(20px);
+    opacity: 0.5;
+    border-radius: 12px;
+    animation: glow-gradient 8s ease infinite;
+}
+
+@keyframes glow-gradient {
+    0% {
+        background-position: 0 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}
