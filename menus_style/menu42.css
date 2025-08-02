@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(#111, #333, #111);
+    min-height: 100vh;
+}
+
+.container {
+    height: 70px;
+    width: 370px;
+    background: #22243b;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    padding-inline: 15px;
+}
+
+.container li {
+    list-style-type: none;
+    height: 70px;
+    width: 70px;
+    text-align: center;
+    color: #fff;
+    float: left;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.container li a {
+    color: #fff;
+    font-size: 24px;
+    position: relative;
+    top: 22px;
+    transition: all .3s;
+    pointer-events: none;
+}
+
+.container li p {
+    margin-top: 35px;
+    font-size: 14px;
+    transition: all .3s;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.container .marker-box {
+    width: 55px;
+    height: 55px;
+    background: #222327;
+    position: absolute;
+    top: -30px;
+    left: 21px;
+    transform: rotate(45deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container .marker-box .marker {
+    height: 45px;
+    width: 45px;
+    background: #6840c5;
+}
+
+.container li.active a {
+    top: -17px;
+    font-size: 28px;
+    transition: all .3s;
+}
+
+.container li.active p {
+    opacity: 1;
+    margin-top: 6px;
+    transition: all .3s;
+}
+
+.container li:nth-child(1).active ~ .marker-box {
+    left: 21px;
+    transition: all .3s;
+    transform: rotate(45deg);
+}
+
+.container li:nth-child(2).active ~ .marker-box {
+    left: 90px;
+    transition: all .3s;
+    transform: rotate(135deg);
+}
+
+.container li:nth-child(3).active ~ .marker-box {
+    left: 156px;
+    transition: all .3s;
+    transform: rotate(225deg);
+}
+
+.container li:nth-child(4).active ~ .marker-box {
+    left: 224px;
+    transition: all .3s;
+    transform: rotate(315deg);
+}
+
+.container li:nth-child(5).active ~ .marker-box {
+    left: 293px;
+    transition: all .3s;
+    transform: rotate(405deg);
+}
