@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: #2d2c3e;
+}
+
+.container {
+    padding: 20px 20px 30px 20px;
+    width: 400px;
+    background: #1e1b2e;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+}
+
+.container .app-title {
+    text-align: center;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    background: linear-gradient(90deg, #fff, #efbbff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    font-size: 30px;
+    margin-top: 8px;
+}
+
+.container .time-options {
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+}
+
+.container .time-options button {
+    all: unset;
+    height: 40px;
+    width: 85px;
+    color: #fff;
+    background: #422f66;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    float: left;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.container .time-options button:hover,
+.container .control-buttons button:hover {
+    filter: saturate(1.5);
+    transform: scale(1.03);
+    box-shadow: 0 5px 8px rgba(255, 255, 255, 0.1);
+}
+
+.container .time-options button:active,
+.container .control-buttons button:active {
+    transform: scale(1);
+}
+
+.container .time-options button.active {
+    background: #7d59c1;
+}
+
+.container .progress-bar {
+    height: 220px;
+    width: 220px;
+    background: conic-gradient(#664efe 360deg, #422f66 0deg);
+    border-radius: 50%;
+    margin: auto;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: pulse 3s infinite;
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(0.95);
+    }
+    50% {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(0.95);
+    }
+}
+
+.container .progress-bar .progress-bar-inner {
+    height: 200px;
+    width: 200px;
+    background: #1e1b2e;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 35px;
+}
+
+.container .control-buttons {
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 25px;
+}
+
+.container .control-buttons button {
+    all: unset;
+    height: 40px;
+    width: 100px;
+    background: #7d59c1;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    transition: .25s;
+}
+
+/* .container .control-buttons .reset-btn {
+    position: absolute;
+    right: 30px;
+} */
+
+.container .control-buttons .stop-btn {
+    display: none;
+}
