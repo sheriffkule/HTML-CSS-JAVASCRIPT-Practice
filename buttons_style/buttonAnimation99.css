@@ -1,0 +1,76 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    flex-direction: column;
+    background: rgb(31, 31, 31);
+    gap: 25px;
+}
+
+button {
+    position: relative;
+    font-size: 1.2em;
+    padding: 0.7em 1.5em;
+    background: #bf0426;
+    border: none;
+    border-radius: 0.5em;
+    color: #dedede;
+    cursor: pointer;
+    box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.3);
+    transition: .3s;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: -2px;
+    left: -2px;
+    background: linear-gradient(135deg, rgb(31,31,31) 0%, rgb(33,33,33) 50%, #960422 50%, #bf0426 60%);
+    border-radius: 0 0 0.5em 0;
+    box-shadow: 0.2em 0.2em 0.2em rgba(0, 0, 0, 0.3);
+    transition: all 0.8s;
+}
+
+button::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: -2px;
+    right: -2px;
+    background: linear-gradient(225deg, rgb(31,31,31) 0%, rgb(33,33,33) 50%, #960422 50%, #bf0426 60%);
+    border-radius: 0 0 0 0.5em;
+    box-shadow: -0.2em 0.2em 0.2em rgba(0, 0, 0, 0.3);
+    transition: all 0.8s;
+}
+
+button:nth-child(1)::after {
+    all: unset;
+}
+
+button:nth-child(3)::before {
+    all: unset;
+}
+
+button:hover {
+    scale: 1.1;
+}
+
+button:hover::before {
+    width: 1.6em;
+    height: 1.6em;
+}
+
+button:hover::after {
+    width: 1.6em;
+    height: 1.6em;
+}
