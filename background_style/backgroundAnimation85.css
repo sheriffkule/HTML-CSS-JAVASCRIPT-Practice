@@ -1,0 +1,94 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+    'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #ddd;
+  background: fixed linear-gradient(#555, #000 70%),
+    fixed repeating-linear-gradient(#949494, #949494 1px, transparent 1px, transparent 40px),
+    fixed repeating-linear-gradient(to right, #949494, #949494 1px, transparent 1px, transparent 40px);
+  padding: 0 2rem;
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  gap: 1.5rem;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 2vw + 2rem, 6rem);
+  line-height: 1.3;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: transparent;
+  background: repeating-linear-gradient(90deg, white 10%, lightblue 15%, white 20%);
+  background-clip: text;
+}
+
+.btn {
+  display: inline-block;
+  padding: 1rem 4rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: currentColor;
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid #ff8059;
+  border-radius: 0.5rem;
+  outline: none;
+  transition: 0.5s ease-out;
+  transition-property: color, background-color, transform;
+}
+
+.btn:hover,
+.btn:focus {
+  color: #fff;
+  background-color: #ff8059;
+  transform: scale(1.05);
+}
+
+.pointer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 2rem;
+  aspect-ratio: 1;
+  background: radial-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.25));
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.25), 0 0 50px rgba(255, 255, 255, 0.55);
+  border: 1px solid transparent;
+  border-radius: 100%;
+  pointer-events: none;
+  transform: translate3d(var(--mouseX, 0), var(--mouseY, 0), 0) translate(-50%, -50%);
+  transition-property: transform, width, border, background;
+}
+
+body:has(.btn:hover) .pointer {
+  width: 5rem;
+  background: transparent;
+  border-color: rgba(0, 0, 0, 0.5);
+  border-width: 4px;
+  transition: 0.2s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pointer,
+  #coordinates {
+    display: none;
+  }
+}
+
+@media (pointer: coarse) {
+  .pointer,
+  #coordinates {
+    display: none;
+  }
+}
