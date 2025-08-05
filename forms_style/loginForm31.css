@@ -1,0 +1,136 @@
+:root {
+    --main-color: #5855ff;
+    --input-padding: 10px;
+    --border-color: #ccc;
+    --font: 'Segoe UI', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    interpolate-size: allow-keywords;
+}
+
+body {
+    font-family: var(--font);
+    background: linear-gradient(135deg, var(--main-color) 0%, transparent 50%, var(--main-color) 100%),
+    linear-gradient(225deg, var(--main-color) 0%, transparent 50%, var(--main-color) 100%),
+    radial-gradient(var(--main-color), silver, var(--main-color)) ;
+    background-size: 100% 100%, 100% 100%, 20px 20px;
+    background-repeat: round;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.container {
+    max-width: 600px;
+    width: 100%;
+    background: rgba(218, 218, 218, 0.1);
+    backdrop-filter: blur(5px);
+    padding: 20px 30px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    border-top: 5px solid var(--main-color);
+    border-radius: 10px;
+    color: #000;
+}
+
+.container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    margin-bottom: 25px;
+    height: 45px;
+}
+
+.form-group i {
+    background-color: rgb(203, 208, 255);
+    padding: var(--input-padding) 20px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+}
+
+.form-group input,
+.form-group select {
+    flex: 1;
+    padding: var(--input-padding);
+    border: 1px solid var(--border-color);
+    outline: none;
+    color: #000;
+    background: transparent;
+}
+
+select {
+    cursor: pointer;
+    transition: .25s;
+}
+select:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.form-group input::placeholder {
+    color: #000;
+    transition: .3s;
+}
+.form-group input:focus::placeholder {
+    transform: translateX(500px);
+}
+
+.double-inputs {
+    display: flex;
+    gap: 10px;
+}
+
+.double-inputs .form-group {
+    flex: 1;
+}
+
+.gender {
+    margin: 16px 0;
+}
+
+.gender label {
+    margin-right: 20px;
+}
+
+.checkbox {
+    margin: 10px 0;
+}
+
+.checkbox label,
+.gender label {
+    color: #000;
+}
+
+.register-btn {
+    background: var(--main-color);
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 5px;
+    transition: .25s;
+}
+
+.register-btn:hover {
+    transform: scale(1.02) translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    letter-spacing: 1px;
+}
+
+@media screen and (max-width: 600px) {
+    .double-inputs {
+        flex-direction: column;
+    }
+}
