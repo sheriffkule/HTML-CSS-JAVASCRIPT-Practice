@@ -6,16 +6,15 @@
     --posFlip: 0;
 }
 
-* {
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
+} */
 
 body,
 .seaLevel {
     height: 100vh;
-    font-family: 'Open Sans';
     background: linear-gradient(to bottom, #87ceeb, #1e90ff);
     overflow: hidden;
 }
@@ -26,7 +25,7 @@ body,
     left: 0;
     width: 100%;
     height: 100%;
-    filter: drop-shadow(calc(var(--coilSize) * 4) calc(var(--coilSize) / 3) 5px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(calc(var(--coilSize)*4) calc(var(--coilSize)/3) 5px rgba(0, 0, 0, 0.3));
 }
 
 .fish .koiCoil {
@@ -41,24 +40,25 @@ body,
     margin-top: calc(var(--coilSize) / -2);
     transform: scale(var(--scaleMe), var(--scaleMe));
     filter: contrast(200%);
-    offset-path: path("M 0 200 C 100 100, 200 300, 300 200, S 500 100, 600 200");
+    offset-path: path("M 0 200 C 100 100, 200 300, 300 200 S 500 100, 600 200");
     animation: fishAnim 20s linear infinite;
-    box-shadow: calc(var(--coilSize) / -2) calc(var(--coilSize) / -10) 0 white inset;
+    box-shadow: calc(var(--coilSize) /-2) calc(var(--coilSize) /-10) 0 white inset;
 }
 
 .fish:nth-of-type(2) {
     transform-origin: top center;
     transform: scale(-1, 1);
+    left: 10%;
     filter: drop-shadow(calc(var(--coilSize) * -4) calc(var(--coilSize) / 3) 5px rgba(0, 0, 0, 0.3));
 }
 
 .fish:nth-of-type(2) .koiCoil {
     background: white;
-    box-shadow: calc(var(--coilSize) / -2) calc(var(--coilSize) / -10)  0 rgb(9, 30, 148);
+    box-shadow: calc(var(--coilSize) / 2) calc(var(--coilSize) / 10)  0 rgb(9, 30, 148);
 }
 
-.fish .koiCoil:nth-last-of-type(15),
-.fish:nth-of-type(14) {
+.fish .koiCoil:nth-of-type(15),
+.fish .koiCoil:nth-of-type(14) {
     background: rgb(114, 157, 44);
 }
 
@@ -71,10 +71,7 @@ body,
     content: '';
     position: absolute;
     color: black;
-    font-weight: 800;
-    text-align: center;
     line-height: 60%;
-    font-size: calc(var(--coilSize) * 1.2);
 }
 
 .fish .koiCoil:nth-last-of-type(1)::before {
@@ -83,7 +80,7 @@ body,
     width: 100%;
     height: 50%;
     top: 25%;
-    left: 100%;
+    left: -250%;
     border-radius: var(--coilSize);
     background: white;
     transform-origin: center right;
@@ -92,7 +89,7 @@ body,
 
 .fish .koiCoil:nth-of-type(14) {
     --scaleMe: 1.2;
-    animation-delay: calc(var(--delayCount) * 2);
+    animation-delay: calc(var(--delayCount) * 1);
 }
 
 .fish .koiCoil:nth-of-type(13) {
@@ -126,6 +123,188 @@ body,
 }
 
 .fish .koiCoil:nth-of-type(7) {
-    --scaleMe: 1.2;
-    animation-delay: calc(var(--delayCount) * 2);
+    --scaleMe: 2;
+    animation-delay: calc(var(--delayCount) * 8);
+}
+
+.fish .koiCoil:nth-of-type(6) {
+    --scaleMe: 1.9;
+    animation-delay: calc(var(--delayCount) * 9);
+}
+
+.fish .koiCoil:nth-of-type(5) {
+    --scaleMe: 1.75;
+    animation-delay: calc(var(--delayCount) * 10);
+}
+
+.fish .koiCoil:nth-of-type(4) {
+    --scaleMe: 1.55;
+    animation-delay: calc(var(--delayCount) * 11);
+}
+
+.fish .koiCoil:nth-of-type(3) {
+    --scaleMe: 1.35;
+    animation-delay: calc(var(--delayCount) * 12);
+}
+
+.fish .koiCoil:nth-of-type(2) {
+    --scaleMe: 2;
+    animation-delay: calc(var(--delayCount) * 13);
+}
+
+.fish .koiCoil:nth-of-type(1) {
+    animation-delay: calc(var(--delayCount) * 14);
+}
+
+.fish .koiCoil:nth-of-type(12)::before,
+.fish .koiCoil:nth-of-type(12)::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 20%;
+    top: -10%;
+    left: -100%;
+    border-radius: var(--coilSize);
+    background: white;
+    transform-origin: center right;
+    animation: sideFlip .5s ease-in-out alternate infinite;
+}
+
+.fish .koiCoil:nth-of-type(12)::after {
+    --scaleFlip: -1;
+    --posFlip: calc(var(--coilSize) * -1);
+}
+
+@keyframes fishAnim {
+    from {
+        offset-distance: 0%;
+    }
+    to {
+        offset-distance: 100%;
+    }
+}
+
+@keyframes backFlip {
+    from {
+        transform: rotate(45deg);
+    }
+    to {
+        transform: rotate(-45deg);
+    }
+}
+
+@keyframes sideFlip {
+    from {
+        transform: scale(1, var(--scaleFlip)) translateY(var(--posFlip)) rotate(80deg);
+    }
+    to {
+        transform: scale(1, var(--scaleFlip)) translateY(var(--posFlip)) rotate(20deg);
+    }
+} */
+
+.seaLevel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.ripple {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: rippleEffect 3s linear infinite;
+}
+
+.ripple:nth-child(2) {
+    animation-delay: 1s;
+}
+
+.ripple:nth-child(2) {
+    animation-delay: 2s;
+}
+
+@keyframes rippleEffect {
+    from {
+        width: 20px;
+        height: 20px;
+        opacity: 0.7;
+    }
+    to {
+        width: 300px;
+        height: 300px;
+        opacity: 0;
+    }
+}
+
+.ocean {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+.octopus {
+    position: absolute;
+    bottom: 200px;
+    left: 30%;
+    width: 60px;
+    height: 60px;
+    background: purple;
+    border-radius: 50%;
+    animation: bob 2s ease-in-out infinite;
+}
+
+.octopus .eye {
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 20px;
+}
+
+.octopus .eye:first-child {
+    left: 15px;
+}
+
+/* .octopus .eye:last-child(2) {
+    right: 15px;
+} */
+
+.octopus .tentacle {
+    width: 10px;
+    height: 20px;
+    background: purple;
+    position: absolute;
+    bottom: -20px;
+    border-radius: 5px;
+}
+
+.octopus .tentacle:nth-child(3) {
+    left: 10px;
+}
+
+.octopus .tentacle:nth-child(4) {
+    left: 25px;
+}
+
+.octopus .tentacle:nth-child(5) {
+    right: 10px;
+}
+
+@keyframes bob {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
 }
