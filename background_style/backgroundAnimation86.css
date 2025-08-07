@@ -1,0 +1,131 @@
+:root {
+    --coilSize: 14px;
+    --delayCount: 40ms;
+    --scaleMe: 1;
+    --scaleFlip: 1;
+    --posFlip: 0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body,
+.seaLevel {
+    height: 100vh;
+    font-family: 'Open Sans';
+    background: linear-gradient(to bottom, #87ceeb, #1e90ff);
+    overflow: hidden;
+}
+
+.fish {
+    position: absolute;
+    top: -35%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(calc(var(--coilSize) * 4) calc(var(--coilSize) / 3) 5px rgba(0, 0, 0, 0.3));
+}
+
+.fish .koiCoil {
+    position: absolute;
+    width: var(--coilSize);
+    height: var(--coilSize);
+    background: rgb(231, 56, 79);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    margin-left: calc(var(--coilSize) / -2);
+    margin-top: calc(var(--coilSize) / -2);
+    transform: scale(var(--scaleMe), var(--scaleMe));
+    filter: contrast(200%);
+    offset-path: path("M 0 200 C 100 100, 200 300, 300 200, S 500 100, 600 200");
+    animation: fishAnim 20s linear infinite;
+    box-shadow: calc(var(--coilSize) / -2) calc(var(--coilSize) / -10) 0 white inset;
+}
+
+.fish:nth-of-type(2) {
+    transform-origin: top center;
+    transform: scale(-1, 1);
+    filter: drop-shadow(calc(var(--coilSize) * -4) calc(var(--coilSize) / 3) 5px rgba(0, 0, 0, 0.3));
+}
+
+.fish:nth-of-type(2) .koiCoil {
+    background: white;
+    box-shadow: calc(var(--coilSize) / -2) calc(var(--coilSize) / -10)  0 rgb(9, 30, 148);
+}
+
+.fish .koiCoil:nth-last-of-type(15),
+.fish:nth-of-type(14) {
+    background: rgb(114, 157, 44);
+}
+
+.fish:nth-of-type(2) .koiCoil:nth-last-of-type(15),
+.fish:nth-of-type(2) .koiCoil:nth-last-of-type(14) {
+    background: white;
+}
+
+.fish .koiCoil:nth-last-of-type(15)::after {
+    content: '';
+    position: absolute;
+    color: black;
+    font-weight: 800;
+    text-align: center;
+    line-height: 60%;
+    font-size: calc(var(--coilSize) * 1.2);
+}
+
+.fish .koiCoil:nth-last-of-type(1)::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    top: 25%;
+    left: 100%;
+    border-radius: var(--coilSize);
+    background: white;
+    transform-origin: center right;
+    animation: backFlip .2s ease-in-out alternate infinite;
+}
+
+.fish .koiCoil:nth-of-type(14) {
+    --scaleMe: 1.2;
+    animation-delay: calc(var(--delayCount) * 2);
+}
+
+.fish .koiCoil:nth-of-type(13) {
+    --scaleMe: 1.35;
+    animation-delay: calc(var(--delayCount) * 2);
+}
+
+.fish .koiCoil:nth-of-type(12) {
+    --scaleMe: 1.55;
+    animation-delay: calc(var(--delayCount) * 3);
+}
+
+.fish .koiCoil:nth-of-type(11) {
+    --scaleMe: 1.75;
+    animation-delay: calc(var(--delayCount) * 4);
+}
+
+.fish .koiCoil:nth-of-type(10) {
+    --scaleMe: 1.9;
+    animation-delay: calc(var(--delayCount) * 5);
+}
+
+.fish .koiCoil:nth-of-type(9) {
+    --scaleMe: 2;
+    animation-delay: calc(var(--delayCount) * 7);
+}
+
+.fish .koiCoil:nth-of-type(8) {
+    --scaleMe: 1.9;
+    animation-delay: calc(var(--delayCount) * 8);
+}
+
+.fish .koiCoil:nth-of-type(7) {
+    --scaleMe: 1.2;
+    animation-delay: calc(var(--delayCount) * 2);
+}
