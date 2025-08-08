@@ -18,6 +18,8 @@ body {
     max-width: 1200px;
     margin: auto;
     display: flex;
+    flex-direction: column;
+    gap: 20px;
     align-items: center;
     justify-content: center;
     padding: 20px;
@@ -42,12 +44,27 @@ body {
     cursor: pointer;
     font-size: 14px;
     font-weight: 600;
+    z-index: 2;
     background: transparent;
     transition: all .3s;
 }
 
+.tab-header .tab-btn i {
+    margin-right: 5px;
+    font-size: 16px;
+}
+
+.tab-header[full-width] .tab-btn {
+    flex: 1;
+    text-align: center;
+}
+
 .tab-header .tab-btn:hover,
 .tab-header .tab-btn:active {
+    color: var(--primary-color);
+}
+
+.tab-header .tab-btn.active i {
     color: var(--primary-color);
 }
 
@@ -72,4 +89,46 @@ body {
     font-size: 14px;
     transition: all .3s;
     text-align: justify;
+}
+
+.tab-header[border] .tab-btn {
+    border: 1px solid #e5e5e5;
+}
+
+.tab-header[border] .tab-btn.active {
+    color: #fff;
+    border-color: var(--primary-color);
+}
+
+.tab-header[border] .underline {
+    height: 100%;
+    bottom: 0;
+}
+
+.tab-header[background] {
+    background: var(--primary-color);
+}
+
+.tab-header[background] .tab-btn {
+    color: #fff;
+}
+
+.tab-header[background] .tab-btn.active {
+    color: var(--primary-color);
+}
+
+.tab-header[background] .tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background: var(--primary-color);
+}
+
+.tab-header[background] .underline {
+    background: #fff;
+    height: 100%;
+    bottom: 0;
 }
