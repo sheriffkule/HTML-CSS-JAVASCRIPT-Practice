@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(#000, #333);
+}
+
+div {
+    width: 80px;
+    height: 40px;
+    color: white;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    padding: 3px;
+    background: repeating-linear-gradient(90deg, currentColor 0 10px, #fff0 0 15px)
+    0/0% no-repeat content-box content-box;
+    position: relative;
+    animation: move 4s infinite steps(6);
+}
+
+div::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    bottom: -2px;
+    left: 100%;
+    width: 10px;
+    background: linear-gradient(#fff0 calc(50% - 7px), currentColor 0 calc(50% - 5px), #fff0 0 calc(50% + 5px), currentColor 0 calc(50% + 7px), #fff0 0)
+    left / 100% 100%, linear-gradient(currentColor calc(50% - 5px), #ff0 0 calc(50% + 5px), currentColor 0)
+    left / 2px 100%, linear-gradient(#fff0 calc(50% - 5px), currentColor 0 calc(50% + 5px), #fff0 0) right / 2px 100%;
+    background-repeat: no-repeat;
+}
+
+@keyframes move {
+    to {
+        background-size: 120%;
+    }
+}
