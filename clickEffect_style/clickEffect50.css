@@ -1,0 +1,145 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(#000, #333, #000);
+    height: 100vh;
+    color: #e0e0e0;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(90deg, #4da6ff, #ff4dff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+p {
+    max-width: 65ch;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    text-wrap: balance;
+}
+
+.cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(77, 166, 266, 0.7);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+    z-index: 100;
+    transition: transform .1s;
+}
+
+.cursor-follower {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 2px solid rgba(255, 77, 255, 0.6);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    transition: all .3s;
+}
+
+.custom-menu {
+    position: absolute;
+    width: 200px;
+    background: rgba(30, 30, 60, 0.95);
+    border-radius: 8px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    transform: scale(0);
+    transform-origin: top left;
+    opacity: 0;
+    transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 1001;
+}
+
+.custom-menu.active {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.menu-item {
+    padding: 12px 20px;
+    color: #e0e0e0;
+    cursor: pointer;
+    transition: all .2s;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.menu-item i {
+    margin-right: 10px;
+    color: #4da6ff;
+}
+
+.menu-item:last-child {
+    border-bottom: none;
+}
+
+.menu-item:hover {
+    background: rgba(77, 166, 255, 0.2);
+    padding-left: 25px;
+}
+
+.click-effect {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0);
+    animation: clickAnimation 0.5s ease-out;
+}
+
+@keyframes clickAnimation {
+    to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+.context-disabler {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 998;
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+    .custom-menu {
+        width: 180px;
+    }
+}
