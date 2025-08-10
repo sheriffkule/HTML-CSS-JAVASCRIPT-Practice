@@ -1,0 +1,187 @@
+body {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: #2e2e2e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    gap: 1rem;
+    width: 95%;
+}
+
+.left,
+.right {
+    width: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+}
+
+th, td {
+    max-width: 7.5rem;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    word-wrap: break-word;
+    white-space: normal;
+    border-right: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+th {
+    background: rgba(24, 17, 215, .15);
+    font-weight: bold;
+}
+
+tbody tr:nth-child(odd) {
+    background: rgba(255, 255, 255, 0.2);
+}
+.tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+tbody tr:hover {
+    background: rgba(0, 114, 255, 0.15);
+    transition: background 0.3s;
+}
+
+.form_card {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.6s;
+}
+
+.form_card input,
+.input_group input {
+    margin: 0 auto;
+    width: 95%;
+    padding: 14px 10px;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+
+.form_card input:focus,
+.input_group input:focus {
+    background: rgba(255, 255, 255, 0.3);
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 198, 255, 0.5);
+}
+
+.input_group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.input_group label,
+.form_card label {
+    position: absolute;
+    left: 20px;
+    transition: all .3s;
+    pointer-events: none;
+}
+
+.input_group label {
+    top: 30%;
+}
+
+.form_card input:focus + label,
+.form_card input:not(:placeholder-shown) + label,
+.input_group input:focus + label,
+.input_group input:not(:placeholder-shown) + label {
+    top: -8px;
+    left: 18px;
+    font-size: .8rem;
+    font-weight: 500;
+    color: #2e2e2e;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0 6px;
+    border-radius: 4px;
+}
+
+.btn {
+    width: 8rem;
+    height: 2rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin: 0.5rem;
+}
+
+.primary_btn {
+    background: linear-gradient(135deg, #0072ff, #00c6ff);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.primary_btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 14px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal_content {
+    background: #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    color: #2e2e2e;
+}
+
+.modal_content p {
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+    table thead {
+        width: 100%;
+    }
+}
