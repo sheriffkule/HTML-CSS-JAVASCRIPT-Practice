@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animated Countdown Timer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/countdownTimer2.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Animated Countdown Timer</h1>
+      <p class="description">
+        A beautiful, customizable countdown timer with smooth animations and multiple controls.
+      </p>
+      <div class="timer-container">
+        <div class="timer-display">
+          <div class="time-unit" id="days">
+            <div class="time-value">00</div>
+            <div class="time-label">Days</div>
+          </div>
+          <div class="time-unit" id="hours">
+            <div class="time-value">00</div>
+            <div class="time-label">Hours</div>
+          </div>
+          <div class="time-unit" id="minutes">
+            <div class="time-value">00</div>
+            <div class="time-label">Minutes</div>
+          </div>
+          <div class="time-unit" id="seconds">
+            <div class="time-value">00</div>
+            <div class="time-label">Seconds</div>
+          </div>
+        </div>
+        <div class="controls">
+          <button class="start-btn" id="startBtn"><i class="vas fa-play"></i> Start</button>
+          <button class="pause-btn" id="pauseBtn"><i class="fas fa-pause"></i> Pause</button>
+          <button class="reset-btn" id="resetBtn"><i class="fas fa-redo"></i> Reset</button>
+        </div>
+      </div>
+      <div class="settings">
+        <h3>Timer Settings</h3>
+        <div class="input-group">
+          <div>
+            <label for="daysInput">Days</label>
+            <input type="number" id="hoursInput" min="0" value="0" />
+          </div>
+          <div>
+            <label for="hoursInput">Hours</label>
+            <input type="number" id="hoursInput" min="0" max="23" value="0" />
+          </div>
+          <div>
+            <label for="minsInput">Minutes</label>
+            <input type="number" id="minsInput" min="0" max="59" value="0" />
+          </div>
+          <div>
+            <label for="secsInput">Seconds</label>
+            <input type="number" id="secsInput" min="0" max="59" value="0" />
+          </div>
+        </div>
+        <button class="set-btn" id="setBtn"><i class="fas fa-clock"></i> Set Timer</button>
+      </div>
+    </div>
+    <script src="/widgets_script/countdownTimer2.js"></script>
+  </body>
+</html>
