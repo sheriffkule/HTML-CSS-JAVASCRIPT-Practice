@@ -8,8 +8,9 @@
 body {
     min-height: 100vh;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
+    flex-direction: column;
     background: linear-gradient(135deg, #1a1a2e, #1e2c53);
     color: #fff;
     padding: 2rem;
@@ -228,6 +229,21 @@ input:focus {
     transform: translateY(-1px) scaleX(1);
 }
 
+h4 {
+    /* place-content: flex-end; */
+    text-align: center;
+  font-size: 14px;
+  font-weight: 300;
+  color: #888;
+  cursor: default;
+  margin-block: 100px 10px;
+  text-wrap: pretty;
+}
+
+h4 em {
+  color: skyblue;
+}
+
 @media screen and (max-width: 768px) {
     .timer-display {
         flex-wrap: wrap;
@@ -255,5 +271,8 @@ input:focus {
     .input-group {
         flex-direction: column;
         align-items: center;
+    }
+    h4 {
+        margin-block: 20px 10px;
     }
 }
