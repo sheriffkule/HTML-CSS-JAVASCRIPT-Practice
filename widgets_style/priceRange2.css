@@ -1,0 +1,210 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: grid;
+    background: linear-gradient(#999, #ddd, #999);
+    padding: 1rem;
+}
+
+.container {
+    max-width: 600px;
+    width: 100%;
+    background: linear-gradient(#aaa, #ddd, #999);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    align-self: flex-end;
+    justify-self: center;
+    transform: scaleX(0);
+    animation: intro 1s cubic-bezier(0.275, 0.885, 0.32, 1.5) forwards;
+}
+
+@keyframes intro {
+    to {
+        transform: scaleX(1);
+    }
+}
+
+h1 {
+    text-align: center;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+    color: transparent;
+    font-size: 2rem;
+    background: linear-gradient(90deg, #0080ff, #ff00ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    border-bottom: 1px solid #0080ff;
+}
+
+.price-display {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.price-box {
+    background: #0080ff;
+    color: white;
+    padding: 0.5rem 2rem;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1.25rem;
+    box-shadow: 0 5px 15px rgba(77, 166, 255, 0.2);
+    transition: all .3s;
+    text-align: center;
+    min-width: 120px;
+}
+
+.price-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(77, 166, 255, 0.4);
+}
+
+.price-box.min-price {
+    background: #0080ff;
+}
+
+.price-box.max-price {
+    background: #ff00ff;
+}
+
+.price-label {
+    font-size: 0.8rem;
+    margin-bottom: 0.3rem;
+}
+
+.slider-container {
+    position: relative;
+    width: 100%;
+    margin: 3rem 0;
+}
+
+.slider-track {
+    width: 100%;
+    height: 6px;
+    background: #e0e0e0;
+    border-radius: 3px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.slider-range {
+    height: 6px;
+    background: linear-gradient(90deg, #0080ff, #ff00ff);
+    border-radius: 3px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    background: transparent;
+    position: relative;
+    z-index: 3;
+    pointer-events: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid #0080ff;
+    cursor: pointer;
+    pointer-events: auto;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    transition: all .2s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: rgba(0, 0, 0, 0.3);
+}
+
+input[type="range"]#min-slider::-webkit-slider-thumb {
+    border-color: #0080ff;
+    margin-bottom: 12px;
+}
+
+input[type="range"]#max-slider::-webkit-slider-thumb {
+    border-color: #ff00ff;
+    margin-top: 6px;
+}
+
+.bubble {
+    position: absolute;
+    top: -40px;
+    transform: translateX(-50%);
+    background: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.2s;
+    z-index: 4;
+}
+
+.bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid white;
+}
+
+.bubble.min-bubble {
+    color: #0080ff;
+}
+
+.bubble.max-bubble {
+    color: #ff00ff;
+}
+
+input[type="range"]:hover + .bubble {
+    opacity: 1;
+}
+
+.footer {
+    align-self: self-end;
+    font-weight: 400;
+    font-size: 14px;
+    text-wrap: pretty;
+    text-align: center;
+}
+
+abbr {
+    color: #004d9b;
+    letter-spacing: 0.5px;
+    cursor: default;
+}
+
+@media screen and (max-width: 600px) {
+    .price-display {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+}

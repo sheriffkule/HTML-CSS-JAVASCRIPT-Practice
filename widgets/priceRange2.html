@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animated Price Range Slider</title>
+    <link rel="stylesheet" href="/widgets_style/priceRange2.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Price Range Slider</h1>
+      <div class="price-display">
+        <div class="price-box min-price">
+          <div class="price-label">Min Price</div>
+          <span class="min-value">$50</span>
+        </div>
+        <div class="price-box max-price">
+          <div class="price-label">Max Price</div>
+          <span class="max-value">$250</span>
+        </div>
+      </div>
+      <div class="slider-container">
+        <div class="slider-track"></div>
+        <div class="slider-range" id="slider-range"></div>
+        <input type="range" min="0" max="500" value="50" id="min-slider" />
+        <div class="bubble min-bubble" id="min-bubble"></div>
+        <input type="range" min="0" max="500" value="200" id="max-slider" />
+        <div class="bubble max-bubble" id="max-bubble"></div>
+      </div>
+    </div>
+    <h4 class="footer">
+      &copy; <time id="year"></time> Made by
+      <em><abbr title="Web Development Frontend Master">Sheriffkule</abbr></em> from XXIII Century
+    </h4>
+    <script src="/widgets_script/priceRange2.js"></script>
+  </body>
+</html>
