@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: hsl(4, 100%, 67%);
+    --dark: hsl(234, 29%, 20%);
+    --black-dark: hsl(235, 18%, 26%);
+    --gray: hsl(231, 7%, 60%);
+    --white: hsl(0, 0%, 90%);
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: var(--black-dark);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.form_container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 5px 10px 5px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 1.5rem;
+}
+
+.form_container .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 1rem;
+    width: 60%;
+}
+
+.content h2 {
+    font-size: 3rem;
+    color: var(--black-dark);
+    margin: 1rem 0;
+}
+
+.content p {
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.content ul {
+    list-style-type: none;
+    margin: 1rem 0;
+}
+
+.content ul li {
+    margin: 0.8rem 0;
+}
+
+.content ul li i {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    padding: 0.1rem;
+}
+
+.error {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.content label {
+    font-weight: 500;
+    font-size: .9rem;
+}
+
+.content .error p {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+.content input {
+    width: 100%;
+    outline: none;
+    margin: 0.5rem 0;
+    padding: 0.9rem 0.5rem;
+    border-radius: 5px;
+    border: 1px solid var(--black-dark);
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.content button {
+    outline: none;
+    border: none;
+    margin: 1rem 0;
+    background-color: var(--black-dark);
+    color: var(--white);
+    font-family: inherit;
+    font-size: 0.9rem;
+    padding: 0.9rem 0;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
