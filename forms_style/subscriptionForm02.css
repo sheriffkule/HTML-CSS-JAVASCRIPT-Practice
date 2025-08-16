@@ -13,22 +13,39 @@
 }
 
 body {
-    display: flex;
+    display: grid;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
     background-color: var(--black-dark);
     font-family: Arial, Helvetica, sans-serif;
+    interpolate-size: allow-keywords;
+}
+
+.wrapper {
+    align-self: flex-end;
 }
 
 .form_container {
     background-color: white;
     border-radius: 10px;
     box-shadow: 5px 10px 5px rgba(0, 0, 0, 0.5);
-    width: 100%;
+    max-width: 1000px;
     height: 100%;
     display: flex;
     padding: 1.5rem;
+}
+
+.form_container.hide {
+    animation: leave .2s linear forwards;
+    transform-origin: bottom;
+}
+
+@keyframes leave {
+    to {
+        transform: scale(0);
+        display: none;
+    }
 }
 
 .form_container .content {
@@ -63,6 +80,7 @@ body {
 
 .content ul li {
     margin: 0.8rem 0;
+    text-wrap: pretty;
 }
 
 .content ul li i {
@@ -70,7 +88,10 @@ body {
     color: var(--white);
     border-radius: 50%;
     margin-right: 0.5rem;
-    padding: 0.1rem;
+    padding: 0.25rem 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .error {
@@ -88,6 +109,9 @@ body {
     font-size: 0.9rem;
     font-weight: 500;
     color: var(--primary-color);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all .3s;
 }
 
 .content input {
@@ -101,7 +125,12 @@ body {
     font-size: 1rem;
 }
 
-.content button {
+.content input.active::placeholder {
+    color: var(--primary-color);
+}
+
+.content button,
+.success_message button {
     outline: none;
     border: none;
     margin: 1rem 0;
@@ -113,4 +142,129 @@ body {
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
+    transition: .25s;
+}
+
+.content button i {
+    transition: .25s;
+    transform-origin: bottom left;
+}
+
+.content button:hover {
+    background-color: var(--primary-color);
+    font-size: 1rem;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+}
+
+.content button:hover i {
+    transform: translateX(1.25rem) translateY(.25rem) rotate(-90deg);
+}
+
+.content button:active {
+    transform: scale(0.98);
+    font-size: .95rem;
+}
+
+.img_content {
+    width: 40%;
+}
+
+.img_content img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.success_message {
+    width: 450px;
+    padding: 2rem;
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: 5px 10px 5px rgba(0, 0, 0, 0.5);
+    transform: scale(0);
+    animation: enter .5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation-delay: .3s;
+}
+
+@keyframes enter {
+    to {
+        transform: scale(1);
+    }
+}
+
+.success_message h2 {
+    color: var(--black-dark);
+    font-size: 2rem;
+    margin: 1rem 0;
+}
+
+.success_message .icons {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.success_message .icons i {
+    color: var(--white);
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    padding: 0.5rem 0.25rem;
+    font-size: 3rem;
+}
+
+.success_message p {
+    line-height: 1.5;
+    text-wrap: balance;
+}
+
+.success_message button {
+    background-color: var(--primary-color);
+    margin-top: 2rem;
+}
+
+.success_message button:active {
+    transform: scale(.98);
+}
+
+.success_message.hide {
+    display: none;
+}
+
+.footer {
+    align-self: self-end;
+    font-weight: 400;
+    font-size: 14px;
+    text-wrap: pretty;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+abbr {
+    color: var(--primary-color);
+    letter-spacing: 0.5px;
+    cursor: default;
+}
+
+@media screen and (max-width: 768px) {
+    .form_container {
+        flex-direction: column-reverse;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        height: 750px;
+    }
+    .content {
+        display: flex;
+        width: 100%;
+    }
+    .content h2 {
+        font-size: 2.4rem;
+        margin: 2rem 0;
+    }
+    .img_content {
+        overflow: hidden;
+        width: 100%;
+        margin: 0 auto 0 auto;
+        border-radius: 10px;
+    }
 }

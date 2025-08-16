@@ -20,18 +20,35 @@
           </ul>
           <div class="error">
             <label for="email">Email address</label>
-            <p class="error">Enter Valid Email</p>
+            <p class="error"></p>
           </div>
           <form action="#">
-            <input type="email" placeholder="name@email.com" />
-            <button type="button">Subscribe for monthly newsletter</button>
+            <input type="email" placeholder="etc. name@email.com" />
+            <button type="button" class="subscribe_btn">
+              Subscribe for monthly newsletter <i class="fa-solid fa-arrow-right"></i>
+            </button>
           </form>
         </div>
         <div class="img_content">
-            <img src="/images/darkhex.jpg" alt="">
+          <img src="/images/darkhex.jpg" alt="" />
         </div>
       </div>
+      <div class="success_message hide">
+        <div class="icons">
+          <i class="fa-solid fa-check-double"></i>
+          <i class="fa-solid fa-check-double"></i>
+          <i class="fa-solid fa-check-double"></i>
+        </div>
+        <h2>Thanks for Subscribing</h2>
+        <p>Thanks for joining our community!</p>
+        <p>A confirmation email has been sent to name@mail.com. Please open it and click the button inside to confirm your subscription</p>
+        <button type="button" class="btn_dismiss">Dismiss message</button>
+      </div>
     </div>
+    <h4 class="footer">
+      © <time id="year" datetime="2025">2025</time> Made by
+      <em><abbr title="Web Development Frontend Master">Sheriffkule</abbr></em> from XXIII Century
+    </h4>
     <script src="/forms_script/subscriptionForm02.js"></script>
   </body>
 </html>
