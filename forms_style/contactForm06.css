@@ -68,10 +68,6 @@ section {
   text-align: center;
 }
 
-/* .shp {
-    display: none;
-} */
-
 .obj {
   position: relative;
   opacity: 0.5;
@@ -199,26 +195,24 @@ section {
   display: flex;
   flex-wrap: wrap;
   border-radius: 30px;
-  width: 90%;
+  width: 10%0%;
   max-width: 1100px;
   margin: 0 auto;
   margin-top: 35px;
 }
 
-.form_wrap {
-  width: 58%;
-  /* margin: 0 auto; */
-  padding: 40px 25px 35px 25px;
-  box-shadow: var(--box-shadow);
-  border-radius: 0 0 30px 30px;
-}
-
 .contact_info_wrap {
   padding: 40px;
   display: block;
-  border-radius: 30px 30px 0 0;
+  border-radius: 30px 0 0 30px;
   background-color: var(--primary);
   color: var(--color);
+}
+
+.form_wrap {
+  padding: 40px 25px 35px 25px;
+  box-shadow: var(--box-shadow);
+  border-radius: 0 30px 30px 0;
 }
 
 .contact_info_title {
@@ -311,18 +305,19 @@ section {
 }
 
 .form_fields input,
-.form_fields input:focus,
 .form_fields textarea {
   outline: none;
   background: transparent;
   color: var(--black);
   padding: 20px 10px 20px 5px;
   width: 100%;
+  transition: 0.2s;
 }
 
 .form_fields input::placeholder,
 .form_fields textarea::placeholder {
   color: var(--black);
+  opacity: 0.7;
 }
 
 .form_fields textarea {
@@ -337,6 +332,11 @@ section {
   padding: 0 10px;
   border-radius: 25px;
   box-shadow: inset var(--box-shadow);
+  transition: border-bottom 0.5s;
+}
+input:is(:focus, :focus-within),
+textarea:is(:focus, :focus-within) {
+  border-bottom: 1px solid var(--blue);
 }
 
 .form_fields .form_group:last-child {
@@ -359,4 +359,66 @@ form .button:hover {
   filter: brightness(0.9);
   box-shadow: var(--box-shadow);
   letter-spacing: .5px;
+}
+
+.message {
+  width: 100%;
+  position: relative;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.message .success {
+  position: absolute;
+  animation: buttons .3s linear;
+  display: none;
+  color: var(--black);
+}
+
+.message .fail {
+  position: absolute;
+  animation: buttons .3s linear;
+  transition: .3s;
+  color: red;
+  text-wrap: pretty;
+  display: none;
+}
+
+@keyframes buttons  {
+  from {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.5);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.footer {
+  font-size: 14px;
+  font-weight: 400;
+  margin-block: 2rem .5rem;
+  color: var(--black);
+}
+
+abbr {
+  color: var(--blue);
+  font-size: 15px;
+  letter-spacing: .5px;
+  text-underline-offset: 5px;
+  cursor: default;
+}
+
+@media screen and (max-width: 768px) {
+  .contact_info_wrap {
+    border-radius: 30px 30px 0 0;
+    width: 95%;
+  }
+  .form_wrap {
+    width: 95%;
+    border: 0 0px 30px 30px;
+  }
 }
