@@ -51,7 +51,6 @@ a {
 
 input,
 button,
-select,
 textarea {
   background: none;
   border: none;
@@ -65,6 +64,10 @@ button {
   display: block;
 }
 
+section {
+  text-align: center;
+}
+
 /* .shp {
     display: none;
 } */
@@ -76,7 +79,7 @@ button {
 
 .shape1 {
   position: absolute;
-  top: 35rem;
+  top: 15rem;
   left: 90%;
   height: 2rem;
   width: 2rem;
@@ -100,7 +103,7 @@ button {
 
 .shape2 {
   position: absolute;
-  top: 43%;
+  top: 25rem;
   left: 2%;
   height: 2rem;
   width: 2rem;
@@ -127,7 +130,7 @@ button {
 .shape3 {
   position: absolute;
   top: 78%;
-  left: 80%;
+  left: 70%;
   height: 2rem;
   width: 2rem;
   padding: 2rem;
@@ -151,8 +154,8 @@ button {
 
 .shape4 {
   position: absolute;
-  top: 3%;
-  left: 3%;
+  top: -10%;
+  left: -10%;
   height: 2rem;
   width: 2rem;
   padding: 2rem;
@@ -178,14 +181,182 @@ button {
     font-size: 2.25rem;
     font-family: 'Spectral', serif;
     font-weight: 700;
-    width: fit-content;
     padding: 0 1rem;
     text-align: center;
     margin: 0.5rem;
     padding-top: 1rem;
     border-bottom: 2px solid var(--black);
+    font-size: 3rem;
+    font-family: 'Spectral', serif;
+    font-weight: 700;
 }
 
 .section_name span {
     color: var(--primary);
+}
+
+.box_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 30px;
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+  margin-top: 35px;
+}
+
+.form_wrap {
+  width: 58%;
+  /* margin: 0 auto; */
+  padding: 40px 25px 35px 25px;
+  box-shadow: var(--box-shadow);
+  border-radius: 0 0 30px 30px;
+}
+
+.contact_info_wrap {
+  padding: 40px;
+  display: block;
+  border-radius: 30px 30px 0 0;
+  background-color: var(--primary);
+  color: var(--color);
+}
+
+.contact_info_title {
+  font-size: 2rem;
+  text-align: left;
+  letter-spacing: .5px;
+}
+
+.contact_info_wrap .sub_title {
+  font-size: 1.5rem;
+  font-family: 'Spectral', serif;
+  font-weight: 500;
+  margin-top: 12px;
+  letter-spacing: -.5px;
+  text-align: left;
+  width: 100%;
+}
+
+.details {
+  margin: 60px 0;
+}
+
+.details li {
+  margin-top: 25px;
+  display: flex;
+  align-items: center;
+}
+
+.details li i {
+  font-size: 18px;
+  height: 100%;
+  color: var(--primary);
+  background-color: var(--secondary);
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.details li .text {
+  text-align: left;
+  font-size: 1.2rem;
+  font-family: 'Spectral' serif;
+  font-weight: 500;
+}
+
+.details li address a {
+  color: var(--color);
+  transition: all .15s;
+}
+
+.details li address a:hover {
+  color: var(--secondary);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.social_icons {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.social_icons li {
+  display: inline-block;
+}
+
+.social_icons li a i{
+  background-color: var(--secondary);
+  color: var(--primary);
+  padding: 10px 22px;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  border-radius: 22%;
+  margin: 0 6px;
+  cursor: pointer;
+  transition: all .5s ease-in-out;
+}
+
+.social_icons li:hover a i {
+  transform: rotateX(360deg);
+}
+
+.form_fields {
+  display: table;
+  width: 100%;
+  padding: 15px 5px 5px 5px;
+}
+
+.form_fields input,
+.form_fields input:focus,
+.form_fields textarea {
+  outline: none;
+  background: transparent;
+  color: var(--black);
+  padding: 20px 10px 20px 5px;
+  width: 100%;
+}
+
+.form_fields input::placeholder,
+.form_fields textarea::placeholder {
+  color: var(--black);
+}
+
+.form_fields textarea {
+  height: 150px;
+  resize: none;
+}
+
+.form_group {
+  width: 100%;
+  float: none;
+  margin: 25px 0;
+  padding: 0 10px;
+  border-radius: 25px;
+  box-shadow: inset var(--box-shadow);
+}
+
+.form_fields .form_group:last-child {
+  width: 100%;
+}
+
+form .button {
+  padding: 10px 45px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all .3s;
+  font-size: 18px;
+  margin-top: 10px;
+  background-color: var(--primary);
+  width: 100%;
+  margin: 0 auto;
+}
+
+form .button:hover {
+  filter: brightness(0.9);
+  box-shadow: var(--box-shadow);
+  letter-spacing: .5px;
 }
