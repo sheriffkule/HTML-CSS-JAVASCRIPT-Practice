@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Contact Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="/forms_style/contactForm06.css" />
+  </head>
+  <body>
+    <section id="contact">
+      <div class="section_name">Contact <span>Me</span></div>
+      <div class="obj">
+        <div class="shp">
+          <span class="object shape1" data-value="30"></span>
+          <span class="object shape2" data-value="-20"></span>
+          <span class="object shape3" data-value="40"></span>
+          <span class="object shape4" data-value="-10"></span>
+        </div>
+      </div>
+      <div class="box_wrapper">
+        <div class="contact_info_wrap">
+          <div class="contact_info_title sub_heading">Get in touch:</div>
+          <div class="sub_title"><span>Ask Me Anything</span></div>
+          <ul class="details" role="list">
+            <li>
+              <i class="fas fa-phone-alt"></i>
+              <div class="text">
+                Phone:
+                <address><a href="tel: +1234567890">+1234567890</a></address>
+              </div>
+            </li>
+            <li>
+              <i class="fas fa-paper-plane"></i>
+              <div class="text">Email: <a href="mailito: info@yoursite.com">info@yoursite.com</a></div>
+            </li>
+            <li>
+              <i class="fas fa-globe"></i>
+              <div class="text">
+                Website:
+                <address>
+                  <a href="https://sheriffkule.vercel.app/">https://sheriffkule.vercel.app/</a>
+                </address>
+              </div>
+            </li>
+          </ul>
+          <ul class="social_icons" role="list">
+            <li>
+              <a href=""><i class="fa-brands fa-facebook"></i></a>
+            </li>
+            <li>
+              <a href=""><i class="fa-brands fa-linkedin"></i></a>
+            </li>
+            <li>
+              <a href=""><i class="fa-brands fa-twitter"></i></a>
+            </li>
+          </ul>
+        </div>
+        <div class="form_wrap">
+          <form class="contact_form">
+            <div class="form_fields">
+              <div class="form_group">
+                <input type="text" name="name" id="name" class="name" placeholder="Your Name" required />
+              </div>
+              <div class="form_group">
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  class="email"
+                  placeholder="Your Email Address"
+                  required
+                  autocomplete="off" />
+              </div>
+              <div class="form_group">
+                <input type="tel" name="phone" id="phone" class="phone" placeholder="Phone Number" required />
+              </div>
+              <div class="form_group">
+                <textarea
+                  name="message"
+                  id="message"
+                  class="message"
+                  placeholder="
+                Write Your Message"
+                  required>
+                </textarea>
+              </div>
+            </div>
+            <a href="#" class="button primary_btn" type="submit" onclick="mess(event)" id="send">Send Message</a>
+          </form>
+          <div class="message" id="form-output-global">
+            <div class="success" id="success">Your Message Sent Successfully!</div>
+            <div class="fail" id="fail">Ooops! Something went wrong, try again!</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="/forms_script/contactForm06.js"></script>
+  </body>
+</html>
