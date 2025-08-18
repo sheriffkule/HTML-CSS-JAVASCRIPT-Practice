@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Validation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="/forms_style/loginForm32.css" />
+  </head>
+  <body>
+    <div class="form_container">
+      <div class="form_card">
+        <form action="#" id="registrationForm">
+          <div class="form">
+            <div class="title">registration form</div>
+            <div class="subtitle">let's create your account!</div>
+            <div class="input_container inp1">
+                <input type="text" id="name" class="input" placeholder=" " autocomplete="off">
+                <div class="cut"></div>
+                <label for="name" class="placeholder">first name</label>
+                <div class="error_message" id="nameError"></div>
+            </div>
+            <div class="input_container inp2">
+                <input type="email" id="email" class="input" placeholder=" " autocomplete="off">
+                <div class="cut cut_short"></div>
+                <label for="email" class="placeholder">email</label>
+                <div class="error_message" id="emailError"></div>
+            </div>
+            <div class="input_container inp2">
+                <input type="password" id="password" class="input" placeholder=" " autocomplete="off">
+                <div class="cut cut_shorter"></div>
+                <label for="password" class="placeholder">password</label>
+                <div class="error_message" id="passwordError"></div>
+            </div>
+            <button type="text" class="submit">Submit</button>
+            <p id="formMessage"></p>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="/forms_script/loginForm32.js"></script>
+  </body>
+</html>
