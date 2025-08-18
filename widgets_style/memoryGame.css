@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Orbitron", sans-serif;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    color: #0ff;
+    background: radial-gradient(circle at center, #1a1a2e, #16214e, #0f3460);
+}
+
+.game_container {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #0ff;
+    align-self: flex-end;
+}
+
+.title {
+    font-size: 2rem;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+.game_grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    place-items: center;
+    margin-block:30px  20px;
+}
+
+.card {
+    width: 70px;
+    height: 70px;
+    background: rgba(0, 255, 255, 0.2);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: #0ff;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 0 15px #0ff;
+}
+
+.card.flipped {
+    font-size: 3rem;
+    background: rgba(0, 68, 255, 0.8);
+    transform: rotateY(180deg);
+}
+
+.game_info p:first-child {
+    margin-bottom: 8px;
+}
+
+#restart_btn {
+    margin-top: 20px;
+    background: #0ff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+#restart_btn:hover {
+    color: white;
+    box-shadow: inset 0 -40px 0 rgba(0, 133, 133, 0.9);
+    transform: scale(1.03);
+}
+
+#restart_btn:active {
+    transform: scale(1);
+    transition: .15s;
+}
+
+.footer {
+  align-self: last baseline;
+  justify-self: center;
+  font-size: 12px;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  color: #ccc;
+  letter-spacing: 1px;
+}
+
+abbr {
+  color: #0ff;
+  font-size: 14px;
+  text-underline-offset: 5px;
+  cursor: default;
+}
