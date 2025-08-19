@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Paytone+One&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #131418;
+    font-family: "Amatic SC", sans-serif;
+    /* font-family: "Paytone One", sans-serif; */
+    display: grid;
+    place-content: center;
+    min-height: 100vh;
+}
+
+.container {
+    padding: 15px;
+    height: 520px;
+    width: 400px;
+    background: #fec601;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all .25s;
+}
+
+.container h2 {
+    text-align: center;
+    font-size: 34px;
+    letter-spacing: 2px;
+    word-spacing: 3px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #3c1802;
+    font-family: "Paytone One", sans-serif;
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.container .timer-box,
+.container .score-box {
+    height: 40px;
+    width: 120px;
+    background: #a4550a;
+    padding: 8px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    color: white;
+    float: left;
+    margin-left: 54px;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.container .timer-box {
+    width: 80px;
+}
+
+.container .timer-box .timer,
+.container .score-box .score {
+    height: 30px;
+    width: 48px;
+    background: #3c1802;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    margin-left: 8px;
+    position: relative;
+    left: 20px;
+    font-family: "Paytone One", sans-serif;
+}
+
+.container .timer-box .timer {
+    left: 2px;
+}
+
+.container .score-box .score {
+    left: 6px;
+}
+
+.container .timer-box i,
+.container .score-box .score-text {
+    margin-left: 7px;
+    font-size: 18px;
+}
+
+.container .score-box .score-text {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.container .all-items {
+    height: 350px;
+    width: 100%;
+    border-top: 1px solid #3c1802;
+    position: relative;
+    top: 80px;
+}
+
+.container .all-items .item {
+    height: 80px;
+    width: 80px;
+    background: #3c1802;
+    border-radius: 50%;
+    float: left;
+    margin-left: 32px;
+    margin-top: 20px;
+    position: relative;
+    top: -40px;
+}
+
+.container .all-items .item .hole {
+    height: 72px;
+    width: 72px;
+    background: #a4550a;
+    border-radius: 50%;
+    position: relative;
+    top: 8px;
+    left: 6px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.container .all-items .item .hole img {
+    height: 70px;
+    width: auto;
+    position: absolute;
+    bottom: -15px;
+}
