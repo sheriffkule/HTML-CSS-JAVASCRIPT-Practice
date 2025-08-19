@@ -112,3 +112,220 @@ body {
     background: linear-gradient(225deg, var(--stem-color-1), var(--stem-color-2));
     transform: rotate(-45deg);
 }
+
+#toggle-rose {
+    display: none;
+}
+
+#toggle-rose:not(:checked) ~ .rose-container .center {
+    width: 70px;
+    height: 70px;
+    filter: brightness(1.1);
+}
+
+#toggle-rose:checked ~ .rose-container .petal {
+    opacity: 1;
+    transform: rotate(calc(var(--i) * 145deg)) translateY(calc(-55px + var(--layer) * -24px)) rotateX(calc(var(--curl) * 15deg)) scale(calc(0.8 + var(--layer) * 0.6));
+}
+
+.petal:nth-child(1) {
+    --i: 0;
+    --layer: 1;
+    --curl: 1;
+}
+
+.petal:nth-child(2) {
+    --i: 1;
+    --layer: 1;
+    --curl: -1;
+}
+
+.petal:nth-child(3) {
+    --i: 2;
+    --layer: 1;
+    --curl: -1;
+}
+
+.petal:nth-child(4) {
+    --i: 3;
+    --layer: 1;
+    --curl: -1;
+}
+
+.petal:nth-child(5) {
+    --i: 4;
+    --layer: 1;
+    --curl: -1;
+}
+
+.petal:nth-child(6) {
+    --i: 5;
+    --layer: 1;
+    --curl: -1;
+}
+
+.petal:nth-child(7) {
+    --i: 6;
+    --layer: 1;
+    --curl: 1;
+}
+
+.petal:nth-child(8) {
+    --i: 7;
+    --layer: 1;
+    --curl: -1;
+}
+
+.petal:nth-child(9) {
+    --i: 0.5;
+    --layer: 2;
+    --curl: 1;
+}
+.petal:nth-child(10) {
+    --i: 1.5;
+    --layer: 2;
+    --curl: -1;
+}
+.petal:nth-child(11) {
+    --i: 2.5;
+    --layer: 2;
+    --curl: 1;
+}
+
+.petal:nth-child(12) {
+    --i: 3.5;
+    --layer: 2;
+    --curl: -1;
+}
+
+.petal:nth-child(13) {
+    --i: 4.5;
+    --layer: 2;
+    --curl: -1;
+}
+
+.petal:nth-child(14) {
+    --i: 5.5;
+    --layer: 2;
+    --curl: -1;
+}
+
+.petal:nth-child(15) {
+    --i: 6.5;
+    --layer: 2;
+    --curl: 1;
+}
+
+.petal:nth-child(16) {
+    --i: 7.5;
+    --layer: 2;
+    --curl: -1;
+}
+
+.glow {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, var(--glow-color) 0%, transparent 70%);
+    top: -50%;
+    left: -50%;
+    z-index: -2;
+    animation: pulse 4s infinite alternate;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+#toggle-rose:checked ~ .rose-container .glow {
+    opacity: 0.7;
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(0.8);
+        filter: blur(10px);
+    }
+    to {
+        transform: scale(1.2);
+        filter: blur(15px);
+    }
+}
+
+.pollen {
+    position: absolute;
+    right: 200%;
+    width: 6px;
+    height: 6px;
+    background: #eee;
+    border-radius: 50%;
+    opacity: 0;
+    filter: blur(1px);
+    animation: float 3s infinite ease-in-out;
+}
+
+.pollen1 {
+    position: absolute;
+    left: 200%;
+    width: 6px;
+    height: 6px;
+    background: #feeb3b;
+    border-radius: 50%;
+    opacity: 0;
+    filter: blur(1px);
+    animation: float 3s infinite ease-in-out;
+    animation-delay: 1s;
+    z-index: 40;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+    50% {
+        transform: translateY(-40px) translateX(10px);
+        opacity: 0.8;
+    }
+}
+
+.pollen:nth-child(1) {
+    top: 35%;
+    left: 45%;
+    animation-delay: 0s;
+}
+
+.pollen:nth-child(2) {
+    top: 40%;
+    left: 45%;
+    animation-delay: 0.5s;
+}
+
+.pollen:nth-child(3) {
+    top: 35%;
+    left: 55%;
+    animation-delay: 1s;
+}
+
+.pollen:nth-child(4) {
+    top: 45%;
+    left: 50%;
+    animation-delay: 1.5s;
+}
+
+#toggle-rose:checked ~ .rose-container .leaf.leaf.left {
+    transform: rotate(35deg);
+}
+
+#toggle-rose:checked ~ .rose-container .leaf.right {
+    transform: rotate(55deg);
+}
+
+.click-area {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    cursor: pointer;
+}
