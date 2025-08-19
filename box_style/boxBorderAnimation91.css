@@ -1,0 +1,114 @@
+:root {
+    --petal-color-1: #ff4081;
+    --petal-color-2: #e91e63;
+    --petal-color-3: #c2185b;
+    --glow-color: rgba(255, 64, 129, 0.4);
+    --stem-color-1: #4caf50;
+    --stem-color-2: #2e7d32;
+    --leaf-color: #388e3c;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at center, #1a1a2e, #0f0f1c);
+    min-height: 100vh;
+    perspective: 1000px;
+    overflow: hidden;;
+}
+
+.rose-container {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    filter: drop-shadow(0 0 20px rgba(255, 64, 129, 0.3));
+}
+
+.rose {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: all 1.8s cubic-bezier(0.25, 1.5, 0.35, 1);
+}
+
+.center {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle at center, var(--petal-color-1) 0%, var(--petal-color-2) 50%, var(--petal-color-3) 100%);
+    border-radius: 50%;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 30px var(--glow-color),
+    inset 0 0 15px rgba(0, 0, 0, 0.4);
+    transition: all 1.8s cubic-bezier(0.25, 1.5, 0.35, 1);
+    z-index: 10;
+}
+
+.petal {
+    position: absolute;
+    left: 35%;
+    width: 70px;
+    height: 90px;
+    background: linear-gradient(135deg, var(--petal-color-1) 0%, var(--petal-color-2) 50%, var(--petal-color-3) 100%);
+    border-radius: 50% 50% 0 50%;
+    transform-origin: bottom center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3),
+    inset -2px -2px 5px rgba(0, 0, 0, 0.2);
+    transition: 1.8s cubic-bezier(0.25, 1.5, 0.35, 1);
+    opacity: 0;
+    transform: rotate(calc(var(--i) * 45deg)) translateY(-20px) scale(0.3);
+    z-index: calc(8 - var(--layer));
+}
+
+.stem {
+    position: absolute;
+    width: 12px;
+    height: 55vh;
+    background: linear-gradient(to bottom, var(--stem-color-1), var(--stem-color-2));
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 6px;
+    z-index: -1;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2),
+    0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.leaf {
+    position: absolute;
+    width: 50px;
+    height: 30px;
+    background: var(--leaf-color);
+    border-radius: 50% 0 50% 50%;
+    transform: rotate(45deg);
+    z-index: var(--stem-color-1);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3),
+    inset -2px -2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 1s;
+}
+
+.leaf.left {
+    top: 125%;
+    left: 24%;
+    transform-origin: right center;
+    border-radius: 50% 0 50% 50%;
+    background: linear-gradient(var(--stem-color-1), var(--stem-color-2));
+}
+
+.leaf.right {
+    top: 140%;
+    left: 56%;
+    transform-origin: left center;
+    border-radius: 0 50% 50% 50%;
+    background: linear-gradient(225deg, var(--stem-color-1), var(--stem-color-2));
+    transform: rotate(-45deg);
+}
