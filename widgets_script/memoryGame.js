@@ -98,4 +98,4 @@ document.addEventListener('DOMContentLoaded', () => {
   startGame();
 });
 
-document.getElementById('time').textContent = new Date().getFullYear();
+document.getElementById('year').textContent = new Date().getFullYear();
