@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    min-height: 100vh;
+    background: #000;
+    gap: 20px;
+}
+
+.card {
+    position: relative;
+    width: 200px;
+    height: 250px;
+    border-radius: 14px;
+    z-index: 10;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0px 0px 60px #ebebeb,
+    -20px -20px 60px #fff;
+}
+
+.bg {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 190px;
+    height: 240px;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid #fff;
+}
+
+.blob {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    width: 150px;
+    height: 150px;
+    background: #05cedc;
+    opacity: 1;
+    filter: blur(60px);
+    animation: move 5s linear infinite;
+}
+
+.card:nth-child(2) .blob {
+    background: #2df605;
+}
+
+.card:nth-child(3) .blob {
+    background: #ec0a77;
+}
+
+@keyframes move {
+    from {
+        transform: translate(-100%, -100%) translate3d(0, 0, 0);
+    }
+    25% {
+        transform: translate(-100%, -100%) translate3d(150%, 0, 0);
+    }
+    50% {
+        transform: translate(-100%, -100%) translate3d(150%, 150%, 0);
+    }
+    75% {
+        transform: translate(-100%, -100%) translate3d(0, 150%, 0);
+    }
+    to {
+        transform: translate(-100%, -100%) translate3d(0, 0, 0);
+    }
+}
