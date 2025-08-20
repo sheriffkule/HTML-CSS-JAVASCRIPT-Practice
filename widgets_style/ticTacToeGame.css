@@ -11,18 +11,18 @@
 body {
     background: radial-gradient(#f8b31a, #6e4e09);
     min-height: 100vh;
+    display: grid;
+    align-items: center;
+    justify-content: center;
 }
 
 .container {
-    border: 1px solid navy;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    align-self: flex-end;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 15px;
+    margin-top: 12px;
 }
 
 .pre-container {
@@ -30,6 +30,7 @@ body {
     width: 330px;
     background: radial-gradient(#fff, #999);
     border-radius: 15px;
+    box-shadow: 4px 4px 10px rgba(14, 48, 85, 0.2);
 }
 
 .player_turn {
@@ -63,6 +64,7 @@ body {
     background: #f8b31a;
     position: absolute;
     border-radius: 50px;
+    transition: .25s ease-in-out;
 }
 
 .board {
@@ -108,6 +110,14 @@ body {
     border-radius: 6px;
     text-align: center;
     display: none;
+    transform: scale(0);
+    animation: fadeIn .3s forwards cubic-bezier(0.215, 1.610, 0.355, 1);
+}
+
+@keyframes fadeIn {
+    to {
+        transform: scale(1);
+    }
 }
 
 .result-box span {
@@ -154,4 +164,20 @@ body {
 
 .result-box button:active {
     transform: scale(1) translateX(-50%);
+}
+
+.footer {
+    align-self: flex-end;
+    margin-bottom: 12px;
+    font-size: 14px;
+    text-align: center;
+    font-weight: 500;
+}
+
+abbr {
+    cursor: default;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    text-underline-offset: 2px;
+    color: #0e3055;
 }

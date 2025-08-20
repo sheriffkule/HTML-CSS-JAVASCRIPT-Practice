@@ -16,8 +16,8 @@
           <div class="turn_indicator"></div>
         </div>
         <div class="board">
-          <div class="cell"><i class="fa-solid fa-xmark"></i></div>
-          <div class="cell"><i class="fa-solid fa-o"></i></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
           <div class="cell"></div>
           <div class="cell"></div>
           <div class="cell"></div>
@@ -29,9 +29,13 @@
       </div>
       <div class="result-box">
         <span class="winner-msg">Player X Won the game!</span>
-        <button class="reload-btn">Restart</button>
+        <button class="reload-btn" onclick="location.reload()">Restart</button>
       </div>
     </div>
+    <h4 class="footer">
+      &copy; <time datetime="year" id="year"></time> Made by
+      <em><abbr title="Web Developer Frontend Master">SheriffKule </abbr></em>From XXIII Century
+    </h4>
     <script src="/widgets_script/ticTacToeGame.js"></script>
   </body>
 </html>
