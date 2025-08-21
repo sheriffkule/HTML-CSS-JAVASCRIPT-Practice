@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Synonyms Search App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/synonymsApp.css" />
+  </head>
+  <body>
+    <h1>Synonyms Search App</h1>
+    <div class="container">
+      <div class="app-name">
+        <h2><i class="fa-solid fa-magnifying-glass"></i> Word Find</h2>
+        <i class="fa-solid fa-circle-info" title=" "></i>
+        <div class="info">
+          <li>Type word to find words with similar meaning.</li>
+          <li>Click on item in list to copy.</li>
+        </div>
+      </div>
+      <div class="search-box">
+        <input type="text" name="text" placeholder="Enter a word..." />
+        <i class="fa-solid fa-magnifying-glass" title="Search..."></i>
+      </div>
+      <div class="result-box"></div>
+      <button type="button" class="copyBtn">Copy All</button>
+    </div>
+    <h4 class="footer">
+      &copy; <time datetime="year" id="year"></time> Made by
+      <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+    </h4>
+    <script src="/widgets_script/synonymsApp.js"></script>
+  </body>
+</html>

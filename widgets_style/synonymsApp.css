@@ -1,0 +1,235 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    interpolate-size: allow-keywords;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(#111, #555, #111);
+}
+
+h1 {
+    display: inline-block;
+    text-align: center;
+    align-self: flex-end;
+    color: transparent;
+    background: linear-gradient(#333, #aaa, #333);
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+.container {
+    padding: 20px;
+    max-width: 500px;
+    background: linear-gradient(#111, #555, #111);
+    border-radius: 8px;
+    margin-top: 12px;
+    position: relative;
+    overflow: visible;
+}
+
+.container .app-name {
+    height: 60px;
+    width: 100%;
+    background: #000;
+    box-shadow: 0 8px 30px rgba(162, 162, 180, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-left: 24px;
+    text-transform: uppercase;
+}
+
+.container .app-name i {
+    color: #ff5556;
+    margin-right: 20px;
+    transition: .25s;
+}
+
+.container .app-name i:hover {
+    text-shadow: 0 0 10px rgba(255, 85, 85, 0.4);
+    transform: scale(1.1);
+}
+
+.container .app-name i:nth-child(2) {
+    font-size: 22px;
+    padding-right: 30px;
+    cursor: help;
+}
+
+.info {
+    padding: 10px;
+    background: #333;
+    text-transform: none;
+    font-size: 14px;
+    height: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 44px;
+    border-radius: 6px;
+    line-height: 1.6;
+    right: -20%;
+    transform: translateY(40px);
+    z-index: 120;
+    transition: .3s ease-out;
+}
+
+.info li {
+    list-style-type: circle;
+    opacity: 0;
+    visibility: hidden;
+    transition: .2s;
+    transition-delay: .2s;
+}
+
+.container .app-name i:hover ~ .info {
+    visibility: visible;
+    transform: translateY(0);
+    height: auto;
+}
+
+.container .app-name i:hover ~ .info li {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+}
+
+.container .search-box {
+    height: 60px;
+    width: 100%;
+    background: linear-gradient(#111, #555, #111);
+    margin-top: 60px;
+    box-shadow: 0 8px 30px rgba(162, 162, 180, 0.6);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    position: relative;
+}
+
+.container .search-box input {
+    all: unset;
+    height: 60px;
+    width: 88%;
+    padding-left: 10px;
+    color: #eee;
+    border-bottom: 0px solid #999;
+    transition: .25s;
+}
+
+.container .search-box input:where(:focus, :focus-within) {
+    border-bottom: 2px solid #999;
+    background: linear-gradient(#111, #555, #111);
+}
+
+.container .search-box input::placeholder {
+    color: #ccc;
+    transition: .3s;
+}
+
+.container .search-box input:where(:focus, :focus-within)::placeholder {
+    transform: translateX(30px) skewX(90deg);
+
+}
+
+.container .search-box i {
+    margin-left: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #ff5556;
+    transition: .25s;
+}
+
+.container .search-box i:hover {
+    scale: 1.2;
+    text-shadow: 0 0 8px #ff5556;
+}
+
+.container .result-box {
+    height: 230px;
+    width: 100%;
+    border: 1px solid gray;
+    border-radius: 6px;
+    margin-top: 25px;
+    padding: 10px;
+    overflow: hidden;
+    overflow-y: scroll;
+    position: relative;
+}
+
+.container .result-box::-webkit-scrollbar {
+    display: none;
+}
+
+.container .result-box li {
+    padding: 10px 20px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    border: 1px solid #999;
+    list-style-type: none;
+    float: left;
+    margin-left: 8px;
+    margin-top: 5px;
+    border-radius: 6px;
+    cursor: copy;
+}
+
+.copyBtn {
+    background: linear-gradient(#111, #555, #111);
+    border: none;
+    padding: 10px 40px;
+    color: #fff;
+    margin-top: 20px;
+    border-radius: 6px;
+    float: right;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.copyBtn:hover {
+    filter: brightness(150%);
+    transform: scale(1.04);
+    box-shadow: inset 0 4px 8px rgba(255, 255, 255, 0.1),
+    inset 0 -4px 8px rgba(255, 255, 255, 0.1);
+}
+
+.msg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #ff5556;
+}
+
+.footer {
+    color: #aaa;
+    font-size: 14px;
+    font-weight: 300;
+    text-align: center;
+    align-self: flex-end;
+    margin-bottom: 12px;
+}
+
+abbr {
+    color: #ff5556;
+    cursor: default;
+    text-underline-offset: 3px;
+}
