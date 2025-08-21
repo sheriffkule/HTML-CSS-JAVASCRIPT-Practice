@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg-color: #121212;
+}
+
+:root:has(#theme-toggle:checked) {
+  --bg-color: #4437aa;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #4437aa;
+  }
+
+  :root:has(#theme-toggle:checked) {
+    --bg-color: #121212;
+  }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: var(--bg-color);
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    transition: all .4s;
+}
+
+.theme-toggle:checked + body {
+    background: #111;
+}
+
+.container {
+    padding: 20px;
+    /* width: 400px; */
+    max-width: max-content;
+    background: radial-gradient(#fff, #999);
+    border-radius: 5px;
+    align-self: flex-end;
+    margin-top: 10px;
+    position: relative;
+    transition: .4s;
+}
+
+.theme-toggle:checked ~ .container {
+    background: radial-gradient(#555, #111);
+}
+
+.container h2 {
+    font-size: 28px;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    background: linear-gradient(to right, #000, #888);
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle:checked ~ .container h2 {
+    background: linear-gradient(to right, #fff, #aaa);
+    text-shadow: 4px 4px 8px rgba(255, 255, 255, 0.2);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.theme-switch {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+.theme-toggle {
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+}
+
+.theme-label {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 70px;
+    height: 34px;
+    background-color: #e0e0e0;
+    border-radius: 50px;
+    padding: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in;
+}
+
+.ball {
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    background-color: #222;
+    border-radius: 50%;
+    left: 6px;
+    transition: transform 0.3s cubic-bezier(0.275, 0.82, 0.165, 1), background-color 0.3s ease-in;
+}
+
+.theme-label i {
+    font-size: 20px;
+}
+
+.theme-label .fa-sun {
+    color: #f39c12;
+}
+
+.theme-toggle:checked + .container .theme-label .ball {
+    transform: translateX(35px);
+}
+
+.container p {
+    margin-top: 16px;
+    font-size: 16px;
+    color: #505050;
+    text-wrap: pretty;
+}
+
+.theme-toggle:checked ~ .container p {
+    color: #ddd;
+}
+
+.container .search-box {
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.container .search-box input {
+    height: 40px;
+    width: 100%;
+    border: 1px solid grey;
+    padding-left: 10px;
+    border-radius: 6px;
+    outline: none;
+    background: transparent;
+}
+
+.theme-toggle:checked ~ .container .search-box input {
+    color: #ccc;
+}
+
+.container .search-box input:where(:focus, :focus-within) {
+    border-color: #9a90ff;
+}
+
+.container .search-box input::placeholder {
+    transition: .25s;
+}
+
+.theme-toggle:checked ~ .container .search-box input::placeholder {
+    color: #bbb;
+}
+
+.container .search-box input:where(:focus, :focus-within)::placeholder {
+    transform: translateX(300px) skewX(90deg);
+}
+
+.container .search-box button {
+    height: 40px;
+    width: 150px;
+    background: #8e87e4;
+    color: white;
+    border-radius: 3px;
+    margin-left: 10px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: .25s;
+}
+
+.container .search-box button:hover {
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+    transform: scale(1.03);
+    filter: saturate(250%);
+    border-radius: 3px 20px 20px 3px;
+}
+
+.container .search-box button:active {
+    transform: scale(1);
+}
+
+.container .fact-box {
+    padding: 15px;
+    border: 1px solid grey;
+    border-radius: 6px;
+    margin-top: 8px;
+    padding-bottom: 16px;
+}
+
+.container .fact-box h1 {
+    margin-top: 15px;
+}
+
+.theme-toggle:checked ~ .container .fact-box h1 {
+    color: #ddd;
+}
+
+.container .fact-box div {
+    height: 4px;
+    width: calc(100% + 30px);
+    background: #8e87e4;
+    margin-top: -15px;
+    margin-left: -15px;
+}
+
+.footer {
+    align-self: flex-end;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 300;
+    text-align: center;
+    text-wrap: pretty;
+}
+
+.theme-toggle:checked ~ .footer {
+    color: #999;
+}
+
+abbr {
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    font-weight: 400;
+    color: #9a90ff;
+    cursor: default;
+    text-underline-offset: 3px;
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Trivia App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/numberTrivia.css">
+</head>
+<body>
+    <input type="checkbox" id="theme-toggle" class="theme-toggle" />
+    <div class="container">
+        <h2>Number Trivia App</h2>
+        <div class="theme-switch">
+          <label for="theme-toggle" class="theme-label">
+            <i class="fas fa-sun"></i>
+            <i class="fas fa-moon"></i>
+            <span class="ball"></span>
+          </label>
+        </div>
+        <p>Enter a number to know interesting facts about the number.</p>
+        <div class="search-box">
+            <input type="number" class="user-input" placeholder="Enter number">
+            <button class="search-btn">Search</button>
+        </div>
+        <div class="fact-box">
+            <div></div>
+            <h1>46</h1>
+            <p></p>
+        </div>
+    </div>
+    <h4 class="footer">&copy; <time datetime="year" id="year"></time> Made by <em><abbr title="Web Developer Frontend Master"> SheriffKule </abbr></em> from XXIII century</h4>
+    <script src="/widgets_script/numberTrivia.js"></script>
+</body>
+</html>
