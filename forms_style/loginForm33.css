@@ -1,0 +1,272 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: radial-gradient(circle at top left, #89f7fe, #66a6ff);
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    align-self: flex-end;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+    width: 850px;
+    max-width: 100%;
+    min-height: 520px;
+    transition: 0.8s ease-in-out;
+}
+
+.form-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all .8s ease-in-out;
+}
+
+.sign-in-container {
+    left: 0;
+    width: 50%;
+    z-index: 2;
+}
+
+.sign-up-container {
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+}
+
+.container.right-panel-active .sign-up-container {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    animation: show 0.8s linear;
+}
+
+.container.right-panel-active .sign-in-container {
+    transform: translateX(100%);
+    opacity: 0;
+    z-index: 1;
+}
+
+@keyframes show {
+    from {
+        opacity: 0;
+        transform: translateX(30%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(100%);
+    }
+}
+
+form {
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 60px;
+    text-align: center;
+    height: 100%;
+}
+
+form h1 {
+    color: #1a1a1a;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+input {
+    background-color: #f5faff;
+    border: 2px solid #c0dfff;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+    border-radius: 10px;
+    font-size: 15ps;
+    color: #1a1a1a;
+    outline: none;
+    transition: .3s;
+}
+
+input::placeholder {
+    color: #7a7a7a;
+}
+
+input:focus {
+    border-color: #66a6ff;
+    box-shadow: 0 0 5px rgba(102, 166, 255, 0.5);
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+button {
+    border-radius: 20px;
+    border: none;
+    background: linear-gradient(to right, #2196f3, #0072ff);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 45px;
+    margin-top: 20px;
+    cursor: pointer;
+    box-shadow: 0 0 12px rgba(33, 150, 243, 0.4);
+    transition: all .25s;
+}
+
+button:hover {
+    transform: translateY(-4px) scale(1.04);
+    filter: saturate(150%);
+    box-shadow: 0 0 24px rgba(33, 150, 243, 0.6);
+}
+
+button:active {
+    transform: scale(1);
+}
+
+button.ghost {
+    background-color: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+}
+
+.overlay-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s ease-in-out;
+    overflow: hidden;
+    z-index: 100;
+}
+
+.container.right-panel-active .overlay-container {
+    transform: translateX(-100%);
+}
+
+.overlay {
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    color: #fff;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: 0.8s ease-in-out;
+}
+
+.container.right-panel-active .overlay {
+    transform: translateX(50%);
+}
+
+.overlay-panel {
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
+    height: 100%;
+    padding: 0 40px;
+    text-align: center;
+    transition: transform 0.8s ease-in-out;
+}
+
+.overlay-left {
+    transform: translateX(-20%);
+}
+
+.container.right-panel-active .overlay-left {
+    transform: translateX(0);
+}
+
+.overlay-right {
+    right: 0;
+    transform: translateX(0);
+}
+
+.container.right-panel-active .overlay-right {
+    transform: translateX(20%);
+}
+
+.overlay h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.overlay p {
+    font-size: 14px;
+    max-width: 260px;
+    margin-bottom: 20px;
+}
+
+a {
+    color: #0072ff;
+    font-size: 14px;
+    margin-top: 10px;
+    text-decoration: none;
+    transition: all .2s;
+}
+
+a:hover {
+    font-size: 15px;
+    color: #1a1a1a;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.footer {
+    align-self: flex-end;
+    margin-bottom: 12px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+abbr {
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    text-underline-offset: 3px;
+    font-weight: 500;
+    cursor: default;
+    color: #0072ff;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        width: 100%;
+        min-height: 400px;
+    }
+    form h1 {
+        font-size: 20px;
+    }
+    input {
+        font-size: 14px;
+    }
+    button {
+        padding: 10px 30px;
+        font-size: 14px;
+    }
+    .overlay h1 {
+        font-size: 20px;
+    }
+    .overlay p {
+        font-size: 13px;
+    }
+}
