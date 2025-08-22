@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict Gender by Name</title>
+    <link rel="stylesheet" href="/widgets_style/predictGender.css">
+</head>
+<body>
+    <div class="container">
+        <h2 class="app-title">Predict Gender by Name</h2>
+        <div class="user-input-box">
+            <input type="text" placeholder="Enter a name...">
+            <div class="border-bottom"></div>
+            <button class="predict-btn">Predict</button>
+        </div>
+        <div class="result-box">
+            <p class="name">
+                <div class="gender-logo"></div>
+                <h2 class="gender"></h2>
+                <div class="probability"></div>
+            </p>
+        </div>
+    </div>
+    <h4 class="footer">&copy; <time datetime="year" id="year"></time> Made by <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century</h4>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="/widgets_script/predictGender.js"></script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: #6a5acd;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.container {
+  padding: 20px;
+  background: #ccc;
+  border-radius: 8px;
+  width: 400px;
+  align-self: flex-end;
+  margin-top: 10px;
+}
+
+.container .app-title {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 500;
+  margin-top: 14px;
+  color: #222;
+}
+
+.container .user-input-box {
+  padding: 2px;
+  margin-top: 25px;
+  position: relative;
+}
+
+.container .user-input-box input {
+  all: unset;
+  height: 34px;
+  width: 210px;
+  border: 1px solid #555;
+  padding: 5px;
+  border-radius: 6px;
+  padding-left: 15px;
+  transition: 0.3s;
+}
+
+.container .user-input-box input:where(:focus, :focus-within) {
+    border-color: #999;
+    background: #ddd;
+    border-radius: 6px 6px 0 0;
+}
+
+.container .user-input-box input::placeholder {
+    transition: .3s;
+    transition-delay: 0.15s;
+}
+
+.container .user-input-box input:where(:focus, :focus-within)::placeholder {
+    transform: translateX(232px);
+}
+
+.container .user-input-box .border-bottom {
+  width: 0;
+  height: 3px;
+  display: inline-block;
+  background: #6a5acd;
+  position: absolute;
+  bottom: 0px;
+  left: 2px;
+  transition: 0.3s;
+}
+
+.container .user-input-box input:where(:focus, :focus-within) ~ .border-bottom {
+  width: 232px;
+}
+
+.container .user-input-box button {
+  all: unset;
+  height: 45px;
+  width: 120px;
+  background: #6a5acd;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  margin-left: 3px;
+  float: right;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.container .user-input-box button:hover {
+  filter: saturate(150%);
+  font-size: 17px;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.container .user-input-box button:active {
+    scale: 0.97;
+}
+
+.container .result-box {
+  padding: 10px;
+  background: #5bc4f3;
+  margin-top: 20px;
+  border-radius: 8px;
+  /* display: none; */
+}
+
+.container .result-box .name {
+  text-align: center;
+  font-size: 20px;
+  color: white;
+  margin-top: 10px;
+}
+
+.container .result-box .gender-logo {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  color: #5bc4f3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  font-size: 60px;
+  margin: auto;
+  margin-top: 1rem;
+}
+
+.container .result-box .gender {
+  text-align: center;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 28px;
+  margin-top: 1rem;
+}
+
+.container .result-box .probability {
+  text-align: center;
+  color: white;
+  margin-top: 0.5rem;
+  font-size: 16px;
+  position: relative;
+  top: -5px;
+}
+
+.footer {
+  align-self: flex-end;
+  margin-bottom: 10px;
+  font-size: 14px;
+  text-align: center;
+  text-wrap: pretty;
+  font-weight: 300;
+}
+
+abbr {
+  font-size: 15px;
+  text-underline-offset: 3px;
+  letter-spacing: 0.5px;
+  color: #5bc4f3;
+  cursor: default;
+}
