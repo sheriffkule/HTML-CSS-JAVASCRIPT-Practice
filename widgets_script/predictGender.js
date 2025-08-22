@@ -1,10 +1,12 @@
-let nameInput = document.querySelector('input');
+let nameInput = document.querySelector('.user-input-box input');
 let searchBtn = document.querySelector('.predict-btn');
 let nameTxt = document.querySelector('.name');
 let genderLogo = document.querySelector('.gender-logo');
 let gender = document.querySelector('.gender');
 let probability = document.querySelector('.probability');
 let resultBox = document.querySelector('.result-box');
+let bgInput = document.querySelector('.settings input');
+let colorHex = document.querySelector('.colorHex');
 
 let predictGender = (name) => {
   let url = 'https://api.genderize.io?name=';
@@ -14,7 +16,7 @@ let predictGender = (name) => {
       console.log(data);
       nameTxt.innerHTML = data.name;
       gender.innerHTML = data.gender;
-      probability.innerHTML = `Probability: ${data.probability}`;
+      probability.innerHTML = `Probability: ${Math.round(data.probability * 100)}%`;
       if (data.gender == 'female') {
         resultBox.style.background = '#f576ab';
         genderLogo.innerHTML = `<ion-icon name="woman-outline"></ion-icon>`;
@@ -25,10 +27,10 @@ let predictGender = (name) => {
         genderLogo.style.color = '#5bc4f3';
       }
     });
-    resultBox.style.displa = 'block';
+  resultBox.style.display = 'block';
 };
 
-predictGender('gicule');
+predictGender();
 
 searchBtn.addEventListener('click', () => {
   if (nameInput.value.length > 0 && /^[A-Za-z]+$/.test(nameInput.value)) {
@@ -36,4 +38,15 @@ searchBtn.addEventListener('click', () => {
   }
 });
 
-document.getElementById('year').textContent = new Date().getFullYear()
+nameInput.addEventListener('keyup', (e) => {
+  if (e.key === 'Enter' && nameInput.value.length > 0 && /^[A-Za-z]+$/.test(nameInput.value)) {
+    predictGender(nameInput.value);
+  }
+});
+
+bgInput.addEventListener('input', () => {
+  document.body.style.background = bgInput.value;
+  colorHex.textContent = bgInput.value;
+});
+
+document.getElementById('year').textContent = new Date().getFullYear();

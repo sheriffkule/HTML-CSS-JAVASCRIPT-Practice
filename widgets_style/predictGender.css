@@ -5,6 +5,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
+  interpolate-size: allow-keywords;
 }
 
 body {
@@ -13,6 +14,8 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  transition: background 0.25s ease-in;
+  overflow-y: hidden;
 }
 
 .container {
@@ -22,6 +25,19 @@ body {
   width: 400px;
   align-self: flex-end;
   margin-top: 10px;
+  animation: enter 1s ease-in forwards 0.2s;
+}
+
+@keyframes enter {
+  from {
+    transform: translateY(300%);
+  }
+  80% {
+    transform: translateY(-20%) scale(1.1);
+  }
+  to {
+    transform: translateY(0) scale(1);
+  }
 }
 
 .container .app-title {
@@ -50,18 +66,18 @@ body {
 }
 
 .container .user-input-box input:where(:focus, :focus-within) {
-    border-color: #999;
-    background: #ddd;
-    border-radius: 6px 6px 0 0;
+  border-color: #999;
+  background: #ddd;
+  border-radius: 6px 6px 0 0;
 }
 
 .container .user-input-box input::placeholder {
-    transition: .3s;
-    transition-delay: 0.15s;
+  transition: 0.3s;
+  transition-delay: 0.15s;
 }
 
 .container .user-input-box input:where(:focus, :focus-within)::placeholder {
-    transform: translateX(232px);
+  transform: translateX(232px);
 }
 
 .container .user-input-box .border-bottom {
@@ -103,7 +119,7 @@ body {
 }
 
 .container .user-input-box button:active {
-    scale: 0.97;
+  scale: 0.97;
 }
 
 .container .result-box {
@@ -111,7 +127,8 @@ body {
   background: #5bc4f3;
   margin-top: 20px;
   border-radius: 8px;
-  /* display: none; */
+  display: none;
+  transition: display 0.25s;
 }
 
 .container .result-box .name {
@@ -151,6 +168,18 @@ body {
   font-size: 16px;
   position: relative;
   top: -5px;
+}
+
+.container .settings {
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+.container .settings input {
+  height: 1.25rem;
+  width: 2.5rem;
+  cursor: pointer;
+  margin-inline: 6px;
 }
 
 .footer {
