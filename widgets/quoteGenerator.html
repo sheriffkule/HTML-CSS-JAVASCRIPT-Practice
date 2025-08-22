@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Quote Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/quoteGenerator.css" />
+  </head>
+  <body>
+    <div class="container">
+      <label for="switch" class="switch">
+        <input type="checkbox" id="switch" />
+        <div class="sunmoon">
+          <div class="darkside"></div>
+        </div>
+        <div class="border"></div>
+      </label>
+      <h2>Quote of the Day</h2>
+      <div class="quote_content">
+        <i class="fa fa-quote-left quote-icon"></i>
+        <p class="quote">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita accusamus ipsam mollitia
+          blanditiis dolor quod!
+        </p>
+        <i class="fa fa-quote-right quote-icon"></i>
+      </div>
+      <p class="author">Lorem, ipsum dolor.</p>
+      <div class="social_icons">
+        <ul>
+          <li class="speech"><i class="fas fa-volume-up"></i></li>
+          <li class="copy"><i class="fas fa-copy"></i></li>
+          <li class="twitter"><i class="fab fa-twitter"></i></li>
+        </ul>
+        <button type="button" class="btn-quote">New Quote</button>
+      </div>
+      <p class="message">Quote Copied!</p>
+    </div>
+    <h4 class="footer">
+      &copy; <time datetime="year" id="year"></time> Made by
+      <em><abbr title="Web Developer Frontend master">SheriffKule </abbr></em> from XXIII century
+    </h4>
+    <script src="/widgets_script/quoteGenerator.js"></script>
+  </body>
+</html>

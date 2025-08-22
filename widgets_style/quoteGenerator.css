@@ -1,0 +1,326 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+    --bg-color: #074e99;
+    --sunmoon-size: 28px;
+    --switch-width: 65px;
+    --switch-height: 34px;
+    --switch-rounded: 50px;
+    --switch-padding-x: 5px;
+    --switch-bg: linear-gradient(to bottom, #73bbff, #a2d1fd);
+    --switch-dark-bg: linear-gradient(to bottom, #4a587a, #181d27);
+    --border-width: 2px;
+    --border-gradient: linear-gradient(to bottom, #a2d1fd, #074e99);
+    --border-dark-gradient: linear-gradient(to bottom, #000, #6c7384);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--bg-color);
+  font-family: 'Poppins', sans-serif;
+  transition: .4s;
+}
+
+body.dark {
+    --bg-color: #242831;
+}
+
+.switch {
+    position: absolute;
+    top: 2.5rem;
+    right: 2rem;
+    width: var(--switch-width);
+    height: var(--switch-height);
+    border-radius: var(--switch-rounded);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--switch-bg);
+    transition: all .4s ease-in;
+}
+
+.switch input {
+    display: none;
+}
+
+.switch::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    border-radius: var(--switch-rounded);
+    background: var(--switch-dark-bg);
+    transition: opacity .4s ease-in;
+}
+
+body.dark .switch::before {
+    opacity: 1;
+}
+
+.sunmoon {
+    position: absolute;
+    width: var(--sunmoon-size);
+    height: var(--sunmoon-size);
+    border-radius: 50%;
+    background: #ffc187;
+    box-shadow: 0 0 10px 0 #ffc187,
+    0 0 20px #ffc18768,
+    -2px -2px 5px #ffab5c inset;
+    left: var(--switch-padding-x);
+    transition: all .4s ease-in-out;
+}
+
+body.dark .sunmoon {
+    left: calc(100% - var(--sunmoon-size) - var(--switch-padding-x));
+    background: #dee5f3;
+    box-shadow: 0 0 50px 0 #dee5f3;
+}
+
+.darkside {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 75%;
+    height: 75%;
+    border-radius: 50%;
+    background: #ffc187;
+    transition: all .4s ease-in;
+}
+
+body.dark .darkside {
+    background: #565c6b;
+}
+
+.border {
+    position: absolute;
+    top: calc(var(--border-width) * -2);
+    left: calc(var(--border-width) * -2);
+    width: calc(100% + var(--border-width) * 4);
+    height: calc(100% + var(--border-width) * 4);
+    background: var(--border-gradient);
+    border-radius: var(--switch-rounded);
+    z-index: -1;
+    transition: .4s ease-in;
+}
+
+.border::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    border-radius: var(--switch-rounded);
+    background: var(--border-dark-gradient);
+    transition: opacity .4s ease-in;
+}
+
+body.dark .border::after {
+    opacity: 1;
+}
+
+.container {
+  max-width: 600px;
+  width: 100%;
+  background: linear-gradient(135deg, #aaaaaa, white, #aaa);
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  align-self: flex-end;
+  margin-top: 10px;
+}
+
+body.dark .container {
+    background: linear-gradient(135deg, #444, #000, #444);
+}
+
+.container h2 {
+  font-size: 2rem;
+  text-align: center;
+  color: #2c3e50;
+  transition: .4s;
+}
+
+body.dark .container h2 {
+    color: #83bbf3;
+}
+
+.quote_content {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+
+.quote_content p {
+  font-size: 1.2rem;
+  text-align: center;
+  text-wrap: pretty;
+  padding: 0.25rem;
+  word-break: keep-all;
+}
+
+body.dark .quote_content p {
+    color: #ddd;
+}
+
+.quote-icon {
+  font-size: 1.2rem;
+  color: #888;
+}
+
+.quote_content i:first-child {
+  margin: 3px 10px 0 0;
+}
+
+.quote_content i:last-child {
+  display: flex;
+  align-items: flex-end;
+  margin: 0 0 3px 10px;
+}
+
+.author {
+  text-align: center;
+  font-weight: 600;
+  padding: 1rem 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #707b7c;
+}
+
+.social_icons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.5rem 0;
+}
+
+.social_icons ul {
+  list-style-type: none;
+  display: flex;
+}
+
+ul li {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #707b7c;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.25s;
+}
+
+ul li::before {
+  content: '';
+  position: absolute;
+  width: 70%;
+  height: 1px;
+  background: #074e99;
+  bottom: -8px;
+  transform: scaleX(0);
+  transition: 0.25s;
+}
+
+body.dark ul li::before {
+    background: #6db4ff;
+}
+
+ul li:hover,
+.social_icons button:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 4px 8px rgba(0, 0, 0, 0.2);
+  filter: saturate(200%);
+}
+
+body.dark ul li:hover {
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2), inset 0 4px 8px rgba(255, 255, 255, 0.2);
+}
+
+ul li:hover::before {
+  transform: scaleX(1);
+}
+
+ul li i {
+  color: #074e99;
+  font-size: 1.25rem;
+}
+
+body.dark ul li i {
+  color: #6db4ff;
+}
+
+.social_icons button {
+  outline: none;
+  border: none;
+  background: #074e99;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.social_icons button:active,
+ul li:active {
+  transform: scale(1);
+}
+
+.message {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    padding: 0.5rem 1rem;
+    background: #2c3e50;
+    color: #0f0;
+    border-radius: 4px;
+    transform: translateX(-200%) scale(0.2);
+    transition: all .4s ease-in;
+}
+
+.message.active {
+    transform: translateX(10%) scale(1);
+}
+
+.footer {
+    align-self: flex-end;
+    margin-bottom: 10px;
+    text-align: center;
+    text-wrap: pretty;
+    font-size: 14px;
+    font-weight: 300;
+    transition: color .3s;
+}
+
+body.dark .footer {
+    color: #aaa;
+}
+
+abbr {
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    text-underline-offset: 3px;
+    color: #999;
+}
+
+body.dark abbr {
+    color: #ccc;
+}
