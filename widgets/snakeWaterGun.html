@@ -8,24 +8,34 @@
   </head>
   <body>
     <div class="container">
+      <h1>Snake, Water, Gun Game</h1>
+      <label for="switch" class="switch">
+        <input type="checkbox" id="switch" />
+        <div class="sunmoon">
+          <div class="darkside"></div>
+        </div>
+        <div class="border"></div>
+      </label>
       <span class="my_score">You: <strong>0</strong></span>
       <span class="computer_score">Computer: <strong>0</strong></span>
       <span class="draw_match">Draw: <strong>0</strong></span>
-      <div class="snake" onclick="check('snake')">
+      <div class="snake" onclick="check('Snake')">
         <img src="/icons/snake.png" alt="snake" />
       </div>
-      <div class="water" onclick="check('water')">
+      <div class="water" onclick="check('Water')">
         <img src="/icons/water.png" alt="water" />
       </div>
-      <div class="gun" onclick="check('gun')">
+      <div class="gun" onclick="check('Gun')">
         <img src="/icons/Gun.png" alt="gun" />
       </div>
       <div class="choices">
-        <span class="your_choice">You Choose: <strong>Snake</strong></span>
-        <span class="computer_choice">Computer Choose: <strong>Water</strong></span>
-        <div class="match-result">You Win!</div>
+        <span class="your_choice"></span>
+        <span class="computer_choice"></span>
+        <div class="match-result"></div>
       </div>
     </div>
+    <f4 class="footer">&copy; <time datetime="year" id="year"></time> Made by
+      <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century</f4>
     <script src="/widgets_script/snakeWaterGun.js"></script>
   </body>
 </html>

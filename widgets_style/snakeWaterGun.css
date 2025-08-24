@@ -1,5 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
+:root {
+    --bg-color: #66cdaa;
+    --sunmoon-size: 25px;
+    --switch-width: 70px;
+    --switch-height: 30px;
+    --switch-rounded: 50px;
+    --switch-padding-x: 3px;
+    --switch-bg: linear-gradient(to bottom, #73bbff, #a2d1fd);
+    --switch-dark-bg: linear-gradient(to bottom, #4a587a, #181d27);
+    --border-width: 2px;
+    --border-gradient: linear-gradient(to bottom, #a2d1fd, #cde7ff);
+    --border-dark-gradient: linear-gradient(to bottom, #000, #6c7384);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -9,20 +23,162 @@
 }
 
 body {
-    background: #66cdaa;
+    background: var(--bg-color);
     display: grid;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+    overflow-y: hidden;
+    transition: 0.4s;
+}
+
+body.dark {
+    --bg-color: #1b2849;
+}
+
+.switch {
+    position: absolute;
+    right: 20px;
+    top: 14px;
+    width: var(--switch-width);
+    height: var(--switch-height);
+    border-radius: var(--switch-rounded);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--switch-bg);
+    transition: all .5s ease-in;
+}
+
+.switch input {
+    display: none;
+}
+
+.switch::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    border-radius: var(--switch-rounded);
+    background: var(--switch-dark-bg);
+    transition: opacity .4s ease-in;
+}
+
+body.dark .switch::before {
+    opacity: 1;
+}
+
+.sunmoon {
+    position: absolute;
+    width: var(--sunmoon-size);
+    height: var(--sunmoon-size);
+    border-radius: 50%;
+    background: #ffc187;
+    box-shadow: 0 0 10px 0 #ffc187,
+    0 0 20px #ffc18768,
+    -2px -2px 5px #ffab5c inset;
+    left: var(--switch-padding-x);
+    transition: all .5s ease-in-out;
+}
+
+body.dark .sunmoon {
+    left: calc(100% - var(--sunmoon-size) - var(--switch-padding-x));
+    background: #dee5f3;
+    box-shadow: 0 0 50px 0 #dee5f3;
+}
+
+.darkside {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 75%;
+    height: 75%;
+    border-radius: 50%;
+    background: #ffc187;
+    transition: all .4s ease-in;
+}
+
+body.dark .darkside {
+    background: #565c6b;
+}
+
+.border {
+    position: absolute;
+    top: calc(var(--border-width) * -2);
+    left: calc(var(--border-width) * -2);
+    width: calc(100% + var(--border-width) * 4);
+    height: calc(100% + var(--border-width) * 4);
+    background: var(--border-gradient);
+    border-radius: var(--switch-rounded);
+    z-index: -1;
+    transition: .4s ease-in;
+}
+
+.border::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    border-radius: var(--switch-rounded);
+    background: var(--border-dark-gradient);
+    transition: opacity .4s ease-in;
+}
+
+body.dark .border::after {
+    opacity: 1;
 }
 
 .container {
-    height: 330px;
+    align-self: flex-end;
+    margin-top: 20px;
+    height: 230px;
     width: 400px;
     background: #ccc;
     border-radius: 6px;
     position: relative;
-    transition: all .2s;
+    transition: all .4s;
+    animation: enter 0.7s linear forwards;
+}
+
+@keyframes enter {
+    from {
+        transform: translateY(400px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+body.dark .container {
+    background: #333;
+}
+
+h1 {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    font-size: 24px;
+    text-align: center;
+    background: linear-gradient(90deg, #002e1f, #326655);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+body.dark h1 {
+    background: linear-gradient(90deg, #66cdaa, #326655);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .container .my_score,
@@ -31,6 +187,13 @@ body {
     position: absolute;
     left: 25px;
     margin-top: 14px;
+    transition: .3s;
+}
+
+body.dark .container .my_score,
+body.dark .container .computer_score,
+body.dark .container .draw_match {
+    color: #eee;
 }
 
 .container .computer_score {
@@ -58,30 +221,86 @@ body {
     border: 2px solid #000;
     cursor: pointer;
     float: left;
+    transition: .25s;
+    position: relative;
+}
+
+body.dark .container .snake,
+body.dark .container .water,
+body.dark .container .gun {
+    background: #326655;
+}
+
+.container .snake:hover,
+.container .water:hover,
+.container .gun:hover {
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
+    transform: translateY(-4px);
+}
+
+.container .snake::before,
+.container .water::before,
+.container .gun::before {
+    content: '';
+    position: absolute;
+    height: 4px;
+    width: 80%;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    background: #66cdaa;
+    transition: .25s;
+}
+
+body.dark .container .snake::before,
+body.dark .container .water::before,
+body.dark .container .gun::before {
+    background: #326655;
+}
+
+.container .snake:hover::before,
+.container .water:hover::before,
+.container .gun:hover::before {
+    transform: translateX(-50%) scaleX(1);
 }
 
 .container .water img, 
 .container .gun img {
     height: 40px;
     width: 40px;
+    transition: 0.15s ease-in;
 }
 
 .container .snake img {
     height: 60px;
     width: 60px;
+    transition: 0.2s ease-in;
+}
+
+.container .snake:hover img,
+.container .water:hover img,
+.container .gun:hover img {
+    transform: scale(1.3);
 }
 
 .container .choices {
     position: absolute;
-    top: 75%;
+    top: 72%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: left;
+    display: none;
+    transition: .25s;
 }
 
 .container .choices span {
     white-space: nowrap;
     font-size: 15px;
+    transition: .25s;
+}
+
+body.dark .container .choices span {
+    color: #eee;
 }
 
 .container .choices .match-result {
@@ -98,5 +317,29 @@ body {
     border-radius: 4px;
     border: 1px solid #000;
     white-space: nowrap;
+    transition: 0.25s;
 }
 
+.footer {
+    align-self: flex-end;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+body.dark .footer {
+    color: #aaa;
+}
+
+abbr {
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    color: blue;
+    font-weight: 400;
+    text-underline-offset: 3px;
+}
+
+body.dark abbr {
+    color: #66cdaa;
+}
