@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snake, Water, Gun Game</title>
+    <link rel="stylesheet" href="/widgets_style/snakeWaterGun.css" />
+  </head>
+  <body>
+    <div class="container">
+      <span class="my_score">You: <strong>0</strong></span>
+      <span class="computer_score">Computer: <strong>0</strong></span>
+      <span class="draw_match">Draw: <strong>0</strong></span>
+      <div class="snake" onclick="check('snake')">
+        <img src="/icons/snake.png" alt="snake" />
+      </div>
+      <div class="water" onclick="check('water')">
+        <img src="/icons/water.png" alt="water" />
+      </div>
+      <div class="gun" onclick="check('gun')">
+        <img src="/icons/Gun.png" alt="gun" />
+      </div>
+      <div class="choices">
+        <span class="your_choice">You Choose: <strong>Snake</strong></span>
+        <span class="computer_choice">Computer Choose: <strong>Water</strong></span>
+        <div class="match-result">You Win!</div>
+      </div>
+    </div>
+    <script src="/widgets_script/snakeWaterGun.js"></script>
+  </body>
+</html>

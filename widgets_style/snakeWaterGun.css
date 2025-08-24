@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    interpolate-size: allow-keywords;
+}
+
+body {
+    background: #66cdaa;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container {
+    height: 330px;
+    width: 400px;
+    background: #ccc;
+    border-radius: 6px;
+    position: relative;
+    transition: all .2s;
+}
+
+.container .my_score,
+.container .computer_score,
+.container .draw_match {
+    position: absolute;
+    left: 25px;
+    margin-top: 14px;
+}
+
+.container .computer_score {
+    margin-top: 42px;
+}
+
+.container .draw_match {
+    margin-top: 70px;
+}
+
+.container .snake,
+.container .water,
+.container .gun {
+    height: 85px;
+    width: 85px;
+    border-radius: 50%;
+    background: #66cdaa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    margin-left: 36px;
+    position: relative;
+    top: 90px;
+    border: 2px solid #000;
+    cursor: pointer;
+    float: left;
+}
+
+.container .water img, 
+.container .gun img {
+    height: 40px;
+    width: 40px;
+}
+
+.container .snake img {
+    height: 60px;
+    width: 60px;
+}
+
+.container .choices {
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: left;
+}
+
+.container .choices span {
+    white-space: nowrap;
+    font-size: 15px;
+}
+
+.container .choices .match-result {
+    width: 100%;
+    padding: 5px 20px;
+    background: lightgreen;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 4px;
+    border: 1px solid #000;
+    white-space: nowrap;
+}
+
