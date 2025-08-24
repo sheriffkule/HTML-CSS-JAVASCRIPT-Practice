@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    interpolate-size: allow-keywords;
+}
+
+body {
+    background: #0089bb;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.wrapper {
+    position: relative;
+    align-self: flex-end;
+    margin-top: 10px;
+}
+
+.container {
+    padding: 25px;
+    width: 360px;
+    height: fit-content;
+    background: rgba(221, 221, 221, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    border: 1px solid gray;
+    animation: enter 0.8s cubic-bezier(0.25, 2, 0.475, 0.19) forwards;
+}
+
+@keyframes enter {
+    from {
+        transform: rotateY(0deg) translateY(500px) scale(0);
+    }
+    to {
+        transform: rotateY(360) translateY(0) scale(1);
+    }
+}
+
+.blob {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: rgba(0, 25, 109, 0.6);
+    z-index: -1;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    animation: 10s rotate linear infinite;
+}
+
+.blob1 {
+    top: -45px;
+    left: -45px;
+}
+
+.blob2 {
+    bottom: -45px;
+    right: -45px;
+    animation-direction: reverse;
+}
+
+@keyframes rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.container h2 {
+    color: #000;
+}
+
+.container .info {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    font-size: 20px;
+    display: inline-block;
+    outline: 1px solid rgba(0, 25, 109, 0.6);
+    border-radius: 50%;
+    padding: 0 12px;
+    margin-left: 18px;
+    cursor: help;
+    transition: 0.2s;
+}
+
+.container  .info:hover {
+    outline-offset: 2px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.4);
+}
+
+.popup {
+    position: absolute;
+    top: 58px;
+    right: -60px;
+    width: 200px;
+    height: 0;
+    padding: 6px 10px;
+    border-radius: 6px;
+    background: rgba(204, 204, 204, 0.6);
+    backdrop-filter: blur(10px);
+    pointer-events: none;
+    visibility: hidden;
+    opacity: 0;
+    overflow: hidden;
+    transition: opacity 0.3s, visibility .3s, height 0.3s;
+}
+
+.container  .info:hover ~ .popup {
+    height: auto;
+    visibility: visible;
+    opacity: 1;
+}
+
+.container input {
+    height: 50px;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid grey;
+    margin-top: 20px;
+    outline: none;
+    padding-left: 15px;
+    transition: 0.25s;
+}
+
+.container input:where(:focus, :focus-within) {
+    border-color: #0089bb;
+    background: rgba(204, 204, 204, 0.6);
+}
+
+.container input::placeholder {
+    transition: .3s;
+}
+
+.container input:where(:focus, :focus-within)::placeholder {
+    transform: translateY(-30px);
+}
+
+.container button {
+    height: 50px;
+    width: 100%;
+    color: white;
+    background: #0089bb;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    margin-top: 14px;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.container button:hover {
+    transform: scale(1.02) translateY(-3px);
+    box-shadow: inset 0 -55px 0 #03a7e2,
+    0 5px 12px rgba(0, 0, 0, 0.2);
+}
+
+.container h4 {
+    text-align: center;
+    margin-top: 15px;
+    font-weight: 500;
+    display: none;
+    transition: 0.2s;
+}
+
+.container h4 span {
+    color: #0011ff;
+}
+
+.footer {
+    align-self: flex-end;
+    margin-bottom: 10px;
+    font-size: 13px;
+    text-align: center;
+    font-weight: 400;
+}
+
+abbr {
+    letter-spacing: 0.5px;
+    font-size: 14px;
+    cursor: default;
+    text-underline-offset: 3px;
+}

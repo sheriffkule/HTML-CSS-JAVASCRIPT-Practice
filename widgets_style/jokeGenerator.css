@@ -25,7 +25,6 @@ body {
     border-radius: 8px;
     box-shadow: 0 8px 14px rgba(255, 255, 255, 0.3);
     animation: enter 0.7s cubic-bezier(0.455, 0.03, 0.515, 0.955) forwards;
-    animation-delay: 0.3s;
 }
 
 @keyframes enter {
