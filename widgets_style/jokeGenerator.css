@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    interpolate-size: allow-keywords;
+}
+
+body {
+    background: radial-gradient(#04b19d, #02534a);
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow-y: hidden;
+}
+
+.container {
+    align-self: flex-end;
+    margin-top: 10px;
+    padding: 25px;
+    max-width: 400px;
+    background: radial-gradient(#424242, #2f2f2f);
+    border-radius: 8px;
+    box-shadow: 0 8px 14px rgba(255, 255, 255, 0.3);
+    animation: enter 0.7s cubic-bezier(0.455, 0.03, 0.515, 0.955) forwards;
+    animation-delay: 0.3s;
+}
+
+@keyframes enter {
+    from { 
+        transform: translateY(200%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+h1 {
+    color: #04b19d;
+    margin-top: 16px;
+    text-align: center;
+}
+
+.container .emoji {
+    text-align: center;
+    font-size: 70px;
+    margin-top: 16px;
+    text-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+}
+
+.container .joke {
+    color: #fff;
+    text-align: center;
+    margin-top: 12px;
+    font-size: 18px;
+    text-wrap: pretty;
+    line-height: 1.5;
+}
+
+.container .btns {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 6px;
+}
+
+.container .btns button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 55px;
+    width: 55px;
+    background: #000;
+    color: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    position: relative;
+    inline-size: 54px;
+    transition: all .3s;
+}
+
+@property --fill {
+    syntax: '<percentage>';
+    inherits: true;
+    initial-value: 0%;
+}
+
+.container .btns button::after,
+.container .btns button::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: -2px;
+    border-radius: inherit;
+    background: conic-gradient(currentColor var(--fill), transparent var(--fill));
+    transition: --fill .3s .3s ease-in-out;
+    transition-delay: 0s;
+}
+
+.container .btns button::before {
+    transform: rotateX(180deg);
+}
+
+.container .btns button::after {
+    transform: rotate(180deg);
+}
+
+.container .btns button:hover {
+    --fill: 50%;
+    color: greenyellow;
+    margin-bottom: 6px;
+    font-size: 20px;
+    transition-delay: 0s;
+}
+
+.container .btns .copy span {
+    position: absolute;
+    color: #0f0;
+    font-style: italic;
+    font-size: 16px;
+    bottom: -50px;
+    left: 0;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease-in, bottom .25s ease-in-out;
+}
+
+.footer {
+    text-align: center;
+    align-self: flex-end;
+    margin-bottom: 10px;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+abbr {
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+    text-underline-offset: 3px;
+    cursor: default;
+}
