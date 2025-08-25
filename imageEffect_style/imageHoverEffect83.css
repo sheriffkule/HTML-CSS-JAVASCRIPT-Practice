@@ -1,0 +1,100 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #2f2f2f;
+}
+
+.container {
+    height: 400px;
+    width: 700px;
+    background: none;
+    border-radius: 6px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* overflow: hidden; */
+    cursor: pointer;
+}
+
+.container .images {
+    height: 100%;
+    width: 100%;
+    border-radius: 6px;
+}
+
+
+.container .images .img-one {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: url('/images/earth.jpg') no-repeat;
+    background-size: cover;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.container .images .img-two {
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    background: url('/images/earth.jpg') no-repeat;
+    background-size: cover;
+    border-radius: 4px;
+    cursor: pointer;
+    filter: grayscale(1);
+}
+
+.container .slider {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+
+.container .slider input {
+    -webkit-appearance: none;
+    width: 100%;
+    outline: none;
+    background: none;
+    cursor: pointer;
+}
+
+.container .slider input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 400px;
+    width: 4px;
+}
+
+.container .slider .drag-line {
+    height: 100%;
+    width: 2px;
+    position: absolute;
+    left: 50%;
+    cursor: col-resize;
+    background: #fff;
+}
+
+.container .slider .drag-line .drag-line-thumb {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 15px;
+    cursor: col-resize;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    box-shadow: 0 8px 30px rgba(100, 100, 111, 0.8);
+    border: 1px solid #fff;
+    user-select: none;
+}
