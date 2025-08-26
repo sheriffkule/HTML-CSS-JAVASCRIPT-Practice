@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #000;
+}
+
+h1 {
+    position: absolute;
+    background: linear-gradient(90deg, #f00, #ff0, #ff00f3, #03f, #ff00c4, #f00);
+    background-size: 400%;
+    font-size: clamp(40px, 10vw, 20vw);
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: move 10s linear infinite;
+    user-select: none;
+    cursor: pointer;
+}
+
+@keyframes move {
+    from {
+        background-position: 0;
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0);
+    }
+    50% {
+        text-shadow: 0 20px 0px rgba(255, 255, 255, 0.5);
+    }
+    to {
+        background-position: -400%;
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0);
+    }
+}
