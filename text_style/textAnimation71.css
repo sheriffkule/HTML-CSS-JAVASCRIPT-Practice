@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Bungee", sans-serif;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #000;
+}
+
+h1 {
+    font-size: clamp(50px, 12vw, 25vw);
+    color: #191818;
+    height: 140px;
+    letter-spacing: 3px;
+    text-align: center;
+    animation: move 2s linear infinite;
+}
+
+@keyframes move {
+    from {
+        text-shadow: 4px -4px 0 hsl(0, 100%, 50%),
+        3px -3px 0 hsl(0, 100%, 50%),
+        2px -2px 0 hsl(0, 100%, 50%),
+        1px -1px 0 hsl(0, 100%, 50%),
+        -4px 4px 0 hsl(180, 100%, 50%),
+        -3px 3px 0 hsl(180, 100%, 50%),
+        -2px 2px 0 hsl(180, 100%, 50%),
+        -1px 1px 0 hsl(180, 100%, 50%);
+    }
+    25% {
+        text-shadow: -4px 4px 0 hsl(180, 100%, 50%),
+        -3px 3px 0 hsl(180, 100%, 50%),
+        -2px 2px 0 hsl(180, 100%, 50%),
+        -1px 1px 0 hsl(180, 100%, 50%),
+        4px -4px 0 hsl(0, 100%, 50%),
+        3px -3px 0 hsl(0, 100%, 50%),
+        2px -2px 0 hsl(0, 100%, 50%),
+        1px -1px 0 hsl(0, 100%, 50%);
+    }
+    50% {
+        text-shadow: -4px 4px 0 hsl(0, 100%, 50%),
+        -3px 3px 0 hsl(0, 100%, 50%),
+        -2px 2px 0 hsl(0, 100%, 50%),
+        -1px 1px 0 hsl(0, 100%, 50%),
+        4px -4px 0 hsl(180, 100%, 50%),
+        3px -3px 0 hsl(180, 100%, 50%),
+        2px -2px 0 hsl(180, 100%, 50%),
+        1px -1px 0 hsl(180, 100%, 50%);
+    }
+    75% {
+        text-shadow: 4px 4px 0 hsl(180, 100%, 50%),
+        3px 3px 0 hsl(180, 100%, 50%),
+        2px 2px 0 hsl(180, 100%, 50%),
+        1px 1px 0 hsl(180, 100%, 50%),
+        -4px -4px 0 hsl(0, 100%, 50%),
+        -3px -3px 0 hsl(0, 100%, 50%),
+        -2px -2px 0 hsl(0, 100%, 50%),
+        -1px -1px 0 hsl(0, 100%, 50%);
+    }
+    to {
+        text-shadow: 4px -4px 0 hsl(0, 100%, 50%),
+        3px -3px 0 hsl(0, 100%, 50%),
+        2px -2px 0 hsl(0, 100%, 50%),
+        1px -1px 0 hsl(0, 100%, 50%),
+        -4px 4px 0 hsl(180, 100%, 50%),
+        -3px 3px 0 hsl(180, 100%, 50%),
+        -2px 2px 0 hsl(180, 100%, 50%),
+        -1px 1px 0 hsl(180, 100%, 50%);
+    }
+}
