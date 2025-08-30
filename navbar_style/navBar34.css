@@ -1,0 +1,43 @@
+:root {
+    --bg-light: rgba(255, 255, 255, 0.15);
+    --text-light: #1e293b;
+    --bg-dark: rgb(15 23 42 / 55%);
+    --text-dark: #eee;
+    --primary: #b36cf5;
+    --glass-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+    --glass-blur: 15px;
+    --light: rgba(22, 51, 255, 0.278);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: url(/images/darkhex.jpg);
+    color: var(--text-light);
+    background-size: cover;
+    background-position: center;
+    background-repeat: round;
+}
+
+.sidebar {
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 90vh;
+    width: 250px;
+    background: var(--bg-light);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(var(--glass-blur));
+    box-shadow: var(--glass-shadow);
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s;
+    border-radius: 5px;
+}
