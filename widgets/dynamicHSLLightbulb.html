@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/widgets_style/dynamicHSLLightbulb.css" />
   </head>
   <body>
+    <h1>Dynamic HSL Led Lightbulb</h1>
     <div class="container">
       <div class="flexrow">
         <div class="flexcol">
@@ -44,6 +45,23 @@
             </div>
           </div>
           <div class="component-container">
+            <div class="component-title">Saturation</div>
+            <div class="color-slider-metrics">
+              <span>0</span>
+              <span>100</span>
+            </div>
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value="50"
+              class="color-slider color-slider--saturation"
+              id="slider-saturation" />
+            <div class="color-slider-value">
+              <div id="current-saturation-value"><span>value</span></div>
+            </div>
+          </div>
+          <div class="component-container">
             <div class="component-title">Lightness</div>
             <div class="color-slider-metrics">
               <span>0</span>
@@ -54,15 +72,24 @@
               min="0"
               max="100"
               value="50"
-              class="color-slider--lightness"
+              class="color-slider color-slider--lightness"
               id="slider-lightness" />
-              <div class="color-slider-value">
-                <div id="current-lightness-value"><span>value</span></div>
-              </div>
+            <div class="color-slider-value">
+              <div id="current-lightness-value"><span>value</span></div>
+            </div>
+          </div>
+          <div class="component-container settings">
+            <div class="bgColor">
+              <span>Change Background: </span>
+              <input type="color" value="#a9b8d6" />
+              <span class="colorHex" style="text-transform: uppercase; font-size: 15px">#a9b8d6</span>
+            </div>
+            <button type="button">Default Color</button>
           </div>
         </div>
       </div>
     </div>
+    <h4 class="footer">&copy; <time datetime="year" id="year"></time> Made by <em><abbr title="Web Developer Frontend Master"> SheriffKule </abbr></em> from XXIII century</h4>
     <script src="/widgets_script/dynamicHSLLightbulb.js"></script>
   </body>
 </html>
