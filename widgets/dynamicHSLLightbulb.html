@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic HSL Led Lightbulb</title>
+    <link rel="stylesheet" href="/widgets_style/dynamicHSLLightbulb.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="flexrow">
+        <div class="flexcol">
+          <div class="lightbulb">
+            <img src="https://assets.codepen.io/2273448/lightbulb.svg" alt="lightbulb" />
+            <div class="lightcolor" id="light-color-changer"></div>
+            <div class="lightshine"></div>
+          </div>
+        </div>
+        <div class="flexcol flex-half">
+          <div class="component-container">
+            <div class="component-title">Hue</div>
+            <div class="color-slider-metrics">
+              <span>red</span>
+              <span>orange</span>
+              <span>yellow</span>
+              <span>lime</span>
+              <span>green</span>
+              <span>cyan</span>
+              <span>blue</span>
+              <span>indigo</span>
+              <span>purple</span>
+              <span>magenta</span>
+              <span>red</span>
+            </div>
+            <input
+              type="range"
+              min="0"
+              max="360"
+              value="180"
+              class="color-slider color-slider--hue"
+              id="slider-hue" />
+            <div class="color-slider-value">
+              <div id="current-hue-value"><span>value</span></div>
+            </div>
+          </div>
+          <div class="component-container">
+            <div class="component-title">Lightness</div>
+            <div class="color-slider-metrics">
+              <span>0</span>
+              <span>100</span>
+            </div>
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value="50"
+              class="color-slider--lightness"
+              id="slider-lightness" />
+              <div class="color-slider-value">
+                <div id="current-lightness-value"><span>value</span></div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/widgets_script/dynamicHSLLightbulb.js"></script>
+  </body>
+</html>
