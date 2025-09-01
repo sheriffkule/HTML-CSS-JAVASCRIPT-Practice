@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WhatsApp Status Demo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="/clickEffect_style/clickEffect56.css" />
+  </head>
+  <body>
+    <header class="header">
+      <i class="fas fa-user-circle" style="font-size: 2rem; color: #128c7e"></i>
+      <h1>WhatsApp Status</h1>
+    </header>
+    <div class="status-container">
+      <div class="status-list">
+        <div class="status-item">
+          <div class="status-avatar">
+            <img src="/images/matrix.jpg" alt="matrix" />
+          </div>
+          <div class="status-name">My Status</div>
+        </div>
+        <div
+          class="status-item"
+          onclick="viewStatus('blondy', 'https://sheriffkule.vercel.app/images/clint.jpeg', 'Just being cool', '2 min ago')">
+          <div class="status-avatar has-new">
+            <img src="/images/clint.jpeg" alt="blondie" />
+          </div>
+          <div class="status-name">Blondie</div>
+        </div>
+        <div
+          class="status-item"
+          onclick="viewStatus('Tuco', 'https://sheriffkule.vercel.app/images/tuco-01.jpg', 'Weekend vibes', '5 min ago')">
+          <div class="status-avatar has-new">
+            <img src="/images/tuco-01.jpg" alt="Tuco" />
+          </div>
+          <div class="status-name">Tuco</div>
+        </div>
+        <div
+          class="status-item"
+          onclick="viewStatus('Angel Eyes', 'https://sheriffkule.vercel.app/images/Angel-Eyes.jpg', 'Traveling', '15 min ago')">
+          <div class="status-avatar has-new">
+            <img src="/images/Angel-Eyes.jpg" alt="" />
+          </div>
+          <div class="status-name">Angel Eyes</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="statusModel" class="status-model">
+      <div class="status-progress" id="statusProgress"></div>
+      <div class="status-content">
+        <span class="close-btn" onclick="closeStatus()">&times;</span>
+        <div class="status-header">
+          <img id="modelAvatar" src="" alt="user" />
+        </div>
+        <div>
+          <div id="modelName" class="name"></div>
+          <div id="modelName" class="time"></div>
+        </div>
+        <img id="modelImage" src="" alt="whatsApp Status" />
+      </div>
+    </div>
+    <script src="/clickEffect_script/clickEffect56.js"></script>
+  </body>
+</html>
