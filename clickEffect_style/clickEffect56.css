@@ -25,6 +25,9 @@ body {
     font-size: 1.5rem;
     margin-left: 10px;
     color: #128c7e;
+    text-decoration: 1px solid underline rgba(0, 0, 0, 0.2);
+    text-underline-offset: 2px;
+    text-decoration-skip-ink: none;
 }
 
 .status-container {
@@ -41,4 +44,181 @@ body {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
+}
+
+.status-list::-webkit-scrollbar {
+    display: none;
+}
+
+.status-item {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    text-align: center;
+    width: 68px;
+}
+
+.status-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid #128c7e;
+    padding: 2px;
+    background: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    position: relative;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.status-avatar:hover {
+    transform: translateY(-4px) scale(1.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.status-avatar.has-new::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: #075e54;
+    border: 2px solid #eee;
+    border-radius: 50%;
+    top: -4px;
+    right: -4px;
+    transition: .2s;
+}
+
+.status-avatar:hover::after {
+    right: 50%;
+    top: -14px;
+    transform: translateX(50%);
+    background: #0faf9c;
+}
+
+.status-avatar img {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.status-name {
+    font-size: 0.875rem;
+    margin-top: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 70px;
+    transition: .15s;
+}
+
+.status-avatar:hover + .status-name {
+    overflow: visible;
+}
+
+.status-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(#000, #303030);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.status-modal.active {
+    display: flex;
+}
+
+.status-progress {
+    width: 100%;
+    height: 5px;
+    display: flex;
+}
+
+.progress-segment {
+    height: 100%;
+    background: #128c7e;
+    transition: width 1s linear;
+    width: 0;
+}
+
+.status-content {
+    width: 100%;
+    height: calc(100% - 5px);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.status-content img {
+    max-width: 90%;
+    max-height: 80%;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+}
+
+.status-header {
+    position: absolute;
+    top: 20px;
+    left: 15px;
+    right: 15px;
+    display: flex;
+    align-items: center;
+    color: #eee;
+}
+
+.status-header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.status-header div .name,
+.status-header div .time {
+    display: inline-flex;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #eee;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 101;
+    transition: .15s;
+}
+
+.close-btn:hover {
+    scale: 1.1;
+    color: #fff;
+}
+
+@media screen and (max-width: 480px) {
+    .status-item {
+        width: 60px;
+    }
+    .status-avatar {
+        width: 52px;
+        height: 52px;
+    }
+    .status-avatar img {
+        width: 46px;
+        height: 46px;
+    }
+    .status-name {
+        font-size: 0.8rem;
+    }
 }

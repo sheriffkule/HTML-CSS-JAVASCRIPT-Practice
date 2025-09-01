@@ -22,7 +22,7 @@
         </div>
         <div
           class="status-item"
-          onclick="viewStatus('blondy', 'https://sheriffkule.vercel.app/images/clint.jpeg', 'Just being cool', '2 min ago')">
+          onclick="viewStatus('Blondy', 'https://sheriffkule.vercel.app/images/clint.jpeg', 'Just being cool', '2 min ago')">
           <div class="status-avatar has-new">
             <img src="/images/clint.jpeg" alt="blondie" />
           </div>
@@ -47,18 +47,19 @@
       </div>
     </div>
 
-    <div id="statusModel" class="status-model">
+    <div id="statusModal" class="status-modal">
       <div class="status-progress" id="statusProgress"></div>
       <div class="status-content">
         <span class="close-btn" onclick="closeStatus()">&times;</span>
         <div class="status-header">
-          <img id="modelAvatar" src="" alt="user" />
+          <img id="modalAvatar" src="" alt="user" />
+          <div>
+            <div id="modalName" class="name"></div>
+            <div id="modalCaption" class="caption"></div>
+            <div id="modalTime" class="time"></div>
+          </div>
         </div>
-        <div>
-          <div id="modelName" class="name"></div>
-          <div id="modelName" class="time"></div>
-        </div>
-        <img id="modelImage" src="" alt="whatsApp Status" />
+        <img id="modalImage" src="" alt="whatsApp Status" />
       </div>
     </div>
     <script src="/clickEffect_script/clickEffect56.js"></script>
