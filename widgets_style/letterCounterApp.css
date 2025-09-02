@@ -1,0 +1,112 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(135deg, rgb(2, 0, 36), rgb(107, 9, 121) 36%, rgb(0, 212, 255));
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;
+}
+
+.wrapper {
+    position: relative;
+}
+
+h1 {
+    position: absolute;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: transparent;
+    background: linear-gradient(135deg, rgb(2, 0, 36), rgb(107, 9, 121) 36%, rgb(0, 212, 255));
+    background-clip: text;
+    -webkit-text-stroke: 1px silver;
+    font-size: 3rem;
+    width: 100%;
+}
+
+.blob {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: royalblue;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    z-index: -1;
+    animation: rotate 5s linear infinite;
+}
+
+.blob:nth-of-type(1) {
+    left: -40px;
+    top: -40px;
+}
+
+.blob:nth-of-type(2) {
+    bottom: 20px;
+    right: -50px;
+}
+
+@keyframes rotate {
+    to {
+        transform: rotate(360deg);
+    }
+    
+}
+
+.form_container {
+    align-self: flex-end;
+}
+
+.form_container textarea {
+    border: none;
+    padding: 1.25rem 1rem;
+    width: 650px;
+    max-width: 100%;
+    outline: none;
+    font-size: 1.25rem;
+    resize: none;
+    border-radius: 6px;
+    background: rgba(192, 192, 192, 0.3);
+    backdrop-filter: blur(10px);
+    overflow-x: hidden;
+}
+
+.form_container textarea::placeholder {
+    transition: .25s;
+    color: silver;
+}
+
+.form_container textarea:where(:focus, :focus-within)::placeholder {
+    transform: translateX(400px) skew(90deg);
+}
+
+.txt2 {
+    padding: 0.8rem 1rem;
+    font-size: 1.25rem;
+    background: #e74c3c;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.footer {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    font-weight: 400;
+    color: silver;
+}
+
+abbr {
+    font-size: 15px;
+    text-underline-offset: 3px;
+    cursor: default;
+}
