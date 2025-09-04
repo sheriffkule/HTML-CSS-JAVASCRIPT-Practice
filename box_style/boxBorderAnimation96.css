@@ -1,0 +1,97 @@
+:root {
+    --primary-color: #8354f5;
+    --white: #eee;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-color);
+}
+
+.carousel {
+    width: 1200px;
+    max-width: 100%;
+    overflow-x: auto;
+    display: flex;
+    gap: 1rem;
+    scroll-behavior: smooth;
+    position: relative;
+    anchor-name: --carousel;
+    scroll-snap-type: x mandatory;
+    scroll-marker-group: after;
+}
+
+.carousel::scroll-marker-group {
+    display: flex;
+    justify-content: center;
+    gap: 0.5em;
+    margin-top: 1em;
+}
+
+.card::scroll-marker {
+    content: '';
+    height: 1rem;
+    width: 1rem;
+    background: #25222e5c;
+    border-radius: 50%;
+}
+
+.card::scroll-marker:target-current {
+    background: var(--white);
+    box-shadow: 3px 3px 3px #25222e5c;
+}
+
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel::scroll-button(right),
+.carousel::scroll-button(left) {
+    border: none;
+    background: var(--white);
+    font-size: 2rem;
+    color: var(--primary-color);
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    position-anchor: --carousel;
+}
+
+.carousel::scroll-button(right) {
+    content: '\f061';
+    right: 100px;
+}
+.carousel::scroll-button(left) {
+    content: '\f060';
+    left: 90px;
+}
+
+.carousel::scroll-button(right):disabled,
+.carousel::scroll-button(left):disabled {
+    opacity: 0.5;
+    cursor: auto;
+}
+
+.card {
+    flex: 0 0 10em;
+    height: 12rem;
+    background: var(--white);
+    padding: 1em;
+    border-radius: .5em;
+    text-align: center;
+    align-content: center;
+    scroll-snap-align: start;
+    color: var(--primary-color);
+    font-size: 2rem;
+    font-weight: bold;
+}
