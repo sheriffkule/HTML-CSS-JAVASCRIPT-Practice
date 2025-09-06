@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    interpolate-size: allow-keywords;
 }
 
 body {
@@ -28,7 +29,7 @@ body {
 
 .btns {
     position: absolute;
-    top: 1rem;
+    top: 4rem;
     right: 1rem;
     display: flex;
     flex-direction: column;
@@ -36,9 +37,21 @@ body {
     border: 1px solid #555;
     padding: 1rem;
     backdrop-filter: blur(10px);
+    transition: height 0.3s, opacity 0.2s;
 }
 
-.btns button{
+#hide {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.btns.hide {
+    height: 0px;
+    opacity: 0;
+}
+
+button{
     border: none;
     color: #eee;
     font-size: 1.5rem;
@@ -50,13 +63,13 @@ body {
     transition: 0.2s;
 }
 
-.btns button:hover {
+button:hover {
     background-color: #0065ca;
     transform: scale(1.03);
     box-shadow: 0 6px 16px rgba(255, 255, 255, 0.1);
 }
 
-.btns button:active {
+button:active {
     transform: scale(1);
 }
 
@@ -64,8 +77,61 @@ body {
     color: #eee;
 }
 
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg, #0080ff, orangered);
+    border-radius: 5px;
+    pointer-events: none;
+    transition: 0.2s;
+}
+
+input[type="range"]:active {
+    height: 7px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 14px;
+    width: 14px;
+    background: #0080ff;
+    border-radius: 50%;
+    border: 1px solid #999;
+    cursor: pointer;
+    pointer-events: auto;
+    box-shadow: rgba(255, 255, 255, 0.1);
+    transition: all .2s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: rgba(255, 255, 255, 0.6);
+}
+
+.footer {
+    color: #aaa;
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+abbr {
+    font-size: 15px;
+    color: #ccc;
+    text-underline-offset: 3px;
+    text-decoration-skip-ink: none;
+    letter-spacing: 0.5px;
+    cursor: default;
+}
+
 @media screen and (max-width: 768px) {
-    .btns button {
+    button {
         font-size: 1rem;
     }
 }

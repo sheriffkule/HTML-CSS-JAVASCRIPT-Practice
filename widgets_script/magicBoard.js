@@ -3,9 +3,15 @@ const size = document.getElementById('size');
 const gapSlider = document.getElementById('gap');
 const modeBtn = document.getElementById('mode');
 const shapeBtn = document.getElementById('shape');
+const colorBtn = document.getElementById('color');
+const colorPicker = document.getElementById('color-picker');
+const randomBtn = document.getElementById('random-color');
+const clearBtn = document.getElementById('clear');
+const saveBtn = document.getElementById('save');
+const hideBtn = document.getElementById('hide');
 
 let spanBg = '#1e1f26';
-let shape = 'square'; //square, triangle, diamond, star, pentagon
+let shape = 'square'; //square, circle, triangle, diamond, star, pentagon
 let mode = 'draw';
 let color = '#ff0000';
 let singleColor = false;
@@ -119,6 +125,27 @@ function mouseMoveHandler(event) {
   }
 }
 
+document.addEventListener('touchstart', function () {
+  document.addEventListener('touchmove', touchMoveHandler);
+});
+
+document.addEventListener('touchend', function () {
+  document.addEventListener('touchmove', touchMoveHandler);
+});
+
+function touchMoveHandler(e) {
+  let touch = e.touches[0];
+  let targetElement = document.elementFromPoint(touch.clientX, touch.clientY);
+
+  if (targetElement.tagName === 'SPAN') {
+    if (mode === 'draw') {
+      draw(targetElement);
+    } else {
+      erase(targetElement);
+    }
+  }
+}
+
 function draw(target) {
   let randomColor = singleColor ? color : colors[Math.floor(Math.random() * colors.length)];
 
@@ -165,3 +192,75 @@ modeBtn.addEventListener('click', () => {
   mode = mode === 'draw' ? 'erase' : 'draw';
   modeBtn.textContent = mode;
 });
+
+shapeBtn.addEventListener('click', () => {
+  const shapes = ['square', 'circle', 'triangle', 'diamond', 'star', 'pentagon'];
+  const index = shapes.indexOf(shape);
+
+  if (index < shapes.length - 1) {
+    shape = shapes[index + 1];
+  } else {
+    shape = shapes[0];
+  }
+
+  shapeBtn.textContent = shape;
+
+  createGrid();
+});
+
+colorBtn.addEventListener('click', () => {
+  colorPicker.click();
+});
+
+colorPicker.addEventListener('change', (e) => {
+  color = e.target.value;
+  colorBtn.style.backgroundColor = color;
+
+  singleColor = true;
+});
+
+randomBtn.addEventListener('click', () => {
+  singleColor = false;
+  colorBtn.style.backgroundColor = '#0080ff';
+});
+
+size.addEventListener('input', () => {
+  createGrid();
+});
+
+gapSlider.addEventListener('input', () => {
+  createGrid();
+});
+
+function clear() {
+  const spans = document.querySelectorAll('span');
+
+  spans.forEach((span) => {
+    draw(span);
+    setTimeout(() => {
+      erase(span);
+    }, 1000);
+  });
+  colorBtn.style.backgroundColor = '#0080ff';
+}
+
+clearBtn.addEventListener('click', clear);
+
+function download() {
+  html2canvas(container).then(function (canvas) {
+    let link = document.createElement('a');
+    link.download = 'SheriffKule.png';
+    link.href = canvas.toDataURL();
+    link.click();
+  });
+}
+
+saveBtn.addEventListener('click', download);
+
+hideBtn.addEventListener('click', () => {
+  const btns = document.querySelector('.btns');
+  btns.classList.toggle('hide');
+  hideBtn.textContent = btns.classList.contains('hide') ? 'Show Panel' : 'Hide Panel';
+});
+
+document.getElementById('year').textContent = new Date().getFullYear();

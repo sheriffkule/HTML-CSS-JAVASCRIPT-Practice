@@ -1,26 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Magic Board</title>
-    <link rel="stylesheet" href="/widgets_style/magicBoard.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/widgets_style/magicBoard.css" />
+  </head>
+  <body>
     <div class="container"></div>
+    <button id="hide">Hide Panel</button>
     <div class="btns">
-        <button id="clear">clear</button>
-        <button id="mode">draw</button>
-        <button id="shape">square</button>
-        <button id="color">color</button>
-        <input type="color" name="" id="color-picker" hidden>
-        <button id="random-color">random</button>
-        <p>Size of Fields:</p>
-        <input type="range" name="" id="size" min="1" max="100" value="20">
-        <p>Gap Between :</p>
-        <input type="range" name="" id="gap" min="0" max="100" value="5">
-        <button id="save">save</button>
+      <button id="clear" title="Clear Board.">clear</button>
+      <button id="mode" title="Draw or Erase.">draw</button>
+      <button id="shape" title="Chose shapes between square, circle, triangle, diamond, star and pentagon.">
+        square
+      </button>
+      <button id="color" title="Chose color of boxes.">color</button>
+      <input type="color" name="" id="color-picker" hidden />
+      <button id="random-color" title="Let random colors of boxes">random</button>
+      <p>Size of Fields:</p>
+      <input type="range" name="" id="size" min="2" max="100" value="20" />
+      <p>Gap Between :</p>
+      <input type="range" name="" id="gap" min="1" max="100" value="5" />
+      <button id="save" title="Save as PNG picture">save</button>
     </div>
+    <h4 class="footer">
+      &copy; <time datetime="year" id="year"></time> Made by
+      <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+    </h4>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+      integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
     <script src="/widgets_script/magicBoard.js"></script>
-</body>
+  </body>
 </html>
