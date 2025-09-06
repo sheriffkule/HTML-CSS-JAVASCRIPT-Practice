@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Board</title>
+    <link rel="stylesheet" href="/widgets_style/magicBoard.css">
+</head>
+<body>
+    <div class="container"></div>
+    <div class="btns">
+        <button id="clear">Clear</button>
+        <button id="mode">Draw</button>
+        <button id="shape">Square</button>
+        <button id="color">Color</button>
+        <input type="color" name="" id="color-picker" hidden>
+        <button id="random-color">Random</button>
+        <p>Size of Fields:</p>
+        <input type="range" name="" id="size" min="1" max="100" value="20">
+        <p>Gap Between :</p>
+        <input type="range" name="" id="gap" min="0" max="100" value="5">
+        <button id="save">Save</button>
+    </div>
+    <script src="/widgets_script/magicBoard.js"></script>
+</body>
+</html>
