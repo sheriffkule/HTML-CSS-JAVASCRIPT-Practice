@@ -42,6 +42,7 @@ body {
     border: none;
     color: #eee;
     font-size: 1.5rem;
+    text-transform: capitalize;
     padding: 0.5rem 1.5rem;
     cursor: pointer;
     background-color: #0080ff;
