@@ -9,70 +9,40 @@
   </head>
   <body>
     <main class="container">
-      <!-- <div class="toasts-wrapper">
-        <div class="toast success">
-          <div class="icon">
-            <i class="fas fa-check-circle"></i>
-          </div>
-          <div class="body">
-            <p class="msg">Well done, this is great!</p>
-          </div>
-          <div class="close">
-            <i class="fas fa-times"></i>
-          </div>
-          <div class="progress">
-            <div class="bar"></div>
-          </div>
+      <div class="actions">
+        <div class="buttons">
+          <button class="btn btn-success" data-type="success" data-message="Well done, this is great!">
+            Success
+          </button>
+          <button class="btn btn-info" data-type="info" data-message="You are now informed!">Info</button>
+          <button class="btn btn-warning" data-type="warning" data-message="Be aware of this warning!">
+            Warning
+          </button>
+          <button class="btn btn-error" data-type="error" data-message="You've made a mistake!!!">
+            Error
+          </button>
         </div>
 
-        <div class="toast info">
-          <div class="icon">
-            <i class="fas fa-exclamation-circle"></i>
+        <fieldset>
+          <legend>Position</legend>
+          <div class="form-group">
+            <input type="radio" name="query" value="query" id="top-left" checked />
+            <label for="top-left">Top Left</label>
           </div>
-          <div class="body">
-            <p class="msg">You are now informed!</p>
+          <div class="form-group">
+            <input type="radio" name="query" value="query" id="top-right" />
+            <label for="top-right">Top Right</label>
           </div>
-          <div class="close">
-            <i class="fas fa-times"></i>
+          <div class="form-group">
+            <input type="radio" name="query" value="query" id="bottom-left" />
+            <label for="bottom-left">Bottom Right</label>
           </div>
-          <div class="progress">
-            <div class="bar"></div>
+          <div class="form-group">
+            <input type="radio" name="query" value="query" id="bottom-right" />
+            <label for="bottom-right">Bottom Right</label>
           </div>
-        </div>
-
-        <div class="toast warning">
-          <div class="icon">
-            <i class="fas fa-info"></i>
-          </div>
-          <div class="body">
-            <p class="msg">Be aware of this warning!</p>
-          </div>
-          <div class="close">
-            <i class="fas fa-times"></i>
-          </div>
-          <div class="progress">
-            <div class="bar"></div>
-          </div>
-        </div>
-
-        <div class="toast error">
-          <div class="icon">
-            <i class="fas fa-exclamation-triangle"></i>
-          </div>
-          <div class="body">
-            <p class="msg">You've made a mistake!!!</p>
-          </div>
-          <div class="close">
-            <i class="fas fa-times"></i>
-          </div>
-          <div class="progress">
-            <div class="bar"></div>
-          </div>
-        </div>
-      </div> -->
-
-      <div class="buttons">
-        <button class="btn">Show</button>
+          <span class="error-message"></span>
+        </fieldset>
       </div>
     </main>
     <script src="/clickEffect_script/clickEffect57.js"></script>
