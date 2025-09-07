@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: #6497a8;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+}
+
+.container .search-box {
+    height: 45px;
+    width: 100%;
+    background: #eee;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+}
+
+.container .search-box i {
+    color: grey;
+    font-size: 18px;
+}
+
+.container .search-box input {
+    height: 45px;
+    width: 100%;
+    padding-left: 10px;
+    font-size: 15px;
+    transition: all .3s;
+}
+
+input:where(:focus, :focus-visible) {
+    background: #cce6e6;
+    outline: none;
+    border: none;
+}
+
+.container .info-box {
+    background: #ccc;
+    margin-top: 5px;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    padding: 10px;
+}
+
+.container .info-box .color-box {
+    height: 350px;
+    width: 350px;
+    border-radius: 50%;
+    margin-top: -180px;
+    margin-left: -25px;
+    background: #f0932b;
+}
+
+.container .info-box img {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: -40px;
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+}
+
+.container .info-box .color-box .pokemon-id {
+    padding: 4px;
+    width: 60px;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #000;
+    background: #eee;
+    text-align: center;
+    border-radius: 30px;
+    font-size: 15px;
+}
+
+.container .info-box .pokemon-name {
+    text-align: center;
+    margin-top: 55px;
+    font-weight: 600;
+    font-size: 25px;
+    text-transform: capitalize;
+}
