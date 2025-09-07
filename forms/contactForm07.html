@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kinda Complex Contact Form</title>
+    <link rel="stylesheet" href="/forms_style/contactForm07.css" />
+  </head>
+  <body>
+    <main class="contact">
+      <h1>Contact Us</h1>
+      <form>
+        <div class="form-group">
+          <label for="fname">First Name</label>
+          <input type="text" name="first_name" id="fname" required />
+          <span class="error-message"></span>
+        </div>
+        <div class="form-group">
+          <label for="lname">Last Name</label>
+          <input type="text" name="last_name" id="lname" required />
+          <span class="error-message"></span>
+        </div>
+        <div class="form-group span-all">
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" required />
+          <span class="error-message"></span>
+        </div>
+
+        <fieldset class="span-all">
+          <legend>Query Type</legend>
+          <div class="form-group">
+            <input type="radio" name="query" value="General Enquiry" id="general" required />
+            <label for="general">General Enquiry</label>
+          </div>
+          <div class="form-group">
+            <input type="radio" name="query" value="Support Request" id="support" required />
+            <label for="support">Support Request</label>
+          </div>
+          <span class="error-message"></span>
+        </fieldset>
+
+        <div class="form-group span-all">
+          <label for="message">Message</label>
+          <textarea name="message" id="message" required></textarea>
+          <span class="error-message"></span>
+        </div>
+
+        <div class="form-group span-all">
+          <input type="checkbox" name="consent" id="consent" />
+          <label for="consent">I consent to being contacted by the team.</label>
+          <span class="error-message"></span>
+        </div>
+        <button class="span-all">Submit</button>
+      </form>
+    </main>
+    <script src="/forms_script/contactForm07.js"></script>
+  </body>
+</html>
