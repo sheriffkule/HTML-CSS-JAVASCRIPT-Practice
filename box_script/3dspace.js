@@ -31,7 +31,7 @@ function createStars() {
 
     const posX = Math.random() * 100;
     const posY = Math.random() * 100;
-    const duration = Math.random() * 3 + 2;
+    const duration = Math.random() * 5 + 2;
     const delay = Math.random() * 15;
     const length = Math.random() * 100 + 50;
     const width = Math.random() * 2 + 1;
@@ -128,7 +128,7 @@ function setupPlanetClickEvent() {
 
   planets.forEach((planet) => {
     planet.addEventListener('click', () => {
-      const planetName = planet.getAttribute('data-planet');
+      const planetName = planet.getAttribute('data-name');
       const data = planetData[planetName];
 
       document.querySelector('.planet-name').textContent = data.name;
