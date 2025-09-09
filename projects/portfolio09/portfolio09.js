@@ -41,7 +41,43 @@ tabs.forEach((tab) => {
     tabContent.forEach((content) => content.classList.remove('work-active'));
     tabs.forEach((t) => t.classList.remove('work-active'));
 
-    tab.classList.add('work-active')
-    targetContent.classList.add('work-active')
+    tab.classList.add('work-active');
+    targetContent.classList.add('work-active');
   });
+});
+
+const servicesButtons = document.querySelectorAll('.services__button');
+
+servicesButtons.forEach((button) => {
+  const heightInfo = document.querySelector('.services__info');
+  heightInfo.style.height = heightInfo.scrollHeight + 'px';
+
+  button.addEventListener('click', () => {
+    const servicesCards = document.querySelectorAll('.services__card');
+    const currentCard = button.parentNode;
+    const currentInfo = currentCard.querySelector('.services__info');
+    const isOpen = currentCard.classList.contains('services-open');
+
+    servicesCards.forEach((card) => {
+      card.classList.replace('services-open', 'services-close');
+
+      const info = card.querySelector('.services__info');
+      info.style.height = '0';
+    });
+
+    if (!isOpen) {
+      currentCard.classList.replace('services-close', 'services-open');
+      currentInfo.style.height = currentInfo.scrollHeight + 'px';
+    }
+  });
+});
+
+const tracks = document.querySelectorAll('.testimonials__content');
+
+tracks.forEach((track) => {
+  const cards = [...track.children];
+
+  for (const card of cards) {
+    track.appendChild(card.cloneNode(true));
+  }
 });

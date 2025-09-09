@@ -775,6 +775,77 @@ img {
     transform: rotate(-180deg);
 }
 
+.testimonials .section__title {
+    text-align: initial;
+    margin-left: 1.5rem;
+}
+
+.testimonials__container {
+    position: relative;
+    margin-inline: 0;
+    overflow: hidden;
+}
+
+.testimonials__card {
+    position: relative;
+    width: 320px;
+    background-color: var(--container-color);
+    padding: 1.5rem 1rem 2.5rem;
+    margin-inline: 1rem;
+    border-radius: 3rem;
+    text-align: center;
+    overflow: hidden;
+
+    .blob {
+        z-index: 0;
+        left: 0;
+        right: 0;
+        margin-inline: auto;
+        bottom: -12.5rem;
+    }
+}
+
+.testimonials__data {
+    position: relative;
+    z-index: 1;
+}
+
+.testimonials__img {
+    width: 60px;
+    border-radius: 50%;
+    margin: 0 auto .5rem;
+}
+
+.testimonials__name {
+    font-size: var(--normal-font-size);
+    font-weight: var(--font-regular);
+    margin-bottom: 1.5rem;
+}
+
+.testimonials__rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: .5rem;
+    margin-bottom: .5rem;
+}
+
+.testimonials__stars {
+    display: flex;
+    column-gap: .25rem;
+}
+
+.testimonials__stars i {
+    font-size: 1.25rem;
+    color: var(--title-color);
+}
+
+.testimonials__number {
+    font-size: var(--h3-font-size);
+}
+
+
+
 
 
 
@@ -812,7 +883,8 @@ img {
         margin-inline: auto;
     }
     .about__container,
-    .work__container {
+    .work__container,
+    .services__container {
         grid-template-columns: 460px;
         justify-content: center;
     }
@@ -857,6 +929,10 @@ img {
         right: 0;
         margin-inline: auto;
     }
+    .services__container {
+        grid-template-columns: repeat(2, 350px);
+        align-items: flex-start;
+    }
 }
 
 
@@ -864,6 +940,16 @@ img {
 @media screen and (min-width: 1150px) {
     .container {
         margin-inline: auto;
+    }
+    .section {
+        padding-block: 7rem 2rem;
+    }
+    .section__title {
+        margin-bottom: 4rem;
+    }
+    .blob {
+        width: 300px;
+        height: 300px;
     }
     .nav {
         height: calc(var(--header-height) + 2rem);
@@ -1012,5 +1098,22 @@ img {
     .work__subtitle,
     .work__description {
         font-size: var(--h3-font-size);
+    }
+    .services__container {
+        grid-template-columns: repeat(2, 455px);
+        column-gap: 5rem;
+    }
+    .services__card {
+        padding: 3rem 3rem 4rem 3rem;
+        border-radius: 4rem;
+        row-gap: 2rem;
+    }
+    .services__title {
+        font-size: var(--h1-font-size);
+        margin-bottom: 1rem;
+    }
+    .services__button {
+        right: 2rem;
+        bottom: 2rem;
     }
 }
