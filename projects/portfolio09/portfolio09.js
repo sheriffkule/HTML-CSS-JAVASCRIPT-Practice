@@ -81,3 +81,23 @@ tracks.forEach((track) => {
     track.appendChild(card.cloneNode(true));
   }
 });
+
+const copyBtn = document.getElementById('contact-btn');
+const copyEmail = document.getElementById('contact-email').textContent;
+
+copyBtn.addEventListener('click', () => {
+  navigator.clipboard.writeText(copyEmail).then(() => {
+    copyBtn.innerHTML = `Email Copied <i class="ri-check-line"></i>`;
+    copyBtn.style.color = '#0f0';
+
+    setTimeout(() => {
+      copyBtn.innerHTML = `Copy Email <i class="ri-file-copy-line">`;
+      copyBtn.style.color = '#f1f1f3';
+    }, 2000);
+  });
+});
+
+const textYear = document.getElementById('year');
+const currentYear = new Date().getFullYear();
+
+textYear.textContent = currentYear;
