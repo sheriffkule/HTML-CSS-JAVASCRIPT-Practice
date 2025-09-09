@@ -27,5 +27,21 @@ const swiperProjects = new Swiper('.projects__swiper', {
   autoplay: {
     delay: 3000,
     disableOnInteraction: false,
-  }
-})
+  },
+});
+
+const tabs = document.querySelectorAll('[data-target]');
+const tabContent = document.querySelectorAll('[data-content]');
+
+tabs.forEach((tab) => {
+  tab.addEventListener('click', () => {
+    const targetSelector = tab.dataset.target;
+    const targetContent = document.querySelector(targetSelector);
+
+    tabContent.forEach((content) => content.classList.remove('work-active'));
+    tabs.forEach((t) => t.classList.remove('work-active'));
+
+    tab.classList.add('work-active')
+    targetContent.classList.add('work-active')
+  });
+});
