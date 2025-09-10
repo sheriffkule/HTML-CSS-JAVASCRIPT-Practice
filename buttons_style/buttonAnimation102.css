@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
+
+:root {
+    --gradient-color: linear-gradient(180deg, hsl(235, 4%, 75%) 0%, hsl(235, 4%, 50%) 100%);
+    --dark-color: hsl(235, 4%, 42%);
+    --white-color: hsl(235, 16%, 95%);
+    --body-color: hsl(235, 4%, 60%);
+    --body-font: 'Montserrat', sans-serif;
+    --normal-font-size: 1rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+    background-color: var(--body-color);
+    color: var(--white-color);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .3s;
+}
+
+body.dark-mode {
+    background-color: #222;
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    display: grid;
+    place-items: center;
+    gap: 5rem;
+}
+
+.button {
+    background: var(--gradient-color);
+    color: var(--white-color);
+    padding: 1rem;
+    border-radius: 4rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    column-gap: 0.5rem;
+    box-shadow: inset 0 -2px 2px var(--dark-color),
+    inset 0 2px 2px var(--white-color),
+    0 18px 14px -14px var(--white-color),
+    -24px 40px 48px hsla(235, 32%, 4%, 0.6);
+    transition: box-shadow 0.2s linear;
+}
+
+button i {
+    font-size: 1.5rem;
+    filter: drop-shadow(0 0 4px var(--white-color));
+}
