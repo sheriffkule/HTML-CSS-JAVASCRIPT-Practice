@@ -19,6 +19,34 @@
             <li><a href="#about" class="nav__link">About Us</a></li>
             <li><a href="#projects" class="nav__link">Projects</a></li>
             <li><a href="#contact" class="nav__link">Contact</a></li>
+            <li>
+              <div class="dropdown-wrapper">
+                <button class="menu-btn" aria-label="Toggle menu" data-menu-toggler>
+                  <i class="ri-more-line"></i>
+                </button>
+
+                <div class="dropdown-container" data-menu>
+                  <ul class="dropdown-list">
+                    <li class="dropdown-item">
+                      <p class="item-title">Theme</p>
+                      <div class="theme-btn-group">
+                        <button
+                          class="theme-btn active"
+                          style="--hue: 255"
+                          data-theme-btn
+                          data-hue="255"></button>
+                        <button class="theme-btn" style="--hue: 220" data-theme-btn data-hue="220"></button>
+                        <button class="theme-btn" style="--hue: 300" data-theme-btn data-hue="300"></button>
+                        <button class="theme-btn" style="--hue: 110" data-theme-btn data-hue="110"></button>
+                        <button class="theme-btn" style="--hue: 180" data-theme-btn data-hue="180"></button>
+                        <button class="theme-btn" style="--hue: 15" data-theme-btn data-hue="15"></button>
+                        <button class="theme-btn" style="--hue: 358" data-theme-btn data-hue="358"></button>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
           </ul>
         </div>
       </nav>
@@ -656,7 +684,9 @@
       <div class="blob-animate"></div>
       <div class="footer__copy">
         All Rights Reserved by
-        <span><em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em></span>
+        <span
+          ><em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em></span
+        >
       </div>
       <div class="footer__year">&#169; <time datetime="year" id="year"></time></div>
     </div>

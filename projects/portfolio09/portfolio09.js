@@ -161,7 +161,9 @@ const sr = ScrollReveal({
   reset: true,
 });
 
-sr.reveal(`.home__image, .projects__container, .work__container, .testimonials__container, .contact__container`);
+sr.reveal(
+  `.home__image, .projects__container, .work__container, .testimonials__container, .contact__container`
+);
 sr.reveal(`.home__data`, { delay: 900, origin: 'bottom' });
 sr.reveal(`.home__info`, { delay: 1200, origin: 'bottom' });
 sr.reveal(`.home__social, .home__cv`, { delay: 1500 });
@@ -169,3 +171,58 @@ sr.reveal(`.about__data`, { origin: 'left' });
 sr.reveal(`.about__image`, { origin: 'right' });
 sr.reveal(`.services__card, .interval`, { interval: 400 });
 
+const menuTogglers = document.querySelectorAll('[data-menu-toggler]');
+const menu = document.querySelector('[data-menu]');
+const themeBtns = document.querySelectorAll('[data-theme-btn]');
+const modalTogglers = document.querySelectorAll('[data-modal-toggler]');
+const modal = document.querySelector('[data-modal]');
+
+const elemToggler = function (elem) {
+  elem.classList.toggle('active');
+};
+
+const addEventOnMultiElem = function (elem, event) {
+  for (let i = 0; i < elem.length; i++) {
+    elem[i].addEventListener('click', event);
+  }
+};
+
+const toggleMenu = function () {
+  elemToggler(menu);
+};
+
+addEventOnMultiElem(menuTogglers, toggleMenu);
+
+const toggleModal = function () {
+  elemToggler(modal);
+};
+
+addEventOnMultiElem(modalTogglers, toggleModal);
+
+window.addEventListener('load', function () {
+  document.body.classList.add('loaded');
+});
+
+const themeChanger = function () {
+  const hueValue = this.dataset.hue;
+
+  document.documentElement.style.setProperty('--hue', hueValue);
+  localStorage.setItem('themeHue', hueValue); // Save theme to localStorage
+
+  for (let i = 0; i < themeBtns.length; i++) {
+    themeBtns[i].classList.remove('active');
+  }
+  this.classList.add('active');
+};
+
+window.addEventListener('DOMContentLoaded', () => {
+  const savedHue = localStorage.getItem('themeHue');
+  if (savedHue) {
+    document.documentElement.style.setProperty('--hue', savedHue);
+    themeBtns.forEach((btn) => {
+      btn.classList.toggle('active', btn.dataset.hue === savedHue);
+    });
+  }
+});
+
+addEventOnMultiElem(themeBtns, themeChanger);
