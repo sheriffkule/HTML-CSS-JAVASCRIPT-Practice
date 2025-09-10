@@ -139,6 +139,26 @@ img {
   overflow: hidden;
 }
 
+.cursor {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 99;
+    width: 25px;
+    height: 25px;
+    background: radial-gradient(var(--first-color-light), var(--first-color));
+    border-radius: 50%;
+    box-shadow: 0 0 20px var(--first-color);
+    mix-blend-mode: difference;
+    pointer-events: none;
+    transition: transform .05s ease-out, left .05s ease-out, top .05s ease-out, width .2s, height .2s;
+}
+
+.hide-cursor {
+    height: 0;
+    width: 0;
+}
+
 .header {
     position: fixed;
     width: 100%;
@@ -204,6 +224,13 @@ img {
     &:hover::before {
         transform: scaleX(1);
     }
+}
+
+.active-link {
+    color: var(--first-color);
+    text-shadow: 0 8px 16px var(--first-color);
+    text-decoration: 2px solid underline var(--first-color);
+    text-underline-offset: 4px;
 }
 
 .blob-animate {
@@ -986,6 +1013,20 @@ img {
     font-family: var(--second-font);
 }
 
+::-webkit-scrollbar {
+    width: 0.6rem;
+    background-color: hsl(240, 6%, 12%);
+    border-radius: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: hsl(240, 6%, 20%);
+    border-radius: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(240, 6%, 30%);
+}
 
 
 
@@ -1318,5 +1359,17 @@ img {
     }
     .contact__link {
         font-size: 1.25rem;
+    }
+}
+
+@media screen and (jin-width: 2048px) {
+    body {
+        zoom: 1.4;
+    }
+}
+
+@media (pointer: coarse) {
+    .cursor {
+        display: none;
     }
 }
