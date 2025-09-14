@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aspect Ration Example</title>
+    <link rel="stylesheet" href="/box_style/boxBorderAnimation98.css">
+</head>
+<body>
+    <div class="wrap">
+        <section class="grid">
+            <div class="toolbar" role="toolbar" aria-label="Aspect ratio presets">
+                <button data-ratio="1/1" aria-pressed="false">1:1</button>
+                <button data-ratio="4/3" aria-pressed="false">4:3</button>
+                <button data-ratio="16/9" aria-pressed="false">16:9</button>
+                <button data-ratio="9/16" aria-pressed="false">9:16</button>
+                <button data-ratio="21/9" aria-pressed="false">21:9</button>
+            </div>
+            <div class="stage">
+                <div class="card" id="arCard">
+                    <div class="label" id="label">Aspect-ratio: 16/9</div>
+                    <div class="content">
+                        Using <code>aspect-ratio</code> keeps this box locked while width animates.
+                        <div class="hint">Resize window or watch width animation</div>
+                    </div>
+                </div>
+                <div class="stats">
+                    <span id="sizeStat">0 x 0</span>
+                    <span id="ratioStat">ratio 1.78</span>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="/box_script/boxBorderAnimation98.js"></script>
+</body>
+</html>

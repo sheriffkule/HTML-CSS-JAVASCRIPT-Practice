@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+    --ratio: 16/9;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #0b0f13;
+    color: #e8eef4;
+    font-family: "Inter", sans-serif;
+}
+
+.wrap {
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    gap: 16px;
+}
+
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+.toolbar button {
+    border: 1px solid #2b3440;
+    background: #e8eef4;
+    padding: 8px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.toolbar button[aria-pressed="true"] {
+    outline: 2px solid #4aa3ff;
+    background: #0f141a;
+}
+
+.stage {
+    width: min(900px, 92vw);
+    /* animation: pulseWidth 6s ease-in-out infinite; */
+    margin-inline: auto;
+}
+
+@keyframes pulseWidth {
+    from {
+        width: min(320px, 92vw);
+    }
+    50% {
+        width: min(900px, 92vw);
+    }
+    to {
+        width: min(320px, 92vw);
+    }
+}
+
+.card {
+    aspect-ratio: var(--ratio);
+    background: conic-gradient(from 0turn, #19324a, #0e6ba8, #19324a);
+    border: 1px solid #28455e;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    isolation: isolate;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.06) 0 10px, rgba(255, 255, 255, 0) 10px 20px);
+    mix-blend-mode: overlay;
+    pointer-events: none;
+}
+
+.label {
+    position: absolute;
+    inset: 12px auto auto 12px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.stats {
+    position: absolute;
+    inset: auto 12px 12px auto;
+    display: grid;
+    grid-area: 6px;
+    text-align: right;
+    font-size: 13px;
+}
+
+.stats span {
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 6px 10px;
+    border-radius: 8px;
+}
+
+.content {
+    font-weight: 600;
+    text-align: center;
+    font-size: clamp(16px, 2.2vw, 24px);
+}
+
+.hint {
+    opacity: 0.7;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 6px;
+}
+
+.grid {
+    display: grid;
+    gap: 16px;
+}
+
+@media screen and (min-width: 900px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
