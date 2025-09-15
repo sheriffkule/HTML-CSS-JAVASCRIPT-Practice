@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    /* --color-1: rgb(200, 60, 100);
+    --color-2: rgb(211, 100, 131);
+    --color-3: rgb(222, 140, 163);
+    --color-4: rgb(234, 179, 195);
+    --color-5: rgb(245, 219, 226);
+    --color-6: rgb(4, 1, 2); */
+    --primary-color: #f4f6fc;
+    --secondary-color: #303030;
+    --tertiary-color: ##eeeeee;
+    --quaternary-color: #9ea6ab;
+    --body-bg-color: #bec8db;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background-color: var(--body-bg-color);
+}
+
+div {
+    width: 100%;
+}
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 38px;
+    font-weight: 300;
+    color: var(--secondary-color);
+}
+
+.desc {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--quaternary-color);
+}
+
+.search {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.search .code {
+    position: relative;
+}
+
+input[type="text"] {
+    height: 60px;
+    line-height: 60px;
+    padding: 0 10px;
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 16px;
+    background: var(--primary-color);
+    color: var(--quaternary-color);
+    transition: .3s;
+}
+
+input[type="text"]::placeholder {
+    transition: .3s;
+}
+
+input[type="text"]:where(:focus, :focus-within) {
+    border: 1px solid var(--quaternary-color);
+    filter: contrast(0.9);
+}
+
+input[type="text"]:where(:focus, :focus-within)::placeholder {
+    transform: translateY(-40px);
+}
+
+.search .code .search-color {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: red;
+}
+
+.search .image {
+    display: block;
+    width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--quaternary-color);
+    cursor: pointer;
+    background: var(--primary-color);
+    border: 1px dashed #aaa;
+    transition: .2s;
+
+    &:hover {
+        border-color: var(--secondary-color);
+        transform: scale(1.07);
+        color: blue;
+    }
+}
