@@ -1,7 +1,8 @@
-const searchInput = document.querySelector('.search-input');
+const searchInput = document.querySelector('#search-input');
 const searchColor = document.querySelector('.search-color');
 const searchImage = document.querySelector('#search-image');
 const typeSelect = document.querySelector('#palette-type');
+const typeText = document.querySelector('#type-text');
 const countSelect = document.querySelector('#palette-count');
 const randomBtn = document.querySelector('#random-btn');
 const paletteContainer = document.querySelector('#palette');
@@ -164,6 +165,33 @@ function generatePaletteHtml(type, container) {
   let color = currentColor;
   let count = currentCount;
   const hsl = getHslFromColor(color);
+
+  if (!hsl) return;
+  let palette = [];
+  container.innerHTML = '';
+  palette = generatePalette(hsl, type, count);
+  palette.forEach((color) => {
+    color = hslToHex(color);
+    const colorEl = document.createElement('div');
+    colorEl.classList.add('color');
+    colorEl.style.backgroundColor = color;
+
+    colorEl.innerHTML = `
+        <div class="overlay">
+          <div class="icons">
+            <div class="copy-color" title="Copy">
+              <i class="fas fa-copy"></i>
+            </div>
+            <div class="generate-palette" title="Generate">
+              <i class="fas fa-palette"></i>
+            </div>
+          </div>
+          <div class="code">${color}</div>
+        </div>
+    `;
+
+    container.appendChild(colorEl);
+  });
 }
 
 function getHslFromColor(color) {
@@ -181,6 +209,7 @@ function getHslFromColor(color) {
 
     hsl = rgbToHsl(rgb);
   }
+  return hsl;
 }
 
 function isValidColor(color) {
@@ -223,4 +252,92 @@ function rgbToHsl(rgb) {
   l = Math.round(l * 100);
 
   return [h, s, l];
+}
+
+function hslToHex(hsl) {
+  let h = hsl[0];
+  let s = hsl[1];
+  let l = hsl[2];
+  l /= 100;
+  const a = (s * Math.min(l, 1 - l)) / 100;
+  const f = (n) => {
+    const k = (n + h / 30) % 12;
+    const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+    return Math.round(255 * color)
+      .toString(16)
+      .padStart(2, '0');
+  };
+  return `#${f(0)}${f(8)}${f(4)}`;
+}
+
+function getRandomColor() {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+generatePaletteHtml(currentType, paletteContainer);
+generatePaletteHtml('related', relatedContainer);
+searchColor.style.backgroundColor = currentColor;
+
+searchInput.addEventListener('keyup', (e) => {
+  const value = e.target.value;
+
+  if (isValidColor(value)) {
+    searchColor.style.backgroundColor = value;
+    currentColor = value;
+
+    generatePaletteHtml(currentType, paletteContainer);
+    generatePaletteHtml('related', relatedContainer);
+  }
+});
+
+typeSelect.addEventListener('change', (e) => {
+  const value = e.target.value;
+  currentType = value;
+  typeText.textContent = value + ' Palette';
+
+  generatePaletteHtml(currentType, paletteContainer);
+});
+
+countSelect.addEventListener('change', (e) => {
+  const value = e.target.value;
+  currentCount = value;
+  generatePaletteHtml(currentType, paletteContainer);
+});
+
+randomBtn.addEventListener('click', () => {
+  const randomColor = getRandomColor();
+  searchInput.value = randomColor;
+  searchColor.style.backgroundColor = randomColor;
+  currentColor = randomColor;
+  generatePaletteHtml(currentType, paletteContainer);
+  generatePaletteHtml('related', relatedContainer);
+});
+
+const palettes = document.querySelectorAll('.palette');
+
+palettes.forEach((palette) => {
+  palette.addEventListener('click', (e) => {
+    const target = e.target;
+    const color = target.parentElement.parentElement.children[1].textContent;
+
+    if (target.classList.contains('copy-color')) {
+      copyToClipboard(color);
+      toast(`Color ${color} Copied to Clipboard`)
+    }
+  });
+});
+
+function copyToClipboard(text) {
+  const input = document.createElement('input');
+  input.value = text;
+  document.body.appendChild(input);
+  input.select();
+  document.execCommand('copy');
+  input.remove();
 }

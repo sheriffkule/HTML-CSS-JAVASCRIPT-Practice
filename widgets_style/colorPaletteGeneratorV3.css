@@ -211,6 +211,10 @@ select#palette-count {
     color: var(--tertiary-color);
 }
 
+.palette .color .icons i {
+    pointer-events: none;
+}
+
 .palette .color .icons div {
     width: 30px;
     height: 30px;
@@ -232,6 +236,7 @@ select#palette-count {
     width: 70px;
     padding: 0 10px;
     background-color: rgba(0, 0, 0, 0.1);
+    cursor: default;
 }
 
 .btn {
