@@ -310,3 +310,62 @@ select#palette-count {
 .switch #toggle:checked ~ .slider::before {
     transform: translateX(40px);
 }
+
+@media screen and (max-width: 768px) {
+    .container {
+        justify-content: flex-start;
+    }
+    .title {
+        font-size: 24px;
+    }
+    .desc {
+        font-size: 13px;
+    }
+    .search .code {
+        height: 50px;
+    }
+    input[type="text"] {
+        height: 50px;
+        font-size: 14px;
+    }
+    .search .code .search-color {
+        width: 15px;
+        height: 15px;
+        right: 10px;
+    }
+    .search .image {
+        width: 48px;
+        height: 48px;
+    }
+    select,
+    .btn {
+        height: 50px;
+        font-size: 14px;
+    }
+    .palette .color {
+        height: 70px;
+    }
+    .palette .color .overlay {
+        font-size: 11px;
+    }
+    .palette .color .code {
+        line-height: 20px;
+        width: 50px;
+        padding: 0 5px;
+    }
+    .palette .color .icons div {
+        width: 20px;
+        height: 20px;
+    }
+    .switch .slider {
+        height: 25px;
+        width: 50px;
+    }
+    .switch .slider::before {
+        height: 15px;
+        width: 15px;
+    }
+    .switch #toggle:checked ~ .slider::before {
+        transform: translateX(25px);
+    }
+}
