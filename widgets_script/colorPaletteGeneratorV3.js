@@ -408,7 +408,7 @@ function extractColorsFromImage(image) {
 }
 
 const downloadBtn = document.querySelector('#download-btn');
-const downloadFormat = document.querySelector('download-format');
+const downloadFormat = document.querySelector('#download-format');
 const downloadName = document.querySelector('#download-name');
 
 downloadBtn.addEventListener('click', () => {
@@ -416,4 +416,134 @@ downloadBtn.addEventListener('click', () => {
   let name = downloadName.value;
 
   name = name == '' ? 'palette' : name;
+  downloadPalette(format, name);
+});
+
+function downloadPalette(format, name) {
+  const palette = document.querySelector('#palette');
+  const paletteColors = palette.querySelectorAll('.color');
+  const colors = [];
+  paletteColors.forEach((color) => {
+    colors.push(color.style.backgroundColor);
+  });
+
+  switch (format) {
+    case 'png':
+      downloadPalettePng(colors, name);
+      break;
+    case 'svg':
+      downloadPaletteSvg(colors, name);
+      break;
+    case 'css':
+      downloadPaletteCss(colors, name);
+      break;
+    case 'json':
+      downloadPaletteJson(colors, name);
+      break;
+    case 'txt':
+      downloadPaletteTxt(colors, name);
+      break;
+    default:
+      break;
+  }
+}
+
+function downloadPalettePng(colors, name) {
+  const canvas = document.createElement('canvas');
+  canvas.width = colors.length * 200;
+  canvas.height = 1000;
+  const ctx = canvas.getContext('2d');
+
+  colors.forEach((color, index) => {
+    ctx.fillStyle = color;
+    ctx.fillRect(index * 200, 0, 200, 1000);
+  });
+
+  const link = document.createElement('a');
+  link.download = name + '.png';
+  link.href = canvas.toDataURL();
+  link.click();
+}
+
+function downloadPaletteSvg(colors, name) {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+  svg.setAttribute('width', '100%');
+  svg.setAttribute('height', '100%');
+  svg.setAttribute('viewBox', '0 0 100 100');
+  svg.setAttribute('preserveAspectRatio', 'none');
+
+  colors.forEach((color, index) => {
+    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    const width = 100 / colors.length;
+    rect.setAttribute('x', index * width);
+    rect.setAttribute('y', 0);
+    rect.setAttribute('width', width);
+    rect.setAttribute('height', 100);
+    rect.setAttribute('fill', color);
+    svg.appendChild(rect);
+  });
+
+  const svgData = new XMLSerializer().serializeToString(svg);
+  const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+  const svgUrl = URL.createObjectURL(svgBlob);
+  const downloadLink = document.createElement('a');
+  downloadLink.download = name + '.svg';
+  downloadLink.href = svgUrl;
+  downloadLink.click();
+}
+
+function downloadPaletteCss(colors, name) {
+  const css = `:root {
+    ${colors.map((color, index) => `--color-${index + 1}: ${color}`).join('\n')}}`;
+  const blob = new Blob([css], { type: 'text/css' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.download = name + '.css';
+  link.href = url;
+  link.click();
+}
+
+function downloadPaletteJson(colors, name) {
+  const json = JSON.stringify(colors);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.download = name + '.json';
+  link.href = url;
+  link.click();
+}
+
+function downloadPaletteTxt(colors, name) {
+  const text = colors.join('\n');
+  const blob = new Blob([text], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.download = name + '.txt';
+  link.href = url;
+  link.click();
+  URL.revokeObjectURL(url);
+}
+
+const toggle = document.querySelector('#toggle');
+
+window.addEventListener('DOMContentLoaded', () => {
+  const savedTheme = localStorage.getItem('colorPaletteTheme');
+  if (savedTheme === 'dark') {
+    document.body.classList.add('dark');
+    toggle.checked = true;
+  } else {
+    document.body.classList.remove('dark');
+    toggle.checked = false;
+  }
+});
+
+toggle.addEventListener('change', (e) => {
+  if (e.target.checked) {
+    document.body.classList.add('dark');
+    localStorage.setItem('colorPaletteTheme', 'dark');
+  } else {
+    document.body.classList.remove('dark');
+    localStorage.setItem('colorPaletteTheme', 'light');
+  }
 });
