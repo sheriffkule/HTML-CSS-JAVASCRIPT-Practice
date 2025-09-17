@@ -16,7 +16,7 @@
           <input type="text" id="search-input" value="skyblue" placeholder="Color code or name" />
           <span class="search-color"></span>
         </div>
-        <label for="search-image" class="image" id="search-image">
+        <label for="search-image" class="image">
           <input type="file" id="search-image" name="search-image" hidden />
           <i class="fas fa-image"></i>
         </label>
@@ -59,23 +59,29 @@
       </div>
       <p class="label">Related Colors</p>
       <div class="palette" id="related"></div>
+
+      <div class="image-colors-wrapper hidden">
+        <p class="label">Image Colors</p>
+        <div class="palette" id="image-colors"></div>
+      </div>
+
       <div class="or">Download Palette</div>
       <div class="options">
-        <input type="text" id="download-name" placeholder="filename" value="palette">
+        <input type="text" id="download-name" placeholder="filename" value="palette" />
       </div>
       <div class="options">
         <select name="" id="download-format">
-            <option value="png">PNG</option>
-            <option value="svg">SVG</option>
-            <option value="css">CSS</option>
-            <option value="json">JSON</option>
-            <option value=""></option>
+          <option value="png">PNG</option>
+          <option value="svg">SVG</option>
+          <option value="css">CSS</option>
+          <option value="json">JSON</option>
+          <option value=""></option>
         </select>
         <button class="btn" id="download-btn">Download</button>
       </div>
       <div class="toast">Toast Message</div>
       <label for="toggle" class="switch">
-        <input type="checkbox" id="toggle" name="toggle">
+        <input type="checkbox" id="toggle" name="toggle" />
         <span class="slider"></span>
       </label>
     </div>

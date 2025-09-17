@@ -7,6 +7,8 @@ const countSelect = document.querySelector('#palette-count');
 const randomBtn = document.querySelector('#random-btn');
 const paletteContainer = document.querySelector('#palette');
 const relatedContainer = document.querySelector('#related');
+const imageColorsContainer = document.querySelector('#image-colors');
+const imageColorsWrapper = document.querySelector('.image-colors-wrapper');
 
 let currentColor = 'skyblue';
 let currentType = 'analogous';
@@ -169,9 +171,17 @@ function generatePaletteHtml(type, container) {
   if (!hsl) return;
   let palette = [];
   container.innerHTML = '';
-  palette = generatePalette(hsl, type, count);
+
+  if (type === 'image-colors') {
+    palette = imageColors;
+  } else {
+    palette = generatePalette(hsl, type, count);
+  }
+
   palette.forEach((color) => {
-    color = hslToHex(color);
+    if (type != 'image-colors') {
+      color = hslToHex(color);
+    }
     const colorEl = document.createElement('div');
     colorEl.classList.add('color');
     colorEl.style.backgroundColor = color;
@@ -179,10 +189,10 @@ function generatePaletteHtml(type, container) {
     colorEl.innerHTML = `
         <div class="overlay">
           <div class="icons">
-            <div class="copy-color" title="Copy">
+            <div class="copy-color" title="Copy color code">
               <i class="fas fa-copy"></i>
             </div>
-            <div class="generate-palette" title="Generate">
+            <div class="generate-palette" title="Generate Palette">
               <i class="fas fa-palette"></i>
             </div>
           </div>
@@ -328,7 +338,18 @@ palettes.forEach((palette) => {
 
     if (target.classList.contains('copy-color')) {
       copyToClipboard(color);
-      toast(`Color ${color} Copied to Clipboard`)
+      toast(`Color ${color} Copied to Clipboard`);
+    }
+
+    if (target.classList.contains('generate-palette')) {
+      searchInput.value = color;
+      searchColor.style.backgroundColor = color;
+      currentColor = color;
+
+      generatePaletteHtml(currentType, paletteContainer);
+      generatePaletteHtml('related', relatedContainer);
+
+      toast('Palette generated for ' + color);
     }
   });
 });
@@ -341,3 +362,58 @@ function copyToClipboard(text) {
   document.execCommand('copy');
   input.remove();
 }
+
+function toast(message) {
+  const toast = document.createElement('div');
+  toast.classList.add('toast');
+  toast.textContent = message;
+  document.body.appendChild(toast);
+
+  setTimeout(() => {
+    toast.classList.add('show');
+  }, 20);
+
+  setTimeout(() => {
+    toast.classList.remove('show');
+    toast.addEventListener('transitionend', () => {
+      toast.remove();
+    });
+  }, 2000);
+}
+
+searchImage.addEventListener('change', (e) => {
+  const file = e.target.files[0];
+
+  if (file) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      const image = new Image();
+      image.src = reader.result;
+      image.onload = function () {
+        extractColorsFromImage(image);
+      };
+    };
+  }
+});
+
+function extractColorsFromImage(image) {
+  colorjs.prominent(image, { amount: 6, format: 'hex' }).then((color) => {
+    imageColors = [];
+    imageColors.push(...color);
+    generatePaletteHtml('image-colors', imageColorsContainer);
+
+    imageColorsWrapper.classList.remove('hidden');
+  });
+}
+
+const downloadBtn = document.querySelector('#download-btn');
+const downloadFormat = document.querySelector('download-format');
+const downloadName = document.querySelector('#download-name');
+
+downloadBtn.addEventListener('click', () => {
+  const format = downloadFormat.value;
+  let name = downloadName.value;
+
+  name = name == '' ? 'palette' : name;
+});
