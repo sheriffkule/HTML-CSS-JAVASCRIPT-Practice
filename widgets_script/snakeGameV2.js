@@ -32,7 +32,7 @@ const FOOD_COLORS = ['#ff0000', '#00ff00', '#0000ff'];
 const BORDER_RADIUS = GRID_SIZE / 3;
 const SCORE_PER_FOOD = 10;
 const BIG_FOOD_COUNT = 6;
-const INITIAL_SNAKE_SPEED = 6;
+const INITIAL_SNAKE_SPEED = 5;
 
 let score;
 let direction;
@@ -44,13 +44,13 @@ let updateInterval;
 let timeInterval;
 let turned;
 let snakeSpeed;
-let mode = 'easy';
+let mode = 'hard';
 let timePlayed = 0;
 let gameRunning = false;
 let foodSpawnedTimes = 0;
 
 function initGame() {
-  //   showMenu(0);
+  showMenu(0);
   ctx.lineWidth = LINE_WIDTH;
   numberOfColumns = Math.floor(window.innerWidth / GRID_SIZE);
   numberOfRows = Math.floor(window.innerHeight / GRID_SIZE);
@@ -63,9 +63,10 @@ function initGame() {
     { x: 0, y: 0 },
   ];
 
-  (direction = 'right'), (score = 0);
+  direction = 'right';
+  score = 0;
   timePlayed = 0;
-  //   food = generateFood();
+  food = generateFood();
   foodSpawnedTimes = 0;
   snakeSpeed = INITIAL_SNAKE_SPEED;
   drawGrid();
@@ -142,8 +143,6 @@ function drawFood() {
   drawSquare(food.color, x, y, size, LINE_WIDTH, BORDER_RADIUS);
 }
 
-function isFoodOverlapsSnake(food) {}
-
 function drawSquare(color, x, y, size, LINE_WIDTH, BORDER_RADIUS) {
   ctx.lineWidth = LINE_WIDTH;
   ctx.strokeStyle = color;
@@ -193,11 +192,114 @@ function update() {
 
   if (direction === 'right') {
     snake.unshift({ x: headX + 1, y: headY });
+  } else if (direction === 'left') {
+    snake.unshift({ x: headX - 1, y: headY });
+  } else if (direction === 'up') {
+    snake.unshift({ x: headX, y: headY - 1 });
+  } else if (direction === 'down') {
+    snake.unshift({ x: headX, y: headY + 1 });
   }
 
-  drawGrid()
-  drawFood()
-  drawSnake()
+  if (mode === 'hard') {
+    if (isSnakeCollidingWithWall() || isSnakeCollidingWithItself) {
+        stop();
+    }
+  } else if (mode === 'medium') {
+    if (isSnakeCollidingWithItself) {
+      stop()
+    }
+  }
+
+  snake[0].x = (snake[0].x + numberOfColumns) % numberOfColumns;
+  snake[0].y = (snake[0].y + numberOfRows) % numberOfRows;
+
+  drawGrid();
+  drawSnake();
+  drawFood();
 }
 
-drawFood();
+function isSnakeCollidingWithItself() {
+  for (let i = 1; i < snake.length; i++) {
+    if (isOverlap(snake[0], snake[i])) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function isSnakeCollidingWithWall() {
+  const headX = snake[0].x;
+  const headY = snake[0].y;
+
+  if (headX < 0 || headX >= numberOfColumns || headY < 0 || headY >= numberOfRows) {
+    return true;
+  }
+  return false;
+}
+
+function isFoodOverlapsSnake(food) {
+  return snake.some((segment) => isOverlap(segment, food));
+}
+
+function isOverlap(point1, point2) {
+  return point1.x === point2.x && point1.y === point2.y;
+}
+
+function changeMode(newMode) {
+  mode = newMode;
+}
+
+function startGame() {
+  gameRunning = true;
+  updateInterval = setInterval(update, 1000 / snakeSpeed);
+  timeInterval = setInterval(() => {
+    timePlayed++;
+  }, 1000);
+}
+
+function stop() {
+    clearInterval(updateInterval)
+    clearInterval(timeInterval)
+    gameRunning = false;
+}
+
+startBtn.addEventListener('click', () => {
+  showMenu(1);
+});
+
+difficultyBtns.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    changeMode(btn.id);
+    hideAllMenus();
+    startGame();
+  });
+});
+
+function handleArrowKeyPress(event) {
+  switch (event.key) {
+    case 'ArrowRight':
+      if (direction !== 'left') {
+        direction = 'right';
+      }
+      break;
+    case 'ArrowLeft':
+      if (direction !== 'right') {
+        direction = 'left';
+      }
+      break;
+    case 'ArrowUp':
+      if (direction !== 'down') {
+        direction = 'up';
+      }
+      break;
+    case 'ArrowDown':
+      if (direction !== 'up') {
+        direction = 'down';
+      }
+      break;
+  }
+}
+
+document.addEventListener('keydown', handleArrowKeyPress);
+
+initGame();
