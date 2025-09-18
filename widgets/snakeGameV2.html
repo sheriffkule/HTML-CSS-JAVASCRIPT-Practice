@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Neon Snake - Snake Game V2</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
-    <link rel="shortcut icon" href="/icons/snake.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/icons/snake.png" type="image/x-icon" />
     <link rel="stylesheet" href="/widgets_style/snakeGameV2.css" />
   </head>
   <body>
@@ -13,8 +13,10 @@
       <div class="menu" id="start-menu">
         <h1 class="title">Neon Snake</h1>
         <button class="btn start-btn">Start</button>
-        <button class="btn settings-btn">Settings</button>
-        <button class="btn exit-btn">exit</button>
+        <div class="info">
+            <i class="fa-solid fa-copyright"></i>
+            <p><time datetime="year" id="year"></time> &copy; Made by <em>SheriffKule</em></p>
+        </div>
       </div>
       <div class="menu" id="difficulty-menu">
         <h1 class="title">Difficulty</h1>
@@ -26,6 +28,7 @@
         <h1 class="title">Game Over</h1>
         <h2 class="score">Score: <span id="final-score">10</span></h2>
         <button class="btn restart-btn">Restart</button>
+        <button class="btn exit-btn">exit</button>
       </div>
       <div class="menu" id="pause-menu">
         <h1 class="title">Game Paused</h1>
@@ -35,6 +38,10 @@
     </div>
 
     <canvas id="gameCanvas"></canvas>
+
+    <button class="icon" id="pause-btn">
+      <i class="fas fa-pause"></i>
+    </button>
     <script src="/widgets_script/snakeGameV2.js"></script>
   </body>
 </html>

@@ -5,6 +5,8 @@ const difficultyBtns = document.querySelectorAll('.difficulty-btn');
 const finalScoreElement = document.getElementById('final-score');
 const restartBtns = document.querySelectorAll('.restart-btn');
 const resumeBtn = document.getElementById('resume-btn');
+const pauseBtn = document.getElementById('pause-btn');
+const exitBtn = document.querySelector('.exit-btn');
 
 /** @type {HTMLCanvasElement} */
 const ctx = canvas.getContext('2d');
@@ -31,7 +33,7 @@ const SNAKE_EYE_COLOR = '#ffffff';
 const FOOD_COLORS = ['#ff0000', '#00ff00', '#0000ff'];
 const BORDER_RADIUS = GRID_SIZE / 3;
 const SCORE_PER_FOOD = 10;
-const BIG_FOOD_COUNT = 6;
+const BIG_FOOD_COUNT = 12;
 const INITIAL_SNAKE_SPEED = 5;
 
 let score;
@@ -182,6 +184,16 @@ function drawSquare(color, x, y, size, LINE_WIDTH, BORDER_RADIUS) {
   ctx.shadowBlur = 0;
 }
 
+function drawScore() {
+  const time =
+    Math.floor(timePlayed / 60) + ':' + (timePlayed % 60 < 10 ? '0' + (timePlayed % 60) : timePlayed % 60);
+  ctx.fillStyle = '#fff';
+  ctx.font = '20px Varela Round';
+  ctx.fillText(`Score: ${score}`, 10, 30);
+  ctx.fillText(`Difficulty: ${mode[0].toUpperCase() + mode.slice(1)}`, 10, 60);
+  ctx.fillText(`Time: ${time}`, 10, 90);
+}
+
 function update() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -201,12 +213,12 @@ function update() {
   }
 
   if (mode === 'hard') {
-    if (isSnakeCollidingWithWall() || isSnakeCollidingWithItself) {
-        stop();
+    if (isSnakeCollidingWithWall() || isSnakeCollidingWithItself()) {
+      stop();
     }
   } else if (mode === 'medium') {
-    if (isSnakeCollidingWithItself) {
-      stop()
+    if (isSnakeCollidingWithItself()) {
+      stop();
     }
   }
 
@@ -216,6 +228,12 @@ function update() {
   drawGrid();
   drawSnake();
   drawFood();
+  foodEaten();
+  drawScore();
+}
+
+function updateFoodPosition() {
+  food = generateFood();
 }
 
 function isSnakeCollidingWithItself() {
@@ -245,8 +263,34 @@ function isOverlap(point1, point2) {
   return point1.x === point2.x && point1.y === point2.y;
 }
 
+function foodEaten() {
+  if (isFoodOverlapsSnake(food)) {
+    updateFoodPosition();
+    foodSpawnedTimes++;
+
+    if (foodSpawnedTimes % BIG_FOOD_COUNT === 0) {
+      foodSpawnedTimes = 0;
+      score += SCORE_PER_FOOD * BIG_FOOD_COUNT;
+      changeSpeed(snakeSpeed + 1);
+    } else {
+      score += SCORE_PER_FOOD;
+    }
+
+    snake.push({
+      x: snake[snake.length - 1].x,
+      y: snake[snake.length - 1].y,
+    });
+  }
+}
+
 function changeMode(newMode) {
   mode = newMode;
+}
+
+function changeSpeed(newSpeed) {
+  snakeSpeed = newSpeed;
+  clearInterval(updateInterval);
+  updateInterval = setInterval(update, 1000 / snakeSpeed);
 }
 
 function startGame() {
@@ -255,12 +299,29 @@ function startGame() {
   timeInterval = setInterval(() => {
     timePlayed++;
   }, 1000);
+  pauseBtn.classList.add('active');
 }
 
 function stop() {
-    clearInterval(updateInterval)
-    clearInterval(timeInterval)
-    gameRunning = false;
+  clearInterval(updateInterval);
+  clearInterval(timeInterval);
+  gameRunning = false;
+  showMenu(2);
+  finalScoreElement.innerHTML = score;
+  pauseBtn.classList.remove('active');
+}
+
+function pauseGame() {
+  clearInterval(updateInterval);
+  clearInterval(timeInterval);
+  gameRunning = false;
+  showMenu(3);
+  pauseBtn.classList.remove('active');
+}
+
+function resumeGame() {
+  startGame();
+  hideAllMenus();
 }
 
 startBtn.addEventListener('click', () => {
@@ -273,6 +334,21 @@ difficultyBtns.forEach((btn) => {
     hideAllMenus();
     startGame();
   });
+});
+
+restartBtns.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    initGame();
+  });
+});
+
+resumeBtn.addEventListener('click', resumeGame);
+
+pauseBtn.addEventListener('click', pauseGame);
+
+exitBtn.addEventListener('click', () => {
+  showMenu(0);
+  initGame()
 });
 
 function handleArrowKeyPress(event) {
@@ -302,4 +378,38 @@ function handleArrowKeyPress(event) {
 
 document.addEventListener('keydown', handleArrowKeyPress);
 
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden' && gameRunning) {
+    pauseGame();
+  }
+});
+
 initGame();
+
+window.addEventListener('resize', () => {
+  const oldSnake = [...snake];
+  const oldDirection = direction;
+  const oldScore = score;
+  const oldMode = mode;
+  const oldSnakeSpeed = snakeSpeed;
+  const oldTimePlayed = timePlayed;
+  const oldFoodSpawnedTimes = foodSpawnedTimes;
+
+  initGame();
+
+  if (gameRunning) {
+    snake = oldSnake;
+    direction = oldDirection;
+    score = oldScore;
+    mode = oldMode;
+    snakeSpeed = oldSnakeSpeed;
+    timePlayed = oldTimePlayed;
+    foodSpawnedTimes = oldFoodSpawnedTimes;
+    drawGrid();
+    drawSnake();
+    drawFood();
+    drawScore();
+  }
+});
+
+document.getElementById('year').textContent = new Date().getFullYear();
