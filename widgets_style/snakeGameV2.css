@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+:root {
+    --bg-color: #0d142e;
+    --blue-color: rgb(0, 170, 255);
+    --white-color: #fff;
+    --text-shadow-blue: 0 0 10px var(--blue-color),
+    0 0 20px var(--blue-color),
+    0 0 30px var(--blue-color);
+    --text-shadow-white: 0 0 10px var(--white-color),
+    0 0 20px var(--white-color),
+    0 0 30px var(--white-color);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Varela Round", sans-serif;
+}
+
+body {
+    overflow: hidden;
+}
+
+.screens {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.menu {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--bg-color);
+    padding: 50px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% - 20px);
+    max-width: 500px;
+    border: 3px solid var(--white-color);
+    box-shadow: 0 0 10px var(--blue-color),
+    0 0 20px var(--blue-color),
+    0 0 30px var(--blue-color);
+    transition: all .3s ease-in-out;
+}
+
+.menu.active {
+    top: 50%;
+}
+
+.title,
+.score {
+    font-size: 60px;
+    color: var(--white-color);
+    margin-bottom: 20px;
+    letter-spacing: 4px;
+    text-align: center;
+    text-shadow: var(--text-shadow-blue);
+}
+
+.score {
+    font-size: 30px;
+}
+
+.btn {
+    padding: 15px 30px;
+    width: 100%;
+    border-radius: 10px;
+    background-color: transparent;
+    color: var(--bg-color);
+    text-shadow: var(--text-shadow-white);
+    font-size: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    -webkit-text-stroke: 1px var(--white-color);
+    border: 3px solid var(--white-color);
+    margin-top: 20px;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+
+    &:hover {
+        color: var(--white-color);
+        text-shadow: var(--text-shadow-blue);
+        letter-spacing: 3px;
+    }
+
+    &:active {
+        transform: scale(0.97);
+    }
+}
+

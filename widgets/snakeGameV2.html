@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neon Snake - Snake Game V2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/snakeGameV2.css" />
+  </head>
+  <body>
+    <div class="screens">
+      <div class="menu" id="start-menu">
+        <h1 class="title">Neon Snake</h1>
+        <button class="btn start-btn">Start</button>
+        <button class="btn settings-btn">Settings</button>
+        <button class="btn exit-btn">exit</button>
+      </div>
+      <div class="menu" id="difficulty-menu">
+        <h1 class="title">Difficulty</h1>
+        <button class="btn difficulty-btn" id="easy">Easy</button>
+        <button class="btn difficulty-btn" id="medium">Medium</button>
+        <button class="btn difficulty-btn" id="hard">Hard</button>
+      </div>
+      <div class="menu" id="over-menu">
+        <h1 class="title">Game Over</h1>
+        <h2 class="score">Score: <span id="final-score">10</span></h2>
+        <button class="btn restart-btn">Restart</button>
+      </div>
+    </div>
+    <script src="/widgets_script/snakeGameV2.js"></script>
+  </body>
+</html>
