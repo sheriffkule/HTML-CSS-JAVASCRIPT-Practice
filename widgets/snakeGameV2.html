@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Neon Snake - Snake Game V2</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="shortcut icon" href="/icons/snake.png" type="image/x-icon">
     <link rel="stylesheet" href="/widgets_style/snakeGameV2.css" />
   </head>
   <body>
@@ -26,7 +27,14 @@
         <h2 class="score">Score: <span id="final-score">10</span></h2>
         <button class="btn restart-btn">Restart</button>
       </div>
+      <div class="menu" id="pause-menu">
+        <h1 class="title">Game Paused</h1>
+        <button class="btn" id="resume-btn">resume</button>
+        <button class="btn restart-btn">Restart</button>
+      </div>
     </div>
+
+    <canvas id="gameCanvas"></canvas>
     <script src="/widgets_script/snakeGameV2.js"></script>
   </body>
 </html>
