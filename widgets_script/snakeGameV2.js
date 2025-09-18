@@ -26,10 +26,10 @@ const LINE_WIDTH = 5;
 const SNAKE_OFFSET = 1;
 const SNAKE_EYE_SIZE = 5;
 const SNAKE_BODY_COLOR = '#00aaff';
-const SNAKE_HEAD_COLOR = '#006600';
+const SNAKE_HEAD_COLOR = '#ff6600';
 const SNAKE_EYE_COLOR = '#ffffff';
-const FOOD_COLORS = ['#ff000', '#00ff00', '#0000ff'];
-const BORDER_SIZE = GRID_SIZE / 3;
+const FOOD_COLORS = ['#ff0000', '#00ff00', '#0000ff'];
+const BORDER_RADIUS = GRID_SIZE / 3;
 const SCORE_PER_FOOD = 10;
 const BIG_FOOD_COUNT = 6;
 const INITIAL_SNAKE_SPEED = 6;
@@ -50,7 +50,7 @@ let gameRunning = false;
 let foodSpawnedTimes = 0;
 
 function initGame() {
-  showMenu(0);
+  //   showMenu(0);
   ctx.lineWidth = LINE_WIDTH;
   numberOfColumns = Math.floor(window.innerWidth / GRID_SIZE);
   numberOfRows = Math.floor(window.innerHeight / GRID_SIZE);
@@ -80,8 +80,7 @@ function generateFood() {
       color: FOOD_COLORS[Math.floor(Math.random() * FOOD_COLORS.length)],
     };
   } while (isFoodOverlapsSnake(newFood));
-  {
-  }
+  return newFood;
 }
 
 function drawGrid() {
@@ -103,4 +102,102 @@ function drawGrid() {
   }
 }
 
-initGame();
+function drawSnake() {
+  for (let i = 0; i < snake.length; i++) {
+    const x = snake[i].x * GRID_SIZE + LINE_WIDTH * SNAKE_OFFSET;
+    const y = snake[i].y * GRID_SIZE + LINE_WIDTH * SNAKE_OFFSET;
+    const size = GRID_SIZE - 2 * LINE_WIDTH - 2 * SNAKE_OFFSET;
+
+    if (i === 0) {
+      drawSquare(SNAKE_HEAD_COLOR, x, y, size, LINE_WIDTH, BORDER_RADIUS);
+      drawEyes(x, y, size);
+    } else {
+      drawSquare(SNAKE_BODY_COLOR, x, y, size, LINE_WIDTH, BORDER_RADIUS);
+    }
+  }
+}
+
+function drawEyes(x, y, size) {
+  ctx.fillStyle = SNAKE_EYE_COLOR;
+  ctx.beginPath();
+  ctx.arc(x + size / 4, y + size / 4, SNAKE_EYE_SIZE, 0, 2 * Math.PI);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(x + (3 * size) / 4, y + size / 4, SNAKE_EYE_SIZE, 0, 2 * Math.PI);
+  ctx.fill();
+
+  ctx.fillStyle = SNAKE_HEAD_COLOR;
+  ctx.beginPath();
+  ctx.arc(x + size / 4, y + size / 4, SNAKE_EYE_SIZE / 2, 0, 2 * Math.PI);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(x + (3 * size) / 4, y + size / 4, SNAKE_EYE_SIZE / 2, 0, 2 * Math.PI);
+  ctx.fill();
+}
+
+function drawFood() {
+  const x = food.x * GRID_SIZE + LINE_WIDTH + SNAKE_OFFSET;
+  const y = food.y * GRID_SIZE + LINE_WIDTH + SNAKE_OFFSET;
+  const size = GRID_SIZE - 2 * LINE_WIDTH - 2 * SNAKE_OFFSET;
+  drawSquare(food.color, x, y, size, LINE_WIDTH, BORDER_RADIUS);
+}
+
+function isFoodOverlapsSnake(food) {}
+
+function drawSquare(color, x, y, size, LINE_WIDTH, BORDER_RADIUS) {
+  ctx.lineWidth = LINE_WIDTH;
+  ctx.strokeStyle = color;
+  ctx.shadowColor = color;
+  ctx.shadowBlur = 20;
+
+  ctx.beginPath();
+  ctx.moveTo(x + BORDER_RADIUS, y);
+  ctx.lineTo(x + size - BORDER_RADIUS, y);
+  ctx.quadraticCurveTo(x + size, y, x + size, y + BORDER_RADIUS);
+  ctx.lineTo(x + size, y + size - BORDER_RADIUS);
+  ctx.quadraticCurveTo(x + size, y + size, x + size - BORDER_RADIUS, y + size);
+  ctx.lineTo(x + BORDER_RADIUS, y + size);
+  ctx.quadraticCurveTo(x, y + size, x, y + size - BORDER_RADIUS);
+  ctx.lineTo(x, y + BORDER_RADIUS);
+  ctx.quadraticCurveTo(x, y, x + BORDER_RADIUS, y);
+  ctx.closePath();
+  ctx.stroke();
+
+  ctx.lineWidth = 2;
+  ctx.strokeStyle = '#ffffff';
+
+  ctx.beginPath();
+  ctx.moveTo(x + BORDER_RADIUS, y);
+  ctx.lineTo(x + size - BORDER_RADIUS, y);
+  ctx.quadraticCurveTo(x + size, y, x + size, y + BORDER_RADIUS);
+  ctx.lineTo(x + size, y + size - BORDER_RADIUS);
+  ctx.quadraticCurveTo(x + size, y + size, x + size - BORDER_RADIUS, y + size);
+  ctx.lineTo(x + BORDER_RADIUS, y + size);
+  ctx.quadraticCurveTo(x, y + size, x, y + size - BORDER_RADIUS);
+  ctx.lineTo(x, y + BORDER_RADIUS);
+  ctx.quadraticCurveTo(x, y, x + BORDER_RADIUS, y);
+  ctx.closePath();
+  ctx.stroke();
+
+  ctx.shadowColor = 'transparent';
+  ctx.shadowBlur = 0;
+}
+
+function update() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  snake.pop();
+
+  const headX = snake[0].x;
+  const headY = snake[0].y;
+
+  if (direction === 'right') {
+    snake.unshift({ x: headX + 1, y: headY });
+  }
+
+  drawGrid()
+  drawFood()
+  drawSnake()
+}
+
+drawFood();
