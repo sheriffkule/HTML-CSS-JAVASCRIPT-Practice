@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: azure;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container {
+    position: relative;
+    width: 520px;
+    height: 520px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto;
+    padding: 30px;
+}
+
+.cube_face > i {
+    font-size: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+.scene > i {
+    font-size: 60px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    color: black;
+    cursor: pointer;
+    transition: bottom 0.3s;
+}
+
+.scene:hover > i {
+    transform: translate(-50%, 0) rotateY(360deg);
+    bottom: -20px;
+    transition: 0.3s 0.2s;
+}
+
+.cube {
+    transform: translateY(0) translateZ(-200px) rotateX(-20deg) rotateY(20deg);
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    transition: transform 0.3s ease-in;
+}
+
+.scene {
+    width: 100px;
+    height: 100px;
+    perspective: 500px;
+    margin-left: 16px;
+}
+
+.cube_shadow {
+    display: block;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    filter: blur(10px);
+    bottom: -20px;
+    left: 0;
+    background-color: black;
+    transition: 0.3s ease-in;
+}
+
+.scene:hover  .cube_shadow {
+    width: 120px;
+    height: 20px;
+    filter: blur(15px);
+    bottom: 0;
+    left: 20px;
+}
+
+.cube_face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #9c0c0c;
+    opacity: 1;
+    border: 1px solid black;
+}
+
+.cube_face--front {
+    transform: rotateY(0) translateZ(50px);
+}
+
+.cube_face--right {
+    transform: rotateY(90deg) translateZ(50px);
+    background-color: #992b2b;
+}
+
+.cube_face--back {
+    transform: rotateY(180deg) translateZ(50px);
+    background-color: #520303;
+}
+
+.cube_face--left {
+    transform: rotateY(-90deg) translateZ(50px);
+    background-color: #e63737;
+}
+
+.cube_face--top {
+    transform: rotateX(90deg) translateZ(50px);
+    background-color: #c21f1f;
+}
+
+.scene:hover .cube {
+    transform: translateY(-80px) translateZ(-200px) rotateX(30deg) rotateY(30deg);
+}
