@@ -10,17 +10,18 @@
 
 body {
     background: #474b57;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
     min-height: 100vh;
 }
 
 .container {
     padding: 20px;
+    margin-top: 10px;
     background: #1d1d27;
     border-radius: 8px;
     width: 400px;
+    justify-self: center;
+    align-self: flex-end;
     position: relative;
 }
 
@@ -283,4 +284,28 @@ input:is(:focus, :focus-visible)::placeholder {
     font-size: 14px;
     position: relative;
     top: -5px;
+}
+
+.container .msg {
+    margin-top: 60px;
+    color: #f56f68;
+    white-space: nowrap;
+    text-align: center;
+    display: none;
+}
+
+.footer {
+    font-size: 14px;
+    font-weight: 300;
+    justify-self: center;
+    align-self: flex-end;
+    margin-bottom: 10px;
+}
+
+abbr {
+    font-size: 15px;
+    text-underline-offset: 3px;
+    letter-spacing: 0.5px;
+    color: #f7af37;
+    cursor: default;
 }

@@ -8,6 +8,8 @@ let powerStatBox = document.querySelector('.powerstats');
 let biographyBox = document.querySelector('.biography');
 let appearanceBox = document.querySelector('.appearance');
 let connectionsBox = document.querySelector('.connections');
+let msg = document.querySelector('.msg');
+let resultBox = document.querySelector('.result');
 
 let apiKey = '4ee04a4e33b75b3b93b9962a660e524d';
 
@@ -18,12 +20,21 @@ let fetchSuperhero = () => {
     .then((superhero) => {
       console.log(superhero);
       if (superhero.response == 'success') {
+        resultBox.style.display = 'block';
+        msg.style.display = 'none';
         let data = superhero.results[0];
         superheroImg.src = data.image.url;
         superheroName.innerHTML = data.name;
         showPowerstats(data.powerstats);
+        showBiography(data.biography);
+        showAppearance(data.appearance);
+        showConnections(data.connections);
+      } else {
+        resultBox.style.display = 'none';
+        msg.style.display = 'block';
       }
-    });
+    })
+    .catch((error) => console.error('Error:', error));
 };
 
 let showPowerstats = (powerstats) => {
@@ -61,6 +72,61 @@ let showPowerstats = (powerstats) => {
   `;
 };
 
+let showBiography = (biography) => {
+  biographyBox.innerHTML = `
+    <li><span>Full Name: </span>${biography['full-name']}</li>
+    <li><span>Alter-Egos: </span>${biography['alter-egos']}</li>
+    <li><span>First-Appearance: </span>$${biography['first-appearance']}</li>
+    <li><span>Place-of-birth: </span>${biography['place-of-birth']}</li>
+    <li class="publisher"><span>Publisher: </span>${biography['publisher']}</li>
+    <li class="aliases"><span>Aliases: </span>${biography['aliases']}</li>
+  `;
+};
+
+let showAppearance = (appearance) => {
+  appearanceBox.innerHTML = `
+    <li>
+      <i class="fa-solid fa-star"></i>
+      <span>Eye-Color</span>
+      <div>${appearance['eye-color']}</div>
+    </li>
+    <li>
+      <i class="fa-solid fa-star"></i>
+      <span>Gender</span>
+      <div>${appearance['gender']}</div>
+    </li>
+    <li>
+      <i class="fa-solid fa-star"></i>
+      <span>Hair-Color</span>
+      <div>${appearance['hair-color']}</div>
+    </li>
+    <li>
+      <i class="fa-solid fa-star"></i>
+      <span>Height</span>
+      <div>${appearance.height[1]}</div>
+    </li>
+    <li>
+      <i class="fa-solid fa-star"></i>
+      <span>Race</span>
+      <div>${appearance.race}</div>
+    </li>
+    <li>
+      <i class="fa-solid fa-star"></i>
+      <span>Weight</span>
+      <div>${appearance.weight[1]}</div>
+    </li>
+  `;
+};
+
+let showConnections = (connections) => {
+  connectionsBox.innerHTML = `
+    <h2>Group-Affiliations</h2>
+    <span>${connections['group-affiliation']}</span>
+    <h2>Relatives</h2>
+    <span>${connections['relatives']}</span>
+  `;
+};
+
 searchInput.addEventListener('keyup', (e) => {
   if (searchInput.value != '') {
     if (e.key == 'Enter') {
@@ -88,4 +154,6 @@ let indicator = (e) => {
   marker.style.width = e.offsetWidth + 'px';
 };
 
-fetchSuperhero('Hulk');
+fetchSuperhero();
+
+document.getElementById('year').textContent = new Date().getFullYear();
