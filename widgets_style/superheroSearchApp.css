@@ -20,7 +20,7 @@ body {
     padding: 20px;
     background: #1d1d27;
     border-radius: 8px;
-    width: 350px;
+    width: 400px;
     position: relative;
 }
 
@@ -52,7 +52,15 @@ body {
     width: 90%;
     border-radius: 30px;
     font-size: 15px;
-    color: #808080;
+    color: #b0b0b0;
+}
+
+input::placeholder {
+    transition: .25s;
+}
+
+input:is(:focus, :focus-visible)::placeholder {
+    transform: translateX(300px);
 }
 
 .container .search-box .search i {
@@ -86,6 +94,173 @@ body {
     font-size: 22px;
 }
 
-.container .other .tab-content {
+.container .other {
+    height: 250px;
+    width: 100%;
+}
+
+.container .other .options {
+    color: #fff;
+    height: 35px;
+    white-space: nowrap;
+    overflow-x: scroll;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    border-bottom: 1px solid #808080;
+}
+
+.container .other .options::-webkit-scrollbar {
     display: none;
+}
+
+.container .other .options span {
+    font-size: 12px;
+    font-weight: 600;
+    margin-left: 11px;
+    position: relative;
+    left: -8px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.container .other .options #marker {
+    height: 2px;
+    width: 84px;
+    background: #f7af37;
+    position: absolute;
+    margin-top: 33px;
+    left: 20px;
+    transition: all .25s;
+}
+
+.container .other .tab-content {
+    height: 210px;
+    margin-top: 12px;
+}
+
+.container .other .tab-content div {
+    height: 210px;
+    width: 100%;
+    display: none;
+}
+
+.container .other .tab-content .active {
+    display: block;
+}
+
+.container .other .tab-content .powerstats li {
+    height: 30px;
+    width: 100%;
+    margin-top: 5px;
+    list-style-type: none;
+    background: #1d1d27;
+    box-shadow: 1px 1px 1px 1px #000000;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 3px;
+}
+
+.container .other .tab-content .powerstats li i {
+    color: #f56f68;
+    font-size: 14px;
+}
+
+.container .other .tab-content .powerstats li span:nth-child(2) {
+    color: grey;
+    font-size: 14px;
+    margin-left: 10px;
+    text-transform: uppercase;
+}
+
+.container .other .tab-content .powerstats li span:nth-child(3) {
+    color: #f7af37;
+    font-size: 14px;
+    flex: 1;
+    text-align: right;
+    padding-right: 8px;
+}
+
+.container .other .tab-content .biography {
+    overflow: scroll;
+}
+
+.container .other .tab-content .biography::-webkit-scrollbar {
+    display: none;
+}
+
+.container .other .tab-content .biography li {
+    list-style-type: none;
+    color: #fff;
+    height: 30px;
+    width: 100%;
+    margin-top: 3px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    padding-left: 10px;
+    white-space: nowrap;
+}
+
+.container .other .tab-content .biography li span {
+    color: #b0b0b0;
+    position: relative;
+    left: -5px;
+}
+
+.container .other .tab-content .appearance li {
+    height: 30px;
+    width: 100%;
+    margin-top: 3px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+}
+
+.container .other .tab-content .appearance li i {
+    color: #f7af37;
+    font-size: 14px;
+}
+
+.container .other .tab-content .appearance li span {
+    font-size: 14px;
+    color: #fff;
+    margin-left: 10px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.container .other .tab-content .appearance li div {
+    position: absolute;
+    right: 30px;
+    border-radius: 30px;
+    background: #f56f68;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    padding: 5px;
+    height: 20px;
+    max-width: 70px;
+    font-size: 15px;
+}
+
+.container .other .tab-content .connections {
+    overflow-y: scroll;
+}
+
+.container .other .tab-content .connections::-webkit-scrollbar {
+    display: none;
+}
+
+.container .other .tab-content .connections h2 {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 16px;
+    margin-top: 12px;
+    position: relative;
+    top: -10px;
 }
