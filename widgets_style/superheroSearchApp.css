@@ -83,7 +83,7 @@ input:is(:focus, :focus-visible)::placeholder {
     width: 150px;
     display: block;
     border-radius: 3px;
-    margin-left: 75px;
+    margin-left: 100px;
     margin-top: 60px;
 }
 
@@ -126,7 +126,7 @@ input:is(:focus, :focus-visible)::placeholder {
 
 .container .other .options #marker {
     height: 2px;
-    width: 84px;
+    width: 86px;
     background: #f7af37;
     position: absolute;
     margin-top: 33px;
@@ -263,4 +263,24 @@ input:is(:focus, :focus-visible)::placeholder {
     margin-top: 12px;
     position: relative;
     top: -10px;
+}
+
+.container .other .tab-content .connections h2::before {
+    content: '';
+    height: 1px;
+    width: 174px;
+    background: #f7af37;
+    position: absolute;
+    margin-top: 22px;
+}
+
+.container .other .tab-content .connections h2:nth-child(3)::before {
+    width: 84px;
+}
+
+.container .other .tab-content .connections span {
+    color: grey;
+    font-size: 14px;
+    position: relative;
+    top: -5px;
 }
