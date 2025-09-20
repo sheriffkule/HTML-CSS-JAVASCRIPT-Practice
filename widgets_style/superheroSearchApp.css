@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    interpolate-size: allow-keywords;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: #474b57;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container {
+    padding: 20px;
+    background: #1d1d27;
+    border-radius: 8px;
+    width: 350px;
+    position: relative;
+}
+
+.container .search-box {
+    height: 55px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 15px;
+}
+
+.container .search-box .search {
+    height: 40px;
+    width: 90%;
+    border: 1px solid #808080;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+
+.container .search-box .search input {
+    all: unset;
+    height: 40px;
+    width: 90%;
+    border-radius: 30px;
+    font-size: 15px;
+    color: #808080;
+}
+
+.container .search-box .search i {
+    color: #808080;
+    cursor: pointer;
+    transition: .15s;
+
+    &:hover {
+        scale: 1.1;
+        color: #b0b0b0;
+    }
+
+    &:active {
+        scale: 1;
+    }
+}
+
+.container .superheroImg {
+    height: 150px;
+    width: 150px;
+    display: block;
+    border-radius: 3px;
+    margin-left: 75px;
+    margin-top: 60px;
+}
+
+.container .superheroName {
+    text-align: center;
+    color: #f7af37;
+    margin-top: 12px;
+    font-size: 22px;
+}
+
+.container .other .tab-content {
+    display: none;
+}

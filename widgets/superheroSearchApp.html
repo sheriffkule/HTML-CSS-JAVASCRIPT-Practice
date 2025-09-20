@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Superhero Search App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/superheroSearchApp.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="search-box">
+        <div class="search">
+          <input type="text" class="userInput" placeholder="Search Superhero..." />
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+      </div>
+      <div class="result">
+        <img src="/images/clint.jpeg" alt="Superhero" class="superheroImg" />
+        <h4 class="superheroName">Iron Man</h4>
+        <div class="other">
+          <div class="options">
+            <div id="marker"></div>
+            <span>Powerstats</span>
+            <span>Biography</span>
+            <span>Appearance</span>
+            <span>Connections</span>
+          </div>
+          <div class="tab-content">
+            <div class="powerstats">
+              <li>
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Combat</span>
+                <span>64</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Durability</span>
+                <span>85</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Intelligence</span>
+                <span>100</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Power</span>
+                <span>100</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Speed</span>
+                <span>58</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Strength</span>
+                <span>85</span>
+              </li>
+            </div>
+            <div class="biography">
+              <li><span>Full Name: </span>Tony Stark</li>
+              <li><span>Alter-Egos: </span> No alter egos found.</li>
+              <li><span>First-Appearance: </span>Tales of Suspence #39 (March, 1963)</li>
+              <li><span>Place-of-birth: </span>Long Island, New York</li>
+              <li class="publisher"><span>Publisher: </span>Marvel Comics</li>
+              <li class="aliases">
+                <span>Aliases: </span>Iron Knight, Hogan Potts, Spare Parts Man, Cobalt Man II, Crimson
+                Dynamo, Ironman
+              </li>
+            </div>
+            <div class="appearance">
+              <li>
+                <i class="fa-solid fa-star"></i>
+                <span>Eye-Color</span>
+                <div>Blue</div>
+              </li>
+              <li>
+                <i class="fa-solid fa-star"></i>
+                <span>Gender</span>
+                <div>Male</div>
+              </li>
+              <li>
+                <i class="fa-solid fa-star"></i>
+                <span>Hair-Color</span>
+                <div>Black</div>
+              </li>
+              <li>
+                <i class="fa-solid fa-star"></i>
+                <span>Height</span>
+                <div>6&prime; 7&Prime;</div>
+              </li>
+              <li>
+                <i class="fa-solid fa-star"></i>
+                <span>Race</span>
+                <div>Human</div>
+              </li>
+              <li>
+                <i class="fa-solid fa-star"></i>
+                <span>Weight</span>
+                <div>425 lb</div>
+              </li>
+            </div>
+            <div class="connections">
+              <h2>Group-Affiliations</h2>
+              <span
+                >Avengers, Illuminati, Stark Resilient; formerly S.H.I.E.L.D., leader of Stark Enterprises,
+                the Pro-Registration Superhero Unit, New Avengers, Mighty Avengers, hellfire Club, Force
+                Works, Avengers West Coast, United States Department of Defense.</span>
+              <h2>Relatives</h2>
+              <span>Howard Anthony Stark (father, deceased), Maria Stark (mother, deceased), Morgan Stark
+                (cousin), Isaac Stark (ancestor)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/widgets_script/superheroSearchApp.js"></script>
+  </body>
+</html>
