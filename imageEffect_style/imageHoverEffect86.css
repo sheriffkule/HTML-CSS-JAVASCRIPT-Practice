@@ -130,7 +130,7 @@ h1 {
     transition: all .3s;
 }
 
-.dot-active {
+.dot.active {
     background: white;
     transform: scale(1.2);
 }
