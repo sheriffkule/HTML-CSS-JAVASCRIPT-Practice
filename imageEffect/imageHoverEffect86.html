@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Draggable Image Slider</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/imageEffect_style/imageHoverEffect86.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Draggable Image Slider</h1>
+      <div class="slider-container" id="slider-container">
+        <div class="slider" id="slider">
+          <div class="slide">
+            <img src="/images/mountains.jpg" class="slide-image" alt="" />
+            <div class="slide-content">
+              <h3 class="slide-title">Mountin Peaks</h3>
+              <p class="slide-description">
+                Breathtaking views of snow capped mountains under a clear blue sky.
+              </p>
+            </div>
+          </div>
+          <div class="slide">
+            <img src="/images/dreamy-world.jpg" class="slide-image" alt="" />
+            <div class="slide-content">
+              <h3 class="slide-title">Dreamy World</h3>
+              <p class="slide-description">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet ex maiores facilis.
+              </p>
+            </div>
+          </div>
+          <div class="slide">
+            <img src="/images/Aurora.jpeg" class="slide-image" alt="">
+            <div class="slide-content">
+                <h3 class="slide-title">Aurora Borealis</h3>
+                <p class="slide-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis enim cum corrupti!</p>
+            </div>
+          </div>
+          <div class="slide">
+            <img src="/images/cityscape.jpg" class="slide-image" alt="">
+            <div class="slide-content">
+                <h3 class="slide-title">City Scape</h3>
+                <p class="slide-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui officiis exercitationem maiores?</p>
+            </div>
+          </div>
+          <div class="slide">
+            <img src="/images/matrix.jpg" alt="" class="slide-image">
+            <div class="slide-content">
+                <h3 class="slide-title">Matrix</h3>
+                <p class="slide-description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempora quas temporibus alias.</p>
+            </div>
+          </div>
+          <div class="slide">
+            <img src="/images/glowing_globe.jpg" alt="" class="slide-image">
+            <h3 class="slide-content">Glowing Globe</h3>
+            <p class="slide-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui numquam quae omnis.</p>
+          </div>
+        </div>
+      </div>
+      <div class="slider-progress">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+      <div class="slider-counter">
+        <span id="current-slide">1</span>/ 
+        <span id="total-slides">5</span>
+      </div>
+      <div class="slider-controls">
+        <button class="slider-btn" id="prev-btn">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="slider-dots" id="slider-dots"></div>
+        <button class="slider-btn" id="next-btn">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
