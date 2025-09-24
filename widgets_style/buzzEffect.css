@@ -25,9 +25,9 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    /* background-image: url('/images/darkhex.jpg');
+    background-image: url('/images/darkhex.jpg');
     background-size: cover;
-    background-repeat: no-repeat; */
+    background-repeat: no-repeat;
     background-color: gray;
 }
 
@@ -40,9 +40,9 @@ body {
     box-shadow: inset 0 4px 10px #df1a58,
     0 6px 16px indigo,
     0 0 40px rgba(0, 0, 0, 0.6);
-    animation: fadeIn 0.5s ease-out;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(12px);
+    animation: fadeIn 0.5s ease-out;
 }
 
 h1 {
@@ -132,7 +132,7 @@ button {
     font-weight: 500;
     opacity: 0;
     transform: translateY(10px);
-    transition: all .3s;
+    transition: all 0.3s;
 }
 
 .status.visible {
@@ -190,11 +190,11 @@ button {
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(100px);
+        transform: translateY(100px) scaleY(0);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scaleY(1);
     }
 }
 
