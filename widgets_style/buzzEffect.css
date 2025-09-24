@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+    --primary: #df1a58;
+    --primary-hover: #a113e8;
+    --success: #10b981;
+    --error: #ef4444;
+    --warning: #f59e0b;
+    --bg: #cc1313;
+    --card-bg: #eeeeee;
+    --text-light: #f8f8f8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    color: #fff;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* background-image: url('/images/darkhex.jpg');
+    background-size: cover;
+    background-repeat: no-repeat; */
+    background-color: gray;
+}
+
+.container {
+    max-width: 600px;
+    width: 100%;
+    background: transparent;
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: inset 0 4px 10px #df1a58,
+    0 6px 16px indigo,
+    0 0 40px rgba(0, 0, 0, 0.6);
+    animation: fadeIn 0.5s ease-out;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+}
+
+h1 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-size: 2.2rem;
+}
+
+.description {
+    color: var(--text-light);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+button {
+    background: var(--primary);
+    color: white;
+    font-size: 1rem;
+    border: none;
+    padding: 1.2rem 1.5rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* min-height: 80px; */
+
+    &:hover {
+        background: var(--primary-hover);
+        transform: translateY(-4px);
+        box-shadow: 0 16px 12px rgba(29, 78, 216, 0.2);
+    }
+}

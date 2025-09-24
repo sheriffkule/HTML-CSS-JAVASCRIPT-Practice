@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animated Buzz Effect</title>
+    <link rel="stylesheet" href="/widgets_style/buzzEffect.css" />
+  </head>
+  <body>
+    <!-- <img src="/images/darkhex.jpg" alt="" /> -->
+    <div class="container">
+      <h1>Fixed Haptic Feedback</h1>
+      <p class="description">
+        Each button now correctly triggers its designated vibration pattern with matching visual feedback.
+      </p>
+      <div class="button-grid">
+        <button id="shortTap" onmousedown="createRipple(event)">
+          <span>Short Tap</span>
+          <div class="button-effect"></div>
+        </button>
+        <button id="doublePulse" onmousedown="createRipple(event)">
+          <span>Double Pulse</span>
+          <div class="button-effect"></div>
+        </button>
+        <button id="longBuzz" onmousedown="createRipple(event)">
+          <span>Long Buzz</span>
+          <div class="button-effect"></div>
+        </button>
+      </div>
+      <div class="feedback">
+        <div class="pulse pulse-1"></div>
+        <div class="pulse pulse-2"></div>
+        <div class="pulse pulse-3"></div>
+      </div>
+      <div class="pattern-display">Current pattern: <span id="currentPattern">None</span></div>
+      <div id="statusMessage" class="status"></div>
+      <div class="device-status">Haptic Support: <span id="hapticSupport"></span></div>
+    </div>
+    <script src="/widgets_script/buzzEffect.js"></script>
+  </body>
+</html>
