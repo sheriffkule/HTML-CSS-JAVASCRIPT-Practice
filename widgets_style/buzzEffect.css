@@ -85,4 +85,187 @@ button {
         transform: translateY(-4px);
         box-shadow: 0 16px 12px rgba(29, 78, 216, 0.2);
     }
+
+    .button-effect {
+        position: absolute;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.4);
+        transform: scale(0);
+        animation: ripple 0.6s linear;
+    }
+}
+
+.feedback {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.pulse {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin: 0 5px;
+    background-color: var(--primary);
+    transform: scale(0);
+    opacity: 0.7;
+}
+
+.pulse-1 {
+    animation: pulse 1.5s infinite;
+}
+
+.pulse-2 {
+    animation: pulse 1.5s infinite 0.5s;
+}
+
+.pulse-3 {
+    animation: pulse 1.5s infinite 1s;
+}
+
+.status {
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all .3s;
+}
+
+.status.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.status.success {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--success);
+}
+
+.status.error {
+    background-color: rgba(239, 68, 69, 0.1);
+    color: var(--error);
+}
+
+.device-status {
+    margin-top: 1.5rem;
+    padding: 0.8rem;
+    background-color: rgba(0, 0, 0, 0.05);
+    font-size: 0.9rem;
+}
+
+.pattern-display {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: rgba(189, 21, 21, 0.03);
+    border-radius: 8px;
+    font-family: monospace;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(0);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1);
+        opacity: 0.3;
+    }
+    to {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes vibration {
+    from {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-4px);
+    }
+    50% {
+        transform: translateX(4px);
+    }
+    75% {
+        transform: translateX(-4px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes doublePulse {
+    from, to {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.1);
+    }
+    50% {
+        transform: scale(1);
+    }
+    75% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes longBuzz {
+    from {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.05) rotate(-2deg);
+    }
+    50% {
+        transform: scale(1.1) rotate(2deg);
+    }
+    75% {
+        transform: scale(1.05) rotate(-2deg);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+.vibrate {
+    animation: vibration 0.3s linear;
+}
+
+.double-pulse {
+    animation: doublePulse 0.6s linear;
+}
+
+.long-buzz {
+    animation: longBuzz 0.8s linear;
+}
+
+@media screen and (max-width: 600px) {
+    .container {
+        padding: 1.5rem;
+    }
+    .button-grid {
+        grid-template-columns: 1fr;
+    }
 }
