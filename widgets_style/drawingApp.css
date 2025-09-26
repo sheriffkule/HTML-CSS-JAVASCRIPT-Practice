@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(150deg, #0073ff, #4a98f7);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    padding: 10px;
+    max-width: 1050px;
+}
+
+section {
+    background: #74b2ca;
+    border-radius: 6px;
+}
+
+.tools {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.tools .row {
+    border-right: 1px solid #333;
+    margin-right: 10px;
+}
+
+.tools .options {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.row .options .option {
+    cursor: pointer;
+}
+
+#sizeSlider::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    width: 100px;
+    background: linear-gradient(to right, #4a98f7, #0073ff);
+    border-radius: 6px;
+    height: 8px;
+    border: 1px solid silver;
+}
+
+#sizeSlider:active::-webkit-slider-runnable-track {
+    border-width: 2px;
+    height: 10px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    cursor: pointer;
+    background: linear-gradient(white, red);
+    position: relative;
+    bottom: 4px;
+    border-radius: 50%;
+    box-shadow: 0 0 4px #0073ff;
+    transition: .15s;
+}
+
+input[type="range"]::-webkit-slider-thumb:is(:hover, :active) {
+    scale: 1.2;
+}
+
+.tools .options li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tools .shapes .options {
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+}
+
+.tools .shapes .title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tools .colors {
+    border: none;
+}

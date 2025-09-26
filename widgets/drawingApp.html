@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Advanced Drawing App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/drawingApp.css" />
+  </head>
+  <body>
+    <div class="container">
+      <section class="tools">
+        <div class="row">
+          <label class="title"><strong>Tools</strong></label>
+          <ul class="options">
+            <li class="option">
+              <input type="range" id="sizeSlider" min="1" max="30" value="5" />
+            </li>
+            <li class="option active tool" id="pencil">
+              <i class="fa fa-pencil" id="icon"></i>
+              <span>Pencil</span>
+            </li>
+            <li class="option tool" id="brush">
+              <i class="fa fa-paint-brush" id="icon"></i>
+              <span>Brush</span>
+            </li>
+            <li class="option tool" id="eraser">
+              <i class="fa fa-eraser" id="icon"></i>
+              <span>Eraser</span>
+            </li>
+            <li class="option tool" id="undo">
+              <i class="fa fa-undo" id="icon"></i>
+              <span>Undo</span>
+            </li>
+            <li class="option tool" id="redo">
+              <i class="fa fa-redo" id="icon"></i>
+              <span>Redo</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="row shapes">
+          <label class="title"
+            ><strong>Shapes</strong> <input type="checkbox" id="fillColor" /> <label for="fillColor">Fill Color</label
+          ></label>
+          <ul class="options">
+            <li class="option tool" id="rectangle">
+              <i class="fa fa-square" id="icon"></i>
+              <span>Rectangle</span>
+            </li>
+            <li class="option tool" id="circle">
+              <i class="fa fa-circle" id="icon"></i>
+              <span>Circle</span>
+            </li>
+            <li class="option tool" id="triangle">
+              <i class="fa fa-mountain" id="icon"></i>
+              <span>Triangle</span>
+            </li>
+            <li class="option tool" id="square">
+              <i class="fa fa-square" id="icon"></i>
+              <span>Square</span>
+            </li>
+            <li class="option tool" id="Hexagon">
+              <i class="fa-solid fa-cube" id="icon"></i>
+              <span>Hexagon</span>
+            </li>
+            <li class="option tool" id="pentagon">
+              <i class="fa-solid fa-dice-d6" id="icon"></i>
+              <span>Pentagon</span>
+            </li>
+            <li class="option tool" id="line">
+              <i class="fa-solid fa-grip-lines" id="icon"></i>
+              <span>Line</span>
+            </li>
+            <li class="option tool" id="arrow">
+              <i class="fa-solid fa-arrow-up" id="icon"></i>
+              <span>Arrow</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="row colors">
+          <label class="title"><strong>Colors</strong></label>
+          <ul class="options">
+            <li class="option"></li>
+            <li class="option selected"></li>
+            <li class="option"></li>
+            <li class="option"></li>
+            <li class="option"></li>
+            <li class="option">
+              <input type="color" value="#0000ff" id="colorPicker" />
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="drawingArea">
+        <canvas></canvas>
+      </section>
+      <div class="buttons">
+        <button class="clearCanvas"><i class="fa fa-times"></i> Clear Canvas</button>
+        <button class="saveImg"><i class="fa fa-save"></i> Save As Image</button>
+      </div>
+    </div>
+    <script src="/widgets_script/drawingApp.js" defer></script>
+  </body>
+</html>
