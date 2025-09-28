@@ -233,3 +233,16 @@ button:hover,
 button:focus-visible {
   --gradient-button-fill: #ffffff22;
 }
+
+.footer {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 300;
+  margin-top: 30px;
+}
+
+abbr {
+  font-size: 15px;
+  text-underline-offset: 3px;
+  letter-spacing: 0.5px;
+}

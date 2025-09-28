@@ -4,7 +4,7 @@ const canvas = document.querySelector('canvas');
 const toolBtns = document.querySelectorAll('.tool');
 const fillColor = document.getElementById('fillColor');
 const sizeSlider = document.getElementById('sizeSlider');
-const colorBtns = document.querySelectorAll('.colors .options');
+const colorBtns = document.querySelectorAll('.colors .option');
 const colorPicker = document.getElementById('colorPicker');
 const clearCanvas = document.querySelector('.clearCanvas');
 const saveImage = document.querySelector('.saveImg');
@@ -39,7 +39,6 @@ toolBtns.forEach((btn) => {
     document.querySelector('.options .active').classList.remove('active');
     btn.classList.add('active');
     selectedTool = btn.id;
-    console.log(btn.id);
   });
 });
 
@@ -64,17 +63,26 @@ const drawPencil = (e) => {
 const drawRect = (e) => {
   const width = e.offsetX - prevMouseX;
   const height = e.offsetY - prevMouseY;
+  ctx.beginPath()
   if (!fillColor.checked) {
-    return ctx.strokeRect(prevMouseX, prevMouseY, width, height);
+    ctx.strokeRect(prevMouseX, prevMouseY, width, height);
+  } else {
+    ctx.fillRect(prevMouseX, prevMouseY, width, height);
+    ctx.strokeRect(prevMouseX, prevMouseY, width, height);
   }
-  ctx.fillRect(prevMouseX, prevMouseY, width, height);
 };
 
 const drawCircle = (e) => {
   ctx.beginPath();
-  let radius = Math.sqrt(Math.pow(prevMouseX - e.offsetX, 2) + Math.pow(prevMouseY - e.offsetY, 2));
-  ctx.arc(prevMouseX, prevMouseY, radius, 0, Math.PI * 2);
-  fillColor.checked ? ctx.fill() : ctx.stroke();
+  const radius = Math.sqrt(Math.pow(prevMouseX - e.offsetX, 2) + Math.pow(prevMouseY - e.offsetY, 2));
+  ctx.arc(prevMouseX, prevMouseY, radius, 0, 2 * Math.PI);
+  
+  if (!fillColor.checked) {
+    ctx.stroke();
+  } else {
+    ctx.fill();
+    ctx.stroke();
+  }
 };
 
 const drawTriangle = (e) => {
@@ -153,13 +161,13 @@ sizeSlider.addEventListener('change', () => {
 });
 
 colorPicker.addEventListener('change', () => {
-  colorPicker.parentElement.style.background = colorPicker.value;
+  colorPicker.parentElement.style.backgroundColor = colorPicker.value;
   colorPicker.parentElement.click();
 });
 
 colorBtns.forEach((btn) => {
   btn.addEventListener('click', () => {
-    const selectedBtn = document.querySelector('.options .option .selected');
+    const selectedBtn = document.querySelector('.color .selected');
     if (selectedBtn) {
       selectedBtn.classList.remove('selected');
     }
@@ -249,3 +257,17 @@ redoButton.addEventListener('click', () => {
     };
   }
 });
+
+clearCanvas.addEventListener('click', () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  setCanvasBackground();
+});
+
+saveImage.addEventListener('click', () => {
+  const link = document.createElement('a')
+  link.download = `${Date.now()}.jpg`;
+  link.href = canvas.toDataURL()
+  link.click()
+})
+
+document.getElementById('year').textContent = new Date().getFullYear()
