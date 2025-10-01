@@ -5,6 +5,7 @@ const CANVAS_HEIGHT = 620;
 
 let snowBgCanvas;
 let branchCanvas;
+let snowFgCanvas;
 
 function initializeCanvas(canvasID) {
   const canvas = document.getElementById(canvasID);
@@ -16,9 +17,15 @@ function initializeCanvas(canvasID) {
 function main() {
   snowBgCanvas = initializeCanvas('canvasSnowBackground');
   branchCanvas = initializeCanvas('canvasTreeBranches');
+  snowFgCanvas = initializeCanvas('canvasSnowForeground');
   const treeLocation = [CANVAS_WIDTH * 0.5, CANVAS_HEIGHT * 0.95];
   drawBranches(branchCanvas, treeLocation, 100, 0, 20);
   drawLeaves(branchCanvas);
+  setInterval(function () {
+    handleSnowflakes(snowBgCanvas);
+    drawSnowBackground(snowBgCanvas);
+  }, 1000 / 60);
+  drawSnowForeground(snowFgCanvas);
 }
 
 function drawLeaves(branchCanvas) {
@@ -43,18 +50,18 @@ function drawLeaves(branchCanvas) {
 
   for (let i = 0; i < branchPixels.length; i++) {
     if (Math.random() < 0.3) {
-        let loc = branchPixels[i];
-        loc[0] += (Math.random() - 0.5) * 10;
-        loc[1] += (Math.random() - 0.5) * 10;
+      let loc = branchPixels[i];
+      loc[0] += (Math.random() - 0.5) * 10;
+      loc[1] += (Math.random() - 0.5) * 10;
       ctx.beginPath();
-      let green = 255 * (CANVAS_HEIGHT - loc[1]) / CANVAS_HEIGHT;
-      ctx.fillStyle = 'rgba(0,' + green +',0,0.4)';
-      ctx.save()
-      ctx.translate(...loc)
-      ctx.rotate(Math.random() * Math.PI * 2)
+      let green = (255 * (CANVAS_HEIGHT - loc[1])) / CANVAS_HEIGHT;
+      ctx.fillStyle = 'rgba(0,' + green + ',0,0.4)';
+      ctx.save();
+      ctx.translate(...loc);
+      ctx.rotate(Math.random() * Math.PI * 2);
       ctx.arc(0, 0, 4, 0, Math.PI);
       ctx.fill();
-      ctx.restore()
+      ctx.restore();
     }
   }
 }
@@ -78,4 +85,99 @@ function drawBranches(canvas, start, len, angle, branchWidth) {
   }
 
   ctx.restore();
+}
+
+const snowflakes = new Image();
+snowflakes.src = '../icons/snowflakes.png';
+
+class Snowflake {
+  constructor() {
+    this.x = Math.random() * CANVAS_WIDTH;
+    this.y = Math.random() * CANVAS_HEIGHT;
+    this.size = Math.random() * 60 + 40;
+    this.speed = Math.random() * 0.5 + 0.2;
+    this.frameX = Math.floor(Math.random() * 4);
+    this.frameY = Math.floor(Math.random() * 4);
+    this.frameSize = 160;
+    this.angle = 0;
+    this.spin = Math.random() > 0.5 ? 0.2 : -0.2;
+  }
+
+  update() {
+    this.y += this.speed;
+
+    if (this.y - this.size > CANVAS_HEIGHT) this.y = 0 - this.size;
+    this.angle += this.spin;
+  }
+
+  draw(canvas) {
+    const ctx = canvas.getContext('2d');
+    ctx.save();
+    ctx.translate(this.x, this.y);
+    ctx.rotate((this.angle * Math.PI) / 180);
+    ctx.drawImage(
+      snowflakes,
+      this.frameX * this.frameSize,
+      this.frameY * this.frameSize,
+      this.frameSize,
+      this.frameSize,
+      0 - this.size / 2,
+      0 - this.size / 2,
+      this.size,
+      this.size
+    );
+    ctx.restore();
+  }
+}
+
+const particlesArray = [];
+
+for (let i = 0; i < 20; i++) {
+  particlesArray.push(new Snowflake());
+}
+
+function handleSnowflakes(canvas) {
+  clear(canvas);
+
+  for (let i = 0; i < particlesArray.length; i++) {
+    particlesArray[i].update();
+    particlesArray[i].draw(canvas);
+  }
+}
+
+function clear(canvas) {
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function drawSnowBackground(canvas) {
+  const ctx = canvas.getContext('2d');
+  ctx.beginPath();
+  ctx.moveTo(0, CANVAS_HEIGHT);
+  ctx.lineTo(0, CANVAS_WIDTH - 20);
+  ctx.fillStyle = '#eee';
+  ctx.strokeStyle = 'lightblue';
+  ctx.quadraticCurveTo(CANVAS_WIDTH, CANVAS_WIDTH - 30, CANVAS_WIDTH, CANVAS_HEIGHT);
+  ctx.fill();
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(CANVAS_WIDTH, CANVAS_HEIGHT);
+  ctx.lineTo(CANVAS_WIDTH, CANVAS_WIDTH - 30);
+  ctx.fillStyle = 'white';
+  ctx.quadraticCurveTo(0, CANVAS_WIDTH + 20, 0, CANVAS_HEIGHT);
+  ctx.stroke();
+  ctx.fill();
+}
+
+function drawSnowForeground(canvas) {
+  const ctx = canvas.getContext('2d');
+  ctx.beginPath();
+  ctx.moveTo(0, CANVAS_HEIGHT);
+  ctx.lineTo(0, CANVAS_WIDTH + 20);
+  ctx.fillStyle = '#f9f9f9';
+  ctx.strokeStyle = 'lightblue';
+  ctx.lineWidth = 2;
+  ctx.quadraticCurveTo(CANVAS_WIDTH, CANVAS_WIDTH + 90, CANVAS_WIDTH, CANVAS_HEIGHT);
+  ctx.stroke();
+  ctx.fill();
 }
