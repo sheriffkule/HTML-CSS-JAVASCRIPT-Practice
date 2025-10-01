@@ -1,0 +1,87 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(#ed1f0a, #f8420b, #f95504, #f76f0b, #ff900a, black 10%);
+  height: 100vh;
+  overflow: hidden;
+}
+
+.buttons {
+    position: absolute;
+    top: 30%;
+    left: 0;
+    text-align: center;
+    width: 100vw;
+}
+
+#canvas1 {
+    background: black;
+}
+
+.button {
+    display: inline-block;
+    position: relative;
+    width: 25%;
+    height: 120px;
+    margin: 10px;
+    border-radius: 50px;
+    border: 5px solid white;
+    background: transparent;
+    transition: .5s;
+    font-size: 40px;
+    font-weight: 900;
+    color: white;
+    line-height: 110px;
+    min-width: 250px;
+    cursor: pointer;
+}
+
+.button::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 44px;
+    transition: 0.5s;
+}
+
+.button:nth-child(1)::before {
+    content: 'HOME';
+}
+
+.button:nth-child(2)::before {
+    content: 'PROJECTS';
+}
+
+.button:nth-child(3)::before {
+    content: 'ABOUT';
+}
+
+.button:hover::before {
+    color: yellow;
+    box-shadow: inset 10px 10px 15px orange,
+    inset -10px -10px 15px orange,
+    inset -10px 10px 15px orange,
+    inset 10px -10px 15px orange;
+    background: yellow;
+    text-shadow: 5px 5px 5px orange,
+    -5px -5px 5px orange,
+    -5px 5px 5px orange,
+    5px -5px 5px orange;
+}
+
+.button:hover {
+    color: yellow;
+    box-shadow: 10px 10px 15px orange,
+    -10px -10px 15px orange,
+    -10px 10px 15px orange,
+    10px -10px 15px orange;
+    border: 5px solid orange;
+    background: orange;
+}
