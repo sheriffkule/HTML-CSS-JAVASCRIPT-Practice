@@ -5,7 +5,7 @@
 }
 
 body {
-  background: linear-gradient(#ed1f0a, #f8420b, #f95504, #f76f0b, #ff900a, black 10%);
+  background: black;
   height: 100vh;
   overflow: hidden;
 }
@@ -20,6 +20,7 @@ body {
 
 #canvas1 {
     background: black;
+    filter: blur(22px) contrast(5);
 }
 
 .button {
@@ -27,7 +28,7 @@ body {
     position: relative;
     width: 25%;
     height: 120px;
-    margin: 10px;
+    margin: 20px;
     border-radius: 50px;
     border: 5px solid white;
     background: transparent;
