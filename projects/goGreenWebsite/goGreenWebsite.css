@@ -10,6 +10,14 @@
     font-family: "Poppins", sans-serif;
 }
 
+.section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 80px 10%;
+    width: 100%;
+}
+
 .navbar {
     height: 80px;
     width: 100%;
@@ -21,11 +29,13 @@
     top: 0;
     left: 0;
     z-index: 99;
+    transition: .6s;
 }
 
 .navbarSticky {
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    background-color: rgba(0, 0, 0, 1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
 }
 
 .navbar .logo a {
@@ -217,24 +227,168 @@ button {
 .header-btns i {
     border-radius: 50%;
     background-color: rgb(121, 185, 0);
-    height: 60px;
-    width: 60px;
+    height: 50px;
+    width: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #fff;
     font-size: 30px;
+    cursor: pointer;
     animation: pulse 1s linear infinite alternate;
+    transition: .4s;
+}
+
+.header-btns i:hover {
+    background-color: rgb(0, 128, 0);
 }
 
 @keyframes pulse {
     from {
-        box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.1);
         outline: 1px solid rgb(142, 224, 142);
-        outline-offset: 20px;
+        outline-offset: 10px;
     }
     to {
-        box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
-        outline: 2px solid transparent;
+        box-shadow: 0 0 0 0px rgba(255, 255, 255, 0);
+        outline: 1px solid transparent;
+    }
+}
+
+.header-btns span {
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.about {
+    justify-content: center;
+    gap: 100px;
+    background-image: url(images/about-bg.jpg);
+}
+
+.about-content h1 {
+    color: rgb(121, 185, 0);
+    font-size: 55px;
+    line-height: 70px;
+    margin-bottom: 1rem;
+}
+
+.about-content button {
+    margin-top: 30px;
+}
+
+.about-card {
+    display: flex;
+    gap: 30px;
+    margin-block: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 1600px) {
+    .social {
+        left: -6%;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .navbar ul li a {
+        font-size: 16px;
+    }
+    .header-content {
+        padding-left: 30px;
+    }
+    .header-wrapper {
+        background-position: top;
+    }
+    .about-content h1 {
+        margin-top: 30px;
+        font-size: 30px;
+        line-height: 45px;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .navbar ul {
+        position: absolute;
+        top: 100%;
+        left: -100%;
+        width: 300px;
+        transition: .6s;
+        background-color: rgba(0, 0, 0, 1);
+    }
+    .navbar ul li {
+        display: block;
+        margin: 8px 0;
+        padding-left: 10% !important;
+        padding: 20px 0;
+    }
+    .nav-btn {
+        display: flex;
+    }
+    .navbar ul li a {
+        color: rgb(121, 185, 0);
+        position: relative;
+    }
+    .navbar ul li a:hover {
+        color: #fff;
+        letter-spacing: 1px;
+        text-decoration: 1px solid underline #fff;
+        text-underline-offset: 4px;
+    }
+    .navbar .show-menu {
+        left: 0;
+    }
+    .navbar .ri-menu-line {
+        display: flex;
+    }
+    .social {
+        left: 5%;
+        margin-top: 25px;
+    }
+    .about {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .header-content p {
+        width: 60%;
+    }
+    .header-content h1 {
+        font-size: 3rem;
+        line-height: 3.5rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header-content p {
+        width: 90%;
+    }
+    .about-image {
+        width: 100%;
+    }
+    .about-image img {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .header-btns span,
+    .nav-btn i:nth-of-type(1) {
+        display: none;
+    }
+    .nav-btn i {
+        margin-right: 0;
     }
 }
