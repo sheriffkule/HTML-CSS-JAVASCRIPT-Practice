@@ -284,6 +284,200 @@ button {
     margin-block: 30px;
 }
 
+.services {
+    flex-direction: column;
+    justify-content: center;
+    background-image: url(images/service-bg.jpg);
+}
+
+.services span {
+    color: rgb(121, 185, 0);
+}
+
+.services h1 {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.services-swiper {
+    width: 100% !important;
+    margin-top: 60px;
+}
+
+.service-card {
+    background-color: rgb(223, 228, 211);
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.service-card img {
+    max-width: 100%;
+}
+
+.service-card:hover {
+    background-color: rgb(0, 24, 25);
+    color: #fff;
+    transition: all .5s ease-in-out;
+}
+
+.service-content {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    position: relative;
+    padding: 20px 0;
+}
+
+.service-content img {
+    height: 80px;
+    width: 80px;
+    padding: 20px;
+    position: absolute;
+    bottom: -26%;
+    right: -14%;
+    border-radius: 50%;
+    background-color: rgb(0, 24, 25);
+    animation: pluse 1s linear infinite alternate;
+    box-shadow: 0 0 0 10px rgb(0, 24, 25);
+}
+
+@keyframes pluse {
+    from {
+        box-shadow: 0 0 0 0px rgba(0, 128, 0, 0);
+    }
+    to {
+        box-shadow: 0 0 0 20px rgba(0, 128, 0, 0.2);
+    }
+}
+
+.service-content .line1 {
+    width: 50px;
+    height: 5px;
+    background-color: rgb(121, 185, 0);
+}
+
+.service-content h3 {
+    font-size: 25px;
+}
+
+.skills {
+    gap: 100px;
+}
+
+.skills-content {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.skills-content p {
+    margin: 20px 0;
+    font-size: 1rem;
+    font-weight: 500;
+    text-wrap: pretty;
+}
+
+.headings {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+
+.headings span {
+    color: rgb(121, 185, 0);
+    font-size: 1.5rem;
+}
+
+.headings h1 {
+    font-size: 3rem;
+    font-weight: 600;
+    line-height: 3.5rem;
+    width: 90%;
+}
+
+.headings h1 span {
+    font-size: 3rem;
+    font-weight: 600;
+}
+
+.skills-img {
+    width: 50%;
+}
+
+.skills-img  img {
+    max-width: 100%;
+}
+
+.skills-infos {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.skills-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.skills-info h1 {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.progress {
+    width: 100%;
+    height: 8px;
+    border-radius: 5px;
+    background-color: rgb(0, 24, 25);
+    position: relative;
+}
+
+.progress::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 70%;
+    height: 100%;
+    background: linear-gradient(90deg, rgb(0, 128, 0), rgb(121, 185, 0));
+}
+
+.progress::before {
+    content: '70%';
+    position: absolute;
+    top: -25px;
+    left: 68%;
+    font-size: 1.25rem;
+    color: #000;
+}
+
+.skills-infos .skills-info:last-child .progress::after {
+    width: 80%;
+}
+
+.skills-infos .skills-info:last-child .progress::before {
+    content: '80%';
+    left: 78%;
+}
+
+
+
+
 
 
 
