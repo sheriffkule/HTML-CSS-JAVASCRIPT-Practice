@@ -14,7 +14,7 @@ window.addEventListener('scroll', () => {
   }
 });
 
-let swiper = new Swiper('.services-swiper', {
+let swiper1 = new Swiper('.services-swiper', {
   loop: true,
   autoplay: {
     delay: 3000,
@@ -35,6 +35,32 @@ let swiper = new Swiper('.services-swiper', {
     1400: {
       slidesPerView: 4,
       spaceBetween: 10,
+    },
+  },
+});
+
+let swiper2 = new Swiper('.project-swiper', {
+  slidesPerView: 3,
+  spaceBetween: 10,
+  loop: true,
+  autoplay: {
+    delay: 2000,
+  },
+  breakpoints: {
+    1400: {
+      slidesPerView: 3,
+    },
+    1100: {
+      slidesPerView: 2,
+    },
+    900: {
+      slidesPerView: 2,
+    },
+    768: {
+      slidesPerView: 2,
+    },
+    500: {
+      slidesPerView: 1,
     },
   },
 });

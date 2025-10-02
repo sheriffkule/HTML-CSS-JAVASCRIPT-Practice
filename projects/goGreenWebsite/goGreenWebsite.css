@@ -475,7 +475,130 @@ button {
     left: 78%;
 }
 
+.counter {
+    background-image: url(images/counter-bg.png);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    place-content: center;
+    place-items: center;
+    gap: 10px;
+}
 
+.count-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.count-box img {
+    margin: 20px 0;
+    transition: 0.4s;
+}
+
+.count-box h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #fff;
+    line-height: 2rem;
+    transition: .4s;
+}
+
+.count-box h2 {
+    font-size: 1.75rem;
+    font-weight: 500;
+    color: #fff;
+    line-height: 1.75rem;
+    transition: .4s;
+}
+
+.count-box:hover img {
+    filter: invert(1);
+    cursor: pointer;
+}
+
+.count-box:hover h1,
+.count-box:hover h2 {
+    color: #000;
+}
+
+.projects {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 50px;
+}
+
+.projects .headings {
+    width: 70%;
+}
+
+.project-swiper {
+    width: 100%;
+}
+
+.project-card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.project-img {
+    max-width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.project-card:hover .project-img img {
+    transform: scale(1.1);
+}
+
+.project-img img {
+    max-width: 100%;
+    border-radius: 10px;
+    transition: .3s;
+}
+
+.project-info {
+    background-color: rgb(223, 228, 211);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    transition: .3s;
+}
+
+.project-info h2 {
+    font-size: 1.25rem;
+    font-weight: 400;
+    transition: .3s;
+}
+
+.project-info h1 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.project-card:hover .project-info {
+    background-color: rgb(121, 185, 0);
+}
+
+.project-card:hover .project-info h2,
+.project-card:hover .project-info h1 {
+    color: #fff;
+}
 
 
 
@@ -553,6 +676,24 @@ button {
         flex-direction: column;
         align-items: flex-start;
     }
+
+    .skills {
+        flex-direction: column;
+    }
+    .skills-content,
+    .skills-img {
+        width: 100%;
+    }
+    .counter {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .counter .count-box:nth-child(4) {
+        grid-column: 2/3;
+    }
+    .projects .headings {
+        width: 90%;
+    }
 }
 
 @media screen and (max-width: 900px) {
@@ -563,6 +704,16 @@ button {
         font-size: 3rem;
         line-height: 3.5rem;
     }
+    .counter {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .projects .headings {
+        width: 100%;
+    }
+    .projects .headings h1 {
+        width: 100%;
+    }
+    
 }
 
 @media screen and (max-width: 768px) {
@@ -584,5 +735,18 @@ button {
     }
     .nav-btn i {
         margin-right: 0;
+    }
+    .headings h1 {
+        font-size: 2rem;
+        line-height: 2.5rem;
+    }
+    .counter {
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .counter .count-box:nth-child(4) {
+        grid-column: auto;
     }
 }
