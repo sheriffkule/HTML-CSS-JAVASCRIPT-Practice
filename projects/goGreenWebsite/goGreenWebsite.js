@@ -64,3 +64,12 @@ let swiper2 = new Swiper('.project-swiper', {
     },
   },
 });
+
+let swiper3 = new Swiper('.testimonial-swiper', {
+  slidesPerView: 2,
+  spaceBetween: 30,
+  loop: true,
+  autoplay: {
+    delay: 3000,
+  },
+});
