@@ -72,4 +72,61 @@ let swiper3 = new Swiper('.testimonial-swiper', {
   autoplay: {
     delay: 3000,
   },
+  breakpoints: {
+    1400: {
+      slidesPerView: 2,
+    },
+    900: {
+      slidesPerView: 2,
+    },
+    500: {
+      slidesPerView: 1,
+    },
+  },
+});
+
+let swiper4 = new Swiper('.brands-swiper', {
+  slidesPerView: 5,
+  spaceBetween: 10,
+  loop: true,
+  autoplay: {
+    delay: 3000,
+  },
+  breakpoints: {
+    1400: {
+      slidesPerView: 5,
+    },
+    1100: {
+      slidesPerView: 4,
+    },
+    900: {
+      slidesPerView: 2,
+    },
+    500: {
+      slidesPerView: 1,
+    },
+  },
+});
+
+let swiper5 = new Swiper('.team-swiper', {
+  slidesPerView: 3,
+  spaceBetween: 30,
+  loop: true,
+  autoplay: {
+    delay: 3000,
+  },
+  breakpoints: {
+    1400: {
+      slidesPerView: 3,
+    },
+    1100: {
+      slidesPerView: 2,
+    },
+    900: {
+      slidesPerView: 2,
+    },
+    500: {
+      slidesPerView: 1,
+    },
+  },
 });

@@ -682,10 +682,126 @@ button {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    padding: 5%;
+    padding: 2% 5%;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid transparent;
+    transition: .3s;
 }
+
+.test-slide:hover {
+    border: 1px solid rgb(121, 185, 0);
+    cursor: pointer;
+}
+
+.test-head {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.stars {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.stars i {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(121, 185, 0);
+    color: #fff;
+}
+
+.test-slide p {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+.test-bottom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px auto;
+}
+
+.test-bottom img {
+    filter: invert(100%);
+}
+
+.client-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.client-info h2 {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+}
+
+.client-info p {
+    font-size: 1rem;
+    font-weight: 500;
+    text-wrap: pretty;
+}
+
+.brands {
+    flex-direction: column;
+    gap: 50px;
+}
+
+.brands-container {
+    width: 100%;
+    padding: 3% 5%;
+    padding-bottom: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    background-image: url(images/brand-bg.jpg);
+    border-radius: 10px;
+}
+
+.brands-container h2 {
+    font-size: 2rem;
+    color: #fff;
+    font-weight: 500;
+}
+
+.brands-swiper {
+    width: 100%;
+}
+
+.team {
+    flex-direction: column;
+    gap: 50px;
+}
+
+.team .headings {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.team .headings h1 {
+    width: 100%;
+    text-align: center;
+}
+
+.team-swiper {
+    width: 100%;
+}
+
+
+
 
 
 
@@ -841,5 +957,13 @@ button {
     }
     .work-cards {
         grid-template-columns: repeat(1, 1fr);
+    }
+    .test-bottom {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+    .brands-container h2 {
+        text-align: center;
     }
 }
