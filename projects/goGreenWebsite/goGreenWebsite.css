@@ -38,14 +38,14 @@
     backdrop-filter: blur(10px);
 }
 
-.navbar .logo a {
+.logo a {
     font-size: 30px;
     font-weight: 500;
     color: #fff;
     font-family: "Kaushan Script", serif;
 }
 
-.navbar .logo a span {
+.logo a span {
     color: rgb(121, 185, 0);
     font-family: "Kaushan Script", cursive;
 }
@@ -798,21 +798,244 @@ button {
 
 .team-swiper {
     width: 100%;
+    padding: 2% !important;
 }
 
+.team-slide {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f1f7e3;
+    border-radius: 10px;
+    padding: 5%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
 
+.team-img {
+    margin: 10px 0;
+}
 
+.team-slide h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
 
+.team-slide p {
+    font-size: 1rem;
+    font-weight: 500;
+    text-wrap: pretty;
+}
 
+.socials {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+}
 
+.socials i {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    color: #000;
+    border: 1px solid rgba(131, 131, 131, 0.5);
+    transition: 0.3s;
 
+    &:hover {
+        background-color: #000;
+        color: #fff;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        scale: 1.1;
+    }
+}
 
+.footer {
+    flex-direction: column;
+    gap: 50px;
+    background-image: url(images/footer-bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    padding-bottom: 10px;
+}
 
+.footer-top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    background-image: url(images/brand-bg.jpg);
+    padding: 2% 5%;
+    border-radius: 10px;
+}
 
+.footer-top h1 {
+    font-size: 2rem;
+    font-weight: 600;
+}
 
+.footer-follow {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
 
+.footer-follow h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
 
+.footer-social {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
+.footer-social i {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    color: #000;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    transition: 0.3s;
+
+    &:hover {
+        color: #fff;
+        background-color: #000;
+        cursor: pointer;
+        scale: 1.1;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.footer-grid {
+    margin-top: 20px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    place-items: start;
+    gap: 10px;
+    place-content: start;
+    color: #fff;
+}
+
+.footer-col {
+    width: 100%;
+    display: grid;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.footer-col h3 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin: 10px 0;
+}
+
+.footer-col a {
+    color: #fff;
+}
+
+.footer-col a span {
+    color: rgb(0, 128, 0);
+}
+
+.footer-col p {
+    font-size: 1rem;
+    margin: 10px 0;
+    font-weight: 500;
+}
+
+.footer-col h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.footer-col a {
+    margin: 5px 0;
+    transition: 0.3s;
+}
+
+.footer-col a i {
+    color: rgb(0, 128, 0);
+    font-size: 1.25rem;
+}
+
+.footer-col a:hover {
+    color: rgb(0, 128, 0);
+}
+
+.footer-col input {
+    width: 100%;
+    height: 50px;
+    outline: none;
+    margin: 15px 0;
+    background-color: transparent;
+    border: 1px solid rgb(0, 128, 0);
+    color: #fff;
+    font-size: 1.25rem;
+    border-radius: 20px;
+    padding-left: 5%;
+    transition: 0.3s;
+
+    &::placeholder {
+        color: #fff;
+    }
+}
+
+.footer-col input:active,
+.footer-col input:focus {
+    outline: 1px solid rgb(121, 185, 0);
+}
+
+.footer-col button {
+    width: 100%;
+    height: 50px;
+    border-radius: 20px;
+    font-size: 1.25rem;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgb(223, 228, 211);
+    width: 100%;
+    padding: 3%;
+    text-align: center;
+}
+
+h4 {
+    font-weight: 300;
+    color: #eee;
+}
+
+abbr {
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 3px;
+    cursor: default;
+    transition: .25s;
+
+    &:hover {
+        color: rgb(121, 185, 0);
+    }
+}
+
+.footer-follow h1 {
+    text-align: center;
+}
 
 @media screen and (max-width: 1600px) {
     .social {
@@ -887,15 +1110,19 @@ button {
     .skills-img {
         width: 100%;
     }
-    .counter {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
     .counter .count-box:nth-child(4) {
         grid-column: 2/3;
     }
     .projects .headings {
         width: 90%;
+    }
+    .footer-top {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .counter,
+    .footer-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
@@ -907,7 +1134,9 @@ button {
         font-size: 3rem;
         line-height: 3.5rem;
     }
-    .counter {
+    .counter,
+    .work-cards,
+    .footer-grid  {
         grid-template-columns: repeat(2, 1fr);
     }
     .projects .headings {
@@ -916,10 +1145,6 @@ button {
     .projects .headings h1 {
         width: 100%;
     }
-    .work-cards {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
 }
 
 @media screen and (max-width: 768px) {
@@ -965,5 +1190,11 @@ button {
     }
     .brands-container h2 {
         text-align: center;
+    }
+    .footer-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .footer-follow h2 {
+        display: none;
     }
 }

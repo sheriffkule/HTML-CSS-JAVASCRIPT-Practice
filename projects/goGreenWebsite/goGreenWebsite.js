@@ -110,7 +110,7 @@ let swiper4 = new Swiper('.brands-swiper', {
 
 let swiper5 = new Swiper('.team-swiper', {
   slidesPerView: 3,
-  spaceBetween: 30,
+  spaceBetween: 40,
   loop: true,
   autoplay: {
     delay: 3000,
