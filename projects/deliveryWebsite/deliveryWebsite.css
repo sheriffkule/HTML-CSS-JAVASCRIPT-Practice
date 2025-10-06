@@ -1,0 +1,221 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+  --header-height: 3.5rem;
+
+  --first-color: hsl(45, 100%, 50%);
+  --first-color-alt: hsl(45, 100%, 48%);
+  --first-color-light: hsl(45, 100%, 88%);
+  --gradient-color: linear-gradient(180deg, hsl(45, 100%, 65%) 0%, hsl(45, 100%, 45%) 100%);
+  --title-color: hsl(45, 4%, 8%);
+  --text-color: hsl(45, 4%, 40%);
+  --text-color-light: hsl(45, 4%, 60%);
+  --white-color: hsl(45, 80%, 98%);
+  --dark-color: hsl(45, 4%, 8%);
+  --body-color: hsl(45, 100%, 96%);
+  --container-color: hsl(45, 100%, 99%);
+  --shadow-first-color: hsla(45, 100%, 50%, .3);
+  --shadow-small: 0 4px 8px hsla(45, 50%, 8%, .1);
+  --shadow-big: 0 2px 16px hsla(45, 50%, 8%, .1);
+  --shadow-img-small: drop-shadow(0 4px 8px hsla(45, 50%, 8%, .2));
+  --shadow-img-big: drop-shadow(0 16px 4px hsla(45, 50%, 8%, .3));
+
+  --body-font: "Montserrat", sans-serif;
+  --biggest-font-size: 2.25rem;
+  --bigger-font-size: 1.5rem;
+  --h1-font-size: 1.5rem;
+  --h2-font-size: 1.25rem;
+  --h3-font-size: 1rem;
+  --normal-font-size: .938rem;
+  --small-font-size: .813rem;
+  --smaller-font-size: .75rem;
+
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semi-bold: 600;
+  --font-bold: 700;
+
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+
+@media screen and (min-width: 1150px) {
+  :root {
+    --biggest-font-size: 4rem;
+    --bigger-font-size: 3rem;
+    --h1-font-size: 2.25rem;
+    --h2-font-size: 1.5rem;
+    --h3-font-size: 1.25rem;
+    --normal-font-size: 1rem;
+    --small-font-size: .875rem;
+    --smaller-font-size: .813rem;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body,
+button,
+input {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+}
+
+body {
+  background-color: var(--body-color);
+  color: var(--text-color);
+  transition: background-color .4s;
+}
+
+input,
+button {
+  border: none;
+  outline: none;
+}
+
+h1, h2, h3, h4 {
+  color: var(--title-color);
+  font-weight: var(--font-bold);
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  max-width: 1120px;
+  margin-inline: 1.5rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.section {
+  padding-block: 5rem 1rem;
+}
+
+.section__title, 
+.section__subtitle {
+  text-align: center;
+}
+
+.section__title {
+  font-size: var(--bigger-font-size);
+  margin-bottom: 2rem;
+}
+
+.section__subtitle {
+  font-size: var(--normal-font-size);
+  color: var(--first-color);
+  margin-bottom: .25rem;
+}
+
+.main {
+  overflow: hidden;
+}
+
+.header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: var(--body-color);
+    z-index: var(--z-fixed);
+    transition: background-color .4s, box-shadow .4s;
+}
+
+.nav {
+    position: relative;
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav__logo {
+    display: flex;
+    align-items: center;
+    column-gap: .25rem;
+}
+
+.nav__logo i {
+    font-size: 1.5rem;
+    color: var(--title-color);
+    transition: color .4s;
+}
+
+.nav__logo span {
+    font-weight: var(--font-bold);
+    color: var(--first-color);
+}
+
+.nav__toggle {
+    display: flex;
+    font-size: 1.5rem;
+    color: var(--title-color);
+    cursor: pointer;
+    transition: transform .4s;
+}
+
+@media screen and (max-width: 1150px) {
+    .nav__menu {
+        position: fixed;
+        top: 5rem;
+        left: -200%;
+        right: 0;
+        margin: 0 auto;
+        width: 75%;
+        box-shadow: var(--shadow-big);
+        background-color: var(--body-color);
+        padding: 3.5rem;
+        border-radius: 3rem;
+        border: 3px solid var(--first-color);
+        transition: left .4s, background-color .4s, box-shadow .4s;
+    }
+}
+
+.nav__list {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.5rem;
+}
+
+.nav__link {
+    color: var(--title-color);
+    font-weight: var(--font-semi-bold);
+    transition: color .4s;
+}
+
+.nav__link:hover {
+    color: var(--first-color);
+}
+
+.nav__theme {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-size: 1.25rem;
+    color: var(--title-color);
+    cursor: pointer;
+}
