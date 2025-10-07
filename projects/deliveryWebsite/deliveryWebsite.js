@@ -24,3 +24,19 @@ const shadowHeader = () => {
 };
 
 window.addEventListener('scroll', shadowHeader);
+
+const swiperReviews = new Swiper('.reviews__swiper', {
+  loop: true,
+  spaceBetween: 16,
+  grabCursor: true,
+  speed: 600,
+
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+//   autoplay: {
+//     delay: 3000,
+//     disableOnInteraction: false,
+//   },
+});
