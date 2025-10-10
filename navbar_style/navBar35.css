@@ -1,0 +1,91 @@
+:root {
+    --panel: rgba(255, 255, 255, 0.75);
+    --muted: #6b7b8a;
+    --primary: #2f8fff;
+    --accent: #2d9bf0;
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --shadow: 0 8px 30px rgba(29,41, 61, 0.1);
+    --icon-fill: #405563;
+    --tooltip-bg: rgba(20, 20, 20, 0.95);
+    --tooltip-color: #fff;
+    --sidebar-w: 420px;
+    --sidebar-w-collapsed: 100px;
+}
+
+[data-theme='dark'] {
+    --panel: rgba(8, 14, 20, 0.65);
+    --muted: #93a3b4;
+    --primary: #4ea6ff;
+    --accent: #3ea3ff;
+    --glass-border: rgba(255, 255, 255, 0.05);
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    --icon-fill: #cbd8e6;
+    --tooltip-bg: #fff;
+    --tooltip-color: #000;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+    background: url('/images/tiled-stones.jpg');
+    background-size: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.sidebar {
+    width: var(--sidebar-w);
+    border-radius: 22px;
+    padding: 18px;
+    background: var(--panel);
+    backdrop-filter: blur(12px) saturate(120%);
+    -webkit-backdrop-filter: blur(12px) saturate(120%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
+    transition: width .3s, transform .2s;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.sidebar .menu li span strong {
+    font-weight: 400;
+}
+
+.sidebar.collapsed {
+    width: var(--sidebar-w-collapsed);
+}
+
+.sidebar.collapsed .profile-info,
+.sidebar.collapsed .menu li span strong,
+.sidebar.collapsed .serviceMenu li span,
+.sidebar.collapsed .createTask h1,
+.sidebar.collapsed .user-group,
+.sidebar.collapsed .menu li .extraIcon,
+.sidebar.collapsed .createTask p {
+    display: none;
+}
+
+.sidebar.collapsed .profile .avatar {
+    height: 50px;
+}
+
+.sidebar.collapsed .profile {
+    margin-top: 30px;
+}
+
+.sidebar.collapsed .theme-toggle {
+    top: 50px;
+    right: 30px;
+}
+
+.sidebar.collapsed .collapse-toggle {
+    top: 105px;
+}
