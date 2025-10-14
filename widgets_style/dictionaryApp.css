@@ -1,0 +1,194 @@
+:root {
+    --darkBlack: #050505;
+    --blackGray: #1f1f1f;
+    --darkGray: #2d2d2d;
+    --lightGray: #3a3a3a;
+    --halfWhite: #e9e9e9;
+    --whiteGray: #f4f4f4;
+    --white: #ffffff;
+    --purple: #a445ed;
+    --orange: #ff5252;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: var(--white);
+    color: var(--darkBlack)
+}
+
+body.dark {
+    background-color: var(--darkBlack);
+    color: var(--white);
+}
+
+.container {
+    max-width: 1080px;
+    width: 100%;
+    overflow: hidden;
+    padding: 0 2rem;
+    margin: 0 auto;
+}
+
+header {
+    padding: 3rem 0;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.content {
+    display: flex;
+    align-content: center;
+}
+
+.content select {
+    border: none;
+    margin-right: 2rem;
+    background-color: var(--white);
+    outline: none;
+    cursor: pointer;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 26px;
+    margin-right: 1rem;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--lightGray);
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+.slider::before {
+    content: '';
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 3px;
+    background-color: var(--white);
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+input:checked + .slider {
+    background-color: var(--purple);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 2px var(--purple);
+}
+
+input:checked + .slider::before {
+    transform: translateX(32px);
+    -webkit-transform: translateX(32px);
+    -ms-transform: translateX(32px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round::before {
+    border-radius: 34px;
+}
+
+header form {
+    margin: 2rem 0;
+    position: relative;
+}
+
+header form input {
+    width: 100%;
+    background-color: var(--halfWhite);
+    padding: 1.2rem 1rem;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.3rem;
+    font-family: inherit;
+}
+
+header form input:is(:focus, :focus-visible) {
+    outline: 2px solid var(--purple);
+}
+
+header form .search {
+    position: absolute;
+    top: 50%;
+    right: 2%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    font-size: 2rem;
+    transition: .2s;
+
+    &:hover {
+        color: var(--purple);
+        transform: translate(-50%, -50%) scale(1.1);
+        text-shadow: 1px 1px 2px var(--purple);
+    }
+}
+
+.dictionary_content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.section h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.section p {
+    color: var(--purple);
+    font-size: 1.25rem;
+}
+
+.dictionary_content i {
+    cursor: pointer;
+    font-size: 3rem;
+    color: var(--purple);
+    opacity: 0.8;
+    transition: .2s;
+
+    &:hover {
+        opacity: 1;
+        scale: 1.05;
+    }
+}
+
+.noun {
+    margin: 4rem 0;
+}
+
+.noun h3 {
+    font-size: 1.5rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+}
