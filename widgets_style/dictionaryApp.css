@@ -19,12 +19,17 @@
 body {
     font-family: sans-serif;
     background-color: var(--white);
-    color: var(--darkBlack)
+    color: var(--darkBlack);
+    transition: .4s;
 }
 
 body.dark {
     background-color: var(--darkBlack);
     color: var(--white);
+}
+
+p, li {
+    text-wrap: pretty;
 }
 
 .container {
@@ -183,12 +188,55 @@ header form .search {
     }
 }
 
-.noun {
+.noun, .verb {
     margin: 4rem 0;
 }
 
-.noun h3 {
+.noun h3, .verb h3 {
     font-size: 1.5rem;
     margin-bottom: 2.5rem;
     position: relative;
+}
+
+.noun h3::after,
+.verb h3::after {
+    position: absolute;
+    content: '';
+    width: 92%;
+    height: 2px;
+    background-color: var(--halfWhite);
+    top: 15px;
+    bottom: 0;
+    right: 0;
+}
+
+.noun > p,
+.verb > p {
+    color: var(--lightGray);
+}
+
+.noun ul {
+    margin: 2rem 0;
+}
+
+ul li {
+    list-style-type: none;
+    margin: 1rem;
+    display: flex;
+    align-items: center;
+    margin-left: 2rem;
+}
+
+ul li::before {
+    content: '\2022';
+    color: var(--purple);
+    font-size: 2rem;
+    width: 1rem;
+    padding-right: 1rem;
+}
+
+.synonyms p span {
+    color: var(--purple);
+    font-weight: 600;
+    margin-left: 2rem;
 }
