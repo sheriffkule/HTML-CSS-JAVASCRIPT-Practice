@@ -50,6 +50,14 @@ nav {
     justify-content: space-between;
 }
 
+.logo {
+    font-size: 1.5rem;
+}
+
+.logo span {
+    color: var(--orange);
+}
+
 .content {
     display: flex;
     align-content: center;
@@ -63,12 +71,17 @@ nav {
     cursor: pointer;
 }
 
+body.dark .content select {
+    background-color: var(--blackGray);
+    color: var(--halfWhite);
+}
+
 .switch {
     position: relative;
     display: inline-block;
     width: 60px;
     height: 26px;
-    margin-right: 1rem;
+    margin-right: .75rem;
 }
 
 .switch input {
@@ -123,6 +136,11 @@ input:checked + .slider::before {
     border-radius: 34px;
 }
 
+.content i {
+    margin-top: .125rem;
+    font-size: 1.25rem;
+}
+
 header form {
     margin: 2rem 0;
     position: relative;
@@ -141,6 +159,7 @@ header form input {
 
 header form input:is(:focus, :focus-visible) {
     outline: 2px solid var(--purple);
+    background-color: var(--whiteGray);
 }
 
 header form .search {
@@ -150,6 +169,7 @@ header form .search {
     transform: translate(-50%, -50%);
     cursor: pointer;
     font-size: 2rem;
+    color: var(--darkBlack);
     transition: .2s;
 
     &:hover {
@@ -221,10 +241,12 @@ header form .search {
 
 ul li {
     list-style-type: none;
-    margin: 1rem;
+    margin: .75rem;
     display: flex;
     align-items: center;
     margin-left: 2rem;
+    line-height: 1.5;
+    transition: .5s;
 }
 
 ul li::before {
@@ -238,5 +260,20 @@ ul li::before {
 .synonyms p span {
     color: var(--purple);
     font-weight: 600;
-    margin-left: 2rem;
+    margin-left: .25rem;
+}
+
+.footer {
+    text-align: center;
+    margin-bottom: .75rem;
+    font-size: 14px;
+    font-weight: 300;
+    /* color: var(--halfWhite); */
+}
+
+abbr {
+    letter-spacing: 0.5px;
+    text-underline-offset: 2px;
+    cursor: default;
+    color: var(--orange);
 }
