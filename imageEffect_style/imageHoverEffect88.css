@@ -1,0 +1,38 @@
+body {
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.collage {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    height: 400px;
+}
+
+.image {
+    overflow: hidden;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: flex .5s ease;
+    height: 100%;
+}
+
+.image img {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    display: block;
+}
+
+.slice {
+    flex: 0 0 50px;
+}
+
+.slice.active {
+    flex: 0 0 250px;
+}
