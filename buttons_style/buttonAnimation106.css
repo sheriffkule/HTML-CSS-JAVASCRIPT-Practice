@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #222;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container {
+    filter: url(#goo);
+}
+
+.button {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    transition: .5s;
+    background-color: white;
+    color: black;
+    border-radius: 50%;
+    float: left;
+    margin-right: 5px;
+}
+
+.button::before {
+    content: '';
+    position: absolute;
+    background-color: black;
+    width: 10px;
+    height: 10px;
+    top: 15px;
+    right: 20px;
+    border-radius: 50%;
+    transform: rotateX(-15deg) rotateY(-15deg);
+}
+
+.button::after {
+    content: '';
+    position: absolute;
+    background-color: white;
+    width: 100%;
+    height: 10px;
+    left: 0;
+    bottom: -30px;
+    border-radius: 50%;
+    filter: blur(5px);
+}
+
+.button p:nth-child(1) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 40px;
+    z-index: 100;
+    color: black;
+    transform: translate(-50%, -50%) rotateX(0);
+    transition: .3s ease-in;
+}
+
+.button:hover p:nth-child(1) {
+    transform: translate(-50%, 60%) rotateX(-90deg);
+}
+
+.button p:nth-child(2) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 40px;
+    z-index: 100;
+    color: black;
+    transform: translate(-50%, -170%) rotateX(-90deg);
+    transition: .3s ease-in;
+}
+
+.button:hover p:nth-child(2) {
+    transform: translate(-50%, -50%) rotateX(0);
+}
+
+.button:hover ~ .button {
+    transform: translateX(2px);
+}

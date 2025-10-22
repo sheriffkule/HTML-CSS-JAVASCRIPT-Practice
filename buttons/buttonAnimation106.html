@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Floating Marbles Button Animation</title>
+    <link rel="stylesheet" href="/buttons_style/buttonAnimation106.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="button">
+        <p>H</p>
+        <p>I</p>
+      </div>
+      <div class="button">
+        <p>O</p>
+        <p>&hearts;</p>
+      </div>
+      <div class="button">
+        <p>V</p>
+        <p>C</p>
+      </div>
+      <div class="button">
+        <p>E</p>
+        <p>S</p>
+      </div>
+      <div class="button">
+        <p>R</p>
+        <p>S</p>
+      </div>
+    </div>
+    <svg>
+      <defs>
+        <filter id="goo">
+          <feGaussianBlur in="SourceGraphics" stdDeviation="10" />
+          <feColorMatrix in="name" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 30 -15" />
+          <feBlend in="SourceGraphic" />
+        </filter>
+      </defs>
+    </svg>
+  </body>
+</html>
