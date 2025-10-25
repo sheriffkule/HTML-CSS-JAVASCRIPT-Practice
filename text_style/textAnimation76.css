@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+
+body {
+    background: radial-gradient(circle, #1e201e 10%, #021526 100%);
+    margin: 0;
+    padding: 0;
+    font-family: "Orbitron", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    /* position: relative; */
+}
+
+.container {
+    position: relative;
+    height: 100vh;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+}
+
+.text {
+    position: relative;
+    top: 30%;
+    font-size: clamp(20vw, 30vw, 50vw);
+    background-color: transparent;
+    letter-spacing: -5px;
+    animation: rotate 5s linear infinite;
+    transform: rotateX(-20deg) rotateY(45deg);
+    transform-style: preserve-3d;
+    perspective: 1400px;
+}
+
+.shadow {
+    position: absolute;
+    top: 0;
+    left: 45%;
+    color: #16bffd;
+    transform: translateY(150px);
+    z-index: -3;
+    -webkit-text-stroke: 5px #edf2f4;
+    width: 600px;
+    height: 625px;
+    cursor: pointer;
+}
+
+.circle {
+    width: 600px;
+    height: 600px;
+    cursor: pointer;
+    position: absolute;
+    top: 10%;
+    left: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.shadow1 {
+    /* top: -120px;
+    left: 30%; */
+    top: 0;
+}
+
+.shadow2 {
+    /* top: -110px;
+    left: 31%; */
+    top: 0;
+}
+
+.shadow3 {
+    /* top: -100px;
+    left: 32%; */
+    top: 0;
+}
+
+.shadow4 {
+    /* top: -90px;
+    left: 33%; */
+    top: 0;
+}
+
+.shadow5 {
+    /* top: -80px;
+    left: 34%; */
+    top: 0;
+}
+
+.shadow6 {
+    /* top: -70px;
+    left: 35%; */
+    top: 0;
+}
+
+.shadow7 {
+    /* top: -60px;
+    left: 36%; */
+    top: 0;
+}
+
+.shadow8 {
+    /* top: -50px;
+    left: 37%; */
+    top: 0;
+}
+
+.shadow9 {
+    /* top: -40px;
+    left: 38%; */
+    top: 0;
+}
+
+.shadow10 {
+    /* top: -30px;
+    left: 39%; */
+    top: 0;
+}
+
+.shadow11 {
+    /* top: -20px;
+    left: 40%; */
+    top: 0;
+}
+
+.shadow12 {
+    /* top: -10px;
+    left: 41%; */
+    top: 0;
+}
+
+.shadow13 {
+    /* top: 0px;
+    left: 42%; */
+    top: 0;
+}
