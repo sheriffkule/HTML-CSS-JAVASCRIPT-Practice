@@ -1,22 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Animated Portfolio Website</title>
-    <meta name="title" content="Richard Ryan">
-    <meta name="description" content="This is a photographer portfolio html template, made by SheriffKule">
-    <link rel="shortcut icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="font/font.css">
-    <link rel="stylesheet" href="portfolio10.css">
-</head>
-<body class="active">
+    <meta name="title" content="Richard Ryan" />
+    <meta name="description" content="This is a photographer portfolio html template, made by SheriffKule" />
+    <link rel="shortcut icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="font/font.css" />
+    <link rel="stylesheet" href="portfolio10.css" />
+  </head>
+  <body class="active">
     <div class="loading" data-loading>
-        <img src="images/loading.svg" width="55" height="55" alt="loading" class="img">
-        <img src="images/loading-circle.svg" width="70" height="70" alt="" class="circle">
+      <img src="images/loading.svg" width="55" height="55" alt="loading" class="img" />
+      <img src="images/loading-circle.svg" width="70" height="70" alt="" class="circle" />
     </div>
 
+    <header class="header" data-header>
+      <div class="container">
+        <a href="#" class="logo">
+          <img src="images/logo.svg" width="40" height="40" alt="Richard Home" />
+        </a>
+        <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
+          <img src="images/menu.svg" width="17" height="17" alt="menu icon" />
+        </button>
+        <nav class="navbar" data-navbar>
+          <div class="navbar-top">
+            <a href="" class="logo">
+              <img src="images/nav-logo.svg" width="140" height="40" alt="Richard Home" class="img"/>
+            </a>
+            <button class="nav-close-btn" aria-label="close menu" data-nav-toggler>
+              <span class="span one"></span>
+              <span class="span two"></span>
+            </button>
+          </div>
+          <ul class="navbar-list">
+            <li class="navbar-item">
+              <a href="#home" class="navbar-link" data-nav-link>Home</a>
+            </li>
+            <li class="navbar-item">
+              <a href="#gallery" class="navbar-link" data-nav-link>Gallery</a>
+            </li>
+            <li class="navbar-item">
+              <a href="#about" class="navbar-link" data-nav-link>About</a>
+            </li>
+            <li class="navbar-item">
+              <a href="#services" class="navbar-link" data-nav-link>Services</a>
+            </li>
+            <li class="navbar-item">
+              <a href="#portfolio" class="navbar-link" data-nav-link>Portfolio</a>
+            </li>
+            <li class="navbar-item">
+              <a href="#contact" class="navbar-link" data-nav-link>Contact Us</a>
+            </li>
+          </ul>
+          <button class="login-btn">
+            <img src="images/user.svg" width="21" height="21" alt="user icon" />
+            <span class="span">Login</span>
+          </button>
+          <p class="navbar-title">My Address</p>
+          <address class="navbar-text">3287 Indiana Avenue, Waialua, Hawaii</address>
+          <p class="navbar-text">
+            Urgent issue? Call us at <a href="tel:8085613846" class="contact-link">808-561-3846</a>
+          </p>
+        </nav>
+        <div class="overlay" data-nav-toggler data-overlay></div>
+      </div>
+    </header>
 
     <script src="portfolio10.js"></script>
-</body>
+  </body>
 </html>
