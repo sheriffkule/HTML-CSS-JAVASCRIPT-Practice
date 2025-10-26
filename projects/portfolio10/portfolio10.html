@@ -27,7 +27,7 @@
         <nav class="navbar" data-navbar>
           <div class="navbar-top">
             <a href="" class="logo">
-              <img src="images/nav-logo.svg" width="140" height="40" alt="Richard Home" class="img"/>
+              <img src="images/nav-logo.svg" width="140" height="40" alt="Richard Home" class="img" />
             </a>
             <button class="nav-close-btn" aria-label="close menu" data-nav-toggler>
               <span class="span one"></span>
@@ -67,6 +67,83 @@
         <div class="overlay" data-nav-toggler data-overlay></div>
       </div>
     </header>
+
+    <main>
+      <article>
+        <section class="section hero" id="home" aria-label="home">
+          <div class="container">
+            <img src="images/hero-banner.png" width="322" height="322" alt="" class="hero-banner" />
+            <div class="hero-content">
+              <h1 class="hero-title h1">Richard Ryan</h1>
+              <div class="wrapper h2">
+                <strong class="strong" data-letter-effect>Photographer</strong>
+                <strong class="strong" data-letter-effect>Shutterbug</strong>
+                <strong class="strong" data-letter-effect>Cameraman</strong>
+                <strong class="strong" data-letter-effect>Pacific Portraits</strong>
+              </div>
+              <p class="hero-text">15+ Years Of Experience</p>
+            </div>
+          </div>
+          <img src="images/hero-shape.svg" width="211" height="189" alt="" class="shape" />
+        </section>
+
+        <section class="section gallery" id="gallery">
+          <div class="container">
+            <ul class="gallery-list">
+              <li class="gallery-item" data-reveal>
+                <div class="gallery-card">
+                  <figure class="card-banner img-holder has-before" style="--width: 450; --height: 625">
+                    <img
+                      src="images/gallery-1.jpg"
+                      width="450"
+                      height="625"
+                      loading="lazy"
+                      alt="The Drunken"
+                      class="img-cover" />
+                  </figure>
+                  <div class="card-content">
+                    <h3 class="h6"><a href="#" class="card-title">The Drunken</a></h3>
+                    <span class="card-tag">Food, Event</span>
+                  </div>
+                  <a href="#" class="btn-icon"
+                    ><img
+                      src="images/arrow-forward.svg"
+                      width="43"
+                      height="20"
+                      loading="lazy"
+                      alt="arrow-forward icon"
+                  /></a>
+                </div>
+
+                <div class="gallery-card">
+                  <figure class="card-banner img-holder has-before" style="--width: 450; --height: 625">
+                    <img
+                      src="images/gallery-2.jpg"
+                      width="450"
+                      height="625"
+                      loading="lazy"
+                      alt="Lettuce Entertain"
+                      class="img-cover" />
+                  </figure>
+                  <div class="card-content">
+                    <h3 class="h6"><a href="#" class="card-title">Lettuce Entertain</a></h3>
+                    <span class="card-tag">Landscape</span>
+                  </div>
+                  <a href="#" class="btn-icon"
+                    ><img
+                      src="images/arrow-forward.svg"
+                      width="43"
+                      height="20"
+                      loading="lazy"
+                      alt="arrow-forward icon"
+                  /></a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </article>
+    </main>
 
     <script src="portfolio10.js"></script>
   </body>
