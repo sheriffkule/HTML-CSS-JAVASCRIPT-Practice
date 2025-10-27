@@ -224,6 +224,26 @@ body.active {
     transition: var(--transition-2);
 }
 
+.btn-icon path {
+    transition: var(--transition-2);
+}
+
+.btn-icon:is(:hover, :focus-visible) {
+    background-color: var(--hover-bg-color, var(--white));
+    transform: rotate(-45deg) translateX(5px);
+}
+
+.btn-icon:is(:hover, :focus-visible) path {
+    stroke: var(--hover-text-color, var(--black));
+}
+
+.section-subtitle {
+    color: var(--white_a25);
+    font-size: var(--fs-7);
+    text-transform: uppercase;
+    letter-spacing: 3.5px;
+}
+
 .loading {
     position: fixed;
     top: 0;
@@ -724,4 +744,50 @@ body.active {
     left: 0;
     z-index: 1;
     width: 100px;
+}
+
+.service {
+    padding-inline: 15px;
+}
+
+.service .section-subtitle {
+    padding-inline: 10px;
+    margin-block-end: 55px;
+}
+
+.service-card .img {
+    display: none;
+}
+
+.service-list > li:not(:last-child) {
+    border-block-start: 1px solid var(--white_a9);
+}
+
+.service-list > li:last-child {
+    border-block: 1px solid var(--white_a9);
+}
+
+.service-card {
+    padding: 30px 10px;
+}
+
+.service-card .card-subtitle {
+    color: var(--white_a50);
+    font-size: var(--fs-7);
+    font-weight: var(--fw-300);
+    line-height: 1.5;
+    margin-block: 10px 25px;
+}
+
+.service-card .btn-icon {
+    width: 55px;
+    height: 55px;
+    border: 1px solid var(--white);
+    --bg-color: transparent;
+    --hover-bg-color: var(--white);
+    --hover-text-color: var(--black);
+}
+
+.service-card .btn-icon svg {
+    width: 25px;
 }
