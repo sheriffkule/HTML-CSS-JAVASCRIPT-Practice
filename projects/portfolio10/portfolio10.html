@@ -9,8 +9,10 @@
     <link rel="shortcut icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="font/font.css" />
     <link rel="stylesheet" href="portfolio10.css" />
+    <link rel="preload" as="image" href="images/loading.svg">
+    <link rel="preload" as="image" href="images/loading-circle.svg">
   </head>
-  <body class="active">
+  <body class="active" id="top">
     <div class="loading" data-loading>
       <img src="images/loading.svg" width="55" height="55" alt="loading" class="img" />
       <img src="images/loading-circle.svg" width="70" height="70" alt="" class="circle" />
@@ -784,11 +786,88 @@
                 </div>
               </div>
             </div>
-            <img src="images/portfolio-shape.svg" width="286" height="232" loading="lazy" alt="" class="shape">
+            <img
+              src="images/portfolio-shape.svg"
+              width="286"
+              height="232"
+              loading="lazy"
+              alt=""
+              class="shape" />
           </div>
         </section>
       </article>
     </main>
+
+    <footer class="footer">
+      <div class="footer-top section" id="contact">
+        <div class="container">
+          <p class="section-subtitle" data-reveal>Contact Us!</p>
+          <h2 class="h2 section-title" data-reveal>Work Inquiry, Job oportunities? send Message.</h2>
+          <a href="#" class="btn-icon" data-reveal>
+            <img src="images/arrow-forward.svg" width="43" height="20" loading="lazy" alt="" />
+          </a>
+          <img
+            src="images/footer-1.jpg"
+            width="159"
+            height="176"
+            loading="lazy"
+            alt="photography"
+            class="abs-img abs-img-1"
+            data-reveal />
+          <img
+            src="images/footer-2.jpg"
+            width="265"
+            height="275"
+            loading="lazy"
+            alt="photography"
+            class="abs-img abs-img-2"
+            data-reveal />
+          <img
+            src="images/footer-3.jpg"
+            width="303"
+            height="272"
+            loading="lazy"
+            alt="photography"
+            class="abs-img abs-img-3"
+            data-reveal />
+          <img
+            src="images/footer-4.jpg"
+            width="175"
+            height="175"
+            loading="lazy"
+            alt="photography"
+            class="abs-img abs-img-4"
+            data-reveal />
+          <img src="images/footer-shape.svg" width="185" height="134" loading="lazy" alt="" class="shape" />
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="container">
+          <a href="#" class="logo">
+            <img src="images/logo.svg" width="40" height="40" loading="lazy" alt="Richard home" />
+          </a>
+          <ul class="social-list">
+            <li><a href="#" class="social-link">Fa.</a></li>
+            <li><a href="#" class="social-link">Insta.</a></li>
+            <li><a href="#" class="social-link">Tw.</a></li>
+          </ul>
+          <p class="copyright">Made with love &hearts; &hearts; &hearts;</p>
+        </div>
+      </div>
+
+      <div class="footer-bg has-before">
+        <img
+          src="images/footer-bg.jpg"
+          width="1920"
+          height="1135"
+          loading="lazy"
+          alt="photography"
+          class="img-cover" />
+      </div>
+    </footer>
+
+    <a href="#top" class="back-top-btn" aria-label="back to top" data-back-top-btn>0%</a>
 
     <script src="portfolio10.js"></script>
   </body>

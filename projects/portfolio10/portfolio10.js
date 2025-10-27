@@ -87,3 +87,20 @@ const setLetterEffect = function () {
   }, totalLetterBoxDelay * 1000 + 3000);
 };
 window.addEventListener('load', setLetterEffect);
+
+const backTopBtn = document.querySelector('[data-back-top-btn]');
+
+window.addEventListener('scroll', function () {
+  const bodyHeight = document.body.scrollHeight;
+  const windowHeight = window.innerHeight;
+  const scrollEnd = bodyHeight - windowHeight;
+  const percentage = (window.scrollY / scrollEnd) * 100;
+
+  backTopBtn.textContent = `${percentage.toFixed(1)}%`;
+
+  if (percentage > 5) {
+    backTopBtn.classList.add('show');
+  } else {
+    backTopBtn.classList.remove('show');
+  }
+});
