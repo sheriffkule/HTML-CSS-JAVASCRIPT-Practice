@@ -244,6 +244,25 @@ body.active {
     letter-spacing: 3.5px;
 }
 
+[data-reveal] {
+    transform: translateY(100px) scale(0.7);
+    opacity: 0;
+    transition: var(--transition-3);
+}
+
+[data-reveal="left"] {
+    transform: translateX(-100px);
+}
+
+[data-reveal="right"] {
+    transform: translateX(100px);
+}
+
+[data-reveal].revealed {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+}
+
 .loading {
     position: fixed;
     top: 0;
@@ -954,4 +973,267 @@ body.active {
 
 .back-top-btn:hover {
     color: var(--white);
+    box-shadow: inset 0 0 10px var(--white);
+}
+
+.cursor {
+    display: none;
+}
+
+@media screen and (min-width: 575px) {
+    :root {
+        --section-padding: 80px;
+    }
+    .container {
+        max-width: 540px;
+        width: 100%;
+        margin-inline: var(--white_a15);
+    }
+    :is(.header, .gallery, .category, .portfolio) .container {
+        max-width: unset;
+    }
+    .navbar {
+        max-width: 500px;
+        right: -500px;
+    }
+    .navbar.active {
+        transform: translateX(-500px);
+    }
+    .gallery-list {
+        grid-template-columns: 1fr 1fr;
+        column-gap: 25px;
+    }
+    .gallery-card .btn-icon {
+        transform-origin: top right;
+        transform: scale(0);
+    }
+    .gallery-item:is(:hover, :focus-visible) .btn-icon {
+        transform: scale(1);
+    }
+    .gallery-card :is(.card-title, .card-tag) {
+        transform: translateY(10px);
+        opacity: 0;
+        transition: var(--transition-2);
+    }
+    .gallery-card .card-tag {
+        transition-delay: 0.1s;
+    }
+    .gallery-card:is(:hover, :focus-visible) :is(.card-title, .card-tag) {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    .gallery [data-reveal] {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    .category-item {
+        max-width: 235px;
+    }
+    .portfolio-list {
+        display: flex;
+        column-gap: 30px;
+    }
+    .footer-bottom {
+        padding-block-end: 40px;
+    }
+    .footer-bottom .container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        align-items: center;
+    }
+    .footer-bottom .logo {
+        margin: 0;
+    }
+    .copyright,
+    .social-list {
+        padding-block-end: 0;
+    }
+    .social-list {
+        order: 1;
+        justify-content: flex-end;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    :root {
+        --fs-3: 4.5rem;
+    }
+    .container {
+        max-width: 720px;
+    }
+    .about-banner {
+        max-width: 500px;
+        margin-inline: auto;
+    }
+    .service-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .service-card .card-subtitle {
+        margin-block-end: 15px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    :root {
+        --fs-1: 8rem;
+    }
+    .section {
+        position: relative;
+    }
+    .container {
+        max-width: 960px;
+    }
+    .shape {
+        display: block;
+        position: absolute;
+    }
+    .header {
+        padding-block: 30px;
+    }
+    .navbar {
+        padding: 40px;
+        padding-block-end: 10px;
+    }
+    .navbar-link {
+        --fs-7: 2.4rem;
+    }
+    .navbar-title {
+        --fs-8: 2.2rem;
+    }
+    .navbar-text {
+        font-size: 1.9rem;
+        margin-block-end: 30px;
+    }
+    .hero {
+        padding-block-start: 150px;
+    }
+    .hero .container {
+        position: relative;
+        z-index: 1;
+    }
+    .hero-title {
+        text-align: left;
+    }
+    .hero .wrapper {
+        --fs-2: 8rem;
+        margin-block: -5px 10px;
+    }
+    .hero-banner {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        max-width: 200px;
+        z-index: -1;
+    }
+    .hero .shape {
+        display: none;
+    }
+    .gallery {
+        padding-block-end: 140px;
+    }
+    .gallery-list {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .gallery-item:nth-child(even) {
+        margin-block-start: 100px;
+    }
+    .gallery .scroll-down {
+        width: 85px;
+        height: 85px;
+        margin-block-start: 100px;
+    }
+    .gallery .scroll-down img {
+        width: 26px;
+    }
+    .gallery .shape {
+        left: 5%;
+        bottom: 15%;
+    }
+    .category {
+        --section-padding: 60px;
+    }
+    .category-card {
+        position: relative;
+    }
+    .category-card .card-banner {
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translate(-50%, -20px);
+        width: 200px;
+        visibility: hidden;
+        transition: all var(--transition-2);
+    }
+    .category-card:is(:hover, :focus-visible) .card-banner {
+        transform: translate(-50%, 0);
+        visibility: visible;
+        opacity: 1;
+    }
+    .category-card .card-title {
+        --fs-4: 5.5rem;
+    }
+    .category-item {
+        min-width: max-content;
+    }
+    .category-list {
+        row-gap: 0;
+        justify-content: flex-start;
+    }
+    .about .container {
+        grid-template-columns: 0.9fr 1fr;
+        align-items: flex-start;
+        gap: 80px;
+    }
+    .about-content {
+        order: 1;
+    }
+    .about-banner .shape-2 {
+        width: 100%;
+        bottom: -20px;
+        left: 0;
+        animation: moving 8s linear infinite;
+    }
+    @keyframes moving {
+        from, to {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(50px);
+        }
+    }
+    .about .shape-3 {
+        bottom: 0;
+        right: 0;
+    }
+    .service-card {
+        position: relative;
+    }
+    .service-card .img {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 200px;
+        opacity: 0;
+        visibility: hidden;
+        transition: var(--transition-1);
+        z-index: -1;
+    }
+    .service-card:is(:hover, :focus-visible) .img {
+        opacity: 1;
+        visibility: visible;
+        transform: translate(50px, -50%);
+    }
+    .portfolio {
+        padding-block-end: 150px;
+        margin-block-end: 60px;
+    }
+    .portfolio .shape {
+        bottom: 0;
+        right: 0;
+    }
 }
