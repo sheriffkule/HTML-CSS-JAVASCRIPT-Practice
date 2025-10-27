@@ -122,3 +122,38 @@ const scrollReveal = function () {
 window.addEventListener('scroll', scrollReveal);
 
 scrollReveal();
+
+const cursor = document.querySelector('[data-cursor]');
+const anchorElements = document.querySelectorAll('a');
+const buttons = document.querySelectorAll('button');
+
+document.body.addEventListener('mousemove', function (event) {
+  setTimeout(function () {
+    cursor.style.top = `${event.clientY}px`;
+    cursor.style.left = `${event.clientX}px`;
+  }, 100);
+});
+
+addEventOnElements(anchorElements, 'mouseover', function () {
+  cursor.classList.add('hovered');
+});
+
+addEventOnElements(anchorElements, 'mouseout', function () {
+  cursor.classList.remove('hovered');
+});
+
+addEventOnElements(buttons, 'mouseover', function () {
+  cursor.classList.add('hovered');
+});
+
+addEventOnElements(buttons, 'mouseout', function () {
+  cursor.classList.remove('hovered');
+});
+
+document.body.addEventListener('mouseout', function () {
+  cursor.classList.add('disabled');
+});
+
+document.body.addEventListener('mouseover', function () {
+  cursor.classList.remove('disabled');
+});
