@@ -639,3 +639,89 @@ body.active {
         transform: translateY(12px);
     }
 }
+
+.category {
+    --section-padding: 40px;
+    border-block: 1px solid var(--white_a9);
+}
+
+.category-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 35px 10px;
+}
+
+.category-item {
+    max-width: calc(50% - 5px);
+}
+
+.category-card .card-title {
+    color: var(--white_a25);
+    margin-block-end: 10px;
+    text-align: center;
+    text-underline-offset: 15px;
+    transition: var(--transition-2);
+}
+
+.category-card:is(:hover, :focus-visible) .card-title {
+    color: var(--white);
+    scale: 1.1;
+    text-decoration: 2px underline;
+    text-underline-offset: 3px;
+    text-decoration-skip-ink: none;
+}
+
+.about .container {
+    display: grid;
+    gap: 45px;
+}
+
+.about .wrapper,
+.about-banner {
+    padding-inline-start: 45px;
+}
+
+.about .section-title {
+    margin-block-end: 35px;
+}
+
+.about .section-text {
+    font-size: var(--fs-6);
+    color: var(--white_a70);
+    font-weight: var(--fw-300);
+    line-height: 1.7;
+    margin-block-end: 35px;
+}
+
+.about .wrapper::before {
+    top: 10px;
+    left: 0;
+    background-image: url('images/about-quote.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+}
+
+.about .section-text .em {
+    color: var(--white);
+    font-weight: var(--fw-400);
+    text-decoration: 1px underline;
+    text-underline-offset: 4px;
+    text-decoration-skip-ink: none;
+}
+
+.about-banner {
+    position: relative;
+}
+
+.about .shape-1 {
+    display: block;
+    position: absolute;
+    bottom: 10%;
+    left: 0;
+    z-index: 1;
+    width: 100px;
+}
