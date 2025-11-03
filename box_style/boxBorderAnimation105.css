@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(#667e91, #275377);
+  overflow: hidden;
+}
+
+.list {
+  width: 480px;
+}
+
+.list .list-item {
+  margin: 30px 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.list .list-content {
+  display: flex;
+  width: 100%;
+  z-index: 1;
+  padding: 16px;
+  background: linear-gradient(to right, white, silver);
+  border-radius: 25px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
+}
+
+.list .list-content .profile {
+  width: 25%;
+  pointer-events: none;
+}
+
+.list .list-content .caption {
+  width: 75%;
+  padding-left: 6px;
+  display: grid;
+  align-items: center;
+  justify-content: flex-start;
+  pointer-events: none;
+}
+
+.list .list-content img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.list .list-item:nth-child(2) .list-content img {
+    object-position: -70px;
+}
+
+.list .list-content h3 {
+  color: #2c3e50;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+.list .list-content p {
+  color: #3c5165;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: -45px;
+}
+
+.list button {
+  cursor: pointer;
+  position: absolute;
+  width: 50%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: 18px;
+  transition: .25s ease-out;
+}
+
+.list button .list-icon {
+  width: 100px;
+  font-size: 30px;
+}
+
+.list .settings {
+  left: 10px;
+  color: #010101;
+  background: #e7eaed;
+  justify-content: flex-start;
+}
+
+.list .delete {
+  right: 10px;
+  color: white;
+  background: #ec395e;
+  justify-content: flex-end;
+}
+
+@media screen and (min-width: 768px) {
+  .list button .list-icon {
+    width: 65px;
+    font-size: 28px;
+  }
+  .list .list-item:hover .settings {
+    transform: translateX(-70px);
+  }
+  .list .list-item:hover .delete {
+    transform: translateX(70px);
+  }
+}
