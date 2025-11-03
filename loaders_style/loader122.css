@@ -1,0 +1,150 @@
+:root {
+    --sand-color: #edd0aa;
+    --frame-color: #c19875;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #161412;
+    overflow: hidden;
+}
+
+.hourglass {
+    width: 180px;
+    height: 220px;
+    position: relative;
+}
+
+.hourglass .frame {
+    position: absolute;
+    width: 180px;
+    height: 200px;
+    border-radius: 6px;
+    border-top: 10px solid var(--frame-color);
+    border-bottom: 10px solid var(--frame-color);
+    animation: rotation 5s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes rotation {
+    90% {
+        transform: none;
+    }
+    to {
+        transform: rotate(180deg);
+    }
+}
+
+.hourglass .frame .top {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 160px;
+    height: 100px;
+    clip-path: polygon(45% 100%, 55% 100%, 100% 0, 0 0);
+}
+
+.hourglass .frame .top::before {
+    content: '';
+    position: absolute;
+    width: 160px;
+    height: 100px;
+    background-color: var(--sand-color);
+    animation: sand-falling 5s infinite;
+}
+
+@keyframes sand-falling {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(100%);
+    }
+}
+
+.hourglass .frame .top::after {
+    content: '';
+    position: absolute;
+    left: -15px;
+    width: 190px;
+    height: 190px;
+    transform: rotate(-90deg);
+    background: conic-gradient(from 0, #fff 0, transparent 90deg, #fff 180deg);
+}
+
+.hourglass .frame .bottom {
+    position: absolute;
+    left: 50%;
+    top: 100px;
+    transform: translateX(-50%);
+    width: 160px;
+    height: 100px;
+    clip-path: polygon(45% 0%, 55% 0%, 100% 100%, 0 100%);
+}
+
+.hourglass .frame .bottom::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    width: 160px;
+    height: 100px;
+    background-color: var(--sand-color);
+    animation: sand-filling 5s infinite;
+}
+
+@keyframes sand-filling {
+    from {
+        transform: translate(-50%, 120px);
+    }
+    to {
+        border-radius: 50% 50% 0 0;
+        transform: translate(-50%);
+    }
+}
+
+.hourglass .frame .bottom .glass {
+    position: absolute;
+    top: -90px;
+    left: -15px;
+    width: 190px;
+    height: 190px;
+    transform: rotate(-270deg);
+    background: conic-gradient(from 0, #fff 0, transparent 90deg, #fff 180deg);
+}
+
+.hourglass .frame .bottom .drip {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: fade-drip 5s infinite;
+}
+
+@keyframes fade-drip {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.hourglass .frame .bottom .drip::before {
+    content: '';
+    position: absolute;
+    left: -1px;
+    width: 3px;
+    height: 200px;
+    background: repeating-linear-gradient(to bottom, var(--sand-color), var(--sand-color) 5px, transparent 5px, transparent 10px);
+    animation: drip 5s infinite;
+}
+
+@keyframes drip {
+    from {
+        transform: translateY(-180px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
