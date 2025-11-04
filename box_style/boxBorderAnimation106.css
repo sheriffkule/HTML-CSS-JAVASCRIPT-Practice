@@ -1,0 +1,15 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+}
+
+#canvas1 {
+    display: block;
+    background: black;
+    filter: blur(30px) contrast(60);
+}
