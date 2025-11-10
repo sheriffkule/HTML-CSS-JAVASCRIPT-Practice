@@ -13,7 +13,7 @@
   --white-color-light: hsl(218, 48%, 80%);
   --dark-color: hsl(218, 68%, 18%);
   --gray-color: hsl(0, 0%, 92%);
-  --body-color: hsl(218, 100%, 80%);
+  --body-color: hsl(218, 100%, 90%);
 
   --body-font: 'Montserrat', sans-serif;
   --biggest-font-size: 2.25rem;
@@ -564,6 +564,130 @@ img {
 .about__button:hover i {
     transform: translateX(.25rem);
 }
+.prices__container {
+    padding-bottom: 4rem;
+    row-gap: 3rem;
+}
+
+.prices__content {
+    display: grid;
+    position: relative;
+}
+
+.prices__description {
+    text-align: center;
+}
+
+.prices__card {
+    width: 304px;
+    background-color: var(--body-color);
+    box-shadow: 0 4px 16px hsla(218, 68%, 18%, 0.9);
+    border-radius: 1rem;
+}
+
+.prices__heading {
+    background-color: var(--first-color);
+    padding: 1.5rem 1rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 1rem 1rem 0 0 ;
+}
+
+.prices__number {
+    font-size: var(--bigger-font-size);
+    color: var(--white-color);
+    margin-bottom: .5rem;
+}
+
+.prices__title {
+    font-size: var(--h3-font-size);
+    color: var(--white-color);
+    align-self: flex-end;
+}
+
+.prices__list {
+    display: grid;
+    row-gap: .5rem;
+    padding: 1.5rem 1rem;
+}
+
+.prices__item {
+    display: flex;
+    column-gap: .25rem;
+    font-size: var(--small-font-size);
+}
+
+.prices__item i {
+    color: var(--first-color);
+    font-size: 1rem;
+}
+
+.prices__box {
+    display: grid;
+    width: 230px;
+    height: 100%;
+    background: linear-gradient(var(--dark-color), var(--dark-color)),
+                linear-gradient(225deg, var(--second-color) 0%, var(--dark-color) 25%);
+    border: 4px solid transparent;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    position: absolute;
+    inset: 0;
+    margin-inline: auto;
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 16px hsla(218, 94%, 45%, 0.2);
+    overflow: hidden;
+}
+
+.prices__box::after {
+    content: '';
+    width: 64px;
+    height: 64px;
+    background-color: var(--second-color);
+    border-radius: 50%;
+    position: absolute;
+    top: -0.5rem;
+    right: -.5rem;
+    filter: blur(32px);
+}
+
+.prices__details {
+    color: var(--white-color);
+    font-size: var(--small-font-size);
+    text-align: center;
+    align-self: flex-end;
+    padding-bottom: 1.5rem;
+}
+
+.prices .swiper {
+    width: 320px;
+    overflow: initial;
+    padding-block: 2rem 5rem;
+}
+
+.prices :is(.swiper-slide-next, .swiper-slide-prev) {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .4s;
+}
+
+.prices .swiper-pagination-bullets.swiper-pagination-horizontal {
+    bottom: -4rem;
+}
+
+.prices .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background-color: gray;
+    opacity: 1;
+    transition: background-color .4s;
+}
+
+.prices .swiper-pagination-bullet-active {
+    background-color: var(--first-color);
+}
+
+
 
 
 
@@ -591,6 +715,9 @@ img {
     .about__container {
         padding-inline: 1rem;
     }
+    .prices .swiper {
+        width: 250px;
+    }
 }
 
 @media screen and (max-width: 360px) {
@@ -600,6 +727,9 @@ img {
     .section__title {
         font-size: 1.5rem;
     }
+    .prices .swiper {
+        width: 280px;
+    }
 }
 
 @media screen and (min-width: 440px) {
@@ -608,7 +738,8 @@ img {
         grid-template-columns: 350px;
         justify-content: center;
     }
-    .about__container {
+    .about__container,
+    .prices__container {
         width: 350px;
         margin-inline: auto;
     }
@@ -670,6 +801,20 @@ img {
     .about__button {
         justify-self: flex-start;
     }
+    .prices__container {
+        width: 700px;
+    }
+    .prices__description {
+        width: 540px;
+        margin-inline: auto;
+    }
+    .prices__box {
+        width: 460px;
+    }
+    .prices__content {
+        overflow-x: clip;
+    }
+
 }
 
 @media screen and (min-width: 1150px) {
@@ -783,5 +928,38 @@ img {
      }
      .about__img {
         width: 320px;
+     }
+     .prices__container {
+        row-gap: 4rem;
+     }
+     .prices__box {
+        width: 660px;
+        border-radius: 2rem;
+     }
+     .prices__details {
+        font-size: var(--normal-font-size);
+        padding-bottom: 2.5rem;
+     }
+     .prices .swiper {
+        width: 460px;
+        padding-block: 2.5rem 7rem;
+     }
+     .prices__heading {
+        padding: 1.5rem;
+     }
+     .prices__number {
+        font-size: var(--h1-font-size);
+     }
+     .prices__list {
+        padding: 2rem 1.5rem 3.5rem;
+        row-gap: 1rem;
+     }
+     .prices__item {
+        font-size: var(--normal-font-size);
+     }
+     .prices__box::after {
+        width: 100px;
+        height: 100px;
+        filter: blur(60px);
      }
 }

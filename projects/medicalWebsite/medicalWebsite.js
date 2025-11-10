@@ -28,3 +28,19 @@ const shadowHeader = () => {
 };
 
 window.addEventListener('scroll', shadowHeader);
+
+const swiperPrices = new Swiper('.prices__swiper', {
+  loop: true,
+  grabCursor: true,
+  spaceBetween: 24,
+
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
+
+  autoplay: {
+    delay: 3000,
+    disableOnInteraction: false,
+  },
+});
