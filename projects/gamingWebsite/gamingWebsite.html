@@ -20,10 +20,12 @@
         </a>
         <nav class="navbar" data-navbar>
           <ul class="navbar-list">
-            <li class="navbar-item"><a href="#home" class="navbar-link">Home</a></li>
-            <li class="navbar-item"><a href="#tournament" class="navbar-link">Tournament</a></li>
-            <li class="navbar-item"><a href="#news" class="navbar-link">News</a></li>
-            <li class="navbar-item"><a href="#contact" class="navbar-link">Contact</a></li>
+            <li class="navbar-item"><a href="#home" class="navbar-link" data-nav-link>Home</a></li>
+            <li class="navbar-item">
+              <a href="#tournament" class="navbar-link" data-nav-link>Tournament</a>
+            </li>
+            <li class="navbar-item"><a href="#news" class="navbar-link" data-nav-link>News</a></li>
+            <li class="navbar-item"><a href="#contact" class="navbar-link" data-nav-link>Contact</a></li>
           </ul>
         </nav>
         <a href="#" class="btn">Join Our Team</a>
@@ -34,6 +36,22 @@
         </button>
       </div>
     </header>
+
+    <main>
+      <article>
+        <div class="hero has-before" id="home">
+          <div class="container">
+            <p class="section-subtitle">Enjoy The Games</p>
+            <h1 class="h1 title hero-title">Epic Games Made For True Gamers!</h1>
+            <a href="#" class="btn" data-btn>Join With Us</a>
+            <figure class="hero-banner">
+              <img src="images/hero-banner.png" width="850" height="414" alt="hero banner" class="w-100"/>
+              <img src="images/hero-banner-bg.png" alt="hero banner" class="hero-banner-bg">
+            </figure>
+          </div>
+        </div>
+      </article>
+    </main>
 
     <script type="module" src="https://esm.sh/ionicons@latest/loader"></script>
     <script nomodule src="https://esm.sh/ionicons@latest/loader"></script>
