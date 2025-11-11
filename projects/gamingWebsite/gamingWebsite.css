@@ -259,6 +259,32 @@ main {
     width: 100%;
 }
 
+.section {
+    padding-block: var(--section-spacing);
+}
+
+.section-title {
+    margin-block: 10px;
+    text-transform: uppercase;
+}
+
+.section-title .span {
+    display: inline;
+    color: var(--text-purple);
+}
+
+.section-text {
+    margin-block: 40px;
+    max-width: 480px;
+    margin-inline: auto;
+}
+
+.social-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
 .header .btn {
     display: none;
 }
@@ -353,4 +379,110 @@ main {
 
 .navbar-item:last-child {
     border-block-end: 1px solid var(--border-space-cadet);
+}
+
+.hero {
+    padding-block-start: 170px;
+    text-align: center;
+}
+
+.hero .section-subtitle {
+    letter-spacing: 5px;
+}
+
+.hero-title {
+    margin-block: 20px 25px;
+}
+
+.hero .btn {
+    margin-inline: auto;
+}
+
+.hero::before {
+    background-image: var(--gradient-2);
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    z-index: 1;
+}
+
+.hero-banner {
+    position: relative;
+    margin-block-start: 50px;
+}
+
+.hero-banner-bg {
+    display: none;
+}
+
+.upcoming-item:not(:last-child) {
+    margin-block-end: 90px;
+}
+
+.upcoming-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.upcoming-card::before {
+    top: 50%;
+    background-image: var(--gradient-1);
+    transform: translateY(-50%);
+    width: 90%;
+    height: 80px;
+    z-index: -1;
+    opacity: 0.3;
+    border-radius: var(--radius-5);
+}
+
+.upcoming-card.left::before {
+    right: 0;
+    clip-path: var(--clip-path-4);
+}
+
+.upcoming-card.right::before {
+    left: 0;
+    clip-path: var(--clip-path-6);
+}
+
+.upcoming-card .card-title {
+    text-transform: uppercase;
+}
+
+.upcoming-card.left .card-title {
+    margin-inline-end: 50px;
+    text-align: right;
+}
+
+.upcoming-card.right .card-title {
+    margin-inline-start: 50px;
+    text-align: left;
+}
+
+.upcoming-card .card-meta {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-image: var(--gradient-1);
+    width: max-content;
+    padding: 6px 20px;
+    font-size: var(--fontSize-7);
+    font-weight: var(--weight-semiBold);
+    text-transform: uppercase;
+    border-radius: var(--radius-3);
+}
+
+.upcoming-card.left .card-meta {
+    clip-path: var(--clip-path-5);
+}
+
+.upcoming-card.right .card-meta {
+    clip-path: var(--clip-path-7);
+}
+
+.upcoming-card .card-banner {
+    width: 30%;
 }

@@ -35,3 +35,12 @@ const activeEl = function () {
 };
 
 window.addEventListener('scroll', activeEl);
+
+const buttons = document.querySelectorAll('[data-btn]');
+
+const buttonHoverRipple = function (event) {
+    this.style.setProperty('--top', `${event.offsetY}px`);
+    this.style.setProperty('--left', `${event.offsetX}px`);
+}
+
+addEventOnElements(buttons, 'mousemove', buttonHoverRipple)
