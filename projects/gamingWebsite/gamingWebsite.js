@@ -47,3 +47,57 @@ const buttonHoverRipple = function (event) {
 };
 
 addEventOnElements(buttons, 'mousemove', buttonHoverRipple);
+
+const revealElements = document.querySelectorAll('[data-reveal]');
+
+const revealElementOnScroll = function () {
+  for (let i = 0, len = revealElements.length; i < len; i++) {
+    const isElementInsideWindow = revealElements[i].getBoundingClientRect().top < window.innerHeight / 1.1;
+
+    if (isElementInsideWindow) {
+      revealElements[i].classList.add('revealed');
+    } else {
+      revealElements[i].classList.remove('revealed');
+    }
+  }
+};
+
+window.addEventListener('scroll', revealElementOnScroll);
+
+window.addEventListener('load', revealElementOnScroll);
+
+const cursor = document.querySelector('[data-cursor]');
+const hoverElements = [...document.querySelectorAll('a'), ...document.querySelectorAll('button')];
+
+const cursorMove = function (event) {
+  cursor.style.top = `${event.clientY}px`;
+  cursor.style.left = `${event.clientX}px`;
+};
+
+window.addEventListener('mousemove', cursorMove);
+
+addEventOnElements(hoverElements, 'mouseover', function () {
+  cursor.classList.add('hovered');
+});
+
+addEventOnElements(hoverElements, 'mouseout', function () {
+  cursor.classList.remove('hovered');
+});
+
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+
+  if (yearElement) {
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.dateTime = currentYear;
+    yearElement.textContent = currentYear.toString();
+  }
+}
+
+window.addEventListener('load', updateYear);
