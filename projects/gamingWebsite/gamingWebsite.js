@@ -25,12 +25,15 @@ const navClose = () => {
 addEventOnElements(navLinks, 'click', navClose);
 
 const header = document.querySelector('[data-header]');
+const backTopBtn = document.querySelector('[data-back-top-btn]');
 
 const activeEl = function () {
   if (window.scrollY > 100) {
     header.classList.add('active');
+    backTopBtn.classList.add('active');
   } else {
     header.classList.remove('active');
+    backTopBtn.classList.remove('active');
   }
 };
 
@@ -39,8 +42,8 @@ window.addEventListener('scroll', activeEl);
 const buttons = document.querySelectorAll('[data-btn]');
 
 const buttonHoverRipple = function (event) {
-    this.style.setProperty('--top', `${event.offsetY}px`);
-    this.style.setProperty('--left', `${event.offsetX}px`);
-}
+  this.style.setProperty('--top', `${event.offsetY}px`);
+  this.style.setProperty('--left', `${event.offsetX}px`);
+};
 
-addEventOnElements(buttons, 'mousemove', buttonHoverRipple)
+addEventOnElements(buttons, 'mousemove', buttonHoverRipple);

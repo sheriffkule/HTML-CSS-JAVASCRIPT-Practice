@@ -12,7 +12,7 @@
     <link rel="preload" as="image" href="images/hero-banner.png" />
     <link rel="preload" as="image" href="images/hero-banner-bg.png" />
   </head>
-  <body>
+  <body id="top">
     <header class="header active" data-header>
       <div class="container">
         <a href="#" class="logo">
@@ -285,8 +285,90 @@
       </article>
     </main>
 
-    <!-- <script type="module" src="https://esm.sh/ionicons@latest/loader"></script>
-    <script nomodule src="https://esm.sh/ionicons@latest/loader"></script> -->
+    <footer class="footer">
+      <div class="section footer-top">
+        <div class="container">
+          <div class="footer-brand">
+            <a href="#" class="logo">
+              <img src="images/logo.svg" width="150" height="73" loading="lazy" alt="Unigine logo" />
+            </a>
+            <p class="footer-text">
+              Our success in creating business solutions is due in large part to our talented and highly
+              committed team.
+            </p>
+            <ul class="social-list">
+              <li>
+                <a href="#" class="social-link"><ion-icon name="logo-facebook"></ion-icon></a>
+              </li>
+              <li>
+                <a href="#" class="social-link"><ion-icon name="logo-twitter"></ion-icon></a>
+              </li>
+              <li>
+                <a href="#" class="social-link"><ion-icon name="logo-instagram"></ion-icon></a>
+              </li>
+              <li>
+                <a href="#" class="social-link"><ion-icon name="logo-youtube"></ion-icon></a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-list">
+            <p class="title footer-list-title has-after">Useful Links</p>
+            <ul>
+              <li><a href="#" class="footer-link">Tournaments</a></li>
+              <li><a href="#" class="footer-link">Help Center</a></li>
+              <li><a href="#" class="footer-link">Privacy and Policy</a></li>
+              <li><a href="#" class="footer-link">Terms of Use</a></li>
+              <li><a href="#" class="footer-link">Contact Us</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-list">
+            <p class="title footer-list-title has-after">Contact Us</p>
+            <div class="contact-item">
+              <span class="span">Location:</span>
+              <address class="contact-link">153 Williamson Plaza, Maggieberg, MT 09514</address>
+            </div>
+            <div class="contact-item">
+              <span class="span">Join Us:</span>
+              <a href="maiilto:Info@unigine.com" class="contact-link">Info@unigine.com</a>
+            </div>
+            <div class="contact-item">
+              <span class="span">Phone:</span>
+              <a href="tel:+12345678910" class="contact-link">+1 (234) 567-8910</a>
+            </div>
+          </div>
+
+          <div class="footer-list">
+            <p class="title footer-list-title has-after">Newsletter Signup</p>
+            <form action="gamingWebsite.html" method="get" class="footer-form">
+              <input
+                type="email"
+                name="email_address"
+                required
+                placeholder="Your Email"
+                autocomplete="off"
+                class="input-field" />
+              <button type="submit" class="btn" data-btn>Subscribe Now</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="container">
+          <p class="copyright">
+            &copy; <time datetime="year" id="year"></time> Made by
+            <abbr title="Web Developer Frontend Master"><em>SheriffKule</em></abbr> from XXIII Century
+          </p>
+        </div>
+      </div>
+    </footer>
+    <a href="#top" class="back-top-btn" aria-label="back to top" data-back-top-btn>
+      <ion-icon name="arrow-up-outline" aria-hidden="true"></ion-icon>
+    </a>
+    <div class="cursor" data-cursor></div>
+
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="gamingWebsite.js"></script>
