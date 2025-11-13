@@ -217,6 +217,36 @@ body {
     transform: translate(0, 0);
 }
 
+.btn-secondary {
+    --btn-bg: var(--black);
+}
+
+.btn-secondary:is(:hover, :focus-visible) {
+    --btn-bg: var(--pistachio);
+}
+
+.btn-outline {
+    border: 2px solid var(--white);
+    background-color: transparent;
+}
+
+.btn-white {
+    --btn-bg: var(--platinum);
+    color: var(--black);
+}
+
+.section {
+    padding-block: var(--section-padding);
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.section-text{
+    line-height: 2;
+}
+/*    */
 .lang-switch,
 .header-action {
     display: none;
@@ -389,4 +419,118 @@ body {
     letter-spacing: -1px;
     max-width: 50ch;
     margin-block-end: 30px;
+}
+
+.features {
+    padding-block-start: 0;
+    background-color: var(--eerie-black-1);
+}
+
+.features-list {
+    display: grid;
+    gap: 30px;
+}
+
+.features-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 25px;
+}
+
+.features-item .item-icon {
+    color: var(--pistachio);
+    font-size: 5.5rem;
+    margin-block-start: 10px;
+}
+
+.features-item .item-icon ion-icon {
+    --ionicon-stroke-width: 25px;
+}
+
+.features-item .item-title {
+    margin-block-end: 10px;
+}
+
+.features-item .item-text {
+    max-width: 25ch;
+    color: var(--white_50);
+    font-size: var(--fs-9);
+}
+
+.about {
+    padding-block-start: 120px;
+}
+
+.about-banner {
+    position: relative;
+    max-width: max-content;
+    margin-block-end: 30px;
+}
+
+.deco-title {
+    font-size: var(--fs-1);
+    font-weight: var(--fw-700);
+    white-space: nowrap;
+    line-height: 0.5;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1px var(--light-gray);
+    transform-origin: top left;
+    transform: rotate(0.25turn);
+    position: absolute;
+    top: 55%;
+    left: 100%;
+    z-index: -1;
+}
+
+.deco-img {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    z-index: -1;
+}
+
+.about-img {
+    max-width: max-content;
+    margin-block-end: 30px;
+}
+
+.about .section-subtitle {
+    margin-block-end: 10px;
+}
+
+.tab-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-block: 25px 35px;
+}
+
+.tab-btn {
+    background-color: var(--platinum);
+    color: var(--granite-gray);
+    font-size: var(--fs-8);
+    font-weight: var(--fw-500);
+    padding: 10px 32px;
+}
+
+.tab-btn.active {
+    background-color: var(--pistachio);
+    color: var(--white);
+}
+
+.tab-list {
+    margin-block: 25px 50px;
+}
+
+.tab-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-block: 5px;
+}
+
+.tab-item .item-icon {
+    font-size: 3rem;
+    color: var(--pistachio);
 }
