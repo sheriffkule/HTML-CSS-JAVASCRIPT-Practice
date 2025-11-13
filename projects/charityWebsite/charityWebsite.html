@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Charity for Animals Website</title>
+    <link rel="shortcut icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="charityWebsite.css" />
+  </head>
+  <body>
+    <header class="header" data-header>
+      <div class="container">
+        <h1><a href="#" class="logo">Wildvine</a></h1>
+        <select name="language" class="lang-switch">
+          <option value="english">English</option>
+          <option value="french">French</option>
+          <option value="spanish">Spanish</option>
+        </select>
+        <button class="nav-open-btn" aria-label="Open menu" data-nav-open-btn>
+          <ion-icon name="menu-outline"></ion-icon>
+        </button>
+        <nav class="navbar" data-navbar>
+          <button class="nav-close-btn" aria-label="Close menu" data-nav-close-btn>
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
+          <a href="#" class="logo">Wildvine</a>
+          <ul class="navbar-list">
+            <li>
+              <a href="#home" class="navbar-link" data-nav-link>
+                <span>Home</span> <ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon>
+              </a>
+            </li>
+            <li>
+              <a href="#about" class="navbar-link" data-nav-link>
+                <span>About</span> <ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon>
+              </a>
+            </li>
+            <li>
+              <a href="#service" class="navbar-link" data-nav-link>
+                <span>Service</span> <ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon>
+              </a>
+            </li>
+            <li>
+              <a href="#donate" class="navbar-link" data-nav-link>
+                <span>Donate</span> <ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon>
+              </a>
+            </li>
+            <li>
+              <a href="#event" class="navbar-link" data-nav-link>
+                <span>Event</span> <ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon>
+              </a>
+            </li>
+            <li>
+              <a href="#contact" class="navbar-link" data-nav-link>
+                <span>Contact</span> <ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="header-action">
+          <button class="search-btn" aria-label="Search">
+            <ion-icon name="search-outline"></ion-icon>
+          </button>
+          <button class="btn btn-primary">
+            <span>Donation</span> <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="charityWebsite.js"></script>
+  </body>
+</html>
