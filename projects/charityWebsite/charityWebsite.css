@@ -19,7 +19,7 @@
   --white-60: hsla(0, 0%, 100%, 0.6);
   --white_50: hsla(0, 0%, 100%, 0.5);
   --white_10: hsla(0, 0%, 100%, 0.1);
-  --white: hsl(0, 0%, 70%);
+  --white: hsl(0, 0%, 90%);
   --black: hsl(0, 0%, 0%);
   --jet: hsl(0, 0%, 18%);
 
@@ -245,6 +245,12 @@ body {
 
 .section-text{
     line-height: 2;
+}
+
+.img-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 /*    */
 .lang-switch,
@@ -533,4 +539,101 @@ body {
 .tab-item .item-icon {
     font-size: 3rem;
     color: var(--pistachio);
+}
+
+.tab-text {
+    color: var(--eerie-black-2);
+    font-size: var(--fs-8);
+    font-weight: var(--fw-500);
+}
+
+.cta-content {
+    background-color: var(--pistachio);
+    text-align: center;
+    padding: 50px 15px;
+    margin-block-end: 30px;
+}
+
+.cta .section-title {
+    color: var(--white);
+    font-size: var(--fs-4);
+    font-weight: var(--fw-600);
+    line-height: 1.2;
+    margin-block: 25px;
+}
+
+.cta .btn-outline {
+    margin-inline: auto;
+}
+
+.cta-banner {
+    background-color: var(--light-gray);
+}
+
+.service {
+    background-color: var(--baby-powder);
+    background-repeat: no-repeat;
+    background-position: center top;
+    margin-block-start: -200px;
+    padding-block-start: 200px;
+}
+
+.service .section-title {
+    margin-block: 10px 40px;
+}
+
+.service-list {
+    display: grid;
+    gap: 30px;
+}
+
+.service-card {
+    background-color: var(--white);
+    text-align: center;
+    padding: 45px 40px;
+    border-radius: 2px;
+    outline: 3px solid transparent;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition-2);
+}
+
+.service-card:is(:hover, :focus-within) {
+    outline-color: var(--pistachio);
+    transform: scale(1.01);
+}
+
+.service-card .card-icon {
+    color: var(--pistachio);
+    font-size: 7rem;
+    max-width: max-content;
+    margin-inline: auto;
+}
+
+.service-card .card-icon  ion-icon {
+    --ionicon-stroke-width: 20px
+}
+
+.service-card .card-title {
+    letter-spacing: -1px;
+    margin-block: 10px;
+}
+
+.service-card .card-text {
+    font-family: var(--ff-inter);
+}
+
+.btn-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    color: var(--silver-chalice);
+    font-size: var(--fs-8);
+    font-weight: var(--fw-600);
+    margin-block-start: 15px;
+}
+
+.btn-link span {
+    text-decoration: underline;
+    text-underline-offset: 4px;
 }
