@@ -913,3 +913,159 @@ body {
     min-width: 90%;
     scroll-snap-align: center;
 }
+
+.footer {
+    background-color: var(--raisin-black);
+    color: var(--white);
+    font-family: var(--ff-inter);
+    padding-block: 40px;
+}
+
+.footer .container {
+    margin-inline: 15px;
+    background-color: var(--eerie-black-3);
+    padding: 20px;
+}
+
+.footer-list,
+.copyright {
+    max-width: max-content;
+    margin-inline: auto;
+}
+
+.footer-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px 40px;
+    margin-block-end: 15px;
+}
+
+.footer-link {
+    color: var(--white_50);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-skip-ink: none;
+    transition: var(--transition-1);
+}
+
+.footer-link:is(:hover, :focus) {
+    background-color: hsla(0, 0%, 100%, 0.1);
+    letter-spacing: 1px;
+}
+
+.copyright {
+    text-align: center;
+    font-weight: var(--fw-300);
+}
+
+.copyright time {
+    display: inline;
+}
+
+.copyright abbr {
+    cursor: default;
+    text-underline-offset: 3px;
+    letter-spacing: 0.5px;
+}
+
+@media screen and (min-width: 450px) {
+    :root {
+        --fs-3: 4rem;
+    }
+    .cta {
+        --fs-4: 4.1rem;
+    }
+}
+
+@media screen and (min-width: 580px) {
+    :root {
+        --fs-2: 5.5rem;
+    }
+    .donate-card {
+        position: relative;
+        padding-block-end: 150px;
+        box-shadow: none;
+    }
+    .donate-card .card-content {
+        position: absolute;
+        width: 85%;
+        bottom: 0;
+        right: 0;
+        border-radius: 4px;
+        box-shadow: var(--card-shadow);
+    }
+    .donate-card .card-title {
+        --fs-5: 2.4rem;
+    }
+    .event-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 30px;
+    }
+    .event-card .card-subtitle {
+        margin-block-start: 0;
+    }
+    .event-card .card-title {
+        font-size: var(--fs-5);
+        line-height: 1.4;
+    }
+    .insta-post-item {
+        min-width: 45%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .features-list,
+    .service-list {
+        grid-template-columns: 1fr 1fr;
+    }
+    .banner-row {
+        display: flex;
+        gap: 20px;
+    }
+    .deco-title {
+        top: 10%;
+        left: calc(100% + 40px);
+    }
+    .about-img {
+        margin-block-end: 0;
+    }
+    .about-img:first-child {
+        margin-block-end: 30px;
+    }
+    .testi-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 30px;
+    }
+    .testi-text {
+        margin-block-start: 0;
+    }
+    .insta-post-item {
+        min-width: 32%;
+    }
+    .footer .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 40px;
+        padding-inline: 40px;
+    }
+    .footer-list,
+    .copyright {
+        margin-inline: 0;
+    }
+    .footer-list {
+        margin-block-end: 0;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    :root {
+        --fs-2: 7.5rem;
+    }
+    .header {
+        transition: var(--transition-2);
+    }
+}

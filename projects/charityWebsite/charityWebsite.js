@@ -25,3 +25,21 @@ const header = document.querySelector('[data-header]');
 window.addEventListener('scroll', function () {
   window.scrollY >= 50 ? header.classList.add('active') : header.classList.remove('active');
 });
+
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+
+  if (yearElement) {
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.dateTime = currentYear;
+    yearElement.textContent = currentYear.toString();
+  }
+}
+
+window.addEventListener('load', updateYear);
