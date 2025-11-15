@@ -61,6 +61,11 @@ body {
     transition: .2s;
 }
 
+.error_message.error {
+    visibility: visible;
+    height: auto;
+}
+
 .budget_content {
     padding: 2rem;
     display: flex;
