@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Budget App</title>
+    <link href="https://cdn.boxicons.com/3.0.3/fonts/basic/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/widgets_style/budgetApp2.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Budget App</h2>
+      <div class="error_message"><p>Please Enter Budget Amount | More Than 0</p></div>
+      <div class="budget_content">
+        <div class="ur_budget">
+          <form class="ur_budget">
+            <label for="budget">Your Budget : </label>
+            <input type="number" class="budget_input" placeholder="Enter Your Budget..." />
+            <button class="btn" id="btn_budget">Calculate</button>
+          </form>
+        </div>
+        <div class="ur_expenses">
+          <form class="ur_expenses">
+            <label for="expenses">Your Expenses : </label>
+            <input type="number" class="expenses_input" placeholder="Enter Your Expenses Description..." />
+            <input type="number" class="expenses_amount" placeholder="Enter Your Expenses Amount..." />
+            <button class="btn" id="btn_expenses">Add Expense</button>
+          </form>
+        </div>
+      </div>
+
+      <ul class="cards">
+        <li>
+          <i class="bx bx-currency-notes"></i>
+          <span class="info">
+            <h3><span>$</span><span class="budget_card">7,373</span></h3>
+            <p>Budget</p>
+          </span>
+        </li>
+        <li>
+          <i class="bx bx-credit-card"></i>
+          <span class="info">
+            <h3><span>$</span><span class="expenses_card">5,373</span></h3>
+            <p>Expenses</p>
+          </span>
+        </li>
+        <li>
+          <i class="bx bx-dollar"></i>
+          <span class="info">
+            <h3><span>$</span><span class="balance_card">2,000</span></h3>
+            <p>Balance</p>
+          </span>
+        </li>
+      </ul>
+    </div>
+    <script src="/widgets_script/budgetApp2.js"></script>
+  </body>
+</html>
