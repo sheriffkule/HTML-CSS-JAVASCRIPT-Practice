@@ -11,6 +11,9 @@
     <div class="container">
       <h2>Budget App</h2>
       <div class="error_message"><p></p></div>
+      <div class="theme_icon">
+        <i class="bx bx-sun" id="theme-button"></i>
+      </div>
       <div class="budget_content">
         <div class="ur_budget">
           <form class="ur_budget">
@@ -28,31 +31,33 @@
           <form class="ur_expenses">
             <label for="expenses">Your Expenses : </label>
             <input type="text" class="expenses_input" placeholder="Enter Your Expenses Description..." />
-            <input type="number" class="expenses_amount" placeholder="Enter Your Expenses Amount..." />
-            <button class="btn" id="btn_expenses">Add Expense</button>
+            <span class="expenses_content">
+              <input type="number" class="expenses_amount" placeholder="Enter Your Expenses Amount..." />
+              <button class="btn" id="btn_expenses">Add Expense</button>
+            </span>
           </form>
         </div>
       </div>
 
       <ul class="cards">
-        <li>
+        <li title="Current Budget">
           <i class="bx bx-currency-notes"></i>
           <span class="info">
-            <h3><span>$</span><span class="budget_card">7,373</span></h3>
+            <h3><span>$</span><span class="budget_card"></span></h3>
             <p>Budget</p>
           </span>
         </li>
-        <li>
+        <li title="Total Expenses">
           <i class="bx bx-credit-card"></i>
           <span class="info">
-            <h3><span>$</span><span class="expenses_card">5,373</span></h3>
+            <h3><span>$</span><span class="expenses_card"></span></h3>
             <p>Expenses</p>
           </span>
         </li>
-        <li>
+        <li title="Remaining Funds">
           <i class="bx bx-dollar"></i>
           <span class="info">
-            <h3><span>$</span><span class="balance_card">2,000</span></h3>
+            <h3><span>$</span><span class="balance_card"></span></h3>
             <p>Balance</p>
           </span>
         </li>
@@ -60,19 +65,13 @@
 
       <div class="table_content">
         <h3>Budget Details</h3>
-        <div class="table_data">
-          <!-- <ul class="tbl_tr_content">
-            <li>1</li>
-            <li>Gaming Mouse</li>
-            <li><span>$</span>600</li>
-            <li>
-              <button type="submit" class="btn_edit">Edit</button>
-              <button type="submit" class="btn_delete">Delete</button>
-            </li>
-          </ul> -->
-        </div>
+        <div class="table_data"></div>
       </div>
     </div>
+    <h4 class="footer__copy">
+      © <time datetime="2025" id="year">2025</time> Made by
+      <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+    </h4>
     <script src="/widgets_script/budgetApp2.js"></script>
   </body>
 </html>

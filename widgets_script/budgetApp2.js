@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 
 const errorMessage = document.querySelector('.error_message');
 const budgetInputEl = document.querySelector('.budget_input');
@@ -14,6 +14,10 @@ const balanceCardEl = document.querySelector('.balance_card');
 
 let itemList = [];
 let itemId = 0;
+
+// localStorage keys
+const STORAGE_BUDGET = 'budgetApp_budget';
+const STORAGE_ITEMS = 'budgetApp_items';
 
 function btnEvents() {
   const btnBudgetCal = document.getElementById('btn_budget');
@@ -31,8 +35,11 @@ function btnEvents() {
   });
 }
 
-// Calling Btns Events
-document.addEventListener('DOMContentLoaded', btnEvents);
+// load saved data and attach events on DOM ready
+document.addEventListener('DOMContentLoaded', () => {
+  btnEvents();
+  loadSavedData();
+});
 
 // Expenses Function
 function expensesFun() {
@@ -57,52 +64,80 @@ function expensesFun() {
 
     // add expenses inside the HTML Page
     addExpenses(expenses);
+
+    // persist items
+    localStorage.setItem(STORAGE_ITEMS, JSON.stringify(itemList));
+
     showBalance();
   }
 }
 
 // Add Expenses
 function addExpenses(expensesPara) {
-  const html = ` <ul class="tbl_tr_content">
-      <li data-id="${expensesPara.id}">${expensesPara.id + 1}</li>
+  const html = ` <ul class="tbl_tr_content" data-id="${expensesPara.id}">
+      <li>${expensesPara.id + 1}</li>
       <li>${expensesPara.title}</li>
       <li><span>$</span>${expensesPara.amount}</li>
       <li>
-        <button type="submit" class="btn_edit">Edit</button>
-        <button type="submit" class="btn_delete">Delete</button>
+        <button type="button" class="btn_edit" title="Edit Entry">Edit</button>
+        <button type="button" class="btn_delete" title="Delete Entry Permanently">Delete</button>
       </li>
     </ul>
     `;
 
   tableRecordEl.insertAdjacentHTML('beforeend', html);
 
-  // edit
-  const editBtn = document.querySelectorAll('btn_edit');
+  // edit and delete buttons
+  const editBtn = document.querySelectorAll('.btn_edit');
   const delBtn = document.querySelectorAll('.btn_delete');
-  const content_id = document.querySelectorAll('.tbl_tr_content');
 
   // btn edit event
   editBtn.forEach((btnEdit) => {
-    btnEdit.addEventListener('click', (el) => {
-      let id;
+    btnEdit.addEventListener('click', (e) => {
+      const element = e.target.closest('.tbl_tr_content');
+      if (!element) return;
+      const id = parseInt(element.dataset.id, 10);
 
-      content_id.forEach((ids) => {
-        id = ids.firstElementChild.dataset.id;
-      });
-
-      let element = el.target.parentElement.parentElement;
+      // remove element from DOM
       element.remove();
 
-      let expenses = itemList.filter(function (item) {
-        return item.id == id;
+      // find the expense in itemList
+      const expenses = itemList.filter(function (item) {
+        return item.id === id;
       });
 
-      expenseDescEl.value = expenses[0].title;
-      expenseAmountEl.value = expenses[0].amount;
+      if (expenses.length > 0) {
+        expenseDescEl.value = expenses[0].title;
+        expenseAmountEl.value = expenses[0].amount;
+      }
 
-      let temp_list = itemList.filter(function(item) {
+      // remove item from itemList
+      itemList = itemList.filter(function (item) {
         return item.id !== id;
-      })
+      });
+
+      // persist items after edit/remove
+      localStorage.setItem(STORAGE_ITEMS, JSON.stringify(itemList));
+
+      showBalance();
+    });
+  });
+
+  // btn delete event
+  delBtn.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      const element = e.target.closest('.tbl_tr_content');
+      if (!element) return;
+      const id = parseInt(element.dataset.id, 10);
+      element.remove();
+      itemList = itemList.filter(function (item) {
+        return item.id !== id;
+      });
+
+      // persist items after delete
+      localStorage.setItem(STORAGE_ITEMS, JSON.stringify(itemList));
+
+      showBalance();
     });
   });
 }
@@ -115,6 +150,10 @@ function budgetFun() {
   } else {
     budgetCardEl.textContent = budgetValue;
     budgetInputEl.value = '';
+
+    // persist budget
+    localStorage.setItem(STORAGE_BUDGET, budgetCardEl.textContent);
+
     showBalance();
   }
 }
@@ -146,3 +185,76 @@ function showErrorMessage(message) {
     errorMessage.classList.remove('error');
   }, 2500);
 }
+
+// load saved budget and expenses from localStorage
+function loadSavedData() {
+  const savedBudget = localStorage.getItem(STORAGE_BUDGET);
+  if (savedBudget !== null) {
+    budgetCardEl.textContent = savedBudget;
+  }
+
+  const savedItems = JSON.parse(localStorage.getItem(STORAGE_ITEMS) || '[]');
+  if (Array.isArray(savedItems) && savedItems.length > 0) {
+    itemList = savedItems;
+    // restore next id
+    itemId = itemList.reduce((max, it) => Math.max(max, it.id), -1) + 1;
+    // populate UI
+    itemList.forEach((it) => addExpenses(it));
+    showBalance();
+  }
+}
+
+const themeButton = document.getElementById('theme-button');
+const darkTheme = 'dark-theme';
+const iconTheme = 'bx-sun';
+
+const selectedTheme = localStorage.getItem('selected-theme');
+const selectedIcon = localStorage.getItem('selected-icon');
+
+const getCurrentTheme = () => (document.body.classList.contains(darkTheme) ? 'dark' : 'light');
+const getCurrentIcon = () => (themeButton.classList.contains('bx-sun') ? 'bx-sun' : 'bx-moon');
+
+if (selectedTheme) {
+  document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme);
+  if (selectedIcon === 'bx-moon') {
+    themeButton.classList.add('bx-moon');
+    themeButton.classList.remove('bx-sun');
+  } else {
+    themeButton.classList.add('bx-sun');
+    themeButton.classList.remove('bx-moon');
+  }
+}
+
+if (themeButton) {
+  themeButton.addEventListener('click', () => {
+    document.body.classList.toggle(darkTheme);
+    if (themeButton.classList.contains('bx-sun')) {
+      themeButton.classList.remove('bx-sun');
+      themeButton.classList.add('bx-moon');
+    } else {
+      themeButton.classList.remove('bx-moon');
+      themeButton.classList.add('bx-sun');
+    }
+
+    localStorage.setItem('selected-theme', getCurrentTheme());
+    localStorage.setItem('selected-icon', getCurrentIcon());
+  });
+}
+
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+
+  if (yearElement) {
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.dateTime = currentYear;
+    yearElement.textContent = currentYear.toString();
+  }
+}
+
+window.addEventListener('load', updateYear);
