@@ -15,14 +15,19 @@
         <div class="ur_budget">
           <form class="ur_budget">
             <label for="budget">Your Budget : </label>
-            <input type="number" class="budget_input" placeholder="Enter Your Budget..." />
+            <input
+              type="number"
+              id="budget"
+              class="budget_input"
+              placeholder="Enter Your Budget..."
+              min="1" />
             <button class="btn" id="btn_budget">Calculate</button>
           </form>
         </div>
         <div class="ur_expenses">
           <form class="ur_expenses">
             <label for="expenses">Your Expenses : </label>
-            <input type="number" class="expenses_input" placeholder="Enter Your Expenses Description..." />
+            <input type="text" class="expenses_input" placeholder="Enter Your Expenses Description..." />
             <input type="number" class="expenses_amount" placeholder="Enter Your Expenses Amount..." />
             <button class="btn" id="btn_expenses">Add Expense</button>
           </form>
@@ -52,6 +57,21 @@
           </span>
         </li>
       </ul>
+
+      <div class="table_content">
+        <h3>Budget Details</h3>
+        <div class="table_data">
+          <ul class="tbl_tr_content">
+            <li>1</li>
+            <li>Gaming Mouse</li>
+            <li><span>$</span>600</li>
+            <li>
+              <button type="submit" class="btn_edit">Edit</button>
+              <button type="submit" class="btn_delete">Delete</button>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
     <script src="/widgets_script/budgetApp2.js"></script>
   </body>

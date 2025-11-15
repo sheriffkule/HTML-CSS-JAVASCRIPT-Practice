@@ -56,7 +56,9 @@ body {
     width: 600px;
     margin: 0 auto;
     border-radius: 6px;
-    display: none;
+    visibility: hidden;
+    height: 0;
+    transition: .2s;
 }
 
 .budget_content {
@@ -118,7 +120,7 @@ body {
     }
 
     &:active {
-        transform: scale(0.98);
+        transform: scale(0.98) translateX(4px);
     }
 }
 
@@ -137,5 +139,97 @@ body {
     align-items: center;
     gap: 1.5rem;
     cursor: pointer;
-    transition: .3s ease-in;
+    transition: .25s ease-in;
+}
+
+.container .cards li:hover {
+    transform: translateY(-10px);
+}
+
+.container .cards li .bx {
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 10px;
+    font-size: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container .cards li:nth-child(1) .bx {
+    background-color: var(--light-primary);
+    color: var(--primary);
+}
+
+.container .cards li:nth-child(2) .bx {
+    background-color: var(--light-warning);
+    color: var(--warning);
+}
+
+.container .cards li:nth-child(3) .bx {
+    background-color: var(--light-success);
+    color: var(--success);
+}
+
+.container .cards li .info h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.container .cards li .info p {
+    color: var(--dark);
+}
+
+.table_content {
+    padding: 2rem;
+    background-color: var(--light);
+    margin: 1rem 2rem;
+    border-radius: 6px;
+}
+
+.table_content h3 {
+    font-size: 2rem;
+    margin: 1rem 0;
+}
+
+.tbl_tr_content {
+    display: grid;
+    list-style-type: none;
+    grid-template-columns: 1fr 50% 30% 2fr;
+    align-items: center;
+    background-color: var(--dark);
+    color: var(--light);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    margin: 0.5rem 0;
+    cursor: pointer;
+}
+
+.table_data {
+    overflow-y: auto;
+    height: auto;
+}
+
+.tbl_tr_content button {
+    outline: none;
+    border: none;
+    color: var(--light);
+    padding: 0.4rem;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: var(--danger);
+    transition: .25s;
+
+    &:hover {
+        transform: translateY(-2px) scale(1.02);
+    }
+
+    &:active {
+        transform: scale(1);
+    }
+}
+
+.tbl_tr_content button:first-child {
+    background-color: var(--success);
 }
