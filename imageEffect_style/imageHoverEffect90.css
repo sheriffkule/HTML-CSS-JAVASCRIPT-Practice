@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    background-color: black;
+    background: repeating-radial-gradient(circle at center, #222 10px, black 20px, #222 30px, black 40px);
+    background-size: 50% 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.box {
+    position: relative;
+    width: 400px;
+    height: 400px;
+}
+
+.box span {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: url('../images/clint.jpeg');
+    background-repeat: no-repeat;
+    animation: animate 10s linear infinite;
+}
+
+#animateBtn {
+    position: absolute;
+    background-color: transparent;
+    color: white;
+    top: -200px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    outline: none;
+    left: 50%;
+    transform: translateX(-50%);
+    transform-origin: bottom left;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: .25s;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        scale: 1.02;
+        transform: translateX(-50%);
+    }
+
+    &:active {
+        scale: 1;
+        transition: .1;
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes animate {
+    0%, 10% {
+        scale: 1;
+        rotate: 0deg;
+        translate: 0 0;
+        transform-origin: center;
+    }
+    20%, 30% {
+        scale: 0.5;
+        rotate: 0deg;
+        transform: 0 0;
+        transform-origin: center;
+    }
+    40% {
+        scale: 0.5;
+        rotate: 360deg;
+        translate: 150px 0;
+        transform-origin: 100px;
+    }
+    70% {
+        scale: 0.5;
+        rotate: 720deg;
+        translate: -150px;
+        transform-origin: -100px;
+    }
+    90% {
+        scale: 2.5;
+        rotate: 0deg;
+        translate: 0 0;
+        transform-origin: center;
+    }
+    100% {
+        scale: 1;
+        rotate: 0deg;
+        translate: 0 0;
+        transform-origin: center;
+    }
+}
