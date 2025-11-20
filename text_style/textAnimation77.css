@@ -1,0 +1,18 @@
+body {
+    background: linear-gradient(to bottom, #111, darkslategrey, #111);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+#text {
+    border-right: 4px solid white;
+    height: 35px;
+    padding-inline-end: 2px;
+    color: transparent;
+    background: linear-gradient(to right, white, #00ffea);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
