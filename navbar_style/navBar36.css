@@ -1,0 +1,246 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
+
+:root {
+  --header-height: 3.5rem;
+
+  --first-color: hsl(236, 100%, 48%);
+  --black-color: hsl(0, 0%, 0%);
+  --white-color: hsl(0, 0%, 95%);
+  --body-color: darkslategray;
+  --nav-shadow: 0 4px 16px hsla(0, 0%, 0%, 0.3);
+
+  --body-font: 'Montserrat', sans-serif;
+  --normal-font-size: 0.938rem;
+  --small-font-size: 0.813rem;
+}
+
+@media screen and (min-width: 1150px) {
+  :root {
+    --normal-font-size:1rem;
+    --small-font-size: 0.875rem;
+  }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    interpolate-size: allow-keywords;
+}
+
+body {
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+    background-color: var(--body-color);
+}
+
+button {
+    outline: none;
+    border: none;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    max-width: 1120px;
+    margin-inline: 1rem;
+}
+
+.header {
+    position: fixed;
+    top: 1.5rem;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
+.nav {
+    height: var(--header-height);
+    background-color: black;
+    padding: .5rem 1rem .5rem .5rem;
+    border-radius: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--nav-shadow);
+}
+
+.nav__logo {
+    width: 40px;
+    height: 40px;
+    background-color: var(--white-color);
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+
+    &:hover i {
+        transform: rotateY(-360deg) scale(1.1);
+        filter: brightness(5);
+    }
+}
+
+.nav__logo i {
+    font-size: 1.5rem;
+    color: var(--first-color);
+    transition: transform .5s, filter .2s;
+}
+
+.nav__buttons {
+    display: flex;
+    align-items: center;
+    column-gap: .5rem;
+}
+
+.nav__email {
+    background-color: var(--white-color);
+    color: var(--black-color);
+    padding: .75rem 1rem;
+    border-radius: 4rem;
+    font: 500 var(--small-font-size) var(--body-font);
+    display: grid;
+    place-items: center;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.nav__email span {
+    transition: transform .25s;
+}
+
+.nav__email span:nth-child(2) {
+    position: absolute;
+    transform: translateY(200%);
+}
+
+.nav__email:hover span:nth-child(1) {
+    transform: translateY(-200%);
+}
+
+.nav__email:hover span:nth-child(2) {
+    transform: translateY(0);
+}
+
+.nav__toggle {
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    background: none;
+    color: var(--white-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.nav__burger,
+.nav__close {
+    position: absolute;
+    transition: opacity .3s, transform .4s;
+}
+
+.nav__close {
+    opacity: 0;
+}
+
+@media screen and (max-width: 1150px) {
+    .nav__menu {
+        position: fixed;
+        top: 1.5rem;
+        left: 0;
+        right: 0;
+        background-color: var(--black-color);
+        margin-inline: 1rem;
+        padding-block: 4rem;
+        border-radius: 2rem;
+        box-shadow: var(--nav-shadow);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform .4s, opacity .3s;
+    }
+}
+
+.nav__list {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 1.5rem;
+}
+
+.nav__link {
+    color: var(--white-color);
+    font-weight: 600;
+    display: grid;
+    place-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav__link span {
+    transition: transform .4s;
+}
+
+.nav__link span:nth-child(2) {
+    position: absolute;
+    transform: translateY(150%);
+}
+
+.nav__link:hover span:nth-child(1) {
+    transform: translateY(-150%);
+}
+
+.nav__link:hover span:nth-child(2) {
+    transform: translateY(0);
+}
+
+.show-menu {
+    transform: translateY(5rem);
+    opacity: 1;
+    pointer-events: initial;
+}
+
+.show-icon .nav__burger {
+    opacity: 0;
+    transform: rotate(-90deg);
+}
+
+.show-icon .nav__close {
+    opacity: 1;
+    transform: -90deg;
+}
+
+@media screen and (min-width: 1150px) {
+    .container {
+        margin-inline: auto;
+    }
+    .header {
+        top: 2.5rem;
+    }
+    .nav {
+        height: calc(var(--header-height) + 1.5rem);
+        padding: .75rem 1rem;
+    }
+    .nav__logo {
+        width: 56px;
+        height: 56px;
+    }
+    .nav__logo i {
+        font-size: 2rem;
+    }
+    .nav__list {
+        flex-direction: row;
+        column-gap: 3rem;
+    }
+    .nav__email {
+        font-size: var(--normal-font-size);
+    }
+    .nav__toggle {
+        display: none;
+    }
+}
