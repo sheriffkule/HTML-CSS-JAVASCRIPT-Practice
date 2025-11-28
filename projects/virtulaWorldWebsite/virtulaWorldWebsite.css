@@ -14,7 +14,9 @@
 :root {
     --body-color: #0d1220;
     --prime-color: #32a64f;
-    --prime-ligh-color: #34e460;
+    --prime-color2: #01ff40;
+    --prime-light-color: #34e460;
+    --prime-light-color: #55fc7f;
     --second-color: #161c2d;
     --black-color: #000;
     --white-color: #fff;
@@ -44,6 +46,7 @@ h1 {
 body {
     background-color: var(--body-color);
     overflow-x: hidden;
+    color: var(--white-color);
 }
 
 header {
@@ -212,7 +215,7 @@ button:hover {
     left: 50%;
     width: 40%;
     height: 2px;
-    background-color: var(--prime-ligh-color);
+    background-color: var(--prime-light-color);
 }
 
 .brands_Swiper {
@@ -227,6 +230,43 @@ button:hover {
 
 .about_image {
     width: 50%;
+    position: relative;
+}
+
+.about_bg {
+    position: absolute;
+    top: 53%;
+    left: 53%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    z-index: -1;
+}
+
+.product_sold {
+    position: absolute;
+    top: -5%;
+    left: -5%;
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    background-color: var(--white-color);
+    color: var(--black-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.product_sold h1 {
+    font-size: 3rem;
+    font-family: var(--museoModerno-font);
+    color: var(--prime-light-color);
+    font-weight: 500;
+    line-height: 3rem;
+}
+
+.product_sold p {
+    font-size: 1.1rem;
 }
 
 .about_content {
@@ -242,5 +282,114 @@ button:hover {
 .about_content h2 {
     font-size: 1.2rem;
     font-weight: 500;
-    color: var(--prime-ligh-color);
+    color: var(--prime-light-color);
+}
+
+.about_content h1 {
+    font-size: 3rem;
+    font-family: var(--museoModerno-font);
+    font-weight: 500;
+    line-height: 3.5rem;
+}
+
+.about_content p {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #999;
+    margin: 10px 0;
+}
+
+.about_content button {
+    margin: 20px 0;
+}
+
+.category_cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    place-content: center;
+    place-items: center;
+}
+
+.btn2 {
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    clip-path: none;
+    margin: 10px 0;
+}
+
+.btn2:hover {
+    color: var(--black-color);
+    border-color: transparent;
+}
+
+.category_card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    padding: 5%;
+}
+
+.category_card::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background-image: url('Images/card_bg.jpg');
+    background-size: cover;
+    z-index: -1;
+    opacity: 0.5;
+    transition: var(--transition);
+}
+
+.category_card::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(135deg, var(--prime-color) 0%, var(--prime-light-color) 100%);
+    z-index: -1;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.category_card:hover::before {
+    opacity: 1;
+}
+
+.category_card:hover::after {
+    opacity: 0;
+}
+
+.category_card h2:hover {
+    color: var(--black-color);
+    cursor: pointer;
+}
+
+.category_card img {
+    width: 18%;
+}
+
+.category_card h2 {
+    font-family: var(--museoModerno-font);
+    font-size: 2rem;
+    font-weight: 400;
+    transition: var(--transition);
+}
+
+.category_card p {
+    font-size: 1rem;
+    font-weight: 400;
 }
