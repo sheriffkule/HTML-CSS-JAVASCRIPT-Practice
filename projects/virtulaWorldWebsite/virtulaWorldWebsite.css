@@ -420,6 +420,12 @@ button:hover {
     font-family: var(--museoModerno-font);
 }
 
+.headings p {
+    color: #999;
+    font-size: 1.1rem;
+    margin: 10px 0;
+}
+
 .about_info {
     gap: 50px;
     background-color: #14262a;
@@ -427,6 +433,7 @@ button:hover {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    position: relative;
 }
 
 .about_info_content {
@@ -435,12 +442,6 @@ button:hover {
     justify-content: flex-start;
     align-items: flex-start;
     gap: 10px;
-}
-
-.about_info_content p {
-    color: #999;
-    font-size: 1.1rem;
-    margin: 10px 0;
 }
 
 .about_det {
@@ -488,4 +489,105 @@ button:hover {
 
 .about_info_img {
     width: 70%;
+}
+
+.work_det {
+    position: absolute;
+    top: 90%;
+    left: 0;
+    padding: 3% 10%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    place-content: center;
+    background-image: linear-gradient(to left, var(--prime-color) 0%, var(--prime-light-color));
+    clip-path: polygon(0 0, 100% 0, 100% 70%, 96% 100%, 0 100%, 0% 0);
+}
+
+.work_box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+.work_box::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 100%;
+    width: 1px;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.work_box h1 {
+    font-size: 3rem;
+    line-height: 3rem;
+    font-family: var(--museoModerno-font);
+}
+
+.service {
+    margin-top: 120px;
+    gap: 50px;
+}
+
+.service .headings {
+    width: 50%;
+}
+
+.service_info {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.service_box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.service_box:hover i {
+    background-color: var(--prime-color);
+    cursor: pointer;
+}
+
+.service_box i {
+    width: 150px;
+    height: 100px;
+    font-size: 3.5rem;
+    border-radius: 5px;
+    background-color: var(--prime-color2);
+    color: var(--white-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.service_det {
+    display: flex;
+    flex-direction: column;
+}
+
+.service_det h2 {
+    font-size: 1.5rem;
+    font-family: var(--museoModerno-font);
+    font-weight: 400;
+    transition: var(--transition);
+}
+
+.service_det h2:hover {
+    color: var(--prime-color2);
+    cursor: pointer;
+}
+
+.service_det p {
+    font-size: 1rem;
+    color: #999;
+    font-weight: 400;
 }
