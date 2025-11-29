@@ -14,9 +14,9 @@
 :root {
     --body-color: #0d1220;
     --prime-color: #32a64f;
-    --prime-color2: #01ff40;
+    --prime-color2: #55fc7f;
     --prime-light-color: #34e460;
-    --prime-light-color: #55fc7f;
+    --prime-light-color2: #01ff40;
     --second-color: #161c2d;
     --black-color: #000;
     --white-color: #fff;
@@ -334,6 +334,7 @@ button:hover {
     position: relative;
     z-index: 1;
     padding: 5%;
+    transition: var(--transition);
 }
 
 .category_card::after {
@@ -359,7 +360,7 @@ button:hover {
     transform: translate(-50%, -50%);
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(135deg, var(--prime-color) 0%, var(--prime-light-color) 100%);
+    background-image: linear-gradient(135deg, var(--prime-color2) 0%, var(--prime-light-color2) 100%);
     z-index: -1;
     opacity: 0;
     transition: var(--transition);
@@ -367,6 +368,10 @@ button:hover {
 
 .category_card:hover::before {
     opacity: 1;
+}
+
+.category_card:hover {
+    transform: scale(1.03);
 }
 
 .category_card:hover::after {
@@ -392,4 +397,95 @@ button:hover {
 .category_card p {
     font-size: 1rem;
     font-weight: 400;
+}
+
+.headings {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.headings h2 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--prime-light-color);
+}
+
+.headings h1 {
+    font-size: 2rem;
+    line-height: 2.5rem;
+    font-weight: 500;
+    font-family: var(--museoModerno-font);
+}
+
+.about_info {
+    gap: 50px;
+    background-color: #14262a;
+    background-image: url('Images/bg_img.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.about_info_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.about_info_content p {
+    color: #999;
+    font-size: 1.1rem;
+    margin: 10px 0;
+}
+
+.about_det {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.det_box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.det_box i {
+    font-size: 3rem;
+    width: 150px;
+    height: 75px;
+    border-radius: 100%;
+    border: 1px solid var(--prime-light-color);
+    color: var(--prime-light-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.det_info {
+    display: flex;
+    flex-direction: column;
+}
+
+.det_info h2 {
+    font-size: 1.3rem;
+    font-weight: 400;
+    font-family: var(--museoModerno-font);
+}
+
+.det_info p {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.about_info_img {
+    width: 70%;
 }
