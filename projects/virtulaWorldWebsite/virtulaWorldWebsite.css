@@ -309,7 +309,7 @@ button:hover {
     gap: 20px;
     place-content: center;
     place-items: center;
-    background-image: linear-gradient(to bottom, rgba(131, 131, 131, 0,1), transparent);
+    background-image: linear-gradient(to bottom, rgba(131, 131, 131, 0.1), transparent);
 }
 
 .btn2 {
@@ -832,6 +832,8 @@ button:hover {
 
 .banner2 {
     flex-direction: column;
+    padding: 0 10%;
+    padding-top: 10%;
 }
 
 .banner_content {
@@ -875,7 +877,7 @@ button:hover {
 
 .footer {
     flex-direction: column;
-    padding: 3% 10%;
+    padding: 3% 0%;
 }
 
 .footer_top,
@@ -911,4 +913,237 @@ button:hover {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.social_icon i {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.social_icon i:hover {
+    background-color: var(--white-color);
+    color: var(--black-color);
+    transform: scale(1.05) translateY(-3px);
+}
+
+.footer_bottom h4 {
+    font-size: 1.1rem;
+    color: #e0e0e0;
+    font-weight: 400;
+}
+
+.footer_bottom h4 abbr {
+    text-decoration: underline 1px dotted var(--prime-color);
+    text-underline-offset: 3px;
+    cursor: default;
+    color: var(--prime-color);
+}
+
+@media screen and (max-width: 1200px) {
+    .menu {
+        gap: 10px;
+    }
+    .hero_header,
+    section {
+        flex-direction: column;
+    }
+    .about {
+        flex-direction: column-reverse;
+        margin-top: 20%;
+    }
+    .hero_content,
+    .about_content,
+    .about_image,
+    .about_info_content,
+    .service .headings,
+    .about_info_img,
+    .service_info,
+    .info_image {
+        width: 100%;
+        margin: 0;
+    }
+    .info_content {
+        display: none;
+    }
+    .work_det {
+        top: 95%;
+    }
+    .work_box::after {
+        all: unset;
+    }
+    .det_box i {
+        width: 100px;
+    }
+    .hero_image {
+        width: 70%;
+    }
+    .company {
+        top: 107%;
+    }
+    .company h1 {
+        font-size: 2rem;
+    }
+    .banner h1 {
+        font-size: 3rem;
+    }
+    .banner_content h1 {
+        font-size: 3.5rem;
+    }
+    .category_cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .bars {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+    }
+    nav {
+        position: relative;
+    }
+    .menu {
+        position: absolute;
+        top: -700%;
+        left: 0;
+        opacity: 0;
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1% 10%;
+        background-color: var(--body-color);
+        z-index: 999;
+        transition: var(--transition2);
+    }
+    .menu li {
+        width: 100%;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+        transition: var(--transition);
+    }
+    .menu li:hover {
+        border-color: var(--prime-color);
+    }
+    .show_menu {
+        top: 100%;
+        opacity: 1;
+    }
+    .hero_image {
+        width: 80%;
+    }
+    .company {
+        top: 100%;
+    }
+    .company h1 {
+        font-size: 1.5rem;
+    }
+    .det_box i {
+        height: 65px;
+    }
+    .work_det {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    .services {
+        margin-top: 150px;
+    }
+    .info_image img {
+        object-fit: cover;
+    }
+    .banner h1,
+    .banner_content h1 {
+        width: 100%;
+    }
+    .banner_content h1 {
+        font-size: 2.5rem;
+    }
+    .footer_top,
+    .footer_bottom {
+        flex-direction: column;
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .links {
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .logo {
+        width: 130px;
+    }
+    nav button {
+        width: 150px;
+    }
+    .hero_content {
+        font-size: 2rem;
+        line-height: 2.5rem;
+    }
+    .hero_content p {
+        font-size: 1rem;
+    }
+    .hero_image {
+        width: 100%;
+    }
+    .company {
+        top: 82%;
+    }
+    .company h1 {
+        width: 100%;
+        font-size: 1.3rem;
+    }
+    .about {
+        margin: 0;
+    }
+    .about_content h1 {
+        font-size: 2rem;
+        line-height: 2.5rem;
+    }
+    .category_cards {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .headings h1 {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+    .det_info {
+        font-size: 0.8rem;
+        color: #999;
+    }
+    .headings p {
+        font-size: 1rem;
+    }
+    .det_info i {
+        height: 55px;
+    }
+    .service_box i {
+        height: 80px;
+    }
+    .banner h1,
+    .banner_content {
+        font-size: 2rem;
+        line-height: 2.5rem;
+        width: 100%;
+    }
+    .banner_content p {
+        width: 100%;
+    }
 }
