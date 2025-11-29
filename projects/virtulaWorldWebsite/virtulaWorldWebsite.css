@@ -309,6 +309,7 @@ button:hover {
     gap: 20px;
     place-content: center;
     place-items: center;
+    background-image: linear-gradient(to bottom, rgba(131, 131, 131, 0,1), transparent);
 }
 
 .btn2 {
@@ -721,4 +722,71 @@ button:hover {
 .testimonial .headings {
     justify-content: center;
     align-items: center;
+    gap: 20px;
+}
+
+.star_icons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.star_icons i {
+    font-size: 1.5rem;
+}
+
+.testimonialSwiper {
+    width: 100%;
+}
+
+.test_slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #161c2d;
+    padding: 5%;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: var(--transition);
+}
+
+.test_slide:hover {
+    border-color: rgba(255, 255, 255, 0.7);
+}
+
+.test_slide:hover p {
+    color: #bfbfbf;
+}
+
+.test_slide p {
+    font-size: 1.1rem;
+    color: #999;
+    font-weight: 400;
+    transition: var(--transition);
+}
+
+.client_img {
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.test_slide h2 {
+    font-size: 1.5rem;
+    color: var(--prime-color);
+    font-weight: 400;
+    transition: var(--transition);
+}
+
+.client_name {
+    color: var(--white-color) !important;
+}
+
+.test_slide h2:hover {
+    color: var(--prime-light-color2);
+    cursor: pointer;
 }
