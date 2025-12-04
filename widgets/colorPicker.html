@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Color Picker App</title>
+    <link rel="stylesheet" href="/widgets_style/colorPicker.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="section">
+      <h1>Color Picker App</h1>
+      <input type="color" id="color-picker" />
+      <div class="color-codes">
+        <p>
+          <label for="hex-value">Hex: </label>
+          <button class="button-28" id="hex-value" onclick="hex()">#03FFDD</button>
+        </p>
+        <p>
+          <label for="rgb-value">RGB: </label>
+          <button class="button-28" id="rgb-value" onclick="rgb()">rgb(106,50,15)</button>
+        </p>
+        <p>
+          <label for="hsl-value">HSL: </label>
+          <button class="button-28" id="hsl-value" onclick="hsl()">hsl(228,76%,30%)</button>
+        </p>
+        <p>COPY TO CLIPBOARD</p>
+      </div>
+    </div>
+    <script src="/widgets_script/colorPicker.js"></script>
+  </body>
+</html>
