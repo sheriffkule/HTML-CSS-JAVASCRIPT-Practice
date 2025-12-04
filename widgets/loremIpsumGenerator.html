@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lorem Ipsum Generator App</title>
+    <link rel="stylesheet" href="/widgets_style/loremIpsumGenerator.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Lorem Ipsum Generator App</h1>
+      <div class="controls">
+        <label for="paragraphs">Paragraphs: <span id="paraCount">3</span></label>
+        <input type="range" id="paragraphs" min="1" max="10" value="3" />
+        <label for="length">Length:</label>
+        <select id="length">
+          <option value="short">Short</option>
+          <option value="medium">Medium</option>
+          <option value="long">Long</option>
+        </select>
+        <label for="customWords">Custom Words:</label>
+        <input type="text" id="customWords" placeholder="Optional, comma-separated" />
+        <button id="generate">Generate</button>
+        <button id="copy">Copy</button>
+        <button id="clear">Clear</button>
+        <button id="darkMode">Dark Mode</button>
+      </div>
+      <div id="output"></div>
+    </div>
+    <h4 class="footer__copy">
+        © <time datetime="2025" id="year">2025</time> Made by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </h4>
+    <script src="/widgets_script/loremIpsumGenerator.js"></script>
+  </body>
+</html>

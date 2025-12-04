@@ -1,0 +1,124 @@
+:root {
+    --bg-color: #f0f2f5;
+    --text-color: #222;
+    --container-bg: #e2e2e2;
+    --button-bg: #007bff;
+    --button-hover: #0056b3;
+}
+
+body.dark {
+    --bg-color: #181a1f;
+    --text-color: #eee;
+    --container-bg: #242629;
+    --button-bg: #4e9cff;
+    --button-hover: #1f6ed0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    interpolate-size: allow-keywords;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--bg-color);
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    color: var(--text-color);
+    transition: .3s;
+}
+
+.container {
+    background-color: var(--container-bg);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    margin-inline: 20px;
+    margin-block-end: 10px;
+    max-width: 900px;
+    align-self: flex-end;
+}
+
+h1 {
+    text-align: center;
+    margin-block-end: 25px;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-block-end: 20px;
+}
+
+input[type="text"], select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #bbb;
+    flex: 1;
+    min-width: 120px;
+    outline: none;
+}
+
+input[type="text"] {
+    min-width: fit-content;
+}
+
+input[type="range"] {
+    flex: 1;
+}
+
+input:where(:focus, :focus-within) {
+    filter: contrast(0.85);
+}
+
+button {
+    padding: 7px 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--button-bg);
+    color: white;
+    transition: 0.2s;
+
+    &:hover {
+        background-color: var(--button-hover);
+        transform: translateY(-2px) scale(1.03);
+        box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    &:active {
+        transform: translateY(0) scale(1);
+    }
+}
+
+#output {
+    line-height: 1.7;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    transition: .5s;
+}
+
+#output p {
+    margin-bottom: 15px;
+}
+
+.footer__copy {
+    align-self: flex-end;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--text-color);
+    margin-block-end: 10px;
+}
+
+abbr {
+    text-underline-offset: 3px;
+    cursor: default;
+}
