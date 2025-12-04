@@ -17,7 +17,7 @@
         <div class="input-section">
           <div class="input-group">
             <div class="input-num">
-              <input type="number" id="numberInput"  min="1" step="1" />
+              <input type="number" id="numberInput" min="1" step="1" />
               <span>Enter a positive integer</span>
             </div>
             <button id="checkBtn" class="primary-btn"><i class="fas fa-check"></i> Check Prime</button>
@@ -35,20 +35,47 @@
         </div>
 
         <div class="result-section">
-            <p>Enter a number to check if it's prime.</p>
-            <div id="result" class="result"></div>
-            <div id="factors" class="factors"></div>
+          <p>Enter a number to check if it's prime.</p>
+          <div id="result" class="result"></div>
+          <div id="factors" class="factors"></div>
         </div>
 
         <div class="history-section">
-            <h2><i class="fas fa-history"></i> Check History</h2>
-            <div id="historyList" class="history-list">
-                Your checked numbers will appear here.
-            </div>
+          <h2><i class="fas fa-history"></i> Check History</h2>
+          <div id="historyList" class="history-list">
+            <p>Your checked numbers will appear here.</p>
+          </div>
         </div>
 
-        <div class="result-section"></div>
+        <div class="info-section">
+          <div class="info-content">
+            <div class="info-text">
+              <h3>What is a Prime Number?</h3>
+              <p>
+                A prime number is a natural number greater than 1 that cannot be formed by multiplying two
+                smaller natural numbers. In other words, a prime number is only divisible by 1 and itself.
+              </p>
+              <p>The first few prime numbers are 2, 3, 5, 7, 11, 13, 17, 19, 23, and so on.</p>
+            </div>
+            <div class="examples">
+              <h3>Examples of Prime Numbers</h3>
+              <ul class="example-list">
+                <li><span class="prime-history">2</span> - The Smallest and only even prime number.</li>
+                <li><span class="prime-history">17</span> - A prime number with 2 digits.</li>
+                <li><span class="prime-history">7919</span> - The 1000th prime number.</li>
+                <li><span class="prime-history">2147483647</span> = A large prime number.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
+      <footer>
+        <h4 class="footer__copy">
+          © <time datetime="2025" id="year"></time> Made by
+          <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+        </h4>
+      </footer>
     </section>
+    <script src="/widgets_script/primeNumChecker.js"></script>
   </body>
 </html>
