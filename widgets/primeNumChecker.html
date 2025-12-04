@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prime Number Checker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/primeNumChecker.css" />
+  </head>
+  <body>
+    <section class="container">
+      <header>
+        <h1><i class="fas fa-calculator"></i> Prime Number Checker</h1>
+        <p class="description">Check if number is prime and explore its properties.</p>
+      </header>
+      <div class="main-content">
+        <div class="input-section">
+          <div class="input-group">
+            <div class="input-num">
+              <input type="number" id="numberInput"  min="1" step="1" />
+              <span>Enter a positive integer</span>
+            </div>
+            <button id="checkBtn" class="primary-btn"><i class="fas fa-check"></i> Check Prime</button>
+          </div>
+
+          <div class="action-buttons">
+            <button id="clearBtn" class="danger-btn"><i class="fas fa-trash"></i> Clear Result</button>
+            <button id="exampleBtn" class="secondary-btn">
+              <i class="fas fa-question"></i> Show Example
+            </button>
+            <button id="historyBtn" class="secondary-btn">
+              <i class="fas fa-history"></i> Toggle History
+            </button>
+          </div>
+        </div>
+
+        <div class="result-section">
+            <p>Enter a number to check if it's prime.</p>
+            <div id="result" class="result"></div>
+            <div id="factors" class="factors"></div>
+        </div>
+
+        <div class="history-section">
+            <h2><i class="fas fa-history"></i> Check History</h2>
+            <div id="historyList" class="history-list">
+                Your checked numbers will appear here.
+            </div>
+        </div>
+
+        <div class="result-section"></div>
+      </div>
+    </section>
+  </body>
+</html>
