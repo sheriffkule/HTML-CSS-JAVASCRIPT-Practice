@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    background: #0c2935;
+}
+
+h2 {
+    color: rgba(0, 0, 0, 0.2);
+    font-size: 12vw;
+    pointer-events: none;
+    user-select: none;
+}
+
+.pulse {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    border: 2px solid #03a9f4;
+    outline-offset: 5px;
+    border-radius: 50%;
+    z-index: 10;
+    animation: pulse 1s linear infinite;
+}
+
+@keyframes pulse {
+    from {
+        width: 0;
+        height: 0;
+        opacity: 1;
+        filter: hue-rotate(0);
+    }
+    50% {
+        opacity: 50%;
+    }
+    to {
+        width: 100px;
+        height: 100px;
+        opacity: 0;
+        filter: hue-rotate(60deg);
+    }
+}
