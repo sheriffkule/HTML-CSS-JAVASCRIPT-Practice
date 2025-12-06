@@ -8,6 +8,7 @@
   </head>
   <body>
     <section class="wrap">
+      <h1 class="title">Catch Me If You Can Game</h1>
       <div class="app">
         <div>
           <div class="hud">
@@ -43,6 +44,17 @@
           <footer>Tip: Move your mouse slowly to lure the button, then click quickly</footer>
         </aside>
       </div>
+      <div id="gameOver" class="gameOver">
+        <h2>GAME OVER!</h2>
+        <h3>Your Score: <span id="scoreFinal"></span></h3>
+        <p>Try again, or adjust difficulty.</p>
+        <button id="startOver" class="btn">Start Over</button>
+        <span id="gameOverClose">X</span>
+      </div>
+      <h4 class="footer__copy">
+        © <time datetime="year" id="year"></time> Made by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </h4>
     </section>
     <script src="/widgets_script/catchMeGame.js"></script>
   </body>
