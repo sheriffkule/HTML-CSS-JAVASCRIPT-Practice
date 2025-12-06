@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+    color: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-block-end: 20px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #fdbb2d, #b21f1f, #1a2a6c);
+    display: inline-block;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-stroke: 0.5px white;
+    -webkit-box-reflect: below -20px linear-gradient(transparent, transparent, white);
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.main-content {
+    display: flex;
+    width: 100%;
+    gap: 30px;
+}
+
+.controls {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 25px;
+    width: 320px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.control-group {
+    margin-block-end: 25px;
+}
+
+.control-group h3 {
+    margin-block-end: 15px;
+    font-size: 1.25rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    padding-block-end: 8px;
+}
+
+.slider-container {
+    margin-block-end: 15px;
+}
+
+.slider-container label {
+    display: flex;
+    justify-content: space-between;
+    margin-block-end: 8px;
+}
+
+input[type="range"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 5px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2));
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 20px;
+    background: radial-gradient(circle at center, white 60%, silver);
+    cursor: pointer;
+    transition: .2s;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+    scale: 1.1;
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.8);
+}

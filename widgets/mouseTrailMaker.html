@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mouse Trail Maker</title>
+    <link rel="stylesheet" href="/widgets_style/mouseTrailMaker.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Cursor Trail Maker</h1>
+        <p class="subtitle">
+          Create beautiful cursor trails with customizable shapes, colors, and effects. Move your cursor
+          around the preview area to see the magic!
+        </p>
+      </header>
+      <main class="main-content">
+        <div class="controls">
+          <div class="control-group">
+            <h3>Trail Style</h3>
+            <div class="slider-container">
+              <label>
+                <span>Size:</span>
+                <span id="size-value">20px</span>
+              </label>
+              <input type="range" id="size-slider" min="5" max="50" value="20" />
+            </div>
+            <div class="slider-container">
+              <label>
+                <span>Length:</span>
+                <span id="length-value">15</span>
+              </label>
+              <input type="range" id="opacity-slider" min="0.1" max="1" step="0.1" value="0.7" />
+            </div>
+          </div>
+
+          <div class="control-group">
+            <h3>Colors</h3>
+            <div class="color-picker">
+              <div class="color-option active" style="background-color: #ff3e3e" data-color="#ff3e3e"></div>
+              <div class="color-option" style="background-color: #3ea6ff" data-color="#3ea6ff"></div>
+              <div class="color-option" style="background-color: #3eff8b" data-color="#3eff8b"></div>
+              <div class="color-option" style="background-color: #ffeb3e" data-color="#ffeb3e"></div>
+              <div class="color-option" style="background-color: #c13eff" data-color="#c13eff"></div>
+              <div class="color-option" style="background-color: #ff7b3e" data-color="#ff7b3e"></div>
+              <div class="color-option" style="background-color: #ffffff" data-color="#ffffff"></div>
+              <div
+                class="color-option"
+                style="background: linear-gradient(45deg, #ff3e3e, #3ea6ff)"
+                data-color="gradient"></div>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <h3>Shapes</h3>
+            <div class="shape-options">
+              <div class="shape-option active" data-shape="circle">
+                <div class="shape-circle"></div>
+              </div>
+              <div class="shape-option" data-shape="square">
+                <div class="shape-square"></div>
+              </div>
+              <div class="shape-option" data-shape="triangle">
+                <div class="shape-triangle"></div>
+              </div>
+              <div class="shape-option" data-shape="star">
+                <div class="shape-star"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <h3>Effect</h3>
+            <button id="toggle-trail">Toggle Trail</button>
+            <button id="clear-trail">Clear Trail</button>
+            <button id="random-mode">Random Mode</button>
+          </div>
+        </div>
+
+        <div class="preview-area" id="preview-area"></div>
+      </main>
+
+      <p class="instructions">
+        Move your cursor in the preview area to create a beautiful trail. Customize the appearance using the
+        controls on the left.
+      </p>
+
+      <footer class="footer__copy">
+        © <time datetime="2025" id="year"></time> Made by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
+    </div>
+    <script src="/widgets_script/mouseTrailMaker.js"></script>
+  </body>
+</html>
