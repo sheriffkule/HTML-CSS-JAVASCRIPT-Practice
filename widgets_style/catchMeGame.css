@@ -1,0 +1,86 @@
+:root {
+    --bg: #0f1724;
+    --card: #0b1220;
+    --accent: #60a5fa;
+    --muted: #9aa4b2;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #e6eef6;
+    background: linear-gradient(180deg, #071023, #0f1724);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.wrap {
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.wrap {
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.app {
+    width: 980px;
+    max-width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 8px 30px rgba(2, 6, 23, 0.6);
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 16px;
+
+    @media screen and (max-width: 880px) {
+        .app {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+.stage {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hud {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-block-end: 8px;
+}
+
+.stat {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+#playArea {
+    width: 100%;
+    height: 520px;
+    background: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.01) 0 10px, transparent 10px 20px);
+    border-radius: 8px;
+    position: relative;
+}

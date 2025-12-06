@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catch Me If You Can Game</title>
+    <link rel="stylesheet" href="/widgets_style/catchMeGame.css" />
+  </head>
+  <body>
+    <section class="wrap">
+      <div class="app">
+        <div>
+          <div class="hud">
+            <div class="stat">Score: <span id="score">0</span></div>
+            <div class="stat">Level: <span id="level">1</span></div>
+            <div class="stat">Timer: <span id="timer">30</span></div>
+            <div class="muted" style="margin-left: auto">
+              Catch the button - click it before time runs out!
+            </div>
+          </div>
+          <div class="stage">
+            <div id="playArea" aria-label="Game play area">
+              <button id="catcher" aria-label="Catch me button">Catch me!</button>
+            </div>
+          </div>
+        </div>
+        <aside class="sidebar">
+          <h1>Settings & Stats</h1>
+          <div class="mutted">Difficulty</div>
+          <label>Start timer (seconds): <strong id="startTimerLabel">30</strong></label>
+          <input type="range" id="startTimer" min="5" max="60" value="30" />
+          <label>Escape distance (pixels): <strong id="escapeLabel">140</strong></label>
+          <input type="range" id="escapeRange" min="40" max="260" value="140" />
+          <div style="height: 12px"></div>
+          <div class="controls">
+            <button id="startBtn" class="btn">Start Game</button>
+            <button id="resetBtn" class="btn" style="background: #ef4444">Reset</button>
+            <button id="themeBtn" class="btn" style="background: #6b7280">Light Mode</button>
+          </div>
+          <div style="height: 12px"></div>
+          <div class="mutted">Best Score: <strong id="best">0</strong></div>
+          <div style="height: 6px"></div>
+          <footer>Tip: Move your mouse slowly to lure the button, then click quickly</footer>
+        </aside>
+      </div>
+    </section>
+    <script src="/widgets_script/catchMeGame.js"></script>
+  </body>
+</html>
