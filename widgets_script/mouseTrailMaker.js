@@ -22,3 +22,55 @@ let config = {
   randomMode: false,
   trailElements: [],
 };
+
+// Initialize the app
+function init() {
+  updateSliderValues();
+  setupEventListeners();
+}
+
+function updateSliderValues() {
+  sizeValue.textContent = `${config.size}px`;
+  lengthValue.textContent = config.length;
+  opacityValue.textContent = config.opacity;
+}
+
+// set up event listeners
+function setupEventListeners() {
+  // slider events
+  sizeSlider.addEventListener('input', () => {
+    config.size = parseInt(sizeSlider.value);
+    updateSliderValues();
+  });
+
+  lengthSlider.addEventListener('input', () => {
+    config.length = parseInt(lengthSlider.value);
+    updateSliderValues();
+  });
+
+  opacitySlider.addEventListener('input', () => {
+    config.opacity = parseFloat(opacitySlider.value);
+    updateSliderValues();
+  });
+
+  // Shape selection
+  colorOptions.forEach((option) => {
+    option.addEventListener('click', () => {
+      colorOptions.forEach((opt) => opt.classList.remove('active'));
+      option.classList.add('active');
+      config.color = option.getAttribute('data-color');
+    });
+  });
+
+  // Shape selection
+  shapeOptions.forEach((option) => {
+    option.addEventListener('click', () => {
+      shapeOptions.forEach((opt) => opt.classList.remove('active'));
+      option.classList.add('active');
+      config.shape = option.getAttribute('data-shape');
+    });
+  });
+}
+
+// Initialize the application
+init();

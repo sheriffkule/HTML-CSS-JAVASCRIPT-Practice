@@ -22,12 +22,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    gap: 20px;
 }
 
 header {
     text-align: center;
-    padding: 20px;
+    padding: 10px 20px;
     width: 100%;
 }
 
@@ -87,13 +87,17 @@ h1 {
     margin-block-end: 8px;
 }
 
+.slider-container label span:last-child {
+    font-weight: 600;
+}
+
 input[type="range"] {
     appearance: none;
     -webkit-appearance: none;
     width: 100%;
     height: 8px;
     border-radius: 5px;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2));
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.4));
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -109,4 +113,123 @@ input[type="range"]::-webkit-slider-thumb {
 input[type="range"]::-webkit-slider-thumb:hover {
     scale: 1.1;
     box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.8);
+}
+
+.color-picker,
+.shape-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-block-start: 10px;
+}
+
+.color-option {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.2s;
+
+    &:hover {
+        transform: translateY(-2px) scale(1.15);
+    }
+}
+
+.color-option.active {
+    border-color: white;
+    transform: scale(1.15);
+}
+
+.shape-option {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px) scale(1.1);
+    }
+}
+
+.shape-option.active {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px) scale(1.1);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+.shape-option div {
+    background: white;
+}
+
+.shape-option div {
+    width: 22px;
+    height: 22px;
+}
+
+.shape-circle {
+    border-radius: 10px;
+}
+
+.shape-triangle {
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.shape-star {
+    position: relative;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.shape-pentagon {
+    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+}
+
+.shape-hexagon {
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+
+.shape-chess {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 25%, 0% 25%, 0% 50%, 100% 50%, 100% 75%, 0% 75%, 0% 100%, 100% 100%, 100% 0%, 75% 0%, 75% 100%, 50% 100%, 50% 0%, 25% 0%, 25% 100%, 0% 100%);
+}
+
+.shape-heart {
+    clip-path: polygon(30% 0%, 50% 15%, 70% 0%, 90% 10%, 100% 35%, 80% 70%, 50% 100%, 20% 70%, 0% 35%, 10% 10%);
+}
+
+.shape-plus {
+    clip-path: polygon(33% 0%, 66% 0%, 66% 33%, 100% 33%, 100% 66%, 66% 66%, 66% 100%, 33% 100%, 33% 66%, 0% 66%, 0% 33%, 33% 33%);
+}
+
+.shape-diamond {
+    clip-path: polygon(25% 0%, 75% 0%, 100% 25%, 50% 100%, 0% 25%);
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.25s;
+    margin-block-start: 10px;
+
+    &:hover {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: inset 0 -44px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    &:active {
+        transform: scale(1);
+        transition: 0.1s;
+    }
 }
