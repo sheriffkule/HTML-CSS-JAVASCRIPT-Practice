@@ -5,6 +5,10 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+p {
+    text-wrap: pretty;
+}
+
 body {
     background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
     color: white;
@@ -231,5 +235,54 @@ button {
     &:active {
         transform: scale(1);
         transition: 0.1s;
+    }
+}
+
+.preview-area {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 8px 21px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: crosshair;
+}
+
+.trail-element {
+    position: absolute;
+    pointer-events: none;
+    transition: transform 0.1s, opacity 0.5s;
+}
+
+.instructions {
+    text-align: center;
+    margin-block-start: 20px;
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+footer {
+    margin-block-start: 20px;
+    text-align: center;
+    opacity: 0.7;
+    font-size: 0.9rem;
+
+    abbr {
+        text-underline-offset: 3px;
+        opacity: 1;
+        cursor: default;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .main-content {
+        flex-direction: column;
+    }
+    .controls {
+        width: 100%;
+    }
+    .preview-area {
+        min-height: 400px;
     }
 }
