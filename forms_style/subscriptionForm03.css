@@ -128,3 +128,78 @@ body {
     color: var(--primary);
     font-weight: 600;
 }
+
+.form-container {
+    padding: 20px 40px 40px;
+}
+
+.form-step {
+    display: none;
+    /* animation: fadeIn 0.5s ease; */
+}
+
+.form-step.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-title {
+    margin-block-end: 25px;
+    color: var(--dark);
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.form-group {
+    margin-block-end: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin: 8px;
+    font-weight: 500;
+    color: var(--dark);
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.form-control::placeholder {
+    transition: var(--transition);
+    transform-origin: left;
+}
+
+.form-control:where(:focus, :focus-within) {
+    border-color: var(--primary-light);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+}
+
+.form-control:where(:focus, :focus-within)::placeholder {
+    transform: translateY(-15px);
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}

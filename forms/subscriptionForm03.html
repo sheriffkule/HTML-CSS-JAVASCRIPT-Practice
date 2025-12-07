@@ -32,6 +32,54 @@
           <span class="step-label">Review</span>
         </div>
       </article>
+
+      <article class="form-container">
+        <div class="form-step active" id="form-step1">
+          <h2 class="form-title">Personal Information</h2>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="first-name">First Name</label>
+              <input type="text" id="first-name" class="form-control" placeholder="Enter your first name" />
+              <div class="error-message" id="first-name-error">Please enter your first name.</div>
+            </div>
+
+            <div class="form-group">
+              <label for="last-name">Last Name</label>
+              <input type="text" id="last-name" class="form-control" placeholder="Enter your last name" />
+              <div class="error-message" id="last-name-error">Please enter your last name.</div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <div class="input-with-icon">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="email" class="form-control" placeholder="Enter your email address" />
+              </div>
+              <div class="error-message" id="email-error">Please enter a valid email address.</div>
+            </div>
+
+            <div class="form-group">
+              <label for="phone"></label>
+              <div class="input-with-icon">
+                <i class="fas fa-phone"></i>
+                <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number" />
+              </div>
+              <div class="error-message" id="phone-error">Please enter a valid phone number</div>
+            </div>
+
+            <div class="btn-group">
+              <button class="btn btn-prev" disabled>
+                <i class="fas fa-arrow-left"></i> Previous
+              </button>
+              <button class="btn btn-next" id="next-1">
+                Next <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+
+        </div>
+      </article>
     </section>
     <script src="/forms_script/subscriptionForm03.js"></script>
   </body>
