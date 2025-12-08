@@ -48,121 +48,164 @@
               <input type="text" id="last-name" class="form-control" placeholder="Enter your last name" />
               <div class="error-message" id="last-name-error">Please enter your last name.</div>
             </div>
+          </div>
 
-            <div class="form-group">
-              <label for="email">Email Address</label>
-              <div class="input-with-icon">
-                <i class="fas fa-envelope"></i>
-                <input type="email" id="email" class="form-control" placeholder="Enter your email address" />
-              </div>
-              <div class="error-message" id="email-error">Please enter a valid email address.</div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <div class="input-with-icon">
+              <i class="fas fa-envelope"></i>
+              <input type="email" id="email" class="form-control" placeholder="Enter your email address" />
             </div>
+            <div class="error-message" id="email-error">Please enter a valid email address.</div>
+          </div>
 
-            <div class="form-group">
-              <label for="phone"></label>
-              <div class="input-with-icon">
-                <i class="fas fa-phone"></i>
-                <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number" />
-              </div>
-              <div class="error-message" id="phone-error">Please enter a valid phone number.</div>
+          <div class="form-group">
+            <label for="phone"></label>
+            <div class="input-with-icon">
+              <i class="fas fa-phone"></i>
+              <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number" />
             </div>
+            <div class="error-message" id="phone-error">Please enter a valid phone number.</div>
+          </div>
 
-            <div class="btn-group">
-              <button class="btn btn-prev" disabled><i class="fas fa-arrow-left"></i> Previous</button>
-              <button class="btn btn-next" id="next-1">Next <i class="fas fa-arrow-right"></i></button>
+          <div class="btn-group">
+            <button class="btn btn-prev" disabled><i class="fas fa-arrow-left"></i> Previous</button>
+            <button class="btn btn-next" id="next-1">Next <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <div class="form-step" id="form-step-2">
+          <h2 class="form-title">Account Details</h2>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <div class="input-with-icon">
+              <i class="fas fa-user"></i>
+              <input type="text" id="username" class="form-control" placeholder="Choose a username" />
+            </div>
+            <div class="error-message" id="username-error">Username must be at least 3 characters.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-with-icon">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="password" class="form-control" placeholder="Create a password" />
+              <span class="password-toggle" id="password-toggle">
+                <i class="fas fa-eye"></i>
+              </span>
+            </div>
+            <div class="error-message" id="password-error">Password must be at least 8 characters.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <div class="input-with-icon">
+              <i class="fas fa-lock"></i>
+              <input
+                type="password"
+                id="confirm-password"
+                class="form-control"
+                placeholder="Confirm your password" />
+              <span class="password-toggle" id="password-toggle">
+                <i class="fas fa-eye"></i>
+              </span>
+            </div>
+            <div class="error-message" id="confirm-password-error">Passwords do not match.</div>
+          </div>
+
+          <div class="btn-group">
+            <button class="btn btn-prev" id="prev-2"><i class="fas fa-arrow-left"></i> Previous</button>
+            <button class="btn btn-next" id="next-2">Next <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <div class="form-step" id="form-step-3">
+          <h2 class="form-title">Preferences</h2>
+          <div class="form-group">
+            <label> Communication Preferences</label>
+            <div class="checkbox-group">
+              <input type="checkbox" id="email-notifications" checked />
+              <label for="email-notifications">Email Notifications</label>
+            </div>
+            <div class="checkbox-group">
+              <input type="checkbox" id="sms-notifications" />
+              <label for="sms-notifications">SMS Notifications</label>
+            </div>
+            <div class="checkbox-group">
+              <input type="checkbox" id="newsletter" checked />
+              <label for="newsletter">Subscribe to newsletter</label>
             </div>
           </div>
 
-          <div class="form-step" id="form-step-2">
-            <h2 class="form-title">Account Details</h2>
-            <div class="form-group">
-              <label for="username">Username</label>
-              <div class="input-with-icon">
-                <i class="fas fa-user"></i>
-                <input type="text" id="username" class="form-control" placeholder="Choose a username" />
-              </div>
-              <div class="error-message" id="username-error">Username must be at least 3 characters.</div>
-            </div>
-
-            <div class="form-group">
-              <label for="password">Password</label>
-              <div class="input-with-icon">
-                <i class="fas fa-lock"></i>
-                <input type="password" id="password" class="form-control" placeholder="Create a password" />
-                <span class="password-toggle" id="password-toggle">
-                  <i class="fas fa-eye"></i>
-                </span>
-              </div>
-              <div class="error-message" id="password-error">Password must be at least 8 characters.</div>
-            </div>
-
-            <div class="form-group">
-              <label for="confirm-password">Confirm Password</label>
-              <div class="input-with-icon">
-                <i class="fas fa-lock"></i>
-                <input
-                  type="password"
-                  id="confirm-password"
-                  class="form-control"
-                  placeholder="Confirm your password" />
-                <span class="password-toggle" id="password-toggle">
-                  <i class="fas fa-eye"></i>
-                </span>
-              </div>
-              <div class="error-message" id="confirm-password-error">Passwords do not match.</div>
-            </div>
-
-            <div class="btn-group">
-              <button class="btn btn-prev" id="prev-2"><i class="fas fa-arrow-left"></i> Previous</button>
-              <button class="btn btn-next" id="next-2">Next <i class="fas fa-arrow-right"></i></button>
-            </div>
+          <div class="form-group">
+            <label for="theme">Theme Preference</label>
+            <select id="theme" class="form-control">
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+              <option value="auto">Auto (System)</option>
+            </select>
           </div>
 
-          <div class="form-step" id="form-step-3">
-            <h2 class="form-title">Preferences</h2>
-            <div class="form-group">
-              <label> Communication Preferences</label>
-              <div class="checkbox-group">
-                <input type="checkbox" id="email-notifications" checked />
-                <label for="email-notifications">Email Notifications</label>
-              </div>
-              <div class="checkbox-group">
-                <input type="checkbox" id="sms-notifications" />
-                <label for="sms-notifications">SMS Notifications</label>
-              </div>
-              <div class="checkbox-group">
-                <input type="checkbox" id="newsletter" checked />
-                <label for="newsletter">Subscribe to newsletter</label>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="theme">Theme Preference</label>
-              <select id="theme" class="form-control">
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
-                <option value="auto">Auto (System)</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="language">Language</label>
-              <select id="language" class="form-control">
-                <option value="en">English</option>
-                <option value="es">Spanish</option>
-                <option value="fr">French</option>
-                <option value="de">German</option>
-              </select>
-            </div>
-
-            <div class="btn-group">
-              <button class="btn btn-prev" id="prev-3"><i class="fas fa-arrow-left"></i> Previous</button>
-              <button class="btn btn-next" id="next-3">Next <i class="fas fa-arrow-right"></i></button>
-            </div>
+          <div class="form-group">
+            <label for="language">Language</label>
+            <select id="language" class="form-control">
+              <option value="en">English</option>
+              <option value="es">Spanish</option>
+              <option value="fr">French</option>
+              <option value="de">German</option>
+            </select>
           </div>
+
+          <div class="btn-group">
+            <button class="btn btn-prev" id="prev-3"><i class="fas fa-arrow-left"></i> Previous</button>
+            <button class="btn btn-next" id="next-3">Next <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <div class="form-step" id="form-step-4">
+          <h2 class="form-title">Review Your Information</h2>
+          <div class="form-group">
+            <h3>Personal Information</h3>
+            <div id="review-personal" class="review-section"></div>
+          </div>
+
+          <div class="form-group">
+            <h3>Account Details</h3>
+            <div id="review-account" class="review-section"></div>
+          </div>
+
+          <div class="form-group">
+            <h3>Preferences</h3>
+            <div id="review-preferences" class="review-section"></div>
+          </div>
+
+          <div class="checkebox-group">
+            <input type="checkbox" id="terms" />
+            <label for="terms"
+              >I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label
+            >
+          </div>
+          <div class="error-message" id="terms-error">You must agree to the terms and conditions.</div>
+
+          <div class="btn-group">
+            <button class="btn btn-prev" id="prev-4"><i class="fas fa-arrow-left"></i> Previous</button>
+            <button class="btn btn-submit" id="submit-form">Submit <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <div class="success-container" id="success-screen">
+          <i class="fas fa-check-circle"></i>
+          <h2>Registration Successful!</h2>
+          <p>
+            Thank you for creating an account with us. We're sent a confirmation email to your address. You
+            can now log in and start using our services.
+          </p>
+          <button class="btn btn-restart" id="restart-form">
+            <i class="fas fa-redo"></i> Create Another Account
+          </button>
         </div>
       </article>
     </section>
-    <!-- <script src="/forms_script/subscriptionForm03.js"></script> -->
+    <script src="/forms_script/subscriptionForm03.js"></script>
   </body>
 </html>

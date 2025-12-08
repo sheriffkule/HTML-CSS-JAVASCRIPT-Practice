@@ -119,3 +119,31 @@ function validateStep2() {
 
   return isValid;
 }
+
+function validateStep4() {
+  const terms = document.getElementById('terms');
+  const termsError = document.getElementById('terms-error');
+
+  if (!terms.checked) {
+    termsError.style.display = 'block';
+    return false;
+  } else {
+    termsError.style.display = 'none';
+    return true;
+  }
+}
+
+// Populate review section
+function populateReview() {
+  // Personal information
+  const firstName = document.getElementById('first-name').value;
+  const lastName = document.getElementById('last-name').value;
+  const email = document.getElementById('email').value;
+  const phone = document.getElementById('phone').value;
+
+  document.getElementById('review-personal').innerHTML = `
+    <p><strong>Name:</strong> ${firstName} ${lastName}</p>
+    <p><strong>Email:</strong> ${email}</p>
+    <p><strong>Phone:</strong> ${phone} || 'Not provided!'</p>
+  `;
+}
