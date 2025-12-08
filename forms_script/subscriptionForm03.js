@@ -83,3 +83,39 @@ function validateStep1() {
 
   return isValid;
 }
+
+function validateStep2() {
+  let isValid = true;
+
+  // Username validation
+  const username = document.getElementById('username');
+  const usernameError = document.getElementById('username-error');
+  if (username.value.length < 3) {
+    usernameError.style.display = 'block';
+    isValid = false;
+  } else {
+    usernameError.style.display = 'none';
+  }
+
+  // Password validation
+  const password = document.getElementById('password');
+  const passwordError = document.getElementById('password-error');
+  if (password.value.length < 8) {
+    passwordError.style.display = 'block';
+    isValid = false;
+  } else {
+    passwordError.style.display = 'none';
+  }
+
+  // Confirm password validation
+  const confirmPassword = document.getElementById('confirm-password');
+  const confirmPasswordError = document.getElementById('confirm-password-error');
+  if (password.value !== confirmPassword) {
+    confirmPasswordError.style.display = 'block';
+    isValid = false;
+  } else {
+    confirmPasswordError.style.display = 'none';
+  }
+
+  return isValid;
+}

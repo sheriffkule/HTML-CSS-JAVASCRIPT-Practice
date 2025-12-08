@@ -135,8 +135,8 @@ body {
 
 .form-step {
     display: none;
-    /* animation: fadeIn 0.5s ease; */
-}
+    /* animation: fadeIn 0.5s ease;  */
+ } 
 
 .form-step.active {
     display: block;
@@ -151,7 +151,7 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
-}
+} */
 
 .form-title {
     margin-block-end: 25px;
@@ -196,10 +196,85 @@ body {
 }
 
 .form-row {
-    display: flex;
+    /* display: flex; */
     gap: 15px;
 }
 
 .form-row .form-group {
     flex: 1;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-block-end: 15px;
+}
+
+.checkbox-group input {
+    width: 18px;
+    height: 18px;
+}
+
+.checkbox-group label {
+    margin-block-end: 0;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: space-between;
+    margin-block-start: 30px;
+}
+
+.btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+i {
+    transition: var(--transition);
+}
+
+.btn-prev {
+    background: white;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+
+    &:hover {
+        background: #d0d6e4;
+        transform: translateX(-2px);
+    }
+    &:hover i {
+        transform: translateX(-4px);
+    }
+}
+
+.btn-next, .btn-submit {
+    background: var(--primary);
+    color: white;
+
+    &:hover {
+        background: var(--secondary);
+        transform: translateX(2px);
+        box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+    }
+    &:hover i {
+        transform: translateX(4px);
+    }
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
 }
