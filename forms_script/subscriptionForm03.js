@@ -1,9 +1,14 @@
 // DOM Elements
 const steps = document.querySelectorAll('.step');
 const formSteps = document.querySelectorAll('.form-step');
-const progressLine = document.getElementById('.progress-line');
+const progressLine = document.querySelector('.progress-line');
 const nextButtons = document.querySelectorAll('.btn-next');
 const prevButtons = document.querySelectorAll('.btn-prev');
+const submitButton = document.getElementById('submit-form');
+const restartButton = document.getElementById('restart-form');
+const successScreen = document.getElementById('success-screen');
+const passwordToggle = document.getElementById('password-toggle');
+const passwordInput = document.getElementById('password');
 
 // Current step tracker
 let currentStep = 0;
@@ -11,7 +16,7 @@ let currentStep = 0;
 // Update progress bar
 function updateProgressBar() {
   const progressPercentage = (currentStep / (steps.length - 1)) * 100;
-  progressLine.style.width = `${progressPercentage}%`;
+  if (progressLine) progressLine.style.width = `${progressPercentage}%`;
 
   steps.forEach((step, index) => {
     if (index < currentStep) {
@@ -29,7 +34,7 @@ function updateProgressBar() {
 // Show current step
 function showStep(stepIndex) {
   formSteps.forEach((step, index) => {
-    step.classList.toggle('active', (index = stepIndex));
+    step.classList.toggle('active', index === stepIndex);
   });
 
   updateProgressBar();
@@ -73,8 +78,9 @@ function validateStep1() {
   // Phone validation (optional but if provided, must be valid)
   const phone = document.getElementById('phone');
   const phoneError = document.getElementById('phone-error');
-  const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
-  if (phone.value && !phoneRegex.test(phone.value.replace(/\D/g, ''))) {
+  const cleanedPhone = phone.value ? phone.value.replace(/\D/g, '') : '';
+  const phoneDigitsRegex = /^\d{7,15}$/;
+  if (phone.value && !phoneDigitsRegex.test(cleanedPhone)) {
     phoneError.style.display = 'block';
     isValid = false;
   } else {
@@ -110,7 +116,7 @@ function validateStep2() {
   // Confirm password validation
   const confirmPassword = document.getElementById('confirm-password');
   const confirmPasswordError = document.getElementById('confirm-password-error');
-  if (password.value !== confirmPassword) {
+  if (password.value !== confirmPassword.value) {
     confirmPasswordError.style.display = 'block';
     isValid = false;
   } else {
@@ -144,6 +150,140 @@ function populateReview() {
   document.getElementById('review-personal').innerHTML = `
     <p><strong>Name:</strong> ${firstName} ${lastName}</p>
     <p><strong>Email:</strong> ${email}</p>
-    <p><strong>Phone:</strong> ${phone} || 'Not provided!'</p>
+    <p><strong>Phone:</strong> ${phone || 'Not provided!'}</p>
+  `;
+
+  // account details
+  const username = document.getElementById('username').value;
+
+  document.getElementById('review-account').innerHTML = `
+    <p><strong>Username:</strong> ${username}</p>
+    <p><strong>Password:</strong> ********</p>
+  `;
+
+  // Preferences
+  const emailNotifications = document.getElementById('email-notifications').checked;
+  const smsNotifications = document.getElementById('sms-notifications').checked;
+  const newsletter = document.getElementById('newsletter').checked;
+  const theme = document.getElementById('theme').value;
+  const language = document.getElementById('language').value;
+
+  const languageMap = {
+    en: 'English',
+    es: 'Spanish',
+    fr: 'French',
+    de: 'German',
+  };
+
+  const themeText = theme ? theme.charAt(0).toUpperCase() + theme.slice(1) : 'Default';
+  const languageText = languageMap[language] || language || 'Unknown';
+
+  document.getElementById('review-preferences').innerHTML = `
+    <p><strong>Email Notifications:</strong> ${emailNotifications ? 'Yes' : 'No'}</p>
+    <p><strong>SMS Notifications:</strong> ${smsNotifications ? 'Yes' : 'No'}</p>
+    <p><strong>Newsletter:</strong> ${newsletter ? 'Subscribed' : 'Not Subscribed'}</p>
+    <p><strong>Theme:</strong> ${themeText}</p>
+    <p><strong>Language:</strong> ${languageText}</p>
   `;
 }
+
+// Event listeners
+nextButtons.forEach((button, index) => {
+  button.addEventListener('click', () => {
+    // Validate current step before proceeding
+    let isValid = true;
+    if (currentStep === 0) isValid = validateStep1();
+    if (currentStep === 1) isValid = validateStep2();
+
+    if (isValid) {
+      currentStep++;
+      showStep(currentStep);
+
+      // Populate review section when moving to step 4
+      if (currentStep === 3) {
+        populateReview();
+      }
+    }
+  });
+});
+
+prevButtons.forEach((button, index) => {
+  button.addEventListener('click', () => {
+    if (currentStep > 0) {
+      currentStep--;
+      showStep(currentStep);
+    }
+  });
+});
+
+submitButton.addEventListener('click', () => {
+  if (validateStep4()) {
+    // Show the success screen
+    document.querySelector('.form-container').style.display = 'none';
+    successScreen.style.display = 'block';
+
+    // Updata progress bar to show completion
+    steps.forEach((step) => {
+      step.classList.add('completed');
+      step.classList.remove('active');
+    });
+    if (progressLine) progressLine.style.width = '100%';
+  }
+});
+
+restartButton.addEventListener('click', () => {
+  // Reset form
+  document.querySelectorAll('input').forEach((input) => {
+    if (input.type !== 'button' && input.type !== 'submit') {
+      input.value = '';
+    }
+    if (input.type === 'checkbox') {
+      input.checked = false;
+    }
+  });
+
+  document.querySelectorAll('select').forEach((select) => {
+    select.selectedIndex = 0;
+  });
+
+  // Reset to first step
+  currentStep = 0;
+  showStep(currentStep);
+
+  // Show form container and hide success screen
+  document.querySelector('.form-container').style.display = 'block';
+  successScreen.style.display = 'none';
+});
+
+// Password visibility toggle
+passwordToggle.addEventListener('click', () => {
+  const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+  passwordInput.setAttribute('type', type);
+
+  // Toggle eye icon
+  const icon = passwordToggle.querySelector('i');
+  icon.classList.toggle('fa-eye');
+  icon.classList.toggle('fa-eye-slash');
+});
+
+// Initialize the form
+updateProgressBar();
+showStep(currentStep);
+
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+
+  if (yearElement) {
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.dateTime = currentYear.toString();
+    yearElement.textContent = currentYear.toString();
+  }
+}
+
+updateYear();

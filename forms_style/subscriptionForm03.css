@@ -22,19 +22,20 @@
 body {
     background: linear-gradient(135deg, grey, #c3cfe2);
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    place-items: center;
     padding: 20px;
 }
 
 .container {
     width: 100%;
     max-width: 800px;
-    background: #ccc;
+    background: linear-gradient(135deg, #ccc, #f0f0f0);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     overflow: hidden;
+    align-self: flex-end;
+    margin-block-start: 10px;
 }
 
 .header {
@@ -339,6 +340,18 @@ i {
     transform: translateY(-50%);
     color: var(--gray);
     cursor: pointer;
+}
+
+.footer__copy {
+    text-align: center;
+    align-self: flex-end;
+    font-size: 14px;
+    font-weight: 200;
+
+    abbr {
+        text-underline-offset: 2px;
+        cursor: default;
+    }
 }
 
 @media screen and (max-width: 768px) {
