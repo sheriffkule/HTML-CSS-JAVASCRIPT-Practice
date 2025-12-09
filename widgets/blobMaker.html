@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blob Maker App</title>
+    <link rel="stylesheet" href="/widgets_style/blobMaker.css" />
+  </head>
+  <body>
+    <div class="app">
+      <div class="canvas-wrap">
+        <h2>Blob Maker App</h2>
+        <canvas id="blobCanvas" width="900" height="620"></canvas>
+      </div>
+      <div class="controls">
+        <h2>Controls</h2>
+        <div class="group">
+          <label for="size">Size</label>
+          <input type="range" name="size" id="size" min="50" max="500" value="260" />
+        </div>
+        <div class="group">
+          <label for="points">Points</label>
+          <input type="range" name="points" id="points" min="2" max="64" value="12" />
+        </div>
+        <div class="group">
+          <label for="randomness">Randomness</label>
+          <input type="range" name="randomness" id="randomness" min="0" max="1" step="0.01" value="0.35" />
+        </div>
+        <div class="group">
+          <label for="roundness">Roundness</label>
+          <input type="range" name="roundness" id="roundness" min="0" max="1" step="0.01" value="0.7" />
+        </div>
+
+        <div class="group">
+          <h3>Gradient Fill</h3>
+          <label for="g1">Color 1: <input type="color" name="g1" id="g1" value="#6366f1" /></label>
+          <label for="g2">Color 2: <input type="color" name="g2" id="g2" value#ec4899 /></label>
+          <label for="gAngle">
+            Angle: <input type="range" name="gAngle" id="gAngle" min="0" max="360" value="45" />
+          </label>
+        </div>
+
+        <div class="group">
+          <h3>Shape Presets</h3>
+          <div class="preset-list" id="presets"></div>
+        </div>
+
+        <div class="group">
+          <h3>Live Gallery</h3>
+          <div class="gallery" id="gallery"></div>
+        </div>
+
+        <div class="group">
+          <label for="seed">Seed: <input type="number" name="seed" id="seed" value="0" /></label>
+          <button id="randomize" class="btn">Randomize</button>
+        </div>
+        <div class="group">
+          <label>Animation:</label>
+          <button id="toggleAnim" class="btn">Start</button>
+          <label for="speed">Speed: </label>
+          <input type="range" name="speed" id="speed" min="0" max="4" step="0.01" value="1" />
+        </div>
+
+        <div class="group">
+          <button id="downloadPng" class="btn">Download PNG</button>
+          <button id="downloadSvg" class="btn">Download SVG</button>
+        </div>
+      </div>
+    </div>
+    <script src="/widgets_script/blobMaker.js"></script>
+  </body>
+</html>
