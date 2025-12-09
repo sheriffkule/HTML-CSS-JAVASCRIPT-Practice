@@ -16,7 +16,7 @@ body {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     background: linear-gradient(#071020, #0b1626);
     color: #e6eef6;
-    display: flex;
+    display: grid;
     gap: 16px;
     align-items: flex-start;
     padding: 20px;
@@ -144,4 +144,31 @@ input[type="range"]::-webkit-slider-thumb:hover {
     height: 90px;
     border-radius: 6px;
     background-color: #111;
+}
+
+.footer__copy {
+    text-align: center;
+    margin-block-start: 20px;
+    font-size: 13px;
+    color: var(--muted);
+
+    abbr {
+        text-underline-offset: 2px;
+        font-size: 14px;
+        color: var(--accent);
+        cursor: default;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    background: var(--panel);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--muted);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
 }
