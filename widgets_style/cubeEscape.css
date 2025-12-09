@@ -57,9 +57,22 @@ h1 {
 
 .obstacle {
     position: absolute;
-    width: 60px;
-    height: 60px;
-    background-color: #333;
+    width: 54px;
+    height: 54px;
+    background-color: rgba(255, 0, 0, 0.1);
+    display: grid;
+    place-content: center;
     border-radius: 8px;
+    color: red;
+    font-size: 60px;
     z-index: 1;
+}
+
+.footer__copy {
+    font-size: 13px;
+    font-weight: 100;
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
 }

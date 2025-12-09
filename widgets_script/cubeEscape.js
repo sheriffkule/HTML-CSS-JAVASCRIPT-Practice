@@ -43,6 +43,7 @@ function createObstacles() {
   while (obstacles.length < obstacleCount) {
     const obs = document.createElement('div');
     obs.classList.add('obstacle');
+    obs.textContent = '😠';
 
     const x = Math.floor(Math.random() * (containerSize - 70));
     const y = Math.floor(Math.random() * (containerSize - 70));
