@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pincode Generator App</title>
+    <link rel="stylesheet" href="/widgets_style/pincodeGenerator.css" />
+  </head>
+  <body>
+    <main class="app">
+      <h1>Pincode Generator App</h1>
+      <p class="small">
+        Generate secure random PIN codes with advanced options, validation, and persistent history
+      </p>
+      <div class="controls">
+        <div>
+          <label for="length">Length</label>
+          <input type="number" name="length" id="length" min="1" max="64" value="4" />
+        </div>
+        <div>
+          <label for="count">How many</label>
+          <input type="number" name="count" id="count" min="1" max="50" value="6" />
+        </div>
+        <div>
+          <label for="type">Type</label>
+          <select name="type" id="type">
+            <option value="numeric">Numeric</option>
+            <option value="alphanumeric">Alphanumeric</option>
+            <option value="hex">Hex</option>
+            <option value="custom">Custom</option>
+          </select>
+        </div>
+        <div id="customWrap">
+          <label for="custom">Custom Set</label>
+          <input type="text" name="custom" id="custom" placeholder="e.g. 0123456789ABC" />
+        </div>
+        <div class="checkboxes">
+          <label for="uppercase"><input type="checkbox" name="uppercase" id="uppercase" />Uppercase</label>
+          <label for="lowercase"
+            ><input type="checkbox" name="lowercase" id="lowercase" checked />Lowercase</label
+          >
+          <label for="symbols"><input type="checkbox" name="symbols" id="symbols" />Symbols</label>
+          <label for="avoidAmbig"
+            ><input type="checkbox" name="avoidAmbig" id="avoidAmbig" />Avoid Ambiguous</label
+          >
+        </div>
+      </div>
+
+      <div class="row">
+        <button id="generate" class="btn-primary">Generate</button>
+        <button id="copyAll" class="btn-ghost">Copy All</button>
+        <button id="downloadCSV" class="btn-ghost">Download CSV</button>
+        <button id="downloadJSON" class="btn-ghost">Download JSON</button>
+        <button id="downloadZIP" class="btn-ghost">Download ZIP</button>
+        <button id="clear" class="btn-ghost">Clear</button>
+        <button id="toggleTheme" class="btn-ghost">Toggle Theme</button>
+        <button id="lockToggle" class="btn-ghost">Lock/Reveal</button>
+      </div>
+
+      <div class="search-box">
+        <input type="text" name="search" id="search" placeholder="Search History..." />
+      </div>
+
+      <div class="output" id="output"></div>
+
+      <div class="footer small">
+        <div>History: <span id="historyCount">0</span></div>
+        <div class="strengthMsg"></div>
+      </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="/widgets_script/pincodeGenerator.js"></script>
+  </body>
+</html>
