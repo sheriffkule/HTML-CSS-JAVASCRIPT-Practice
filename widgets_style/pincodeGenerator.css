@@ -107,3 +107,77 @@ option {
     padding: 8px 10px;
     border-radius: 8px;
 }
+
+button {
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: .2s;
+
+    &:hover {
+        opacity: 0.8;
+        scale: 1.03;
+    }
+    &:active {
+        scale: 1;
+    }
+}
+
+.btn-primary {
+    background: linear-gradient(90deg, var(--accent), #3b82f6);
+    color: white;
+}
+
+.btn-ghost {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    color: var(--muted);
+}
+
+.output {
+    background: var(--glass);
+    padding: 12px;
+    border-radius: 10px;
+    margin-top: 12px;
+    max-height: 280px;
+    overflow: auto;
+}
+
+.pin-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.pin {
+    font-family: monospace;
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+
+.hidden-pin {
+    filter: blur(6px);
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 14px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.strength {
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+.search-box {
+    margin-block: 10px;
+}
