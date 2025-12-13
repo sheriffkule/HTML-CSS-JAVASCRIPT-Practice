@@ -140,3 +140,107 @@ header h1 {
         font-size: 1.5rem;
     }
 }
+
+.result-container {
+    background-color: var(--light-color);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    margin-block-start: 20px;
+    border-left: 5px solid var(--primary-color);
+}
+
+.result-container h3 {
+    color: var(--secondary-color);
+    margin-block-end: 15px;
+    font-size: 1.25rem;
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #e9ecef;
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.result-value {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+.conversion-history {
+    margin-block-start: 30px;
+    padding: 25px;
+    background-color: #ddd;
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+
+    h3 {
+        color: var(--secondary-color);
+        margin-block-end: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+.history-list {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 15px;
+    background-color: var(--light-color);
+    margin-block-end: 10px;
+    border-radius: 8px;
+    border-left: 4px solid var(--accent-color);
+
+    &:last-child {
+        margin-block-end: 0;
+    }
+}
+
+.history-conversion {
+    font-weight: 500;
+}
+
+.history-value {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.clear-history {
+    background: none;
+    border: none;
+    color: var(--danger-color);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    text-underline-offset: 10px;
+
+    &:hover {
+        text-decoration: 1px underline;
+        text-underline-offset: 2px;
+        font-size: 1rem;
+    }
+}
+
+footer {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-block-start: 20px;
+
+    abbr {
+        text-underline-offset: 2px;
+        color: var(--primary-color);
+        cursor: default;
+    }
+}

@@ -30,6 +30,52 @@ document.addEventListener('DOMContentLoaded', function () {
   const unitCategories = {
     metric: ['meter', 'kilometer', 'centimeter', 'millimeter'],
     imperial: ['mile', 'yard', 'foot', 'inch'],
-    nautical: ['nautical-mile']
+    nautical: ['nautical-mile'],
+  };
+
+  // Load conversion history from localStorage
+  let conversionHistory = JSON.parse(localStorage.getItem('conversionHistory')) || [];
+
+  // Initialize the app
+  function init() {
+    updateConversion();
+    displayAllResults();
+    displayHistory();
+    setupEventListeners();
+  }
+
+  // Set up event listeners
+  function setupEventListeners() {
+    fromValue.addEventListener('input', updateConversion);
+    fromUnit.addEventListener('change', updateConversion);
+    toUnit.addEventListener('change', updateConversion);
+    swapButton.addEventListener('click', swapUnits);
+    clearHistoryButton.addEventListener('click', clearHistory);
+    copyResultButton.addEventListener('click', copyResult);
+    resetButton.addEventListener('click', resetConverter);
+
+    // Category buttons
+    categoryButtons.forEach((button) => {
+      button.addEventListener('click', function () {
+        const category = this.getAttribute('data-category');
+        filterUnitsByCategory(category);
+
+        // Update active button
+        categoryButtons.forEach((btn) => btn.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    // Favorite items
+    favoriteItems.forEach((item) => {
+      item.addEventListener('click', function () {
+        const from = this.getAttribute('data-form');
+        const to = this.getAttribute('data-to');
+
+        fromUnit.value = from;
+        toUnit.value = to;
+        updateConversion();
+      });
+    });
   }
 });
