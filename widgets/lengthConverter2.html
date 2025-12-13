@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Universal Length Converter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/lengthConverter2.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1><i class="fas fa-ruler-combined"></i> Universal Length Converter</h1>
+        <p>Convert between different length units with ease.</p>
+      </header>
+      <div class="converter-container">
+        <div class="input-group">
+          <label for="from-unit">From</label>
+          <select name="from-unit" id="from-unit" class="unit-selector">
+            <option value="meter">Meter (m)</option>
+            <option value="kilometer">Kilometer (Km)</option>
+            <option value="centimeter">Centimeter (cm)</option>
+            <option value="millimeter">Millimeter (mm)</option>
+            <option value="mile">Mile (mi)</option>
+            <option value="yard">Yard (yd)</option>
+            <option value="foot">Foot (ft)</option>
+            <option value="inch">Inch (in)</option>
+            <option value="nautical-mile">Nautical Mile (nmi)</option>
+          </select>
+          <div class="input-field">
+            <input
+              type="number"
+              name="from-value"
+              id="from-value"
+              placeholder="Enter value..."
+              value="1"
+              min="0"
+              step="any" />
+          </div>
+        </div>
+
+        <div class="swap-button">
+          <button id="swap-units"><i class="fas fa-exchange-alt"></i></button>
+        </div>
+
+        <div class="input-group">
+          <label for="to-unit">To</label>
+          <select name="to-unit" id="to-unit" class="unit-selector">
+            <option value="foot">Foot (ft)</option>
+            <option value="inch">Inch (in)</option>
+            <option value="meter">Meter (m)</option>
+            <option value="kilometer">Kilometer (km)</option>
+            <option value="centimeter">Centimeter (cm)</option>
+            <option value="millimeter">Millimeter (mm)</option>
+            <option value="mile">Mile (mi)</option>
+            <option value="yard">Yard (yd)</option>
+            <option value="nautical-mile">Nautical Mile (nmi)</option>
+          </select>
+          <div class="input-field">
+            <input type="number" name="to-value" id="to-value" placeholder="Result" readonly />
+          </div>
+        </div>
+      </div>
+
+      <div class="unit-categories">
+        <button class="category-btn active" data-category="all">All Units</button>
+        <button class="category-btn" data-category="metric">Metric</button>
+        <button class="category-btn" data-category="imperial">Imperial</button>
+        <button class="category-btn" data-category="nautical">Nautical</button>
+      </div>
+
+      <div class="result-container">
+        <h3>All Unit Conversions</h3>
+        <div id="all-results"></div>
+      </div>
+
+      <div class="favorites">
+        <h4><i class="fas fa-star"></i> Favorite Conversions</h4>
+        <div class="favorite-items">
+          <div class="favorite-item" data-from="meter" data-to="foot">Meter to Foot</div>
+          <div class="favorite-item" data-from="kilometer" data-to="mile">Kilometer to Mile</div>
+          <div class="favorite-item" data-from="inch" data-to="centimeter">Inch to Centimeter</div>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn btn-primary" id="copy-result"><i class="fas fa-copy"></i> Copy Result</button>
+        <button class="btn btn-outline" id="reset-converter"><i class="fas fa-redo"></i> Reset</button>
+      </div>
+
+      <div class="conversion-history">
+        <h3>
+          Conversion History
+          <button class="clear-history" id="clear-history">Clear History</button>
+        </h3>
+        <div class="history-list" id="history-list"></div>
+      </div>
+      <footer class="footer__copy">
+        © <time datetime="" id="year"></time> Made by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
+    </div>
+    <script src="/widgets_script/lengthConverter2.js"></script>
+  </body>
+</html>
