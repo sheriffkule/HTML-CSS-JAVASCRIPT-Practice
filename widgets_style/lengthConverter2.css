@@ -1,7 +1,8 @@
 :root {
     --primary-color: #4361ee;
     --secondary-color: #3a0ca3;
-    --accent-color: #f8f9fa;
+    --accent-color: #4cc9f0;
+    --light-color: #f8f9fa;
     --dark-color: #212529;
     --success-color: #4bb543;
     --warning-color: #ffcc00;
@@ -43,4 +44,99 @@ header {
     padding: 25px 30px;
     text-align: center;
     border-radius: var(--border-radius);
+
+    p {
+        opacity: 0.9;
+        font-size: 1.1rem;
+    }
+}
+
+header h1 {
+    font-size: 2.25rem;
+    margin-block-end: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    i {
+        font-size: 1.8rem;
+    }
+}
+
+.converter-container {
+    padding: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 30px;
+}
+
+/* .converter-container .input-group {
+    width: 100%;
+} */
+
+@media screen and (max-width: 768px) {
+    .converter-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.input-field label {
+    position: relative;
+}
+
+.input-field input {
+    width: 100%;
+    padding: 15px 20px;
+    font-size: 1.25rem;
+    border: 2px solid #e0e0e0;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    outline: none;
+}
+
+.input-field input:where(:focus, :focus-within) {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2),
+    inset 0 0 0 3px rgba(67, 97, 238, 0.2);
+}
+
+.swap-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.swap-button button {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+        background-color: var(--primary-color);
+        transform: rotate(180deg) scale(1.05);
+    }
+    &:active {
+        transform: rotate(180deg) scale(1);
+    }
+    & i {
+        font-size: 1.5rem;
+    }
 }
