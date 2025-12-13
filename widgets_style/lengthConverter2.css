@@ -308,3 +308,70 @@ footer {
         padding-inline-start: 25px;
     }
 }
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-block-start: 20px;
+}
+
+.btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+
+    &:hover {
+        background-color: var(--secondary-color);
+        box-shadow: var(--box-shadow);
+        transform: translateY(-2px) scale(1.02);
+    }
+    &:active {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+
+    &:hover {
+        background-color: var(--primary-color);
+        color: white;
+        transform: translateY(-2px) scale(1.02);
+    }
+    &:active {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.empty-state {
+    text-align: center;
+    padding: 20px;
+    color: #6c757d;
+}
+
+@media screen and (max-width: 480px) {
+    header h1 {
+        font-size: 1.75rem;
+    }
+    .converter-container {
+        padding: 20px;
+    }
+    .input-field,
+    .input-selector {
+        padding: 12px 15px;
+        font-size: 1rem;
+    }
+}
