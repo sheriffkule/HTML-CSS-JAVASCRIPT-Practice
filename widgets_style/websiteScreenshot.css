@@ -65,7 +65,7 @@ header p {
     transition: var(--transition);
 
     &:hover {
-        transform: translateY(-5px);
+        transform: translateY(-4px);
         box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
     }
 }
@@ -103,6 +103,7 @@ header p {
     &:hover {
         background: var(--primary-dark);
         transform: scale(1.02);
+        box-shadow: var(--box-shadow);
     }
     i {
         font-size: 1.25rem;
@@ -113,4 +114,72 @@ header p {
     &:hover i {
         transform: rotate(360deg);
     }
+}
+
+.btn-secondary {
+    background: var(--secondary);
+    border-radius: var(--border-radius);
+    margin-inline-start: 10px;
+
+    &:hover {
+        background-color: #5e08a0;
+    }
+}
+
+.options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-block-end: 20px;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.option label {
+    font-size: 0.9rem;
+    color: var(--gray);
+}
+
+select {
+    padding: 10px;
+    border: 1px solid var(--gray-light);
+    border-radius: var(--border-radius);
+    background: white;
+    font-size: 0.9rem;
+    cursor: pointer;
+    outline: none;
+}
+
+.loading {
+    display: none;
+    text-align: center;
+    padding: 40px;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 6px solid white;
+    border-top: 6px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+    box-shadow: 0 -32px 0 -22px var(--primary),
+    14px -28px 0 -22px var(--primary),
+    -14px -28px 0 -22px var(--primary);
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.result {
+    margin-block-start: 30px;
+    /* display: none; */
 }

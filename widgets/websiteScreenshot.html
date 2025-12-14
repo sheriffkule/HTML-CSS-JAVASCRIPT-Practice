@@ -54,15 +54,39 @@
         </div>
 
         <div class="loading" id="loading">
-            <div class="spinner"></div>
-            <p>Capturing screenshot... THis may take a few seconds</p>
+          <div class="spinner"></div>
+          <p>Capturing screenshot... THis may take a few seconds</p>
         </div>
 
         <div class="error" id="error">
-            <i class="fas fa-exclamation-triangle"></i>
-            <span id="error-message">An error occurred while generating the screenshot.</span>
+          <i class="fas fa-exclamation-triangle"></i>
+          <span id="error-message">An error occurred while generating the screenshot.</span>
+        </div>
+
+        <div class="result" id="result">
+          <h2>Your Screenshot</h2>
+          <figure class="screenshot-container">
+            <img src="" alt="Website Screenshot" class="screenshot" id="screenshot-img" />
+          </figure>
+          <div class="actions">
+            <button class="action-btn download" id="download-btn">
+              <i class="fas fa-download"></i> Download
+            </button>
+            <button class="action-btn share" id="share-btn"><i class="fas fa-share-alt"></i> Share</button>
+            <button class="action-btn" id="new-btn"><i class="fas fa-plus"></i> New Screenshot</button>
+          </div>
         </div>
       </div>
+
+      <div class="card hostory">
+        <h2>Recent Screenshots</h2>
+        <div class="history-items" id="history-items"></div>
+      </div>
+
+      <footer class="footer__copy">
+        © <time datetime="" id="year"></time> Made by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
     </div>
     <script src="/widgets_script/websiteScreenshot.js"></script>
   </body>
