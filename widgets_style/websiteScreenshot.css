@@ -1,0 +1,116 @@
+:root {
+    --primary: #4361ee;
+    --primary-dark: #3a56d4;
+    --secondary: #7209b7;
+    --dark: #212529;
+    --light: #f8f9fa;
+    --success: #4cc9f0;
+    --danger: #f72585;
+    --gray: #6c757d;
+    --gray-light: #e9ecdf;
+    --border-radius: 12px;
+    --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #f6f7f7, #9faec5);
+    color: var(--dark);
+    line-height: 1.4;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    padding: 40px 20px;
+    margin-block-end: 30px;
+}
+
+header h1 {
+    font-size: 2.75rem;
+    margin-block-end: 10px;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+header p {
+    font-size: 1.25rem;
+    color: var(--gray);
+    max-width: fit-content;
+    margin: 0 auto;
+    text-wrap: pretty;
+}
+
+.card {
+    background: #eee;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 30px;
+    margin-block-end: 30px;
+    transition: var(--transition);
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+}
+
+.input-group {
+    display: flex;
+    margin-block-end: 20px;
+}
+
+.url-input {
+    flex: 1;
+    padding: 15px 20px;
+    border: 2px solid var(--gray-light);
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.url-input:where(:focus, :focus-within) {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.btn {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    background: var(--primary);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+
+    &:hover {
+        background: var(--primary-dark);
+        transform: scale(1.02);
+    }
+    i {
+        font-size: 1.25rem;
+        -webkit-text-stroke: 1.5px white;
+        color: transparent;
+        transition: var(--transition);
+    }
+    &:hover i {
+        transform: rotate(360deg);
+    }
+}

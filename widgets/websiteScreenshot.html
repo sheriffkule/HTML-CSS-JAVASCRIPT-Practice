@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Website Page Screenshot</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/websiteScreenshot.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Website Page Screenshot</h1>
+        <p>Capture beautiful screenshots of any website in different resolution and devices.</p>
+      </header>
+
+      <div class="card">
+        <div class="input-group">
+          <input
+            type="text"
+            class="url-input"
+            placeholder="Enter website URL (e.g., https://example.com)"
+            value="https://" />
+          <button class="btn" id="generate-btn"><i class="fas fa-camera"></i></button>
+        </div>
+
+        <div class="options">
+          <div class="option">
+            <label for="device">Device:</label>
+            <select name="device" id="device">
+              <option value="desktop">Desktop</option>
+              <option value="tablet">Tablet</option>
+              <option value="mobile">Mobile</option>
+            </select>
+          </div>
+          <div class="option">
+            <label for="resolution">Resolution:</label>
+            <select name="resolution" id="resolution">
+              <option value="1920x1080">1920x1080 (Full HD)</option>
+              <option value="1366x768">1366x768</option>
+              <option value="1536x864">1536x864</option>
+              <option value="1440x900">1440x900</option>
+              <option value="1280x720">1280x720</option>
+            </select>
+          </div>
+          <div class="option">
+            <label for="format">Format:</label>
+            <select name="format" id="format">
+              <option value="png">PNG</option>
+              <option value="jpeg">JPEG</option>
+            </select>
+          </div>
+          <button class="btn btn-secondary" id="random-btn"><i class="fas fa-random"></i> Random Site</button>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Capturing screenshot... THis may take a few seconds</p>
+        </div>
+
+        <div class="error" id="error">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span id="error-message">An error occurred while generating the screenshot.</span>
+        </div>
+      </div>
+    </div>
+    <script src="/widgets_script/websiteScreenshot.js"></script>
+  </body>
+</html>
