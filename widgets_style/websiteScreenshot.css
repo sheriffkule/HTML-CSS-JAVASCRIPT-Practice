@@ -1,13 +1,13 @@
 :root {
     --primary: #4361ee;
-    --primary-dark: #3a56d4;
+    --primary-dark: #314dcc;
     --secondary: #7209b7;
     --dark: #212529;
     --light: #f8f9fa;
     --success: #4cc9f0;
     --danger: #f72585;
     --gray: #6c757d;
-    --gray-light: #e9ecdf;
+    --gray-light: #d6dbc4;
     --border-radius: 12px;
     --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s ease;
@@ -182,4 +182,73 @@ select {
 .result {
     margin-block-start: 30px;
     /* display: none; */
+}
+
+.screenshot-container {
+    position: relative;
+    margin-block-end: 20px;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.screenshot {
+    width: 100%;
+    display: block;
+}
+
+.actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: var(--gray-light);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.9rem;
+
+    &:hover {
+        background: var(--gray);
+        color: white;
+        box-shadow: var(--box-shadow);
+        transform: translateY(-2px);
+    }
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+.action-btn.download {
+    background: var(--success);
+    color: white;
+
+    &:hover {
+        background: #3ab0d6;
+    }
+}
+
+.action-btn.share {
+    background: var(--primary);
+    color: white;
+
+    &:hover {
+        background: var(--primary-dark);
+    }
+}
+
+.history {
+    margin-block-start: 40px;
+
+    h2 {
+        margin-block-end: 20px;
+        font-size: 1.5rem;
+    }
 }
