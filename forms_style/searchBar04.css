@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&display=swap');
+
+:root {
+    --first-color: hsl(240, 90%, 58%);
+    --title-color: hsl(240, 80%, 12%);
+    --text-color: hsl(240, 24%, 56%);
+    --body-color: hsl(240, 52%, 90%);
+    --container-color: hsl(240, 52%, 92%);
+
+    --body-font: "Montserrat Alternates", sans-serif;
+    --normal-font-size: 1rem;
+    --tiny-font-size: .625rem
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+    background-color: var(--body-color);
+    color: var(--text-color);
+}
+
+.input {
+    height: 100vh;
+    margin-inline: 1.5rem;
+    display: grid;
+    place-items: center;
+}
+
+.input__form {
+    width: 100%;
+    max-width: 360px;
+}
+
+.input__box {
+    position: relative;
+    height: 80px;
+    box-shadow: 8px 16px 24px hsla(240, 90%, 24%, 0.5);
+    padding: .5rem;
+    border-radius: 4rem;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.input__box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 380px;
+    height: 380px;
+    background: conic-gradient(from -90deg, hsl(44, 94%, 72%) 2%, 
+                                            hsl(309, 90%, 56%) 7%,
+                                            hsl(249, 91%, 62%) 25%,
+                                            hsl(223, 89%, 52%) 45%,
+                                            hsl(189, 95%, 60%) 50%,
+                                            hsl(189, 95%, 60%) 55%,
+                                            hsl(223, 89%, 52%) 60%,
+                                            hsl(249, 91%, 62%) 80%,
+                                            hsl(309, 90%, 56%) 95%,
+                                            hsl(44, 94%, 72%) 100%);
+    border-radius: 50%;
+    z-index: -1;
+    animation: conic-bg 6s linear infinite;
+}
+
+.input__field {
+    width: 100%;
+    height: 100%;
+    border-radius: 4rem;
+    border: none;
+    outline: none;
+    background: var(--container-color);
+    box-shadow: 0 4px 4px hsla(240, 90%, 24%, 0.5),
+    inset 0 4px 4px hsla(240, 90%, 24%, 0.3);
+    padding-inline: 1.25rem 3rem;
+    font: 600 var(--normal-font-size) var(--body-font);
+    color: var(--title-color);
+}
+
+.input__field:autofill {
+    transition: background-color 6000s, color 6000s;
+}
+
+.input__label {
+    position: absolute;
+    left: 1.75rem;
+    font-weight: 600;
+    color: var(--title-color);
+    cursor: text;
+    transition: transform .4s, font-size .4s, color .4s;
+}
+
+.input__icon {
+    position: absolute;
+    right: 1.75rem;
+    font-size: 1.5rem;
+    color: var(--title-color);
+    transition: color .4s;
+}
+
+.input__field:focus ~ .input__label {
+    transform: translateY(-10px);
+    font-size: var(--tiny-font-size);
+    color: var(--text-color);
+}
+
+.input__field:focus {
+    padding-block: 2rem 1rem;
+}
+
+.input__field:not(:placeholder-shown).input__field:not(:focus) ~ .input__label {
+    transform: translateY(-10px);
+    font-size: var(--tiny-font-size);
+    color: var(--text-color);
+}
+
+.input__field:not(:placeholder-shown).input__field:not(:focus) {
+    padding-block: 2rem 1rem;
+}
+
+.input__field:focus ~ .input__icon {
+    color: var(--first-color);
+}
+
+@keyframes conic-bg {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
