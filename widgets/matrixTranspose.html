@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Matrix Transpose Calculator App</title>
+    <link rel="stylesheet" href="/widgets_style/matrixTranspose.css" />
+  </head>
+  <body>
+    <div class="container" role="main">
+      <h1>Transpose Matrix Calculator App</h1>
+      <div class="controls">
+        <div class="row">
+          <label for="rows" class="small">Rows</label>
+          <input type="number" id="rows" min="1" max="20" value="3" />
+        </div>
+        <div class="row">
+          <label for="cols" class="small">Cols</label>
+          <input type="number" name="cols" id="cols" min="1" max="20" value="4" />
+        </div>
+        <div class="row">
+          <button id="generate">Generate</button>
+          <button id="random" class="secondary">Random</button>
+        </div>
+        <div class="row">
+          <button id="transpose">Transpose</button>
+          <button id="clear" class="secondary">Clear</button>
+        </div>
+      </div>
+
+      <div class="grid-wrap">
+        <div class="matrix" aria-label="Input matrix">
+          <strong>Input Matrix</strong>
+          <div id="inputMatrix" style="margin-top: 8px"></div>
+          <div class="actions">
+            <button id="pasteCSV" class="secondary">Paste CSV</button>
+            <button id="copyInput" class="secondary">Copy CSV</button>
+          </div>
+        </div>
+
+        <div class="matrix" aria-label="Output matrix">
+          <strong>Transposed Matrix</strong>
+          <div id="outputMatrix" style="margin-top: 8px; min-height: 40px"></div>
+          <div class="actions">
+            <button id="copyOutput" class="secondary">Copy CSV</button>
+            <button id="download" class="secondary">Download CSV</button>
+          </div>
+        </div>
+      </div>
+      <div class="note">
+        Tip: you can paste comma/space/tab separated values. Empty cells are treated as 0. Max 20x20.
+      </div>
+    </div>
+    <script src="/widgets_script/matrixTranspose.js"></script>
+  </body>
+</html>
