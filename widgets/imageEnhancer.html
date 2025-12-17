@@ -86,8 +86,68 @@
               </div>
             </div>
           </div>
+
+          <div class="tool-group">
+            <h3><i class="fas fa-magic"></i> Filters</h3>
+            <div class="filters-container">
+              <div class="filter-option active" data-filter="none">
+                <div
+                  class="filter-preview"
+                  style="background: linear-gradient(45deg, #ff9a9e, #fad0c4)"></div>
+                <span>Original</span>
+              </div>
+              <div class="filter-option" data-filter="grayscale">
+                <div
+                  class="filter-preview"
+                  style="filter: grayscale(100%); background: linear-gradient(45deg, #ff9a9e, #fad0c4)"></div>
+                <span>Grayscale</span>
+              </div>
+              <div class="filter-option" data-filter="sepia">
+                <div
+                  class="filter-preview"
+                  style="filter: sepia(100%); background: linear-gradient(45deg, #ff9a9e, #fad0c4)"></div>
+                <span>Sepia</span>
+              </div>
+              <div class="filter-option" data-filter="grayscale">
+                <div
+                  class="filter-preview"
+                  style="filter: invert(100%); background: linear-gradient(45deg, #ff9a9e, #fad0c4)"></div>
+                <span>Invert</span>
+              </div>
+              <div class="filter-option" data-filter="grayscale">
+                <div
+                  class="filter-preview"
+                  style="
+                    filter: contrast(1.2) sepia(0.3);
+                    background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+                  "></div>
+                <span>Vintage</span>
+              </div>
+              <div class="filter-option" data-filter="grayscale">
+                <div
+                  class="filter-preview"
+                  style="
+                    filter: hue-rotate(180deg), saturate(1.5);
+                    background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+                  "></div>
+                <span>Cool</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-buttons">
+            <button class="action-btn download-btn" id="downloadBtn">
+              <i class="fas fa-download"></i> Download Image
+            </button>
+            <button class="action-btn reset-btn" id="resetBtn"><i class="fas fa-redo"></i> Reset</button>
+          </div>
         </section>
       </div>
+
+      <footer class="footer__copy">
+        © <time datetime="" id="year"></time> Made by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
     </div>
     <script src="/widgets_script/imageEnhancer.js"></script>
   </body>

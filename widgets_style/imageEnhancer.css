@@ -180,3 +180,66 @@ h1 {
     text-align: right;
     color: var(--success);
 }
+
+.filters-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 15px;
+}
+
+.filter-option {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 2px solid transparent;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.12);
+        box-shadow: var(--shadow);
+        transform: translateY(-2px);
+    }
+}
+
+.filter-option.active {
+    border-color: var(--primary);
+    background: rgba(67, 97, 238, 0.2);
+}
+
+.filter-preview {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    margin: 0 auto 8px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-block-start: 10px;
+}
+
+.action-btn {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.download-btn {
+    background: var(--success);
+    color: var(--dark);
+
+    &:hover {
+        background: #3ab0d9;
+    }
+}
