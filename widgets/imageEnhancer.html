@@ -32,7 +32,61 @@
           <button class="upload-btn" id="uploadTrigger"><i class="fas fa-upload"></i> Chose Image</button>
         </section>
 
-        
+        <section class="tools-section">
+          <div class="tool-group">
+            <h3><i class="fas fa-sliders-h"></i> Adjustments</h3>
+
+            <div class="adjustment-control">
+              <label for="brightness">
+                <span>Brightness</span>
+                <span class="slider-value" id="brightnessValue">100%</span>
+              </label>
+              <div class="slider-container">
+                <input type="range" name="brightness" id="brightness" min="0" max="200" value="100" />
+              </div>
+            </div>
+
+            <div class="adjustment-control">
+              <label for="contrast">
+                <span>Contrast</span>
+                <span class="slider-value" id="contrastValue">100%</span>
+              </label>
+              <div class="slider-container">
+                <input type="range" name="contrast" id="contrast" min="0" max="200" value="100" />
+              </div>
+            </div>
+
+            <div class="adjustment-control">
+              <label for="saturation">
+                <span>Saturation</span>
+                <span class="slider-value" id="saturationValue">100%</span>
+              </label>
+              <div class="slider-container">
+                <input type="range" name="saturation" id="saturation" min="0" max="200" value="100" />
+              </div>
+            </div>
+
+            <div class="adjustment-control">
+              <label for="blur">
+                <span>Blur</span>
+                <span class="slider-value" id="blurValue">0px</span>
+              </label>
+              <div class="slider-container">
+                <input type="range" name="blur" id="blur" min="0" max="20" value="0" step="0.1" />
+              </div>
+            </div>
+
+            <div class="adjustment-control">
+              <label for="hue">
+                <span>Hue Rotate</span>
+                <span class="slider-value" id="contrastValue">100%</span>
+              </label>
+              <div class="slider-container">
+                <input type="range" name="hue" id="hue" min="0" max="360" value="0" />
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
     <script src="/widgets_script/imageEnhancer.js"></script>

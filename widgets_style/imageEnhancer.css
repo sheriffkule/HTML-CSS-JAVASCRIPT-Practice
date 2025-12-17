@@ -101,3 +101,82 @@ h1 {
     margin-block-end: 15px;
     color: var(--primary);
 }
+
+.upload-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 14px 25px;
+    border-radius: var(--border-radius);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+
+    &:hover {
+        background: var(--primary-dark);
+        transform: translateY(-3px);
+    }
+}
+
+.tool-group {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+}
+
+.tool-group h3 {
+    margin-block-end: 15px;
+    color: var(--success);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.adjustment-control {
+    margin-block-end: 15px;
+}
+
+.adjustment-control label {
+    display: flex;
+    justify-content: space-between;
+    margin-block-end: 8px;
+}
+
+.slider-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.slider-container input[type="range"] {
+    flex: 1;
+    height: 6px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.slider-container input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--primary);
+    cursor: pointer;
+}
+
+.slider-value {
+    min-width: 40px;
+    text-align: right;
+    color: var(--success);
+}
