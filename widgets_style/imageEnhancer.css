@@ -243,3 +243,55 @@ h1 {
         background: #3ab0d9;
     }
 }
+
+.reset-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--light);
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.15);
+    }
+}
+
+footer {
+    text-align: center;
+    margin-block: 40px 10px;
+    color: var(--gray);
+    font-size: 0.9rem;
+
+    abbr {
+        text-underline-offset: 2px;
+        cursor: default;
+        color: var(--primary);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .app-container {
+        flex-direction: column;
+    }
+    .image-container {
+        height: 300px;
+    }
+    h1 {
+        font-size: 2.25rem;
+    }
+}
+
+.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 1.5rem;
+    display: none;
+}
+
+.processing .loading {
+    display: block;
+}
+
+.processing #imagePreview {
+    opacity: 0.5;
+}

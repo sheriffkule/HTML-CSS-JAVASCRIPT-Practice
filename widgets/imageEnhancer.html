@@ -79,7 +79,7 @@
             <div class="adjustment-control">
               <label for="hue">
                 <span>Hue Rotate</span>
-                <span class="slider-value" id="contrastValue">100%</span>
+                <span class="slider-value" id="hueValue">100%</span>
               </label>
               <div class="slider-container">
                 <input type="range" name="hue" id="hue" min="0" max="360" value="0" />
@@ -108,13 +108,13 @@
                   style="filter: sepia(100%); background: linear-gradient(45deg, #ff9a9e, #fad0c4)"></div>
                 <span>Sepia</span>
               </div>
-              <div class="filter-option" data-filter="grayscale">
+              <div class="filter-option" data-filter="invert">
                 <div
                   class="filter-preview"
                   style="filter: invert(100%); background: linear-gradient(45deg, #ff9a9e, #fad0c4)"></div>
                 <span>Invert</span>
               </div>
-              <div class="filter-option" data-filter="grayscale">
+              <div class="filter-option" data-filter="vintage">
                 <div
                   class="filter-preview"
                   style="
@@ -123,11 +123,11 @@
                   "></div>
                 <span>Vintage</span>
               </div>
-              <div class="filter-option" data-filter="grayscale">
+              <div class="filter-option" data-filter="cool">
                 <div
                   class="filter-preview"
                   style="
-                    filter: hue-rotate(180deg), saturate(1.5);
+                    filter: hue-rotate(180deg) saturate(1.5);
                     background: linear-gradient(45deg, #ff9a9e, #fad0c4);
                   "></div>
                 <span>Cool</span>
