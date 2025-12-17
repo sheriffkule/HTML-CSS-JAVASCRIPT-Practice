@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Enhancer App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/imageEnhancer.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Image Enhancer App</h1>
+        <p class="tagline">
+          Transform your images with professional-grade filters and adjustments in seconds.
+        </p>
+      </header>
+
+      <div class="app-container">
+        <section class="image-section">
+          <div class="image-container" id="imageContainer">
+            <div class="placeholder-text">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <p>Upload an image to get started</p>
+            </div>
+            <img src="" alt="Preview" id="imagePreview" />
+            <div class="loading">
+              <i class="fas fa-spinner fa-spin"></i>
+            </div>
+          </div>
+          <input type="file" id="imageUpload" accept="image/*" hidden />
+          <button class="upload-btn" id="uploadTrigger"><i class="fas fa-upload"></i> Chose Image</button>
+        </section>
+
+        
+      </div>
+    </div>
+    <script src="/widgets_script/imageEnhancer.js"></script>
+  </body>
+</html>
