@@ -225,3 +225,84 @@ select {
         }
     }
 }
+
+.history-list {
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border: 1px solid #e9ecef;
+    border-radius: var(--border-radius);
+}
+
+.history-item {
+    padding: 0.8rem;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.history-item:last-child {
+    border-bottom: none;
+}
+
+.history-ip {
+    font-weight: 600;
+}
+
+.history-type {
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+.history-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    color: var(--gray);
+    cursor: pointer;
+    transition: var(--transition);
+
+    &:hover {
+        color: var(--primary);
+        transform: scale(1.02);
+    }
+    &:active {
+        transform: scale(1);
+    }
+}
+
+footer {
+    text-align: center;
+    color: white;
+    font-size: 0.9rem;
+    opacity: 0.8;
+
+    abbr {
+        text-underline-offset: 2px;
+        cursor: default;
+        letter-spacing: 0.5px;
+        color: var(--success);
+    }
+}
+
+.error-message {
+    color: var(--danger);
+    margin-block-start: 0.5rem;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    animation: errorMsg 1s linear infinite;
+}
+
+@keyframes errorMsg {
+    50% {
+        text-shadow: 0 0 2px var(--danger);
+        transform: scale(1.05);
+    }
+}

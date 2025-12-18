@@ -129,6 +129,72 @@ document.addEventListener('DOMContentLoaded', function () {
     if (firstOctet >= 224 && firstOctet <= 239) return 'Class D (Multicast)';
     if (firstOctet >= 240 && firstOctet <= 255) return 'Class E (Experimental)';
 
-    return 'Unknown'
+    return 'Unknown';
+  }
+
+  function getIPType(ip) {
+    const parts = ip.split('.').map((part) => parseInt(part, 10));
+
+    // Private IP ranges
+    if (parts[0] === 10) return 'Private';
+    if (parts[0] === 172 && parts[1] >= 16 && parts[1] <= 31) return 'Private';
+    if (parts[0] === 192 && parts[1] === 168) return 'Private';
+
+    // Localhost
+    if (parts[0] === 127) return 'Loopback';
+
+    // Link-local
+    if (parts[0] === 169 && parts[1] === 254) return 'Link-local';
+
+    // Public
+    return 'Public';
+  }
+
+  // History function
+  function addToHistory(ip, type) {
+    const historyItem = {
+      ip: ip,
+      type: type === 'all' ? 'All Conversions' : conversionType.options[conversionType.selectedIndex].text,
+      timestamp: new Date(),
+    };
+
+    conversionHistory.unshift(historyItem);
+
+    // Keep only last 10 items
+    if (conversionHistory > 10) {
+      conversionHistory.pop();
+    }
+
+    renderHistory();
+  }
+
+  function renderHistory() {
+    historyList.innerHTML = '';
+
+    conversionHistory.forEach((item) => {
+      const historyItem = document.createElement('div');
+      historyItem.className = 'history-item';
+
+      const timeAgo = getTimeAgo(item.timestamp);
+
+      historyItem.innerHTML = `
+        <div>
+          <div class="history-ip">${item.ip}</div>
+          <div class="history-type">${item.type} - ${timeAgo}</div>
+        </div>
+        <div class="history-actions">
+          <button class="action-btn tooltip copy-history" data-ip="${item.ip}">
+            <i class="fas fa-copy"></i>
+            <span class="tooltiptext">Copy to clipboard</span>
+          </button>
+          <button class="action-btn tooltip reuse-history" data-ip="${item.ip}">
+            <i class="fas fa-redo"></i>
+            <span class="tooltiptext">Use this IP Again</span>
+          </button>
+        </div>
+      `;
+
+      historyList.appendChild(historyItem);
+    });
   }
 });
