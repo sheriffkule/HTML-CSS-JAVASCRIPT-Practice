@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IP Address Conversion Tool</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/ipConversion.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1><i class="fas fa-network-wired"></i> IP Address Conversion Tool</h1>
+        <p>Convert IP addresses between different formats quickly and easily.</p>
+      </header>
+
+      <div class="main-content">
+        <div class="input-section">
+          <div class="input-group">
+            <div class="input-row">
+              <div class="input-field">
+                <label for="ip-input">IP Address</label>
+                <input type="text" id="ip-input" placeholder="Enter IP address (e.g., 192.168.1.1)" />
+                <div class="ip-error error-message hidden">
+                  <i class="fas fa-exclamation-circle"></i> Please enter a valid IP address
+                </div>
+              </div>
+              <div class="input-field">
+                <label for="conversion-type">Conversion Type</label>
+                <select id="conversion-type">
+                  <option value="all">All Conversions</option>
+                  <option value="decimal">Decimal to Binary</option>
+                  <option value="binary">Binary to Decimal</option>
+                  <option value="hex">Hexadecimal Conversion</option>
+                  <option value="cidr">CIDR Notation</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <button id="convert-btn" class="btn btn-convert">
+            <i class="fas fa-sync-alt"></i> Convert IP Address
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="/widgets_script/ipConversion.js"></script>
+  </body>
+</html>
