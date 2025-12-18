@@ -52,15 +52,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     if (type === 'all' || type === 'binary') {
-      binaryResult.textContent = ipToDecimal(ip);
+      binaryResult.textContent = ipToBinary(ip);
     }
 
     if (type === 'all' || type === 'hex') {
-      hexResult.textContent = ipToDecimal(ip);
+      hexResult.textContent = ipToHex(ip);
     }
 
     if (type === 'all' || type === cidr) {
-      cidrResult.textContent = ipToDecimal(ip);
+      cidrResult.textContent = ipToCIDR(ip);
     }
 
     if (type === 'all') {
@@ -76,5 +76,59 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Add copy buttons to results
     addCopyButtons();
+  }
+
+  // IP validation
+  function isValidIP(ip) {
+    const ipRegex = /^(\d{1,3}\.){3}\d{1,3}$/;
+    if (!ipRegex.test(ip)) return false;
+
+    const parts = ip.split('.');
+    for (let part of parts) {
+      const num = parseInt(part, 10);
+      if (num < 0 || num > 255) return false;
+    }
+
+    return true;
+  }
+
+  // Conversion functions
+  function ipToDecimal(ip) {
+    return ip;
+  }
+
+  function ipToBinary(ip) {
+    return ip
+      .split('.')
+      .map((part) => {
+        return parseInt(part, 10).toString(2).padStart(8, '0');
+      })
+      .join('.');
+  }
+
+  function ipToHex(ip) {
+    return ip
+      .split('.')
+      .map((part) => {
+        return parseInt(part, 10).toString(16).toUpperCase().padStart(2, '0');
+      })
+      .join('.');
+  }
+
+  function ipToCIDR(ip) {
+    // Simple CIDR representation - in a real app, this would be more complex
+    return ip + '/24';
+  }
+
+  function getIPClass(ip) {
+    const firstOctet = parseInt(ip.split('.')[0], 10);
+
+    if (firstOctet >= 1 && firstOctet <= 126) return 'Class A';
+    if (firstOctet >= 128 && firstOctet <= 191) return 'Class B';
+    if (firstOctet >= 192 && firstOctet <= 223) return 'Class C';
+    if (firstOctet >= 224 && firstOctet <= 239) return 'Class D (Multicast)';
+    if (firstOctet >= 240 && firstOctet <= 255) return 'Class E (Experimental)';
+
+    return 'Unknown'
   }
 });
