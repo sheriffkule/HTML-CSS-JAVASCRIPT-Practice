@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tide Height Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="/widgets_style/tideHeightGenerator.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1><i class="fas fa-water"></i> Tide Height Generator</h1>
+        <p>Get accurate tide predictions using free APIs</p>
+      </header>
+
+      <div class="app-container">
+        <div class="card">
+          <h2><i class="fas fa-map-marker-alt"></i> Location Selection</h2>
+
+          <div class="location-input">
+            <input
+              type="text"
+              id="location-search"
+              placeholder="Enter latitude, longitude or location name..." />
+            <button id="search-btn"><i class="fas fa-search"></i> Search</button>
+          </div>
+          <div class="location-options">
+            <button class="location-btn active" data-location="40.7128,-74.0060">New York</button>
+            <button class="location-btn" data-location="34.0522,-118.2437">Los Angeles</button>
+            <button class="location-btn" data-location="51.5074,-0.1278">London</button>
+            <button class="location-btn" data-location="35.6762,139.6503">Tokyo</button>
+            <button class="location-btn" data-location="-33.8688,151.2093">Sydney</button>
+            <button class="location-btn" id="current-location-btn" data-location="">
+              <i class="fas fa-location-arrow"></i> My Location
+            </button>
+          </div>
+
+          <div class="current-time" id="current-time"></div>
+
+          <div class="map-container">
+            <div id="map"></div>
+          </div>
+
+          <div class="tide-chart-container">
+            <div class="tide-chart" id="tide-chart"></div>
+          </div>
+
+          <div class="tide-info">
+            <div class="info-box">
+              <h3>Current Tide</h3>
+              <p id="current-tide">---</p>
+            </div>
+            <div class="info-box">
+              <h3>Next High Tide</h3>
+              <p id="next-high-tide">---</p>
+            </div>
+            <div class="info-box">
+              <h3>Next Low Tide</h3>
+              <p id="next-low-tide">---</p>
+            </div>
+            <div class="info-box">
+              <h3>Tide Status</h3>
+              <p id="tide-status">---</p>
+            </div>
+          </div>
+
+          <div class="moon-phase">
+            <div class="moon-icon">
+                <i class="fas fa-moon" id="moon-icon"></i>
+            </div>
+            <div class="moon-info">
+                <h3>Moon Phase</h3>
+                <p id="moon-phase">---</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+            <h2><i class="fas fa-chart-line"></i> Tide Forecast</h2>
+        </div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="/widgets_script/tideHeightGenerator.js"></script>
+  </body>
+</html>

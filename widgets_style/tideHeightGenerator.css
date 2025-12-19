@@ -1,0 +1,75 @@
+:root {
+    --primary: #2c3e50;
+    --secondary: #3498db;
+    --accent: #1abc9c;
+    --light: #ecf0f1;
+    --dark: #1d2935;
+    --danger: #e74c3c;
+    --success: #2ecc71;
+    --warning: #f39c12;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #1a2a3a, #2c3e50);
+    color: var(--light);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    padding: 20px 0;
+    margin-block-end: 30px;
+
+    h1 {
+        font-size: 2.5rem;
+        background: linear-gradient(to right, var(--accent), var(--secondary), var(--accent));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        display: inline-block;
+        animation: animateTitle 4s linear infinite;
+    }
+
+    p {
+        font-size: 1.1rem;
+        opacity: 0.8;
+        text-wrap: pretty;
+    }
+}
+
+@keyframes animateTitle {
+    to {
+        background-position: 450px 0;
+    }    
+}
+
+.app-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+
+    @media screen and (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.card {
+    background: rgb(255 255 255 / 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 8px 32px rgb(0 0 0 / 0.3);
+    border: 1px solid rgb(255 255 255 / 0.2);
+}
