@@ -14,14 +14,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const historyList = document.getElementById('history-list');
 
+  const HISTORY_KEY = 'ipConversionHistory';
+
   // Sample history data
-  let conversionHistory = [
+  const sampleHistory = [
     { ip: '192.168.1.1', type: 'All Conversions', timestamp: new Date() },
     { ip: '10.0.0.1', type: 'Decimal to Binary', timestamp: new Date(Date.now() - 3600000) },
     { ip: '172.16.254.1', type: 'Hexadecimal Conversion', timestamp: new Date(Date.now() - 7200000) },
   ];
 
-  // Initialize with sample history
+  // Load history from localStorage if present, otherwise use sample copy
+  let conversionHistory = loadHistoryFromStorage() || sampleHistory.slice();
+
+  // Initialize UI
   renderHistory();
 
   // Event listeners
@@ -42,33 +47,33 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    ip.classList.add('hidden');
+    ipError.classList.add('hidden');
 
     // Perform conversions based on selected type
     const type = conversionType.value;
 
     if (type === 'all' || type === 'decimal') {
-      decimalResult.textContent = ipToDecimal(ip);
+      setResult(decimalResult, ipToDecimal(ip));
     }
 
     if (type === 'all' || type === 'binary') {
-      binaryResult.textContent = ipToBinary(ip);
+      setResult(binaryResult, ipToBinary(ip));
     }
 
     if (type === 'all' || type === 'hex') {
-      hexResult.textContent = ipToHex(ip);
+      setResult(hexResult, ipToHex(ip));
     }
 
-    if (type === 'all' || type === cidr) {
-      cidrResult.textContent = ipToCIDR(ip);
+    if (type === 'all' || type === 'cidr') {
+      setResult(cidrResult, ipToCIDR(ip));
     }
 
     if (type === 'all') {
-      classResult.textContent = getIPClass(ip);
-      typeResult.textContent = getIPType(ip);
+      setResult(classResult, getIPClass(ip));
+      setResult(typeResult, getIPType(ip));
     } else {
-      classResult.textContent = '-';
-      typeResult.textContent = '-';
+      setResult(classResult, '-');
+      setResult(typeResult, '-');
     }
 
     // Add to history
@@ -94,7 +99,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Conversion functions
   function ipToDecimal(ip) {
-    return ip;
+    const parts = ip.split('.').map((p) => parseInt(p, 10));
+    // Convert dotted-quad to a single 32-bit unsigned decimal
+    const decimal = parts[0] * 256 ** 3 + parts[1] * 256 ** 2 + parts[2] * 256 + parts[3];
+
+    return decimal.toString();
   }
 
   function ipToBinary(ip) {
@@ -161,10 +170,12 @@ document.addEventListener('DOMContentLoaded', function () {
     conversionHistory.unshift(historyItem);
 
     // Keep only last 10 items
-    if (conversionHistory > 10) {
+    if (conversionHistory.length > 10) {
       conversionHistory.pop();
     }
 
+    // Persist history and re-render
+    saveHistoryToStorage();
     renderHistory();
   }
 
@@ -196,5 +207,142 @@ document.addEventListener('DOMContentLoaded', function () {
 
       historyList.appendChild(historyItem);
     });
+
+    // Add event listeners to history buttons
+    document.querySelectorAll('.copy-history').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        const ip = this.getAttribute('data-ip');
+        navigator.clipboard.writeText(ip).then(() => {
+          // Show feedback
+          const originalHTML = this.innerHTML;
+          this.innerHTML = '<i class="fas fa-check"></i>';
+          setTimeout(() => {
+            this.innerHTML = originalHTML;
+          }, 1000);
+        });
+      });
+    });
+
+    document.querySelectorAll('.reuse-history').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        const ip = this.getAttribute('data-ip');
+        ipInput.value = ip;
+        convertIP();
+      });
+    });
   }
+
+  // Persistence helpers (localStorage)
+
+  function saveHistoryToStorage() {
+    try {
+      const toStore = conversionHistory.map((item) => ({
+        ip: item.ip,
+        type: item.type,
+        timestamp: item.timestamp instanceof Date ? item.timestamp.toISOString() : item.timestamp,
+      }));
+      localStorage.setItem(HISTORY_KEY, JSON.stringify(toStore));
+    } catch (e) {
+      console.warn('Could not save history to localStorage:', e);
+    }
+  }
+
+  function loadHistoryFromStorage() {
+    try {
+      const raw = localStorage.getItem(HISTORY_KEY);
+      if (!raw) return null;
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) return null;
+      return parsed.map((item) => ({
+        ip: item.ip,
+        type: item.type,
+        timestamp: item.timestamp ? new Date(item.timestamp) : new Date(),
+      }));
+    } catch (e) {
+      console.warn('Could not load history from localStorage:', e);
+      return null;
+    }
+  }
+
+  function getTimeAgo(timestamp) {
+    const now = new Date();
+    const diffMs = now - timestamp;
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+
+    if (diffMins < 1) return 'Just now';
+    if (diffMins < 60) return `${diffMins} min ago`;
+    if (diffHours < 24) return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+    return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
+  }
+
+  // Helper to set result text inside a dedicated span so copy excludes tooltips
+  function setResult(element, text) {
+    element.innerHTML = '';
+    const span = document.createElement('span');
+    span.className = 'result-text';
+    span.textContent = text;
+    element.appendChild(span);
+  }
+
+  // Add copy buttons to results
+  function addCopyButtons() {
+    const resultValues = document.querySelectorAll('.result-value');
+
+    resultValues.forEach((valueElement) => {
+      // Remove existing copy button if any
+      const existingBtn = valueElement.querySelector('.copy-btn');
+      if (existingBtn) {
+        existingBtn.remove();
+      }
+
+      // Add new copy button
+      if (valueElement.textContent !== '-') {
+        const copyBtn = document.createElement('button');
+        copyBtn.className = 'copy-btn tooltip';
+        copyBtn.innerHTML = '<i class="far fa-copy"></i>';
+        copyBtn.setAttribute('title', 'Copy to clipboard');
+
+        const tooltip = document.createElement('span');
+        tooltip.className = 'tooltiptext';
+        tooltip.textContent = 'Copy to clipboard';
+        copyBtn.appendChild(tooltip);
+
+        copyBtn.addEventListener('click', function () {
+          const resultSpan = valueElement.querySelector('.result-text');
+          const textToCopy = resultSpan ? resultSpan.textContent : valueElement.textContent;
+          navigator.clipboard.writeText(textToCopy).then(() => {
+            // Show feedback
+            const originalHTML = this.innerHTML;
+            this.innerHTML = '<i class="fas fa-check"></i>';
+            setTimeout(() => {
+              this.innerHTML = originalHTML;
+            }, 1000);
+          });
+        });
+        valueElement.appendChild(copyBtn);
+      }
+    });
+  }
+  // Initialize with a sample conversion
+  ipInput.value = '192.168.1.1';
+
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+
+    if (yearElement) {
+      yearElement.setAttribute('datetime', currentYear.toString());
+      yearElement.dateTime = currentYear.toString();
+      yearElement.textContent = currentYear.toString();
+    }
+  }
+
+  updateYear();
 });
