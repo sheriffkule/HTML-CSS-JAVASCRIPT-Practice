@@ -79,7 +79,39 @@
 
         <div class="card">
             <h2><i class="fas fa-chart-line"></i> Tide Forecast</h2>
+
+            <div class="tide-forecast" id="tide-foracast"></div>
+
+            <div class="tide-stats">
+                <div class="stat-box">
+                    <h3>Today's High</h3>
+                    <p id="today-high">---</p>
+                </div>
+                <div class="stat-box">
+                    <h3>Today's Low</h3Today>
+                    <p id="today-low">---</p>
+                </div>
+                <div class="stat-box">
+                    <h3>Average Tide</h3>
+                    <p id="average-tide">---</p>
+                </div>
+                <div class="stat-box">
+                    <h3>Tide Range</h3>
+                    <p id="tide-range">---</p>
+                </div>
+            </div>
+            <h2 style="margin-top: 30px;"><i class="fas fa-info-circle"></i> About This Location</h2>
+            <p id="loacation-info" style="margin-top: 10px; line-height: 1.5;">Select a location to see tide information. This app uses free APIs to provide accurate tide predictions based on your selected location.</p>
+
+            <div class="api-info">
+                <p>Tide data provided by WorldTide API | Location data from OpenStreetMap</p>
+            </div>
         </div>
+      </div>
+
+      <div class="loading" id="loading">
+        <i class="fas fa-spinner"></i>
+        <p>Loading tide data...</p>
       </div>
     </div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>

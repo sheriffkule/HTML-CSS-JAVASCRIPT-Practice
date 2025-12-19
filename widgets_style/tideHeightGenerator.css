@@ -39,7 +39,7 @@ header {
         background-clip: text;
         color: transparent;
         display: inline-block;
-        animation: animateTitle 4s linear infinite;
+        /* animation: animateTitle 4s linear infinite; */
     }
 
     p {
@@ -72,4 +72,114 @@ header {
     padding: 25px;
     box-shadow: 0 8px 32px rgb(0 0 0 / 0.3);
     border: 1px solid rgb(255 255 255 / 0.2);
+}
+
+.card h2 {
+    font-size: 1.5rem;
+    margin-block-end: 20px;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    i {
+        font-size: 1.3rem;
+        /* animation: iconPulse 2s linear infinite; */
+    }
+}
+
+@keyframes iconPulse {
+    50% {
+        transform: scale(1.2) translateY(-5px)
+    }
+}
+
+.location-input {
+    display: flex;
+    gap: 10px;
+    margin-block-end: 20px;
+}
+
+.location-input input {
+    flex: 1;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 8px;
+    background: rgb(255 255 255 / 0.15);
+    color: var(--light);
+    font-size: 1rem;
+    transition: 0.25s;
+}
+
+.location-input input::placeholder {
+    color: rgb(255 255 255 / 0.6);
+    position: absolute;
+    left: 12px;
+    transition: 0.25s;
+}
+
+.location-input input:where(:focus, :focus-within) {
+    outline: 1px solid var(--secondary);
+    background: rgb(255 255 255 / 0.2);
+}
+
+.location-input input:where(:focus, :focus-within)::placeholder {
+    transform: translateY(-10px);
+    scale: 0.9;
+    left: 2px;
+}
+
+.location-input button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background: var(--secondary);
+    color: var(--light);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all .3s ease;
+
+    &:hover {
+        filter: saturate(1.7);
+        transform: translateY(-3px);
+        box-shadow: inset 0 0 5px rgb(0 0 0 / 0.5);
+    }
+    &:active {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.location-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    margin-block-end: 20px;
+}
+
+.location-btn {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background: rgb(255 255 255 / 0.1);
+    color: var(--light);
+    cursor: pointer;
+    transition: all .3s ease;
+    text-align: center;
+    font-size: 1rem;
+
+    &:hover {
+        background: rgb(255 255 255 / 0.2);
+        transform: translateY(-2px) scale(1.01);
+    }
+    &:active {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.location-btn.active {
+    background: var(--accent);
+    color: var(--dark);
+    font-weight: 600;
+    letter-spacing: 1px;
 }
