@@ -332,3 +332,28 @@ header {
     font-size: 0.9rem;
     opacity: 0.8;
 }
+
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+    opacity: 0.7;
+
+    abbr {
+        text-underline-offset: 2px;
+        letter-spacing: 0.5px;
+        cursor: default;
+    }
+}
+
+.loading i {
+    text-align: center;
+    animation: spin 1.5s linear infinite;
+    display: none;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
