@@ -183,3 +183,152 @@ header {
     font-weight: 600;
     letter-spacing: 1px;
 }
+
+.tide-chart-container {
+    height: 250px;
+    margin: 20px 0;
+    position: relative;
+}
+
+.tide-chart {
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.tide-bar {
+    flex: 1;
+    background: linear-gradient(to top, var(--secondary), var(--accent));
+    border-radius: 5px 5px 0 0;
+    position: relative;
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: scaleY(1.05);
+    }
+}
+
+.tide-bar.high {
+    background: linear-gradient(to top, var(--warning), var(--danger));
+}
+
+.tide-bar-label {
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 0.8rem;
+    color: rgb(255 255 255 / 0.7);
+}
+
+.tide-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-block-start: 20px;
+}
+
+.info-box {
+    background: rgb(255 255 255 / 0.05);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+
+    h3 {
+        font-size: 0.9rem;
+        margin-block-end: 5px;
+        color: var(--accent);
+    }
+    p {
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+}
+
+.tide-forecast {
+    margin-block-start: 20px;
+}
+
+.forecast-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid rgb(255 255 255 / 0.1);
+}
+
+.forecast-item:last-child {
+    border-bottom: none;
+}
+
+.forecast-time {
+    font-weight: 600;
+}
+
+.forecast-height {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.forecast-type {
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    background: var(--secondary);
+}
+
+.forecast-type.high {
+    background: var(--danger);
+}
+
+.tide-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-block-start: 20px;
+}
+
+.stat-box {
+    background: rgb(255 255 255 / 0.05);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+
+    h3 {
+        font-size: 0.9rem;
+        margin-block-end: 5px;
+        color: var(--accent);
+    }
+    p {
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+}
+
+.moon-phase {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-block-start: 20px;
+    padding: 15px;
+    background: rgb(255 255 255 / 0.05);
+    border-radius: 10px;
+}
+
+.moon-icon {
+    font-size: 2rem;
+    color: lightblue;
+}
+
+.moon-info h3 {
+    font-size: 1rem;
+    margin-block-end: 5px;
+    color: var(--accent);
+}
+
+.moon-info p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
