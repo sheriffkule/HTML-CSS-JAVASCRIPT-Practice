@@ -1,13 +1,13 @@
 // Initialize map
-// const map = L.map('map').setView([40.7128, -74.006], 10);
+const map = L.map('map').setView([40.7128, -74.006], 10);
 
 // Add OpenStreetMap tiles (free)
-// L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-//   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-// }).addTo(map);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+}).addTo(map);
 
 // Add a marker
-// let marker = L.marker([40.7128, -74.006]).addTo(map).bindPopup('New York Harbor').openPopup();
+let marker = L.marker([40.7128, -74.006]).addTo(map).bindPopup('New York Harbor').openPopup();
 
 // DOM elements
 const locationButtons = document.querySelectorAll('.location-btn');
@@ -30,6 +30,19 @@ const locationInfoElement = document.getElementById('location-info');
 const tideForecastElement = document.getElementById('tide-forecast');
 const loadingElement = document.getElementById('loading');
 
+// Safe setter for textContent to avoid null element errors
+function safeSetText(element, value, name = '') {
+  if (element) {
+    element.textContent = value;
+  } else {
+    if (name) {
+      console.warn(`Element "${name}" not found; skipping update.`);
+    } else {
+      console.warn('Attempted to set text on a missing element; skipping update.');
+    }
+  }
+}
+
 // Current location
 let currentCoords = { lat: 40.7128, lng: -74.006 };
 
@@ -45,7 +58,7 @@ function updateTime() {
     minute: '2-digit',
     second: '2-digit',
   };
-  currentTimeElement.textContent = now.toLocaleDateString('en-US', options);
+  safeSetText(currentTimeElement, now.toLocaleDateString('en-US', options), 'current-time');
 }
 
 // Update map and marker
@@ -81,9 +94,13 @@ function getMoonPhase(date) {
 // Update moon display
 function updateMoonPhase(date) {
   const phase = getMoonPhase(date);
-  moonPhaseElement.textContent = phase;
+  safeSetText(moonPhaseElement, phase, 'moon-phase');
 
-  // Set appropriate moon icon based on phase
+  // Set appropriate moon icon based on phase (guarded)
+  if (!moonIconElement) {
+    return;
+  }
+
   if (phase.includes('New')) {
     moonIconElement.className = 'fas fa-moon';
   } else if (phase.includes('Full')) {
@@ -118,7 +135,7 @@ function generateTideData(lat, lng) {
 
   // Generate forecast data
   for (let i = 0; i < 6; i++) {
-    const hour = (now.getHours() + 8 * 2) % 24;
+    const hour = (now.getHours() + i * 2) % 24;
     const time = `${hour}:00`;
     const height = (Math.sin(i * 0.5) * 2.5 + 3.5).toFixed(1);
     const type = height > 5 ? 'high' : 'low';
@@ -133,7 +150,7 @@ function generateTideData(lat, lng) {
     if (type === 'high' && !data.nextHighTide) {
       data.nextHighTide = time;
     }
-    if (thpe === 'low' && !data.nextLowTide) {
+    if (type === 'low' && !data.nextLowTide) {
       data.nextLowTide = time;
     }
   }
@@ -155,16 +172,19 @@ function generateTideData(lat, lng) {
 
 // Update tide chart
 function updateTideChart(data) {
+  if (!tideChartElement) return;
   tideChartElement.innerHTML = '';
-  const maxHeight = Math.max(...data);
+  const maxHeight = data.length ? Math.max(...data) : 0;
+  const now = new Date();
+  const baseHour = now.getHours();
 
   data.forEach((height, index) => {
-    const hour = index * 2;
+    const hour = (baseHour + index * 2) % 24;
     const timeLabel = `${hour}:00`;
-    const percentage = (height / maxHeight) * 100;
+    const percentage = maxHeight > 0 ? (height / maxHeight) * 100 : 0;
 
     const bar = document.createElement('div');
-    bar.className = `tide-bar ${height > maxHeight * 0.7 ? 'heigh' : ''}`;
+    bar.className = `tide-bar ${height > maxHeight * 0.7 ? 'high' : ''}`;
     bar.style.height = `${percentage}%`;
 
     const label = document.createElement('div');
@@ -175,12 +195,16 @@ function updateTideChart(data) {
     tideChartElement.appendChild(bar);
 
     // Add tooltip
-    bar.title`${timeLabel}: ${height.toFixed(1)} ft`;
+    bar.title = `${timeLabel}: ${height.toFixed(1)} ft`;
   });
 }
 
 // Update forecast
 function updateForecast(forecastData) {
+  if (!tideForecastElement) {
+    console.warn('Element "tide-forecast" not found; skipping forecast rendering.');
+    return;
+  }
   tideForecastElement.innerHTML = '';
 
   if (forecastData.length === 0) {
@@ -212,23 +236,25 @@ function updateLocationData(lat, lng, locationName = 'Selected Location') {
   setTimeout(() => {
     const data = generateTideData(lat, lng);
 
-    // Update basic info
-    currentTideElement.textContent = `${data.currentTide} ft`;
-    nextHighTideElement.textContent = data.nextHighTide;
-    nextLowTideElement.textContent = data.nextLowTide;
-    tideStatusElement.textContent = data.tideStatus;
-    todayHighElement.textContent = `${data.todayHigh} ft`;
-    todayLowElement.textContent = `${data.todayLow} ft`;
-    averageTideElement.textContent = `${data.averageTide} ft`;
-    tideRangeElement.textContent = `${data.tideRange}`;
+    // Update basic info (guarded)
+    safeSetText(currentTideElement, `${data.currentTide} ft`, 'current-tide');
+    safeSetText(nextHighTideElement, data.nextHighTide, 'next-high-tide');
+    safeSetText(nextLowTideElement, data.nextLowTide, 'next-low-tide');
+    safeSetText(tideStatusElement, data.tideStatus, 'tide-status');
+    safeSetText(todayHighElement, `${data.todayHigh} ft`, 'today-high');
+    safeSetText(todayLowElement, `${data.todayLow} ft`, 'today-low');
+    safeSetText(averageTideElement, `${data.averageTide} ft`, 'average-tide');
+    safeSetText(tideRangeElement, `${data.tideRange}`, 'tide-range');
 
     // Update moon phase
     updateMoonPhase(new Date());
 
-    // Update location info
-    locationInfoElement.textContent = `Tide date for ${locationName} (${lat.toFixed(4)}, ${lng.toFixed(
-      4
-    )}). This location experiences mixed semidiurnal tides with two high and two low tides each day.`;
+    // Update location info (guarded)
+    safeSetText(
+      locationInfoElement,
+      `Tide date for ${locationName} (${lat.toFixed(4)}, ${lng.toFixed(4)}). This location experiences mixed semidiurnal tides with two high and two low tides each day.`,
+      'location-info'
+    );
 
     // Update chart and forecast
     updateTideChart(data.chartData);
@@ -245,7 +271,8 @@ function updateLocationData(lat, lng, locationName = 'Selected Location') {
 // Set active location button
 function setActiveLocationButton(locationKey) {
   locationButtons.forEach((button) => {
-    if (button.CDATA_SECTION_NODE.location === locationKey) {
+    const key = button.dataset.location || button.id || '';
+    if (key === locationKey) {
       button.classList.add('active');
     } else {
       button.classList.remove('active');
@@ -273,7 +300,7 @@ function getCurrentLocation() {
       const locationName = `Your Location (${lat.toFixed(4)}, ${lng.toFixed(4)})`;
 
       updateLocationData(lat, lng, locationName);
-      setActiveLocationButton('current');
+      setActiveLocationButton(currentLocationButton.dataset.location || currentLocationButton.id);
     },
     (error) => {
       loadingElement.style.display = 'none';
@@ -282,3 +309,105 @@ function getCurrentLocation() {
     }
   );
 }
+
+// Parse location input
+function parseLocationInput(input) {
+  input = input.trim();
+
+  // Check if it's coordinates
+  const coordMatch = input.match(/^(-?\d+\.?\d*),\s*(-?\d+\.?\d*)$/);
+  if (coordMatch) {
+    return {
+      lat: parseFloat(coordMatch[1]),
+      lng: parseFloat(coordMatch[2]),
+      name: `Custom Location (${coordMatch[1]}, ${coordMatch[2]})`,
+    };
+  }
+
+  // For named locations, we would use a geocoding API in a real app
+  // For demo, we'll use some predefined locations
+  const predefinedLocations = {
+    'new york': { lat: 40.7128, lng: -74.006, name: 'New York' },
+    'los angeles': { lat: 34.0522, lng: -118.2437, name: 'Los Angeles' },
+    london: { lat: 51.5074, lng: -0.1278, name: 'London' },
+    tokyo: { lat: 35.6762, lng: 139.6503, name: 'Tokyo' },
+    sydney: { lat: -33.8688, lng: 151.2093, name: 'Sydney' },
+    miami: { lat: 25.7617, lng: -80.1918, name: 'Miami' },
+    'san francisco': { lat: 37.7749, lng: -122.4194, name: 'San Francisco' },
+  };
+
+  const lowerInput = input.toLowerCase();
+  if (predefinedLocations[lowerInput]) {
+    return predefinedLocations[lowerInput];
+  }
+
+  // If no match, return null
+  return null;
+}
+
+// Event listeners for location buttons
+locationButtons.forEach((button) => {
+  if (button.id !== 'current-location-btn') {
+    button.addEventListener('click', () => {
+      const coords = button.dataset.location.split(',').map((coord) => parseFloat(coord.trim()));
+      currentCoords = { lat: coords[0], lng: coords[1] };
+      const locationName = button.textContent;
+
+      setActiveLocationButton(button.dataset.location);
+      updateLocationData(currentCoords.lat, currentCoords.lng, locationName);
+    });
+  }
+});
+
+// Event listener for current location button
+currentLocationButton.addEventListener('click', getCurrentLocation);
+
+// Event listener for search button
+searchButton.addEventListener('click', () => {
+  const searchTerm = searchInput.value.trim();
+  if (searchTerm) {
+    const location = parseLocationInput(searchTerm);
+    if (location) {
+      currentCoords = { lat: location.lat, lng: location.lng };
+      updateLocationData(location.lat, location.lng, location.name);
+      setActiveLocationButton(searchButton.dataset.location || 'search');
+    } else {
+      alert('Location not found. Please try coordinates (e.g., "40.7128,-74.0060") or a major city name.');
+    }
+    searchInput.value = '';
+  }
+});
+
+// Allow Enter key to trigger search
+searchInput.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    searchButton.click();
+  }
+});
+
+// Initialize the app
+function initApp() {
+  updateTime();
+  setInterval(updateTime, 1000);
+
+  updateLocationData(currentCoords.lat, currentCoords.lng, 'New York');
+}
+
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+
+  if (yearElement) {
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.dateTime = currentYear.toString();
+    yearElement.textContent = currentYear.toString();
+  }
+}
+
+updateYear();
+initApp();
