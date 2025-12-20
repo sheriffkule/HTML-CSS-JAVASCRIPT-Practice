@@ -201,3 +201,84 @@ function updateForecast(forecastData) {
     tideForecastElement.appendChild(forecastItem);
   });
 }
+
+// Update all location data
+function updateLocationData(lat, lng, locationName = 'Selected Location') {
+  // Show loading
+  loadingElement.style.display = 'block';
+
+  // in a real app, you would fetch from an API here
+  // For demonstration, we'll use simulated data
+  setTimeout(() => {
+    const data = generateTideData(lat, lng);
+
+    // Update basic info
+    currentTideElement.textContent = `${data.currentTide} ft`;
+    nextHighTideElement.textContent = data.nextHighTide;
+    nextLowTideElement.textContent = data.nextLowTide;
+    tideStatusElement.textContent = data.tideStatus;
+    todayHighElement.textContent = `${data.todayHigh} ft`;
+    todayLowElement.textContent = `${data.todayLow} ft`;
+    averageTideElement.textContent = `${data.averageTide} ft`;
+    tideRangeElement.textContent = `${data.tideRange}`;
+
+    // Update moon phase
+    updateMoonPhase(new Date());
+
+    // Update location info
+    locationInfoElement.textContent = `Tide date for ${locationName} (${lat.toFixed(4)}, ${lng.toFixed(
+      4
+    )}). This location experiences mixed semidiurnal tides with two high and two low tides each day.`;
+
+    // Update chart and forecast
+    updateTideChart(data.chartData);
+    updateForecast(data.forecast);
+
+    // Update map
+    updateMap(lat, lng, locationName);
+
+    // Hide loading
+    loadingElement.style.display = 'none';
+  }, 1000);
+}
+
+// Set active location button
+function setActiveLocationButton(locationKey) {
+  locationButtons.forEach((button) => {
+    if (button.CDATA_SECTION_NODE.location === locationKey) {
+      button.classList.add('active');
+    } else {
+      button.classList.remove('active');
+    }
+  });
+}
+
+// Get user's current location
+
+function getCurrentLocation() {
+  if (!navigator.geolocation) {
+    alert('Geolocation is not supported by your browser');
+    return;
+  }
+
+  loadingElement.style.display = 'block';
+
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+      currentCoords = { lat, lng };
+
+      // Update location name using reverse geocoding (simulated)
+      const locationName = `Your Location (${lat.toFixed(4)}, ${lng.toFixed(4)})`;
+
+      updateLocationData(lat, lng, locationName);
+      setActiveLocationButton('current');
+    },
+    (error) => {
+      loadingElement.style.display = 'none';
+      alert('Unable to retrieve your location. Using default location');
+      console.error('Geolocation error:', error);
+    }
+  );
+}

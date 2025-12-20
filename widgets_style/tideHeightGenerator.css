@@ -167,6 +167,20 @@ header {
     transition: all .3s ease;
     text-align: center;
     font-size: 1rem;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        width: 60%;
+        height: 100%;
+        top: 0;
+        left: -10%;
+        background: rgba(255, 255, 255, 0.15);
+        transform: skew(35deg);
+        transition: 0.3s;
+    }
 
     &:hover {
         background: rgb(255 255 255 / 0.2);
@@ -174,6 +188,10 @@ header {
     }
     &:active {
         transform: translateY(0) scale(1);
+    }
+    &:hover::before {
+        width: 110%;
+        transform: skew(0);
     }
 }
 
@@ -346,14 +364,56 @@ footer {
     }
 }
 
-.loading i {
+.loading {
     text-align: center;
-    animation: spin 1.5s linear infinite;
+    padding: 20px;
     display: none;
+}
+
+.loading i {
+    font-size: 2rem;
+    margin-block-end: 10px;
+    color: var(--accent);
+    animation: spin 1.5s linear infinite;
 }
 
 @keyframes spin {
     to {
         transform: rotate(360deg);
     }
+}
+
+.current-time {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 1.1rem;
+    color: var(--accent);
+}
+
+.map-container {
+    height: 300px;
+    margin-block-start: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+.error-message {
+    background: rgb(231 76 60 / 0.2);
+    border: 1px solid var(--danger);
+    border-radius: 8px;
+    padding: 15px;
+    margin: 15px 0;
+    text-align: center;
+}
+
+.api-info {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin-block-start: 10px;
+    text-align: center;
 }
