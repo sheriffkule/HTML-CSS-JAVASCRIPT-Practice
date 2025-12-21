@@ -1,0 +1,113 @@
+:root {
+    --primary: #4361ee;
+    --primary-dark: #3a56d4;
+    --secondary: #7209b7;
+    --dark: #212529;
+    --light: #f8f9fa;
+    --gray: #6c757d;
+    --success: #4cc9f0;
+    --danger: #f72585;
+    --border-radius: 12px;
+    --shadow: 0 10px 20px rgb(0 0 0 / 0.15);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: var(--light);
+    min-height: 100vh;
+    padding: 20px;
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-block-end: 40px;
+    padding: 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-block-end: 15px;
+
+    i {
+        font-size: 2.5rem;
+        -webkit-text-stroke: 1px var(--success);
+        color: transparent;
+    }
+    h1 {
+        font-size: 2.5rem;
+        background: linear-gradient(to right, var(--success), var(--primary));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+}
+
+.tagline {
+    color: var(--gray);
+    font-size: 1.1rem;
+    max-width: 65ch;
+    margin: 0 auto;
+    text-wrap: pretty;
+}
+
+.app-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-block-end: 40px;
+
+    @media screen and (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.card {
+    background: rgb(255 255 255 / 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgb(255 255 255 / 0.2);
+}
+
+.card-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-block-end: 10px;
+    font-size: 1.3rem;
+    color: var(--success);
+
+    i {
+        font-size: 1.75rem;
+        -webkit-text-stroke: 1px var(--success);
+        color: transparent;
+    }
+}
+
+.input-group {
+    margin-block-end: 20px;
+}
+
+label {
+    display: block;
+    margin-block-end: 8px;
+    font-weight: 500;
+}
