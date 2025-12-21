@@ -35,6 +35,42 @@
               id="inputText"
               placeholder="Type ar paste your text here..."></textarea>
           </div>
+
+          <div class="input-group">
+            <label>Select Hash Algorithms:</label>
+            <div class="options">
+              <div class="option-item">
+                <input type="checkbox" id="md5" checked />
+                <label for="md5">MD5</label>
+              </div>
+              <div class="option-item">
+                <input type="checkbox" id="sha1" checked />
+                <label for="sha1">SHA-1</label>
+              </div>
+              <div class="option-item">
+                <input type="checkbox" id="sha256" checked />
+                <label for="sha256">SHA-256</label>
+              </div>
+              <div class="option-item">
+                <input type="checkbox" id="sha512" checked />
+                <label for="sha512">SHA-512</label>
+              </div>
+              <div class="option-item">
+                <input type="checkbox" id="sha3" />
+                <label for="sha3">SHA-3</label>
+              </div>
+              <div class="option-item">
+                <input type="checkbox" id="ripemd160" />
+                <label for="ripemd160">RIPEMD-160</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="buttons">
+            <button class="btn-primary" id="generateBtn"><i class="fas fa-bolt"></i> Generate Hashes</button>
+            <button class="btn-secondary" id="clearBtn"><i class="fas fa-broom"></i> Generate Hashes</button>
+            <button class="btn-secondary" id="sampleBtn"><i class="fas fa-vial"></i> Generate Hashes</button>
+          </div>
         </div>
       </div>
     </div>
