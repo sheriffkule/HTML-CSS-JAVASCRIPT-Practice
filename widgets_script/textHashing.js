@@ -99,6 +99,85 @@ document.addEventListener('DOMContentLoaded', function () {
         default:
           hashValue = 'Algorithm not supported';
       }
+
+      // Create hash result element
+      const hashItem = document.createElement('div');
+      hashItem.className = 'hash-item';
+      hashItem.style.borderLeftColor = algo.color;
+
+      hashItem.innerHTML = `
+        <div class="hash-title">
+          <span>${algo.name}</span>
+          <button class="copy-btn" data-hash="${hashValue}"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <div class="hash-value">${hashValue}</div>
+        <div class="hash-info">
+          <span>Length: ${hashValue.length} chars</span>
+          <span>${new Date().toLocaleTimeString()}</span>
+        </div>
+      `;
+
+      hashValue.appendChild(hashItem);
     });
+
+    // Add to history
+    addToHistory(text, selectedAlgorithms.length);
+
+    // Show success notification
+    showNotification(`Generated ${selectedAlgorithms.length} hash values`);
+
+    // Add event listeners to copy buttons
+    document.querySelectorAll('.copy-btn').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        const hashValue = this.getAttribute('data-hash');
+        copyToClipboard(hashValue);
+        showNotification('Hash copied to clipboard!');
+      });
+    });
+  }
+
+  // Clear input function
+  function clearInput() {
+    inputText.value = '';
+    hashResults.innerHTML = `
+      <div class="empty-state">
+        <i class="fas fa-code"></i>
+        <h3>No Hashes Generated</h3>
+        <p>Enter some text and click "Generate Hashes" to see the results here.</p>
+      </div>
+    `;
+  }
+
+  // Load sample text function
+  function loadSampleText() {
+    const sampleTexts = [
+      'The quick brown fox jumps over the lazy dog',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      'Hello, World! This is a sample text for hashing.',
+      'Password123!@#',
+      'Cryptographic hash functions are fundamental to modern cryptography.',
+    ];
+
+    const randomText = sampleTexts[Math.floor(Math.random() * sampleTexts.length)];
+    inputText.value = randomText;
+  }
+
+  // Add to history function
+  function addToHistory(text, algorithmCount) {
+    const historyItem = {
+      text: text,
+      algorithmCount: algorithmCount,
+      timestamp: new Date().toString(),
+    };
+
+    history.unshift(historyItem);
+
+    // Keep only last 10 items
+    if (history.length > 10) {
+      history = history.slice(0, 10);
+    }
+
+    localStorage.setItem('hashHistory', JSON.stringify(history));
+    renderHistory();
   }
 });
