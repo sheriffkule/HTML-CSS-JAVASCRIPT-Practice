@@ -68,8 +68,47 @@
 
           <div class="buttons">
             <button class="btn-primary" id="generateBtn"><i class="fas fa-bolt"></i> Generate Hashes</button>
-            <button class="btn-secondary" id="clearBtn"><i class="fas fa-broom"></i> Generate Hashes</button>
-            <button class="btn-secondary" id="sampleBtn"><i class="fas fa-vial"></i> Generate Hashes</button>
+            <button class="btn-secondary" id="clearBtn"><i class="fas fa-broom"></i> Clear</button>
+            <button class="btn-secondary" id="sampleBtn"><i class="fas fa-vial"></i> Sample Text</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            <i class="fas fa-tachometer-alt"></i>
+            <h2>Hash Results</h2>
+          </div>
+
+          <div class="tabs">
+            <div class="tab active" data-tab="results">Results</div>
+            <div class="tab" data-tab="history">History</div>
+          </div>
+
+          <div class="tab-content active" id="results-tab">
+            <div class="hash-results" id="hashResults">
+              <div class="empty-state">
+                <i class="fas fa-code"></i>
+                <h3>No Hashes Generated Yet</h3>
+                <p>Enter some text and click "Generate Hashes" to see the results here.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-content" id="history-tab">
+            <div class="history-section">
+              <div id="historyList">
+                <div class="empty-state">
+                  <i class="fas fa-history"></i>
+                  <h3>No History Yet</h3>
+                  <p>Your previously generated hashes will appear here.</p>
+                </div>
+              </div>
+              <div class="buttons">
+                <button class="btn danger" id="clearHistoryBtn">
+                  <i class="fas fa-trash"></i> Clear History
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
