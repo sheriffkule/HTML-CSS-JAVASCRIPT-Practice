@@ -180,4 +180,6 @@ document.addEventListener('DOMContentLoaded', function () {
     localStorage.setItem('hashHistory', JSON.stringify(history));
     renderHistory();
   }
+
+  // Render history function
 });
