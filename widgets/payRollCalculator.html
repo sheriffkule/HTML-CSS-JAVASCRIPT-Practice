@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payroll Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/payRollCalculator.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Payroll Calculator</h1>
+        <p class="subtitle">
+          Calculate employee salaries, deductions, and net pay with our comprehensive payroll calculator.
+        </p>
+      </header>
+
+      <div class="app-container">
+        <div class="card">
+          <h2 class="card-title"><i class="fa-solid fa-chart-column"></i> Payroll Information</h2>
+
+          <div class="toggle-container">
+            <div class="toggle-option active" id="hourlyToggle">Hourly</div>
+            <div class="toggle-option" id="salaryToggle">Salary</div>
+          </div>
+
+          <div class="input-group">
+            <label for="payRate"
+              >Pay Rate
+              <span class="tooltip">
+                <i class="fa-solid fa-info"></i>
+                <span class="tooltip-text">Enter hourly rate of annual salary based on selection</span>
+              </span>
+            </label>
+            <input type="number" name="payRate" id="payRate" placeholder="0.00" min="0" step="0.01" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/widgets_script/payRollCalculator.js"></script>
+  </body>
+</html>
