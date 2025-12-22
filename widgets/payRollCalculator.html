@@ -103,18 +103,84 @@
             <label for="hasBonus">Include Bonus</label>
           </div>
 
-          <div class="input-group" id="bonusContainer" style="display: none;">
+          <div class="input-group" id="bonusContainer" style="display: none">
             <label for="bonusAmount">Bonus Amount (%)</label>
-            <input type="number" id="bonusAmount" placeholder="0" min="0" step="0.01">
+            <input type="number" id="bonusAmount" placeholder="0" min="0" step="0.01" />
           </div>
 
           <div class="actions">
             <button class="btn" id="calculateBtn">
-                <i class="fa-solid fa-calculator"></i> Calculate Payroll
+              <i class="fa-solid fa-calculator"></i> Calculate Payroll
             </button>
-            <button class="btn btn-secondary" id="resetBtn">
-                <i class="fa-solid fa-rotate"></i> Reset
-            </button>
+            <button class="btn btn-secondary" id="resetBtn"><i class="fa-solid fa-rotate"></i> Reset</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="card-title"><i class="fa-solid fa-chart-line"></i> Payroll Results</h2>
+
+          <div class="results-container">
+            <div class="result-item">
+              <div class="result-label">Gross Pay</div>
+              <div class="result-value" id="grossPay">$0.00</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label">Net Pay</div>
+              <div class="result-value" id="netPay">$0.00</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label">Taxes</div>
+              <div class="result-value" id="totalTaxes">$0.00</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label">Deduction</div>
+              <div class="result-value" id="totalDeduction">$0.00</div>
+            </div>
+          </div>
+
+          <h2 class="card-title"><i class="fa-solid fa-rectangle-list"></i> Payroll Summary</h2>
+
+          <div class="summary-container" id="payrollSummary">
+            <div class="summary-item">
+              <span>Regular Pay:</span>
+              <span id="regularPay">$0.00</span>
+            </div>
+            <div class="summary-item">
+              <span>Overtime Pay:</span>
+              <span id="overtimePay">$0.00</span>
+            </div>
+            <div class="summary-item">
+              <span>Bonus:</span>
+              <span id="bonusPay">$0.00</span>
+            </div>
+            <div class="summary-item">
+              <span>Federal Tax:</span>
+              <span id="federalTaxAmount">$0.00</span>
+            </div>
+            <div class="summary-item">
+              <span>State Tax:</span>
+              <span id="stateTaxAmount">$0.00</span>
+            </div>
+            <div class="summary-item">
+              <span>Social Security:</span>
+              <span id="socialSecurityAmount">$0.00</span>
+            </div>
+            <div class="summary-item">
+              <span>Medicare:</span>
+              <span id="medicareAmount">$0.00</span>
+            </div>
+            <div class="summary-item">
+              <span>Retirement:</span>
+              <span id="retirementAmount">$0.00</span>
+            </div>
+            <div class="summary-item">
+              <span>Health Insurance:</span>
+              <span id="healthInsuranceAmount">$0.00</span>
+            </div>
+            <div class="summary-item">
+              <span>Net Pay:</span>
+              <span id="netPaySummary">$0.00</span>
+            </div>
           </div>
         </div>
       </div>

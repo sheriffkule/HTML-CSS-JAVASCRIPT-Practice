@@ -186,3 +186,24 @@ select {
     grid-template-columns: 1fr 1fr;
     gap: 15px;
 }
+
+.result-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-block: 15px 20px;
+    flex-shrink: 0;
+}
+
+.result-item {
+    background: var(--light);
+    padding: 12px;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary);
+}
+
+.result-label {
+    font-size: 0.8rem;
+    color: var(--gray);
+    margin-block-end: 4px;
+}
