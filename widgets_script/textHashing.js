@@ -23,13 +23,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Load history from localStorage
   let history = JSON.parse(localStorage.getItem('hashHistory')) || [];
-  renderHistory();
+  if (historyList) renderHistory();
 
   // Event Listeners
-  generateBtn.addEventListener('click', generateHashes);
-  clearBtn.addEventListener('click', clearInput);
-  sampleBtn.addEventListener('click', loadSampleText);
-  clearHistoryBtn.addEventListener('click', clearHistory);
+  if (generateBtn) generateBtn.addEventListener('click', generateHashes);
+  if (clearBtn) clearBtn.addEventListener('click', clearInput);
+  if (sampleBtn) sampleBtn.addEventListener('click', loadSampleText);
+  if (clearHistoryBtn) clearHistoryBtn.addEventListener('click', clearHistory);
 
   // Tab functionality
   tabs.forEach((tab) => {
@@ -62,7 +62,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Check if at least one algorithm is selected
     const selectedAlgorithms = hashAlgorithms.filter((algo) => {
       const checkbox = document.getElementById(algo.id);
-      return checkbox.ariaChecked;
+      // Support native checkbox inputs and elements using aria-checked
+      return checkbox && (checkbox.checked === true || checkbox.getAttribute('aria-checked') === 'true');
     });
 
     if (selectedAlgorithms.length === 0) {
@@ -117,7 +118,8 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
       `;
 
-      hashValue.appendChild(hashItem);
+      // Append result to the results container
+      if (hashResults) hashResults.appendChild(hashItem);
     });
 
     // Add to history
@@ -182,4 +184,133 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Render history function
+  function renderHistory() {
+    if (!historyList) return;
+
+    if (history.length === 0) {
+      historyList.innerHTML = `
+        <div class="empty-state">
+          <i class="fas fa-history"></i>
+          <h3>No History Yet</h3>
+          <p>Your previously generated hashes will appear here.</p>
+        </div>
+      `;
+      return;
+    }
+
+    historyList.innerHTML = '';
+
+    history.forEach((item, index) => {
+      const historyElement = document.createElement('div');
+      historyElement.className = 'history-item';
+
+      const date = new Date(item.timestamp);
+      const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+
+      historyElement.innerHTML = `
+        <div class="history-text" title="${item.text}">${item.text}</div>
+        <div class="history-details">
+          <div>${item.algorithmCount} algorithms</div>
+          <div>${formattedDate}</div>
+        </div>
+        <div class="history-actions">
+          <button class="btn secondary use-history-btn" data-index="${index}">
+            <i class="fas fa-redo"></i> Use
+          </button>
+        </div>
+      `;
+
+      historyList.appendChild(historyElement);
+    });
+
+    // Add event listeners to use history buttons
+    document.querySelectorAll('.use-history-btn').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        const index = parseInt(this.getAttribute('data-index'));
+        inputText.value = history[index].text;
+
+        // Switch to input tab
+        tabs[0].click();
+
+        showNotification('Text loaded from history');
+      });
+    });
+  }
+
+  // Clear history function
+  function clearHistory() {
+    history = [];
+    localStorage.setItem('hashHistory', JSON.stringify(history));
+    renderHistory();
+    showNotification('History cleared');
+  }
+
+  // Copy to clipboard function
+  function copyToClipboard(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text);
+    }
+
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+  }
+
+  // Show notification function
+  function showNotification(message, type = 'success') {
+    // If there's a page-provided notification element, use it — otherwise create a temporary toast
+    let target = notification;
+    let created = false;
+
+    if (!target) {
+      created = true;
+      target = document.createElement('div');
+      target.className = 'notification';
+      document.body.appendChild(target);
+      console.warn('Notification element not found; created temporary toast instead.');
+    }
+
+    target.textContent = message;
+
+    if (type === 'error') {
+      target.style.background = 'var(--danger)';
+    } else {
+      target.style.background = 'var(--success)';
+    }
+
+    // Show the notification
+    target.classList.add('show');
+
+    // Hide and clean up (if temporary) after a delay
+    setTimeout(() => {
+      target.classList.remove('show');
+
+      if (created) {
+        // Wait for transition then remove
+        setTimeout(() => {
+          if (target.parentNode) target.parentNode.removeChild(target);
+        }, 300);
+      }
+    }, 3000);
+  }
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.dateTime = currentYear.toString();
+    yearElement.textContent = currentYear.toString();
+  }
+
+  updateYear();
 });
