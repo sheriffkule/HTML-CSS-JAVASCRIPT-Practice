@@ -35,6 +35,87 @@
             </label>
             <input type="number" name="payRate" id="payRate" placeholder="0.00" min="0" step="0.01" />
           </div>
+
+          <div id="hourlyInputs">
+            <div class="input-row">
+              <div class="input-group">
+                <label for="hoursWorked">hours Worked</label>
+                <input type="number" id="hoursWorked" placeholder="40" min="0" step="0.5" />
+              </div>
+
+              <div class="input-group">
+                <label for="overtimeHours">Overtime Hours</label>
+                <input type="number" id="overtimeHours" placeholder="0" min="0" step="0.5" />
+              </div>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="payPeriod">Pay Period</label>
+            <select id="payPeriod">
+              <option value="weekly">Weekly</option>
+              <option value="biweekly" selected>Bi-Weekly</option>
+              <option value="semimonthly">Semi-Monthly</option>
+              <option value="monthly">Monthly</option>
+            </select>
+          </div>
+
+          <h2 class="card-title"><i class="fa-solid fa-sack-dollar"></i> Deductions</h2>
+
+          <div class="input-row">
+            <div class="input-group">
+              <label for="federalTax">Federal Tax (%)</label>
+              <input type="number" id="federalTax" placeholder="10" min="0" max="50" step="0.1" />
+            </div>
+
+            <div class="input-group">
+              <label for="stateTax">State Tax (%)</label>
+              <input type="number" id="stateTax" placeholder="5" min="0" max="20" step="0.1" />
+            </div>
+          </div>
+
+          <div class="input-row">
+            <div class="input-group">
+              <label for="socialSecurity">Social Security (%)</label>
+              <input type="number" id="socialSecurity" value="6.2" min="0" max="20" step="0.1" readonly />
+            </div>
+
+            <div class="input-group">
+              <label for="medicare">Medicare (%)</label>
+              <input type="number" id="medicare" value="1.45" min="0" max="20" step="0.1" />
+            </div>
+          </div>
+
+          <div class="input-row">
+            <div class="input-group">
+              <label for="retirement">Retirement (%)</label>
+              <input type="number" id="retirement" placeholder="5" min="0" max="50" step="0.1" />
+            </div>
+
+            <div class="input-group">
+              <label for="healthInsurance">Health Insurance (%)</label>
+              <input type="number" id="healthInsurance" placeholder="100" min="0" step="0.01" />
+            </div>
+          </div>
+
+          <div class="checkbox-group">
+            <input type="checkbox" id="hasBonus" />
+            <label for="hasBonus">Include Bonus</label>
+          </div>
+
+          <div class="input-group" id="bonusContainer" style="display: none;">
+            <label for="bonusAmount">Bonus Amount (%)</label>
+            <input type="number" id="bonusAmount" placeholder="0" min="0" step="0.01">
+          </div>
+
+          <div class="actions">
+            <button class="btn" id="calculateBtn">
+                <i class="fa-solid fa-calculator"></i> Calculate Payroll
+            </button>
+            <button class="btn btn-secondary" id="resetBtn">
+                <i class="fa-solid fa-rotate"></i> Reset
+            </button>
+          </div>
         </div>
       </div>
     </div>
