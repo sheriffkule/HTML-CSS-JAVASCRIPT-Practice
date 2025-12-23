@@ -182,9 +182,23 @@
               <span id="netPaySummary">$0.00</span>
             </div>
           </div>
+
+          <div class="actions">
+            <button class="btn" id="saveBtn"><i class="fa-solid fa-floppy-disk"></i> Save Calculation</button>
+            <button class="btn btn-secondary" id="exportBtn">
+              <i class="fa-solid fa-file-export"></i> Export as PDF
+            </button>
+          </div>
         </div>
       </div>
+
+      <footer class="footer__copy">
+        © <time datetime="" id="year"></time> Made by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
     </div>
+
+    <div class="notification" id="notification">Calculation saved successfully!</div>
     <script src="/widgets_script/payRollCalculator.js"></script>
   </body>
 </html>

@@ -187,7 +187,7 @@ select {
     gap: 15px;
 }
 
-.result-container {
+.results-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
@@ -206,4 +206,107 @@ select {
     font-size: 0.8rem;
     color: var(--gray);
     margin-block-end: 4px;
+}
+
+.result-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.summary-container {
+    overflow-y: auto;
+    flex-grow: 1;
+    margin-block-start: 15px;
+    padding-inline-end: 5px;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+}
+
+.summary-item.total {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--primary);
+    border-bottom: none;
+    margin-block-start: 8px;
+    padding-block-start: 12px;
+    border-top: 2px solid #eee;
+}
+
+.btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+
+    &:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px) scale(1.02);
+    }
+    &:active {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.btn-secondary {
+    background: var(--secondary);
+
+    &:hover {
+        background: #6511a0;
+    }
+}
+
+.actions {
+    display: flex;
+    gap: 12px;
+    margin: 20px;
+    flex-shrink: 0;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    margin-inline-start: 5px;
+    color: gray;
+    cursor: help;
+    transition: var(--transition);
+}
+
+.tooltip-text {
+    visibility: hidden;
+    width: 180px;
+    background: var(--dark);
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    padding: 6px;
+    position: absolute;
+    z-index: 1;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    font-size: 0.8rem;
+    font-weight: normal;
+    transition: var(--transition);
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
 }
