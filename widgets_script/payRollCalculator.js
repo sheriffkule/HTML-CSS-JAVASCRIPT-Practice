@@ -58,3 +58,69 @@ salaryToggle.addEventListener('click', () => {
 hasBonusCheckbox.addEventListener('change', () => {
   bonusContainer.style.display = hasBonusCheckbox.checked ? 'block' : 'none';
 });
+
+// Calculate payroll
+calculateBtn.addEventListener('click', calculatePayroll);
+
+function calculatePayroll() {
+  // Get input values
+  const isHourly = hourlyToggle.classList.contains('active');
+  const payRate = parseFloat(payRateInput.value) || 0;
+  const hoursWorked = parseFloat(hoursWorkedInput.value) || 0;
+  const overtimeHours = parseFloat(overtimeHoursInput.value) || 0;
+  const payPeriod = payPeriodSelect.value;
+  const federalTaxRate = parseFloat(federalTaxInput.value) || 0;
+  const stateTaxRate = parseFloat(stateTaxInput.value) || 0;
+  const socialSecurityRate = parseFloat(socialSecurityInput.value) || 0;
+  const medicareRate = parseFloat(medicareInput.value) || 0;
+  const retirementRate = parseFloat(retirementInput.value) || 0;
+  const healthInsurance = parseFloat(healthInsuranceInput.value) || 0;
+  const hasBonus = hasBonusCheckbox.checked;
+  const bonusAmount = parseFloat(bonusAmountInput.value) || 0;
+
+  // Calculate gross pay
+  let grossPay = 0;
+
+  if (isHourly) {
+    // Hourly calculation
+    const regularHours = Math.min(hoursWorked, 40);
+    const overtimeRate = payRate * 1.5;
+
+    grossPay = regularHours * payRate + overtimeHours * overtimeRate;
+
+    // Adjust for pay period
+    if (payPeriod === 'biweekly') {
+      grossPay *= 2;
+    } else if (payPeriod === 'semimonthly') {
+      grossPay = (payRate * 40 * 52) / 24;
+    } else if (payPeriod === 'monthly') {
+      grossPay = (payRate * 40 * 52) / 12;
+    }
+  } else {
+    // Salary calculation
+    if (payPeriod === 'weekly') {
+      grossPay = payRate / 52;
+    } else if (payPeriod === 'biweekly') {
+      grossPay = payRate / 26;
+    } else if (payPeriod === 'semimonthly') {
+      grossPay = payRate / 24;
+    } else if (payPeriod === 'monthly') {
+      grossPay = payRate / 12;
+    }
+  }
+
+  // add bonus if applicable
+  if (hasBonus) {
+    grossPay += bonusAmount;
+  }
+
+  // calculate deductions
+  const federalTaxAmount = grossPay * (federalTaxRate / 100);
+  const stateTaxAmount = grossPay * (stateTaxRate / 100);
+  const socialSecurityAmount = grossPay * (socialSecurityRate / 100);
+  const medicareAmount = grossPay * (medicareRate / 100);
+  const retirementAmount = grossPay * (retirementRate / 100);
+
+  const totalTaxes = federalTaxAmount + stateTaxAmount + socialSecurityAmount + medicareAmount;
+  const totalDeductions = totalTaxes + retirementAmount + healthInsurance;
+}

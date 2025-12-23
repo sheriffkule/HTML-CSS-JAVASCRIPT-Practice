@@ -257,6 +257,7 @@ select {
     &:hover {
         background: var(--primary-dark);
         transform: translateY(-2px) scale(1.02);
+        box-shadow: var(--shadow);
     }
     &:active {
         transform: translateY(0) scale(1);
@@ -309,4 +310,59 @@ select {
 .tooltip:hover .tooltip-text {
     visibility: visible;
     opacity: 1;
+}
+
+.notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--success);
+    color: white;
+    padding: 12px 18px;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    transform: translateY(100px);
+    opacity: 0;
+    transition: var(--transition);
+    z-index: 10;
+}
+
+.notification.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    color: var(--gray);
+    font-size: 0.8rem;
+    margin-block-start: 10px;
+    border-top: 1px solid #ddd;
+    flex-shrink: 0;
+
+    abbr {
+        text-underline-offset: 2px;
+        letter-spacing: 0.5px;
+        cursor: default;
+        color: var(--primary);
+    }
+}
+
+.summary-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.summary-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.summary-container::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 10px;
+}
+
+.summary-container::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
 }
