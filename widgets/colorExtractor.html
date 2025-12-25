@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Color Palette Extractor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/colorExtractor.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Image Color Palette Extractor</h1>
+        <p class="subtitle">Upload an image to extract its dominant colors and create beautiful palettes.</p>
+      </header>
+
+      <div class="app-container">
+        <div class="upload-section">
+          <div class="upload-area" id="uploadArea">
+            <div class="upload-icon">
+              <i class="fas fa-cloud-upload-alt"></i>
+            </div>
+            <p class="upload-text">Drag & drop your image here or click to browse</p>
+            <button class="btn" id="browseBtn">
+              <i class="fas fa-folder-open"></i>
+            </button>
+            <input type="file" id="fileInput" accept="image/*" class="hidden" />
+          </div>
+
+          <div class="image-preview hidden" id="imagePreview">
+            <img src="" alt="Preview" id="previewImg">
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.6.0/color-thief.min.js"></script>
+    <script src="/widgets_script/colorExtractor.js"></script>
+  </body>
+</html>

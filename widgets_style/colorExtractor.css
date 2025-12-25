@@ -1,0 +1,115 @@
+:root {
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --secondary: #f8fafc;
+    --dark: #1e293b;
+    --light: #8ca7c2;
+    --gray: #64748b;
+    --success: #10b981;
+    --danger: #ef4444;
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.15), 0 2px 4px -1px rgb(0 0 0 / 0.8);
+    --radius: 8px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--light);
+    color: var(--dark);
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+header {
+    text-align: center;
+    margin-block-end: 2rem;
+
+    h1 {
+        font-size: 2.5rem;
+        margin-block-end: 0.5rem;
+        color: var(--primary);
+    }
+    .subtitle {
+        color: gray;
+        font-size: 1.1rem;
+        text-wrap: pretty;
+    }
+}
+
+.app-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-block-end: 2rem;
+
+    @media screen and (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.upload-section {
+    background: #eee;
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.upload-area {
+    border: 2px dashed var(--gray);
+    border-radius: var(--radius);
+    padding: 3rem 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all .3s ease;
+    margin-block-end: 1.5rem;
+}
+
+.upload-area:hover,
+.upload-area.dragover {
+    border-color: var(--primary);
+    background-color: rgb(99 102 241 / 0.08);
+}
+
+.upload-icon {
+    font-size: 3rem;
+    color: var(--gray);
+    margin-block-end: 1rem;
+}
+
+.upload-text {
+    margin-block-end: 1rem;
+}
+
+.btn {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: .3s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: var(--shadow);
+    }
+    &:active {
+        transform: translateY(0) scale(1);
+    }
+}
