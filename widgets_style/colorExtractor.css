@@ -166,3 +166,42 @@ select {
     background-color: white;
     outline: none;
 }
+
+.palette-section {
+    background: #eee;
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.palette-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-block-end: 1.5rem;
+}
+
+.palette-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1rem;
+}
+
+.color-card {
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: translateY(-5px);
+    }
+}
+
+.color-swatch {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}

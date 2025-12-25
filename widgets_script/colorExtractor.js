@@ -47,3 +47,85 @@ function handleDrop(e) {
     handleFileSelect(e);
   }
 }
+
+function handleFileSelect(e) {
+  uploadArea.style.display = 'none';
+  const file = e.target.files[0];
+
+  if (file && file.type.startWith('image/')) {
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      previewImg.src = e.target.result;
+      imagePreview.classList.remove('hidden');
+      currentImage = e.target.result;
+    };
+
+    reader.readAsDataURL(file);
+  }
+}
+
+function updateColorCount() {
+  colorCountValue.textContent = colorCount.ariaValueMax;
+}
+
+function extractColors() {
+  if (!currentImage) {
+    showNotification('Please upload an image first!');
+    return;
+  }
+
+  // Show loading state
+  paletteContainer.innerHTML = `
+    <div class="empty-state">
+      <div class="empty-icon">
+        <i class="fas fa-spinner fa-spin"></i>
+      </div>
+      <p>Extracting colors...</p>
+    </div>
+  `;
+
+  // Use ColorThief to extract colors from an image
+  const colorThief = new ColorThief();
+  const img = new Image();
+
+  img.onload = function () {
+    try {
+      const colorCountValue = parseInt(colorCount.value);
+      const palette = colorThief.getPalette(img, colorCountValue);
+
+      if (palette && palette.length > 0) {
+        currentPalette = palette.map((color) => {
+          const hex = rgbToHex(color[0], color[1], color[2]);
+          const rgb = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+          const hsl = rgbToHsl(color[0], color[1], color[2]);
+
+          return { hex, rgb, hsl, original: color };
+        });
+
+        renderPalette(currentPalette);
+      } else {
+        showNotification('Could not extract colors from this image. Please try another image.');
+        resetPalette();
+      }
+    } catch (error) {
+      console.error('Error extracting colors:', error);
+      showNotification('Error extracting colors. Please try another image.');
+      resetPalette();
+    }
+  };
+
+  img.onerror = function () {
+    showNotification('Error loading image. Please try another image.');
+    resetPalette();
+  };
+
+  img.crossOrigin = 'Anonymous';
+  img.src = currentImage;
+}
+
+function rgbToHex(r, g, b) {
+  return '#'((1 << 24) + (r << 16) + (g << 8) + b)
+    .toString(16)
+    .slice(1);
+}
