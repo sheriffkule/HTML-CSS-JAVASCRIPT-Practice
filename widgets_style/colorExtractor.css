@@ -205,3 +205,32 @@ select {
     justify-content: center;
     position: relative;
 }
+
+.color-info {
+    padding: .75rem;
+    background: #eee;
+}
+
+.color-value {
+    font-family: monospace;
+    font-weight: 600;
+    margin-block-end: .25rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.copy-icon {
+    opacity: 0.7;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.color-value:hover .copy-icon {
+    opacity: 1;
+}
+
+.color-rgb {
+    font-size: 0.8rem;
+    color: var(--gray);
+}

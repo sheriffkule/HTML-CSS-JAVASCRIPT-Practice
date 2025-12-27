@@ -129,3 +129,84 @@ function rgbToHex(r, g, b) {
     .toString(16)
     .slice(1);
 }
+
+function rgbToHsl(r, g, b) {
+  r /= 255;
+  g /= 255;
+  b /= 255;
+
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  let h,
+    s,
+    l = (max + min) / 2;
+
+  if (max === min) {
+    h = s = l;
+  } else {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+
+    switch (max) {
+      case r:
+        h = (g - b) / d + (g < b ? 6 : 0);
+        break;
+      case g:
+        h = (b - r) / d + 2;
+        break;
+      case b:
+        h = (r - g) / d + 4;
+        break;
+    }
+
+    h /= 6;
+  }
+
+  h = Math.round(h * 360);
+  s = Math.round(h * 100);
+  l = Math.round(l * 100);
+
+  return `hsl(${h}, ${s}%, ${l}%)`;
+}
+
+function renderPalette(palette) {
+  if (palette.length === 0) {
+    resetPalette();
+    return;
+  }
+
+  const format = colorFormat.value;
+  paletteContainer.innerHTML = '';
+
+  palette.forEach((color) => {
+    const colorCard = document.createElement('div');
+    colorCard.className = 'color-card';
+
+    const colorValue = format === 'hex' ? color.hex : format === 'rgb' ? color.rgb : color.hsl;
+
+    colorCard.innerHTML = `
+      <div class="color-swatch" style="background-color: ${color.hex}"></div>
+      <div class="color-info">
+        <div class="color-value">
+          <span>${colorValue}</span>
+          <i class="far fa-copy copy-icon"></i>
+        </div>
+        <div class="color-rgb">${color.rgb}</div>
+      </div>
+    `;
+
+    paletteContainer.appendChild(colorCard);
+  });
+
+  // Add event listeners for copy
+  document.querySelectorAll('.color-value').forEach((el) => {
+    el.addEventListener('click', copyColorToClipboard);
+  });
+}
+
+function copyColorToClipboard(e) {
+  const colorValue = e.currentTarget.querySelector('span').textContent;
+  navigator.clipboard.writeText(colorValue).then(() => {
+    showNotification('Color copied to clipboard');
+  });
+}
