@@ -26,6 +26,7 @@ uploadArea.addEventListener('drop', handleDrop);
 colorCount.addEventListener('input', updateColorCount);
 extractBtn.addEventListener('click', extractColors);
 resetBtn.addEventListener('click', resetApp);
+exportBtn.addEventListener('click', exportPalette);
 
 // Functions
 function handleDragOver(e) {
@@ -52,7 +53,7 @@ function handleFileSelect(e) {
   uploadArea.style.display = 'none';
   const file = e.target.files[0];
 
-  if (file && file.type.startWith('image/')) {
+  if (file && file.type.startsWith('image/')) {
     const reader = new FileReader();
 
     reader.onload = function (e) {
@@ -66,7 +67,7 @@ function handleFileSelect(e) {
 }
 
 function updateColorCount() {
-  colorCountValue.textContent = colorCount.ariaValueMax;
+  colorCountValue.textContent = colorCount.value;
 }
 
 function extractColors() {
@@ -91,8 +92,8 @@ function extractColors() {
 
   img.onload = function () {
     try {
-      const colorCountValue = parseInt(colorCount.value);
-      const palette = colorThief.getPalette(img, colorCountValue);
+      const numColors = parseInt(colorCount.value, 10) || 5;
+      const palette = colorThief.getPalette(img, numColors);
 
       if (palette && palette.length > 0) {
         currentPalette = palette.map((color) => {
@@ -125,7 +126,7 @@ function extractColors() {
 }
 
 function rgbToHex(r, g, b) {
-  return '#'((1 << 24) + (r << 16) + (g << 8) + b)
+  return '#' + ((1 << 24) + (r << 16) + (g << 8) + b)
     .toString(16)
     .slice(1);
 }
@@ -137,12 +138,14 @@ function rgbToHsl(r, g, b) {
 
   const max = Math.max(r, g, b);
   const min = Math.min(r, g, b);
-  let h,
-    s,
-    l = (max + min) / 2;
+  let h = 0,
+    s = 0;
+  let l = (max + min) / 2;
 
   if (max === min) {
-    h = s = l;
+    // achromatic
+    h = 0;
+    s = 0;
   } else {
     const d = max - min;
     s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
@@ -163,7 +166,7 @@ function rgbToHsl(r, g, b) {
   }
 
   h = Math.round(h * 360);
-  s = Math.round(h * 100);
+  s = Math.round(s * 100);
   l = Math.round(l * 100);
 
   return `hsl(${h}, ${s}%, ${l}%)`;
@@ -210,3 +213,81 @@ function copyColorToClipboard(e) {
     showNotification('Color copied to clipboard');
   });
 }
+
+function exportPalette() {
+  if (currentPalette.length === 0) {
+    showNotification('No palette to export!');
+    return;
+  }
+
+  const format = colorFormat.value;
+  let exportText = 'Color Palette\n\n';
+
+  currentPalette.forEach((color) => {
+    const colorValue = format === 'hex' ? color.hex : format === 'rgb' ? color.rgb : color.hsl;
+    exportText += `${colorValue}\n`;
+  });
+
+  const blob = new Blob([exportText], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'color-palette.txt';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  showNotification('Palette exported successfully!');
+}
+
+function resetApp() {
+  fileInput.value = '';
+  imagePreview.classList.add('hidden');
+  previewImg.src = '';
+  currentImage = null;
+  resetPalette();
+  uploadArea.style.display = '';
+}
+
+function resetPalette() {
+  currentPalette = [];
+  paletteContainer.innerHTML = `
+    <div class="empty-state">
+      <div class="empty-icon">
+        <i class="fas fa-palette"></i>
+      </div>
+      <p>Your extracted colors will appear here.</p>
+    </div>
+  `;
+}
+
+function showNotification(message) {
+  notification.textContent = message;
+  notification.classList.add('show');
+
+  setTimeout(() => {
+    notification.classList.remove('show');
+  }, 3000);
+}
+
+// Initialize
+updateColorCount();
+
+// update year in footer
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+
+  if (yearElement) {
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.dateTime = currentYear.toString();
+    yearElement.textContent = currentYear.toString();
+  }
+}
+updateYear();
