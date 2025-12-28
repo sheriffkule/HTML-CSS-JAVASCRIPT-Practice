@@ -54,3 +54,114 @@ header {
         text-wrap: pretty;
     }
 }
+
+.app-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-block-end: 40px;
+
+    @media screen and (max-width: 900px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.calculator-card,
+.results-card {
+    background: #eee;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 30px;
+    transition: var(--transition);
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgb(0 0 0 / 0.25);
+    }
+}
+
+.card-title {
+    font-size: 1.5rem;
+    margin-block-end: 20px;
+    color: var(--secondary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    i {
+        color: transparent;
+        -webkit-text-stroke: 1px var(--primary);
+    }
+}
+
+.input-group {
+    margin-block-end: 20px;
+}
+
+label {
+    display: block;
+    margin-block-end: 8px;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.input-with-icon {
+    position: relative;
+
+    i {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--gray);
+    }
+}
+
+input,
+select {
+    width: 100%;
+    padding: 14px 15px 14px 45px;
+    border: 1px solid #e0e0e0;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+:is(input, select):where(:focus, :focus-within) {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgb(67 97 238 / 0.2),
+    inset 0 0 0 3px rgb(67 97 238 / 0.2);
+}
+
+.range-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.range-container input[type="range"] {
+    height: 6px;
+    flex: 1;
+    padding: 0;
+}
+
+.range-value {
+    min-width: 60px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.info-tooltip {
+    display: inline-block;
+    margin-inline-start: 5px;
+    color: var(--gray);
+    cursor: help;
+    transition: var(--transition);
+
+    &:hover {
+        transform: scale(1.4);
+        color: var(--success);
+    }
+}

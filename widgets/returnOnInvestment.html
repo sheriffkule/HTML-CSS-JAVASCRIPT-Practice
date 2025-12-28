@@ -58,7 +58,6 @@
                   ><i class="fa-solid fa-circle-info"></i></span
               ></label>
               <div class="range-container">
-                <i class="fas fa-dollar-sign"></i>
                 <input type="range" id="investment-period" min="1" max="30" value="10" />
                 <span class="range-value" id="period-value">10 years</span>
               </div>
@@ -71,9 +70,53 @@
                   ><i class="fa-solid fa-circle-info"></i></span
               ></label>
               <div class="range-container">
-                <i class="fas fa-dollar-sign"></i>
                 <input type="range" id="expected-return" min="1" max="30" value="7" step="0.5" />
                 <span class="range-value" id="return-value">7%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-content" id="advanced-tab">
+            <div class="input-group">
+              <label for="inflation-rate"
+                >Inflation Rate (%)
+                <span class="info-tooltip" title="Average annual inflation rate to calculate real returns"
+                  ><i class="fa-solid fa-circle-info"></i></span
+              ></label>
+              <div class="input-with-icon">
+                <i class="fas fa-chart-line"></i>
+                <input type="number" id="inflation-rate" value="2.5" min="0" max="10" step="0.1" />
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="tax-rate"
+                >Tax Rate (%)
+                <span class="info-tooltip" title="Estimated tax rate on investment gains"
+                  ><i class="fa-solid fa-circle-info"></i></span
+              ></label>
+              <div class="input-with-icon">
+                <i class="fas fa-percentage"></i>
+                <input type="number" id="tax-rate" value="15" min="0" max="50" step="1" />
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="investment-type"
+                >Investment Type
+                <span class="info-tooltip" title="Type of investment to help with accurate calculations"
+                  ><i class="fa-solid fa-circle-info"></i></span
+              ></label>
+              <div class="input-with-icon">
+                <i class="fas fa-piggy-bank"></i>
+                <select id="investment-type">
+                  <option value="stocks">Stocks</option>
+                  <option value="bonds">Bonds</option>
+                  <option value="real-estate">Real Estate</option>
+                  <option value="crypto">Cryptocurrency</option>
+                  <option value="savings">Savings Account</option>
+                  <option value="other">Other</option>
+                </select>
               </div>
             </div>
           </div>
