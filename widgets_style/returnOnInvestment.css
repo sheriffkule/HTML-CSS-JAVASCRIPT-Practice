@@ -218,3 +218,49 @@ select {
     color: var(--gray);
     font-weight: 600;
 }
+
+.profit-positive {
+    color: #2ecc71;
+}
+
+.profit-negative {
+    color: var(--danger);
+}
+
+.chart-container {
+    height: 200px;
+    margin: 25px 0;
+    position: relative;
+}
+
+.breakdown-section {
+    margin-block-start: 25px;
+}
+
+.breakdown-title {
+    font-size: 1.25rem;
+    margin-block-end: 15px;
+    color: var(--secondary);
+}
+
+.breakdown-list {
+    list-style: none;
+}
+
+.breakdown-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #ccc;
+
+    &:last-child {
+        border-bottom: none;
+        font-weight: 700;
+        color: var(--secondary);
+    }
+
+    &:nth-last-child(2) {
+        border-bottom: 1px double;
+    }
+}
+
