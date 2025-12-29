@@ -264,3 +264,64 @@ select {
     }
 }
 
+.comparison-section {
+    background: #eee;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 30px;
+    margin-block-start: 30px;
+}
+
+.comparison-title {
+    font-size: 1.5rem;
+    margin-block-end: 20px;
+    color: var(--secondary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.comparison-item {
+    background: var(--light);
+    padding: 20px;
+    border-radius: var(--radius);
+    text-align: center;
+    transition: var(--transition);
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgb(0 0 0 / 0.1),
+        inset 0 5px 15px rgb(0 0 0 / 0.1);
+    }
+}
+
+.comparison-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 10px 0;
+}
+
+.savings-label {
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: var(--gray);
+    font-size: 0.9rem;
+
+    abbr {
+        letter-spacing: 0.5px;
+        text-underline-offset: 2px;
+        color: var(--primary-light);
+        cursor: default;
+    }
+}

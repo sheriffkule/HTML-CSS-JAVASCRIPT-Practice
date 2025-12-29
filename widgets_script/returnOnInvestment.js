@@ -59,3 +59,65 @@ tabs.forEach((tab) => {
     });
   });
 });
+
+// Format currency
+function formatCurrency(value) {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(value);
+}
+
+// Calculate ROI
+function calculateROI() {
+  const initial = parseFloat(initialInvestment.value);
+  const monthly = parseFloat(monthlyContribution.value);
+  const years = parseFloat(investmentPeriod.value);
+  const annualReturn = parseFloat(expectedReturn.value) / 100;
+
+  // Calculate future value using compound interest formula
+  let future = initial * Math.pow(1 + annualReturn, years);
+
+  // Add monthly contributions (future value of an annuity)
+  if (monthly > 0) {
+    const monthlyRate = annualReturn / 12;
+    const months = years * 12;
+    futureValue += monthly * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate);
+  }
+
+  const totalInvested = initial + monthly * 12 * years;
+  const totalGain = futureValue - totalInvested;
+  const roi = (totalGain / totalInvested) * 100;
+
+  // Update results
+  totalValue.textContent = formatCurrency(futureValue);
+  totalInvestment.textContent = formatCurrency(totalInvested);
+  totalReturn.textContent = formatCurrency(totalGain);
+  roiPercentage.textContent = `${roi.toFixed(2)}%`;
+
+  // Update breakdown
+  breakdownInitial.textContent = formatCurrency(initial);
+  breakdownContributions.textContent = formatCurrency(monthly * 12 * years);
+  breakdownGrowth.textContent = formatCurrency(totalGain);
+  breakdownTotal.textContent = formatCurrency(futureValue);
+
+  // Update comparison scenarios
+  calculateComparisonScenarios(initial, monthly, years);
+
+  // Update chart
+  updateChart(initial, monthly * 12 * years, totalGain);
+}
+
+// Calculate comparison scenarios
+function calculateComparisonScenarios(initial, monthly, years) {
+  const conservativeReturn = 0.04;
+  const moderateReturn = parseFloat(expectedReturn.value) / 100;
+  const aggressiveReturn = 0.12;
+
+  // Calculate future values for each scenario
+  let conservativeFV = initial * Math.pow(1 + conservativeReturn, years);
+  let moderateFV = initial * Math.pow(1 + moderateReturn, years);
+  let aggressiveFV = initial * Math.pow(1 + aggressiveReturn, years);
+}
