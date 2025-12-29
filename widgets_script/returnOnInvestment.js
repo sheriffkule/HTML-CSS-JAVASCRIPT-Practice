@@ -17,6 +17,7 @@ const breakdownTotal = document.getElementById('breakdown-total');
 const conservativeValue = document.getElementById('conservative-value');
 const moderateValue = document.getElementById('moderate-value');
 const aggressiveValue = document.getElementById('aggressive-value');
+const conservativeLoss = document.getElementById('conservative-loss');
 const toggleOptions = document.getElementById('toggle-options');
 const additionalInputs = document.getElementById('additional-inputs');
 const tabs = document.querySelectorAll('.tab');
@@ -120,4 +121,46 @@ function calculateComparisonScenarios(initial, monthly, years) {
   let conservativeFV = initial * Math.pow(1 + conservativeReturn, years);
   let moderateFV = initial * Math.pow(1 + moderateReturn, years);
   let aggressiveFV = initial * Math.pow(1 + aggressiveReturn, years);
+
+  // Add monthly contributions
+  if (monthly > 0) {
+    const conservativeMonthly = conservativeReturn / 12;
+    const moderateMonthly = moderateReturn / 12;
+    const aggressiveMonthly = aggressiveReturn / 12;
+    const months = years * 12;
+
+    conservativeFV +=
+      monthly *
+      ((Math.pow(1 + conservativeMonthly, months) - 1) / conservativeMonthly) *
+      (1 + conservativeMonthly);
+    moderateFV +=
+      monthly * ((Math.pow(1 + moderateMonthly, months) - 1) / moderateMonthly) * (1 + moderateMonthly);
+    aggressiveFV +=
+      monthly * ((Math.pow(1 + aggressiveMonthly, months) - 1) / aggressiveMonthly) * (1 + aggressiveMonthly);
+  }
+
+  // Update comparison values
+  conservativeValue.textContent = formatCurrency(conservativeFV);
+  moderateValue.textContent = formatCurrency(moderateFV);
+  aggressiveValue.textContent = formatCurrency(aggressiveFV);
+
+  // Update comparison values
+  conservativeValue.textContent = formatCurrency(conservativeFV);
+  moderateValue.textContent = formatCurrency(moderateFV);
+  aggressiveValue.textContent = formatCurrency(aggressiveFV);
+
+  // Calculate potential gains/losses
+  const conservativeLossAmount = moderateFV - conservativeFV;
+  const aggressiveGainAmount = aggressiveFV - moderateFV;
+
+  conservativeLoss.textContent = formatCurrency(conservativeLossAmount);
+  aggressiveGain.textContent = formatCurrency(aggressiveGainAmount);
+}
+
+// Update chart
+function updateChart(initial, contributions, growth) {
+  const ctx = chartCanvas.getContext('2d');
+
+  // Clear Previous chart
+  ctx.clearRect(0, 0, chartCanvas.width, chartCanvas.height);
 }
