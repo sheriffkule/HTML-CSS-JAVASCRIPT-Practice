@@ -41,8 +41,56 @@
                   placeholder="Denominator"
                   value="4" />
               </div>
+
+              <div class="fraction-input-group">
+                <label for="numerator2">Second Fraction</label>
+                <input
+                  type="number"
+                  id="numerator2"
+                  class="fraction-input"
+                  placeholder="Numerator"
+                  value="1" />
+                <div class="fraction-separator">-</div>
+                <input
+                  type="number"
+                  id="denominator2"
+                  class="fraction-input"
+                  placeholder="Denominator"
+                  value="2" />
+              </div>
+            </div>
+
+            <div class="operations">
+              <button class="operation-btn active" data-operation="add">
+                <i class="fas fa-plus"></i>
+              </button>
+              <button class="operation-btn" data-operation="subtract">
+                <i class="fas fa-minus"></i>
+              </button>
+              <button class="operation-btn" data-operation="multiply">
+                <i class="fas fa-times"></i>
+              </button>
+              <button class="operation-btn" data-operation="divide">
+                <i class="fas fa-divide"></i>
+              </button>
+            </div>
+
+            <div class="action-buttons">
+              <button class="btn btn-primary" id="calculate-btn">
+                <i class="fas fa-calculator"></i> Calculate
+              </button>
+              <button class="btn btn-secondary" id="clear-btn"><i class="fas fa-broom"></i> Clear</button>
+            </div>
+
+            <div class="instructions">
+              <p>
+                <i class="fas fa-info-circle"></i> Tip: You can enter whole numbers by setting the denominator
+                to 1.
+              </p>
             </div>
           </section>
+
+          <section class="results-section"></section>
         </div>
       </main>
     </div>

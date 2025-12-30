@@ -82,3 +82,86 @@ h1 {
         grid-template-columns: 1fr;
     }
 }
+
+.calculator-section,
+.results-section {
+    background-color: #eee;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 30px;
+    transition: var(--transition);
+
+    &:hover {
+        box-shadow: 0 12px 28px rgb(0 0 0 / 0.2);
+    }
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-block-end: 25px;
+    color: var(--primary);
+    font-size: 1.5rem;
+
+    i {
+        background-color: rgb(67 97 238 / 0.15);
+        padding: 10px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.fraction-inputs {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-block-end: 15px;
+}
+
+.fraction-input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+
+    label {
+        margin-block-end: 8px;
+        font-weight: 600;
+        color: dark;
+    }
+}
+
+.fraction-input {
+    width: 100%;
+    padding: 16px;
+    border: 2px solid #e9ecef;
+    border-radius: var(--border-radius);
+    font-size: 2.25rem;
+    text-align: center;
+    transition: var(--transition);
+    outline: none;
+}
+
+.fraction-input:where(:focus, :focus-within) {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgb(67 97 238 / 0.2),
+    inset 0 0 0 3px rgb(67 97 238 / 0.2);
+}
+
+.fraction-separator {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-inline-end: 15px;
+    color: var(--primary);
+}
+
+.operations {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-block-end: 25px;
+}
