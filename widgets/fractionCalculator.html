@@ -90,8 +90,57 @@
             </div>
           </section>
 
-          <section class="results-section"></section>
+          <section class="results-section">
+            <h2 class="section-title"><i class="fas fa-chart-bar"></i> Results</h2>
+
+            <div class="result-display">
+              <div class="result-title">Calculation Result</div>
+              <div class="result-fraction" id="result-fraction">5/4</div>
+              <div class="result-decimal" id="result-decimal">1.25</div>
+              <div class="result-percentage" id="result-percentage">125%</div>
+            </div>
+
+            <div class="additional-results">
+              <div class="result-card">
+                <div class="result-card-title">Simplified Form</div>
+                <div class="result-card-value" id="simplified-result">5/4</div>
+              </div>
+              <div class="result-card">
+                <div class="result-card-title">Mixed Number</div>
+                <div class="result-card-value" id="mixed-number">1 1/4</div>
+              </div>
+            </div>
+
+            <div class="visualization">
+              <h3 class="visualization-title">Fraction Visualization</h3>
+              <div class="fraction-bars">
+                <div class="fraction-bar">
+                  <div class="fraction-label" id="fraction-label">3/4</div>
+                  <div class="bar-container">
+                    <div class="bar-fill" id="fraction1bar" style="width: 75%"></div>
+                  </div>
+                  <div class="bar-value" id="fraction1-value">75%</div>
+                </div>
+                <div class="fraction-bar">
+                  <div class="fraction-label" id="fraction2-label">1/2</div>
+                  <div class="bar-container">
+                    <div class="bar-fill second" id="fraction2-bar" style="width: 50%"></div>
+                  </div>
+                  <div class="bar-value" id="fraction2-value">50%</div>
+                </div>
+                <div class="fraction-bar">
+                  <div class="fraction-label">Result</div>
+                  <div class="bar-container">
+                    <div class="bar-fill result" id="result-bar" style="width: 100%"></div>
+                  </div>
+                  <div class="bar-value" id="result-value">100%</div>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
+
+        <div class="history-section"></div>
       </main>
     </div>
   </body>

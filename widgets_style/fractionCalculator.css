@@ -233,3 +233,76 @@ h1 {
         transform: translateY(-3px);
     }
 }
+
+.result-display {
+    text-align: center;
+    padding: 30px;
+    background-color: var(--light);
+    border-radius: var(--border-radius);
+    margin-block-end: 25px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.result-title {
+    color: var(--gray);
+    font-size: 1.25rem;
+    margin-block-end: 15px;
+}
+
+.result-fraction {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-block-end: 10px;
+}
+
+.result-decimal {
+    font-size: 1.25rem;
+    color: var(--secondary);
+    margin-block-end: 5px;
+}
+
+.result-percentage {
+    font-size: 1.25rem;
+    color: var(--accent);
+}
+
+.additional-results {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-block-end: 25px;
+}
+
+.result-card {
+    background-color: var(--light);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    text-align: center;
+}
+
+.result-card-title {
+    font-size: 0.9rem;
+    color: var(--gray);
+    margin-block-end: 8px;
+}
+
+.result-card-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.visualization {
+    margin-block-start: 25px;
+}
+
+.visualization-title {
+    margin-block-end: 15px;
+    color: var(--dark);
+    font-size: 1.25rem;
+}
