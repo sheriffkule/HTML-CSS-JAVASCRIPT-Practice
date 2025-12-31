@@ -63,3 +63,43 @@ function init() {
   // Perform initial calculation
   calculate();
 }
+
+// Greatest Common Divisor function
+function gcd(a, b) {
+  a = Math.abs(a);
+  b = Math.abs(b);
+
+  while (b) {
+    const temp = b;
+    b = a % b;
+    a = temp;
+  }
+  return a;
+}
+
+// Simplify fraction
+function simplifyFraction(numerator, denominator) {
+  if (denominator === 0) return { numerator: 0, denominator: 0 };
+
+  const divisor = gcd(numerator, denominator);
+  return {
+    numerator: numerator / divisor,
+    denominator: denominator / divisor,
+  };
+}
+
+// Convert to mixed number
+function toMixedNumber(numerator, denominator) {
+  if (denominator === 0) return 'Undefined';
+
+  const whole = Math.floor(numerator / denominator);
+  const remainder = numerator % denominator;
+
+  if (remainder === 0) {
+    return whole.toString();
+  } else if (whole === 0) {
+    return `${remainder}/${denominator}`;
+  } else {
+    return `${whole} ${remainder}/${denominator}`;
+  }
+}

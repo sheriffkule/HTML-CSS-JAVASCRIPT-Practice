@@ -194,7 +194,7 @@ h1 {
 .action-buttons {
     display: flex;
     gap: 15px;
-    margin-block-start: 30px;
+    margin-block: 30px 15px;
 }
 
 .btn {
@@ -305,4 +305,73 @@ h1 {
     margin-block-end: 15px;
     color: var(--dark);
     font-size: 1.25rem;
+}
+
+.fraction-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.fraction-bar {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.fraction-label {
+    min-width: 100px;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.bar-container {
+    flex: 1;
+    height: 30px;
+    background-color: var(--light);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    background-color: var(--primary);
+    border-radius: var(--border-radius);
+    width: 0%;
+    transition: width 1s ease;
+}
+
+.bar-fill.second {
+    background-color: var(--secondary);
+}
+
+.bar-fill.result {
+    background-color: var(--accent);
+}
+
+.bar-value {
+    min-width: 60px;
+    font-weight: 600;
+    color: var(--dark);
+    text-align: right;
+}
+
+.history-section {
+    background-color: var(--light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 30px;
+}
+
+.history-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-block-end: 20px;
+}
+
+.history-list {
+    max-height: 200px;
+    overflow-y: auto;
+    padding-inline-end: 10px;
 }
