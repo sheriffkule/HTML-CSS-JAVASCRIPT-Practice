@@ -152,5 +152,87 @@ function calculate() {
   }
 
   // Simplify result
-  const simplified = simplifyFraction(resultNumerator, resultDenominator)
+  const simplified = simplifyFraction(resultNumerator, resultDenominator);
+
+  // Calculate decimal and percentage
+  const decimalValue = resultNumerator / resultDenominator;
+  const percentageValue = decimalValue * 100;
+
+  // Update result display
+  resultFractionElement.textContent = `${resultNumerator}/${resultDenominator}`;
+  resultDecimalElement.textContent = decimalValue.toFixed(4);
+  resultPercentageElement.textContent = `${percentageValue.toFixed(2)}`;
+
+  // Update simplified result and mixed number
+  simplifiedResultElement.textContent = `${simplified.numerator}/${simplified.denominator}`;
+  mixedNumberElement.textContent = toMixedNumber(simplified.numerator, simplified.denominator);
+
+  // Update visualization
+  updateVisualization(num1, den1, num2, den2, resultNumerator, resultDenominator);
+
+  // Add to history
+  addToHistory(num1, den1, num2, den2, currentOperation, resultNumerator, resultDenominator);
+}
+
+// Update visualization bars
+function updateVisualization(num1, den1, num2, den2, resultNum, resultDen) {
+  // Calculate percentages for visualization
+  const fraction1Value = den1 !== 0 ? (num1 / den1) * 100 : 0;
+  const fraction2Value = den2 !== 0 ? (num2 / den2) * 100 : 0;
+  const resultValue = resultDen !== 0 ? (resultNum / resultDen) * 100 : 0;
+
+  // Update labels
+  fraction1Label.textContent = `${num1}/${den1}`;
+  fraction2Label.textContent = `${num2}/${den2}`;
+
+  // Update bar widths with animation
+  fraction1Bar.style.width = `${fraction1Value}%`;
+  fraction2Bar.style.width = `${fraction2Value}%`;
+  resultBar.style.width = `${resultValue}%`;
+
+  // Update percentage values
+  fraction1Value.textContent = `${fraction1Value.toFixed(1)}`;
+  fraction2Value.textContent = `${fraction2Value.toFixed(1)}`;
+  resultValue.textContent = `${resultValue.toFixed(1)}%`;
+}
+
+// Add calculation to history
+function addToHistory(num1, den1, num2, den2, operation, resultNum, resultDen) {
+  // Create operation symbol
+  let operationSymbol;
+  switch (operation) {
+    case 'add':
+      operationSymbol = '+';
+      break;
+    case 'subtract':
+      operationSymbol = '-';
+      break;
+    case 'multiply':
+      operationSymbol = 'x';
+      break;
+    case 'divide':
+      operationSymbol = '/';
+      break;
+  }
+
+  // Create history item
+  const historyItem = {
+    id: Date.now(),
+    equation: `${num1}/${den1} ${operationSymbol} ${num2}/${den2}`,
+    result: `${resultNum}/${resultDen}`,
+  };
+
+  // Add to beginning of history array
+  calculationHistory.unshift(historyItem);
+
+  // Keep only last 10 items
+  if (calculationHistory.length > 10) {
+    calculationHistory = calculationHistory.slice(0, 10);
+  }
+
+  // Update history display
+  updateHistoryDisplay();
+
+  // Save to localStorage
+  saveHistory();
 }
