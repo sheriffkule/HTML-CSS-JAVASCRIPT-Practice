@@ -375,3 +375,81 @@ h1 {
     overflow-y: auto;
     padding-inline-end: 10px;
 }
+
+.history-item {
+    padding: 15px;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.history-equation {
+    font-weight: 600;
+}
+
+.history-result {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.clear-history {
+    background-color: transparent;
+    border: none;
+    color: var(--accent);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: var(--transition);
+
+    i {
+        transition: var(--transition);
+    }
+
+    &:hover {
+        color: #d9048e;
+        letter-spacing: 0.5px;
+        box-shadow: var(--shadow),
+        inset var(--shadow);
+    }
+    &:hover  i {
+        transform: scale(1.2);
+    }
+}
+
+footer {
+    margin-block-start: 20px;
+    text-align: center;
+    color: var(--gray);
+    font-size: 0.9rem;
+    padding-top: 20px;
+    border-top: 1px solid #dee2a6;
+
+    abbr {
+        letter-spacing: 0.5px;
+        color: var(--primary);
+        text-underline-offset: 2px;
+        cursor: default;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .fraction-inputs {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .fraction-separator {
+        margin: 5px 0;
+    }
+    .operations {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .additional-results {
+        grid-template-columns: 1fr;
+    }
+    .action-buttons {
+        flex-direction: column;
+    }
+    h1 {
+        font-size: 2rem;
+    }
+}

@@ -103,3 +103,54 @@ function toMixedNumber(numerator, denominator) {
     return `${whole} ${remainder}/${denominator}`;
   }
 }
+
+// Perform calculation based on selected operation
+function calculate() {
+  // Get input values
+  const num1 = parseInt(numerator1Input.value) || 0;
+  const den1 = parseInt(denominator1Input.value) || 0;
+  const num2 = parseInt(numerator2Input.value) || 0;
+  const den2 = parseInt(denominator2Input.value) || 0;
+
+  let resultNumerator;
+  let resultDenominator;
+
+  // Perform the selected operation
+  switch (currentOperation) {
+    case 'add':
+      resultNumerator = num1 * den2 + num2 * den1;
+      resultDenominator = den1 * den2;
+      break;
+    case 'subtract':
+      resultNumerator = num1 * den2 - num2 * den1;
+      resultDenominator = den1 * den2;
+      break;
+    case 'multiply':
+      resultNumerator = num1 * num2;
+      resultDenominator = den1 * den2;
+      break;
+    case 'divide':
+      resultNumerator = num1 * den2;
+      resultDenominator = den1 * num2;
+      break;
+    default:
+      resultNumerator = 0;
+      resultDenominator = 1;
+  }
+
+  // handle division by zero
+  if (resultDenominator === 0) {
+    resultFractionElement.textContent = 'Undefined';
+    resultDecimalElement.textContent = 'Undefined';
+    resultPercentageElement.textContent = 'Undefined';
+    simplifiedResultElement.textContent = 'Undefined';
+    mixedNumberElement.textContent = 'Undefined';
+
+    // Update visualization
+    updateVisualization(num1, den1, num2, den2, 0, 1);
+    return;
+  }
+
+  // Simplify result
+  const simplified = simplifyFraction(resultNumerator, resultDenominator)
+}
