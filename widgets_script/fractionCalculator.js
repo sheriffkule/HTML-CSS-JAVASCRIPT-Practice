@@ -35,22 +35,19 @@ let calculationHistory = [];
 // Initialize the app
 function init() {
   // Set active operation button
-  operationButtons
-    .forEach((button) => {
-      button.addEventListener('click', () => {
-        operationButtons.forEach((btn) => btn.classList.remove('active'));
-        button.classList.add('active');
-        currentOperation = button.dataset.operation;
-        calculate();
-      });
-    })
-
-    [
-      // Add event listeners to inputs
-      (numerator1Input, denominator1Input, numerator2Input, denominator2Input)
-    ].forEach((input) => {
-      input.addEventListener('input', calculate);
+  operationButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      operationButtons.forEach((btn) => btn.classList.remove('active'));
+      button.classList.add('active');
+      currentOperation = button.dataset.operation;
+      calculate();
     });
+  });
+
+  // Add event listeners to inputs
+  [numerator1Input, denominator1Input, numerator2Input, denominator2Input].forEach((input) => {
+    input.addEventListener('input', calculate);
+  });
 
   // Add event listeners to buttons
   calculateButton.addEventListener('click', calculate);
@@ -82,27 +79,34 @@ function simplifyFraction(numerator, denominator) {
   if (denominator === 0) return { numerator: 0, denominator: 0 };
 
   const divisor = gcd(numerator, denominator);
-  return {
-    numerator: numerator / divisor,
-    denominator: denominator / divisor,
-  };
-}
+  let n = numerator / divisor;
+  let d = denominator / divisor;
+
+  // Ensure denominator is positive
+  if (d < 0) {
+    n = -n;
+    d = -d;
+  }
+
+  return { numerator: n, denominator: d };
+} 
 
 // Convert to mixed number
 function toMixedNumber(numerator, denominator) {
   if (denominator === 0) return 'Undefined';
 
-  const whole = Math.floor(numerator / denominator);
-  const remainder = numerator % denominator;
+  const whole = Math.trunc(numerator / denominator);
+  const remainder = Math.abs(numerator - whole * denominator);
 
   if (remainder === 0) {
     return whole.toString();
   } else if (whole === 0) {
-    return `${remainder}/${denominator}`;
+    // keep sign for proper fractions
+    return `${numerator < 0 ? '-' : ''}${remainder}/${Math.abs(denominator)}`;
   } else {
-    return `${whole} ${remainder}/${denominator}`;
+    return `${whole} ${remainder}/${Math.abs(denominator)}`;
   }
-}
+} 
 
 // Perform calculation based on selected operation
 function calculate() {
@@ -161,10 +165,10 @@ function calculate() {
   // Update result display
   resultFractionElement.textContent = `${resultNumerator}/${resultDenominator}`;
   resultDecimalElement.textContent = decimalValue.toFixed(4);
-  resultPercentageElement.textContent = `${percentageValue.toFixed(2)}`;
+  resultPercentageElement.textContent = `${percentageValue.toFixed(2)}%`;
 
   // Update simplified result and mixed number
-  simplifiedResultElement.textContent = `${simplified.numerator}/${simplified.denominator}`;
+  simplifiedResultElement.textContent = simplified.denominator === 0 ? 'Undefined' : `${simplified.numerator}/${simplified.denominator}`;
   mixedNumberElement.textContent = toMixedNumber(simplified.numerator, simplified.denominator);
 
   // Update visualization
@@ -174,27 +178,30 @@ function calculate() {
   addToHistory(num1, den1, num2, den2, currentOperation, resultNumerator, resultDenominator);
 }
 
+// Note: append '%' to percentage display (handled after this function)
+
+
 // Update visualization bars
 function updateVisualization(num1, den1, num2, den2, resultNum, resultDen) {
-  // Calculate percentages for visualization
-  const fraction1Value = den1 !== 0 ? (num1 / den1) * 100 : 0;
-  const fraction2Value = den2 !== 0 ? (num2 / den2) * 100 : 0;
-  const resultValue = resultDen !== 0 ? (resultNum / resultDen) * 100 : 0;
+  // Calculate percentages for visualization (clamped 0-100 for display)
+  const perc1 = den1 !== 0 ? Math.min(Math.max((num1 / den1) * 100, 0), 100) : 0;
+  const perc2 = den2 !== 0 ? Math.min(Math.max((num2 / den2) * 100, 0), 100) : 0;
+  const percResult = resultDen !== 0 ? Math.min(Math.max((resultNum / resultDen) * 100, 0), 100) : 0;
 
   // Update labels
-  fraction1Label.textContent = `${num1}/${den1}`;
-  fraction2Label.textContent = `${num2}/${den2}`;
+  fraction1Label.textContent = den1 !== 0 ? `${num1}/${den1}` : 'Undefined';
+  fraction2Label.textContent = den2 !== 0 ? `${num2}/${den2}` : 'Undefined';
 
   // Update bar widths with animation
-  fraction1Bar.style.width = `${fraction1Value}%`;
-  fraction2Bar.style.width = `${fraction2Value}%`;
-  resultBar.style.width = `${resultValue}%`;
+  fraction1Bar.style.width = `${perc1}%`;
+  fraction2Bar.style.width = `${perc2}%`;
+  resultBar.style.width = `${percResult}%`;
 
-  // Update percentage values
-  fraction1Value.textContent = `${fraction1Value.toFixed(1)}`;
-  fraction2Value.textContent = `${fraction2Value.toFixed(1)}`;
-  resultValue.textContent = `${resultValue.toFixed(1)}%`;
-}
+  // Update percentage text values
+  fraction1Value.textContent = `${perc1.toFixed(1)}%`;
+  fraction2Value.textContent = `${perc2.toFixed(1)}%`;
+  resultValue.textContent = `${percResult.toFixed(1)}%`;
+} 
 
 // Add calculation to history
 function addToHistory(num1, den1, num2, den2, operation, resultNum, resultDen) {
@@ -236,3 +243,86 @@ function addToHistory(num1, den1, num2, den2, operation, resultNum, resultDen) {
   // Save to localStorage
   saveHistory();
 }
+
+// Update history display
+function updateHistoryDisplay() {
+  // Clear current history display
+  historyList.innerHTML = '';
+
+  // Add each history item
+  calculationHistory.forEach((item) => {
+    const historyItemElement = document.createElement('div');
+    historyItemElement.className = 'history-item';
+    historyItemElement.innerHTML = `
+      <div class="history-equation">${item.equation}</div>
+      <div class="history-result">${item.result}</div>
+    `;
+    historyList.appendChild(historyItemElement);
+  });
+
+  // If no history, show message
+  if (calculationHistory.length === 0) {
+    const emptyMessage = document.createElement('div');
+    emptyMessage.className = 'history-item';
+    emptyMessage.innerHTML = '<div class="history-equation">No calculations yet</div>';
+    historyList.appendChild(emptyMessage);
+  }
+}
+
+// Clear inputs
+function clearInputs() {
+  numerator1Input.value = '3';
+  denominator1Input.value = '4';
+  numerator2Input.value = '1';
+  denominator2Input.value = '2';
+
+  // Reset operation to addition
+  operationButtons.forEach((btn) => btn.classList.remove('active'));
+  operationButtons[0].classList.add('active');
+  currentOperation = 'add';
+
+  // Recalculate
+  calculate();
+}
+
+// Clear history
+function clearHistory() {
+  calculationHistory = [];
+  updateHistoryDisplay();
+  saveHistory();
+}
+
+// Save history to localStorage
+function saveHistory() {
+  localStorage.setItem('fractionCalcHistory', JSON.stringify(calculationHistory));
+}
+
+// Load history from localStorage
+function loadHistory() {
+  const savedHistory = localStorage.getItem('fractionCalcHistory');
+  if (savedHistory) {
+    calculationHistory = JSON.parse(savedHistory);
+    updateHistoryDisplay();
+  }
+}
+
+// Initialize the app when the page loads
+document.addEventListener('DOMContentLoaded', init);
+
+// Update year in footer
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+
+  if (yearElement) {
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.dateTime = currentYear.toString();
+    yearElement.textContent = currentYear.toString();
+  }
+}
+updateYear();
