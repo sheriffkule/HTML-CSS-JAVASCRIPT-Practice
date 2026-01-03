@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mouse Click Animation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/mouseClickAnimation.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1><i class="fas fa-mouse-pointer"></i> Mouse Click Animation</h1>
+        <p class="subtitle">
+          Click anywhere in the click zone to create beautiful animations. Customize animation style, colors,
+          and size. Track your click statistics in real-time
+        </p>
+        <div class="click-count">
+          Total Clicks: <span id="totalClicks">0</span> | Left: <span id="leftClicks">0</span> Right:
+          <span ip="rightClicks">0</span>
+        </div>
+      </header>
+
+      <div class="main-content">
+        <div class="click-area">
+          <div class="click-area-header">
+            <h2>Click Zone</h2>
+            <div class="click-instructions">
+              <i class="fas fa-mouse"></i> Left-click or Right-click anywhere in this area
+            </div>
+          </div>
+
+          <div class="click-zone" id="clickZone">
+            <div class="zone-label">
+              <i class="fas fa-hand-pointer fa-2x"></i>
+              <p>Click here to create animation</p>
+              <p>Try both left and right mouse buttons</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/widgets_script/mouseClickAnimation.js"></script>
+  </body>
+</html>
