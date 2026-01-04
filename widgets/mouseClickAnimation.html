@@ -38,6 +38,63 @@
             </div>
           </div>
         </div>
+
+        <div class="controls-panel">
+          <h3 class="panel-title"><i class="fas fa-sliders-h"></i> Animation Controls</h3>
+
+          <div class="control-group">
+            <label for="control-label">Left Click Animation</label>
+            <div class="btn-group">
+              <button class="btn active" id="leftCircle">Circle</button>
+              <button class="btn" id="leftRipple">Ripple</button>
+              <button class="btn" id="leftParticles">Particles</button>
+            </div>
+
+            <div class="slider-container">
+              <label class="control-label"
+                >Left Click Size: <span class="slider-value" id="leftSizeValue">50</span>px</label
+              >
+              <input type="range" id="leftSizeSlider" class="slider" min="20" max="100" value="50" />
+            </div>
+
+            <div class="slider-container">
+              <label class="control-label"
+                >Left Click Duration: <span class="slider-value" id="leftDurationValue">0.8</span>s</label
+              >
+              <input
+                type="range"
+                id="leftDurationSlider"
+                class="slider"
+                min="0.3"
+                max="2"
+                value="0.8"
+                step="0.1" />
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Right Click Animation</label>
+            <div class="btn-group">
+              <button class="btn active" id="rightCircle">Circle</button>
+              <button class="btn" id="rightRipple">Ripple</button>
+              <button class="btn" id="rightParticles">Particles</button>
+            </div>
+
+            <div class="slider-container">
+              <label class="control-label"
+                >Right Click Size: <span class="slider-value" id="rightSizeValue">60</span>px</label
+              >
+              <input type="range" id="rightSizeSlider" class="slider" min="20" max="100" value="60" />
+            </div>
+
+            <div class="slider-container">
+              <label class="control-label"
+                >Right Click Duration: <span class="slider-value" id="rightDurationValue">1.0</span></label
+              >
+              <input type="range" id="rightDurationSlider" min="0.3" max="2" step="0.1" value="1.0" />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
