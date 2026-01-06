@@ -43,7 +43,7 @@
           <h3 class="panel-title"><i class="fas fa-sliders-h"></i> Animation Controls</h3>
 
           <div class="control-group">
-            <label for="control-label">Left Click Animation</label>
+            <label class="control-label">Left Click Animation</label>
             <div class="btn-group">
               <button class="btn active" id="leftCircle">Circle</button>
               <button class="btn" id="leftRipple">Ripple</button>
@@ -91,7 +91,7 @@
               <label class="control-label"
                 >Right Click Duration: <span class="slider-value" id="rightDurationValue">1.0</span></label
               >
-              <input type="range" id="rightDurationSlider" min="0.3" max="2" step="0.1" value="1.0" />
+              <input type="range" id="rightDurationSlider" class="slider" min="0.3" max="2" step="0.1" value="1.0" />
             </div>
           </div>
 
@@ -118,6 +118,34 @@
           </div>
         </div>
       </div>
+
+      <div class="stats-panel">
+        <h3 class="panel-title"><i class="fas fa-chart-bar"></i> Click Statistics</h3>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-value" id="totalClicksStat">0</div>
+            <div class="stat-label">Total Clicks</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value" id="leftClicksStat">0</div>
+            <div class="stat-label">Left Clicks</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value" id="rightClicksStat">0</div>
+            <div class="stat-label">RIght Clicks</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value" id="clicksPerMinute">0</div>
+            <div class="stat-label">Clicks/Min</div>
+          </div>
+        </div>
+        <button class="reset-btn" id="resetStats"><i class="fas fa-redo"></i> Reset Statistics</button>
+      </div>
+
+      <footer class="footer__copy">
+        © <time datetime="" id="year"></time> Made by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
     </div>
 
     <script src="/widgets_script/mouseClickAnimation.js"></script>
