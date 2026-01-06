@@ -293,3 +293,19 @@ h1 {
 .preview-right {
     background: #f87171;
 }
+
+footer {
+    text-align: center;
+    margin-block-start: 40px;
+    padding-block-start: 20px;
+    border-top: 1px solid rgb(100 116 139 / 0.3);
+    color: #94a3b8;
+    font-size: 0.9rem;
+
+    abbr {
+        text-underline-offset: 2px;
+        letter-spacing: 0.5px;
+        color: #38bdf8;
+        cursor: default;
+    }
+}
