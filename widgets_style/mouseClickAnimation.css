@@ -309,3 +309,26 @@ footer {
         cursor: default;
     }
 }
+
+.click-count {
+    font-size: 1.1rem;
+    color: #60a5fa;
+    font-weight: 600;
+}
+
+.tip-box {
+    background: rgb(30 41 59 / 0.5);
+    border-radius: 10px;
+    padding: 15px;
+    margin-block-start: 20px;
+    border-left: 4px solid #60a5fa;
+}
+
+.tip-title {
+    color: #60a5fa;
+    font-weight: 600;
+    margin-block-end: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}

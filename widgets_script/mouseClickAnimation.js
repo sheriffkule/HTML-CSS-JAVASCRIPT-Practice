@@ -97,3 +97,82 @@ function setupEventListeners() {
   // Reset stats button
   document.getElementById('resetStats').addEventListener('click', resetStats);
 }
+
+// Handle click events
+function handleClick(event, clickType) {
+  // Update statistics
+  updateClickStats(clickType);
+
+  // Create animation based on click type
+  const x = event.clientX - clickZone.getBoundingClientRect().left;
+  const y = event.clientY - clickZone.getBoundingClientRect().top;
+
+  if (clickType === 'left') {
+    createAnimation(
+      x,
+      y,
+      state.leftClickType,
+      state.leftClickSize,
+      state.leftClickDuration,
+      state.colors.left
+    );
+  } else {
+    createAnimation(
+      x,
+      y,
+      state.rightClickType,
+      state.rightClickSize,
+      state.rightClickDuration,
+      state.colors.right
+    );
+  }
+}
+
+// Create animation at position
+function createAnimation(x, y, type, size, duration, color) {
+  const animation = document.createElement('div');
+  animation.className = 'click-animation';
+  animation.style.left = `${x}px`;
+  animation.style.top = `${y}px`;
+
+  // Set animation style based on type
+  if (type === 'circle') {
+    animation.style.width = `${size}px`;
+    animation.style.height = `${size}px`;
+    animation.style.borderRadius = '50%';
+    animation.style.backgroundColor = color;
+    animation.style.opacity = '0.8';
+
+    // Animation
+    animation.animate(
+      [
+        { transform: 'scale(0)', opacity: 0.8 },
+        { transform: 'scale(1.5)', opacity: 0 },
+      ],
+      {
+        duration: duration * 1000,
+        easing: 'ease-out',
+      }
+    );
+  } else if (type === 'ripple') {
+    animation.style.width = `${size}px`;
+    animation.style.height = `${size}px`;
+    animation.style.borderRadius = '50%';
+    animation.style.border = `3px solid ${color}`;
+    animation.style.backgroundColor = 'transparent';
+
+    // Animation
+    animation.animate(
+      [
+        { transform: 'scale(0)', opacity: 1 },
+        { transform: 'scale(2.5)', opacity: 0 },
+      ],
+      {
+        duration: duration * 1000,
+        easing: 'ease-out',
+      }
+    );
+  } else if (type === 'particles') {
+    // Create multiple small particles
+  }
+}
