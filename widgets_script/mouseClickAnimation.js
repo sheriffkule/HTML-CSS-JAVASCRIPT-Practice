@@ -174,5 +174,86 @@ function createAnimation(x, y, type, size, duration, color) {
     );
   } else if (type === 'particles') {
     // Create multiple small particles
+    const particleCount = 12;
+    for (let i = 0; i < particleCount; i++) {
+      createParticle(x, y, size, duration, color, i);
+    }
+    // No central element for particles
+    return;
   }
+
+  clickZone.appendChild(animation);
+
+  // Remove element after animation completes
+  setTimeout(() => {
+    if (animation.parentNode) {
+      animation.parentNode.removeChild(animation);
+    }
+  }, duration * 1000);
+}
+
+// Create particle for particles animation
+function createParticle(x, y, size, duration, color, index) {
+  const particle = document.createElement('div');
+  particle.className = 'click-animation';
+  particle.style.left = `${x}px`;
+  particle.style.top = `${y}px`;
+  particle.style.width = `${size / 4}px`;
+  particle.style.height = `${size / 4}px`;
+  particle.style.borderRadius = '50%';
+  particle.style.backgroundColor = color;
+
+  // Calculate angle and distance for particle
+  const angle = (index / 12) * Math.PI * 2;
+  const distance = size;
+
+  // Animation
+  particle.animate(
+    [
+      { transform: `translate(0, 0) scale(1)`, opacity: 1 },
+      {
+        transform: `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) scale(0)`,
+        opacity: 0,
+      },
+    ],
+    {
+      duration: duration * 1000,
+      easing: 'ease-out',
+    }
+  );
+
+  clickZone.appendChild(particle);
+
+  // Remove particle after animation completes
+  setTimeout(() => {
+    if (particle.parentNode) {
+      particle.parentNode.removeChild(particle);
+    }
+  }, duration * 1000);
+}
+
+// Update click statistics
+function updateClickStats(clickType) {
+  // Update counts
+  state.stats.totalClicks++;
+  if (clickType === 'left') {
+    state.stats.leftClicks++;
+  } else {
+    state.stats.rightClicks++;
+  }
+
+  // Add timestamp for clicks per minute calculation
+  const now = Date.now();
+  state.stats.clickTimestamps.push(now);
+
+  // Remove timestamps older than 1 minute
+  state.stats.clickTimestamps = state.stats.clickTimestamps.filter((timestamp) => {
+    return now - timestamp < 60000;
+  });
+
+  // Calculate clicks per minute
+  state.stats.clicksPerMinute = state.stats.clickTimestamps.length;
+
+  // Update UI
+  updateStats();
 }
