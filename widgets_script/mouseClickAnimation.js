@@ -257,3 +257,91 @@ function updateClickStats(clickType) {
   // Update UI
   updateStats();
 }
+
+// Update statistics display
+function updateStats() {
+  totalClicksElement.textContent = state.stats.totalClicks;
+  leftClicksElement.textContent = state.stats.leftClicks;
+  rightClicksElement.textContent = state.stats.rightClicks;
+
+  totalClicksStat.textContent = state.stats.totalClicks;
+  leftClicksStat.textContent = state.stats.leftClicks;
+  rightClicksStat.textContent = state.stats.rightClicks;
+  clicksPerMinuteElement.textContent = state.stats.clicksPerMinute;
+}
+
+// Reset statistics
+function resetStats() {
+  state.stats = {
+    totalClicks: 0,
+    leftClicks: 0,
+    rightClicks: 0,
+    clicksPerMinute: 0,
+    clickTimestamps: [],
+  };
+
+  updateStats();
+}
+
+// Set left click type
+function setLeftClickType(type) {
+  state.leftClickType = type;
+
+  // Update button states
+  document.getElementById('leftCircle').classList.remove('active');
+  document.getElementById('leftRipple').classList.remove('active');
+  document.getElementById('leftParticles').classList.remove('active');
+  document.getElementById(`left${type.charAt(0).toUpperCase() + type.slice(1)}`).classList.add('active');
+}
+
+// Set right click type
+function setRightClickType(type) {
+  state.rightClickType = type;
+
+  // Update button states
+  document.getElementById('rightCircle').classList.remove('active');
+  document.getElementById('rightRipple').classList.remove('active');
+  document.getElementById('rightParticles').classList.remove('active');
+  document.getElementById(`right${type.charAt(0).toUpperCase() + type.slice(1)}`).classList.add('active');
+}
+
+// Set color scheme
+function setColorScheme(scheme) {
+  state.colors = colorSchemes[scheme];
+
+  // Update button states
+  document.getElementById('colorBlue').classList.remove('active');
+  document.getElementById('colorGreen').classList.remove('active');
+  document.getElementById('colorPurple').classList.remove('active');
+  document.getElementById(`color${scheme.charAt(0).toUpperCase() + scheme.slice(1)}`).classList.add('active');
+
+  // Update preview
+  updateColorPreview();
+}
+
+// Update color preview circles
+function updateColorPreview() {
+  leftColorPreview.style.backgroundColor = state.colors.left;
+  rightColorPreview.style.backgroundColor = state.colors.right;
+}
+
+// Initialize the app when DOM is loaded
+document.addEventListener('DOMContentLoaded', initApp);
+
+// Update year in footer
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+
+  if (yearElement) {
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.dateTime = currentYear.toString();
+    yearElement.textContent = currentYear.toString();
+  }
+}
+updateYear();

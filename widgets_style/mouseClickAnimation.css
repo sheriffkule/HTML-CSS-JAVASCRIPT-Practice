@@ -94,12 +94,12 @@ h1 {
     overflow: hidden;
     cursor: pointer;
     transition: all .3s;
-
-    &:hover {
-        background: rgb(30 41 59 / 0.7);
-        border-color: rgb(100 116 139 / 0.8);
-    }
 }
+
+.click-zone:hover {
+    background: rgb(30 41 59 / 0.7);
+    border-color: rgb(100 116 139 / 0.8);
+} 
 
 .zone-label {
     font-size: 1.5rem;
@@ -131,11 +131,11 @@ h1 {
     display: flex;
     align-items: center;
     gap: 10px;
-
-    i {
-        font-size: 1.25rem;
-    }
 }
+
+.panel-title i {
+    font-size: 1.25rem;
+} 
 
 .control-group {
     margin-block-end: 25px;
@@ -165,12 +165,12 @@ h1 {
     display: flex;
     align-items: center;
     gap: 8px;
-
-    &:hover {
-        background: rgb(56 189 248 / 0.3);
-        border-color: #38bdf8;
-    }
 }
+
+.btn:hover {
+    background: rgb(56 189 248 / 0.3);
+    border-color: #38bdf8;
+} 
 
 .btn.active {
     background: rgb(56 189 248 / 0.3);
@@ -254,23 +254,25 @@ h1 {
     cursor: pointer;
     font-weight: 600;
     transition: all .2s;
+}
 
-    i {
-        transition: 0.2s;
-    }
+.reset-btn i {
+    transition: 0.2s;
+}
 
-    &:hover {
-        background: rgb(239 68 68 / 0.3);
-        border-color: #ef4444;
-        transform: translateY(-2px);
-        letter-spacing: 0.5px;
-    }
-    &:active {
-        transform: scale(0.99);
-    }
-    &:hover i {
-        transform: rotate(360deg) scale(1.1);
-    }
+.reset-btn:hover {
+    background: rgb(239 68 68 / 0.3);
+    border-color: #ef4444;
+    transform: translateY(-2px);
+    letter-spacing: 0.5px;
+}
+
+.reset-btn:active {
+    transform: scale(0.99);
+}
+
+.reset-btn:hover i {
+    transform: rotate(360deg) scale(1.1);
 }
 
 .animation-preview {
