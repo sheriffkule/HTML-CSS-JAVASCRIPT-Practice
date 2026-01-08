@@ -85,3 +85,100 @@ h1 {
         box-shadow: 0 15px 40px rgb(0 0 0 / 0.2);
     }
 }
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-block-end: 25px;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    i {
+        color: var(--secondary);
+    }
+}
+
+.form-group {
+    margin-block-end: 20px;
+}
+
+label {
+    display: block;
+    margin-block-end: 8px;
+    font-weight: 500;
+    color: var(--dark);
+}
+
+.input-with-icon {
+    position: relative;
+}
+
+.input-with-icon i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: gray;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    border: 2px solid var(--gray-light);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+:is(input, select):is(:focus, :focus-within) {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgb(67 97 238 / 0.1),
+    inset 0 0 0 3px rgb(67 97 238 / 0.1);
+}
+
+.slider-container {
+    margin-block-start: 10px;
+}
+
+.slider-value {
+    display: flex;
+    justify-content: space-between;
+    margin-block-end: 5px;
+
+    span {
+        font-weight: 600;
+        color: var(--primary);
+    }
+}
+
+.slider {
+    width: 100%;
+    height: 8px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--gray-light);
+    border-radius: 4px;
+    outline: none;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.slider::-webkit-slider-thumb:hover {
+    background: var(--primary-dark);
+    transform: scale(1.2);
+    border-color: var(--success);
+}

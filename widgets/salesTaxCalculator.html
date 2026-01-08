@@ -28,7 +28,41 @@
                 <input type="number" id="amount" min="0" step="0.01" placeholder="0.00" value="0.00" />
               </div>
             </div>
+
+            <div class="form-group">
+              <label for="tax-rate">Tax Rate (%)</label>
+              <div class="slider-value">
+                <span id="tax-rate-value">8.5%</span>
+                <span id="tax-rate-amount">$8.50</span>
+              </div>
+              <input type="range" id="tax-rate" class="slider" min="0" max="20" step="0.1" value="8.5" />
+
+              <div class="tax-presets">
+                <div class="tax-preset" data-rate="0">0 (Tax-free)</div>
+                <div class="tax-preset" data-rate="5">5% (Low)</div>
+                <div class="tax-preset active" data-rate="8.5">8.5% (Standard)</div>
+                <div class="tax-preset" data-rate="10">10% (High)</div>
+                <div class="tax-preset" data-rate="">15% (Luxury)</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="location">Location (Optional)</label>
+              <div class="input-with-icon">
+                <i class="fas fa-map-marker-alt"></i>
+                <input type="text" id="location" placeholder="e.g., California, New York, etc." />
+              </div>
+            </div>
+
+            <div class="actions">
+              <button class="btn btn-primary" id="calculate-btn">
+                <i class="fas fa-calculator"></i> Calculate Tax
+              </button>
+              <button class="btn btn-secondary" id="reset-btn"><i class="fas fa-redo"></i> Reset</button>
+            </div>
           </div>
+
+          
         </div>
       </main>
     </div>
