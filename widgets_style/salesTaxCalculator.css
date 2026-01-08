@@ -161,6 +161,7 @@ select {
     -webkit-appearance: none;
     appearance: none;
     background: var(--gray-light);
+    border: 1px solid var(--gray);
     border-radius: 4px;
     outline: none;
 }
@@ -181,4 +182,70 @@ select {
     background: var(--primary-dark);
     transform: scale(1.2);
     border-color: var(--success);
+}
+
+.tax-preset {
+    padding: 10px 15px;
+    background-color: var(--gray-light);
+    border-radius: var(--border-radius);   
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 2px solid transparent;
+
+    &:hover {
+        background-color: #dde7f7;
+    }
+}
+
+.tax-preset.active {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary-dark);
+}
+
+.results {
+    display: flex;
+    flex-direction: column;
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--gray-light);
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.result-label {
+    font-weight: 500;
+}
+
+.result-value {
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.total {
+    background: #f0f7ff;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-block-start: 20px;
+}
+
+.total .result-item {
+    border-bottom: none;
+    padding: 15px 0;
+}
+
+.total .result-label {
+    font-size: 1.25rem;
+}
+
+.total .result-value {
+    font-size: 1.75rem;
+    color: var(--primary);
 }

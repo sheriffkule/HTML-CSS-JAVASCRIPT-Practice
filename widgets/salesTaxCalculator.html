@@ -62,8 +62,49 @@
             </div>
           </div>
 
-          
+          <div class="card">
+            <h2 class="card-title"><i class="fas fa-chart-pie"></i> Tax Breakdown</h2>
+
+            <div class="results">
+              <div class="result-item">
+                <div class="result-label">Subtotal</div>
+                <div class="result-value" id="subtotal">$100.00</div>
+              </div>
+              <div class="result-item">
+                <div class="result-label">Tax Rate</div>
+                <div class="result-value" id="tax-rate-display">8.5%</div>
+              </div>
+              <div class="result-item">
+                <div class="result-label">Tax Amount</div>
+                <div class="result-value" id="tax-amount">$8.50</div>
+              </div>
+
+              <div class="total">
+                <div class="result-item">
+                  <div class="result-label">Total Amount</div>
+                  <div class="result-value" id="total-amount">$108.50</div>
+                </div>
+              </div>
+
+              <div class="breakdown">
+                <div class="breakdown-title">Visual Breakdown</div>
+                <div class="breakdown-chart">
+                  <div class="chart-bar subtotal" id="subtotal-bar" style="height: 70%">
+                    <div class="chart-label">Subtotal</div>
+                  </div>
+                  <div class="chart-bar tax" id="tax-bar" style="height: 30%">
+                    <div class="chart-label">Tax</div>
+                  </div>
+                  <div class="chart-bar total" id="total-bar" style="height: 100%">
+                    <div class="chart-label">Total</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <div class="history-section"></div>
       </main>
     </div>
 
