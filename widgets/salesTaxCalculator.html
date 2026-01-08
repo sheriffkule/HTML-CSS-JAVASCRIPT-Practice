@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sales Tax Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/salesTaxCalculator.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1><i class="fas fa-calculator"></i> Sales Tax Calculator</h1>
+        <p class="subtitle">
+          Calculate sales tax, view detailed breakdowns, and save calculations for future reference.
+        </p>
+      </header>
+
+      <main>
+        <div class="app-container">
+          <div class="card">
+            <h2 class="card-title"><i class="fas fa-edit"></i> Enter Details</h2>
+
+            <div class="form-group">
+              <label for="amount">Purchase Amount ($)</label>
+              <div class="input-with-icon">
+                <i class="fas fa-dollar-sign"></i>
+                <input type="number" id="amount" min="0" step="0.01" placeholder="0.00" value="0.00" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="/widgets_script/salesTaxCalculator.js"></script>
+  </body>
+</html>
