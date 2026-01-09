@@ -249,3 +249,102 @@ select {
     font-size: 1.75rem;
     color: var(--primary);
 }
+
+.breakdown {
+    margin-block-start: 30px;
+}
+
+.breakdown-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-block-end: 15px;
+    color: var(--dark);
+}
+
+.breakdown-chart {
+    height: 120px;
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    margin-block-end: 20px;
+}
+
+.chart-bar {
+    flex: 1;
+    background-color: var(--primary);
+    border-radius: 6px 6px 0 0;
+    position: relative;
+    transition: var(--transition);
+    min-height: 10px;
+
+    &:hover {
+        opacity: 0.9;
+    }
+}
+
+.chart-bar.subtotal {
+    background-color: var(--success);
+}
+
+.chart-bar.tax {
+    background-color: var(--secondary);
+}
+
+.chart-bar.total {
+    background-color: var(--primary-dark);
+}
+
+.chart-label {
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.actions {
+    display: flex;
+    gap: 15px;
+    margin-block-start: 30px;
+}
+
+.btn {
+    padding: 15px 25px;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+
+    &:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: var(--box-shadow);
+    }
+    &:active {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.btn-secondary:hover {
+    background-color: #dde1e6;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: var(--box-shadow);
+}
+
+.btn-secondary:active {
+    transform: translateY(0) scale(1);
+}
