@@ -348,3 +348,23 @@ select {
 .btn-secondary:active {
     transform: translateY(0) scale(1);
 }
+
+.history-section {
+    margin-block-start: 40px;
+}
+
+.history-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-block-end: 20px;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.history-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
