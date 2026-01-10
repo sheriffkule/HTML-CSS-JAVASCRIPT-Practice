@@ -39,43 +39,43 @@ function formatCurrency(amount) {
 }
 
 // Calculate tax
-function calculateTax() {
-  const amount = parseFloat(amountInput.value) || 0;
-  const taxRate = parseFloat(taxRateSlider.value) || 0;
-  const location = locationInput.value.trim();
+function calculateTax(saveHistory = true) {
+  const amount = parseFloat(amountInput && amountInput.value ? amountInput.value : 0) || 0;
+  const taxRate = parseFloat(taxRateSlider && taxRateSlider.value ? taxRateSlider.value : 0) || 0;
+  const location = locationInput ? locationInput.value.trim() : '';
 
   // Calculate tax and total
   const taxAmount = amount * (taxRate / 100);
   const totalAmount = amount + taxAmount;
 
-  // Updata displays
+  // Update displays
   subtotalDisplay.textContent = formatCurrency(amount);
   taxRateDisplay.textContent = `${taxRate.toFixed(1)}%`;
   taxAmountDisplay.textContent = formatCurrency(taxAmount);
-  totalAmountDisplay.textContent = formatCurrency(taxAmount);
+  totalAmountDisplay.textContent = formatCurrency(totalAmount);
 
   // Update tax rate display
   const maxAmount = Math.max(amount, totalAmount);
-  const subtotalPercent = (taxAmount / maxAmount) * 100;
-  const taxPercent = (taxAmount / maxAmount) * 100;
-  const totalPercent = (totalAmount / maxAmount) * 100;
+  const subtotalPercent = maxAmount === 0 ? 0 : (amount / maxAmount) * 100;
+  const taxPercent = maxAmount === 0 ? 0 : (taxAmount / maxAmount) * 100;
+  const totalPercent = maxAmount === 0 ? 0 : (totalAmount / maxAmount) * 100;
 
-  subtotalBar.style.height = `${subtotalPercent}%`;
-  taxBar.style.height = `${taxPercent}%`;
-  totalBar.style.height = `${totalPercent}`;
+  if (subtotalBar) subtotalBar.style.height = `${subtotalPercent}%`;
+  if (taxBar) taxBar.style.height = `${taxPercent}%`;
+  if (totalBar) totalBar.style.height = `${totalPercent}%`;
 
-  // Save to history
-  saveToHistory(amount, taxRate, taxAmount, totalAmount, location);
-
-  // Update history display
-  updateHistoryDisplay();
+  // Save and update history only when requested
+  if (saveHistory) {
+    saveToHistory(amount, taxRate, taxAmount, totalAmount, location);
+    updateHistoryDisplay();
+  }
 }
 
 // Save calculation to history
 function saveToHistory(amount, taxRate, taxAmount, totalAmount, location) {
   const calculation = {
     id: Date.now(),
-    data: new Date().toLocaleString(),
+    date: new Date().toLocaleString(),
     amount: amount,
     taxRate: taxRate,
     taxAmount: taxAmount,
@@ -114,5 +114,129 @@ function updateHistoryDisplay() {
   calculationHistory.forEach((calc) => {
     const historyItem = document.createElement('div');
     historyItem.className = 'history-item';
+
+    historyItem.innerHTML = `
+      <div class="history-amount">${formatCurrency(calc.totalAmount)}</div>
+      <div class="history-details">
+        <div>Subtotal: ${formatCurrency(calc.amount)}</div>
+        <div>Tax: ${calc.taxRate.toFixed(1)}% (${formatCurrency(calc.taxAmount)})</div>
+        <div>Location: ${calc.location}</div>
+      </div>
+      <div class="history-rate">${calc.date}</div>
+    `;
+
+    // Add click to reuse this calculation
+    historyItem.addEventListener('click', () => {
+      amountInput.value = calc.amount;
+      taxRateSlider.value = calc.taxRate;
+      locationInput.value = calc.location;
+
+      // Update tax preset active state
+      updateTaxPresetActiveState(calc.taxRate);
+
+      // Trigger tax calculation
+      calculateTax();
+    });
+
+    historyContainer.appendChild(historyItem);
   });
 }
+
+// Update tax preset active state
+function updateTaxPresetActiveState(rate) {
+  taxPresets.forEach((preset) => {
+    const presetRate = parseFloat(preset.getAttribute('data-rate'));
+    if (Math.abs(presetRate - rate) < 0.1) {
+      preset.classList.add('active');
+    } else {
+      preset.classList.remove('active');
+    }
+  });
+}
+
+// Reset form
+function resetForm() {
+  amountInput.value = '100.00';
+  taxRateSlider.value = '8.5';
+  locationInput.value = '';
+
+  // Reset tax preset active state
+  taxPresets.forEach((preset) => {
+    if (preset.getAttribute('data-rate') === '8.5') {
+      preset.classList.add('active');
+    } else {
+      preset.classList.remove('active');
+    }
+  });
+
+  // Recalculate
+  calculateTax();
+}
+
+// Event listeners
+if (calculateBtn) calculateBtn.addEventListener('click', calculateTax);
+if (resetBtn) resetBtn.addEventListener('click', resetForm);
+
+// Tax preset click handlers
+taxPresets.forEach((preset) => {
+  preset.addEventListener('click', () => {
+    const rate = preset.getAttribute('data-rate');
+    taxRateSlider.value = rate;
+
+    // Update active state
+    taxPresets.forEach((p) => p.classList.remove('active'));
+    preset.classList.add('active');
+
+    // Recalculate
+    calculateTax();
+  });
+});
+
+// Update tax preview when amount or slider changes
+function updateTaxPreview() {
+  const amount = parseFloat(amountInput && amountInput.value ? amountInput.value : 0) || 0;
+  const rate = parseFloat(taxRateSlider && taxRateSlider.value ? taxRateSlider.value : 0) || 0;
+  if (taxRateValue) taxRateValue.textContent = `${rate.toFixed(1)}%`;
+  if (taxRateAmount) taxRateAmount.textContent = formatCurrency(amount * (rate / 100));
+}
+
+// Hook up preview handlers
+if (taxRateSlider) taxRateSlider.addEventListener('input', updateTaxPreview);
+if (amountInput) amountInput.addEventListener('input', updateTaxPreview);
+
+// Initialize preview
+updateTaxPreview();
+
+// Render initial values without saving history
+calculateTax(false);
+
+// Add keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+  // Ctrl/Cmd + Enter to calculate
+  if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+    calculateTax();
+  }
+
+  // Escape to reset
+  if (e.key === 'Escape') {
+    resetForm();
+  }
+});
+
+// Update year in footer
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+
+  if (yearElement) {
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.dateTime = currentYear.toString();
+    yearElement.textContent = currentYear.toString();
+  }
+}
+updateYear();
