@@ -94,3 +94,25 @@ function saveToHistory(amount, taxRate, taxAmount, totalAmount, location) {
   // Save to localStorage
   localStorage.setItem('taxCalculations', JSON.stringify(calculationHistory));
 }
+
+// Update history display
+function updateHistoryDisplay() {
+  // Clear current history display
+  historyContainer.innerHTML = '';
+
+  if (calculationHistory.length === 0) {
+    // Show empty history message
+    historyContainer.appendChild(emptyHistory);
+    emptyHistory.style.display = 'block';
+    return;
+  }
+
+  // Hide empty history message
+  emptyHistory.style.display = 'none';
+
+  // Add each history item
+  calculationHistory.forEach((calc) => {
+    const historyItem = document.createElement('div');
+    historyItem.className = 'history-item';
+  });
+}
