@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Animation Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/cssAnimationGenerator.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1><i class="fas fa-magic"></i> CSS Animation Generator</h1>
+        <p>
+          Create beautiful CSS animations visually. Customize properties in real-time and export the code for
+          your projects.
+        </p>
+      </header>
+
+      <div class="app-container">
+        <div class="left-panel">
+          <div class="panel">
+            <div class="panel-title">
+              <i class="fas fa-play-circle"></i>
+              <h2>Animation Preview</h2>
+            </div>
+            <div class="animationPreview">
+              <div class="animated-element" id="animatedBox">
+                <i class="fas fa-star"></i>
+                <span>Animated Element</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-title">
+              <i class="fas fa-sliders-h"></i>
+              <h2>Animation Controls</h2>
+            </div>
+
+            <div class="controls-grid">
+              <div class="control-group">
+                <label for="animationType">Animation Type</label>
+                <select id="animationType">
+                  <option value="slide">Slide</option>
+                  <option value="bounce">Bounce</option>
+                  <option value="rotate">Rotate</option>
+                  <option value="fade">Fade</option>
+                  <option value="pulse">Pulse</option>
+                  <option value="shake">Shake</option>
+                  <option value="flip">Flip</option>
+                  <option value="zoom">Zoom</option>
+                </select>
+              </div>
+
+              <div class="control-group">
+                <label for="duration">Duration: <span id="durationValue">1.0</span>s</label>
+                <div class="slider-container">
+                  <input type="range" id="duration" min="0.1" max="5" step="0.1" value="1" />
+                </div>
+              </div>
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/widgets_script/cssAnimationGenerator.js"></script>
+  </body>
+</html>
