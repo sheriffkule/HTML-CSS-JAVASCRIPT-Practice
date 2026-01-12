@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #03a9f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+h2 {
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 8em;
+    text-transform: uppercase;
+    background: #0092d4;
+    padding: 30px 0;
+    border-top: 10px solid #005f8a;
+    border-bottom: 10px solid #005f8a;
+    box-shadow: 0 0 0 10px #0074a9,
+    0 0 0 20px #008dce,
+    0 0 0 30px #009fe8,
+    0 0 20px 30px rgb(0 0 0 / .5);
+    text-shadow: 0 1px 1px #bec3c3,
+    0 2px 1px #bec3c3,
+    0 3px 1px #bec3c3,
+    0 4px 1px #bec3c3,
+    0 5px 1px #bec3c3,
+    0 6px 1px #bec3c3,
+    0 7px 1px #bec3c3,
+    0 8px 1px #bec3c3,
+    0 9px 1px #bec3c3,
+    0 0 5px rgb(0 0 0 / .1),
+    0 1px 2px rgb(0 0 0 / .2),
+    0 2px 4px rgb(0 0 0 / .3),
+    0 4px 8px rgb(0 0 0 / .4),
+    0 8px 16px rgb(0 0 0 / .3),
+    0 16px 32px rgb(0 0 0 / .2),
+    0 32px 32px rgb(0 0 0 / .5);
+    outline: none;
+}
