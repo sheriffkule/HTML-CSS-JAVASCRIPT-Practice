@@ -57,14 +57,121 @@
                 <label for="duration">Duration: <span id="durationValue">1.0</span>s</label>
                 <div class="slider-container">
                   <input type="range" id="duration" min="0.1" max="5" step="0.1" value="1" />
+                  <div class="slider-value" id="durationDisplay">1.0s</div>
                 </div>
               </div>
 
+              <div class="control-group">
+                <label for="delay">Delay: <span id="delayValue">0</span>s</label>
+                <div class="slider-container">
+                  <input type="range" id="delay" min="0" max="3" step="0.1" value="0" />
+                  <div class="slider-value" id="delayDisplay">0s</div>
+                </div>
+              </div>
 
+              <div class="control-group">
+                <label for="iteration">Iteration</label>
+                <select id="iteration">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="infinite">Infinite</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label>Timing Function</label>
+              <div class="timing-functions">
+                <button class="timing-btn active" data-timing="ease">ease</button>
+                <button class="timing-btn" data-timing="linear">linear</button>
+                <button class="timing-btn" data-timing="ease-in">ease-in</button>
+                <button class="timing-btn" data-timing="ease-out">ease-out</button>
+                <button class="timing-btn" data-timing="ease-in-out">ease-in-out</button>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label>Element Colors</label>
+              <div class="color-inputs">
+                <div>
+                  <label for="bgColor">Background</label>
+                  <input type="color" id="bgColor" value="#6c5ce7" />
+                </div>
+                <div>
+                  <label for="textColor">Icon Color</label>
+                  <input type="color" id="textColor" value="#ffffff" />
+                </div>
+              </div>
+            </div>
+
+            <div class="action-buttons">
+              <button class="btn btn-primary" id="playBtn"><i class="fas fa-play"></i> Play Animation</button>
+              <button class="btn btn-secondary" id="pauseBtn"><i class="fas fa-pause"></i> Pause</button>
+              <button class="btn btn-secondary" id="resetBtn"><i class="fas fa-redo"></i> Reset</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="right-panel">
+          <div class="panel">
+            <div class="code-header">
+              <div class="panel-title">
+                <i class="fas fa-code"></i>
+                <h2>Generated CSS Code</h2>
+              </div>
+              <button class="copy-btn" id="copyCodeBtn"><i class="fas fa-copy"></i> Copy Code</button>
+            </div>
+            <pre id="codeOutput">/* Your generated CSS code will appear here */</pre>
+
+            <div class="action-buttons">
+              <button class="btn btn-success" id="exportBtn">
+                <i class="fas fa-download"></i> Export CSS File
+              </button>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-title">
+              <i class="fas fa-th-large"></i>
+              <h2>Animation Presets</h2>
+            </div>
+            <p style="margin-bottom: 15px">Click on any preset to apply it to the animation.</p>
+
+            <div class="animations-library">
+              <div class="animation-preset" data-preset="bounce">
+                <i class="fas fa-basketball-ball"></i>
+                <h4>Bounce</h4>
+              </div>
+              <div class="animation-preset" data-preset="slide">
+                <i class="fas fa-arrows-alt-h"></i>
+                <h4>Slide</h4>
+              </div>
+              <div class="animation-preset" data-preset="rotate">
+                <i class="fas fa-sync-alt"></i>
+                <h4>Rotate</h4>
+              </div>
+              <div class="animation-preset" data-preset="pulse">
+                <i class="fas fa-heartbeat"></i>
+                <h4>Pulse</h4>
+              </div>
+              <div class="animation-preset" data-preset="shake">
+                <i class="fas fa-hand-rock"></i>
+                <h4>Shake</h4>
+              </div>
+              <div class="animation-preset" data-preset="zoom">
+                <i class="fas fa-search-plus"></i>
+                <h4>Zoom</h4>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      <footer class="footer__copy">
+        © <time datetime="" id="year"></time> Made width &hearts; by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
     </div>
 
     <script src="/widgets_script/cssAnimationGenerator.js"></script>
