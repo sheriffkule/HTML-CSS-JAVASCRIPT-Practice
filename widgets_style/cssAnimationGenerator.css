@@ -12,7 +12,7 @@
     --secondary: #a29bfe;
     --light: #f9f9ff;
     --dark: #2d3436;
-    --gray: #dfe6e9;
+    --gray: #c8cdcf;
     --success: #00b894;
     --danger: #e74c3c;
     --warning: #fdcb6e;
@@ -176,4 +176,126 @@ header {
     to {
         transform: scale(1);
     }
+}
+
+@keyframes shake {
+    from, to {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-10px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(10px);
+    }
+}
+
+@keyframes flip {
+    from {
+        transform: perspective(400px) rotateY(0);
+    }
+    to {
+        transform: perspective(400px) rotateY(360deg);
+    }
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(0.3);
+        opacity: 0;
+    }
+    70% {
+        transform: scale(1.1);
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.slide {
+    animation-name: slide;
+}
+
+.bounce {
+    animation-name: bounce;
+}
+
+.rotate {
+    animation-name: rotate;
+}
+
+.fade {
+    animation-name: fade;
+}
+
+.pulse {
+    animation-name: pulse;
+}
+
+.shake {
+    animation-name: shake;
+}
+
+.flip {
+    animation-name: flip;
+}
+
+.zoom {
+    animation-name: zoom;
+}
+
+.controls-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-block-end: 25px;
+
+    @media screen and (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.control-group {
+    margin-block-end: 15px;
+
+    label {
+        display: block;
+        margin-block-end: 8px;
+        font-weight: 500;
+        color: dark;
+    }
+}
+
+.slider-container {
+    display: flex;
+    align-items: center;
+}
+
+.slider-container input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    flex: 1;
+    height: 8px;
+    border-radius: 4px;
+    background: var(--gray);
+    outline: none;
+}
+
+.slider-container input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary);
+    cursor: pointer;
+    box-shadow: 0 3px 6px rgb(0 0 0 / 0.1);
+    transition: .2s;
+}
+
+.slider-container input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+    color: var(--primary-dark);
+    outline: 2px solid var(--warning);
 }
