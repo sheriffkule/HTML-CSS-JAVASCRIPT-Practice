@@ -16,7 +16,7 @@ const iterationSelect = document.getElementById('iteration');
 const timingButtons = document.querySelectorAll('.timing-btn');
 const bgColor = document.getElementById('bgColor');
 const textColor = document.getElementById('textColor');
-const animationPresets = document.querySelectorAll('animation-preset');
+const animationPresets = document.querySelectorAll('.animation-preset');
 
 // Display elements
 const durationValue = document.getElementById('durationValue');
@@ -50,7 +50,7 @@ function setupEventListeners() {
   durationSlider.addEventListener('change', generateAnimation);
   delaySlider.addEventListener('input', updateDisplayValues);
   delaySlider.addEventListener('change', generateAnimation);
-  iterationSelect.addEventListener('change', generateAnimationI);
+  iterationSelect.addEventListener('change', generateAnimation);
 
   // Color listeners
   bgColor.addEventListener('input', function () {
@@ -108,7 +108,7 @@ function setupEventListeners() {
     });
   });
 
-  // Auto-lay when settings change
+  // Auto-play when settings change
   animationType.addEventListener('change', () => {
     setTimeout(() => {
       playAnimation();
@@ -183,10 +183,7 @@ function playAnimation() {
 
   // If animation is not infinite, enable play button after animation completes
   if (iteration !== 'infinite') {
-    const totalTime =
-      (parseFloat(duration) + parseFloat(delay)) *
-      1000 *
-      (iteration === 'infinite' ? 1 : parseInt(iteration));
+    const totalTime = (parseFloat(duration) + parseFloat(delay)) * 1000 * (parseInt(iteration) || 1);
 
     clearTimeout(animationTimeout);
     animationTimeout = setTimeout(() => {
@@ -231,67 +228,77 @@ function generateCSSCode(type, duration, delay, iteration) {
       keyframes = `@keyframes slide {
   0% { transform: translateX(-150px); opacity: 0; }
   70% { transform: translateX(10px); }
-  100% { transform: translateX(0); opacity: 1; } }`;
+  100% { transform: translateX(0); opacity: 1; }
+}`;
       break;
     case 'bounce':
       keyframes = `@keyframes bounce {
   0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
   40% { transform: translateY(-30px); }
-  60% { transform: translateY(-15px); } }`;
+  60% { transform: translateY(-15px); }
+}`;
       break;
     case 'rotate':
       keyframes = `@keyframes rotate {
   from { transform: rotate(0); }
-  to { transform: rotate(360deg); } }`;
+  to { transform: rotate(360deg); }
+}`;
       break;
     case 'fade':
       keyframes = `@keyframes fade {
   from { opacity: 0; }
-  to { opacity: 1; } }`;
+  to { opacity: 1; }
+}`;
       break;
     case 'pulse':
       keyframes = `@keyframes pulse {
   from { transform: scale(1); }
   50% { transform: scale(1.2); }
-  to { transform: scale(1); } }`;
+  to { transform: scale(1); }
+}`;
       break;
     case 'shake':
       keyframes = `@keyframes shake {
   from, to { transform: translateX(0); }
   10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
-  20%, 40%, 60%, 80% { transform: translateX(10px); } }`;
+  20%, 40%, 60%, 80% { transform: translateX(10px); }
+}`;
       break;
     case 'flip':
       keyframes = `@keyframes flip {
   from { transform: perspective(400px) rotateY(0); }
-  to { transform: perspective(400px) rotateY(360deg); } }`;
+  to { transform: perspective(400px) rotateY(360deg); }
+}`;
       break;
     case 'zoom':
       keyframes = `@keyframes zoom {
   from { transform: scale(0.3); opacity: 0; }
   70% { transform: scale(1.1); }
-  to { transform: scale(1); opacity: 1; } }`;
+  to { transform: scale(1); opacity: 1; }
+}`;
       break;
   }
 
-  // Create CS code
+  // Create CSS code
   const cssCode = `${keyframes}
   
-.${type} {animation: ${type} ${duration}s ${currentTiming} ${delay}s ${iteration};
+.${type} {
+  animation: ${type} ${duration}s ${currentTiming} ${delay}s ${iteration};
 }
+  
 
 /* To apply this animation to any element: */
-  .your-element {
-    width: 120px;
-    height: 120px;
-    background: ${bgColorValue};
-    color: ${textColorValue};
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: ${type} ${duration}s ${currentTiming} ${delay}s ${iteration};
-  }`;
+.your-element {
+  width: 120px;
+  height: 120px;
+  background: ${bgColorValue};
+  color: ${textColorValue};
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: ${type} ${duration}s ${currentTiming} ${delay}s ${iteration};
+}`;
 
   // Update code output
   codeOutput.textContent = cssCode;
@@ -305,6 +312,64 @@ function generateCSSCode(type, duration, delay, iteration) {
     }
   });
 }
+
+// Copy CSS code to clipboard
+function copyCodeToClipboard() {
+  const codeText = codeOutput.textContent;
+
+  navigator.clipboard
+    .writeText(codeText)
+    .then(() => {
+      const originalText = copyCodeBtn.innerHTML;
+      copyCodeBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+      copyCodeBtn.style.background = 'var(--success)';
+
+      setTimeout(() => {
+        copyCodeBtn.innerHTML = originalText;
+        copyCodeBtn.style.background = '';
+      }, 2000);
+    })
+    .catch((err) => {
+      console.error('Failed to copy text: ', err);
+      alert('Failed to copy code to clipboard, Please try again.');
+    });
+}
+
+// Export CSS as a file
+function exportCSSFile() {
+  const cssCode = codeOutput.textContent;
+  const blob = new Blob([cssCode], { type: 'text/css' });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'css-animation.css';
+  document.body.appendChild(a);
+  a.click();
+
+  setTimeout(() => {
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }, 100);
+}
+
+// Update year in footer
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+
+  if (yearElement) {
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.dateTime = currentYear.toString();
+    yearElement.textContent = currentYear.toString();
+  }
+}
+updateYear();
 
 // Initialize the app when page loads
 document.addEventListener('DOMContentLoaded', init);
