@@ -431,3 +431,18 @@ input[type="color"] {
         transform: translateY(0) scale(0.98);
     }
 }
+
+#codeOutput {
+    background: #1e1e2e;
+    color: #f8f8f2;
+    padding: 20px;
+    border-radius: var(--radius);
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    height: 300px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+    margin-block-end: 20px;
+}

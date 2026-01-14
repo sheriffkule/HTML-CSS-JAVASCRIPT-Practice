@@ -122,5 +122,100 @@ function setupEventListeners() {
   });
 }
 
+// Update display values for sliders
+function updateDisplayValues() {
+  durationValue.textContent = durationSlider.value;
+  durationDisplay.textContent = durationSlider.value + 's';
+  delayValue.textContent = delaySlider.value;
+  delayDisplay.textContent = delaySlider.value + 's';
+}
+
+// Generate animation based on controls
+function generateAnimation() {
+  updateDisplayValues();
+
+  // Get values from controls
+  const type = animationType.value;
+  const duration = durationSlider.value;
+  const delay = delaySlider.value;
+  const iteration = iterationSelect.value;
+
+  // Reset animation state
+  resetAnimation();
+
+  // Remove any existing animation classes
+  animatedBox.className = 'animated-element';
+
+  // Apply new animation class
+  animatedBox.classList.add(type);
+
+  // Apply animation properties
+  animatedBox.style.animation = `${type} ${duration}s ${currentTiming} ${delay}s ${iteration}`;
+
+  // Store current animation
+  currentAnimation = type;
+
+  // Generate CSS code
+  generateCSSCode(type, duration, delay, iteration);
+}
+
+// Play animation
+function playAnimation() {
+  // First reset to ensure animation plays from start
+  animatedBox.style.animation = 'none';
+
+  // Force reflow to restart animation
+  void animatedBox.offsetWidth;
+
+  // Get values from controls
+  const type = animationType.value;
+  const duration = durationSlider.value;
+  const delay = delaySlider.value;
+  const iteration = iterationSelect.value;
+
+  // Reapply animation
+  animatedBox.style.animation = `${type} ${duration}s ${currentTiming} ${delay}s ${iteration}`;
+  animatedBox.style.animationPlayState = 'running';
+
+  isPlaying = true;
+  playBtn.disabled = true;
+  pauseBtn.disabled = false;
+
+  // If animation is not infinite, enable play button after animation completes
+  if (iteration !== 'infinite') {
+    const totalTime =
+      (parseFloat(duration) + parseFloat(delay)) *
+      1000 *
+      (iteration === 'infinite' ? 1 : parseInt(iteration));
+
+    clearTimeout(animationTimeout);
+    animationTimeout = setTimeout(() => {
+      if (isPlaying) {
+        isPlaying = false;
+        playBtn.disabled = false;
+        pauseBtn.disabled = true;
+      }
+    }, totalTime + 100);
+  }
+}
+
+// Pause animation
+function pauseAnimation() {
+  animatedBox.style.animationPlayState = 'paused';
+  isPlaying = false;
+  playBtn.disabled = false;
+  pauseBtn.disabled = true;
+}
+
+// Reset animation
+function resetAnimation() {
+  animatedBox.style.animation = 'none';
+  void animatedBox.offsetWidth; // Trigger reflow to restart animation
+  isPlaying = false;
+  playBtn.disabled = false;
+  pauseBtn.disabled = true;
+  clearTimeout(animationTimeout);
+}
+
 // Initialize the app when page loads
 document.addEventListener('DOMContentLoaded', init);
