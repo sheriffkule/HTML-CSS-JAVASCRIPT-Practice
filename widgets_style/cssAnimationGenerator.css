@@ -300,3 +300,134 @@ header {
     color: var(--primary-dark);
     outline: 2px solid var(--warning);
 }
+
+.slider-value {
+    width: 50px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+select{
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--gray);
+    border-radius: 8px;
+    font-size: 1rem;
+    background: #eee;
+    color: var(--dark);
+    outline: none;
+    transition: all .3s;
+
+    &:focus {
+        border-color: var(--primary);
+    }
+}
+
+input[type="color"] {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.color-inputs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.timing-functions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-block-start: 10px;
+}
+
+.timing-btn {
+    flex: 1;
+    min-width: 100px;
+    padding: 10px;
+    background: white;
+    border: 2px solid var(--gray);
+    border-radius: 8px;
+    font-size: .9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .3s;
+
+    &:hover {
+        border-color: var(--primary);
+        background: rgb(108 92 231 / 0.05);
+        box-shadow: var(--shadow);
+    }
+}
+
+.timing-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary-dark);
+}
+
+.action-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-block-start: 25px;
+}
+
+.btn {
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .3s;
+
+    i {
+        margin-inline-end: 8px;
+    }
+    &:active {
+        transform: translateY(0) scale(0.98);
+    }
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+
+    &:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 7px 15px rgb(108 92 231 / 0.3);
+    }
+    &:active {
+        transform: translateY(0) scale(0.98);
+    }
+}
+
+.btn-secondary {
+    background: var(--gray);
+    color: var(--dark);
+
+    &:hover {
+        filter: contrast(1.2);
+    }
+}
+
+.btn-success {
+    background: var(--success);
+    color: white;
+
+    &:hover {
+        background: #00a085;
+        transform: translateY(-2px);box-shadow: 0 7px 15px rgb(108 92 231 / 0.3);
+    }
+    &:active {
+        transform: translateY(0) scale(0.98);
+    }
+}
