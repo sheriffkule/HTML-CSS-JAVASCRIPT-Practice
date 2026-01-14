@@ -446,3 +446,32 @@ input[type="color"] {
     word-break: break-all;
     margin-block-end: 20px;
 }
+
+.code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-block-end: 15px;
+}
+
+.copy-btn {
+    background: rgb(0 0 0 / 0.5);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    transition: all .3s;
+
+    &:hover {
+        background: rgb(0 0 0 / 0.6);
+        box-shadow: var(--shadow);
+        scale: 1.02;
+    }
+    &:active {
+        scale: 1;
+    }
+}
