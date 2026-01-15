@@ -197,11 +197,12 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(45deg, #c0c0c0 25%, transparent 25%),
-    linear-gradient(-45deg, #c0c0c0 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, #c0c0c0 75%),
-    linear-gradient(-45deg, transparent 75%, #c0c0c0 75%);
+    background: linear-gradient(45deg, #cfcfcf 25%, transparent 25%),
+    linear-gradient(-45deg, #cfcfcf 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #cfcfcf 75%),
+    linear-gradient(-45deg, transparent 75%, #cfcfcf 75%);
     background-size: 20px 20px;
+    background-repeat: round;
     background-position: 0 0, 0 10px, 10px -10px, -10px 0;
     border-radius: 15px;
     margin-block-end: 25px;
@@ -270,4 +271,53 @@ header {
 
 .copy-btn.copied {
     background-color: var(--success);
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-block-start: 20px;
+}
+
+.action-btn {
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all .25s;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.primary-btn {
+    background-color: var(--primary);
+    color: white;
+
+    &:hover {
+        background-color: var(--secondary);
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 4px 8px rgb(0 0 0 / 0.2);
+    }
+    &:active {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.secondary-btn {
+    background-color: white;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+
+    &:hover {
+        background-color: #f8f8fa;
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 4px 8px rgb(0 0 0 / 0.2);
+    }
+    &:active {
+        transform: translateY(0) scale(1);
+    }
 }

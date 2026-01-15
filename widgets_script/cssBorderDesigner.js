@@ -103,3 +103,98 @@ function copyCssCode() {
       alert('Failed to copy CSS code to clipboard!');
     });
 }
+
+function resetToDefault() {
+  borderWidth = 5;
+  borderColor = '#4361ee';
+  borderStyle = 'solid';
+  bgColor = '#ffffff';
+  borderRadius = {
+    tl: 15,
+    tr: 15,
+    br: 15,
+    bl: 15,
+  };
+
+  // Update UI elements
+  borderWidthSlider.value = borderWidth;
+  borderColorPicker.value = borderColor;
+  borderStyleSelect.value = borderStyle;
+  bgColorPicker.value = bgColor;
+  radiusTlSlider.value = borderRadius.tl;
+  radiusTrSlider.value = borderRadius.tr;
+  radiusBrSlider.value = borderRadius.br;
+  radiusBlSlider.value = borderRadius.bl;
+
+  // Update border style options
+  borderStyleOptions.forEach((option) => {
+    if (option.dataset.style === borderStyle) {
+      option.classList.add('active');
+    } else {
+      option.classList.remove('active');
+    }
+  });
+
+  updateDisplayValues();
+  updatePreview();
+}
+
+// Generate random border settings
+function generateRandom() {
+  // Random border with between 1 and 20
+  borderWidth = Math.floor(Math.random() * 20) + 1;
+
+  // Random color
+  borderColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+
+  // Random style
+  const styles = ['solid', 'dashed', 'dotted', 'double', 'groove', 'ridge', 'inset', 'outset'];
+  borderStyle = Math.floor(Math.random() * styles.length);
+
+  // Random background color
+  const bgHue = Math.floor(Math.random() * 360);
+  bgColor = `hsl(${bgHue}, 70%, 95%)`;
+
+  // Random border radius (0-50px)
+  borderRadius.tl = Math.floor(Math.random() * 51);
+  borderRadius.tr = Math.floor(Math.random() * 51);
+  borderRadius.br = Math.floor(Math.random() * 51);
+  borderRadius.bl = Math.floor(Math.random() * 51);
+
+  // Update UI elements
+  borderWidthSlider.value = borderWidth;
+  borderColorPicker.value = borderColor;
+  borderStyleSelect.value = borderStyle;
+  bgColorPicker.value = bgColor;
+  radiusTlSlider.value = borderRadius.tl;
+  radiusTrSlider.value = borderRadius.tr;
+  radiusBrSlider.value = borderRadius.br;
+  radiusBlSlider.value = borderRadius.bl;
+
+  // Update border style options
+  borderStyleOptions.forEach((option) => {
+    if (option.dataset.style === borderStyle) {
+      option.classList.add('active');
+    } else {
+      option.classList.remove('active');
+    }
+  });
+
+  updateDisplayValues();
+  updatePreview();
+}
+
+// Apply preset border settings
+function applyPreset(presetName) {
+  switch (presetName) {
+    case 'modern':
+      borderWidth = 3;
+      borderColor = '#4361ee';
+      borderStyle = 'solid';
+      borderRadius.tl = 20;
+      borderRadius.tr = 20;
+      borderRadius.br = 20;
+      borderRadius.bl = 20;
+      break;
+  }
+}
