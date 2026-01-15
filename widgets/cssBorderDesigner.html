@@ -55,8 +55,125 @@
               <div class="border-style-option" data-style="double">Double</div>
             </div>
           </div>
+
+          <div class="control-group">
+            <label class="control-label">Border Radius</label>
+            <div class="border-radius-controls">
+              <div class="border-radius-control">
+                <label>Top Left: <span id="tl-value">15px</span></label>
+                <input type="range" id="radius-tl" min="0" max="100" value="15" class="slider" />
+              </div>
+              <div class="border-radius-control">
+                <label>Top Right: <span id="tr-value">15px</span></label>
+                <input type="range" id="radius-tr" min="0" max="100" value="15" class="slider" />
+              </div>
+              <div class="border-radius-control">
+                <label>Bottom Right: <span id="br-value">15px</span></label>
+                <input type="range" id="radius-br" min="0" max="100" value="15" class="slider" />
+              </div>
+              <div class="border-radius-control">
+                <label>Bottom Left: <span id="bl-value">15px</span></label>
+                <input type="range" id="radius-bl" min="0" max="100" value="15" class="slider" />
+              </div>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Background Color</label>
+            <div class="color-picker-container">
+              <div class="color-picker">
+                <input type="color" id="bg-color" value="#ffffff" />
+              </div>
+              <span id="bg-color-hex">#ffffff</span>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Quick Presets</label>
+            <div class="presets">
+              <div class="preset" data-preset="modern" style="border: 3px solid #4361ee; border-radius: 20px">
+                Modern
+              </div>
+            </div>
+            <div class="presets">
+              <div class="preset" data-preset="rounded" style="border: 8px solid #2ec4b6; border-radius: 50%">
+                Rounded
+              </div>
+            </div>
+            <div class="presets">
+              <div
+                class="preset"
+                data-preset="dashed"
+                style="border: 4px dashed #ff9f1c; border-radius: 10px">
+                Dashed
+              </div>
+            </div>
+            <div class="presets">
+              <div
+                class="preset"
+                data-preset="double"
+                style="border: 10px double #3a0ca3; border-radius: 5px">
+                Double
+              </div>
+            </div>
+            <div class="presets">
+              <div
+                class="preset"
+                data-preset="mixed"
+                style="border-top: 6px solid #e71d36; border-right: 6px dotted #4cc9f0">
+                Mixed
+              </div>
+            </div>
+            <div class="presets">
+              <div
+                class="preset"
+                data-preset="none"
+                style="border: none; box-shadow: 0 5px 15px rgb(0 0 0 / 0.1)">
+                No Border
+              </div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="action-btn secondary-btn" id="reset-btn"><i class="fas fa-redo"></i> Reset</button>
+            <button class="action-btn primary-btn" id="random-btn">
+              <i class="fas fa-random"></i> Random
+            </button>
+          </div>
+        </div>
+
+        <div class="preview-panel">
+          <h2 class="section-title">Preview & Code</h2>
+
+          <div class="preview-box">
+            <div id="preview-element">
+              <div class="preview-text">
+                <h3>Border Preview</h3>
+                <p>Your border style will appear here.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="code-output-container">
+            <div class="code-header">
+              <h3>CSS Code</h3>
+              <button class="copy-btn" id="copy-btn"><i class="fas fa-copy"></i> Copy Code</button>
+            </div>
+            <pre class="code-output" id="css-code">
+.box {
+    border: 5px solid #4361ee;
+    border-radius: 15px;
+    background-color: #ffffff
+}</pre
+            >
+          </div>
         </div>
       </div>
+
+      <footer class="footer__copy">
+        © <time datetime="2026" id="year">2026</time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
     </div>
 
     <script src="/widgets_script/cssBorderDesigner.js"></script>

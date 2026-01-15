@@ -61,3 +61,16 @@ header {
         grid-template-columns: 1fr;
     }
 }
+
+.controls-panel,
+.preview-panel {
+    background: linear-gradient(90deg, #ddd, #fff);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgb(0 0 0 / 0.1);
+}
+
+.preview-panel {
+    display: flex;
+    flex-direction: column;
+}
