@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Border Design Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/cssBorderDesigner.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1><i class="fas fa-border-style"></i> CSS Border Design Generator</h1>
+        <p>Create beautiful CSS borders visually. Customize every aspect and get the code instantly.</p>
+      </header>
+
+      <div class="app-container">
+        <div class="controls-panel">
+          <h2 class="section-title">Border Controls</h2>
+
+          <div class="control-group">
+            <label class="control-label">Border Width: <span class="width-value">5px</span></label>
+            <div class="slider-container">
+              <input type="range" id="border-width" min="0" max="30" value="5" class="slider" />
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Border Color</label>
+            <div class="color-picker-container">
+              <div class="color-picker">
+                <input type="color" id="border-color" value="#4361ee" />
+              </div>
+              <span id="color-hex">#4361ee</span>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Border Style</label>
+            <select id="border-style" class="border-style-select">
+              <option value="solid">Solid</option>
+              <option value="dashed">Dashed</option>
+              <option value="dotted">Dotted</option>
+              <option value="double">Double</option>
+              <option value="groove">Groove</option>
+              <option value="ridge">Ridge</option>
+              <option value="inset">Inset</option>
+              <option value="outset">Outset</option>
+            </select>
+
+            <div class="border-style-options">
+              <div class="border-style-option active" data-style="solid">Solid</div>
+              <div class="border-style-option" data-style="dashed">Dashed</div>
+              <div class="border-style-option" data-style="dotted">Dotted</div>
+              <div class="border-style-option" data-style="double">Double</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/widgets_script/cssBorderDesigner.js"></script>
+  </body>
+</html>
