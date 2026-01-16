@@ -63,9 +63,9 @@ function updateCssCode() {
       : `${borderRadius.tl}px ${borderRadius.tr}px ${borderRadius.br}px ${borderRadius.bl}px`;
 
   const cssCode = `.box {
-<span class="css-property">border</span>:<span class="css-value">${borderWidth}px ${borderStyle} ${borderColor}</span>
-<span class="css-property">border-radius</span>: <span class="css-value">${borderRadiusValue}</span>
-<span class="css-property">background-color</span>: <span class="css-value">${bgColor}</span>
+    <span class="css-property">border</span>:<span class="css-value">${borderWidth}px ${borderStyle} ${borderColor}</span>
+    <span class="css-property">border-radius</span>: <span class="css-value">${borderRadiusValue}</span>
+    <span class="css-property">background-color</span>: <span class="css-value">${bgColor}</span>
 }`;
 
   cssCodeElement.innerHTML = cssCode;
@@ -94,7 +94,7 @@ function copyCssCode() {
       copyButton.classList.add('copied');
 
       setTimeout(() => {
-        copyButton.innerHTML = '<i class="fa-copy"></i> Copy Code';
+        copyButton.innerHTML = '<i class="fas fa-copy"></i> Copy Code';
         copyButton.classList.remove('copied');
       }, 2000);
     })
@@ -147,9 +147,13 @@ function generateRandom() {
   // Random color
   borderColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
 
+  //  // Apply colors
+  // animatedBox.style.background = bgColor.value;
+  // animatedBox.style.color = textColor.value;
+
   // Random style
   const styles = ['solid', 'dashed', 'dotted', 'double', 'groove', 'ridge', 'inset', 'outset'];
-  borderStyle = Math.floor(Math.random() * styles.length);
+  borderStyle = styles[Math.floor(Math.random() * styles.length)];
 
   // Random background color
   const bgHue = Math.floor(Math.random() * 360);
@@ -313,3 +317,113 @@ function applyPreset(presetName) {
   updateDisplayValues();
   updatePreview();
 }
+
+// Event Listeners
+borderWidthSlider.addEventListener('input', () => {
+  borderWidth = parseInt(borderWidthSlider.value);
+  updateDisplayValues();
+  updatePreview();
+});
+
+borderColorPicker.addEventListener('input', () => {
+  borderColor = borderColorPicker.value;
+  updateDisplayValues();
+  updatePreview();
+});
+
+borderStyleSelect.addEventListener('change', () => {
+  borderStyle = borderStyleSelect.value;
+
+  // Update border style options
+  borderStyleOptions.forEach((option) => {
+    if (option.dataset.style === borderStyle) {
+      option.classList.add('active');
+    } else {
+      option.classList.remove('active');
+    }
+  });
+
+  updatePreview();
+});
+
+// Background color picker event listener
+bgColorPicker.addEventListener('input', () => {
+  bgColor = bgColorPicker.value;
+  updateDisplayValues();
+  updatePreview();
+});
+
+radiusTlSlider.addEventListener('input', () => {
+  borderRadius.tl = parseInt(radiusTlSlider.value);
+  updateDisplayValues();
+  updatePreview();
+});
+
+radiusTrSlider.addEventListener('input', () => {
+  borderRadius.tr = parseInt(radiusTrSlider.value);
+  updateDisplayValues();
+  updatePreview();
+});
+
+radiusBrSlider.addEventListener('input', () => {
+  borderRadius.br = parseInt(radiusBrSlider.value);
+  updateDisplayValues();
+  updatePreview();
+});
+
+radiusBlSlider.addEventListener('input', () => {
+  borderRadius.bl = parseInt(radiusBlSlider.value);
+  updateDisplayValues();
+  updatePreview();
+});
+
+// Border style options click events
+borderStyleOptions.forEach((option) => {
+  option.addEventListener('click', () => {
+    borderStyle = option.dataset.style;
+    borderStyleSelect.value = borderStyle;
+
+    borderStyleOptions.forEach((opt) => {
+      if (opt === option) {
+        opt.classList.add('active');
+      } else {
+        opt.classList.remove('active');
+      }
+    });
+
+    updatePreview();
+  });
+});
+
+// Preset click events
+presetElements.forEach((preset) => {
+  preset.addEventListener('click', () => {
+    applyPreset(preset.dataset.preset);
+  });
+});
+
+// Update year in footer
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+
+  if (yearElement) {
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.dateTime = currentYear.toString();
+    yearElement.textContent = currentYear.toString();
+  }
+}
+updateYear();
+
+// Button click events
+copyButton.addEventListener('click', copyCssCode);
+resetButton.addEventListener('click', resetToDefault);
+randomButton.addEventListener('click', generateRandom);
+
+// Initialize the app
+resetToDefault();

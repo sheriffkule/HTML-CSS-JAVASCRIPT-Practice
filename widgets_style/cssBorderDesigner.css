@@ -350,3 +350,34 @@ header {
         box-shadow: 0 10px 20px rgb(0 0 0 / 0.1);
     }
 }
+
+footer {
+    text-align: center;
+    margin-block-start: 40px;
+    padding: 20px;
+    color: var(--gray);
+    font-size: 0.9rem;
+
+    span {
+        color: var(--danger);
+        font-size: 1rem;
+    }
+    abbr {
+        text-underline-offset: 2px;
+        letter-spacing: .5px;
+        color: var(--primary);
+        cursor: default;
+    }
+}
+
+.css-property {
+    color: #9cdcfe;
+}
+
+.css-value {
+    color: #ce9178
+}
+
+.css-selector {
+    color: #d7ba7d;
+}
