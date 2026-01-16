@@ -128,3 +128,51 @@ label {
         color: #99a0a7;
     }
 }
+
+input,
+select {
+    width: 100%;
+    padding: 14px 15px 14px 45px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    transition: var(--transition);
+}
+
+:is(input, select):is(:focus, :focus-visible) {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgb(76 201 240 / 0.2),
+    inset 0 0 0 3px rgb(76 201 240 / 0.2);
+}
+
+.slider-container {
+    margin-block-start: 8px;
+}
+
+.slider {
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    background: #dde0e4;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--primary);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.slider::-webkit-slider-thumb:hover {
+    background: var(--secondary);
+    transform: scale(1.1);
+}
