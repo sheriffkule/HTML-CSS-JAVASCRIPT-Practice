@@ -321,3 +321,32 @@ header {
         transform: translateY(0) scale(1);
     }
 }
+
+.presets {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-block-start: 15px;
+
+    @media screen and (max-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.preset {
+    height: 80px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all .3s;
+    border: 2px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dark);
+    font-weight: 600;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgb(0 0 0 / 0.1);
+    }
+}

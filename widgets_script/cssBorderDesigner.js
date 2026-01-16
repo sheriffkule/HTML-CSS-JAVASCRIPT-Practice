@@ -196,5 +196,120 @@ function applyPreset(presetName) {
       borderRadius.br = 20;
       borderRadius.bl = 20;
       break;
+
+    case 'rounded':
+      borderWidth = 8;
+      borderColor = '#2ec4bd';
+      borderStyle = 'solid';
+      borderRadius.tl = 50;
+      borderRadius.tr = 50;
+      borderRadius.br = 50;
+      borderRadius.bl = 50;
+      break;
+
+    case 'dashed':
+      borderWidth = 4;
+      borderColor = '#ff9f1c';
+      borderStyle = 'dashed';
+      borderRadius.tl = 10;
+      borderRadius.tr = 10;
+      borderRadius.br = 10;
+      borderRadius.bl = 10;
+      break;
+
+    case 'double':
+      borderWidth = 10;
+      borderColor = '#3a0ca3';
+      borderStyle = 'double';
+      borderRadius.tl = 5;
+      borderRadius.tr = 5;
+      borderRadius.br = 5;
+      borderRadius.bl = 5;
+      break;
+
+    case 'mixed':
+      // For mixed borders all sides need to be set separately
+      previewElement.style.border = 'none';
+      previewElement.style.borderTop = '6px solid #e71d36';
+      previewElement.style.borderRight = '6px dotted #4cc9f0';
+      previewElement.style.borderBottom = '6px dashed #ff9f1c';
+      previewElement.style.borderBottom = '6px groove #2ec4b6';
+      borderRadius.tl = 30;
+      borderRadius.tr = 5;
+      borderRadius.br = 30;
+      borderRadius.bl = 5;
+
+      // Update CSS code for mixed borders
+      const mixedCssCode = `.box {
+<span class="css-property">border-top</span>: <span class="css-value">6px solid #e71d36</span>
+<span class="css-property">border-right</span>: <span class="css-value">6px dotted #4cc9f0</span>
+<span class="css-property">border-bottom</span>: <span class="css-value">6px dashed #ff9f1c</span>
+<span class="css-property">border-left</span>: <span class="css-value">6px groove #2ec4b6</span>
+<span class="css-property">border-radius</span>: <span class="css-value">30px 5px 30px 5px</span>
+<span class="css-property">background-color</span>: <span class="css-value">${bgColor}</span>
+}`;
+
+      cssCodeElement.innerHTML = mixedCssCode;
+
+      // Update UI elements
+      borderWidthSlider.value = 6;
+      borderColorPicker.value = '#e71d36';
+      borderStyleSelect.value = 'solid';
+      radiusTlSlider.value = 30;
+      radiusTrSlider.value = 5;
+      radiusBrSlider.value = 30;
+      radiusBlSlider.value = 5;
+
+      updateDisplayValues();
+
+      // Set border style options
+      borderStyleOptions.forEach((option) => {
+        if (option.dataset.style === 'solid') {
+          option.classList.add('active');
+        } else {
+          option.classList.remove('active');
+        }
+      });
+
+      return;
+
+    case 'none':
+      borderWidth = 0;
+      borderColor = '#ffffff';
+      borderStyle = 'solid';
+      borderRadius.tl = 0;
+      borderRadius.tr = 0;
+      borderRadius.br = 0;
+      borderRadius.bl = 0;
+      break;
   }
+
+  // Reset border to uniform style (for non-mixed presets)
+  previewElement.style.border = '';
+  previewElement.style.borderTop = '';
+  previewElement.style.borderRight = '';
+  previewElement.style.borderBottom = '';
+  previewElement.style.borderLeft = '';
+  previewElement.style.boxShadow = 'none';
+
+  // Update UI elements
+  borderWidthSlider.value = borderWidth;
+  borderColorPicker.value = borderColor;
+  borderStyleSelect.value = borderStyle;
+  bgColorPicker.value = bgColor;
+  radiusTlSlider.value = borderRadius.tl;
+  radiusTrSlider.value = borderRadius.tr;
+  radiusBrSlider.value = borderRadius.br;
+  radiusBlSlider.value = borderRadius.bl;
+
+  borderStyleOptions.forEach((option) => {
+    if (option.dataset.style === borderStyle) {
+      option.classList.add('active');
+    } else {
+      option.classList.remove('active');
+    }
+  });
+
+  updateDisplayValues();
+  updatePreview();
 }
