@@ -57,6 +57,185 @@
               </div>
             </div>
           </div>
+
+          <div class="input-row">
+            <div class="input-wrapper">
+              <label for="interest-rate">Interest Rate</label>
+              <div class="input-with-icon">
+                <i class="fas fa-percentage"></i>
+                <input type="number" id="interest-rate" min="0.1" max="20" step="0.1" value="4.5" />
+                <div class="currency">%</div>
+              </div>
+              <div class="slider-container">
+                <input
+                  type="range"
+                  id="interest-rate-slider"
+                  class="slider"
+                  min="0.1"
+                  max="20"
+                  step="0.1"
+                  value="4.5" />
+                <div class="value-display">
+                  <span>0.1%</span>
+                  <span>20%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="input-wrapper">
+              <label for="down-payment">Down Payment</label>
+              <div class="input-with-icon">
+                <i class="fas fa-hand-holding-usd"></i>
+                <input type="number" id="down-payment" min="0" max="1000000" step="1000" value="60000" />
+                <div class="currency">USD</div>
+              </div>
+              <div class="slider-container">
+                <input
+                  type="range"
+                  id="down-payment-slider"
+                  class="slider"
+                  min="0"
+                  max="1000000"
+                  step="1000"
+                  value="60000" />
+                <div class="value-display">
+                  <span>$0</span>
+                  <span>$1,000,000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="input-row">
+            <div class="input-wrapper">
+              <label for="property-tax">Annual Property Tax</label>
+              <div class="input-with-icon">
+                <i class="fas fa-home"></i>
+                <input type="number" id="property-tax" min="0" max="50000" step="100" value="3600" />
+                <div class="currency">USD</div>
+              </div>
+            </div>
+
+            <div class="input-wrapper">
+              <label for="insurance">Annual Insurance</label>
+              <div class="input-with-icon">
+                <i class="fas fa-shield-alt"></i>
+                <input type="number" id="insurance" min="0" max="10000" step="100" value="1200" />
+              </div>
+            </div>
+          </div>
+
+          <div class="input-row">
+            <div class="input-wrapper">
+              <label for="payment-frequency">Payment Frequency</label>
+              <div class="input-with-icon">
+                <i class="fas fa-calendar-week"></i>
+                <select id="payment-frequency">
+                  <option value="12">Monthly</option>
+                  <option value="24">Semi-Monthly</option>
+                  <option value="26">Bi-Weekly</option>
+                  <option value="52">Weekly</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="input-wrapper">
+              <label for="start-date">Loan Start Date</label>
+              <div class="input-with-icon">
+                <i class="fas fa-calendar-day"></i>
+                <input type="date" id="start-date" value="2026-01-01" />
+              </div>
+            </div>
+          </div>
+
+          <div class="button-group">
+            <button class="calculate-btn" id="calculate-btn">
+              <i class="fas fa-calculator"></i> Calculate Mortgage
+            </button>
+            <button class="reset-btn" id="reset-btn"><i class="fas fa-redo"></i> Reset All</button>
+          </div>
+
+          <div class="feature-list">
+            <div class="feature-item">
+              <i class="fas fa-chart-pie"></i>
+              <div class="feature-text">
+                <h4>Payment Breakdown</h4>
+                <p>See a visual breakdown of principal vs. interest.</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-table"></i>
+              <div class="feature-text">
+                <h4>Amortization Schedule</h4>
+                <p>View detailed year-by-year payment breakdown.</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-sliders-h"></i>
+              <h4>Interactive Sliders</h4>
+              <p>Adjust values with intuitive sliders.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="results-section">
+        <h2 class="section-title"><i class="fas fa-chart-bar"></i> Calculation Results</h2>
+
+        <div class="results-grid">
+          <div class="result-card">
+            <div class="result-label">Monthly Payment</div>
+            <div class="result-value" id="monthly-payment">$1,520</div>
+            <div class="result-note">Principal & Interest</div>
+          </div>
+          <div class="result-card">
+            <div class="result-label">Total Payment</div>
+            <div class="result-value" id="total-payment">$547,000</div>
+            <div class="result-note">Over loan term</div>
+          </div>
+          <div class="result-card">
+            <div class="result-label">Total Interest</div>
+            <div class="result-value" id="total-interest">$247,000</div>
+            <div class="result-note">Interest paid over term</div>
+          </div>
+          <div class="result-card">
+            <div class="result-label">Pay-off Date</div>
+            <div class="result-value" id="payoff-date">Jan 2055</div>
+            <div class="result-note">Loan term completion</div>
+          </div>
+        </div>
+
+        <div class="chart-container">
+          <div class="chart-placeholder" id="chart-placeholder">
+            <div>Click "Calculate Mortgage to see payment breakdown chart."</div>
+          </div>
+          <canvas id="payment-chart" style="display: none"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="breakdown-section">
+      <div class="tabs">
+        <button class="tab active" data-tab="amortization">Amortization Schedule</button>
+        <button class="tab" data-tab="summary">Loan Summary</button>
+        <button class="tab" data-tab="extra">Extra Payments</button>
+      </div>
+
+      <div id="amortization-tab" class="tab-content active">
+        <p>View how each payment is split between principal and interest over the life of your loan.</p>
+        <div class="table-container">
+          <table class="amortization-table" id="amortization-table">
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Principal Paid</th>
+                <th>Interest Paid</th>
+                <th>Remaining Balance</th>
+                <th>Cumulative Interest</th>
+              </tr>
+            </thead>
+            <tbody id="amortization-body"></tbody>
+          </table>
         </div>
       </div>
     </div>

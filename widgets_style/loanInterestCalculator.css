@@ -90,3 +90,41 @@ header {
         color: var(--primary);
     }
 }
+
+.input-group {
+    margin-block-end: 20px;
+}
+
+.input-row {
+    display: flex;
+    gap: 20px;
+    margin-block-end: 15px;
+
+    @media screen and (max-width: 576px) {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+.input-wrapper {
+    flex: 1;
+}
+
+label {
+    display: block;
+    margin-block-end: 8px;
+    font-weight: 500;
+    color: #495057;
+}
+
+.input-with-icon {
+    position: relative;
+
+    i {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #99a0a7;
+    }
+}
