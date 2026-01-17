@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Auth System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/forms_style/loginForm34.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-container sign-up-container">
+        <form id="registerForm">
+          <h1>Create Account</h1>
+          <div class="social-container">
+            <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+            <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+          <span>or use email for registration</span>
+          <input type="text" id="regName" placeholder="Name" required />
+          <input type="email" id="regEmail" placeholder="Email" required />
+          <div class="password-container">
+            <input type="password" id="regPassword" placeholder="Password" required />
+            <i class="fas fa-eye toggle-password" onclick="togglePassword('regPassword', this)"></i>
+          </div>
+          <div class="password-strength-meter">
+            <div class="strength-bar"></div>
+            <div class="strength-labels">
+              <span>Weak</span>
+              <span>Medium</span>
+              <span>Strong</span>
+            </div>
+          </div>
+          <button type="submit">Sign Up</button>
+        </form>
+      </div>
+      <div class="form-container sign-in-container">
+        <form id="loginForm">
+          <h1>Sign In</h1>
+          <div class="social-container">
+            <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+            <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+          <span>or use your account</span>
+          <input type="email" id="loginEmail" placeholder="Email" required />
+          <div class="password-container">
+            <input type="password" id="loginPassword" placeholder="Password" required />
+            <i class="fas fa-eye toggle-password" onclick="togglePassword('loginPassword', this)"></i>
+          </div>
+          <a href="#" id="forgotPassword">Forgot your password?</a>
+          <div class="remember-me">
+            <input type="checkbox" id="rememberMe" />
+            <label for="rememberMe">Remember Me</label>
+          </div>
+          <button type="submit">Sign In</button>
+        </form>
+      </div>
+      <div class="overlay-container">
+        <div class="overlay">
+          <div class="overlay-panel overlay-left">
+            <h1>Greetings, Friend</h1>
+            <p>Enter your personal details and start journey with us</p>
+            <p>Already have an account?</p>
+            <button class="ghost" id="signIn">Sign In</button>
+          </div>
+          <div class="overlay-panel overlay-right">
+            <h1>Welcome Back!</h1>
+            <p>To keep connected with us please login with your personal info</p>
+            <p>No account yet?</p>
+            <button class="ghost" id="signUp">Sign Up</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="forgotPasswordModal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Reset Password</h2>
+        <p>Enter your email address and we'll send you a link to reset your password.</p>
+        <form id="forgotPasswordForm">
+          <input type="email" id="resetEmail" placeholder="Email" required />
+          <button type="submit">Send Reset Link</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="notification" id="notification"></div>
+
+    <script src="/forms_script/loginForm34.js"></script>
+  </body>
+</html>
