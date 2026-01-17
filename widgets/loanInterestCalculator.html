@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -49,6 +49,9 @@
               <label for="loan-term">Loan Term</label>
               <div class="input-with-icon">
                 <i class="fas fa-calendar-alt"></i>
+                <input type="number" id="loan-term" min="1" max="40" step="1" value="30" />
+              </div>
+              <div class="input-with-icon">
                 <input type="range" id="loan-term" class="slider" min="1" max="40" step="1" value="30" />
                 <div class="value-display">
                   <span>1 Year</span>
@@ -238,7 +241,74 @@
           </table>
         </div>
       </div>
+
+      <div id="summary-tab" class="tab-content">
+        <div class="results-grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 20px">
+          <div class="result-card">
+            <div class="result-label">Loan Amount</div>
+            <div class="result-value" id="summary-loan-amount">$300,000</div>
+          </div>
+          <div class="result-card">
+            <div class="result-label">Down Payment</div>
+            <div class="result-value" id="summary-down-payment">$60,000</div>
+          </div>
+          <div class="result-card">
+            <div class="result-label">Total Interest Rate</div>
+            <div class="result-value" id="summary-interest-rate">4.5%</div>
+          </div>
+          <div class="result-card">
+            <div class="result-label">Loan Term</div>
+            <div class="result-value" id="summary-loan-term">30 Years</div>
+          </div>
+          <div class="result-card">
+            <div class="result-label">Total Cost</div>
+            <div class="result-value" id="summary-total-cost">$547,200</div>
+          </div>
+          <div class="result-card">
+            <div class="result-label">Interest to Principal Ratio</div>
+            <div class="result-value" id="summary-ratio">1:1.2</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="extra-tab" class="tab-content">
+        <p style="margin-bottom: 20px">
+          See how making extra payments can reduce your loan term and total interest paid.
+        </p>
+        <div class="input-row" style="max-width: 500px">
+          <div class="input-wrapper">
+            <label for="extra-payment">Extra Monthly Payment</label>
+            <div class="input-with-icon">
+              <i class="fas fa-dollar-sign"></i>
+              <input type="number" id="extra-payment" min="0" max="5000" step="50" value="100" />
+              <div class="currency">USD</div>
+            </div>
+          </div>
+          <div class="input-wrapper" style="align-self: flex-end">
+            <button class="calculate-btn" id="calculate-extra-btn" style="padding: 12px 20px">
+              <i class="fas fa-calculator"></i> Calculate
+            </button>
+          </div>
+        </div>
+        <div class="results-grid" style="grid-template-columns: repeat(2, 1fr); margin-top: 30px">
+          <div class="result-card">
+            <div class="result-label">New Loan Term</div>
+            <div class="result-value" id="new-term">27.8 Years</div>
+            <div class="result-note">With extra payments</div>
+          </div>
+          <div class="result-card">
+            <div class="result-label">Interest Saved</div>
+            <div class="result-value" id="interest-saved">$24,450</div>
+            <div class="result-note">With extra payments</div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <footer class="footer__copy">
+      © <time datetime="" id="year"></time> Made width <span>♥</span> by
+      <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+    </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.min.js"></script>
     <script src="/widgets_script/loanInterestCalculator.js"></script>
