@@ -180,39 +180,39 @@
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="results-section">
-        <h2 class="section-title"><i class="fas fa-chart-bar"></i> Calculation Results</h2>
+        <div class="results-section">
+          <h2 class="section-title"><i class="fas fa-chart-bar"></i> Calculation Results</h2>
 
-        <div class="results-grid">
-          <div class="result-card">
-            <div class="result-label">Monthly Payment</div>
-            <div class="result-value" id="monthly-payment">$1,520</div>
-            <div class="result-note">Principal & Interest</div>
+          <div class="results-grid">
+            <div class="result-card">
+              <div class="result-label">Monthly Payment</div>
+              <div class="result-value" id="monthly-payment">$1,520</div>
+              <div class="result-note">Principal & Interest</div>
+            </div>
+            <div class="result-card">
+              <div class="result-label">Total Payment</div>
+              <div class="result-value" id="total-payment">$547,000</div>
+              <div class="result-note">Over loan term</div>
+            </div>
+            <div class="result-card">
+              <div class="result-label">Total Interest</div>
+              <div class="result-value" id="total-interest">$247,000</div>
+              <div class="result-note">Interest paid over term</div>
+            </div>
+            <div class="result-card">
+              <div class="result-label">Pay-off Date</div>
+              <div class="result-value" id="payoff-date">Jan 2055</div>
+              <div class="result-note">Loan term completion</div>
+            </div>
           </div>
-          <div class="result-card">
-            <div class="result-label">Total Payment</div>
-            <div class="result-value" id="total-payment">$547,000</div>
-            <div class="result-note">Over loan term</div>
-          </div>
-          <div class="result-card">
-            <div class="result-label">Total Interest</div>
-            <div class="result-value" id="total-interest">$247,000</div>
-            <div class="result-note">Interest paid over term</div>
-          </div>
-          <div class="result-card">
-            <div class="result-label">Pay-off Date</div>
-            <div class="result-value" id="payoff-date">Jan 2055</div>
-            <div class="result-note">Loan term completion</div>
-          </div>
-        </div>
 
-        <div class="chart-container">
-          <div class="chart-placeholder" id="chart-placeholder">
-            <div>Click "Calculate Mortgage to see payment breakdown chart."</div>
+          <div class="chart-container">
+            <div class="chart-placeholder" id="chart-placeholder">
+              <div>Click "Calculate Mortgage to see payment breakdown chart."</div>
+            </div>
+            <canvas id="payment-chart" style="display: none"></canvas>
           </div>
-          <canvas id="payment-chart" style="display: none"></canvas>
         </div>
       </div>
     </div>

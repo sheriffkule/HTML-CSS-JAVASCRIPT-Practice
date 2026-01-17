@@ -107,3 +107,99 @@ resetBtn.addEventListener('click', resetCalculator);
 
 // Calculate extra payments
 calculateExtraBtn.addEventListener('click', calculateExtraPayments);
+
+// Tab switching
+tabs.forEach((tab) => {
+  tab.addEventListener('click', () => {
+    const tabId = tab.getAttribute('data-tab');
+
+    // Update active tab
+    tabs.forEach((t) => t.classList.remove('active'));
+    tab.classList.add('active');
+
+    // Show active tab content
+    tabContents.forEach((content) => {
+      content.classList.remove('active');
+      if (content.id === `${tabId}-tab`) {
+        content.classList.add('active');
+      }
+    });
+  });
+});
+
+// Initialize the calculator
+function initCalculator() {
+  calculateLoan();
+}
+
+// Main calculation function
+function calculateLoan() {
+  // Get input values
+  const loanAmount = parseFloat(loanAmountInput.value) || 0;
+  const loanTerm = parseInt(loanTermInput.value) || 0;
+  const annualInterestRate = parseFloat(interestRateInput.value) || 0;
+  const downPayment = parseFloat(downPaymentInput.value) || 0;
+  const propertyTax = parseFloat(propertyTaxInput.value) || 0;
+  const insurance = parseFloat(insuranceInput.value) || 0;
+  const paymentFrequency = parseInt(paymentFrequencySelect.value);
+  const startDate = new Date(startDateInput.value);
+
+  // Calculate principal (loan amount minus down payment)
+  const principal = loanAmount - downPayment;
+
+  // Convert annual interest rate to monthly and adjust for payment frequency
+  const monthlyInterestRate = annualInterestRate / 100 / (paymentFrequency / 12);
+
+  // Calculate total number of payments
+  const totalPayments = loanTerm * (paymentFrequency / 12) * 12;
+
+  // Calculate monthly payments using the formula: P * r (1+r)^n / ((1+r)^n - 1)
+  const monthlyPayment =
+    (principal * (monthlyInterestRate * Math.pow(1 + monthlyInterestRate, totalPayments))) /
+    (Math.pow(1 + monthlyInterestRate, totalPayments) - 1);
+
+  // Calculate additional monthly costs (property tax and insurance)
+  const additionalMonthlyCosts = (propertyTax + insurance) / 12;
+
+  // Calculate total monthly payment
+  const totalMonthlyPayment = monthlyPayment + additionalMonthlyCosts;
+
+  // Calculate total payment over loan term
+  const totalPayment = monthlyPayment * totalPayments;
+
+  // Calculate total interest paid
+  const totalInterest = totalPayment - principal;
+
+  // Calculate payoff date
+  const payoffDate = new Date(startDate);
+  payoffDate.setFullYear(payoffDate.getFullYear() + loanTerm);
+
+  // Update UI with results
+  monthlyPaymentEl.textContent = `$${totalMonthlyPayment.toFixed(2)}`;
+  totalPaymentEl.textContent = `$${Math.round(totalPayment + additionalMonthlyCosts * totalPayments).toLocaleString()}`;
+  totalInterestEl.textContent = `$${Math.round(totalInterest).toLocaleString()}`;
+  payoffDateEl.textContent = payoffDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+
+  // Update summary section
+  summaryLoanAmount.textContent = `$${loanAmount.toLocaleString()}`;
+  summaryDownPayment.textContent = `$${downPayment.toLocaleString()}`;
+  summaryInterestRate.textContent = `${annualInterestRate}%`;
+  summaryLoanTerm.textContent = `${loanTerm} Years`;
+  summaryTotalCost.textContent = `$${Math.round(totalPayment + additionalMonthlyCosts * totalPayments).toLocaleString()}`;
+
+  // Calculate interest to principal ratio
+  const ratio = (totalInterest / principal).toFixed(1);
+  summaryRatio.textContent = `$1:${ratio}`;
+
+  // Generate amortization schedule
+  generateAmortizationSchedule(principal, annualInterestRate, loanTerm, monthlyPayment, startDate);
+
+  // Generate chart
+  generateChart(principal, totalInterest, additionalMonthlyCosts * totalPayments);
+
+  // Calculate extra payments
+  calculateExtraPayments();
+
+  // Show notification
+  showNotification();
+}

@@ -22,7 +22,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #99a3c2;
+    background-color: #f0f4ff;
     color: var(--dark);
     line-height: 1.5;
     padding: 20px;
@@ -220,6 +220,7 @@ button {
 .calculate-btn {
     background-color: var(--primary);
     color: white;
+    text-wrap-mode: nowrap;
 
     &:hover {
         background-color: var(--secondary);
@@ -229,6 +230,7 @@ button {
     }
     &:hover i {
         scale: 1.2;
+        color: var(--success);
     }
 }
 
@@ -244,6 +246,7 @@ button {
     }
     &:hover i {
         transform: rotate(360deg);
+        color: var(--danger);
     }
 }
 
@@ -261,4 +264,60 @@ button {
     @media screen and (max-width: 768px) {
         grid-template-columns: 1fr;
     }
+}
+
+.result-card {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    border-left: 5px solid var(--primary);
+}
+
+.result-card.highlight {
+    background-color: rgb(67 97 238 / 0.1);
+    border-left-color: var(--secondary);
+}
+
+.result-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-block-end: 8px;
+}
+
+.result-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--secondary);
+}
+
+.result-note {
+    font-size: 0.8rem;
+    color: #adb5bd;
+    margin-block-start: 5px;
+}
+
+.chart-container {
+    flex-grow: 1;
+    margin-block-start: 20px;
+    min-height: 300px;
+    position: relative;
+}
+
+.chart-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #adb5bd;
+    font-size: 1.1rem;
+}
+
+.breakdown-section {
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--shadow);
+    margin-block: 10px 40px;
 }
