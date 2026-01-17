@@ -65,32 +65,32 @@ loanAmountSlider.addEventListener('input', () => {
 
 loanTermInput.addEventListener('input', () => {
   loanTermSlider.value = loanTermInput.value;
-  calculateBtn();
+  calculateLoan();
 });
 
 loanTermSlider.addEventListener('input', () => {
   loanTermInput.value = loanTermSlider.value;
-  calculateBtn();
+  calculateLoan();
 });
 
 interestRateInput.addEventListener('input', () => {
   interestRateSlider.value = interestRateInput.value;
-  calculateBtn();
+  calculateLoan();
 });
 
 interestRateSlider.addEventListener('input', () => {
   interestRateInput.value = interestRateSlider.value;
-  calculateBtn();
+  calculateLoan();
 });
 
 downPaymentInput.addEventListener('input', () => {
   downPaymentSlider.value = interestRateInput.value;
-  calculateBtn();
+  calculateLoan();
 });
 
 downPaymentSlider.addEventListener('input', () => {
   downPaymentInput.value = downPaymentSlider.value;
-  calculateBtn();
+  calculateLoan();
 });
 
 // Other input change events
@@ -202,4 +202,105 @@ function calculateLoan() {
 
   // Show notification
   showNotification();
+}
+
+// Generate amortization schedule
+function generateAmortizationSchedule(principal, annualInterestRate, loanTerm, monthlyPayment, startDate) {
+  // Clear existing table rows
+  amortizationBody.innerHTML = '';
+
+  const monthlyRate = annualInterestRate / 100 / 12;
+  let balance = principal;
+  let cumulativeInterest = 0;
+
+  // Generate year-by-year schedule
+  for (let year = 1; year <= loanTerm; year++) {
+    let yearPrincipal = 0;
+    let yearInterest = 0;
+
+    // Calculate for each month in the year
+    for (let month = 1; month <= 12; month++) {
+      if (balance <= 0) break;
+
+      const interestPayment = balance * monthlyRate;
+      const principalPayment = monthlyPayment - interestPayment;
+
+      yearPrincipal += principalPayment;
+      yearInterest += interestPayment;
+      cumulativeInterest += interestPayment;
+
+      // Update balance
+      balance -= principalPayment;
+    }
+
+    // Add row to table
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>Year ${year}</td>
+      <td>$${Math.round(yearPrincipal).toLocaleString()}</td>
+      <td>$${Math.round(yearInterest).toLocaleString()}</td>
+      <td>$${Math.round(balance).toLocaleString()}</td>
+      <td>$${Math.round(cumulativeInterest).toLocaleString()}</td>
+    `;
+
+    amortizationBody.appendChild(row);
+
+    // If balance is paid off, break
+    if (balance <= 0) break;
+  }
+}
+
+// Generate chart
+function generateChart(principal, totalInterest, additionalCosts) {
+  // Destroy existing chart if it exist
+  if (paymentChart) {
+    paymentChart.destroy();
+  }
+
+  // Hide placeholder and show chart
+  chartPlaceholder.style.display = 'none';
+  paymentChartCanvas.style.display = 'block';
+
+  // Create chart
+  const ctx = paymentChartCanvas.getContext('2d');
+  paymentChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Principal', 'Interest', 'Tax & Insurance'],
+      dataset: [
+        {
+          data: [principal, totalInterest, additionalCosts],
+          backgroundColor: ['rgb(67 97 238 / 0.8)', 'rgb(76 201 240 / 0.8)', 'rgb(58 12 163 / 0.8)'],
+          borderColor: ['rgb(rgb(67 97 238 / 1)', 'rgb(76 201 240 / 1)', 'rgb(58 12 163 / 1)'],
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            padding: 20,
+            font: {
+              size: 13,
+            },
+          },
+        },
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              const label = context.label || '';
+              const value = context.raw || '';
+              const total = context.dataset.data.reduce((a, b) => a + b, 0);
+              const percentage = Math.round((value / total) * 100);
+              return `${label}: $${Math.round(value).toLocaleString()} (${percentage}%)`;
+            },
+          },
+        },
+      },
+    },
+  });
 }
