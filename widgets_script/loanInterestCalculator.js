@@ -84,7 +84,7 @@ interestRateSlider.addEventListener('input', () => {
 });
 
 downPaymentInput.addEventListener('input', () => {
-  downPaymentSlider.value = interestRateInput.value;
+  downPaymentSlider.value = downPaymentInput.value;
   calculateLoan();
 });
 
@@ -100,13 +100,13 @@ paymentFrequencySelect.addEventListener('change', calculateLoan);
 startDateInput.addEventListener('change', calculateLoan);
 
 // Calculate button
-calculateBtn.addEventListener('click', calculateLoan);
+if (calculateBtn) calculateBtn.addEventListener('click', calculateLoan);
 
 // Reset button
-resetBtn.addEventListener('click', resetCalculator);
+if (resetBtn) resetBtn.addEventListener('click', resetCalculator);
 
 // Calculate extra payments
-calculateExtraBtn.addEventListener('click', calculateExtraPayments);
+if (calculateExtraBtn) calculateExtraBtn.addEventListener('click', calculateExtraPayments);
 
 // Tab switching
 tabs.forEach((tab) => {
@@ -134,6 +134,20 @@ function initCalculator() {
 
 // Main calculation function
 function calculateLoan() {
+  // Guard against null input elements
+  if (
+    !loanAmountInput ||
+    !loanTermInput ||
+    !interestRateInput ||
+    !downPaymentInput ||
+    !propertyTaxInput ||
+    !insuranceInput ||
+    !paymentFrequencySelect ||
+    !startDateInput
+  ) {
+    return;
+  }
+
   // Get input values
   const loanAmount = parseFloat(loanAmountInput.value) || 0;
   const loanTerm = parseInt(loanTermInput.value) || 0;
@@ -175,21 +189,24 @@ function calculateLoan() {
   payoffDate.setFullYear(payoffDate.getFullYear() + loanTerm);
 
   // Update UI with results
-  monthlyPaymentEl.textContent = `$${totalMonthlyPayment.toFixed(2)}`;
-  totalPaymentEl.textContent = `$${Math.round(totalPayment + additionalMonthlyCosts * totalPayments).toLocaleString()}`;
-  totalInterestEl.textContent = `$${Math.round(totalInterest).toLocaleString()}`;
-  payoffDateEl.textContent = payoffDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+  if (monthlyPaymentEl) monthlyPaymentEl.textContent = `$${totalMonthlyPayment.toFixed(2)}`;
+  if (totalPaymentEl)
+    totalPaymentEl.textContent = `$${Math.round(totalPayment + additionalMonthlyCosts * totalPayments).toLocaleString()}`;
+  if (totalInterestEl) totalInterestEl.textContent = `$${Math.round(totalInterest).toLocaleString()}`;
+  if (payoffDateEl)
+    payoffDateEl.textContent = payoffDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
 
   // Update summary section
-  summaryLoanAmount.textContent = `$${loanAmount.toLocaleString()}`;
-  summaryDownPayment.textContent = `$${downPayment.toLocaleString()}`;
-  summaryInterestRate.textContent = `${annualInterestRate}%`;
-  summaryLoanTerm.textContent = `${loanTerm} Years`;
-  summaryTotalCost.textContent = `$${Math.round(totalPayment + additionalMonthlyCosts * totalPayments).toLocaleString()}`;
+  if (summaryLoanAmount) summaryLoanAmount.textContent = `$${loanAmount.toLocaleString()}`;
+  if (summaryDownPayment) summaryDownPayment.textContent = `$${downPayment.toLocaleString()}`;
+  if (summaryInterestRate) summaryInterestRate.textContent = `${annualInterestRate}%`;
+  if (summaryLoanTerm) summaryLoanTerm.textContent = `${loanTerm} Years`;
+  if (summaryTotalCost)
+    summaryTotalCost.textContent = `$${Math.round(totalPayment + additionalMonthlyCosts * totalPayments).toLocaleString()}`;
 
   // Calculate interest to principal ratio
   const ratio = (totalInterest / principal).toFixed(1);
-  summaryRatio.textContent = `$1:${ratio}`;
+  if (summaryRatio) summaryRatio.textContent = `$1:${ratio}`;
 
   // Generate amortization schedule
   generateAmortizationSchedule(principal, annualInterestRate, loanTerm, monthlyPayment, startDate);
@@ -207,7 +224,7 @@ function calculateLoan() {
 // Generate amortization schedule
 function generateAmortizationSchedule(principal, annualInterestRate, loanTerm, monthlyPayment, startDate) {
   // Clear existing table rows
-  amortizationBody.innerHTML = '';
+  if (amortizationBody) amortizationBody.innerHTML = '';
 
   const monthlyRate = annualInterestRate / 100 / 12;
   let balance = principal;
@@ -243,7 +260,7 @@ function generateAmortizationSchedule(principal, annualInterestRate, loanTerm, m
       <td>$${Math.round(cumulativeInterest).toLocaleString()}</td>
     `;
 
-    amortizationBody.appendChild(row);
+    if (amortizationBody) amortizationBody.appendChild(row);
 
     // If balance is paid off, break
     if (balance <= 0) break;
@@ -258,49 +275,204 @@ function generateChart(principal, totalInterest, additionalCosts) {
   }
 
   // Hide placeholder and show chart
-  chartPlaceholder.style.display = 'none';
-  paymentChartCanvas.style.display = 'block';
+  if (chartPlaceholder) chartPlaceholder.style.display = 'none';
+  if (paymentChartCanvas) paymentChartCanvas.style.display = 'block';
 
   // Create chart
-  const ctx = paymentChartCanvas.getContext('2d');
-  paymentChart = new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      labels: ['Principal', 'Interest', 'Tax & Insurance'],
-      dataset: [
-        {
-          data: [principal, totalInterest, additionalCosts],
-          backgroundColor: ['rgb(67 97 238 / 0.8)', 'rgb(76 201 240 / 0.8)', 'rgb(58 12 163 / 0.8)'],
-          borderColor: ['rgb(rgb(67 97 238 / 1)', 'rgb(76 201 240 / 1)', 'rgb(58 12 163 / 1)'],
-          borderWidth: 1,
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          position: 'bottom',
-          labels: {
-            padding: 20,
-            font: {
-              size: 13,
+  if (paymentChartCanvas) {
+    const ctx = paymentChartCanvas.getContext('2d');
+    paymentChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Principal', 'Interest', 'Tax & Insurance'],
+        datasets: [
+          {
+            data: [principal, totalInterest, additionalCosts],
+            backgroundColor: ['rgb(67 97 238 / 0.8)', 'rgb(76 201 240 / 0.8)', 'rgb(58 12 163 / 0.8)'],
+            borderColor: ['rgb(67 97 238 / 1)', 'rgb(76 201 240 / 1)', 'rgb(58 12 163 / 1)'],
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              padding: 20,
+              font: {
+                size: 13,
+              },
             },
           },
-        },
-        tooltip: {
-          callbacks: {
-            label: function (context) {
-              const label = context.label || '';
-              const value = context.raw || '';
-              const total = context.dataset.data.reduce((a, b) => a + b, 0);
-              const percentage = Math.round((value / total) * 100);
-              return `${label}: $${Math.round(value).toLocaleString()} (${percentage}%)`;
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const label = context.label || '';
+                const value = context.raw || '';
+                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                const percentage = Math.round((value / total) * 100);
+                return `${label}: $${Math.round(value).toLocaleString()} (${percentage}%)`;
+              },
             },
           },
         },
       },
-    },
-  });
+    });
+  }
 }
+
+// Calculate extra payments
+function calculateExtraPayments() {
+  // Guard against null input elements
+  if (
+    !loanAmountInput ||
+    !downPaymentInput ||
+    !interestRateInput ||
+    !loanTermInput ||
+    !extraPaymentInput ||
+    !paymentFrequencySelect
+  ) {
+    return;
+  }
+
+  const loanAmount = parseFloat(loanAmountInput.value) || 0;
+  const downPayment = parseFloat(downPaymentInput.value) || 0;
+  const principal = loanAmount - downPayment;
+  const annualInterestRate = parseFloat(interestRateInput.value) || 0;
+  const loanTerm = parseInt(loanTermInput.value) || 0;
+  const extraPayment = parseFloat(extraPaymentInput.value) || 0;
+  const paymentFrequency = parseInt(paymentFrequencySelect.value);
+
+  // Convert annual interest rate to period rate based on payment frequency
+  const monthlyInterestRate = annualInterestRate / 100 / paymentFrequency;
+
+  // Calculate total number of payments
+  const totalPayments = loanTerm * paymentFrequency;
+
+  // Calculate monthly payment
+  const monthlyPayment =
+    (principal * (monthlyInterestRate * Math.pow(1 + monthlyInterestRate, totalPayments))) /
+    (Math.pow(1 + monthlyInterestRate, totalPayments) - 1);
+
+  // Calculate with extra payments
+  const totalMonthlyPayment = monthlyPayment + extraPayment;
+
+  // Calculate new loan term with extra payments using the formula: n = -log(1-(P*r)/A)/log(1+ r)
+  let newTotalPayments;
+  if (totalMonthlyPayment > principal * monthlyInterestRate) {
+    newTotalPayments = Math.ceil(
+      -Math.log(1 - (principal * monthlyInterestRate) / totalMonthlyPayment) /
+        Math.log(1 + monthlyInterestRate)
+    );
+  } else {
+    newTotalPayments = totalPayments;
+  }
+
+  const newLoanTerm = newTotalPayments / (paymentFrequency / 12) / 12;
+
+  // Calculate interest saved
+  const totalInterestWithoutExtra = monthlyPayment * totalPayments - principal;
+
+  // Calculate total interest with extra payments
+  let balance = principal;
+  let totalInterestWithExtra = 0;
+
+  for (let i = 0; i < newTotalPayments; i++) {
+    const interestPayment = balance * monthlyInterestRate;
+    const principalPayment = totalMonthlyPayment - interestPayment;
+
+    totalInterestWithExtra += interestPayment;
+    balance -= principalPayment;
+
+    if (balance <= 0) break;
+  }
+
+  const interestSaved = totalInterestWithoutExtra - totalInterestWithExtra;
+
+  // Update UI
+  if (newTermEl) newTermEl.textContent = `${newLoanTerm.toFixed(1)} Years`;
+  if (interestSavedEl) interestSavedEl.textContent = `${Math.round(interestSaved).toLocaleString()}`;
+}
+
+// Reset calculator
+function resetCalculator() {
+  // Guard against null input elements
+  if (
+    !loanAmountInput ||
+    !loanAmountSlider ||
+    !loanTermInput ||
+    !loanTermSlider ||
+    !interestRateInput ||
+    !interestRateSlider ||
+    !downPaymentInput ||
+    !downPaymentSlider ||
+    !propertyTaxInput ||
+    !insuranceInput ||
+    !paymentFrequencySelect ||
+    !startDateInput ||
+    !extraPaymentInput
+  ) {
+    return;
+  }
+
+  loanAmountInput.value = 300000;
+  loanAmountSlider.value = 300000;
+  loanTermInput.value = 30;
+  loanTermSlider.value = 30;
+  interestRateInput.value = 4.5;
+  interestRateSlider.value = 4.5;
+  downPaymentInput.value = 60000;
+  downPaymentSlider.value = 60000;
+  propertyTaxInput.value = 3600;
+  insuranceInput.value = 1200;
+  paymentFrequencySelect.value = 12;
+  startDateInput.value = formattedDate;
+  extraPaymentInput.value = 100;
+
+  calculateLoan();
+
+  // Show reset notification
+  if (notification) {
+    notification.innerHTML =
+      '<i class="fas fa-redo"></i><span>Calculator has been reset to default values!</span>';
+    notification.style.backgroundColor = 'var(--primary-color)';
+    showNotification();
+  }
+}
+
+// Show notification
+function showNotification() {
+  if (notification) {
+    notification.classList.add('show');
+
+    setTimeout(() => {
+      notification.classList.remove('show');
+    }, 3000);
+  }
+}
+
+// Update year in footer
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+
+  if (yearElement) {
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.dateTime = currentYear.toString();
+    yearElement.textContent = currentYear.toString();
+  }
+}
+
+// Initialize year update when DOM is fully loaded
+document.addEventListener('DOMContentLoaded', updateYear);
+
+// Initialize calculator on load
+window.addEventListener('DOMContentLoaded', initCalculator);

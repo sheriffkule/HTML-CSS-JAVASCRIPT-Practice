@@ -6,7 +6,6 @@
     <title>House Loan Interest Calculator</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
     <link rel="stylesheet" href="/widgets_style/loanInterestCalculator.css" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
     <div class="container">
@@ -53,7 +52,14 @@
                 <input type="number" id="loan-term" min="1" max="40" step="1" value="30" />
               </div>
               <div class="input-with-icon">
-                <input type="range" id="loan-term-slider" class="slider" min="1" max="40" step="1" value="30" />
+                <input
+                  type="range"
+                  id="loan-term-slider"
+                  class="slider"
+                  min="1"
+                  max="40"
+                  step="1"
+                  value="30" />
                 <div class="value-display">
                   <span>1 Year</span>
                   <span>40 Years</span>
@@ -64,7 +70,7 @@
 
           <div class="input-row">
             <div class="input-wrapper">
-              <label for="interest-rate">Interest Rate</label>
+              <label for="interest-rate">Monthly Interest Rate</label>
               <div class="input-with-icon">
                 <i class="fas fa-percentage"></i>
                 <input type="number" id="interest-rate" min="0.1" max="20" step="0.1" value="4.5" />
@@ -226,11 +232,7 @@
       </div>
 
       <div id="amortization-tab" class="tab-content active">
-        <p>View how each payment is split between principal and i
-
-    <script src="/widgets_script/loanInterestCalculator.js"></script>
-  </body>
-</html>nterest over the life of your loan.</p>
+        <p>View how each payment is split between principal and interest over the life of your loan.</p>
         <div class="table-container">
           <table class="amortization-table" id="amortization-table">
             <thead>
@@ -315,7 +317,7 @@
       <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
     </footer>
 
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/widgets_script/loanInterestCalculator.js"></script>
   </body>
 </html>
