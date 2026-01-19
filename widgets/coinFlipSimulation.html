@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coin Flip Simulator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/coinFlipSimulation.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Coin Flip Simulator</h1>
+      <p class="subtitle">Test your luck with our realistic coin flipping experience.</p>
+
+      <div class="coin-container">
+        <div class="coin" id="coin">
+          <div class="coin-face heads">
+            <i class="fas fa-dollar-sign"></i>
+          </div>
+          <div class="coin-face tails">
+            <i class="fas fa-dove"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="btn btn-flip" id="flip-btn">Flip Coin</button>
+        <button class="btn btn-reset" id="reset-btn">Reset Stats</button>
+      </div>
+
+      <div class="stats-container">
+        <div class="stat">
+          <h3>Total Flips</h3>
+          <p id="total-flips">0</p>
+        </div>
+        <div class="stat">
+          <h3>Heads</h3>
+          <p id="heads-count">0</p>
+        </div>
+        <div class="stat">
+          <h3>Tails</h3>
+          <p id="tails-count">0</p>
+        </div>
+        <div class="stat">
+          <h3>Heads %</h3>
+          <p id="heads-percent">0%</p>
+        </div>
+      </div>
+
+      <div class="history">
+        <h2>Flip History</h2>
+        <div id="history-list"></div>
+      </div>
+    </div>
+    
+    <script src="/widgets_script/coinFlipSimulation.js"></script>
+  </body>
+</html>
