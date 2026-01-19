@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -71,4 +72,145 @@ body {
 .heads {
     background: linear-gradient(45deg, #ffd700, #ffec8b);
     background-color: #ffd700;
+}
+
+.tails {
+    background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+    background-color: #6c5ce7;
+    transform: rotateY(180deg);
+}
+
+.controls {
+    margin-block-end: 30px;
+}
+
+.btn {
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    margin: 0 10px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all .25s;
+    box-shadow: 0 4px 6px rgb(0 0 0 / 0.1);
+
+    &:hover {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 6px 8px rgb(0 0 0 / 0.15);
+        filter: brightness(1.1);
+    }
+    &:active {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.btn-flip {
+    background: linear-gradient(45deg, #e74c3c, #e67e22);
+}
+
+.btn-reset {
+    background: linear-gradient(45deg, #2ecc71, #27ae60);
+}
+
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    margin-block-end: 30px;
+    flex-wrap: wrap;
+}
+
+.stat {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    min-width: 150px;
+    margin: 10px;
+    box-shadow: 0 4px 6px rgb(0 0 0 / 0.1);
+
+    h3 {
+        color: #7f8c8d;
+        margin-block-end: 5px;
+        font-size: 1rem;
+    }
+    p {
+        color: #2c3e50;
+        font-size: 1.75rem;
+        font-weight: bold;
+    }
+}
+
+.history {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    text-align: center;
+    box-shadow: 0 4px 6px rgb(0 0 0 / 0.1);
+
+    h2 {
+        color: #2c3e50;
+        margin-block-end: 10px;
+        font-size: 1.3rem;
+        padding-bottom: 5px;
+        border-bottom: 1px double rgb(0 0 0 / 0.2);
+    }
+}
+
+.history-item {
+    padding: 8px 12px;
+    margin-block-end: 8px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.heads-bg {
+    background-color: rgb(255 215 0 / 0.2);
+    border-left: 4px solid #dfbd00;
+}
+
+.tails-bg {
+    background-color: rgb(108 92 231 / 0.2);
+    border-left: 4px solid #6c5ce7;
+}
+
+.flip-count {
+    color: #7f8c8d;
+    font-weight: 500;
+}
+
+.flipping {
+    animation: flip 1.5s ease-out;
+}
+
+@keyframes flip {
+    to {
+        transform: rotateY(1800deg);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .container {
+        padding: 20px;
+
+        h1 {
+            font-size: 2rem;
+        }
+    }
+    .coin-container {
+        width: 150px;
+        height: 150px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        margin: 10px;
+    }
+    .stats-container {
+        flex-direction: column;
+        align-items: center;
+    }
 }
