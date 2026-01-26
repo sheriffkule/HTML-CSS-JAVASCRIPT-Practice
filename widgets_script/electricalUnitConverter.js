@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const unitNames = {
       voltage: { V: 'Volts (V)', kV: 'Kilovolts (kV)', mV: 'Millivolts (mV)' },
       current: { A: 'Amperes (A)', mA: 'Milliamperes (mA)', kA: 'Kiloamperes (kA)' },
-      power: { W: 'Watts (W)', kW: 'Kilowatts (kW)', MW: 'Megawatts (MW)', ht: 'Horsepower (hp)' },
+      power: { W: 'Watts (W)', kW: 'Kilowatts (kW)', MW: 'Megawatts (MW)', hp: 'Horsepower (hp)' },
       resistance: { Ω: 'Ohms (Ω)', kΩ: 'Kiloohms (kΩ)', MΩ: 'Megaohms (MΩ)' },
       energy: {
         J: 'Joules (J)',
@@ -96,4 +96,59 @@ document.addEventListener('DOMContentLoaded', function () {
       performConversion();
     });
   });
+
+  // Perform conversion
+  function performConversion() {
+    const fromValue = parseFloat(fromValueInput.value);
+    const fromUnit = fromUnitSelect.value;
+    const toUnit = toUnitSelect.value;
+
+    if (isNaN(fromValue)) {
+      resultValue.textContent = '0.00';
+      conversionDetails.textContent = 'Please enter a valid number to convert.';
+      return;
+    }
+
+    // Convert to base unit first
+    const valueInBaseUnit = fromValue * conversionFactors[currentConversionType][fromUnit];
+
+    // Convert from base unit to target unit
+    const result = valueInBaseUnit / conversionFactors[currentConversionType][toUnit];
+
+    // Update result
+    resultValue.textContent = result.toFixed(6).replace(/\.?0+$/, '');
+    toValueInput.value = result;
+    resultUnit.textContent = toUnitSelect.options[toUnitSelect.selectedIndex].text;
+
+    // Update conversion details
+    conversionDetails.innerHTML = `
+      <strong>${fromValue} ${fromUnit}</strong> = <strong>${result.toFixed(6)} ${toUnit}</strong><br />
+      Conversion: ${fromValue} ${fromUnit} ⊠ ${conversionFactors[currentConversionType][fromUnit]} ÷
+      ${conversionFactors[currentConversionType][toUnit]} = ${result.toFixed(6)} ${toUnit}
+    `;
+  }
+
+  // Event listeners
+  convertBtn.addEventListener('click', performConversion);
+  fromValueInput.addEventListener('input', performConversion);
+  fromUnitSelect.addEventListener('change', performConversion);
+  toUnitSelect.addEventListener('change', performConversion);
+
+  // Initialize
+  updateUnits();
+
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.dateTime = currentYear.toString();
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
