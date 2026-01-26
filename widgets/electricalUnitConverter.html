@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Electrical Unit Converter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/electricalUnitConverter.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1><i class="fas fa-bolt"></i> Electrical Unit Converter</h1>
+        <p>Convert between different electrical units with ease.</p>
+      </header>
+
+      <div class="converter-container">
+        <div class="input-section">
+          <div class="conversion-type">
+            <h3><i class="fas fa-exchange-alt"></i> Conversion Type</h3>
+            <div class="conversion-options">
+              <div class="conversion-option active" data-type="voltage">Voltage</div>
+              <div class="conversion-option" data-type="current">Current</div>
+              <div class="conversion-option" data-type="power">Power</div>
+              <div class="conversion-option" data-type="resistance">Resistance</div>
+              <div class="conversion-option" data-type="energy">Energy</div>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label>From</label>
+            <div class="input-with-unit">
+              <input type="number" id="fromValue" placeholder="Enter value" step="any" />
+              <select id="fromUnit">
+                <option value="V">Volts (V)</option>
+                <option value="kV">kilovolts (kV)</option>
+                <option value="mV">millivolts (mV)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label>To</label>
+            <div class="input-with-unit">
+              <input type="text" id="toValue" readonly placeholder="Result" />
+              <select id="toUnit">
+                <option value="V">Volts (V)</option>
+                <option value="kV">kilovolts (kV)</option>
+                <option value="mV">millivolts (mV)</option>
+              </select>
+            </div>
+          </div>
+
+          <button class="convert-btn" id="convertBtn"><i class="fas fa-sync-alt"></i> Convert</button>
+        </div>
+
+        <div class="result-section">
+          <div class="result-card">
+            <h3 class="result-title">Conversion Result</h3>
+            <div class="result-value" id="resultValue">0.00</div>
+            <div class="result-unit" id="resultUnit">Volts</div>
+
+            <div class="conversion-details">
+              <h4><i class="fax fa-info-circle"></i> Conversion Details</h4>
+              <p id="conversionDetails">Enter values and select units to see conversion details.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer__copy">
+        © <time datetime="2026" id="year">2026</time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
+    </div>
+
+    <script src="/widgets_script/electricalUnitConverter.js"></script>
+  </body>
+</html>
