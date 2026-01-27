@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personal Time Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/personalTimeTracker.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="logo">
+          <i class="fas fa-clock"></i>
+          <span>Personal Time Tracker</span>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="#" class="active">Dashboard</a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Settings</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main class="main-content">
+        <section class="left-column">
+          <article class="card">
+            <div class="card-header">
+              <h2 class="card-title">Track Time</h2>
+              <div class="current-project">Current: <strong>Web Development</strong></div>
+            </div>
+            <div class="timer-container">
+              <div class="timer-display" id="timer">00:00:00</div>
+              <div class="btn-group">
+                <button class="btn btn-primary" id="startBtn"><i class="fas fa-play"></i> Start</button>
+                <button class="btn btn-outline" id="pauseBtn"><i class="fas fa-pause"></i> Pause</button>
+                <button class="btn btn-warning" id="stopBtn"><i class="fas fa-stop"></i> Stop</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-header">
+              <h2 class="card-title">Projects</h2>
+            </div>
+            <input type="text" id="" class="project-input" placeholder="Add a new project..." />
+            <ul class="project-list" id="projectList">
+              <li class="project-item active">
+                <div class="project-info">
+                  <span class="project-name">Web Development</span>
+                  <span class="project-time">Total: 12h 30m</span>
+                </div>
+                <div class="project-actions">
+                  <button class="icon-btn"><i class="fas fa-edit"></i></button>
+                  <button class="icon-btn"><i class="fas fa-trash"></i></button>
+                </div>
+              </li>
+              <li class="project-item">
+                <div class="project-info">
+                  <span class="project-name">Graphic Design</span>
+                  <span class="project-time">Total: 8h 15m</span>
+                </div>
+                <div class="project-actions">
+                  <button class="icon-btn"><i class="fas fa-edit"></i></button>
+                  <button class="icon-btn"><i class="fas fa-trash"></i></button>
+                </div>
+              </li>
+              <li class="project-item">
+                <div class="project-info">
+                  <span class="project-name">Content Writing</span>
+                  <span class="project-time">Total: 6h 45m</span>
+                </div>
+                <div class="project-actions">
+                  <button class="icon-btn"><i class="fas fa-edit"></i></button>
+                  <button class="icon-btn"><i class="fas fa-trash"></i></button>
+                </div>
+              </li>
+            </ul>
+          </article>
+        </section>
+
+        <section class="right-column">
+          <article class="card">
+            <div class="card-header">
+              <h2 class="card-title">Today's Summary</h2>
+            </div>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="stat-value">4h 28m</div>
+                <div class="stat-label">Time Tracked</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value">12</div>
+                <div class="stat-label">Sessions</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value">83%</div>
+                <div class="stat-label">Productivity</div>
+              </div>
+            </div>
+            <div class="chart-container" id="dailyChart">
+              <div class="chart-bar" style="height: 70%">
+                <span class="chart-label">Mon</span>
+              </div>
+              <div class="chart-bar" style="height: 50%">
+                <span class="chart-label">Tue</span>
+              </div>
+              <div class="chart-bar" style="height: 80%">
+                <span class="chart-label">Wed</span>
+              </div>
+              <div class="chart-bar" style="height: 65%">
+                <span class="chart-label">Thu</span>
+              </div>
+              <div class="chart-bar" style="height: 90%">
+                <span class="chart-label">Fri</span>
+              </div>
+              <div class="chart-bar" style="height: 40%">
+                <span class="chart-label">Sat</span>
+              </div>
+              <div class="chart-bar" style="height: 20%">
+                <span class="chart-label">Sun</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-header">
+              <h2 class="card-title">Recent Activity</h2>
+            </div>
+            <ul class="recent-activity">
+              <li class="activity-item">
+                <div class="activity-icon"><i class="fas fa-play"></i></div>
+                <div class="activity-info">
+                  <div class="activity-title">Started Web Development</div>
+                  <div class="activity-time">2 hours ago</div>
+                </div>
+              </li>
+              <li class="activity-item">
+                <div class="activity-icon"><i class="fas fa-stop"></i></div>
+                <div class="activity-info">
+                  <div class="activity-title">Stopped Graphic Design</div>
+                  <div class="activity-time">4 hours ago</div>
+                </div>
+              </li>
+              <li class="activity-item">
+                <div class="activity-icon"><i class="fas fa-plus"></i></div>
+                <div class="activity-info">
+                  <div class="activity-title">Added Content Writing project</div>
+                  <div class="activity-time">Yesterday</div>
+                </div>
+              </li>
+            </ul>
+          </article>
+        </section>
+      </main>
+
+      <footer class="footer__copy">
+        © <time datetime="2026" id="year">2026</time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
+    </div>
+  </body>
+</html>
