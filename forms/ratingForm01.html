@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Rating Section</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/forms_style/ratingForm01.css" />
+  </head>
+  <body>
+    <main class="container">
+      <section class="rating-section">
+        <header class="header">
+          <h1>Rate Your Experience</h1>
+          <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+        </header>
+
+        <article class="rating-container">
+          <h2>How would you rate our service?</h2>
+          <div class="stars" id="stars">
+            <i class="far fa-star star" data-rating="1"></i>
+            <i class="far fa-star star" data-rating="2"></i>
+            <i class="far fa-star star" data-rating="3"></i>
+            <i class="far fa-star star" data-rating="4"></i>
+            <i class="far fa-star star" data-rating="5"></i>
+          </div>
+          <div class="rating-text" id="ratingText">Select a rating</div>
+        </article>
+
+        <article class="rating-container">
+          <h2>How do you feel about our service?</h2>
+          <div class="emoji-rating">
+            <div class="emoji" data-emoji="1">😠</div>
+            <div class="emoji" data-emoji="2">😕</div>
+            <div class="emoji" data-emoji="3">😐</div>
+            <div class="emoji" data-emoji="4">😊</div>
+            <div class="emoji" data-emoji="5">😍</div>
+          </div>
+        </article>
+
+        <article class="feedback">
+          <h2>Additional Feedback (Optional)</h2>
+          <textarea id="feedbackText" placeholder="Tell us more about your experience..."></textarea>
+          <div class="char-count"><span id="charCount">0</span>/500</div>
+        </article>
+
+        <button class="submit-btn" id="submitBtn" disabled>Submit Rating</button>
+
+        <article class="confirmation" id="confirmation">
+          <i class="fas fa-check-circle"></i>
+          <h2>Thank You!</h2>
+          <p>Your rating has been submitted successfully.</p>
+        </article>
+      </section>
+
+      <section class="stats-section">
+        <header class="stats-header">
+          <h2>Rating Statistics</h2>
+          <span id="totalRatings">0 ratings</span>
+        </header>
+        <article class="stats-container">
+          <div class="stat-item">
+            <div class="stat-value" id="averageRating">0.0</div>
+            <div class="stat-label">Average Rating</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="fiveStar">0%</div>
+            <div class="stat-label">Stars</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="responseRate">0%</div>
+            <div class="stat-label">Response Rate</div>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <script src="/forms_script/ratingForm01.js"></script>
+  </body>
+</html>

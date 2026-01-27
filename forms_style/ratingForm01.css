@@ -1,0 +1,66 @@
+:root {
+    --primary: #4361ee;
+    --secondary: #3a0ca3;
+    --success-color: #4cc9f0;
+    --text: #333;
+    --bg-color: #dadada;
+    --card-bg: #ffffff;
+    --border-color: #e0e0e0;
+    --shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+    --transition: all .3s ease;
+}
+
+.dark-mode {
+    --primary: #4895ef;
+    --secondary: #560bad;
+    --success-color: #4cc9f0;
+    --text: #f5f5f5;
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
+    --border-color: #333;
+    --shadow: 0 4px 12px rgb(255 255 255 / 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text);
+    transition: var(--transition);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+}
+
+.rating-section {
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 30px;
+    transition: var(--transition);
+    margin-bottom: 30px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+h1 {
+    font-size: 1.8rem;
+    color: var(--primary);
+}
