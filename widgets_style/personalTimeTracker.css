@@ -71,3 +71,176 @@ nav ul a {
         font-weight: 600;
     }
 }
+
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 30px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 24px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.timer-container {
+    text-align-last: center;
+    padding: 20px 0;
+}
+
+.timer-display {
+    font-size: 64px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--primary);
+    margin: 20px 0;
+}
+
+.btn-group {
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-evenly;
+}
+
+.btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+
+    &:hover {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: var(--card-shadow);
+    }
+    &:active {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+
+    &:hover {
+        background-color: var(--secondary);
+    }
+}
+
+.btn-outline {
+    background-color: transparent;
+    outline: 2px solid var(--primary);
+    outline-offset: -2px;
+
+    &:hover {
+        background-color: var(--primary);
+        color: white;
+    }
+}
+
+.btn-warning {
+    background-color: var(--warning);
+    color: white;
+
+    &:hover {
+        filter: saturate(0.7);
+    }
+}
+
+.project-input {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 16px;
+    transition: var(--transition);
+
+    &::placeholder {
+        transition: var(--transition);
+    }
+    &:is(:focus, :focus-within) {
+        border-color: var(--primary);
+        outline: none;
+        box-shadow: var(--card-shadow);
+    }
+    &:is(:focus, :focus-within)::placeholder {
+        transform: translateX(200px) skewX(90deg);
+    }
+}
+
+.project-list {
+    list-style: none;
+    margin-top: 20px;
+}
+
+.project-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    background-color: #e9ebec;
+    transition: var(--transition);
+
+    &:hover {
+        background-color: #dde1e6;
+    }
+    &.active {
+        background-color: rgb(67 97 238 / 0.1);
+        border-left: 4px solid var(--primary);
+    }
+}
+
+.project-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.project-name {
+    font-weight: 600;
+}
+
+.project-time {
+    font-size: 14px;
+    color: var(--gray);
+}
+
+.project-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    color: var(--gray);
+    cursor: pointer;
+    font-size: 18px;
+    transition: var(--transition);
+
+    &:hover {
+        color: var(--primary);
+        transform: scale(1.1);
+    }
+}
