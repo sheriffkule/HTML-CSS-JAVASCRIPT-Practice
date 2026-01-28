@@ -83,8 +83,49 @@
               <button class="btn btn-secondary" id="favoriteBtn"><i class="far fa-star"></i> Favorite</button>
             </div>
           </div>
+
+          <div id="statsView">
+            <h2 style="margin-bottom: 20px">Your Journalizing Statistics</h2>
+            <div class="stats-container">
+              <div class="stat-card">
+                <div class="stat-value" id="totalEntries">12</div>
+                <div class="stat-label">Total Entries</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value" id="thisMonth">5</div>
+                <div class="stat-label">This Month</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value" id="streak">7</div>
+                <div class="stat-label">Day Streak</div>
+              </div>
+            </div>
+            <div style="margin-top: 30px">
+              <h3 style="margin-bottom: 15px">Your Mood Distribution</h3>
+              <div
+                style="
+                  background-color: var(--light);
+                  height: 200px;
+                  border-radius: 10px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                ">
+                <p style="color: var(gray)">Mood chart visualization would appear here.</p>
+              </div>
+            </div>
+            <button class="btn btn-primary" id="backToJournal" style="margin-top: 20px">
+              <i class="fas fa-arrow-left"></i> Back to Journal
+            </button>
+          </div>
         </div>
       </div>
     </main>
+    <footer class="footer__copy">
+      © <time datetime="" id="year"></time> Made width <span>♥</span> by
+      <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+    </footer>
+
+    <script src="/widgets_script/personalJournal.js"></script>
   </body>
 </html>
