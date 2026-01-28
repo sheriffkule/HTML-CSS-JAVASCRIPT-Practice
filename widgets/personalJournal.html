@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personal Journal App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/personalJournal.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <div class="logo">
+          <i class="fas fa-book-open"></i>
+          <h1>Personal Journal</h1>
+        </div>
+        <div class="user-actions">
+          <button class="btn btn-secondary" id="statsBtn"><i class="fas fa-chart-bar"></i> Stats</button>
+          <button class="btn btn-primary" id="newEntryBtn"><i class="fas fa-plus"></i> New Entry</button>
+        </div>
+      </header>
+
+      <div class="app-container">
+        <div class="sidebar">
+          <div class="search-container">
+            <input type="text" class="search-box" placeholder="Search entries..." />
+          </div>
+          <div class="filter-options">
+            <button class="filter-btn active">All</button>
+            <button class="filter-btn">Today</button>
+            <button class="filter-btn">This Week</button>
+            <button class="filter-btn">Favorites</button>
+          </div>
+          <div class="journal-list" id="journalList"></div>
+        </div>
+
+        <div class="main-content">
+          <div class="empty-state" id="emptyState">
+            <i class="fas fa-book"></i>
+            <h2>No Journal Entry Selected</h2>
+            <p>Select an existing entry of create a new one to get started.</p>
+            <button class="btn btn-primary" id="emptyNewBtn" style="margin-top: 20px">
+              <i class="fas fa-plus"></i> Create New Entry
+            </button>
+          </div>
+
+          <div id="journalEditor">
+            <div class="journal-header">
+              <div style="width: 100%">
+                <input type="text" class="journal-title" placeholder="Entry Title" id="journalTitle" />
+                <div class="journal-meta">
+                  <span id="journalDate">June 15, 2025</span>
+                  <span id="journalTime">10:30AM</span>
+                  <span id="wordCount">0</span>
+                </div>
+              </div>
+              <div class="user-actions">
+                <button class="btn btn-secondary" id="saveBtn"><i class="fas fa-save"></i> Save</button>
+                <button class="btn btn-danger" id="deleteBtn"><i class="fas fa-trash"></i> Delete</button>
+              </div>
+            </div>
+
+            <div class="mood-selector">
+              <div class="mood-btn active" data-mood="happy"></div>
+              <div class="mood-btn" data-mood="neutral"></div>
+              <div class="mood-btn" data-mood="sad"></div>
+              <div class="mood-btn" data-mood="excited"></div>
+              <div class="mood-btn" data-mood="tired"></div>
+            </div>
+
+            <textarea
+              class="journal-content"
+              placeholder="Write your thoughts here..."
+              id="journalContent"></textarea>
+
+            <div class="journal-footer">
+              <div class="tag-selector">
+                <div class="tag-option personal active" data-tag="personal">Personal</div>
+                <div class="tag-option work" data-tag="work">Work</div>
+                <div class="tag-option travel" data-tag="travel">Travel</div>
+                <div class="tag-option ideas" data-tag="ideas">Ideas</div>
+              </div>
+              <button class="btn btn-secondary" id="favoriteBtn"><i class="far fa-star"></i> Favorite</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
