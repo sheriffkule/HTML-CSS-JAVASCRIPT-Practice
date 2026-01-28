@@ -176,6 +176,63 @@ document.addEventListener('DOMContentLoaded', function () {
     showEditor();
   }
 
-  
+  // Open an existing journal entry
+  function openJournal(id) {
+    const journal = journals.find((j) => j.id === id);
+    if (!journal) return;
+
+    currentJournalId = id;
+    journalTitle.value = journal.title;
+    journalContent.value = journal.content;
+    journalDate.textContent = journal.date;
+    journalTime.textContent = journal.time;
+    updateWordCount();
+
+    // Set mod
+    moodButtons.forEach((btn) => {
+      btn.classList.remove('active');
+      if (btn.dataset.mood === journal.mood) btn.classList.add('active');
+    });
+
+    // Set tag
+    tagOptions.forEach((opt) => {
+      opt.classList.remove('active');
+      if (opt.dataset.tag === journal.tag) opt.classList.add('active');
+    });
+
+    // Update favorite button
+    const favoriteIcon = favoriteBtn.querySelector('i');
+    if (journal.favorite) {
+      favoriteIcon.classList.remove('far');
+      favoriteIcon.classList.add('fas');
+    } else {
+      favoriteIcon.classList.add('far');
+      favoriteIcon.classList.remove('fas');
+    }
+
+    showEditor();
+    renderJournalList();
+  }
+
+  // Save journal entry
+  function saveJournal() {
+    const title = journalTitle.value.trim();
+    const content = journalContent.value.trim();
+
+    if (!title) {
+      alert('Please enter a title for your journal entry!');
+      return;
+    }
+
+    const now = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const dateStr = now.toLocaleDateString('en-US', options);
+    const timeStr = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+
+    const activeMood = document.querySelector('.mood-btn.active').dataset.mood;
+    const activeTag = document.querySelector('.tag-option.active').dataset.tag;
+    const isFavorite = favoriteBtn.querySelector('i').classList.contains('fas');
+  }
+
   init();
 });

@@ -300,3 +300,106 @@ header {
     gap: 10px;
     margin: 20px 0;
 }
+
+.mood-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--gray);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 1.5rem;
+
+    &:hover {
+        scale: 1.1;
+        box-shadow: var(--shadow);
+    }
+    &.active {
+        border-color: var(--primary);
+        background-color: var(--primary-light);
+    }
+}
+
+.journal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--gray);
+}
+
+.tag-selector {
+    display: flex;
+    gap: 10px;
+}
+
+.tag-option {
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: var(--transition);
+
+    &.active {
+        color: var(--primary);
+        text-decoration: underline solid var(--primary) 1px;
+        text-underline-offset: 2px;
+    }
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    color: var(--gray);
+
+    & > i {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        color: var(--primary-light);
+    }
+    h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+}
+
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.stat-card {
+    background-color: var(--light);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--gray);
+}
+
+@media screen and (max-width: 900px) {
+    .app-container {
+        grid-template-columns: 1fr;
+    }
+    .sidebar {
+        display: none;
+    }
+}
