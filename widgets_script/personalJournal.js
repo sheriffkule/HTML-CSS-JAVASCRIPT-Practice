@@ -82,4 +82,100 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Set up event listeners
+  function setupEventListeners() {
+    newEntryBtn.addEventListener('click', createNewJournal);
+    emptyNewBtn.addEventListener('click', createNewJournal);
+    statsBtn.addEventListener('click', showStats);
+    backToJournal.addEventListener('click', showJournal);
+    saveBtn.addEventListener('click', saveJournal);
+    deleteBtn.addEventListener('click', deleteJournal);
+    favoriteBtn.addEventListener('click', toggleFavorite);
+
+    journalContent.addEventListener('input', updateWordCount);
+
+    moodButtons.forEach((button) => {
+      button.addEventListener('click', function () {
+        moodButtons.forEach((btn) => btn.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    tagOptions.forEach((option) => {
+      option.addEventListener('click', function () {
+        tagOptions.forEach((opt) => opt.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    searchBox.addEventListener('input', filterJournals);
+
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', function () {
+        filterButtons.forEach((btn) => btn.classList.remove('active'));
+        this.classList.add('active');
+        filterJournals();
+      });
+    });
+  }
+
+  // Render the journal list
+  function renderJournalList() {
+    journalList.innerHTML = '';
+    if (journals.length === 0) {
+      journalList.innerHTML =
+        '<p style="text-align: center; color: var(--gray); padding: 20px;">No journal entries yet</p>';
+      return;
+    }
+
+    journals.forEach((journal) => {
+      const journalItem = document.createElement('div');
+      journalItem.className = 'journal-item';
+      if (journal.id === currentJournalId) {
+        journalItem.classList.add('active');
+      }
+
+      journalItem.innerHTML = `
+        <div class="journal-date">${journal.date} • ${journal.time}</div>
+        <div class="journal-preview">${journal.date}</div>
+        <div class="journal-tags">
+          <div class="tag ${journal.tag}">${journal.tag.charAt(0).toUpperCase() + journal.tag.slice(1)}</div>
+          ${
+            journal.favorite
+              ? '<div class="tag" style="background-color: #fff3cd; color: #856404"><i class="fas fa-star"></i></div>'
+              : ''
+          }
+        </div>
+      `;
+
+      journalItem.addEventListener('click', () => openJournal(journal.id));
+      journalList.appendChild(journalItem);
+    });
+  }
+
+  // Create a new journal entry
+  function createNewJournal() {
+    const now = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const dateStr = now.toLocaleDateString('en-US', options);
+    const timeStr = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+
+    currentJournalId = null;
+    journalTitle.value = '';
+    journalContent.value = '';
+    journalDate.textContent = dateStr;
+    journalTime.textContent = timeStr;
+    updateWordCount();
+
+    // Reset mood and tag to defaults
+    moodButtons.forEach((btn) => btn.classList.remove('active'));
+    moodButtons[0].classList.add('active');
+
+    tagOptions.forEach((opt) => opt.classList.remove('active'));
+    tagOptions[0].classList.add('active');
+
+    showEditor();
+  }
+
+  
+  init();
 });

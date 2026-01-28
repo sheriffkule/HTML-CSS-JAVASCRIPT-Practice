@@ -4,8 +4,8 @@
     --secondary: #3f37c9;
     --accent: #f72585;
     --dark: #1e1e2c;
-    --light: #e8e9ea;
-    --gray: #adb5bd;
+    --light: #ececf0;
+    --gray: #9da4ac;
     --success: #4cc9f0;
     --warning: #f8961e;
     --danger: #e63946;
@@ -110,7 +110,7 @@ header {
     display: grid;
     grid-template-columns: 300px 1fr;
     gap: 30px;
-    /* height: calc(100vh - 150px); */
+    height: calc(100vh - 150px);
 }
 
 .sidebar {
@@ -192,4 +192,111 @@ header {
         background-color: #e0e7ff;
         border-left: 4px solid var(--primary);
     }
+}
+
+.journal-date {
+    font-size: 0.9rem;
+    color: var(--gray);
+    margin-bottom: 5px;
+}
+
+.journal-preview {
+    font-size: 1rem;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.journal-tags {
+    display: flex;
+    gap: 5px;
+    margin-top: 8px;
+}
+
+.tag {
+    font-size: 0.8rem;
+    padding: 3px 8px;
+    border-radius: 10px;
+}
+
+.tag.personal {
+    background-color: #e0f4ff;
+    color: #0066cc;
+}
+
+.tag.work {
+    background-color: #e6f7e9;
+    color: #00a86b;
+}
+
+.tag.travel {
+    background-color: #fff2e6;
+    color: #ff8c00;
+}
+
+.tag.ideas {
+    background-color: #f0e6ff;
+    color: #8a2be2;
+}
+
+.main-content {
+    background-color: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.journal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.journal-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    border: none;
+    width: 100%;
+    padding: 5px 0;
+    margin-bottom: 5px;
+
+    &:is(:focus, :focus-within) {
+        outline: none;
+        border-bottom: 2px solid var(--primary);
+    }
+}
+
+.journal-meta {
+    display: flex;
+    gap: 15px;
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+.journal-content {
+    flex-grow: 1;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    border: 1px solid var(--gray);
+    resize: none;
+    padding: 10px 0;
+    min-height: 300px;
+    width: 100%;
+
+    &:is(:focus, :focus-within) {
+        outline: none;
+    }
+}
+
+.mood-selector {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
 }
