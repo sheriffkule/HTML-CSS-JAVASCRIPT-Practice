@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Number System Conversion</title>
+    <link rel="stylesheet" href="/widgets_style/numberSystemConversion.css" />
+  </head>
+  <body>
+    <main class="converter">
+      <h1>Number System Conversion App</h1>
+
+      <div class="theme-switcher">
+        <label for="themeSelect">Select Theme:</label>
+        <select id="themeSelect" onchange="changeTheme()">
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+          <option value="ocean">Ocean</option>
+        </select>
+      </div>
+
+      <label for="numberInput">Enter Number:</label>
+      <input type="text" id="numberInput" placeholder="Enter Number here." />
+
+      <label for="fromBase">From Base</label>
+      <select id="fromBase">
+        <option value="2">Binary</option>
+        <option value="8">Octal</option>
+        <option value="10" selected>Decimal</option>
+        <option value="16">Hexadecimal</option>
+      </select>
+
+      <label for="toBase">To Base:</label>
+      <select id="toBase">
+        <option value="2">Binary</option>
+        <option value="8">Octal</option>
+        <option value="10" selected>Decimal</option>
+        <option value="16">Hexadecimal</option>
+      </select>
+
+      <button onclick="convertNumber()">Convert</button>
+      <div class="result" id="result"></div>
+    </main>
+
+    <footer class="footer__copy">
+      © <time datetime="2026" id="year">2026</time> Made width <span>♥</span> by
+      <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+    </footer>
+
+    <script src="/widgets_script/numberSystemConversion.js"></script>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+:root {
+    --bg-color: #e3e7eb;
+    --card-bg: #fff;
+    --text-color: #333;
+    --input-bg: #fff;
+    --input-border: #ccc;
+    --button-bg: #007bff;
+    --button-hover: #0059b3;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg-color);
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    transition: all .3s ease;
+}
+
+.converter {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgb(0 0 0 / 0.1);
+    align-self: flex-end;
+    transition: all 0.3s ease;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--text-color);
+    text-wrap: pretty;
+    font-weight: bold;
+    font-size: 26px;
+}
+
+label {
+    display: block;
+    margin: 15px 0 5px;
+    color: var(--text-color);
+}
+
+input,
+select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid var(--input-border);
+    margin-bottom: 15px;
+    font-size: 16px;
+    background: var(--input-bg);
+    color: var(--text-color);
+    transition: all .3s;
+}
