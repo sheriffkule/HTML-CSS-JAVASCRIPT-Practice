@@ -232,7 +232,139 @@ document.addEventListener('DOMContentLoaded', function () {
     const activeMood = document.querySelector('.mood-btn.active').dataset.mood;
     const activeTag = document.querySelector('.tag-option.active').dataset.tag;
     const isFavorite = favoriteBtn.querySelector('i').classList.contains('fas');
+
+    if (currentJournalId) {
+      // Update existing journal
+      const journalIndex = journals.findIndex((j) => j.id === currentJournalId);
+      if (journalIndex !== -1) {
+        journals[journalIndex] = {
+          ...journals[journalIndex],
+          title,
+          content,
+          date: dateStr,
+          time: timeStr,
+          mood: activeMood,
+          tag: activeTag,
+          favorite: isFavorite,
+          wordCount: content.split(/\s+/).filter((word) => word.length > 0).length,
+        };
+      }
+    } else {
+      // Create new journal
+      const newId = journals.length > 0 ? Math.max(...journals.map((j) => j.id)) + 1 : 1;
+      const newJournal = {
+        id: newId,
+        title,
+        content,
+        date: dateStr,
+        time: timeStr,
+        mood: activeMood,
+        tag: activeTag,
+        favorite: isFavorite,
+        wordCount: content.split(/\s+/).filter((word) => word.length > 0).length,
+      };
+
+      journals.unshift(newJournal);
+      currentJournalId = newId;
+    }
+
+    renderJournalList();
+    alert('Journal entry saved successfully!');
   }
 
+  // Delete journal entry
+  function deleteJournal() {
+    if (!currentJournalId) return;
+
+    if (confirm('Are you sure you want to delete this journal entry?')) {
+      journals = journals.filter((j) => j.id !== currentJournalId);
+      currentJournalId = null;
+      showEmptyState();
+      renderJournalList();
+    }
+  }
+
+  // Toggle favorite status
+  function toggleFavorite() {
+    const favoriteIcon = favoriteBtn.querySelector('i');
+    if (favoriteIcon.classList.contains('far')) {
+      favoriteIcon.classList.remove('far');
+      favoriteIcon.classList.add('fas');
+    } else {
+      favoriteIcon.classList.add('far');
+      favoriteIcon.classList.remove('fas');
+    }
+  }
+
+  // Update word count
+  function updateWordCount() {
+    const text = journalContent.value;
+    const words = text.split(/\s+/).filter((word) => word.length > 0);
+    wordCount.textContent = `${words.length} words`;
+  }
+
+  // Filter journals based on search and filter criteria
+  function filterJournals() {
+    const searchTerm = searchBox.value.toLowerCase();
+    const activeFilter = document.querySelector('.filter-btn.active').textContent;
+
+    // In a real app, this would filter the journals array
+    // For this demo, we'll just re-render the list
+    renderJournalList();
+  }
+
+  // Show the editor view
+  function showEditor() {
+    emptyState.style.display = 'none';
+    journalEditor.style.display = 'block';
+    statsView.style.display = 'none';
+    currentView = 'editor';
+  }
+
+  // Show the empty state
+  function showEmptyState() {
+    emptyState.style.display = 'flex';
+    journalEditor.style.display = 'none';
+    statsView.style.display = 'none';
+    currentView = 'empty';
+  }
+
+  // Show the stats view
+  function showStats() {
+    emptyState.style.display = 'none';
+    journalEditor.style.display = 'none';
+    statsView.style.display = 'block';
+    currentView = 'stats';
+
+    // Update stats
+    document.getElementById('totalEntries').textContent = journals.length;
+    document.getElementById('thisMonth').textContent = Math.floor(journals.length / 2);
+    document.getElementById('streak').textContent = Math.floor(Math.random() * 10) + 1;
+  }
+
+  // Show the journal view (from stats)
+  function showJournal() {
+    if (currentJournalId) {
+      showEditor();
+    } else {
+      showEmptyState();
+    }
+  }
+
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.dateTime = currentYear.toString();
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
+  
   init();
 });

@@ -395,6 +395,27 @@ header {
     color: var(--gray);
 }
 
+footer {
+    text-align: center;
+    margin-block-start: 30px;
+    background-color: var(--light);
+    border-radius: 6px;
+    padding-block: 6px;
+    color: var(--dark);
+    font-size: 14px;
+
+    span {
+        color: var(--danger);
+        font-size: 18px;
+    }
+    abbr {
+        text-underline-offset: 2px;
+        letter-spacing: 0.5px;
+        cursor: default;
+        color: var(--primary);
+    }
+}
+
 @media screen and (max-width: 900px) {
     .app-container {
         grid-template-columns: 1fr;
