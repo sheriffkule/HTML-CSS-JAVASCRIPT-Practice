@@ -30,6 +30,7 @@ body {
     border-radius: 12px;
     box-shadow: 0 8px 20px rgb(0 0 0 / 0.1);
     align-self: flex-end;
+    margin-top: 10px;
     transition: all 0.3s ease;
 }
 
@@ -58,5 +59,83 @@ select {
     font-size: 16px;
     background: var(--input-bg);
     color: var(--text-color);
+    outline: none;
     transition: all .3s;
+}
+
+select:focus {
+    background: var(--button-hover);
+    color: white;
+}
+
+option {
+    background: var(--button-bg);
+    color: white;
+}
+
+input::placeholder {
+    transition: 0.3s;
+}
+
+input:is(:focus, :focus-within)::placeholder {
+    transform: translateX(110%);
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background: var(--button-bg);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 18px;
+    transition: 0.2s;
+
+    &:hover {
+        background-color: var(--button-hover);
+        box-shadow: 0 4px 8px rgb(from var(--button-hover) r g b / 0.3);
+        transform: translateY(-3px) scale(1.02);
+    }
+    &:active {
+        transform: translateY(-1px) scale(1);
+    }
+}
+
+.result {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-top: 12px;
+    word-break: break-all;
+    transition: all .2s;
+}
+
+.theme-switcher {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.theme-switcher select {
+    width: fit-content;
+}
+
+footer {
+    text-align: center;
+    align-self: flex-end;
+    margin-bottom: 10px;
+    font-size: 14px;
+
+    span {
+        color: red;
+        font-size: 16px;
+    }
+    abbr {
+        cursor: default;
+        letter-spacing: 0.5px;
+        text-underline-offset: 2px;
+        color: var(--button-hover);
+    }
 }
