@@ -101,3 +101,18 @@ header {
     position: relative;
     overflow: hidden;
 }
+
+.text-display {
+    font-size: 4rem;
+    font-weight: bold;
+    text-align: center;
+    transition: all 0.3s ease;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
