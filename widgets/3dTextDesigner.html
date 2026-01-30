@@ -73,9 +73,82 @@
                 <option value="900">900</option>
               </select>
             </div>
+
+            <div class="input-group">
+              <label for="letter-spacing">Letter Spacing: <span id="letter-spacing-value">0</span>px</label>
+              <input type="range" id="letter-spacing" min="-5" max="20" value="0" />
+            </div>
+
+            <div class="input-group">
+              <label for="text-color">Text Color</label>
+              <input type="color" id="text-color" value="#ffffff" />
+            </div>
+          </div>
+
+          <div class="control-group">
+            <h2>3D Settings</h2>
+            <div class="input-group">
+              <label for="depth-slider">3D Depth: <span id="depth-value">5</span>px</label>
+              <input type="range" id="depth-slider" min="0" max="45" value="5" />
+            </div>
+          </div>
+
+          <div class="control-group">
+            <h2>Shadow Settings</h2>
+            <div class="shadow-controls">
+              <div class="input-group">
+                <label for="shadow-x">X Offset: <span id="shadow-x-value">5</span>px</label>
+                <input type="range" id="shadow-x" min="-20" max="20" value="5" />
+              </div>
+              <div class="input-group">
+                <label for="shadow-y">Y Offset: <span id="shadow-y-value">5</span>px</label>
+                <input type="range" id="shadow-y" min="-20" max="20" value="5" />
+              </div>
+              <div class="input-group">
+                <label for="shadow-blur">Blur: <span id="shadow-blur-value">10</span>px</label>
+                <input type="range" id="shadow-blur" min="0" max="50" value="10" />
+              </div>
+              <div class="input-group shadow-color">
+                <label for="shadow-color">Shadow Color</label>
+                <input type="color" id="shadow-color" value="#000000" />
+              </div>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <h2>Outline Settings</h2>
+            <div class="outline-controls">
+              <div class="input-group">
+                <label for="outline-width">Width: <span id="outline-width-value">0</span>px</label>
+                <input type="range" id="outline-width" min="0" max="10" value="0" />
+              </div>
+
+              <div class="input-group outline-color">
+                <label for="outline-color">Outline Color</label>
+                <input type="color" id="outline-color" value="#ffffff" />
+              </div>
+            </div>
+          </div>
+
+          <div class="action-buttons">
+            <button class="btn-primary" id="download-btn">&DownArrow;</button>
+            <button class="btn-secondary" id="reset-btn">&circlearrowleft;</button>
           </div>
         </div>
+
+        <div class="preview">
+          <div class="text-display" id="text-preview">3D TEXT</div>
+        </div>
       </div>
+    </div>
+
+    <footer class="footer__copy">
+      © <time datetime="2026" id="year">2026</time> Made width <span>♥</span> by
+      <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+    </footer>
+
+    <div class="canvas-container">
+      <canvas id="text-canvas" width="1200" height="600"></canvas>
     </div>
 
     <script src="/widgets_script/3dTextDesigner.js"></script>
