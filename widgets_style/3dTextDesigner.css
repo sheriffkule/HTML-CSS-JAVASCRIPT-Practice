@@ -190,3 +190,126 @@ input[type="range"]::-webkit-slider-thumb:hover {
     background: var(--secondary);
     transform: scale(1.2);
 }
+
+.color-picker {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.color-option {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all .3s ease;
+    border: 2px solid transparent;
+
+    &:hover {
+        transform: scale(1.2);
+    }
+    &.active {
+        border: 2px solid white;
+        transform: scale(1.2);
+    }
+}
+
+.effects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.effect-option {
+    padding: 15px 10px;
+    text-align: center;
+    border-radius: 10px;
+    background: rgb(255 255 255 / 0.08);
+    cursor: pointer;
+    transition: all .25s ease;
+    font-weight: 500;
+
+    &:hover {
+        background: rgb(255 255 255 / 0.2);
+        transform: translateY(-4px);
+        letter-spacing: 1px;
+        font-weight: 600;
+    }
+    &.active {
+        background: var(--primary);
+        transform: translateY(-4px);
+        box-shadow: 0 5px 15px rgb(67 97 238 / 0.4);
+    }
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+button {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all .25s ease;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+
+    &:hover {
+        background: var(--secondary);
+        transform: scale(1.03) translateY(-3px);
+        box-shadow: 0 5px 15px rgb(67 97 238 / 0.4);
+    }
+}
+
+.btn-secondary {
+    background: rgb(255 255 255 / 0.1);
+    color: white;
+
+    &:hover {
+        background: rgb(255 255 255 / 0.2);
+        transform: translateY(-3px);
+    }
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    opacity: 0.7;
+    font-size: 0.9rem;
+
+    span {
+        color: var(--danger);
+        font-size: 1.25rem;
+    }
+    abbr {
+        text-underline-offset: 2px;
+        cursor: default;
+        letter-spacing: 0.5px;
+    }
+}
+
+.canvas-container {
+    display: none;
+}
+
+.shadow-controls,
+.outline-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
