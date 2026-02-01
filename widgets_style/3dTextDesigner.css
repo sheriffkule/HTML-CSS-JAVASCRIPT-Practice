@@ -344,3 +344,43 @@ footer {
     background-clip: text;
     color: transparent;
 }
+
+.metal-effect {
+    background: linear-gradient(135deg, #757575, #9e9e9e, #e0e0e0, #616161);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.graffiti-effect {
+    color: #fff;
+}
+
+.glitter-effect {
+    background: linear-gradient(135deg, #ff0000, #ff9900, #ffff00, #00ff00, #00ffff, #0000ff, #9900ff, #ff00ff);
+    background-size: 800%, 800%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: glitter 3s ease infinite;
+}
+
+@keyframes identifier {
+    from {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    to {background-position: 0% 50%;}
+}
+
+.rainbow-effect {
+    background: linear-gradient(135deg, #ff0000, #ff9900, #ffff00, #00ff00, #00ffff, #0000ff, #9900ff, #ff00ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.chrome-effect {
+    background: linear-gradient(135deg, #8e9eab, #eef2f3, #8e9eab);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
