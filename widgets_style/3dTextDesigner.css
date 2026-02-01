@@ -313,3 +313,34 @@ footer {
     grid-template-columns: 1fr 1fr;
     gap: 10px;
 }
+
+@media screen and (max-width: 768px) {
+    .app-container {
+        flex-direction: column;
+    }
+    .preview,
+    .controls {
+        min-width: 100%;
+    }
+    .text-display {
+        font-size: 2.5rem;
+    }
+}
+
+.gold-style {
+    background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.neon-effect {
+    color: #0ff;
+}
+
+.fire-effect {
+    background: linear-gradient(135deg, #ff8a00, #ff2070, #ff00cc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}

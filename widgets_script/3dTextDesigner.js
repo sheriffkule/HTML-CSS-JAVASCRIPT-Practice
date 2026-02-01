@@ -158,3 +158,102 @@ function updateTextEffect() {
     textPreview.style.color = textColorPicker.value;
   }
 }
+
+// Render text to canvas for download
+function renderTextToCanvas() {
+  // Clear canvas
+  canvasCtx.clearRect(0, 0, textCanvas.width, textCanvas.height);
+
+  // Set canvas background
+  canvasCtx.fillStyle = '#1a1a2e';
+  canvasCtx.fillRect(0, 0, textCanvas.width, textCanvas.height);
+
+  // Get text properties
+  const text = textInput.value || '3D TEXT';
+  const fontSize = parseFloat(fontSizeSlider.value) * 20; // Convert rem to px
+  const fontFamily = fontFamilySelect.value;
+  const fontWeight = parseInt(letterSpacingSlider.value);
+  const letterSpacing = parseInt(letterSpacingSlider.value);
+  const depth = parseInt(depthSlider.value);
+  const rotation = parseInt(rotationSlider.value);
+  const shadowX = parseInt(shadowXSlider.value);
+  const shadowY = parseInt(shadowYSlider.value);
+  const shadowBlur = parseInt(shadowBlurSlider.value);
+  const shadowColor = shadowColorPicker.value;
+  const outlineWidth = parseInt(outlineWidthSlider.value);
+  const outlineColor = outlineColorPicker.value;
+
+  // Set font
+  canvasCtx = `${fontWeight} ${fontSize} ${fontFamily}`;
+  canvasCtx.textAlign = 'center';
+  canvasCtx.textBaseline = 'middle';
+
+  // Calculate text position
+  const x = textCanvas / 2;
+  const y = textCanvas / 2;
+
+  // Apply 3D effect (shadow for depth)
+  if (depth > 0) {
+    canvasCtx.save();
+    canvasCtx.translate(x, y);
+    canvasCtx.rotate((rotation * Math.PI) / 180);
+
+    // Draw shadow layers for 3D effect
+    for (let i = depth; i > 0; i--) {
+      canvasCtx.save();
+      canvasCtx.translate(i, i);
+      canvasCtx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+      canvasCtx.fillText(text, 0, 0);
+      canvasCtx.restore();
+    }
+
+    canvasCtx.restore();
+  }
+
+  // Draw main text with effect
+  canvasCtx.save();
+  canvasCtx.translate(x, y);
+  canvasCtx.rotate((rotation * Math.PI) / 180);
+
+  // Apply shadow
+  canvasCtx.shadowOffsetX = shadowX;
+  canvasCtx.shadowOffsetY = shadowY;
+  canvasCtx.shadowBlur = shadowBlur;
+  canvasCtx.shadowColor = shadowColor;
+
+  // Apply outline if needed
+  if (outlineWidth > 0) {
+    canvasCtx.strokeStyle = outlineColor;
+    canvasCtx.lineWidth = outlineColor;
+    canvasCtx.strokeStyle(text, 0, 0);
+  }
+
+  // Apply selected effect
+  switch (currentEffect) {
+    case 'gold':
+      const goldGradient = canvasCtx.createLinearGradient(-200, -50, 200, 50);
+      goldGradient.addColorStop(0, '#bf953f');
+      goldGradient.addColorStop(0.3, '#fcf6ba');
+      goldGradient.addColorStop(0.5, '#b38728');
+      goldGradient.addColorStop(0.7, '#fbf5b7');
+      goldGradient.addColorStop(1, '#aa771c');
+      canvasCtx.fillStyle = goldGradient;
+      break;
+
+    case 'neon':
+      canvasCtx.fillStyle = textColorPicker.value;
+      canvasCtx.shadowColor = textColorPicker.value;
+      canvasCtx.shadowBlur = 20;
+      break;
+
+    case 'fire':
+      const fireGradient = canvasCtx.createLinearGradient(-200, -50, 200, 50);
+      fireGradient.addColorStop(0, '#ff8a00');
+      fireGradient.addColorStop(0.5, '#ff2070');
+      fireGradient.addColorStop(1, '#ff00cc');
+      canvasCtx.fillStyle = fireGradient;
+      canvasCtx.shadowColor = '#ff3333';
+      canvasCtx.shadowBlur = 15;
+      break;
+  }
+}
