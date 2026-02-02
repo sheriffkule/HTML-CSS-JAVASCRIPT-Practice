@@ -1,0 +1,217 @@
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+  --header-height: 3.5rem;
+
+  --first-color: hsl(358, 54%, 48%);
+  --first-color-alt: hsl(358, 54%, 46%);
+  --first-color-light: hsl(358, 50%, 58%);
+  --title-color: hsl(34, 8%, 16%);
+  --text-color: hsl(34, 8%, 40%);
+  --white-color: hsl(34, 64%, 98%);
+  --gray-color: hsl(34, 8%, 85%);
+  --body-color: hsl(34, 100%, 94%);
+  --body-color-alt: hsl(34, 70%, 88%);
+  --container-color: hsl(34, 32%, 98%);
+
+  --body-font: "Montserrat", sans-serif;
+  --second-font: "Lora", serif;
+  --biggest-font-size: 2rem;
+  --bigger-font-size: 1.5rem;
+  --h1-font-size: 1.5rem;
+  --h2-font-size: 1.25rem;
+  --h3-font-size: 1rem;
+  --normal-font-size: .938rem;
+  --small-font-size: .813rem;
+
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semi-bold: 600;
+
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+
+@media screen and (width >= 1150px) {
+  :root {
+    --biggest-font-size: 3.5rem;
+    --bigger-font-size: 3rem;
+    --h1-font-size: 2.25rem;
+    --h2-font-size: 1.5rem;
+    --h3-font-size: 1.25rem;
+    --normal-font-size: 1rem;
+    --small-font-size: .875rem;
+  }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body,
+input,
+button {
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+}
+
+body {
+    background-color: var(--body-color);
+    color: var(--text-color);
+}
+
+input,
+button {
+    border: none;
+    outline: none;
+}
+
+h1, h2, h3, h4 {
+    color: var(--title-color);
+    font-weight: var(--font-semi-bold);
+    font-family: var(--second-font);
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.container {
+    max-width: 1120px;
+    margin-inline: 1rem;
+}
+
+.grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.section {
+    padding-block: 5rem 1rem;
+}
+
+.section__title {
+    text-align: center;
+    font-size: var(--bigger-font-size);
+    margin-bottom: 1rem;
+
+    span {
+        color: var(--first-color);
+    }
+}
+
+.section__subtitle {
+    display: block;
+    text-align: center;
+    font: var(--font-semi-bold) var(--small-font-size) var(--second-font);
+    color: var(--first-color);
+    margin-bottom: 0.5rem;
+}
+
+.main {
+    overflow: hidden;
+}
+
+.header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: var(--body-color);
+    z-index: var(--z-fixed);
+    transition: box-shadow .4s;
+}
+
+.nav {
+    position: relative;
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav__logo {
+    color: var(--first-color);
+    font-weight: var(--font-semi-bold);
+    font-family: var(--second-font);
+}
+
+.nav__toggle {
+    width: 32px;
+    height: 32px;
+    background-color: var(--first-color);
+    color: var(--white-color);
+    border-radius: .5rem;
+    display: grid;
+    place-items: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+@media screen and (width <= 1150px) {
+    .nav__menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: var(--body-color);
+        box-shadow: 0 8px 16px hsl(0 0% 0% / .15);
+        padding-block: 4rem;
+        border-radius: 0 0 1rem 1rem;
+        transition: top .4s;
+    }
+}
+
+.nav__list {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.5rem;
+}
+
+.nav__link {
+    color: var(--title-color);
+    font-weight: var(--font-semi-bold);
+    font-size: var(--h3-font-size);
+    transition: color .4s;
+    position: relative;
+
+    &:hover {
+        color: var(--first-color);
+    }
+}
+
+.nav__link::before {
+    position: absolute;
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: transparent;
+    top: 50%;
+    left: -40%;
+    transform: translateY(-50%);
+    user-select: none;
+    transition: .3s;
+}
+
+.nav__link:hover::before {
+    left: -18%;
+    background-color: var(--first-color);
+}
