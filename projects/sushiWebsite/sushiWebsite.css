@@ -238,6 +238,10 @@ img {
     top: 0;
 }
 
+.scroll-header {
+    box-shadow: 0 2px 16px hsl(0 0% 0% / .15);
+}
+
 .home__container {
     padding-top: 1.5rem;
     row-gap: 3rem;
@@ -390,6 +394,79 @@ img {
     }
 }
 
+.about__container {
+    row-gap: 3rem;
+    padding-bottom: 3rem;
+}
+
+.about__data {
+    position: relative;
+    text-align: center;
+}
+
+.about__description {
+    margin-bottom: 2rem;
+    text-wrap: pretty;
+}
+
+.about__data img,
+.about__text {
+    position: absolute;
+}
+
+.about__flower-1 {
+    width: 20px;
+    top: .5rem;
+    right: 2rem;
+}
+
+.about__flower-2 {
+    width: 20px;
+    left: 2rem;
+    bottom: 2rem;
+}
+
+.about__leaf {
+    width: 30px;
+    right: 2rem;
+    bottom: 4rem;
+}
+
+.about__text {
+    bottom: -4rem;
+    left: 0;
+    right: 0;
+    font-size: 10rem;
+    font-weight: var(--font-medium);
+    color: var(--body-color-alt);
+    z-index: -1;
+}
+
+.about__images {
+    position: relative;
+    justify-self: center;
+}
+
+.about__blob {
+    width: 200px;
+    height: 320px;
+    background-color: var(--first-color);
+    border-radius: 1rem;
+    margin-left: 4rem;
+}
+
+.about__img {
+    position: absolute;
+    max-width: initial;
+    width: 230px;
+    top: 0;
+    bottom: 0;
+    margin-block: auto;
+    right: 2rem;
+}
+
+
+
 
 
 
@@ -399,10 +476,14 @@ img {
         width: 280px;
         height: 280px;
     }
+    .about__text {
+        font-size: 8rem;
+    }
 }
 
 @media screen and (width >= 540px) {
-    .home__container {
+    .home__container,
+    .about__container {
         grid-template-columns: 400px;
         justify-content: center;
     }
@@ -437,5 +518,130 @@ img {
         align-items: center;
         column-gap: 1rem;
         padding-top: 4rem;
+    }
+    .home__data {
+        text-align: initial;
+        margin-bottom: 4rem;
+    }
+    .home__description {
+        margin: 1rem 3.5rem 3.5rem 0;
+    }
+    .home__flower-1 {
+        width: 30px;
+        top: -2.5rem;
+        left: 1.5rem;
+    }
+    .home__flower-2 {
+        width: 30px;
+        left: 17rem;
+        bottom: -3rem;
+    }
+    .home__leaf-1 {
+        width: 40px;
+        top: .5rem;
+        right: 2.5rem;
+    }
+    .home__leaf-2 {
+        width: 40px;
+        top: initial;
+        left: 2.5rem;
+        bottom: -6rem;
+    }
+    .home__text {
+        font-size: 17rem;
+        top: -8rem;
+    }
+    .home__blob {
+        width: 580px;
+        height: 580px;
+    }
+    .home__img-1 {
+        width: 460px;
+        left: -5rem;
+        bottom: 5rem;
+    }
+    .home__img-2 {
+        width: 240px;
+        top: 1rem;
+        left: 4rem;
+    }
+    .home__img-3 {
+        width: 180px;
+        top: 10.5rem;
+        right: 5.5rem;
+    }
+    .home__img-4 {
+        width: 120px;
+        top: 3rem;
+        right: 8rem;
+    }
+    .home__img-5 {
+        width: 100px;
+        right: 2rem;
+        bottom: 11rem;
+    }
+    .home__img-6 {
+        width: 300px;
+        right: 8rem;
+        bottom: -4rem;
+    }
+    .home__flower-3 {
+        width: 30px;
+        right: 6.5rem;
+    }
+    .home__flower-4 {
+        width: 30px;
+        left: 1rem;
+        bottom: 1.5rem;
+    }
+    .home__leaf-3 {
+        width: 35px;
+        bottom: 2.5rem;
+    }
+    .about__container {
+        grid-template-columns: 350px 530px;
+        column-gap: 13rem;
+        align-items: center;
+        padding-block: 2rem 5rem;
+    }
+    .about__data {
+        order: 1;
+        text-align: initial;
+    }
+    .about__data :is(.section__title, .section__subtitle) {
+        text-align: initial;
+    }
+    .about__description {
+        margin-bottom: 3.5rem;
+    }
+    .about__flower-1 {
+        width: 30px;
+        right: 9rem;
+    }
+    .about__flower-2 {
+        width: 30px;
+        bottom: -5rem;
+        left: 0;
+    }
+    .about__leaf {
+        width: 40px;
+        top: 0;
+        bottom: 0;
+        margin-block: auto;
+    }
+    .about__text {
+        font-size: 17rem;
+        white-space: nowrap;
+        bottom: -9rem;
+        left: -1.5rem;
+    }
+    .about__blob {
+        width: 350px;
+        height: 560px;
+        margin-left: 0;
+    }
+    .about__img {
+        width: 420px;
+        right: -6rem;
     }
 }
