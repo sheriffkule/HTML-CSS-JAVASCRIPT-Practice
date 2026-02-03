@@ -31,3 +31,15 @@ const scrollHeader = () => {
   this.scrollY >= 50 ? header.classList.add('scroll-header') : header.classList.remove('scroll-header');
 };
 window.addEventListener('scroll', scrollHeader);
+
+// Swiper slider
+const swiperTabs = new Swiper('.menu__tabs', {
+  slidesPerView: 'auto'
+})
+
+const swiperMenu = new Swiper('.menu__content', {
+  loop: true,
+  thumbs: {
+    swiper: swiperTabs,
+  }
+})
