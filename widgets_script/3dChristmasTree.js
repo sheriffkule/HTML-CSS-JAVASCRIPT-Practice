@@ -123,6 +123,130 @@ const ColorUtils = {
 function hideLoading() {
   document.getElementById('loading').classList.add('hidden');
   setTimeout(() => {
-    document.getElementById('loading').classList.remove('hiden');
+    document.getElementById('loading').classList.remove('hidden');
   }, 1000);
+}
+
+// Customization via dat.GUI
+function getRandomChain() {
+  const colorPairs = [
+    { start: '#ff6b6b', end: '#4ecdc4' },
+    { start: '#45b7d1', end: '#96c93d' },
+    { start: '#ff9a9a', end: '#fad0c4' },
+    { start: '#a1c4fd', end: '#c2e9fb' },
+    { start: '#ffd89b', end: '#19547b' },
+  ];
+
+  const colors = colorPairs[Math.floor(Math.random() * colorPairs.length)];
+
+  return {
+    bulbCount: Math.round(Math.random() * (100 - 20) + 20),
+    bulbRadius: Math.round(Math.random() * (15 - 2) + 2),
+    glowOffset: Math.random() < 0.5 ? 0 : Math.round(Math.random() * (30 - 5) + 5),
+    turnsCount: Math.round(Math.random() * (10 - 3) + 3) + (Math.random() < 0.5 ? -1 : 1),
+    startAngle: Math.round(Math.random() * 360),
+    startColor: colors.start,
+    endColor: colors.end,
+    opacity: Math.round(Math.random() * (100 - 60) + 60) / 100,
+    name: `Chain ${chains.length + 1}`,
+  };
+}
+
+const guiMethods = {
+  'ADD CHAIN': () => {
+    chains.push(getRandomChain());
+    updateDatGui();
+  },
+  'Save as image': () => {
+    try {
+      const link = document.createElement('a');
+      link.download = 'christmas-tree-' + new Date().getTime() + '.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    } catch (error) {
+      console.error('Error saving image: ', error);
+      alert('Error saving image! Please try again.');
+    }
+  },
+  'Reset to Default': () => {
+    chains = [
+      {
+        bulbRadius: 2,
+        bulbCount: 100,
+        endColor: '#ffcc00',
+        glowOffset: 10,
+        opacity: 1,
+        startAngle: 0,
+        startColor: '#ffcc00',
+        turnsCount: 14,
+        name: 'Gold Chain',
+      },
+      {
+        bulbRadius: 8,
+        bulbCount: 40,
+        endColor: '#00ffff',
+        glowOffset: 15,
+        opacity: 0.8,
+        startAngle: 120,
+        startColor: '#ffff00',
+        turnsCount: 3,
+        name: 'Cyan Ribbon',
+      },
+      {
+        bulbRadius: 5,
+        bulbCount: 60,
+        endColor: '#ffff00',
+        glowOffset: 8,
+        opacity: 0.9,
+        startAngle: 240,
+        startColor: '#00ffff',
+        turnsCount: -5,
+        name: 'Spiral Ribbon',
+      },
+    ];
+
+    // Reset star to default
+    starSettings.color = '#ffd700';
+    starSettings.glowColor = '#ffff00';
+    starSettings.size = 35;
+    starSettings.glowSize = 12;
+    starSettings.opacity = 1;
+    starSettings.rotationSpeed = 0.2;
+    starSettings.pulseSpeed = 1.5;
+    starSettings.pulseAmount = 0.15;
+    starSettings.showStar = true;
+    starSettings.showGlow = true;
+
+    // Reset tree scale
+    settings.treeScale = 0.7;
+
+    updateDatGui();
+    render();
+  },
+  'Pause/Resume': () => {
+    isPaused = !isPaused;
+    if (!isPaused) animate();
+  },
+};
+
+function updateDatGui() {
+  if (gui) gui.destroy();
+
+  gui = new dat.GUI({ autoPlace: false });
+  gui.domElement.classList.add('main');
+  document.body.appendChild(gui.domElement);
+
+  // Create chain folders
+  chains.forEach((chain, i) => {
+    const guiChain = gui.addFolder(chain.name || `Chain ${i + 1}`);
+    guiChain.add(chain, 'bulbsCount', 10, 500, 1).onChange(render);
+    guiChain.add(chain, 'bulbRadius', 1, 50, 1).onChange(render);
+    guiChain.add(chain, 'glowOffset', 0, 50, 1).onChange(render);
+    guiChain.add(chain, 'turnsCount', -20, 20, 1).onChange(render);
+    guiChain.add(chain, 'startAngle', 0, 360, 1).onChange(render);
+    guiChain.addColor(chain, 'startColor').onChange(render);
+    guiChain.addColor(chain, 'endColor').onChange(render);
+    guiChain.add(chain, 'opacity', 0, 1, 0.01).onChange(render);
+    guiChain.open();
+  });
 }
