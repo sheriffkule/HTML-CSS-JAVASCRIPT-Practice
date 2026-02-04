@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    interpolate-size: allow-keywords;
 }
 
 body {
@@ -14,6 +15,33 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+body.recording {
+    pointer-events: none;
+}
+
+body.recording {
+    content: 'recording...';
+    position: fixed;
+    z-index: 999;
+    inset: 0;
+    margin: auto;
+    display: inline-block;
+    width: 15ch;
+    height: 2em;
+    line-height: 2em;
+    text-align: center;
+    white-space: nowrap;
+    color: white;
+    background: rgb(0 0 0 / 0.5);
+    padding: 1em;
+    border-radius: 50vh;
+    font-size: 2vw;
+}
+
+body.recording canvas {
+    opacity: 0.7;
 }
 
 .canvas-container {
@@ -30,15 +58,39 @@ canvas {
     height: 100%;
     display: block;
     cursor: grab;
-    color: #999;
-    border: 1px solid white;
+
+    &:active {
+        cursor: grab;
+    }
 }
 
-.overlay {
+.open-overlay {
     position: absolute;
     top: 20px;
     left: 20px;
-    /* z-index: 10; */
+    color: #ccc;
+    font-size: 28px;
+    font-weight: bold;
+    border: 2px solid #ccc;
+    z-index: 10;
+    border-radius: 20px;
+    padding: 0 8px;
+    cursor: pointer;
+    transition: .2s;
+
+    &:hover {
+        font-size: 30px;
+        color: white;
+    }
+}
+
+.overlay {
+    height: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
     background: rgb(0 0 0 / 0.7);
     padding: 15px 20px;
     border-radius: 10px;
@@ -46,6 +98,16 @@ canvas {
     backdrop-filter: blur(10px);
     border: 1px solid rgb(255 255 255 / 0.2);
     box-shadow: 4px 4px 12px rgb(255 255 255 / 0.1);
+    transition: height .4s, visibility .4s;
+}
+
+.close-overlay {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: #bbb;
+    font-size: 24px;
+    cursor: pointer;
 }
 
 .overlay h1 {
@@ -75,7 +137,38 @@ canvas {
     font-size: 0.85rem;
     text-wrap: pretty;
     list-style-type: disclosure-closed !important;
-    /* list-style-image: linear-gradient(90deg, lightgreen, green); */
+}
+
+.dg.ac {
+    z-index: 100 !important;
+}
+
+.dg.main {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    border-radius: 8px;
+    overflow-y: auto;
+    box-shadow: 0 10px 30px rgb(0 0 0 / 0.3);
+    max-height: 80vh;
+    width: 260px !important;
+}
+
+.dg li {
+    margin-block: 2px;
+}
+
+.dg li.title {
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 30px;
+    height: 30px;
+    padding-left: 16px;
+    background: linear-gradient(90deg, #2c3e50, #3498db);
+}
+
+.dg li .property-name {
+    font-size: 14px;
 }
 
 .loading {
@@ -89,7 +182,7 @@ canvas {
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.2s ease;
 }
 
 .loading.hidden {
@@ -140,6 +233,24 @@ canvas {
 
 @keyframes pulse {
     50% {opacity: 0.5}
+}
+
+footer {
+    color: #ccc;
+    position: absolute;
+    bottom: 10px;
+    text-align: center;
+    font-size: 13px;
+
+    span {
+        color: red;
+    }
+    abbr {
+        color: lightblue;
+        letter-spacing: .5px;
+        text-underline-offset: 2px;
+        cursor: default;
+    }
 }
 
 @media screen and (max-width: 768px) {

@@ -123,9 +123,24 @@ const ColorUtils = {
 function hideLoading() {
   document.getElementById('loading').classList.add('hidden');
   setTimeout(() => {
-    document.getElementById('loading').classList.remove('hidden');
-  }, 1000);
+    document.getElementById('loading').style.display = 'none';
+  }, 2000);
 }
+
+// Toggle info
+const openOverlay = document.querySelector('.open-overlay');
+const overlay = document.querySelector('.overlay');
+const closeOverlay = document.querySelector('.close-overlay');
+
+openOverlay.addEventListener('click', () => {
+  overlay.style.visibility = 'visible';
+  overlay.style.height = 'auto';
+});
+
+closeOverlay.addEventListener('click', () => {
+  overlay.style.visibility = 'hidden';
+  overlay.style.height = '0';
+});
 
 // Customization via dat.GUI
 function getRandomChain() {
@@ -239,7 +254,7 @@ function updateDatGui() {
   // Create chain folders
   chains.forEach((chain, i) => {
     const guiChain = gui.addFolder(chain.name || `Chain ${i + 1}`);
-    guiChain.add(chain, 'bulbsCount', 10, 500, 1).onChange(render);
+    guiChain.add(chain, 'bulbCount', 10, 500, 1).onChange(render);
     guiChain.add(chain, 'bulbRadius', 1, 50, 1).onChange(render);
     guiChain.add(chain, 'glowOffset', 0, 50, 1).onChange(render);
     guiChain.add(chain, 'turnsCount', -20, 20, 1).onChange(render);
@@ -330,7 +345,6 @@ function updateScene() {
 }
 
 // Draw a beautiful star
-/** @type {HTMLCanvasElement} */
 function drawStar(x, y, radius, points, rotation) {
   const outerRadius = radius;
   const innerRadius = radius * 0.5;
@@ -371,7 +385,7 @@ function drawStar(x, y, radius, points, rotation) {
 }
 
 // Draw star on top of the tree
-function drawStartOnTree() {
+function drawStarOnTree() {
   if (!starSettings.showStar) return;
 
   ctx.save();
@@ -387,7 +401,20 @@ function drawStartOnTree() {
   // Draw glow/halo if enabled
   if (starSettings.showGlow) {
     ctx.globalAlpha = starSettings.opacity * 0.7;
-    drawStarGlow(starX, starY, currentSize + starSettings.glowSize);
+    const glowGradient = ctx.createRadialGradient(
+      starX,
+      starY,
+      0,
+      starX,
+      starY,
+      currentSize + starSettings.glowSize,
+    );
+    glowGradient.addColorStop(0, ColorUtils.withOpacity(starSettings.glowColor, 0.6));
+    glowGradient.addColorStop(1, ColorUtils.withOpacity(starSettings.glowColor, 0));
+    ctx.fillStyle = glowGradient;
+    ctx.beginPath();
+    ctx.arc(starX, starY, currentSize + starSettings.glowSize, 0, Math.PI * 2);
+    ctx.fill();
   }
 
   // Draw the star
@@ -397,3 +424,188 @@ function drawStartOnTree() {
 
   ctx.restore();
 }
+
+function renderChain(props) {
+  if (!props.bulbCount || props.bulbCount <= 0) return;
+
+  const easing = eval(settings.treeShape);
+
+  for (let i = 0; i < props.bulbCount; i++) {
+    let progress = i / (props.bulbCount - 1);
+
+    // Adjust progress for better distribution
+    progress = Math.pow(progress, Math.sqrt(progress) + 0.5);
+
+    const turnProgress = (progress * props.turnsCount) % 1;
+    const sectionRadius = baseRadius * (1 - easing(progress));
+    const sectionAngle =
+      (((turnProgress * 360 + props.startAngle + rotationZ) / 180) * Math.PI) % (Math.PI * 2);
+
+    // Calculate bulb position
+    const X = baseCenter.x + Math.sin(sectionAngle) * sectionRadius;
+    const Y =
+      baseCenter.y -
+      progress * treeHeight * Math.sin(((90 - settings.rotationX) / 180) * Math.PI) +
+      sectionRadius * Math.sin(tiltAngle) * Math.cos(sectionAngle);
+
+    const bulbRadius = Math.max(1, (props.bulbRadius * treeHeight) / 1000);
+    const glowRadius = bulbRadius + (props.glowOffset * treeHeight) / 1000;
+
+    // Mix colors based on progress
+    const currentColor = ColorUtils.mixColors(props.startColor, props.endColor, progress);
+
+    // Set global alpha for this chain
+    ctx.globalAlpha = props.opacity;
+
+    // Draw glow effect
+    if (props.glowOffset > 0 && glowRadius > bulbRadius) {
+      const gradient = ctx.createRadialGradient(X, Y, bulbRadius, X, Y, glowRadius);
+
+      gradient.addColorStop(0, ColorUtils.withOpacity(currentColor, 0.8));
+      gradient.addColorStop(0.5, ColorUtils.withOpacity(currentColor, 0.4));
+      gradient.addColorStop(1, ColorUtils.withOpacity(currentColor, 0));
+
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(X, Y, glowRadius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Draw bulb
+    ctx.fillStyle = currentColor;
+    ctx.beginPath();
+    ctx.arc(X, Y, bulbRadius, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Add subtle highlight
+    if (bulbRadius > 3) {
+      ctx.fillStyle = 'rgba(255,255,255,0.3)';
+      ctx.beginPath();
+      ctx.arc(X - bulbRadius * 0.3, Y - bulbRadius * 0.3, bulbRadius * 0.4, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+}
+
+function render() {
+  if (!isInitialized) return;
+
+  updateScene();
+
+  // Clear canvas with background
+  ctx.fillStyle = settings.background;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Reset global alpha
+  ctx.globalAlpha = 1;
+
+  // Render all chains
+  chains.forEach((chain) => renderChain(chain));
+
+  // Draw the star on top
+  drawStarOnTree();
+
+  // Update FPS counter
+  frameCount++;
+  const now = performance.now();
+  if (now - lastTime >= 1000) {
+    fps = frameCount;
+    frameCount = 0;
+    lastTime = now;
+    document.getElementById('fpsCounter').textContent = `FPS: ${fps}`;
+  }
+}
+
+function animate(currentTime) {
+  if (!isPaused) {
+    rotationZ = (rotationZ - settings.rotationSpeed) % 360;
+    startRotation = (startRotation + starSettings.rotationSpeed * 0.05) % (Math.PI * 2);
+    starPulse = (starPulse + starSettings.pulseSpeed * 0.05) % (Math.PI * 2);
+    render();
+  }
+  animationId = requestAnimationFrame(animate);
+}
+
+// Initialize the application
+function init() {
+  // Check for required libraries
+  if (typeof dat === 'undefined') {
+    alert('Error: dat.GUI library failed to load! Please refresh the page.');
+    return;
+  }
+
+  updateDatGui();
+  updateScene();
+  render();
+
+  // Start animation
+  lastTime = performance.now();
+  animate();
+
+  isInitialized = true;
+  hideLoading();
+
+  // Handle window resize
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      updateScene();
+      render();
+    }, 100);
+  });
+
+  // Add keyboard shortcuts
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'r' || e.key === 'R') {
+      guiMethods['Reset to Default']();
+    } else if (e.key === 's' || e.key === 'S') {
+      if (e.ctrlKey || e.metaKey) {
+        e.preventDefault();
+        guiMethods['Save as image']();
+      }
+    } else if (e.key === ' ') {
+      e.preventDefault();
+      isPaused = !isPaused;
+      if (!isPaused) animate();
+    }
+  });
+
+  // Add canvas click to pause/resume animation
+  canvas.addEventListener('click', () => {
+    isPaused = !isPaused;
+    if (!isPaused) animate();
+  });
+
+  // Hide click hint after 5 seconds
+  setTimeout(() => {
+    const clickHint = document.getElementById('clickHint');
+    if (clickHint) {
+      clickHint.style.opacity = '0';
+      setTimeout(() => {
+        clickHint.style.display = 'none';
+      }, 500);
+    }
+  }, 5000);
+}
+
+// Start initialization
+setTimeout(() => {
+    init();
+}, 1800);
+
+// Update year in footer
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+
+  yearElement.setAttribute('datetime', currentYear.toString());
+  yearElement.dateTime = currentYear.toString();
+  yearElement.textContent = currentYear.toString();
+}
+updateYear();

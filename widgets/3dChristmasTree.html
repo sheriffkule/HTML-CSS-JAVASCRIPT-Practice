@@ -9,11 +9,13 @@
     <link rel="stylesheet" href="/widgets_style/3dChristmasTree.css" />
   </head>
   <body>
-    <div class="loading hidden" id="loading">
+    <div class="loading" id="loading">
       <div class="spinner"></div>
     </div>
 
+    <div class="open-overlay">?</div>
     <div class="overlay">
+      <span class="close-overlay">&boxtimes;</span>
       <h1>Animated 3D Christmas Tree</h1>
       <p>Interactive 3D Christmas tree with animated star on top!</p>
       <ul>
@@ -30,6 +32,11 @@
       <div class="fps-counter" id="fpsCounter">FPS: 60</div>
       <div class="click-hint" id="clickHint">Click to pause/resume</div>
     </div>
+
+    <footer class="footer__copy">
+      © <time datetime="" id="year"></time> Made width <span>♥</span> by
+      <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+    </footer>
 
     <script src="/widgets_script/3dChristmasTree.js"></script>
   </body>
