@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive 3D Christmas Tree</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js"></script>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudvlare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.css" /> -->
+    <link rel="stylesheet" href="/widgets_style/3dChristmasTree.css" />
+  </head>
+  <body>
+    <div class="loading hidden" id="loading">
+      <div class="spinner"></div>
+    </div>
+
+    <div class="overlay">
+      <h1>Animated 3D Christmas Tree</h1>
+      <p>Interactive 3D Christmas tree with animated star on top!</p>
+      <ul>
+        <li>Customize ribbon chains in the control panel.</li>
+        <li>Adjust star settings in the Star folder.</li>
+        <li>Click to pause/ resume animation.</li>
+        <li>Press Space to pause, R to reset.</li>
+        <li>Enjoy and have fun.</li>
+      </ul>
+    </div>
+
+    <div class="canvas-container">
+      <canvas id="canvas"></canvas>
+      <div class="fps-counter" id="fpsCounter">FPS: 60</div>
+      <div class="click-hint" id="clickHint">Click to pause/resume</div>
+    </div>
+
+    <script src="/widgets_script/3dChristmasTree.js"></script>
+  </body>
+</html>
