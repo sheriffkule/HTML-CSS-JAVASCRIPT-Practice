@@ -37,6 +37,7 @@ window.onload = function () {
     const totalWeeksElement = document.getElementById('total-weeks');
     const totalDaysElement = document.getElementById('total-days');
     const totalHoursElement = document.getElementById('total-hours');
+    const noveltyUnitsList = document.getElementById('novelty-units');
 
     if (!birthdateInput.value) {
       resultElement.innerText = 'Please enter a birthdate.';
@@ -72,7 +73,7 @@ window.onload = function () {
       const daysInPreviousMonth = getDaysInPreviousMonth(today);
       ageInDays = Math.max(ageInDays + daysInPreviousMonth, 0);
     }
-    
+
     function getDaysInPreviousMonth(date) {
       const previousMonth = new Date(date.getFullYear(), date.getMonth() - 1, 1);
       return new Date(previousMonth.getFullYear(), previousMonth.getMonth() + 1, 0).getDate();
@@ -124,6 +125,38 @@ window.onload = function () {
     }
 
     copyBtn.addEventListener('click', handleCopyAgeInfo);
+
+    const planetaryYears = {
+      Mercury: ageInYears / 0.2408467,
+      Venus: ageInYears / 0.61519726,
+      Mars: ageInYears / 1.8808158,
+      Jupiter: ageInYears / 11.862615,
+      Saturn: ageInYears / 29.447498,
+      Uranus: ageInYears / 84.016846,
+      Neptune: ageInYears / 164.79132,
+    };
+
+    const fruitYears = {
+      Apple: ageInYears / 80,
+      Banana: ageInYears / 25,
+      Carrot: ageInYears / 2,
+      Grape: ageInYears / 60,
+      Watermelon: ageInYears / 90,
+    };
+
+    noveltyUnitsList.innerHTML = '';
+
+    for (const planet in planetaryYears) {
+      const listItem = document.createElement('li');
+      listItem.textContent = `${planet}: ${planetaryYears[planet].toFixed(2)} years`;
+      noveltyUnitsList.appendChild(listItem);
+    }
+
+    for (const fruit in fruitYears) {
+      const listItem = document.createElement('li');
+      listItem.textContent = `${fruit}: ${fruitYears[fruit].toFixed(2)} years`;
+      noveltyUnitsList.appendChild(listItem);
+    }
   }
 };
 
@@ -200,9 +233,17 @@ const zodiacTitle = document.querySelector('.zodiac-title');
 const zodiacContainer = document.querySelector('.zodiac-container');
 
 zodiacTitle.addEventListener('click', () => {
-  zodiacTitle.classList.toggle('active')
+  zodiacTitle.classList.toggle('active');
   zodiacContainer.classList.toggle('shown');
-})
+});
+
+const noveltyTitle = document.querySelector('.novelty-title');
+const noveltyContainer = document.querySelector('.novelty-units');
+
+noveltyTitle.addEventListener('click', () => {
+  noveltyTitle.classList.toggle('active');
+  noveltyContainer.classList.toggle('shown');
+});
 
 function updateYear() {
   const currentYear = new Date().getFullYear();

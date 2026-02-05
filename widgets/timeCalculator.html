@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Time Calculator | Modern Time Tool</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/timeCalculator.css" />
+  </head>
+  <body>
+    <div class="dark-mode-toggle" id="darkModeToggle">
+      <i class="fas fa-moon"></i>
+    </div>
+
+    <main class="container">
+      <header>
+        <h1><i class="fas fa-clock"></i> Time Calculator</h1>
+        <p>
+          Calculate, add, subtract, multiply, and compare time values easily using a modern and intuitive
+          interface.
+        </p>
+      </header>
+
+      <section class="card">
+        <article class="card-title">
+          <i class="fas fa-calculator"></i>
+          <h2>Time Calculator | Modern Time Tool</h2>
+        </article>
+
+        <article class="input-group">
+          <label>First Time (Hours, Minutes, Seconds):</label>
+          <div class="time-inputs">
+            <div class="input-with-icon">
+              <input type="number" id="hours1" value="2" />
+              <i class="fas fa-hourglass-start"></i>
+            </div>
+            <div class="input-with-icon">
+              <input type="number" id="minutes1" value="30" />
+              <i class="fas fa-hourglass-half"></i>
+            </div>
+            <div class="input-with-icon">
+              <input type="number" id="seconds1" value="15" />
+              <i class="fas fa-hourglass-end"></i>
+            </div>
+          </div>
+        </article>
+
+        <article class="input-group">
+          <label>Second Time (Hours, Minutes, Seconds):</label>
+          <div class="time-inputs">
+            <div class="input-with-icon">
+              <input type="number" id="hours2" value="1" />
+              <i class="fas fa-hourglass-start"></i>
+            </div>
+            <div class="input-with-icon">
+              <input type="number" id="minutes2" value="45" />
+              <i class="fas fa-hourglass-half"></i>
+            </div>
+            <div class="input-with-icon">
+              <input type="number" id="seconds2" value="30" />
+              <i class="fas fa-hourglass-end"></i>
+            </div>
+          </div>
+        </article>
+
+        <article class="operation-buttons">
+          <button class="operation-btn active" data-operation="add">Add</button>
+          <button class="operation-btn" data-operation="subtract">Subtract</button>
+          <button class="operation-btn" data-operation="difference">Difference</button>
+          <button class="operation-btn" data-operation="multiply">Multiply</button>
+          <button class="operation-btn" data-operation="divide">Divide</button>
+        </article>
+
+        <article class="action-buttons">
+          <button class="btn btn-primary" id="calculateBtn">Calculate</button>
+          <button class="btn btn-secondary" id="resetBtn">Reset</button>
+        </article>
+
+        <article class="result-container">
+          <h3 id="resultValue">0 Hours, 0 Minutes, 0 Seconds</h3>
+          <p id="resultDetails">Calculation result will appear here</p>
+        </article>
+      </section>
+
+      <footer class="footer__copy">
+        © <time datetime="" id="year"></time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
+    </main>
+
+    <script src="/widgets_script/timeCalculator.js"></script>
+  </body>
+</html>

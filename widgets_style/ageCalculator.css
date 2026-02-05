@@ -15,6 +15,7 @@ body {
   align-items: center;
   min-height: 99vh;
   overflow: auto;
+  overflow-x: hidden;
   background: radial-gradient(circle at center, #a5b1c2, #172b47);
   color: #fff;
 }
@@ -52,12 +53,12 @@ body {
   padding: 30px;
   border-radius: 15px;
   box-shadow: 20px 35px 35px rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(10px);
   text-align: center;
   max-width: 400px;
   width: 100%;
   overflow: hidden;
   align-self: flex-end;
+  grid-row: span 10;
 }
 
 h1 {
@@ -185,9 +186,12 @@ button:active {
 
 .zodiac {
   margin-bottom: 20px;
+  grid-row: span 5;
+  align-self: flex-start;
 }
 
-.zodiac-container {
+.zodiac-container,
+.novelty-units {
   margin-block: 10px;
   padding: 20px;
   border-radius: 20px;
@@ -199,12 +203,14 @@ button:active {
   overflow: hidden;
 }
 
-.zodiac-container.shown {
+.zodiac-container.shown,
+.novelty-units.shown {
   height: max-content;
   visibility: visible;
 }
 
-.zodiac-title {
+.zodiac-title,
+.novelty h2 {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -215,20 +221,23 @@ button:active {
   text-shadow: 0px 15px 15px rgba(51, 255, 0, 0.2);
 }
 
-.zodiac-title span {
+.zodiac-title span,
+.novelty h2 span {
   font-size: 28px;
   padding-bottom: 5px;
   color: #0d160b;
   transition: .3s;
 }
 
-.zodiac-title.active span{
+.zodiac-title.active span, 
+.novelty h2.active span{
   transform: rotate(180deg);
   padding-bottom: -5px;
 }
 
 
-.zodiac-container li {
+.zodiac-container li,
+.novelty-units li {
   list-style-position: inside;
   padding-inline-start: 20px;
   list-style-type: square;
@@ -250,4 +259,17 @@ h4 {
 
 h4 em {
   color: #daa644;
+}
+
+::-webkit-scrollbar-track {
+  width: 0.75rem;
+  background: #172b47;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0d160b;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #485460;
 }
