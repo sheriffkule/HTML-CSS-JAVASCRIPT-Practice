@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     cup: 236.588,
     pint: 473.176,
     quart: 946.353,
+    gallon: 3785.41,
     ml: 1,
     l: 1000,
 
@@ -72,20 +73,22 @@ document.addEventListener('DOMContentLoaded', function () {
   converterForm.addEventListener('input', calculateConversion);
   swapBtn.addEventListener('click', swapUnits);
   resetBtn.addEventListener('click', resetConverter);
-  saveFavoriteBtn.addEventListener('click', saveFavorete);
+  saveFavoriteBtn.addEventListener('click', saveFavorite);
 
-  // Initial calculation
-  calculateConversion();
+  // Initial calculation - don't show toast on page load
+  calculateConversion(false);
 
-  function calculateConversion() {
+  function calculateConversion(showInvalidToast = true) {
     const amount = parseFloat(amountInput.value);
     const fromUnit = fromUnitSelect.value;
-    const toUnit = toUnit.value;
+    const toUnit = toUnitSelect.value;
     const ingredient = ingredientSelect.value;
 
-    if (isNaN(number) || amount <= 0) {
+    if (isNaN(amount) || amount <= 0) {
       resultContainer.style.display = 'none';
-      showToast('Invalid input!');
+      if (showInvalidToast) {
+        showToast('Invalid input!');
+      }
       return;
     }
 
@@ -170,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function saveFavorite() {
     const amount = parseFloat(amountInput.value);
     const fromUnit = fromUnitSelect.value;
-    const toUnit = toUnit.value;
+    const toUnit = toUnitSelect.value;
     const ingredient = ingredientSelect.value;
 
     if (isNaN(amount) || amount <= 0) {
@@ -186,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     // Check if this favorite already exist
-    const exist = favorite.some(
+    const exist = favorites.some(
       (fav) =>
         (fav.amount === favorite.amount &&
           fav.fromUnit === favorite.fromUnit &&
@@ -199,5 +202,162 @@ document.addEventListener('DOMContentLoaded', function () {
       showToast('This conversion is already in your favorites', 'error');
       return;
     }
+
+    favorites.push(favorite);
+    localStorage.setItem('cookingConverterFavorites', JSON.stringify(favorites));
+    renderFavorites();
+    showToast('Conversion saved to favorites!');
+  }
+
+  function isVolumeToWeightConversion(fromUnit, toUnit) {
+    return isVolumeUnit(fromUnit) && isWeightUnit(toUnit);
+  }
+
+  function renderFavorites() {
+    if (favorites.length === 0) {
+      noFavoritesMessage.style.display = 'block';
+      favoritesList.innerHTML = '';
+      return;
+    }
+
+    noFavoritesMessage.style.display = 'none';
+    favoritesList.innerHTML = '';
+
+    favorites.forEach((favorite, index) => {
+      const favoriteElement = document.createElement('div');
+      favoriteElement.className = 'favorite-item';
+
+      const fromAmount = favorite.amount % 1 === 0 ? favorite.amount : favorite.amount.toFixed(2);
+      const fromUnitName = getUnitName(favorite.fromUnit);
+      const toUnitName = getUnitName(favorite.toUnit);
+
+      let description = `${fromAmount} ${fromUnitName}
+        <i class="fa-solid fa-arrow-right-long"></i> ${toUnitName}`;
+      if (favorite.ingredient && favorite.ingredient !== 'generic') {
+        description += ` (${favorite.ingredient})`;
+      }
+
+      favoriteElement.innerHTML = `
+        <span>${description}</span>
+        <span class="remove-favorite" data-index="${index}">&times;</span>
+      `;
+
+      favoritesList.appendChild(favoriteElement);
+
+      // Add click event to use this favorite
+      favoriteElement.addEventListener('click', function (e) {
+        if (e.target.classList.contains('remove-favorite')) {
+          return;
+        }
+        loadFavorite(favorite);
+      });
+
+      // Add click event to remove button
+      const removeBtn = favoriteElement.querySelector('.remove-favorite');
+      removeBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        removeFavorite(index);
+      });
+    });
+  }
+
+  function loadFavorite(favorite) {
+    amountInput.value = favorite.amount;
+    fromUnitSelect.value = favorite.fromUnit;
+    toUnitSelect.value = favorite.toUnit;
+    ingredientSelect.value = favorite.ingredient || 'generic';
+    calculateConversion();
+    showToast('Favorite loaded.');
+  }
+
+  function removeFavorite(index) {
+    favorites.splice(index, 1);
+    localStorage.setItem('cookingConverterFavorites', JSON.stringify(favorites));
+    renderFavorites();
+    showToast('Favorite removed.');
+  }
+
+  function renderCommonConversions() {
+    commonConversionsContainer.innerHTML = '';
+
+    commonConversions.forEach((conversion) => {
+      const card = document.createElement('div');
+      card.className = 'conversion-card';
+
+      card.innerHTML = `
+        <div class="conversion-value">${conversion.from} = ${conversion.to}</div>
+        <div class="conversion-label">
+          ${
+            conversion.ingredient
+              ? conversion.ingredient.charAt(0).toUpperCase() + conversion.ingredient.slice(1)
+              : 'Volume conversion'
+          }
+        </div>
+        <div
+          class="add-to-favorites"
+          data-from="${conversion.fromUnit}"
+          data-to="${conversion.toUnit}"
+          data-amount="${conversion.amount}"
+          data-ingredient="${conversion.ingredient || 'generic'}">
+          <i class="fa-regular fa-bookmark"></i> Save to favorites
+        </div>
+      `;
+
+      commonConversionsContainer.appendChild(card);
+
+      // Add click event to the whole card
+      card.addEventListener('click', function () {
+        fromUnitSelect.value = conversion.fromUnit;
+        toUnitSelect.value = conversion.toUnit;
+        amountInput.value = conversion.amount;
+        ingredientSelect.value = conversion.ingredient || 'generic';
+        calculateConversion();
+      });
+
+      // Add click event to the save button
+      const saveBtn = card.querySelector('.add-to-favorites');
+      saveBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        const favorite = {
+          amount: parseFloat(this.getAttribute('data-amount')),
+          fromUnit: this.getAttribute('data-from'),
+          toUnit: this.getAttribute('data-to'),
+          ingredient:
+            this.getAttribute('data-ingredient') !== 'generic'
+              ? this.getAttribute('data-ingredient')
+              : undefined,
+        };
+
+        // Check if already exist
+        const exist = favorites.some(
+          (fav) =>
+            fav.amount === favorite.amount &&
+            fav.fromUnit === favorite.fromUnit &&
+            fav.toUnit === favorite.toUnit &&
+            (fav.ingredient || 'generic') === favorite.ingredient,
+        );
+
+        if (exist) {
+          showToast('This conversion is already in your favorites', 'error');
+          return;
+        }
+
+        favorites.push(favorite);
+        localStorage.setItem('cookingConverterFavorites', JSON.stringify(favorites));
+        renderFavorites();
+        showToast('Common conversion saved to favorites!');
+      });
+    });
+  }
+
+  function showToast(message, type = 'success') {
+    toast.textContent = message;
+    toast.className = 'toast';
+    toast.classList.add(type);
+    toast.classList.add('show');
+
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3000);
   }
 });
