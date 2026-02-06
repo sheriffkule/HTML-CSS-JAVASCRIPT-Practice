@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cooking Unit Converter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/cookingUnitConverter.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Cooking Unit Converter</h1>
+        <p class="subtitle">
+          Easily convert between cups, tablespoons, grams, and more for all your cooking needs.
+        </p>
+      </header>
+
+      <main>
+        <section class="converter-container">
+          <div class="converter-header">
+            <h2 class="converter-title">Unit Converter</h2>
+            <div class="converter-actions">
+              <button class="btn btn-secondary" id="resetBtn">
+                <i class="fa-solid fa-rotate"></i> Reset
+              </button>
+              <button class="btn btn-primary"><i class="fa-regular fa-bookmark"></i> Save</button>
+            </div>
+          </div>
+
+          <form class="converter-form" id="converterForm">
+            <article class="form-group">
+              <label for="amount">Amount</label>
+              <input type="number" id="amount" placeholder="Enter amount" step="0.01" min="0" required />
+            </article>
+
+            <div class="converter-group">
+              <article class="form-group">
+                <label for="fromUnit">From Unit</label>
+                <select id="fromUnit" required>
+                  <option value="tsp">Teaspoons (tsp)</option>
+                  <option value="tbsp">Tablespoon (tbsp)</option>
+                  <option value="fl-oz">Fluid Ounces (fl oz)</option>
+                  <option value="cup" selected>Cups (c)</option>
+                  <option value="pint">Pints (pt)</option>
+                  <option value="quart">Quarts (qt)</option>
+                  <option value="gallon">Gallons (gal)</option>
+                  <option value="ml">Milliliters (ml)</option>
+                  <option value="l">Liters (l)</option>
+                  <option value="g">Grams (g)</option>
+                  <option value="kg">Kilograms (kg)</option>
+                  <option value="oz">Ounces (0z)</option>
+                  <option value="lb">Pounds (lb)</option>
+                </select>
+              </article>
+              <button class="swap-btn" id="swapBtn" aria-label="Swap units">
+                <i class="fa-solid fa-repeat"></i>
+              </button>
+              <article class="form-group">
+                <label for="toUnit">To Unit</label>
+                <select id="toUnit" required>
+                  <option value="tsp">Teaspoons (tsp)</option>
+                  <option value="tbsp" selected>Tablespoon (tbsp)</option>
+                  <option value="fl-oz">Fluid Ounces (fl oz)</option>
+                  <option value="cup">Cups (c)</option>
+                  <option value="pint">Pints (pt)</option>
+                  <option value="quart">Quarts (qt)</option>
+                  <option value="gallon">Gallons (gal)</option>
+                  <option value="ml">Milliliters (ml)</option>
+                  <option value="l">Liters (l)</option>
+                  <option value="g">Grams (g)</option>
+                  <option value="kg">Kilograms (kg)</option>
+                  <option value="oz">Ounces (0z)</option>
+                  <option value="lb">Pounds (lb)</option>
+                </select>
+              </article>
+            </div>
+            <article class="form-group">
+              <label for="ingredient">Ingredient (for weight conversions)</label>
+              <select id="ingredient">
+                <option value="generic">Generic</option>
+                <option value="water">Water</option>
+                <option value="milk">Milk</option>
+                <option value="flour">Flour</option>
+                <option value="sugar">Sugar</option>
+                <option value="salt">Salt</option>
+                <option value="butter">Butter</option>
+                <option value="oil">Oil</option>
+                <option value="honey">Honey</option>
+              </select>
+            </article>
+          </form>
+
+          <div class="result-container" id="resultContainer">
+            <p class="result-title">Conversion Result</p>
+            <p class="result-value" id="resultValue">0 tablespoons</p>
+          </div>
+        </section>
+
+        <section class="favorites-section" id="favoritesSection">
+          <h2 class="section-title">Your Favorite Conversions</h2>
+          <div class="favorites-list" id="favoritesList">
+            <p id="noFavoritesMessage">
+              No favorites saved yet. Convert something and click "Save" to add it here.
+            </p>
+          </div>
+        </section>
+
+        <section class="common-conversions">
+          <h2 class="section-title">Common Cooking Conversions</h2>
+          <div class="conversion-grid" id="commonConversions"></div>
+        </section>
+      </main>
+
+      <footer class="footer__copy">
+        © <time datetime="2026" id="year">2026</time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
+    </div>
+
+    <script src="/widgets_script/cookingUnitConverter.js"></script>
+  </body>
+</html>
