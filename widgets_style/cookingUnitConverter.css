@@ -46,6 +46,7 @@ header {
         color: #555;
         font-weight: 300;
         font-size: 1rem;
+        text-wrap: pretty;
     }
 }
 
@@ -95,4 +96,183 @@ header {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+
+    &:hover {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: var(--box-shadow);
+        corner-shape: scoop;
+        letter-spacing: .5px;
+    }
+    &:active {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+
+    &:hover {
+        filter: saturate(250%);
+    }
+}
+
+.btn-secondary {
+    background-color: var(--light);
+    color: var(--dark);
+    border: 1px solid #aaa;
+
+    &:hover {
+        background-color: #ddd;
+    }
+}
+
+.converter-form,
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #555;
+}
+
+input, select {
+    padding: 0.8rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    background-color: var(--light);
+    transition: var(--transition);
+}
+
+:is(input, select):is(:focus, :focus-within) {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgb(255 123 84 / 0.2),
+    inset 0 0 0 2px rgb(255 123 84 / 0.2);
+}
+
+input::placeholder {
+    transition: var(--transition);
+}
+
+input:is(:focus, :focus-within)::placeholder {
+    transform: translateX(110%);
+}
+
+select:is(:focus, :focus-within) {
+    background-color: var(--accent);
+}
+
+select,
+::picker(select) {
+  appearance: base-select;
+}
+
+::picker(select) {
+  border-radius: 8px;
+  border: none;
+}
+
+select::picker-icon {
+  color: var(--primary);
+  transition: 0.4s rotate;
+}
+
+select:open::picker-icon {
+  rotate: 180deg;
+}
+
+select:open::picker-icon {
+  color: var(--success);
+}
+
+option {
+  border: 1px solid #dddddd;
+  background: var(--secondary);
+  padding: 2px 0 2px 12px;
+  transition: var(--transition);
+}
+
+option:hover,
+option:focus {
+  background: var(--primary);
+}
+
+option:checked {
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+option::checkmark {
+  color: var(--success);
+  font-size: 1.5rem;
+}
+
+.swap-btn {
+    background-color: var(--accent);
+    color: var(--dark);
+    font-size: 1.25rem;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-inline: auto;
+    align-self: flex-end;
+    margin-bottom: 4px;
+
+    &:hover {
+        transform: rotate(180deg) scale(1.1);
+        background-color: var(--secondary);
+        outline: 1px solid var(--primary);
+        outline-offset: 6px;
+    }
+}
+
+.result-container {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background-color: var(--light);
+    border-radius: var(--border-radius);
+    display: none;
+}
+
+.result-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+.result-value {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.favorites-section {
+    background-color: var(--light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    animation: slideUp 0.6s ease 0.2s both;
+}
+
+.section-title {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--dark);
+}
+
+.favorites-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
 }
