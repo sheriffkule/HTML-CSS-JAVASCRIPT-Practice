@@ -276,3 +276,38 @@ option::checkmark {
     flex-wrap: wrap;
     gap: 0.8rem;
 }
+
+.favorite-item {
+    background-color: var(--light);
+    padding: 0.6rem 1rem;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+
+    &:hover {
+        background-color: #eae9ff;
+    }
+}
+
+.remove-favorite {
+    color: #999;
+    font-size: 1.1rem;
+    transition: var(--transition);
+
+    &:hover {
+        color: var(--error);
+        scale: 1.1;
+    }
+}
+
+.common-conversions {
+    background-color: var(--light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 2rem;
+    animation: slideUp 0.6s ease-in 0.4s both;
+}
