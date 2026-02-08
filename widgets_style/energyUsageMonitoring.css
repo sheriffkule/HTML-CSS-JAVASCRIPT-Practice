@@ -1,0 +1,50 @@
+:root {
+    --primary: #2e86ab;
+    --secondary: #a23b72;
+    --success: #4caf50;
+    --warning: #ff9800;
+    --danger: '#f44336';
+    --light: '#f8f9fa';
+    --dark: '#212529';
+    --gray: '#6c7579';
+    --bg-color: '#f5f7fa';
+    --card-bg: '#afffff';
+    --shadow: 0 4px 6px rgb(0 0 0 / 0.15);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg-color);
+    color: var(--dark);
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgb(0 0 0 / 0.15);
+}
+
+.logo i {
+    font-size: 2rem;
+}
+
+.user-actions {
+    display: flex;
+    gap: 15px;
+}

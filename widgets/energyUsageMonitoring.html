@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Energy Usage Monitoring</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.min.js"></script>
+    <link rel="stylesheet" href="/widgets_style/energyUsageMonitoring.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="logo">
+          <i class="fas fa-bolt"></i>
+          <span>Energy Usage Monitoring</span>
+        </div>
+        <div class="user-actions">
+          <button class="btn btn-outline" id="settings-btn"><i class="fas fa-cog"></i> Settings</button>
+          <button class="btn btn-primary" id="add-device-btn"><i class="fas fa-plus"></i> Add Device</button>
+        </div>
+      </header>
+
+      <section class="dashbord">
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">Current Usage</div>
+            <div class="card-icon icon-primary"><i class="fas fa-bolt"></i></div>
+          </div>
+          <div class="stat-value" id="current-usage">1.25kW</div>
+          <div class="stat-label">Right Now</div>
+          <div class="stat-change change-up"><i class="fas fa-arrow-up"></i> 12% from yesterday</div>
+        </article>
+
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">Today's Usage</div>
+            <div class="card-icon icon-secondary"><i class="fas fa-chart-line"></i></div>
+          </div>
+          <div class="stat-value" id="today-usage">15.8 kW</div>
+          <div class="stat-label">So Far Today</div>
+          <div class="stat-change change-down"><i class="fas fa-arrow-down">5% from yesterday</i></div>
+        </article>
+
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">Monthly Cost</div>
+            <div class="card-icon icon-success"><i class="fas fa-dollar-sign"></i></div>
+          </div>
+          <div class="stat-value" id="monthly-cost">$42.50</div>
+          <div class="stat-label">Projected for this month</div>
+          <div class="stat-change change-up"><i class="fas fa-arrow-up"></i> 8% from last month</div>
+        </article>
+
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">Carbon Footprint</div>
+            <div class="card-icon icon-warning"><i class="fas fa-leaf"></i></div>
+          </div>
+          <div class="stat-value" id="carbon-footprint">125 kg</div>
+          <div class="stat-label">CO2 emissions this month</div>
+          <div class="stat-change change-down"><i class="fas fa-arrow-down"></i></div>
+        </article>
+      </section>
+
+      <section class="charts-container">
+        <article class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">Energy Consumption</div>
+            <div class="cart-actions">
+              <span class="chart-action active" data-period="day">Today</span>
+              <span class="chart-action" data-period="week">This Week</span>
+              <span class="chart-action" data-period="month">This Month</span>
+            </div>
+          </div>
+          <div class="chart-container">
+            <canvas id="consumption-chart"></canvas>
+          </div>
+        </article>
+
+        <article class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">Usage by Device</div>
+          </div>
+          <div class="chart-container">
+            <canvas id="device-chart"></canvas>
+          </div>
+        </article>
+      </section>
+
+      <section class="devices-list">
+        <div class="devices-header">
+          <div class="devices-title">Connected Devices</div>
+          <div class="devices-filter">
+            <select id="device-filter" class="form-control" style="width: auto">
+              <option value="all">All Devices</option>
+              <option value="active">Active Only</option>
+              <option value="high-usage">High Usage</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="devices-container"></div>
+      </section>
+    </div>
+  </body>
+</html>

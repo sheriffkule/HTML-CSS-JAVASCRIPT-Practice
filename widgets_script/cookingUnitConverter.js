@@ -360,4 +360,19 @@ document.addEventListener('DOMContentLoaded', function () {
       toast.classList.remove('show');
     }, 3000);
   }
+
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.dateTime = currentYear.toString();
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
