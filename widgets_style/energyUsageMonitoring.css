@@ -169,7 +169,7 @@ header {
     color: var(--danger);
 }
 
-.chart-container {
+.charts-container {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 20px;
@@ -181,4 +181,70 @@ header {
     border-radius: 10px;
     padding: 20px;
     box-shadow: var(--shadow);
+}
+
+.chart-header {
+    margin-bottom: 15px;
+}
+
+.chart-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.chart-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.chart-action {
+    padding: 5px 10px;
+    border: 1px solid var(--gray);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: var(--transition);
+    
+    &.active {
+        background-color: var(--primary);
+        color: white;
+        border-color: var(--primary);
+    }
+}
+
+.chart-container {
+    position: relative;
+    height: 300px;
+}
+
+.devices-list {
+    margin-top: 30px;
+}
+
+.devices-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.devices-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.device-card {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+
+    &:hover {
+        transform: translateX(5px);
+    }
 }

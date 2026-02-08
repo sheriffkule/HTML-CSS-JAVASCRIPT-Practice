@@ -58,7 +58,7 @@
           </div>
           <div class="stat-value" id="carbon-footprint">125 kg</div>
           <div class="stat-label">CO2 emissions this month</div>
-          <div class="stat-change change-down"><i class="fas fa-arrow-down"></i></div>
+          <div class="stat-change change-down"><i class="fas fa-arrow-down"></i> 15% from last month</div>
         </article>
       </section>
 
@@ -66,7 +66,7 @@
         <article class="chart-card">
           <div class="chart-header">
             <div class="chart-title">Energy Consumption</div>
-            <div class="cart-actions">
+            <div class="chart-actions">
               <span class="chart-action active" data-period="day">Today</span>
               <span class="chart-action" data-period="week">This Week</span>
               <span class="chart-action" data-period="month">This Month</span>
@@ -103,6 +103,78 @@
       </section>
     </div>
 
+    <div class="modal" id="add-device-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-title">Add New Device</div>
+          <button class="close-modal">&times;</button>
+        </div>
+        <form id="add-device-form">
+          <div class="form-group">
+            <label for="device-name" class="form-label">Device Name</label>
+            <input type="text" class="form-control" id="device-name" />
+          </div>
+          <div class="form-group">
+            <label for="device-type" class="form-label">Device Type</label>
+            <select id="form-control">
+              <option value="">Select a Type</option>
+              <option value="appliance">Home Appliance</option>
+              <option value="electronics">Electronics</option>
+              <option value="lighting">Lighting</option>
+              <option value="heating">Heating/Cooling</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="device-power" class="form-label">Power Rating (W)</label>
+            <input type="number" id="device-power" class="form-control" min="1" required />
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-outline close-modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Add Device</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal" id="settings-modal">
+      <div class="modal-content">
+        <div class="modal-head">
+          <div class="modal-title">Settings</div>
+          <button class="close-modal">&times;</button>
+        </div>
+        <form id="settings-form">
+          <div class="form-group">
+            <label class="form-label" for="energy-rate">Energy Rate ($/kWh)</label>
+            <input
+              type="number"
+              class="form-control"
+              id="energy-rate"
+              step="0.01"
+              min="0.01"
+              value="0.15"
+              required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="carbon-intensity">Carbon Intensity (gCO2/kWh)</label>
+            <input type="number" class="form-control" id="carbon-intensity" min="1" value="450" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="budget-alert">Monthly Budget Alert ($)</label>
+            <input type="number" class="form-control" id="budget-alert" min="1" value="100" required />
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-outline close-modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Settings</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <footer class="footer__copy">
+      © <time datetime="2026" id="year">2026</time> Made width <span>♥</span> by
+      <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/widgets_script/energyUsageMonitoring.js"></script>

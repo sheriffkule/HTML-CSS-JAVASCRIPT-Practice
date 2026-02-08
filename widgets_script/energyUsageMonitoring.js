@@ -32,3 +32,39 @@ document.addEventListener('DOMContentLoaded', function () {
   // Update stats periodically
   setInterval(updateStats, 5000);
 });
+
+// Initialize charts
+function initCharts() {
+  // Consumption chart
+  const consumptionCtx = document.getElementById('consumptionChart').getContext('2d');
+  window.consumptionChart = new Chart(consumptionCtx, {
+    type: 'line',
+    data: {
+      labels: Array.from({ length: 24 }, (_, i) => `${i}:00`),
+      datasets: [
+        {
+          label: 'Energy Consumption (kWh)',
+          data: consumptionData.day,
+          borderColor: '2e86ab',
+          backgroundColor: 'rgba(46, 134, 171, 0.1)',
+          borderWidth: 2,
+          fill: true,
+          tension: 0.4,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'kWh',
+          },
+        },
+      },
+    },
+  });
+}
