@@ -1,0 +1,34 @@
+// Sample data for the application
+const sampleDevices = [
+  { id: 1, name: 'Refrigerator', type: 'appliance', power: 150, status: true, usage: 3.2 },
+  { id: 2, name: 'Living Room TV', type: 'electronics', power: 120, status: false, usage: 1.5 },
+  { id: 3, name: 'AC Unit', type: 'heating', power: 1500, status: true, usage: 8.7 },
+  { id: 4, name: 'Kitchen Lights', type: 'Lighting', power: 60, status: true, usage: 2.1 },
+  { id: 5, name: 'Laptop', type: 'electronics', power: 65, status: true, usage: 1.8 },
+  { id: 6, name: 'Washing Machine', type: 'appliance', power: 500, status: false, usage: 0.5 },
+];
+
+// Chart data
+const consumptionData = {
+  day: [
+    1.2, 1.0, 0.8, 0.7, 0.9, 1.1, 1.5, 2.1, 2.5, 2.8, 2.6, 2.3, 2.0, 1.8, 1.6, 1.4, 1.6, 1.4, 1.6, 2.0, 2.4,
+    2.7, 2.5, 2.2, 1.8, 1.4,
+  ],
+  week: [18.5, 17.2, 19.1, 20.3, 22.5, 16.8, 15, 2],
+  month: [
+    450, 420, 480, 460, 490, 510, 530, 520, 500, 480, 460, 440, 420, 400, 410, 430, 450, 470, 490, 510, 530,
+    520, 500, 480, 460440, 420, 430, 450, 470,
+  ],
+};
+
+// Initialize the application
+document.addEventListener('DOMContentLoaded', function () {
+  // Initialize charts
+  initCharts();
+
+  // Render devices
+  renderDevices();
+
+  // Update stats periodically
+  setInterval(updateStats, 5000);
+});

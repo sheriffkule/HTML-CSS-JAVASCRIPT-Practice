@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Energy Usage Monitoring</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.min.js"></script>
     <link rel="stylesheet" href="/widgets_style/energyUsageMonitoring.css" />
   </head>
   <body>
@@ -21,7 +20,7 @@
         </div>
       </header>
 
-      <section class="dashbord">
+      <section class="dashboard">
         <article class="card">
           <div class="card-header">
             <div class="card-title">Current Usage</div>
@@ -39,7 +38,7 @@
           </div>
           <div class="stat-value" id="today-usage">15.8 kW</div>
           <div class="stat-label">So Far Today</div>
-          <div class="stat-change change-down"><i class="fas fa-arrow-down">5% from yesterday</i></div>
+          <div class="stat-change change-down"><i class="fas fa-arrow-down"></i> 5% from yesterday</div>
         </article>
 
         <article class="card">
@@ -103,5 +102,9 @@
         <div id="devices-container"></div>
       </section>
     </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/widgets_script/energyUsageMonitoring.js"></script>
   </body>
 </html>
