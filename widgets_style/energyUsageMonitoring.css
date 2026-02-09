@@ -330,7 +330,7 @@ input:checked + .slider::before {
 }
 
 .modal {
-    /* display: none; */
+    display: none !important;
     position: fixed;
     top: 0;
     left: 0;
@@ -338,6 +338,7 @@ input:checked + .slider::before {
     height: 100%;
     background-color: rgb(0 0 0 / 0.5);
     z-index: 1000;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -349,4 +350,81 @@ input:checked + .slider::before {
     max-width: 500px;
     padding: 30px;
     box-shadow: 0 10px 25px rgb(0 0 0 / 0.2);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    color: var(--gray);
+}
+
+.close-modal:nth-child(2) {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 1.5rem;
+    transition: var(--transition);
+
+    &:hover {
+        scale: 1.2;
+        color: var(--primary);
+    }
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    color: var(--gray);
+    border-top: 1px solid rgb(0 0 0 / 0.15);
+
+    span {
+        color: red;
+    }
+    abbr {
+        text-underline-offset: 2px;
+        letter-spacing: .5px;
+        color: var(--primary);
+        cursor: default;
+    }
 }

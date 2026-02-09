@@ -96,6 +96,46 @@ function initCharts() {
 
 // Render devices list
 function renderDevices() {
-  const container = document.getElementById('devices-container')
+  const container = document.getElementById('devices-container');
   container.innerHTML = '';
+
+  sampleDevices.forEach((device) => {
+    const deviceCard = document.createElement('div');
+    deviceCard.innerHTML = `
+      <div class="device-icon icon-${getDeviceTypeClass(device.type)}">
+        <i class="fas ${getDeviceIcon(device.type)}"></i>
+      </div>
+      <div class="device-info">
+        <div class="device-name">${device.name}</div>
+        <div class="device-status">${device.status ? 'Active' : 'Inactive'} x ${device.power}W</div>
+      </div>
+      <div class="device-power">${device.usage} kWh</div>
+      <div class="device-actions">
+        <label class="toggle-switch">
+          <input type="checkbox" ${device.status ? 'checked' : ''} data-id="${device.id}" />
+          <span class="slider"></span>
+        </label>
+        <button class="btn btn-outline" style="padding: 5px 10px" data-id="$device.id">
+          <i class="fas fa-chart-bar"></i>
+        </button>
+      </div>
+    `;
+    container.appendChild(deviceCard);
+  });
+}
+
+// Get device icon based on type
+function getDeviceIcon(type) {
+  switch (type) {
+    case 'appliance':
+      return 'fa-refrigerator';
+    case 'electronics':
+      return 'fa-tv';
+    case 'lighting':
+      return 'fa-lightbulb';
+    case 'heating':
+      return ' fa-temperature-low';
+    default:
+      return 'fa-plug';
+  }
 }
