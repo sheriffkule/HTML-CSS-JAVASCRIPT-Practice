@@ -67,4 +67,35 @@ function initCharts() {
       },
     },
   });
+
+  // Device usage chart
+  const deviceCtx = document.getElementById('device-chart').getContext('2d');
+  window.deviceChart = new Chart(deviceCtx, {
+    type: 'doughnut',
+    data: {
+      labels: sampleDevices.filter((d) => d.status).map((d) => d.name),
+      datasets: [
+        {
+          data: sampleDevices.filter((d) => d.status).map((d) => d.usage),
+          backgroundColor: ['#2e86ab', '#a23b72', '#4caf50', '#ff9800', '#f44336', '#6c757d'],
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'bottom',
+        },
+      },
+    },
+  });
+}
+
+// Render devices list
+function renderDevices() {
+  const container = document.getElementById('devices-container')
+  container.innerHTML = '';
 }
