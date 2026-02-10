@@ -139,3 +139,107 @@ function getDeviceIcon(type) {
       return 'fa-plug';
   }
 }
+
+// Get device type class for styling
+function getDeviceTypeClass(type) {
+  switch (type) {
+    case 'appliance':
+      return 'primary';
+    case 'electronics':
+      return 'secondary';
+    case 'lighting':
+      return 'success';
+    case 'heating':
+      return 'danger';
+    default:
+      return 'gray';
+  }
+}
+
+// Set event listeners
+function setEventListeners() {
+  // Modal controls
+  document.getElementById('add-device-btn').addEventListener('click', () => {
+    document.getElementById('add-device-modal').style.display = 'flex';
+  });
+
+  document.getElementById('settings').addEventListener('click', () => {
+    document.getElementById('settings-modal').style.display = 'flex';
+  });
+
+  document.querySelectorAll('close-modal').addEventListener('click', () => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.modal').forEach((modal) => {
+        modal.style.display = 'none';
+      });
+    });
+  });
+
+  // Chart period controls
+  document.querySelectorAll('.chart-action').forEach((action) => {
+    action.addEventListener('click', function () {
+      document.querySelectorAll('.chart-action').forEach((a) => a.classList.remove('active'));
+      this.classList.add('active');
+
+      const period = this.getAttribute('data-period');
+      updateConsumptionChart(period);
+    });
+  });
+
+  // Device filter
+  document.getElementById('device-filter').addEventListener('change', function () {
+    // In a real app this would filter the devices
+    console.log('Filter changed to:', this.value);
+  });
+
+  // Add device form
+  document.getElementById('add-device-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById('device-name').value;
+    const type = document.getElementById('device-type').value;
+    const power = parseInt(document.getElementById('device-power').value);
+
+    // In a real app, this would add the device to the database
+    console.log('Adding device:', { name, type, power });
+
+    // Close modal and reset form
+    document.getElementById('add-device-modal').style.display = 'none';
+    this.reset();
+
+    // Show success message
+    alert(`Device ${name} added successfully`);
+  });
+
+  // Settings form
+  document.getElementById('settings-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const rate = parseFloat(document.getElementById('energy-rate').value);
+    const intensity = parseInt(document.getElementById('carbon-intensity').value);
+    const budget = parseInt(document.getElementById('budget-alert').value);
+
+    // In a real app, this would save the settings to the database
+    console.log('Saving settings:', { rate, intensity, budget });
+
+    // Close modal
+    document.getElementById('settings-modal').style.display = 'none';
+
+    // Show success message
+    alert('Settings saved successfully');
+  });
+
+  // Toggle device status
+  document.getElementById('change', function (e) {
+    if (e.target.type === 'checkbox' && e.target.closest('.toggle-switch')) {
+      const deviceId = parseInt(e.target.getAttribute('data-id'));
+      const isActive = e.target.checked;
+
+      // In a real app, this would update the device status in the database
+      console.log(`Device ${deviceId} status changed to: ${isActive ? 'active' : 'inactive'}`);
+
+      // Update the device chart
+      updateDeviceChart();
+    }
+  });
+}

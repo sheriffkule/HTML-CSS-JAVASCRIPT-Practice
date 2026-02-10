@@ -428,3 +428,16 @@ footer {
         cursor: default;
     }
 }
+
+@media screen and (max-width: 768px) {
+    .charts-container {
+        grid-template-columns: 1fr;
+    }
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
