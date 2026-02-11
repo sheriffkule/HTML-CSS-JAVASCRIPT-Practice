@@ -330,7 +330,7 @@ input:checked + .slider::before {
 }
 
 .modal {
-    display: none !important;
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -338,7 +338,6 @@ input:checked + .slider::before {
     height: 100%;
     background-color: rgb(0 0 0 / 0.5);
     z-index: 1000;
-    display: flex;
     justify-content: center;
     align-items: center;
 }
