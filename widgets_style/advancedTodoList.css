@@ -1,0 +1,79 @@
+:root {
+    --primary-color: #4a6fa5;
+    --primary-hover: #3a5a8f;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #17a2b8;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --text-color: #212529;
+    --text-light: #6c757d;
+    --bg-color: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --border-color: #dee2e6;
+    --shadow-color: rgb(0 0 0 / 0.15);
+    --transition-speed: 0.3s;
+}
+
+[data-theme="dark"] {
+    --primary-color: #5d8acd;
+    --primary-hover: #4a7bc1;
+    --secondary-color: #6c757d;
+    --text-color: #f8f9fa;
+    --text-light: #adb5bd;
+    --bg-color: #212529;
+    --bg-secondary: #343a40;
+    --border-color: #495057;
+    --shadow-color: rgb(0 0 0 / 0.3)
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-secondary);
+    color: var(--text-color);
+    transition: background-color var(--transition-speed) ease-in;
+}
+
+.app-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-header {
+    margin-bottom: 30px;
+    animation: fadeIn 0.6s ease-in;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    h1 {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        font-weight: 700;
+    }
+}
+
+.stats-bar {
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--bg-color);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px var(--shadow-color);
+    margin-top: 15px;
+}

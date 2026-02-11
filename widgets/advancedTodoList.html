@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Advanced To-Do List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/advancedTodoList.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <header class="app-header">
+        <div class="header-content">
+          <h1>Advanced To-Do List</h1>
+          <div class="theme-toggle">
+            <button id="themeToggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
+          </div>
+        </div>
+        <div class="stats-bar">
+          <div class="stat-item">
+            <span class="stat-count" id="totalTasks">0</span>
+            <div class="stat-label">Total</div>
+          </div>
+          <div class="stat-item">
+            <span class="stat-count" id="completedTasks">0</span>
+            <div class="stat-label">Completed</div>
+          </div>
+          <div class="stat-item">
+            <span class="stat-count" id="pendingTasks">0</span>
+            <div class="stat-label">Pending</div>
+          </div>
+        </div>
+      </header>
+
+      <main class="app-main">
+        <div class="controls-section">
+          <div class="task-input-container">
+            <input type="text" id="taskInput" placeholder="Add a new task..." autocomplete="off" />
+            <button id="addTaskBtn" class="btn-primary"><i class="fas fa-plus"></i> Add</button>
+          </div>
+
+          <div class="task-options">
+            <div class="task-filters">
+              <select id="filterSelect" class="filter-select">
+                <option value="all">All Tasks</option>
+                <option value="completed">Completed</option>
+                <option value="pending">Pending</option>
+              </select>
+
+              <select id="priorityFilter" class="filter-select">
+                <option value="all">All Priorities</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="Low">Low</option>
+              </select>
+
+              <select id="categoryFilter" class="filter-select">
+                <option value="all">All Categories</option>
+              </select>
+            </div>
+
+            <div class="search-container">
+              <input type="text" id="searchInput" placeholder="Search tasks..." autocomplete="off" />
+              <button id="searchBtn" class="btn-icon"><i class="fas fa-search"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="task-list-container">
+          <ul id="taskList" class="task-list"></ul>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
