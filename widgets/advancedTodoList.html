@@ -70,6 +70,50 @@
           <ul id="taskList" class="task-list"></ul>
         </div>
       </main>
+
+      <div class="task-details-modal" id="taskDetailsModal">
+        <div class="modal-content">
+          <span class="close-modal" id="closeModal">&times;</span>
+          <h2>Task Details</h2>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="editTaskText">Task</label>
+              <input type="text" id="editTaskText" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="editTaskPriority">Priority</label>
+              <select id="editTaskPriority" class="form-control">
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="editTaskDueDate">Due Date</label>
+              <input type="date" id="editTaskDueDate" class="form-control" />
+            </div>
+            <div class="from-group">
+              <label for="editTaskCategory">Category</label>
+              <div class="category-input-container">
+                <input type="text" id="editTaskCategory" class="form-control" placeholder="Add category..." />
+                <button id="addCategoryBtn" class="btn-icon"><i class="fas fa-plus"></i></button>
+              </div>
+              <div class="category-tags" id="categoryTags"></div>
+            </div>
+            <div class="modal-actions">
+              <button id="saveTaskBtn" class="btn-primary">Save Changes</button>
+              <button id="cancelEditBtn" class="btn-secondary">Save Changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <footer class="footer__copy">
+      © <time datetime="2026" id="year">2026</time> Made width <span>♥</span> by
+      <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+    </footer>
+
+    <script src="/widgets_script/advancedTodoList.js"></script>
   </body>
 </html>
