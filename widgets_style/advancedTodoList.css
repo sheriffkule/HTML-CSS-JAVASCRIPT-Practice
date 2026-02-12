@@ -172,3 +172,41 @@ body {
         transition: .15s;
     }
 }
+
+.btn-icon {
+    background-color: transparent;
+    border: none;
+    color: var(--text-light);
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 5px;
+    transition: all var(--transition-speed) ease;
+
+    &:hover {
+        color: var(--primary-color);
+        transform: scale(1.1);
+    }
+}
+
+.task-options {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.filter-select {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: border-color var(--transition-speed) ease;
+}
+
+.filter-select:is(:focus, :focus-within) {
+    outline: none;
+    border-color: var(--primary-color);
+}
