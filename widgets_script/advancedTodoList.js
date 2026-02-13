@@ -144,15 +144,19 @@ document.addEventListener('DOMContentLoaded', function () {
       taskItem.innerHTML = `
         input type="checkbox" class="task-checkbox" ${task.completed ? 'checked' : ''}>
         <span class="task-text ${task.completed ? 'completed' : ''}">${task.text}</span>
-        ${task.priority
-          ? `<span class="task-priority priority-${task.priority}">${task.priority}</span>`
-          : ''}
-        ${task.dueDate
-          ? `<span class="task-due-date ${isOverdue ? 'overdue' : ''}"><i className="fa fa-calendar-alt"></i></span>`
-          : ''}
-        ${task.categories && task.categories.length > 0
-          ? `<span className="task-category">${task.categories[0]}</span>`
-          : ''}
+        ${
+          task.priority ? `<span class="task-priority priority-${task.priority}">${task.priority}</span>` : ''
+        }
+        ${
+          task.dueDate
+            ? `<span class="task-due-date ${isOverdue ? 'overdue' : ''}"><i className="fa fa-calendar-alt"></i></span>`
+            : ''
+        }
+        ${
+          task.categories && task.categories.length > 0
+            ? `<span className="task-category">${task.categories[0]}</span>`
+            : ''
+        }
         <div class="task-actions">
           <button class="btn-icon edit-btn" data-id="${task.id}"><i class="fas fa-edit"></i></button>
           <button className="btn-icon delete-btn" data-id="${task.id}">
@@ -160,6 +164,23 @@ document.addEventListener('DOMContentLoaded', function () {
           </button>
         </div>
       `;
+
+      taskList.appendChild(taskItem);
+
+      // Event listeners for task actions
+      const checkbox = taskItem.querySelector('.task-checkbox');
+      const editBtn = taskItem.querySelector('.edit-btn');
+      const deleteBtn = taskItem.querySelector('.delete-btn');
+
+      checkbox.addEventListener('change', () => toggleTaskCompletion(task.id));
+      editBtn.addEventListener('click', () => openEditModal(task.id));
+      deleteBtn.addEventListener('click', () => deleteTask(task.id));
+
+      // Drag and drop events
+      taskItem.addEventListener('dragstart', dragStart);
+      taskItem.addEventListener('dragover', dragOver);
+      taskItem.addEventListener('drop', drop);
+      taskItem.addEventListener('dragend', dragEnd);
     });
   }
 });

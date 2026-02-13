@@ -251,3 +251,91 @@ body {
 .task-list {
     list-style: none;
 }
+
+.task-item {
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: transform 0.2s ease, background-color var(--transition-speed) ease;
+    cursor: grab;
+}
+
+.task-item:last-child {
+    border-bottom: none;
+}
+
+.task-item:hover {
+    background-color: var(--bg-secondary);
+}
+
+.task-item.dragging {
+    opacity: 0.5;
+    background-color: rgb(74 111 165 / 0.1);
+}
+
+.task-checkbox {
+    min-width: 20px;
+    min-height: 20px;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+.task-text {
+    flex: 1;
+    font-size: 1rem;
+    word-break: break-word;
+}
+
+.task-text.completed {
+    text-decoration: line-through;
+    color: var(--text-light);
+}
+
+.task-priority {
+    font-size: 0.8rem;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-right: 10px;
+}
+
+.priority-high {
+    background-color: rgb(220 53 69 / 0.1);
+    color: var(--danger-color);
+}
+
+.priority-medium {
+    background-color: rgb(255 193 7 / 0.1);
+    color: var(--warning-color);
+}
+
+.priority-low {
+    background-color: rgb(23 162 184 / 0.1);
+    color: var(--info-color);
+}
+
+.task-due-date {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.task-due-date.overdue {
+    color: var(--danger-color);
+    font-weight: 600;
+}
+
+.task-category {
+    font-size: 0.8rem;
+    padding: 3px 8px;
+    border-radius: 12px;
+    background-color: rgb(40 167 69 / 0.1);
+    color: var(--success-color);
+    margin-right: 10px;
+}
