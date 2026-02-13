@@ -93,4 +93,73 @@ document.addEventListener('DOMContentLoaded', function () {
     renderTasks();
     updateStats();
   }
+
+  function renderTasks() {
+    const filterValue = filterSelect.value;
+    const priorityValue = priorityFilter.value;
+    const categoryValue = categoryFilter.value;
+    const searchValue = searchInput.value.toLowerCase();
+
+    const filteredTasks = tasks.filter((task) => {
+      // Filter by status
+      if (filterValue === 'completed' && !task.completed) return false;
+      if (filterValue === 'pending' && task.completed) return false;
+
+      // Filter by priority
+      if (priorityValue !== 'all' && task.priority !== priorityValue) return false;
+
+      // Filter by category
+      if (categoryValue !== 'all' && !task.categories.includes(categoryValue)) return false;
+
+      // Filter by search term
+      if (searchValue && !task.text.toLowerCase().includes(searchValue)) return false;
+
+      return true;
+    });
+
+    if (filteredTasks.length === 0) {
+      taskList.innerHTML = `
+        <div class="empty-state">
+          <i class="fas fa-tasks"></i>
+          <p>No tasks found.</p>
+          <small>Try changing your filters or add a new task.</small>
+        </div>
+      `;
+      return;
+    }
+
+    taskList.innerHTML = '';
+    filteredTasks((task, index) => {
+      const taskItem = document.createElement('li');
+      taskItem.className = 'task-item';
+      taskItem.setAttribute('data-id', task.id);
+      taskItem.setAttribute('draggable', true);
+
+      // Check if task i overdue
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const dueDate = task.dueDate ? new Date(task.dueDate) : null;
+      const isOverdue = dueDate && dueDate < today && !task.completed;
+
+      taskItem.innerHTML = `
+        input type="checkbox" class="task-checkbox" ${task.completed ? 'checked' : ''}>
+        <span class="task-text ${task.completed ? 'completed' : ''}">${task.text}</span>
+        ${task.priority
+          ? `<span class="task-priority priority-${task.priority}">${task.priority}</span>`
+          : ''}
+        ${task.dueDate
+          ? `<span class="task-due-date ${isOverdue ? 'overdue' : ''}"><i className="fa fa-calendar-alt"></i></span>`
+          : ''}
+        ${task.categories && task.categories.length > 0
+          ? `<span className="task-category">${task.categories[0]}</span>`
+          : ''}
+        <div class="task-actions">
+          <button class="btn-icon edit-btn" data-id="${task.id}"><i class="fas fa-edit"></i></button>
+          <button className="btn-icon delete-btn" data-id="${task.id}">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </div>
+      `;
+    });
+  }
 });
