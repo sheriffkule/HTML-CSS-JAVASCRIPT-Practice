@@ -183,4 +183,111 @@ document.addEventListener('DOMContentLoaded', function () {
       taskItem.addEventListener('dragend', dragEnd);
     });
   }
+
+  function toggleTaskCompletion(id) {
+    const task = tasks.find((task) => task.id === id);
+    if (task) {
+      task.completed = !task.completed;
+      saveTasks();
+      updateStats();
+    }
+  }
+
+  function deleteTask(id) {
+    if (confirm('Are you sure you want to delete this task?')) {
+      tasks = tasks.filter((task) => task.id !== id);
+      saveTasks();
+      renderTasks();
+      updateStats();
+    }
+  }
+
+  function openEditModal(id) {
+    const task = tasks.find((task) => task.id === id);
+    if (!task) return;
+
+    currentEditId = id;
+    currentCategories = [...task.categories];
+
+    editTaskText.value = task.text;
+    editTaskPriority.value = task.priority;
+    editTaskDueDate.value = task.dueDate || '';
+
+    // Render categories
+    renderCategoryTags();
+
+    taskDetailsModal.style.display = 'flex';
+  }
+
+  function closeModal() {
+    taskDetailsModal.style.display = 'none';
+    currentEditId = null;
+    currentCategories = [];
+  }
+
+  function saveTaskChanges() {
+    if (!currentEditId) return;
+
+    const task = tasks.find((task) => task.id === currentEditId);
+    if (!task) return;
+
+    task.text = editTaskText.value.trim();
+    task.priority = editTaskPriority.value;
+    task.dueDate = editTaskDueDate.value || '';
+    task.categories = [...currentCategories];
+
+    saveTasks();
+    renderTasks();
+    updateCategoryFilter();
+    closeModal();
+  }
+
+  function addCategory() {
+    const category = editTaskCategory.value.trim();
+    if (!category || currentCategories.includes(category)) return;
+
+    currentCategories.push(category);
+
+    // Add to global categories if not exist
+    if (!categories.includes(category)) {
+      categories.push(category);
+      localStorage.setItem('categories', JSON.stringify(categories));
+      updateCategoryFilter();
+    }
+
+    editTaskCategory.value = '';
+    renderCategoryTags();
+  }
+
+  function removeCategory(category) {
+    currentCategories = currentCategories.filter((cat) => cat !== category);
+    renderCategoryTags();
+  }
+
+  function renderCategoryTags() {
+    categoryTags.innerHTML = '';
+    currentCategories.forEach((category) => {
+      const tag = document.createElement('span');
+      tag.className = 'category-tag';
+      tag.innerHTML = `
+        ${category}
+        <button onclick="removeCategory('${category}')">
+          <i class="fas fa-times"></i>
+        </button>
+      `;
+      categoryTags.appendChild(tag);
+    });
+  }
+
+  function updateCategoryFilter() {
+    categoryFilter.innerHTML = html`
+      <option value="all">All Categories</option>
+      ${categories
+        .map(
+          (category) => `
+      <option value="${category}">${category}</option>`,
+        )
+        .join('')}
+    `;
+  }
 });
