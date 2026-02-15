@@ -290,4 +290,45 @@ document.addEventListener('DOMContentLoaded', function () {
         .join('')}
     `;
   }
+
+  function saveTasks() {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }
+
+  function updateStats() {
+    totalTasksEl.textContent = tasks.length;
+    completedTasksEl.textContent = tasks.filter((task) => task.completed).length;
+    pendingTasksEl.textContent = tasks.filter((task) => !task.completed).length;
+  }
+
+  function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeIcon(newTheme);
+  }
+
+  function updateThemeIcon(theme) {
+    const icon = themeToggle.querySelector('i');
+    icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+  }
+
+  function formatDate(dateString) {
+    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  }
+
+  // Drag and drop functions
+  function initDragAndDrop() {
+    const listItems = document.querySelectorAll('.task-item');
+
+    listItems.forEach((item) => {
+      item.addEventListener('dragstart', dragStart);
+      item.addEventListener('dragover', dragOver);
+      item.addEventListener('drop', drop);
+      item.addEventListener('dragend', dragEnd);
+    });
+  }
 });

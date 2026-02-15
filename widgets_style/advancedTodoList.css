@@ -476,3 +476,82 @@ body {
     font-size: 1.1rem;
     margin-bottom: 15px;
 }
+
+.theme-toggle button {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-content: center;
+    transition: color var(--transition-speed) ease;
+
+    &:hover {
+        color: var(--secondary-color);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .app-container {
+        padding: 15px;
+    }
+    .task-options {
+        flex-direction: column;
+    }
+    .task-filters {
+        flex-direction: column;
+    }
+    .search-container {
+        width: 100%;
+    }
+    .search-container input {
+        width: 100%;
+    }
+    .task-item {
+        flex-wrap: wrap;
+    }
+    .task-actions {
+        margin-left: auto;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+    .modal-content {
+        width: 95%;
+        padding: 15px;
+    }
+    .modal-actions {
+        flex-direction: column;
+    }
+    .modal-actions button {
+        width: 100%;
+    }
+}
