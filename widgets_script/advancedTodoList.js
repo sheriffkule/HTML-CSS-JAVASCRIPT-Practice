@@ -33,29 +33,35 @@ document.addEventListener('DOMContentLoaded', function () {
   init();
 
   // Event listeners
-  addTaskBtn.addEventListener('click', addTask);
-  taskInput.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') addTask();
-  });
+  if (addTaskBtn) addTaskBtn.addEventListener('click', addTask);
+  if (taskInput) {
+    taskInput.addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') addTask();
+    });
+  }
 
-  filterSelect.addEventListener('change', renderTasks);
-  priorityFilter.addEventListener('change', renderTasks);
-  categoryFilter.addEventListener('change', renderTasks);
+  if (filterSelect) filterSelect.addEventListener('change', renderTasks);
+  if (priorityFilter) priorityFilter.addEventListener('change', renderTasks);
+  if (categoryFilter) categoryFilter.addEventListener('change', renderTasks);
 
-  searchBtn.addEventListener('click', renderTasks);
-  searchInput.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') renderTasks();
-  });
+  if (searchBtn) searchBtn.addEventListener('click', renderTasks);
+  if (searchInput) {
+    searchInput.addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') renderTasks();
+    });
+  }
 
-  themeToggle.addEventListener('click', toggleTheme);
+  if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
 
-  closeModalBtn.addEventListener('click', closeModal);
-  saveTaskBtn.addEventListener('click', saveTaskChanges);
-  cancelEditBtn.addEventListener('click', closeModal);
-  addCategoryBtn.addEventListener('click', addCategory);
-  editTaskCategory.addEventListener(keypress, function (e) {
-    if (e.key === 'Enter') addCategory();
-  });
+  if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+  if (saveTaskBtn) saveTaskBtn.addEventListener('click', saveTaskChanges);
+  if (cancelEditBtn) cancelEditBtn.addEventListener('click', closeModal);
+  if (addCategoryBtn) addCategoryBtn.addEventListener('click', addCategory);
+  if (editTaskCategory) {
+    editTaskCategory.addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') addCategory();
+    });
+  }
 
   // Initialize drag and drop
   initDragAndDrop();
@@ -129,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     taskList.innerHTML = '';
-    filteredTasks((task, index) => {
+    filteredTasks.forEach((task, index) => {
       const taskItem = document.createElement('li');
       taskItem.className = 'task-item';
       taskItem.setAttribute('data-id', task.id);
@@ -142,24 +148,24 @@ document.addEventListener('DOMContentLoaded', function () {
       const isOverdue = dueDate && dueDate < today && !task.completed;
 
       taskItem.innerHTML = `
-        input type="checkbox" class="task-checkbox" ${task.completed ? 'checked' : ''}>
+        <input type="checkbox" class="task-checkbox" ${task.completed ? 'checked' : ''}>
         <span class="task-text ${task.completed ? 'completed' : ''}">${task.text}</span>
         ${
           task.priority ? `<span class="task-priority priority-${task.priority}">${task.priority}</span>` : ''
         }
         ${
           task.dueDate
-            ? `<span class="task-due-date ${isOverdue ? 'overdue' : ''}"><i className="fa fa-calendar-alt"></i></span>`
+            ? `<span class="task-due-date ${isOverdue ? 'overdue' : ''}"><i class="fa fa-calendar-alt"></i></span>`
             : ''
         }
         ${
           task.categories && task.categories.length > 0
-            ? `<span className="task-category">${task.categories[0]}</span>`
+            ? `<span class="task-category">${task.categories[0]}</span>`
             : ''
         }
         <div class="task-actions">
           <button class="btn-icon edit-btn" data-id="${task.id}"><i class="fas fa-edit"></i></button>
-          <button className="btn-icon delete-btn" data-id="${task.id}">
+          <button class="btn-icon delete-btn" data-id="${task.id}">
             <i class="fas fa-trash-alt"></i>
           </button>
         </div>
@@ -280,7 +286,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function updateCategoryFilter() {
-    categoryFilter.innerHTML = html`
+    categoryFilter.innerHTML = `
       <option value="all">All Categories</option>
       ${categories
         .map(
@@ -331,4 +337,60 @@ document.addEventListener('DOMContentLoaded', function () {
       item.addEventListener('dragend', dragEnd);
     });
   }
+
+  function dragStart(e) {
+    dragStartIndex = +this.closest('li').getAttribute('data-id');
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/html', this.innerHTML);
+    this.classList.add('dragging');
+  }
+
+  function dragOver(e) {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    return false;
+  }
+
+  function drop(e) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    const dragEndIndex = +this.getAttribute('data-id');
+    if (dragStartIndex === dragEndIndex) return;
+
+    // Reorder tasks array
+    const startIdx = tasks.findIndex((task) => task.id === dragStartIndex);
+    const endIdx = tasks.findIndex((task) => task.id === dragEndIndex);
+
+    if (startIdx === -1 || endIdx === -1) return;
+
+    const [removed] = tasks.splice(startIdx, 1);
+    tasks.splice(endIdx, 0, removed);
+
+    saveTasks();
+    renderTasks();
+  }
+
+  function dragEnd() {
+    this.classList.remove('dragging');
+  }
+
+  // Make removeCategory available globally for the category tags
+  window.removeCategory = removeCategory;
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.dateTime = currentYear.toString();
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
