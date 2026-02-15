@@ -18,6 +18,105 @@
           (mph), meters per second (m/s), knots, and Mach number.
         </p>
       </header>
+
+      <div class="converter-card">
+        <div class="converter-header">
+          <h2 class="converter-title">Speed Converter</h2>
+          <button class="swap-btn" id="swapBtn"><i class="fas fa-exchange-alt"></i></button>
+        </div>
+
+        <div class="input-group">
+          <div class="input-row">
+            <div class="input-container">
+              <label for="inputValue">Value</label>
+              <input type="number" id="inputValue" placeholder="Enter speed value" step="any" />
+            </div>
+            <div class="input-container">
+              <label for="inputUnit">From Unit:</label>
+              <select id="inputUnit">
+                <option value="kmh">kilometers per hour (km/h)</option>
+                <option value="mph">Miles per hour (mph)</option>
+                <option value="ms">Meters per second (m/s)</option>
+                <option value="knot">Knots (kn)</option>
+                <option value="mach">Mach number (Ma)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="input-row">
+            <div class="input-container">
+              <label for="outputValue">Result:</label>
+              <div class="result-container">
+                <div class="result-title">Converted Value</div>
+                <div class="result-value" id="outputValue">0</div>
+              </div>
+            </div>
+            <div class="input-container">
+              <label for="outputUnit">To Unit:</label>
+              <select id="outputUnit">
+                <option value="kmh">kilometers per hour (km/h)</option>
+                <option value="mph">Miles per hour (mph)</option>
+                <option value="ms">Meters per second (m/s)</option>
+                <option value="knot">Knots (kn)</option>
+                <option value="mach">Mach number (Ma)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="speedometer-container">
+          <div class="speedometer">
+            <div class="speedometer-bg"></div>
+            <div class="speedometer-needle" id="speedNeedle"></div>
+          </div>
+          <div class="speedometer-labels">
+            <span class="speedometer-label">0</span>
+            <span class="speedometer-label">500</span>
+            <span class="speedometer-label">1000 km/h</span>
+          </div>
+          <div class="speed-value" id="speedValue">0 km/h</div>
+        </div>
+
+        <div class="comparison-section">
+          <h3 class="comparison-title">Comparison with Common Speeds</h3>
+          <div class="comparison-items" id="comparisonItems"></div>
+        </div>
+      </div>
+
+      <div class="unit-info">
+        <h3>About Speed Units</h3>
+        <p>
+          Speed is the rate of change of distance with time. Different units are used in different contexts:
+        </p>
+        <ul>
+          <li>
+            <strong>km/h (Kilometers per hour)</strong>: Commonly used in most countries for road speeds and
+            weather reports.
+          </li>
+          <li>
+            <strong>mph (Miles per hour)</strong>: Primarily used in the United States and United Kingdom
+          </li>
+          <li><strong>m/s</strong>: The SI unit for speed, often used in scientific contexts.</li>
+          <li>
+            <strong>Knots</strong>: Used in aviation and maritime contexts, equal to one nautical mile per
+            hour.
+          </li>
+          <li>
+            <strong>Mach number</strong>: Ratio of speed to the speed of sound in the surrounding medium
+            (varies with altitude).
+          </li>
+        </ul>
+      </div>
+
+      <div class="examples-section">
+        <h3 class="examples-title">Common Speed Conversions</h3>
+        <div class="examples-grid" id="examplesGrid"></div>
+      </div>
     </div>
+
+    <footer class="footer__copy">
+      © <time datetime="2026" id="year">2026</time> Made width <span>♥</span> by
+      <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+    </footer>
   </body>
 </html>
