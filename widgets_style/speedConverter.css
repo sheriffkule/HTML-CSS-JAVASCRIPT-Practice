@@ -24,6 +24,10 @@ body {
     line-height: 1.5;
 }
 
+p, li {
+    text-wrap: pretty;
+}
+
 .container {
     max-width: 900px;
     margin: 2rem auto;
@@ -45,7 +49,6 @@ header {
         font-size: 1.1rem;
         max-width: 700px;
         margin: 0 auto;
-        text-wrap: pretty;
     }
 }
 
@@ -266,4 +269,50 @@ input {
     bottom: -6px;
     left: 50%;
     transform: translateX(-50%);
+}
+
+.speedometer-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+.speedometer-label {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+.speed-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-top: 0.5rem;
+}
+
+.unit-info {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--box-shadow);
+    margin-bottom: 2rem;
+
+    h3 {
+        color: var(--primary);
+        margin-bottom: 1rem;
+        font-size: 1.3rem;
+    }
+    p {
+        margin-bottom: 1rem;
+        color: #495057;
+    }
+    ul {
+        margin-left: 1.5rem;
+        color: #495057;
+    }
+    li {
+        margin-bottom: .5rem;
+        list-style-type: circle;
+    }
 }
