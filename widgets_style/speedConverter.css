@@ -197,3 +197,73 @@ input {
     font-size: 0.9rem;
     color: #6c757d;
 }
+
+.speedometer-container {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.speedometer {
+    position: relative;
+    width: 200px;
+    height: 100px;
+    margin: 0 auto 1rem;
+}
+
+.speedometer-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 100px 100px 0 0;
+    background: conic-gradient(
+        #ff0000 0%,
+        #ff5e00 10%,
+        #ffbb00 20%,
+        #d4ff00 30%,
+        #73ff00 40%,
+        #00ff22 50%,
+        #00ff88 60%,
+        #00ffea 70%,
+        #0095ff 80%,
+        #0040ff 90%,
+        #2b00ff 100%
+    );
+    clip-path: circle(100px at center);
+    overflow: hidden;
+}
+
+.speedometer-bg::after {
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    background: white;
+    border-radius: 50%;
+    top: 20%;
+    left: 10%;
+}
+
+.speedometer-needle {
+    position: absolute;
+    width: 3px;
+    height: 50%;
+    background: var(--dark);
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: bottom center;
+    transition: transform 1s ease-out;
+    z-index: 2;
+}
+
+.speedometer-needle::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: var(--dark);
+    border-radius: 50%;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+}
