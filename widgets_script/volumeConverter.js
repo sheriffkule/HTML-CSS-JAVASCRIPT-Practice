@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const favoritesGrid = document.getElementById('favorites-grid');
   const resetBtn = document.getElementById('reset-values');
   const tabs = document.querySelectorAll('.tab');
-  const tabContent = document.querySelectorAll('.tab-content');
+  const tabContents = document.querySelectorAll('.tab-content');
 
   // Conversion factors (to milliliters)
   const conversionFactors = {
@@ -46,11 +46,60 @@ document.addEventListener('DOMContentLoaded', function () {
     in3: 'in³',
     ft3: 'ft³',
   };
-});
 
-// Initialize
-let history = JSON.parse(localStorage.getItem('conversionHistory')) || [];
-let favorites = JSON.parse(localStorage.getItem('conversionFavorites')) || [];
-updateHistoryList();
-updateFavoritesGrid();
-convert();
+  // Initialize
+  let history = JSON.parse(localStorage.getItem('conversionHistory')) || [];
+  let favorites = JSON.parse(localStorage.getItem('conversionFavorites')) || [];
+  updateHistoryList();
+  updateFavoritesGrid();
+  convert();
+
+  // Event listeners
+  fromValueInput.addEventListener('input', convert);
+  fromUnitSelect.addEventListener('change', convert);
+  toUnitSelect.addEventListener('change', convert);
+  swapBtn.addEventListener('click', swapUnits);
+  clearHistoryBtn.addEventListener('click', clearHistory);
+  addFavoriteBtn.addEventListener('click', addFavorite);
+  resetBtn.addEventListener('click', resetValues);
+
+  // Tab switching
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const tabId = tab.getAttribute('data-tab');
+
+      // Update active tab
+      tabs.forEach((t) => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      // Show corresponding content
+      tabContents.forEach((content) => {
+        content.classList.remove('active');
+        if (content.id === tabId) {
+          content.classList.add('active');
+        }
+      });
+    });
+  });
+
+  // Conversion function
+  function convert() {
+    const fromValue = parseFloat(fromValueInput.value) || 0;
+    const fromUnit = fromUnitSelect.value;
+    const toUnit = toUnitSelect.value;
+
+    // Convert to milliliters first
+    const valueInMl = fromValue * conversionFactors[fromUnit];
+
+    // Convert to target unit
+    const result = valueInMl / conversionFactors[toUnit];
+
+    // Update UI
+    toValueInput.value = result.toFixed(6).replace(/\.?0+$/, '');
+    toUnitIcon.textContent = unitLabels[toUnit];
+    resultText.textContent = `${fromValue} ${unitLabels[fromUnit]} = ${result.toFixed(6).replace(/\.?0+$/, '')} ${unitLabels[toUnit]}`;
+
+    // Add to history
+    if (fromValue !== 0) addToHistory(fromValue, fromUnit, result, toUnit);
+  }
+});

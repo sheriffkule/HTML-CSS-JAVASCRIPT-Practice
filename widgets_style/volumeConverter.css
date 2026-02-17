@@ -19,7 +19,7 @@
 }
 
 body {
-    background-color: #f5f7ff;
+    background-color: #f0f3ff;
     color: var(--dark);
     line-height: 1.5;
     padding: 20px;
@@ -130,4 +130,129 @@ input {
     top: 40px;
     color: #555;
     font-size: 0.9rem;
+}
+
+.swap-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--transition);
+    align-self: center;
+    font-size: 1.2rem;
+
+    &:hover {
+        background: var(--secondary);
+        transform: rotate(180deg) scale(1.1);
+        outline: 2px solid var(--primary);
+    }
+    &:active {
+        transform: rotate(180deg) scale(1);
+    }
+}
+
+.result-container {
+    background: #eef0f1;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    margin-top: 20px;
+}
+
+.result-title {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.result-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.conversion-history {
+    margin-top: 30px;
+}
+
+.history-title {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.history-list {
+    list-style: none;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.history-item {
+    padding: 10px 15px;
+    border-bottom: 1px solid #ccd4db;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.history-conversion {
+    font-weight: 500;
+}
+
+.history-value {
+    color: var(--primary);
+}
+
+.history-date {
+    font-size: 0.8rem;
+    color: #777;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+
+    &:hover {
+        transform: translateY(-2px) scale(1.02);
+    }
+    &:active {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+
+    &:hover {
+        background: var(--secondary);
+    }
+}
+
+.btn-secondary {
+    background: #e9ecef;
+    color: var(--dark);
+
+    &:hover {
+        background: #dee2e6;
+    }
 }
