@@ -42,12 +42,18 @@ const examples = [
 
 // Initialize the app
 function init() {
-  // Set up event listeners
-  inputValue.addEventListener('input', convertSpeed);
-  inputValue.addEventListener('input', convertSpeed);
-  outputUnit.addEventListener('input', convertSpeed);
-  swapBtn.addEventListener('click', swapUnits);
-  themeToggle.addEventListener('click', toggleTheme);
+  // Set up event listeners (guard elements that may be absent)
+  if (inputValue) inputValue.addEventListener('input', convertSpeed);
+  if (inputUnit) inputUnit.addEventListener('input', convertSpeed);
+  if (outputUnit) outputUnit.addEventListener('input', convertSpeed);
+  // also listen for change on selects to cover non-text inputs
+  if (inputUnit) inputUnit.addEventListener('change', convertSpeed);
+  if (outputUnit) outputUnit.addEventListener('change', convertSpeed);
+  if (swapBtn) swapBtn.addEventListener('click', swapUnits);
+  if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+
+  // Apply saved theme (if any)
+  applySavedTheme();
 
   // Load examples
   loadExamples();
@@ -105,20 +111,20 @@ function updateSpeedometer(kmhValue) {
 }
 
 // Update comparison items
-function updateComparisons(kmhValue) {
+function updateComparisons(currentKmh) {
   comparisonItems.innerHTML = '';
 
   commonSpeeds.forEach((item) => {
     const itemKmh = item.value * conversionFactors[item.unit];
+    if (!itemKmh || !isFinite(itemKmh)) return;
+
     const ratio = currentKmh / itemKmh;
 
     let comparisonText = '';
-    if (ratio < 0.1) {
-      comparisonText = `${(1 / ratio).toFixed(1)}x slower than`;
-    } else if (ratio < 0.9) {
-      comparisonText = `${(1 / ratio).toFixed(1)}x slower than`;
+    if (ratio < 0.9) {
+      comparisonText = `${(1 / ratio).toFixed(1)} x slower than`;
     } else if (ratio > 1.1) {
-      comparisonText = `${(1 / ratio).toFixed(1)}x faster than`;
+      comparisonText = `${ratio.toFixed(1)} x faster than`;
     } else {
       comparisonText = 'About the same as';
     }
@@ -134,6 +140,27 @@ function updateComparisons(kmhValue) {
   });
 }
 
+// Apply saved theme from localStorage (safe)
+function applySavedTheme() {
+  if (!themeToggle) return;
+  const saved = localStorage.getItem('speedConverterTheme');
+  const icon = themeToggle.querySelector && themeToggle.querySelector('i');
+
+  if (saved === 'dark') {
+    document.body.classList.add('dark-theme');
+    if (icon) {
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+    }
+  } else {
+    document.body.classList.remove('dark-theme');
+    if (icon) {
+      icon.classList.remove('fa-sun');
+      icon.classList.add('fa-moon');
+    }
+  }
+}
+
 // Load example conversions
 function loadExamples() {
   examplesGrid.innerHTML = '';
@@ -146,7 +173,8 @@ function loadExamples() {
     exampleElement.className = 'example-card';
     exampleElement.innerHTML = `
       <div class="example-value">
-        ${example.from} ${getUnitName(example.fromUnit)} → ${result.toFixed(2)} ${getUnitName(example.toUnit)}
+        ${example.from} ${getUnitName(example.fromUnit)} <span> → </span>${result.toFixed(2)}
+        ${getUnitName(example.toUnit)}
       </div>
       <div class="example-label">
         ${getUnitName(example.fromUnit, true)} to ${getUnitName(example.toUnit, true)}
@@ -171,15 +199,22 @@ function getUnitName(unit, short = false) {
 
 // Toggle dark/light theme
 function toggleTheme() {
+  if (!themeToggle) return;
   document.body.classList.toggle('dark-theme');
-  const icon = themeToggle.querySelector('i');
+  const icon = themeToggle.querySelector && themeToggle.querySelector('i');
 
   if (document.body.classList.contains('dark-theme')) {
-    icon.classList.remove('fa-moon');
-    icon.classList.add('fa-sun');
+    if (icon) {
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+    }
+    localStorage.setItem('speedConverterTheme', 'dark');
   } else {
-    icon.classList.remove('fa-sun');
-    icon.classList.add('fa-moon');
+    if (icon) {
+      icon.classList.remove('fa-sun');
+      icon.classList.add('fa-moon');
+    }
+    localStorage.setItem('speedConverterTheme', 'light');
   }
 }
 
