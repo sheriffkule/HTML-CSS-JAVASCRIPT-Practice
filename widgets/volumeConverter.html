@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Volume Conversion Tool</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/volumeConverter.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+        <h1>Volume Conversion Tool</h1>
+        <p class="subtitle">Convert between different volume units with ease.</p>
+      </header>
+
+      <section class="tabs">
+        <div class="tab active" data-tab="converter">Converter</div>
+        <div class="tab" data-tab="favorites">Favorites</div>
+        <div class="tab" data-tab="info">Info</div>
+      </section>
+
+      <section class="tab-content active" id="converter">
+        <div class="converter-container">
+          <div class="input-group">
+            <div class="input-row">
+              <div class="input-field">
+                <label for="from-value">From</label>
+                <input type="number" id="from-value" placeholder="Enter value..." value="0" step="anu" />
+              </div>
+              <div class="input-field">
+                <label for="from-unit">Unit</label>
+                <select id="from-unit">
+                  <option value="ml">Milliliters (ml)</option>
+                  <option value="l">Liters (l)</option>
+                  <option value="tsp">Teaspoons (tsp)</option>
+                  <option value="tbsp">Tablespoons (tbsp)</option>
+                  <option value="fl-oz">Fluid Ounces (fl oz)</option>
+                  <option value="cup" selected>Cups (cup)</option>
+                  <option value="pt">Pints (pt)</option>
+                  <option value="qt">Quarts (qt)</option>
+                  <option value="gal">Gallons (gal)</option>
+                  <option value="m3">Cubic Meters (m³)</option>
+                  <option value="in3">Cubic Inches (in³)</option>
+                  <option value="ft3">Cubic Feet (ft³)</option>
+                </select>
+              </div>
+            </div>
+
+            <button class="swap-btn" id="swap-units"><i class="fas fa-exchange-alt"></i></button>
+
+            <div class="input-row">
+              <div class="input-field">
+                <label for="to-value">To</label>
+                <input type="number" id="to-value" placeholder="Result" readonly />
+                <span class="unit-icon" id="to-unit-icon">gal</span>
+              </div>
+              <div class="input-field">
+                <label for="to-unit">Unit</label>
+                <select id="to-unit">
+                  <option value="ml">Milliliters (ml)</option>
+                  <option value="l">Liters (l)</option>
+                  <option value="tsp">Teaspoons (tsp)</option>
+                  <option value="tbsp">Tablespoons (tbsp)</option>
+                  <option value="fl-oz">Fluid Ounces (fl oz)</option>
+                  <option value="cup">Cups (cup)</option>
+                  <option value="pt">Pints (pt)</option>
+                  <option value="qt">Quarts (qt)</option>
+                  <option value="gal" selected>Gallons (gal)</option>
+                  <option value="m3">Cubic Meters (m³)</option>
+                  <option value="in3">Cubic Inches (in³)</option>
+                  <option value="ft3">Cubic Feet (ft³)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="result-container">
+            <p class="result-title">Conversion Result</p>
+            <p class="result-value" id="result-text">1 cup = 0.0625 gal</p>
+          </div>
+
+          <div class="action-buttons">
+            <button class="btn-secondary" id="add-favorite">
+              <i class="far fa-star"></i> Add to Favorites
+            </button>
+            <button class="btn-primary" id="reset-values"><i class="fas fa-redo"></i> Reset</button>
+          </div>
+
+          <div class="conversion-history">
+            <div class="history-title">
+              <span>Recent Conversions</span>
+              <button class="clear-history" id="clear-history">Clear All</button>
+            </div>
+            <ul class="history-list" id="history-list"></ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="tab-content" id="favorites"></section>
+    </div>
+  </body>
+</html>
