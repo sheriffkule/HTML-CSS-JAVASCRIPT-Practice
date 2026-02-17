@@ -14,12 +14,13 @@ document.addEventListener('DOMContentLoaded', function () {
   const resetBtn = document.getElementById('reset-values');
   const tabs = document.querySelectorAll('.tab');
   const tabContents = document.querySelectorAll('.tab-content');
+  const themeToggle = document.getElementById('themeToggle');
 
   // Conversion factors (to milliliters)
   const conversionFactors = {
     ml: 1,
     l: 1000,
-    tsb: 4.92892,
+    tsp: 4.92892,
     tbsp: 14.7868,
     'fl-oz': 29.5735,
     cup: 240,
@@ -35,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const unitLabels = {
     ml: 'ml',
     l: 'l',
-    tsb: 'tsb',
+    tsp: 'tsp',
     tbsp: 'tbsp',
     'fl-oz': 'fa oz',
     cup: 'cup',
@@ -67,20 +68,30 @@ document.addEventListener('DOMContentLoaded', function () {
   tabs.forEach((tab) => {
     tab.addEventListener('click', () => {
       const tabId = tab.getAttribute('data-tab');
-
       // Update active tab
       tabs.forEach((t) => t.classList.remove('active'));
       tab.classList.add('active');
-
       // Show corresponding content
       tabContents.forEach((content) => {
-        content.classList.remove('active');
         if (content.id === tabId) {
           content.classList.add('active');
+        } else {
+          content.classList.remove('active');
         }
       });
     });
   });
+
+  // Reset all input values and result
+  function resetValues() {
+    fromValueInput.value = '';
+    toValueInput.value = '';
+    resultText.textContent = '';
+    // Optionally reset selects to default (first option)
+    if (fromUnitSelect.options.length) fromUnitSelect.selectedIndex = 0;
+    if (toUnitSelect.options.length) toUnitSelect.selectedIndex = 0;
+    toUnitIcon.textContent = '';
+  }
 
   // Conversion function
   function convert() {
@@ -148,22 +159,190 @@ document.addEventListener('DOMContentLoaded', function () {
     history.forEach((item) => {
       const li = document.createElement('li');
       li.className = 'history-item';
+      const toValueSafe =
+        typeof item.toValue === 'number' && isFinite(item.toValue) ? item.toValue.toFixed(4) : '';
       li.innerHTML = `
-        <div>
-          <span class="history-conversion"
-            >${item.fromValue} ${unitLabels[item.fromUnit]} → ${item.toValue.toFixed(4)}
-            ${unitLabels[item.toUnit]}</span
-          >
-        </div>
-        <button
-          class="use-history"
-          data-from-value="${item.fromValue}"
-          data-from-unit="${item.fromUnit}"
-          data-to-unit="${item.toUnit}">
-          <i class="fas fa-redo"></i>
-        </button>
-      `;
-      historyList.appendChild(li)
+          <div>
+            <span class="history-conversion">${item.fromValue} ${unitLabels[item.fromUnit]} → ${toValueSafe} ${unitLabels[item.toUnit]}</span>
+          </div>
+          <button
+            class="use-history"
+            data-from-value="${item.fromValue}"
+            data-from-unit="${item.fromUnit}"
+            data-to-unit="${item.toUnit}">
+            <i class="fas fa-redo"></i>
+          </button>
+        `;
+      historyList.appendChild(li);
+    });
+
+    // Add event listeners to use history buttons
+    document.querySelectorAll('.use-history').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        const fromValue = this.getAttribute('data-from-value');
+        const fromUnit = this.getAttribute('data-from-unit');
+        const toUnit = this.getAttribute('data-to-unit');
+
+        fromValueInput.value = fromValue;
+        fromUnitSelect.value = fromUnit;
+        toUnitSelect.value = toUnit;
+        convert();
+      });
     });
   }
+
+  // Clear history
+  function clearHistory() {
+    if (confirm('Are you sure you want to clear all history?')) {
+      history = [];
+      localStorage.setItem('conversionHistory', JSON.stringify(history));
+      updateHistoryList();
+    }
+  }
+
+  // Add favorite
+  function addFavorite() {
+    const fromValue = parseFloat(fromValueInput.value) || 0;
+    const fromUnit = fromUnitSelect.value;
+    const toUnit = toUnitSelect.value;
+
+    if (fromValue === 0) {
+      alert('Please enter a valid value to add to favorites!');
+      return;
+    }
+
+    // Check if this favorite already exist
+    const exist = favorites.some((fav) => fav.fromUnit === fromUnit && fav.toUnit === toUnit);
+
+    if (exist) {
+      alert('This conversion is already in your favorites!');
+      return;
+    }
+
+    // Add to favorites
+    favorites.push({
+      fromValue,
+      fromUnit,
+      toUnit,
+      timestamp: new Date().toISOString(),
+    });
+
+    localStorage.setItem('conversionFavorites', JSON.stringify(favorites));
+    updateFavoritesGrid();
+    alert('Added to favorites');
+  }
+
+  // Update favorites grid
+  function updateFavoritesGrid() {
+    favoritesGrid.innerHTML = '';
+
+    if (favorites.length === 0) {
+      favoritesGrid.innerHTML = '<p>No favorites yet. Add some using the "Add to Favorites" button.</p>';
+      return;
+    }
+
+    favorites.forEach((fav, index) => {
+      // Convert to get current value
+      const valueInMl = fav.fromValue * conversionFactors[fav.fromUnit];
+      const result = valueInMl / conversionFactors[fav.toUnit];
+
+      const favoriteItem = document.createElement('div');
+      favoriteItem.className = 'favorite-item';
+      favoriteItem.innerHTML = `
+        <div class="favorite-value">${fav.fromValue} ${unitLabels[fav.fromUnit]}</div>=
+        <div class="favorite-conversion">${result.toFixed(4)} ${unitLabels[fav.toUnit]}</div>
+        <button class="remove-favorite" data-index="${index}">
+          <i class="fas fa-times"></i>
+        </button>
+      `;
+
+      // Click to use this favorite
+      favoriteItem.addEventListener('click', function (e) {
+        // Don't trigger if clicking the remove button
+        if (!e.target.closest('.remove-favorite')) {
+          fromValueInput.value = fav.fromValue;
+          fromUnitSelect.value = fav.fromUnit;
+          toUnitSelect.value = fav.toUnit;
+          convert();
+
+          // Switch to converter tab
+          document.querySelector('.tab[data-tab="converter"]').click();
+        }
+      });
+
+      // Remove button
+      const removeBtn = favoriteItem.querySelector('.remove-favorite');
+      removeBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (confirm('Remove this favorite?')) {
+          favorites.splice(index, 1);
+          localStorage.setItem('conversionFavorites', JSON.stringify(favorites));
+          updateFavoritesGrid();
+        }
+      });
+
+      favoritesGrid.appendChild(favoriteItem);
+    });
+  }
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.dateTime = currentYear.toString();
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
+
+// Apply saved theme from localStorage (safe)
+function applySavedTheme() {
+  if (!themeToggle) return;
+  const saved = localStorage.getItem('volumeConversionTheme');
+  const icon = themeToggle.querySelector && themeToggle.querySelector('i');
+
+  if (saved === 'dark') {
+    document.body.classList.add('dark-theme');
+    if (icon) {
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+    }
+  } else {
+    document.body.classList.remove('dark-theme');
+    if (icon) {
+      icon.classList.remove('fa-sun');
+      icon.classList.add('fa-moon');
+    }
+  }
+}
+
+function toggleTheme() {
+  if (!themeToggle) return;
+  document.body.classList.toggle('dark-theme');
+  const icon = themeToggle.querySelector && themeToggle.querySelector('i');
+
+  if (document.body.classList.contains('dark-theme')) {
+    if (icon) {
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+    }
+    localStorage.setItem('volumeConversionTheme', 'dark');
+  } else {
+    if (icon) {
+      icon.classList.remove('fa-sun');
+      icon.classList.add('fa-moon');
+    }
+    localStorage.setItem('speedConverterTheme', 'light');
+  }
+}
+if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+
+// Apply saved theme (if any)
+applySavedTheme();

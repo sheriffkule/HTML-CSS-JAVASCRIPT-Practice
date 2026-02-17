@@ -16,6 +16,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: all 0.4s ease-in;
 }
 
 body {
@@ -55,7 +56,7 @@ header {
         margin-bottom: 20px;
         text-wrap: pretty;
     }
-    button {
+    button, .use-history {
         position: absolute;
         top: -10px;
         right: -10px;
@@ -217,6 +218,21 @@ input {
     color: #777;
 }
 
+.use-history {
+    border: none;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    background-color: var(--primary);
+    color: white;
+    cursor: pointer;
+    transition: var(--transition);
+
+    &:hover {
+        transform: rotate(360deg) scale(1.1);
+    }
+}
+
 .action-buttons {
     display: flex;
     gap: 10px;
@@ -263,18 +279,28 @@ input {
 
 .favorites-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: 10px;
     margin-top: 15px;
+
+    p {
+        grid-column: span 4;
+    }
 }
 
 .favorite-item {
     background: #f8f9fa;
     padding: 10px;
+    border: 1px solid var(--accent);
     border-radius: var(--border-radius);
     text-align: center;
     cursor: pointer;
     transition: var(--transition);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 
     &:hover {
         background: #e9ecef;
@@ -285,11 +311,21 @@ input {
 .favorite-value {
     font-weight: 600;
     color: var(--primary);
+    display: inline-flex;
 }
 
 .favorite-conversion {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     color: #555;
+    display: inline-flex;
+}
+
+.remove-favorite {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    cursor: pointer;
+    font-size: 0.75rem;
 }
 
 .tabs {
@@ -306,7 +342,9 @@ input {
 
 .tab.active {
     color: var(--primary);
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
 }
 
 .tab.active::after {
@@ -319,9 +357,9 @@ input {
     background: var(--primary);
 }
 
-/* .tab-content {
+.tab-content {
     display: none;
-} */
+}
 
 .tab-content.active {
     display: block;
@@ -361,4 +399,23 @@ footer {
         color: var(--primary);
         cursor: default;
     }
+}
+
+body.dark-theme {
+    background-color: #121212;
+    color: var(--light);
+}
+
+body.dark-theme .container {
+    background-color: #232323;
+}
+
+body.dark-theme :is(label, .history-title, .result-title, .unit-icon) {
+    color: var(--light);
+}
+
+body.dark-theme :is(input, select, .result-container) {
+    background: #323232;
+    color: var(--light);
+    border: 1px solid #555;
 }
