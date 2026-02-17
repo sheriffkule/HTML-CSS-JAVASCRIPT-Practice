@@ -68,3 +68,66 @@ header {
         cursor: pointer;
     }
 }
+
+.converter-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-row {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+
+    @media screen and (max-width: 600px) {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+.input-field {
+    flex: 1;
+    position: relative;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: var(--dark);
+}
+
+input, select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e9ecef;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+:is(input, select):is(:focus, :focus-within) {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgb(67 97 238 / 0.2),
+    inset 0 0 0 2px rgb(67 97 238 / 0.2);
+}
+
+input {
+    padding-right: 40px;
+}
+
+.unit-icon {
+    position: absolute;
+    right: 15px;
+    top: 40px;
+    color: #555;
+    font-size: 0.9rem;
+}
