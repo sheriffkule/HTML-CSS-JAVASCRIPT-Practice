@@ -102,4 +102,68 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add to history
     if (fromValue !== 0) addToHistory(fromValue, fromUnit, result, toUnit);
   }
+
+  // Swap units function
+  function swapUnits() {
+    const tempUnit = fromUnitSelect.value;
+    fromUnitSelect.value = toUnitSelect.value;
+    toUnitSelect.value = tempUnit;
+    convert();
+  }
+
+  // Add to history
+  function addToHistory(fromValue, fromUnit, toValue, toUnit) {
+    // Check if this conversion is already in history
+    const existingIndex = history.findIndex((item) => item.fromUnit === fromUnit && item.toUnit === toUnit);
+
+    if (existingIndex !== -1) {
+      // Update existing entry
+      history[existingIndex] = {
+        fromValue,
+        fromUnit,
+        toValue,
+        toUnit,
+        timestamp: new Date().toISOString(),
+      };
+    } else {
+      // Add new entry (limit to 10)
+      if (history.length >= 10) history.pop();
+      history.unshift({
+        fromValue,
+        fromUnit,
+        toValue,
+        toUnit,
+        timestamp: new Date().toISOString(),
+      });
+    }
+
+    localStorage.setItem('conversionHistory', JSON.stringify(history));
+    updateHistoryList();
+  }
+
+  // Update history list
+  function updateHistoryList() {
+    historyList.innerHTML = '';
+
+    history.forEach((item) => {
+      const li = document.createElement('li');
+      li.className = 'history-item';
+      li.innerHTML = `
+        <div>
+          <span class="history-conversion"
+            >${item.fromValue} ${unitLabels[item.fromUnit]} → ${item.toValue.toFixed(4)}
+            ${unitLabels[item.toUnit]}</span
+          >
+        </div>
+        <button
+          class="use-history"
+          data-from-value="${item.fromValue}"
+          data-from-unit="${item.fromUnit}"
+          data-to-unit="${item.toUnit}">
+          <i class="fas fa-redo"></i>
+        </button>
+      `;
+      historyList.appendChild(li)
+    });
+  }
 });
