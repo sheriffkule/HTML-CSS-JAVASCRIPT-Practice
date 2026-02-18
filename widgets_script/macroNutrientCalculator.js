@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
       'Eat calorie-dense foods like nuts, nut butters, and avocados',
       'Spread meals throughout the day (5-6 smaller meals)',
       'Focus on progressive overload in your workouts',
-      'Aim for gradual weight gain (0.25-0.5kg per week',
+      'Aim for gradual weight gain (0.25-0.5kg per week)',
     ],
   };
 
@@ -45,13 +45,89 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Calculate BMR (basal Metabolic Rate)
     let bmr;
-    if (gender = 'male') {
-        bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+    if (gender.value === 'male') {
+      bmr = 10 * weight + 6.25 * height - 5 * age + 5;
     } else {
-        bmr = 10 * weight + 6.25 * height - 5 * age - 161
+      bmr = 10 * weight + 6.25 * height - 5 * age - 161;
     }
 
     // Calculate TDEE (Total Daily Energy Expenditure)
     let tdee = bmr * activity;
+
+    // Adjust calories based on goal
+    let calories;
+    switch (goal) {
+      case 'lose':
+        calories = tdee * 0.85;
+        break;
+      case 'gain':
+        calories = tdee * 1.15;
+        break;
+      default:
+        calories = tdee;
+    }
+
+    // Calculate macros (40% carbs, 30% protein, 30% fat split)
+    const proteinGrams = Math.round((calories * 0.3) / 4);
+    const carbsGrams = Math.round((calories * 0.4) / 4);
+    const fatsGrams = Math.round((calories * 0.3) / 9);
+
+    // Update UI
+    document.getElementById('total-calories').textContent = Math.round(calories);
+    document.getElementById('protein-value').textContent = proteinGrams + 'g';
+    document.getElementById('carbs-value').textContent = carbsGrams + 'g';
+    document.getElementById('fats-value').textContent = fatsGrams + 'g';
+
+    // Update macro bars
+    const totalMacros = proteinGrams + carbsGrams + fatsGrams;
+    document.getElementById('protein-bar').style.width = (proteinGrams / totalMacros) * 100 + '%';
+    document.getElementById('carbs-bar').style.width = (carbsGrams / totalMacros) * 100 + '%';
+    document.getElementById('fat-bar').style.width = (fatsGrams / totalMacros) * 100 + '%';
+
+    // Update tips
+    tipsList.innerHTML = '';
+    tips[goal].forEach((tip) => {
+      const li = document.createElement('li');
+      li.textContent = tip;
+      tipsList.appendChild(li);
+    });
+
+    // Show results
+    initialState.classList.add('hidden');
+    resultsCard.classList.remove('hidden');
+    resultsCard.classList.add('fade-in');
+    tipsSection.classList.remove('hidden');
+    tipsSection.classList.add('fade-in');
+
+    // Scroll to results (for mobile)
+    resultsCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   });
+
+  // Add animation to form elements on focus
+  const inputs = document.querySelectorAll('input, select');
+  inputs.forEach((input) => {
+    input.addEventListener('focus', function () {
+      this.parentElement.style.transform = 'scale(1.02)';
+    });
+
+    input.addEventListener('blur', function () {
+      this.parentElement.style.transform = 'scale(1)';
+    });
+  });
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.dateTime = currentYear.toString();
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
