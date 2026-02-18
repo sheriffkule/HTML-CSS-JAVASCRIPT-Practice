@@ -126,3 +126,110 @@ select:open option {
     width: auto;
     accent-color: var(--primary-light);
 }
+
+button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 1rem 1.5rem;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    width: 100%;
+    margin-top: 1rem;
+
+    &:hover {
+        background-color: var(--secondary);
+        transform: translateY(-2px);
+        box-shadow: var(--box-shadow);
+        corner-shape: scoop;
+    }
+}
+
+.results-card {
+    background: rgb(0 0 0 / 0.08);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--box-shadow);
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.results-title {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--primary);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    svg {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+.macro-result {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px dashed #fff;
+}
+
+.macro-name {
+    font-weight: 500;
+}
+
+.macro-value {
+    font-weight: 700;
+}
+
+.calories {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+.calories-label {
+    text-align: center;
+    color: var(--info);
+    margin-bottom: 1.5rem;
+}
+
+.macro-bars {
+    margin-top: 1.5rem;
+}
+
+.macro-bar {
+    height: 10px;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    background-color: #eee;
+    overflow: hidden;
+}
+
+.macro-bar-fill {
+    height: 100%;
+    border-radius: 5px;
+}
+
+.macro-bar-protein {
+    background-color: var(--success);
+    width: 0%;
+}
+
+.macro-bar-carbs {
+    background-color: var(--warning);
+    width: 0%;
+}
+
+.macro-bar-fat {
+    background-color: var(--danger);
+    width: 0%;
+}
