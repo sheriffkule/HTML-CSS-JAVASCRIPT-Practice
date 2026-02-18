@@ -50,3 +50,79 @@ header {
         font-size: 1.1rem;
     }
 }
+
+.app-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    min-height: 500px;
+}
+
+.input-section {
+    padding: 2rem;
+    background: linear-gradient(225deg, #f5f7ff, #bbbfd6);
+}
+
+.results-section {
+    padding: 2rem;
+    background: linear-gradient(135deg, #f5f7ff, #bbbfd6);
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--dark);
+}
+
+input, select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #bbb;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: var(--transition);
+    background: transparent;
+}
+
+:is(input, select):is(:focus, :focus-within) {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgb(67 97 238 / 0.2),
+    inset 0 0 0 2px rgb(67 97 238 / 0.2);
+    background: linear-gradient(90deg, #f9f9f9, #e0e0e0);
+}
+
+select:open option {
+    background: #e2e2e2;
+}
+
+.radio-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    label {
+        margin-bottom: auto;
+    }
+}
+
+.radio-option input {
+    width: auto;
+    accent-color: var(--primary-light);
+}
