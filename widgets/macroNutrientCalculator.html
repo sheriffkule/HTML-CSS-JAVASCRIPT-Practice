@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Macro Nutrient Calculator</title>
+    <link rel="stylesheet" href="/widgets_style/macroNutrientCalculator.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>Macro Nutrient Calculator</h1>
+        <p>Calculate your optimal macro nutrient intake based on your goals</p>
+      </header>
+
+      <div class="app-container">
+        <section class="input-section">
+          <article class="form-group">
+            <label for="age">Age</label>
+            <input type="number" id="age" min="15" max="100" placeholder="Enter your age..." />
+          </article>
+
+          <article class="form-group">
+            <label for="gender">Gender</label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" name="gender" id="male" value="male" checked />
+                <label for="male">Male</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="gender" id="female" value="female" />
+                <label for="female">Female</label>
+              </div>
+            </div>
+          </article>
+
+          <article class="form-group">
+            <label for="height">Height (cm)</label>
+            <input type="number" id="height" min="100" max="250" placeholder="Enter your height in cm" />
+          </article>
+
+          <article class="form-group">
+            <label for="weight">Weight (kg)</label>
+            <input type="number" id="weight" min="30" max="200" placeholder="Enter your weight in kg" />
+          </article>
+
+          <article class="form-group">
+            <label for="activity">Activity</label>
+            <select id="activity">
+              <option value="1.2">Sedentary (little or no exercise)</option>
+              <option value="1.375">Sightly active (light exercise 1-3 days/week)</option>
+              <option value="1.55" selected>Moderately active (moderate exercise 3-5 days/week)</option>
+              <option value="1.725">Very active (hard exercise 5-7 days/week)</option>
+              <option value="1.9">Extra active (very hard exercise & physical job)</option>
+            </select>
+          </article>
+
+          <article class="activity-levels">
+            <div class="activity-level">
+              <span>Sedentary</span>
+              <span>1.2</span>
+            </div>
+            <div class="activity-level">
+              <span>Lightly active</span>
+              <span>1.375</span>
+            </div>
+            <div class="activity-level">
+              <span>Moderately active</span>
+              <span>1.55</span>
+            </div>
+            <div class="activity-level">
+              <span>Very active</span>
+              <span>1.725</span>
+            </div>
+            <div class="activity-level">
+              <span>Extra active</span>
+              <span>1.9</span>
+            </div>
+          </article>
+
+          <article class="form-group">
+            <label for="goal">Goal</label>
+            <select id="goal">
+              <option value="maintain">Maintain weight</option>
+              <option value="lose">Lose weight</option>
+              <option value="gain">Gain weight</option>
+            </select>
+          </article>
+
+          <button class="calculate-btn">Calculate My Macros</button>
+        </section>
+
+        <section class="results-section"></section>
+      </div>
+    </main>
+  </body>
+</html>
