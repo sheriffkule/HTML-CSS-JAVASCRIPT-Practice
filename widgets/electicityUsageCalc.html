@@ -44,7 +44,7 @@
           </button>
         </article>
 
-        <div class="tab-content" id="appliance">
+        <article class="tab-content" id="appliance">
           <div class="appliance-list" id="appliances-container"></div>
 
           <div class="add-appliance">
@@ -64,11 +64,120 @@
               <i class="fas fa-plus"></i> Add
             </button>
           </div>
-        </div>
+
+          <div class="form-group" style="margin-top: 2rem">
+            <label for="appliance-rate">Electricity Rate (per kWh)</label>
+            <div class="input-group">
+              <i class="fas fa-dollar-sign"></i>
+              <input type="number" id="appliance-rate" placeholder="e.g. 0.15" step="0.01" value="0.15" />
+            </div>
+          </div>
+          <button id="calculate-appliance" class="btn btn-block">
+            <i class="fas fa-calculator"></i> Calculate Total
+          </button>
+        </article>
+
+        <article class="tab-content" id="advanced">
+          <div class="form-group">
+            <label for="advanced-days">Billing Period (Days)</label>
+            <div class="iput-group">
+              <i class="fas fa-calendar-alt"></i>
+              <input type="number" id="advanced-days" placeholder="e.g.30" value="30" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="advanced-usage">Usage Pattern</label>
+            <div class="input-group">
+              <i class="fas fa-chart-line"></i>
+              <select id="advanced-usage">
+                <option value="consistent">Consistent Usage</option>
+                <option value="peak">Peak Hours Usage</option>
+                <option value="variable">Variable Usage</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="advanced-rate">Electricity Rate (per kWh)</label>
+            <div class="input-group">
+              <i class="fas fa-dollar-sign"></i>
+              <input type="number" id="advanced-rate" placeholder="e.g. 0.15" step="0.01" value="0.15" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="advanced-tax">Tax Rate (%)</label>
+            <div class="input-group">
+              <i class="fas fa-percent"></i>
+              <input type="number" id="advanced-tax" placeholder="e.g. 5" step="0.1" value="5" />
+            </div>
+          </div>
+          <button id="calculate-advanced" class="btn btn-block">
+            <i class="fas fa-calculator"></i> Calculate Advanced
+          </button>
+        </article>
       </section>
+
+      <section class="results" id="results">
+        <article class="result-card">
+          <div class="result-title">
+            <i class="fas fa-bolt"></i>
+            <span>Electricity Consumption</span>
+          </div>
+          <div class="result-value" id="total-kwh">0<span class="result-unit">kWh</span></div>
+
+          <div class="result-details">
+            <div class="result-detail">
+              <span>Daily Usage</span>
+              <span id="daily-kwh">0 kWh</span>
+            </div>
+            <div class="result-detail">
+              <span>Hourly Usage</span>
+              <span id="hourly-kwh">0 kWh</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="result-card">
+          <div class="result-title">
+            <i class="fas fa-dollar-sign"></i>
+            <span>Cost Estimation</span>
+          </div>
+          <div class="result-value" id="total-cost">$0<span class="result-unit">/month</span></div>
+
+          <div class="result-details">
+            <div class="result-detail">
+              <span>Daily Cost</span>
+              <span id="daily-cost">$0</span>
+            </div>
+            <div class="result-detail">
+              <span>Hourly Cost</span>
+              <span id="hourly-cost">$0</span>
+            </div>
+            <div class="result-detail" id="tax-row" style="display: none">
+              <span>Tax</span>
+              <span id="tax-amount"></span>
+            </div>
+          </div>
+        </article>
+
+        <article class="savings-tip">
+          <div class="savings-tip-title"><i class="fas fa-lightbulb"></i> Energy Saving Tip</div>
+          <p id="savings-tip-text">
+            Consider switching to LED bulbs which use 75% less energy than traditional incandescent bulbs.
+          </p>
+        </article>
+
+        <article class="history-chart" id="history-chart">
+          <canvas id="consumption-chart"></canvas>
+        </article>
+      </section>
+
+      <footer>
+        © <time datetime="2026" id="year">2026</time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.min.js"></script>
     <script src="/widgets_script/electicityUsageCalc.js"></script>
   </body>
 </html>
