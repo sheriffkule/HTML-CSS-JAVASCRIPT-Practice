@@ -61,7 +61,9 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="appliance-watts">${appliance.watts}W × ${appliance.hours}</div>
       </div>
       <div class="appliance-action">
-        <button class="btn-icon remove-appliance"></button>
+        <button class="btn-icon remove-appliance">
+          <i class="fas fa-trash"></i>
+        </button>
       </div>
     `;
     container.appendChild(applianceElement);
@@ -135,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function () {
         kwh = 450 * (days / 30);
         break;
       case 'variable':
-        kvh = 375 * (days / 30);
+        kwh = 375 * (days / 30);
         break;
       default:
         kwh = 300 * (days / 30);
@@ -180,5 +182,108 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('results').classList.add('active');
 
     // Update charts
+    updateChart(kwh, days);
   }
+
+  const energyTips = [
+    'Switch to LED bulbs which use 75% less energy than incandescent bulbs.',
+    'Unplug devices when not in use to avoid "phantom load" energy consumption.',
+    'Use smart power strips to automatically cut power to devices in standby mode.',
+    'Wash clothes in cold water - 90% of energy used by washing machines goes to heating water.',
+    'Set your thermostat 1 degree higher in summer and 1 degree lower in winter to save energy.',
+    'Clean or replace HVAC filters monthly to keep your system running efficiently.',
+    'Use natural light during the day instead of turning on lights.',
+    'Install a programmable thermostat to automatically adjust temperatures when you are away.',
+    'Seal leaks around dors and windows to prevent cooled/heated air from escaping.',
+    'Run full load in your dishwasher and washing machine to maximize efficiency.',
+  ];
+
+  function showRandomTip() {
+    const randomTip = energyTips[Math.floor(Math.random() * energyTips.length)];
+    document.getElementById('savings-tip-text').textContent = randomTip;
+  }
+
+  let consumptionChart = null;
+
+  function updateChart(totalKwh, days) {
+    const ctx = document.getElementById('consumption-chart').getContext('2d');
+
+    // Generate sample data for the period
+    const labels = [];
+    const data = [];
+
+    for (let i = 1; i <= days; i++) {
+      labels.push(`Day ${i}`);
+      // SImulate some variation in daily usage
+      const variation = Math.random() * 0.4 + 0.8;
+      data.push((totalKwh / days) * variation);
+    }
+
+    if (consumptionChart) consumptionChart.destroy();
+
+    consumptionChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Daily Consumption (kWh)',
+            data: data,
+            backgroundColor: 'rgb(67 97 238 / 0.1)',
+            borderColor: 'rgb(67 97 238 / 0.8)',
+            borderWidth: 2,
+            pointBackgroundColor: 'rgb(67 97 238 / 0.8)',
+            pointRadius: 3,
+            fill: true,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'kWh',
+            },
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Days',
+            },
+          },
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                return `${context.dataset.label}: ${context.parsed.y.toFixed(2)} kWh`;
+              },
+            },
+          },
+          legend: {
+            position: 'top',
+          },
+        },
+      },
+    });
+  }
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
