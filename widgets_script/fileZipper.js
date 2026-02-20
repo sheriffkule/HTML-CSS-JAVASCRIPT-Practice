@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const text = title.textContent;
   const dropZone = document.getElementById('dropZone');
   const browseBtn = document.getElementById('browseBtn');
-  const fileInput = document.getElementById('filterInput');
+  const fileInput = document.getElementById('fileInput');
   const fileList = document.getElementById('fileList');
   const emptyState = document.getElementById('emptyState');
   const clearAllBtn = document.getElementById('clearAllBtn');
@@ -83,55 +83,63 @@ document.addEventListener('DOMContentLoaded', function () {
     showNotification(`Added ${newFiles.length} file(s)`);
   }
 
-//   function updateFileList() {
-//     // Clear file list
-//     fileList.innerHTML = '';
+  function updateFileList() {
+    // Clear file list
+    fileList.innerHTML = '';
 
-//     if (files.length === 0) {
-//       fileList.appendChild(emptyState);
-//       emptyState.style.display = 'block';
-//       clearAllBtn.disabled = true;
-//       zipBtn.disabled = true;
-//       return;
-//     }
+    if (files.length === 0) {
+      fileList.appendChild(emptyState);
+      emptyState.style.display = 'block';
+      clearAllBtn.disabled = true;
+      zipBtn.disabled = true;
+      return;
+    }
 
-//     emptyState.style.display = 'none';
-//     clearAllBtn.disabled = false;
-//     zipBtn.disabled = true;
+    emptyState.style.display = 'none';
+    clearAllBtn.disabled = false;
+    zipBtn.disabled = false;
 
-//     // Add files to list
-//     files.forEach((file, index) => {
-//       const fileItem = document.createElement('div');
-//       fileItem.className = 'file-item';
+    // Add files to list
+    files.forEach((file, index) => {
+      const fileItem = document.createElement('div');
+      fileItem.className = 'file-item';
 
-//       const fileExtension = getFileExtension(file.name);
-//       const fileIcon = getFileIcon(fileExtension);
+      const fileExtension = getFileExtension(file.name);
+      const fileIcon = getFileIcon(fileExtension);
 
-//       fileItem.innerHTML = `
-//         <div class="file-icon">${fileIcon}</div>
-//         <div class="file-name">${file.name}</div>
-//         <div class="file-size">${formatFileSize(file.size)}</div>
-//         <div class="remove-file" data-index="${index}">&times;</div>
-//       `;
+      fileItem.innerHTML = `
+        <div class="file-icon">${fileIcon}</div>
+        <div class="file-name">${file.name}</div>
+        <div class="file-size">${formatFileSize(file.size)}</div>
+        <div class="remove-file" data-index="${index}">&times;</div>
+      `;
 
-//       fileList.appendChild(fileItem);
-//       document.querySelector('.file-list').style.display = '';
-//     });
+      fileList.appendChild(fileItem);
+      document.querySelector('.file-list').style.display = '';
+    });
 
-//     // Add event listeners to remove buttons
-//     const removeButtons = document.querySelectorAll('.remove-file');
-//     removeButtons.forEach((button) => {
-//       button.addEventListener('click', (e) => {
-//         const index = parseInt(e.target.getAttribute('data-index'));
-//         removeFile(index);
-//       });
-//     });
-//   }
+    // Add event listeners to remove buttons
+    const removeButtons = document.querySelectorAll('.remove-file');
+    removeButtons.forEach((button) => {
+      button.addEventListener('click', (e) => {
+        const index = parseInt(e.target.getAttribute('data-index'));
+        removeFile(index);
+      });
+    });
+  }
+
+  function removeFile(index) {
+    const removedFile = files[index].name;
+    files.splice(index, 1);
+    updateFileList();
+    showNotification(`Removed ${removedFile}`);
+  }
 
   function clearAllFiles() {
     files = [];
     updateFileList();
     showNotification('All files cleared');
+    progressSection.style.display = 'none'
   }
 
   function getFileExtension(filename) {
@@ -170,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const sizes = ['Bytes', 'KB', 'MB', 'GB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
 
-    return parseFloat(bytes / Math.pow(k, i).toFixed(2) + ' ' + sizes[i]);
+    return (bytes / Math.pow(k, i)).toFixed(2) + ' ' + sizes[i];
   }
 
   function showNotification(message, isError = false) {
@@ -185,4 +193,89 @@ document.addEventListener('DOMContentLoaded', function () {
       notification.classList.remove('show');
     }, 3000);
   }
+
+  function updateProgress(progress) {
+    const percentage = typeof progress === 'object' ? progress.percent : progress;
+
+    progressBar.style.width = percentage + '%';
+    progressPercentage.textContent = Math.round(percentage) + '%';
+
+    if (percentage === 100) progressStatus.textContent = 'Compression complete!';
+  }
+
+  async function createZip() {
+    if (files.length === 0) {
+      showNotification('Please add files to compress', true);
+      return;
+    }
+
+    // Reset UI
+    progressSection.style.display = 'block';
+    downloadSection.style.display = 'none';
+    downloadBtn.disabled = true;
+    updateProgress(0);
+
+    try {
+      zip = new JSZip();
+
+      // Add files to zip with smooth progress updates
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        zip.file(file.name, file);
+
+        const fileProgress = Math.floor(((i + 1) / files.length) * 20);
+        updateProgress(fileProgress);
+
+        await new Promise((resolve) => setTimeout(resolve, 50));
+      }
+
+      // Generate zip file with progress callback
+      const zipName = zipFileName.value || 'compressed_files';
+      const zipBlob = await zip.generateAsync(
+        {
+          type: 'blob',
+          compression: 'DEFLATE',
+          compressionOptions: {
+            level: 6,
+          },
+        },
+        (metadata) => {
+          const compressionProgress = 30 + Math.floor((metadata.percent * 80) / 100);
+          updateProgress(compressionProgress);
+        },
+      );
+
+      updateProgress(100);
+
+      // Create download link
+      const url = URL.createObjectURL(zipBlob);
+      downloadLink.href = url;
+      downloadLink.download = `${zipName}.zip`;
+
+      // Show download section
+      progressStatus.textContent = 'Compression complete!';
+      downloadSection.style.display = 'block';
+      downloadBtn.disabled = false;
+
+      showNotification('Files compressed successfully!');
+    } catch (error) {
+      console.error('Error creating zip: ', error);
+      showNotification('Error compressing files: ' + error.message, true);
+    }
+  }
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });

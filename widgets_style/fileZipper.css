@@ -18,6 +18,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    interpolate-size: allow-keywords;
 }
 
 body {
@@ -45,6 +46,8 @@ header {
     color: white;
     padding: 2rem;
     text-align: center;
+    opacity: 0;
+    animation: slideIn 0.8s ease-in forwards;
 }
 
 header h1 {
@@ -65,7 +68,7 @@ header h1 {
     0 8px 0 transparent,
     0 9px 0 transparent,
     0 10px 10px transparent;
-    /* animation: move 2s ease-in-out infinite alternate; */
+    animation: move 2s ease-in-out infinite alternate;
     animation-delay: calc(var(--i) * .1s);
 }
 
@@ -93,11 +96,17 @@ header p {
     margin-bottom: 1rem;
     -webkit-text-stroke: 3px white;
     color: transparent;
-    /* animation: move 2s ease-in-out infinite alternate; */
+    animation: move 2s ease-in-out infinite alternate;
 }
 
 .main-content {
     padding: 2rem;
+}
+
+.upload-section {
+    opacity: 0;
+    animation: slideIn 0.8s ease-in forwards;
+    animation-delay: .5s;
 }
 
 .drop-zone {
@@ -219,6 +228,9 @@ header p {
 
 .files-list {
     margin-top: 2rem;
+    opacity: 0;
+    animation: slideIn 0.8s ease-in forwards;
+    animation-delay: 1s;
 }
 
 .section-title {
@@ -232,12 +244,18 @@ header p {
     h2 {
         font-size: 1.25rem;
     }
+
+    @media screen and (width < 768px) {
+        flex-direction: column-reverse;
+        gap: 1rem;
+    }
 }
 
 .file-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 1rem;
+    margin-bottom: 1rem;
 }
 
 .file-item {
@@ -320,4 +338,178 @@ header p {
     padding: 1.5rem;
     border-radius: var(--border-radius);
     margin-bottom: 2rem;
+    opacity: 0;
+    animation: slideIn 0.8s ease-in forwards;
+    animation-delay: 1.5s;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    
+    label {
+        display: block;
+        margin-bottom: .5rem;
+        font-weight: 600;
+        padding-left: 1rem;
+    }
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.form-control:is(:focus, :focus-within) {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgb(67 97 238 / 0.2),
+    inset 0 0 0 2px rgb(67 97 238 / 0.2);
+}
+
+.actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: slideIn 0.8s ease-in forwards;
+    animation-delay: 2s;
+}
+
+.progress-section {
+    margin-top: 2rem;
+    display: none;
+}
+
+.progress-bar {
+    height: 10px;
+    background-color: #dde1e6;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progress {
+    height: 100%;
+    background: repeating-linear-gradient(135deg, var(--primary) 0% 10px, var(--secondary) 10px 20px);
+    border-radius: 5px;
+    width: 0%;
+    transition: width 0.3 ease;
+    animation: progressMove 1s linear infinite;
+}
+
+@keyframes progressMove {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 28px 0;
+    }
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: var(--gray);
+}
+
+.download-section {
+    text-align: center;
+    margin-top: 1rem;
+    display: none;
+}
+
+.download-link {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 1.25rem;
+    text-decoration: none;
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1rem 1.5rem;
+    background-color: white;
+    border: 1px solid var(--success);
+    border-left: 6px solid var(--success);
+    border-radius: 4px;
+    box-shadow: var(--box-shadow),
+    inset 0 0 20px var(--success);
+    transform: translateX(110%) scaleY(0);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.notification.show {
+    transform: translateX(-20%) scaleY(1);
+}
+
+.notification.error {
+    border-color: var(--danger);
+    box-shadow: inset 0 0 20px var(--danger);
+}
+
+footer {
+    text-align: center;
+    color: var(--gray);
+    margin-top: auto;
+    padding: 1rem;
+    font-size: 0.9rem;
+
+    span {
+        color: var(--accent);
+        font-size: 1.1rem;
+    }
+    abbr {
+        letter-spacing: .5px;
+        color: var(--primary);
+        text-underline-offset: 2px;
+        cursor: default;
+    }
+}
+
+@media screen and (width < 768px) {
+    .actions {
+        flex-direction: column;
+    }
+    .btn {
+        width: 100%;
+    }
+    .file-list {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(100px) scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 0.6rem;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--success);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--primary);
+    border-radius: var(--border-radius);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--secondary);
 }
