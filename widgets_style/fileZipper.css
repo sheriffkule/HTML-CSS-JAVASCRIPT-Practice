@@ -2,7 +2,7 @@
     --primary: #4361ee;
     --secondary: #3a0ca3;
     --accent: #f72585;
-    --light: #f8f9fa;
+    --light: #e7e7e7;
     --dark: #212529;
     --success: #4cc9f0;
     --warning: #f9c74f;
@@ -232,4 +232,92 @@ header p {
     h2 {
         font-size: 1.25rem;
     }
+}
+
+.file-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.file-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--light);
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    position: relative;
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgb(0 0 0 / 0.15);
+        border-left: 4px solid var(--primary);
+        border-right: 4px solid var(--primary);
+    }
+}
+
+.file-icon {
+    font-size: 2rem;
+    margin-bottom: .5rem;
+    color: transparent;
+    -webkit-text-stroke: 2px var(--dark);
+}
+
+.file-name {
+    font-size: 0.9rem;
+    text-align: center;
+    word-wrap: break-word;
+    width: 100%;
+}
+
+.file-size {
+    font-size: 0.8rem;
+    color: var(--gray);
+    margin-top: 0.3rem;
+}
+
+.remove-file {
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+    background: var(--danger);
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: var(--transition);
+
+    &:hover {
+        transform: scale(1.1);
+        background: var(--accent);
+        font-size: 1.2;
+    }
+}
+
+.empty-state {
+    text-align: center;
+    padding: 2rem;
+    color: var(--gray);
+
+    i {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        opacity: 0.5;
+        color: transparent;
+        -webkit-text-stroke: 2px var(--dark);
+        text-shadow: 0 0 10px rgb(0 0 0 / 0.25);
+    }
+}
+
+.compression-options {
+    background-color: var(--light);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 2rem;
 }

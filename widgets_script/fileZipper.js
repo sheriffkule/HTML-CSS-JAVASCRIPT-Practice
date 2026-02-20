@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
   let zip = null;
 
   // Initialize
-  UpdateFileList();
+  updateFileList();
 
   // Title spiting characters for animation
   title.innerHTML = '';
@@ -79,7 +79,110 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
-    UpdateFileList();
+    updateFileList();
     showNotification(`Added ${newFiles.length} file(s)`);
+  }
+
+//   function updateFileList() {
+//     // Clear file list
+//     fileList.innerHTML = '';
+
+//     if (files.length === 0) {
+//       fileList.appendChild(emptyState);
+//       emptyState.style.display = 'block';
+//       clearAllBtn.disabled = true;
+//       zipBtn.disabled = true;
+//       return;
+//     }
+
+//     emptyState.style.display = 'none';
+//     clearAllBtn.disabled = false;
+//     zipBtn.disabled = true;
+
+//     // Add files to list
+//     files.forEach((file, index) => {
+//       const fileItem = document.createElement('div');
+//       fileItem.className = 'file-item';
+
+//       const fileExtension = getFileExtension(file.name);
+//       const fileIcon = getFileIcon(fileExtension);
+
+//       fileItem.innerHTML = `
+//         <div class="file-icon">${fileIcon}</div>
+//         <div class="file-name">${file.name}</div>
+//         <div class="file-size">${formatFileSize(file.size)}</div>
+//         <div class="remove-file" data-index="${index}">&times;</div>
+//       `;
+
+//       fileList.appendChild(fileItem);
+//       document.querySelector('.file-list').style.display = '';
+//     });
+
+//     // Add event listeners to remove buttons
+//     const removeButtons = document.querySelectorAll('.remove-file');
+//     removeButtons.forEach((button) => {
+//       button.addEventListener('click', (e) => {
+//         const index = parseInt(e.target.getAttribute('data-index'));
+//         removeFile(index);
+//       });
+//     });
+//   }
+
+  function clearAllFiles() {
+    files = [];
+    updateFileList();
+    showNotification('All files cleared');
+  }
+
+  function getFileExtension(filename) {
+    return filename.split('.').pop().toLowerCase();
+  }
+
+  function getFileIcon(extension) {
+    const iconMap = {
+      pdf: '<i class="fas fa-file-pdf"></i>',
+      doc: '<i class="fas fa-file-word"></i>',
+      docx: '<i class="fas fa-file-word"></i>',
+      xls: '<i class="fas fa-file-excel"></i>',
+      xlsx: '<i class="fas fa-file-excel"></i>',
+      ppt: '<i class="fas fa-file-powerpoint"></i>',
+      pptx: '<i class="fas fa-file-powerpoint"></i>',
+      jpg: '<i class="fas fa-file-image"></i>',
+      jpeg: '<i class="fas fa-file-image"></i>',
+      png: '<i class="fas fa-file-image"></i>',
+      gif: '<i class="fas fa-file-image"></i>',
+      txt: '<i class="fas fa-file-alt"></i>',
+      zip: '<i class="fas fa-file-archive"></i>',
+      rar: '<i class="fas fa-file-archive"></i>',
+      mp3: '<i class="fas fa-file-audio"></i>',
+      wav: '<i class="fas fa-file-audio"></i>',
+      mp4: '<i class="fas fa-file-video"></i>',
+      avi: '<i class="fas fa-file-video"></i>',
+    };
+
+    return iconMap[extension] || '<i class="fas fa-file"></i>';
+  }
+
+  function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+    return parseFloat(bytes / Math.pow(k, i).toFixed(2) + ' ' + sizes[i]);
+  }
+
+  function showNotification(message, isError = false) {
+    notificationText.textContent = message;
+    notification.className = 'notification';
+
+    if (isError) notification.classList.add('error');
+
+    notification.classList.add('show');
+
+    setTimeout(() => {
+      notification.classList.remove('show');
+    }, 3000);
   }
 });
