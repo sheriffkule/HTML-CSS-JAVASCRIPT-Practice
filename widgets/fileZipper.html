@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>File Zipper | Compress Your Files</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/fileZipper.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="app-icon"><i class="fas fa-file-archive"></i></div>
+        <h1 id="title">File Zipper App</h1>
+        <p>Compress your files quickly and easily.</p>
+      </header>
+
+      <main class="main-content">
+        <section class="upload-section">
+          <div class="drop-zone" id="dropZone">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <h3>Drag & Drop Your Files</h3>
+            <p>OR</p>
+            <button class="btn" id="browseBtn">Browse Files</button>
+            <input type="file" id="fileInput" class="file-input" multiple />
+          </div>
+        </section>
+
+        <section class="files-list">
+          <div class="section-title">
+            <h2>Selected Files</h2>
+            <button class="btn btn-outline" id="clearAllBtn">Clear All</button>
+          </div>
+
+          <div class="file-list" id="fileList">
+            <div class="empty-state" id="emptyState">
+              <i class="fas fa-folder-open"></i>
+              <p>No files selected</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="compression-option">
+          <div class="form-group">
+            <label for="zipFileName">Zip File Name</label>
+            <input
+              type="text"
+              id="zipFileName"
+              class="form-control"
+              placeholder="Enter zip file name"
+              value="compressed_filex" />
+          </div>
+        </section>
+
+        <section class="actions">
+          <button class="btn" id="zipBtn"><i class="fas fa-compress-alt"></i> Compress Files</button>
+          <button class="btn btn-accent" id="downloadBtn" disabled>
+            <i class="fas fa-download"></i> Download Zip
+          </button>
+        </section>
+
+        <section class="progress-section" id="progressSection">
+          <div class="progress-bar">
+            <div class="progress" id="progressBar"></div>
+          </div>
+          <div class="progress-info">
+            <span id="progressPercentage">0%</span>
+            <span id="progressStatus">Processing...</span>
+          </div>
+        </section>
+
+        <section class="download-section" id="downloadSection">
+          <h3>Your files are compressed and ready!</h3>
+          <a href="#" class="btn download-link" id="downloadLink">
+            <i class="fas fa-download"></i> Download Zip File
+          </a>
+        </section>
+      </main>
+    </div>
+
+    <article class="notification" id="notification">
+      <i id="notificationText"></i>
+    </article>
+
+    <footer>
+      © <time datetime="2026" id="year">2026</time> Made width <span>♥</span> by
+      <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="/widgets_script/fileZipper.js"></script>
+  </body>
+</html>
