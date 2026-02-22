@@ -1,0 +1,61 @@
+:root {
+    --primary: #4361ee;
+    --secondary: #3f37c9;
+    --accent: #4cc9f0;
+    --light: #f8f9fa;
+    --dark: #212529;
+    --success: #4caf50;
+    --warning: #ff9800;
+    --error: #f44336;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 6px rgb(0 0 0 / 0.15);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f1f7fa;
+    color: var(--dark);
+    line-height: 1.5;
+    padding: 20px;
+}
+
+p {
+    text-wrap: pretty;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+
+    h1 {
+        color: var(--light);
+        font-size: clamp(1.5rem, 5vw, 2.5rem);
+        margin-bottom: 10px;
+        text-shadow: 0 1px 1px var(--primary),
+            0 2px 1px var(--primary),
+            0 3px 1px var(--primary),
+            0 4px 1px var(--primary),
+            0 0 5px rgb(0 0 0 / 0.1),
+            0 1px 2px rgb(0 0 0 / 0.2),
+            0 2px 4px rgb(0 0 0 / 0.3),
+            0 4px 8px rgb(0 0 0 / 0.4),
+            0 8px 16px rgb(0 0 0 / 0.3);
+    }
+    .subtitle {
+        color: #555;
+        font-size: 1.1rem;
+    }
+}
