@@ -201,3 +201,85 @@ header {
     margin-bottom: 15px;
     color: #555;
 }
+
+.result-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 15px;
+    min-height: 60px;
+}
+
+.formula-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    border: 1px solid #ccc;
+}
+
+.visualization {
+    background: #f8f9fa;
+    border-radius: var(--border-radius);
+    padding: 20px;
+}
+
+.visualization h3 {
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.triangle-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.triangle-labels {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.triangle-labels span {
+    position: absolute;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+#label-a {
+    bottom: 10px;
+    left: 50%;
+    transform: translateY(-50%);
+}
+
+#label-b {
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+}
+
+#label-c {
+    top: 20px;
+    left: 20px;
+}
+
+.history-section {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+    margin-bottom: 30px;
+}
+
+.history-section h3 {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
