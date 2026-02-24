@@ -46,12 +46,62 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       // Clear result
-      resultDisplay.textContent = '-'
+      resultDisplay.textContent = '-';
     });
   });
 
-  calculateBtn.addEventListener('click', calculate)
-  resetBtn.addEventListener('click', resetForm)
-  copyBtn.addEventListener('click', copyResult)
-  clearHistoryBtn.addEventListener('click', clearHistory)
+  calculateBtn.addEventListener('click', calculate);
+  resetBtn.addEventListener('click', resetForm);
+  copyBtn.addEventListener('click', copyResult);
+  clearHistoryBtn.addEventListener('click', clearHistory);
+
+  // Calculation function
+  function calculate() {
+    let a;
+    let b;
+    let c;
+    let result;
+
+    try {
+      if (currentMode === 'find-hypotenuse') {
+        a = parseFloat(document.getElementById('leg-a').value)
+        b = parseFloat(document.getElementById('leg-b').value)
+
+        if (isNaN(a) || isNaN(b)) {
+          throw new Error('Please enter valid numbers for both legs.')
+        }
+        if (a<=0 ||b <= 0) {
+          throw new Error('Lengths must be positive numbers')
+        }
+
+        c= Math.sqrt(a * a + b * b)
+        result = {
+          formula: `√(${a}² + ${b}²)`,
+          result: c.toFixed(4),
+          type: 'hypotenuse',
+          values: {a, b, c}
+        }
+    } else {
+      a = parseFloat(document.getElementById('known-leg').value)   
+      c = parseFloat(document.getElementById('hypotenuse').value)   
+
+      if (isNaN(a) || isNaN(c)) {
+        throw new Error('Please enter valid numbers.')
+      }
+      if (a <= 0 || c <= 0) {
+        throw new Error('Lengths must be positive numbers.')
+      }
+      if (a >= c) {
+        throw new Error('Leg must be shorter than hypotenuse')
+      }
+
+      b = Math.sqrt(c * c - a * a)
+      result = {
+        formula: `√(${c}² + ${a}²)`,
+          result: b.toFixed(4),
+          type: 'leg',
+          values: {a: a, b: b, c: c}
+      }
+    }
+  }
 });
