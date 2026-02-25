@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         b = Math.sqrt(c * c - a * a);
         result = {
-          formula: `√(${c}² + ${a}²)`,
+          formula: `√(${c}² - ${a}²)`,
           result: b.toFixed(4),
           type: 'leg',
           values: { a: a, b: b, c: c },
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Copy result to clipboard
   function copyResult() {
-    if (resultDisplay === '-') return;
+    if (resultDisplay.textContent === '-') return;
 
     navigator.clipboard.writeText(resultDisplay.textContent).then(() => {
       const originalIcon = copyBtn.innerHTML;
@@ -211,13 +211,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const scaledC = c * scale;
 
     // Determine which is the longer leg for visualization
-    let x1;
-    let y1;
-    let x2;
-    let y2;
-    let x3;
-    let y3;
-
+    let x1, y1, x2, y2, x3, y3;
     if (a >= b) {
       // a is the horizontal leg, b is vertical
       x1 = offsetX;
@@ -225,7 +219,84 @@ document.addEventListener('DOMContentLoaded', function () {
       x2 = offsetX + scaledA;
       y2 = offsetY;
       x3 = offsetX;
-      y3 = offsetY = scaledB;
+      y3 = offsetY - scaledB;
+    } else {
+      x1 = offsetX;
+      y1 = offsetY;
+      x2 = offsetX + scaledB;
+      y2 = offsetY;
+      x3 = offsetX;
+      y3 = offsetY - scaledA;
     }
+
+    // Draw triangle
+    const trianglePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    trianglePath.setAttribute('d', `M ${x1} ${y1} L ${x2} ${y2} L ${x3} ${y3} Z`);
+    trianglePath.setAttribute('fill', 'rgba(67, 97, 238, 0.2)');
+    trianglePath.setAttribute('stroke', primaryColor);
+    trianglePath.setAttribute('stroke-width', '2');
+    triangleSvg.appendChild(trianglePath);
+
+    // Draw right angle indicator
+    const rightAngleSize = 10;
+    const rightAnglePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    rightAnglePath.setAttribute(
+      'd',
+      `M ${x1} ${y1 - rightAngleSize} L ${x1} ${y1} L ${x1 + rightAngleSize} ${y1}`,
+    );
+    rightAnglePath.setAttribute('stroke', primaryColor);
+    rightAnglePath.setAttribute('stroke-width', '1.5');
+    rightAnglePath.setAttribute('fill', 'none');
+    triangleSvg.appendChild(rightAnglePath);
+
+    // Update labels
+    if (a >= b) {
+      labelA.textContent = `a = ${a}`;
+      labelB.textContent = `b = ${b}`;
+    } else {
+      labelA.textContent = `a = ${b}`;
+      labelB.textContent = `b = ${a}`;
+    }
+
+    labelC.textContent = `c = ${c.toFixed(2)}`;
+
+    // Position labels
+    if (a >= b) {
+      // A is horizontal
+      labelA.style.left = `${(x1 + x2) / 2}px`;
+      labelA.style.bottom = '10px';
+      labelA.style.transform = 'translateX(-50%)';
+
+      labelB.style.right = '10px';
+      labelB.style.top = `${(y1 + y3) / 2}px`;
+      labelB.style.transform = 'translateY(-50%)';
+    } else {
+      // b is horizontal
+      labelA.style.left = `${(x1 + x2) / 2}px`;
+      labelA.style.bottom = '10px';
+      labelA.style.transform = 'translateX(-50%)';
+
+      labelB.style.right = '10px';
+      labelB.style.top = `${(y1 + y3) / 2}px`;
+      labelB.style.transform = 'translateY(-50%)';
+    }
+
+    labelC.style.left = `${x3 + 10}px`;
+    labelC.style.top = `${y3 - 10}px`;
   }
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
