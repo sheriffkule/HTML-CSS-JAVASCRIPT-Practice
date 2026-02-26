@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const sizeChartBtn = document.getElementById('size-chart-btn');
   const sizeChartSection = document.getElementById('size-chart-section');
   const sizeChartContent = document.getElementById('size-chart-content');
+  const btns = document.querySelectorAll('.btn');
 
   // Current state
   let currentGender = 'men';
@@ -52,5 +53,72 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const results = calculateConversions(currentGender, from, size);
     displayResults(results);
+  }
+
+  btns.forEach((button) => {
+    button.addEventListener('mousemove', function (e) {
+      let rect = btn.getBoundingClientRect();
+      let x = e.clientX - rect.left;
+      let y = e.clientY - rect.top;
+      let numParticles = 20;
+
+      for (let i = 0; i < numParticles; i++) {
+        createParticle(x, y);
+      }
+    });
+  });
+
+  function createParticle(x, y) {
+    let particle = document.createElement('div');
+    particle.classList.add('particle');
+    particle.style.left = `${x}px`;
+    particle.style.top = `${y}px`;
+    let angle = Math.random() * 2 * Math.PI;
+    let distance = Math.random() * 80 + 20;
+    let tx = Math.cos(angle) * distance;
+    let ty = Math.sin(angle) * distance;
+
+    particle.style.setProperty('--tx', tx + 'px');
+    particle.style.setProperty('--ty', ty + 'px');
+
+    btns.appendChild(particle);
+
+    setTimeout(() => {
+      particle.remove();
+    }, 1000);
+  }
+
+  function calculateConversions(gender, fromSystem, size) {
+    const systems = ['us', 'uk', 'eu', 'cm', 'jp', 'au'];
+    const results = {};
+
+    // Get the base size in US for conversion
+    let baseUS;
+    switch (fromSystem) {
+      case 'us':
+        baseUS = size;
+        break;
+      case 'uk':
+        baseUS = gender === 'women' ? size + 2 : size + 1;
+        break;
+      case 'eu':
+        if (gender === 'women') {
+          baseUS = (size - 30.5) / 0.85;
+        } else if (gender === 'men') {
+          baseUS = (size - 30.5) / 0.85;
+        } else {
+          baseUS = (size - 16) / 0.67;
+        }
+        break;
+      case 'cm':
+        baseUS = size * 0.3937 * 3 - 22;
+        break;
+      case 'jp':
+        baseUS = (size - 18.5) / 0.85;
+        break;
+      case 'au':
+        baseUS = gender === 'women' ? size + 2 : size + 1;
+        break;
+    }
   }
 });

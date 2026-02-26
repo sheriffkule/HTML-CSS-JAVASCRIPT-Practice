@@ -129,6 +129,7 @@ option:focus {
 option:checked {
   font-weight: bold;
   letter-spacing: 1px;
+  color: var(--light);
 }
 
 option::checkmark {
@@ -140,4 +141,79 @@ option::checkmark {
     display: flex;
     gap: 1rem;
     margin-bottom: 1rem;
+}
+
+.btn {
+    position: relative;
+    background: #3498db;
+    color: #000;
+    overflow: hidden;
+}
+
+.gender-btn {
+    flex: 1;
+    padding: 0.8rem;
+    border: 2px solid #bbb;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    transition: all .3s ease;
+
+    i {
+        font-size: 1.25rem;
+    }
+}
+
+.gender-btn.active {
+    border-color: var(--primary);
+    background: rgb(108 92 231 / 0.2);
+    color: var(--primary);
+}
+
+.particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 1;
+    animation: btnAnimate 1s ease-out forwards;
+}
+
+@keyframes btnAnimate {
+    to {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty)) scale(4);
+    }
+}
+
+.result-section {
+    background-color: rgb(108 92 231 / 0.1);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    /* display: none; */
+}
+
+.result-section.active {
+    display: block;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.result-title {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
 }
