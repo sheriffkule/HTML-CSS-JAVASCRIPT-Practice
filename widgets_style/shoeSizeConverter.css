@@ -57,8 +57,87 @@ h1 {
     max-width: 800px;
 }
 
-.convert-section {
+.converter-section {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+label {
+    font-weight: 600;
+    color: var(--dark);
+}
+
+select, input {
+    padding: 0.8rem 1rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all .3s ease;
+}
+
+:is(select, input):is(:focus, :focus-within) {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgb(108 92 231 / 0.2),
+    inset 0 0 0 2px rgb(108 92 231 / 0.2);
+}
+
+select:is(:focus, :focus-within) {
+    background-color: var(--primary);
+    color: var(--light);
+}
+
+select,
+::picker(select) {
+  appearance: base-select;
+}
+
+::picker(select) {
+  border-radius: 8px;
+  border: none;
+}
+
+select::picker-icon {
+  color: var(--primary);
+  transition: 0.3s rotate;
+}
+
+select:open::picker-icon {
+  rotate: 180deg;
+  color: var(--success);
+}
+
+option {
+  border: 1px solid #bbb;
+  background: var(--secondary);
+  padding: 2px 0 2px 12px;
+  transition: 0.3s;
+}
+
+option:hover,
+option:focus {
+  background: var(--primary);
+}
+
+option:checked {
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+option::checkmark {
+  color: var(--success);
+  font-size: 1.5rem;
+}
+
+.gender-selection {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
 }
