@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shoe Size Converter | Worldwide Sizing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/shoeSizeConverter.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Shoe Size Converter</h1>
+      <p class="subtitle">Convert between international shoe sizing standards with ease.</p>
+    </header>
+
+    <main class="container">
+      <section class="convert-section">
+        <article class="gender-selection">
+          <button class="gender-btn active" data-gender="men"><i class="fas fa-mars"></i> Men's Sizes</button>
+          <button class="gender-btn" data-gender="women"><i class="fas fa-venus"></i> Women's Sizes</button>
+          <button class="gender-btn" data-gender="kids"><i class="fas fa-child"></i> Kid's Sizes</button>
+        </article>
+
+        <article class="input-group">
+          <label for="from-system">Convert From:</label>
+          <select id="from-system">
+            <option value="us">US (United States)</option>
+            <option value="uk">UK (United Kingdom)</option>
+            <option value="eu">EU (European Union)</option>
+            <option value="cm">CM (Centimeters)</option>
+            <option value="jp">JP (Japan)</option>
+            <option value="au">AU (Australia)</option>
+          </select>
+        </article>
+
+        <article class="input-group">
+          <label for="size-input">Shoe Size:</label>
+          <input type="number" id="size-input" placeholder="Enter size" step="0.5" min="0" />
+        </article>
+
+        <button id="convert-btn" class="btn"><i class="fas fa-exchange-alt"></i> Convert Size</button>
+
+        <article class="result-section" id="result-section">
+          <div class="result-title">Conversion Results</div>
+          <div class="result-grid" id="result-grid"></div>
+        </article>
+
+        <button class="btn btn-secondary size-chart-btn" id="size-chart-btn">
+          <i class="fas fa-table"></i> Show Size Chart
+        </button>
+      </section>
+
+      <section class="info-section">
+        <div class="info-title">Shoe Size Conversion Tips</div>
+        <p class="info-text">
+          Shoe size conversion can vary between manufacturers and shoe types. Here are some tips to ensure the
+          best fit:
+        </p>
+        <ul class="tips-list">
+          <li>Always try shoes on when possible, as sizes can vary between brands.</li>
+          <li>Measure your feet at the end of the day when they are largest.</li>
+          <li>Consider the width of your feet = some sizing systems account for width.</li>
+          <li>For athletic shoes, you may need a half size larger than dress shoes.</li>
+          <li>Children's feet grow quickly = check sizing every 2-3 months.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      © <time datetime="" id="year"></time> Made width <span>♥</span> by
+      <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+    </footer>
+  </body>
+</html>
