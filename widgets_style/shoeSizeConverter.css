@@ -25,7 +25,7 @@ body {
     padding: 2rem;
 }
 
-p {
+p, li {
     text-wrap: pretty;
 }
 
@@ -216,4 +216,144 @@ option::checkmark {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 1rem;
+}
+
+.result-item {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+    text-align: center;
+}
+
+.result-system {
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 0.3rem;
+}
+
+.result-size {
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.button {
+    padding: 0.8rem;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    &:hover {
+        background-color: #5649c5;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgb(0 0 0 / 0.15);
+    }
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+.btn-secondary {
+    background-color: white;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.btn-secondary:hover {
+    background-color: rgb(108 92 231 / 0.5);
+}
+
+.size-chart-btn {
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.size-chart-section {
+    display: none;
+    margin-top: 2rem;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.size-chart-section.active {
+    display: block;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+th, td {
+    padding: 0.8rem;
+    text-align: center;
+    border: 1px solid #bbb;
+}
+
+th {
+    background-color: var(--primary);
+    color: white;
+    font-weight: 600;
+
+    &:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+}
+
+.info-section {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: rgb(162 155 254 / 0.2);
+    border-radius: 10px;
+}
+
+.info-title {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.info-text {
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.tips-list {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+
+    li {
+        margin-bottom: 0.5rem;
+        list-style: square;
+    }
+}
+
+footer {
+    margin-top: 2rem;
+    text-align: center;
+    color: var(--dark);
+    opacity: 0.7;
+    font-size: 0.9rem;
+    width: 100%;
+
+    span {
+        color: var(--error);
+        font-size: 1.1rem;
+    }
+    abbr {
+        letter-spacing: 0.5px;
+        text-underline-offset: 2px;
+        color: var(--primary);
+        cursor: default;
+    }
 }
