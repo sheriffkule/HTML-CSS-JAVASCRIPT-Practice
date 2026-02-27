@@ -13,6 +13,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    interpolate-size: allow-keywords;
 }
 
 body {
@@ -145,8 +146,7 @@ option::checkmark {
 
 .btn {
     position: relative;
-    background: #3498db;
-    color: #000;
+    color: var(--dark);
     overflow: hidden;
 }
 
@@ -163,6 +163,11 @@ option::checkmark {
     font-weight: 600;
     transition: all .3s ease;
 
+    &:hover {
+        transform: translateY(-2px);
+        background: rgb(108 92 231 / 0.2);
+        box-shadow: 0 4px 8px rgb(108 92 231 / 0.4);
+    }
     i {
         font-size: 1.25rem;
     }
@@ -178,7 +183,7 @@ option::checkmark {
     position: absolute;
     width: 8px;
     height: 8px;
-    background: #fff;
+    background: rgb(108 92 231 / 0.1);
     border-radius: 50%;
     pointer-events: none;
     opacity: 1;
@@ -197,7 +202,7 @@ option::checkmark {
     border-radius: 10px;
     padding: 1.5rem;
     margin-top: 1rem;
-    /* display: none; */
+    display: none;
 }
 
 .result-section.active {
@@ -210,6 +215,7 @@ option::checkmark {
     margin-bottom: 1rem;
     font-size: 1.2rem;
     font-weight: 600;
+    text-align: center;
 }
 
 .result-grid {
@@ -280,6 +286,7 @@ option::checkmark {
 .size-chart-section {
     display: none;
     margin-top: 2rem;
+    transition: display .5s;
     animation: fadeIn 0.5s ease-in;
 }
 
@@ -296,7 +303,11 @@ table {
 th, td {
     padding: 0.8rem;
     text-align: center;
-    border: 1px solid #bbb;
+    border: 1px solid #ccc;
+}
+
+tr td:nth-child(odd) {
+    background-color: rgb(108 92 231 / 0.1);
 }
 
 th {
@@ -306,6 +317,7 @@ th {
 
     &:nth-child(even) {
         background-color: #f9f9f9;
+        color: var(--dark);
     }
 }
 
@@ -355,5 +367,40 @@ footer {
         text-underline-offset: 2px;
         color: var(--primary);
         cursor: default;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media screen and (width < 768px) {
+    .container {
+        padding: 1.5rem;
+    }
+    .result-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .gender-selection {
+        flex-direction: column;
+    }
+}
+
+@media screen and (width < 480px) {
+    body {
+        padding: 1rem;
+    }
+    h1 {
+        font-size: 2rem;
+    }
+    .result-grid {
+        grid-template-columns: 1fr;
     }
 }

@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
   let sizeCharts = {
     men: generateSizeChart('men'),
     women: generateSizeChart('women'),
-    kid: generateSizeChart('kids'),
+    kids: generateSizeChart('kids'),
   };
 
   // Initialize
@@ -57,18 +57,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
   btns.forEach((button) => {
     button.addEventListener('mousemove', function (e) {
-      let rect = btn.getBoundingClientRect();
+      let rect = button.getBoundingClientRect();
       let x = e.clientX - rect.left;
       let y = e.clientY - rect.top;
       let numParticles = 20;
 
       for (let i = 0; i < numParticles; i++) {
-        createParticle(x, y);
+        createParticle(x, y, button);
       }
     });
   });
 
-  function createParticle(x, y) {
+  function createParticle(x, y, button) {
     let particle = document.createElement('div');
     particle.classList.add('particle');
     particle.style.left = `${x}px`;
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
     particle.style.setProperty('--tx', tx + 'px');
     particle.style.setProperty('--ty', ty + 'px');
 
-    btns.appendChild(particle);
+    button.appendChild(particle);
 
     setTimeout(() => {
       particle.remove();
@@ -120,5 +120,139 @@ document.addEventListener('DOMContentLoaded', function () {
         baseUS = gender === 'women' ? size + 2 : size + 1;
         break;
     }
+
+    // Convert baseUS to all other systems
+    systems.forEach((sys) => {
+      if (sys === fromSystem) {
+        results[sys] = size;
+        return;
+      }
+
+      switch (sys) {
+        case 'us':
+          results[sys] = baseUS;
+          break;
+        case 'uk':
+          results[sys] = gender === 'women' ? baseUS - 2 : baseUS - 1;
+          break;
+        case 'eu':
+          if (gender === 'women' || gender === 'men') {
+            results[sys] = 30.5 + 0.85 * baseUS;
+          } else {
+            results[sys] = 16 + 0.67 * baseUS;
+          }
+          break;
+        case 'cm':
+          results[sys] = (baseUS + 22) / 3 / 0.3937;
+          break;
+        case 'jp':
+          results[sys] = 18.5 + 0.85 * baseUS;
+          break;
+        case 'au':
+          results[sys] = gender === 'women' ? baseUS - 2 : baseUS - 1;
+          break;
+      }
+
+      // Round to nearest 0.5 for most systems, whole number for EU and CM
+      if (sys === 'eu' || sys === 'cm' || sys === 'jp') {
+        results[sys] = Math.round(results[sys]);
+      } else {
+        results[sys] = Math.round(results[sys] * 2) / 2;
+      }
+    });
+
+    return results;
   }
+
+  function displayResults(results) {
+    resultGrid.innerHTML = '';
+
+    for (const [system, size] of Object.entries(results)) {
+      const systemName = {
+        us: 'US',
+        uk: 'UK',
+        eu: 'EU',
+        cm: 'CM',
+        jp: 'JP',
+        au: 'AU',
+      }[system];
+
+      const item = document.createElement('div');
+      item.className = 'result-item';
+      item.innerHTML = `
+        <div class="result-system">${systemName}</div>
+        <div class="result-size">${size}</div>
+      `;
+      resultGrid.appendChild(item);
+    }
+
+    resultSection.classList.add('active');
+  }
+
+  function toggleSizeChart() {
+    sizeChartSection.classList.toggle('active');
+    sizeChartBtn.innerHTML = sizeChartSection.classList.contains('active')
+      ? '<i class ="fas fa-times"></i> Hide Size Chart'
+      : '<i class ="fas fa-table"></i> Show Size Chart';
+  }
+
+  function updateSizeChartDisplay() {
+    sizeChartContent.innerHTML = sizeCharts[currentGender];
+  }
+
+  function generateSizeChart(gender) {
+    const sizes = [];
+    const startSize = gender === 'kids' ? 0.5 : 5;
+    const endSize = gender === 'kids' ? 13.5 : 15;
+    const step = 0.5;
+
+    // Generate sizes array
+    for (let i = startSize; i <= endSize; i += step) {
+      sizes.push(i);
+    }
+
+    // Create table HTML
+    let html = '<table><thead><tr>';
+    const systems = ['US', 'UK', 'EU', 'CM', 'JP'];
+    if (gender !== 'kids') systems.push('AU');
+
+    systems.forEach((sys) => {
+      html += `<th>${sys}</th>`;
+    });
+    html += '</tr></thead><tbody>';
+
+    sizes.forEach((size) => {
+      const results = calculateConversions(gender, 'us', size);
+      html += '<tr>';
+
+      html += `<td>${size}</td>`;
+      html += `<td>${gender === 'women' ? results.uk - 1 : results.uk}</td>`;
+      html += `<td>${results.eu}</td>`;
+      html += `<td>${results.cm}</td>`;
+      html += `<td>${results.jp}</td>`;
+      if (gender !== 'kids') {
+        html += `<td>${gender === 'women' ? results.au - 1 : results.au}</td>`;
+      }
+
+      html += '</tr>';
+    });
+
+    html += '</tbody></table>';
+    return html;
+  }
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
