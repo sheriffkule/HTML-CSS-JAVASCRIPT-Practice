@@ -1,13 +1,48 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Draggable Popup Modal</title>
-    <link rel="stylesheet" href="/clickEffect_style/clickEffect64.css">
-</head>
-<body>
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/clickEffect_style/clickEffect64.css" />
+  </head>
+  <body>
+    <h1>Draggable Popup Modal</h1>
+    <button id="openModalBtn">Open Modal</button>
+
+    <div class="modal" id="myModal">
+      <div class="modal-content">
+        <header class="modal-header">
+          <div>
+            <h2>Modal Title</h2>
+            <h3 class="modal-subtitle">Subtitle Here</h3>
+          </div>
+          <div class="close">&times;</div>
+        </header>
+        <div class="modal-body">
+          <img src="/images/darkhex.jpg" alt="Placeholder Image" class="modal-image" />
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati culpa ducimus molestiae
+            adipisci eaque! Esse accusantium in, vero ducimus rem reiciendis expedita dicta, ipsum enim
+            explicabo, officia amet blanditiis laboriosam!
+          </p>
+        </div>
+        <div class="modal-footer">
+          <div class="footer-text">
+            <p>
+              For more information, please contact us at
+              <a href="mailto:support@example.com">support@example.com</a>.
+            </p>
+          </div>
+          <div class="footer-icons">
+            <i class="fas fa-phone-alt"></i>
+            <i class="fas fa-envelope"></i>
+            <i class="fas fa-info-circle"></i>
+          </div>
+        </div>
+      </div>
+    </div>
     <script src="/clickEffect_script/clickEffect64.js"></script>
-</body>
+  </body>
 </html>
