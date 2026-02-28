@@ -2,6 +2,7 @@
     --primary: #6f4e37;
     --secondary: #c4a484;
     --light: #e0e0c9;
+    --dark: #3e2723;
     --accent: #3e2723;
     --text: #333333;
     --white: #e8e9ea;
@@ -30,6 +31,7 @@ body {
     border-radius: 15px;
     box-shadow: 0 10px 30px rgb(0 0 0 / 0.1);
     margin-block: 30px;
+    padding-inline: 1rem;
 }
 
 header {
@@ -55,4 +57,133 @@ header {
     @media screen and (width < 768px) {
         grid-template-columns: 1fr;
     }
+}
+
+.input-section, .result-section {
+    background-color: var(--light);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgb(0 0 0 / 0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+input, select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--secondary);
+    border-radius: 8px;
+    font-size: 1rem;
+    margin: 2px;
+    transition: all 0.3s;
+    background-color: var(--white);
+}
+
+:is(input, select):is(:focus, :focus-within) {
+    outline: none;
+    border-color: none;
+    box-shadow: 0 0 0 3px rgb(111 78 55 / 0.2);
+}
+
+select:is(:focus, :focus-within) {
+    background-color: var(--primary);
+    color: var(--light);
+}
+
+select,
+::picker(select) {
+  appearance: base-select;
+}
+
+::picker(select) {
+  border-radius: 8px;
+  border: none;
+}
+
+select::picker-icon {
+  color: var(--primary);
+  transition: 0.3s rotate;
+}
+
+select:open::picker-icon {
+  rotate: 180deg;
+  color: var(--success);
+}
+
+option {
+  border: 1px solid #bbb;
+  background: var(--secondary);
+  padding: 2px 0 2px 12px;
+  transition: 0.3s;
+}
+
+option:hover,
+option:focus {
+  background: var(--primary);
+}
+
+option:checked {
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: var(--light);
+}
+
+option::checkmark {
+  color: var(--success);
+  font-size: 1.5rem;
+}
+
+.btn {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all .3s;
+    width: 100%;
+    margin-top: 10px;
+
+    &:hover {
+        background-color: var(--dark);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgb(111 78 55 / 0.2);
+    }
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+.result-card {
+    background-color: var(--white);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: inset 0 -4px 10px rgb(0 0 0 / 0.1),
+    inset 0 4px 10px rgb(0 0 0 / 0.1);
+    border-left: 5px solid var(--primary);
+}
+
+.result-title {
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.result-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark);
 }
