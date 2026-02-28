@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coffee to Water Ratio Calculator</title>
+    <link rel="stylesheet" href="/widgets_style/coffeeWaterRatio.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Coffee to Water Ratio Calculator</h1>
+        <p class="subtitle">Brew the perfect cup every time.</p>
+      </header>
+
+      <div class="toggle-container">
+        <button class="toggle-btn active" id="ratio-toggle">Calculate by Ratio</button>
+        <button class="toggle-btn" id="amount-toggle">Calculate by Amount</button>
+      </div>
+
+      <main class="calculator">
+        <section class="input-section" id="ratio-input-section">
+          <article class="form-group">
+            <label for="coffee-amount">Coffee Amount</label>
+            <input type="number" id="coffee-amount" placeholder="Enter coffee amount" min="1" />
+            <select id="coffee-unit">
+              <option value="g">Grams (g)</option>
+              <option value="oz">Ounces (oz)</option>
+              <option value="tbsp">Tablespoons</option>
+            </select>
+          </article>
+
+          <article class="form-group">
+            <label for="ratio">Coffee to Water Ratio</label>
+            <div class="brew-methods">
+              <button class="method-btn active" data-ratio="16">Standard (1:16)</button>
+              <button class="method-btn" data-ratio="15">Strong (1:15)</button>
+              <button class="method-btn" data-ratio="17">Light (1:17)</button>
+              <button class="method-btn" data-ratio="12">Espresso (1:12)</button>
+            </div>
+
+            <div class="visual-ratio"></div>
+            <div class="ratio-labels">
+              <span>More Coffee</span>
+              <span>More Water</span>
+            </div>
+            <input type="range" id="ratio-slider" min="10" max="20" step="0.5" value="16" />
+            <input type="number" id="ratio-input" value="16" min="1" max="30" step="0.5" />
+          </article>
+
+          <button class="btn" id="calculate-btn">Calculate Water Needed</button>
+        </section>
+
+        <section class="input-section">
+          <article class="form-group">
+            <label for="total-water">Total Water Amount</label>
+            <input type="number" id="total-water" placeholder="Enter water amount" min="1" />
+            <select id="water-unit">
+              <option value="ml">Milliliters (ml)</option>
+              <option value="oz">Ounces (oz)</option>
+              <option value="cup">Cups</option>
+            </select>
+          </article>
+
+          <article class="form-group">
+            <label for="ratio-amount">Coffee to Water Ratio</label>
+            <div class="brew-methods">
+              <button class="method-btn active" data-ratio="16">Standard (1:16)</button>
+              <button class="method-btn" data-ratio="15">Strong (1:15)</button>
+              <button class="method-btn" data-ratio="17">Light (1:17)</button>
+              <button class="method-btn" data-ratio="12">Espresso (1:12)</button>
+            </div>
+            <input type="range" id="ratio-slider-amount" min="10" max="20" step="0.5" value="16" />
+            <input type="number" id="ratio-input-amount" value="16" min="1" max="30" step="0.5" />
+          </article>
+
+          <button class="btn" id="calculate-amount-btn">Calculate Coffee Needed</button>
+        </section>
+
+        <section class="result-section">
+          <article class="result-card">
+            <div class="result-title">Water Needed</div>
+            <div class="result-value" id="water-result">0<span class="result-unit">ml</span></div>
+          </article>
+
+          <article class="result-card">
+            <div class="result-title">Coffee Needed</div>
+            <div class="result-value" id="coffee-result">0<span class="result-unit">g</span></div>
+          </article>
+
+          <article class="tips-section">
+            <div class="tips-title">Brewing Tips</div>
+            <ul class="tips-list">
+              <li>Use filtered water for better taste.</li>
+              <li>Water temperature should be between 195&deg;F to 205&deg;F.</li>
+              <li>Grind your coffee beans just before brewing.</li>
+              <li>Experiment with ratios to find your perfect taste.</li>
+            </ul>
+          </article>
+        </section>
+      </main>
+
+      <footer>
+        © <time datetime="2026" id="year">2026</time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
+    </div>
+
+    <script src="/widgets_script/coffeeWaterRatio.js"></script>
+  </body>
+</html>
