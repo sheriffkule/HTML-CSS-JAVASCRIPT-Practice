@@ -14,8 +14,8 @@
       </header>
 
       <div class="toggle-container">
-        <button class="toggle-btn active" id="ratio-toggle">Calculate by Ratio</button>
-        <button class="toggle-btn" id="amount-toggle">Calculate by Amount</button>
+        <button class="toggle-btn ripple-btn active" id="ratio-toggle">Calculate by Ratio</button>
+        <button class="toggle-btn ripple-btn" id="amount-toggle">Calculate by Amount</button>
       </div>
 
       <main class="calculator">
@@ -33,10 +33,10 @@
           <article class="form-group">
             <label for="ratio">Coffee to Water Ratio</label>
             <div class="brew-methods">
-              <button class="method-btn active" data-ratio="16">Standard (1:16)</button>
-              <button class="method-btn" data-ratio="15">Strong (1:15)</button>
-              <button class="method-btn" data-ratio="17">Light (1:17)</button>
-              <button class="method-btn" data-ratio="12">Espresso (1:12)</button>
+              <button class="method-btn ripple-btn active" data-ratio="16">Standard (1:16)</button>
+              <button class="method-btn ripple-btn" data-ratio="15">Strong (1:15)</button>
+              <button class="method-btn ripple-btn" data-ratio="17">Light (1:17)</button>
+              <button class="method-btn ripple-btn" data-ratio="12">Espresso (1:12)</button>
             </div>
 
             <div class="visual-ratio"></div>
@@ -48,7 +48,7 @@
             <input type="number" id="ratio-input" value="16" min="1" max="30" step="0.5" />
           </article>
 
-          <button class="btn" id="calculate-btn">Calculate Water Needed</button>
+          <button class="btn ripple-btn" id="calculate-btn">Calculate Water Needed</button>
         </section>
 
         <section class="input-section" id="amount-input-section">
@@ -65,16 +65,16 @@
           <article class="form-group">
             <label for="ratio-amount">Coffee to Water Ratio</label>
             <div class="brew-methods">
-              <button class="method-btn active" data-ratio="16">Standard (1:16)</button>
-              <button class="method-btn" data-ratio="15">Strong (1:15)</button>
-              <button class="method-btn" data-ratio="17">Light (1:17)</button>
-              <button class="method-btn" data-ratio="12">Espresso (1:12)</button>
+              <button class="method-btn ripple-btn active" data-ratio="16">Standard (1:16)</button>
+              <button class="method-btn ripple-btn" data-ratio="15">Strong (1:15)</button>
+              <button class="method-btn ripple-btn" data-ratio="17">Light (1:17)</button>
+              <button class="method-btn ripple-btn" data-ratio="12">Espresso (1:12)</button>
             </div>
             <input type="range" id="ratio-slider-amount" min="10" max="20" step="0.5" value="16" />
             <input type="number" id="ratio-input-amount" value="16" min="1" max="30" step="0.5" />
           </article>
 
-          <button class="btn" id="calculate-amount-btn">Calculate Coffee Needed</button>
+          <button class="btn ripple-btn" id="calculate-amount-btn">Calculate Coffee Needed</button>
         </section>
 
         <section class="result-section">

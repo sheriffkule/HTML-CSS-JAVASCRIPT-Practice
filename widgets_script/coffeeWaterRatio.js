@@ -16,8 +16,10 @@ document.addEventListener('DOMContentLoaded', function () {
   const waterUnitSelect = document.getElementById('water-unit');
   const waterResult = document.getElementById('water-result');
   const coffeeResult = document.getElementById('coffee-result');
-  const methodBtns = document.querySelectorAll('.method-btn');
+  const methodBtns = document.querySelectorAll('#ratio-input-section .method-btn');
   const methodBtnsAmount = document.querySelectorAll('#amount-input-section .method-btn');
+  const resultSection = document.querySelector('.result-section');
+  const allButtons = document.querySelectorAll('.ripple-btn, .btn, .toggle-btn');
 
   // Toggle between ratio and amount calculation
   ratioToggle.addEventListener('click', function () {
@@ -25,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
     amountToggle.classList.remove('active');
     ratioInputSection.style.display = 'block';
     amountInputSection.style.display = 'none';
+    resultSection.style.gridColumn = 'unset';
   });
 
   amountToggle.addEventListener('click', function () {
@@ -32,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
     amountToggle.classList.add('active');
     ratioInputSection.style.display = 'none';
     amountInputSection.style.display = 'block';
+    resultSection.style.gridColumn = 'unset';
   });
 
   // Sync ratio slider and input
@@ -78,8 +82,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const coffeeUnit = coffeeUnitSelect.value;
     const ratio = parseFloat(ratioInput.value);
 
-    if (isNaN(coffeeAmount)) {
+    if (isNaN(coffeeAmount) || coffeeAmount <= 0) {
       alert('Please enter a valid coffee amount!');
+      return;
+    }
+    if (isNaN(ratio) || ratio <= 0) {
+      alert('Please enter a valid ratio!');
       return;
     }
 
@@ -95,6 +103,8 @@ document.addEventListener('DOMContentLoaded', function () {
       case 'tbsp':
         coffeeGrams = coffeeAmount * 5;
         break;
+      default:
+        coffeeGrams = coffeeAmount;
     }
 
     const waterMl = coffeeGrams * ratio;
@@ -110,8 +120,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const waterUnit = waterUnitSelect.value;
     const ratio = parseFloat(ratioInputAmount.value);
 
-    if (isNaN(waterAmount)) {
+    if (isNaN(waterAmount) || waterAmount <= 0) {
       alert('Please enter a valid water amount!');
+      return;
+    }
+    if (isNaN(ratio) || ratio <= 0) {
+      alert('Please enter a valid ratio!');
       return;
     }
 
@@ -127,6 +141,8 @@ document.addEventListener('DOMContentLoaded', function () {
       case 'cup':
         waterMl = waterAmount * 236.588;
         break;
+      default:
+        waterMl = waterAmount;
     }
 
     const coffeeGrams = waterMl / ratio;
@@ -134,6 +150,26 @@ document.addEventListener('DOMContentLoaded', function () {
     // Display results
     waterResult.innerHTML = `${waterMl.toFixed(1)}<span class="result-unit">ml</span>`;
     coffeeResult.innerHTML = `${coffeeGrams.toFixed(1)}<span class="result-unit">g</span>`;
+  });
+
+  // All buttons ripple effect
+  allButtons.forEach((btn) => {
+    btn.addEventListener('mousedown', function (e) {
+      // Remove any existing ripple
+      const oldRipple = this.querySelector('span.ripple-effect');
+      if (oldRipple) oldRipple.remove();
+
+      let x = e.offsetX;
+      let y = e.offsetY;
+      let ripples = document.createElement('span');
+      ripples.style.left = x + 'px';
+      ripples.style.top = y + 'px';
+      this.appendChild(ripples);
+
+      setTimeout(() => {
+        ripples.remove();
+      }, 500);
+    });
   });
 
   // Update year in footer

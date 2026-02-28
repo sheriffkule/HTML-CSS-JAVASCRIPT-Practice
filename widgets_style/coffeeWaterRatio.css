@@ -37,6 +37,7 @@ body {
 header {
     text-align: center;
     margin-block: 20px 30px;
+    animation: slideIn .8s ease-in;
 
     h1 {
         color: var(--primary);
@@ -53,6 +54,8 @@ header {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 30px;
+    animation: slideIn .8s ease-in forwards 1s;
+    visibility: hidden;
 
     @media screen and (width < 768px) {
         grid-template-columns: 1fr;
@@ -235,7 +238,7 @@ option::checkmark {
 .brew-methods {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 12px;
     margin-top: 20px;
 }
 
@@ -243,9 +246,10 @@ option::checkmark {
     background-color: var(--white);
     border: 2px solid var(--secondary);
     padding: 8px 16px;
-    border-radius: 20px;
+    border-radius: 10px 0 10px 0;
     cursor: pointer;
     font-size: 0.9rem;
+    corner-shape: superellipse(-1);
     transition: all .3s;
 
     &:hover {
@@ -254,8 +258,132 @@ option::checkmark {
         border-color: white;
         transform: translateY(-2px) scale(1.02);
         box-shadow: 0 6px 16px rgb(111 78 55 / 0.2);
+        border-radius: 0 10px 0 10px;
     }
     &:active {
         transform: translateY(0) scale(1);
+    }
+}
+
+.visual-ratio {
+    height: 10px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 15px;
+    margin-block: 15px;
+    position: relative;
+}
+
+.visual-ratio::after {
+    content: '';
+    position: absolute;
+    top: -6px;
+    bottom: -6px;
+    width: 4px;
+    background-color: var(--dark);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.ratio-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: var(--secondary);
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    color: var(--secondary);
+    font-size: 0.9rem;
+    padding-bottom: 10px;
+
+    span {
+        color: crimson;
+        font-size: 1.1rem;
+    }
+    abbr {
+        letter-spacing: 0.5px;
+        text-underline-offset: 2px;
+        cursor: default;
+        color: var(--primary);
+    }
+}
+
+.toggle-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    animation: slideIn .8s ease-in forwards 0.5s;
+    visibility: hidden;
+}
+
+.toggle-btn {
+    padding: 10px 20px;
+    background-color: var(--light);
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all .3s;
+
+    &:first-child {
+        border-radius: 8px 0 0 8px;
+        &:hover {
+            transform: translateX(-6px) scale(1.02);
+        }
+    }
+    &:last-child {
+        border-radius: 0 8px 8px 0;
+        &:hover {
+            transform: translateX(6px) scale(1.02);
+        }
+    }
+    &:hover {
+        corner-shape: superellipse(-1.5);
+    }
+    &.active {
+        background-color: var(--primary);
+        color: white;
+    }
+}
+
+.ripple-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple-btn span {
+    position: absolute;
+    background: white;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    border-radius: 50%;
+    animation: animate .5s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: .5;
+    }
+
+    100% {
+        width: 350px;
+        height: 350px;
+        opacity: 0;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY();
+        opacity: 1;
+        visibility: visible;
     }
 }
