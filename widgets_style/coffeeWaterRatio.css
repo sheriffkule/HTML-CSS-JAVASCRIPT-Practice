@@ -165,6 +165,14 @@ option::checkmark {
     }
 }
 
+.result-section {
+    grid-column: span 2;
+
+    @media screen and (width < 768px) {
+        grid-column: unset;
+    }
+}
+
 .result-card {
     background-color: var(--white);
     border-radius: 8px;
@@ -186,4 +194,68 @@ option::checkmark {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--dark);
+}
+
+.result-unit {
+    font-size: 1rem;
+    color: var(--secondary);
+    margin-left: 5px;
+}
+
+.tips-section {
+    margin-top: 30px;
+}
+
+.tips-title {
+    color: var(--dark);
+    margin-bottom: 15px;
+    font-size: 1.22rem;
+    font-weight: 600;
+}
+
+.tips-list {
+    list-style-type: none;
+}
+
+.tips-list li {
+    margin-bottom: 8px;
+    position: relative;
+    padding-left: 25px;
+}
+
+.tips-list li::before {
+    content: '•';
+    color: var(--primary);
+    font-size: 1.5rem;
+    position: absolute;
+    left: 0;
+    top: -5px;
+}
+
+.brew-methods {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.method-btn {
+    background-color: var(--white);
+    border: 2px solid var(--secondary);
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all .3s;
+
+    &:hover {
+        background-color: var(--primary);
+        color: white;
+        border-color: white;
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 6px 16px rgb(111 78 55 / 0.2);
+    }
+    &:active {
+        transform: translateY(0) scale(1);
+    }
 }

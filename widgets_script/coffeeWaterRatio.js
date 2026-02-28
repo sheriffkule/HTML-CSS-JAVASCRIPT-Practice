@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const ratioSliderAmount = document.getElementById('ratio-slider-amount');
   const ratioInputAmount = document.getElementById('ratio-input-amount');
   const totalWaterInput = document.getElementById('total-water');
-  const totalUnitSelect = document.getElementById('water-unit');
+  const waterUnitSelect = document.getElementById('water-unit');
   const waterResult = document.getElementById('water-result');
   const coffeeResult = document.getElementById('coffee-result');
   const methodBtns = document.querySelectorAll('.method-btn');
@@ -61,4 +61,93 @@ document.addEventListener('DOMContentLoaded', function () {
       ratioInput.value = ratio;
     });
   });
+
+  methodBtnsAmount.forEach((btn) => {
+    btn.addEventListener('click', function () {
+      methodBtnsAmount.forEach((b) => b.classList.remove('active'));
+      this.classList.add('active');
+      const ratio = parseFloat(this.dataset.ratio);
+      ratioSliderAmount.value = ratio;
+      ratioInputAmount.value = ratio;
+    });
+  });
+
+  // Calculate water needed based on coffee amount
+  calculateBtn.addEventListener('click', function () {
+    const coffeeAmount = parseFloat(coffeeAmountInput.value);
+    const coffeeUnit = coffeeUnitSelect.value;
+    const ratio = parseFloat(ratioInput.value);
+
+    if (isNaN(coffeeAmount)) {
+      alert('Please enter a valid coffee amount!');
+      return;
+    }
+
+    // Convert coffee amount to grams for calculation
+    let coffeeGrams;
+    switch (coffeeUnit) {
+      case 'g':
+        coffeeGrams = coffeeAmount;
+        break;
+      case 'oz':
+        coffeeGrams = coffeeAmount * 28.35;
+        break;
+      case 'tbsp':
+        coffeeGrams = coffeeAmount * 5;
+        break;
+    }
+
+    const waterMl = coffeeGrams * ratio;
+
+    // Display results
+    waterResult.innerHTML = `${waterMl.toFixed(1)}<span class="result-unit">ml</span>`;
+    coffeeResult.innerHTML = `${coffeeGrams.toFixed(1)}<span class="result-unit">g</span>`;
+  });
+
+  // Calculate coffee needed based on water amount
+  calculateAmountBtn.addEventListener('click', function () {
+    const waterAmount = parseFloat(totalWaterInput.value);
+    const waterUnit = waterUnitSelect.value;
+    const ratio = parseFloat(ratioInputAmount.value);
+
+    if (isNaN(waterAmount)) {
+      alert('Please enter a valid water amount!');
+      return;
+    }
+
+    // Convert water amount to ml for calculation
+    let waterMl;
+    switch (waterUnit) {
+      case 'ml':
+        waterMl = waterAmount;
+        break;
+      case 'oz':
+        waterMl = waterAmount * 29.574;
+        break;
+      case 'cup':
+        waterMl = waterAmount * 236.588;
+        break;
+    }
+
+    const coffeeGrams = waterMl / ratio;
+
+    // Display results
+    waterResult.innerHTML = `${waterMl.toFixed(1)}<span class="result-unit">ml</span>`;
+    coffeeResult.innerHTML = `${coffeeGrams.toFixed(1)}<span class="result-unit">g</span>`;
+  });
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
