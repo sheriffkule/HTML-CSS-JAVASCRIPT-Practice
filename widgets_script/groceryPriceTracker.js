@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Render grocery items to the DOM
   function renderGroceryItems(filteredItems = null) {
-    const itemRender = filteredItems || groceryItems;
+    const itemsToRender = filteredItems || groceryItems;
 
     if (itemsToRender.length === 0) {
       groceryItemContainer.innerHTML =
@@ -48,13 +48,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
       groceryItem.innerHTML = `
         <div class="item-name">
-          <input type="checkbox" class="item-checkbox ${item.purchased ? 'checked' : ''}" />
+          <input type="checkbox" class="item-checkbox" ${item.purchased ? 'checked' : ''} />
           <span>${item.name}</span>
           ${item.notes ? '<i class="fas fa-sticky-note" title="' + item.notes + '"></i>' : ''}
         </div>
-        <div class="item-price">$${item.price.toFIxed(2)}</div>
+        <div class="item-price">$${item.price.toFixed(2)}</div>
         <div class="item-store">
-          <span className="store-icon">${item.store.charAt(0)}</span>
+          <span class="store-icon">${item.store.charAt(0)}</span>
         </div>
         <div class="item-date">${formatDate(item.date)}</div>
         <div class="item-actions">
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add event listener to edit buttons
     document.querySelectorAll('.edit-btn').forEach((btn) => {
       btn.addEventListener('click', function () {
-        const itemId = this.closest('grocery-item').dataset.id;
+        const itemId = this.closest('.grocery-item').dataset.id;
         editItem(itemId);
       });
     });
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add event listener to delete buttons
     document.querySelectorAll('.delete-btn').forEach((btn) => {
       btn.addEventListener('click', function () {
-        const itemId = this.closest('grocery-item').dataset.id;
+        const itemId = this.closest('.grocery-item').dataset.id;
         deleteItem(itemId);
       });
     });
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('itemPrice').value = item.price;
     document.getElementById('itemStore').value = item.store;
     document.getElementById('itemNotes').value = item.notes || '';
-    document.getElementById('itemPurchased').checked = item.checked;
+    document.getElementById('itemPurchased').checked = item.purchased;
 
     openModal();
   }
@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (groceryItemElement) {
         isPurchased
           ? groceryItemElement.classList.add('purchased')
-          : groceryItemElement.classList.add('purchased');
+          : groceryItemElement.classList.remove('purchased');
       }
     }
   }
@@ -207,10 +207,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // Apply search filter
     const searchTerm = searchInput.value.toLowerCase();
     if (searchTerm) {
-      filteredItems = filteredItems.filter((item) => {
+      filteredItems = filteredItems.filter((item) =>
         item.name.toLowerCase().includes(searchTerm) ||
-          (item.notes && item.notes.toLowerCase().includes(searchTerm));
-      });
+        (item.notes && item.notes.toLowerCase().includes(searchTerm))
+      );
     }
 
     // Apply store filter
@@ -223,7 +223,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const sortValue = sortBy.value;
     switch (sortValue) {
       case 'name':
-        filteredItems.sort((a, b) => a.name.localCompare(b.name));
+        filteredItems.sort((a, b) => a.name.localeCompare(b.name));
         break;
       case 'price-low':
         filteredItems.sort((a, b) => a.price - b.price);
@@ -232,7 +232,7 @@ document.addEventListener('DOMContentLoaded', function () {
         filteredItems.sort((a, b) => b.price - a.price);
         break;
       case 'store':
-        filteredItems.sort((a, b) => a.store.localCompare(b.store));
+        filteredItems.sort((a, b) => a.store.localeCompare(b.store));
         break;
       case 'date':
         filteredItems.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -244,4 +244,84 @@ document.addEventListener('DOMContentLoaded', function () {
 
     renderGroceryItems(filteredItems);
   }
+
+  // Update statistics
+  function updateStats() {
+    const totalItems = groceryItems.length;
+    const totalCost = groceryItems.reduce((sum, item) => sum + item.price, 0);
+    const remainingItems = groceryItems.filter((item) => !item.purchased).length;
+
+    totalItemsEl.textContent = totalItems;
+    totalCostEl.textContent = `$${totalCost.toFixed(2)}`;
+    remainingItemsEl.textContent = remainingItems;
+  }
+
+  // Save to local storage
+  function saveToLocalStorage() {
+    localStorage.setItem('groceryItems', JSON.stringify(groceryItems));
+  }
+
+  // Modal function
+  function openModal() {
+    itemModal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    itemModal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+    groceryForm.reset();
+    document.getElementById('itemId').value = '';
+    document.getElementById('modalTitle').textContent = 'Add New Grocery Item';
+  }
+
+  // Toggle theme
+  function toggleTheme() {
+    if (themeToggle.checked) {
+      document.body.classList.add('dark-mode');
+      document.body.classList.remove('light-mode');
+      localStorage.setItem('theme', 'dark-mode');
+    } else {
+      document.body.classList.add('light-mode');
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('theme', 'light-mode');
+    }
+  }
+
+  // Event listeners
+  addItemBtn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+  window.addEventListener('click', function (e) {
+    if (e.target === itemModal) {
+      closeModal();
+    }
+  });
+
+  groceryForm.addEventListener('submit', function (e) {
+    const itemId = document.getElementById('itemId').value;
+    itemId ? updateItem(e) : addItem(e);
+  });
+
+  searchInput.addEventListener('input', filterAndSortItems);
+  storeFilter.addEventListener('change', filterAndSortItems);
+  sortBy.addEventListener('change', filterAndSortItems);
+  themeToggle.addEventListener('change', toggleTheme);
+
+  // Initialize the app
+  init();
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
