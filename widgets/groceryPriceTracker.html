@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grocery Price Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/groceryPriceTracker.css" />
+  </head>
+  <body class="dark-mode">
+    <div class="container">
+      <header>
+        <div class="header-content">
+          <h1><i class="fas fa-shopping-basket"></i> Grocery Price Tracker</h1>
+          <div class="theme-toggle">
+            <i class="fas fa-sun"></i>
+            <label for="switch">
+              <input type="checkbox" id="themeToggle" />
+              <span class="slider round"></span>
+            </label>
+            <i class="fas fa-moon"></i>
+          </div>
+        </div>
+        <p class="subtitle">Track and compare prices across stores.</p>
+      </header>
+
+      <main class="app-container">
+        <section class="controls">
+          <article class="search-filter">
+            <div class="search-box">
+              <i class="fas fa-search"></i>
+              <input type="text" id="searchInput" placeholder="Search groceries..." />
+            </div>
+            <select id="storeFilter">
+              <option value="all">All Stores</option>
+              <option value="walmart">Walmart</option>
+              <option value="target">Target</option>
+              <option value="kroger">Kroger</option>
+              <option value="whole foods">Whole Foods</option>
+              <option value="trader joe's">Trader Joe's</option>
+            </select>
+            <select id="sortBy">
+              <option value="name">Sort by Name</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="store">Sort by Store</option>
+              <option value="date">Sort by Date</option>
+            </select>
+          </article>
+
+          <button class="btn-primary" id="addItemBtn"><i class="fas fa-plus"></i> Add Item</button>
+        </section>
+
+        <section class="stats">
+          <article class="stat-card">
+            <h3>Total Items</h3>
+            <p id="totalItems">0</p>
+          </article>
+          <article class="stat-card">
+            <h3>Total Cost</h3>
+            <p id="totalCost">$0.00</p>
+          </article>
+          <article class="stat-card">
+            <h3>Remaining</h3>
+            <p id="totalItems">0</p>
+          </article>
+        </section>
+
+        <section class="grocery-list">
+          <article class="list-header">
+            <div class="header-item">Item</div>
+            <div class="header-item">Price</div>
+            <div class="header-item">Store</div>
+            <div class="header-item">Date</div>
+            <div class="header-item">Actions</div>
+          </article>
+          <article class="items-container" id="groceryItems"></article>
+        </section>
+      </main>
+
+      <footer>
+        © <time datetime="2026" id="year">2026</time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
+    </div>
+
+    <section class="modal" id="itemModal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2 id="modalTitle">Add New Grocery Item</h2>
+        <form id="groceryForm">
+          <input type="hidden" id="itemId" />
+
+          <article class="form-group">
+            <label for="itemName">Item Name</label>
+            <input type="text" id="itemName" />
+          </article>
+
+          <article class="form-group">
+            <label for="itemPrice">Price ($)</label>
+            <input type="number" id="itemPrice" min="0" step="0.01" required />
+          </article>
+
+          <article class="form-group">
+            <label for="itemStore">Store</label>
+            <select id="itemStore">
+              <option value="">Select a Store</option>
+              <option value="walmart">Walmart</option>
+              <option value="target">Target</option>
+              <option value="kroger">Kroger</option>
+              <option value="whole foods">Whole Foods</option>
+              <option value="trader joe's">Trader Joe's</option>
+              <option value="other">Other</option>
+            </select>
+          </article>
+
+          <article class="form-group">
+            <label for="itemNotes">Notes</label>
+            <textarea id="itemNotes" rows="3"></textarea>
+          </article>
+
+          <article class="form-group checkbox-group">
+            <input type="checkbox" id="itemPurchased" />
+            <label for="itemPurchased">Purchased</label>
+          </article>
+
+          <button type="submit" class="btn-primary">Save Item</button>
+        </form>
+      </div>
+    </section>
+
+    <script src="/widgets_script/groceryPriceTracker.js"></script>
+  </body>
+</html>
