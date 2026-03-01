@@ -65,5 +65,80 @@ document.addEventListener('DOMContentLoaded', function () {
 
       groceryItemContainer.appendChild(groceryItem);
     });
+
+    // Add event listeners to checkboxes
+    document.querySelectorAll('.item-checkbox').forEach((checkbox) => {
+      checkbox.addEventListener('change', function () {
+        const itemId = this.closest('.grocery-item').dataset.id;
+        togglePurchasedStatus(itemId, this.checked);
+      });
+    });
+
+    // Add event listener to edit buttons
+    document.querySelectorAll('.edit-btn').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        const itemId = this.closest('grocery-item').dataset.id;
+        editItem(itemId);
+      });
+    });
+
+    // Add event listener to delete buttons
+    document.querySelectorAll('.delete-btn').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        const itemId = this.closest('grocery-item').dataset.id;
+        deleteItem(itemId);
+      });
+    });
+  }
+
+  // Format date for display
+  function formatDate(dateString) {
+    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  }
+
+  // Add a new grocery item
+  function addItem(e) {
+    e.preventDefault();
+
+    const id = Date.now().toString();
+    const name = document.getElementById('itemName').value;
+    const price = parseFloat(document.getElementById('itemPrice').value);
+    const store = document.getElementById('itemStore').value;
+    const notes = document.getElementById('itemNotes').value;
+    const purchased = document.getElementById('itemPurchased').checked;
+    const date = new Date().toISOString();
+
+    const newItem = {
+      id,
+      name,
+      price,
+      store,
+      notes,
+      purchased,
+      date,
+    };
+
+    groceryItems.unshift(newItem);
+    saveToLocalStorage();
+    renderGroceryItems();
+    updateStats();
+    closeModal();
+  }
+
+  // Edit an existing item
+  function editItem(itemId) {
+    const item = groceryItems.find((item) => item.id === itemId);
+    if (!item) return;
+
+    document.getElementById('modalTitle').textContent = 'Edit Grocery Item';
+    document.getElementById('itemId').value = item.id;
+    document.getElementById('itemName').value = item.name;
+    document.getElementById('itemPrice').value = item.price;
+    document.getElementById('itemStore').value = item.store;
+    document.getElementById('itemNotes').value = item.notes || '';
+    document.getElementById('itemPurchased').checked = item.checked;
+
+    openModal();
   }
 });
