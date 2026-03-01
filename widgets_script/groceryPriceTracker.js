@@ -141,4 +141,107 @@ document.addEventListener('DOMContentLoaded', function () {
 
     openModal();
   }
+
+  // Update an item
+  function updateItem(e) {
+    e.preventDefault();
+
+    const id = document.getElementById('itemId').value;
+    const name = document.getElementById('itemName').value;
+    const price = parseFloat(document.getElementById('itemPrice').value);
+    const store = document.getElementById('itemStore').value;
+    const notes = document.getElementById('itemNotes').value;
+    const purchased = document.getElementById('itemPurchased').checked;
+
+    const itemIndex = groceryItems.findIndex((item) => item.id === id);
+
+    if (itemIndex !== -1) {
+      groceryItems[itemIndex] = {
+        ...groceryItems[itemIndex],
+        name,
+        price,
+        store,
+        notes,
+        purchased,
+      };
+
+      saveToLocalStorage();
+      renderGroceryItems();
+      updateStats();
+      closeModal();
+    }
+  }
+
+  // Delete an item
+  function deleteItem(itemId) {
+    if (confirm('Are you sure you want to delete this item?')) {
+      groceryItems = groceryItems.filter((item) => item.id !== itemId);
+      saveToLocalStorage();
+      renderGroceryItems();
+      updateStats();
+    }
+  }
+
+  // Toggle purchased status
+  function togglePurchasedStatus(itemId, isPurchased) {
+    const item = groceryItems.find((item) => item.id === itemId);
+    if (item) {
+      item.purchased = isPurchased;
+      saveToLocalStorage();
+      updateStats();
+
+      // Re-render to update the visual state
+      const groceryItemElement = document.querySelector(`.grocery-item[data-id="${itemId}"]`);
+      if (groceryItemElement) {
+        isPurchased
+          ? groceryItemElement.classList.add('purchased')
+          : groceryItemElement.classList.add('purchased');
+      }
+    }
+  }
+
+  // FIlter and sort items
+  function filterAndSortItems() {
+    let filteredItems = [...groceryItems];
+
+    // Apply search filter
+    const searchTerm = searchInput.value.toLowerCase();
+    if (searchTerm) {
+      filteredItems = filteredItems.filter((item) => {
+        item.name.toLowerCase().includes(searchTerm) ||
+          (item.notes && item.notes.toLowerCase().includes(searchTerm));
+      });
+    }
+
+    // Apply store filter
+    const selectedStore = storeFilter.value;
+    if (selectedStore !== 'all') {
+      filteredItems = filteredItems.filter((item) => item.store === selectedStore);
+    }
+
+    // Apply sorting
+    const sortValue = sortBy.value;
+    switch (sortValue) {
+      case 'name':
+        filteredItems.sort((a, b) => a.name.localCompare(b.name));
+        break;
+      case 'price-low':
+        filteredItems.sort((a, b) => a.price - b.price);
+        break;
+      case 'price-high':
+        filteredItems.sort((a, b) => b.price - a.price);
+        break;
+      case 'store':
+        filteredItems.sort((a, b) => a.store.localCompare(b.store));
+        break;
+      case 'date':
+        filteredItems.sort((a, b) => new Date(b.date) - new Date(a.date));
+        break;
+      default:
+        // Default sort by date newest first
+        filteredItems.sort((a, b) => new Date(b.date) - new Date(a.date));
+    }
+
+    renderGroceryItems(filteredItems);
+  }
 });
