@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
+
+:root {
+    --primary: #4361ee;
+    --primary-light: #93acff;
+    --secondary: #3f37ff;
+    --text: #2b2d42;
+    --text-light: #8d99ae;
+    --bg-color: #eaecee;
+    --card-bg: #eeeeee;
+    --border-color: #d9ecef;
+    --success: #4caf50;
+    --warning: #ff9800;
+    --error: #f44336;
+    --shadow: 0 4px 8px rgb(0 0 0 / 0.15);
+    --transition: all 0.3s ease;
+}
+
+[data-theme="dark"] {
+    --primary: #4895ef;
+    --primary-light: #1a237e;
+    --secondary: #560bad;
+    --text: #f8f9fa;
+    --text-light: #adb5bd;
+    --bg-color: #121212;
+    --card-bg: #2e2e2e;
+    --border-color: #353535;
+    --shadow: 0 4px 8px rgb(255 255 255 / 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text);
+    line-height: 1.4;
+    transition: var(--transition);
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    /* min-height: 100vh; */
+}
+
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--primary);
+    color: white;
+    box-shadow: var(--shadow);
+}
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.app-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.app-subtitle {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.header-right {
+    display: flex;
+    gap: 1rem;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: 0px solid var(--border-color);
+    transition: var(--transition);
+
+    &:hover {
+        background-color: rgb(255 255 255 / 0.2);
+        scale: 1.1;
+        outline: 1px solid var(--border-color);
+    }
+}
+
+.app-main {
+    display: flex;
+    flex: 1;
+}

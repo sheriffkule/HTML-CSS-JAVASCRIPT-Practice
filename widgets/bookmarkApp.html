@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bookmarking App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/bookmarkApp.css" />
+  </head>
+  <body data-theme="dark">
+    <div class="app-container">
+      <header class="app-header">
+        <div class="header-left">
+          <h1 class="app-title">Bookmarking App</h1>
+          <p class="app-subtitle">Your modern bookmarking solution.</p>
+        </div>
+        <div class="header-right">
+          <button class="icon-button" id="theme-toggle" aria-label="Toggle theme">
+            <i class="fas fa-moon"></i>
+          </button>
+          <button class="icon-button" id="import-btn" aria-label="Import bookmarks" title="Import Bookmarks">
+            <i class="fas fa-file-import"></i>
+          </button>
+          <button class="icon-button" id="export-btn" aria-label="Export bookmarks" title="Export Bookmarks">
+            <i class="fas fa-file-export"></i>
+          </button>
+        </div>
+      </header>
+
+      <main class="app-main">
+        <section class="sidebar">
+          <article class="search-container">
+            <input type="text" class="search-input" id="search-input" placeholder="Search bookmarks..." />
+            <button class="search-button" id="search-btn" aria-label="Search button">
+              <i class="fas fa-search"></i>
+            </button>
+          </article>
+
+          <article class="tags-container">
+            <h3 class="tags-title">Tags</h3>
+            <div class="tags-list" id="tags-list">
+              <button class="tag active" data-tag="all" aria-label="All tags">All</button>
+            </div>
+          </article>
+
+          <article class="stats-container">
+            <h3 class="stats-title">Stats</h3>
+            <div class="stats-item">
+              <span class="stats-label">Total:</span>
+              <span class="stats-value" id="total-bookmarks">0</span>
+            </div>
+            <div class="stats-item">
+              <span class="stats-label">Tags:</span>
+              <span class="stats-value" id="total-tags">0</span>
+            </div>
+          </article>
+        </section>
+
+        <section class="content-area">
+          <article class="bookmark-form-container">
+            <form class="bookmark-form" id="bookmark-form">
+              <div class="form-group">
+                <input type="text" class="form-input" id="bookmark-title" placeholder="Title" required />
+              </div>
+              <div class="form-group">
+                <input
+                  type="url"
+                  class="form-input"
+                  id="bookmark-url"
+                  placeholder="https://example.com"
+                  required />
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-input"
+                  id="bookmark-tags"
+                  placeholder="tags, separated, by, commas" />
+              </div>
+              <div class="form-group">
+                <textarea class="form-input" id="bookmark-notes" placeholder="Notes (optional)"></textarea>
+              </div>
+              <button type="submit" class="submit-button" aria-label="Submit button">
+                <i class="fas fa-plus"></i> Add Bookmark
+              </button>
+            </form>
+          </article>
+
+          <article class="bookmarks-container">
+            <div class="bookmarks-header">
+              <h2 class="bookmarks-title" id="bookmarks-title">All Bookmarks</h2>
+              <div class="sort-options">
+                <select id="sort-select" class="sort-select">
+                  <option value="newest">Newest First</option>
+                  <option value="oldest">Oldest First</option>
+                  <option value="title-asc">Title (A-Z)</option>
+                  <option value="title-desc">Title (Z-A)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="bookmarks-grid" id="bookmarks-grid">
+              <div class="empty-state">
+                <i class="fas fa-bookmark empty-icon"></i>
+                <h3>No bookmarks yet.</h3>
+                <p>Add your first bookmark using the form above.</p>
+              </div>
+            </div>
+          </article>
+        </section>
+      </main>
+
+      <footer>
+        © <time datetime="2026" id="year">2026</time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
+    </div>
+
+    <section class="modal" id="edit-modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Edit Bookmark</h2>
+        <form id="edit-form">
+          <input type="hidden" id="edit-id" />
+          <div class="form-group">
+            <input type="text" class="form-input" id="edit-title" placeholder="Title" />
+          </div>
+          <div class="form-group">
+            <input type="url" class="form-input" id="edit-url" placeholder="https://example.com" />
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-input" id="edit-tags" placeholder="tags, separated, by, commas" />
+          </div>
+          <div class="form-group">
+            <textarea class="form-input" id="edit-notes" placeholder="Notes (optional)"></textarea>
+          </div>
+          <button type="submit" class="submit-button" aria-label="Submit button">Save Changes</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="preview-card hidden">
+      <div class="preview-header">
+        <h3 class="preview-title"></h3>
+        <div class="preview-url"></div>
+      </div>
+      <div class="preview-content">
+        <div class="preview-notes"></div>
+        <div class="preview-tags"></div>
+      </div>
+    </section>
+
+    <script src="/widgets_script/bookmarkApp.js"></script>
+  </body>
+</html>
