@@ -196,4 +196,64 @@ document.addEventListener('DOMContentLoaded', function () {
       deleteBtn.addEventListener('click', () => deleteEditModal(bookmark.id));
     });
   }
+
+  function renderTags() {
+    // Get all unique tags from bookmarks
+    const allTags = getAllTags();
+
+    // Clear the tags list (except the 'All' button)
+    tagsList.innerHTML = '<button class="tag active" data-tag="all">All</button>';
+
+    // Add each tag to the list
+    allTags.forEach((tag) => {
+      const tagElement = document.createElement('button');
+      tagElement.className = 'tag';
+      if (tag === currentTagFilter) {
+        tagElement.classList.add('active');
+      }
+      tagElement.textContent = tag;
+      tagElement.dataset.tag = tag;
+      tagsList.appendChild(tagElement);
+    });
+  }
+
+  function filterBookmarks() {
+    return bookmarks.filter((bookmark) => {
+      // Filter by tag
+      const tagMatch = currentTagFilter === 'all' || bookmark.tags.includes(currentTagFilter);
+
+      // Filter by search query
+      const searchMatch =
+        !currentSearchQuery ||
+        bookmark.title.toLowerCase().includes(currentSearchQuery.toLowerCase()) ||
+        bookmark.url.toLowerCase().includes(currentSearchQuery.toLowerCase()) ||
+        bookmark.notes.toLowerCase().includes(currentSearchQuery.toLowerCase()) ||
+        bookmark.tags.some((tag) => tag.toLowerCase().includes(currentSearchQuery.toLowerCase()));
+
+      return tagMatch && searchMatch;
+    });
+  }
+
+  function sortBookmarks(bookmarksToSort) {
+    switch (currentSort) {
+      case 'newest':
+        return [...bookmarksToSort].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      case 'oldest':
+        return [...bookmarksToSort].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+      case 'title-asc':
+        return [...bookmarksToSort].sort((a, b) => a.title.localeCompare(b.title));
+      case 'title-desc':
+        return [...bookmarksToSort].sort((a, b) => b.title.localeCompare(a.title));
+      default:
+        return bookmarksToSort;
+    }
+  }
+
+  function getAllTags() {
+    const tags = new Set();
+    bookmarks.forEach((bookmark) => {
+      bookmark.tags.forEach((tag) => tags.add(tag));
+    });
+    return Array.from(tags).sort();
+  }
 });
