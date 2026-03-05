@@ -256,4 +256,123 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     return Array.from(tags).sort();
   }
+
+  function filterByTag(e) {
+    if (e.target.classList.contains('tag')) {
+      // Update active tag
+      document.querySelectorAll('.tag').forEach((tag) => tag.classList.remove('active'));
+      e.target.classList.add('active');
+
+      // Set current filter and re-render
+      currentTagFilter = e.target.dataset.tag;
+      renderBookmarks();
+    }
+  }
+
+  function handleSearch() {
+    currentSearchQuery = searchInput.value.trim();
+    renderBookmarks();
+  }
+
+  function handleSortChange(e) {
+    currentSort = e.target.value;
+    renderBookmarks();
+  }
+
+  function openEditModal(bookmark) {
+    document.getElementById('edit-id').value = bookmark.id;
+    document.getElementById('edit-title').value = bookmark.title;
+    document.getElementById('edit-url').value = bookmark.url;
+    document.getElementById('edit-tags').value = bookmark.tags.join(', ');
+    document.getElementById('edit-notes').value = bookmark.notes;
+    editModal.style.display = 'flex';
+  }
+
+  function saveEditedBookmark(e) {
+    e.preventDefault();
+
+    const id = document.getElementById('edit-id').value;
+    const title = document.getElementById('edit-title').value.trim();
+    const url = document.getElementById('edit-url').value.trim();
+    const tagsInput = document.getElementById('edit-tags').value.trim();
+    const notes = document.getElementById('edit-notes').value.trim();
+
+    // Validate URL
+    if (!isValidUrl(url)) {
+      alert('Please enter a valid URL (including http::// or https://');
+      return;
+    }
+
+    //Process tags
+    const tags = tagsInput
+      ? tagsInput
+          .split(',')
+          .map((tag) => tag.trim())
+          .filter((tag) => tag)
+      : [];
+
+    // Find and update the bookmark
+    const index = bookmarks.findIndex((b) => b.id === id);
+    if (index !== -1) {
+      bookmarks[index] = {
+        ...bookmarks[index],
+        title,
+        url: formatUrl(url),
+        tags,
+        notes,
+        updatedAt: new Date().toISOString(),
+      };
+
+      saveBookmarks();
+      renderBookmarks();
+      renderTags();
+      editModal.style.display = 'none';
+
+      showToast('Bookmark updated successfully!');
+    }
+  }
+
+  function deleteBookmark(id) {
+    if (confirm('Are you sure you want to delete this bookmark?')) {
+      bookmarks = bookmarks.filter((bookmark) => bookmark.id !== id);
+      saveBookmarks();
+      renderBookmarks();
+      renderTags();
+      updateStats();
+
+      showToast('Bookmark deleted successfully!');
+    }
+  }
+
+  function saveBookmarks() {
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+  }
+
+  function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeIcon();
+  }
+
+  function updateThemeIcon(theme) {
+    const icon = themeToggle.querySelector('i');
+    icon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+  }
+
+  function exportBookmarks() {
+    const dataStr = JSON.stringify(bookmarks, null, 2);
+    const dataUri = 'data:application/json;charset=utf-8' + encodeURIComponent(dataStr);
+
+    const exportName = `bookmarks-${new Date().toISOString().slice(0, 10)}.json`;
+
+    const linkElement = document.createElement('a');
+    linkElement.setAttribute('href', dataUri);
+    linkElement.setAttribute('download', exportName);
+    linkElement.click();
+
+    showToast('Bookmarks exported successfully!');
+  }
 });
