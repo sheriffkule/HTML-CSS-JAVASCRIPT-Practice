@@ -375,4 +375,114 @@ document.addEventListener('DOMContentLoaded', function () {
 
     showToast('Bookmarks exported successfully!');
   }
+
+  function importBookmarks() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+
+    input.onchange = (e) => {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+
+      reader.onload = (event) => {
+        try {
+          const importedBookmarks = JSON.parse(event.target.result);
+
+          if (!Array.isArray(importBookmarks())) {
+            throw new Error('Invalid Bookmarks format');
+          }
+
+          // Validate each bookmark
+          const validBookmarks = importBookmarks.filter((b) => b.id && b.title && b.url && isValidUrl(b.url));
+
+          if (validBookmarks.length === 0) {
+            throw new Error('No valid bookmarks found in the file');
+          }
+
+          // Add imported bookmarks (avoid duplicates by ID)
+          const existingIds = bookmarks.map((b) => b.id);
+          const newBookmarks = validBookmarks.filter((b) => !existingIds.includes(b.id));
+
+          if (newBookmarks.length === 0) {
+            showToast('All bookmarks in the file already exist', 'Warning');
+            return;
+          }
+
+          bookmarks = [...newBookmarks, ...bookmarks];
+          saveBookmarks();
+          renderBookmarks();
+          renderTags();
+          updateStats();
+
+          showToast(`Imported ${newBookmarks.length} bookmarks successfully!`);
+        } catch (error) {
+          alert(`Error importing bookmarks: ${error.message}`);
+        }
+      };
+
+      reader.readAsText(file);
+    };
+
+    input.click();
+  }
+
+  function setupPreviewCard() {
+    // Show preview card on hover
+    document.addEventListener('mouseover', (e) => {
+      const bookmarkCard = e.target.closest('.bookmark-card');
+      if (bookmarkCard) {
+        const id = bookmarkCard.dataset.id;
+        const bookmark = bookmarks.find((b) => b.id === id);
+
+        if (bookmark) {
+          showPreview(bookmark, e.clientX, e.clientY);
+        }
+      }
+    });
+
+    // Hide preview card when not hovering over a bookmark
+    document.addEventListener('mouseout', (e) => {
+      if (!e.relatedTarget || !e.relatedTarget.closest('.bookmark-card')) {
+        hidePreview();
+      }
+    });
+
+    // Move preview card with mouse
+    document.addEventListener('mousemove', (e) => {
+      if (previewCard.classList.contains('visible')) {
+        positionPreview(e.clientX, e.clientY);
+      }
+    });
+  }
+
+  function showPreview (bookmark, x, y) {
+    const previewTitle = previewCard.querySelector('preview-title')
+    const previewUrl = previewCard.querySelector('preview-url')
+    const previewNotes = previewCard.querySelector('preview-notes')
+    const previewTags = previewCard.querySelector('preview-tags')
+
+    previewTitle.textContent = bookmark.title;
+    previewUrl.textContent = bookmark.url;
+    previewNotes.textContent = bookmark.notes || 'No notes available'
+
+    previewTags.innerHTML = ''
+    if (bookmark.tags.length > 0) {
+      bookmark.tags.forEach(tag => {
+        const tagElement = document.createElement('span')
+        tagElement.className = 'preview-tag'
+        tagElement.textContent = tag;
+        previewTags.appendChild(tagElement)
+      })
+    } else {
+      previewTags.innerHTML = '<span class="preview-tag">No tags</span>'
+    }
+
+    positionPreview(x, y)
+    previewCard.classList.remove('visible')
+  }
+
+  function hidePreview() {
+    previewCard.classList.remove('visible')
+  }
 });
