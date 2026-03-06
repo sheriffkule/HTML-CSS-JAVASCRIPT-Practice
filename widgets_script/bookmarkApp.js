@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   const bookmarkForm = document.getElementById('bookmark-form');
-  const bookmarksGrid = document.getElementById('bookmark-grid');
+  const bookmarksGrid = document.getElementById('bookmarks-grid');
   const searchInput = document.getElementById('search-input');
   const searchBtn = document.getElementById('search-btn');
   const tagsList = document.getElementById('tags-list');
@@ -348,30 +348,44 @@ document.addEventListener('DOMContentLoaded', function () {
     localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
   }
 
+  function updateStats() {
+    document.getElementById('total-bookmarks').textContent = bookmarks.length;
+    document.getElementById('total-tags').textContent = getAllTags().length;
+  }
+
   function toggleTheme() {
     const currentTheme = document.documentElement.getAttribute('data-theme');
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
 
     document.documentElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
-    updateThemeIcon();
+    updateThemeIcon(newTheme);
   }
 
   function updateThemeIcon(theme) {
     const icon = themeToggle.querySelector('i');
-    icon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+    if (!icon) return;
+    if (theme === 'light') {
+      icon.classList.remove('fa-sun');
+      icon.classList.add('fa-moon');
+    } else {
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+    }
   }
 
   function exportBookmarks() {
     const dataStr = JSON.stringify(bookmarks, null, 2);
-    const dataUri = 'data:application/json;charset=utf-8' + encodeURIComponent(dataStr);
+    const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
 
     const exportName = `bookmarks-${new Date().toISOString().slice(0, 10)}.json`;
 
     const linkElement = document.createElement('a');
     linkElement.setAttribute('href', dataUri);
     linkElement.setAttribute('download', exportName);
+    document.body.appendChild(linkElement);
     linkElement.click();
+    document.body.removeChild(linkElement);
 
     showToast('Bookmarks exported successfully!');
   }
@@ -450,39 +464,121 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Move preview card with mouse
     document.addEventListener('mousemove', (e) => {
-      if (previewCard.classList.contains('visible')) {
+      if (previewCard && previewCard.classList && previewCard.classList.contains('visible')) {
         positionPreview(e.clientX, e.clientY);
       }
     });
   }
 
-  function showPreview (bookmark, x, y) {
-    const previewTitle = previewCard.querySelector('preview-title')
-    const previewUrl = previewCard.querySelector('preview-url')
-    const previewNotes = previewCard.querySelector('preview-notes')
-    const previewTags = previewCard.querySelector('preview-tags')
+  function showPreview(bookmark, x, y) {
+    if (!previewCard) return;
+    const previewTitle = previewCard.querySelector('.preview-title');
+    const previewUrl = previewCard.querySelector('.preview-url');
+    const previewNotes = previewCard.querySelector('.preview-notes');
+    const previewTags = previewCard.querySelector('.preview-tags');
 
-    previewTitle.textContent = bookmark.title;
-    previewUrl.textContent = bookmark.url;
-    previewNotes.textContent = bookmark.notes || 'No notes available'
+    if (previewTitle) previewTitle.textContent = bookmark.title;
+    if (previewUrl) previewUrl.textContent = bookmark.url;
+    if (previewNotes) previewNotes.textContent = bookmark.notes || 'No notes available';
 
-    previewTags.innerHTML = ''
-    if (bookmark.tags.length > 0) {
-      bookmark.tags.forEach(tag => {
-        const tagElement = document.createElement('span')
-        tagElement.className = 'preview-tag'
-        tagElement.textContent = tag;
-        previewTags.appendChild(tagElement)
-      })
-    } else {
-      previewTags.innerHTML = '<span class="preview-tag">No tags</span>'
+    if (previewTags) {
+      previewTags.innerHTML = '';
+      if (bookmark.tags.length > 0) {
+        bookmark.tags.forEach((tag) => {
+          const tagElement = document.createElement('span');
+          tagElement.className = 'preview-tag';
+          tagElement.textContent = tag;
+          previewTags.appendChild(tagElement);
+        });
+      } else {
+        previewTags.innerHTML = '<span class="preview-tag">No tags</span>';
+      }
     }
 
-    positionPreview(x, y)
-    previewCard.classList.remove('visible')
+    positionPreview(x, y);
+    if (previewCard && previewCard.classList) {
+      previewCard.classList.add('visible');
+    }
   }
 
   function hidePreview() {
-    previewCard.classList.remove('visible')
+    if (previewCard && previewCard.classList) {
+      previewCard.classList.remove('visible');
+    }
   }
+
+  function positionPreview(x, y) {
+    // Position the preview card slightly offset from the cursor
+    const offset = 20;
+    const cardWidth = previewCard.offsetWidth;
+    const cardHeight = previewCard.offsetHeight;
+    const windowHeight = window.innerHeight;
+    const windowWidth = window.innerWidth;
+
+    // Adjust position if near the right or bottom edge of the window
+    let left = x + offset;
+    let top = y + offset;
+
+    if (left + cardWidth > windowWidth) {
+      left = x - cardWidth - offset;
+    }
+
+    if (top + cardHeight > windowHeight) {
+      top = y - cardHeight - offset;
+    }
+
+    previewCard.style.left = `${left}px`;
+    previewCard.style.top = `${top}px`;
+  }
+
+  function showToast(message, type = 'success') {
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    toast.textContent = message;
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+      toast.classList.add('show');
+    }, 100);
+
+    setTimeout(() => {
+      toast.classList.remove('show');
+      setTimeout(() => {
+        document.body.removeChild(toast);
+      }, 300);
+    }, 3000);
+  }
+
+  // Helper function
+  function isValidUrl(url) {
+    try {
+      new URL(url);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function formatUrl(url) {
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+      return `https://${url}`;
+    }
+    return url;
+  }
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
