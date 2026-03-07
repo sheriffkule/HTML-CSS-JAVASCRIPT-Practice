@@ -1,0 +1,129 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #e09, #3023ae);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    text-align: center;
+}
+
+.description {
+    text-wrap: pretty;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: repeating-linear-gradient(#fff 10%, #aeb1db 20%, #fff 30%);
+    background-position-y: -20px;
+    color: #333;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px rgb(0 0 0 / 0.2);
+    max-width: 400px;
+    width: 90%;
+    height: 100%;
+    animation: bgMove 10s infinite linear;
+}
+
+@keyframes bgMove {
+    from {
+        background-position-y: 0;
+    }
+    to {
+        background-position-y: 220px;
+    }
+}
+
+.btn {
+    display: inline-block;
+    background: #3023ae;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    margin-top: 10px;
+    box-shadow: 0 4px 6px rgb(0 0 0 / 0.2);
+    transition: transform 0.2s, background 0.4s;
+
+    &:hover {
+        background: #e09;
+        transform: translateY(-2px) scale(1.02) rotate(-1deg);
+    }
+    &:active {
+        transform: translateY(0) scale(1) rotate(0);
+    }
+}
+
+#loader {
+    display: none;
+    margin-top: 15px;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 30px;
+    background: linear-gradient(to right, #fff, #001aff);
+    background-size: 200%, 100%;
+    animation-delay: 2s;
+    border-radius: 10px;
+    box-shadow: 0 0 3px;
+    -webkit-box-reflect: below 2px linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.8));
+    animation: 2000ms linear 47.3926ms infinite normal none running move;
+}
+
+h2 {
+    color: #fff;
+    mix-blend-mode: difference;
+    text-align: center;
+    font-size: 16px;
+    line-height: 30px;
+    text-shadow: 0 0 3px;
+    padding: 0;
+    letter-spacing: 3px;
+}
+
+@keyframes move {
+    from {
+        background-position: 0;
+    }
+    to {
+        background-position: -200% 0;
+    }
+}
+
+#result {
+    display: none;
+    margin-top: 20px;
+}
+
+.result-card {
+    text-align: center;
+    background: rgba(238, 231, 255, 0.5);
+    color: #333;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgb(0 0 0 / 0.2);
+}
+
+.details {
+    text-align: left;
+    border-bottom: 1px solid rgb(0 0 0 / 0.2);
+    padding-bottom: 10px;
+}
