@@ -4,7 +4,7 @@
   --header-height: 3.5rem;
 
   --first-color: hsl(28, 95%, 60%);
-  --first-color-alt: hsl(28, 95%, 56%);
+  --first-color-alt: hsl(28, 95%, 52%);
   --beige-color: hsl(40, 45%, 86%);
   --beige-color-light: hsl(40, 45%, 94%);
   --beige-color-alt: hsl(40, 35%, 72%);
@@ -120,4 +120,125 @@ img {
 
 .main {
   overflow: hidden;
+}
+
+.header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: #000;
+  z-index: var(--z-fixed);
+  transition: background-color 0.4s, box-shadow 0.4s;
+}
+
+.nav {
+  position: relative;
+  height: var(--header-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav__logo {
+  color: var(--white-color);
+  font-family: var(--second-font);
+  font-weight: var(--font-bold);
+  transition: color .4s;
+}
+
+.nav__toggle {
+  color: var(--white-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color .4s, transform .4s;
+}
+
+@media screen and (width <= 1150px) {
+  .nav__menu {
+    position: fixed;
+    top: 0;
+    right: -120%;
+    background-color: var(--body-color);
+    width: 300px;
+    height: 100%;
+    box-shadow: -8px 0 16px hsla(0, 0%, 0%, .15);
+    padding: 7rem 0 2rem 2rem;
+    transition: right .4s cubic-bezier(0.785, 0.135, 0.15, 1.2);
+  }
+}
+
+.nav__list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+}
+
+.nav__link {
+  color: var(--title-color);
+  font-weight: var(--font-semi-bold);
+  transition: color .3s, text-decoration .3s, text-underline-offset .3s;
+  text-underline-offset: 10px;
+
+  &:hover {
+    color: var(--first-color);
+    text-decoration: 1px solid underline;
+    text-underline-offset: 2px;
+  }
+}
+
+.nav__button {
+  background-color: var(--first-color);
+  padding: 1rem;
+  border-radius: .5rem;
+  display: inline-flex;
+  transition: background-color .4s;
+
+  &:hover {
+    background-color: var(--first-color-alt);
+    color: var(--title-color);
+  }
+}
+
+.nav__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  color: var(--title-color);
+  cursor: pointer;
+}
+
+.show-menu {
+  right: 0;
+}
+
+
+
+
+@media screen and (width >= 1150px) {
+  .container {
+    margin-inline: auto;
+  }
+  .section {
+    padding-block: 7rem 5rem;
+  }
+  .nav {
+    height: calc(var(--header-height) + 2rem);
+  }
+  .nav__toggle,
+  .nav__close {
+    display: none;
+  }
+  .nav__list {
+    flex-direction: row;
+    align-items: center;
+    column-gap: 4rem;
+  }
+  .nav__link {
+    color: var(--white-color);
+  }
+  .nav__button {
+    color: var(--title-color);
+  }
 }
