@@ -356,6 +356,24 @@ img {
   border-radius: 1.5rem;
 }
 
+.work__swiper {
+  width: 100%;
+  border-radius: 1.5rem;
+}
+
+.work__data {
+  padding-bottom: 7rem;
+}
+
+.work .swiper-pagination-fraction {
+  font-weight: var(--font-semi-bold);
+  bottom: 3rem;
+}
+
+.work .swiper-navigation-icon {
+  display: none;
+}
+
 
 
 
