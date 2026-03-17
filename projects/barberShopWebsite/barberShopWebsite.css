@@ -393,6 +393,58 @@ img {
   right: calc(50% - 3rem);
 }
 
+.service {
+  background-color: var(--beige-color);
+}
+
+.service__container {
+  row-gap: 4rem;
+  padding-bottom: 2.5rem;
+}
+
+.service .section__title {
+  margin-bottom: 3rem;
+}
+
+.service__prices {
+  display: grid;
+  row-gap: 1rem;
+}
+
+.service__plan {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: .75rem;
+  border-bottom: 1px solid var(--beige-color-alt);
+}
+
+.service__plan:last-child {
+  border-bottom: none;
+}
+
+.service__name {
+  font-size: var(--h3-font-size);
+  font-weight: var(--font-medium);
+}
+
+.service__price {
+  font: var(--font-medium) var(--h3-font-size) var(--second-font);
+}
+
+.service__swiper {
+  background-color: var(--first-color);
+  border-radius: 1.5rem;
+  padding: 2rem 1rem;
+}
+
+.service__testimonial-description {
+  margin-bottom: 6rem;
+}
+
+.service__testimonial-name {
+  font-size: var(--normal-font-size);
+}
+
 
 
 
@@ -495,5 +547,16 @@ img {
   .work__description,
   .work .swiper-pagination {
     text-align: initial;
+  }
+  .work .swiper-button-prev {
+    left: 0;
+  }
+  .work .swiper-button-next {
+    left: 4.5rem;
+    right: initial;
+  }
+  .work__img,
+  .work__card {
+    width: 320px;
   }
 }
