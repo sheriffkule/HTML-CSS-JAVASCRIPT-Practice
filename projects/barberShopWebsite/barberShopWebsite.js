@@ -46,3 +46,19 @@ const swiperWork = new Swiper('.work__swiper', {
     prevEl: '.work__data .swiper-button-prev',
   },
 });
+
+const swiperTestimonial = new Swiper('.service__swiper', {
+  loop: true,
+  slidesPerView: 'auto',
+  spaceBetween: 56,
+  grabCursor: true,
+
+  pagination: {
+    el: '.service__swiper .swiper-pagination',
+  },
+
+  navigation: {
+    nextEl: '.service__swiper .swiper-button-next',
+    prevEl: '.service__swiper .swiper-button-prev',
+  },
+});

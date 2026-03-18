@@ -445,6 +445,33 @@ img {
   font-size: var(--normal-font-size);
 }
 
+.service__swiper {
+  width: 100%;
+}
+
+.service .swiper-pagination-bullets {
+  position: absolute;
+  top: initial;
+  left: 0;
+  right: 0;
+  bottom: 6rem;
+  display: flex;
+  justify-content: center;
+  column-gap: .25rem;
+}
+
+.service .swiper-pagination-bullet {
+  width: 24px;
+  height: 3px;
+  border-radius: .5rem;
+  background-color: var(--title-color);
+  transition: opacity .4s, width .4s;
+}
+
+.service .swiper-pagination-bullet-active {
+  width: 32px;
+}
+
 
 
 
