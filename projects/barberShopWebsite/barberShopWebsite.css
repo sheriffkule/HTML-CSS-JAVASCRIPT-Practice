@@ -505,12 +505,90 @@ img {
   right: 1rem;
 }
 
+.expert__container {
+  row-gap: 4rem;
+}
+
+.expert__description {
+  text-align: center;
+}
+
+.expert__content {
+  display: grid;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.expert__img {
+  width: 120px;
+  transition: scale .4s;
+  transform-origin: left bottom;
+}
+
+.expert__card {
+  background-color: var(--beige-color-light);
+  padding: .5rem 2rem 0 2rem;
+  border-radius: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.expert__data {
+  display: grid;
+  row-gap: 1.5rem;
+}
+
+.expert__name {
+  font-size: var(--h2-font-size);
+}
+
+.expert__profession {
+  font-size: var(--smaller-font-size);
+  color: var(--text-color);
+}
+
+.expert__social {
+  display: flex;
+  column-gap: .5rem;
+}
+
+.expert__link {
+  font-size: 1.25rem;
+  color: var(--text-color);
+  transition: color .4s;
+}
+
+.expert__link:hover {
+  color: var(--title-color);
+}
+
+.expert__card:hover .expert__img {
+  scale: 1.1;
+}
 
 
 
 
 
 
+
+
+@media screen and (width <= 350px) {
+  .expert__card {
+    flex-direction: column;
+    padding: 1rem 3rem 0 3rem;
+  }
+  .expert__img {
+    order: 1;
+  }
+  .expert__info {
+    text-align: center;
+  }
+  .expert__social {
+    justify-content: center;
+  }
+}
 
 @media screen and (width >= 540px) {
   .home__container,
