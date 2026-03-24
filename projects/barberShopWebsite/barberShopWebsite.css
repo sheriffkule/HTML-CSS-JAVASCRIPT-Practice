@@ -662,13 +662,17 @@ img {
   .expert__social {
     justify-content: center;
   }
+  .contact__map {
+    width: 100%;
+  }
 }
 
 @media screen and (width >= 540px) {
   .home__container,
   .about__container,
   .service__container,
-  .expert__container {
+  .expert__container,
+  .contact__container {
     grid-template-columns: 400px;
     justify-content: center;
   }
@@ -845,5 +849,21 @@ img {
   .expert__social {
     flex-direction: column;
     justify-self: flex-end;
+  }
+  .contact__container {
+    grid-template-columns: 355px 320px 355px;
+    column-gap: 2.5rem;
+    align-items: center;
+    padding-top: 4rem;
+  }
+  .contact__data,
+  .contact__data .section__title {
+    text-align: initial;
+  }
+  .contact__description {
+    margin-bottom: 7rem;
+  }
+  .contact__title {
+    font-size: var(--h3-font-size);
   }
 }
