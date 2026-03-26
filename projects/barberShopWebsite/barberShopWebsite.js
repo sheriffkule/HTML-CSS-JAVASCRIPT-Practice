@@ -62,3 +62,29 @@ const swiperTestimonial = new Swiper('.service__swiper', {
     prevEl: '.service__swiper .swiper-button-prev',
   },
 });
+
+const scrollUp = () => {
+  const scrollUp = document.getElementById('scroll-up');
+  this.scrollY >= 350 ? scrollUp.classList.add('show-scroll') : scrollUp.classList.remove('show-scroll');
+};
+
+window.addEventListener('scroll', scrollUp);
+
+const sections = document.querySelectorAll('section[id]');
+
+const scrollActive = () => {
+  const scrollY = window.scrollY;
+
+  sections.forEach((section) => {
+    const id = section.id;
+    const top = section.offsetTop - 50;
+    const height = section.offsetHeight;
+    const link = document.querySelector('.nav__menu a[href*=' + id + ']');
+
+    if (!link) return;
+
+    link.classList.toggle('active-link', scrollY > top && scrollY <= top + height)
+  });
+};
+
+window.addEventListener('scroll', scrollActive)
