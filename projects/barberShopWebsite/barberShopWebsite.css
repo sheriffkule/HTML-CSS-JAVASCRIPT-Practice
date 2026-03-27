@@ -837,7 +837,18 @@ img {
   .nav__button {
     color: var(--title-color);
   }
-  .scroll-header .nav__link {
+  .active-link {
+    color: var(--first-color);
+  }
+  .scroll-header .nav__link,
+  .scroll-header .active-link.nav__button {
+    color: var(--title-color);
+  }
+  .scroll-header .active-link,
+  .scroll-header .nav__link:hover {
+    color: var(--first-color);
+  }
+  .scroll-header .nav__button:hover {
     color: var(--title-color);
   }
   .home {
@@ -1005,5 +1016,14 @@ img {
   }
   .footer__title {
     margin-bottom: 1.5rem;
+  }
+  .scrollUp {
+    right: 3rem;
+  }
+}
+
+@media screen and (width >= 2048px) {
+  body {
+    zoom: 1.2;
   }
 }
