@@ -137,3 +137,46 @@ reveal('.home__logo', { y: 0, scale: 0.3, delay: 1.9, ease: 'elastic.out(0.8, 0.
 reveal('.home__title', { delay: 2.2 });
 reveal('.home__description', { delay: 2.5 });
 reveal('.home__data .button', { delay: 2.8 });
+
+if (window.scrollY < 100) {
+  reveal('.nav > *', { delay: 1.6, y: -30 });
+} else {
+  gsap.set('.nav > *', { opacity: 1, y: 0 });
+}
+
+reveal('.about__data > *', { stagger: 0.2 });
+reveal('.about__img > *', { delay: 0.9 });
+
+const aboutCounter = document.querySelectorAll('.about__counter');
+
+aboutCounter.forEach((el) => {
+  gsap.from(el, {
+    textContent: 0,
+    duration: 3,
+    ease: 'power1.out',
+    snap: { textContent: 1 },
+    scrollTrigger: { trigger: el, once: true },
+  });
+});
+
+reveal('.work__data .section__title', {});
+reveal('.work__description', { delay: 0.6 });
+reveal('.work__data .swiper-pagination', { delay: 0.9 });
+reveal('.work__data :is(.swiper-button-prev, .swiper-button-next', { delay: 1.2 });
+reveal('.work__swiper', { delay: 0.9 });
+
+reveal('.service__data .section__title', {});
+reveal('.service__plan', { delay: 0.6, stagger: 0.2 });
+reveal('.service__swiper', { delay: 0.9, stagger: 0.2 });
+
+reveal('.expert .section__title', {});
+reveal('.expert__description', { delay: 0.6 });
+reveal('.expert__card', { delay: 0.9, stagger: 0.2 });
+
+reveal('.contact__data .section__title', {});
+reveal('.contact__description', { delay: 0.6 });
+reveal('.contact__data .button', { delay: 0.9, y: 0, scale: 0 });
+reveal('.contact__map', { delay: 0.9 });
+reveal('.contact__card', { delay: 1.2, stagger: 0.2 });
+
+reveal('.footer__container', {});
