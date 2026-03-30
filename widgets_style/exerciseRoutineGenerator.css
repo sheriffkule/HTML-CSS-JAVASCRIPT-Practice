@@ -263,3 +263,17 @@ input[type="checkbox"] {
     font-size: 1.8rem;
     font-weight: 700;
 }
+
+.summary-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 20px;
+    color: var(--dark);
+    opacity: 0.8;
+    font-size: 0.9rem;
+}

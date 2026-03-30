@@ -89,5 +89,91 @@ document.addEventListener('DOMContentLoaded', function () {
     // Get selected equipment
     const equipmentCheckboxes = document.querySelectorAll('input[name="equipment"]:checked');
     const equipment = Array.from(equipmentCheckboxes).map((cb) => cb.value);
+
+    // If 'none' is selected, ignore all other equipment
+    let selectedEquipment = equipment.includes('none') ? ['none'] : equipment;
+    // Filter exercises based on selection
+    let filteredExercises = exercises.filter(
+      (ex) =>
+        (selectedEquipment.length === 0 || ex.equipment.some((eq) => selectedEquipment.includes(eq))) && ex.level === level
+    );
+
+    // Further filter by goal if needed
+    if (goal === 'strength') {
+      filteredExercises = filteredExercises.filter((ex) => ex.type === 'strength');
+    } else if (goal === 'weightloss') {
+      filteredExercises = filteredExercises.filter((ex) => ex.type === 'cardio');
+    } else if (goal === 'endurance') {
+      filteredExercises = filteredExercises.filter((ex) => ex.type === 'cardio' || ex.type === 'core');
+    }
+
+    // Calculate how many exercises we can fit in the available time
+    let totalDuration = 0;
+    let selectedExercises = [];
+    let totalCaloriesCount = 0;
+
+    // Shuffle exercises for variety
+    filteredExercises = shuffleArray(filteredExercises);
+
+    // Select exercises until time is up
+    let maxTime = parseInt(time, 10);
+    for (let i = 0; i < filteredExercises.length; i++) {
+      if (totalDuration + filteredExercises[i].duration <= maxTime) {
+        selectedExercises.push(filteredExercises[i]);
+        totalDuration += filteredExercises[i].duration;
+        totalCaloriesCount += filteredExercises[i].calories;
+      }
+    }
+
+    // Update UI
+    displayRoutine(selectedExercises);
+    totalExercises.textContent = selectedExercises.length;
+    totalTime.textContent = totalDuration;
+    totalCalories.textContent = totalCaloriesCount;
   }
+
+  function displayRoutine(exercises) {
+    if (!exercises || exercises.length === 0) {
+      routineContainer.innerHTML = `
+        <div class="empty-state">
+          <i class="fas fa-exclamation-circle"></i>
+          <p>No exercises found matching your criteria. Try adjusting your equipment or time.</p>
+        </div>
+      `;
+      return;
+    }
+
+    let html = '';
+    exercises.forEach((exercise) => {
+      html += `
+        <div class="exercise-card">
+          <div class="exercise-name">
+            <span>${exercise.name}</span>
+            <span>${exercise.duration} min</span>
+          </div>
+          <div class="exercise-details">
+            <div class="exercise-detail"><i class="fas fa-fire"></i> ${exercise.calories} calories</div>
+            <div class="exercise-detail">
+              <i class="fas fa-dumbbell"></i> ${exercise.equipment.join(', ').replace(/_/g, ' ')}
+            </div>
+            <div class="exercise-detail"><i class="fas fa-signal"></i> ${exercise.level}</div>
+            <div class="exercise-detail"><i class="fas fa-running"></i> ${exercise.type}</div>
+          </div>
+        </div>
+      `;
+    });
+
+    routineContainer.innerHTML = html;
+  }
+
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  // Generate routine on page load for demo purposes
+  generateRoutine();
 });
