@@ -48,3 +48,149 @@ header {
         text-wrap: pretty;
     }
 }
+
+.app-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+
+    @media screen and (max-width: 900px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.form-section,
+.result-section {
+    background: linear-gradient(135deg, white, silver);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgb(0 0 0 / 0.2);
+}
+
+.section-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+select, input, button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    border: 1px solid var(--gray);
+    font-size: 1rem;
+    transition: .3s;
+}
+
+:is(select, input):is(:focus, :focus-within) {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgb(67 97 238 / 0.2),
+    inset 0 0 0 2px rgb(67 97 238 / 0.2);
+}
+
+select,
+::picker(select) {
+    appearance: base-select;
+}
+
+::picker(select) {
+    border-radius: 6px;
+    border: none;
+}
+
+select::picker-icon {
+    color: var(--primary);
+    transition: 0.3s rotate;
+}
+
+select:open::picker-icon {
+    rotate: 180deg;
+}
+
+option {
+    border: 1px solid #bbb;
+    background: hsl(from var(--primary) h s 25%);
+    color: white;
+    padding: 8px 0 8px 12px;
+    transition: 0.3s;
+}
+
+option:is(:hover, :focus, :focus-within) {
+    background: var(--primary);
+}
+
+option:checked {
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: var(--suc);
+}
+
+option::checkmark {
+    content: '☑️';
+    color: white;
+}
+
+button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    &:hover {
+        background-color: var(--secondary);
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 5px 15px rgb(0 0 0 / 0.2);
+    }
+    &:active {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    width: auto;
+    transform: scale(1.2);
+}
+
+.routine-display {
+    background: var(--light);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    min-height: 300px;
+}
