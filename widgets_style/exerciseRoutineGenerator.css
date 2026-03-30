@@ -194,3 +194,72 @@ input[type="checkbox"] {
     margin-top: 20px;
     min-height: 300px;
 }
+
+.exercise-name {
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.exercise-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    font-size: 0.9rem;
+}
+
+.exercise-detail {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--dark);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 0;
+    color: var(--gray);
+
+    i {
+        font-size: 3rem;
+        margin-bottom: 15px;
+    }
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.secondary-btn {
+    background: white;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+
+    &:hover {
+        background: var(--light);
+    }
+}
+
+.workout-summary {
+    display: flex;
+    justify-content: space-between;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.summary-item {
+    text-align: center;
+}
+
+.summary-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
