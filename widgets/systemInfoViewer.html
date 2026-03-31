@@ -69,6 +69,129 @@
           <h1>System Info Viewer</h1>
           <p class="subtitle">Comprehensive system information at your fingertips.</p>
         </header>
+
+        <div class="dashboard">
+          <article class="card">
+            <div class="card-header">
+              <i class="fas fa-desktop"></i>
+              <h2>System Information</h2>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Platform:</span>
+              <span class="info-value" id="platform">Detecting...</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">User Agent:</span>
+              <span class="info-value" id="userAgent">Detecting...</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Logical Cores:</span>
+              <span class="info-value" id="logicalCores">Detecting...</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Device Memory:</span>
+              <span class="info-value" id="deviceMemory">Detecting...</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Max Touch Points:</span>
+              <span class="info-value" id="maxTouchPoints">Detecting...</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-header">
+              <i class="fas fa-globe"></i>
+              <h2>Browser Information</h2>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Browser:</span>
+              <span class="info-value" id="browserName">Detecting...</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Version:</span>
+              <span class="info-value" id="browserVersion">Detecting...</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Cookies Enabled:</span>
+              <span class="info-value" id="cookiesEnabled">Detecting...</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Online Status:</span>
+              <span class="info-value" id="onlineStatus">Detecting...</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Language:</span>
+              <span class="info-value" id="language">Detecting...</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-header">
+              <i class="fas fa-tachometer-alt"></i>
+              <h2>Performance</h2>
+            </div>
+            <div class="info-item">
+              <span class="info-label">CPU Cores:</span>
+              <span class="info-value" id="cpuCores">Detecting...</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">RAM Usage:</span>
+              <span class="info-value" id="ramUsage">Detecting...</span>
+            </div>
+            <div class="progress-container">
+              <div class="progress-bar">
+                <div class="progress-fill" id="ramProgress"></div>
+              </div>
+              <div class="progress-info">
+                <span>0%</span>
+                <span id="ramPercent">Detecting...</span>
+                <span>100%</span>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Battery Status:</span>
+              <span class="info-value" id="batteryStatus">Detecting...</span>
+            </div>
+            <div class="battery-container" id="batteryContainer">
+              <div class="battery">
+                <div class="battery-level" id="batteryLevel"></div>
+              </div>
+              <span id="batteryPercent">Detecting...</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-header">
+              <i class="fas fa-wifi"></i>
+              <h2>Network</h2>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Connection Type:</span>
+              <span class="info-value" id="connectionType">Detecting...</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Effective Type:</span>
+              <span class="info-value" id="effectiveType">Detecting...</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Downlink:</span>
+              <span class="info-value" id="downlink">Detecting...</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">RTT:</span>
+              <span class="info-value" id="rtt">Detecting...</span>
+            </div>
+            <div class="network-status">
+              <i class="fas fa-circle network-icon pulse" id="networkIcon"></i>
+              <div class="network-info">
+                <div class="info-item">
+                  <span class="info-label">Save Data:</span>
+                  <span class="info-value" id="saveData">Detecting...</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
       </div>
     </div>
   </body>

@@ -41,4 +41,45 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }, 200);
   });
+
+  // Dark mode toggle
+  darkModeToggle.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    const isDarkMode = body.classList.contains('dark-mode');
+
+    if (isDarkMode) {
+      darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      localStorage.setItem('darkMode', 'enabled');
+    } else {
+      darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+      localStorage.setItem('darkMode', 'disabled');
+    }
+  });
+
+  function initializeApp() {
+    // Refresh button
+    const refreshBtn = document.getElementById('refreshBtn');
+    refreshBtn.addEventListener('click', updateAllInfo);
+
+    // Get location button
+    const getLocationBtn = document.getElementById('getLocationBtn');
+    getLocationBtn.addEventListener('click', getGeolocation);
+
+    // Initial update
+    updateAllInfo();
+    startClock();
+
+    // Update network status in real-time
+    window.addEventListener('online', updateNetworkStatus);
+    window.addEventListener('offline', updateNetworkStatus);
+  }
+
+  function updateAllInfo() {
+    updateSystemInfo();
+    updateBrowserInfo();
+    updatePerformanceInfo();
+    updateNetworkStatus();
+    updateScreenInfo();
+    updateLocationInfo();
+  }
 });
