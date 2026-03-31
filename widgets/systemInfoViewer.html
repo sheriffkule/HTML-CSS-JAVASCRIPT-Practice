@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>System Info Viewer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/systemInfoViewer.css" />
+  </head>
+  <body>
+    <div class="landing-page">
+      <div class="landing-content">
+        <h1>System Info Viewer</h1>
+        <p class="subtitle">Get comprehensive insights about your device and browser.</p>
+
+        <button class="btn-start" id="startBtn"><i class="fas fa-rocket"></i> Start Analysis</button>
+
+        <div class="features">
+          <div class="feature-item">
+            <div class="feature-icon">
+              <div class="fas fa-microchip"></div>
+            </div>
+            <h3 class="feature-title">Hardware Details</h3>
+            <p class="feature-desc">View CPU cores, memory, and device specifications.</p>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <div class="fas fa-globe"></div>
+            </div>
+            <h3 class="feature-title">Browser Info</h3>
+            <p class="feature-desc">Discover your browser version and capabilities.</p>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-tachometer-alt"></i>
+            </div>
+            <h3 class="feature-title">Performance</h3>
+            <p class="feature-desc">Monitor RAM usage and battery status.</p>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-wifi"></i>
+            </div>
+            <h3 class="feature-title">Network Stats</h3>
+            <p class="feature-desc">Check connection type and speed metrics.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="loading-screen" id="loadingScreen">
+      <div class="loader"></div>
+      <div class="loading-text">Analyzing your system...</div>
+      <div class="loading-progress">
+        <div class="loading-progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+  </body>
+</html>

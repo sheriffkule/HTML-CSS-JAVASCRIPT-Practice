@@ -1,0 +1,92 @@
+:root {
+    --primary: #4361ee;
+    --secondary: #3f37c9;
+    --accent: #4895ef;
+    --dark: #1a1a2e;
+    --light: #f8f9fa;
+    --success: #4cc9f0
+    --warning: #f8961e;
+    --danger: #f72585;
+    --card-bg: rgb(255 255 255 / 0.9);
+    --border-radius: 12px;
+    --box-shadow: 0 10px 20px rgb(0 0 0 / 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #f5f7fa, #9fafc9);
+    min-height: 100vh;
+    color: #333;
+    transition: background 0.3s ease-in;
+}
+
+.landing-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    padding: 2rem;
+}
+
+.landing-content {
+    max-width: 600px;
+    animation: fadeIn 0.8s ease-in;
+}
+
+h1 {
+    font-size: 3rem;
+    color: var(--dark);
+    margin-bottom: 1rem;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.subtitle {
+    color: var(--secondary);
+    font-weight: 500;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    text-wrap: pretty;
+}
+
+.btn-start {
+    display: inline-flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 15px rgb(67 97 238 / 0.3);
+
+    i {
+        margin-right: 0.75rem;
+        transition: transform 0.3s;
+    }
+    &:hover {
+        background: var(--secondary);
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 8px 20px rgb(67 97 238 / 0.4);
+    }
+    &:active {
+        transform: translateY(0) scale(1);
+    }
+    &:hover i {
+        transform: rotate(-45deg) scale(1.2);
+    }
+}
