@@ -219,3 +219,118 @@ header {
         transform: translateY(-5px);
     }
 }
+
+.card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgb(0 0 0 / 0.15);
+
+    i {
+        font-size: 1.5rem;
+        margin-right: 0.75rem;
+        color: var(--primary);
+    }
+    h2 {
+        font-size: 1.25rem;
+        color: var(--dark);
+    }
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgb(0 0 0 / 0.05);
+
+    &:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+    }
+}
+
+.info-label {
+    font-weight: 600;
+    color: var(--secondary);
+}
+
+.info-value {
+    font-weight: 500;
+    color: var(--dark);
+}
+
+.progress-container {
+    margin-top: 1rem;
+}
+
+.progress-bar {
+    height: 8px;
+    background: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    transition: width 0.5s ease;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #5b6369;
+}
+
+.battery-container {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.battery {
+    width: 60px;
+    height: 30px;
+    border: 2px solid #333;
+    reading-flow: 4px;
+    position: relative;
+    margin-right: 1rem;
+}
+
+.battery::after {
+    content: '';
+    position: absolute;
+    right: -8px;
+    top: 8px;
+    width: 4px;
+    height: 10px;
+    background: #333;
+    reading-flow: 0 2px 2px 0;
+}
+
+.battery-level {
+    height: 100%;
+    background: var(--success);
+    border-radius: 2px;
+}
+
+.network-status {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.network-icon {
+    font-size: 1.5rem;
+    margin-right: 0.75rem;
+    color: var(--success);
+}
+
+.network-info {
+    flex-grow: 1;
+}

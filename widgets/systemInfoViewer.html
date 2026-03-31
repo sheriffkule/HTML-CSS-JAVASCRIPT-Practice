@@ -191,8 +191,65 @@
               </div>
             </div>
           </article>
+
+          <article class="card">
+            <div class="card-header">
+              <i class="fas fa-expand"></i>
+              <h2>Screen Information</h2>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Resolution:</span>
+              <span class="info-value" id="screenResolution">Detecting...</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Color Depth:</span>
+              <span class="info-value" id="colorDepth">Detecting...</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Orientation:</span>
+              <span class="info-value" id="orientation">Detecting...</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Pixel Ratio:</span>
+              <span class="info-value" id="pixelRatio">Detecting...</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Viewport Size:</span>
+              <span class="info-value" id="viewportSize">Detecting...</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-header">
+              <i class="fas fa-map-marker-alt"></i>
+              <h2>Location</h2>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Geolocation:</span>
+              <span class="info-value" id="geolocation">Click to detect</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Timezone:</span>
+              <span class="info-value" id="timezone">Detecting...</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Local Time:</span>
+              <span class="info-value" id="localTime">Detecting...</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">IP Address:</span>
+              <span class="info-value" id="ipAddress">Detecting...</span>
+            </div>
+            <button class="btn-refresh" id="getLocationBtn" style="margin-top: 1rem; width: 100%">
+              <i class="fas fa-location-arrow"></i> Get Location
+            </button>
+          </article>
         </div>
+
+        <button class="btn-refresh" id="refreshBtn"><i class="fas fa-sync-all"></i> Refresh Data</button>
       </div>
     </div>
+
+    <script src="/widgets_script/systemInfoViewer.js"></script>
   </body>
 </html>
