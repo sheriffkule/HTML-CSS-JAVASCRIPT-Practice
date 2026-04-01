@@ -204,5 +204,127 @@ document.addEventListener('DOMContentLoaded', function () {
         status += `, ≈ ${hours}h ${minutes}m remaining`;
       }
     }
+
+    document.getElementById('batteryStatus').textContent = status;
+    document.getElementById('batteryPercent').textContent = `${batteryPercent}%`;
+
+    const batteryLevel = document.getElementById('batteryLevel');
+    batteryLevel.style.width = `${batteryPercent}%`;
+
+    // Change color based on battery level
+    if (batteryPercent <= 20) {
+      batteryLevel.style.background = 'var(--danger)';
+    } else if (batteryPercent <= 50) {
+      batteryLevel.style.background = 'var(--warning)';
+    } else {
+      batteryLevel.style.background = 'var(--success)';
+    }
+  }
+
+  function updateNetworkInfo() {
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+
+    if (connection) {
+      document.getElementById('connectionType').textContent = connection.type || 'Unknown';
+      document.getElementById('effectiveType').textContent = connection.effectiveType || 'Unknown';
+      document.getElementById('downlink').textContent = connection.downlink
+        ? `${connection.downlink} Mbps`
+        : 'Unknown';
+      document.getElementById('rtt').textContent = connection.rtt ? `${connection.rtt} ms` : 'Unknown';
+      document.getElementById('saveData').textContent = connection.saveData ? 'Enabled' : 'Disabled';
+
+      // Add event listener for changes in network information
+      connection.addEventListener('change', updateNetworkInfo);
+    } else {
+      document.getElementById('connectionType').textContent = 'API not available';
+      document.getElementById('effectiveType').textContent = 'N/A';
+      document.getElementById('downlink').textContent = 'N/A';
+      document.getElementById('rtt').textContent = 'N/A';
+      document.getElementById('saveData').textContent = 'N/A';
+    }
+
+    updateNetworkStatus();
+  }
+
+  function updateNetworkStatus() {
+    // Screen resolution
+    const width = window.screen.width;
+    const height = window.screen.height;
+    document.getElementById('screenResolution').textContent = `${width} x ${height} pixels`;
+
+    // Color depth
+    document.getElementById('colorDepth').textContent = `${window.screen.colorDepth}-bit`;
+
+    // Orientation
+    let orientation = 'Portrait';
+    if (window.screen.orientation) {
+      orientation = window.screen.orientation.type.includes('landscape') ? 'Landscape' : 'Portrait';
+    } else if (window.innerWidth > window.innerHeight) {
+      orientation = 'Landscape';
+    }
+    document.getElementById('orientation').textContent = orientation;
+
+    // Pixel ratio
+    document.getElementById('pixelRatio').textContent = window.devicePixelRatio || '1';
+
+    // Viewport size
+    document.getElementById('viewportSize').textContent =
+      `${window.innerWidth} x ${window.innerHeight} pixels`;
+
+    // Add event listeners for changes in screen orientation and size
+    window.addEventListener('resize', () => {
+      document.getElementById('viewportSize').textContent =
+        `${window.innerWidth} x ${window.innerHeight} pixels`;
+
+      // Update orientation on resize
+      let newOrientation = 'Portrait';
+      if (window.screen.orientation) {
+        newOrientation = window.screen.orientation.type.includes('landscape') ? 'Landscape' : 'Portrait';
+      } else if (window.innerWidth > window.innerHeight) {
+        newOrientation = 'Landscape';
+      }
+
+      if (newOrientation !== orientation) {
+        orientation = newOrientation;
+        document.getElementById('orientation').textContent = orientation;
+      }
+    });
+
+    if (window.screen.orientation) {
+      window.screen.orientation.addEventListener('change', () => {
+        newOrientation = window.screen.orientation.type.includes('landscape') ? 'Landscape' : 'Portrait';
+        document.getElementById('orientation').textContent = newOrientation;
+      });
+    }
+  }
+
+  function updateLocationInfo() {
+    // Timezone
+    document.getElementById('timezone').textContent = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Not Available';
+
+    // Update clock continuosly
+    startClock();
+
+    // IP address (simulated as this requires external API)
+    simulateIPAddress();
+  }
+
+  function startClock() {
+    updateClock();
+    setInterval(updateClock, 1000);
+  }
+
+  function simulateIPAddress() {
+    // Simulate IP address since we can't fetch it without an external API
+    const fakeIPs = [
+      '192.168.1.1',
+      '10.0.0.1',
+      '172.16.0.1',
+      '203.0.112.42',
+      '192.51.100.1'
+    ];
+
+    const randomIP = fakeIPs[Math.floor(Math.random() * fakeIPs.length)];
+    document.getElementById('ipAddress').textContent = randomIP;
   }
 });
