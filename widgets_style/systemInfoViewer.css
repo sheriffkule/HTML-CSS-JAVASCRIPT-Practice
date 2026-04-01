@@ -28,7 +28,6 @@ body {
 
 .landing-page {
     display: flex;
-    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -94,7 +93,7 @@ h1 {
 
 .features {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1.5rem;
     margin-top: 3rem;
     width: 100%;
@@ -186,7 +185,7 @@ h1 {
 }
 
 .app-container {
-    /* display: none; */
+    display: none;
     padding: 2rem;
     max-width: 1200px;
     margin: 0 auto;
@@ -378,5 +377,100 @@ header {
 
     &:hover {
         scale: 1.05;
+    }
+}
+
+body.dark-mode {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: #f8f9fa;
+}
+
+body.dark-mode .landing-page {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+}
+
+body.dark-mode h1 {
+    background: linear-gradient(90deg, #4895ef, #4cc9f0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+body.dark-mode .subtitle {
+    color: var(--accent);
+}
+
+body.dark-mode .feature-item {
+    background: rgb(30 30 46 / 0.9);
+}
+
+body.dark-mode .feature-title {
+    color: #f8f9fa;
+}
+
+body.dark-mode .feature-desc {
+    color: #aaa;
+}
+
+body.dark-mode .card {
+    background: rgb(30 30 46 / 0.9);
+    color: #f8f9fa;
+}
+
+body.dark-mode .card-header h2 {
+    color: #f8f9fa;
+}
+
+body.dark-mode .info-label {
+    color: var(--accent);
+}
+
+body.dark-mode .info-value {
+    color: #f8f9fa;
+}
+
+body.dark-mode .card-header {
+    border-bottom: 1px solid rgb(255 255 255 / 0.4);
+}
+
+body.dark-mode .info-item {
+    border-bottom: 1px solid rgb(255 255 255 / 0.1);
+}
+
+body.dark-mode .loading-screen.active {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(50px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+@keyframes spin {
+    to {transform: rotate(360deg);}
+}
+
+@keyframes pulse {
+    0% {opacity: 1;}
+    50% {opacity: 0.5;}
+    100% {opacity: 1;}
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 2.2rem;
+    }
+    .subtitle {
+        font-size: 1rem;
+    }
+    .features {
+        grid-template-columns: 1fr;
+    }
+    .dashboard {
+        grid-template-columns: 1fr;
     }
 }
