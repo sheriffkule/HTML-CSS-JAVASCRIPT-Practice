@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fuel Cost Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/fuelCostCalculator.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1><i class="fas fa-gas-pump"></i> Fuel Cost Calculator</h1>
+        <p>Calculate your trip fuel cost and save money.</p>
+      </header>
+
+      <div class="app-container">
+        <section class="input-section">
+          <h2>Trip Details</h2>
+          <article class="form-group">
+            <label for="distance">Distance (miles)</label>
+            <input type="number" id="distance" placeholder="Enter trip distance" min="1" value="100" />
+          </article>
+          <article class="form-group">
+            <label for="fuel-consumption">Fuel Consumption (MPG)</label>
+            <input type="number" id="fuel-consumption" placeholder="Miles per gallon" min="1" value="25" />
+          </article>
+          <article class="form-group">
+            <label for="fuel-price">Fuel Price (per gallon)</label>
+            <input
+              type="number"
+              id="fuel-price"
+              placeholder="Price per gallon"
+              min="0.01"
+              step="0.01"
+              value="3.50" />
+          </article>
+          <article class="form-group">
+            <label for="currency">Currency</label>
+            <select id="currency">
+              <option value="$">USD ($)</option>
+              <option value="€">EUR (€)</option>
+              <option value="£">GBP (£)</option>
+              <option value="¥">JPY (¥)</option>
+            </select>
+          </article>
+
+          <button class="calculate-btn" id="calculate">Calculate Fuel Cost</button>
+        </section>
+
+        <section class="result-section">
+          <div class="result-card">
+            <h2 class="result-title">Your Fuel Cost</h2>
+            <div class="fuel-cost" id="cost-result">$14.00</div>
+            <p>for <span id="result-distance">100</span> miles</p>
+
+            <div class="details">
+              <div class="detail-item">
+                <div class="detail-value" id="fuel-needed">4.00</div>
+                <div class="detail-label">Gallons needed</div>
+              </div>
+
+              <div class="detail-item">
+                <div class="detail-value" id="consumption-rate">25</div>
+                <div class="detail-label">MPG</div>
+              </div>
+            </div>
+
+            <div class="details">
+              <div class="detail-item">
+                <div class="detail-value" id="price-per-gallon">$3.50</div>
+                <div class="detail-label">Price per gallon</div>
+              </div>
+
+              <div class="detail-item">
+                <div class="detail-value" id="cost-per-mile">$0.14</div>
+                <div class="detail-label">Cost per mile</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section class="additional-features">
+        <h2 class="features-title">Additional Features</h2>
+        <div class="features-grid">
+          <article class="feature-card">
+            <div class="feature-icon"><i class="fas fa-route"></i></div>
+            <h3>Multiple Trips</h3>
+            <p>Save and compare different trips</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+            <h3>Fuel History</h3>
+            <p>Track fuel price changes over time</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon"><i class="fas fa-car"></i></div>
+            <h3>Vehicle Profiles</h3>
+            <p>Save consumption for multiple vehicles</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon"><i class="fas fa-share-alt"></i></div>
+            <h3>Share Result</h3>
+            <p>Share calculations with others</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="savings-tips">
+        <h2 class="tips-title">Fuel Saving Tips</h2>
+
+        <article class="tip-item">
+          <div class="tip-icon"><i class="fas fa-tachometer-alt"></i></div>
+          <div>
+            <h3>Maintain Steady Speed</h3>
+            <p>Avoid rapid acceleration and braking to improve fuel economy by up to 30%</p>
+          </div>
+        </article>
+
+        <article class="tip-item">
+          <div class="tip-icon"><i class="fas fa-tire"></i></div>
+          <div>
+            <h3>Check Tire Pressure</h3>
+            <p>Properly inflated tires can improve fuel efficiency by up to 3%</p>
+          </div>
+        </article>
+
+        <article class="tip-item">
+          <div class="tip-icon"><i class="fas fa-weight"></i></div>
+          <div>
+            <h3>Reduce Vehicle Weight</h3>
+            <p>Remove unnecessary items from your vehicle to improve MPG</p>
+          </div>
+        </article>
+      </section>
+
+      <footer>
+        © <time datetime="2026" id="year">2026</time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
+    </main>
+  </body>
+</html>
