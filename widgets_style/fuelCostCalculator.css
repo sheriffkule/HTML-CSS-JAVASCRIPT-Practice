@@ -85,3 +85,105 @@ input, select {
     box-shadow: 0 0 0 2px rgb(52, 152, 219 / 0.2),
     inset 0 0 0 2px rgb(52, 152, 219 / 0.2);
 }
+
+.calculate-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .3s;
+    margin-top: 10px;
+
+    &:hover {
+        background: #c0392b;
+        box-shadow: 0 4px 12px rgb(0 0 0 / 0.2);
+    }
+}
+
+.result-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgb(0 0 0 / 0.2);
+    text-align: center;
+}
+
+.result-title {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.fuel-cost {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #e74c3c;
+    margin: 15px 0;
+}
+
+.details {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.detail-item {
+    padding: 15px;
+    background: linear-gradient(110deg, #f8f9fa, silver);
+    border-radius: 10px;
+    margin: 10px;
+    min-width: 120px;
+}
+
+.detail-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.detail-label {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.additional-features {
+    padding: 30px;
+    background: #2c3e50;
+    color: white;
+}
+
+.features-title {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.feature-card {
+    background: rgb(255 255 255 / 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #3498db;
+}
+
+.savings-tips {
+    padding: 30px;
+    background: linear-gradient(110deg, #f8f9fa, silver);
+}
