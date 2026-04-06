@@ -187,3 +187,55 @@ input, select {
     padding: 30px;
     background: linear-gradient(110deg, #f8f9fa, silver);
 }
+
+.tips-title {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #2c3e50;
+}
+
+.tip-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 15px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.1);
+}
+
+.tip-icon {
+    font-size: 1.5rem;
+    color: #27ae60;
+    margin-right: 15px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #1a252f;
+    color: white;
+    font-size: 0.9rem;
+    text-wrap: pretty;
+
+    span {
+        color: #b21f1f;
+        font-size: 1.1rem;
+    }
+    abbr {
+        letter-spacing: 0.5px;
+        text-underline-offset: 2px;
+        color: #27ae60;
+    }
+}
+
+@media (width < 768px) {
+    .app-content {
+        flex-direction: column;
+    }
+
+    .input-section,
+    .result-section {
+        width: 100%;
+    }
+}

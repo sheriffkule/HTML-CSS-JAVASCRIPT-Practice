@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const deleteBtn = bookmarkCard.querySelector('.delete-btn');
 
       editBtn.addEventListener('click', () => openEditModal(bookmark));
-      deleteBtn.addEventListener('click', () => deleteEditModal(bookmark.id));
+      deleteBtn.addEventListener('click', () => deleteBookmark(bookmark.id));
     });
   }
 

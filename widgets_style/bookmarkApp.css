@@ -244,6 +244,12 @@ textarea.form-input {
     resize: vertical;
 }
 
+:is(input, textarea):is(:focus, :focus-within) {
+    box-shadow: 0 0 0 2px var(--primary-light),
+    inset 0 0 0 2px var(--primary-light);
+    outline: none;
+}
+
 .submit-button {
     padding: 0.75rem;
     background-color: var(--primary);
