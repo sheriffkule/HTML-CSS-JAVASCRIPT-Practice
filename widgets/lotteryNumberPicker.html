@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lottery Number Picker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/lotteryNumberPicker.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1><i class="fas fa-dice"></i> Lottery Number Picker</h1>
+        <p class="tagline">Your personal lottery number generator.</p>
+      </header>
+
+      <main class="main-content">
+        <section class="left-panel">
+          <article class="control-group">
+            <h2><i class="fas fa-ticket-alt"></i> Lottery Game</h2>
+            <div class="game-selector">
+              <div class="game-btn active" data-game="powerball">Powerball</div>
+              <div class="game-btn" data-game="megamillions">Mega Millions</div>
+              <div class="game-btn" data-game="euromillions">Euro Millions</div>
+              <div class="game-btn" data-game="custom">Custom</div>
+            </div>
+          </article>
+
+          <article class="control-group">
+            <h2><i class="fas fa-sliders-h"></i> Options</h2>
+            <div class="slider-container">
+              <div class="slider-label">
+                <span>Numbers to generate:</span>
+                <span id="number-count">5</span>
+              </div>
+              <input type="range" id="numbers-slider" min="1" max="10" value="5" />
+            </div>
+
+            <div class="slider-container">
+              <div class="slider-label">
+                <span>Number range:</span>
+                <span id="range-value">1-69</span>
+              </div>
+              <input type="range" id="range-slider" min="10" max="100" value="69" />
+            </div>
+
+            <div class="slider-container">
+              <div class="slider-label">
+                <span>Special numbers:</span>
+                <span id="special-count">1</span>
+              </div>
+              <input type="range" id="special-slider" min="0" max="5" value="1" />
+            </div>
+          </article>
+
+          <article class="action-buttons">
+            <button class="btn btn-generate" id="generate-btn">
+              <i class="fas fa-magic"></i> Generate Numbers
+            </button>
+            <button class="btn btn-reset" id="reset-btn"><i class="fas fa-redo"></i> Reset</button>
+          </article>
+        </section>
+
+        <section class="right-panel">
+          <h2><i class="fas fa-star"></i> Your Numbers</h2>
+          <div class="numbers-container" id="numbers-container">
+            <div class="number">12</div>
+            <div class="number">24</div>
+            <div class="number">37</div>
+            <div class="number">42</div>
+            <div class="number">55</div>
+            <div class="number special-number">18</div>
+          </div>
+
+          <div class="stats">
+            <div class="stat-value" id="total-generated">0</div>
+            <div class="stat-label">Total Generated</div>
+          </div>
+          <div class="stats">
+            <div class="stat-value" id="lucky-number">7</div>
+            <div class="stat-label">Your Lucky Number</div>
+          </div>
+          <div class="stats">
+            <div class="stat-value" id="hot-number">23</div>
+            <div class="stat-label">Most Frequent</div>
+          </div>
+        </section>
+
+        <h2><i class="fas fa-history"></i> History</h2>
+        <section class="history-container" id="history-container"></section>
+      </main>
+
+      <footer>
+        <p>Generated numbers are for entertainment purposes only. Good luck!</p>
+        © <time datetime="2026" id="year">2026</time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
+    </div>
+
+    <script src="/widgets_script/lotteryNumberPicker.js"></script>
+  </body>
+</html>
