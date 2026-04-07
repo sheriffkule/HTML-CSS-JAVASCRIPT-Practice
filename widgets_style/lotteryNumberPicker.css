@@ -116,3 +116,121 @@ h2 {
 .slider-container {
     margin: 20px 0;
 }
+
+.slider-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+input[type="range"] {
+    width: 100%;
+    height: 8px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: linear-gradient(90deg, #ddd, #bbb);
+    border-radius: 5px;
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #3498db;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 0.2);
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    i {
+        margin-right: 8px;
+    }
+}
+
+.btn-generate {
+    background: linear-gradient(90deg, #3498db, #2980b9);
+    color: white;
+    box-shadow: 0 5px 15px rgb(52 152 219 / 0.4);
+
+    &:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 8px 20px rgb(52 152 219 / 0.6);
+    }
+    &:active {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.btn-reset {
+    background: #f8f8f8;
+    color: #6c757d;
+    border: 2px solid #ddd;
+
+    &:hover {
+        background: #e9ecef;
+        transform: translateY(-3px) scale(1.02);
+    }
+    &:active {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.numbers-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin: 25px 0;
+}
+
+.number {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3498db, #2c3e50);
+    color: white;
+    box-shadow: 0 5px 15px rgb(0 0 0 / 0.2);
+    transition: transform 0.3s;
+
+    &:hover {
+        transform: scale(1.1) rotate(10deg);
+    }
+}
+
+.special-number {
+    background: linear-gradient(135deg, #e74c3c, #bd3223);
+}
+
+.history-container {
+    margin-top: 30px;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+}
