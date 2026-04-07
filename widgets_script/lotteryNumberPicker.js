@@ -67,4 +67,126 @@ document.addEventListener('DOMContentLoaded', function () {
   generateBtn.addEventListener('click', function () {
     generateNumbers();
   });
+
+  // Reset
+  resetBtn.addEventListener('click', function () {
+    historyContainer.innerHTML = '';
+    generatedCount = 0;
+    totalGenerated.textContent = '0';
+    numberFrequency = {};
+    hotNumber.textContent = Math.floor(Math.random() * 50) + 1;
+  });
+
+  // Function to generate numbers
+  function generateNumbers() {
+    const numbersCount = parseInt(numberSlider.value);
+    const range = parseInt(rangeSlider.value);
+    const specialCount = parseInt(specialSlider.value);
+    let specialRange = range;
+    if (currentGame !== 'custom') {
+      specialRange = games[currentGame].specialRange;
+    }
+
+    // Generate main numbers
+    const mainNumbers = generateUniqueNumbers(numbersCount, range).sort((a, b) => a - b);
+
+    // Generate special numbers
+    const specialNumbers = generateUniqueNumbers(specialCount, specialRange);
+
+    // Display numbers
+    numbersContainer.innerHTML = '';
+
+    mainNumbers.forEach((num) => {
+      const numberEl = document.createElement('div');
+      numberEl.className = 'number';
+      numberEl.textContent = num;
+      numbersContainer.appendChild(numberEl);
+
+      // Track frequency
+      numberFrequency[num] = (numberFrequency[num] || 0) + 1;
+    });
+
+    specialNumbers.forEach((num) => {
+      const numberEl = document.createElement('div');
+      numberEl.className = 'number special-number';
+      numberEl.textContent = num;
+      numbersContainer.appendChild(numberEl);
+    });
+
+    // Add to history
+    addToHistory(mainNumbers, specialNumbers);
+
+    // Update stats
+    generatedCount++;
+    totalGenerated.textContent = generatedCount;
+
+    // Update hot number
+    updateHotNumber();
+  }
+
+  // Generate unique numbers
+  function generateUniqueNumbers(count, range) {
+    const numbers = new Set();
+    while (numbers.size < count) {
+      numbers.add(Math.floor(Math.random() * range) + 1);
+    }
+    return Array.from(numbers);
+  }
+
+  // Add to history
+  function addToHistory(mainNumbers, specialNumbers) {
+    const historyItem = document.createElement('div');
+    historyItem.className = 'history-item';
+
+    mainNumbers.forEach((num) => {
+      const numEl = document.createElement('div');
+      numEl.className = 'history-number';
+      numEl.textContent = num;
+      historyItem.appendChild(numEl);
+    });
+
+    specialNumbers.forEach((num) => {
+      const numEl = document.createElement('div');
+      numEl.className = 'history-number history-special';
+      numEl.textContent = num;
+      historyItem.appendChild(numEl);
+    });
+
+    historyContainer.prepend(historyItem);
+  }
+
+  // Update hot number
+  function updateHotNumber() {
+    let maxFreq = 0;
+    let hotNum = 0;
+
+    for (const [num, freq] of Object.entries(numberFrequency)) {
+      if (freq > maxFreq) {
+        maxFreq = freq;
+        hotNum = num;
+      }
+    }
+
+    if (hotNum) {
+      hotNumber.textContent = hotNum;
+    }
+  }
+
+  // Generate initial numbers
+  generateNumbers();
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
