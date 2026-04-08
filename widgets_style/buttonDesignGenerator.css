@@ -78,3 +78,107 @@ header {
         padding-bottom: 0.5rem;
     }
 }
+
+label {
+    font-weight: 500;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+input[type="color"],
+input[type="range"],
+select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: white;
+    cursor: pointer;
+}
+
+input[type="color"] {
+    height: 40px;
+    padding: 0.2rem;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--info);
+}
+
+select:is(:focus, :focus-within) {
+    outline: none;
+    border-color: var(--primary);
+    transition: 0.1s;
+}
+
+select,
+::picker(select) {
+    appearance: base-select;
+}
+
+::picker(select) {
+    border-radius: 6px;
+    border: none;
+}
+
+select::picker-icon {
+    color: var(--primary);
+    transition: 0.3s rotate;
+}
+
+select:open::picker-icon {
+    rotate: 180deg;
+}
+
+option {
+    border: 1px solid #bbb;
+    background: hsl(from var(--primary) h s 25%);
+    color: white;
+    padding: 2px 0 2px 12px;
+    transition: display 0.3s;
+}
+
+option:is(:hover, :focus, :focus-within) {
+    background: var(--primary);
+}
+
+option:checked {
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: var(--light);
+}
+
+option::checkmark {
+    content: '☑️';
+    color: white;
+}
+
+input[type="number"],
+input[type="text"] {
+    padding: 4px 8px;
+    border: 1px solid #bbb;
+    outline: none;
+    transition: 0.2s;
+
+    &:focus {
+        border-color: var(--secondary);
+        box-shadow: 0 0 3px var(--primary);
+    }
+}
+
+.preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid #ccc;
+    padding-left: 2rem;
+}
