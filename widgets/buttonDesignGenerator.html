@@ -79,7 +79,7 @@
               <label for="addIcon">Add Icon</label>
             </div>
 
-            <select id="iconSelect">
+            <select id="iconSelect" style="display: none;">
               <option value="fa-rocket">🚀 Rocket</option>
               <option value="fa-heart">❤️ Heart</option>
               <option value="fa-star">⭐ Star</option>
@@ -91,14 +91,14 @@
         </section>
 
         <section class="preview">
-          <div class="button-perview">
-            <button id="generateButton">Click Me</button>
+          <div class="button-preview">
+            <button id="generatedButton">Click Me</button>
           </div>
 
           <div class="code-container">
             <div class="code-header">
               <div class="code-tabs">
-                <div class="cede-tab active">HTML</div>
+                <div class="code-tab active">HTML</div>
                 <div class="code-tab">CSS</div>
                 <div class="code-tab">JS</div>
               </div>
@@ -106,7 +106,7 @@
             </div>
             <div class="code-content">
               <pre id="htmlCode"><code>&lt;button class="custom-btn&lt;Click Me&lt;/button&gt;"</code></pre>
-              <pre id="cssCode"><code>.custom-btn {
+              <pre id="cssCode" style="display: none"><code>.custom-btn {
     background: #4361ee;
     color: #ffffff;
     border: 1px solid #4361ee;
@@ -121,7 +121,7 @@
 .custom-btn:hover {
     background: #3a56d4;
 }</code></pre>
-              <pre id="jsCode"><code>// No JavaScript required for basic functionality
+              <pre id="jsCode" style="display: none"><code>// No JavaScript required for basic functionality
 // For hover effects, include the CSS above.
               </code></pre>
             </div>
@@ -129,6 +129,11 @@
         </section>
       </main>
     </div>
+
+    <footer>
+      © <time datetime="" id="year"></time> Made width <span>♥</span> by
+      <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+    </footer>
 
     <div class="toast" id="toast">Code copied to clipboard!</div>
 

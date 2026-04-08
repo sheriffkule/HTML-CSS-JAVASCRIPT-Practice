@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
         htmlCode.style.display = 'block';
       } else if (this.textContent === 'CSS') {
         cssCode.style.display = 'block';
-      } else if (this.textContent === 'JavaScript') {
+      } else if (this.textContent === 'JS') {
         jsCode.style.display = 'block';
       }
     });
@@ -55,9 +55,10 @@ document.addEventListener('DOMContentLoaded', function () {
   // Copy code to clipboard
   copyBtn.addEventListener('click', function () {
     let codeToCopy;
-    if (document.querySelector('.code-tab.active').textContent === 'HTML') {
+    const activeTab = document.querySelector('.code-tab.active');
+    if (activeTab && activeTab.textContent === 'HTML') {
       codeToCopy = htmlCode.querySelector('code').textContent;
-    } else if (document.querySelector('code-tab.active').textContent === 'CSS') {
+    } else if (activeTab && activeTab.textContent === 'CSS') {
       codeToCopy = cssCode.querySelector('code').textContent;
     } else {
       codeToCopy = jsCode.querySelector('code').textContent;
@@ -79,7 +80,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const radius = borderRadius.value;
     const bWidth = borderWidth.value;
     const shadow = addShadow.checked;
-    const hover = hoverEffect.checked;
+    // Get hover effect value (should be a string, not boolean)
+    const hover = hoverEffect.value || (hoverEffect.checked ? 'grow' : '');
     const pulse = pulseAnimation.checked;
     const icon = addIcon.checked;
     const iconClass = iconSelect.value;
@@ -108,8 +110,149 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add icon if checked
     if (icon) {
       generatedButton.innerHTML = `<i class="fas ${iconClass}"></i> ${text}`;
+    } else {
+      generatedButton.textContent = text;
     }
 
     pulse ? generatedButton.classList.add('pulse') : generatedButton.classList.remove('pulse');
+
+    // Generate code
+    generateCode(
+      text,
+      width,
+      height,
+      bg,
+      textCol,
+      borderCol,
+      radius,
+      bWidth,
+      shadow,
+      hover,
+      pulse,
+      icon,
+      iconClass,
+    );
   }
+
+  function generateCode(
+    text,
+    width,
+    height,
+    bg,
+    textCol,
+    borderCol,
+    radius,
+    bWidth,
+    shadow,
+    hover,
+    pulse,
+    icon,
+    iconClass,
+  ) {
+    // HTML Code
+    let html = `<button class="custom-btn">${text}`;
+    if (icon) html += ` <i class="fas ${iconClass}"></i>`;
+    html += `</button>`;
+    htmlCode.querySelector('code').textContent = html;
+
+    // CSS Code
+    let css = `.custom-btn {\n`;
+    css += `    background: ${bg};\n`;
+    css += `    color: ${textCol};\n`;
+    css += `    border: ${bWidth}px solid ${borderCol};\n`;
+    css += `    border-radius: ${radius}px;\n`;
+    css += `    width: ${width}px;\n`;
+    css += `    height: ${height}px;\n`;
+    css += `    cursor: pointer;\n`;
+    css += `    font-size: ${Math.min(16, height / 3)}px;\n`;
+    css += `    transition: all 0.3s ease;\n`;
+
+    if (shadow) css += `    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n`;
+
+    if (pulse) css += `    animation: pulse 1.5s infinite;\n`;
+
+    css += `}\n\n.custom-btn:hover {\n`;
+
+    // Hover effects
+    switch (hover) {
+      case 'darken':
+        css += `    background: ${darkenColor(bg, 20)};\n`;
+        break;
+      case 'lighten':
+        css += `    background: ${lightenColor(bg, 20)};\n`;
+        break;
+      case 'grow':
+        css += `    transform: scale(1.1);\n`;
+        break;
+      case 'shrink':
+        css += `    transform: scale(0.9);\n`;
+        break;
+      case 'rotate':
+        css += `    transform: rotate(5deg);\n`;
+        break;
+      default:
+        // No additional hover effect
+        break;
+    }
+
+    css += `}\n`;
+
+    if (pulse) {
+      css += `@keyframes pulse {\n`;
+      css += `    0% { transform: scale(1); }\n`;
+      css += `    50% { transform: scale(1.05); }\n`;
+      css += `    100% { transform: scale(1); }\n`;
+      css += `}\n`;
+    }
+
+    cssCode.querySelector('code').textContent = css;
+
+    // JS Code (minimal for this example)
+    let js = `// No JavaScript required for basic functionality\n`;
+    js += `// For hover effects, include the CSS above`;
+    const jsCodeBlock = jsCode.querySelector('code');
+    if (jsCodeBlock) {
+      jsCodeBlock.textContent = js;
+    } else {
+      jsCode.textContent = js;
+    }
+  }
+
+  // Helper functions
+  function darkenColor(color, percent) {
+    // Simple darken function for hex colors
+    // In a real app, use a proper color manipulation library
+    return color;
+  }
+
+  function lightenColor(color, percent) {
+    // Simple lighten function for hex colors
+    // In a real app, use a proper color manipulation library
+    return color;
+  }
+
+  function showToast() {
+    toast.classList.add('show');
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3000);
+  }
+
+  // Initialize
+  updateButton();
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
