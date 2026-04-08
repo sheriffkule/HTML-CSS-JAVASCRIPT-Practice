@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Button Design Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/buttonDesignGenerator.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Button Design Generator</h1>
+        <p class="subtitle">
+          Create beautiful, customizable buttons for your web projects. Adjust the settings below and copy the
+          generated code.
+        </p>
+      </header>
+
+      <main class="app-container">
+        <section class="controls">
+          <article class="control-group">
+            <h3>Basic Styles</h3>
+            <label for="buttonText">Button Text</label>
+            <input type="text" id="buttonText" value="Click Me" placeholder="Enter button text" />
+
+            <label for="buttonWidth">Width (px)</label>
+            <input type="number" id="buttonWidth" min="50px" max="300px" value="150px" />
+
+            <label for="buttonHeight">Height (px)</label>
+            <input type="number" id="buttonHeight" min="20px" max="100px" value="45px" />
+          </article>
+
+          <article class="control-group">
+            <h3>Colors</h3>
+            <label for="bgColor">Background Color</label>
+            <input type="color" id="bgColor" value="#4361ee" />
+
+            <label for="textColor">Text Color</label>
+            <input type="color" id="textColor" value="#ffffff" />
+
+            <label for="borderColor">Border Color</label>
+            <input type="color" id="borderColor" value="#4361ee" />
+          </article>
+
+          <article class="control-group">
+            <h3>Borders & Shadows</h3>
+            <label for="borderRadius">Border Radius (px)</label>
+            <input type="number" id="borderRadius" min="0" max="50" value="8" />
+
+            <label for="borderWidth">Border Width (px)</label>
+            <input type="number" id="borderWidth" min="0" max="10" value="1" />
+
+            <div class="checkbox-group">
+              <input type="checkbox" id="addShadow" checked />
+              <label for="addShadow">Add Shadow</label>
+            </div>
+          </article>
+
+          <article class="control-group">
+            <h3>Effects</h3>
+            <label for="hoverEffect">Hover Effect</label>
+            <select id="hoverEffect">
+              <option value="none">None</option>
+              <option value="darken">Darken</option>
+              <option value="lighten">Lighten</option>
+              <option value="grow">Grow</option>
+              <option value="shrink">Shrink</option>
+              <option value="rotate">Rotate</option>
+            </select>
+
+            <div class="checkbox-group">
+              <input type="checkbox" id="pulseAnimation" />
+              <label for="pulseAnimation">Pulse Animation</label>
+            </div>
+
+            <div class="checkbox-group">
+              <input type="checkbox" id="addIcon" />
+              <label for="addIcon">Add Icon</label>
+            </div>
+
+            <select id="iconSelect">
+              <option value="fa-rocket">🚀 Rocket</option>
+              <option value="fa-heart">❤️ Heart</option>
+              <option value="fa-star">⭐ Star</option>
+              <option value="fa-bolt">⚡ Bolt</option>
+              <option value="fa-share">↗️ Share</option>
+              <option value="fa-download">📥 Download</option>
+            </select>
+          </article>
+        </section>
+
+        <section class="preview">
+          <div class="button-perview">
+            <button id="generateButton">Click Me</button>
+          </div>
+
+          <div class="code-container">
+            <div class="code-header">
+              <div class="code-tabs">
+                <div class="cede-tab active">HTML</div>
+                <div class="code-tab">CSS</div>
+                <div class="code-tab">JS</div>
+              </div>
+              <button class="copy-btn" id="copyBtn"><i class="fas fa-copy"></i> Copy</button>
+            </div>
+            <div class="code-content">
+              <pre id="htmlCode"><code>&lt;button class="custom-btn&lt;Click Me&lt;/button&gt;"</code></pre>
+              <pre id="cssCode"><code>.custom-btn {
+    background: #4361ee;
+    color: #ffffff;
+    border: 1px solid #4361ee;
+    border-radius: 8px;
+    width: 150px;
+    height: 45px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.custom-btn:hover {
+    background: #3a56d4;
+}</code></pre>
+              <pre id="jsCode"><code>// No JavaScript required for basic functionality
+// For hover effects, include the CSS above.
+              </code></pre>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="toast" id="toast">Code copied to clipboard!</div>
+
+    <script src="/widgets_script/buttonDesignGenerator.js"></script>
+  </body>
+</html>
