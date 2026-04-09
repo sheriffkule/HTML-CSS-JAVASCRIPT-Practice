@@ -11,7 +11,7 @@
     --light: #f8f9fa;
     --dark: #212529;
     --gray: #6c757d;
-    --light-gray: #e9ecef;
+    --light-gray: #dcdfe2;
     --border-radius: 8px;
     --box-shadow: 0 4px 8px rgb(0 0 0 / 0.15);
     --transition: all 0.3s ease;
@@ -356,4 +356,71 @@ body {
     display: grid;
     place-items: center;
     font-size: 16px;
+}
+
+.transaction-details h4 {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 3px;
+}
+
+.transaction-details p {
+    font-size: 12px;
+    color: var(--gray);
+}
+
+.transaction-amount.income {
+    color: var(--success);
+    font-weight: 600;
+}
+
+.transaction-amount.expense {
+    color: var(--danger);
+    font-weight: 600;
+}
+
+.filters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    label {
+        font-size: 14px;
+        color: var(--gray);
+    }
+}
+
+.filter-group :is(select, input) {
+    padding: 8px 12px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--light-gray);
+    background: var(--light);
+    color: var(--dark);
+    font-family: 'Poppins', sans-serif;
+}
+
+.transaction-table {
+    overflow-x: auto;
+}
+
+.transaction-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.transaction-table :is(th, td) {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.transaction-table tr:hover {
+    background-color: rgb(0 0 0 / 0.02);
 }
