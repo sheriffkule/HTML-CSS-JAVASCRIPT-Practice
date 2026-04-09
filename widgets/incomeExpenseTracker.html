@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Income and Expense Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/incomeExpenseTracker.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="app-header">
+        <div class="header-content">
+          <h1><i class="fas fa-wallet"></i> Income and Expense Tracker</h1>
+          <p>Take control of your finances.</p>
+        </div>
+        <div class="theme-toggle">
+          <i class="fas fa-moon" id="theme-icon"></i>
+        </div>
+      </header>
+      <div class="app-container">
+        <aside class="sidebar">
+          <div class="user-profile">
+            <div class="avatar">
+              <i class="fas fa-user"></i>
+            </div>
+            <h3>Welcome</h3>
+          </div>
+
+          <nav class="main-nav">
+            <ul>
+              <li class="active" data-section="dashboard"><i class="fas fa-home"></i> Dashboard</li>
+              <li data-section="transactions"><i class="fas fa-exchange-alt"></i> Transactions</li>
+              <li data-section="budgets"><i class="fas fa-chart-pie"></i> Budgets</li>
+              <li data-section="reports"><i class="fas fa-chart-line"></i> Reports</li>
+              <li data-section="goals"><i class="fas fa-bullseye"></i> Savings Goal</li>
+            </ul>
+          </nav>
+
+          <div class="sidebar-footer">
+            <button class="btn-secondary" id="export-data">
+              <i class="fas fa-file-export"></i> Export Data
+            </button>
+          </div>
+        </aside>
+
+        <main class="main-content">
+          <section class="content-section active" id="dashboard">
+            <article class="summary-cards">
+              <div class="card">
+                <h3>Total Balance</h3>
+                <p class="amount" id="total-balance">$0.00</p>
+                <p class="change positive"><i class="fas fa-arrow-up"></i> 0% from last month</p>
+              </div>
+              <div class="card">
+                <h3>Monthly Income</h3>
+                <p class="amount income" id="monthly-income">$0.00</p>
+                <p class="change"><i class="fs fa-calendar-alt"></i> This month</p>
+              </div>
+              <div class="card">
+                <h3>Monthly Expenses</h3>
+                <p class="amount expense" id="monthlyExpenses">$0.00</p>
+                <p class="change"><i class="fas fa-calendar-alt"></i> This month</p>
+              </div>
+              <div class="card">
+                <h3>Savings Rate</h3>
+                <p class="amount" id="savings-rate">0%</p>
+                <p class="change"><i class="fas fa-percentage"></i> Of income</p>
+              </div>
+            </article>
+
+            <article class="chart-container">
+              <div class="chart-card">
+                <h3>Spending by Category</h3>
+                <canvas id="categoryChart"></canvas>
+              </div>
+              <div class="chart-card">
+                <h3>Monthly Overview</h3>
+                <canvas id="monthlyChart"></canvas>
+              </div>
+            </article>
+
+            <article class="recent-transactions">
+              <h3>Recent Transactions</h3>
+              <div class="transactions-list" id="recent-transactions">
+                <!-- Transactions will be added here dynamically -->
+              </div>
+            </article>
+          </section>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   addIcon.addEventListener('change', function () {
-    iconSelect.style.display = this.checked ? 'block' : 'none';
+    iconSelect.style.display = this.checked ? 'flex' : 'none';
     updateButton();
   });
 
