@@ -136,6 +136,48 @@ document.addEventListener('DOMContentLoaded', function () {
     transactionForm.addEventListener('submit', handleTransactionSubmit);
     categoryForm.addEventListener('submit', handleCategorySubmit);
     goalForm.addEventListener('submit', handleGoalSubmit);
+
+    // Report period navigation
+    document.getElementById('prev-month').addEventListener('click', () => {
+      if (state.currentMonth === 0) {
+        state.currentMonth = 11;
+        state.currentYear--;
+      } else {
+        state.currentMonth--;
+      }
+      setCurrentMonthYear();
+      renderCharts();
+    });
+
+    document.getElementById('next-month').addEventListener('click', () => {
+      if (state.currentMonth === 11) {
+        state.currentMonth = 0;
+        state.currentYear++;
+      } else {
+        state.currentMonth++;
+      }
+      setCurrentMonthYear();
+      renderCharts();
+    });
+
+    // Filter changes
+    document.getElementById('transaction-type').addEventListener('change,', renderTransactionsTable);
+    document.getElementById('transaction-category').addEventListener('change,', renderTransactionsTable);
+    document.getElementById('transaction-month').addEventListener('change,', renderTransactionsTable);
+  }
+
+  // Toggle between light and dark themes
+  function toggleTheme() {
+    const body = document.body;
+    if (body.getAttribute('data-theme') === 'dark') {
+      body.removeAttribute('data-theme');
+      themeToggle.classList.remove('fa-sun');
+      themeToggle.classList.add('fa-moon');
+    } else {
+      body.setAttribute('data-theme', 'dark');
+      themeToggle.classList.remove('fa-moon');
+      themeToggle.classList.add('fa-sun');
+    }
   }
 
   // Initialize the app

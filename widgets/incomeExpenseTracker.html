@@ -88,7 +88,7 @@
             </article>
           </section>
 
-          <section class="content-section active" id="transactions">
+          <section class="content-section" id="transactions">
             <div class="section-header">
               <h2>Transactions</h2>
               <button class="btn btn-primary" id="add-transaction">
@@ -138,8 +138,75 @@
               </table>
             </div>
           </section>
+
+          <section class="content-section" id="budgets">
+            <div class="section-header">
+              <h2>Budget Categories</h2>
+              <button class="btn btn-primary" id="add-category">
+                <i class="fas fa-plus"></i> Add Category
+              </button>
+            </div>
+
+            <div class="budget-categories">
+              <div class="budget-grid" id="budget-categories">
+                <!-- Budget categories will be added here dynamically -->
+              </div>
+            </div>
+          </section>
+
+          <section class="content-section" id="reports">
+            <div class="section-header">
+              <h2>Reports</h2>
+              <div class="report-period">
+                <button id="prev-month"><i class="fas fa-chevron-left"></i></button>
+                <span id="current-month">June 2026</span>
+                <button id="next-month"><i class="fas fa-chevron-right"></i></button>
+              </div>
+            </div>
+
+            <div class="report-charts">
+              <div class="chart-card large">
+                <h3>Income vs Expenses</h3>
+                <canvas id="incomeExpenseChart"></canvas>
+              </div>
+              <div class="chart-card large">
+                <h3>Spending Trends</h3>
+                <canvas id="trendsChart"></canvas>
+              </div>
+            </div>
+
+            <div class="report-details">
+              <div class="detail-card">
+                <h3>Top Expenses</h3>
+                <ul id="top-expenses">
+                  <!-- Top expenses will be added here dynamically -->
+                </ul>
+              </div>
+              <div class="detail-card">
+                <h3>Category Breakdown</h3>
+                <ul id="category-breakdown">
+                  <!-- Category breakdown will be added here dynamically -->
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section class="content-section active">
+            <div class="section-header">
+              <h2>Savings Goals</h2>
+              <button class="btn btn-primary" id="add-goal"><i class="fas fa-plus"></i> Add Goal</button>
+            </div>
+
+            <div class="goals-container">
+              <div class="goals-list" id="savings-goals">
+                <!-- Savings goals will be added here dynamically -->
+              </div>
+            </div>
+          </section>
         </main>
       </div>
     </div>
+
+    <script src="/widgets_script/incomeExpenseTracker.js"></script>
   </body>
 </html>
