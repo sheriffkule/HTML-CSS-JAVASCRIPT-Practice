@@ -45,7 +45,7 @@
         </aside>
 
         <main class="main-content">
-          <section class="content-section" id="dashboard">
+          <section class="content-section active" id="dashboard">
             <article class="summary-cards">
               <div class="card">
                 <h3>Total Balance</h3>
@@ -191,7 +191,7 @@
             </div>
           </section>
 
-          <section class="content-section active">
+          <section class="content-section">
             <div class="section-header">
               <h2>Savings Goals</h2>
               <button class="btn btn-primary" id="add-goal"><i class="fas fa-plus"></i> Add Goal</button>
@@ -207,6 +207,41 @@
       </div>
     </div>
 
-    <script src="/widgets_script/incomeExpenseTracker.js"></script>
+    <div class="modal active" id="transaction-modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Add Transaction</h2>
+        <form id="transaction-form">
+          <div class="form-group">
+            <label for="trans-type">Type</label>
+            <select id="trans-type">
+              <option value="">Select Type</option>
+              <option value="income">Income</option>
+              <option value="expense">Expense</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="trans-amount">Amount</label>
+            <input type="number" id="trans-amount" min="0.01" step="0.01" required />
+          </div>
+          <div class="form-group">
+            <label for="trans-description">Description</label>
+            <input type="text" id="trans-description" required />
+          </div>
+          <div class="form-group">
+            <label for="trans-category">Category</label>
+            <select id="trans-category">
+              <!-- Categories will be added dynamically -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="trans-date">Date</label>
+            <input type="date" id="trans-date" required />
+          </div>
+          <button type="submit" class="btn btn-primary">Save Transaction</button>
+        </form>
+      </div>
+    </div>
+    <!-- <script src="/widgets_script/incomeExpenseTracker.js"></script> -->
   </body>
 </html>

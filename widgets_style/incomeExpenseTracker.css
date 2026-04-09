@@ -555,3 +555,195 @@ body {
         color: var(--primary);
     }
 }
+
+.goals-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.goal-card {
+    background-color: var(--light);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+    position: relative;
+}
+
+.goal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.goal-title h3 {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.goal-title p {
+    font-size: 12px;
+    color: var(--gray);
+}
+
+.goal-progress {
+    height: 8px;
+    background-color: var(--light-gray);
+    border-radius: 4px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.goal-progress-bar {
+    height: 100%;
+    background-color: var(--success);
+    border-radius: 4px;
+}
+
+.goal-details {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.goal-amount {
+    font-weight: 600;
+}
+
+.goal-date {
+    color: var(--gray);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0 0 0 / 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(7px);
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background-color: var(--light);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgb(0 0 0 / 0.3);
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--gray);
+
+    &:hover {
+        color: var(--danger);
+        scale: 1.1;
+    }
+}
+
+.modal h2 {
+    margin-bottom: 20px;
+    color: var(--primary);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.form-group :is(input, select) {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--light-gray);
+    background-color: var(--light);
+    color: var(--dark);
+    font-family: 'Poppins', sans-serif;
+    transition: var(--transition);
+}
+
+.form-group :is(input, select):is(:focus, :focus-within) {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px (67 97 238 / 0.2),
+    inset 0 0 0 2px (67 97 238 / 0.2);
+}
+
+select:is(:focus, :focus-within) {
+    background-color: var(--primary);
+    color: var(--light);
+}
+
+select:is(:focus, :focus-within)::picker-icon {
+    color: var(--success);
+}
+
+select,
+::picker(select) {
+  appearance: base-select;
+}
+
+::picker(select) {
+  border-radius: var(--border-radius);
+  border: none;
+}
+
+select::picker-icon {
+  color: var(--primary);
+  transition: 0.3s rotate;
+}
+
+select:open::picker-icon {
+  rotate: 180deg;
+  color: var(--success);
+}
+
+select:not():open {
+    background-color: var(--light);
+}
+
+option {
+  border: 1px solid #bbb;
+  background: var(--secondary);
+  padding: 2px 0 2px 12px;
+  color: white;
+  transition: 0.3s;
+}
+
+option:hover,
+option:focus {
+  background: var(--primary);
+}
+
+option:checked {
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: var(--success);
+}
+
+option::checkmark {
+  color: var(--success);
+  font-size: 1.5rem;
+}

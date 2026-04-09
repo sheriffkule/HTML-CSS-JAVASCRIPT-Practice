@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Save data to localStorage
   function saveDate() {
     // Convert Date objects to strings for storage
-    const transactionsWithStringDates = state.transactions.map((trns) => ({
+    const transactionsWithStringDates = state.transactions.map((trans) => ({
       ...trans,
       date: trans.date.toISOString(),
     }));
@@ -179,6 +179,54 @@ document.addEventListener('DOMContentLoaded', function () {
       themeToggle.classList.add('fa-sun');
     }
   }
+
+  // Open modal
+  function openModal(type) {
+    closeModal(); // Close any open modals first
+
+    if (type === 'transaction') {
+      prepareTransactionModal();
+      transactionModal.classList.add('active');
+    } else if (type === 'category') {
+      prepareCategoryModal();
+      categoryModal.classList.add('active');
+    } else if (type === 'goal') {
+      prepareGoalModal();
+      goalModal.classList.add('active');
+    }
+  }
+
+  // Close modal
+  function closeModal() {
+    document.querySelectorAll('.modal').forEach((modal) => modal.classList.remove('active'));
+  }
+
+  // Prepare transaction modal for adding or editing
+  function prepareTransactionModal() {
+    // Set today's date as default
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('trans-date').value = today;
+
+    // Populate category dropdown
+    const categorySelect = document.getElementById('trans-category');
+    categorySelect.innerHTML = '';
+
+    state.categories.forEach((category) => {
+      const option = document.createElement('option');
+      option.value = category.id;
+      option.textContent = category.name;
+      categorySelect.appendChild(option);
+    });
+  }
+
+  // Prepare category modal for adding or editing
+  function prepareCategoryModal() {
+    document.getElementById('category-name').value = '';
+    document.getElementById('category-budget').value = '';
+    document.getElementById('category-icon').value = 'fa-utensils';
+  }
+
+    // Prepare goal modal for adding or editing
 
   // Initialize the app
   init();
