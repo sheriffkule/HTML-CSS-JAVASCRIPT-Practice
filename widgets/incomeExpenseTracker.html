@@ -38,7 +38,7 @@
           </nav>
 
           <div class="sidebar-footer">
-            <button class="btn-secondary" id="export-data">
+            <button class="btn btn-secondary" id="export-data">
               <i class="fas fa-file-export"></i> Export Data
             </button>
           </div>
@@ -86,6 +86,57 @@
                 <!-- Transactions will be added here dynamically -->
               </div>
             </article>
+          </section>
+
+          <section class="content-section active" id="transactions">
+            <div class="section-header">
+              <h2>Transactions</h2>
+              <button class="btn btn-primary" id="add-transaction">
+                <i class="fas fa-plus"></i> Add Transaction
+              </button>
+            </div>
+
+            <div class="filters">
+              <div class="filter-group">
+                <label for="transaction-type">Type</label>
+                <select id="transaction-type">
+                  <option value="all">All</option>
+                  <option value="income">Income</option>
+                  <option value="expense">Expense</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label for="transaction-category">Category</label>
+                <select id="transaction-category">
+                  <option value="all">All Categories</option>
+                  <!-- Categories will be added dynamically -->
+                </select>
+              </div>
+              <div class="filter-group">
+                <label for="transaction-month">Month</label>
+                <select id="transaction-month">
+                  <option value="all">All Months</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="transaction-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="transactions-list">
+                  <!-- Transactions will be added here dynamically -->
+                </tbody>
+              </table>
+            </div>
           </section>
         </main>
       </div>
