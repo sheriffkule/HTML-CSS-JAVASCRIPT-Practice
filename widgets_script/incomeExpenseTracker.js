@@ -1,7 +1,52 @@
 document.addEventListener('DOMContentLoaded', function () {
+      // Export data functionality
+      const exportDataBtn = document.getElementById('export-data');
+      if (exportDataBtn) {
+        exportDataBtn.addEventListener('click', function () {
+          // Prepare data for export (use the current state, but convert Dates to ISO strings)
+          const exportState = {
+            ...state,
+            transactions: state.transactions.map((trans) => ({
+              ...trans,
+              date: trans.date instanceof Date ? trans.date.toISOString() : trans.date,
+            })),
+            goals: state.goals.map((goal) => ({
+              ...goal,
+              targetDate: goal.targetDate instanceof Date ? goal.targetDate.toISOString() : goal.targetDate,
+            })),
+          };
+          const dataStr = JSON.stringify(exportState, null, 2);
+          const blob = new Blob([dataStr], { type: 'text/plain' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'income-expense-data.txt';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        });
+      }
+    // Restore theme from localStorage (after themeToggle is defined)
+    setTimeout(() => {
+      const savedTheme = localStorage.getItem('data-theme');
+      if (savedTheme === 'dark') {
+        document.body.setAttribute('data-theme', 'dark');
+        if (themeToggle) {
+          themeToggle.classList.remove('fa-moon');
+          themeToggle.classList.add('fa-sun');
+        }
+      } else {
+        document.body.removeAttribute('data-theme');
+        if (themeToggle) {
+          themeToggle.classList.remove('fa-sun');
+          themeToggle.classList.add('fa-moon');
+        }
+      }
+    }, 0);
   // DOM Elements
   const themeToggle = document.getElementById('theme-icon');
-  const navItems = document.querySelectorAll('menu-nav li');
+  const navItems = document.querySelectorAll('.main-nav li');
   const contentSections = document.querySelectorAll('.content-section');
 
   // Modal elements
@@ -41,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function init() {
     loadData();
     setupEventListeners();
-    renderDashboard();
+    // renderDashboard();
     renderCategories();
     updateSummaryCards();
     renderRecentTransactions();
@@ -66,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Save data to localStorage
-  function saveDate() {
+  function saveData() {
     // Convert Date objects to strings for storage
     const transactionsWithStringDates = state.transactions.map((trans) => ({
       ...trans,
@@ -75,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const goalsWithStringDates = state.goals.map((goal) => ({
       ...goal,
-      date: goal.targetDate.toISOString(),
+      targetDate: (goal.targetDate instanceof Date ? goal.targetDate : new Date(goal.targetDate)).toISOString(),
     }));
 
     const stateToSave = {
@@ -100,7 +145,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const section = item.getAttribute('data-section');
         contentSections.forEach((sec) => sec.classList.remove('active'));
-        document.getElementById(section).classList.add('active');
+        const sectionEl = document.getElementById(section);
+        if (sectionEl) {
+          sectionEl.classList.add('active');
+        }
 
         // Render specific content when section changes
         if (section === 'transactions') {
@@ -161,23 +209,28 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Filter changes
-    document.getElementById('transaction-type').addEventListener('change,', renderTransactionsTable);
-    document.getElementById('transaction-category').addEventListener('change,', renderTransactionsTable);
-    document.getElementById('transaction-month').addEventListener('change,', renderTransactionsTable);
+    document.getElementById('transaction-type').addEventListener('change', renderTransactionsTable);
+    document.getElementById('transaction-category').addEventListener('change', renderTransactionsTable);
+    document.getElementById('transaction-month').addEventListener('change', renderTransactionsTable);
   }
 
   // Toggle between light and dark themes
   function toggleTheme() {
     const body = document.body;
-    if (body.getAttribute('data-theme') === 'dark') {
+    const currentTheme = body.getAttribute('data-theme');
+    if (currentTheme === 'dark') {
       body.removeAttribute('data-theme');
       themeToggle.classList.remove('fa-sun');
       themeToggle.classList.add('fa-moon');
+      localStorage.setItem('data-theme', 'light');
     } else {
       body.setAttribute('data-theme', 'dark');
       themeToggle.classList.remove('fa-moon');
       themeToggle.classList.add('fa-sun');
+      localStorage.setItem('data-theme', 'dark');
     }
+    // Set theme from localStorage if present
+    // No need to re-read and re-apply theme here; handled above and on load
   }
 
   // Open modal
@@ -272,7 +325,7 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     state.transactions.push(newTransaction);
-    saveDate();
+    saveData();
 
     // Update UI
     closeModal();
@@ -311,7 +364,7 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     state.categories.push(newCategory);
-    saveDate();
+    saveData();
 
     // Update UI
     closeModal();
@@ -356,11 +409,11 @@ document.addEventListener('DOMContentLoaded', function () {
       name,
       target,
       saved,
-      date,
+      targetDate: date,
     };
 
     state.goals.push(newGoal);
-    saveDate();
+    saveData();
 
     // Update UI
     closeModal();
@@ -396,7 +449,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Update DOM
     document.getElementById('total-balance').textContent = `$${balance.toFixed(2)}`;
     document.getElementById('monthly-income').textContent = `$${income.toFixed(2)}`;
-    document.getElementById('monthly-income').textContent = `$${expenses.toFixed(2)}`;
+    document.getElementById('monthly-expenses').textContent = `$${expenses.toFixed(2)}`;
     document.getElementById('savings-rate').textContent = `${savingsRate}%`;
 
     // Update change indicator
@@ -525,9 +578,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
       row.innerHTML = `
         <td>${formatDate(trans.date)}</td>
-        <td>${formatDate(trans.description)}</td>
+        <td>${trans.description}</td>
         <td>
-          <i class="fas ${trans.icon} || 'fa-money-bill-wave"></i>
+          <i class="fas ${trans.icon || 'fa-money-bill-wave'}></i>
           ${category?.name || trans.category}
         </td>
         <td>
@@ -599,7 +652,7 @@ document.addEventListener('DOMContentLoaded', function () {
         transaction.icon = category.icon;
       }
 
-      saveDate();
+      saveData();
 
       // Update UI
       closeModal();
@@ -619,7 +672,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function deleteTransaction(id) {
     if (confirm('Are you sure you want to delete this transaction?')) {
       state.transactions = state.transactions.filter((trans) => trans.id !== id);
-      saveDate();
+      saveData();
 
       // Update UI
       updateSummaryCards();
@@ -682,7 +735,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="budget-amount">Spent: ${spent.toFixed(2)} / Remaining: $${remaining.toFixed(2)}</div>
         <div class="budget-progress">
           <div
-            class="progress-bar"
+            class="budget-progress-bar"
             style="width: ${percent}%; background-color: ${category.color || '#4361ee'}"></div>
         </div>
         <div class="budget-stats">
@@ -707,7 +760,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     state.goals.forEach((goal) => {
       const percent = (goal.saved / goal.target) * 100;
-      const daysLeft = Math.ceil((goal.date - new Date()) / (1000 * 60 * 60 * 24));
+      const daysLeft = Math.ceil((goal.targetDate - new Date()) / (1000 * 60 * 60 * 24));
 
       const goalEl = document.createElement('div');
       goalEl.className = 'goal-card';
@@ -721,11 +774,11 @@ document.addEventListener('DOMContentLoaded', function () {
           <span>${daysLeft > 0 ? `${daysLeft} days left` : 'Completed'}</span>
         </div>
         <div class="goal-progress">
-          <div class="goal-progress-bar" style="width: ${Math.min(percentage, 100)}"></div>
+          <div class="goal-progress-bar" style="width: ${Math.min(percent, 100)}%"></div>
         </div>
         <div class="goal-details">
           <span class="goal-amount">Saved: $${goal.saved.toFixed(2)} (${percent.toFixed(1)}%)</span>
-          <span class="goal-date">${formatDate(goal.date)}</span>
+          <span class="goal-date">${formatDate(goal.targetDate)}</span>
         </div>
       `;
 
@@ -781,7 +834,8 @@ document.addEventListener('DOMContentLoaded', function () {
     categoryChart = new Chart(ctx, {
       type: 'doughnut',
       data: {
-        labels: [
+        label: labels,
+        datasets: [
           {
             data: data,
             backgroundColors: backgroundColors,
@@ -800,8 +854,8 @@ document.addEventListener('DOMContentLoaded', function () {
               label: function (context) {
                 const label = context.label || '';
                 const value = context.raw || 0;
-                const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                const percentage = Math.round((value / total) * 100);
+                const total = Array.isArray(context.dataset.data) ? context.dataset.data.reduce((a, b) => a + b, 0) : 0;
+                const percentage = total > 0 ? Math.round((value / total) * 100) : 0;
                 return `${label}: $${value.toFixed(2)} (${percentage}%)`;
               },
             },
@@ -861,7 +915,7 @@ document.addEventListener('DOMContentLoaded', function () {
       type: 'bar',
       data: {
         labels: labels,
-        dataset: [
+        datasets: [
           {
             label: 'Income',
             data: incomeData,
@@ -889,7 +943,7 @@ document.addEventListener('DOMContentLoaded', function () {
           tooltip: {
             callbacks: {
               label: function (context) {
-                const label = context.dataset.label || '';
+                const label = context.datasets.label || '';
                 const value = context.raw || 0;
                 return `${label}: $${value.toFixed(2)}`;
               },
@@ -946,8 +1000,8 @@ document.addEventListener('DOMContentLoaded', function () {
               label: function (context) {
                 const label = context.label || '';
                 const value = context.raw || 0;
-                const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                const percentage = Math.round((value / total) * 100);
+                const total = Array.isArray(context.dataset.data) ? context.dataset.data.reduce((a, b) => a + b, 0) : 0;
+                const percentage = total > 0 ? Math.round((value / total) * 100) : 0;
                 return `${label}: $${value.toFixed(2)} (${percentage}%)`;
               },
             },
@@ -962,11 +1016,230 @@ document.addEventListener('DOMContentLoaded', function () {
     const ctx = document.getElementById('trendsChart').getContext('2d');
 
     // Calculate monthly trends for the past 12 months
-    const monthlyTrends = Array(12).fill().map((_, i) => {
-      const date = new Date(state.currentYear, state.currentMonth - i, 1);
-      const month = date.getMonth();
-      const year = date.getFullYear();
-    })
+    const monthlyTrends = Array(12)
+      .fill()
+      .map((_, i) => {
+        const date = new Date(state.currentYear, state.currentMonth - i, 1);
+        const month = date.getMonth();
+        const year = date.getFullYear();
+
+        const monthTransactions = state.transactions.filter((trans) => {
+          return trans.date.getMonth() === month && trans.date.getFullYear() === year;
+        });
+
+        const income = monthTransactions
+          .filter((trans) => trans.type === 'income')
+          .reduce((sum, trans) => sum + trans.amount, 0);
+
+        const expenses = monthTransactions
+          .filter((trans) => trans.type === 'expense')
+          .reduce((sum, trans) => sum + trans.amount, 0);
+
+        return {
+          month,
+          year,
+          income,
+          expenses,
+          balance: income - expenses,
+          label: `${getMonthName(month)} ${year.toString().slice(2)}`,
+        };
+      })
+      .reverse();
+
+    // Prepare data for chart
+    const labels = monthlyTrends.map((data) => data.label);
+    const incomeData = monthlyTrends.map((data) => data.income);
+    const expenseData = monthlyTrends.map((data) => data.expenses);
+    const balanceData = monthlyTrends.map((data) => data.balance);
+
+    // Destroy previous chart if exists
+    if (trendsChart) {
+      trendsChart.destroy();
+    }
+
+    trendsChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Income',
+            data: incomeData,
+            backgroundColor: 'rgba(76, 201, 240, 0.2)',
+            borderColor: '#4cc9f0',
+            borderWidth: 2,
+            tension: 0.3,
+          },
+          {
+            label: 'Expenses',
+            data: expenseData,
+            backgroundColor: 'rgba(249, 65, 68, 0.2)',
+            borderColor: '#f94144',
+            borderWidth: 2,
+            tension: 0.3,
+          },
+          {
+            label: 'Balance',
+            data: balanceData,
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: '#4bc0c0',
+            borderWidth: 2,
+            tension: 0.3,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const label = context.datasets.label || '';
+                const value = context.raw || 0;
+                return `${label}: $${value.toFixed(2)}`;
+              },
+            },
+          },
+        },
+      },
+    });
+  }
+
+  // Render top expenses for reports
+  function renderTopExpenses() {
+    const container = document.getElementById('top-expenses');
+    container.innerHTML = '';
+
+    // Filter transactions for selected month/year
+    const monthExpenses = state.transactions.filter((trans) => {
+      return (
+        trans.type === 'expense' &&
+        trans.date.getMonth() === state.currentMonth &&
+        trans.date.getFullYear() === state.currentYear
+      );
+    });
+
+    // Sort by amount (descending)
+    const sortedExpenses = [...monthExpenses].sort((a, b) => b.amount - a.amount);
+
+    // Get top 5 expenses
+    const topExpenses = sortedExpenses.slice(0, 5);
+
+    if (topExpenses.length === 0) {
+      container.innerHTML = '<li">No expenses for this month.</li>';
+      return;
+    }
+
+    topExpenses.forEach((expense) => {
+      const li = document.createElement('li');
+      const category = state.categories.find((cat) => cat.id === expense.categoryId);
+
+      li.innerHTML = `
+        <span>
+          <i class="fas ${expense.icon || 'fa-money-bill-wave'}"></i>
+        </span>
+        <span class="expense">$${expense.amount.toFixed(2)}</span>
+      `;
+
+      container.appendChild(li);
+    });
+  }
+
+  // Render category breakdown for reports
+  function renderCategoryBreakdown() {
+    const container = document.getElementById('category-breakdown');
+    container.innerHTML = '';
+
+    // Filter transactions for selected month/year
+    const monthExpenses = state.transactions.filter((trans) => {
+      return (
+        trans.type === 'expense' &&
+        trans.date.getMonth() === state.currentMonth &&
+        trans.date.getFullYear() === state.currentYear
+      );
+    });
+
+    // Calculate total expenses
+    const totalExpenses = monthExpenses.reduce((sum, trans) => sum + trans.amount, 0);
+
+    // Group by category
+    const categoryTotals = {};
+    monthExpenses.forEach((trans) => {
+      if (!categoryTotals[trans.categoryId]) {
+        categoryTotals[trans.categoryId] = 0;
+      }
+      categoryTotals[trans.categoryId] += trans.amount;
+    });
+
+    // Convert to array and sort by amount (descending)
+    const categoryArray = Object.entries(categoryTotals)
+      .map(([categoryId, amount]) => {
+        const category = state.categories.find((cat) => cat.id === parseInt(categoryId));
+        return {
+          name: category?.name || 'Unknown',
+          amount,
+          percentage: totalExpenses > 0 ? (amount / totalExpenses) * 100 : 0,
+          color: category?.color || '#4361ee',
+        };
+      })
+      .sort((a, b) => b.amount - a.amount);
+
+    if (categoryArray.length === 0) {
+      container.innerHTML = '<li>No expenses this month.</li>';
+      return;
+    }
+
+    categoryArray.forEach((category) => {
+      const li = document.createElement('li');
+
+      li.innerHTML = `
+        <span>
+          <span class="color-indicator" style="background-color: ${category.color}"></span>
+        </span>
+        <span>${category.percentage.toFixed(1)}% (${category.amount.toFixed(2)})</span>
+      `;
+
+      container.appendChild(li);
+    });
+  }
+
+  // Set current month/year for reports
+  function setCurrentMonthYear() {
+    const monthName = getMonthName(state.currentMonth);
+    document.getElementById('current-month').textContent = `${monthName} ${state.currentYear}`;
+  }
+
+  // Helper function to format data
+  function formatDate(date) {
+    return new Date(date).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    });
+  }
+
+  // Helper function to get month name
+  function getMonthName(monthIndex) {
+    const months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ];
+    return months[monthIndex];
   }
 
   // Initialize the app

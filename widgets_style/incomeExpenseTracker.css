@@ -17,7 +17,7 @@
     --transition: all 0.3s ease;
 }
 
-[dark-theme="dark"] {
+body[data-theme="dark"] {
     --primary: #4895ef;
     --primary-light: #4361ee;
     --secondary: #3a0ca3;
