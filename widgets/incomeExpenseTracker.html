@@ -207,7 +207,7 @@
       </div>
     </div>
 
-    <div class="modal active" id="transaction-modal">
+    <div class="modal" id="transaction-modal">
       <div class="modal-content">
         <span class="close-modal">&times;</span>
         <h2>Add Transaction</h2>
@@ -242,6 +242,67 @@
         </form>
       </div>
     </div>
-    <!-- <script src="/widgets_script/incomeExpenseTracker.js"></script> -->
+
+    <div class="modal" id="category-modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Add Budget Category</h2>
+        <form id="category-form">
+          <div class="form-group">
+            <label for="category-name">Category Name</label>
+            <input type="text" id="category-name" required />
+          </div>
+          <div class="form-group">
+            <label for="category-budget">Monthly Budget ($)</label>
+            <input type="number" id="category-budget" min="0" step="0.01" required />
+          </div>
+          <div class="form-group">
+            <label for="category-icon">Icon</label>
+            <select id="category-icon">
+              <option value="fa-utensils">Food</option>
+              <option value="fa-home">Housing</option>
+              <option value="fa-car">Transport</option>
+              <option value="fa-shopping-cart">Shopping</option>
+              <option value="fa-heart">Health</option>
+              <option value="fa-film">Entertainment</option>
+              <option value="fa-graduation-cap">Education</option>
+              <option value="fa-money-bill-wave">Income</option>
+              <option value="fa-piggy-bank">Savings</option>
+              <option value="fa-fa-ellipsis-h">Other</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Save Category</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal active" id="goal-modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Add Savings Goal</h2>
+        <form id="goal-form">
+          <div class="form-group">
+            <label for="goal-name">Goal Name</label>
+            <input type="text" id="goal-name" required />
+          </div>
+          <div class="form-group">
+            <label for="goal-target">Target Amount ($)</label>
+            <input type="number" id="goal-target" min="0.01" step="0.01" required />
+          </div>
+          <div class="form-group">
+            <label for="goal-saved">Amount Saved ($)</label>
+            <input type="number" id="goal-saved" min="0" step="0.01" required />
+          </div>
+          <div class="form-group">
+            <label for="goal-date">Target Date</label>
+            <input type="date" id="goal-date" required />
+          </div>
+          <button type="submit" class="btn btn-primary">Save Goal</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/widgets_script/incomeExpenseTracker.js"></script>
   </body>
 </html>

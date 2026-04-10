@@ -226,7 +226,149 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('category-icon').value = 'fa-utensils';
   }
 
-    // Prepare goal modal for adding or editing
+  // Prepare goal modal for adding or editing
+  function prepareGoalModal() {
+    const today = new Date();
+    const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, 1);
+    const nextMonthFormatted = nextMonth.toISOString().split('T')[0];
+
+    document.getElementById('goal-name').value = '';
+    document.getElementById('goal-target').value = '';
+    document.getElementById('goal-saved').value = '0';
+    document.getElementById('goal-date').value = nextMonthFormatted;
+  }
+
+  // Handle transaction form submission
+  function handleTransactionSubmit(e) {
+    e.preventDefault();
+
+    const type = document.getElementById('trans-type').value;
+    const amount = parseFloat(document.getElementById('trans-amount').value);
+    const description = document.getElementById('trans-description').value;
+    const categoryId = parseInt(document.getElementById('trans-category').value);
+    const date = new Date(document.getElementById('trans-date').value);
+
+    const category = state.categories.find((cat) => cat.id === categoryId);
+
+    if (isNaN(amount) || amount <= 0) {
+      alert('Please enter a valid amount.');
+      return;
+    }
+
+    if (date < new Date()) {
+      alert('Please select a future date for the goal.');
+      return;
+    }
+
+    const newTransaction = {
+      id: Date.now(),
+      type,
+      amount,
+      description,
+      category: category.name,
+      categoryId,
+      date,
+      icon: category.icon,
+    };
+
+    state.transactions.push(newTransaction);
+    saveDate();
+
+    // Update UI
+    closeModal();
+    updateSummaryCards();
+    renderRecentTransactions();
+    renderTransactionsTable();
+    renderCharts();
+
+    // Reset form
+    transactionForm.reset();
+  }
+
+  // Handle category form submission
+  function handleCategorySubmit(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('category-name').value;
+    const budget = parseFloat(document.getElementById('category-budget').value);
+    const icon = document.getElementById('category-icon').value;
+
+    // Generate a random color for the category
+    const colors = ['#FF6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff', '#00cc99', '#ff9f40'];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+
+    if (!name) {
+      alert('Please enter a category name.');
+      return;
+    }
+
+    const newCategory = {
+      id: Date.now(),
+      name,
+      budget: isNaN(budget) ? 0 : budget,
+      icon,
+      color,
+    };
+
+    state.categories.push(newCategory);
+    saveDate();
+
+    // Update UI
+    closeModal();
+    renderCategories();
+    renderCharts();
+
+    // Reset form
+    categoryForm.reset();
+  }
+
+  // Handle goal form submission
+  function handleGoalSubmit(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('goal-name').value;
+    const target = parseFloat(document.getElementById('goal-target').value);
+    const saved = parseFloat(document.getElementById('goal-saved').value);
+    const date = new Date(document.getElementById('goal-date').value);
+
+    if (!name) {
+      alert('Please enter a goal name.');
+      return;
+    }
+
+    if (isNaN(target) || target <= 0) {
+      alert('Please enter a valid target amount.');
+      return;
+    }
+
+    if (isNaN(saved) || saved < 0) {
+      alert('Please enter a valid saved amount.');
+      return;
+    }
+
+    if (date < new Date()) {
+      alert('Please select a future date for the goal.');
+      return;
+    }
+
+    const newGoal = {
+      id: Date.now(),
+      name,
+      target,
+      saved,
+      date,
+    };
+
+    state.goals.push(newGoal);
+    saveDate();
+
+    // Update UI
+    closeModal();
+    renderGoals();
+
+    // Reset form
+    goalForm.reset();
+  }
 
   // Initialize the app
   init();

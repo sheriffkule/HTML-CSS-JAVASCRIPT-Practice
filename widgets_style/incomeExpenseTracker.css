@@ -747,3 +747,33 @@ option::checkmark {
   color: var(--success);
   font-size: 1.5rem;
 }
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    transition: var(--transition);
+}
+
+.edit-btn {
+    color: var(--primary);
+
+    &:hover {
+        color: var(--secondary);
+    }
+}
+
+.delete-btn {
+    color: var(--danger);
+
+    &:hover {
+        color: #d32f2f;
+    }
+}
