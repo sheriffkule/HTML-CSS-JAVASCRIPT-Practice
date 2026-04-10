@@ -370,6 +370,186 @@ document.addEventListener('DOMContentLoaded', function () {
     goalForm.reset();
   }
 
+  // Update summary card
+  function updateSummaryCards() {
+    const now = new Date();
+    const currentMont = now.getMonth();
+    const currentYear = now.getFullYear();
+
+    // Filter transactions for current month
+    const monthlyTransactions = state.transactions.filter((trans) => {
+      return trans.date.getMonth() === currentMont && trans.date.getFullYear() === currentYear;
+    });
+
+    // Calculate totals
+    const income = monthlyTransactions
+      .filter((trans) => trans.type === 'income')
+      .reduce((sum, trans) => sum + trans.amount, 0);
+
+    const expenses = monthlyTransactions
+      .filter((trans) => trans.type === 'expense')
+      .reduce((sum, trans) => sum + trans.amount, 0);
+
+    const balance = income - expenses;
+    const savingsRate = income > 0 ? (((income - expenses) / income) * 100).toFixed(1) : 0;
+
+    // Update DOM
+    document.getElementById('total-balance').textContent = `$${balance.toFixed(2)}`;
+    document.getElementById('monthly-income').textContent = `$${income.toFixed(2)}`;
+    document.getElementById('monthly-income').textContent = `$${expenses.toFixed(2)}`;
+    document.getElementById('savings-rate').textContent = `${savingsRate}%`;
+
+    // Update change indicator
+    const changeElement = document.querySelector('#total-balance +  .change');
+    if (balance > 0) {
+      changeElement.classList.add('positive');
+      changeElement.classList.remove('negative');
+    } else if (balance < 0) {
+      changeElement.classList.add('negative');
+      changeElement.classList.remove('positive');
+    } else {
+      changeElement.classList.remove('positive', 'negative');
+    }
+  }
+
+  // Render recent transactions
+  function renderRecentTransactions() {
+    const container = document.getElementById('recent-transactions');
+    container.innerHTML = '';
+
+    // Get 5 most recent transactions
+    const recentTransactions = [...state.transactions].sort((a, b) => b.date - a.date).slice(0, 5);
+
+    if (recentTransactions.length === 0) {
+      container.innerHTML = '<p class="no-transactions">No transactions yet. Add your first transaction!</p>';
+      return;
+    }
+
+    recentTransactions.forEach((trans) => {
+      const transactionEl = document.createElement('div');
+      transactionEl.className = 'transaction-item';
+
+      const category = state.categories.find((cat) => cat.id === trans.categoryId);
+
+      transactionEl.innerHTML = `
+        <div class="transaction-info">
+          <div class="transaction-icon">
+            <i class="fas ${trans.icon || 'fa-money-bill-wave'}"></i>
+          </div>
+          <div class="transaction-details">
+            <h4>${trans.description}</h4>
+            <p>${category?.name || trans.category} • ${formatDate(trans.date)}</p>
+          </div>
+        </div>
+        <div class="transaction-amount ${trans.type}">
+          ${trans.type === 'income' ? '+' : '-'}$${trans.amount.toFixed(2)}
+        </div>
+      `;
+
+      container.appendChild(transactionEl);
+    });
+  }
+
+  // Render transaction table
+  function renderTransactionsTable() {
+    const container = document.getElementById('transactions-list');
+    container.innerHTML = '';
+
+    const typeFilter = document.getElementById('transaction-type').value;
+    const categoryFilter = document.getElementById('transaction-category').value;
+    const monthFilter = document.getElementById('transaction-month').value;
+
+    // Populate category filter
+    const categorySelect = document.getElementById('transaction-category');
+    if (categorySelect.options.length <= 1) {
+      state.categories.forEach((category) => {
+        const option = document.createElement('option');
+        option.value = category.id;
+        option.textContent = category.name;
+        categorySelect.appendChild(option);
+      });
+    }
+
+    // Populate month filter
+    const monthSelect = document.getElementById('transaction-month');
+    if (monthSelect.options.length <= 1) {
+      const months = [];
+      state.transactions.forEach((trans) => {
+        const monthYear = `${trans.date.getFullYear()}-${trans.date.getMonth()}`;
+        if (!months.includes(monthYear)) {
+          months.push(monthYear);
+
+          const option = document.createElement('option');
+          option.value = monthYear;
+          option.textContent = `${getMonthName(trans.date.getMonth())} ${trans.date.getFullYear()}`;
+          monthSelect.appendChild(option);
+        }
+      });
+    }
+
+    // Filter transactions
+    let filteredTransactions = [...state.transactions];
+
+    if (typeFilter !== 'all') {
+      filteredTransactions = filteredTransactions.filter((trans) => trans.type === typeFilter);
+    }
+
+    if (categoryFilter !== 'all') {
+      filteredTransactions = filteredTransactions.filter(
+        (trans) => trans.categoryId === parseInt(categoryFilter),
+      );
+    }
+
+    if (monthFilter !== 'all') {
+      const [year, month] = monthFilter.split('-').map(Number);
+      filteredTransactions = filteredTransactions.filter((trans) => {
+        return trans.date.getFullYear() === year && trans.date.getMonth() === month;
+      });
+    }
+
+    // Sort transactions by date
+    filteredTransactions.sort((a, b) => b.date - a.date);
+
+    if (filteredTransactions.length === 0) {
+      container.innerHTML = `
+        <tr>
+          <td colspan="6" class="no-transactions">No transactions found matching your filters.</td>
+        </tr>
+      `;
+      return;
+    }
+
+    filteredTransactions.forEach((trans) => {
+      const row = document.createElement('tr');
+      const category = state.categories.find((cat) => cat.id === trans.categoryId);
+
+      row.innerHTML = `
+        <td>${formatDate(trans.date)}</td>
+        <td>${formatDate(trans.description)}</td>
+        <td>
+          <i class="fas ${trans.icon} || 'fa-money-bill-wave"></i>
+          ${category?.name || trans.category}
+        </td>
+        <td>
+          <span class="badge ${trans.type === 'income' ? 'income' : 'expense'}">
+            ${trans.type === 'income' ? 'Income' : 'Expense'}
+          </span>
+        </td>
+        <td class="${trans.type === 'income' ? 'income' : 'expense'}">
+          ${trans.type === 'income' ? '+' : '-'}$${trans.amount.toFixed(2)}
+        </td>
+        <td class="action-buttons">
+          <button class="action-btn edit-btn" data-id="${trans.id}">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="action-btn delete-btn" data-id="${trans.id}">
+            <i class="fas fa-trash"></i>
+          </button>
+        </td>
+      `;
+    });
+  }
+
   // Initialize the app
   init();
 });
