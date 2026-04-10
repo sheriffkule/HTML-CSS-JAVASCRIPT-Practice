@@ -766,6 +766,207 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         categorySpending[trans.categoryId] += trans.amount;
       });
+
+    // Prepare data for chart
+    const categories = state.categories.filter((cat) => cat.name !== 'Income');
+    const labels = categories.map((cat) => cat.name);
+    const data = categories.map((cat) => categorySpending[cat.id] || 0);
+    const backgroundColors = categories.map((cat) => cat.color || '#4361ee');
+
+    // Destroy previous chart if exists
+    if (categoryChart) {
+      categoryChart.destroy();
+    }
+
+    categoryChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: [
+          {
+            data: data,
+            backgroundColors: backgroundColors,
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'right',
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const label = context.label || '';
+                const value = context.raw || 0;
+                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                const percentage = Math.round((value / total) * 100);
+                return `${label}: $${value.toFixed(2)} (${percentage}%)`;
+              },
+            },
+          },
+        },
+      },
+    });
+  }
+
+  // Render monthly chart
+  function renderMonthlyChart() {
+    const ctx = document.getElementById('monthlyChart').getContext('2d');
+
+    // Calculate income and expenses for each month
+    const monthlyData = {};
+
+    state.transactions.forEach((trans) => {
+      const monthYear = `${trans.date.getFullYear()}-${trans.date.getMonth()}`;
+
+      if (!monthlyData[monthYear]) {
+        monthlyData[monthYear] = {
+          income: 0,
+          expenses: 0,
+          month: trans.date.getMonth(),
+          year: trans.date.getFullYear(),
+        };
+      }
+      if (trans.type === 'income') {
+        monthlyData[monthYear].income += trans.amount;
+      } else {
+        monthlyData[monthYear].expenses += trans.amount;
+      }
+    });
+
+    // Sort by date (oldest first)
+    const sortedMonths = Object.values(monthlyData).sort((a, b) => {
+      if (a.year !== b.year) return a.month - b.month;
+      return a.month - b.month;
+    });
+
+    // Get last 6 months
+    const last6Months = sortedMonths.slice(-6);
+
+    // Prepare data for chart
+    const labels = last6Months.map(
+      (month) => `{getMonthName(month.month)} ${month.year.toString().slice(2)}`,
+    );
+    const incomeData = last6Months.map((month) => month.income);
+    const expenseData = last6Months.map((month) => month.expenses);
+
+    // Destroy previous chart if exists
+    if (monthlyChart) {
+      monthlyChart.destroy();
+    }
+
+    monthlyChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        dataset: [
+          {
+            label: 'Income',
+            data: incomeData,
+            backgroundColor: '#4cc9f0',
+            borderColor: '#4cc9f0',
+            borderWidth: 1,
+          },
+          {
+            label: 'Expenses',
+            data: expenseData,
+            backgroundColor: '#f94144',
+            borderColor: '#f94144',
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const label = context.dataset.label || '';
+                const value = context.raw || 0;
+                return `${label}: $${value.toFixed(2)}`;
+              },
+            },
+          },
+        },
+      },
+    });
+  }
+
+  // Render income vs expenses chart for reports
+  function renderIncomeExpenseChart() {
+    const ctx = document.getElementById('incomeExpenseChart').getContext('2d');
+
+    // Filter transactions for selected month/year
+    const monthTransactions = state.transactions.filter((trans) => {
+      return trans.date.getMonth() === state.currentMonth && trans.date.getFullYear() === state.currentYear;
+    });
+
+    // Calculate totals
+    const income = monthTransactions
+      .filter((trans) => trans.type === 'income')
+      .reduce((sum, trans) => sum + trans.amount, 0);
+
+    const expenses = monthTransactions
+      .filter((trans) => trans.type === 'expense')
+      .reduce((sum, trans) => sum + trans.amount, 0);
+
+    // Destroy previous chart if exists
+    if (incomeExpenseChart) {
+      incomeExpenseChart.destroy();
+    }
+
+    incomeExpenseChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['Income', 'Expenses'],
+        datasets: [
+          {
+            data: [income, expenses],
+            backgroundColor: ['#4cc9f0', '#f94144'],
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'right',
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const label = context.label || '';
+                const value = context.raw || 0;
+                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                const percentage = Math.round((value / total) * 100);
+                return `${label}: $${value.toFixed(2)} (${percentage}%)`;
+              },
+            },
+          },
+        },
+      },
+    });
+  }
+
+  // Render trends chart for reports
+  function renderTrendsChart() {
+    const ctx = document.getElementById('trendsChart').getContext('2d');
+
+    // Calculate monthly trends for the past 12 months
+    const monthlyTrends = Array(12).fill().map((_, i) => {
+      const date = new Date(state.currentYear, state.currentMonth - i, 1);
+      const month = date.getMonth();
+      const year = date.getFullYear();
+    })
   }
 
   // Initialize the app
