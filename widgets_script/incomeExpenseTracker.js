@@ -547,7 +547,225 @@ document.addEventListener('DOMContentLoaded', function () {
           </button>
         </td>
       `;
+
+      container.appendChild(row);
     });
+
+    // Add event listeners for edit and delete buttons
+    document.querySelectorAll('.edit-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const id = parseInt(btn.getAttribute('data-id'));
+        editTransaction(id);
+      });
+    });
+
+    document.querySelectorAll('.delete-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const id = parseInt(btn.getAttribute('data-id'));
+        deleteTransaction(id);
+      });
+    });
+  }
+
+  // Edit transaction
+  function editTransaction(id) {
+    const transaction = state.transactions.find((trans) => trans.id === id);
+    if (!transaction) return;
+
+    openModal('transaction');
+
+    // Populate form with transaction data
+    document.getElementById('trans-type').value = transaction.type;
+    document.getElementById('trans-amount').value = transaction.amount;
+    document.getElementById('trans-description').value = transaction.description;
+    document.getElementById('trans-category').value = transaction.categoryId;
+    document.getElementById('trans-date').value = transaction.date.toISOString().split('T')[0];
+
+    // Modify form submission to handle edit
+    transactionForm.removeEventListener('submit', handleTransactionSubmit);
+    transactionForm.addEventListener('submit', function handleEditSubmit(e) {
+      e.preventDefault();
+
+      // Update transaction with new values
+      transaction.type = document.getElementById('trans-type').value;
+      transaction.amount = parseFloat(document.getElementById('trans-amount').value);
+      transaction.description = document.getElementById('trans-description').value;
+      transaction.categoryId = parseInt(document.getElementById('trans-category').value);
+      transaction.date = new Date(document.getElementById('trans-date').value);
+
+      const category = state.categories.find((cat) => cat.id === transaction.categoryId);
+      if (category) {
+        transaction.category = category.name;
+        transaction.icon = category.icon;
+      }
+
+      saveDate();
+
+      // Update UI
+      closeModal();
+      updateSummaryCards();
+      renderRecentTransactions();
+      renderTransactionsTable();
+      renderCharts();
+
+      // Reset form and event listener
+      transactionForm.reset();
+      transactionForm.removeEventListener('submit', handleEditSubmit);
+      transactionForm.addEventListener('submit', handleTransactionSubmit);
+    });
+  }
+
+  // Delete transaction
+  function deleteTransaction(id) {
+    if (confirm('Are you sure you want to delete this transaction?')) {
+      state.transactions = state.transactions.filter((trans) => trans.id !== id);
+      saveDate();
+
+      // Update UI
+      updateSummaryCards();
+      renderRecentTransactions();
+      renderTransactionsTable();
+      renderCharts();
+    }
+  }
+
+  // Render budget categories
+  function renderCategories() {
+    const container = document.getElementById('budget-categories');
+    container.innerHTML = '';
+
+    if (state.categories.length === 0) {
+      container.innerHTML = '<p class="no-categories">No categories yet. Add your first category!</p>';
+      return;
+    }
+
+    // Calculate spent amounts per category
+    const now = new Date();
+    const currentMonth = now.getMonth();
+    const currentYear = now.getFullYear();
+
+    const categorySpending = {};
+    state.transactions
+      .filter(
+        (trans) =>
+          trans.type === 'expense' &&
+          trans.date.getMonth() === currentMonth &&
+          trans.date.getFullYear() === currentYear,
+      )
+      .forEach((trans) => {
+        if (!categorySpending[trans.categoryId]) {
+          categorySpending[trans.categoryId] = 0;
+        }
+        categorySpending[trans.categoryId] += trans.amount;
+      });
+
+    state.categories.forEach((category) => {
+      if (category.name === 'Income') return; // Skip income category
+
+      const spent = categorySpending[category.id] || 0;
+      const percent = category.budget > 0 ? Math.min((spent / category.budget) * 100, 100) : 0;
+      const remaining = category.budget - spent;
+
+      const categoryEl = document.createElement('div');
+      categoryEl.className = 'budget-category';
+
+      categoryEl.innerHTML = `
+        <div class="budget-category-header">
+          <div class="budget-icon" style="background-color: ${category.color || '#4361ee'}">
+            <i class="fas ${category.icon}"></i>
+          </div>
+          <div class="budget-title">
+            <h4>${category.name}</h4>
+            <p>Budget: $${category.budget.toFixed(2)}</p>
+          </div>
+        </div>
+        <div class="budget-amount">Spent: ${spent.toFixed(2)} / Remaining: $${remaining.toFixed(2)}</div>
+        <div class="budget-progress">
+          <div
+            class="progress-bar"
+            style="width: ${percent}%; background-color: ${category.color || '#4361ee'}"></div>
+        </div>
+        <div class="budget-stats">
+          <span>${percent.toFixed(0)}% of budget</span>
+          <span>${remaining.toFixed(2)} left</span>
+        </div>
+      `;
+
+      container.appendChild(categoryEl);
+    });
+  }
+
+  // Render savings goals
+  function renderGoals() {
+    const container = document.getElementById('savings-goals');
+    container.innerHTML = '';
+
+    if (state.goals.length === 0) {
+      container.innerHTML = '<p class="no-goals">No goals yet. Add your first savings goal!</p>';
+      return;
+    }
+
+    state.goals.forEach((goal) => {
+      const percent = (goal.saved / goal.target) * 100;
+      const daysLeft = Math.ceil((goal.date - new Date()) / (1000 * 60 * 60 * 24));
+
+      const goalEl = document.createElement('div');
+      goalEl.className = 'goal-card';
+
+      goalEl.innerHTML = `
+        <div class="goal-header">
+          <div class="goal-title">
+            <h3>${goal.name}</h3>
+            <p>Target: $${goal.target.toFixed(2)}</p>
+          </div>
+          <span>${daysLeft > 0 ? `${daysLeft} days left` : 'Completed'}</span>
+        </div>
+        <div class="goal-progress">
+          <div class="goal-progress-bar" style="width: ${Math.min(percentage, 100)}"></div>
+        </div>
+        <div class="goal-details">
+          <span class="goal-amount">Saved: $${goal.saved.toFixed(2)} (${percent.toFixed(1)}%)</span>
+          <span class="goal-date">${formatDate(goal.date)}</span>
+        </div>
+      `;
+
+      container.appendChild(goalEl);
+    });
+  }
+
+  // Render charts
+  function renderCharts() {
+    renderCategoryChart();
+    renderMonthlyChart();
+    renderIncomeExpenseChart();
+    renderTrendsChart();
+    renderTopExpenses();
+    renderCategoryBreakdown();
+  }
+
+  // Render category chart
+  function renderCategoryChart() {
+    const ctx = document.getElementById('categoryChart').getContext('2d');
+
+    // Calculate spending by category for current month
+    const now = new Date();
+    const currentMonth = now.getMonth();
+    const currentYear = now.getFullYear();
+
+    const categorySpending = {};
+    state.transactions
+      .filter(
+        (trans) =>
+          trans.type === 'expense' &&
+          trans.date.getMonth() === currentMonth &&
+          trans.date.getFullYear() === currentYear,
+      )
+      .forEach((trans) => {
+        if (!categorySpending[trans.categoryId]) {
+          categorySpending[trans.categoryId] = 0;
+        }
+        categorySpending[trans.categoryId] += trans.amount;
+      });
   }
 
   // Initialize the app
