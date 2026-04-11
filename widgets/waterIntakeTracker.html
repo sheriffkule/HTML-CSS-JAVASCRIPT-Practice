@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Water Intake Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/waterIntakeTracker.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <header class="app-header">
+        <div class="logo">
+          <i class="fas fa-tint"></i>
+          <h1>Water Intake Tracker</h1>
+        </div>
+        <button class="icon-btn" id="settings-btn" aria-label="settings"><i class="fas fa-cog"></i></button>
+      </header>
+
+      <main class="main-content">
+        <section class="water-display">
+          <div class="water-progress">
+            <div class="wave-container">
+              <div class="wave" id="water-wave"></div>
+            </div>
+            <div class="progress-info">
+              <span id="current-amount">0</span>
+              <span class="divider">/</span>
+              <span id="goal-amount">2000</span>
+              <span class="unit">ml</span>
+            </div>
+          </div>
+          <div class="percentage-circle">
+            <svg viewBox="0 0 36 36" class="circular-chart">
+              <path
+                class="circle-bg"
+                d="M18 2.0845
+                a 15.9155 15.9155 0 0 1 0 31.831
+                a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+              <path
+                id="percentage-circle"
+                class="circle-fill"
+                stroke-dasharray="0, 100"
+                d="M18 2.0845
+                a 15.9155 15.9155 0 0 1 0 31.831
+                a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+              <text x="18" y="20.5" class="percentage-text" id="percentage-text">0%</text>
+            </svg>
+          </div>
+        </section>
+
+        <section class="intake-controls">
+          <h2>Add Water Intake</h2>
+          <div class="quick-add-btns">
+            <button class="intake-btn" data-amount="250">250mx</button>
+            <button class="intake-btn" data-amount="500">500mx</button>
+            <button class="intake-btn" data-amount="750">750ml</button>
+            <button class="reset-btn" id="reset-btn">Reset Day</button>
+          </div>
+          <div class="custom-add">
+            <input type="number" id="custom-amount" placeholder="Enter amount in ml" min="0" />
+            <button id="add-custom-btn">Add</button>
+          </div>
+        </section>
+
+        <section class="history-section">
+          <div class="section-header">
+            <h2>Today's History</h2>
+            <button id="view-all-btn">View All</button>
+          </div>
+          <div class="history-list" id="today-history">
+            <div class="empty-state">
+              <i class="fas fa-glass-water"></i>
+              <p>No entries yet today.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="stats-section">
+          <h2>Daily Stats</h2>
+          <div class="stats-cards">
+            <div class="stat-card">
+              <div class="stat-value" id="streak-days">0</div>
+              <div class="stat-label">Day Streak</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="weekly-avg">0ml</div>
+              <div class="stat-label">Weekly Avg</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="completion-rate">0%</div>
+              <div class="stat-label">Completion</div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
