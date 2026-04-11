@@ -111,8 +111,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     todayHistoryEl.innerHTML = '';
 
-    // Show only the last 5 entries
-    const entriesToShow = todayEntries.slice(-5).reverse();
+    // Show only the last 4 entries
+    const entriesToShow = todayEntries.slice(-4).reverse();
 
     entriesToShow.forEach((entry) => {
       const entryTime = new Date(entry.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -127,11 +127,11 @@ document.addEventListener('DOMContentLoaded', function () {
       todayHistoryEl.appendChild(historyItem);
     });
 
-    // Show "view more" if there are more than 5 entries
-    if (todayEntries > 5) {
+    // Show "view more" if there are more than 4 entries
+    if (todayEntries > 4) {
       const viewMoreItem = document.createElement('div');
       viewMoreItem.className = 'history-item view-more';
-      viewMoreItem.textContent = `${todayEntries.length - 5} more entries`;
+      viewMoreItem.textContent = `${todayEntries.length - 4} more entries`;
       todayHistoryEl.appendChild(viewMoreItem);
     }
   }
@@ -348,6 +348,62 @@ document.addEventListener('DOMContentLoaded', function () {
     dismissNotificationBtn.addEventListener('click', () => {
       notificationEl.style.display = 'none';
     });
+  }
+
+  // Open history modal
+  function openHistoryModal() {
+    historyModal.style.display = 'flex';
+    updateHistoryChart('today');
+    renderDetailedHistory('today');
+  }
+
+  // Update history chart
+  function updateHistoryChart(period) {
+    let labels = [];
+    let data = [];
+    const now = new Date();
+
+    if (period === 'today') {
+      // Group by hour for today
+      const todayEntries = state.history.filter((entry) => {
+        return new Date(entry.date).toDateString() === now.toDateString();
+      });
+
+      // Initialize hours array
+      for (let i = 0; i < 24; i++) {
+        labels.push(`${i}:00`);
+        data.push(0);
+      }
+
+      // Sum amounts by hour
+      todayEntries.forEach((entry) => {
+        const hour = new Date(entry.date).getHours();
+        data[hour] += entry.amount;
+      });
+    } else if (period === 'week') {
+      // Group by day for this week
+      const oneWeekAgo = new Date(now);
+      oneWeekAgo.setDate(oneWeekAgo.getDate() - 6);
+
+      // Initialize days array
+      for (let i = 0; i < 7; i++) {
+        const date = new Date(oneWeekAgo);
+        date.setDate(date.getDate() + i);
+        labels.push(date.toLocaleDateString([], { weekday: 'short' }));
+        data.push(0);
+      }
+
+      // Sum amounts by day
+      state.history.forEach((entry) => {
+        const entryDay = new Date(entry.date);
+        if (entryDay >= oneWeekAgo) {
+          const dayIndex = Math.floor((entryDay - oneWeekAgo) / (1000 * 60 * 60 * 24));
+          if (dayIndex >= 0 && dayIndex <= 7) data[dayIndex] += entry.amount;
+        }
+      });
+    } else if (period === 'month') {
+      // Group by day for this month
+    }
   }
 
   // Initialize the app
