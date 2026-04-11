@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const historyModal = document.getElementById('history-modal');
   const historyChartCtx = document.getElementById('history-chart');
   const detailedHistoryEl = document.getElementById('detailed-history');
-  const streakDaysEl = document.getElementById('streak-day');
+  const streakDaysEl = document.getElementById('streak-days');
   const weeklyAvgEl = document.getElementById('weekly-avg');
   const completionRateEl = document.getElementById('completion-rate');
   const notificationEl = document.getElementById('reminder-notification');
@@ -193,5 +193,163 @@ document.addEventListener('DOMContentLoaded', function () {
       state.streak = 0;
       return;
     }
+
+    const today = new Date().toDateString();
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yesterdayStr = yesterday.toDateString();
+
+    if (state.lastEntryDate === today) {
+      // No need to update if already logged today
+      return;
+    } else if (state.lastEntryDate === yesterdayStr) {
+      // Increment streak if logged yesterday
+      state.streak++;
+    } else {
+      // Reset streak if missed a day
+      state.streak = 1;
+    }
+
+    state.lastEntryDate = today;
+    saveData();
   }
+
+  // Update stats cards
+  function updateStats() {
+    streakDaysEl.textContent = state.streak;
+
+    // Calculate weekly average
+    const oneWeekAgo = new Date();
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+
+    const weeklyEntries = state.history.filter((entry) => {
+      return new Date(entry.date) >= oneWeekAgo;
+    });
+
+    const weeklyTotal = weeklyEntries.reduce((sum, entry) => sum + entry.amount, 0);
+    const weeklyDays = new Set(weeklyEntries.map((entry) => new Date(entry.date).toDateString())).size;
+
+    const weeklyAverage = weeklyDays > 0 ? Math.round(weeklyTotal / weeklyDays) : 0;
+    weeklyAverage.textContent = `${weeklyAverage}ml`;
+
+    // Calculate completion rate (days where goal was met)
+    const completedDays = state.history.reduce((count, entry) => {
+      const entryDate = new Date(entry.date).toDateString();
+      const dayEntries = state.history.filter((e) => new Date(e.date).toDateString() === entryDate);
+      const dayTotal = dayEntries.reduce((sum, e) => sum + e.amount, 0);
+
+      return dayTotal >= state.goalAmount ? count + 1 : count;
+    }, 0);
+
+    const totalTrackedDays = new Set(state.history.map((entry) => new Date(entry.date).toDateString())).size;
+    const completionRate = totalTrackedDays > 0 ? Math.round((completedDays / totalTrackedDays) * 100) : 0;
+
+    completionRateEl.textContent = `${completionRate}%`;
+  }
+
+  // Setup event listeners
+  function setupEventListeners() {
+    // Quick add buttons
+    document.querySelectorAll('.intake-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const amount = parseInt(btn.getAttribute('data-amount'));
+        addWater(amount);
+      });
+    });
+
+    // Custom add button
+    addCustomBtn.addEventListener('click', () => {
+      const amount = parseInt(customAmountInput.value);
+      if (!isNaN(amount) && amount > 0) {
+        addWater(amount);
+        customAmountInput.value = '';
+      }
+    });
+
+    // Allow Enter key to submit custom amount
+    customAmountInput.addEventListener('keypress', (e) => {
+      if ((e.key = 'Enter')) {
+        const amount = parseInt(customAmountInput.value);
+        if (!isNaN(amount) && amount > 0) {
+          addWater(amount);
+          customAmountInput.value = '';
+        }
+      }
+    });
+
+    // Settings modal
+    settingsBtn.addEventListener('click', () => {
+      // Populate settings form with current values
+      dailyGoalInput.value = state.settings.dailyGoal;
+      reminderFrequencyInput.value = state.settings.reminderFrequency;
+      wakeUpTimeInput.value = state.settings.wakeUpTime;
+      bedtimeInput.value = state.settings.bedtime;
+      themeInput.value = state.settings.theme;
+
+      settingsModal.style.display = 'flex';
+    });
+
+    // Save settings
+    saveSettingsBtn.addEventListener('click', () => {
+      state.settings.dailyGoal = parseInt(dailyGoalInput.value) || 2000;
+      state.settings.reminderFrequency = parseInt(reminderFrequencyInput.value) || 0;
+      state.settings.wakeUpTime = wakeUpTimeInput.value;
+      state.settings.bedtime = bedtimeInput.value;
+      state.settings.theme = themeInput.value;
+
+      state.goalAmount = state.settings.dailyGoal;
+
+      saveData();
+      render();
+      updateWaveHeight();
+      updatePercentageCircle();
+      applyTheme();
+      setupReminders();
+
+      settingsModal.style.display = 'none';
+    });
+
+    // Close modal
+    document.querySelectorAll('.close-modal').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        settingsModal.style.display = 'none';
+        historyModal.style.display = 'none';
+      });
+    });
+
+    // Click outside modal to close
+    window.addEventListener('click', (e) => {
+      if (e.target === settingsModal) {
+        settingsModal.style.display = 'none';
+      }
+      if (e.target === historyModal) {
+        historyModal.style.display = 'none';
+      }
+    });
+
+    // View all history
+    viewAllBtn.addEventListener('click', () => {
+      openHistoryModal();
+    });
+
+    // Period buttons in history modal
+    document.querySelectorAll('.period-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.period-btn').forEach((b) => b.classList.remove(active));
+        btn.classList.add('active');
+
+        const period = btn.getAttribute('data-period');
+        updateHistoryChart(period);
+        renderDetailedHistory(period);
+      });
+    });
+
+    // Dismiss notification
+    dismissNotificationBtn.addEventListener('click', () => {
+      notificationEl.style.display = 'none';
+    });
+  }
+
+  // Initialize the app
+  init();
 });
