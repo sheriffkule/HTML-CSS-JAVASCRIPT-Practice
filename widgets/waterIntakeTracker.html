@@ -14,7 +14,9 @@
           <i class="fas fa-tint"></i>
           <h1>Water Intake Tracker</h1>
         </div>
-        <button class="icon-btn" id="settings-btn" aria-label="settings"><i class="fas fa-cog"></i></button>
+        <button class="icon-btn" id="settings-btn" aria-label="settings" title="Settings">
+          <i class="fas fa-cog"></i>
+        </button>
       </header>
 
       <main class="main-content">
@@ -52,8 +54,8 @@
         <section class="intake-controls">
           <h2>Add Water Intake</h2>
           <div class="quick-add-btns">
-            <button class="intake-btn" data-amount="250">250mx</button>
-            <button class="intake-btn" data-amount="500">500mx</button>
+            <button class="intake-btn" data-amount="250">250ml</button>
+            <button class="intake-btn" data-amount="500">500ml</button>
             <button class="intake-btn" data-amount="750">750ml</button>
             <button class="reset-btn" id="reset-btn">Reset Day</button>
           </div>
@@ -94,6 +96,91 @@
           </div>
         </section>
       </main>
+
+      <footer>
+        © <time datetime="2026" id="year">2026</time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
+
+      <div class="modal" id="settings-modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>Settings</h3>
+            <button class="close-modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="daily-goal">Daily Water Goal (ml)</label>
+              <input type="number" id="daily-goal" min="500" max="5000" value="2000" />
+            </div>
+            <div class="form-group">
+              <label for="reminder-frequency">Reminder Frequency</label>
+              <select id="reminder-frequency">
+                <option value="0">No Reminder</option>
+                <option value="30">Every 30 minutes</option>
+                <option value="60">Every hour</option>
+                <option value="120">Every 2 hours</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="wake-up-time">Wake Up Time</label>
+              <input type="time" id="wake-up-time" value="08:00" />
+            </div>
+            <div class="form-group">
+              <label for="bedtime">Bedtime</label>
+              <input type="time" id="bedtime" value="22:00" />
+            </div>
+            <div class="form-group">
+              <label for="theme">Theme Color</label>
+              <select id="theme">
+                <option value="blue">Blue</option>
+                <option value="teal">Teal</option>
+                <option value="orange">Orange</option>
+                <option value="red">Red</option>
+                <option value="purple">Purple</option>
+                <option value="green">Green</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="dark-theme">Dark Background</label>
+              <input type="checkbox" id="dark-theme" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal" id="history-modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>Drinking History</h3>
+            <button class="close-modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="time-period-selector">
+              <button class="period-btn active" data-period="today">Today</button>
+              <button class="period-btn" data-period="week">This Week</button>
+              <button class="period-btn" data-period="month">This Month</button>
+            </div>
+            <div class="history-chart-container">
+              <canvas id="history-chart"></canvas>
+            </div>
+            <div class="detailed-history" id="detailed-history">
+              <!-- History items will be inserted here -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="notification" id="reminder-notification">
+        <div class="notification-content">
+          <i class="fas fa-bell"></i>
+          <p>Time to drink some water!</p>
+          <button class="dismiss-btn">Dismiss</button>
+        </div>
+      </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/widgets_script/waterIntakeTracker.js"></script>
   </body>
 </html>

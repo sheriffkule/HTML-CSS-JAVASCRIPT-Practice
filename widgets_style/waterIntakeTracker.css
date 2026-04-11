@@ -196,3 +196,126 @@ section {
     display: block;
     margin: 0 auto;
 }
+
+.circle-bg {
+    fill: none;
+    stroke: #aaa;
+    stroke-width: 2;
+}
+
+.circle-fill {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 2;
+    stroke-linecap: round;
+    animation: circle-fill-animation 1s ease-out forwards;
+}
+
+@keyframes circle-fill-animation {
+    0% {
+        stroke-dasharray: 0, 100;
+    }
+}
+
+.percentage-text {
+    fill: var(--primary);
+    font-size: 0.5em;
+    text-anchor: middle;
+    font-weight: 600;
+}
+
+.intake-controls {
+    background-color: var(--primary);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+
+    h2 {
+        font-size: 18px;
+        margin-bottom: 15px;
+        color: var(--text);
+    }
+}
+
+.quick-add-btns {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    gap: 10px;
+}
+
+.intake-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    corner-shape: round;
+    background-color: var(--primary-light);
+    color: white;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all .3s;
+
+    &:hover {
+        corner-shape: scoop;
+        border-radius: var(--border-radius);
+        background-color: var(--primary-dark);
+        transform: scale(1.1);
+    }
+    &:active {
+        transform: scale(1);
+    }
+}
+
+.custom-add {
+    display: flex;
+    gap: 10px;
+}
+
+.custom-add input {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #bbb;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+}
+
+.custom-add input::placeholder {
+    transition: 0.25s ease-in;
+}
+
+.custom-add input:is(:focus, :focus-within)::placeholder {
+    transform: translateX(110%);
+}
+
+.custom-add input:is(:focus, :focus-within) {
+    border-color: var(--primary-dark);
+    box-shadow: inset 0 0 15px rgb(0 0 0 / 0.4);
+}
+
+.custom-add button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--primary-light);
+    color: white;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all .3s;
+
+    &:hover {
+        background-color: var(--primary-dark);
+        scale: 1.05;
+    }
+}
+
+.history-section,
+.stats-section {
+    background-color: var(--bg-color);
+    border: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+}
