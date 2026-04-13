@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const wakeUpTimeInput = document.getElementById('wake-up-time');
   const bedtimeInput = document.getElementById('bedtime');
   const themeInput = document.getElementById('theme');
+  const darkTheme = document.getElementById('dark-theme');
   const viewAllBtn = document.getElementById('view-all-btn');
   const historyModal = document.getElementById('history-modal');
   const historyChartCtx = document.getElementById('history-chart');
@@ -58,6 +59,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Load data from local storage
   function loadData() {
+    // Restore theme color selection in settings form
+    if (typeof themeInput !== 'undefined' && themeInput && state.settings && state.settings.theme) {
+      themeInput.value = state.settings.theme;
+    }
     const savedState = localStorage.getItem('waterTrackerState');
     if (savedState) {
       state = JSON.parse(savedState);
@@ -76,6 +81,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const today = new Date().toDateString();
     const todayEntries = state.history.filter((entry) => new Date(entry.date).toDateString() === today);
     state.currentAmount = todayEntries.reduce((sum, entry) => sum + entry.amount, 0);
+
+    // Restore darkTheme checkbox state from saved settings
+    if (typeof darkTheme !== 'undefined' && darkTheme) {
+      const savedDark = localStorage.getItem('waterTrackerDarkTheme');
+      darkTheme.checked = savedDark === 'true';
+    }
+    // Ensure theme is applied after restoring checkbox
+    applyTheme();
   }
 
   // Save data to localStorage
@@ -128,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Show "view more" if there are more than 4 entries
-    if (todayEntries > 4) {
+    if (todayEntries.length > 4) {
       const viewMoreItem = document.createElement('div');
       viewMoreItem.className = 'history-item view-more';
       viewMoreItem.textContent = `${todayEntries.length - 4} more entries`;
@@ -230,7 +243,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const weeklyDays = new Set(weeklyEntries.map((entry) => new Date(entry.date).toDateString())).size;
 
     const weeklyAverage = weeklyDays > 0 ? Math.round(weeklyTotal / weeklyDays) : 0;
-    weeklyAverage.textContent = `${weeklyAverage}ml`;
+    weeklyAvgEl.textContent = `${weeklyAverage}ml`;
 
     // Calculate completion rate (days where goal was met)
     const completedDays = state.history.reduce((count, entry) => {
@@ -268,7 +281,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Allow Enter key to submit custom amount
     customAmountInput.addEventListener('keypress', (e) => {
-      if ((e.key = 'Enter')) {
+      if (e.key === 'Enter') {
         const amount = parseInt(customAmountInput.value);
         if (!isNaN(amount) && amount > 0) {
           addWater(amount);
@@ -289,6 +302,13 @@ document.addEventListener('DOMContentLoaded', function () {
       settingsModal.style.display = 'flex';
     });
 
+    if (typeof darkTheme !== 'undefined' && darkTheme) {
+      darkTheme.addEventListener('change', () => {
+        localStorage.setItem('waterTrackerDarkTheme', darkTheme.checked ? 'true' : 'false');
+        applyTheme();
+      });
+    }
+
     // Save settings
     saveSettingsBtn.addEventListener('click', () => {
       state.settings.dailyGoal = parseInt(dailyGoalInput.value) || 2000;
@@ -305,6 +325,9 @@ document.addEventListener('DOMContentLoaded', function () {
       updatePercentageCircle();
       applyTheme();
       setupReminders();
+
+      // Persist theme color selection in localStorage for extra safety
+      localStorage.setItem('waterTrackerTheme', state.settings.theme);
 
       settingsModal.style.display = 'none';
     });
@@ -335,7 +358,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Period buttons in history modal
     document.querySelectorAll('.period-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.period-btn').forEach((b) => b.classList.remove(active));
+        document.querySelectorAll('.period-btn').forEach((b) => b.classList.remove('active'));
         btn.classList.add('active');
 
         const period = btn.getAttribute('data-period');
@@ -403,8 +426,260 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     } else if (period === 'month') {
       // Group by day for this month
+      const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+      const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+
+      // Initialize days array
+      for (let i = 0; i < daysInMonth; i++) {
+        const date = new Date(firstDayOfMonth);
+        date.setDate(date.getDate() + i);
+        labels.push(date.getDate());
+        data.push(0);
+      }
+
+      // Sum amounts by day
+      state.history.forEach((entry) => {
+        const entryDate = new Date(entry.date);
+        if (entryDate.getMonth() === now.getMonth() && entryDate.getFullYear() === now.getFullYear()) {
+          const dayIndex = entryDate.getDate() - 1;
+          data[dayIndex] += entry.amount;
+        }
+      });
+    }
+
+    // Destroy previous chart if exists
+    if (window.historyChart) window.historyChart.destroy();
+
+    // Create new chart
+    window.historyChart = new Chart(historyChartCtx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Water Intake (ml)',
+            data: data,
+            backgroundColor: 'rgba(52, 152, 219, 0.7)',
+            borderColor: 'rgba(52, 152, 219, 1)',
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },
+      },
+    });
+  }
+
+  // Render detailed history
+  function renderDetailedHistory(period) {
+    let entries = [];
+    const now = new Date();
+
+    if (period === 'today') {
+      entries = state.history.filter((entry) => {
+        return new Date(entry.date).toDateString() === now.toDateString();
+      });
+    } else if (period === 'week') {
+      const oneWeekAgo = new Date(now);
+      oneWeekAgo.setDate(oneWeekAgo.getDate() - 6);
+
+      entries = state.history.filter((entry) => {
+        return new Date(entry.date) >= oneWeekAgo;
+      });
+    } else if (period === 'month') {
+      const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+
+      entries = state.history.filter((entry) => {
+        const entryDate = new Date(entry.date);
+        return entryDate >= firstDayOfMonth;
+      });
+    }
+
+    // Group entries by day
+    const entriesByDay = {};
+    entries.forEach((entry) => {
+      const entryDate = new Date(entry.date);
+      const dateStr = entryDate.toLocaleDateString([], { weekday: 'long', month: 'short', day: 'numeric' });
+
+      if (!entriesByDay[dateStr]) entriesByDay[dateStr] = [];
+
+      entriesByDay[dateStr].push(entry);
+    });
+
+    // Render grouped entries
+    detailedHistoryEl.innerHTML = '';
+
+    for (const [dateStr, dayEntries] of Object.entries(entriesByDay)) {
+      const dayTotal = dayEntries.reduce((sum, entry) => sum + entry.amount, 0);
+      const dayHeader = document.createElement('div');
+      dayHeader.className = 'history-day-header';
+      dayHeader.innerHTML = `
+        <span class="date">${dateStr}</span>
+        <span class="total">${dayTotal}</span>
+      `;
+      detailedHistoryEl.appendChild(dayHeader);
+
+      dayEntries.reverse().forEach((entry) => {
+        const entryTime = new Date(entry.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+        const historyItem = document.createElement('div');
+        historyItem.className = 'history-item detailed';
+        historyItem.innerHTML = `
+          <span class="amount">${entry.amount}</span>
+          <span class="time">${entryTime}</span>
+        `;
+        detailedHistoryEl.appendChild(historyItem);
+      });
+    }
+
+    if (Object.keys(entriesByDay).length === 0) {
+      detailedHistoryEl.innerHTML = `
+        <div class="empty-state">
+          <i class="fas fa-glass-water"></i>
+          <p>No entries for this period.</p>
+        </div>
+      `;
     }
   }
+
+  // Setup reminders
+  function setupReminders() {
+    if (!state.settings.reminderFrequency || state.settings.reminderFrequency === 0) {
+      if (notificationEl) notificationEl.style.display = 'none';
+      return;
+    }
+
+    // Clear any existing reminders
+    if (window.reminderInterval) clearInterval(window.reminderInterval);
+
+    // Don't set up reminders if frequency is 0
+    if (state.settings.reminderFrequency === 0) return;
+
+    // Convert frequency from minutes to milliseconds
+    const frequencyMs = state.settings.reminderFrequency * 60 * 1000;
+
+    // Helper to get/set last reminder time
+    function getLastReminderTime() {
+      return parseInt(localStorage.getItem('waterTrackerLastReminder') || '0', 10);
+    }
+    function setLastReminderTime(ts) {
+      localStorage.setItem('waterTrackerLastReminder', String(ts));
+    }
+
+    // Set up interval for reminders
+    window.reminderInterval = setInterval(() => {
+      const now = new Date();
+      const currentHours = now.getHours();
+      const currentMinutes = now.getMinutes();
+      const [wakeHour, wakeMinute] = state.settings.wakeUpTime.split(':').map(Number);
+      const [bedHour, bedMinute] = state.settings.bedtime.split(':').map(Number);
+      const currentTimeInMinutes = currentHours * 60 + currentMinutes;
+      const wakeTimeInMinutes = wakeHour * 60 + wakeMinute;
+      const bedTimeInMinutes = bedHour * 60 + bedMinute;
+
+      // Only show reminder if within wake hours and enough time has passed
+      if (currentTimeInMinutes >= wakeTimeInMinutes && currentTimeInMinutes <= bedTimeInMinutes) {
+        const nowTs = Date.now();
+        const lastReminder = getLastReminderTime();
+        // Only show if enough time has passed since last reminder
+        if (nowTs - lastReminder >= frequencyMs) {
+          // Only show if user hasn't met their goal for today
+          if (state.currentAmount < state.goalAmount) {
+            showReminder();
+            setLastReminderTime(nowTs);
+          }
+        }
+      }
+    }, frequencyMs);
+  }
+
+  // Show reminder notification
+  function showReminder() {
+    notificationEl.style.display = 'flex';
+    // Auto hide after 10 seconds
+    setTimeout(() => {
+      notificationEl.style.display = 'none';
+    }, 10000);
+  }
+
+  // Apply selected theme
+  function applyTheme() {
+    // Remove all theme classes
+    document.body.classList.remove(
+      'blue-theme',
+      'teal-theme',
+      'orange-theme',
+      'red-theme',
+      'purple-theme',
+      'green-theme',
+    );
+
+    // If darkTheme is checked, add both dark-theme and the selected color theme
+    if (typeof darkTheme !== 'undefined' && darkTheme && darkTheme.checked) {
+      document.body.classList.add('dark-theme');
+      document.body.classList.remove('light-theme');
+      document.body.classList.add(`${state.settings.theme}-theme`);
+    } else {
+      document.body.classList.remove('dark-theme');
+      document.body.classList.add('light-theme');
+      document.body.classList.add(`${state.settings.theme}-theme`);
+    }
+  }
+
+  // Add to your setupEventListeners function
+  resetBtn.addEventListener('click', resetDailyProgress);
+
+  // Reset daily progress
+  function resetDailyProgress() {
+    if (confirm("Are you sure you want to reset today's progress?")) {
+      const today = new Date().toDateString();
+
+      // Filter out today's entries from history
+      state.history = state.history.filter((entry) => {
+        return new Date(entry.date).toDateString() !== today;
+      });
+
+      // Reset current amount
+      state.currentAmount = 0;
+
+      // Update UI and save
+      saveData();
+      render();
+      updateWaveHeight();
+      updatePercentageCircle();
+      updatePercentageCircle();
+
+      // Show confirmation
+      alert("Today's progress has been reset!");
+    }
+  }
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 
   // Initialize the app
   init();
