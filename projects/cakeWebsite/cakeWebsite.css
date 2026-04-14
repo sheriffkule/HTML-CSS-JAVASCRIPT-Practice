@@ -119,9 +119,9 @@ img {
   margin-bottom: 1.5rem;
 }
 
-.main {
+/* .main {
   overflow: hidden;
-}
+} */
 
 .header {
     position: fixed;
@@ -172,14 +172,14 @@ img {
     .nav__menu {
         position: fixed;
         top: 0;
-        right: 0;
+        right: -120%;
         background-color: var(--body-color);
-        width: 80%;
+        width: 300px;
         height: 100%;
         box-shadow: -2px 0 16px hsla(350 70% 20% / 0.2);
         padding: 7rem 0 2rem 2rem;
         z-index: var(--z-fixed);
-        transition: 0.4s;
+        transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
 }
 
@@ -256,4 +256,264 @@ img {
     width: 100px;
     right: 1.5rem;
     bottom: 1.5rem;
+}
+
+.show-menu {
+    right: 0;
+}
+
+.home__container {
+    padding-block: 2.5rem;
+    row-gap: 3rem;
+}
+
+.home__data {
+    position: relative;
+    text-align: center;
+}
+
+.home__title {
+    font-size: var(--biggest-font-size);
+    margin-bottom: 1rem;
+}
+
+.home__title span {
+    display: block;
+    color: var(--first-color);
+}
+
+.home__description {
+    margin-bottom: 2rem;
+}
+
+.home__data img {
+    position: absolute;
+    z-index: -1;
+}
+
+.home__slice-1 {
+    width: 50px;
+    left: -2rem;
+    top: -2rem;
+}
+
+.home__slice-2 {
+    width: 80px;
+    right: -2rem;
+    bottom: -2.5rem;
+    filter: blur(2px);
+}
+
+.home__balloons {
+    width: 80px;
+    top: -3.5rem;
+    right: 1rem;
+}
+
+.home__sticker-1 {
+    width: 30px;
+    top: 2.5rem;
+    right: -0.5rem;
+}
+
+.home__sticker-2 {
+    width: 30px;
+    left: 1rem;
+    bottom: 2rem;
+}
+
+.home__images {
+    width: 340px;
+    height: 372px;
+    position: relative;
+    display: grid;
+    justify-self: center;
+}
+
+.home__images img {
+    position: absolute;
+}
+
+.home__swiper .home__cake {
+    position: initial;
+    width: 300px;
+    margin-inline: auto;
+}
+
+.home__blob {
+    width: 300px;
+    top: -1.5rem;
+    justify-self: center;
+    z-index: -1;
+}
+
+.home__base {
+    width: 340px;
+    bottom: 0;
+    justify-self: center;
+    z-index: -1;
+}
+
+.home__leaf-1 {
+    width: 40px;
+    bottom: 3rem;
+    right: 4.5rem;
+}
+
+.home__leaf-2 {
+    width: 50px;
+    left: 0.5rem;
+    top: 2rem;
+}
+
+.home__sticker-3 {
+    width: 30px;
+    left: 5rem;
+    bottom: 6.5rem;
+}
+
+.home__sticker-4 {
+    width: 30px;
+    top: 6rem;
+    right: 1.25em;
+}
+
+.home__swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.button {
+    display: inline-flex;
+    background-color: var(--first-color);
+    color: var(--title-color);
+    font-weight: var(--font-semi-bold);
+    padding: 1rem 2rem;
+    border-radius: 4rem;
+    transition: all .4s;
+
+    &:hover {
+        background-color: var(--first-color-alt);
+        box-shadow: 0 4px 24px hsl(350 70% 65% / 0.5);
+        transform: translateY(-3px);
+        border-radius: 4rem 4rem 0 0;
+    }
+}
+
+
+
+
+
+
+
+
+
+@media (width < 360px) {
+    .home__images {
+        width: 250px;
+        height: 290px;
+    }
+}
+
+@media (width >= 540px) {
+    .home__container {
+        grid-template-columns: 400px;
+        justify-content: center;
+    }
+}
+
+@media (width >= 1150px) {
+    .container {
+        margin-inline: auto;
+    }
+    .section {
+        padding-block: 7rem 2rem;
+    }
+    .nav {
+        height: calc(var(--header-height) + 2rem);
+    }
+    .nav__toggle,
+    .nav__close,
+    .nav__img {
+        display: none;
+    }
+    .nav__list {
+        flex-direction: row;
+        column-gap: 4rem;
+        margin-right: 4rem;
+    }
+    .home__container {
+        grid-template-columns: 475px 550px;
+        column-gap: 6rem;
+        align-items: center;
+        padding-block: 6rem 1rem;
+    }
+    .home__data {
+        text-align: initial;
+        margin-bottom: 5rem;
+    }
+    .home__title {
+        margin-bottom: 1.5rem;
+    }
+    .home__description {
+        margin-bottom: 4rem;
+    }
+    .home__slice-1 {
+        width: 70px;
+        left: -6rem;
+        top: -3rem;
+    }
+    .home__slice-2 {
+        width: 90deg;
+        right: 6rem;
+        bottom: -0.5rem;
+    }
+    .home__balloons {
+        width: 140px;
+        top: -7rem;
+        right: -1rem;
+    }
+    .home__sticker-1 {
+        width: 40px;
+        top: 4rem;
+        right: -1.5rem;
+    }
+    .home__sticker-2 {
+        width: 40px;
+        left: -4rem;
+        bottom: 4rem;
+    }
+    .home__images {
+        width: 550px;
+        height: 640px;
+    }
+    .home__blob {
+        width: 485px;
+        top: -2.5rem;
+    }
+    .home__base {
+        width: 550px;
+        bottom: 3rem;
+    }
+    .home__swiper .home__cake {
+        width: 485px;
+    }
+    .home__leaf-1 {
+        width: 55px;
+        bottom: 8rem;
+        right: 8rem;
+    }
+    .home__leaf-2 {
+        width: 75px;
+        top: 3rem;
+    }
+    .home__sticker-3 {
+        width: 40px;
+        left: 8rem;
+        bottom: 13rem;
+    }
+    .home__sticker-4 {
+        width: 40px;
+        top: 10rem;
+    }
 }
