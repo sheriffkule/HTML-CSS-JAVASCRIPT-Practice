@@ -119,9 +119,9 @@ img {
   margin-bottom: 1.5rem;
 }
 
-/* .main {
+.main {
   overflow: hidden;
-} */
+}
 
 .header {
     position: fixed;
@@ -671,8 +671,8 @@ img {
     text-align: center;
     font-size: var(--h1-font-size);
     padding-block: 1rem;
-    /* opacity: 0;
-    transition: opacity .4s; */
+    opacity: 0;
+    transition: opacity .4s;
 }
 
 .new__leaf-1,
@@ -700,6 +700,133 @@ img {
     left: 2rem;
 }
 
+.new__swiper {
+    width: 100%;
+    height: 100%;
+    margin-inline: auto;
+    padding-bottom: 3rem;
+}
+
+.new .swiper-slide-active .new__cake {
+    filter: drop-shadow(0 8px 16px hsl(350 70% 8% / 0.2));
+}
+
+.new .swiper-slide-active .new__name {
+    opacity: 1;
+}
+
+.new .swiper-navigation-icon {
+    display: none;
+}
+
+.new :is(.swiper-button-prev, .swiper-button-next) {
+    top: initial;
+    left: initial;
+    bottom: 0;
+    margin: initial;
+    width: 40px;
+    height: 40px;
+    background-color: var(--white-color);
+    border-radius: .75rem;
+    color: var(--title-color);
+    font-size: 1.5rem;
+    transition: background-color .4s;
+}
+
+.new :is(.swiper-button-prev:hover, .swiper-button-next:hover) {
+    background-color: var(--first-color);
+}
+
+.new .swiper-button-prev {
+    left: calc(50% - 3rem);
+}
+
+.new .swiper-button-next {
+    right: calc(50% - 3rem);
+}
+
+.contact {
+    background-color: var(--second-color);
+}
+
+.contact__container {
+    row-gap: 3rem;
+    padding-bottom: 3rem;
+}
+
+.contact__map iframe {
+    width: 100%;
+    height: 100%;
+}
+
+.contact__map {
+    width: 320px;
+    height: 320px;
+    justify-self: center;
+    border-radius: 1.5rem;
+    overflow: hidden;
+}
+
+.contact__content .section__title {
+    color: var(--white-color);
+}
+
+.contact__data {
+    position: relative;
+    text-align: center;
+    display: grid;
+    row-gap: 2rem;
+}
+
+.contact__title {
+    color: var(--first-color);
+    font-size: var(--h3-font-size);
+    margin-bottom: .5rem;
+}
+
+.contact__address,
+.contact__address :is(span, a) {
+    display: block;
+    color: var(--white-color);
+    font-style: normal;
+}
+
+.contact__social {
+    display: flex;
+    justify-content: center;
+    column-gap: .75rem;
+}
+
+.contact__social-link {
+    color: var(--white-color);
+    font-size: 1.5rem;
+    transition: all .4s;
+
+    &:hover {
+        color: var(--first-color);
+        border-bottom: 1px solid var(--first-color);
+    }
+}
+
+.contact__data img {
+    position: absolute;
+    width: 30px;
+}
+
+.contact__sticker-1 {
+    right: 2rem;
+    top: 1rem;
+}
+
+.contact__sticker-2 {
+    top: 6rem;
+    left: 3rem;
+}
+
+.contact__sticker-3 {
+    right: 3rem;
+    bottom: -1rem;
+}
 
 
 
@@ -713,11 +840,16 @@ img {
         width: 250px;
         height: 290px;
     }
+    .contact__map {
+        width: 100%;
+    }
 }
 
 @media (width >= 540px) {
     .home__container,
-    .about__container {
+    .about__container,
+    .new__container,
+    .contact__data {
         grid-template-columns: 400px;
         justify-content: center;
     }
@@ -921,5 +1053,65 @@ img {
     .product__buy {
         top: 1.5rem;
         right: 1.5rem;
+    }
+    .new__container {
+        grid-template-columns: 400px 640px;
+        column-gap: 5rem;
+        align-items: center;
+        padding-block: 3rem 4rem;
+    }
+    .new__data .section__title,
+    .new__data {
+        text-align: initial;
+    }
+    .new__description {
+        margin-bottom: 4rem;
+    }
+    .new__text {
+        font-size: 6rem;
+    }
+    .new__title {
+        top: -.5rem;
+    }
+    .new__cake {
+        width: 420px;
+    }
+    .new__name {
+        padding-block: 2rem 3rem;
+    }
+    .new__leaf-1 {
+        width: 90px;
+        right: 4rem;
+    }
+    .new__leaf-2 {
+        width: 90px;
+        left: 5rem;
+        bottom: 9rem;
+    }
+    .new__leaf-3 {
+        width: 130px;
+        top: -4rem;
+        left: 4rem;
+    }
+    .contact__container {
+        grid-template-columns: 500px 520px;
+        column-gap: 6rem;
+        align-items: center;
+        padding-bottom: 8rem;
+    }
+    .contact__map {
+        order: -1;
+        width: 500px;
+        height: 440px;
+        border-radius: 3rem;
+    }
+    .contact__content .section__title {
+        text-align: initial;
+        margin-bottom: 3rem;
+    }
+    .contact__data {
+        grid-template-columns: repeat(2, max-content);
+        justify-content: initial;
+        gap: 4rem 6rem;
     }
 }

@@ -6,7 +6,7 @@
     <title>Custom Cakes Bakery</title>
     <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" />
-    <link rel="stylesheet" href="/scripts/swiper-bundle.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
     <link rel="stylesheet" href="cakeWebsite.css" />
   </head>
   <body>
@@ -136,7 +136,7 @@
       </section>
 
       <section class="product section" id="product">
-        <h2 class="section__">Our Products</h2>
+        <h2 class="section__title">Our Products</h2>
 
         <div class="product__container container">
           <div class="product__tabs swiper">
@@ -479,7 +479,7 @@
             <img src="img/leaf-3.png" alt="" class="new__leaf-3" />
 
             <div class="new__swiper swiper">
-              <div class="swiper-wrapper"></div>
+              <div class="swiper-wrapper">
                 <article class="new__article swiper-slide">
                   <img src="img/new-cake-1.png" alt="Delicious decorated cake" class="new__cake" />
                   <h3 class="new__name">Premium Chocolate Cake</h3>
@@ -508,10 +508,97 @@
           </div>
         </div>
       </section>
+
+      <section class="contact section" id="contact">
+        <div class="contact__container container grid">
+          <div class="contact__content">
+            <h2 class="section__title">
+              OrderYour <br />
+              Custom Cake Now!
+            </h2>
+
+            <div class="contact__data">
+              <div class="contact__info">
+                <h3 class="contact__title">Location:</h3>
+                <address class="contact__address">
+                  Fuente Osmeña Cir <br />
+                  Cebu City, Philippines
+                </address>
+              </div>
+              <div class="contact__info">
+                <h3 class="contact__title">Call Us:</h3>
+                <address class="contact__address">
+                  <a href="tel:+1234-9876-00">+1234-9876-00</a>
+                  <a href="tel:+00987654321">+00987654321</a>
+                </address>
+              </div>
+              <div class="contact__info">
+                <h3 class="contact__title">Operational:</h3>
+                <p class="contact__address" itemscope itemtype="https://schema.org/LocalBusiness">
+                  <span itemprop="openingHours" content="Mo-Sa 09:00-20:00"
+                    >Monday - Saturday: 9am - 8pm</span
+                  >
+                  <span itemprop="openingHours" content="Su 09:00-18:00">Sunday: 9am - 6pm</span>
+                </p>
+              </div>
+              <div class="contact__info">
+                <h3 class="contact__title">Messages:</h3>
+                <ul class="contact__social">
+                  <li>
+                    <a
+                      href="https://api.whatsapp.com/send?phone=51123456789&text=Hello, more information!"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Whatsapp"
+                      class="contact__social-link"
+                      ><i class="ri-whatsapp-line"></i
+                    ></a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://m.me/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Messenger"
+                      class="contact__social-link"
+                      ><i class="ri-messenger-line"></i
+                    ></a>
+                  </li>
+                  <li>
+                    <a
+                      href="mailto:delizia@email.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Email"
+                      class="contact__social-link"
+                      ><i class="ri-mail-line"></i
+                    ></a>
+                  </li>
+                </ul>
+              </div>
+
+              <img src="img/sticker-4.svg" alt="" class="contact__sticker-1" />
+              <img src="img/sticker-1.svg" alt="" class="contact__sticker-2" />
+              <img src="img/sticker-5.svg" alt="" class="contact__sticker-3" />
+            </div>
+          </div>
+
+          <div class="contact__map">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4758.519663526426!2d123.8911019757807!3d10.310208367618598!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a9994e8ba469e5%3A0x7030b1023f721a8c!2sFuente%20Osme%C3%B1a%20Cir%2C%20Cebu%20City%2C%206000%20Cebu%2C%20Philippines!5e1!3m2!1sen!2srs!4v1776205160383!5m2!1sen!2srs"
+              width="600"
+              height="450"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </section>
     </main>
 
     <script src="/scripts/scrollreveal.min.js"></script>
-    <script src="/scripts/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
     <script src="cakeWebsite.js"></script>
   </body>
 </html>
