@@ -46,3 +46,11 @@ const swiperHome = new Swiper('.home__swiper', {
     disableOnInteraction: false,
   },
 });
+
+const scrollHeader = () => {
+  const header = document.getElementById('header');
+
+  this.scrollY >= 50 ? header.classList.add('scroll-header') : header.classList.remove('scroll-header');
+};
+
+window.addEventListener('scroll', scrollHeader);

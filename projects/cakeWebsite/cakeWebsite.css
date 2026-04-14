@@ -262,6 +262,11 @@ img {
     right: 0;
 }
 
+.scroll-header {
+    box-shadow: 0 4px 16px hsl(350 70% 65% / 0.4);
+    border-bottom: 4px double var(--first-color-alt);
+}
+
 .home__container {
     padding-block: 2.5rem;
     row-gap: 3rem;
@@ -400,6 +405,102 @@ img {
     }
 }
 
+.about {
+    position: relative;
+    background-color: var(--second-color);
+    overflow: hidden;
+}
+
+.about__container {
+    row-gap: 4.5rem;
+    padding-bottom: 2.5rem;
+}
+
+.about__cupcake-1 {
+    position: absolute;
+    width: 80px;
+    top: -1.5rem;
+    right: -1.5rem;
+    rotate: -135deg;
+}
+
+.about__cupcake-2 {
+    position: absolute;
+    width: 80px;
+    left: -1.5rem;
+    bottom: -1.5rem;
+    rotate: 30deg;
+    z-index: 1;
+}
+
+.about__data {
+    position: relative;
+    text-align: center;
+}
+
+.about__data .section__title {
+    color: var(--white-color);
+}
+
+.about__description {
+    color: var(--white-color);
+    margin-bottom: 2rem;
+}
+
+.about__sticker-1 {
+    position: absolute;
+    width: 30px;
+    top: 3.5rem;
+    left: 2rem;
+}
+
+.about__sticker-2 {
+    position: absolute;
+    width: 30px;
+    right: 3rem;
+    bottom: 3rem;
+}
+
+.about__images {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: grid;
+}
+
+.about__blob {
+    width: 360px;
+    justify-self: center;
+}
+
+.about__img,
+.about__leaf,
+.about__cupcake-3 {
+    position: absolute;
+}
+
+.about__cupcake-3 {
+    width: 50px;
+    right: 3rem;
+    bottom: 0;
+    rotate: -15deg;
+    filter: blur(2px);
+}
+
+.about__leaf {
+    width: 30px;
+    top: 6.5rem;
+    left: 2.5rem;
+    filter: blur(2px);
+}
+
+.about__img {
+    width: 320px;
+    justify-self: center;
+    bottom: 1.5rem;
+    mask-image: linear-gradient(to bottom, hsl(350 70% 65%) 80%, transparent 95%);
+}
+
 
 
 
@@ -416,7 +517,8 @@ img {
 }
 
 @media (width >= 540px) {
-    .home__container {
+    .home__container,
+    .about__container {
         grid-template-columns: 400px;
         justify-content: center;
     }
@@ -515,5 +617,57 @@ img {
     .home__sticker-4 {
         width: 40px;
         top: 10rem;
+    }
+    .about__cupcake-1 {
+        width: 150px;
+        right: -2.5rem;
+        top: -2.5rem;
+    }
+    .about__cupcake-2 {
+        width: 150px;
+        left: -2.5rem;
+        bottom: -2.5rem;
+    }
+    .about__container {
+        grid-template-columns: 500px 480px;
+        column-gap: 6rem;
+        align-items: center;
+        padding-block: 2rem 4rem;
+    }
+    .about__images {
+        order: -1;
+    }
+    .about__blob {
+        width: 545px;
+    }
+    .about__img {
+        width: 485px;
+    }
+    .about__leaf {
+        width: 40px;
+        top: 11rem;
+        left: 4rem;
+    }
+    .about__cupcake-3 {
+        width: 75px;
+        right: 5px;
+    }
+    .about__data,
+    .about__data, .section__title {
+        text-align: initial;
+    }
+    .about__description {
+        margin-bottom: 4rem;
+    }
+    .about__sticker-1 {
+        width: 40px;
+        left: initial;
+        top: 7rem;
+        right: 2rem;
+    }
+    .about__sticker-2 {
+        width: 40px;
+        right: 11rem;
+        bottom: 2rem;
     }
 }
