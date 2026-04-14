@@ -54,3 +54,24 @@ const scrollHeader = () => {
 };
 
 window.addEventListener('scroll', scrollHeader);
+
+const swiperTabs = new Swiper('.product__tabs', {
+  slidesPerView: 'auto',
+});
+
+const swiperProducts = new Swiper('.product__content', {
+  loop: true,
+  spaceBetween: 32,
+  thumbs: {
+    swiper: swiperTabs,
+  },
+});
+
+const swiperNew = new Swiper('.new__swiper', {
+  loop: true,
+
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+});
