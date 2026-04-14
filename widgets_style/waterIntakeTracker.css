@@ -784,7 +784,7 @@ footer {
 }
 
 ::-webkit-scrollbar {
-    width: 14px;
+    width: 8px;
     background-color: var(--primary-light);
 }
 

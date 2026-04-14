@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Pacifico&display=swap');
+
+:root {
+  --header-height: 3.5rem;
+
+  --first-color: hsl(350, 70%, 65%);
+  --first-color-alt: hsl(350, 70%, 62%);
+  --second-color: hsl(350, 40%, 20%);
+  --title-color: hsl(350, 28%, 15%);
+  --text-color: hsl(350, 25%, 28%);
+  --white-color: hsl(0, 0%, 100%);
+  --body-color: hsl(350, 95%, 90%);
+  --container-color: hsl(350, 100%, 97%);
+
+  --body-font: "Montserrat", sans-serif;
+  --second-font: "Pacifico", cursive;
+  --biggest-font-size: 3rem;
+  --bigger-font-size: 2rem;
+  --h1-font-size: 1.5rem;
+  --h2-font-size: 1.25rem;
+  --h3-font-size: 1rem;
+  --normal-font-size: .938rem;
+  --small-font-size: .813rem;
+  --smaller-font-size: .75rem;
+
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semi-bold: 600;
+  --font-bold: 700;
+
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+
+@media (width >= 1150px) {
+  :root {
+    --biggest-font-size: 5rem;
+    --bigger-font-size: 4rem;
+    --h1-font-size: 2.25rem;
+    --h2-font-size: 1.5rem;
+    --h3-font-size: 1.25rem;
+    --normal-font-size: 1rem;
+    --small-font-size: .875rem;
+    --smaller-font-size: .813rem;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body,
+input,
+button {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+}
+
+body {
+  background-color: var(--body-color);
+  color: var(--text-color);
+}
+
+input,
+button {
+  background: none;
+  border: none;
+  outline: none;
+}
+
+h1, h2, h3, h4 {
+  color: var(--title-color);
+  font-weight: var(--font-medium);
+  font-family: var(--second-font);
+  line-height: 120%;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+p {
+    text-wrap: pretty;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  max-width: 1120px;
+  margin-inline: 1rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.section {
+  padding-block: 5rem 1rem;
+}
+
+.section__title {
+  text-align: center;
+  font-size: var(--bigger-font-size);
+  margin-bottom: 1.5rem;
+}
+
+.main {
+  overflow: hidden;
+}
+
+.header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: var(--body-color);
+    z-index: var(--z-fixed);
+    transition: box-shadow 0.4s;
+}
+
+.nav {
+    position: relative;
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav__logo {
+    display: flex;
+    align-items: center;
+    column-gap: 0.5rem;
+}
+
+.nav__logo img {
+    width: 1.5rem;
+}
+
+.nav__logo span {
+    font-family: var(--second-font);
+    font-size: var(--h3-font-size);
+    color: var(--title-color);
+}
+
+.nav__toggle {
+    color: var(--title-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.3s;
+
+    &:hover {
+        transform: scale(1.1) rotate(180deg);
+    }
+}
+
+@media (width <= 1150px) {
+    .nav__menu {
+        position: fixed;
+        top: 0;
+        right: 0;
+        background-color: var(--body-color);
+        width: 80%;
+        height: 100%;
+        box-shadow: -2px 0 16px hsla(350 70% 20% / 0.2);
+        padding: 7rem 0 2rem 2rem;
+        z-index: var(--z-fixed);
+        transition: 0.4s;
+    }
+}
+
+.nav__list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2.5rem;
+}
+
+.nav__link {
+    color: var(--title-color);
+    font-weight: var(--font-semi-bold);
+    position: relative;
+    transition: .4s;
+
+    &:hover {
+        color: var(--first-color);
+    }
+}
+
+.nav__link::before {
+    position: absolute;
+    content: '';
+    top: 50%;
+    left: -50px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--first-color);
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: .3s;
+}
+
+.nav__link:hover::before {
+    left: -10px;
+    opacity: 1;
+}
+
+.nav__link::after {
+    position: absolute;
+    content: '';
+    bottom: -2px;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--first-color), var(--second-color));
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: 0.3s;
+}
+
+.nav__link:hover::after {
+    transform: scaleX(100%);
+}
+
+.nav__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: var(--title-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: .2s;
+
+    &:hover {
+        scale: 1.2;
+        color: var(--first-color);
+    }
+}
+
+.nav__img {
+    position: absolute;
+    width: 100px;
+    right: 1.5rem;
+    bottom: 1.5rem;
+}
