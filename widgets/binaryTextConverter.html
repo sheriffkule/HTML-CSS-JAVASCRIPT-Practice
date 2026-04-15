@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Binary &leftrightarrow; Text Converter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/binaryTextConverter.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Binary &leftrightarrow; Text Converter</h1>
+        <p class="subtitle">Convert between binary code and text seamlessly.</p>
+      </header>
+
+      <div class="translator-container">
+        <div class="translator-box">
+          <div class="box-header">
+            <span class="box-title">Text</span>
+            <div class="action-buttons">
+              <button class="btn btn-light btn-sm" id="clear-text" title="Clear">
+                <i class="fas fa-eraser"></i>
+              </button>
+              <button class="btn btn-light btn-sm" id="copy-text" title="Copy">
+                <i class="fas fa-copy"></i>
+              </button>
+            </div>
+          </div>
+          <div class="textarea-container">
+            <textarea id="text-input" placeholder="Enter your text here..."></textarea>
+            <div class="char-count" id="text-char-count">0 chars</div>
+          </div>
+          <div class="controls">
+            <button class="btn btn-primary" id="text-to-binary">
+              <i class="fas fa-arrow-right"></i> To Binary
+            </button>
+          </div>
+        </div>
+
+        <button class="swap-btn" id="swap-btn" title="Swap">
+          <i class="fas fa-exchange-alt"></i>
+        </button>
+
+        <div class="translator-box">
+          <div class="box-header">
+            <span class="box-title">Binary</span>
+            <div class="action-buttons">
+              <button class="btn btn-light btn-sm" id="clear-binary" title="Clear">
+                <i class="fas fa-eraser"></i>
+              </button>
+              <button class="btn btn-light btn-sm" id="copy-binary" title="Copy">
+                <i class="fas fa-copy"></i>
+              </button>
+            </div>
+          </div>
+          <div class="textarea-container">
+            <textarea
+              id="binary-input"
+              placeholder="Enter binary code here (e.g., 01001000 01100101)"></textarea>
+            <div class="char-count" id="binary-char-count">0 chars</div>
+          </div>
+          <div class="controls">
+            <button class="btn btn-primary" id="text-to-binary">
+              <i class="fas fa-arrow-left"></i> To Text
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
