@@ -267,6 +267,12 @@ img {
     border-bottom: 4px double var(--first-color-alt);
 }
 
+.active-link {
+    color: var(--first-color);
+    text-decoration: solid underline 2px var(--first-color);
+    text-underline-offset: 3px;
+}
+
 .home__container {
     padding-block: 2.5rem;
     row-gap: 3rem;
@@ -828,12 +834,106 @@ img {
     bottom: -1rem;
 }
 
+.footer {
+    position: relative;
+    padding-block: 3rem 5rem;
+    overflow: hidden;
+}
 
+.footer__logo {
+    font-size: var(--bigger-font-size);
+    font-family: var(--second-color);
+    justify-self: center;
+    color: var(--title-color);
+}
 
+.footer__social {
+    display: flex;
+    justify-content: center;
+    column-gap: 1.5rem;
+}
 
+.footer__social-link {
+    display: block;
+    font-size: 1.5rem;
+    color: var(--title-color);
+    transition: transform 0.4s;
 
+    &:hover {
+        transform: translateY(-.25rem) scale(1.2);
+        color: var(--text-color);
+    }
+}
 
+.footer__copy {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: var(--small-font-size);
+}
 
+.footer__container {
+    position: relative;
+}
+
+.footer__container img {
+    position: absolute;
+}
+
+.footer__leaf-1 {
+    width: 30px;
+    top: 2rem;
+    right: 3rem;
+}
+
+.footer__leaf-2 {
+    width: 30px;
+    left: 3rem;
+    bottom: 2rem;
+}
+
+.footer__blob {
+    position: absolute;
+    width: 100%;
+    bottom: -1rem;
+    justify-self: center;
+    z-index: -1;
+}
+
+::-webkit-scrollbar {
+    width: 0.6rem;
+    background-color: hsl(350 40% 40% / 0.85);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: hsla(350, 81%, 51%, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: hsla(350, 93%, 24%, 0.55);
+}
+
+.scrollUp {
+    position: fixed;
+    right: 1rem;
+    bottom: -50%;
+    background-color: var(--body-color);
+    box-shadow: 0 4px 16px hsl(350 70% 20% / 0.2);
+    color: var(--title-color);
+    display: inline-flex;
+    padding: 6px;
+    font-size: 1.25rem;
+    border-radius: .75rem;
+    z-index: var(--z-tooltip);
+    transition: bottom, 4s, transform .4s;
+
+    &:hover {
+        transform: translateY(-.5rem) scale(1.1);
+    }
+}
+
+.show-scroll {
+    bottom: 3rem;
+}
 
 @media (width < 360px) {
     .home__images {
@@ -857,11 +957,18 @@ img {
         grid-template-columns: 350px;
         justify-content: center;
     }
+    .footer__blob {
+        width: 500px;
+    }
 }
 
 @media (width >= 768px) {
     .product__cards {
         grid-template-columns: repeat(2, 350px);
+    }
+    .footer__blob {
+        width: 800px;
+        bottom: -3rem;
     }
 }
 
@@ -1113,5 +1220,68 @@ img {
         grid-template-columns: repeat(2, max-content);
         justify-content: initial;
         gap: 4rem 6rem;
+    }
+    .contact__info {
+        text-align: initial;
+    }
+    .contact__title {
+        font-size: var(--h2-font-size);
+        margin-bottom: 1rem;
+    }
+    .contact__data img {
+        width: 40px;
+    }
+    .contact__sticker-1 {
+        right: -2rem;
+        top: 0;
+    }
+    .contact__sticker-2 {
+        top: -2rem;
+        left: -4rem;
+    }
+    .contact__sticker-3 {
+        right: 14rem;
+        bottom: -5rem;
+    }
+    .footer {
+        padding-block: 4.5rem 10rem;
+    }
+    .footer__container {
+        grid-template-columns: repeat(3, 1fr);
+        align-items: center;
+    }
+    .footer__logo {
+        font-size: var(--h2-font-size);
+        justify-self: flex-start;
+    }
+    .footer__social {
+        order: 1;
+        justify-self: flex-end;
+    }
+    .footer__copy {
+        margin: 0;
+    }
+    .footer__blob {
+        width: 100%;
+        bottom: -6rem;
+    }
+    .footer__leaf-1 {
+        width: 40px;
+        top: -1rem;
+        right: 10rem;
+    }
+    .footer__leaf-2 {
+        width: 40px;
+        left: 10rem;
+        bottom: -4rem;
+    }
+    .scrollUp {
+        right: 3rem;
+    }
+}
+
+@media (width >= 2048px) {
+    body {
+        zoom: 120%;
     }
 }
