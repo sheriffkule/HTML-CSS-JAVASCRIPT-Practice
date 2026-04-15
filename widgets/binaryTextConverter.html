@@ -15,7 +15,7 @@
       </header>
 
       <div class="translator-container">
-        <div class="translator-box">
+        <section class="translator-box">
           <div class="box-header">
             <span class="box-title">Text</span>
             <div class="action-buttons">
@@ -36,13 +36,13 @@
               <i class="fas fa-arrow-right"></i> To Binary
             </button>
           </div>
-        </div>
+        </section>
 
         <button class="swap-btn" id="swap-btn" title="Swap">
           <i class="fas fa-exchange-alt"></i>
         </button>
 
-        <div class="translator-box">
+        <section class="translator-box">
           <div class="box-header">
             <span class="box-title">Binary</span>
             <div class="action-buttons">
@@ -61,12 +61,102 @@
             <div class="char-count" id="binary-char-count">0 chars</div>
           </div>
           <div class="controls">
-            <button class="btn btn-primary" id="text-to-binary">
+            <button class="btn btn-primary" id="binary-to-text">
               <i class="fas fa-arrow-left"></i> To Text
             </button>
           </div>
-        </div>
+        </section>
+      </div>
+
+      <button class="settings-toggle" id="settings-toggle">
+        <span>Settings</span>
+        <i class="fas fa-chevron-down"></i>
+      </button>
+
+      <section class="settings-panel" id="settings-panel">
+        <h3 class="settings-title"><i class="fas fa-cog"></i> Converter Settings</h3>
+
+        <article class="setting-option">
+          <label>
+            <div class="toggle-swit">
+              <input type="checkbox" id="space-separator" checked />
+              <span class="slider"></span>
+            </div>
+            <span>Add space between binary digits (e.g., 01000001 01000010)</span>
+          </label>
+        </article>
+
+        <article class="setting-option">
+          <label>
+            <div class="toggle-switch">
+              <input type="checkbox" id="auto-convert" />
+              <span class="slider"></span>
+            </div>
+            <span>Auto convert on input change</span>
+          </label>
+        </article>
+
+        <article class="setting-option">
+          <label>
+            <div class="toggle-switch">
+              <input type="checkbox" id="show-ascii" checked />
+              <span class="slider"></span>
+            </div>
+            <span>Show ASCII codes in tooltip</span>
+          </label>
+        </article>
+
+        <article class="setting-option">
+          <label>
+            <div class="toggle-switch">
+              <input type="checkbox" id="dark-theme" />
+              <span class="slider"></span>
+            </div>
+            <span>Dark Theme</span>
+          </label>
+        </article>
+      </section>
+
+      <div class="features">
+        <article class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-bolt"></i>
+          </div>
+          <h3 class="feature-title">Quick Conversion</h3>
+          <p class="feature-desc">
+            Instantly convert between binary and text with a single click or automatically as you type.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-clipboard"></i>
+          </div>
+          <h3 class="feature-title">Easy Copy</h3>
+          <p class="feature-desc">
+            Copy results to clipboard with one click for quick sharing or pasting elsewhere.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-cogs"></i>
+          </div>
+          <h3 class="feature-title">Customizable</h3>
+          <p class="feature-desc">
+            Adjust Settings to control formatting and behavior to match your preferences.
+          </p>
+        </article>
       </div>
     </div>
+
+    <footer>
+      © <time datetime="2026" id="year">2026</time> Made width <span>♥</span> by
+      <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+    </footer>
+
+    <div class="notification" id="notification"></div>
+
+    <script src="/widgets_script/binaryTextConverter.js"></script>
   </body>
 </html>
