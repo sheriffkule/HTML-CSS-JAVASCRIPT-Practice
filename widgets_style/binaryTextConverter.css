@@ -239,3 +239,144 @@ textarea:is(:focus, :focus-within)::placeholder {
     margin-bottom: 10px;
     color: var(--secondary);
 }
+
+.feature-desc {
+    color: #495057;
+    font-size: 0.9rem;
+}
+
+footer {
+    margin-top: 30px;
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9rem;
+
+    span {
+        color: var(--error);
+        font-size: 1rem;
+    }
+    abbr {
+        text-underline-offset: 2px;
+        letter-spacing: 0.5px;
+        cursor: default;
+        color: var(--primary);
+    }
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow),
+    inset var(--box-shadow);
+    color: white;
+    transform: translateX(150%) scaleY(0);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.notification.show {
+    transform: translateX(0) scaleY(1);
+}
+
+.notification.success {
+    background-color: var(--success);
+}
+
+.notification.error {
+    background-color: var(--error);
+}
+
+.settings-panel {
+    background: #eee;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-top: 30px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in, padding 0.3s ease-in, margin 0.3s ease-in;
+}
+
+.settings-title {
+    color: var(--secondary);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.settings-option {
+    margin-bottom: 15px;
+
+    label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+    }
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider::before {
+    content: '';
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    border-radius: 50%;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: var(--primary);
+}
+
+input:checked + .slider::before {
+    transform: translateX(26px);
+}
+
+.settings-toggle {
+    background-color: none;
+    border: none;
+    color: var(--primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 20px;
+    border-radius: var(--border-radius);
+    margin: 20px auto 0;
+    font-weight: 500;
+
+    i {
+        transition: transform 0.3s ease-out;
+    }
+    &.open i {
+        transform: rotate(180deg);
+    }
+}
