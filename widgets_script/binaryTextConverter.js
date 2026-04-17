@@ -79,4 +79,120 @@ document.addEventListener('DOMContentLoaded', function () {
     textInput.value = text;
     updateCharCounts();
   }
+
+  // Event listeners
+  textToBinaryBtn.addEventListener('click', convertTextToBinary);
+  binaryToTextBtn.addEventListener('click', convertBinaryToText);
+
+  swapBtn.addEventListener('click', function () {
+    const temp = textInput.value;
+    textInput.value = binaryInput.value;
+    binaryInput.value = temp;
+    updateCharCounts();
+
+    if (document.activeElement === textInput || document.activeElement === binaryInput) {
+      if (autoConvert.checked) {
+        if (document.activeElement === textInput) {
+          convertTextToBinary();
+        } else {
+          convertBinaryToText();
+        }
+      }
+    }
+  });
+
+  clearTextBtn.addEventListener('click', function () {
+    textInput.value = '';
+    updateCharCounts();
+    showNotification('Text cleared', 'success');
+  });
+
+  clearBinaryBtn.addEventListener('click', function () {
+    binaryInput.value = '';
+    updateCharCounts();
+    showNotification('Binary cleared', 'success');
+  });
+
+  copyTextBtn.addEventListener('click', function () {
+    textInput.select();
+    document.execCommand('copy');
+    showNotification('Text copied to clipboard', 'success');
+  });
+
+  copyBinaryBtn.addEventListener('click', function () {
+    binaryInput.select();
+    document.execCommand('copy');
+    showNotification('Binary copied to clipboard', 'success');
+  });
+
+  // Show ASCII codes in tooltip if enabled
+  textInput.addEventListener('mousemove', function (e) {
+    if (!showAscii.checked) return;
+
+    const index = getCursorPosition(textInput, e.clientX, e.clientY);
+    if (index >= 0 && index < textInput.value.length) {
+      const char = textInput.value.charAt(index);
+      const charCode = char.charCodeAt(0);
+      textInput.title = `'${char}' - ASCII: ${charCode}, Binary: ${charCode.toString(2).padStart(8, '0')}`;
+    } else {
+      textInput.title = '';
+    }
+  });
+
+  binaryInput.addEventListener('mousemove', function (e) {
+    if (!showAscii.checked) return;
+
+    const index = getCursorPosition(textInput, e.clientX, e.clientY);
+    if (index >= 0 && index < binaryInput.value.length) {
+      // FInd the start of the current 8-bit binary character
+      let start = index;
+      while (start > 0 && /[01]/.text(binaryInput.value.charAt(start - 1))) {
+        start--;
+      }
+
+      const binaryChar = binaryInput.value.substr(start, 8).replace(/[^01]/g, '');
+      if (binaryChar.length === 8) {
+        const charCode = parseInt(binaryChar, 2);
+        binaryInput.title = `Binary: ${binaryChar} - ASCII: ${charCode}, Char: '${String.fromCharCode(charCode)}'`;
+      } else {
+        binaryInput.title = '';
+      }
+    } else {
+      binaryInput.title = '';
+    }
+  });
+
+  // Helper function to get cursor position in text area
+  function getCursorPosition(textarea, x, y) {
+    const rect = textarea.getBoundingClientRect();
+    x -= rect.left;
+    y -= rect.top;
+
+    // Create a range for the textarea content
+    const range = document.createRange();
+    const sel = window.getSelection();
+
+    // Find the closest text node (might be the textarea itself)
+    let node = textarea.firstChild;
+    if (!node) {
+      node = document.createTextNode('');
+      textarea.appendChild(node);
+    }
+
+    range.setStart(node, 0);
+    range.setEnd(node, textarea.value.length);
+
+    const rects = range.getClientRects();
+    for (let i = 0; i < rects.length; i++) {
+      if (y >= rects[i].top && y <= rects[i].bottom) {
+        if (x <= rects[i].left) {
+          return i > 0 ? i - 1 : 0;
+        } else if (x <= rects[i].right) {
+          return i;
+        }
+      }
+    }
+
+    return textarea.value.length;
+  }
 });
