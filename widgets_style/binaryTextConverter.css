@@ -1,3 +1,56 @@
+body.dark-theme {
+    --primary: #22223b;
+    --secondary: #4a4e69;
+    --accent: #9a8c98;
+    --light: #23243a;
+    --dark: #f8f8f2;
+    --success: #4cc9f0;
+    --error: #f72585;
+    background-color: var(--light);
+    color: var(--dark);
+}
+
+body.dark-theme .container,
+body.dark-theme .translator-box,
+body.dark-theme .feature-card,
+body.dark-theme .settings-panel {
+    background: #23243a !important;
+    color: var(--dark) !important;
+}
+
+body.dark-theme .box-header,
+body.dark-theme .swap-btn {
+    background-color: var(--secondary) !important;
+    color: var(--light) !important;
+}
+
+body.dark-theme textarea {
+    background-color: #2d3142 !important;
+    color: var(--dark) !important;
+}
+
+body.dark-theme .char-count {
+    background-color: rgb(255 255 255 / 0.08) !important;
+    color: #bfc0c0 !important;
+}
+
+body.dark-theme .btn-primary {
+    background-color: var(--primary) !important;
+    color: var(--light) !important;
+}
+
+body.dark-theme .btn-light {
+    background-color: rgb(255 255 255 / 0.08) !important;
+    color: var(--dark) !important;
+}
+
+body.dark-theme .notification.success {
+    background-color: #2ec4b6 !important;
+}
+
+body.dark-theme .notification.error {
+    background-color: #e63946 !important;
+}
 :root {
     --primary: #4361ee;
     --secondary: #3f37c9;
@@ -297,6 +350,12 @@ footer {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease-in, padding 0.3s ease-in, margin 0.3s ease-in;
+}
+
+.settings-panel.open {
+    max-height: 500px;
+    padding: 20px;
+    margin-top: 30px;
 }
 
 .settings-title {

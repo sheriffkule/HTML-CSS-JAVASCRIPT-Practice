@@ -34,8 +34,12 @@ document.addEventListener('DOMContentLoaded', function () {
     binaryCharCount.textContent = `${binaryInput.value.length} characters`;
 
     if (autoConvert.checked) {
-      if (document.activeElement === textInput) convertTextToBinary();
-    } else if ((document.activeElement = binaryInput)) convertBinaryToText();
+      if (document.activeElement === textInput) {
+        convertTextToBinary();
+      } else if (document.activeElement === binaryInput) {
+        convertBinaryToText();
+      }
+    }
   }
 
   // Conversion function
@@ -67,8 +71,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let text = '';
 
-    // Split into 8-bit chunk
-    for (let i = 0; i < binary.length; i++) {
+    // Split into 8-bit chunks
+    for (let i = 0; i < binary.length; i += 8) {
       const binaryChar = binary.substr(i, 8);
       if (binaryChar.length === 8) {
         const charCode = parseInt(binaryChar, 2);
@@ -129,7 +133,8 @@ document.addEventListener('DOMContentLoaded', function () {
   textInput.addEventListener('mousemove', function (e) {
     if (!showAscii.checked) return;
 
-    const index = getCursorPosition(textInput, e.clientX, e.clientY);
+    // Show tooltip for character under mouse (approximate by caret position)
+    const index = textInput.selectionStart;
     if (index >= 0 && index < textInput.value.length) {
       const char = textInput.value.charAt(index);
       const charCode = char.charCodeAt(0);
@@ -142,14 +147,14 @@ document.addEventListener('DOMContentLoaded', function () {
   binaryInput.addEventListener('mousemove', function (e) {
     if (!showAscii.checked) return;
 
-    const index = getCursorPosition(textInput, e.clientX, e.clientY);
+    // Show tooltip for 8-bit binary chunk under caret
+    const index = binaryInput.selectionStart;
     if (index >= 0 && index < binaryInput.value.length) {
-      // FInd the start of the current 8-bit binary character
+      // Find the start of the current 8-bit binary character
       let start = index;
-      while (start > 0 && /[01]/.text(binaryInput.value.charAt(start - 1))) {
+      while (start > 0 && /[01]/.test(binaryInput.value.charAt(start - 1))) {
         start--;
       }
-
       const binaryChar = binaryInput.value.substr(start, 8).replace(/[^01]/g, '');
       if (binaryChar.length === 8) {
         const charCode = parseInt(binaryChar, 2);
@@ -162,37 +167,52 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // Helper function to get cursor position in text area
-  function getCursorPosition(textarea, x, y) {
-    const rect = textarea.getBoundingClientRect();
-    x -= rect.left;
-    y -= rect.top;
+  // Removed getCursorPosition (not reliable for textarea)
 
-    // Create a range for the textarea content
-    const range = document.createRange();
-    const sel = window.getSelection();
+  // Notification function
+  function showNotification(message, type) {
+    notification.textContent = message;
+    notification.className = `notification ${type} show`;
 
-    // Find the closest text node (might be the textarea itself)
-    let node = textarea.firstChild;
-    if (!node) {
-      node = document.createTextNode('');
-      textarea.appendChild(node);
-    }
-
-    range.setStart(node, 0);
-    range.setEnd(node, textarea.value.length);
-
-    const rects = range.getClientRects();
-    for (let i = 0; i < rects.length; i++) {
-      if (y >= rects[i].top && y <= rects[i].bottom) {
-        if (x <= rects[i].left) {
-          return i > 0 ? i - 1 : 0;
-        } else if (x <= rects[i].right) {
-          return i;
-        }
-      }
-    }
-
-    return textarea.value.length;
+    setTimeout(() => {
+      notification.classList.remove('show');
+    }, 3000);
   }
+
+  // Initialize
+  updateCharCounts();
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+
+  updateYear();
+
+  // Dark theme functionality
+  function applyDarkTheme(enabled) {
+    if (enabled) {
+      document.body.classList.add('dark-theme');
+    } else {
+      document.body.classList.remove('dark-theme');
+    }
+  }
+
+  // Listen for dark theme toggle
+  darkTheme.addEventListener('change', function () {
+    applyDarkTheme(darkTheme.checked);
+    showNotification(darkTheme.checked ? 'Dark theme enabled' : 'Dark theme disabled', 'success');
+  });
+
+  // On load, set theme if checked
+  applyDarkTheme(darkTheme.checked);
 });
