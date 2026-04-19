@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Acronym Generator App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/acronymGenerator.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Acronym Generator</h1>
+      <p>Enter an abbreviation to find its meanings:</p>
+      <div class="search-box">
+        <input type="text" id="abbreviation" placeholder="e.g., NASA" />
+        <button id="search-btn"><i class="fas fa-search"></i></button>
+      </div>
+      <div class="loading" id="loading">
+        <i class="fas fa-spinner fa-spin"></i>
+      </div>
+      <div class="results" id="results"></div>
+      <div class="error" id="error"></div>
+    </div>
+
+    <script src="/widgets_script/acronymGenerator.js"></script>
+  </body>
+</html>
