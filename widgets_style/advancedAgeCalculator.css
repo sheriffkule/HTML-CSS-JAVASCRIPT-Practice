@@ -137,3 +137,123 @@ button {
         background-color: #e9ecef;
     }
 }
+
+.result-section {
+    background-color: #eee;
+    border-radius: var(--border-radius);
+    padding: 25px;
+    margin-bottom: 30px;
+    /* display: none; */
+}
+
+.result-section.active {
+    display: block;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    h2 {
+        font-size: 20px;
+        color: var(--primary);
+    }
+}
+
+.age-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.age-unit {
+    text-align: center;
+    background: white;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 8px rgb(0 0 0 / 0.2);
+    flex: 1;
+    transition: all .3s;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 15px rgb(0 0 0 / 0.3);
+    }
+}
+
+.age-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 5px;
+}
+
+.age-label {
+    font-size: 14px;
+    color: #494f55;
+}
+
+.additional-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+
+    @media (width < 500px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.info-card {
+    background: white;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 8px rgb(0 0 0 / 0.2);
+
+    h3 {
+        font-size: 16px;
+        margin-bottom: 10px;
+        color: var(--secondary);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    p {
+        font-size: 14px;
+        color: #495057;
+    }
+}
+
+.milestones-section {
+    margin-top: 30px;
+
+    h2  {
+        font-size: 18px;
+        margin-bottom: 15px;
+        color: var(--dark);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+}
+
+.milestones-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
