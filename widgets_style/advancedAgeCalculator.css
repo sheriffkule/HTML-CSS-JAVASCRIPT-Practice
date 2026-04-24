@@ -257,3 +257,115 @@ button {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 15px;
 }
+
+.milestone-card {
+    background: white;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 8px rgb(0 0 0 / 0.2);
+    transition: all .3s;
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 15px rgb(0 0 0 / 0.3);
+    }
+    h3 {
+        font-size: 16px;
+        margin-bottom: 5px;
+        color: var(--dark);
+    }
+    p {
+        font-size: 14px;
+        color: #494f55;
+    }
+}
+
+.milestone-card.past {
+    opacity: 0.7;
+}
+
+.milestone-card.future {
+    border-left: 4px solid var(--primary);
+}
+
+.milestone-date {
+    font-weight: 500;
+    color: var(--primary);
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+}
+
+.share-section {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.share-btn {
+    padding: 8px 15px;
+    border-radius: 50px;
+    font-size: 14px;
+    flex: 0 0 auto;
+}
+
+.share-btn.twitter {
+    background-color: #1da1f2;
+    color: white;
+}
+
+.share-btn.facebook {
+    background-color: #4267b2;
+    color: white;
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 4px 8px rgb(0 0 0 / 0.2);
+    cursor: pointer;
+    border: none;
+}
+
+body.dark-mode {
+    background: linear-gradient(135deg, #2b2d42, #1a1a2e);
+    color: #f8f9fa;
+}
+
+.body.dark-mode .container {
+    background-color: #212529;
+    color: #f8f9fa;
+}
+
+.body.dark-mode :is(.result-section, .age-unit, .info-card, .milestone-card) {
+    background-color: #343a40;
+    color: #f8f9fa;
+}
+
+.body.dark-mode :is(.age-label, .info-card p, .milestone-card p) {
+    color: #adb5bd;
+}
+
+.body.dark-mode :is(.input-group, select, .input-group input) {
+    background-color: #343a40;
+    border-color: #495057;
+    color: #f8f9fa;
+}
+
+.body.dark-mode .btn-secondary {
+    background-color: #495057;
+    color: #f8f9fa;
+
+    &:hover {
+        background-color: #5a6268;
+    }
+}
