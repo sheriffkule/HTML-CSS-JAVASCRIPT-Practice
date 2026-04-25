@@ -346,16 +346,16 @@ body.dark-mode {
     color: #f8f9fa;
 }
 
-.body.dark-mode :is(.result-section, .age-unit, .info-card, .milestone-card) {
+.body.dark-mode:is(.result-section, .age-unit, .info-card, .milestone-card) {
     background-color: #343a40;
     color: #f8f9fa;
 }
 
-.body.dark-mode :is(.age-label, .info-card p, .milestone-card p) {
+.body.dark-mode:is(.age-label, .info-card p, .milestone-card p) {
     color: #adb5bd;
 }
 
-.body.dark-mode :is(.input-group, select, .input-group input) {
+.body.dark-mode:is(.input-group, select, .input-group input) {
     background-color: #343a40;
     border-color: #495057;
     color: #f8f9fa;
@@ -367,5 +367,23 @@ body.dark-mode {
 
     &:hover {
         background-color: #5a6268;
+    }
+}
+
+footer {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--dark);
+    background-color: rgb(0 0 0 / 0.2);
+    padding-block: 10px;
+
+    span {
+        color: var(--error);
+        font-size: 1rem;
+    }
+    abbr {
+        color: var(--primary);
+        text-underline-offset: 2px;
+        letter-spacing: 0.5px;
     }
 }
