@@ -82,5 +82,87 @@ document.addEventListener('DOMContentLoaded', function () {
     if (nextBirthday < today) {
       nextBirthday.setFullYear(nextBirthday.getFullYear() + 1);
     }
+
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('nextBirthday').textContent = nextBirthday.toLocaleDateString('en-US', options);
+
+    // Calculate day of birth
+    const birthDay = birthDate.toLocaleDateString('en-US', { weekday: 'long' });
+    document.getElementById('birthDay').textContent =
+      `${birthDay}, ${birthDate.toLocaleDateString('en-US', options)}`;
+
+    // Calculate life progress (assuming average lifespan of 80 years)
+    const lifeProgress = (ageInYears / 80) * 100;
+    document.getElementById('lifeProgress').textContent = `${lifeProgress.toFixed(1)}% of average lifespan.`;
+
+    // Determine generation
+    let generation = '';
+    if (year >= 1997 && year <= 2012) {
+      generation = 'Generation Z';
+    } else if (year >= 1981 && year <= 1996) {
+      generation = 'Millennial';
+    } else if (year >= 1965 && year <= 1980) {
+      generation = 'Generation X';
+    } else if (year >= 1946 && year <= 1964) {
+      generation = 'Baby Boomer';
+    } else if (year >= 1928 && year <= 1945) {
+      generation = 'Silent Generation';
+    } else if (year >= 1901 && year <= 1927) {
+      generation = 'Greatest Generation';
+    } else if (year >= 2013) {
+      generation = 'Generation Alpha';
+    } else {
+      generation = 'Unknown Generation';
+    }
+    document.getElementById('generation').textContent = generation;
+
+    // Determine zodiac sign
+    const zodiacSign = getZodiacSign(day, month);
+    document.getElementById('zodiacSign').innerHTML = `
+      <span
+        style="background: #${getZodiacColor(
+          zodiacSign,
+        )}; color: white; padding: 5px 10px; border-radius: 20px; font-size: 14px"
+        >${zodiacSign}</span
+      >
+    `;
+
+    // Generate milestones
+    generateMilestones(birthDate, years);
+
+    // Show results
+    document.getElementById('resultSection').classList.add('active');
+  }
+
+  function getZodiacSign(day, month) {
+    if ((month === 3 && day >= 21) || (month === 4 && day <= 19)) return 'Aries';
+    if ((month === 4 && day >= 20) || (month === 4 && day <= 19)) return 'Taurus';
+    if ((month === 5 && day >= 21) || (month === 4 && day <= 19)) return 'Gemini';
+    if ((month === 6 && day >= 21) || (month === 4 && day <= 19)) return 'Cancer';
+    if ((month === 7 && day >= 23) || (month === 4 && day <= 19)) return 'Leo';
+    if ((month === 8 && day >= 23) || (month === 4 && day <= 19)) return 'Virgo';
+    if ((month === 9 && day >= 23) || (month === 4 && day <= 19)) return 'Libra';
+    if ((month === 10 && day >= 23) || (month === 4 && day <= 19)) return 'Scorpio';
+    if ((month === 11 && day >= 22) || (month === 4 && day <= 19)) return 'Sagittarius';
+    if ((month === 12 && day >= 22) || (month === 4 && day <= 19)) return 'Capricorn';
+    if ((month === 1 && day >= 20) || (month === 4 && day <= 19)) return 'Aquarius';
+    return 'Pisces';
+  }
+
+  function getZodiacColor(sign) {
+    const colors = {
+      'Aries': 'ff6b6b',
+      'Taurus': '4ecdc4',
+      'Gemini': '45b7d1',
+      'Cancer': 'a5d8dd',
+      'Leo': 'ffd166',
+      'Virgo': '06d6a0',
+      'Libra': 'a78aff',
+      'Scorpio': '8338ec',
+      'Sagittarius': 'ff9e00',
+      'Capricorn': '8a817c',
+      'Aquarius': '3a86ff',
+      'Pisces': '5887ff',
+    }
   }
 });

@@ -96,6 +96,63 @@ body {
     inset 0 0 0 2px rgb(67 97 238 / 0.2);
 }
 
+select:is(:focus, :focus-within) {
+    background-color: var(--primary);
+    color: var(--light);
+}
+
+select:is(:focus, :focus-within)::picker-icon {
+    color: var(--success);
+}
+
+select,
+::picker(select) {
+  appearance: base-select;
+}
+
+::picker(select) {
+  border-radius: var(--border-radius);
+  border: none;
+}
+
+select::picker-icon {
+  color: var(--primary);
+  transition: 0.3s rotate;
+}
+
+select:open::picker-icon {
+  rotate: 180deg;
+  color: var(--success);
+}
+
+select:not():open {
+    background-color: var(--light);
+}
+
+option {
+  border: 1px solid #bbb;
+  background: var(--secondary);
+  padding: 2px 0 2px 12px;
+  color: white;
+  transition: 0.3s;
+}
+
+option:hover,
+option:focus {
+  background: var(--primary);
+}
+
+option:checked {
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: var(--success);
+}
+
+option::checkmark {
+  color: var(--success);
+  font-size: 1.5rem;
+}
+
 .action-buttons {
     display: flex;
     gap: 15px;
