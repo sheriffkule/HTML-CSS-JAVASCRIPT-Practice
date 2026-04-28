@@ -31,6 +31,127 @@
           <div class="world-clock-container" id="world-clocks"></div>
         </div>
       </div>
+
+      <div class="tab-content" id="alarm">
+        <div class="clock-container">
+          <form class="alarm-form" id="alarm-form">
+            <input type="time" id="alarm-time" required />
+            <select id="alarm-sound">
+              <option value="bell">Bell</option>
+              <option value="digital">Digital</option>
+              <option value="chime">Chime</option>
+              <option value="birds">Birds</option>
+            </select>
+            <input type="text" id="alarm-label" placeholder="'Alarm Label (optional)" />
+            <button type="submit">Add AlarmI</button>
+          </form>
+
+          <h2 style="text-align: center; margin-bottom: 1rem">Your Alarms</h2>
+          <div class="alarms-list" id="alarms-list"></div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="stopwatch">
+        <div class="clock-container">
+          <div class="stopwatch-display" id="stopwatch-display">00:00:00.00</div>
+
+          <div class="stopwatch-controls">
+            <button class="stopwatch-btn start" id="stopwatch-start">
+              <i class="fas fa-play"></i> Start
+            </button>
+            <button class="stopwatch-btn stop" id="stopwatch-stop" disabled>
+              <i class="fas fa-stop"></i> Stop
+            </button>
+            <button class="stopwatch-btn reset" id="stopwatch-reset" disabled>
+              <i class="fas fa-redo"></i> Reset
+            </button>
+            <button class="stopwatch-btn lap" id="stopwatch-lap" disabled>
+              <i class="fas fa-flag"></i> Lap
+            </button>
+          </div>
+
+          <h2 style="text-align: center; margin-bottom: 1rem">Laps</h2>
+          <div class="stopwatch-laps" id="stopwatch-laps"></div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="timer">
+        <div class="clock-container">
+          <div class="timer-display" id="timer-display">00:00:00</div>
+
+          <div class="timer-input">
+            <div class="timer-input-group">
+              <label>Hours</label>
+              <input type="number" id="timer-hours" min="0" max="23" value="0" />
+            </div>
+            <div class="timer-input-group">
+              <label>Minutes</label>
+              <input type="number" id="timer-minutes" min="0" max="59" value="0" />
+            </div>
+            <div class="timer-input-group">
+              <label>Seconds</label>
+              <input type="number" id="timer-seconds" min="0" max="59" value="0" />
+            </div>
+          </div>
+
+          <div class="timer-controls">
+            <button class="timer-btn start" id="timer-start"><i class="fas fa-play"></i> Start</button>
+            <button class="timer-btn pause" id="timer-pause" disabled>
+              <i class="fas fa-pause"></i> Pause
+            </button>
+            <button class="timer-btn reset" id="timer-reset" disabled>
+              <i class="fas fa-redo"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="settings">
+        <div class="clock-container">
+          <form class="settings-form" id="settings-form">
+            <div class="form-group">
+              <label for="time-format">Time Format</label>
+              <select id="time-format">
+                <option value="12">12-hour</option>
+                <option value="24">24-hour</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="theme">Theme</label>
+              <select id="theme">
+                <option value="dark">Dark</option>
+                <option value="light">Light</option>
+                <option value="blue">Blue</option>
+                <option value="green">Green</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="default-tab">Default Tab</label>
+              <select id="default-tab">
+                <option value="clock">Clock</option>
+                <option value="alarm">Alarm</option>
+                <option value="stopwatch"></option>
+                <option value="timer">Timer</option>
+              </select>
+            </div>
+
+            <button type="submit" class="settings-btn">Save Settings</button>
+          </form>
+        </div>
+      </div>
     </div>
+
+    <div class="notification" id="notification">
+      <span id="notification-message">Notification message</span>
+      <button class="close-btn" id="notification-close">&times;</button>
+    </div>
+
+    <audio
+      src="https://assets.mixkit.co/svx/preview/mixkit-alarm-digital-clock-beep-989.mp3"
+      id="alarm-sound"></audio>
+
+    <script src="/widgets_script/advancedClock.js"></script>
   </body>
 </html>
