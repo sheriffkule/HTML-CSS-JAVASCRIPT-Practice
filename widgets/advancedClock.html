@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Advanced Clock App</title>
+    <link rel="stylesheet" href="/widgets_style/advancedClock.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Advanced Clock App</h1>
+        <p class="subtitle">Your complete time management solution.</p>
+      </header>
+
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="clock"><i class="fas fa-clock"></i> Clock</button>
+        <button class="tab-btn" data-tab="alarm"><i class="fas fa-bell"></i> Alarm</button>
+        <button class="tab-btn" data-tab="stopwatch"><i class="fas fa-stopwatch"></i> Stopwatch</button>
+        <button class="tab-btn" data-tab="timer"><i class="fas fa-hourglass-half"></i> Timer</button>
+        <button class="tab-btn" data-tab="settings"><i class="fas fa-cog"></i> Settings</button>
+      </div>
+
+      <div class="tab-content active" id="clock">
+        <div class="clock-container">
+          <div class="time-display" id="current-time">00:00:00</div>
+          <div class="date-display" id="current-date">Monday, January 1, 2026</div>
+
+          <h2 style="text-align: center; margin-bottom: 1rem">World Clocks</h2>
+          <div class="world-clock-container" id="world-clocks"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
