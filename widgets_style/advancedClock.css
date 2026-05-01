@@ -323,7 +323,7 @@ option::checkmark {
     font-size: 1rem;
     color: white;
     cursor: pointer;
-    transition: all .3s ease;
+    transition: all .2s ease;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -339,6 +339,14 @@ option::checkmark {
     }
     &.lap {
         background: var(--accent);
+    }
+    &:hover {
+        scale: 1.02;
+        box-shadow: 0 5px 20px rgb(255 255 255 / 0.1);
+        filter: saturate(0.7);
+    }
+    &:active {
+        scale: 1;
     }
 }
 
@@ -357,5 +365,79 @@ option::checkmark {
     &:first-child {
         font-weight: bold;
         color: var(--success);
+    }
+}
+
+.timer-display {
+    font-size: 5rem;
+    text-align: center;
+    margin-block: 2rem;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.timer-input {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.timer-input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    label {
+        margin-bottom: .5rem;
+        opacity: 0.8;
+    }
+    input {
+        width: 80px;
+        padding: .75rem;
+        border-radius: 8px;
+        border: 1px solid rgb(255 255 255 / 0.2);
+        background: rgb(255 255 255 / 0.1);
+        color: white;
+        font-size: 1.2rem;
+        text-align: center;
+
+        &:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+    }
+}
+
+.timer-controls {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    gap: 1rem;
+}
+
+.timer-btn {
+    padding: 0.75rem 1rem;
+    border-radius: 50px;
+    border: none;
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+    transition: all .25s;
+
+    &.start {
+        background: var(--success);
+    }
+    &.pause {
+        background: var(--warning);
+    }
+    &.reset {
+        background: rgb(255 255 255 / 0.1);
+    }
+    &:hover {
+        scale: 1.02;
+        box-shadow: 0 5px 20px rgb(255 255 255 / 0.1);
+    }
+    &:active {
+        scale: 1;
     }
 }

@@ -4,7 +4,7 @@ const tabContents = document.querySelectorAll('.tab-content');
 
 // Clock Elements
 const currentTimeEl = document.getElementById('current-time');
-const currentDateEl = document.getElementById('current-data');
+const currentDateEl = document.getElementById('current-date');
 const worldClocksEl = document.getElementById('world-clocks');
 
 // Alarm addEventOnElements
@@ -62,7 +62,7 @@ let timerRunning = false;
 
 // World clocks configuration
 const worldClocks = [
-  { city: 'New York', timezone: 'America/New York' },
+  { city: 'New York', timezone: 'America/New_York' },
   { city: 'London', timezone: 'Europe/London' },
   { city: 'Tokyo', timezone: 'Asia/Tokyo' },
   { city: 'Sydney', timezone: 'Australia/Sydney' },
@@ -104,7 +104,7 @@ function loadSettings() {
     applyTheme(settings.theme);
 
     // Activate default tab
-    const defaultTabBtn = document.querySelectorAll(`.tab-btn[data-tab="${settings.defaultTab}"]`);
+    const defaultTabBtn = document.querySelector(`.tab-btn[data-tab="${settings.defaultTab}"]`);
     if (defaultTabBtn) {
       document.querySelector('.tab-btn.active').classList.remove('active');
       document.querySelector('.tab-content.active').classList.remove('active');
@@ -161,8 +161,87 @@ function updateClock() {
 
   // Format date
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  currentDateEl.textContent = now.toLocaleDateString(undefined, options);
+  currentDateEl.textContent = now.toLocaleDateString(undefined, options) + '.';
 
   // Check alarms
-  checkAlarms(now);
+  // checkAlarms(now);
 }
+
+// Update world clocks
+function updateWorldClocks() {
+  worldClocksEl.innerHTML = '';
+
+  worldClocks.forEach((clock) => {
+    const now = new Date();
+    let timeString;
+
+    try {
+      timeString = now.toLocaleTimeString(undefined, {
+        timeZone: clock.timezone,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: settings.timeFormat === '12',
+      });
+
+      const dateString = now.toLocaleDateString(undefined, {
+        timeZone: clock.timezone,
+        weekday: 'short',
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      });
+
+      const clockEl = document.createElement('div');
+      clockEl.className = 'world-clock';
+      clockEl.innerHTML = `
+        <div class="city">${clock.city}</div>
+        <div class="time">${timeString}</div>
+        <div class="date">${dateString}</div>
+      `;
+
+      worldClocksEl.appendChild(clockEl);
+    } catch (e) {
+      console.error(`Error displaying time for ${clock.city}:`, e);
+    }
+  });
+}
+
+// Set up event listeners
+function setupEventListeners() {
+  // Alarm form submission
+  alarmForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const time = alarmTimeInput.value;
+    const sound = alarmSoundSelect.value;
+    const label = alarmLabelInput.value || 'Alarm';
+
+    // Create alarm object
+    const alarm = {
+      id: Date.now(),
+      time,
+      sound,
+      label,
+      active: true,
+    };
+
+    // Add to alarms array
+    alarms.push(alarm);
+
+    // Save to localStorage
+    localStorage.setItem('alarms', JSON.stringify(alarms));
+
+    // Render alarms
+    renderAlarms();
+
+    // Reset form
+    alarmForm.reset();
+
+    // Show notification
+    showNotification('Alarm aded successfully');
+  });
+}
+
+// Initialize the app
+document.addEventListener('DOMContentLoaded', init);
