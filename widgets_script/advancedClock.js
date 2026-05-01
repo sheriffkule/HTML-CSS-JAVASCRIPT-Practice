@@ -92,3 +92,77 @@ function init() {
   // Set up event listeners
   setupEventLIsteners();
 }
+
+// Load settings from localStorage
+function loadSettings() {
+  if (settings) {
+    timeFormatSelect.value = settings.timeFormat;
+    themeSelect.value = settings.theme;
+    defaultTabSelect.value = settings.defaultTab;
+
+    // Apply theme
+    applyTheme(settings.theme);
+
+    // Activate default tab
+    const defaultTabBtn = document.querySelectorAll(`.tab-btn[data-tab="${settings.defaultTab}"]`);
+    if (defaultTabBtn) {
+      document.querySelector('.tab-btn.active').classList.remove('active');
+      document.querySelector('.tab-content.active').classList.remove('active');
+
+      defaultTabBtn.classList.add('active');
+      document.getElementById(settings.defaultTab).classList.add('active');
+    }
+  }
+}
+
+// Apply theme
+function applyTheme(theme) {
+  document.body.className = '';
+  document.body.classList.add(theme + '-theme');
+}
+
+// Set up tabs
+function setupTabs() {
+  tabBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const tabId = btn.getAttribute('data-tab');
+
+      // Remove active class from all buttons and contents
+      tabBtns.forEach((b) => b.classList.remove('active'));
+      tabContents.forEach((c) => c.classList.remove('active'));
+
+      // Add active class to clicked button and corresponding content
+      btn.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    });
+  });
+}
+
+// Update main clock
+function updateClock() {
+  const now = new Date();
+
+  // Format time based on settings
+  let hours = now.getHours();
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+
+  let timeString;
+  if (settings.timeFormat === '12') {
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    timeString = `${String(hours).padStart(2, '0')}:${minutes}:${seconds} ${ampm}`;
+  } else {
+    timeString = `${String(hours).padStart(2, '0')}:${minutes}:${seconds}`;
+  }
+
+  currentTimeEl.textContent = timeString;
+
+  // Format date
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  currentDateEl.textContent = now.toLocaleDateString(undefined, options);
+
+  // Check alarms
+  checkAlarms(now);
+}

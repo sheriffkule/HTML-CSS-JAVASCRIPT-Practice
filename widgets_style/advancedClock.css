@@ -301,3 +301,61 @@ option::checkmark {
 .alarm-actions .toggle-btn.active {
     color: var(--success);
 }
+
+.stopwatch-display {
+    font-size: 4rem;
+    text-align: center;
+    margin-block: 2rem;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.stopwatch-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stopwatch-btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    border: none;
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+    transition: all .3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &.start {
+        background: var(--success)
+    }
+    &.stop {
+        background: var(--danger);
+    }
+    &.reset {
+        background: rgb(255 255 255 / 0.1);
+    }
+    &.lap {
+        background: var(--accent);
+    }
+}
+
+.stopwatch-laps {
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 1rem;
+}
+
+.lap-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-bottom: rgb(255 255 255 / 0.1);
+
+    &:first-child {
+        font-weight: bold;
+        color: var(--success);
+    }
+}
