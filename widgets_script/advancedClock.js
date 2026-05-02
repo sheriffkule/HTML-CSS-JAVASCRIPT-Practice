@@ -239,8 +239,125 @@ function setupEventListeners() {
     alarmForm.reset();
 
     // Show notification
-    showNotification('Alarm aded successfully');
+    showNotification('Alarm added successfully');
   });
+
+  // Stopwatch controls
+  stopwatchStartBtn.addEventListener('click', startStopwatch);
+  stopwatchStopBtn.addEventListener('click', stopStopwatch);
+  stopwatchResetBtn.addEventListener('click', resetStopwatch);
+  stopwatchLapBtn.addEventListener('click', addLap);
+
+  // Time controls
+  timerStartBtn.addEventListener('click', startTimer);
+  timerPauseBtn.addEventListener('click', pauseTimer);
+  timerResetBtn.addEventListener('click', resetTimer);
+
+  // Timer input validation
+  timerHoursInput.addEventListener('change', validateTimerInput);
+  timerMinutesInput.addEventListener('change', validateTimerInput);
+  timerSecondsInput.addEventListener('change', validateTimerInput);
+
+  // Settings form submission
+  settingsForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    settings = {
+      timeFormat: timeFormatSelect.value,
+      theme: themeSelect.value,
+      defaultTab: defaultTabSelect.value,
+    };
+
+    // Save to localStorage
+    localStorage.setItem('settings', JSON.stringify(settings));
+
+    // Apply settings
+    applyTheme(settings.theme);
+
+    // Show notification
+    showNotification('Settings saved successfully');
+  });
+
+  // Notification close button
+  notificationCloseBtn.addEventListener('click', () => {
+    hideNotification();
+  });
+}
+
+// Render alarms
+function renderAlarms() {
+  alarmsListEl.innerHTML = '';
+
+  if (alarms.length === 0) {
+    alarmsListEl.innerHTML = '<p style="text-align: center; opacity: 0.7">No alarms set</p>';
+    return;
+  }
+
+  alarms.forEach((alarm) => {
+    const alarmEl = document.createElement('div');
+    alarmEl.className = `alarm-item ${alarm.active ? 'active' : ''}`;
+    alarmEl.innerHTML = `
+      <div>
+        <div class="alarm-time">${formatAlarmTime(alarm.time)}</div>
+        <div>${alarm.label} • ${alarm.sound}</div>
+      </div>
+      <div class="alarm-actions">
+        <button class="toggle-btn ${alarm.active ? 'active' : ''}">
+          <i class="fas fa-${alarm.active ? 'bell' : 'bell-slash'}"></i>
+        </button>
+        <button className="delete-btn" data-id="${alarm.id}">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+    `;
+
+    alarmsListEl.appendChild(alarmEl);
+  });
+
+  // Add event listeners to alarm actions
+  document.querySelectorAll('.toggle-btn').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      const id = parseInt(btn.getAttribute('data-id'));
+      toggleAlarm(id);
+    });
+  });
+
+  document.querySelectorAll('.delete-btn').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      const id = parseInt(btn.getAttribute('data-id'));
+      deleteAlarm(id);
+    });
+  });
+}
+
+// Format alarm time for display
+function formatAlarmTime(timeString) {
+  const [hours, minutes] = timeString.split(':');
+  let hoursNum = parseInt(hours);
+
+  if (settings.timeFormat === '12') {
+    const ampm = hoursNum >= 12 ? 'PM' : 'AM';
+    hoursNum = hoursNum % 12;
+    hoursNum = hoursNum ? hoursNum : 12; // the hour '0' should be '12'
+    return `${String(hoursNum).padStart(2, '0')}:${minutes}:${ampm}`;
+  } else {
+    return `${String(hoursNum).padStart(2, '0')}:${minutes}`;
+  }
+}
+
+// Toggle alarm active state
+function toggleAlarm(id) {
+  alarms = alarms.map((alarm) => {
+    if (alarm.id === id) {
+      return { ...alarm, active: !alarm.active };
+    }
+    return alarm;
+  });
+
+  localStorage.setItem('alarms', JSON.stringify(alarms));
+  renderAlarms();
+
+  showNotification(`Alarm ${alarms.find((a) => a.id === id).active ? 'enabled' : 'disabled'}`);
 }
 
 // Initialize the app
