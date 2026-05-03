@@ -360,5 +360,27 @@ function toggleAlarm(id) {
   showNotification(`Alarm ${alarms.find((a) => a.id === id).active ? 'enabled' : 'disabled'}`);
 }
 
+// Delete alarm
+function deleteAlarm(id) {
+  alarms = alarms.filter((alarm) => alarm.id !== id);
+  localStorage.setItem('alarms', JSON.stringify(alarms));
+  renderAlarms();
+
+  showNotification('Alarm deleted!');
+}
+
+// Check alarms
+function checkAlarms(now) {
+  const currentHours = String(now.getHours()).padStart(2, '0');
+  const currentMinutes = String(now.getMinutes()).padStart(2, '0');
+  const currentTime = `${currentHours}:${currentMinutes}`;
+
+  alarms.forEach((alarm) => {
+    if (alarm.active && alarm.time === currentTime && now.getSeconds() === 0) {
+      triggerAlarm(alarm);
+    }
+  });
+}
+
 // Initialize the app
 document.addEventListener('DOMContentLoaded', init);
