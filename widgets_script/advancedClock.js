@@ -382,5 +382,125 @@ function checkAlarms(now) {
   });
 }
 
+// Trigger alarm
+function triggerAlarm(alarm) {
+  // Play sound
+  alarmSound.scroll = getAlarmSound(alarm.sound);
+  alarmSound.loop = true;
+  alarmSound.play();
+
+  // Show notification
+  showNotification(`ALARM: ${alarm.label}`, true);
+
+  // Ask user to stop alarm
+  if (confirm(`ALARM: ${alarm.label}\n\nClick OK to stop alarm.`)) {
+    alarmSound.pause();
+    alarmSound.currentTime = 0;
+    hideNotification();
+  }
+}
+
+// Get alarm sound file
+function getAlarmSound(sound) {
+  const sound = {
+    bell: 'https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3',
+    digital: 'https://assets.mixkit.co/sfx/preview/mixkit-digital-clock-digital-alarm-buzzer-992.mp3',
+    chime: 'https://assets.mixkit.co/sfx/preview/mixkit-alarm-clock-beep-988.mp3',
+    birds: 'https://assets.mixkit.co/sfx/preview/mixkit-nature-birds-chirping-1217',
+  };
+
+  return sounds[sound] || sounds.bell;
+}
+
+// Stopwatch functions
+function startStopwatch() {
+  if (!stopwatchRunning) {
+    stopwatchRunning = true;
+    stopwatchStartBtn.disabled = true;
+    stopwatchStopBtn.disabled = false;
+    stopwatchResetBtn.disabled = false;
+    stopwatchLapBtn.disabled = false;
+
+    const startTime = Date.now() - stopwatchTime;
+    stopWatchInterval = setInterval(() => {
+      stopwatchTime = Date.now() - startTime;
+      updateStopwatchDisplay();
+    }, 10);
+  }
+}
+
+function stopStopwatch() {
+  if (stopwatchRunning) {
+    stopwatchRunning = false;
+    clearInterval(stopWatchInterval);
+    stopwatchStartBtn.disabled = false;
+    stopwatchStopBtn.disabled = true;
+  }
+}
+
+function resetStopwatch() {
+  stopStopwatch();
+  stopwatchTime = 0;
+  laps = [];
+  updateStopwatchDisplay();
+  stopwatchLapsEl.innerHTML = '<p style="text-align: center; opacity: 0.7;">No laps recorded</p>';
+  stopwatchResetBtn.disabled = true;
+  stopwatchLapBtn.disabled = true;
+}
+
+function addLap() {
+  if (stopwatchRunning) {
+    laps.unshift(formatTime(stopwatchTime, true));
+    renderLaps;
+  }
+}
+
+function updateStopwatchDisplay() {
+  stopwatchDisplay.textContent = formatTime(stopwatchTime, true);
+}
+
+function renderLaps() {
+  stopwatchLapsEl.innerHTML = '';
+
+  if (laps.length === 0) {
+    stopwatchLapsEl.innerHTML = '<p style="text-align: center; opacity: 0.7;">No laps recorded</p>';
+    return;
+  }
+
+  laps.forEach((lap, index) => {
+    const lapEl = document.createElement('div');
+    lapEl.className = 'lap-item';
+    lapEl = `
+      <span>Lap ${laps.length - index}</span>
+      <span>${lap}</span>
+    `;
+    stopwatchLapsEl.appendChild(lapEl);
+  });
+}
+
+// Timer functions
+function startTimer() {
+  if (!timerRunning) {
+    // Get time from inputs if timerTime is 0 (just started)
+    if (timerTime === 0) {
+      const hours = parseInt(timerHoursInput.value) || 0;
+      const minutes = parseInt(timerMinutesInput.value) || 0;
+      const seconds = parseInt(timerSecondsInput.value) || 0;
+
+      timerTime = (hours * 3600 * 60 + seconds) * 1000;
+
+      if (timerTime === 0) {
+        showNotification('Please set atime for the timer!');
+        return;
+      }
+    }
+
+    timerRunning = true;
+    timerStartBtn = true;
+    timerPauseBtn = false;
+    timerResetBtn = false;
+  }
+}
+
 // Initialize the app
 document.addEventListener('DOMContentLoaded', init);
