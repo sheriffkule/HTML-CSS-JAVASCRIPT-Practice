@@ -54,7 +54,7 @@ let settings = JSON.parse(localStorage.getItem('settings')) || {
 let stopWatchInterval;
 let stopwatchTime = 0;
 let stopwatchRunning = false;
-let laps = '';
+let laps = [];
 
 let timerInterval;
 let timerTime = 0;
@@ -90,7 +90,7 @@ function init() {
   renderAlarms();
 
   // Set up event listeners
-  setupEventLIsteners();
+  setupEventListeners();
 }
 
 // Load settings from localStorage
@@ -164,7 +164,7 @@ function updateClock() {
   currentDateEl.textContent = now.toLocaleDateString(undefined, options) + '.';
 
   // Check alarms
-  // checkAlarms(now);
+  checkAlarms(now);
 }
 
 // Update world clocks
@@ -302,10 +302,10 @@ function renderAlarms() {
         <div>${alarm.label} • ${alarm.sound}</div>
       </div>
       <div class="alarm-actions">
-        <button class="toggle-btn ${alarm.active ? 'active' : ''}">
+        <button class="toggle-btn ${alarm.active ? 'active' : ''}" data-id="${alarm.id}">
           <i class="fas fa-${alarm.active ? 'bell' : 'bell-slash'}"></i>
         </button>
-        <button className="delete-btn" data-id="${alarm.id}">
+        <button class="delete-btn" data-id="${alarm.id}">
           <i class="fas fa-trash"></i>
         </button>
       </div>
@@ -402,7 +402,7 @@ function triggerAlarm(alarm) {
 
 // Get alarm sound file
 function getAlarmSound(sound) {
-  const sound = {
+  const sounds = {
     bell: 'https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3',
     digital: 'https://assets.mixkit.co/sfx/preview/mixkit-digital-clock-digital-alarm-buzzer-992.mp3',
     chime: 'https://assets.mixkit.co/sfx/preview/mixkit-alarm-clock-beep-988.mp3',
@@ -451,7 +451,7 @@ function resetStopwatch() {
 function addLap() {
   if (stopwatchRunning) {
     laps.unshift(formatTime(stopwatchTime, true));
-    renderLaps;
+    renderLaps();
   }
 }
 
@@ -470,7 +470,7 @@ function renderLaps() {
   laps.forEach((lap, index) => {
     const lapEl = document.createElement('div');
     lapEl.className = 'lap-item';
-    lapEl = `
+    lapEl.innerHTML = `
       <span>Lap ${laps.length - index}</span>
       <span>${lap}</span>
     `;
@@ -487,19 +487,112 @@ function startTimer() {
       const minutes = parseInt(timerMinutesInput.value) || 0;
       const seconds = parseInt(timerSecondsInput.value) || 0;
 
-      timerTime = (hours * 3600 * 60 + seconds) * 1000;
+      timerTime = (hours * 3600 + minutes * 60 + seconds) * 1000;
 
       if (timerTime === 0) {
-        showNotification('Please set atime for the timer!');
+        showNotification('Please set a time for the timer!');
         return;
       }
     }
 
     timerRunning = true;
-    timerStartBtn = true;
-    timerPauseBtn = false;
-    timerResetBtn = false;
+    timerStartBtn.disabled = true;
+    timerPauseBtn.disabled = false;
+    timerResetBtn.disabled = false;
+
+    timerInterval = setInterval(() => {
+      timerTime -= 100; // Subtract 100ms each interval
+
+      if (timerTime <= 0) {
+        timerTime = 0;
+        timerComplete();
+      } else {
+        updateTimerDisplay();
+      }
+    }, 100);
   }
+}
+
+function pauseTimer() {
+  if (timerRunning) {
+    timerRunning = false;
+    clearInterval(timerInterval);
+    timerStartBtn.disabled = false;
+    timerPauseBtn.disabled = true;
+  }
+}
+
+function resetTimer() {
+  pauseTimer();
+  updateTimerDisplay();
+  timerResetBtn.disabled = false;
+
+  // Reset inputs
+  timerHoursInput.value = '0';
+  timerMinutesInput.value = '0';
+  timerSecondsInput.value = '0';
+}
+
+function timerComplete() {
+  resetTimer();
+  showNotification('Timer completed', true);
+  alarmSound.src = 'https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3';
+  alarmSound.play();
+
+  // Stop sound after 5 seconds
+  setTimeout(() => {
+    alarmSound.pause();
+    alarmSound.currentTime = 0;
+  }, 5000);
+}
+
+function updateTimerDisplay() {
+  timerDisplay.textContent = formatTime(timerTime);
+}
+
+function validateTimerInput(e) {
+  const input = e.target;
+  let value = parseInt(input.value) || 0;
+
+  if (input.id === 'timer-hours') {
+    if (value < 0) value = 0;
+    if (value > 23) value = 23;
+  } else {
+    if (value < 0) value = 0;
+    if (value > 59) value = 59;
+  }
+
+  input.value = value;
+}
+
+// Format time (for stopwatch and timer)
+function formatTime(ms, showMilliseconds = false) {
+  let totalSeconds = Math.floor(ms / 1000);
+  const hours = Math.floor(totalSeconds / 3600);
+  totalSeconds %= 3600;
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  const milliseconds = Math.floor((ms % 1000) / 10);
+
+  if (showMilliseconds) {
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}.${String(milliseconds).padStart(2, '0')}`;
+  } else {
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+  }
+}
+
+// Notification functions
+function showNotification(message, persistent = false) {
+  notificationMessageEl.textContent = message;
+  notificationEl.classList.add('show');
+
+  if (!persistent) {
+    setTimeout(hideNotification, 3000);
+  }
+}
+
+function hideNotification() {
+  notificationEl.classList.remove('show');
 }
 
 // Initialize the app
