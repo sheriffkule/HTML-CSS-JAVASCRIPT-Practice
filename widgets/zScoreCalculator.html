@@ -47,7 +47,59 @@
             <div class="interpretation" id="zscoreInterpretation"></div>
           </div>
         </div>
+
+        <div class="tab-content" id="probability">
+          <h2 class="card-title"><i class="fas fa-chart-bar"></i> Probability from Z-Score</h2>
+          <div class="form-group">
+            <label for="zScoreProb">Z-Score</label>
+            <input type="number" id="zScoreProb" placeholder="Enter Z-Score" />
+          </div>
+          <div class="form-group">
+            <label for="probabilityType">Probability Type</label>
+            <select id="probabilityType">
+              <option value="less">Less than (P(Z < z))</option>
+              <option value="greater">Greater than (P(Z > z))</option>
+              <option value="between">Between two Z-scores</option>
+            </select>
+          </div>
+          <div class="form-group" id="secondZScoreGroup">
+            <label for="zScoreProb2">Second Z-Score</label>
+            <input type="number" id="zScoreProb2" placeholder="Enter Z-score" />
+          </div>
+          <button class="btn btn-block" id="calculateProbability">Calculate Probability</button>
+
+          <div class="result-container" id="probabilityResult">
+            <div class="result-title">Probability Result</div>
+            <div class="result-value" id="probabilityValue"></div>
+            <div class="probability-meter">
+              <div class="probability-fill" id="probabilityFill"></div>
+            </div>
+            <div class="probability-labels">
+              <span>0%</span>
+              <span>50%</span>
+              <span>100%</span>
+            </div>
+            <div class="interpretation" id="probabilityInterpretation"></div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="percentile">
+          <h2 class="card-title"><i class="fas fa-percentage"></i> Percentile from Z-Score</h2>
+          <div class="form-group">
+            <label for="zScorePercentile">Z-Score</label>
+            <input type="number" id="zScorePercentile" placeholder="Enter Z-Score" />
+          </div>
+          <button class="btn btn-block" id="calculatePercentile">Calculate Percentile</button>
+
+          <div class="result-container" id="percentileResult">
+            <div class="result-title">Percentile Result</div>
+            <div class="result-value" id="percentileValue"></div>
+            <div class="interpretation" id="percentileInterpretation"></div>
+          </div>
+        </div>
       </div>
     </div>
+
+    <script src="/widgets_script/zScoreCalculator.js"></script>
   </body>
 </html>
