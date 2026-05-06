@@ -23,6 +23,7 @@ body {
     background-color: #d9dce9;
     color: var(--dark);
     line-height: 1.5;
+    transition: all .3s ease-in-out;
 }
 
 .container {
@@ -295,5 +296,81 @@ footer {
         text-underline-offset: 2px;
         cursor: default;
         color: var(--primary);
+    }
+}
+
+.dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgb(0 0 0 / 0.15);
+    z-index: 100;
+    transition: .25s;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.dark-mode .card {
+    background: #1e1e1e;
+    color: #e0e0e0;
+}
+
+body.dark-mode :is(input, select) {
+    background: #2d2d2d;
+    border-color: #555;
+    color: #e0e0e0;
+}
+
+body.dark-mode label {
+    color: #e0e0e0;
+}
+
+body.dark-mode .interpretation {
+    background: #2d2d2d;
+}
+
+body.dark-mode .example-item {
+    border-color: #444;
+
+    &:hover {
+        background: rgb(67 97 238 / 0.1);
+    }
+}
+
+body.dark-mode .result-container {
+    background: rgb(67 97 238 / 0.1);
+}
+
+@media (width < 768px) {
+    .container {
+        padding: 0 1rem;
+    }
+    .tabs {
+        flex-direction: column;
+    }
+    .tab {
+        border-bottom: 1px solid #ccc;
+        border-left: 3px solid transparent;
+
+        &.active {
+            border-left-color: var(--primary);
+            border-bottom-color: #ccc;
+        }
     }
 }
