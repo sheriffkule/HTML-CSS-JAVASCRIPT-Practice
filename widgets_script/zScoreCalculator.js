@@ -53,4 +53,13 @@ document.addEventListener('DOMContentLoaded', function () {
       icon.classList.add('fa-moon');
     }
   });
+
+  // Calculate Z-Score
+  document.getElementById('calculateZScore').addEventListener('click', calculateZScore);
+
+  // Calculate Probability
+  document.getElementById('calculateProbability').addEventListener('click', calculateProbabilityFromZ);
+
+  // Calculate Percentile
+  document.getElementById('calculatePercentile').addEventListener('click', calculatePercentileFromZ);
 });
