@@ -42,10 +42,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Dark mode toggle
   const darkModeToggle = document.getElementById('darkModeToggle');
+  
+  // Restore saved theme
+  if (localStorage.getItem('darkMode') === 'true') {
+    document.body.classList.add('dark-mode');
+    darkModeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+  }
+  
   darkModeToggle.addEventListener('click', function () {
     document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    localStorage.setItem('darkMode', isDark);
+    
     const icon = this.querySelector('i');
-    if (document.body.classList.contains('dark-mode')) {
+    if (isDark) {
       icon.classList.remove('fa-moon');
       icon.classList.add('fa-sun');
     } else {
@@ -147,5 +157,82 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Update probability meter
     document.getElementById('probabilityFill').style.width = `${probability * 100}%`;
+
+    // Interpretation
+    let interpretation = '';
+    if (probability < 0.01) {
+      interpretation = 'This is an extremely rare occurrence (less than 1% probability).';
+    } else if (probability < 0.05) {
+      interpretation = 'This is a statistically significant result (less than 5% probability).';
+    } else if (probability < 0.1) {
+      interpretation = 'This is an uncommon result (less than 10% probability).';
+    } else if (probability < 0.3) {
+      interpretation = 'This is a somewhat uncommon result.';
+    } else if (probability < 0.7) {
+      interpretation = 'This is a fairly common result.';
+    } else {
+      interpretation = 'This is very common result.';
+    }
+
+    document.getElementById('probabilityInterpretation').textContent = interpretation;
+    document.getElementById('probabilityResult').style.display = 'block';
   }
+
+  function calculatePercentileFromZ() {
+    const zScore = parseFloat(document.getElementById('zScorePercentile').value);
+
+    if (isNaN(zScore)) {
+      alert('Please enter a valid Z-score');
+      return;
+    }
+
+    const percentile = normalCDF(zScore) * 100;
+    document.getElementById('percentileValue').textContent = `${percentile.toFixed(2)}th percentile`;
+
+    let interpretation = '';
+    if (percentile < 1) {
+      interpretation = 'This score is extremely low - less than 1% of the population scores this low.';
+    } else if (percentile < 10) {
+      interpretation = 'This score is very low - only about 10% of the population scores this low.';
+    } else if (percentile < 30) {
+      interpretation = 'This score is below average - about 30% of the population scores this low.';
+    } else if (percentile < 70) {
+      interpretation = 'This score is average - near the middle of the population distribution.';
+    } else if (percentile < 90) {
+      interpretation = 'This score is above average = higher than about 70% of the population.';
+    } else if (percentile < 99) {
+      interpretation = 'This score is very high = higher than about 90% of the population.';
+    } else {
+      interpretation = 'This score is extremely high = in the top 1% of the population.';
+    }
+
+    document.getElementById('percentileInterpretation').textContent = interpretation;
+    document.getElementById('percentileResult').style.display = 'block';
+  }
+
+  // Standard normal CDF - approximation
+  function normalCDF(z) {
+    // Abramowitz and Stegun approximation (1964)
+    const t = 1 / (1 + 0.2316419 * Math.abs(z));
+    const d = 0.3989423 * Math.exp((-z * z) / 2);
+    let p = d * t * (0.3193815 + t * (-0.3565638 + t * (1.781478 + t * (-1.821256 + t * 1.330274))));
+
+    p = z > 0 ? 1 - p : p;
+
+    return p;
+  }
+
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fibonacci Sequence Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/fibonacciSequence.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1><i class="fas fa-infinity"></i> Fibonacci Sequence Generator</h1>
+        <p class="subtitle">Generate Fibonnaci sequences with custom length and starting numbers.</p>
+      </header>
+
+      <section class="input-section">
+        <div class="input-group">
+          <label for="sequenceLength"><i class="fas fa-list-ol"></i> Sequence Length</label>
+          <input
+            type="number"
+            id="sequenceLength"
+            min="1"
+            max="100"
+            value="10"
+            placeholder="Enter number of terms" />
+        </div>
+
+        <div class="input-group">
+          <label for="firstNumber"><i class="fas fa-0"></i> First Number (F0)</label>
+          <input type="number" id="firstNumber" value="0" placeholder="First number in sequence" />
+        </div>
+
+        <div class="input-group">
+          <label for="secondNumber"><i class="fas fa-1"></i> Second Number (F1)</label>
+          <input type="number" id="secondNumber" value="1" placeholder="Second number in sequence" />
+        </div>
+      </section>
+
+      <div class="buttons">
+        <button class="generate-btn" id="generateBtn">
+          <i class="fas fa-calculator"></i> Generate Sequence
+        </button>
+        <button class="clear-btn" id="clearBtn"><i class="fas fa-trash"></i> Clear Results</button>
+      </div>
+
+      <div class="action-buttons">
+        <button class="action-btn" id="copyBtn"><i class="fas fa-copy"></i> Copy To Clipboard</button>
+        <button class="action-btn" id="saveTxtBtn"><i class="fas fa-save"></i> Save as Text</button>
+        <button class="action-btn" id="toggleThemeBtn"><i class="fas fa-moon"></i> Toggle Theme</button>
+      </div>
+    </div>
+  </body>
+</html>

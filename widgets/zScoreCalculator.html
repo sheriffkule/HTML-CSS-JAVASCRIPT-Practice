@@ -41,7 +41,7 @@
           </div>
           <button class="btn btn-block" id="calculateZScore">Calculate Z-Score</button>
 
-          <div class="result-container" id="zscoreResult">
+          <div class="result-container" id="zscoreResult" style="display: none;">
             <div class="result-title">Z-Score Result</div>
             <div class="result-value" id="zscoreValue"></div>
             <div class="interpretation" id="zscoreInterpretation"></div>
@@ -62,13 +62,13 @@
               <option value="between">Between two Z-scores</option>
             </select>
           </div>
-          <div class="form-group" id="secondZScoreGroup">
+          <div class="form-group" id="secondZScoreGroup" style="display: none;">
             <label for="zScoreProb2">Second Z-Score</label>
             <input type="number" id="zScoreProb2" placeholder="Enter Z-score" />
           </div>
           <button class="btn btn-block" id="calculateProbability">Calculate Probability</button>
 
-          <div class="result-container" id="probabilityResult">
+          <div class="result-container" id="probabilityResult" style="display: none;">
             <div class="result-title">Probability Result</div>
             <div class="result-value" id="probabilityValue"></div>
             <div class="probability-meter">
@@ -91,7 +91,7 @@
           </div>
           <button class="btn btn-block" id="calculatePercentile">Calculate Percentile</button>
 
-          <div class="result-container" id="percentileResult">
+          <div class="result-container" id="percentileResult" style="display: none;">
             <div class="result-title">Percentile Result</div>
             <div class="result-value" id="percentileValue"></div>
             <div class="interpretation" id="percentileInterpretation"></div>
@@ -107,7 +107,7 @@
         </p>
 
         <div class="formula">
-          <p><strong>Formula: </strong> Z = (X - μ) / σ</p>
+          <p><strong>Formula: </strong><code> Z = (X - μ) / σ</code></p>
           <ul>
             <li><strong>Z</strong> = Z-Score</li>
             <li><strong>X</strong> = Raw score</li>

@@ -64,6 +64,12 @@ header {
     }
 }
 
+.card:last-of-type {
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+    animation-delay: 0.3s;
+}
+
 .card-title {
     color: var(--primary);
     margin-bottom: 1rem;
@@ -223,12 +229,24 @@ option::checkmark {
     border-bottom-color: var(--primary);
 }
 
-/* .tab-content {
+.tab-content {
     display: none;
-} */
+}
 
 .tab-content.active {
     display: block;
+    animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(1);
+    }
 }
 
 .probability-meter {
@@ -280,6 +298,20 @@ option::checkmark {
 .example-desc {
     font-size: .9rem;
     color: var(--gray);
+}
+
+.formula {
+    margin-top: 1rem;
+}
+
+.formula p code {
+    text-decoration: underline 2px dotted;
+    text-underline-offset: 4px;
+}
+
+.formula ul {
+    list-style: none;
+    margin-top: .5rem;
 }
 
 footer {
