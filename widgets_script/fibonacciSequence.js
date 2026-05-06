@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const generateBtn = document.getElementById('generateBtn');
   const clearBtn = document.getElementById('clearBtn');
   const copyBtn = document.getElementById('copyBtn');
-  const saveTextBtn = document.getElementById('saveTextBtn');
+  const saveTextBtn = document.getElementById('saveTxtBtn');
   const toggleThemeBtn = document.getElementById('toggleThemeBtn');
 
   const sequenceLengthInput = document.getElementById('sequenceLength');
@@ -65,21 +65,90 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Copy to clipboard
-  if (!fibonacciSequenceElement.textContent) {
-    alert('No sequence to copy!');
+  function copyToClipboard() {
+    if (!fibonacciSequenceElement.textContent) {
+      alert('No sequence to copy!');
+      return;
+    }
+
+    const sequenceText = Array.from(fibonacciSequenceElement.querySelectorAll('span'))
+      .map((span) => span.textContent)
+      .join('\n');
+
+    navigator.clipboard
+      .writeText(sequenceText)
+      .then(() => {
+        alert('Sequence copied to clipboard!');
+      })
+      .catch((err) => {
+        console.error('Failed to copy: ', err);
+      });
+  }
+
+  // Save as text file
+  function saveAsTextFile() {
+    if (!fibonacciSequenceElement.textContent) {
+      alert('No sequence to save!');
+      return;
+    }
+
+    const sequenceText = Array.from(fibonacciSequenceElement.querySelectorAll('span'))
+      .map((span) => span.textContent)
+      .join('\n');
+
+    const blob = new Blob([sequenceText], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'fibonacci_sequence.txt';
+    document.body.appendChild(a);
+    a.click();
+
+    // Clean up
+    setTimeout(() => {
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }, 100);
+  }
+
+  // Toggle theme
+  function toggleTheme() {
+    isDarkTheme = !isDarkTheme;
+
+    if (isDarkTheme) {
+      document.body.style.background = 'linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d)';
+      document.body.style.color = '#fff';
+      toggleThemeBtn.innerHTML = '<i class="fas fa-moon"></i> Toggle Theme';
+    } else {
+      document.body.style.background = 'linear-gradient(135deg, #b21f1f, #fdbb2d, #1a2a6c)';
+      document.body.style.color = '#333';
+      toggleThemeBtn.innerHTML = '<i class="fas fa-sun"></i> Toggle Theme';
+    }
+  }
+
+  // Event listeners
+  generateBtn.addEventListener('click', generateFibonacciSequence);
+  clearBtn.addEventListener('click', clearResults);
+  copyBtn.addEventListener('click', copyToClipboard);
+  saveTextBtn.addEventListener('click', saveAsTextFile);
+  toggleThemeBtn.addEventListener('click', toggleTheme);
+
+  // Generate sequence on load
+  generateFibonacciSequence();
+});
+
+// Update year in footer
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
     return;
   }
 
-  const sequenceText = Array.from(fibonacciSequenceElement.querySelectorAll('span'))
-    .map((span) => span.textContent)
-    .join('\n');
-
-  navigation.clipboard
-    .writeText(sequenceText)
-    .then(() => {
-      alert('Sequence copied to clipboard!');
-    })
-    .catch((err) => {
-      console.error('Failed to copy: ', err);
-    });
-});
+  yearElement.setAttribute('datetime', currentYear.toString());
+  yearElement.textContent = currentYear.toString();
+}
+updateYear();

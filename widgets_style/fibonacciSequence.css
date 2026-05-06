@@ -23,6 +23,13 @@ body {
     border-radius: 20px;
     padding: 2rem;
     box-shadow: 0 10px 30px rgb(0 0 0 / 0.3);
+    animation: enterIn 0.8s cubic-bezier(0.25, 1.46, 0.45, 1.4) forwards;
+}
+
+@keyframes enterIn {
+    from {
+        transform: scaleX(0);
+    }
 }
 
 header {
@@ -36,6 +43,7 @@ header {
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
+        -webkit-text-stroke: 1px white;
     }
     .subtitle {
         font-size: 1.1rem;
@@ -126,4 +134,121 @@ button {
 .action-btn {
     background: rgb(255 255 255 / 0.1);
     color: white;
+}
+
+.results-section {
+    margin-top: 2rem;
+}
+
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.results-content {
+    background: rgb(0 0 0 / 0.2);
+    border-radius: 10px;
+    padding: 1.5rem;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+#fibonacciSequence {
+    font-family: 'Courier New', monospace;
+    line-height: 1.7;
+    font-size: 1.1rem;
+}
+
+.stats {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.stat-box {
+    background: rgb(255 255 255 / 0.1);
+    padding: 1rem;
+    border-radius: 10px;
+    flex: 1;
+    min-width: 150px;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
+    color: #fdbb2d;
+}
+
+.info-section {
+    margin-top: 2rem;
+    background: rgb(0 0 0 / 0.2);
+    padding: 1.5rem;
+    border-radius: 10px;
+
+    h3 {
+        margin-bottom: 1rem;
+        color: #fdbb2d;
+    }
+}
+
+.sequence-example {
+    font-family: 'Courier New', monospace;
+    margin: 1rem 0;
+    padding: 1rem;
+    background: rgb(0 0 0 / 0.3);
+    border-radius: 5px;
+    font-size: 1.25rem;
+}
+
+footer {
+    margin-top: 2rem;
+    text-align: center;
+    opacity: 0.8;
+    font-size: 0.9rem;
+
+    span {
+        color: red;
+        font-size: 1rem;
+    }
+    abbr {
+        text-underline-offset: 2px;
+        color: #1a2a6c;
+        cursor: default;
+        letter-spacing: 0.5px;
+    }
+}
+
+@media (width < 768px) {
+    .container {
+        padding: 1.5rem;
+    }
+    h1 {
+        font-size: 1.5rem;
+    }
+    .input-group {
+        min-width: 100%;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgb(0 0 0 / 0.1);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #fdbb2d;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #b68620;
 }
