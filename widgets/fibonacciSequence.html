@@ -49,6 +49,52 @@
         <button class="action-btn" id="saveTxtBtn"><i class="fas fa-save"></i> Save as Text</button>
         <button class="action-btn" id="toggleThemeBtn"><i class="fas fa-moon"></i> Toggle Theme</button>
       </div>
+
+      <section class="results-section">
+        <div class="results-header">
+          <h2><i class="fas fa-list"></i> Generated Sequence</h2>
+          <span id="generationTIme"></span>
+        </div>
+
+        <div class="results-content">
+          <div id="fibonacciSequence"></div>
+        </div>
+
+        <div class="stats">
+          <div class="stat-box">
+            <div>Sequence Length</div>
+            <div class="stat-value" id="sequenceLengthValue">0</div>
+          </div>
+          <div class="stat-box">
+            <div>Sum of Sequence</div>
+            <div class="stat-value" id="sequenceSum">0</div>
+          </div>
+          <div class="stat-box">
+            <div>Golden Ratio (&phi;)</div>
+            <div class="stat-value">1.61803</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="info-section">
+        <h3><i class="fas fa-info-circle"></i> About the Fibonacci Sequence</h3>
+        <p>
+          The Fibonacci sequence is a series of numbers where each number is the sum of the two preceding
+          ones, usually starting with 0 and 1.
+        </p>
+        <div class="sequence-example">F<sub>n</sub> = F<sub>n-1</sub> + F<sub>n-2</sub></div>
+        <p>
+          This sequence appears in many places in nature, from the arrangement of leaves on a stem to the
+          spiral patterns of shells and galaxies.
+        </p>
+      </section>
     </div>
+
+    <footer>
+      © <time datetime="" id="year"></time> Made width <span>♥</span> by
+      <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+    </footer>
+
+    <script src="/widgets_script/fibonacciSequence.js"></script>
   </body>
 </html>

@@ -50,3 +50,80 @@ header {
     gap: 1rem;
     margin-bottom: 2rem;
 }
+
+.input-group {
+    flex: 1;
+    min-width: 250px;
+}
+
+label {
+    display: block;
+    margin-bottom: .5rem;
+    font-weight: 500;
+}
+
+input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    border: none;
+    background: rgb(255 255 255 / 0.15);
+    color: white;
+    font-size: 1.1rem;
+    transition: .22s;
+}
+
+input:is(:focus, :focus-within) {
+    outline: 2px solid #fdbb2d;
+    background: rgb(255 255 255 / 0.25);
+}
+
+.buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+button {
+    padding: .75rem 1.5rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .25s ease-out;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 5px 15px rgb(0 0 0 / 0.3),
+        inset 0 5px 15px rgb(0 0 0 / 0.2);
+    }
+    &:active {
+        transform: translateY(-1px) scale(1);
+    }
+}
+
+.generate-btn {
+    background: linear-gradient(to right, #1a2a6c, #b21f1f);
+    color: white;
+}
+
+.clear-btn {
+    background: rgb(255 255 255 / 0.2);
+    color: white;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    background: rgb(255 255 255 / 0.1);
+    color: white;
+}
