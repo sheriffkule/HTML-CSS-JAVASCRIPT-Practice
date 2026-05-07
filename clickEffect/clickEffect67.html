@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Accordion Menu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/clickEffect_style/clickEffect67.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <header class="app-header">
+        <h1>Modern Accordion Menu</h1>
+        <div class="controls">
+          <button class="control-btn" id="toggle-all" aria-label="Toggle all items">
+            <i class="fas fa-bars"></i>
+          </button>
+          <button class="control-btn" id="theme-toggle" aria-label="Toggle dark mode">
+            <i class="fas fa-moon"></i>
+          </button>
+        </div>
+      </header>
+
+      <section class="accordion-container">
+        <article class="accordion-item" data-category="design">
+          <button class="accordion-header" aria-expanded="false" aria-controls="content-1">
+            <span class="accordion-icon"><i class="fas fa-paint-brush"></i></span>
+            <h2>UI/UX Design Principles</h2>
+            <span class="accordion-indicator"></span>
+          </button>
+          <div class="accordion-content" id="content-1">
+            <div class="content-wrapper">
+              <p>
+                Learn the fundamentals of user interface and experience design, including color theory,
+                typography, and layout principles that create intuitive digital products.
+              </p>
+              <ul>
+                <li>Color psychology and accessibility</li>
+                <li>Responsive design patterns</li>
+                <li>User journey mapping</li>
+                <li>Prototyping tools and techniques</li>
+              </ul>
+              <button class="action-btn">View Course</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="accordion-item" data-category="development">
+          <button class="accordion-header" aria-expanded="false" aria-controls="content-2">
+            <span class="accordion-icon"><i class="fas fa-code"></i></span>
+            <h2>Advanced JavaScript</h2>
+            <span class="accordion-indicator"></span>
+          </button>
+          <div class="accordion-content" id="content-2">
+            <div class="content-wrapper">
+              <p>
+                Dive deep into modern JavaScript concepts including ES6+ features, asynchronous programming,
+                and design patterns.
+              </p>
+              <ul>
+                <li>Promises, async/await</li>
+                <li>Closures and scope</li>
+                <li>Functional programming</li>
+                <li>Module systems</li>
+              </ul>
+              <button class="action-btn">View Course</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="accordion-item" data-category="development">
+          <button class="accordion-header" aria-expanded="false" aria-controls="content-3">
+            <span class="accordion-icon"><i class="fas fa-server"></i></span>
+            <h2>Backend Development</h2>
+            <span class="accordion-indicator"></span>
+          </button>
+          <div class="accordion-content" id="content-3">
+            <div class="content-wrapper">
+              <p>
+                Master server-side development with Node.js, databases, and API design to build robust backend
+                systems.
+              </p>
+              <ul>
+                <li>RESTful API design</li>
+                <li>Authentication strategies</li>
+                <li>Database modeling</li>
+                <li>Performance optimization</li>
+              </ul>
+              <button class="action-btn">View Course</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="accordion-item" data-category="devops">
+          <button class="accordion-header" aria-expanded="false" aria-controls="content-4">
+            <span class="accordion-icon"><i class="fas fa-cloud"></i></span>
+            <h2>Cloud Deployment</h2>
+            <span class="accordion-indicator"></span>
+          </button>
+          <div class="accordion-content" id="content-4">
+            <div class="content-wrapper">
+              <p>
+                Learn to deploy, scale, and maintain applications in cloud environments like AWS, Azure, and Google Cloud.
+              </p>
+              <ul>
+                <li>Containerization with Docker</li>
+                <li>CI/CD pipelines</li>
+                <li>Infrastructure as Code</li>
+                <li>Monitoring and logging</li>
+              </ul>
+              <button class="action-btn">View Course</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="filter-controls">
+        <button class="filter-btn" data-category="all">All</button>
+        <button class="filter-btn" data-category="design">Design</button>
+        <button class="filter-btn" data-category="development">Development</button>
+        <button class="filter-btn" data-category="devops">DevOps</button>
+      </section>
+    </div>
+
+    <script src="/clickEffect_script/clickEffect67.js"></script>
+  </body>
+</html>

@@ -1,0 +1,120 @@
+:root {
+    --primary: #4361ee;
+    --primary-light: #4895ef;
+    --secondary: #3f37c9;
+    --dark: #1a1a2e;
+    --light: #d8e0e9;
+    --gray: #6c757d;
+    --success: #4cc9f0;
+    --warning: #f72585;
+    --border-radius: 8px;
+    --shadow: 0 4px 8px rgb(0 0 0 / 0.2);
+    --shadow-hover: 0 8px 16px rgb(0 0 0 / 0.2);
+}
+
+[data-theme="dark"] {
+    --primary: #4895ef;
+    --primary-light: #4361ee;
+    --secondary: #4cc9f0;
+    --dark: #d8e0e9;
+    --light: #1a1a2e;
+    --shadow: 0 4px 8px rgb(255 255 255 / 0.2);
+    --shadow-hover: 0 8px 16px rgb(255 255 255 / 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light);
+    color: var(--dark);
+    line-height: 1.5;
+    transition: all .3s ease;
+}
+
+.app-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding-inline: 1rem;
+}
+
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgb(0 0 0 / 0.2);
+
+    h1 {
+        font-size: 2rem;
+        color: var(--primary);
+    }
+}
+
+.controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.control-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all .3s ease;
+
+    &:hover {
+        background: var(--secondary);
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: var(--shadow-hover);
+    }
+    &:active {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.accordion-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.accordion-item {
+    background: #eee;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all .3s ease-in-out;
+    border: 1px solid rgb(0 0 0 / 0.2);
+}
+
+[data-theme="dark"] .accordion-item {
+    background: #16213e;
+    border-color: rgb(255 255 255 / 0.2);
+}
+
+.accordion-header {
+    width: 100%;
+    padding: 1.5rem;
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.3s ease-out;
+
+    &:hover {
+        background: rgb(0 0 0 / 0.05);
+    }
+}
