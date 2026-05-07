@@ -114,7 +114,160 @@ body {
     text-align: left;
     transition: all 0.3s ease-out;
 
+    h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 0;
+        flex: 1;
+        color: var(--dark);
+    }
     &:hover {
         background: rgb(0 0 0 / 0.05);
+    }
+}
+
+[data-theme="dark"] .accordion-header:hover {
+    background: rgb(255 255 255 / 0.05);
+}
+
+.accordion-icon {
+    margin-right: 1rem;
+    color: var(--primary);
+    font-size: 1.25rem;
+    width: 24px;
+    display: inline-flex;
+    justify-content: center;
+}
+
+.accordion-indicator {
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .3s ease-in-out;
+}
+
+.accordion-header[aria-expanded="true"] .accordion-indicator {
+    transform: rotate(180deg);
+}
+
+.accordion-indicator::after {
+    content: '\f078';
+    font-family: 'Font Awesome 7 Free';
+    font-weight: 900;
+    color: var(--gray);
+}
+
+.accordion-header[aria-expanded="true"] .accordion-indicator::after {
+    color: var(--success);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+
+    p {
+        margin-block: 1rem;
+    }
+    ul {
+        margin-bottom: 1.5rem;
+        padding-left: 1.5rem;
+    }
+    li {
+        margin-bottom: 0.5rem;
+    }
+}
+
+.accordion-content[aria-hidden="false"] {
+    max-height: 500px;
+}
+
+.content-wrapper {
+    padding: 0 1.5rem 1.5rem;
+}
+
+.action-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    corner-shape: superellipse(-1);
+    cursor: pointer;
+    transition: all .25s ease-in-out;
+
+    &:hover {
+        background: var(--secondary);
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: var(--shadow-hover);
+        corner-shape: squircle;
+    }
+    &:active {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.filter-controls {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1;
+}
+
+.filter-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--primary);
+    background: transparent;
+    color: var(--primary);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+    flex: 1;
+
+    &:hover {
+        background: var(--primary);
+        color: white;
+        corner-shape: scoop;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+}
+
+.accordion-item:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.accordion-item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.accordion-item:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.accordion-item:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+@media (width < 600px) {
+    .app-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .accordion-header {
+        padding: 1rem;
+    }
+    .content-wrapper {
+        padding: 0 1rem 1rem;
     }
 }
