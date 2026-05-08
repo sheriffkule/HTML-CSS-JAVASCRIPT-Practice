@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Advanced Task Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/advancedTaskManager.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <header class="app-header">
+        <div class="header-content">
+          <h1><i class="fas fa-tasks"></i> Advanced Task Manager</h1>
+          <div class="theme-toggle">
+            <span>Dark Mode</span>
+            <label class="switch">
+              <input type="checkbox" id="theme-switch" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+      </header>
+
+      <div class="main-content">
+        <aside class="sidebar">
+          <div class="sidebar-menu">
+            <button class="active" id="all-tasks"><i class="fas fa-list"></i> All Tasks</button>
+            <button id="today-tasks"><i class="fas fa-calendar-day"></i> Today</button>
+            <button id="important-tasks"><i class="fas fa-star"></i> Important</button>
+            <button id="completed-tasks"><i class="fas fa-check-circle"></i> Completed</button>
+          </div>
+          <div class="projects-section">
+            <h3>Projects</h3>
+            <div class="projects-list" id="projects-list">
+              <!-- Projects will be added here dynamically -->
+            </div>
+            <button id="add-project-btn"><i class="fas fa-plus"></i> Add Project</button>
+          </div>
+          <div class="stats-section">
+            <h3>Statistics</h3>
+            <div class="stats-item">
+              <span>Total Tasks</span>
+              <span id="total-tasks-count">0</span>
+            </div>
+            <div class="stats-item">
+              <span>Completed</span>
+              <span id="completed-tasks-count">0</span>
+            </div>
+            <div class="stats-item">
+              <span>Pending</span>
+              <span id="pending-tasks-count">0</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </body>
+</html>
