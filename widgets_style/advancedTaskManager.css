@@ -344,3 +344,114 @@ input:checked + .slider::before {
 #task-search:is(:focus, :focus-within) ~ i {
     color: var(--success);
 }
+
+#add-task-btn,
+#sort-tasks-btn {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.35rem;
+    corner-shape: superellipse(-1);
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.25s;
+
+    i {
+        transition: all .25s;
+    }
+    &:hover {
+        background-color: var(--primary-hover);
+        corner-shape: superellipse(1);
+    }
+    &:hover i {
+        transform: rotate(180deg);
+    }
+}
+
+.filter-item {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+
+    label {
+        font-size: 0.9rem;
+        color: var(--secondary);
+    }
+}
+
+.filter-item select {
+    padding: .35rem .75rem;
+    border-radius: .35rem;
+    border: 1px solid var(--border);
+    background-color: var(--input-bg);
+    color: var(--text);
+    font-size: .85rem;
+    cursor: pointer;
+}
+
+.filter-item select:is(:focus, :focus-within) {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.2rem rgb(78 115 223 / 0.25),
+    inset 0 0 0 0.2rem rgb(78 115 223 / 0.25);
+}
+
+select,
+::picker(select) {
+  appearance: base-select;
+}
+
+::picker(select) {
+  border-radius: 8px;
+  border: none;
+}
+
+select::picker-icon {
+  color: var(--primary);
+  transition: 0.3s rotate;
+}
+
+select:open::picker-icon {
+  rotate: 180deg;
+  color: var(--success);
+}
+
+select:not():open {
+    background-color: var(--light);
+}
+
+option {
+  border: 1px solid #bbb;
+  background: var(--card-bg);
+  padding: 2px 0 2px 12px;
+  color: white;
+  padding-right: 18px;
+  transition: 0.3s;
+}
+
+option:hover,
+option:focus {
+  background: var(--primary);
+}
+
+option:checked {
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: var(--success);
+}
+
+option::checkmark {
+  color: var(--success);
+  font-size: 1.5rem;
+}
+
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+}
