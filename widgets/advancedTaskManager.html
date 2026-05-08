@@ -53,7 +53,154 @@
             </div>
           </div>
         </aside>
+
+        <main class="task-content">
+          <article class="task-header">
+            <h2 id="current-view">All Tasks</h2>
+            <div class="task-actions">
+              <div class="search-box">
+                <input type="text" id="task-search" placeholder="Search tasks..." />
+                <i class="fas fa-search"></i>
+              </div>
+              <button id="add-task-btn"><i class="fas fa-plus"></i> Add Task</button>
+              <button id="sort-task-btn"><i class="fas fa-sort"></i> Sort</button>
+            </div>
+          </article>
+
+          <article class="task-filters">
+            <div class="filter-item">
+              <label for="priority-filter">Priority:</label>
+              <select id="priority-filter">
+                <option value="all">All</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="Low">Low</option>
+              </select>
+            </div>
+            <div class="filter-item">
+              <label for="date-filter">Due Date:</label>
+              <select id="date-filter">
+                <option value="all">All</option>
+                <option value="today">Today</option>
+                <option value="week">This Week</option>
+                <option value="month">This Month</option>
+                <option value="overdue">Overdue</option>
+              </select>
+            </div>
+          </article>
+
+          <article class="tasks-list" id="tasks-list">
+            <!-- Tasks will be added here dynamically -->
+            <div class="empty-state">
+              <i class="fas fa-clipboard-list"></i>
+              <p>No tasks found. Add a new task to get started!</p>
+            </div>
+          </article>
+        </main>
       </div>
     </div>
+
+    <div class="modal" id="modal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2 id="modal-title">Add New Task</h2>
+        <form id="task-form">
+          <input type="hidden" id="task-id" />
+          <div class="form-group">
+            <label for="task-title">Title*</label>
+            <input type="text" id="task-title" required />
+          </div>
+          <div class="form-group">
+            <label for="task-description">Description</label>
+            <textarea id="task-description" rows="3"></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="task-due-date">Due Date</label>
+              <input type="date" id="task-due-date" />
+            </div>
+            <div class="form-group">
+              <label for="task-priority">Priority</label>
+              <select id="task-priority">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">HighI</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="task-project">Project</label>
+              <select id="task-project">
+                <option value="">No Project</option>
+                <!-- Projects will be added here dynamically -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="task-labels">Labels (comma separated)</label>
+              <input type="text" id="task-labels" placeholder="work, persona, urgent..." />
+            </div>
+          </div>
+          <button type="submit" class="submit-btn"><i class="fas fa-save"></i> Save Task</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal" id="project-modal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>Add New Project</h2>
+        <form id="project-form">
+          <div class="form-group">
+            <label for="project-name">Project Name*</label>
+            <input type="text" id="project-name" required />
+          </div>
+          <div class="form-group">
+            <label for="project-color">Color</label>
+            <input type="color" id="project-color" value="#4e73df" />
+          </div>
+          <button type="submit" class="submit-btn"><i class="fas fa-list-check"></i> Create Project</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal" id="sort-modal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>Sort Tasks</h2>
+        <div class="sort-options">
+          <div class="sort-option">
+            <input type="radio" name="sort" id="sort-date" value="dueDate" />
+            <label for="sort-date">Due Date</label>
+          </div>
+          <div class="sort-option">
+            <input type="radio" name="sort" id="sort-priority" value="priority" />
+            <label for="sort-priority">Priority</label>
+          </div>
+          <div class="sort-option">
+            <input type="radio" name="sort" id="sort-created" value="createdAt" />
+            <label for="sort-created">Creation Date</label>
+          </div>
+          <div class="sort-option">
+            <input type="radio" name="sort" id="sort-title" value="title" />
+            <label for="sort-title">Title</label>
+          </div>
+        </div>
+
+        <div class="sort-order">
+          <div class="sort-option">
+            <input type="radio" name="order" id="order-asc" value="asc" />
+            <label for="order-asc">Ascending</label>
+          </div>
+          <div class="sort-option">
+            <input type="radio" name="order" id="order-desc" value="desc" />
+            <label for="order-">Descending</label>
+          </div>
+        </div>
+        <button class="submit-btn" id="apply-sort-btn"><i class="fas fa-sort"></i> Apply Sort</button>
+      </div>
+    </div>
+
+    <script src="/widgets_script/advancedTaskManager.js"></script>
   </body>
 </html>

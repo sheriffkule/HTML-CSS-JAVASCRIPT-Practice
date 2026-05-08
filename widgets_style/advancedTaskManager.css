@@ -189,3 +189,115 @@ input:checked + .slider::before {
         font-weight: 600;
     }
 }
+
+.projects-section {
+    margin-bottom: 2rem;
+
+    h3 {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        color: var(--secondary);
+        margin-bottom: 1rem;
+        letter-spacing: 0.5px;
+    }
+}
+
+.projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    margin-bottom: 1rem;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.project-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.35rem;
+    cursor: pointer;
+    font-size: .9rem;
+
+    &:hover {
+        background-color: rgb(78 115 223 / 0.1);
+    }
+}
+
+.project-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+#add-project-btn {
+    width: 100%;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding-block: .75rem;
+    border-radius: .35rem;
+    corner-shape: superellipse(-1);
+    font-size: .9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    transition: .2s ease-in-out;
+
+    i {
+        transition: .25s ease-in-out;
+    }
+    &:hover {
+        background-color: var(--primary-hover);
+        corner-shape: superellipse(1);
+    }
+    &:hover i {
+        transform: rotate(180deg);
+    }
+}
+
+.stats-section {
+    margin-top: auto;
+
+    h3 {
+        font-size: .9rem;
+        text-transform: uppercase;
+        color: var(--secondary);
+        margin-bottom: 1rem;
+        letter-spacing: .5px;
+    }
+}
+
+.stats-item {
+    display: flex;
+    justify-content: space-between;
+    padding-block: .5rem;
+    font-size: .9rem;
+}
+
+.task-content {
+    flex: 1;
+    padding: 1.5rem 2rem;
+    background-color: var(--bg);
+}
+
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+
+    h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+}
+
+.task-actions {
+    display: flex;
+    gap: 1rem;
+}
