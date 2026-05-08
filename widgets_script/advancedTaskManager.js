@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const themeSwitch = document.getElementById('theme-switch');
   const addTaskBtn = document.getElementById('add-task-btn');
   const addProjectBtn = document.getElementById('add-project-btn');
-  const sortTaskBtn = document.getElementById('sort-task-btn');
+  const sortTaskBtn = document.getElementById('sort-tasks-btn');
   const taskModal = document.getElementById('task-modal');
   const projectModal = document.getElementById('project-modal');
   const sortModal = document.getElementById('sort-modal');
@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function () {
       taskLabelInput.value = task.labels ? task.labels.join(', ') : '';
     } else {
       // Add mode
-      modalTitle = 'Add New Task';
+      modalTitle.textContent = 'Add New Task';
       taskIdInput.value = '';
       // Set default due date to today
       const day = new Date().toISOString().split('T')[0];
@@ -245,5 +245,129 @@ document.addEventListener('DOMContentLoaded', function () {
     renderTasks();
     updateStats();
     taskModal.style.display = 'none';
+  }
+
+  function handleProjectSubmit(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('project-name').value.trim();
+    const color = document.getElementById('project-color').value;
+
+    if (!name) {
+      alert('Project name is required!');
+      return;
+    }
+
+    const projectData = {
+      id: generateId,
+      name,
+      color,
+    };
+
+    projects.push(projectData);
+    saveProjects();
+    renderProjects();
+    projectModal.style.display = 'none';
+  }
+
+  function setCurrentView(view) {
+    currentView = view;
+
+    // Update active button
+    document.querySelectorAll('.sidebar-menu button').forEach((btn) => {
+      btn.classList.remove('active');
+    });
+
+    switch (view) {
+      case 'all':
+        allTasksBtn.classList.add('active');
+        currentViewElement.textContent = 'All Tasks';
+        break;
+      case 'today':
+        todayTasksBtn.classList.add('active');
+        currentViewElement.textContent = "Today's Tasks";
+        break;
+      case 'important':
+        importantTasksBtn.classList.add('active');
+        currentViewElement.textContent = 'Important Tasks';
+        break;
+      case 'completed':
+        completedTasksBtn.classList.add('active');
+        currentViewElement.textContent = 'Completed Tasks';
+        break;
+    }
+
+    renderTasks();
+  }
+
+  function renderTasks() {
+    // Filter tasks based on current view, filters and search
+    let filteredTasks = [...tasks];
+
+    // Apply view filter
+    switch (currentView) {
+      case 'today':
+        const today = new Date().toISOString().split('T')[0];
+        filteredTasks = filteredTasks.filter((task) => task.dueDate === today);
+        break;
+      case 'important':
+        filteredTasks = filteredTasks.filter((task) => task.isImportant);
+        break;
+      case 'completed':
+        filteredTasks = filteredTasks.filter((task) => task.isCompleted);
+        break;
+      default:
+        // 'all' view = no filter
+        break;
+    }
+
+    // Apply priority filter
+    if (currentFilters.priority !== 'all') {
+      filteredTasks = filteredTasks.filter((task) => task.priority === currentFilters.priority);
+    }
+
+    // Apply date filter
+    if (currentFilters.date !== 'all') {
+      const today = new Date();
+      const todayStr = today.toISOString().split('T')[0];
+
+      switch (currentFilters.date) {
+        case 'today':
+          filteredTasks = filteredTasks.filter((task) => task.dueDate === todayStr);
+          break;
+        case 'week':
+          const nextWeek = new Date();
+          nextWeek.setDate(today.getDate() + 7);
+          filteredTasks = filteredTasks.filter((task) => {
+            if (!task.dueDate) return false;
+            const taskDate = new Date(task.dueDate);
+            return taskDate >= today && taskDate <= nextWeek;
+          });
+          break;
+        case 'month':
+          const nextMonth = new Date(today);
+          nextMonth.setMonth(today.getMonth() + 1);
+          filteredTasks = filteredTasks.filter((task) => {
+            if (!task.dueDate) return false;
+            const taskDate = new Date(task.dueDate);
+            return taskDate >= today && taskDate <= nextMonth;
+          });
+          break;
+        case 'overdue':
+          filteredTasks = filteredTasks.filter((task) => {
+            if (!task.dueDate) return false;
+            const taskDate = new Date(task.dueDate);
+            return taskDate < today && !task.isCompleted;
+          });
+          break;
+      }
+    }
+
+    // Apply search
+    if (searchQuery) {
+      filteredTasks =
+        filteredTasks.filter((task) => task.title.toLowerCase().includes(searchQuery)) ||
+        (task.description && task.description.toLowerCase().includes(searchQuery));
+    }
   }
 });
