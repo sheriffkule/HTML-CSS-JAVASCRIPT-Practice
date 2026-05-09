@@ -369,5 +369,155 @@ document.addEventListener('DOMContentLoaded', function () {
         filteredTasks.filter((task) => task.title.toLowerCase().includes(searchQuery)) ||
         (task.description && task.description.toLowerCase().includes(searchQuery));
     }
+
+    // Sort tasks
+    filteredTasks.sort((a, b) => {
+      let compareValue = 0;
+
+      switch (currentSort.by) {
+        case 'dueDate':
+          const dateA = a.dueDate ? new Date(a.dueDate) : new Date('9999-12-31'); // max date for tasks without due date
+          const dateB = b.dueDate ? new Date(b.dueDate) : new Date('9999-12-31');
+          compareValue = dateA - dateB;
+          break;
+        case 'priority':
+          const priorityOrder = { high: 1, medium: 2, low: 3 };
+          compareValue = priorityOrder[a.priority] - priorityOrder[b.priority];
+          break;
+        case 'createdAt':
+          compareValue = new Date(a.createdAt) - new Date(b.createdAt);
+          break;
+        case 'title':
+          compareValue = a.title.localeCompare(b.title);
+          break;
+      }
+
+      return currentSort.order === 'asc' ? compareValue : -compareValue;
+    });
+
+    // Render tasks
+    if (filteredTasks.length === 0) {
+      tasksList.innerHTML = `
+        <div class="empty-state">
+          <i class="fas fa-clipboard"></i>
+          <p>
+            No tasks found.
+            ${currentView === 'all' ? 'Add a new task to get started!' : 'Try changing your filters'}
+          </p>
+        </div>
+      `;
+      return;
+    }
+
+    tasksList.innerHTML = '';
+
+    filteredTasks.forEach((task) => {
+      const taskElement = document.createElement('div');
+      taskElement.className = `task-card ${task.priority}-priority ${task.isCompleted ? 'completed' : ''}`;
+
+      // Format due date
+      let dueDateDisplay = 'No due date';
+      if (task.dueDate) {
+        const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
+        dueDateDisplay = new Date(task.dueDate).toLocaleDateString(undefined, options);
+      }
+
+      // Priority display
+      const priorityDisplay = task.priority.charAt(0).toUpperCase() + task.priority.slice(1);
+
+      // Project display
+      let projectDisplay = '';
+      if (task.project) {
+        projectDisplay = `
+          <div class="task-detail">
+            <i class="fas fa-project-diagram"></i>
+            <span class="task-project">
+              <span class="project-color" style="background-color: ${task.projectColor}"></span>
+              ${task.projectName}
+            </span>
+          </div>
+        `;
+      }
+
+      // Labels display
+      let labelsDisplay = '';
+      if (task.labels && task.labels.length > 0) {
+        labelsDisplay = `
+          <div class="task-labels">
+            ${task.labels.map((label) => `<span class="task-label">${label}</span>`).join('')}
+          </div>
+        `;
+      }
+
+      taskElement.innerHTML = `
+        <div class="task-header-now">
+          <div class="task-title ${task.isCompleted ? 'completed' : ''}">
+            <input
+              type="checkbox"
+              class="complete-checkbox ${task.isCompleted ? 'checked' : ''}"
+              data-task-id="${task.id}" />
+            ${task.title}
+          </div>
+          <div className="task-actions-row">
+            <button
+              class="task-action-btn important ${task.isImportant ? 'active' : ''}"
+              data-task-id="${task.id}">
+              <i class="fas fa-star"></i>
+            </button>
+            <button class="task-action-btn edit" data-task-id="${task.id}">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button class="task-action-btn delete" data-task-id="${task.id}"></button>
+          </div>
+        </div>
+        ${task.description ? `<div class="task-description">${task.description}</div>` : ''}
+        <div class="task-details">
+          <div class="task-detail">
+            <i class="fas fa-calendar-alt"></i>
+            <span>${dueDateDisplay}</span>
+          </div>
+          <div class="task-detail">
+            <i className="fas fa-bolt"></i>
+            <span class="task-priority ${task.priority}">${priorityDisplay}</span>
+          </div>
+          ${projectDisplay}
+        </div>
+        ${labelsDisplay}
+      `;
+
+      tasksList.appendChild(taskElement);
+    });
+
+    // Add event listeners for task actions
+    document.querySelectorAll('.complete-checkbox').forEach((checkbox) => {
+      checkbox.addEventListener('change', function () {
+        const taskId = this.getAttribute('data-task-id');
+        toggleTaskCompletion(taskId);
+      });
+    });
+
+    document.querySelectorAll('.important').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        const taskId = this.getAttribute('data-task-id');
+        toggleTaskImportance(taskId);
+      });
+    });
+
+    document.querySelectorAll('.edit').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        const taskId = this.getAttribute('data-task-id');
+        const task = tasks.find((t) => t.id === taskId);
+        if (task) openTaskModal();
+      });
+    });
+
+    document.querySelectorAll('.delete').forEach((btn) => {
+      const taskId = btn.getAttribute('data-task-id');
+      btn.addEventListener('click', function () {
+        if (confirm('Are you sure you want to delete this task?')) {
+          deleteTask(taskId);
+        }
+      });
+    });
   }
 });
