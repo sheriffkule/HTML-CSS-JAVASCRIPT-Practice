@@ -17,9 +17,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const dateFilter = document.getElementById('date-filter');
   const taskSearch = document.getElementById('task-search');
   const currentViewElement = document.getElementById('current-view');
-  const totalTasksCount = document.getElementById('total-task-count');
-  const completedTasksCount = document.getElementById('completed-task-count');
-  const pendingTasksCount = document.getElementById('pending-task-count');
+  const totalTasksCount = document.getElementById('total-tasks-count');
+  const completedTasksCount = document.getElementById('completed-tasks-count');
+  const pendingTasksCount = document.getElementById('pending-tasks-count');
 
   // View buttons
   const allTasksBtn = document.getElementById('all-tasks');
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
   let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
   let projects = JSON.parse(localStorage.getItem('projects')) || [];
   let currentView = 'all';
-  let currentSort = { type: 'dueDate', order: 'asc' };
+  let currentSort = { by: 'dueDate', order: 'asc' };
   let currentFilters = { priority: 'all', dueDate: 'all' };
   let searchQuery = '';
 
@@ -162,8 +162,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function openSortModal() {
     // Set current sort options
-    document.querySelector(`input[name="sort"][value="${currentSort.by}"]`).checked = true;
-    document.querySelector(`input[name="order"][value="${currentSort.order}"]`).checked = true;
+    const sortElement = document.querySelector(`input[name="sort"][value="${currentSort.by || 'dueDate'}"]`);
+    const orderElement = document.querySelector(`input[name="order"][value="${currentSort.order}"]`);
+
+    if (sortElement) sortElement.checked = true;
+    if (orderElement) orderElement.checked = true;
 
     sortModal.style.display = 'flex';
   }
@@ -259,7 +262,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const projectData = {
-      id: generateId,
+      id: generateId(),
       name,
       color,
     };
@@ -365,9 +368,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Apply search
     if (searchQuery) {
-      filteredTasks =
-        filteredTasks.filter((task) => task.title.toLowerCase().includes(searchQuery)) ||
-        (task.description && task.description.toLowerCase().includes(searchQuery));
+      filteredTasks = filteredTasks.filter(
+        (task) =>
+          task.title.toLowerCase().includes(searchQuery) ||
+          (task.description && task.description.toLowerCase().includes(searchQuery)),
+      );
     }
 
     // Sort tasks
@@ -458,7 +463,7 @@ document.addEventListener('DOMContentLoaded', function () {
               data-task-id="${task.id}" />
             ${task.title}
           </div>
-          <div className="task-actions-row">
+          <div class="task-actions-row">
             <button
               class="task-action-btn important ${task.isImportant ? 'active' : ''}"
               data-task-id="${task.id}">
@@ -467,7 +472,9 @@ document.addEventListener('DOMContentLoaded', function () {
             <button class="task-action-btn edit" data-task-id="${task.id}">
               <i class="fas fa-edit"></i>
             </button>
-            <button class="task-action-btn delete" data-task-id="${task.id}"></button>
+            <button class="task-action-btn delete" data-task-id="${task.id}">
+              <i class="fas fa-trash"></i>
+            </button>
           </div>
         </div>
         ${task.description ? `<div class="task-description">${task.description}</div>` : ''}
@@ -477,7 +484,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <span>${dueDateDisplay}</span>
           </div>
           <div class="task-detail">
-            <i className="fas fa-bolt"></i>
+            <i class="fas fa-bolt"></i>
             <span class="task-priority ${task.priority}">${priorityDisplay}</span>
           </div>
           ${projectDisplay}
@@ -507,7 +514,7 @@ document.addEventListener('DOMContentLoaded', function () {
       btn.addEventListener('click', function () {
         const taskId = this.getAttribute('data-task-id');
         const task = tasks.find((t) => t.id === taskId);
-        if (task) openTaskModal();
+        if (task) openTaskModal(task);
       });
     });
 
@@ -526,7 +533,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (projects.length === 0) {
       projectsList.innerHTML =
-        '<p class=""no-projects">No projects yet. Add a new project to get started!</p>';
+        '<p class="no-projects">No projects yet. Add a new project to get started!</p>';
       return;
     }
 
@@ -608,4 +615,60 @@ document.addEventListener('DOMContentLoaded', function () {
     renderTasks();
     updateStats();
   }
+
+  function deleteProject(projectId) {
+    // Remove project from projects list
+    projects = projects.filter((p) => p.id !== projectId);
+
+    // Remove project association from tasks
+    tasks.forEach((task) => {
+      if (task.project === projectId) {
+        task.project = null;
+        task.projectName = null;
+        task.projectColor = null;
+      }
+    });
+
+    saveProjects();
+    saveTasks();
+    renderProjects();
+    renderTasks();
+  }
+
+  function updateStats() {
+    const total = tasks.length;
+    const completed = tasks.filter((t) => t.isCompleted).length;
+    const pending = total - completed;
+
+    totalTasksCount.textContent = total;
+    completedTasksCount.textContent = completed;
+    pendingTasksCount.textContent = pending;
+  }
+
+  function saveTasks() {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }
+
+  function saveProjects() {
+    localStorage.setItem('projects', JSON.stringify(projects));
+  }
+
+  function generateId() {
+    return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
+  }
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
