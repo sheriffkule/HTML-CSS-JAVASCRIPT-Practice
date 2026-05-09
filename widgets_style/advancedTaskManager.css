@@ -621,8 +621,7 @@ option::checkmark {
 }
 
 .modal {
-    /* display: none; */
-    display: flex;
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -645,9 +644,11 @@ option::checkmark {
     position: relative;
 
     h2 {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
+        padding-bottom: .5rem;
         font-size: 1.25rem;
         font-weight: 600;
+        border-bottom: 1px solid var(--border);
     }
 }
 
@@ -676,4 +677,97 @@ option::checkmark {
         font-size: .9rem;
         font-weight: 500;
     }
+}
+
+.form-group :is(input, textarea, select) {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 0.35rem;
+    background-color: var(--input-bg);
+    color: var(--text);
+    font-size: 0.9rem;
+    transition: all 0.25s;
+}
+
+.form-group :is(input, textarea, select):is(:focus, :focus-within) {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.2rem rgb(78 115 223 / 0.25),
+    inset 0 0 0 0.2rem rgb(78 115 223 / 0.25);
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    .form-group {
+        flex: 1;
+    }
+}
+
+.submit-btn {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: .35rem;
+    corner-shape: scoop;
+    font-size: 0.9rem;
+    cursor: pointer;
+    width: 100%;
+    margin-top: .5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    transition: all .2s ease-in-out;
+
+    i {
+        transition: .2s;
+    }
+    &:hover {
+        background-color: var(--primary-hover);
+        letter-spacing: 1px;
+        corner-shape: round;
+    }
+    &:hover i {
+        color: var(--success);
+        font-size: 1rem;
+    }
+    &:active {
+        scale: 0.98;
+    }
+}
+
+.sort-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.sort-option {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+
+    input {
+        width: auto;
+        accent-color: var(--success);
+    }
+    label {
+        margin-bottom: 0;
+        font-weight: 400;
+        cursor: pointer;
+    }
+}
+
+.sort-order {
+    display: flex;
+    margin-bottom: 1.5rem;
+    padding-top: 1rem;
+    gap: 1.5rem;
+    border-top: 1px solid var(--border);
 }

@@ -520,4 +520,92 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
   }
+
+  function renderProjects() {
+    projectsList.innerHTML = '';
+
+    if (projects.length === 0) {
+      projectsList.innerHTML =
+        '<p class=""no-projects">No projects yet. Add a new project to get started!</p>';
+      return;
+    }
+
+    projects.forEach((project) => {
+      const projectElement = document.createElement('div');
+      projectElement.className = 'project-item';
+      projectElement.innerHTML = `
+        <span class="project-color" style="background-color: ${project.color}"></span>
+        <span class="project-name">${project.name}</span>
+        <button class="delete-project" data-project-id="${project.id}">
+          <i class="fas fa-trash"></i>
+        </button>
+      `;
+
+      projectElement.addEventListener('click', function (e) {
+        if (!e.target.classList.contains('delete-project') && !e.target.closest('.delete-project')) {
+          currentView = 'all';
+          currentFilters = { priority: 'all', date: 'all' };
+          priorityFilter.value = 'all';
+          dateFilter.value = 'all';
+          setCurrentView('all');
+          document.getElementById('task-project').value = project.id;
+          renderTasks();
+        }
+      });
+
+      const deleteBtn = projectElement.querySelector('.delete-project');
+      deleteBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        const projectId = this.getAttribute('data-project-id');
+        if (
+          confirm(
+            'Are you sure you want to delete this project? All tasks in this project will not be deleted.',
+          )
+        ) {
+          deleteProject(projectId);
+        }
+      });
+
+      projectsList.appendChild(projectElement);
+    });
+
+    // Update project dropdown in task form
+    populateProjectDropdown();
+  }
+
+  function toggleTaskCompletion(taskId) {
+    const task = tasks.find((t) => t.id === taskId);
+    if (task) {
+      task.isCompleted = !task.isCompleted;
+      saveTasks();
+      renderTasks();
+      updateStats();
+    }
+  }
+
+  function toggleTaskImportance(taskId) {
+    const task = tasks.find((t) => t.id === taskId);
+    if (task) {
+      task.isImportant = !task.isImportant;
+      saveTasks();
+      renderTasks();
+      updateStats();
+    }
+  }
+
+  function toggleTaskImportant(taskId) {
+    const task = tasks.find((t) => t.id === taskId);
+    if (task) {
+      task.isImportant = !task.isImportant;
+      saveTasks();
+      renderTasks();
+    }
+  }
+
+  function deleteTask(taskId) {
+    tasks = tasks.filter((t) => t.id !== taskId);
+    saveTasks();
+    renderTasks();
+    updateStats();
+  }
 });
