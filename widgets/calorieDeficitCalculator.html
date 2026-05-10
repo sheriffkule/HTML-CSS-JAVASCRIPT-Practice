@@ -115,7 +115,161 @@
             </ul>
           </div>
         </div>
+
+        <div class="form-group">
+          <label for="goal">Weight Loss Goal</label>
+          <select id="goal">
+            <option value="0.25">Lose 0.25 kg/week</option>
+            <option value="0.5">Lose 0.5 kg/week</option>
+            <option value="0.75">Lose 0.75 kg/week</option>
+            <option value="1">Lose 1 kg/week</option>
+            <option value="1.25">Lose 1.25 kg/week</option>
+            <option value="1.5">Lose 1.5 kg/week</option>
+          </select>
+        </div>
+
+        <button class="calculate-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 2V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+          Calculate My Calorie Deficit
+        </button>
+
+        <div class="results" id="results">
+          <div class="result-card">
+            <h3 class="result-title">Your Calorie Needs</h3>
+            <div class="result-grid">
+              <div class="result-item">
+                <div class="result-label">Basal Metabolic Rate (BMR)</div>
+                <div class="result-value" id="bmr-result">0</div>
+                <span class="result-unit">calories/day</span>
+              </div>
+              <div class="result-item">
+                <div class="result-label">Maintenance Calories</div>
+                <div class="result-value" id="tdee-result">0</div>
+                <span class="result-unit">calories/day</span>
+              </div>
+              <div class="result-item">
+                <div class="result-label">Daily Deficit Goal</div>
+                <div class="result-value" id="deficit-result">0</div>
+                <span class="result-unit">calories/day</span>
+              </div>
+              <div class="result-item">
+                <div class="result-label">Target Daily Intake</div>
+                <div class="result-value" id="bmr-result">0</div>
+                <span class="result-unit">calories/day</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="result-card">
+            <h3 class="result-title">Your Weight Loss Projection</h3>
+            <div class="result-grid">
+              <div class="result-item">
+                <div class="result-label">Weekly Weight Loss</div>
+                <div class="result-value" id="weekly-loss">0</div>
+                <span class="result-unit" id="weekly-unit">kg/week</span>
+              </div>
+              <div class="result-item">
+                <div class="result-label">Monthly Weight Loss</div>
+                <div class="result-value" id="monthly-loss">0</div>
+                <span class="result-unit" id="monthly-unit">kg/month</span>
+              </div>
+              <div class="result-item">
+                <div class="result-label">Time to Lose 5kg</div>
+                <div class="result-value" id="">0</div>
+                <span class="result-unit">weeks</span>
+              </div>
+              <div class="result-item">
+                <div class="result-label">Time to Lose 10kg</div>
+                <div class="result-value" id="">0</div>
+                <span class="result-unit">weeks</span>
+              </div>
+            </div>
+
+            <div class="progress-container">
+              <div class="progress-title">
+                <span>Deficit Progress (500 cal/day = -0.5kg/week)</span>
+                <span id="deficit-percentage">0%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" id="deficit-progress" style="width: 10%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tips">
+            <h3 class="tips-title">Tips for Healthy Weight Loss</h3>
+            <ul class="tips-list">
+              <li>
+                <svg xmlns="http://www.w3.org/200/svg" fill="none" viewBox="0 0 24 24" stoke="currentColor">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>Prioritize protein intake to preserve muscle mass while in a calorie deficit.</span>
+              </li>
+              <li>
+                <svg xmlns="http://www.w3.org/200/svg" fill="none" viewBox="0 0 24 24" stoke="currentColor">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span
+                  >Combine diet with strength training to maximize fat loss and minimize muscle loss.</span
+                >
+              </li>
+              <li>
+                <svg xmlns="http://www.w3.org/200/svg" fill="none" viewBox="0 0 24 24" stoke="currentColor">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>Stay hydrated - sometimes thirst is mistaken for hunger.</span>
+              </li>
+              <li>
+                <svg xmlns="http://www.w3.org/200/svg" fill="none" viewBox="0 0 24 24" stoke="currentColor">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>get enough sleep = poor sleep can disrupt hunger hormones.</span>
+              </li>
+              <li>
+                <svg xmlns="http://www.w3.org/200/svg" fill="none" viewBox="0 0 24 24" stoke="currentColor">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span
+                  >Be consistent but flexibile = occasional treats can help with long-term adherence.</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
+
+      <footer>
+        <p>This calculator uses the Mifflin-st Jeor equation for BMR calculation, which is considered the most accurate for most people.</p>
+        <p>Remember that these numbers are estimates - individual results may vary based on metabolism and other factors.I</p>
+      </footer>
     </div>
+
+    <script src="/widgets/calorieDeficitCalculator.html"></script>
   </body>
 </html>
