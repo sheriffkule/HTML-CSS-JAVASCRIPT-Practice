@@ -67,14 +67,14 @@
             <div class="form-group">
               <label for="height">Height</label>
               <div class="form-row" style="gap: 1rem; margin-bottom: 0">
-                <div class="from-col" id="height-cm-group">
+                <div class="form-col" id="height-cm-group">
                   <input type="number" id="height-cm" min="100" max="250" placeholder="Centimeters" />
                 </div>
                 <div class="form-col hidden" id="height-ft-group">
                   <input type="number" id="height-ft" min="3" max="8" placeholder="Feet" />
                 </div>
                 <div class="form-col hidden" id="height-in-group">
-                  <input type="number" id="height-in" min="0" max="11" Inches />
+                  <input type="number" id="height-in" min="0" max="11" placeholder="Inches" />
                 </div>
               </div>
             </div>
@@ -128,7 +128,7 @@
           </select>
         </div>
 
-        <button class="calculate-btn">
+        <button id="calculate-btn">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path
               stroke-linecap="round"
@@ -160,7 +160,7 @@
               </div>
               <div class="result-item">
                 <div class="result-label">Target Daily Intake</div>
-                <div class="result-value" id="bmr-result">0</div>
+                <div class="result-value" id="target-result">0</div>
                 <span class="result-unit">calories/day</span>
               </div>
             </div>
@@ -181,12 +181,12 @@
               </div>
               <div class="result-item">
                 <div class="result-label">Time to Lose 5kg</div>
-                <div class="result-value" id="">0</div>
+                <div class="result-value" id="time-5kg">0</div>
                 <span class="result-unit">weeks</span>
               </div>
               <div class="result-item">
                 <div class="result-label">Time to Lose 10kg</div>
-                <div class="result-value" id="">0</div>
+                <div class="result-value" id="time-10kg">0</div>
                 <span class="result-unit">weeks</span>
               </div>
             </div>
@@ -197,7 +197,7 @@
                 <span id="deficit-percentage">0%</span>
               </div>
               <div class="progress-bar">
-                <div class="progress-fill" id="deficit-progress" style="width: 10%"></div>
+                <div class="progress-fill" id="deficit-progress" style="width: 0%"></div>
               </div>
             </div>
           </div>
@@ -206,7 +206,7 @@
             <h3 class="tips-title">Tips for Healthy Weight Loss</h3>
             <ul class="tips-list">
               <li>
-                <svg xmlns="http://www.w3.org/200/svg" fill="none" viewBox="0 0 24 24" stoke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -216,7 +216,7 @@
                 <span>Prioritize protein intake to preserve muscle mass while in a calorie deficit.</span>
               </li>
               <li>
-                <svg xmlns="http://www.w3.org/200/svg" fill="none" viewBox="0 0 24 24" stoke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -228,7 +228,7 @@
                 >
               </li>
               <li>
-                <svg xmlns="http://www.w3.org/200/svg" fill="none" viewBox="0 0 24 24" stoke="currentColor">
+                <svg xmlns="http://www.w3.org/200/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -238,7 +238,7 @@
                 <span>Stay hydrated - sometimes thirst is mistaken for hunger.</span>
               </li>
               <li>
-                <svg xmlns="http://www.w3.org/200/svg" fill="none" viewBox="0 0 24 24" stoke="currentColor">
+                <svg xmlns="http://www.w3.org/200/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -248,7 +248,7 @@
                 <span>get enough sleep = poor sleep can disrupt hunger hormones.</span>
               </li>
               <li>
-                <svg xmlns="http://www.w3.org/200/svg" fill="none" viewBox="0 0 24 24" stoke="currentColor">
+                <svg xmlns="http://www.w3.org/200/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -256,7 +256,7 @@
                     d="M5 13l4 4L19 7"></path>
                 </svg>
                 <span
-                  >Be consistent but flexibile = occasional treats can help with long-term adherence.</span
+                  >Be consistent but flexible = occasional treats can help with long-term adherence.</span
                 >
               </li>
             </ul>
@@ -265,11 +265,17 @@
       </div>
 
       <footer>
-        <p>This calculator uses the Mifflin-st Jeor equation for BMR calculation, which is considered the most accurate for most people.</p>
-        <p>Remember that these numbers are estimates - individual results may vary based on metabolism and other factors.I</p>
+        <p>
+          This calculator uses the Mifflin-st Jeor equation for BMR calculation, which is considered the most
+          accurate for most people.
+        </p>
+        <p>
+          Remember that these numbers are estimates - individual results may vary based on metabolism and
+          other factors.
+        </p>
       </footer>
     </div>
 
-    <script src="/widgets/calorieDeficitCalculator.html"></script>
+    <script src="/widgets_script/calorieDeficitCalculator.js"></script>
   </body>
 </html>
