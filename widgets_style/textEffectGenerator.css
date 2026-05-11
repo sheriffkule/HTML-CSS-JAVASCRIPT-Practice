@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary: #4a6bff;
+    --secondary: #6c757d;
+    --success: #28a745;
+    --danger: #dc3545;
+    --warning: #ffc107;
+    --info: #17a2b8;
+    --light: #ececec;
+    --dark: #343a40;
+    --text: #212529;
+    --bg: #f5f5f5;
+    --border: #cdd2d8;
+    --shadow-color: rgb(0 0 0 / 0.15);
+    --card-bg: #fafafa;
+    --input-bg: #ffffff;
+    --preview-bg: #f8f9fa;
+}
+
+[data-theme="dark"] {
+    --primary: #5d7aff;
+    --secondary: #5a6268;
+    --text: #f8f9fa;
+    --bg: #343a40;
+    --border: #6b7783;
+    --shadow-color: rgb(255 255 255 / 0.15);
+    --card-bg: #2c3136;
+    --input-bg: #495057;
+    --preview-bg: #495057;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out;
+    transition-behavior: allow-discrete;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border);
+}
+
+h1, h2, h3 {
+    color: var(--primary);
+}
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+
+    input {
+        height: 0;
+        width: 0;
+        opacity: 0;
+    }
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background-color: var(--secondary);
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider::before {
+    content: '';
+    position: absolute;
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    top: 4px;
+    border-radius: 50%;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: var(--primary);
+}
+
+input:checked + .slider::before {
+    transform: translateX(26px);
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+
+    @media (width < 768px) {
+        grid-template-columns: 1fr;
+    }
+}

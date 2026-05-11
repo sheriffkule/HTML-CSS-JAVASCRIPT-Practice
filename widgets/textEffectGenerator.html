@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text Effects Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/textEffectGenerator.css" />
+  </head>
+  <body data-theme="dark">
+    <div class="container">
+      <header>
+        <h1>Text Effects Generator</h1>
+        <div class="theme-toggle">
+          <i class="fas fa-sun"></i>
+          <label class="switch">
+            <input type="checkbox" id="theme-switch" />
+            <span class="slider round"></span>
+          </label>
+          <i class="fas fa-moon"></i>
+        </div>
+      </header>
+
+      <main>
+        <div class="preview-section">
+          <div class="preview-container">
+            <div id="text-preview" contenteditable="true">Edit Me!</div>
+          </div>
+          <div class="export-options">
+            <button class="btn" id="copy-css"><i class="fas fa-code"></i></button>
+            <button class="btn" id="download-img"><i class="fas fa-download"></i></button>
+          </div>
+        </div>
+
+        <div class="controls-section">
+          <div class="input-group">
+            <label for="text-input">Your Text:</label>
+            <input type="text" id="text-input" value="Edit Me!" />
+          </div>
+
+          <div class="tabs">
+            <button class="tab-btn active" data-tab="basic">Basic</button>
+            <button class="tab-btn" data-tab="shadow">Shadow</button>
+            <button class="tab-btn" data-tab="gradient">Gradient</button>
+            <button class="tab-btn" data-tab="outline">Outline</button>
+            <button class="tab-btn" data-tab="animation">Animation</button>
+            <button class="tab-btn" data-tab="presets">Presets</button>
+          </div>
+
+          <div class="tab-content active" id="basic-tab">
+            <div class="input-group">
+              <label for="font-family">Font Family:</label>
+              <select id="font-family">
+                <option value="Arial, sans-serif">Arial</option>
+                <option value="'Poppins', sans-serif" selected>Poppins</option>
+                <option value="'Times New Roman', serif">Times New Roman</option>
+                <option value="'Courier New', monospace">Courier New</option>
+                <option value="'Georgia', serif">Georgia</option>
+                <option value="'Verdana', sans-serif">Verdana</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label for="font-size"
+                >Font Size:
+                <input type="range" id="font-size" min="10" max="120" value="48" />
+                <span id="font-size-value">48px</span>
+              </label>
+            </div>
+
+            <div class="input-group">
+              <label for="text-color">Text Color:</label>
+              <input type="color" id="text-color" value="#4a6bff" />
+            </div>
+
+            <div class="input-group">
+              <label for="bg-color">Background Color:</label>
+              <input type="color" id="bg-color" value="#f8f9fa" />
+            </div>
+          </div>
+
+          <div class="tab-content" id="shadow-tab">
+            <div class="input-group">
+              <label for="shadow-color">Shadow Color:</label>
+              <input type="color" id="shadow-color" value="#000000" />
+            </div>
+
+            <div class="input-group">
+              <label for="shadow-h-offset">Horizontal Offset:</label>
+              <input type="range" id="shadow-h-offset" min="-50" max="50" value="5" />
+              <span id="shadow-h-offset-value">5px</span>
+            </div>
+
+            <div class="input-group">
+              <label for="shadow-v-offset">Vertical Offset:</label>
+              <input type="range" id="shadow-v-offset" min="-50" max="50" value="5" />
+              <span id="shadow-v-offset-value">5px</span>
+            </div>
+
+            <div class="input-group">
+              <label for="shadow-blur">Blur Radius:</label>
+              <input type="range" id="shadow-blur" min="0" max="50" value="10" />
+              <span id="shadow-blur-value">10px</span>
+            </div>
+
+            <div class="input-group">
+              <label for="shadow-opacity">Opacity:</label>
+              <input type="range" id="shadow-opacity" min="0" max="100" value="75" />
+              <span id="shadow-opacity-value">75%</span>
+            </div>
+
+            <div class="input-group">
+              <label for="shadow-multiple">Multiple Shadows:</label>
+              <input type="checkbox" id="shadow-multiple" />
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
