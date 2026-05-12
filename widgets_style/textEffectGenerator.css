@@ -290,11 +290,12 @@ input[type="range"]{
 input[type='range']::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    background-color: #E9E9E9;
+    background-color: var(--primary);
     border-radius: 50%;
     border: 1px solid var(--border);
     height: 15px;
     width: 15px;
+    transition: .25s;
 }
 
 input[type='range']::-webkit-slider-thumb:hover {
@@ -399,6 +400,7 @@ option::checkmark {
 }
 
 .css-output-container {
+    position: relative;
     background-color: var(--card-bg);
     border-radius: 10px;
     padding: 20px;
@@ -417,4 +419,38 @@ option::checkmark {
     font-family: 'Courier New', monospace;
     resize: vertical;
     margin-top: 10px;
+    transition: 0.2s;
+
+    &:focus {
+        outline: 1px solid var(--primary);
+    }
+}
+
+.tooltip {
+    position: absolute;
+    display: inline-block;
+    opacity: 0;
+    color: white;
+    background-color: var(--success);
+    border: 1px solid var(--info);
+    text-align: center;
+    border-radius: 6px;
+    padding: 6px 16px;
+    z-index: 1;
+    bottom: 125%;
+    right: 50%;
+    transform: translateX(-50%);
+    transition: opacity .25s ease-in-out;
+    pointer-events: none;
+}
+
+.tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px;
+    border-style: solid;
+    border-color: var(--success) transparent transparent transparent;
 }
