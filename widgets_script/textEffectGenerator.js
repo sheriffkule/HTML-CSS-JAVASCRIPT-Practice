@@ -162,8 +162,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     switch (presetType) {
       case 'neon':
-        textColor.value = '#0ff';
-        shadowColor.value = '#0ff';
+        textColor.value = '#00ffff';
+        shadowColor.value = '#00ffff';
         shadowHOffset.value = '0';
         shadowVOffset.value = '0';
         shadowBlur.value = '20';
@@ -284,4 +284,157 @@ document.addEventListener('DOMContentLoaded', function () {
     textInput.value = textPreview.textContent;
     updateCssOutput();
   });
+
+  fontFamily.addEventListener('change', updateTextPreview);
+  textColor.addEventListener('input', updateTextPreview);
+  bgColor.addEventListener('input', updateTextPreview);
+  shadowColor.addEventListener('input', updateTextPreview);
+  shadowMultiple.addEventListener('change', updateTextPreview);
+  gradientType.addEventListener('change', updateTextPreview);
+  outlineColor.addEventListener('input', updateTextPreview);
+  outlineStyle.addEventListener('change', updateTextPreview);
+  animationColor.addEventListener('change', updateTextPreview);
+  animationIteration.addEventListener('change', updateTextPreview);
+  animationColor.addEventListener('input', updateTextPreview);
+
+  // Show/hide animation color based on animation type
+  animationType.addEventListener('change', function () {
+    this.value === 'color-change'
+      ? (animationColor.style.display = 'block')
+      : (animationColor.style.display = 'none');
+  });
+
+  // Update text preview with all styles
+  function updateTextPreview() {
+    // Basic styles
+    textPreview.style.fontFamily = fontFamily.value;
+    textPreview.style.fontSize = `${fontSize.value}px`;
+    textPreview.style.color = textColor.value;
+    document.querySelector('.preview-container').style.backgroundColor = bgColor.value;
+
+    // Shadow effect
+    const shadowOpacityValue = shadowOpacity.value / 100;
+    const shadowColorValue = hexToRgba(shadowColor.value, shadowOpacityValue);
+
+    if (shadowMultiple.checked) {
+      textPreview.style.textShadow = `
+        ${shadowHOffset.value}.px ${shadowVOffset}px ${shadowVOffset}px ${shadowBlur}px ${shadowColorValue},
+        ${shadowHOffset.value}.px ${-shadowVOffset}px ${-shadowVOffset}px ${shadowBlur}px ${shadowColorValue}
+      `;
+    } else {
+      textPreview.style.textShadow = `${shadowHOffset.value}.px ${shadowVOffset}px ${shadowVOffset}px ${shadowBlur}px ${shadowColorValue}`;
+    }
+
+    // Gradient effect
+    if (gradientType === 'linear') {
+      const gradientStops = gradientColors.map((c) => `${c.color} ${c.stop}%`).join(', ');
+      textPreview.style.background = `linear-gradient(${gradientAngle.value}deg, ${gradientStops})`;
+      textPreview.style.backgroundClip = 'text';
+      textPreview.style.webkitBackgroundClip = 'text';
+      textPreview.style.color = 'transparent';
+    } else {
+      const gradientStops = gradientColors.map((c) => `${c.color} ${c.stop}%`).join(', ');
+      textPreview.style.background = `radial-gradient(circle, ${gradientStops})`;
+      textPreview.style.backgroundClip = 'text';
+      textPreview.style.webkitBackgroundClip = 'text';
+      textPreview.style.color = 'transparent';
+    }
+
+    // Outline Effect
+    textPreview.style.webkitTextStroke = `${outlineWidth.value}px ${outlineColor}`;
+    textPreview.style.textStroke = `${outlineWidth.value}px ${outlineColor}`;
+
+    // Animation
+    textPreview.classList.remove(
+      'pulse-animation',
+      'glow-animation',
+      'shake-animation',
+      'color-change-animation',
+    );
+
+    if (animationType !== 'none') {
+      textPreview.classList.add(`${animationType.value}-animation`);
+      textPreview.style.animationDuration = `${animationDuration.value}s`;
+      textPreview.style.animationIterationCount =
+        animationIteration.value === 'infinite' ? 'infinite' : animationIteration.value;
+
+      if (animationType === 'color-change') {
+        document.documentElement.style.setProperty('--animation-color', animationColor.value);
+      }
+    }
+
+    updateCssOutput();
+  }
+
+  // Convert hex colors to rgba
+  function hexToRgba(hex, opacity) {
+    let r = 0;
+    let g = 0;
+    let b = 0;
+
+    // 3 digits
+    if (hex.length === 4) {
+      r = parseInt(hex[1] + hex[1], 16);
+      g = parseInt(hex[2] + hex[2], 16);
+      b = parseInt(hex[3] + hex[3], 16);
+    }
+    // 6 digits
+    if (hex.length === 7) {
+      r = parseInt(hex[1] + hex[2], 16);
+      g = parseInt(hex[3] + hex[4], 16);
+      b = parseInt(hex[5] + hex[6], 16);
+    }
+
+    return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+  }
+
+  // Update CSS output
+  function updateCssOutput() {
+    let css = `/* Text Styles */\n`;
+    css += `.text-effect {\n}`;
+    css += `   font-family: ${fontFamily.value};\n`;
+    css += `   font-size: ${fontSize.value}px;\n`;
+    css += `   color: ${textColor.value};\n`;
+
+    // Shadow
+    const shadowOpacityValue = shadowOpacity.value / 100;
+    const shadowColorValue = hexToRgba(shadowColor.value, shadowOpacityValue);
+
+    if (shadowMultiple.checked) {
+      css += `   text-shadow: \n`;
+      css += `   ${shadowHOffset.value}px ${shadowVOffset.value}px ${shadowBlur.value}px ${shadowColor.value};\n`;
+      css += `   ${-shadowHOffset.value}px ${-shadowVOffset.value}px ${shadowBlur.value}px ${shadowColor.value};\n`;
+    } else {
+      css += `   text-shadow: ${shadowHOffset.value}px ${shadowVOffset.value}px ${shadowBlur.value}px ${shadowColor.value};\n`;
+    }
+
+    // Gradient
+    if ((gradientType = 'linear')) {
+      const gradientStops = gradientColors.map((c) => `c${c.color} ${c.stop}%`).join(', ');
+      css += `   background: linear-gradient(${gradientAngle.value}deg, ${gradientStops});\n`;
+      css += `   -webkit-background-clip: text;\n`;
+      css += `   background-clip: text;\n`;
+      css += `   color: transparent;\n`;
+    } else {
+      const gradientStops = gradientColors.map((c) => `c${c.color} ${c.stop}%`).join(', ');
+      css += `   background: radial-gradient(circle, ${gradientStops});\n`;
+      css += `   -webkit-background-clip: text;\n`;
+      css += `   background-clip: text;\n`;
+      css += `   color: transparent;\n`;
+    }
+
+    // Outline
+    css += `   -webkit-text-stroke: ${outlineWidth.value}px ${outlineColor.value};\n`;
+    css += `   text-stroke: ${outlineWidth.value}px ${outlineColor.value};\n`;
+
+    // Animation
+    if (animationType !== 'none') {
+      css += `
+        animation: ${animationType.value}-animation ${animationDuration.value}s
+        ${animationIteration.value === 'infinite' ? 'infinite' : animationIteration.value};
+      `;
+    }
+
+    css += `}\n\n`;
+  }
 });
