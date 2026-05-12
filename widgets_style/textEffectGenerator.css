@@ -162,3 +162,191 @@ main {
     margin-block-end: 20px;
     justify-content: center;
 }
+
+.tab-btn {
+    padding: 10px 16px;
+    background-color: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all .3s;
+
+    &:hover,
+    &.active {
+        background-color: var(--primary);
+        color: var(--text);
+        border-color: var(--primary);
+        transform: scale(1.05);
+        letter-spacing: 1px;
+    }
+    &:active {
+        transform: scale(1);
+    }
+}
+
+/* .tab-content {
+    display: none;
+} */
+
+.tab-content.active {
+    display: block;
+}
+
+.input-group {
+    margin-bottom: 15px;
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 500;
+    }
+}
+
+.input-group :is(input[type="text"], input[type="color"], select) {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--border);
+    background-color: var(--input-bg);
+    color: var(--text);
+}
+
+.input-group input[type="range"] {
+    width: calc(100% - 50px);
+    vertical-align: middle;
+}
+
+.gradient-colors {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.gradient-color {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+input[type="range"] {
+    flex-grow: 1;
+    cursor: col-resize;
+}
+
+select,
+::picker(select) {
+  appearance: base-select;
+  cursor: pointer;
+}
+
+::picker(select) {
+  border-radius: 8px;
+  border: none;
+}
+
+select::picker-icon {
+  color: var(--primary);
+  transition: 0.3s rotate;
+}
+
+select:open::picker-icon {
+  rotate: 180deg;
+  color: var(--success);
+}
+
+option {
+  border: 1px solid #bbb;
+  background: var(--primary);
+  padding: 2px 0 2px 12px;
+  color: white;
+  padding-right: 18px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+option:hover,
+option:focus {
+  background: var(--info);
+}
+
+option:checked {
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: var(--warning);
+  background-color: var(--primary);
+}
+
+option::checkmark {
+  color: var(--warning);
+  font-size: 1.5rem;
+}
+
+.presets-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.preset {
+    cursor: pointer;
+    text-align: center;
+}
+
+.preset-preview {
+    padding: 15px;
+    border-radius: 5px;
+    background-color: var(--preview-bg);
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 5px;
+    transition: transform 0.2s;
+}
+
+.preset:hover .preset-preview {
+    transform: scale(1.05);
+}
+
+.btn {
+    padding: 10px 16px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all .3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    &:hover {
+        background-color: #3a56d4;
+        transform: scale(1.05);
+    }
+    &:active {
+        transform: scale(1);
+    }
+}
+
+.css-output-container {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    margin-top: 30px;
+}
+
+#css-output {
+    width: 100%;
+    height: 150px;
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background-color: var(--input-bg);
+    color: var(--text);
+    font-family: 'Courier New', monospace;
+    resize: vertical;
+    margin-top: 10px;
+}
