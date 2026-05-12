@@ -210,11 +210,51 @@ main {
     border: 1px solid var(--border);
     background-color: var(--input-bg);
     color: var(--text);
+    transition: .25s;
 }
 
 .input-group input[type="range"] {
     width: calc(100% - 50px);
     vertical-align: middle;
+}
+
+input[type="color"] {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  height: 25px;
+  padding: 0 !important;
+  transition: .2s ease-in;
+
+  &:hover {
+    transform: scaleY(1.2);
+  }
+}
+
+::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+::-webkit-color-swatch{
+  border: 0;
+  padding: 0;
+}
+
+::-moz-color-swatch,
+::-moz-focus-inner{
+  border: 0;
+}
+
+::-moz-focus-inner{
+  padding: 0;
+}
+
+input[type="text"]:is(:focus, :focus-within) {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--primary);
 }
 
 .gradient-colors {
@@ -230,9 +270,37 @@ main {
     gap: 10px;
 }
 
-input[type="range"] {
+/* input[type="range"] {
     flex-grow: 1;
-    cursor: col-resize;
+} */
+
+input[type="range"]{
+    -webkit-appearance: none;
+    -moz-apperance: none;
+    appearance: none;
+    flex-grow: 1;
+    border-radius: 6px;
+    height: 6px;
+    background-image: linear-gradient(to right,
+        color-stop(0.15, var(--primary)),
+        color-stop(0.15, var(--secondary))
+    );
+}
+
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #E9E9E9;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    height: 15px;
+    width: 15px;
+}
+
+input[type='range']::-webkit-slider-thumb:hover {
+    background-color: var(--info);
+    scale: 1.1;
+    box-shadow: 0 0 5px var(--info);
 }
 
 select,
