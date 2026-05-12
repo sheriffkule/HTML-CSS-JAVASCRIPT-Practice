@@ -122,3 +122,43 @@ main {
         grid-template-columns: 1fr;
     }
 }
+
+.preview-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.preview-container {
+    background-color: var(--preview-bg);
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+}
+
+#text-preview {
+    font-size: 48px;
+    font-weight: 600;
+    color: var(--primary);
+    text-align: center;
+    outline: none;
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+.export-options {
+    display: flex;
+    gap: 10px;
+}
+
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-block-end: 20px;
+    justify-content: center;
+}

@@ -27,8 +27,10 @@
             <div id="text-preview" contenteditable="true">Edit Me!</div>
           </div>
           <div class="export-options">
-            <button class="btn" id="copy-css"><i class="fas fa-code"></i></button>
-            <button class="btn" id="download-img"><i class="fas fa-download"></i></button>
+            <button class="btn" id="copy-css" title="Copy CSS"><i class="fas fa-code"></i></button>
+            <button class="btn" id="download-img" title="Download Image">
+              <i class="fas fa-download"></i>
+            </button>
           </div>
         </div>
 
@@ -114,8 +116,182 @@
               <input type="checkbox" id="shadow-multiple" />
             </div>
           </div>
+
+          <div class="tab-content" id="gradient-tab">
+            <div class="input-group">
+              <label for="gradient-type">Gradient Type:</label>
+              <select id="gradient-type">
+                <option value="linear">Linear</option>
+                <option value="radial">Radial</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label for="gradient-angle">Angle/Direction</label>
+              <input type="range" id="gradient-angle" min="0" max="360" value="90" />
+              <span id="gradient-angle-value">90deg</span>
+            </div>
+
+            <div class="gradient-colors">
+              <div class="gradient-color">
+                <input type="color" id="gradient-color-1" value="#ff0000" />
+                <input type="range" id="gradient-stop" min="0" max="100" value="0" />
+                <span>0%</span>
+              </div>
+              <div class="gradient-color">
+                <input type="color" id="gradient-color-2" value="#ffff00" />
+                <input type="range" id="gradient-stop" min="0" max="100" value="50" />
+                <span>50%</span>
+              </div>
+              <div class="gradient-color">
+                <input type="color" id="gradient-color-3" value="#00ff00" />
+                <input type="range" id="gradient-stop" min="0" max="100" value="100" />
+                <span>100%</span>
+              </div>
+            </div>
+
+            <button class="btn" id="add-gradient-color" title="Add Color"><i class="fas fa-plus"></i></button>
+            <button class="btn" id="remove-gradient-color" title="Remove Color">
+              <i class="fas fa-minus"></i>
+            </button>
+          </div>
+
+          <div class="tab-content" id="outline-tab">
+            <div class="input-group">
+              <label for="outline-color">Outline Color:</label>
+              <input type="color" id="outline-color" value="#000000" />
+            </div>
+
+            <div class="input-group">
+              <label for="outline-width">Outline Width:</label>
+              <input type="range" id="outline-width" min="1" max="20" value="2" />
+              <span id="outline-width-value">2px</span>
+            </div>
+
+            <div class="input-group">
+              <label for="outline-style">Outline Style:</label>
+              <select id="outline-style">
+                <option value="solid">Solid</option>
+                <option value="dotted">Dotted</option>
+                <option value="dashed">Dashed</option>
+                <option value="double">Double</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="tab-content" id="animation-tab">
+            <div class="input-group">
+              <label for="animation-type">Animation Type:</label>
+              <select id="animation-type">
+                <option value="none">None</option>
+                <option value="pulse">Pulse</option>
+                <option value="glow">Glow</option>
+                <option value="shake">Shake</option>
+                <option value="float">Float</option>
+                <option value="color-change">Color Change</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label for="animation-duration">Animation Duration:</label>
+              <input type="range" id="animation-duration" min="0.5" max="10" step="0.5" value="2" />
+              <span id="animation-duration-value">2s</span>
+            </div>
+
+            <div class="input-group">
+              <label for="animation-iteration">Animation Iteration:</label>
+              <select id="animation-iteration">
+                <option value="infinite">Infinite</option>
+                <option value="1">Once</option>
+                <option value="2">Twice</option>
+                <option value="3">Three times</option>
+              </select>
+            </div>
+
+            <div class="input-group animation-color-group">
+              <label for="animation-color">Animation-color:</label>
+              <input type="color" id="animation-color" value="#ff0000" />
+            </div>
+          </div>
+
+          <div class="tab-content" id="presets-tab">
+            <div class="presets-grid">
+              <div class="preset" data-preset="neon">
+                <div
+                  class="preset-preview"
+                  style="
+                    color: #0ff;
+                    text-shadow:
+                      0 0 10px,
+                      0 0 20px,
+                      0 0 30px;
+                  ">
+                  Neon
+                </div>
+                <span>Neon</span>
+              </div>
+              <div class="preset" data-preset="vintage">
+                <div
+                  class="preset-preview"
+                  style="color: #8b4513; text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5)">
+                  Vintage
+                </div>
+                <span>Vintage</span>
+              </div>
+              <div class="preset" data-preset="3d">
+                <div
+                  class="preset-preview"
+                  style="
+                    color: #fff;
+                    text-shadow:
+                      1px 1px 0 #ccc,
+                      2px 2px 0 #999;
+                  ">
+                  3D
+                </div>
+                <span>3D</span>
+              </div>
+              <div class="preset" data-preset="gradient">
+                <div
+                  class="preset-preview"
+                  style="
+                    background: linear-gradient(90deg, #ff0000, #ffff00, #00ff00);
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    color: transparent;
+                    display: inline-flex;
+                  ">
+                  Gradient
+                </div>
+                <span>Gradient</span>
+              </div>
+              <div class="preset" data-preset="outline">
+                <div class="preset-preview" style="color: #fff; -webkit-text-stroke: 1px #000">Outline</div>
+                <span>Outline</span>
+              </div>
+              <div class="preset" data-preset="fire">
+                <div class="preset-preview" style="color: #ff4450; text-shadow: 0 0 5px #ff4450">Fire</div>
+                <span>Fire</span>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
+
+      <div class="css-output-container">
+        <h3>CSS Code:</h3>
+        <textarea id="css-output" readonly></textarea>
+        <div class="tooltip">Copied to clipboard!</div>
+      </div>
     </div>
+
+    <canvas id="canvas" style="display: none"></canvas>
+
+    <footer>
+      © <time datetime="2026" id="year">2026</time> Made width <span>♥</span> by
+      <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+    </footer>
+
+    <script src="/widgets_script/textEffectGenerator.js"></script>
   </body>
 </html>
