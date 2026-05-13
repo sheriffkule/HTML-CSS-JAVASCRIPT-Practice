@@ -49,17 +49,65 @@
 
         <div class="input-group">
           <label for="maxPages">Maximum Pages to Generate (1-500)</label>
-          <input type="range" id="maxPages" min="1" max="500" value="50" />
+          <input type="range" id="maxPages" min="1" max="500" value="50" step="1" />
           <span id="maxPagesValue">50</span>
         </div>
 
-        <div class="btn" id="generateBtn"><i class="fas fa-lay"></i> Generate Sitemap</div>
+        <button class="btn" id="generateBtn">
+          <i class="fas fa-play"></i> Generate Sitemap <i class="fas fa-play"></i>
+        </button>
       </div>
 
       <div class="loading" id="loading">
         <div class="spinner"></div>
         <p>Generating sitemap, please wait...</p>
       </div>
+
+      <div class="card result-area" id="resultArea">
+        <h2 class="card-title"><i class="fas fa-file-code"></i> Generate Sitemap</h2>
+
+        <div class="stats">
+          <div class="stat-card">
+            <div class="stat-value" id="totalPages">0</div>
+            <div class="stat-label">Total Pages</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-value" id="internalLinks">0</div>
+            <div class="stat-label">Internal Links</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-value" id="externalLinks">0</div>
+            <div class="stat-label">External Links</div>
+          </div>
+        </div>
+
+        <div class="sitemap-preview" id="sitemapPreview">
+          <!-- Sitemap content will be displayed here -->
+        </div>
+
+        <div class="action-buttons">
+          <button class="btn btn-outline" id="copyBtn">
+            <i class="fas fa-copy"></i> Copy to Clipboard <i class="fas fa-copy"></i>
+          </button>
+          <button class="btn" id="downloadBtn">
+            <i class="fas fa-download"></i> Download Sitemap <i class="fas fa-download"></i>
+          </button>
+          <button class="btn btn-outline" id="newSitemapBtn">
+            <i class="fas fa-plus"></i> New Sitemap <i class="fas fa-plus"></i>
+          </button>
+        </div>
+      </div>
     </div>
+
+    <footer>
+      © <time datetime="" id="year"></time> Made width <span>♥</span> by
+      <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+    </footer>
+
+    <div class="toast" id="toast">Sitemap copied to clipboard!I</div>
+
+    <script src="/widgets_script/websiteSitemapGenerator.js"></script>
   </body>
 </html>
