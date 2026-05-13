@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Website Sitemap Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/websiteSitemapGenerator.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1><i class="fas fa-sitemap"></i> Website Sitemap Generator</h1>
+        <p>Create XML sitemap for any website quickly and easily</p>
+        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+      </header>
+
+      <div class="card">
+        <h2 class="card-title"><i class="fas fa-cog"></i> Configuration</h2>
+
+        <div class="input-group">
+          <label for="websiteUrl">Website URL</label>
+          <input type="url" id="webisteURL" placeholder="https://example.com" required />
+        </div>
+
+        <h3 class="card-title"><i class="fas fa-sliders-h"></i> Options</h3>
+
+        <div class="options-grid">
+          <div class="option-item">
+            <input type="checkbox" id="includeLastMod" checked />
+            <label for="includeLastMod">Include last modification date</label>
+          </div>
+
+          <div class="option-item">
+            <input type="checkbox" id="includePriority" checked />
+            <label for="includePriority">Include Priority</label>
+          </div>
+
+          <div class="option-item">
+            <input type="checkbox" id="includeChangeFreq" checked />
+            <label for="includeChangeFreq">Include change frequency</label>
+          </div>
+
+          <div class="option-item">
+            <input type="checkbox" id="excludeExternal" />
+            <label for="excludeExternal">Exclude external links</label>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="maxPages">Maximum Pages to Generate (1-500)</label>
+          <input type="range" id="maxPages" min="1" max="500" value="50" />
+          <span id="maxPagesValue">50</span>
+        </div>
+
+        <div class="btn" id="generateBtn"><i class="fas fa-lay"></i> Generate Sitemap</div>
+      </div>
+
+      <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>Generating sitemap, please wait...</p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -189,6 +189,16 @@ document.addEventListener('DOMContentLoaded', function () {
         shadowOpacity.value = '100';
         shadowMultiple.checked = true;
         break;
+      case 'gradient':
+        gradientColors: [
+          { color: '#ff0000', stop: 0 },
+          { color: '#ffff00', stop: 50 },
+          { color: '#00ff00', stop: 100 },
+        ];
+        updateGradientColorsUI();
+        gradientType.value = 'linear';
+        gradientAngle.value = 90;
+        break;
       case 'outline':
         outlineColor.value = '#000000';
         outlineWidth.value = '2';
@@ -302,6 +312,7 @@ document.addEventListener('DOMContentLoaded', function () {
     this.value === 'color-change'
       ? (animationColor.style.display = 'block')
       : (animationColor.style.display = 'none');
+    updateTextPreview();
   });
 
   // Update text preview with all styles
@@ -326,15 +337,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Gradient effect
-    if (gradientType.value === 'linear') {
-      const gradientStops = gradientColors.map((c) => `${c.color} ${c.stop}%`).join(', ');
-      textPreview.style.background = `linear-gradient(${gradientAngle.value}deg, ${gradientStops})`;
-      textPreview.style.backgroundClip = 'text';
-      textPreview.style.webkitBackgroundClip = 'text';
-      textPreview.style.color = 'transparent';
+    if (gradientType.value === 'none') {
+      textPreview.style.background = 'none';
+      textPreview.style.backgroundClip = '';
+      textPreview.style.webkitBackgroundClip = '';
+      textPreview.style.color = textColor.value;
     } else {
       const gradientStops = gradientColors.map((c) => `${c.color} ${c.stop}%`).join(', ');
-      textPreview.style.background = `radial-gradient(circle, ${gradientStops})`;
+      textPreview.style.background =
+        gradientType.value === 'linear'
+          ? `linear-gradient(${gradientAngle.value}deg, ${gradientStops})`
+          : `radial-gradient(circle, ${gradientStops})`;
       textPreview.style.backgroundClip = 'text';
       textPreview.style.webkitBackgroundClip = 'text';
       textPreview.style.color = 'transparent';
@@ -409,30 +422,24 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Gradient
-    if (gradientType.value === 'linear') {
+    if (gradientType.value !== 'none') {
       const gradientStops = gradientColors.map((c) => `${c.color} ${c.stop}%`).join(', ');
-      css += `   background: linear-gradient(${gradientAngle.value}deg, ${gradientStops});\n`;
-      css += `   -webkit-background-clip: text;\n`;
-      css += `   background-clip: text;\n`;
-      css += `   color: transparent;\n`;
-    } else {
-      const gradientStops = gradientColors.map((c) => `${c.color} ${c.stop}%`).join(', ');
-      css += `   background: radial-gradient(circle, ${gradientStops});\n`;
+      css +=
+        gradientType.value === 'linear'
+          ? `   background: linear-gradient(${gradientAngle.value}deg, ${gradientStops});\n`
+          : `   background: radial-gradient(circle, ${gradientStops});\n`;
       css += `   -webkit-background-clip: text;\n`;
       css += `   background-clip: text;\n`;
       css += `   color: transparent;\n`;
     }
 
     // Outline
-    css += `   -webkit-text-stroke: ${outlineWidth.value}px ${outlineColor.value};\n`;
-    css += `   text-stroke: ${outlineWidth.value}px ${outlineColor.value};\n`;
+    css += `   -webkit-text-stroke: ${outlineWidth.value}px ${outlineStyle.value} ${outlineColor.value};\n`;
+    css += `   text-stroke: ${outlineWidth.value}px ${outlineStyle.value} ${outlineColor.value};\n`;
 
     // Animation
     if (animationType !== 'none') {
-      css += `
-        animation: ${animationType.value}-animation ${animationDuration.value}s
-        ${animationIteration.value === 'infinite' ? 'infinite' : animationIteration.value};
-      `;
+      css += `   animation: ${animationType.value}-animation ${animationDuration.value}s ${animationIteration.value === 'infinite' ? 'infinite' : animationIteration.value};\n`;
     }
 
     css += `}\n\n`;
@@ -597,7 +604,6 @@ function updateYear() {
   const currentYear = new Date().getFullYear();
   const yearElement = document.getElementById('year');
 
-// Removed duplicate switch block and unmatched brace
   if (!yearElement) {
     console.error('Year element not found');
     return;

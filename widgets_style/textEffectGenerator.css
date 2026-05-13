@@ -178,7 +178,6 @@ main {
         color: var(--text);
         border-color: var(--primary);
         transform: scale(1.05);
-        letter-spacing: 1px;
     }
     &:active {
         transform: scale(1);
@@ -553,7 +552,7 @@ footer {
 }
 
 .float-animation {
-    animation-name: flat;
+    animation-name: float;
 }
 
 .color-change-animation {
