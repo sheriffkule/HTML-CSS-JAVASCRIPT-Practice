@@ -17,18 +17,21 @@ document.addEventListener('DOMContentLoaded', function () {
   const toast = document.getElementById('toast');
 
   // Theme toggle
+  if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-mode');
+    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+  }
+
   themeToggle.addEventListener('click', function () {
     document.body.classList.toggle('dark-mode');
-    if (document.body.classList.contains('dark-mode')) {
-      themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-    } else {
-      themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-    }
+    const isDark = document.body.classList.contains('dark-mode');
+    themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
   });
 
   // Update max pages value
   maxPages.addEventListener('input', function () {
-    maxPagesValue.value = maxPages.value;
+    maxPagesValue.textContent = maxPages.value;
   });
 
   // Changing colors on input type range track
@@ -55,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Simulate generating sitemap (in a real app, this would be and API call)
     setTimeout(() => {
-      generateSiteMap();
+      generateSitemap();
       loading.style.display = 'none';
       resultArea.style.display = 'block';
     }, 2000);
@@ -134,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function () {
     for (let i = 0; i < pages - 1; i++) {
       const pageIndex = i % pageNames.length;
       const pageNum = Math.floor(i / pageNames.length);
-      const pageName = pageNum ? `${pageName[pageIndex]}-${pageNum}` : pageNames[pageIndex];
+      const pageName = pageNum ? `${pageNames[pageIndex]}-${pageNum}` : pageNames[pageIndex];
 
       // Randomly decide if this is an external link (for demonstration)
       const isExternal = Math.random() > 0.8;
@@ -167,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (document.getElementById('includePriority').checked) {
         const priority = (0.9 - Math.random() * 0.5).toFixed(1);
-        xml = `    <priority>${priority}</priority>\n`;
+        xml += `    <priority>${priority}</priority>\n`;
       }
 
       xml += `  </url>\n`;
