@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Update range value displays
   function updateRangeValueDisplay(rangeInput, valueElement, suffix = '') {
-    valueElement.textColor = rangeInput.value + suffix;
+    valueElement.textContent = rangeInput.value + suffix;
   }
 
   // Event listeners for range inputs
@@ -318,15 +318,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (shadowMultiple.checked) {
       textPreview.style.textShadow = `
-        ${shadowHOffset.value}.px ${shadowVOffset}px ${shadowVOffset}px ${shadowBlur}px ${shadowColorValue},
-        ${shadowHOffset.value}.px ${-shadowVOffset}px ${-shadowVOffset}px ${shadowBlur}px ${shadowColorValue}
+        ${shadowHOffset.value}px ${shadowVOffset.value}px ${shadowBlur.value}px ${shadowColorValue},
+        ${-shadowHOffset.value}px ${-shadowVOffset.value}px ${shadowBlur.value}px ${shadowColorValue}
       `;
     } else {
-      textPreview.style.textShadow = `${shadowHOffset.value}.px ${shadowVOffset}px ${shadowVOffset}px ${shadowBlur}px ${shadowColorValue}`;
+      textPreview.style.textShadow = `${shadowHOffset.value}px ${shadowVOffset.value}px ${shadowBlur.value}px ${shadowColorValue}`;
     }
 
     // Gradient effect
-    if (gradientType === 'linear') {
+    if (gradientType.value === 'linear') {
       const gradientStops = gradientColors.map((c) => `${c.color} ${c.stop}%`).join(', ');
       textPreview.style.background = `linear-gradient(${gradientAngle.value}deg, ${gradientStops})`;
       textPreview.style.backgroundClip = 'text';
@@ -341,8 +341,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Outline Effect
-    textPreview.style.webkitTextStroke = `${outlineWidth.value}px ${outlineColor}`;
-    textPreview.style.textStroke = `${outlineWidth.value}px ${outlineColor}`;
+    textPreview.style.webkitTextStroke = `${outlineWidth.value}px ${outlineColor.value}`;
+    textPreview.style.textStroke = `${outlineWidth.value}px ${outlineColor.value}`;
 
     // Animation
     textPreview.classList.remove(
@@ -352,13 +352,13 @@ document.addEventListener('DOMContentLoaded', function () {
       'color-change-animation',
     );
 
-    if (animationType !== 'none') {
+    if (animationType.value !== 'none') {
       textPreview.classList.add(`${animationType.value}-animation`);
       textPreview.style.animationDuration = `${animationDuration.value}s`;
       textPreview.style.animationIterationCount =
         animationIteration.value === 'infinite' ? 'infinite' : animationIteration.value;
 
-      if (animationType === 'color-change') {
+      if (animationType.value === 'color-change') {
         document.documentElement.style.setProperty('--animation-color', animationColor.value);
       }
     }
@@ -409,14 +409,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Gradient
-    if ((gradientType = 'linear')) {
-      const gradientStops = gradientColors.map((c) => `c${c.color} ${c.stop}%`).join(', ');
+    if (gradientType.value === 'linear') {
+      const gradientStops = gradientColors.map((c) => `${c.color} ${c.stop}%`).join(', ');
       css += `   background: linear-gradient(${gradientAngle.value}deg, ${gradientStops});\n`;
       css += `   -webkit-background-clip: text;\n`;
       css += `   background-clip: text;\n`;
       css += `   color: transparent;\n`;
     } else {
-      const gradientStops = gradientColors.map((c) => `c${c.color} ${c.stop}%`).join(', ');
+      const gradientStops = gradientColors.map((c) => `${c.color} ${c.stop}%`).join(', ');
       css += `   background: radial-gradient(circle, ${gradientStops});\n`;
       css += `   -webkit-background-clip: text;\n`;
       css += `   background-clip: text;\n`;
@@ -436,5 +436,173 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     css += `}\n\n`;
+
+    // Animation keyframes
+    if (animationType.value !== 'none') {
+      css += `/* Animation Keyframes */\n`;
+      switch (animationType.value) {
+        case 'pulse':
+          css += `@keyframes pulse-animation {\n`;
+          css += `   0% { transform: scale(1); }\n`;
+          css += `   50% { transform: scale(1.05); }\n`;
+          css += `   100% { transform: scale(1); }\n`;
+          css += `}\n`;
+          break;
+        case 'glow':
+          css += `@keyframes glow-animation {\n`;
+          css += `   0% { text-shadow: 0 0 5px currentColor; }\n`;
+          css += `   50% { text-shadow: 0 0 20px currentColor; }\n`;
+          css += `   100% { text-shadow: 0 0 5px currentColor; }\n`;
+          css += `}\n`;
+          break;
+        case 'shake':
+          css += `@keyframes shake-animation {\n`;
+          css += `   0%, 100% { transform: translateX(0); }\n`;
+          css += `   20% { transform: translateX(-5px); }\n`;
+          css += `   40% { transform: translateX(5px); }\n`;
+          css += `   60% { transform: translateX(-5px); }\n`;
+          css += `   80% { transform: translateX(5px); }\n`;
+          css += `}\n`;
+          break;
+        case 'float':
+          css += `@keyframes float-animation {\n`;
+          css += `   0%, 100% { transform: translateY(0); }\n`;
+          css += `   50% { transform: translate(-10px); };\n`;
+          css += `}\n`;
+          break;
+        case 'color-change':
+          css += `@keyframes color-change-animation {\n`;
+          css += `   0% { color: currentColor; }\n`;
+          css += `   50% { color: ${animationColor.value}; }\n`;
+          css += `   100% { color: currentColor; }\n`;
+          css += `}\n`;
+          break;
+      }
+    }
+
+    cssOutput.value = css;
   }
+
+  // Copy CSS to clipboard
+  copyCssBtn.addEventListener('click', () => {
+    cssOutput.select();
+    document.execCommand('copy');
+
+    // Show tooltip
+    tooltip.style.opacity = '1';
+    setTimeout(() => {
+      tooltip.style.opacity = '0';
+    }, 2000);
+  });
+
+  // Download as image
+  downloadImgBtn.addEventListener('click', () => {
+    const preview = document.querySelector('.preview-container');
+    const textElement = document.getElementById('text-preview');
+
+    // Get computed style
+    const styles = window.getComputedStyle(textElement);
+    const fontSize = styles.getPropertyValue('font-size');
+    const fontFamily = styles.getPropertyValue('font-family');
+    const color = styles.getPropertyValue('color');
+    const textShadow = styles.getPropertyValue('text-shadow');
+    const background = styles.getPropertyValue('background');
+    const backgroundClip = styles.getPropertyValue('background-clip');
+    const webkitTextStroke = styles.getPropertyValue('-webkit-text-stroke');
+
+    // Set canvas dimensions
+    canvas.width = preview.offsetWidth;
+    canvas.height = preview.offsetHeight;
+
+    // Draw background
+    ctx.fillStyle = bgColor.value;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Set text styles
+    ctx.font = `${fontSize} ${fontFamily}`;
+
+    // Handle gradient fill
+    if (gradientType !== 'none') {
+      let gradient;
+
+      if (gradientType.value === 'linear') {
+        gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+      } else {
+        gradient = ctx.createRadialGradient(
+          canvas.width / 2,
+          canvas.height,
+          0,
+          canvas.width / 2,
+          canvas.height / 2,
+          Math.max(canvas.width, canvas.height) / 2,
+        );
+      }
+
+      gradientColors.forEach((colorObj) => {
+        gradient.addColorStop(colorObj.stop / 100, colorObj.color);
+      });
+
+      ctx.fillStyle = gradient;
+    } else {
+      ctx.fillStyle = color;
+    }
+
+    // Handle text shadow
+    if (textShadow !== 'none') {
+      const shadows = textShadow.split(', ');
+      shadows.forEach((shadow) => {
+        const parts = shadow.split(' ');
+        const x = parseInt(parts[0]);
+        const y = parseInt(parts[1]);
+        const blur = parseInt(parts[2]);
+        const shadowColor = parts.slice(3).join(' ');
+
+        ctx.shadowOffsetX = x;
+        ctx.shadowOffsetY = y;
+        ctx.shadowBlur = blur;
+        ctx.shadowColor = shadowColor;
+      });
+    }
+
+    // Handle outline
+    if (webkitTextStroke !== 'none') {
+      const parts = webkitTextStroke.split(' ');
+      const width = parseFloat(parts[0]);
+      const strokeColor = parts.slice(1).join(' ');
+
+      ctx.strokeStyle = strokeColor;
+      ctx.lineWidth = width * 2;
+      ctx.strokeText(textElement.textContent, canvas.width / 2, canvas.height / 2);
+    }
+
+    // Draw text
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(textElement.textContent, canvas.width / 2, canvas.height / 2);
+
+    // Create download link
+    const link = document.createElement('a');
+    link.download = 'text-effect.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+
+  // Initialize
+  updateGradientColorsUI();
+  updateTextPreview();
 });
+
+// Update year in footer
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+// Removed duplicate switch block and unmatched brace
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+  yearElement.setAttribute('datetime', currentYear.toString());
+  yearElement.textContent = currentYear.toString();
+}
+updateYear();

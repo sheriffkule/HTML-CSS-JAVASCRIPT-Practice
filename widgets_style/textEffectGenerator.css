@@ -185,9 +185,9 @@ main {
     }
 }
 
-/* .tab-content {
+.tab-content {
     display: none;
-} */
+}
 
 .tab-content.active {
     display: block;
@@ -507,4 +507,55 @@ footer {
 
 ::-webkit-scrollbar-thumb:hover {
     background-color: hsl(from var(--primary) h s 60%);
+}
+
+@keyframes pulse {
+    0% {transform: scale(1)}
+    50% {transform: scale(1.05)}
+    100% {transform: scale(1)}
+}
+
+@keyframes glow {
+    0% {text-shadow: 0 0 5px;}
+    50% {text-shadow: 0 0 20px;}
+    100% {text-shadow: 0 0 5px;}
+}
+
+@keyframes shake {
+    0%, 100% {transform: translateX(0);}
+    20% {transform: translateX(-5px);}
+    40% {transform: translateX(5px);}
+    60% {transform: translateX(-5px);}
+    80% {transform: translateX(5px);}
+}
+
+@keyframes float {
+    0%, 100% {transform: translateY(0);}
+    50% {transform: translateY(-15px);}
+}
+
+@keyframes color-change {
+    0% {color: currentColor;}
+    50% {color: var(--animation-color);}
+    100% {color: currentColor;}
+}
+
+.pulse-animation {
+    animation-name: pulse;
+}
+
+.glow-animation {
+    animation-name: glow;
+}
+
+.shake-animation {
+    animation-name: shake;
+}
+
+.float-animation {
+    animation-name: flat;
+}
+
+.color-change-animation {
+    animation-name: color-change;
 }
