@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Time Scheduling Assistant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/aiTimeSchedulingAssistant.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="logo">
+          <i class="fas fa-robot"></i>
+          <h1>AI Time Scheduling Assistant</h1>
+        </div>
+        <div class="user-actions">
+          <button class="btn btn-outline" id="clearBtn"><i class="fas fa-trash-alt"></i> Clear All</button>
+          <button class="btn btn-ai" id="aiSuggestBtn"><i class="fas fa-magic"></i> AI Suggestions</button>
+        </div>
+      </header>
+
+      <main>
+        <div class="panel">
+          <h2 class="panel-title"><i class="fas fa-plus-circle"></i> Task Title</h2>
+          <form id="taskForm">
+            <div class="form-group">
+              <label for="taskTitle">Task Title</label>
+              <input type="text" id="taskTitle" placeholder="Enter task title" required />
+            </div>
+
+            <div class="form-group">
+              <label for="taskDescription">Description</label>
+              <textarea id="taskDescription" rows="3" placeholder="Enter task description"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>Time Slot</label>
+              <div class="time-inputs">
+                <div>
+                  <label for="startTime"></label>
+                  <input type="time" id="startTime" required />
+                </div>
+                <div>
+                  <label for="endTime"></label>
+                  <input type="time" id="endTime" />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="priority">Priority</label>
+              <div class="priority-select">
+                <div class="priority-option low" data-value="low">Low</div>
+                <div class="priority-option medium" data-value="medium">Medium</div>
+                <div class="priority-option high selected" data-value="high">High</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="taskCategory">Category</label>
+              <select id="taskCategory">
+                <option value="work">Work</option>
+                <option value="personal">Personal</option>
+                <option value="health">Health</option>
+                <option value="learning">Learning</option>
+                <option value="social">Social</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%">
+              <i class="fas fa-calendar-plus"></i> Add to Schedule
+            </button>
+          </form>
+        </div>
+
+        <div class="panel">
+          <h2 class="panel-title"><i class="fas fa-calendar-alt"></i> Today's Schedule</h2>
+          <div class="schedule-list" id="scheduleList">
+            <!-- Schedule items will be added here dynamically -->
+            <div class="empty-state">
+              <i class="fas-fa-calendar-plus"></i>
+              <h3>No task scheduled</h3>
+              <p>Add your first task using the form on the left.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel ai-suggestions" id="aiSuggestionsPanel">
+          <h2 class="panel-title"><i class="fas fa-lightbulb"></i> AI Suggestions</h2>
+          <div class="suggestions-container" id="suggestionsContainer">
+            <!-- AI suggestions will be added here dynamically -->
+          </div>
+        </div>
+      </main>
+
+      <div class="panel calendar-view">
+        <h2 class="panel-title"><i class="fas fa-clock"></i> Time Slots Visualization</h2>
+        <div class="time-slots" id="timeSlots">
+          <!-- Time slots will be added here dynamically -->
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat-box">
+          <div class="stat-value" id="totalTasks">0</div>
+          <div class="stat-label">Total Tasks</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="busyHours">0</div>
+          <div class="stat-label">Busy Hours</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="freeHours">24</div>
+          <div class="stat-label">Free Hours</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="highPriority">0</div>
+          <div class="stat-label">High Priority Tasks</div>
+        </div>
+      </div>
+
+      <footer>
+        <p>AI Scheduling Assistant</p>
+        <p>This app uses AI to optimize your schedule and suggest improvements.</p>
+      </footer>
+
+      <div class="notification" id="notification">
+        Task added successfully to your schedule!
+      </div>
+    </div>
+  </body>
+</html>
