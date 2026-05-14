@@ -114,3 +114,40 @@ header {
         background: rgb(67 97 238 / 0.2);
     }
 }
+
+.btn-ai {
+    background: linear-gradient(90deg, var(--secondary), var(--accent));
+    color: white;
+    transition-behavior: allow-discrete;
+
+    &:hover {
+        background: linear-gradient(90deg, var(--secondary), #e11570);
+        transform: translateY(-2px);
+        box-shadow: var(--box-shadow-hover);
+    }
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 30px;
+    margin-bottom: 30px;
+
+    @media (width < 900px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.panel {
+    background: var(--light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow),
+    inset var(--box-shadow);
+    padding: 25px;
+    transition: var(--transition);
+
+    &:hover {
+        box-shadow: var(--box-shadow-hover),
+        inset var(--box-shadow-hover);
+    }
+}
