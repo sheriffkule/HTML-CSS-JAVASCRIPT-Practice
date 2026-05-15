@@ -1,0 +1,187 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #020617;
+}
+
+.scene {
+    position: relative;
+    width: 900px;
+    height: 560px;
+    overflow: hidden;
+    border-radius: 32px;
+    background: linear-gradient(to bottom, #020617 0%, #071a3d 35%, #12356d 65%, #0f4c81 100%);
+    box-shadow: 0 40px 120px rgb(0 0 0 / 0.7),
+    inset 0 0 80px rgb(255 255 255 / 0.05);
+}
+
+.moon {
+    position: absolute;
+    top: 80px;
+    right: 160px;
+    width: 86px;
+    height: 86px;
+    border-radius: 50%;
+    background: #f8fafc;
+    box-shadow: 0 0 30px #e0f2fe,
+    0 0 80px rgb(224 242 254 / 0.7),
+    0 0 140px rgb(224 242 254 / 0.35);
+    animation: moonFloat 8s ease-in-out infinite;
+}
+
+.moon::before {
+    content: '';
+    position: absolute;
+    top: 14px;
+    left: 18px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: rgb(203 213 225 / 0.6);
+    box-shadow: 28px 20px 0 rgb(203 213 225 / 0.35),
+    12px 42 px 0 rgb(203 213 225 / 0.25);
+}
+
+.stars span {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: white;
+    opacity: 0.8;
+    animation: twinkle 3s ease-in-out infinite;
+}
+
+.stars span:nth-child(1) {
+    top: 70px;
+    left: 90px;
+    animation-delay: 0s;
+}
+
+.stars span:nth-child(2) {
+    top: 130px;
+    left: 180px;
+    animation-delay: 0.4s;
+}
+
+.stars span:nth-child(3) {
+    top: 90px;
+    left: 340px;
+    animation-delay: 0.8s;
+}
+
+.stars span:nth-child(4) {
+    top: 170px;
+    left: 470px;
+    animation-delay: 1.2s;
+}
+
+.stars span:nth-child(5) {
+    top: 60px;
+    left: 650px;
+    animation-delay: 1.6s;
+}
+
+.stars span:nth-child(6) {
+    top: 145px;
+    left: 760px;
+    animation-delay: 2s;
+}
+
+.stars span:nth-child(7) {
+    top: 210px;
+    left: 120px;
+    animation-delay: 0.2s;
+}
+
+.stars span:nth-child(8) {
+    top: 230px;
+    left: 700px;
+    animation-delay: 1s;
+}
+
+.stars span:nth-child(9) {
+    top: 35px;
+    left: 520px;
+    animation-delay: 2.4s;
+}
+
+.stars span:nth-child(10) {
+    top: 250px;
+    left: 330px;
+    animation-delay: 1.8s;
+}
+
+.cloud {
+    position: absolute;
+    width: 180px;
+    height: 50px;
+    border-radius: 50px;
+    background: rgb(255 255 255 / 0.12);
+    filter: blur(1px);
+    animation: cloudMove 34s linear infinite;
+}
+
+.cloud::after,
+.cloud::before {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: inherit;
+}
+
+.cloud::before {
+    width: 80px;
+    height: 80px;
+    top: -35px;
+    left: 30px;
+}
+
+.cloud::after {
+    width: 100px;
+    height: 100px;
+    top: -50px;
+    right: 25px;
+}
+
+.cloud.one {
+    top: 130px;
+    left: -220px;
+    animation-delay: 0s;
+}
+
+.cloud.two {
+    top: 210px;
+    left: -260px;
+    transform: scale(0.7);
+    opacity: 0.55;
+    animation-duration: 46s;
+    animation-delay: -12s;
+}
+
+.horizon {
+    position: absolute;
+    left: 0;
+    bottom: 210px;
+    width: 100%;
+    height: 2px;
+    background: rgb(186 230 253 / 0.2);
+    box-shadow: 0 0 20px rgb(186 230 253 / 0.3);
+}
+
+.reflection {
+    position: absolute;
+    bottom: 40px;
+    right: 110px;
+    width: 180px;
+    height: 260px;
+    background: linear-gradient(to bottom, rgb(255 255 255 / 0.35), rgb(255 255 255 / 0.04), transparent);
+    clip-path: polygon(45% 0%, 55% 0%, 80%, 100%, 20% 100%);
+    opacity: 0.35;
+    filter: blur(12px);
+    animation: shimmer 5s ease-in-out infinite;
+}
