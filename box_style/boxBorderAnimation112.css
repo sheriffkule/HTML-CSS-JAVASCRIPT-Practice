@@ -6,6 +6,10 @@
 
 body {
     background-color: #020617;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
 }
 
 .scene {
@@ -184,4 +188,238 @@ body {
     opacity: 0.35;
     filter: blur(12px);
     animation: shimmer 5s ease-in-out infinite;
+}
+
+.wave {
+    position: absolute;
+    left: -10%;
+    width: 120%;
+    height: 170px;
+    border-radius: 45%;
+    background: rgb(14 116 144 / 0.7);
+    animation: waveMove 8s ease-in-out infinite;
+}
+
+.wave::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(to bottom, rgb(255 255 255 / 0.18), transparent 40%);
+}
+
+.wave.one {
+    bottom: -35px;
+    background: #075985;
+    animation-duration: 7s;
+    z-index: 5;
+}
+
+.wave.two {
+    bottom: 20px;
+    background: #0369a1;
+    opacity: 0.8;
+    animation-duration: 9s;
+    animation-delay: -2s;
+    z-index: 4;
+}
+
+.wave.three {
+    bottom: 75px;
+    background: #0284c7;
+    opacity: .55;
+    animation-duration: 11s;
+    animation-delay: -4s;
+    z-index: 3;
+}
+
+.wave.four {
+    bottom: 130px;
+    background: #38bdf8;
+    opacity: 0.22;
+    animation-duration: 13s;
+    animation-delay: -1s;
+    z-index: 2;
+}
+
+.foam {
+    position: absolute;
+    bottom: 165px;
+    left: -5%;
+    width: 110%;
+    height: 80px;
+    z-index: 6;
+    opacity: 0.5;
+    animation: foamDrift 9s ease-in-out infinite;
+}
+
+.foam span {
+    position: absolute;
+    width: 90px;
+    height: 8px;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.35);
+    filter: blur(1);
+}
+
+.foam span:nth-child(1) {
+    left: 80px;
+    top: 20px;
+}
+
+.foam span:nth-child(2) {
+    left: 240px;
+    top: 45px;
+    width: 130px;
+}
+
+.foam span:nth-child(3) {
+    left: 460px;
+    top:28px;
+    width: 100px;
+}
+
+.foam span:nth-child(4) {
+    left: 650px;
+    top: 55px;
+    width: 160px;
+}
+
+.foam span:nth-child(5) {
+    left: 800px;
+    top: 22px;
+    width: 80px;
+}
+
+.boat {
+    position: absolute;
+    bottom: 235px;
+    left: 270px;
+    width: 130px;
+    height: 80px;
+    z-index: 7;
+    animation: boatFloat 5s ease-in-out infinite;
+}
+
+.sail {
+    position: absolute;
+    bottom: 26px;
+    left: 58px;
+    width: 0;
+    height: 0;
+    border-left: 42px solid transparent;
+    border-bottom: 74px solid rgb(255 255 255 / 0.85);
+    filter: drop-shadow(0 0 12px rgb(255 255 255 / 0.25));
+}
+
+.sail.small {
+    left: 18px;
+    border-left: 0;
+    border-right: 36px solid transparent;
+    border-bottom: 58px solid rgb(255 255 255 / 0.75);
+}
+
+.mast {
+    position: absolute;
+    bottom: 25px;
+    left: 58px;
+    width: 4px;
+    height: 82px;
+    border-radius: 4px;
+    background: #e2e8f0;
+}
+
+.hull {
+    position: absolute;
+    bottom: 8px;
+    left: 18px;
+    width: 105px;
+    height: 28px;
+    border-radius: 0 0 60px 60px;
+    background: #3f1d0b;
+    box-shadow: inset 0 -8px 0 rgb(0 0 0 / 0.25);
+}
+
+.glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 78% 22%, rgb(255 255 255 / 0.14), transparent 18%),
+    radial-gradient(circle at 50% 100%, rgb(255 255 255 / 0.18), transparent 45%);
+    pointer-events: none;
+    z-index: 20;
+}
+
+.vignette {
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 120px rgb(0 0 0 / 0.55);
+    pointer-events: none;
+    z-index: 21;
+}
+
+@keyframes moonFloat {
+    from, to {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes twinkle {
+    from, to {
+        opacity: 0.25;
+        transform: 0.8;
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.4);
+    }
+}
+
+@keyframes cloudMove {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(1200px);
+    }
+}
+
+@keyframes shimmer {
+    from, to {
+        opacity: 0.22;
+        transform: scaleX(0.85);
+    }
+    50% {
+        opacity: 0.42;
+        transform: scaleX(1.12);
+    }
+}
+
+@keyframes waveMove {
+    from, to {
+        transform: translateX(0) translateY(0) rotate(0);
+    }
+    50% {
+        transform: translateX(-30px) translateY(12px) rotate(1deg);
+    }
+}
+
+@keyframes foamDrift {
+    from, to {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(40px);
+    }
+}
+
+@keyframes boatFloat {
+    from, to {
+        transform: translateY(0) rotate(-2deg);
+    }
+    50% {
+        transform: translateY(-10px) rotate(2deg);
+    }
 }
