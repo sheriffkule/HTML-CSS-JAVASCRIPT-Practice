@@ -118,3 +118,21 @@ taskForm.addEventListener('submit', function (e) {
   priorityOptions.forEach(opt => opt.classList.remove('selected'))
   document.querySelector('.priority-option.high').classList.add('selected')
 });
+
+// AI suggestions button
+aiSuggestBtn.addEventListener('click', function() {
+  generateAISugestions()
+  aiSuggestionsPanel.style.display = 'block'
+  aiSuggestionsPanel.scrollIntoView({behavior: 'smooth'})
+})
+
+// Clear all button
+clearBtn.addEventListener('click', function() {
+  if (tasks.length > 0 && confirm('Are you sure you want to clear all tasks?')) {
+    tasks = []
+    renderTasks()
+    renderTimeSlots()
+    updateStats()
+    showNotification('All tasks cleared!')
+  }
+})
