@@ -260,4 +260,59 @@ input, select, textarea {
     background-color: var(--light);
     position: relative;
     transition: var(--transition);
+
+    &:hover {
+        transform: translateX(5px);
+    }
+}
+
+.schedule-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.schedule-title {
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.schedule-time {
+    font-size: 14px;
+    color: var(--primary);
+    font-weight: 500;
+    background: rgb(67 97 238 / 0.1);
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.schedule-desc {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.schedule-priority {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.priority-low {
+    background-color: rgb(76 201 240 / 0.2);
+    color: #0a9396;
+}
+
+.priority-medium {
+    background-color: rgb(248 150 30 / 0.2);
+    color: #ca6702;
+}
+
+.priority-low {
+    background-color: rgb(249 65 68 / 0.2);
+    color: #ae2012;
 }

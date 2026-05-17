@@ -104,10 +104,10 @@ taskForm.addEventListener('submit', function (e) {
   showNotification('Task added successfully to your schedule!');
 
   // Reset form
-  taskForm.reset()
+  taskForm.reset();
 
   // Reset time to current hour
-  const now = new Date()
+  const now = new Date();
   const currHour = now.getHours().toString().padStart(2, '0');
   const nextHour = (now.getHours() + 1).toString().padStart(2, '0');
 
@@ -115,24 +115,59 @@ taskForm.addEventListener('submit', function (e) {
   document.getElementById('endTime').value = `${nextHour}:00`;
 
   // Reset priority to high
-  priorityOptions.forEach(opt => opt.classList.remove('selected'))
-  document.querySelector('.priority-option.high').classList.add('selected')
+  priorityOptions.forEach((opt) => opt.classList.remove('selected'));
+  document.querySelector('.priority-option.high').classList.add('selected');
 });
 
 // AI suggestions button
-aiSuggestBtn.addEventListener('click', function() {
-  generateAISugestions()
-  aiSuggestionsPanel.style.display = 'block'
-  aiSuggestionsPanel.scrollIntoView({behavior: 'smooth'})
-})
+aiSuggestBtn.addEventListener('click', function () {
+  generateAISugestions();
+  aiSuggestionsPanel.style.display = 'block';
+  aiSuggestionsPanel.scrollIntoView({ behavior: 'smooth' });
+});
 
 // Clear all button
-clearBtn.addEventListener('click', function() {
+clearBtn.addEventListener('click', function () {
   if (tasks.length > 0 && confirm('Are you sure you want to clear all tasks?')) {
-    tasks = []
-    renderTasks()
-    renderTimeSlots()
-    updateStats()
-    showNotification('All tasks cleared!')
+    tasks = [];
+    renderTasks();
+    renderTimeSlots();
+    updateStats();
+    showNotification('All tasks cleared!');
   }
-})
+});
+
+// Render tasks to the schedule list
+function renderTasks() {
+  if (tasks.length === 0) {
+    scheduleList.innerHTML = `
+      <div class="empty-state">
+        <i class="fas fa-calendar-plus"></i>
+        <h3>No tasks scheduled</h3>
+        <p>Add your first task using the form on the left.</p>
+      </div>
+    `;
+    return
+  }
+
+  // Sort tasks by start time
+  tasks.sort((a, b) => {
+    return a.startTime.localeCompare(b.startTime)
+  })
+
+  let tasksHTML = ''
+
+  tasks.forEach(task => {
+    const startTimeFormatted = formatTime(task.startTime)
+    const endTImeFOrmatted = formatTime(task.endTime)
+
+    tasksHTML += html`
+    <div class="schedule-item" data-id="${task.id}">
+      <div class="schedule-item-header">
+        <div class="schedule-title"${task.title}></div>
+        <div class="schedule-time">${startTimeFormatted} - ${endTImeFOrmatted}</div>
+      </div>
+    </div>
+    `
+  })
+}
