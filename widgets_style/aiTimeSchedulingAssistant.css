@@ -316,3 +316,63 @@ input, select, textarea {
     background-color: rgb(249 65 68 / 0.2);
     color: #ae2012;
 }
+
+.delete-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: var(--gray);
+    cursor: pointer;
+    font-size: 16px;
+    transition: var(--transition);
+
+    &:hover {
+        color: var(--danger);
+    }
+}
+
+.ai-suggestions {
+    grid-column: 1 / -1;
+    margin-top: 10px;
+}
+
+.suggestions-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.suggestion-card {
+    padding: 20px;
+    border-radius: var(--border-radius);
+    border: 2px solid var(--light-gray);
+    transition: var(--transition);
+
+    &:hover {
+        border-color: var(--primary);
+        transform: translateY(-4px);
+    }
+}
+
+.suggestion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.suggestion-title {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.suggestion-ai-badge {
+    background: linear-gradient(90deg, var(--secondary), var(--accent));
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}

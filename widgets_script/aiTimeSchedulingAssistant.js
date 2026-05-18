@@ -147,27 +147,66 @@ function renderTasks() {
         <p>Add your first task using the form on the left.</p>
       </div>
     `;
-    return
+    return;
   }
 
   // Sort tasks by start time
   tasks.sort((a, b) => {
-    return a.startTime.localeCompare(b.startTime)
-  })
+    return a.startTime.localeCompare(b.startTime);
+  });
 
-  let tasksHTML = ''
+  let tasksHTML = '';
 
-  tasks.forEach(task => {
-    const startTimeFormatted = formatTime(task.startTime)
-    const endTImeFOrmatted = formatTime(task.endTime)
+  tasks.forEach((task) => {
+    const startTimeFormatted = formatTime(task.startTime);
+    const endTImeFOrmatted = formatTime(task.endTime);
 
-    tasksHTML += html`
-    <div class="schedule-item" data-id="${task.id}">
-      <div class="schedule-item-header">
-        <div class="schedule-title"${task.title}></div>
-        <div class="schedule-time">${startTimeFormatted} - ${endTImeFOrmatted}</div>
+    tasksHTML += `
+      <div class="schedule-item" data-id="${task.id}">
+        <div class="schedule-item-header">
+          <div class="schedule-title" ${task.title}></div>
+          <div class="schedule-time">${startTimeFormatted} - ${endTImeFOrmatted}</div>
+        </div>
+        <div class="schedule-desc">${task.description}</div>
+        <div class="schedule-priority priority-${task.priority}">${task.priority.toUpperCase()} PRIORITY</div>
+        <button class="delete-btn" onclick="deleteTask(${task.id})">
+          <i class="fas fa-times"></i>
+        </button>
       </div>
+    `;
+  });
+
+  scheduleList.innerHTML = tasksHTML;
+}
+
+// Render time slots visualization
+function renderTimeSlots() {
+  let timeSlotsHTML = ''
+
+  // Create time slots from 6 AM to 10 PM
+  for (let hour = 6; hour <= 22; hour++) {
+    const timeLabel = `${hour.toString().padStart(2, '0')}:00`
+
+    // Check if there's a task at this time
+    const taskAtThisTime = tasks.find(task => {
+      const taskStartHour = parseInt(task.startTime.split(':')[0])
+      const taskEndHour = parseInt(task.endTime.split(':')[0])
+      return hour >= taskStartHour && hour < taskEndHour;
+    })
+
+    let slotClass = 'empty'
+    let slotCOntent = 'Free'
+
+    if (taskAtThisTime) {
+      slotClass = `priority-${taskAtThisTime.priority}`
+      slotCOntent = taskAtThisTime.title;
+    }
+
+    timeSlotsHTML += html`
+    <div class="time-slot">
+      <div class="time-label">${formatTime(timeLabel)}</div>
+      <div class="slot-content ${slotClass}">${slotCOntent}</div>
     </div>
     `
-  })
+  }
 }
