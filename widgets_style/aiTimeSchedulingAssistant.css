@@ -482,3 +482,34 @@ footer {
     transform: translateY(0);
     opacity: 1;
 }
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #999;
+
+    i {
+        font-size: 48px;
+        margin-bottom: 15px;
+        color: var(--light-gray);
+    }
+}
+
+@media (width < 768px) {
+    header {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    .user-actions {
+        width: 100%;
+        justify-content: center;
+    }
+    .stats {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .stat-box {
+        margin: 0;
+    }
+}
