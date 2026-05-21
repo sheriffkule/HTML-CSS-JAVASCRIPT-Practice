@@ -181,32 +181,90 @@ function renderTasks() {
 
 // Render time slots visualization
 function renderTimeSlots() {
-  let timeSlotsHTML = ''
+  let timeSlotsHTML = '';
 
   // Create time slots from 6 AM to 10 PM
   for (let hour = 6; hour <= 22; hour++) {
-    const timeLabel = `${hour.toString().padStart(2, '0')}:00`
+    const timeLabel = `${hour.toString().padStart(2, '0')}:00`;
 
     // Check if there's a task at this time
-    const taskAtThisTime = tasks.find(task => {
-      const taskStartHour = parseInt(task.startTime.split(':')[0])
-      const taskEndHour = parseInt(task.endTime.split(':')[0])
+    const taskAtThisTime = tasks.find((task) => {
+      const taskStartHour = parseInt(task.startTime.split(':')[0]);
+      const taskEndHour = parseInt(task.endTime.split(':')[0]);
       return hour >= taskStartHour && hour < taskEndHour;
-    })
+    });
 
-    let slotClass = 'empty'
-    let slotCOntent = 'Free'
+    let slotClass = 'empty';
+    let slotCOntent = 'Free';
 
     if (taskAtThisTime) {
-      slotClass = `priority-${taskAtThisTime.priority}`
+      slotClass = `priority-${taskAtThisTime.priority}`;
       slotCOntent = taskAtThisTime.title;
     }
 
-    timeSlotsHTML += html`
-    <div class="time-slot">
-      <div class="time-label">${formatTime(timeLabel)}</div>
-      <div class="slot-content ${slotClass}">${slotCOntent}</div>
-    </div>
-    `
+    timeSlotsHTML += `
+      <div class="time-slot">
+        <div class="time-label">${formatTime(timeLabel)}</div>
+        <div class="slot-content ${slotClass}">${slotCOntent}</div>
+      </div>
+    `;
   }
+
+  timeSlots.innerHTML = timeSlotsHTML;
+}
+
+// General AI suggestions
+function generateAISuggestions() {
+  const suggestions = [
+    {
+      id: 1,
+      title: 'Optimize Schedule Gaps',
+      description:
+        'You have a 2-hour gap between meetings at 2 PM. Consider adding a focused work session or a short break.',
+      impact: 'High',
+      timeSave: '45 min',
+    },
+    {
+      id: 2,
+      title: 'Batch SImilar Tasks',
+      description: 'Group your reading and research tasks together to improve focus and efficiency',
+      impact: 'Medium',
+      timeSave: '30 min',
+    },
+    {
+      id: 3,
+      title: 'Add Buffer Time',
+      description: 'Schedule 15-minute buffers between meetings to prevent overruns and reduce stress.',
+      impact: 'High',
+      timeSave: '1 Hour',
+    },
+    {
+      id: 4,
+      title: 'Schedule Deep Work',
+      description:
+        'Reserve your most productive hours (9-11AM) for important, focused work without interruptions',
+      impact: 'High',
+      timeSave: '2 hours',
+    },
+  ];
+
+  let suggestionsHTML = '';
+
+  suggestions.forEach((suggestion) => {
+    suggestionsHTML += `
+      <div class="suggestion-card">
+        <div class="suggestion-">
+          <div class="suggestion-title">${suggestion.title}</div>
+          <div class="suggestion-ai-badge">AI Suggestion</div>
+        </div>
+        <div class="suggestion-desc">${suggestion.description}</div>
+        <div class="suggestion-stats">
+          <div><strong>Impact:</strong> ${suggestion.impact}</div>
+          <div><strong>Time Save:</strong> ${suggestion.timeSave}</div>
+        </div>
+      </div>
+    `;
+  });
+
+  suggestionsContainer.innerHTML = suggestionsHTML;
 }
