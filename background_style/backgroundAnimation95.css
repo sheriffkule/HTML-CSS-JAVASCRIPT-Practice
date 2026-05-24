@@ -1,0 +1,36 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: black;
+    height: 100vh;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    position: absolute;
+    z-index: -1;
+}
+
+.trail {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    background: cyan;
+    box-shadow: 0 0 10px cyan,
+    0 0 20px cyan;
+    animation: fade 0.5s linear forwards;
+}
+
+@keyframes fade {
+    to {
+        opacity: 0;
+        transform: scale(2);
+    }
+}
