@@ -268,3 +268,54 @@ function generateAISuggestions() {
 
   suggestionsContainer.innerHTML = suggestionsHTML;
 }
+
+// Delete a task
+function deleteTask(taskId) {
+  tasks = tasks.filter((task) => task.id != taskId);
+  renderTasks();
+  renderTimeSlots();
+  updateStats();
+  showNotification('Task deleted successfully!');
+}
+
+// Update statistics
+function updateStats() {
+  // Total tasks
+  totalTaskEl.textContent = tasks.length;
+
+  // Busy hours
+  let busyHours = 0;
+  tasks.forEach((task) => {
+    const startHour = parseInt(task.startTime.split(':')[0]);
+    const endHour = parseInt(task.endTime.split(':')[0]);
+    busyHours += endHour - startHour;
+  });
+
+  busyHoursEl.textContent = busyHours;
+
+  // Free hours
+  freeHoursEl.textContent = 24 - busyHours;
+
+  // High priority tasks
+  const highPriorityTasks = tasks.filter((task) => task.priority === 'high').length;
+  highPriorityEl.textContent = highPriorityTasks;
+}
+
+// Show notification
+function showNotification(message) {
+  notification.textContent = message;
+  notification.classList.add('show');
+
+  setTimeout(() => {
+    notification.classList.remove('show');
+  }, 3000);
+}
+
+// Format time from 24h to 12h format
+function formatTime(time24) {
+  const [hours, minutes] = time24.split(':');
+  const hour = parseInt(hours);
+  const ampm = hour >= 12 ? 'PM' : 'AM';
+  const hour12 = hour % 12 || 12;
+  return `${hour12}:${minutes} ${ampm}`;
+}
