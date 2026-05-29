@@ -99,6 +99,10 @@ h1, h2, h3, h4 {
   font-family: var(--second-font);
 }
 
+p {
+  text-wrap: pretty;
+}
+
 ul {
   list-style: none;
 }
@@ -379,6 +383,64 @@ img {
   z-index: 10;
 }
 
+.home__text {
+  z-index: 10;
+  color: var(--white-color);
+  font: var(--font-semi-bold) var(--smaller-font-size) var(--second-font);
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  animation: rotate-text 8s linear infinite;
+}
+
+.home__text span {
+  position: absolute;
+  transform-origin: 0 46px;
+  left: 50px;
+  top: 5px;
+}
+
+.home__images .blob-big {
+  top: -1.5rem;
+  left: 0;
+  right: 0;
+  justify-self: center;
+}
+
+@keyframes rotate-text {
+  to {
+    rotate: 360deg;
+  }
+}
+
+.scroll-header::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: hsl(var(--hue), 8%, 10%, 0.4);
+  backdrop-filter: blur(24px);
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.about__container {
+  color: var(--white-color);
+  text-align: center;
+}
+
+.about__title {
+  font-size: var(--h1-font-size);
+}
+
+.about__title span {
+  color: var(--first-color);
+}
+
+.about__description {
+  margin-bottom: 1rem;
+}
 
 
 
@@ -391,6 +453,10 @@ img {
   .nav__menu {
     width: 50%;
   }
+  .home__container {
+    grid-template-columns: 400px;
+    justify-content: center;
+  }
 }
 
 @media (width >= 1150px) {
@@ -402,6 +468,16 @@ img {
   }
   .section__title {
     margin-bottom: 3rem;
+  }
+  .blob-small {
+    width: 150px;
+    height: 150px;
+    filter: blur(100px);
+  }
+  .blob-big {
+    width: 250px;
+    height: 250px;
+    filter: blur(150px);
   }
   .nav {
     height: calc(var(--header-height) + 2rem);
@@ -418,5 +494,38 @@ img {
     flex-direction: row;
     align-items: center;
     column-gap: 4rem;
+  }
+  .home__container {
+    grid-template-columns: 800px;
+  }
+  .home__subtitle {
+    font-size: var(--h2-font-size);
+    margin-bottom: 2rem;
+  }
+  .home__name {
+    margin-bottom: 1rem;
+  }
+  .home__box-1,
+  .home__box-2,
+  .home__box-3 {
+    width: 250px;
+    height: 300px;
+  }
+  .home__img {
+    width: 230px;
+  }
+  .home__circle {
+    right: -3rem;
+    bottom: -1.5rem;
+  }
+  .home__images .blob-big {
+    top: -8rem;
+  }
+  .home .blob-small:nth-child(1) {
+    top: -3rem;
+    left: -3rem;
+  }
+  .home .blob-small:nth-child(2) {
+    top: 21rem;
   }
 }
