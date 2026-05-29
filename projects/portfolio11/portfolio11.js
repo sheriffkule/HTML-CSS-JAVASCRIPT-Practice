@@ -54,3 +54,21 @@ const scrollHeader = () => {
   this.scrollY >= 50 ? header.classList.add('scroll-header') : header.classList.remove('scroll-header');
 };
 window.addEventListener('scroll', scrollHeader);
+
+// Swiper for work cards
+const swiperWork = new Swiper('.work__swiper', {
+  loop: true,
+  spaceBetween: 24,
+  slidesPerView: 'auto',
+  grabCursor: true,
+  speed: 600,
+
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
+  autoplay: {
+    delay: 3000,
+    disableOnInteraction: false,
+  },
+});
