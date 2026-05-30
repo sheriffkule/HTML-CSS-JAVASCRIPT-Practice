@@ -72,3 +72,22 @@ const swiperWork = new Swiper('.work__swiper', {
     disableOnInteraction: false,
   },
 });
+
+// Services accordion
+const servicesCards = document.querySelectorAll('.services__card');
+const servicesButtons = document.querySelectorAll('.services__button');
+
+servicesButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const currentCard = button.closest('.services__card');
+    const isOpen = currentCard.classList.contains('services-open');
+
+    servicesCards.forEach((card) => {
+      card.classList.replace('services-open', 'services-close');
+    });
+
+    if (!isOpen) {
+      currentCard.classList.replace('services-close', 'services-open')
+    }
+  });
+});

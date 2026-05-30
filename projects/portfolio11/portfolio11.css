@@ -65,6 +65,7 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  interpolate-size: allow-keywords;
 }
 
 html {
@@ -261,6 +262,10 @@ img {
   right: 1rem;
   font-size: 1.5rem;
   cursor: pointer;
+
+  &:hover {
+    color: var(--first-color);
+  }
 }
 
 .show-menu {
@@ -558,6 +563,85 @@ img {
   transition: opacity 0.4s;
 }
 
+.services__container {
+  row-gap: 2rem;
+}
+
+.services__card {
+  border-bottom: 2px solid var(--container-color);
+  padding-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.services__button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  cursor: pointer;
+}
+
+.services__icon {
+  color: var(--first-color);
+  font-size: 2rem;
+}
+
+.services__name {
+  font-size: var(--h2-font-size);
+  text-align: initial;
+}
+
+.services__arrow {
+  width: 32px;
+  height: 32px;
+  background-color: var(--container-color);
+  color: var(--white-color);
+  border-radius: 50%;
+  font-size: 1.5rem;
+  display: grid;
+  place-items: center;
+  margin-left: auto;
+
+  i {
+    transition: rotate 0.4s;
+  }
+}
+
+.services__description {
+  margin-block: 1rem 2rem;
+}
+
+.services__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.services__item {
+  border: 1px solid var(--first-color);
+  border-radius: 4rem;
+  padding: 0.375rem 0.5rem;
+  color: var(--white-color);
+  font: var(--font-semi-bold) var(--h3-font-size) var(--second-font);
+}
+
+.services__data {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.4s, opacity 0.4s;
+}
+
+.services-open .services__data {
+  max-height: 500px;
+  opacity: 1;
+}
+
+.services-open .services__arrow i {
+  rotate: -180deg;
+}
+
 
 
 
@@ -573,7 +657,8 @@ img {
     width: 50%;
   }
   .home__container,
-  .about__container {
+  .about__container,
+  .services__container {
     grid-template-columns: 400px;
     justify-content: center;
   }
@@ -680,5 +765,25 @@ img {
   }
   .work .blob-big {
     right: -6rem;
+  }
+  .services__container {
+    grid-template-columns: 690px;
+    row-gap: 3rem;
+  }
+  .services__card {
+    padding-bottom: 2rem;
+  }
+  .services__button {
+    column-gap: 3rem;
+  }
+  .services__icon {
+    font-size: 2.5rem;
+  }
+  .services__name {
+    font-size: var(--h1-font-size);
+  }
+  .services__description,
+  .services__list {
+    padding-left: 5.5rem;
   }
 }
