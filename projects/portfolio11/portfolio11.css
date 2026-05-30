@@ -642,6 +642,81 @@ img {
   rotate: -180deg;
 }
 
+.skills__description {
+  margin: 0 1rem 3rem;
+  text-align: center;
+}
+
+.skills__card {
+  position: relative;
+  background-color: var(--container-color);
+  padding: 1.5rem 1rem;
+  border-radius: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5rem;
+  overflow: hidden;
+}
+
+.skills__profession {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  justify-content: center;
+  z-index: 5;
+}
+
+.skills__icon {
+  font-size: 2rem;
+  color: var(--first-color);
+}
+
+.skills__title {
+  font-size: var(--h2-font-size);
+}
+
+.skills__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  z-index: 5;
+}
+
+.skills__item {
+  display: flex;
+  align-items: center;
+  column-gap: 0.25rem;
+  cursor: default;
+  transition: filter 0.4s;
+
+  &:hover {
+    filter: drop-shadow(0 0 12px var(--first-color));
+  }
+}
+
+.skills__img {
+  width: 16px;
+}
+
+.skills__name {
+  font-size: var(--small-font-size);
+  transition: color 0.4s, text-shadow 0.4s;
+}
+
+.skills__item:hover .skills__name {
+  color: var(--first-color);
+  text-shadow: 0 0 12px var(--first-color);
+}
+
+.skills__card .blob-small {
+  z-index: 1;
+  top: -5rem;
+  left: 0;
+  right: 0;
+  justify-self: center;
+}
+
 
 
 
@@ -658,12 +733,17 @@ img {
   }
   .home__container,
   .about__container,
-  .services__container {
+  .services__container,
+  .skills__container {
     grid-template-columns: 400px;
     justify-content: center;
   }
   .work__card {
     width: 350px;
+  }
+  .skills__description {
+    width: 500px;
+    margin-inline: auto;
   }
 }
 
@@ -785,5 +865,31 @@ img {
   .services__description,
   .services__list {
     padding-left: 5.5rem;
+  }
+  .skills__description {
+    width: 700px;
+  }
+  .skills__container {
+    grid-template-columns: 700px;
+  }
+  .skills__card {
+    padding: 3.5rem;
+    flex-direction: row;
+    column-gap: 6rem;
+  }
+  .skills__icon {
+    font-size: 3rem;
+  }
+  .skills__title {
+    font-size: var(--h1-font-size);
+  }
+  .skills__img {
+    width: 20px;
+  }
+  .skills__name {
+    font-size: var(--normal-font-size);
+  }
+  .skills__card .blob-small {
+    top: -7.5rem;
   }
 }
