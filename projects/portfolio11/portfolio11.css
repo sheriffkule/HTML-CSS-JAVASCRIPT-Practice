@@ -799,6 +799,43 @@ img {
   }
 }
 
+.contact__container {
+  row-gap: 4rem;
+}
+
+.contact__form {
+  position: relative;
+  row-gap: 1rem;
+}
+
+.contact__group {
+  position: relative;
+}
+
+.contact__input {
+  width: 100%;
+  background: var(--container-color);
+  color: var(--white-color);
+  padding: 1.25rem;
+  border-radius: 4rem;
+  font-weight: var(--font-semi-bold);
+  font-family: var(--second-font);
+}
+
+.contact__label {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  pointer-events: none;
+  font-weight: var(--font-semi-bold);
+  font-family: var(--second-font);
+  transition: opacity 0.4s;
+}
+
+.contact__input:is(:focus, :valid) ~ .contact__label {
+  opacity: 0;
+}
+
 
 
 
@@ -974,5 +1011,40 @@ img {
   }
   .skills__card .blob-small {
     top: -7.5rem;
+  }
+  .testimonials__card {
+    width: 420px;
+    padding: 3rem;
+    border-radius: 3rem;
+  }
+  .testimonials__number {
+    font-size: var(--h2-font-size);
+  }
+  .testimonials__rating {
+    margin-bottom: 2rem;
+  }
+  .testimonials__description {
+    font-size: var(--h3-font-size);
+    margin-bottom: 9.5rem;
+  }
+  .testimonials__card .blob-big {
+    bottom: -6rem;
+  }
+  .testimonials__container::after,
+  .testimonials__container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 15%;
+    height: 100%;
+  }
+  .testimonials__container::after {
+    left: 0;
+    background: linear-gradient(90deg, var(--body-color) 0%, hsl(0, 0%, 0%, 0) 100%);
+  }
+  .testimonials__container::before {
+    right: 0;
+    background: linear-gradient(90deg, hsl(0, 0%, 0%, 0) 0%, var(--body-color) 100%);
+    z-index: 1;
   }
 }

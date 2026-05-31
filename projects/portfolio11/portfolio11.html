@@ -584,7 +584,7 @@
 
               <div class="blob-big"></div>
             </article>
-            
+
             <article class="testimonials__card">
               <div class="testimonials__rating">
                 <span class="testimonials__number">5.0</span>
@@ -674,6 +674,99 @@
 
               <div class="blob-big"></div>
             </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact section" id="contact">
+        <h2 class="section__title">Contact <span>Me</span></h2>
+
+        <div class="contact__container container grid">
+          <form class="contact__form" id="contact-form">
+            <div class="contact__group">
+              <input
+                type="text"
+                id="name"
+                name="user_name"
+                required
+                autocomplete="name"
+                class="contact__input" />
+              <label for="name" class="contact__label">Name</label>
+            </div>
+
+            <div class="contact__group">
+              <input
+                type="text"
+                id="email"
+                name="user_email"
+                required
+                autocomplete="email"
+                class="contact__input" />
+              <label for="email" class="contact__label">Email</label>
+            </div>
+
+            <div class="contact__group">
+              <textarea
+                name="user_message"
+                id="message"
+                required
+                class="contact__input contact__area"></textarea>
+              <label for="message" class="contact__label">Message</label>
+            </div>
+
+            <button type="submit" class="contact__button button">
+              <span>Send Message</span>
+              <i class="ri-arrow-right-line"></i>
+            </button>
+
+            <p class="contact__message" id="contact-message">Message</p>
+          </form>
+
+          <div class="contact__content grid">
+            <a href="mailto:bianca123@gmail.com" target="_blank" class="contact__link">
+              <div class="contact__info">
+                <i class="ri-mail-line contact__icon"></i>
+
+                <div class="contact__text">
+                  <h3 class="contact__title">Email</h3>
+                  <address class="contact__address">bianca123@gmail.com</address>
+                </div>
+              </div>
+
+              <div class="contact__arrow">
+                <i class="ri-arrow-right-up-line"></i>
+              </div>
+            </a>
+
+            <a href="tel:+99 1234567890" target="_blank" class="contact__link">
+              <div class="contact__info">
+                <i class="ri-phone-line contact__icon"></i>
+
+                <div class="contact__text">
+                  <h3 class="contact__title">Phone number</h3>
+                  <address class="contact__address">+99 1234567890</address>
+                </div>
+              </div>
+
+              <div class="contact__arrow">
+                <i class="ri-arrow-right-up-line"></i>
+              </div>
+            </a>
+
+            <a href="https://maps.app.goo.gl/5Gu5S7BnuKi4seVh9" target="_blank" class="contact__link">
+              <div class="contact__info">
+                <i class="ri-map-pin-line contact__icon"></i>
+
+                <div class="contact__text">
+                  <h3 class="contact__title">Location </h3>
+                  <address class="contact__address">Cebu, Philippines, Fuente Osmeña Cir</address>
+                </div>
+              </div>
+
+              <div class="contact__arrow">
+                <i class="ri-arrow-right-up-line"></i>
+              </div>
+            </a>
           </div>
         </div>
       </section>
