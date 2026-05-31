@@ -87,18 +87,39 @@ servicesButtons.forEach((button) => {
     });
 
     if (!isOpen) {
-      currentCard.classList.replace('services-close', 'services-open')
+      currentCard.classList.replace('services-close', 'services-open');
     }
   });
 });
 
 // Testimonials of duplicated cards
-const tracks = document.querySelectorAll('.testimonials__content')
+const tracks = document.querySelectorAll('.testimonials__content');
 
-tracks.forEach(track => {
-  const cards = [...track.children]
+tracks.forEach((track) => {
+  const cards = [...track.children];
 
   for (const card of cards) {
-    track.appendChild(card.cloneNode(true))
+    track.appendChild(card.cloneNode(true));
   }
-})
+});
+
+// Contact email js
+// const contactForm = document.getElementById('contact-form');
+// const contactMessage = document.getElementById('contact-message');
+
+// const sendEmail = async (e) => {
+//   e.preventDefault();
+
+//   try {
+//     // serviceID - templateID - #form - publicKey
+//     await emailjs.sendForm('', '', '', '');
+
+//     contactMessage.textContent = 'Message sent successfully!';
+//     contactForm.reset()
+//   } catch (e) {
+//     contactMessage.textContent = 'Message not sent (service error)';
+//   } finally {
+//     setTimeout(() => contactMessage.textContent = '', 5000)
+//   }
+// };
+// contactForm.addEventListener('submit', contactMessage);
