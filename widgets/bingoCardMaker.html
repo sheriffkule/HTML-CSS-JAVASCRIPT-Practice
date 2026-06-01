@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bingo Card Maker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/bingoCardMaker.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Bingo Card Maker</h1>
+        <p class="subtitle">
+          Create customizable Bingo cards with numbers 1-75 - perfect for your bingo games!
+        </p>
+      </header>
+
+      <div class="app-container">
+        <div class="controls">
+          <div class="tab-container">
+            <div class="tab active" data-tab="single">Single Card</div>
+            <div class="tab" data-tab="multiple">Multiple Cards</div>
+            <div class="tab" data-tab="settings">Settings</div>
+          </div>
+
+          <div class="tab-content active" id="single-tab">
+            <div class="btn-group">
+              <button class="btn" id="generate-btn"><i class="fas fa-plus"></i> Generate New Card</button>
+              <button class="btn btn-accent" id="save-btn">
+                <i class="fas fa-download"></i> Save as Image
+              </button>
+            </div>
+          </div>
+
+          <div class="tab-content" id="multiple-tab">
+            <div class="control-group">
+              <label for="card-count">Number of Cards to Generate:</label>
+              <input type="number" id="card-count" min="1" max="20" />
+            </div>
+            <div class="btn-group">
+              <button class="btn" id="generate-multiple-btn">
+                <i class="fas fa-copy"></i> Generate Multiple Cards
+              </button>
+              <button class="btn btn-accent" id="save-all-btn">
+                <i class="fas fa-download"></i> Save All as Image
+              </button>
+            </div>
+          </div>
+
+          <div class="tab-content" id="settings-tab">
+            <div class="settings-row">
+              <div class="settings">
+                <label for="card-title">Card Title:</label>
+                <input type="text" id="card-title" placeholder="e.g., Family Bingo Night" />
+              </div>
+              <div class="settings">
+                <label for="free-text">Free Space Text:</label>
+                <input type="text" id="free-text" value="FREE" />
+              </div>
+            </div>
+            <div class="settings-row">
+              <div class="settings">
+                <label>Card Color:</label>
+                <div class="color-options">
+                  <div class="color-option" style="background: #3a86ff" data-color="#3a86ff"></div>
+                  <div class="color-option" style="background: #8338ec" data-color="#8338ec"></div>
+                  <div class="color-option" style="background: #ff006e" data-color="#ff006e"></div>
+                  <div class="color-option" style="background: #38b000" data-color="#38b000"></div>
+                  <div class="color-option" style="background: #ff9e00" data-color="#ff9e00"></div>
+                  <div class="color-option" style="background: #00bbf9" data-color="#00bbf9"></div>
+                </div>
+              </div>
+              <div class="settings">
+                <div class="checkbox-group">
+                  <input type="checkbox" id="show-title" checked />
+                  <label for="show-title">Show Card Title</label>
+                </div>
+                <div class="checkbox-group">
+                  <input type="checkbox" id="center-free" checked />
+                  <label for="center-free"></label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bingo-container">
+          <div id="single-card-container">
+            <div class="bingo-card" id="bingo-card">
+              <div class="card-title">Family Bingo Night</div>
+              <div class="bingo-header">
+                <div>B</div>
+                <div>I</div>
+                <div>N</div>
+                <div>G</div>
+                <div>O</div>
+              </div>
+              <div class="bingo-grid" id="bingo-grid"></div>
+            </div>
+          </div>
+
+          <div class="multiple-cards" id="multiple-cards-container"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="/widgets_script/bingoCardMaker.js"></script>
+  </body>
+</html>
