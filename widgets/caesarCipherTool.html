@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Caesar Cipher Tool</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/caesarCipherTool.css" />
+  </head>
+  <body class="dark-mode">
+    <div class="container">
+      <header>
+        <h1>Caesar Cipher Tool</h1>
+        <div class="theme-toggle">
+          <i class="fas fa-sun"></i>
+          <label class="switch">
+            <input type="checkbox" id="theme-switch" />
+            <span class="slider round"></span>
+          </label>
+          <i class="fas fa-moon"></i>
+        </div>
+      </header>
+      <p class="subtitle">
+        A Caesar cipher is one of the simplest and most widely known encryption techniques used in
+        cryptography.
+      </p>
+
+      <div class="controls">
+        <div class="shift-control">
+          <label for="shift">Shift Value:</label>
+          <input type="range" id="shift" min="0" max="25" value="3" />
+          <span id="shift-value">3</span>
+          <button id="animate-shift" title="Visualize Shift"><i class="fas fa-play"></i> Animate</button>
+        </div>
+
+        <div class="action-buttons">
+          <button class="primary" id="encrypt"><i class="fas fa-lock"></i> Encrypt</button>
+          <button class="secondary" id="decrypt"><i class="fas fa-unlock"></i> Decrypt</button>
+          <button id="sample"><i class="fas fa-lightbulb"></i> Sample</button>
+          <button id="clear"><i class="fas fa-trash"></i> Clear</button>
+        </div>
+      </div>
+
+      <div class="text-areas">
+        <div class="text-box">
+          <label for="input-text">Original Text:</label>
+          <textarea id="input-text" placeholder="Enter text to encode/decode..."></textarea>
+          <div class="char-count">Characters: <span id="input-count">0</span></div>
+        </div>
+
+        <div class="text-box">
+          <label for="output-text">Original Text:</label>
+          <textarea id="output-text" readonly placeholder="Result will appear here..."></textarea>
+          <div class="char-count">Characters: <span id="output-count">0</span></div>
+          <button class="copy-btn" id="copy"><i class="far fa-copy"></i> Copy</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

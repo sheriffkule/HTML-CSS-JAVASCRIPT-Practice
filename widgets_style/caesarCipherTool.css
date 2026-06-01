@@ -1,0 +1,134 @@
+:root {
+    --primary: #4361ee;
+    --secondary: #3f37c9;
+    --accent: #4895ef;
+    --light: #f8f9fa;
+    --dark: #212529;
+    --success: #4bb543;
+    --warning: #f0ad4e;
+    --danger: #d9534f;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 8px rgb(0 0 0 / 0.15);
+    --transition: all 0.3s ease;
+}
+
+.dark-mode {
+    --primary: #4895ef;
+    --secondary: #4361ee;
+    --accent: #3f37c9;
+    --light: #212529;
+    --dark: #f8f9fa;
+    --box-shadow: 0 4px 8px rgb(255 255 255 / 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--light);
+    color: var(--dark);
+    transition: var(--transition);
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+h1 {
+    color: var(--primary);
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+}
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+
+    input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background-color: #ccc;
+    transition: var(--transition);
+}
+
+.slider::before {
+    content: '';
+    position: absolute;
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: var(--transition);
+}
+
+input:checked + .slider::before {
+    transform: translateX(26px);
+}
+
+input:checked + .slider {
+    background-color: var(--primary);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round::before {
+    border-radius: 50%;
+}
+
+.subtitle {
+    text-wrap: pretty;
+    font-size: 1.1rem;
+    color: var(--dark);
+    opacity: 0.8;
+}
+
+.controls {
+    background-color: rgb(67 97 238 / 0.1);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 2rem;
+    box-shadow: var(--box-shadow);
+}
+
+.shift-control {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+
+    label {
+        font-weight: 600;
+    }
+}
