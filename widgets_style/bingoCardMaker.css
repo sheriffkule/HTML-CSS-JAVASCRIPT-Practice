@@ -60,3 +60,138 @@ header {
     box-shadow: 0 5px 15px rgb(0 0 0 / 0.1);
     animation: slideUp 0.6s ease-out;
 }
+
+.control-group {
+    margin-bottom: 1rem;
+
+    h3 {
+        margin-bottom: 0.5rem;
+        color: var(--primary);
+        font-size: 1.1rem;
+    }
+}
+
+.btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all .3s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &:hover {
+        background: var(--secondary);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgb(0 0 0 / 0.2);
+    }
+    i {
+        transition: transform 0.2s;
+    }
+    &:hover i {
+        transform: scale(1.1);
+    }
+}
+
+.btn-secondary {
+    background: #6c757d;
+
+    &:hover {
+        background: #5a6268;
+    }
+}
+
+.btn-accent {
+    background: var(--accent);
+
+    &:hover {
+        background: #d80065;
+    }
+}
+
+.btn-group {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.color-options {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.color-option {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.2s;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+    &.selected {
+        border-color: var(--dark);
+        transform: scale(1.1);
+    }
+}
+
+.bingo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.bingo-card {
+    background: var(--light);
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 30px rgb(0 0 0 / 0.15);
+    width: 400px;
+    position: relative;
+    overflow: hidden;
+}
+
+.bingo-card::before {
+    content: 'BINGO';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: rgb(0 0 0 / 0.1);
+    z-index: 0;
+    padding: 1.5rem;
+}
+
+.bingo-header {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    text-align: center;
+    font-weight: bold;
+    color: var(--secondary);
+    position: relative;
+    z-index: 1;
+
+    div {
+        padding: 0.5rem;
+        text-transform: uppercase;
+    }
+}
+
+.bingo-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5rem;
+    position: relative;
+    z-index: 1;
+}
