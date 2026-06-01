@@ -62,6 +62,107 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Functions
   function generateCard() {
-    bingoGrid.innerHTML = ''
+    bingoGrid.innerHTML = '';
+
+    // Generate numbers for each column
+    const bCol = generateUniqueNumbers(1, 15, 5);
+    const iCol = generateUniqueNumbers(6, 30, 5);
+    const nCol = generateUniqueNumbers(31, 45, 5);
+    const gCol = generateUniqueNumbers(46, 60, 5);
+    const oCol = generateUniqueNumbers(61, 75, 5);
+
+    // createCells
+    for (let row = 0; row < 5; row++) {
+      for (let col = 0; col < 5; col++) {
+        const cell = document.createElement('div');
+        cell.className = 'bingo-cell';
+
+        // Center cell is free space
+        if (row === 2 && col === 2 && centerFreeCheckbox.checked) {
+          cell.classList.add('free');
+          cell.textContent = freeTextInput.value || 'FREE';
+        } else {
+          // Assign number based on column
+          switch (col) {
+            case 0:
+              cell.textContent = bCol[row];
+              break;
+            case 1:
+              cell.textContent = iCol[row];
+              break;
+            case 2:
+              cell.textContent = nCol[row];
+              break;
+            case 3:
+              cell.textContent = gCol[row];
+              break;
+            case 4:
+              cell.textContent = oCol[row];
+              break;
+          }
+
+          // Add click event to mark cells
+          cell.addEventListener('click', function () {
+            this.classList.toggle('marked');
+          });
+        }
+
+        bingoGrid.appendChild(cell);
+      }
+    }
+
+    updateCardColor();
+    showToast('New Bingo card generated!');
+  }
+
+  function generateUniqueNumbers(min, max, count) {
+    const numbers = [];
+    while (numbers.length < count) {
+      const num = Math.floor(Math.random() * (max - min + 1)) + min;
+      if (!numbers.includes(num)) {
+        numbers.push(num);
+      }
+    }
+    return numbers;
+  }
+
+  function updateCardColor() {
+    const card = document.getElementById('bingo-card');
+    card.style.borderTop = `5px solid ${currentColor}`;
+
+    const headerCells = document.querySelectorAll('.bingo-header div');
+    headerCells.forEach((cell) => {
+      cell.style.color = currentColor;
+    });
+
+    const title = document.querySelector('.card-title');
+    if (title) title.style.color = currentColor;
+  }
+
+  function updateCardTitle() {
+    const title = document.querySelector('.card-title');
+    if (title) title.textContent = cardTitleInput.value || 'Bingo Card';
+  }
+
+  function toggleCardTitle() {
+    const title = document.querySelector('.card-title');
+    if (title) title.style.display = showTitleCheckbox.checked ? 'block' : 'none';
+  }
+
+  function saveCardAsImage() {
+    const card = document.getElementById('bingo-card');
+
+    html2canvas(card, {
+      scale: 2,
+      logging: false,
+      useCORS: true,
+      allowTaint: true,
+    }).then((canvas) => {
+      const link = document.createElement('a');
+      link.download = 'bingo-card.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      showToast('Card saved as image!');
+    });
   }
 });
