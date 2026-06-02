@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Initialize
   updateCharCount();
   createAlphabetLines();
+  updateShiftValue();
   loadThemePreference();
 
   // Event Listeners
@@ -75,14 +76,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function encryptText() {
     const text = inputText.value;
-    const shift = parseInt(shiftInput.value);
+    const shift = parseInt(shiftInput.value, 10) || 0;
     outputText.value = caesarCipher(text, shift);
     updateCharCount();
   }
 
   function decryptText() {
     const text = inputText.value;
-    const shift = parseInt(shiftValue.value);
+    const shift = parseInt(shiftInput.value, 10) || 0;
     outputText.value = caesarCipher(text, shift, true);
     updateCharCount();
   }
@@ -106,14 +107,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Visual feedback
     const originalText = copyBtn.innerHTML;
-    copyBtn.innerHTML = '<i class="fas fa-check></i> Copied!"';
+    copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
     setTimeout(() => {
       copyBtn.innerHTML = originalText;
     }, 2000);
   }
 
   function toggleTheme() {
-    document.body.classList.toggle('dark-theme');
+    document.body.classList.toggle('dark-mode');
     localStorage.setItem('darkMode', themeSwitch.checked);
   }
 
