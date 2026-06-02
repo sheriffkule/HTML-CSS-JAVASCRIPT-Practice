@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const themeSwitch = document.getElementById('theme-switch');
   const animateShiftBtn = document.getElementById('animate-shift');
   const frequencyAnalysis = document.getElementById('frequency-analysis');
-  const frequencyChart = document.getElementById('frequency-chart').getContext('2d');
+  const frequencyChart = document.getElementById('frequency-chart');
   const suggestions = document.getElementById('suggestions');
   const alphabetAnimation = document.getElementById('alphabet-animation');
   const originalAlphabet = document.getElementById('original-alphabet');
@@ -53,4 +53,111 @@ document.addEventListener('DOMContentLoaded', function () {
   closeAnimationBtn.addEventListener('click', () => {
     alphabetAnimation.classList.add('hidden');
   });
+
+  // Functions
+  function updateCharCount() {
+    inputCount.textContent = inputText.value.length;
+    outputCount.textContent = outputText.value.length;
+  }
+
+  function updateShiftValue() {
+    shiftValue.textContent = shiftInput.value;
+  }
+
+  function caesarCipher(text, shift, decrypt = false) {
+    shift = decrypt ? (26 - shift) % 26 : shift;
+    return text.replace(/[a-z]/gi, function (char) {
+      const code = char.charCodeAt(0);
+      let offset = code >= 65 && code <= 90 ? 65 : 97;
+      return String.fromCharCode(((code - offset + shift) % 26) + offset);
+    });
+  }
+
+  function encryptText() {
+    const text = inputText.value;
+    const shift = parseInt(shiftInput.value);
+    outputText.value = caesarCipher(text, shift);
+    updateCharCount();
+  }
+
+  function decryptText() {
+    const text = inputText.value;
+    const shift = parseInt(shiftValue.value);
+    outputText.value = caesarCipher(text, shift, true);
+    updateCharCount();
+  }
+
+  function insertSampleText() {
+    const randomIndex = Math.floor(Math.random() * sampleText.length);
+    inputText.value = sampleText[randomIndex];
+    updateCharCount();
+  }
+
+  function clearText() {
+    inputText.value = '';
+    outputText.value = '';
+    frequencyAnalysis.classList.add('hidden');
+    updateCharCount();
+  }
+
+  function copyToClipboard() {
+    outputText.select();
+    document.execCommand('copy');
+
+    // Visual feedback
+    const originalText = copyBtn.innerHTML;
+    copyBtn.innerHTML = '<i class="fas fa-check></i> Copied!"';
+    setTimeout(() => {
+      copyBtn.innerHTML = originalText;
+    }, 2000);
+  }
+
+  function toggleTheme() {
+    document.body.classList.toggle('dark-theme');
+    localStorage.setItem('darkMode', themeSwitch.checked);
+  }
+
+  function loadThemePreference() {
+    const darkMode = localStorage.getItem('darkMode') === 'true';
+    themeSwitch.checked = darkMode;
+    if (darkMode) document.body.classList.add('dark-mode');
+  }
+
+  function createAlphabetLines() {
+    originalAlphabet.innerHTML = '';
+    shiftedAlphabet.innerHTML = '';
+
+    for (let i = 0; i < 26; i++) {
+      const char = String.fromCharCode(65 + i);
+
+      const originalLetter = document.createElement('div');
+      originalLetter.className = 'letter';
+      originalLetter.textContent = char;
+      originalAlphabet.appendChild(originalLetter);
+
+      const shiftedLetter = document.createElement('div');
+      shiftedLetter.className = 'letter';
+      shiftedLetter.textContent = char;
+      shiftedAlphabet.appendChild(shiftedLetter);
+    }
+  }
+
+  function showAlphabetAnimation() {
+    const shift = parseInt(shiftInput.value);
+    alphabetAnimation.classList.remove('hidden');
+
+    // Animate the shift
+    const shiftedLetters = shiftedAlphabet.querySelectorAll('.letter');
+    shiftedLetters.forEach((letter, index) => {
+      setTimeout(() => {
+        const newIndex = (index + shift) % 26;
+        const newChar = String.fromCharCode(65 + newIndex);
+        letter.textContent = newChar;
+        letter.style.transform = 'scale(1.2)';
+        setTimeout(() => {
+          letter.style.transform = 'scale(1)';
+        }, 300);
+      }, index * 100);
+    });
+  }
 });
