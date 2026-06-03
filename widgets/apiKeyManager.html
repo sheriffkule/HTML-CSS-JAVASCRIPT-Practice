@@ -40,7 +40,7 @@
           </div>
         </div>
         <div class="stat-card">
-          <div class="fas fa-clock"></div>
+          <i class="fas fa-clock"></i>
           <div>
             <h3 id="recentKeys">0</h3>
             <p>Recent (7 days)</p>
@@ -68,11 +68,87 @@
               <div class="strength-meter">
                 <div class="strength-indicator" id="strengthIndicator"></div>
               </div>
-              <div class="strength-label" id="strengthLabel"></div>
+              <div class="strength-label" id="strengthLabel">Strength: none</div>
             </div>
+
+            <div class="form-group">
+              <label for="keyCategory">Category</label>
+              <select class="form-control" id="keyCategory">
+                <option value="payment">Payment</option>
+                <option value="cloud">Cloud</option>
+                <option value="social">Social</option>
+                <option value="database">Database</option>
+                <option value="analytics">Analytics</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Tags</label>
+              <div class="tags-container" id="tagsContainer">
+                <div class="tag" data-tag="production">Production</div>
+                <div class="tag" data-tag="development">Development</div>
+                <div class="tag" data-tag="test">Test</div>
+                <div class="tag" data-tag="external">External</div>
+                <div class="tag" data-tag="internal">Internal</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="keyNotes">Notes (Optional)</label>
+              <textarea
+                class="form-control"
+                id="keyNotes"
+                rows="3"
+                placeholder="Add any additional notes about this API key..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-full">
+              <i class="fas fa-save"></i> Save API Key
+            </button>
           </form>
+
+          <div style="margin-top: 20px; display: flex; gap: 10px">
+            <button class="btn btn-secondary" id="exportBtn">
+              <i class="fas fa-download"></i> Export
+            </button>
+            <button class="btn btn-secondary" id="importBtn"><i class="fas fa-upload"></i> Import</button>
+          </div>
+        </div>
+
+        <div class="keys-container">
+          <h2><i class="fas fa-key"></i> Saved API Keys</h2>
+
+          <div class="search-filter">
+            <input type="text" class="form-control" id="search-input" placeholder="Search keys..." />
+            <select class="form-control" id="categoryFilter">
+              <option value="all">All Categories</option>
+              <option value="payment">Payment</option>
+              <option value="cloud">Cloud</option>
+              <option value="social">Social Media</option>
+              <option value="database">Database</option>
+              <option value="analytics">Analytics</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="keys-list" id="keysList">
+            <!-- API keys will be displayed here -->
+            <div class="no-keys">
+              <i class="fas fa-key"></i>
+              <h3>No API keys Saved</h3>
+              <p>Add your first API key using the form on the left.</p>
+            </div>
+          </div>
         </div>
       </div>
+
+      <footer>
+        <p>API Key Manager | Your keys are stored locally in your browser.</p>
+        <p style="font-size: 12px; margin-top: 5px">
+          <i class="fas fa-shield-alt"></i> This application does not transmit your API keys to any server.
+        </p>
+      </footer>
     </div>
   </body>
 </html>
