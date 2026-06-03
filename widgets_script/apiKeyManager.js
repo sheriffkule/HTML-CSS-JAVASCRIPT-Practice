@@ -170,8 +170,9 @@ function renderKeys(filteredKeys = null) {
     return;
   }
 
-  keyList.innerHTML = keysToRender.map(
-    (key) => `
+  keyList.innerHTML = keysToRender
+    .map(
+      (key) => `
       <div class="key-item" data-id="${key.id}">
         <div class="key-item-header">
           <div>
@@ -234,5 +235,39 @@ function renderKeys(filteredKeys = null) {
         </div>
       </div>
     `,
-  );
+    )
+    .join('');
+
+  // Add event listeners to key items
+  document.querySelectorAll('.view-btn').forEach((btn) => {
+    btn.addEventListener('click', function () {
+      const keyItem = this.closest('.key-item');
+      const keyId = keyItem.getAttribute('data-id');
+      toggleKeyVisibility(keyId);
+    });
+  });
+
+  document.querySelectorAll('.copy-btn').forEach((btn) => {
+    btn.addEventListener('click', function () {
+      const keyItem = this.closest('.key-item');
+      const keyId = keyItem.getAttribute('data-id');
+      copyToClipboard(keyId);
+    });
+  });
+
+  document.querySelectorAll('.edit-btn').forEach((btn) => {
+    btn.addEventListener('click', function () {
+      const keyItem = this.closest('.key-item');
+      const keyId = keyItem.getAttribute('data-id');
+      openEditModal(keyId);
+    });
+  });
+
+  document.querySelectorAll('.delete-btn').forEach((btn) => {
+    btn.addEventListener('click', function () {
+      const keyItem = this.closest('.key-item');
+      const keyId = keyItem.getAttribute('data-id');
+      deleteKey(keyId);
+    });
+  });
 }

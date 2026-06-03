@@ -109,9 +109,7 @@
           </form>
 
           <div style="margin-top: 20px; display: flex; gap: 10px">
-            <button class="btn btn-secondary" id="exportBtn">
-              <i class="fas fa-download"></i> Export
-            </button>
+            <button class="btn btn-secondary" id="exportBtn"><i class="fas fa-download"></i> Export</button>
             <button class="btn btn-secondary" id="importBtn"><i class="fas fa-upload"></i> Import</button>
           </div>
         </div>
@@ -150,5 +148,78 @@
         </p>
       </footer>
     </div>
+
+    <div class="modal" id="editModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-title">Edit API Key</div>
+          <button class="modal-close" id="closeEditModal">&times;</button>
+        </div>
+        <form id="editKeyForm">
+          <div class="form-group">
+            <label for="editKeyname">Key Name</label>
+            <input type="text" class="form-control" id="editKeyName" required />
+          </div>
+
+          <div class="form-group">
+            <label for="editApiKey">API Key</label>
+            <input type="text" class="form-control" id="editApiKey" />
+          </div>
+
+          <div class="form-group">
+            <label for="editKeyCategory">Category</label>
+            <select id="editKeyCategory" class="form-control">
+              <option value="payment">Payment</option>
+              <option value="cloud">Cloud</option>
+              <option value="social">Social</option>
+              <option value="database">Database</option>
+              <option value="analytics">Analytics</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="editKeyNotes">Notes (Optional)</label>
+            <textarea id="editKeyNotes" class="form-control" rows="3"></textarea>
+          </div>
+
+          <input type="hidden" id="editKeyId" />
+
+          <button type="submit" class="btn btn-primary btn-full">
+            <i class="fas fa-save"></i> Update API Key
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="toast" id="toast">
+      <i class="fas fa-check-circle"></i>
+      <span id="toastMessage">API Key copied to clipboard!</span>
+    </div>
+
+    <div class="modal" id="importModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-title">Import API Keys</div>
+          <button class="modal-close" id="closeImportModal">&times;</button>
+        </div>
+        <div class="form-group">
+          <label for="importData">Paste your exported JSON data</label>
+          <textarea
+            class="form-control"
+            id="importData"
+            rows="8"
+            placeholder="Paste JSON data here..."></textarea>
+        </div>
+        <div style="display: flex; gap: 10px">
+          <button class="btn btn-primary" id="confirmImport">
+            <i class="fas fa-file-import"></i> Import
+          </button>
+          <button class="btn btn-secondary" id="cancelImport"><i class="fas fa-ban"></i> Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="/widgets_script/apiKeyManager.js"></script>
   </body>
 </html>
