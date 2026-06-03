@@ -270,4 +270,226 @@ function renderKeys(filteredKeys = null) {
       deleteKey(keyId);
     });
   });
+
+  document.querySelectorAll('[data-action="reveal"]').forEach((btn) => {
+    btn.addEventListener('click', function () {
+      const keyId = this.getAttribute('data-id');
+      toggleKeyReveal(keyId, this);
+    });
+  });
 }
+
+// Toggle key visibility (mask/unmask)
+function toggleKeyVisibility(keyId) {
+  const keyElement = document.getElementById(`key-value-${keyId}`);
+  if (keyElement.classList.contains('key-masked')) {
+    const keyObj = apiKeys.find((k) => k.id === keyId);
+    keyElement.textContent = keyObj.key;
+    keyElement.classList.remove('key-masked');
+    keyElement.classList.add('key-revealed');
+  } else {
+    const keyObj = apiKeys.find((k) => k.id === keyId);
+    keyElement.textContent = '∙'.repeat(keyObj.key.length > 30 ? 30 : keyObj.key.length);
+    keyElement.classList.add('key-mask');
+    keyElement.classList.removeI('key-revealed');
+  }
+}
+
+// Toggle key reveal with button text change
+function toggleKeyReveal(keyId, button) {
+  const keyElement = document.getElementById(`key-value${keyId}`);
+  if (keyElement.classList.contains('key-masked')) {
+    const keyObj = apiKeys.find((k) => k.id === keyId);
+    keyElement.textContent = keyObj.key;
+    keyElement.classList.remove('key-masked');
+    keyElement.classList.add('key-revealed');
+    button.textContent = 'Hide';
+
+    // Update last used timestamp
+    const keyIndex = apiKeys.findIndex((k) => k.id === keyId);
+    if (keyIndex !== -1) {
+      apiKeys[keyIndex].lastUsed = new Date().toISOString();
+      saveToLocalStorage();
+      updateStats();
+    }
+  } else {
+    const keyObj = apiKeys.find((k) => k.id === keyId);
+    keyElement.textContent = '∙'.repeat(keyObj.key.length > 30 ? 30 : keyObj.key.length);
+    keyElement.classList.add('key-mask');
+    keyElement.classList.removeI('key-revealed');
+    button.textContent = 'Reveal';
+  }
+}
+
+// Copy key to clipboard
+function copyToClipboard(keyId) {
+  const keyObj = apiKeys.find((k) => k.id === keyId);
+  navigator.clipboard
+    .writeText(keyObj.key)
+    .then(() => {
+      showToast('API Key copied to clipboard!', 'success');
+
+      // Update last used timestamp
+      const keyIndex = apiKeys.findIndex((k) => k.id === keyId);
+      if (keyIndex !== -1) {
+        apiKeys[keyIndex].lastUsed = new Date().toISOString();
+        saveToLocalStorage();
+        updateStats();
+      }
+    })
+    .catch((err) => {
+      console.error('Failed to copy: ', err);
+      showToast('Failed to copy key to clipboard', 'danger');
+    });
+}
+
+// Open edit modal
+function openEditModal(keyId) {
+  const keyObj = apiKeys.find((k) => k.id === keyId);
+  if (!keyObj) return;
+
+  document.getElementById('editKeyName').value = keyObj.name;
+  document.getElementById('editApiKey').value = keyObj.key;
+  document.getElementById('editKeyCategory').value = keyObj.category;
+  document.getElementById('editKeyNotes').value = keyObj.notes || '';
+  document.getElementById('editKeyId').value = keyObj.id;
+
+  editModal.classList.add('active');
+}
+
+// Close edit modal
+closeEditModal.addEventListener('click', () => {
+  editModal.classList.remove('active');
+});
+
+// Edit form submission
+editKeyForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const keyId = document.getElementById('editKeyId').value;
+  const keyName = document.getElementById('editKeyName').value;
+  const apiKey = document.getElementById('editApiKey').value;
+  const keyCategory = document.getElementById('editKeyCategory').value;
+  const keyNotes = document.getElementById('editKeyNotes').value;
+
+  const keyIndex = apiKeys.findIndex((k) => (k.id = keyId));
+  if (keyIndex !== -1) {
+    apiKeys[keyIndex].name = keyName;
+    apiKeys[keyIndex].key = apiKey;
+    apiKeys[keyIndex].category = keyCategory;
+    apiKeys[keyIndex].notes = keyNotes;
+    apiKeys[keyIndex].strength = getKeyStrength(apiKey);
+
+    saveToLocalStorage();
+    renderKeys();
+    updateStats();
+    editModal.classList.remove('active');
+
+    showToast('API Key updated successfully!', 'success');
+  }
+});
+
+// Delete key
+function deleteKey(keyId) {
+  if (confirm('Are you sure you want to delete this API key? This action cannot be undone')) {
+    apiKeys = apiKeys.filter((k) => k.id !== keyId);
+    saveToLocalStorage();
+    renderKeys();
+    updateStats();
+
+    showToast('API Key deleted successfully!', 'success');
+  }
+}
+
+// Search and filter functionality
+searchInput.addEventListener('input', filterKeys);
+categoryFilter.addEventListener('change', filterKeys);
+
+function filterKeys() {
+  const searchTerm = searchInput.value.toLowerCase();
+  const categoryFilterValue = categoryFilter.value;
+
+  let filteredKeys = apiKeys;
+
+  // Apply category filter
+  if (categoryFilterValue !== 'all') {
+    filteredKeys = filteredKeys.filter((key) => key.category === categoryFilterValue);
+  }
+
+  // Apply search filter
+  if (searchTerm) {
+    filteredKeys = filteredKeys.filter(
+      (key) =>
+        key.name.toLowerCase().includes(searchTerm) ||
+        (key.notes && key.notes.toLowerCase().includes(searchTerm)) ||
+        key.tags.some((tag) => tag.toLowerCase().includes(searchTerm)),
+    );
+  }
+
+  renderKeys(filteredKeys);
+}
+
+// Save to localStorage
+function saveToLocalStorage() {
+  localStorage.setItem('apiKeys', JSON.stringify(apiKeys));
+}
+
+// Update statistics
+function updateStats() {
+  totalKeysEl.textContent = apiKeys.length;
+
+  // Count strong keys (length >= 16 with mixed characters
+  const strongKeysCount = apiKeys.filter((key) => key.strength === 'Strong').length;
+  strongKeysEl.textContent = strongKeysCount;
+
+  // Count unique categories
+  const uniqueCategories = [...new Set(apiKeys.map((key) => key.category))];
+  categoriesCountEl.textContent = uniqueCategories.length;
+
+  // Count keys created in last 7 days
+  const sevenDaysAgo = new Date();
+  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+  const recentKeysCount = apiKeys.filter((key) => new Date(key.created) >= sevenDaysAgo).length;
+  recentKeysEl.textContent = recentKeysCount;
+}
+
+// Show toast notification
+function showToast(message, type = 'success') {
+  toastMessage.textContent = message;
+  toast.className = `toast toast-${type}`;
+  toast.classList.add('show');
+
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3000);
+}
+
+// Export functionality
+exportBtn.addEventListener('click', () => {
+  const dataStr = JSON.stringify(apiKeys, null, 2);
+  const dataUrl = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+
+  const exportFileDefaultName = 'api-keys-export.json';
+
+  const linkElement = document.createElement('a');
+  linkElement.setAttribute('href', dataUrl);
+  linkElement.setAttribute('download', exportFileDefaultName);
+  linkElement.click();
+
+  showToast('API Keys exported successfully!', 'success');
+});
+
+// Import functionality
+importBtn.addEventListener('click', () => {
+  importModal.classList.add('active');
+});
+
+closeImportModal.addEventListener('click', () => {
+  importModal.classList.remove('active');
+  importData.value = '';
+});
+
+cancelImport.addEventListener('click', () => {
+  importModal.classList.remove('active');
+  importData.value = '';
+});
