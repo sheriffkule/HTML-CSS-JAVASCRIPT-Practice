@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API Key Manager | Secure API Key Storage</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/apiKeyManager.css" />
+  </head>
+  <body class="dark-theme">
+    <div class="container">
+      <header>
+        <div class="logo">
+          <i class="fas fa-key"></i>
+          <h1>API Key Manager</h1>
+        </div>
+        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+      </header>
+
+      <div class="stat-cards">
+        <div class="stat-card">
+          <i class="fas fa-key"></i>
+          <div>
+            <h3 id="totalKeys">0</h3>
+            <p>Total Keys</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-shield-alt"></i>
+          <div>
+            <h3 id="strongKeys">0</h3>
+            <p>Strong Keys</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-tags"></i>
+          <div>
+            <h3 id="categoriesCount">0</h3>
+            <p>Categories</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="fas fa-clock"></div>
+          <div>
+            <h3 id="recentKeys">0</h3>
+            <p>Recent (7 days)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="app-content">
+        <div class="form-container">
+          <h2><i class="fas fa-plus-circle"></i> Add New API Key</h2>
+          <form id="apiKeyForm">
+            <div class="form-group">
+              <label for="keyName">Key Name</label>
+              <input
+                type="text"
+                id="keyName"
+                class="form-control"
+                placeholder="e.g., Stripe Production"
+                required />
+            </div>
+
+            <div class="form-group">
+              <label for="apiKey">API Key</label>
+              <input type="text" class="form-control" id="apiKey" placeholder="Enter your API key" required />
+              <div class="strength-meter">
+                <div class="strength-indicator" id="strengthIndicator"></div>
+              </div>
+              <div class="strength-label" id="strengthLabel"></div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
