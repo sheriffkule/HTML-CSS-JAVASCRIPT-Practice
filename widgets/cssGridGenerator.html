@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Grid Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/cssGridGenerator.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <header class="app-header">
+        <h1><i class="fas fa-th"></i> CSS Grid Generator</h1>
+        <p>Create custom CSS grid layouts and get the code instantly</p>
+      </header>
+
+      <main class="app-main">
+        <section class="controls-panel">
+          <div class="control-group">
+            <h3>Grid Structure</h3>
+            <div class="form-row">
+              <label for="rows">Rows:</label>
+              <input type="number" id="rows" min="1" max="12" value="3" />
+              <button class="icon-btn" id="add-row" title="Add Row"><i class="fas fa-plus"></i></button>
+              <button class="icon-btn" id="remove-row" title="Remove Row">
+                <i class="fas fa-minus"></i>
+              </button>
+            </div>
+
+            <div class="form-row">
+              <label for="columns">Columns:</label>
+              <input type="number" id="columns" min="1" max="12" value="3" />
+              <button class="icon-btn" id="add-col" title="Add Column"><i class="fas fa-plus"></i></button>
+              <button class="icon-btn" id="remove-column" title="Remove Column">
+                <i class="fas fa-minus"></i>
+              </button>
+            </div>
+
+            <div class="form-row">
+              <label for="gap">Gap:</label>
+              <input type="range" id="gap" min="0" max="40" value="10" />
+              <span id="gap-value">10px</span>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <h3>Grid Options</h3>
+            <div class="form-row">
+              <label for="grid-type">Grid Type</label>
+              <select id="grid-type">
+                <option value="static">Static (px)</option>
+                <option value="flexible">Flexible (fr)</option>
+                <option value="auto">Auto</option>
+                <option value="mixed">Mixed</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label for="align-items">Align Items</label>
+              <select id="align-items">
+                <option value="stretch">Stretch</option>
+                <option value="start">Start</option>
+                <option value="end">End</option>
+                <option value="center">Center</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label for="justify-items">Justify Items</label>
+              <select id="justify-items">
+                <option value="stretch">Stretch</option>
+                <option value="start">Start</option>
+                <option value="end">End</option>
+                <option value="center">Center</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <h3>Cell Options</h3>
+            <div class="form-row">
+              <label for="cell-min">Min Height</label>
+              <input type="range" id="cell-min" min="50" max="300" value="100" />
+              <span id="cell-min-value">100px</span>
+            </div>
+
+            <div class="form-row">
+              <label for="cell-color">Cell Color</label>
+              <input type="color" id="cell-color" value="#4a6bff" />
+            </div>
+
+            <div class="form-row">
+              <label for="cell-text">Cell Text</label>
+              <input type="checkbox" id="cell-text" />
+            </div>
+          </div>
+
+          <div class="control-group">
+            <h3>Presets</h3>
+            <div class="presets">
+              <button class="preset-btn" data-rows="3" data-cols="3">3&times;3</button>
+              <button class="preset-btn" data-rows="2" data-cols="4">2&times;4</button>
+              <button class="preset-btn" data-rows="4" data-cols="2">4&times;2</button>
+              <button class="preset-btn" data-rows="1" data-cols="5">1&times;5</button>
+              <button class="preset-btn" data-rows="5" data-cols="1">5&times;1</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="preview-section">
+          <div class="preview-container">
+            <div class="grid-review" id="grid-preview"></div>
+          </div>
+          <div class="preview-actions">
+            <button class="action-btn" id="refresh-btn"><i class="fas fa-sync-alt"></i> Refresh</button>
+            <button class="action-btn" id="copy-btn"><i class="fas fa-copy"></i> Copy</button>
+            <button class="action-btn" id="export-btn"><i class="fas fa-download"></i> Export</button>
+          </div>
+        </section>
+
+        <section class="code-section">
+          <div class="code-tabs">
+            <button class="code-tab active" data-tab="html">HTML</button>
+            <button class="code-tab" data-tab="css">CSS</button>
+            <button class="code-tab" data-tab="combined">Combined</button>
+          </div>
+          <div class="code-container">
+            <pre class="code-content active" id="html-code"><code></code></pre>
+            <pre class="code-content" id="css-code"><code></code></pre>
+            <pre class="code-content" id="combined-code"><code></code></pre>
+          </div>
+          <div class="code-meta">
+            <span id="code-size">0 bytes</span>
+            <span id="code-lines">0 lines</span>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        © <time datetime="2026" id="year">2026</time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
+    </div>
+
+    <div class="notification hidden" id="notification">Code copied to clipboard!</div>
+
+    <script src="/widgets_script/cssGridGenerator.js"></script>
+  </body>
+</html>
