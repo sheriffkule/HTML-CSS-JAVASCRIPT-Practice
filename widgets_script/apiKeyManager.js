@@ -1,7 +1,7 @@
 // DOM Elements
 const themeToggle = document.getElementById('themeToggle');
 const apiKeyForm = document.getElementById('apiKeyForm');
-const keyList = document.getElementById('keyList');
+const keysList = document.getElementById('keysList');
 const searchInput = document.getElementById('searchInput');
 const categoryFilter = document.getElementById('categoryFilter');
 const editModal = document.getElementById('editModal');
@@ -154,7 +154,7 @@ function renderKeys(filteredKeys = null) {
   const keysToRender = filteredKeys || apiKeys;
 
   if (keysToRender.length === 0) {
-    keyList.innerHTML = `
+    keysList.innerHTML = `
       <div class="no-keys">
         <i class="fas fa-key"></i>
         <h3>No API Keys Found</h3>
@@ -170,7 +170,7 @@ function renderKeys(filteredKeys = null) {
     return;
   }
 
-  keyList.innerHTML = keysToRender
+  keysList.innerHTML = keysToRender
     .map(
       (key) => `
       <div class="key-item" data-id="${key.id}">
@@ -493,3 +493,87 @@ cancelImport.addEventListener('click', () => {
   importModal.classList.remove('active');
   importData.value = '';
 });
+
+confirmImport.addEventListener('click', () => {
+  try {
+    const importedData = JSON.parse(importData.value);
+
+    if (!Array.isArray(importedData)) {
+      throw new Error('Invalid data format. Expected an array.');
+    }
+
+    // Merge with existing keys (avoid duplicated by ID)
+    const existingIds = apiKeys((key) => key.id);
+    const newKeys = importData.filter((key) => !existingIds.includes(key.id));
+
+    apiKeys = [...apiKeys, ...newKeys];
+    saveToLocalStorage();
+    renderKeys();
+    updateStats();
+
+    importModal.classList.remove('active');
+    importData.value = '';
+
+    showToast(`${newKeys.length} new API keys imported successfully!`, 'success');
+  } catch (error) {
+    alert('Error importing data: ' + error.message);
+  }
+});
+
+// Helper function
+function getCategoryLabel(category) {
+  const labels = {
+    payment: 'Payment',
+    cloud: 'Cloud',
+    social: 'Social Media',
+    database: 'Database',
+    analytics: 'Analytics',
+    other: 'Other',
+  };
+  return labels[category] || 'Other';
+}
+
+function formatDate(toString) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function getKeyStrength(key) {
+  if (key.length < 8) return 'Weak';
+
+  const hasLower = /[a-z]/.test(key);
+  const hasUpper = /[A-Z]/.test(key);
+  const hasNumber = /\d/.test(key);
+  const hasSpecial = /[^a-zA-Z\d]/.test(key);
+
+  let criteriaMet = 0;
+  if (hasLower) criteriaMet++;
+  if (hasUpper) criteriaMet++;
+  if (hasNumber) criteriaMet++;
+  if (hasSpecial) criteriaMet++;
+
+  if (key.length >= 16 && criteriaMet >= 4) return 'Strong';
+  if (key.length >= 12 && criteriaMet >= 3) return 'Good';
+  if (key.length >= 18 && criteriaMet >= 2) return 'Fair';
+
+  return 'Weak';
+}
+
+// Initialize the app
+function init() {
+  renderKeys();
+  updateStats();
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', init);
