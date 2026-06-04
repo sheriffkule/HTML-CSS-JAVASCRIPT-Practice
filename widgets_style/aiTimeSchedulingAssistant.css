@@ -36,6 +36,16 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
+    transform: scale(0);
+    transform-origin: top;
+    animation: fadeIn 0.6s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        transform: scale(1);
+        scroll-behavior: smooth;
+    }
 }
 
 header {
@@ -189,6 +199,47 @@ input, select, textarea {
     caret-color: var(--primary);
 }
 
+input[type=time] {
+  background-color: var(--light-gray);
+  transition: var(--transition);
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+    background-color: var(--light-gray);
+    border-radius: 50%;
+    opacity: 0.6;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator:hover {
+    scale: 1.1;
+    background-color: var(--success);
+    opacity: 1;
+}
+
+input[type=time]::-webkit-datetime-edit-fields-wrapper {
+  display: flex;
+  background-color: var(--light);
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+input[type=time]::-webkit-datetime-edit-text {
+  padding-inline: 2px;
+  color: black;
+}
+
+input[type=time]::-webkit-datetime-edit-ampm-field {
+  background-color: var(--light-gray);
+  border-radius: 15%;
+  color: var(--dark);
+  padding: 2px 4px;
+}
+
+input[type=time]:open {
+    border-color: primary;
+}
+
 :is(input[type="text"], textarea)::placeholder {
     transition: var(--transition);
 }
@@ -200,6 +251,58 @@ input, select, textarea {
 
 :is(input, textarea):is(:focus, :focus-within)::placeholder {
     transform: translateY(-170%);
+}
+
+select,
+::picker(select) {
+  appearance: base-select;
+  cursor: pointer;
+}
+
+::picker(select) {
+  border-radius: 8px;
+  border: none;
+}
+
+select::picker-icon {
+  color: var(--primary);
+  transition: 0.3s rotate;
+}
+
+select:open::picker-icon {
+  rotate: 180deg;
+  color: var(--success);
+}
+
+select:open {
+    background: var(--gray);
+}
+
+option {
+  border: 1px solid #bbb;
+  background: var(--primary);
+  padding: 2px 0 2px 12px;
+  color: white;
+  padding-right: 18px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+option:hover,
+option:focus {
+  background: var(--primary-dark);
+}
+
+option:checked {
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: var(--success);
+  background-color: var(--primary);
+}
+
+option::checkmark {
+  color: var(--success);
+  font-size: 1.5rem;
 }
 
 .time-inputs {
@@ -250,6 +353,7 @@ input, select, textarea {
 .schedule-list {
     max-height: 500px;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .schedule-item {
@@ -312,15 +416,15 @@ input, select, textarea {
     color: #ca6702;
 }
 
-.priority-low {
+.priority-high {
     background-color: rgb(249 65 68 / 0.2);
     color: #ae2012;
 }
 
 .delete-btn {
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 10px;
+    right: 10px;
     background: none;
     border: none;
     color: var(--gray);
@@ -375,6 +479,7 @@ input, select, textarea {
     border-radius: 20px;
     font-size: 12px;
     font-weight: 600;
+    text-align: center;
 }
 
 .suggestion-desc {
@@ -418,7 +523,7 @@ input, select, textarea {
     margin-left: 10px;
     font-size: 14px;
     font-weight: 500;
-    color: white;
+    color: var(--dark);
 }
 
 .empty {
@@ -455,10 +560,11 @@ input, select, textarea {
     font-size: 14px;
 }
 
-footer {
+.disclaimer {
     text-align: center;
     margin-top: 40px;
     padding: 20px;
+    border-block: 1px solid var(--gray);
     color: #777;
     font-size: 14px;
 }
@@ -493,6 +599,40 @@ footer {
         margin-bottom: 15px;
         color: var(--light-gray);
     }
+}
+
+footer {
+    color: var(--text);
+    opacity: 0.7;
+    font-size: 0.875rem;
+    text-align: center;
+    margin-top: 1rem;
+
+    span {
+        font-size: 1rem;
+        color: red;
+    }
+    abbr {
+        color: var(--primary);
+        text-underline-offset: 2px;
+        cursor: default;
+        letter-spacing: 0.5px;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background: var(--gray);
+    border-radius: var(--border-radius);
+}
+
+::-webkit-scrollbar-thumb {
+    background: hsl(from var(--gray) h s 65%);
+    border-radius: calc(var(--border-radius) * 2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: hsl(from var(--gray) h s 55%);
 }
 
 @media (width < 768px) {

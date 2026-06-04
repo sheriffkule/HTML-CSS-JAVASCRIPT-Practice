@@ -39,7 +39,7 @@
               <div class="time-inputs">
                 <div>
                   <label for="startTime"></label>
-                  <input type="time" id="startTime" required />
+                  <input type="time" id="startTime" required  />
                 </div>
                 <div>
                   <label for="endTime"></label>
@@ -79,7 +79,7 @@
           <div class="schedule-list" id="scheduleList">
             <!-- Schedule items will be added here dynamically -->
             <div class="empty-state">
-              <i class="fas-fa-calendar-plus"></i>
+              <i class="fas fa-calendar-plus"></i>
               <h3>No task scheduled</h3>
               <p>Add your first task using the form on the left.</p>
             </div>
@@ -120,14 +120,18 @@
         </div>
       </div>
 
-      <footer>
+      <div class="disclaimer">
         <p>AI Scheduling Assistant</p>
         <p>This app uses AI to optimize your schedule and suggest improvements.</p>
-      </footer>
-
-      <div class="notification" id="notification">
-        Task added successfully to your schedule!
       </div>
+
+      <div class="notification" id="notification">Task added successfully to your schedule!</div>
+
+      <footer>
+        © <time datetime="" id="year"></time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
     </div>
+    <script defer src="/widgets_script/aiTimeSchedulingAssistant.js"></script>
   </body>
 </html>

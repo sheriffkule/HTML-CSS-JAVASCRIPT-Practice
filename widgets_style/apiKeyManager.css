@@ -14,6 +14,7 @@
     --border-radius: 12px;
     --box-shadow: 0 8px 24px rgb(0 0 0 / 0.1);
     --transition: all 0.3s ease;
+    interpolate-size: allow-keywords;
 }
 
 .dark-theme {
@@ -41,6 +42,14 @@ body {
     max-width: 1500px;
     margin: 0 auto;
     padding: 0 20px;
+    transform: scaleX(0);
+    animation: fadeIn 0.6s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        transform: scaleX(1);
+    }
 }
 
 header {
@@ -179,16 +188,18 @@ header {
     transition: var(--transition);
 }
 
-.form-control:is(:focus, :focus-within) {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 2px rgb(67 97 238 / 0.2),
-    inset 0 0 0 2px rgb(67 97 238 / 0.2);
+:is(input[type="text"], textarea)::placeholder {
+    transition: var(--transition);
+}
+
+:is(input[type="text"], textarea):is(:focus, :focus-visible)::placeholder {
+    transform: translateY(-160%);
 }
 
 select,
 ::picker(select) {
   appearance: base-select;
+  transition: .3s;
 }
 
 ::picker(select) {
@@ -204,6 +215,14 @@ select::picker-icon {
 select:open::picker-icon {
   rotate: 180deg;
   color: var(--success);
+}
+
+select:open {
+  background-color: var(--gray-light);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgb(67 97 238 / 0.2),
+  inset 0 0 0 2px rgb(67 97 238 / 0.2);
+  outline: none;
 }
 
 select:not():open {
@@ -234,6 +253,20 @@ option:checked {
 option::checkmark {
   color: var(--success);
   font-size: 1.5rem;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
 .btn-primary {
@@ -278,15 +311,15 @@ option::checkmark {
 
 .strength-meter {
     height: 6px;
-    background-color: #ddd;
-    border-radius: 3px;
+    background: linear-gradient(90deg, #ddd, #ccc);
+    border-radius: 6px;
     margin-top: 8px;
     overflow: hidden;
 }
 
 .strength-indicator {
     height: 100%;
-    width: 100%;
+    width: 0%;
     transition: var(--transition);
 }
 
@@ -300,7 +333,7 @@ option::checkmark {
     width: 50%;
 }
 
-.strength-weak {
+.strength-good {
     background-color: #ffd166;
     width: 75%;
 }
@@ -336,7 +369,7 @@ option::checkmark {
     &:hover {
         opacity: 0.8;
     }
-    &:selected {
+    &.selected {
         background-color: var(--secondary);
     }
 }
@@ -347,7 +380,6 @@ option::checkmark {
     margin-bottom: 20px;
 
     input {
-        /* flex: 1; */
         width: 100%;
     }
     select {
@@ -438,11 +470,13 @@ option::checkmark {
     border-radius: 8px;
     flex: 1;
     word-break: break-all;
+    transition: var(--transition);
 }
 
 .key-masked {
     filter: blur(5px);
     user-select: none;
+    transition: var(--transition) !important;
 }
 
 .key-revealed {
@@ -473,12 +507,31 @@ option::checkmark {
     }
 }
 
-footer {
+.disclaimer {
     text-align: center;
     padding-block: 50px 20px;
     color: var(--gray);
     font-size: 14px;
     border-top: 1px solid var(--gray-light);
+}
+
+footer {
+    text-align: center;
+    color: var(--gray);
+    font-size: 14px;
+    margin-bottom: 12px;
+
+    span {
+        color: var(--danger);
+        font-size: 16px;
+    }
+    abbr {
+        cursor: default;
+        text-underline-offset: 2px;
+        color: var(--primary);
+        letter-spacing: 0.5px;
+        font-weight: 500;
+    }
 }
 
 .modal {
@@ -554,15 +607,16 @@ footer {
     display: flex;
     align-items: center;
     gap: 10px;
-    transform: translateY(100px);
+    transform-origin: right;
+    transform: translateY(100px) scaleX(0);
     opacity: 0;
     transition: var(--transition);
     z-index: 1001;
+}
 
-    &:show {
-        transform: translateY(0);
-        opacity: 1;
-    }
+.toast.show {
+    transform: translateY(0) scaleX(1);
+    opacity: 1;
 }
 
 .toast-success {
@@ -575,6 +629,21 @@ footer {
 
 .toast-warning {
     background-color: var(--warning);
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: var(--gray);
+    border-radius: var(--border-radius);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, var(--gray-light), var(--gray), var(--gray-light));
+    border-radius: calc(var(--border-radius) * 2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary-dark);
 }
 
 @media (width < 768px) {

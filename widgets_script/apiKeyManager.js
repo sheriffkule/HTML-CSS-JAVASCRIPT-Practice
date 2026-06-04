@@ -31,11 +31,17 @@ const tagsContainer = document.getElementById('tagsContainer');
 let selectedTags = [];
 
 // Initialize API keys from localStorage or empty array
-let apiKeys = JSON.parse(localStorage.getItem('apiKeys')) || [];
+let apiKeys = [];
+try {
+  apiKeys = JSON.parse(localStorage.getItem('apiKeys')) || [];
+} catch (error) {
+  console.warn('Invalid saved API keys, clearing corrupted localStorage entry.', error);
+  localStorage.removeItem('apiKeys');
+}
 
 // Theme handling
 const currentTheme = localStorage.getItem('theme') || 'light';
-document.body.classList.toggle('dark', currentTheme === 'dark');
+document.body.classList.toggle('dark-theme', currentTheme === 'dark');
 themeToggle.innerHTML =
   currentTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
 
@@ -101,11 +107,11 @@ tagsContainer.addEventListener('click', (e) => {
     const index = selectedTags.indexOf(tag);
 
     if (index > -1) {
-      selectedTags.push(tag);
-      e.target.classList.add('selected');
-    } else {
       selectedTags.splice(index, 1);
       e.target.classList.remove('selected');
+    } else {
+      selectedTags.push(tag);
+      e.target.classList.add('selected');
     }
   }
 });
@@ -131,7 +137,7 @@ apiKeyForm.addEventListener('submit', (e) => {
     strength: getKeyStrength(apiKey),
   };
 
-  apiKey.push(newKey);
+  apiKeys.push(newKey);
   saveToLocalStorage();
   renderKeys();
   updateStats();
@@ -197,10 +203,9 @@ function renderKeys(filteredKeys = null) {
 
         <div class="key-item-details">
           <div class="key-value-container">
-            <div
-              class="key-value key-masked"
-              id="key-value-${key.id}"
-              ${'∙'.repeat(key.key.length > 30 ? 30 : key.key.length)}></div>
+            <div class="key-value key-masked" id="key-value-${key.id}">${'∙'.repeat(
+              key.key.length > 30 ? 30 : key.key.length,
+            )}</div>
             <button
               class="btn btn-primary"
               style="margin-left: 10px;"
@@ -214,22 +219,20 @@ function renderKeys(filteredKeys = null) {
             key.tags && key.tags.length > 0
               ? `
                 <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px">
-                  ${key.tags.map((tag) => `<span class="${tag}"></span>`).join('')}
+                  ${key.tags
+                    .map((tag) => `<span class="tag-badge">Category: ${escapeHtml(tag)}</span>`)
+                    .join('')}
                 </div>
               `
               : ''
           }
-          ${key.notes ? `<p style="margin-top: 10px; font-size: 14px;">${escapeHtml(key.notes)}</p>` : ''}
+          ${key.notes ? `<p style="margin-top: 10px; font-size: 14px;">Note: ${escapeHtml(key.notes)}</p>` : ''}
         </div>
 
         <div class="key-item-footer">
           <div>
             <i class="fas fa-calendar-alt"></i> Created: ${formatDate(key.created)}
-            ${
-              key.lastUsed
-                ? ` | <i className="fas fa-history"></i> Last used: ${formatDate(key.lastUsed)}`
-                : ''
-            }
+            ${key.lastUsed ? ` | <i class="fas fa-history"></i> Last used: ${formatDate(key.lastUsed)}` : ''}
           </div>
           <div><i class="fas fa-shield-alt"></i> ${key.strength}</div>
         </div>
@@ -279,51 +282,72 @@ function renderKeys(filteredKeys = null) {
   });
 }
 
-// Toggle key visibility (mask/unmask)
-function toggleKeyVisibility(keyId) {
+function setKeyRevealState(keyId, revealed, button = null) {
   const keyElement = document.getElementById(`key-value-${keyId}`);
-  if (keyElement.classList.contains('key-masked')) {
-    const keyObj = apiKeys.find((k) => k.id === keyId);
-    keyElement.textContent = keyObj.key;
-    keyElement.classList.remove('key-masked');
-    keyElement.classList.add('key-revealed');
+  const keyObj = apiKeys.find((k) => k.id === keyId);
+  if (!keyElement || !keyObj) return;
+
+  keyElement.textContent = revealed
+    ? keyObj.key
+    : '∙'.repeat(keyObj.key.length > 30 ? 30 : keyObj.key.length);
+  keyElement.classList.toggle('key-masked', !revealed);
+  keyElement.classList.toggle('key-revealed', revealed);
+
+  if (button) {
+    button.textContent = revealed ? 'Hide' : 'Reveal';
   } else {
-    const keyObj = apiKeys.find((k) => k.id === keyId);
-    keyElement.textContent = '∙'.repeat(keyObj.key.length > 30 ? 30 : keyObj.key.length);
-    keyElement.classList.add('key-mask');
-    keyElement.classList.removeI('key-revealed');
+    const keyItem = keyElement.closest('.key-item');
+    const revealBtn = keyItem?.querySelector('[data-action="reveal"]');
+    if (revealBtn) {
+      revealBtn.textContent = revealed ? 'Hide' : 'Reveal';
+    }
   }
 }
 
-// Toggle key reveal with button text change
-function toggleKeyReveal(keyId, button) {
-  const keyElement = document.getElementById(`key-value${keyId}`);
-  if (keyElement.classList.contains('key-masked')) {
-    const keyObj = apiKeys.find((k) => k.id === keyId);
-    keyElement.textContent = keyObj.key;
-    keyElement.classList.remove('key-masked');
-    keyElement.classList.add('key-revealed');
-    button.textContent = 'Hide';
+// Toggle key visibility (mask/unmask)
+function toggleKeyVisibility(keyId) {
+  const keyElement = document.getElementById(`key-value-${keyId}`);
+  if (!keyElement) return;
 
-    // Update last used timestamp
+  const revealed = keyElement.classList.contains('key-masked');
+  setKeyRevealState(keyId, revealed);
+
+  if (revealed) {
     const keyIndex = apiKeys.findIndex((k) => k.id === keyId);
     if (keyIndex !== -1) {
       apiKeys[keyIndex].lastUsed = new Date().toISOString();
       saveToLocalStorage();
       updateStats();
     }
-  } else {
-    const keyObj = apiKeys.find((k) => k.id === keyId);
-    keyElement.textContent = '∙'.repeat(keyObj.key.length > 30 ? 30 : keyObj.key.length);
-    keyElement.classList.add('key-mask');
-    keyElement.classList.removeI('key-revealed');
-    button.textContent = 'Reveal';
+  }
+}
+
+// Toggle key reveal with button text change
+function toggleKeyReveal(keyId, button) {
+  const keyElement = document.getElementById(`key-value-${keyId}`);
+  if (!keyElement) return;
+
+  const revealed = keyElement.classList.contains('key-masked');
+  setKeyRevealState(keyId, revealed, button);
+
+  if (revealed) {
+    const keyIndex = apiKeys.findIndex((k) => k.id === keyId);
+    if (keyIndex !== -1) {
+      apiKeys[keyIndex].lastUsed = new Date().toISOString();
+      saveToLocalStorage();
+      updateStats();
+    }
   }
 }
 
 // Copy key to clipboard
 function copyToClipboard(keyId) {
   const keyObj = apiKeys.find((k) => k.id === keyId);
+  if (!keyObj) {
+    showToast('API Key not found', 'danger');
+    return;
+  }
+
   navigator.clipboard
     .writeText(keyObj.key)
     .then(() => {
@@ -372,7 +396,7 @@ editKeyForm.addEventListener('submit', (e) => {
   const keyCategory = document.getElementById('editKeyCategory').value;
   const keyNotes = document.getElementById('editKeyNotes').value;
 
-  const keyIndex = apiKeys.findIndex((k) => (k.id = keyId));
+  const keyIndex = apiKeys.findIndex((k) => k.id === keyId);
   if (keyIndex !== -1) {
     apiKeys[keyIndex].name = keyName;
     apiKeys[keyIndex].key = apiKey;
@@ -455,6 +479,8 @@ function updateStats() {
 
 // Show toast notification
 function showToast(message, type = 'success') {
+  if (!toast || !toastMessage) return;
+
   toastMessage.textContent = message;
   toast.className = `toast toast-${type}`;
   toast.classList.add('show');
@@ -502,9 +528,9 @@ confirmImport.addEventListener('click', () => {
       throw new Error('Invalid data format. Expected an array.');
     }
 
-    // Merge with existing keys (avoid duplicated by ID)
-    const existingIds = apiKeys((key) => key.id);
-    const newKeys = importData.filter((key) => !existingIds.includes(key.id));
+    // Merge with existing keys (avoid duplicates by ID)
+    const existingIds = apiKeys.map((key) => key.id);
+    const newKeys = importedData.filter((key) => !existingIds.includes(key.id));
 
     apiKeys = [...apiKeys, ...newKeys];
     saveToLocalStorage();
@@ -533,7 +559,7 @@ function getCategoryLabel(category) {
   return labels[category] || 'Other';
 }
 
-function formatDate(toString) {
+function formatDate(dateString) {
   const date = new Date(dateString);
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
@@ -568,6 +594,20 @@ function getKeyStrength(key) {
 
   return 'Weak';
 }
+
+// Update year in footer
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+  yearElement.setAttribute('datetime', currentYear.toString());
+  yearElement.textContent = currentYear.toString();
+}
+updateYear();
 
 // Initialize the app
 function init() {

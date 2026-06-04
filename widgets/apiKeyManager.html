@@ -7,14 +7,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
     <link rel="stylesheet" href="/widgets_style/apiKeyManager.css" />
   </head>
-  <body class="dark-theme">
+  <body>
     <div class="container">
       <header>
         <div class="logo">
           <i class="fas fa-key"></i>
           <h1>API Key Manager</h1>
         </div>
-        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+        <button class="theme-toggle" id="themeToggle" title="Light/Dark Mode">
+          <i class="fas fa-moon"></i>
+        </button>
       </header>
 
       <div class="stat-cards">
@@ -141,11 +143,16 @@
         </div>
       </div>
 
-      <footer>
+      <div class="disclaimer">
         <p>API Key Manager | Your keys are stored locally in your browser.</p>
         <p style="font-size: 12px; margin-top: 5px">
           <i class="fas fa-shield-alt"></i> This application does not transmit your API keys to any server.
         </p>
+      </div>
+
+      <footer>
+        © <time datetime="" id="year"></time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
       </footer>
     </div>
 
