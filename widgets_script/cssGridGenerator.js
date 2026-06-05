@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   cellMinInput.addEventListener('input', function () {
     cellMinHeight = parseInt(this.value);
-    cellMinValue.textContent = `${cellMinHeight}`;
+    cellMinValue.textContent = `${cellMinHeight}px`;
     updateGrid();
   });
 
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   removeRowBtn.addEventListener('click', () => {
-    rows = Math.min(12, rows - 1);
+    rows = Math.max(1, rows - 1);
     rowsInput.value = rows;
     updateGrid();
   });
@@ -116,10 +116,10 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   removeColBtn.addEventListener('click', () => {
-    cols = Math.min(12, cols - 1);
+    cols = Math.max(1, cols - 1);
+    colsInput.value = cols;
     updateGrid();
   });
-
   // Preset buttons
   presetBtns.forEach((btn) => {
     btn.addEventListener('click', function () {
@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function getGridTemplate() {
     switch (gridType) {
       case 'static':
-        return `repeat(${rows}, ${cellMinHeight}px) / repeat(${cols}), ${cellMinHeight}px)`;
+        return `repeat(${rows}, ${cellMinHeight}px) / repeat(${cols}, ${cellMinHeight}px)`;
       case 'flexible':
         return `repeat(${rows}, 1fr) / repeat(${cols}, 1fr)`;
       case 'auto':
@@ -200,13 +200,14 @@ document.addEventListener('DOMContentLoaded', function () {
   // Generate HTML, CSS, and combined code
   function generateCode() {
     // HTML code
-    let html = `<div class="grid-container">\n;`;
+    let html = `<div class="grid-container">\n`;
 
     for (let i = 0; i < rows * cols; i++) {
       const row = Math.floor(i / cols) + 1;
       const col = (i % cols) + 1;
       html += `   <div class="grid-item">Item ${row}-${col}</div>\n`;
     }
+    html += `</div>`;
 
     // CSS code
     let css = '.grid-container {\n';
@@ -214,18 +215,19 @@ document.addEventListener('DOMContentLoaded', function () {
     css += `   grid-template: ${getGridTemplate()};\n`;
     css += `   gap: ${gap}px;\n`;
     css += `   align-items: ${alignItems};\n`;
-    css += `   justify-items: ${justifyItems}\n`;
+    css += `   justify-items: ${justifyItems};\n`;
     css += `}\n\n`;
-    css += `grid-item {\n`;
+    css += `.grid-item {\n`;
     css += `   min-height: ${cellMinHeight}px;\n`;
     css += `   background-color: ${hexToRgba(cellColor, 0.2)};\n`;
     css += `   border: 1px solid ${cellColor};\n`;
     css += `   display: flex;\n`;
     css += `   align-items: center;\n`;
     css += `   justify-content: center;\n`;
+    css += `}\n`;
 
     // Combined code
-    const combined = `<style>\n${css}\n</style>\n\n${html}`;
+    const combined = `<style>\n${css}</style>\n\n${html}`;
 
     // Update code displays
     htmlCode.textContent = html;
@@ -260,8 +262,79 @@ document.addEventListener('DOMContentLoaded', function () {
     const codeElement = document.getElementById(`${tabName}-code`);
     const code = codeElement.textContent;
 
-    navigator.clipboard.writeText(cede).then(() => {
+    navigator.clipboard.writeText(code).then(() => {
       showNotification();
     });
   }
+
+  // Export code as file
+  function exportCode() {
+    const activeTab = document.querySelector('.code-tab.active');
+    const tabName = activeTab.dataset.tab;
+    const codeElement = document.getElementById(`${tabName}-code`);
+    const code = codeElement.textContent;
+
+    let extension;
+    let mimeType;
+    switch (tabName) {
+      case 'html':
+        extension = 'html';
+        mimeType = 'text/html';
+        break;
+      case 'css':
+        extension = 'css';
+        mimeType = 'text/css';
+        break;
+      default:
+        extension = 'html';
+        mimeType = 'text/html';
+    }
+
+    const blob = new Blob([code], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `grid-layout.${extension}`;
+    document.body.appendChild(a);
+    a.click();
+
+    setTimeout(() => {
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }, 500);
+  }
+
+  // Show notification
+  function showNotification() {
+    notification.classList.add('show');
+    setTimeout(() => {
+      notification.classList.remove('show');
+    }, 2200);
+  }
+
+  // Convert hex to rgba
+  function hexToRgba(hex, alpha) {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  }
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
+
+  // Initialize
+  updateGrid();
 });
