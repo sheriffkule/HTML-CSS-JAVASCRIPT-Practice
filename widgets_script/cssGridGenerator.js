@@ -163,4 +163,105 @@ document.addEventListener('DOMContentLoaded', function () {
         return `repeat(${rows}, 1fr) / repeat(${cols}, 1fr)`;
     }
   }
+
+  // Update grid preview
+  function updateGrid() {
+    // Clear existing grid
+    gridPreview.innerHTML = '';
+
+    // Set grid styles
+    gridPreview.style.gap = `${gap}px`;
+    gridPreview.style.alignItems = alignItems;
+    gridPreview.style.justifyItems = justifyItems;
+    gridPreview.style.gridTemplate = getGridTemplate();
+
+    // Create cells
+    const cellCount = rows * cols;
+    for (let i = 0; i < cellCount; i++) {
+      const cell = document.createElement('div');
+      cell.className = 'grid-cell';
+      cell.style.backgroundColor = hexToRgba(cellColor, 0.2);
+      cell.style.borderColor = cellColor;
+      cell.style.minHeight = `${cellMinHeight}px`;
+
+      if (showCellText) {
+        const row = Math.floor(i / cols) + 1;
+        const col = (i % cols) + 1;
+        cell.textContent = `${row}-${col}`;
+      }
+
+      gridPreview.appendChild(cell);
+    }
+
+    // Generate code
+    generateCode();
+  }
+
+  // Generate HTML, CSS, and combined code
+  function generateCode() {
+    // HTML code
+    let html = `<div class="grid-container">\n;`;
+
+    for (let i = 0; i < rows * cols; i++) {
+      const row = Math.floor(i / cols) + 1;
+      const col = (i % cols) + 1;
+      html += `   <div class="grid-item">Item ${row}-${col}</div>\n`;
+    }
+
+    // CSS code
+    let css = '.grid-container {\n';
+    css += `   display: grid;\n`;
+    css += `   grid-template: ${getGridTemplate()};\n`;
+    css += `   gap: ${gap}px;\n`;
+    css += `   align-items: ${alignItems};\n`;
+    css += `   justify-items: ${justifyItems}\n`;
+    css += `}\n\n`;
+    css += `grid-item {\n`;
+    css += `   min-height: ${cellMinHeight}px;\n`;
+    css += `   background-color: ${hexToRgba(cellColor, 0.2)};\n`;
+    css += `   border: 1px solid ${cellColor};\n`;
+    css += `   display: flex;\n`;
+    css += `   align-items: center;\n`;
+    css += `   justify-content: center;\n`;
+
+    // Combined code
+    const combined = `<style>\n${css}\n</style>\n\n${html}`;
+
+    // Update code displays
+    htmlCode.textContent = html;
+    cssCode.textContent = css;
+    combinedCode.textContent = combined;
+
+    // Update code metrics
+    updateCodeMetrics(combined);
+  }
+
+  // Update code size and line count
+  function updateCodeMetrics(code) {
+    const size = new Blob([code]).size;
+    const lines = code.split('\n').length;
+
+    // Format size
+    let sizeText;
+    if (size < 1024) {
+      sizeText = `${size} bytes`;
+    } else {
+      sizeText = `${(size / 1024).toFixed(2)} KB`;
+    }
+
+    codeSize.textContent = sizeText;
+    codeLines.textContent = `${lines} lines`;
+  }
+
+  // Copy code to clipboard
+  function copyCode() {
+    const activeTab = document.querySelector('.code-tab.active');
+    const tabName = activeTab.dataset.tab;
+    const codeElement = document.getElementById(`${tabName}-code`);
+    const code = codeElement.textContent;
+
+    navigator.clipboard.writeText(cede).then(() => {
+      showNotification();
+    });
+  }
 });
