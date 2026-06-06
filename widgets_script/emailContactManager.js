@@ -177,6 +177,140 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
-    contactModal.classList.add('active')
+    contactModal.classList.add('active');
+  }
+
+  function handleContactSubmit(e) {
+    e.preventDefault();
+
+    const contactData = {
+      id: isEditing ? currentContactId : generateId(),
+      name: document.getElementById('name').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      phone: document.getElementById('phone').value.trim(),
+      company: document.getElementById('company').value.trim(),
+      notes: document.getElementById('notes').value.trim(),
+      favorite: document.getElementById('favorite').checked,
+      tags: Array.from(selectedTagsContainer.children).map((el) => el.dataset.tagId),
+      dateAdded: isEditing
+        ? contacts.find((c) => c.id === currentContactId).dateAdded
+        : new Date().toISOString(),
+    };
+
+    if (isEditing) {
+      // Update existing contact
+      contacts = contacts.map((contact) => (contact.id === currentContactId ? contactData : contact));
+    } else {
+      // Add new contact
+      contacts.push(contactData);
+    }
+
+    saveContacts();
+    renderContacts();
+    contactModal.classList.remove('active');
+    checkEmptyState();
+  }
+
+  function openDetailsModal(contact) {
+    const detailsTitle = document.getElementById('details-title');
+    const detailsName = document.getElementById('details-name');
+    const detailsAvatar = document.getElementById('details-avatar');
+    const detailsEmail = document.getElementById('details-email');
+    const detailsPhone = document.getElementById('details-phone');
+    const detailsCompany = document.getElementById('details-company');
+    const detailsNotes = document.getElementById('details-notes');
+    const detailsDate = document.getElementById('details-date');
+    const detailsTags = document.getElementById('details-tags');
+    const favoriteBtn = document.querySelector('.favorite-btn');
+    const editBtn = document.querySelector('.edit-btn');
+    const deleteBtn = document.querySelector('.delete-btn');
+    const emailBtn = document.querySelector('.email.btn');
+
+    // Set contact details
+    detailsTitle.textContent = `${contact.name}'s Details`;
+    detailsName.textContent = contact.name;
+    detailsAvatar.textContent = getInitials(contact.name);
+    detailsEmail.textContent = contact.email;
+    detailsPhone.textContent = contact.phone || 'Not provided';
+    detailsCompany.textContent = contact.company || 'Not provided';
+    detailsNotes.textContent = contact.notes || 'No notes available';
+    detailsDate.textContent = formatDate(contact.dateAdded);
+
+    // Set favorite button state
+    favoriteBtn.innerHTML = contact.favorite ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>';
+    favoriteBtn.classList.toggle('favored', contact.favorite);
+
+    // Clear and render tags
+    detailsTags.innerHTML = '';
+    if (contact.tags && contact.tags.length > 0) {
+      contact.tags.forEach((tagId) => {
+        const tag = availableTags.find((t) => t.id === tagId);
+        if (tag) {
+          const tagEl = document.createElement('span');
+          tagEl.className = 'tag';
+          tagEl.innerHTML = `<i class="fas fa-circle" style="color: ${tag.color}"></i> ${tag.name}`;
+          detailsTags.appendChild(tagEl);
+        }
+      });
+    } else {
+      detailsTags.innerHTML = '<span class="no-tags">No tags</span>';
+    }
+
+    // Set up button event listeners
+    favoriteBtn.onclick = () => toggleFavorite(contact.id);
+    editBtn.onclick = () => {
+      detailsModal.classList.remove('active');
+      openContactModal();
+    };
+    deleteBtn.onclick = () => confirmDelete(contact.id);
+    emailBtn.onclick = () => {
+      window.location.href = `mailto:${contact.email}`;
+    };
+
+    detailsModal.classList.add('active');
+  }
+
+  function toggleFavorite(contactId) {
+    contacts = contacts.map((contact) =>
+      contact.id === contactId ? { ...contact, favorite: !contact.favorite } : contact,
+    );
+    saveContacts();
+    renderContacts();
+
+    // Update the favorite button in the details modal if open
+    const favoriteBtn = document.querySelector('.favorite-btn');
+    if (favoriteBtn) {
+      const contact = contacts.find((c) => c.id === contactId);
+      favoriteBtn.innerHTML = contact.favorite
+        ? '<i class="fas fa-star"></i>'
+        : '<i class="far fa-star"></i>';
+      favoriteBtn.classList.toggle('favored', contact.favorite);
+    }
+  }
+
+  function confirmDelete(contactId) {
+    if (confirm('Are you sure you want to delete this contact?')) {
+      contacts = contacts.filter((contact) => contact.id === contactId);
+      saveContacts();
+      renderContacts();
+      detailsModal.classList.remove('active');
+      checkEmptyState();
+    }
+  }
+
+  // Tags functions
+  function showTagsDropdown() {
+    renderTagsDropdown(availableTags);
+    tagsDropdown.classList.add('active');
+  }
+
+  function filterTagsDropdown() {
+    const searchTerm = tagsInput.value.toLowerCase();
+    const filteredTags = availableTags.filter(
+      (tag) =>
+        tag.name.toLowerCase().includes(searchTerm) &&
+        !Array.from(selectedTagsContainer.children).some((el) => el.dataset.tagId === tag.id),
+    );
+    renderTagsDropdown(filteredTags);
   }
 });
