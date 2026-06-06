@@ -155,6 +155,7 @@ body {
 
     &:hover {
         background-color: var(--bg-light-secondary);
+        transform: translateX(4px);
     }
     &.active {
         background-color: var(--primary-light);
