@@ -179,3 +179,33 @@ body {
     font-size: 0.75rem;
     font-weight: 600;
 }
+
+.tags-section {
+    margin-top: 2rem;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+
+    h3 {
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+    }
+}
+
+.contacts-section {
+    flex: 1;
+    padding: 1.5rem 2rem;
+    background-color: var(--bg-light-secondary);
+}
+
+.contacts-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}

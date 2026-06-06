@@ -7,66 +7,244 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
     <link rel="stylesheet" href="/widgets_style/emailContactManager.css" />
   </head>
-  <body>
-    <body class="dark-mode">
-      <div class="app-container">
-        <header class="app-header">
-          <div class="header-content">
-            <h1><i class="fas fa-address-book"></i> Email Contact Manager</h1>
-            <div class="header-actions">
-              <button class="icon-button" id="theme-toggle" title="Toggle Theme">
-                <i class="fas fa-moon"></i>
+  <body class="dark-mode">
+    <div class="app-container">
+      <header class="app-header">
+        <div class="header-content">
+          <h1><i class="fas fa-address-book"></i> Email Contact Manager</h1>
+          <div class="header-actions">
+            <button class="icon-button" id="theme-toggle" title="Toggle Theme">
+              <i class="fas fa-moon"></i>
+            </button>
+            <button class="primary-buttonF" id="add-contact-btn">
+              <i class="fas fa-plus"></i> Add Contact
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div class="main-content">
+        <aside class="sidebar">
+          <div class="sidebar-search">
+            <div class="search-container">
+              <i class="fas fa-search"></i>
+              <input type="text" id="search-contacts" placeholder="Search contacts..." />
+            </div>
+          </div>
+
+          <div class="sidebar-menu">
+            <ul>
+              <li class="active" data-filter="all">
+                <i class="fas fa-user"></i> All Contact
+                <span id="all-count" class="badge">0</span>
+              </li>
+              <li data-filter="favorites">
+                <i class="fas fa-star"></i> Favorites
+                <span class="badge" id="fav-count">0</span>
+              </li>
+              <li data-filter="recent"><i class="fas fa-clock"></i> Recently Added</li>
+            </ul>
+
+            <div class="tags-section">
+              <div class="section-header">
+                <h3>Tags</h3>
+                <button class="icon-button small" id="add-tag-btn">
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+              <ul id="tags-list">
+                <li data-filter="tag-work"><i class="fas fa-circle" style="color: #4caf50"></i> Work</li>
+                <li data-filter="tag-family"><i class="fas fa-circle" style="color: #2196f3"></i> Family</li>
+                <li data-filter="tag-friends">
+                  <i class="fas fa-circle" style="color: #ff9800"></i> Friends
+                </li>
+              </ul>
+            </div>
+          </div>
+        </aside>
+
+        <main class="contacts-section">
+          <div class="contacts-header">
+            <h2 id="contacts-title">All Contacts</h2>
+            <div class="contacts-actions">
+              <div class="sort-options">
+                <select id="sort-contacts">
+                  <option value="name-asc">Name (A-Z)</option>
+                  <option value="name-desc">Name (Z-A)</option>
+                  <option value="date-asc">Date Added (Oldest)</option>
+                  <option value="date-desc">Date Added (Newest)</option>
+                </select>
+              </div>
+              <button class="secondary-btn" id="bulk-actions-btn" disabled>
+                <i class="fas fa-tasks"></i> Bulk Actions
               </button>
-              <button class="primary-buttonF" id="add-contact-btn">
+            </div>
+          </div>
+
+          <div class="contacts-grid" id="contacts-container">
+            <!-- Contacts will be dynamically inserted here -->
+            <div class="empty-state">
+              <i class="fas fa-address-book"></i>
+              <h3>No contacts found</h3>
+              <p>Add your first contact to get started</p>
+              <button class="primary-button" id="empty-add-btn">
                 <i class="fas fa-plus"></i> Add Contact
               </button>
             </div>
           </div>
-        </header>
-
-        <main class="main-content">
-          <aside class="sidebar">
-            <div class="sidebar-search">
-              <div class="search-container">
-                <i class="fas fa-search"></i>
-                <input type="text" id="search-contacts" placeholder="Search contacts..." />
-              </div>
-            </div>
-
-            <div class="sidebar-menu">
-              <ul>
-                <li class="active" data-filter="all">
-                  <i class="fas fa-user"></i> All Contact
-                  <span id="all-count" class="badge">0</span>
-                </li>
-                <li data-filter="favorites">
-                  <i class="fas fa-star"></i> Favorites
-                  <span class="badge" id="fav-count">0</span>
-                </li>
-                <li data-filter="recent"><i class="fas fa-clock"></i> Recently Added</li>
-              </ul>
-
-              <div class="tags-section">
-                <div class="section-header">
-                  <h3>Tags</h3>
-                  <button class="icon-button small" id="add-tag-btn">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
-                <ul id="tags-list">
-                  <li data-filter="tag-work"><i class="fas fa-circle" style="color: #4caf50"></i> Work</li>
-                  <li data-filter="tag-family">
-                    <i class="fas fa-circle" style="color: #2196f3"></i> Family
-                  </li>
-                  <li data-filter="tag-friends">
-                    <i class="fas fa-circle" style="color: #ff9800"></i> Friends
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </aside>
         </main>
       </div>
-    </body>
+    </div>
+
+    <div class="modal" id="contact-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="modal-title">Add New Contact</h3>
+          <button class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="contact-form">
+            <input type="hidden" id="contact-id" />
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" />
+            </div>
+            <div class="form-group">
+              <label for="company">Company</label>
+              <input type="text" class="company" />
+            </div>
+            <div class="form-group">
+              <label for="notes">Notes</label>
+              <textarea id="notes" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <label>Tags</label>
+              <div class="tags-input-container">
+                <div class="selected-tags" id="selected-tags"></div>
+                <input type="text" id="tags-input" placeholder="Add tags..." />
+                <div class="tags-dropdown" id="tags-dropdown"></div>
+              </div>
+            </div>
+            <div class="form-group checkbox-group">
+              <input type="checkbox" id="favorite" />
+              <label for="favorite">Mark as favorite</label>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="secondary-button close-button">Close</button>
+          <button type="submit" form="contact-form" class="primary-button">Save Contact</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="details-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="details-title">Contact Details</h3>
+          <button class="close-button">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="contact-details-header">
+            <div class="contact-avatar" id="details-avatar">
+              <span>JD</span>
+            </div>
+            <div class="contact-name-actions">
+              <h2 id="details-name">John Doe</h2>
+              <div class="contact-actions">
+                <button class="icon-button favorite-btn" title="Toggle Favorite">
+                  <i class="far fa-star"></i>
+                </button>
+                <button class="icon-button edit-btn" title="Edit">
+                  <i class="fas fa-pencil-alt"></i>
+                </button>
+                <button class="icon-button delete-btn" title="Delete">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-details-info">
+            <div class="detail-item">
+              <i class="fas fa-envelope"></i>
+              <div>
+                <span class="detail-label">Email</span>
+                <span class="detail-value" id="details-email">john@example.com</span>
+              </div>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-phone"></i>
+              <span class="detail-label">Phone</span>
+              <span class="detail-value" id="details-phone">+1 (555) 123-4567</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-building"></i>
+              <span class="detail-label">Company</span>
+              <span class="detail-value" id="details-company">Acme Inc</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-tags"></i>
+              <span class="detail-label">Tags</span>
+              <span class="detail-value" id="details-tags"></span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-calendar-plus"></i>
+              <span class="detail-label">Added</span>
+              <span class="detail-value" id="details-date">June 15, 2026</span>
+            </div>
+            <div class="detail-item notes-item">
+              <i class="fas fa-sticky-note"></i>
+              <div>
+                <div class="detail-label">Notes</div>
+                <p class="detail-value" id="details-notes">Important client for the upcoming project.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="secondary-button close-button">Close</button>
+          <button class="primary-button email-btn"><i class="fas fa-paper-plane"></i> Send Email</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="bulk-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Bulk Actions</h3>
+          <button class="close-button">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="bulk-options">
+            <button class="bulk-option" data-action="add-tag"><i class="fas fa-tag"></i> Add Tag</button>
+            <button class="bulk-option" data-action="remove-tag">
+              <i class="fas fa-tag"></i> Remove Tag
+            </button>
+            <button class="bulk-option" data-action="favorite">
+              <i class="fas fa-star"></i> Mark as Favorite
+            </button>
+            <button class="bulk-option" data-action="unfavorite">
+              <i class="fas fa-star"></i> Remove Favorite
+            </button>
+            <button class="bulk-option" data-action="delete">
+              <i class="fas fa-trash"></i> Delete Contact
+            </button>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="secondary-button close-button">Cancel</button>
+          <button class="primary-button" id="apply-bulk-actions" disabled>Apply Actions</button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
