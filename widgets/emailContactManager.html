@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Email Contact Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/emailContactManager.css" />
+  </head>
+  <body>
+    <body class="dark-mode">
+      <div class="app-container">
+        <header class="app-header">
+          <div class="header-content">
+            <h1><i class="fas fa-address-book"></i> Email Contact Manager</h1>
+            <div class="header-actions">
+              <button class="icon-button" id="theme-toggle" title="Toggle Theme">
+                <i class="fas fa-moon"></i>
+              </button>
+              <button class="primary-buttonF" id="add-contact-btn">
+                <i class="fas fa-plus"></i> Add Contact
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <main class="main-content">
+          <aside class="sidebar">
+            <div class="sidebar-search">
+              <div class="search-container">
+                <i class="fas fa-search"></i>
+                <input type="text" id="search-contacts" placeholder="Search contacts..." />
+              </div>
+            </div>
+
+            <div class="sidebar-menu">
+              <ul>
+                <li class="active" data-filter="all">
+                  <i class="fas fa-user"></i> All Contact
+                  <span id="all-count" class="badge">0</span>
+                </li>
+                <li data-filter="favorites">
+                  <i class="fas fa-star"></i> Favorites
+                  <span class="badge" id="fav-count">0</span>
+                </li>
+                <li data-filter="recent"><i class="fas fa-clock"></i> Recently Added</li>
+              </ul>
+
+              <div class="tags-section">
+                <div class="section-header">
+                  <h3>Tags</h3>
+                  <button class="icon-button small" id="add-tag-btn">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+                <ul id="tags-list">
+                  <li data-filter="tag-work"><i class="fas fa-circle" style="color: #4caf50"></i> Work</li>
+                  <li data-filter="tag-family">
+                    <i class="fas fa-circle" style="color: #2196f3"></i> Family
+                  </li>
+                  <li data-filter="tag-friends">
+                    <i class="fas fa-circle" style="color: #ff9800"></i> Friends
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </aside>
+        </main>
+      </div>
+    </body>
+  </body>
+</html>
