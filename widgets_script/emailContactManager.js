@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
     { id: 'tag-business', name: 'Business', color: '#9c27b0' },
     { id: 'tag-important', name: 'Important', color: '#f44336' },
   ];
+  import { favorite } from '../projects/stockPlatform/js/favorite';
 
   // Initialize the app
   function init() {
@@ -137,5 +138,45 @@ document.addEventListener('DOMContentLoaded', function () {
       if (e.target === detailsModal) detailsModal.classList.remove('active');
       if (e.target === bulkModal) bulkModal.classList.remove('active');
     });
+  }
+
+  // Theme functions
+  function toggleTheme() {
+    const currentTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+  }
+
+  function setTheme(theme) {
+    document.body.classList.toggle('dark-mode', theme === 'dark');
+    localStorage.setItem('theme', theme);
+
+    const icon = themeToggle.querySelector('i');
+    icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+  }
+
+  function openContactModal(contact = null) {
+    isEditing = contact !== null;
+    currentContactId = contact ? contact.id : null;
+
+    modalTitle.textContent = isEditing ? 'Edit Contact' : 'Add New Contact';
+    contactIdInput.value = isEditing ? contact.id : '';
+    document.getElementById('name').value = isEditing ? contact.name : '';
+    document.getElementById('email').value = isEditing ? contact.email : '';
+    document.getElementById('phone').value = isEditing ? contact.phone || '' : '';
+    document.getElementById('company').value = isEditing ? contact.company || '' : '';
+    document.getElementById('notes').value = isEditing ? contact.notes || '' : '';
+    document.getElementById('favorite').checked = isEditing ? contact.favorite || false : false;
+
+    // Clear and render selected tags
+    selectedTagsContainer.innerHTML = '';
+    if (isEditing && contact.tags) {
+      contact.tags.forEach((tagId) => {
+        const tag = availableTags.find((t) => t.id === tagId);
+        if (tag) addTagToSelected(tag);
+      });
+    }
+
+    contactModal.classList.add('active')
   }
 });

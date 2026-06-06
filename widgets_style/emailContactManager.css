@@ -210,3 +210,121 @@ body {
     align-items: center;
     margin-bottom: 1.5rem;
 }
+
+.contacts-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.sort-options select {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--bg-light);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+    width: max-content;
+
+    &:is(:focus, :focus-within) {
+        outline: none;
+        border-color: var(--primary);
+    }
+}
+
+select,
+::picker(select) {
+  appearance: base-select;
+  cursor: pointer;
+}
+
+::picker(select) {
+  border-radius: 8px;
+  border: none;
+}
+
+select::picker-icon {
+  color: var(--primary);
+  transition: 0.3s rotate;
+}
+
+select:open::picker-icon {
+  rotate: 180deg;
+  color: var(--warning);
+}
+
+select:open {
+    background: var(--gray);
+}
+
+option {
+  border: 1px solid #bbb;
+  background: var(--primary);
+  padding: 2px 0 2px 12px;
+  color: var(--bg-dark);
+  padding-right: 18px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+option:hover,
+option:focus {
+  background: var(--primary-light);
+  color: white;
+}
+
+option:checked {
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: var(--bg-light-secondary);
+  background-color: var(--primary);
+}
+
+option::checkmark {
+  color: var(--success);
+  font-size: 1.5rem;
+}
+
+.contacts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.contact-card {
+    background-color: var(--bg-light);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px rgb(0 0 0 / 0.12);
+    }
+    &.selected {
+        border: 2px solid var(--primary);
+    }
+    &.selected::after {
+        content: '\f00c';
+        font-family: 'Font Awesome 7 Free';
+        font-weight: 900;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: var(--primary);
+        color: white;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+    }
+}
