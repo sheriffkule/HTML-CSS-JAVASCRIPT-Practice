@@ -384,6 +384,17 @@ option::checkmark {
     }
 }
 
+.contact-checkbox {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    input {
+        accent-color: var(--success);
+    }
+}
+
 .favorite-btn {
     color: var(--warning);
     background: none;
@@ -403,7 +414,7 @@ option::checkmark {
     padding: 4rem 2rem;
     color: var(--text-secondary);
 
-    i {
+    & i:not(button i) {
         font-size: 3rem;
         margin-bottom: 1rem;
         color: var(--border-color);
@@ -415,6 +426,9 @@ option::checkmark {
     }
     p {
         margin-bottom: 1.5rem;
+    }
+    button {
+        justify-self: center;
     }
 }
 
@@ -477,7 +491,8 @@ option::checkmark {
     transition: var(--transition);
 
     &:hover {
-        color: var(--text-primary);
+        color: var(--danger);
+        transform: scale(1.2);
     }
 }
 
@@ -581,7 +596,7 @@ option::checkmark {
     display: block;
     font-size: 0.875rem;
     color: var(--text-secondary);
-    margin-bottom: 0.25rem;
+    /* margin-bottom: 0.25rem; */
 }
 
 .detail-value {
@@ -671,6 +686,7 @@ option::checkmark {
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
     background: var(--bg-light-secondary);
+    color: var(--text-primary);
     cursor: pointer;
     transition: var(--transition);
     text-align: center;
@@ -689,4 +705,129 @@ option::checkmark {
     i {
         font-size: 1.5rem;
     }
+}
+
+.primary-button {
+    background-color: var(--primary);
+    color: white;
+    border: 1px solid var(--border-color);
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 500;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &:hover {
+        background-color: var(--secondary);
+        transform: translateY(-2px);
+    }
+    i {
+        transition: var(--transition);
+    }
+    &:hover i {
+        transform: rotate(90deg);
+    }
+}
+
+.secondary-button {
+    background-color: var(--bg-light-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &:hover {
+        background-color: var(--bg-light);
+        transform: translateY(-2px);
+    }
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    transition: var(--transition);
+
+    &:hover {
+        background-color: var(--bg-light-secondary);
+    }
+    &.small {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media (width < 992px) {
+    .sidebar {
+        width: 240px;
+    }
+}
+
+@media (width < 768px) {
+    .main-content {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        border-right: none;
+        border-bottom: 2px solid var(--border-color);
+        padding: 1rem;
+    }
+    .contacts-section {
+        padding: 1.5rem;
+    }
+    .contacts-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+    .modal-content {
+        max-width: 90%;
+    }
+}
+
+@media (width < 576px) {
+    .app-header {
+        padding: 1rem;
+    }
+    .header-content h1 {
+        font-size: 1.25rem;
+    }
+    .contact-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .bulk-options {
+        grid-template-columns: 1fr;
+    }
+}
+
+::-webkit-scrollbar {
+    background-color: var(--bg-dark);
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--bg-dark-secondary);
+    border-radius: var(--border-radius);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(from var(--bg-dark-secondary) h s 30%);
 }

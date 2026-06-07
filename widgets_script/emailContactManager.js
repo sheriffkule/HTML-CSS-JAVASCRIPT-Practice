@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const contactsTitle = document.getElementById('contacts-title');
   const allCount = document.getElementById('all-count');
   const favCount = document.getElementById('fav-count');
-  const sidebarItems = document.querySelectorAll('sidebar-menu li');
+  const sidebarMenu = document.querySelector('.sidebar-menu');
+  const tagsList = document.getElementById('tags-list');
   const contactForm = document.getElementById('contact-form');
   const contactModal = document.getElementById('contact-modal');
   const detailsModal = document.getElementById('details-modal');
@@ -32,17 +33,19 @@ document.addEventListener('DOMContentLoaded', function () {
   let currentContactId = null;
 
   // Available tags
-  const availableTags = [
-    { id: 'tag-work', name: 'Work', color: '#4caf50' },
-    { id: 'tag-family', name: 'Family', color: '#2196f3' },
-    { id: 'tag-friends', name: 'Friends', color: '#ff9800' },
-    { id: 'tag-business', name: 'Business', color: '#9c27b0' },
-    { id: 'tag-important', name: 'Important', color: '#f44336' },
-  ];
-  import { favorite } from '../projects/stockPlatform/js/favorite';
+  let availableTags =
+    JSON.parse(localStorage.getItem('contactTags')) ||
+    [
+      { id: 'tag-work', name: 'Work', color: '#4caf50' },
+      { id: 'tag-family', name: 'Family', color: '#2196f3' },
+      { id: 'tag-friends', name: 'Friends', color: '#ff9800' },
+      { id: 'tag-business', name: 'Business', color: '#9c27b0' },
+      { id: 'tag-important', name: 'Important', color: '#f44336' },
+    ];
 
   // Initialize the app
   function init() {
+    renderSidebarTags();
     renderContacts();
     updateCounts();
     setupEventListeners();
@@ -50,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Set theme from localStorage or prefer-color-scheme
     const savedTheme =
-      localStorage.getItem('them') ||
+      localStorage.getItem('theme') ||
       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     setTheme(savedTheme);
   }
@@ -77,15 +80,16 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     //  Sidebar filters
-    sidebarItems.forEach((item) => {
-      item.addEventListener('click', () => {
-        sidebarItems.forEach((i) => i.classList.remove('active'));
-        item.classList.add('active');
-        selectedFilter = item.dataset.filter;
-        contactsTitle.textContent = item.textContent.trim();
-        renderContacts();
-        checkEmptyState();
-      });
+    sidebarMenu.addEventListener('click', (event) => {
+      const item = event.target.closest('li');
+      if (!item) return;
+
+      sidebarMenu.querySelectorAll('li').forEach((i) => i.classList.remove('active'));
+      item.classList.add('active');
+      selectedFilter = item.dataset.filter;
+      contactsTitle.textContent = item.textContent.trim();
+      renderContacts();
+      checkEmptyState();
     });
 
     // Bulk actions
@@ -106,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
     contactForm.addEventListener('submit', handleContactSubmit);
 
     // Tags input
-    tagsInput.addEventListener('focus', showTagsDropdown);
+    tagsInput.addEventListener('click', showTagsDropdown);
     tagsInput.addEventListener('input', filterTagsDropdown);
     tagsInput.addEventListener('keydown', handleTagInputKeydown);
 
@@ -119,8 +123,15 @@ document.addEventListener('DOMContentLoaded', function () {
           name: tagName.trim(),
           color: getRandomColor(),
         };
-        availableTags.push(newTag);
-        renderTagsDropdown(availableTags);
+        const existingTag = availableTags.find((tag) => tag.id === newTag.id);
+        if (!existingTag) {
+          availableTags.push(newTag);
+          saveTags();
+          renderTagsDropdown(availableTags);
+          renderSidebarTags();
+        } else {
+          alert('Tag already exists.');
+        }
       }
     });
 
@@ -221,10 +232,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const detailsNotes = document.getElementById('details-notes');
     const detailsDate = document.getElementById('details-date');
     const detailsTags = document.getElementById('details-tags');
-    const favoriteBtn = document.querySelector('.favorite-btn');
-    const editBtn = document.querySelector('.edit-btn');
-    const deleteBtn = document.querySelector('.delete-btn');
-    const emailBtn = document.querySelector('.email.btn');
+    const favoriteBtn = detailsModal.querySelector('.favorite-btn');
+    const editBtn = detailsModal.querySelector('.edit-btn');
+    const deleteBtn = detailsModal.querySelector('.delete-btn');
+    const emailBtn = detailsModal.querySelector('.email-btn');
 
     // Set contact details
     detailsTitle.textContent = `${contact.name}'s Details`;
@@ -260,7 +271,7 @@ document.addEventListener('DOMContentLoaded', function () {
     favoriteBtn.onclick = () => toggleFavorite(contact.id);
     editBtn.onclick = () => {
       detailsModal.classList.remove('active');
-      openContactModal();
+      openContactModal(contact);
     };
     deleteBtn.onclick = () => confirmDelete(contact.id);
     emailBtn.onclick = () => {
@@ -278,7 +289,7 @@ document.addEventListener('DOMContentLoaded', function () {
     renderContacts();
 
     // Update the favorite button in the details modal if open
-    const favoriteBtn = document.querySelector('.favorite-btn');
+    const favoriteBtn = detailsModal.querySelector('.favorite-btn');
     if (favoriteBtn) {
       const contact = contacts.find((c) => c.id === contactId);
       favoriteBtn.innerHTML = contact.favorite
@@ -328,7 +339,7 @@ document.addEventListener('DOMContentLoaded', function () {
     tags.forEach((tag) => {
       const tagItem = document.createElement('div');
       tagItem.className = 'tags-dropdown-item';
-      tagItem.innerHTML = `<i class="fas fa-circle" style: "color: ${tag.color}"></i> ${tag.name}`;
+      tagItem.innerHTML = `<i class="fas fa-circle" style="color: ${tag.color}"></i> ${tag.name}`;
       tagItem.addEventListener('click', () => {
         addTagToSelected(tag);
         tagsInput.value = '';
@@ -339,6 +350,15 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  function renderSidebarTags() {
+    tagsList.innerHTML = availableTags
+      .map(
+        (tag) =>
+          `<li data-filter="${tag.id}"><i class="fas fa-circle" style="color: ${tag.color}"></i> ${tag.name}</li>`,
+      )
+      .join('');
+  }
+
   function addTagToSelected(tag) {
     // Check if tag is already selected
     if (Array.from(selectedTagsContainer.children).some((el) => el.dataset.tagId === tag.id)) return;
@@ -347,8 +367,8 @@ document.addEventListener('DOMContentLoaded', function () {
     tagEl.className = 'tag-input-tag';
     tagEl.dataset.tagId = tag.id;
     tagEl.innerHTML = `
-      <i class="fas fa-circle" style="color: #{tag.color}"></i> ${tag.name}
-      <button type="button">&times:</button>
+      <i class="fas fa-circle" style="color: ${tag.color}"></i> ${tag.name}
+      <button type="button">&times;</button>
     `;
 
     tagEl.querySelector('button').addEventListener('click', (e) => {
@@ -374,11 +394,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const existingTag = availableTags.find((t) => t.id === newTag.id);
         if (!existingTag) {
           availableTags.push(newTag);
+          saveTags();
+          renderSidebarTags();
         }
 
         addTagToSelected(existingTag || newTag);
         tagsInput.value = '';
-        tagsDropdown.classList.add('active');
+        tagsDropdown.classList.remove('active');
       }
     } else if (e.key === 'Backspace' && tagsInput.value === '') {
       // Remove last tag when backspace is pressed on empty input
@@ -420,7 +442,7 @@ document.addEventListener('DOMContentLoaded', function () {
           contacts = contacts.map((contact) => {
             if (selectedContacts.includes(contact.id)) {
               const tags = contact.tags || [];
-              if (!tags.includes(ta.id)) {
+              if (!tags.includes(tag.id)) {
                 return { ...contact, tags: [...tags, tag.id] };
               }
             }
@@ -435,7 +457,7 @@ document.addEventListener('DOMContentLoaded', function () {
           const tagId = `tag-${tagToRemove.toLowerCase().replace(/\s+/g, '-')}`;
           contacts = contacts.map((contact) => {
             if (selectedContacts.includes(contact.id)) {
-              const tags = contact.tag || [];
+              const tags = contact.tags || [];
               return { ...contact, tags: tags.filter((t) => t !== tagId) };
             }
             return contact;
@@ -458,7 +480,7 @@ document.addEventListener('DOMContentLoaded', function () {
       case 'delete':
         if (confirm(`Are you sure you want to delete ${selectedContacts.length} contact(s)?`)) {
           contacts = contacts.filter((contact) => !selectedContacts.includes(contact.id));
-          selectedContacts = [[]];
+          selectedContacts = [];
         }
         break;
     }
@@ -549,8 +571,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 <i class="${contact.favorite ? 'fas' : 'far'} fa-star"></i>
               </button>
             </h3>
-            <a href="mailto:${contact.mail}" class="contact-email">${contact.email}</a>
-            ${contact.company ? `<p className="contact-company">${contact.company}</p>` : ''}
+            <a href="mailto:${contact.email}" class="contact-email">${contact.email}</a>
+            ${contact.company ? `<p class="contact-company">${contact.company}</p>` : ''}
             ${
               contact.tags && contact.tags.length > 0
                 ? `
@@ -561,10 +583,10 @@ document.addEventListener('DOMContentLoaded', function () {
                         return tag
                           ? `
                               <span class="tag">
-                                <i class="fas fa-circle" style="${tag.color}"></i> ${tag.name}
+                                <i class="fas fa-circle" style="color: ${tag.color}"></i> ${tag.name}
                               </span>
                             `
-                          : ';';
+                          : '';
                       })
                       .join('')}
                   </div>
@@ -573,6 +595,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             <div class="contact-checkbox">
               <input type="checkbox" ${selectedContacts.includes(contact.id) ? 'checked' : ''} />
+              <span>Check for bulk edit</span>
             </div>
           `;
 
@@ -599,7 +622,73 @@ document.addEventListener('DOMContentLoaded', function () {
         toggleContactSelection(contact.id);
       });
 
+      // Allow clicking the checkbox wrapper to toggle selection
+      const checkboxWrapper = contactEl.querySelector('.contact-checkbox');
+      checkboxWrapper.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleContactSelection(contact.id);
+      });
+
       contactsContainer.appendChild(contactEl);
     });
   }
+
+  function updateCounts() {
+    const totalContacts = contacts.length;
+    const favoriteContacts = contacts.filter((contact) => contact.favorite).length;
+
+    allCount.textContent = totalContacts;
+    favCount.textContent = favoriteContacts;
+  }
+
+  function checkEmptyState() {
+    const emptyState = contactsContainer.querySelector('.empty-state');
+    if (contacts.length === 0 && !emptyState) {
+      contactsContainer.innerHTML = `
+        <div class="empty-state">
+          <i class="fas fa-address-book"></i>
+          <h3>No contacts found</h3>
+          <p>Add your first contact to get started</p>
+          <button id="empty-add-btn" class="primary-button"><i class="fas fa-plus"></i> Add Contact</button>
+        </div>
+      `;
+      document.getElementById('empty-add-btn').addEventListener('click', () => openContactModal());
+    }
+  }
+
+  // Helper functions
+  function generateId() {
+    return Date.now().toString(36) + Math.random().toString().substr(2);
+  }
+
+  function getInitials(name) {
+    return name
+      .split(' ')
+      .map((part) => part[0])
+      .join('')
+      .toUpperCase()
+      .substr(0, 2);
+  }
+
+  function formatDate(dateString) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  }
+
+  function getRandomColor() {
+    const colors = ['#4caf50', '#2196f3', '#ff9800', '#9c27b0', '#f44336', '#607d8b'];
+    return colors[Math.floor(Math.random() * colors.length)];
+  }
+
+  function saveContacts() {
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+    updateCounts();
+  }
+
+  function saveTags() {
+    localStorage.setItem('contactTags', JSON.stringify(availableTags));
+  }
+
+  // Initialize the app
+  init();
 });
