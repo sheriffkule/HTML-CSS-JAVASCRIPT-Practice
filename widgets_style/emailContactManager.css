@@ -630,3 +630,63 @@ option::checkmark {
     padding: 0;
     margin-left: 0.25rem;
 }
+
+.tags-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-light);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    z-index: 10;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+
+    &.active {
+        display: block;
+    }
+}
+
+.tags-dropdown-item {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+
+    &:hover {
+        background: var(--bg-light-secondary);
+    }
+}
+
+.bulk-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.bulk-option {
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background: var(--bg-light-secondary);
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+
+    &:hover {
+        background-color: var(--bg-light);
+        border-color: var(--primary);
+    }
+    &.danger:hover {
+        border-color: var(--danger);
+    }
+    i {
+        font-size: 1.5rem;
+    }
+}

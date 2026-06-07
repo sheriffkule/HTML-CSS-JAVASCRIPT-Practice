@@ -469,4 +469,137 @@ document.addEventListener('DOMContentLoaded', function () {
     updateBulkActionsButton();
     checkEmptyState();
   }
+
+  function renderContacts() {
+    const searchTerm = searchInput.value.toLowerCase();
+    let filteredContacts = [...contacts];
+
+    // Apply search filter
+    if (searchTerm) {
+      filteredContacts = filteredContacts.filter(
+        (contact) =>
+          contact.name.toLowerCase().includes(searchTerm) ||
+          contact.email.toLowerCase().includes(searchTerm) ||
+          (contact.company && contact.company.toLowerCase().includes(searchTerm)) ||
+          (contact.phone && contact.phone.toLowerCase().includes(searchTerm)),
+      );
+    }
+
+    // Apply sidebar filter
+    switch (selectedFilter) {
+      case 'favorites':
+        filteredContacts = filteredContacts.filter((contact) => contact.favorite);
+        break;
+      case 'recent':
+        filteredContacts.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
+        filteredContacts = filteredContacts.slice(0, 10);
+        break;
+      case 'all':
+        // No additional filtering needed
+        break;
+      default:
+        // Tag filtering
+        if (selectedFilter.startsWith('tag-')) {
+          const tagId = selectedFilter;
+          filteredContacts = filteredContacts.filter(
+            (contact) => contact.tags && contact.tags.includes(tagId),
+          );
+        }
+    }
+
+    // Apply sorting
+    filteredContacts.sort((a, b) => {
+      switch (selectedSort) {
+        case 'name-asc':
+          return a.name.localeCompare(b.name);
+        case 'name-desc':
+          return b.name.localeCompare(a.name);
+        case 'date-asc':
+          return new Date(a.dateAdded) - new Date(b.dateAdded);
+        case 'date-desc':
+          return new Date(b.dateAdded) - new Date(a.dateAdded);
+        default:
+          return 0;
+      }
+    });
+
+    // Render contacts
+    contactsContainer.innerHTML = '';
+
+    if (filteredContacts.length === 0) {
+      const emptyState = document.createElement('div');
+      emptyState.className = 'empty-state';
+      emptyState.innerHTML = `
+            <i class="fas fa-address-book"></i>
+            <h3>No contacts found</h3>
+            <p>Try adjusting your search of filter</p>
+          `;
+      contactsContainer.appendChild(emptyState);
+      return;
+    }
+
+    filteredContacts.forEach((contact) => {
+      const contactEl = document.createElement('div');
+      contactEl.className = `contact-card ${selectedContacts.includes(contact.id) ? 'selected' : ''}`;
+      contactEl.innerHTML = `
+            <div class="contact-avatar">${getInitials(contact.name)}</div>
+            <h3 class="contact-name">
+              ${contact.name}
+              <button class="favorite-btn ${contact.favorite ? 'favored' : ''}">
+                <i class="${contact.favorite ? 'fas' : 'far'} fa-star"></i>
+              </button>
+            </h3>
+            <a href="mailto:${contact.mail}" class="contact-email">${contact.email}</a>
+            ${contact.company ? `<p className="contact-company">${contact.company}</p>` : ''}
+            ${
+              contact.tags && contact.tags.length > 0
+                ? `
+                  <div class="contact-tags">
+                    ${contact.tags
+                      .map((tagId) => {
+                        const tag = availableTags.find((t) => t.id === tagId);
+                        return tag
+                          ? `
+                              <span class="tag">
+                                <i class="fas fa-circle" style="${tag.color}"></i> ${tag.name}
+                              </span>
+                            `
+                          : ';';
+                      })
+                      .join('')}
+                  </div>
+                `
+                : ''
+            }
+            <div class="contact-checkbox">
+              <input type="checkbox" ${selectedContacts.includes(contact.id) ? 'checked' : ''} />
+            </div>
+          `;
+
+      // Add event listeners
+      contactEl.addEventListener('click', (e) => {
+        // Don't open details if clicking on a button ro checkbox
+        if (e.target.tagName === 'BUTTON' || e.target.tagName === 'INPUT' || e.target.closest('button')) {
+          return;
+        }
+        openDetailsModal(contact);
+      });
+
+      // Favorite button
+      const favoriteBtn = contactEl.querySelector('.favorite-btn');
+      favoriteBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleFavorite(contact.id);
+      });
+
+      // Selection checkbox
+      const checkbox = contactEl.querySelector('input[type="checkbox"]');
+      checkbox.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleContactSelection(contact.id);
+      });
+
+      contactsContainer.appendChild(contactEl);
+    });
+  }
 });
