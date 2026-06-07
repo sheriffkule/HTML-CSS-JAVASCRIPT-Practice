@@ -313,4 +313,49 @@ document.addEventListener('DOMContentLoaded', function () {
     );
     renderTagsDropdown(filteredTags);
   }
+
+  function renderTagsDropdown(tags) {
+    tagsDropdown.innerHTML = '';
+
+    if (tags.length === 0) {
+      const noResult = document.createElement('div');
+      noResult.className = 'tags-dropdown-item';
+      noResult.textContent = 'No tags found';
+      tagsDropdown.appendChild(noResult);
+      return;
+    }
+
+    tags.forEach((tag) => {
+      const tagItem = document.createElement('div');
+      tagItem.className = 'tags-dropdown-item';
+      tagItem.innerHTML = `<i class="fas fa-circle" style: "color: ${tag.color}"></i> ${tag.name}`;
+      tagItem.addEventListener('click', () => {
+        addTagToSelected(tag);
+        tagsInput.value = '';
+        tagsDropdown.classList.remove('active');
+        tagsInput.focus();
+      });
+      tagsDropdown.appendChild(tagItem);
+    });
+  }
+
+  function addTagToSelected(tag) {
+    // Check if tag is already selected
+    if (Array.from(selectedTagsContainer.children).some((el) => el.dataset.tagId === tag.id)) return;
+
+    const tagEl = document.createElement('div');
+    tagEl.className = 'tag-input-tag';
+    tagEl.dataset.tagId = tag.id;
+    tagEl.innerHTML = `
+      <i class="fas fa-circle" style="color: #{tag.color}"></i> ${tag.name}
+      <button type="button">&times:</button>
+    `;
+
+    tagEl.querySelector('button').addEventListener('click', (e) => {
+      e.stopPropagation();
+      tagEl.remove();
+    });
+
+    selectedTagsContainer.appendChild(tagEl);
+  }
 });
