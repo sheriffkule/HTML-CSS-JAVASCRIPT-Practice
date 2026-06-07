@@ -358,4 +358,115 @@ document.addEventListener('DOMContentLoaded', function () {
 
     selectedTagsContainer.appendChild(tagEl);
   }
+
+  function handleTagInputKeydown(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const tagName = tagsInput.value.trim();
+      if (tagName) {
+        const newTag = {
+          id: `tag-${tagName.toLowerCase().replace(/\s+/g, '-')}`,
+          name: tagName,
+          color: getRandomColor(),
+        };
+
+        // Check if tag already exist
+        const existingTag = availableTags.find((t) => t.id === newTag.id);
+        if (!existingTag) {
+          availableTags.push(newTag);
+        }
+
+        addTagToSelected(existingTag || newTag);
+        tagsInput.value = '';
+        tagsDropdown.classList.add('active');
+      }
+    } else if (e.key === 'Backspace' && tagsInput.value === '') {
+      // Remove last tag when backspace is pressed on empty input
+      const lastTag = selectedTagsContainer.lastElementChild;
+      if (lastTag) lastTag.remove();
+    }
+  }
+
+  // Bulk actions
+  function toggleContactSelection(contactId) {
+    const index = selectedContacts.indexOf(contactId);
+    index === -1 ? selectedContacts.push(contactId) : selectedContacts.splice(index, 1);
+
+    updateBulkActionsButton();
+    renderContacts();
+  }
+
+  function updateBulkActionsButton() {
+    bulkActionsBtn.disabled = selectedContacts.length === 0;
+  }
+
+  function handleBulkAction(action) {
+    if (selectedContacts.length === 0) return;
+
+    switch (action) {
+      case 'add-tag':
+        const tagToAdd = prompt('Enter tag name to add:');
+        if (tagToAdd && tagToAdd.trim()) {
+          const tagId = `tag-${tagToAdd.toLowerCase().replace(/\s+/g, '-')}`;
+          const existingTag = availableTags.find((t) => t.id === tagId);
+          const tag = existingTag || {
+            id: tagId,
+            name: tagToAdd.trim(),
+            color: getRandomColor(),
+          };
+
+          if (!existingTag) availableTags.push(tag);
+
+          contacts = contacts.map((contact) => {
+            if (selectedContacts.includes(contact.id)) {
+              const tags = contact.tags || [];
+              if (!tags.includes(ta.id)) {
+                return { ...contact, tags: [...tags, tag.id] };
+              }
+            }
+            return contact;
+          });
+        }
+        break;
+
+      case 'remove-tag':
+        const tagToRemove = prompt('Enter tag name to remove:');
+        if (tagToRemove && tagToRemove.trim()) {
+          const tagId = `tag-${tagToRemove.toLowerCase().replace(/\s+/g, '-')}`;
+          contacts = contacts.map((contact) => {
+            if (selectedContacts.includes(contact.id)) {
+              const tags = contact.tag || [];
+              return { ...contact, tags: tags.filter((t) => t !== tagId) };
+            }
+            return contact;
+          });
+        }
+        break;
+
+      case 'favorite':
+        contacts = contacts.map((contact) =>
+          selectedContacts.includes(contact.id) ? { ...contact, favorite: true } : contact,
+        );
+        break;
+
+      case 'unfavorite':
+        contacts = contacts.map((contact) =>
+          selectedContacts.includes(contact.id) ? { ...contact, favorite: false } : contact,
+        );
+        break;
+
+      case 'delete':
+        if (confirm(`Are you sure you want to delete ${selectedContacts.length} contact(s)?`)) {
+          contacts = contacts.filter((contact) => !selectedContacts.includes(contact.id));
+          selectedContacts = [[]];
+        }
+        break;
+    }
+
+    saveContacts();
+    renderContacts();
+    bulkModal.classList.remove('active');
+    updateBulkActionsButton();
+    checkEmptyState();
+  }
 });
