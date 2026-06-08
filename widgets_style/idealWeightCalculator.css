@@ -3,7 +3,8 @@
 :root {
     --primary: #4361ee;
     --secondary: #3f37c9;
-    --accent: #f8f9fa;
+    --accent: #4895ef;
+    --light: #f8f9fa;
     --dark: #212529;
     --success: #4cc9f0;
     --warning: #f72585;
@@ -53,4 +54,157 @@ body {
         font-size: 15px;
         text-wrap: pretty;
     }
+}
+
+.content {
+    padding: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.form-col {
+    flex: 1;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: var(--radius);
+    background: var(--light);
+    font-family: inherit;
+    font-size: 14px;
+    transition: all .3s;
+}
+
+:is(input, select):is(:focus, :focus-within) {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgb(67 97 238 / 0.2),
+    inset 0 0 0 2px rgb(67 97 238 / 0.2);
+    background: azure;
+}
+
+input[type="number"]:not(:valid) ~ label sup {
+    color: var(--warning);
+}
+
+select,
+::picker(select) {
+  appearance: base-select;
+  cursor: pointer;
+}
+
+::picker(select) {
+  border-radius: 8px;
+  border: none;
+}
+
+select::picker-icon {
+  font-size: 16px;
+  color: var(--primary);
+  transition: 0.3s rotate;
+}
+
+select:open::picker-icon {
+  rotate: 180deg;
+  color: var(--warning);
+}
+
+select:open {
+    background: azure;
+}
+
+option {
+  border: 1px solid #bbb;
+  background: var(--primary);
+  padding: 2px 0 2px 12px;
+  color: var(--light);
+  padding-right: 18px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+option:hover,
+option:focus {
+  background: var(--secondary);
+}
+
+option:checked {
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: var(--accent);
+  background-color: var(--secondary);
+}
+
+option::checkmark {
+  color: var(--success);
+  font-size: 1.5rem;
+}
+
+.radio-group {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+input[type="radio"] {
+  -webkit-appearance: none;
+  appearance: none;
+  padding: 0;
+  background-color: var(--light);
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--primary);
+  border-radius: 50px;
+  display: grid;
+  place-content: center;
+}
+
+input[type="radio"]::before {
+  content: "";
+  display: inline-flex;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  transform: scale(0);
+  transition: transform 0.2s ease-in-out;
+}
+
+input[type="radio"]:checked::before {
+  transform: scale(1);
+}
+
+input[type="radio"]:is(:focus, :checked) {
+  outline: 2px solid var(--accent);
+  outline-offset: max(2px, 3px);
+}
+
+.radio-option :focus-within {
+    color: var(--primary);
+    font-weight: bold;
 }
