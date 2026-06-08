@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ideal Weight Calculator</title>
+    <link rel="stylesheet" href="/widgets_style/idealWeightCalculator.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1>Ideal Weight Calculator</h1>
+        <p>Calculate your ideal weight based on multiple formulas and track your progress.</p>
+      </header>
+      <main class="content">
+        <section class="form-row">
+          <article class="form-col">
+            <div class="form-group">
+              <label for="height">Height (cm)</label>
+              <input type="number" id="height" placeholder="Enter your height" min="100" max="250" />
+            </div>
+          </article>
+          <article class="form-col">
+            <div class="form-group">
+              <label for="weight">Weight (kg)</label>
+              <input type="number" id="weight" min="30" max="200" />
+            </div>
+          </article>
+        </section>
+
+        <section class="form-row">
+          <article class="form-col">
+            <div class="form-group">
+              <label for="age">Age</label>
+              <input type="number" id="age" placeholder="Enter your age" min="2" max="120" />
+            </div>
+          </article>
+          <article class="form-col">
+            <div class="form-group">
+              <label>Gender</label>
+              <div class="radio-group">
+                <label class="radio-option">
+                  <input type="radio" name="gender" value="male" checked /> Male
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="gender" value="female" checked /> Female
+                </label>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <div class="form-group">
+          <label for="body-frame">Body Frame</label>
+          <select id="body-frame">
+            <option value="medium">Medium (default)</option>
+            <option value="small">Small</option>
+            <option value="large">Large</option>
+          </select>
+        </div>
+
+        <button id="calculate-btn">Calculate Ideal Weight</button>
+
+        <section class="results" id="results">
+          <h2>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              width="25px">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+            Your Results
+          </h2>
+
+          <article class="result-cards">
+            <div class="result-card">
+              <h3>BMI</h3>
+              <p id="bmi-value">--</p>
+            </div>
+            <div class="result-card">
+              <h3>Devine</h3>
+              <p id="devine-value">--</p>
+            </div>
+            <div class="result-card">
+              <h3>Robinson</h3>
+              <p id="robinson-value">--</p>
+            </div>
+            <div class="result-card">
+              <h3>Miller</h3>
+              <p id="miller-value">--</p>
+            </div>
+          </article>
+
+          <article class="bmi-indicator">
+            <h3>BMI Classification</h3>
+            <div class="bmi-scale">
+              <div class="bmi-marker" style="left: 0%" data-value="15"></div>
+              <div class="bmi-marker" style="left: 20%" data-value="18.5"></div>
+              <div class="bmi-marker" style="left: 40%" data-value="25"></div>
+              <div class="bmi-marker" style="left: 60%" data-value="30"></div>
+              <div class="bmi-marker" style="left: 80%" data-value="35"></div>
+              <div class="bmi-marker" style="left: 100%" data-value="40"></div>
+              <div class="bmi-pointer" id="bmi-pointer" style="left: 50%"></div>
+            </div>
+            <div class="bmi-labels">
+              <span>Underweight</span>
+              <span>Normal</span>
+              <span>Overweight</span>
+              <span>Obese</span>
+              <span>Extreme Obese</span>
+            </div>
+
+            <div class="bmi-categories">
+              <div class="bmi-category" id="underweight">
+                <span>Underweight</span>
+                <span>&lt; 18.5</span>
+              </div>
+              <div class="bmi-category" id="normal">
+                <span>Normal</span>
+                <span>18.5 - 24.9</span>
+              </div>
+              <div class="bmi-category" id="overweight">
+                <span>Overweight</span>
+                <span>25 - 29.9</span>
+              </div>
+              <div class="bmi-category" id="obese">
+                <span>Obese</span>
+                <span>30 - 34.9</span>
+              </div>
+              <div class="bmi-category">
+                <span>Extreme Obese</span>
+                <span>&ge; 35</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="tips">
+            <h3>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                width="25px">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 16v-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              Health Tips
+            </h3>
+            <ul id="health-tips">
+              <li>Maintain a balanced diet with plenty of fruits and vegetables.</li>
+              <li>Engage in regular physical activity (at least 150minutes per week).</li>
+              <li>Stay hydrated by drinking enough water throughout the day.</li>
+              <li>Get adequate sleep (7-9 hours for adults).</li>
+              <li>Monitor your weight regularly but don't obsess over daily fluctuations.</li>
+            </ul>
+          </article>
+        </section>
+
+        <section class="history">
+          <h3>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              width="25px">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Calculate History
+          </h3>
+          <div class="history-list" id="history-list">
+            <!-- History items will be added here -->
+          </div>
+          <div class="clear-history" id="clear-history">Clear History</div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/widgets_script/idealWeightCalculator.js"></script>
+  </body>
+</html>
