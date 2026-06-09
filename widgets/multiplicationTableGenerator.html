@@ -12,7 +12,7 @@
       <i class="fas fa-moon"></i>
     </div>
 
-    <div class="container">
+    <main class="container">
       <header>
         <h1>Multiplication Table Generator</h1>
         <p class="subtitle">Create, practice, and master multiplication tables with this interactive tool.</p>
@@ -38,7 +38,7 @@
               <input type="number" id="rangeFrom" min="1" value="1" placeholder="From" />
             </div>
 
-            <div class="inpu-group">
+            <div class="input-group">
               <label for="rangeTo">To</label>
               <input type="number" id="rangeTo" min="1" value="10" placeholder="To" />
             </div>
@@ -46,7 +46,65 @@
 
           <button id="generateBtn"><i class="fas fa-sync"></i> Generate Table</button>
         </article>
+
+        <article class="card animation-fade-in" id="tableCard">
+          <h2 class="card-title"><i class="fas fa-table"></i> Multiplication Table</h2>
+
+          <div class="print-only">
+            <h2>Multiplication Table for <span id="printNumber"></span></h2>
+            <p>Generated on: <span id="printDate"></span></p>
+          </div>
+
+          <div class="table-container">
+            <table id="multiplicationTable">
+              <thead>
+                <tr>
+                  <th>Multiplier</th>
+                  <th>Result</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Table will be generated here -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="actions">
+            <button class="btn-secondary" id="printBtn"><i class="fas fa-print"></i> Print Table</button>
+            <button class="btn-secondary" id="downloadBtn">
+              <i class="fas fa-download"></i> Download as PDF
+            </button>
+          </div>
+        </article>
       </section>
-    </div>
+
+      <section class="section tab-content" id="quizTab">
+        <article class="card">
+          <h2 class="card-title"><i class="fas fa-brain"></i> Practice Multiplication</h2>
+
+          <div class="quiz-container">
+            <div class="score">Score: <span id="score">0</span></div>
+
+            <div class="quiz-question" id="quizQuestion">5 &times; 3 = ?</div>
+
+            <div class="quiz-options" id="quizOptions">
+              <div class="quiz-option">10</div>
+              <div class="quiz-option">15</div>
+              <div class="quiz-option">20</div>
+              <div class="quiz-option">25</div>
+            </div>
+
+            <button class="btn-success" id="nextQuestionBtn">
+              <i class="fas fa-arrow-right"></i> Next Question
+            </button>
+          </div>
+        </article>
+      </section>
+
+      <footer>
+        © <time datetime="" id="year"></time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
+    </main>
   </body>
 </html>
