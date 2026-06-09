@@ -1,6 +1,6 @@
 document.addEventListener('click', function () {
   // Load history from localStorage
-  localHistory();
+  loadHistory();
 
   // Calculate button click event
   document.getElementById('calculate-btn').addEventListener('click', calculateIdealWeight);
@@ -103,4 +103,83 @@ document.addEventListener('click', function () {
       document.getElementById('extreme-obese').classList.add('active');
     }
   }
+
+  function addToHistory(height, weight, age, gender, bmi, devine, robinson, miller) {
+    // Create history item
+    const historyItem = {
+      date: new Date().toLocaleString(),
+      height,
+      weight,
+      age,
+      gender,
+      bmi,
+      devine,
+      robinson,
+      miller,
+    };
+
+    // Get existing history from localStorage
+    let history = JSON.parse(localStorage.getItem('weightHistory')) || [];
+
+    // Add new item to beginning of array
+    history.unshift(historyItem);
+
+    // Keep only the last 10 item
+    if (history.length > 10) history = history.slice(0, 10);
+
+    // Save to localStorage
+    localStorage.setItem('weightHistory', JSON.stringify(history));
+
+    // Update display
+    loadHistory();
+  }
+
+  function loadHistory() {
+    const historyList = document.getElementById('history-list');
+    historyList.innerHTML = '';
+
+    // Get history from localStorage
+    const history = JSON.parse(localStorage.getItem('weightHistory')) || [];
+
+    if (history.length === 0) {
+      historyList.innerHTML = '<div class="history-item">No calculations yet.</div>';
+      return;
+    }
+
+    // Add each history item to the list
+    history.forEach((item) => {
+      const historyItem = document.createElement('div');
+      historyItem.className = 'history-item';
+      historyItem.innerHTML = `
+        <div class="date">${item.date}</div>
+        <div class="values">
+          <div class="value">BMI: ${item.bmi}</div>
+          <div class="value">Devine: ${item.devine}kg</div>
+        </div>
+      `;
+      historyList.appendChild(historyItem);
+    });
+  }
+
+  function clearHistory() {
+    // Clear localStorage
+    localStorage.removeItem('weightHistory');
+
+    // Update display
+    loadHistory();
+  }
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });

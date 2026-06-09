@@ -31,7 +31,7 @@
         <section class="form-row">
           <article class="form-col">
             <div class="form-group">
-              <label for="age">Age  <sup>*</sup></label>
+              <label for="age">Age <sup>*</sup></label>
               <input type="number" id="age" placeholder="Enter your age" min="2" max="120" />
             </div>
           </article>
@@ -43,7 +43,7 @@
                   <input type="radio" name="gender" value="male" checked /> Male
                 </label>
                 <label class="radio-option">
-                  <input type="radio" name="gender" value="female" checked /> Female
+                  <input type="radio" name="gender" value="female" /> Female
                 </label>
               </div>
             </div>
@@ -117,7 +117,7 @@
             </div>
 
             <div class="bmi-categories">
-              <div class="bmi-category" id="underweight">
+              <div class="bmi-category active" id="underweight">
                 <span>Underweight</span>
                 <span>&lt; 18.5</span>
               </div>
@@ -188,6 +188,10 @@
           <div class="clear-history" id="clear-history">Clear History</div>
         </section>
       </main>
+      <footer>
+        © <time datetime="2026" id="year">2026</time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
     </div>
 
     <script src="/widgets_script/idealWeightCalculator.js"></script>

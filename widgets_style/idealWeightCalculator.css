@@ -236,7 +236,7 @@ button {
     background: linear-gradient(90deg, var(--light), #93a3bd);
     border-radius: var(--radius);
     padding: 20px;
-    /* display: none; */
+    display: none;
 
     h2 {
         font-size: 18px;
@@ -288,7 +288,7 @@ button {
 
 .bmi-scale {
     height: 10px;
-    background: linear-gradient(to right, #4cc9f0, #a5ff32, #ffd60a, #ff7b00, #f72585);
+    background: linear-gradient(to right, #4cc9f0 20%, #a5ff32 20% 40%, #ffd60a 40% 60%, #ff7b00 60% 80%, #f72585 80% 100%);
     border-radius: 5px;
     margin-block: 10px 12px;
     position: relative;
@@ -297,7 +297,7 @@ button {
 .bmi-marker {
     position: absolute;
     top: -5px;
-    width: 2px;
+    width: 1.5px;
     height: 20px;
     background: var(--dark);
 }
@@ -312,3 +312,191 @@ button {
     white-space: nowrap;
 }
 
+.bmi-pointer {
+    position: absolute;
+    top: -10px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 12px solid var(--dark);
+    transform: translateX(-50%);
+    transition: left 0.5s ease-out;
+}
+
+.bmi-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #555;
+    margin-top: 30px;
+}
+
+.bmi-categories {
+    margin-top: 20px;
+}
+
+.bmi-category {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    font-size: 14px;
+
+    &.active {
+        background-color: rgb(67 97 238 / 0.1);
+        font-weight: 500;
+        corner-shape: scoop;
+    }
+}
+
+.tips {
+    margin-top: 30px;
+    background: linear-gradient(135deg, var(--light), #93a3bd);
+    border-radius: var(--radius);
+    padding: 20px;
+    border: 0.5px solid var(--primary);
+
+    h3 {
+        font-size: 16px;
+        margin-bottom: 10px;
+        color: var(--secondary);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    ul {
+        padding-left: 20px;
+    }
+    li {
+        margin-bottom: 8px;
+        font-size: 14px;
+        list-style-type: square;
+        list-style-image: radial-gradient(lime);
+    }
+}
+
+.history {
+    margin-top: 30px;
+
+    h3 {
+        font-size: 16px;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+}
+
+.history-list {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: var(--radius);
+}
+
+.history-item {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &:last-child {
+        border-bottom: none;
+    }
+    &.date {
+        font-size: 12px;
+        color: #555;
+    }
+    &.values {
+        display: flex;
+        gap: 15px;
+    }
+    &.value {
+        font-size: 14px;
+        font-weight: 500;
+    }
+}
+
+.clear-history {
+    background: var(--light);
+    color: var(--dark);
+    border: 1px solid #ccc;
+    padding: 8px 15px;
+    border-radius: var(--radius);
+    font-size: 12px;
+    margin-top: 10px;
+    display: inline-block;
+    cursor: pointer;
+    transition: all .3s ease;
+
+    &:hover {
+        background: #e1e1e1;
+    }
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px;
+    font-size: 0.875rem;
+
+    span {
+        color: var(--danger);
+        font-size: 1rem;
+    }
+    abbr {
+        color: var(--primary);
+        letter-spacing: 0.5px;
+        text-underline-offset: 2px;
+        cursor: default;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: var(--light);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--accent);
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary);
+}
+
+@media (width < 600px) {
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    .result-cards {
+        flex-direction: column;
+    }
+    .container {
+        border-radius: 0;
+    }
+    body {
+        padding: 0;
+        background-color: white;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+}
