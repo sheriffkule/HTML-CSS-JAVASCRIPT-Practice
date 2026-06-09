@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multiplication Table Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/multiplicationTableGenerator.css" />
+  </head>
+  <body class="dark-mode">
+    <div class="theme-toggle" id="themeToggle">
+      <i class="fas fa-moon"></i>
+    </div>
+
+    <div class="container">
+      <header>
+        <h1>Multiplication Table Generator</h1>
+        <p class="subtitle">Create, practice, and master multiplication tables with this interactive tool.</p>
+      </header>
+
+      <div class="tabs">
+        <div class="tab active" data-tab="generate">Generate Table</div>
+        <div class="tab" data-tab="quiz">Practice Quiz</div>
+      </div>
+
+      <section class="tab content" id="generateTab">
+        <article class="card">
+          <h2 class="card-title"><i class="fas fa-calculator"></i> Generate Custom Table</h2>
+
+          <div class="range-inputs">
+            <div class="input-group">
+              <label for="numbaer">Multiplication Number</label>
+              <input type="number" id="number" min="1" max="5" placeholder="Enter a number" />
+            </div>
+
+            <div class="input-group">
+              <label for="rangeFrom">From</label>
+              <input type="number" id="rangeFrom" min="1" value="1" placeholder="From" />
+            </div>
+
+            <div class="inpu-group">
+              <label for="rangeTo">To</label>
+              <input type="number" id="rangeTo" min="1" value="10" placeholder="To" />
+            </div>
+          </div>
+
+          <button id="generateBtn"><i class="fas fa-sync"></i> Generate Table</button>
+        </article>
+      </section>
+    </div>
+  </body>
+</html>
