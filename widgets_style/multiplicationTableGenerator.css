@@ -104,6 +104,9 @@ h1::before {
     &:hover {
         transform: translateY(-5px);
     }
+    &:nth-child(1) {
+        margin-bottom: 20px;
+    }
 }
 
 .card-title {
@@ -151,8 +154,7 @@ input[type="number"] {
     color: var(--text);
     border-radius: 8px;
     font-size: 1.1rem;
-    background-color: var(--dark);
-    color: var(--light);
+    background-color: var(--light);
     transition: border-color 0.3s;
 }
 
@@ -329,5 +331,135 @@ th {
     }
     &:hover i {
         transform: scale(1.2) rotate(15deg);
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+.tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--gray);
+}
+
+.tab {
+    padding: 12px 15px;
+    cursor: pointer;
+    font-weight: 600;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s;
+}
+
+.tab.active {
+    color: var(--primary);
+    border-bottom: 3px solid var(--primary);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.875rem;
+    color: var(--gray);
+
+    span {
+        font-size: 1rem;
+        color: red;
+    }
+    abbr {
+        letter-spacing: 0.5px;
+        text-underline-offset: 2px;
+        cursor: default;
+        color: var(--primary);
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: var(--gray);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--success);
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary);
+}
+
+@media (width < 768px) {
+    .range-inputs {
+        flex-direction: column;
+        gap: 0;
+    }
+    .actions {
+        flex-direction: column;
+    }
+    .quiz-options {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (width < 480px) {
+    .card {
+        padding: 15px;
+    }
+    .quiz-options {
+        grid-template-columns: 1fr;
+    }
+    .theme-toggle {
+        top: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    .table-container, .table-container * {
+        visibility: visible;
+    }
+    .table-container {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+    .print-only {
+        display: block;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+}
+
+.animation-fade-in {
+    animation: fadeIn 0.6s ease-in;
+
+    &:last-of-type {
+        animation-delay: 0.5s;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(100px) scale(0);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
     }
 }
