@@ -103,3 +103,32 @@ function generateTable() {
 printBtn.addEventListener('click', () => {
   window.print();
 });
+
+// Download as pdf
+downloadBtn.addEventListener('click', () => {
+  // In a real app, you would use a library like jsPDF
+  alert(
+    ' implementation, this would download a PDF version of your table. For now, you can use the print function to save as PDF',
+  );
+});
+
+// Quiz functionality
+function generateQuizQuestion() {
+  // Generate random numbers for the question
+  const num1 = Math.floor(Math.random() * 12) + 1;
+  const num2 = Math.floor(Math.random() * 12) + 1;
+  correctAnswer = num1 * num2;
+
+  // Display the question
+  quizQuestionElement.textContent = `${num1} × ${num2} = ?`;
+
+  // Generate options (one correct, three incorrect
+  const options = [correctAnswer];
+  while (options.length < 4) {
+    // Generate a wrong answer that's not too far from the correct one
+    const wrongAnswer = correctAnswer + Math.floor(Math.random() * 20) - 10;
+    if (wrongAnswer !== correctAnswer && wrongAnswer > 0 && !options.includes(wrongAnswer)) {
+      options.push(wrongAnswer);
+    }
+  }
+}
