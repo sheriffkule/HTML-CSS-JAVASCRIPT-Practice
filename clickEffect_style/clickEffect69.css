@@ -11,7 +11,7 @@ body {
 }
 
 .container {
-    background: silver;
+    background: linear-gradient(silver, #e9e9e9, silver);
     padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgb(0 0 0 / 0.2);
@@ -29,6 +29,15 @@ h1 {
     color: #333;
 }
 
+.picker {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    padding-block: 0.5rem;
+    border-top: 1px solid #555;
+    border-bottom: 1px solid #555;
+}
+
 .scrollable {
     height: 150px;
     overflow-y: auto;
@@ -37,6 +46,7 @@ h1 {
     background: #f9f9f9;
     scrollbar-width: none;
     text-align: center;
+    margin-inline: 0.25rem;
 }
 
 .scrollable::-webkit-scrollbar {
