@@ -50,14 +50,13 @@ h1 {
 }
 
 .option-group {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 }
 
 label {
     display: block;
     font-weight: 600;
     color: #495057;
-    /* margin-bottom: 0.5rem; */
 }
 
 .radio-group {
@@ -75,12 +74,99 @@ label {
     }
 }
 
-.checkbox-option {
+input[type="radio"] {
+  -webkit-appearance: none;
+  appearance: none;
+  padding: 0;
+  background-color: #f8f9fa;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #667eea;
+  border-radius: 50px;
+  display: grid;
+  place-content: center;
+}
+
+input[type="radio"]::before {
+  content: "";
+  display: inline-flex;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: #667eea;
+  transform: scale(0);
+  transition: transform 0.2s ease-in-out;
+}
+
+input[type="radio"]:checked::before {
+  transform: scale(1);
+}
+
+input[type="radio"]:is(:focus, :checked) {
+  outline: 1px solid #667eea;
+  outline-offset: max(2px, 3px);
+}
+
+.radio-option:focus-within label {
+    color: #667eea;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.holder {
     display: flex;
     align-items: center;
-    margin-bottom: 0.5rem;
+    padding: 6px 20px;
+    border-radius: 10px;
+    box-shadow: -8px -8px 15px rgba(175, 175, 175, 0.5),
+    10px 10px 10px rgba(0, 0, 0, 0.2),
+    inset 8px 8px 15px rgba(175, 175, 175, 0.5),
+    inset 10px 10px 10px rgba(0, 0, 0, 0.2);
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    max-width: 400px;
+}
 
-    input {
-        margin-right: 0.5rem;
-    }
+input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox-option > input[type="checkbox"] + label {
+    position: relative;
+    display: inline-block;
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    margin-top: 4px;
+    cursor: pointer;
+    box-shadow: inset -8px -8px 15px rgba(175, 175, 175, 0.5),
+    inset 10px 10px 10px rgba(0, 0, 0, 0.25);
+}
+
+.checkbox-label::before {
+    content: 'OFF';
+    position: absolute;
+    font-size: 18px;
+    text-align: center;
+    line-height: 26px;
+    top: 8px;
+    left: 8px;
+    width: 46px;
+    height: 25px;
+    background: red;
+    transition: all .8s;
+    box-shadow: -3px -3px 5px rgba(175, 175, 175, 0.5),
+    3px 3px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+}
+
+input[type="checkbox"]:checked + label::before {
+    content: 'ON';
+    left: 47%;
+    color: #fff;
+    background: #00b33c;
+    box-shadow: -3px -3px 5px rgba(175, 175, 175,
+    0.5),
+    3px 3px 5px #00b33c;
 }
