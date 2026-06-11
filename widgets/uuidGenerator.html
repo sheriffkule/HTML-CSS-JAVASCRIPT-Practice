@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Uuid Guid Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/uuidGenerator.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>UUID/GUID Generator</h1>
+        <p class="subtitle">Generate universally unique identifiers for your projects.</p>
+      </header>
+
+      <section class="options-panel">
+        <article class="option-group">
+          <label for="UUID Version"></label>
+          <div class="radio-group">
+            <div class="radio-option">
+              <input type="radio" name="version" id="v4" value="v4" checked />
+              <label for="v4">Version 4 (Random)</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" name="version" id="v1" value="v1" />
+              <label for="v1">Version 1 (Time-based)</label>
+            </div>
+          </div>
+        </article>
+
+        <article class="option-group">
+          <div class="checkbox-option">
+            <input type="checkbox" name="uppercase" id="uppercase" />
+            <label for="uppercase">Uppercase</label>
+          </div>
+          <div class="checkbox-option">
+            <input type="checkbox" name="hyphens" id="hyphens" checked />
+            <label for="hyphens">Include Hyphens</label>
+          </div>
+          <div class="checkbox-option">
+            <input type="checkbox" name="braces" id="braces" />
+            <label for="braces">Include Braces</label>
+          </div>
+        </article>
+
+        <article class="buttons">
+          <button class="btn-generate" id="generateBtn">
+            <i class="fas fa-plus-circle"></i> Generate UUID
+          </button>
+          <button class="btn-copy" id="copyBtn"><i class="fas fa-copy"></i> Copy</button>
+          <button class="btn-clear" id="clearBtn"><i class="fas fa-trash"></i> Clear History</button>
+        </article>
+      </section>
+
+      <section class="output">
+        <div class="uuid-display" id="uuidDisplay">Click "Generate UUID" to create your first UUID</div>
+        <div class="uuid-info" id="uuidInfo"></div>
+      </section>
+
+      <section class="history">
+        <h3>
+          <span>Generation History</span>
+          <span id="historyCount">(0 items)</span>
+        </h3>
+        <div class="history-list" id="historyList"></div>
+      </section>
+    </main>
+
+    <div class="toast" id="toast">UUID copied to clipboard!</div>
+
+    <footer>
+      © <time datetime="2026" id="year">2026</time> Made width <span>♥</span> by
+      <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+    </footer>
+    <script src="/widgets_script/uuidGenerator.js"></script>
+  </body>
+</html>
