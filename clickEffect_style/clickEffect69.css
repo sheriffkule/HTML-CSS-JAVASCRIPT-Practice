@@ -1,0 +1,74 @@
+body {
+    font-family: "Arial", sans-serif;
+    background: linear-gradient(to bottom, #323232 0%, #3f3f3f 40%, #1c1c1c 150%),
+    linear-gradient(to top, rgb(255 255 255 / 0.4) 0%, rgb(0 0 0 / 0.25) 200%);
+    background-blend-mode: multiply;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: silver;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.2);
+    text-align: center;
+}
+
+.date-time {
+    display: flex;
+    gap: 40px;
+}
+
+h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.scrollable {
+    height: 150px;
+    overflow-y: auto;
+    border-radius: 8px;
+    position: relative;
+    background: #f9f9f9;
+    scrollbar-width: none;
+    text-align: center;
+}
+
+.scrollable::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollable-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+.scrollable div {
+    font-size: 1rem;
+    color: #555;
+    user-select: none;
+    cursor: pointer;
+    padding: 5px 8px;
+}
+
+.scrollable div.selected {
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+}
+
+.selected-display {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.selected-display span {
+    font-weight: bold;
+    color: #007bff;
+}
