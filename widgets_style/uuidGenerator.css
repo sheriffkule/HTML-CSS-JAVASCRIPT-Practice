@@ -286,6 +286,7 @@ button {
     margin-bottom: 0.25rem;
     border-bottom: 1px solid #bdbdbd;
     font-family: 'Courier New', Courier, monospace;
+    overflow-x: hidden;
 
     &:last-child {
         border-bottom: none;

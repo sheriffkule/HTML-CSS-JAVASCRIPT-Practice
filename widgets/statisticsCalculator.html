@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Statistics Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/statisticsCalculator.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1><i class="fas fa-chart-bar"></i> Statistics Calculator</h1>
+        <p class="subtitle">
+          Calculate descriptive statistics, probability distributions, and visualize your data.
+        </p>
+      </header>
+
+      <main class="app-container">
+        <div class="card">
+          <div class="card-title">
+            <i class="fas fa-database"></i>
+            <h2>Data Input</h2>
+          </div>
+
+          <div class="input-section">
+            <textarea
+              id="dataInput"
+              placeholder="Enter your data values separated by commas, spaces, or new lines. Example: 12, 15, 18, 22, 24, 27, 30, 32, 35, 40"></textarea>
+
+            <div class="input-options">
+              <button class="btn btn-primary" id="calculateBtn">
+                <i class="fas fa-calculator"></i> Calculate
+              </button>
+              <button class="btn btn-secondary" id="clearBtn"><i class="fas fa-broom"></i> Clear</button>
+              <button class="btn btn-success" id="exampleBtn">
+                <i class="fas fa-lightbulb"></i> Load Example
+              </button>
+            </div>
+          </div>
+
+          <div class="tabs">
+            <div class="tab active" data-tab="descriptive">Descriptive Stats</div>
+            <div class="tab" data-tab="probability">Probability</div>
+            <div class="tab" data-tab="visualization">Visualization</div>
+          </div>
+
+          <div class="tab-content active" id="descriptiveTab">
+            <div class="results-section">
+              <h3>Descriptive Statistics</h3>
+              <div class="result-grid" id="resultsContainer">
+                <!-- Results will be populated here -->
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-content" id="probabilityTab">
+            <div class="probability-calculator">
+              <div class="form-group">
+                <label for="distribution">Distribution</label>
+                <select id="distribution">
+                  <option value="normal">Normal Distribution</option>
+                  <option value="binomial">Binomial Distribution</option>
+                  <option value="poisson">Poisson Distribution</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="xValue">X Value</label>
+                <input type="number" id="xValue" placeholder="Enter X value">
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
