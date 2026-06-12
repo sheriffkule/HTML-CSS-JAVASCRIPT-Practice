@@ -170,3 +170,115 @@ input[type="checkbox"]:checked + label::before {
     0.5),
     3px 3px 5px #00b33c;
 }
+
+.buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    i {
+        transition: transform 0.25s ease;
+    }
+    &:hover i {
+        transform: scale(1.3);
+    }
+    &:hover {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    &:active {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.btn-generate {
+    background: #007bff;
+    color: white;
+    flex: 2;
+
+    &:hover {
+        background: #0069d9;
+    }
+}
+
+.btn-copy {
+    background: #28a745;
+    color: white;
+    flex: 1;
+
+    &:hover {
+        background: #218838;
+    }
+}
+
+.btn-clear {
+    background: #dc3545;
+    color: white;
+
+    &:hover {
+        background: #c82333;
+    }
+}
+
+.output {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.uuid-display {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #212529;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #ded4da;
+    margin-bottom: 1rem;
+}
+
+.history {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 12px;
+
+    h3 {
+        margin-bottom: 1rem;
+        color: #495057;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.history-list {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #dee2e6;
+    font-family: 'Courier New', Courier, monospace;
+
+    &:hover {
+        border-bottom: none;
+    }
+}

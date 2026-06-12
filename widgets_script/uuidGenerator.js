@@ -59,12 +59,38 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function generateV1UUID() {
-    // Simple v1-like UUID (not fully RFC compliant but good for demo)
     const time = Date.now();
     const timeHex = time.toString(16).padStart(12, '0');
-    return `${timeHex.slice(0, 8)}-${timeHex.slice(8, 12)}-1${timeHex.slice(12, 15)}-${((Math.random() * 0x10000) | 0).toString(16).padStart(4, '0')}-${((Math.random() * 0x1000000000000) | 0).toString(16).padStart(12, '0')}`.slice(
+    return `${timeHex.slice(0, 8)}-${timeHex.slice(8, 12)}-1${timeHex.slice(12, 15)}-${(
+      (Math.random() * 0x10000) |
+      0
+    )
+      .toString(16)
+      .padStart(4, '0')}-${((Math.random() * 0x1000000000000) | 0).toString(16).padStart(12, '0')}`.slice(
       0,
       36,
     );
+  }
+
+  function addToHistory(uuid, version) {
+    history.unshift({ uuid, version, timestamp: new Date().toISOString() });
+
+    // Keep only the last 10 items
+    if (history.length > 10) history.pop();
+
+    // Save to localStorage
+    localStorage.setItem('uuidHistory', JSON.stringify(history));
+
+    updateHistoryDisplay();
+  }
+
+  function updateHistoryDisplay() {
+    historyList.innerHTML = '';
+    historyCount.textContent = `(${history.length} items)`;
+
+    if (history.length === 0) {
+      historyList.innerHTML = '<div class="history-item">No history yet.</div>';
+      return;
+    }
   }
 });
