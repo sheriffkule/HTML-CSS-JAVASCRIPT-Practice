@@ -67,12 +67,58 @@
 
               <div class="form-group">
                 <label for="xValue">X Value</label>
-                <input type="number" id="xValue" placeholder="Enter X value">
+                <input type="number" id="xValue" placeholder="Enter X value" />
+              </div>
+
+              <div class="form-group">
+                <label for="mean">Mean (μ)</label>
+                <input type="number" id="mean" placeholder="Enter mean" />
+              </div>
+
+              <div class="form-group">
+                <label for="stdDev">Standard Deviation (σ)</label>
+                <input type="number" id="stdDev" placeholder="Enter standard deviation" />
+              </div>
+
+              <button class="btn btn-primary" id="calculateProbBtn">
+                <i class="fas fa-calculator"></i> Calculate Probability
+              </button>
+
+              <div class="result-card">
+                <div class="result-label">Probability</div>
+                <div class="result-value" id="probabilityResult">0.0000</div>
               </div>
             </div>
           </div>
+
+          <div class="tab-content" id="visualizationTab">
+            <div class="chart-container">
+              <canvas id="dataChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            <i class="fas fa-history"></i>
+            <h2>Calculation History</h2>
+          </div>
+
+          <div class="history-section" id="historyContainer">
+            <!-- History items will be added here -->
+          </div>
         </div>
       </main>
+
+      <footer>
+        © <time datetime="2026" id="year">2026</time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
     </div>
+
+    <div class="notification" id="notification">Calculation completed successfully!</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.min.js"></script>
+    <script src="/widgets_script/statisticsCalculator.js"></script>
   </body>
 </html>

@@ -85,4 +85,93 @@ h1 {
     margin-bottom: 20px;
     color: var(--primary);
     font-size: 1.25rem;
+
+    i {
+        font-size: 1.5rem;
+    }
+}
+
+.input-section {
+    margin-bottom: 20px;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 15px;
+    border: 2px solid #e9ecef;
+    border-radius: var(--border-radius);
+    resize: vertical;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+textarea:is(:focus, :focus-within) {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgb(67 97 238 / 0.2);
+}
+
+.input-options {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: var(--light);
+
+    &:hover {
+        background: var(--primary-dark);
+    }
+}
+
+.btn-secondary {
+    background: var(--secondary);
+    color: var(--light);
+
+    &:hover {
+        background: #5a08a0;
+    }
+}
+
+.btn-success {
+    background: var(--success);
+    color: white;
+
+    &:hover {
+        background: #3ab0d6;
+    }
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: white;
+
+    &:hover {
+        background: #e01a6f;
+    }
+}
+
+.btn-warning {
+    background: var(--warning);
+    color: white;
+
+    &:hover {
+        background: #e0861b;
+    }
 }
