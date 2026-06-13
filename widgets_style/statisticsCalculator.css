@@ -175,3 +175,75 @@ textarea:is(:focus, :focus-within) {
         background: #e0861b;
     }
 }
+
+.results-section {
+    margin-top: 20px;
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.result-card {
+    background: var(--light);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    border-left: 4px solid var(--primary);
+}
+
+.result-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 10px 0;
+}
+
+.result-label {
+    font-size: 0.9rem;
+    color: var(--gray);
+}
+
+.chart-container {
+    height: 300px;
+    margin-top: 20px;
+}
+
+.history-section {
+    margin-top: 20px;
+}
+
+.history-item {
+    background: var(--light);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.history-data {
+    font-weight: 600;
+}
+
+.history-stats {
+    font-size: 0.9rem;
+    color: var(--gray);
+}
+
+.tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.tab {
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: var(--transition);
+    border-bottom: 3px solid transparent;
+}
