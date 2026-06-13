@@ -97,3 +97,67 @@ function calculateStatistics() {
 
   showNotification('Statistics calculated successfully!');
 }
+
+function computeStatistics(data) {
+  const sortedData = [...data].sort((a, b) => a - b);
+  const n = data.length;
+
+  // Mean
+  const mean = data.reduce((sum, val) => sum + val, 0) / n;
+
+  // Median
+  const mid = Math.floor(n / 2);
+  const median = n % 2 === 0 ? (sortedData[mid - 1] + sortedData[mid]) / 2 : sortedData[mid];
+
+  // Mode
+  const frequency = [];
+  let maxFreq = 0;
+  let modes = [];
+
+  data.forEach((val) => {
+    frequency[val] = (frequency[val] || 0) + 1;
+    if (frequency[val] > maxFreq) {
+      maxFreq = frequency[val];
+      modes = [val];
+    } else if (frequency[val] === maxFreq) {
+      modes.push(val);
+    }
+  });
+
+  const mode = modes.length === n ? 'No mode' : modes.join(', ');
+
+  // Standard deviation
+  const variance = data.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / n;
+  const stdDev = Math.sqrt(variance);
+
+  // Range
+  const range = sortedData[n - 1] - sortedData[0];
+
+  // Quartiles
+  const q1 = calculatePercentile(sortedData, 25);
+  const q3 = calculatePercentile(sortedData, 75);
+  const iqr = q3 - q1;
+
+  // Min and Max
+  const min = sortedData[0];
+  const max = sortedData[n - 1];
+
+  // Sum
+  const sum = data.reduce((total, val) => total + val, 0);
+
+  return {
+    const: n,
+    sum: sum,
+    mean: mean,
+    median: median,
+    mode: mode,
+    stdDev: stdDev,
+    variance: variance,
+    range: range,
+    q1: q1,
+    q3: q3,
+    iqr: iqr,
+    min: min,
+    max: max,
+  };
+}
