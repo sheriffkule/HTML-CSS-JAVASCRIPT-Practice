@@ -129,6 +129,14 @@ textarea:is(:focus, :focus-within) {
     display: flex;
     align-items: center;
     gap: 8px;
+
+    &:hover {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: var(--box-shadow);
+    }
+    &:active {
+        transform: translateY(0) scale(1);
+    }
 }
 
 .btn-primary {
@@ -138,6 +146,13 @@ textarea:is(:focus, :focus-within) {
     &:hover {
         background: var(--primary-dark);
     }
+}
+
+.calculate {
+    width: max-content;
+    height: max-content;
+    align-self: center;
+    justify-self: center;
 }
 
 .btn-secondary {
@@ -339,4 +354,70 @@ option:checked {
 option::checkmark {
   color: var(--success);
   font-size: 1.5rem;
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px;
+    color: var(--gray);
+    font-size: 0.875rem;
+
+    span {
+        color: red;
+        font-size: 1rem;
+    }
+    abbr {
+        text-underline-offset: 2px;
+        letter-spacing: 0.5px;
+        color: var(--primary);
+        cursor: default;
+    }
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    background: var(--success);
+    color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transform: translateX(150%) scaleY(0);
+    transition: transform 0.5s ease;
+    z-index: 100;
+
+    &.show {
+        transform: translateX(0) scaleY(1);
+    }
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: var(--dark);
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.875rem;
+    font-weight: normal;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
 }
