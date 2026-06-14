@@ -146,7 +146,7 @@ function computeStatistics(data) {
   const sum = data.reduce((total, val) => total + val, 0);
 
   return {
-    const: n,
+    count: n,
     sum: sum,
     mean: mean,
     median: median,
@@ -229,3 +229,106 @@ function addToHistory(data, stats) {
     historyContainer.removeChild(historyContainer.lastChild);
   }
 }
+
+function updateChart(data) {
+  const ctx = dataChart.getContext('2d');
+
+  // Destroy existing chart
+  if (chart) chart.destroy();
+
+  // Create new chart
+  chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: data.map((_, i) => `Value ${i + 1}`),
+      datasets: [
+        {
+          label: 'Data Values',
+          data: data,
+          backgroundColor: 'rgba(67,97,238,0.7)',
+          borderColor: 'rgb(67,97,238,1)',
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+}
+
+function calculateProbability() {
+  const distribution = document.getElementById('distribution').value;
+  const xValue = parseFloat(document.getElementById('xValue').value);
+  const mean = parseFloat(document.getElementById('mean').value);
+  const stdDev = parseFloat(document.getElementById('stdDev').value);
+
+  if (isNaN(xValue) || isNaN(mean) || isNaN(stdDev)) {
+    showNotification('Please enter valid numbers for all fields!', 'error');
+    return;
+  }
+
+  if (distribution === 'normal' && stdDev === 0) {
+    showNotification('Standard deviation must be greater than zero for a normal distribution.', 'error');
+    return;
+  }
+
+  let probability = 0;
+
+  if (distribution === 'normal') {
+    // Simplified normal distribution calculation
+    const z = (xValue - mean) / stdDev;
+    probability = Math.exp(-0.5 * z * z) / (stdDev * Math.sqrt(2 * Math.PI));
+  } else if (distribution === 'binomial') {
+    // Simplified binomial calculation (for demonstration)
+    probability = 0.5; // Placeholder
+  } else if (distribution === 'poisson') {
+    // Simplified poisson calculation (for demonstration)
+    probability = 0.3;
+  }
+
+  probabilityResult.textContent = probability.toFixed(4);
+  showNotification('Probability calculated!');
+}
+
+function showNotification(message, type = 'success') {
+  notification.textContent = message;
+
+  // Set color based on type
+  if (type === 'error') {
+    notification.style.background = 'var(--danger)';
+  } else {
+    notification.style.background = 'var(--success)';
+  }
+
+  notification.classList.add('show');
+
+  setTimeout(() => {
+    notification.classList.remove('show');
+  }, 3000);
+}
+
+// Initialize with example data
+window.onload = function () {
+  loadExample();
+};
+
+// Update year in footer
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+  yearElement.setAttribute('datetime', currentYear.toString());
+  yearElement.textContent = currentYear.toString();
+}
+updateYear();
