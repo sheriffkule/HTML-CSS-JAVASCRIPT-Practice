@@ -39,12 +39,12 @@ h1 {
 form {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    gap: 1rem;
 }
 
 .input-group {
-    width: 33%;
     margin-bottom: 1.5rem;
 
     label {
@@ -104,5 +104,68 @@ form button {
     }
     &:active {
         transform: translateY(0) scale(1);
+    }
+}
+
+.accounts-list {
+    margin-top: 2rem;
+
+    h2 {
+        font-size: 1.5rem;
+        color: #2c3e50;
+        margin-bottom: 1rem;
+    }
+}
+
+.accounts-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.accounts-list li {
+    background: #f9f9f9;
+    padding: 1rem;
+    border: 1px solid #94a6a8;
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+        box-shadow: 0 4px 10px rgb(0 0 0 / 0.1);
+    }
+}
+
+.accounts-list li div {
+    display: flex;
+    position: relative;
+    justify-content: space-around;
+    flex: 1;
+}
+
+.accounts-list li strong {
+    color: #2c3e50;
+    font-size: 1rem;
+}
+
+.accounts-list li span {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.accounts-list li button {
+    background: #e74c3c;
+    border: none;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background: #c0392b;
     }
 }
