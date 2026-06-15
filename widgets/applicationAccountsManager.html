@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Application Accounts Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/applicationAccountsManager.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Application Accounts Manager</h1>
+      <p class="subtitle">Manage your accounts securely and efficiently.</p>
+
+      <form id="accountForm">
+        <div class="input-group">
+          <label for="software">Application</label>
+          <input type="text" id="software" placeholder="e.g., Gmail, Facebook" required />
+        </div>
+        <div class="input-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="Enter your username" required />
+        </div>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <div class="password-wrapper">
+            <input type="password" id="password" placeholder="Enter your password" required />
+            <span class="toggle-password" onclick="togglePasswordVisibility('password')"
+              ><i class="fa-solid fa-eye"></i
+            ></span>
+          </div>
+        </div>
+        <button type="submit">Save Account</button>
+      </form>
+
+      <div class="accounts-list">
+        <h2>Saved Accounts</h2>
+        <ul id="accounts"></ul>
+      </div>
+    </div>
+
+    <script src="/widgets_script/applicationAccountsManager.js"></script>
+  </body>
+</html>
