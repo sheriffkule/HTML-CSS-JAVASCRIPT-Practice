@@ -34,7 +34,7 @@
       </div>
 
       <form id="multiStepForm">
-        <div class="form-step" data-step="1">
+        <div class="form-step active" data-step="1">
           <div class="form-row">
             <div class="form-group">
               <label>First Name</label>
@@ -85,7 +85,7 @@
           </div>
         </div>
 
-        <div class="form-step active" data-step="3">
+        <div class="form-step" data-step="3">
           <div class="form-group">
             <label>Chose Your Plan</label>
             <div class="radio-group">
@@ -98,14 +98,14 @@
               </div>
               <div class="radio-option">
                 <input type="radio" name="plan" id="professional" value="professional" required />
-                <label for="starter" class="radio-label">
+                <label for="professional" class="radio-label">
                   Professional <br />
                   <small style="color: #94a3b8">$79/mo</small>
                 </label>
               </div>
               <div class="radio-option">
-                <input type="radio" name="plan" id="custom" value="custom" required />
-                <label for="starter" class="radio-label">
+                <input type="radio" name="plan" id="enterprise" value="enterprise" required />
+                <label for="enterprise" class="radio-label">
                   Enterprise <br />
                   <small style="color: #94a3b8">Custom</small>
                 </label>
@@ -151,7 +151,7 @@
         </div>
 
         <div class="form-actions" id="fomActions">
-          <button type="button" class="btn.btn-secondary" id="prevBtn" style="display: none">Previous</button>
+          <button type="button" class="btn btn-primary" id="prevBtn" style="display: none">Previous</button>
           <button type="button" class="btn btn-secondary" id="nextBtn">Next</button>
         </div>
       </form>
