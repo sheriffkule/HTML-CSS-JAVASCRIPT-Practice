@@ -78,3 +78,243 @@ body {
     position: relative;
     counter-reset: step;
 }
+
+.step-indicator::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--border);
+    z-index: 0;
+}
+
+.step-indicator-progress {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light), var(--primary-dark));
+    z-index: 1;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.step {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.step-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--container-bg);
+    border: 2px solid var(--border);
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 15px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.step-circle::before {
+    counter-increment: step;
+    content: counter(step);
+}
+
+.step.active .step-circle {
+    border-color: var(--primary);
+    color: var(--primary-light);
+    background: #323c4e;
+    box-shadow: 0 0 0 8px var(--focus-shadow);
+    transform: scale(1.1);
+    font-size: 16px;
+}
+
+.step.completed .step-circle {
+    border-color: var(--primary);
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white;
+    transform: scale(1);
+}
+
+.step.completed .step-circle::before {
+    content: '✓';
+}
+
+.step-label {
+    margin-top: 12px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #94a3b8;
+    transition: color 0.3s ease;
+    text-align: center;
+}
+
+.step.active .step-label {
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.step.step.completed .step-label {
+    color: #475569;
+}
+
+.form-step {
+    display: none;
+    /* animation: fadeIn 0.5s ease-in; */
+}
+
+.form-step.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(100px) scaleY(0);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) scaleY(1);
+    }
+}
+
+.form-group {
+    margin-bottom: 20px;
+
+    label {
+        display: block;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-secondary);
+        margin-bottom: 8px;
+        transition: 0.2s ease-in;
+    }
+}
+
+.form-group :is(input, select, textarea) {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    font-size: 15px;
+    border: 2px solid var(--border);
+    color: var(--text-primary);
+    background: var(--input-bg);
+    transition: all 0.3s ease-in;
+    font-family: inherit;
+}
+
+.form-group :is(input, select, textarea):focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px var(--focus-shadow);
+}
+
+.form-group:has(:is(input[type="text"], select, textarea):focus) label {
+    color: var(--primary-dark);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.radio-option {
+    position: relative;
+}
+
+.radio-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.radio-label {
+    display: block;
+    padding: 16px;
+    border: 2px solid var(--border);
+    color: var(--text-secondary);
+    background: var(--input-bg);
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.radio-option input[type="radio"]:checked + .radio-label {
+    border-color: var(--primary);
+    background: rgb(139 92 246 / 0.15);
+    color: var(--primary-light);
+}
+
+.radio-label:hover {
+    border-color: var(--border-hover);
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+}
+
+.btn {
+    flex: 1;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white;
+    box-shadow: 0 4px 12px rgb(139 92 246 / 0.4);
+
+    &:hover {
+        filter: saturate(1.5);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgb(139 92 246 / 0.5);
+    }
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+.btn-secondary {
+    background: var(--input-bg);
+    color: var(--text-secondary);
+    border: 2px solid var(--border);
+
+    &:hover {
+        background: #1e293b;
+        border-color: var(--border-hover);
+    }
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none !important;
+    }
+}
