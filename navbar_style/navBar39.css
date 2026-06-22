@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
+
+:root {
+    --header-height: 3.5rem;
+
+    --first-color: hsl(174, 90%, 46%);
+    --gradient-color: linear-gradient(90deg, hsl(176, 89%, 83%) 0%
+                                             hsl(173, 90%, 40%) 50%,
+                                             hsl(178, 89%, 22%) 100%);
+    --white-color: hsl(0, 0%, 95%);
+    --text-color: hsl(0, 0%, 64%);
+    --border-color: hsl(0, 0%, 16%);
+    --body-color: hsl(0, 0%, 5%);
+    --container-color: hsl(0, 0%, 10%);
+
+    --body-font: 'Montserrat', sans-serif;
+    --h2-font-size: 1.25rem;
+    --smaller-font-size: 0.75rem;
+    --tiny-font-size: 0.625rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--body-font);
+    background-color: var(--body-color);
+    color: var(--white-color);
+}
+
+button {
+    background: none;
+    border: none;
+    outline: none;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.header {
+    position: fixed;
+    width: 100%;
+    height: var(--header-height);
+    top: 0;
+    background-color: var(--body-color);
+    display: flex;
+    align-items: center;
+    padding-inline: 1rem;
+    z-index: 10;
+}
+
+.header__toggle {
+    color: var(--white-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 100%;
+    background-color: var(--container-color);
+    box-shadow: inset -8px 0 16px hsl(0, 0%, 4%);
+    padding: 2rem 3rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 3rem;
+    z-index: 10;
+    transition: left 0.4s, width 0.3s, padding 0.3s;
+}
