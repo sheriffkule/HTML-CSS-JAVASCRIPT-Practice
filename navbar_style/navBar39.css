@@ -4,7 +4,7 @@
     --header-height: 3.5rem;
 
     --first-color: hsl(174, 90%, 46%);
-    --gradient-color: linear-gradient(90deg, hsl(176, 89%, 83%) 0%
+    --gradient-color: linear-gradient(90deg, hsl(176, 89%, 83%) 0%,
                                              hsl(173, 90%, 40%) 50%,
                                              hsl(178, 89%, 22%) 100%);
     --white-color: hsl(0, 0%, 95%);
@@ -70,7 +70,7 @@ a {
 .sidebar {
     position: fixed;
     top: 0;
-    left: 0;
+    left: -120%;
     width: 300px;
     height: 100%;
     background-color: var(--container-color);
@@ -81,4 +81,209 @@ a {
     row-gap: 3rem;
     z-index: 10;
     transition: left 0.4s, width 0.3s, padding 0.3s;
+}
+
+.show-sidebar {
+    left: 0;
+}
+
+.sidebar__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: var(--white-color);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.2s, transform 0.2s;
+
+    &:hover {
+        color: var(--first-color);
+        transform: scale(1.2);
+    }
+}
+
+.sidebar__toggle {
+    position: absolute;
+    top: 2.75rem;
+    right: -0.5rem;
+    color: var(--white-color);
+    font-size: 1.5rem;
+    cursor: e-resize;
+    display: none;
+    transition: color 0.3s, transform 0.3s;
+
+    &:hover {
+        color: var(--first-color);
+        transform: scale(1.15);
+    }
+}
+
+.sidebar__data {
+    text-align: center;
+}
+
+.sidebar__perfil {
+    width: 100px;
+    height: auto;
+    display: block;
+    border-radius: 50%;
+    margin: 0 auto 0.5rem;
+    transition: width 0.4ms;
+}
+
+.sidebar__name {
+    font-size: var(--h2-font-size);
+    font-weight: 600;
+    color: var(--first-color);
+    transition: font-size 0.4s;
+}
+
+.sidebar__status {
+    font-size: var(--smaller-font-size);
+    color: var(--text-color);
+    font-weight: 500;
+    transition: font-size 0.4s;
+}
+
+.sidebar__menu {
+    height: 100%;
+    display: grid;
+    align-content: space-between;
+}
+
+.sidebar__content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+}
+
+.sidebar__link {
+    position: relative;
+    width: 96px;
+    height: 80px;
+    background-color: var(--container-color);
+    color: var(--white-color);
+    box-shadow: inset 12px 12px 24px hsl(0, 0%, 14%),
+    inset -12px -12px 24px hsl(0, 0%, 4%);
+    border-radius: 0.75rem;
+    transition: color 0.4s, width 0.4s, padding 0.4s, transform, 0.3s;
+}
+
+.sidebar__box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+
+.sidebar__glow {
+    width: 70px;
+    height: 70px;
+    background: var(--gradient-color);
+    border-radius: 50%;
+    position: absolute;
+    top: -5rem;
+    left: -3rem;
+    filter: blur(16px);
+    opacity: 0;
+    transition: top 0.4s, left 0.4s, opacity 0.4s;
+}
+
+.sidebar__group {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.75rem;
+    z-index: 10;
+    display: grid;
+    row-gap: 0.5rem;
+    align-content: center;
+    text-align: center;
+}
+
+.sidebar__icon {
+    font-size: 1.5rem;
+}
+
+.sidebar__label {
+    font-size: var(--tiny-font-size);
+    font-weight: 600;
+    text-wrap: nowrap;
+    transition: opacity 0.3s, left 0.3s;
+}
+
+.sidebar__link-large {
+    width: 100%;
+    height: 48px;
+    padding: 0.75rem 1rem;
+}
+
+.sidebar__link-large .sidebar__group {
+    display: flex;
+    align-items: center;
+    column-gap: .75rem;
+}
+
+.sidebar__link:hover {
+    color: var(--first-color);
+    transform: scale(1.05);
+}
+
+.sidebar__link:hover .sidebar__glow {
+    opacity: 1;
+    top: -2.5rem;
+    left: -1.5rem;
+}
+
+@media (width > 1150px) {
+    .header {
+        display: none;
+    }
+    .sidebar {
+        left: 0;
+    }
+    .sidebar__close {
+        display: none;
+    }
+    .sidebar__toggle {
+        display: block;
+    }
+    .sidebar-expand {
+        width: 96px;
+        padding-inline: 1.5rem;
+    }
+    .sidebar-expand .sidebar__perfil {
+        width: 48px;
+    }
+    .sidebar-expand :is(.sidebar__name, .sidebar__status) {
+        font-size: 0;
+    }
+    .sidebar-expand .sidebar__content {
+        grid-template-columns: 1fr;
+    }
+    .sidebar-expand .sidebar__link {
+        width: 48px;
+        height: 48px;
+    }
+    .sidebar-expand .sidebar__label {
+        position: absolute;
+        left: 3rem;
+        align-self: center;
+        background-color: var(--container-color);
+        border: 1px solid var(--border-color);
+        padding: 0.25rem 0.75rem;
+        border-radius: 0.25rem;
+        opacity: 0;
+        pointer-events: none;
+    }
+    .sidebar-expand .sidebar__link-large {
+        padding: .75rem;
+    }
+    .sidebar-expand .sidebar__link:hover .sidebar__label {
+        opacity: 1;
+        left: 5rem;
+    }
 }
