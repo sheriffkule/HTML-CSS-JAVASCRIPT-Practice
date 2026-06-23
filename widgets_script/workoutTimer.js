@@ -17,13 +17,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const tabButtons = document.querySelectorAll('.tab-btn');
   const tabContent = document.querySelectorAll('.tab-content');
 
-  // Audio elements
-  const bellSound = document.getElementById('bell-sound');
-  const beepSound = document.getElementById('beep-sound');
-  const hornSound = document.getElementById('horn-sound');
-  const chimeSound = document.getElementById('chime-sound');
-  const tickSound = document.getElementById('tick-sound');
-
   // Timer variables
   let timer;
   let timeLeft = 0;
@@ -36,6 +29,9 @@ document.addEventListener('DOMContentLoaded', function () {
   let resetTime = 10;
   let startTime;
   let lapTimeArray = [];
+  let restTime = 10;
+  let totalRounds = 1;
+  let audioContext;
 
   // Initialize the app
   init();
@@ -162,8 +158,8 @@ document.addEventListener('DOMContentLoaded', function () {
         currentRound = 1;
         break;
       case 'tabata':
-        workTime = parseInt(document.getElementById('tabata-time').value);
-        restTime = parseInt(document.getElementById('tabata-time').value);
+        workTime = parseInt(document.getElementById('tabata-work').value);
+        restTime = parseInt(document.getElementById('tabata-rest').value);
         totalRounds = parseInt(document.getElementById('tabata-rounds').value);
         timeLeft = workTime;
         totalTime = workTime;
@@ -238,12 +234,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Play tick sound for the last 3 seconds
     if (timeLeft <= 3 && timeLeft > 0 && soundToggle.checked) {
-      tickSound.currentTime = 0;
-      tickSound.play().catch((e) => console.log('Sound play error: ', e));
+      playSound(tickSound, 880, 0.06, 'square');
     }
 
     // Update progress bar
-    const progressPercent = ((totalTime - timeLeft) / totalTime) * 100;
+    let progressPercent = 0;
+    if (totalTime > 0) {
+      progressPercent = ((totalTime - timeLeft) / totalTime) * 100;
+    }
     progressBar.style.width = `${progressPercent}%`;
 
     if (timeLeft <= 0) {
@@ -256,12 +254,12 @@ document.addEventListener('DOMContentLoaded', function () {
       if (currentMode === 'interval' || currentMode === 'tabata') {
         if (currentPhase === 'work') {
           // Switch to rest phase
-          currentPhase === 'rest';
+          currentPhase = 'rest';
           timeLeft = restTime;
           totalTime = restTime;
         } else {
           // switch to work phase for next round
-          currentPhase === 'work';
+          currentPhase = 'work';
           timeLeft = workTime;
           totalTime = workTime;
           currentRound++;
@@ -295,4 +293,153 @@ document.addEventListener('DOMContentLoaded', function () {
     const elapsed = Date.now() - startTime;
     timeDisplay.textContent = formatTime(Math.floor(elapsed / 1000));
   }
+
+  function updateDisplay() {
+    if (currentMode !== 'stopwatch') {
+      timeDisplay.textContent = formatTime(timeLeft);
+    }
+
+    if (currentMode === 'interval') {
+      roundsDisplay.textContent = `Round ${currentRound} of ${totalRounds}`;
+    } else {
+      roundsDisplay.textContent = '';
+    }
+  }
+
+  function updateTimerModeDisplay() {
+    if (currentMode === 'interval' || currentMode === 'tabata') {
+      timerMode.textContent = currentPhase === 'work' ? 'Work!' : 'Rest';
+      timerMode.style.color = currentPhase === 'work' ? 'var(--danger-color)' : 'var(--success-color)';
+    } else if (currentMode === 'countdown') {
+      timerMode.textContent = 'Countdown';
+      timerMode.style.color = 'var(--primary-color)';
+    }
+  }
+
+  function recordLapTime() {
+    if (currentMode !== 'stopwatch' || !isRunning) return;
+
+    const elapsed = Date.now() - startTime;
+    const seconds = Math.floor(elapsed / 1000);
+    lapTimeArray.unshift(seconds);
+
+    // Update lap times display
+    lapTimes.innerHTML = '';
+    lapTimeArray.forEach((lap, index) => {
+      const lapElement = document.createElement('div');
+      lapElement.textContent = `Lap ${lapTimeArray.length - index}: ${formatTime(lap)}`;
+      lapTimes.appendChild(lapElement);
+    });
+  }
+
+  function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  }
+
+  function getAudioContext() {
+    if (!audioContext) {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (AudioContextClass) {
+        audioContext = new AudioContextClass();
+      }
+    }
+    return audioContext;
+  }
+
+  function playTone(frequency, duration, type = 'sine') {
+    const context = getAudioContext();
+    if (!context) return;
+
+    const oscillator = context.createOscillator();
+    const gainNode = context.createGain();
+
+    oscillator.type = type;
+    oscillator.frequency.value = frequency;
+    gainNode.gain.value = 0.08;
+
+    oscillator.connect(gainNode);
+    gainNode.connect(context.destination);
+
+    oscillator.start();
+    gainNode.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + duration);
+    oscillator.stop(context.currentTime + duration);
+  }
+
+  function playSound(soundElement, frequency, duration, type = 'sine') {
+    if (!soundToggle.checked) return;
+
+    const hasUsableSource = Boolean(soundElement && soundElement.src && soundElement.src !== window.location.href);
+
+    if (hasUsableSource) {
+      soundElement.currentTime = 0;
+      soundElement.play().catch(() => playTone(frequency, duration, type));
+    } else {
+      playTone(frequency, duration, type);
+    }
+  }
+
+  function playEndSound() {
+    if (!soundToggle.checked) return;
+
+    let sound;
+    let frequency = 440;
+    let duration = 0.2;
+    let type = 'sine';
+
+    switch (endSoundSelect.value) {
+      case 'bell':
+        sound = bellSound;
+        frequency = 880;
+        duration = 0.25;
+        type = 'triangle';
+        break;
+      case 'beep':
+        sound = beepSound;
+        frequency = 660;
+        duration = 0.15;
+        type = 'square';
+        break;
+      case 'horn':
+        sound = hornSound;
+        frequency = 520;
+        duration = 0.35;
+        type = 'sawtooth';
+        break;
+      case 'chime':
+        sound = chimeSound;
+        frequency = 1040;
+        duration = 0.2;
+        type = 'triangle';
+        break;
+      case 'tick':
+        sound = tickSound;
+        frequency = 720;
+        duration = 0.08;
+        type = 'square';
+        break;
+      default:
+        sound = beepSound;
+        frequency = 660;
+        duration = 0.15;
+        type = 'square';
+    }
+
+    playSound(sound, frequency, duration, type);
+  }
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
