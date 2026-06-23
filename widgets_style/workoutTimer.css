@@ -15,7 +15,7 @@
 
 [data-theme="dark"] {
     --primary: #567aff;
-    --secondary: #5a6268;
+    --secondary: #818c94;
     --danger: #e4606d;
     --success: #3dd45e;
     --warning: #ffd351;
@@ -186,4 +186,108 @@ body {
 .preset-buttons {
     display: flex;
     gap: 10px;
+}
+
+.preset-btn {
+    padding: 10px;
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    width: 100%;
+    color: var(--text);
+    transition: background-color 0.25s, border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+
+    &:hover {
+        background-color: var(--primary);
+        border-color: var(--primary);
+        transform: scale(1.03);
+        box-shadow: 0 4px 10px var(--shadow);
+    }
+    &:active {
+        transform: scale(1);
+    }
+}
+
+.timer-config {
+    background-color: var(--card);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px var(--shadow),
+    inset 0 4px 10px var(--shadow);
+}
+
+.config-tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.tab-btn {
+    padding: 10px 16px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--secondary);
+
+    &.active {
+        color: var(--primary);
+        border-bottom-color: var(--primary);
+        font-size: 1rem;
+        letter-spacing: 1px;
+    }
+}
+
+/* .tab-content {
+    display: none;
+} */
+
+.tab-content.active {
+    display: flex;
+}
+
+.form-group {
+    width: 100%;
+    margin-bottom: 15px;
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 0.9rem;
+        color: var(--secondary);
+    }
+}
+
+.form-group :is(input, select) {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background-color: var(--bg);
+    color: var(--text);
+    outline: none;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    height: 30px;
+    cursor: pointer;
+}
+
+input[type="number"] {
+    caret-animation: manual;
+    caret-shape: block;
+    caret-color: var(--primary);
+    animation: caret-animation infinite linear 1s;
+}
+
+@keyframes caret-animation {
+  50% {
+    caret-color: transparent;
+  }
 }
