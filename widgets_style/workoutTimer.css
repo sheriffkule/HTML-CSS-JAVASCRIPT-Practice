@@ -1,0 +1,86 @@
+:root {
+    --primary: #4a6bff;
+    --secondary: #6c757d;
+    --danger: #dc3545;
+    --success: #28a745;
+    --warning: #ffc107;
+    --light: #f1f2fa;
+    --dark: #343a40;
+    --text: #212529;
+    --bg: #eeeeee;
+    --card: #f1f2fa;
+    --border: #cedae6;
+    --shadow: rgb(0 0 0 / 0.12);
+}
+
+[data-theme="dark"] {
+    --primary: #567aff;
+    --secondary: #5a6268;
+    --danger: #e4606d;
+    --success: #3dd45e;
+    --warning: #ffd351;
+    --light: #343a40;
+    --dark: #f1f2fa;
+    --text: #f1f2fa;
+    --bg: #212529;
+    --card: #2c3034;
+    --border: #495057;
+    --shadow: rgb(255 255 255 / 0.12);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+}
+
+.app-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border);
+
+    h1 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--primary);
+    }
+}
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.main-content {
+    flex-direction: 1;
+}
+
+.timer-display {
+    background: var(--card);
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 25px;
+    text-align: center;
+    box-shadow: 0 4px 15px var(--shadow),
+    inset 0 4px 15px var(--shadow);
+}
