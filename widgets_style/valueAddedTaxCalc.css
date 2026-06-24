@@ -51,3 +51,136 @@ header {
         text-wrap: pretty;
     }
 }
+
+.calculator-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+
+    @media (width < 768px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.calculator-section {
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    color: var(--secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #495057;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #bcc1c7;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+:is(input, select):is(:focus, :focus-visible) {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgb(72 149 239 / 0.2),
+    inset 0 0 0 3px rgb(72 149 239 / 0.2);
+}
+
+select,
+::picker(select) {
+  appearance: base-select;
+  cursor: pointer;
+}
+
+::picker(select) {
+  border-radius: 8px;
+  border: none;
+}
+
+select::picker-icon {
+  font-size: 16px;
+  color: var(--primary);
+  transition: 0.3s rotate;
+}
+
+select:open::picker-icon {
+  rotate: 180deg;
+  color: limegreen;
+}
+
+select:open {
+    background: var(--secondary);
+    color: white;
+}
+
+option {
+  border: 1px solid #bbb;
+  background: var(--primary);
+  padding: 2px 0 2px 12px;
+  color: var(--light);
+  padding-right: 18px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+option:hover,
+option:focus {
+  background: var(--secondary);
+}
+
+option:checked {
+  font-weight: bold;
+  letter-spacing: 1px;
+  background-color: var(--secondary);
+}
+
+option::checkmark {
+  color: var(--success);
+  font-size: 1.5rem;
+}
+
+.calculate-btn {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: var(--transition);
+    width: 100%;
+    margin-top: 10px;
+
+    &:hover {
+        background-color: var(--secondary);
+        transform: translateY(-2px);
+        box-shadow: var(--box-shadow);
+    }
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+.results {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    margin-top: 20px;
+}
