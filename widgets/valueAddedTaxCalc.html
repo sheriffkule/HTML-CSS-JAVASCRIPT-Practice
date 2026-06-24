@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Value Added Tax Calculator</title>
+    <link rel="stylesheet" href="/widgets_style/valueAddedTaxCalc.css" />
+  </head>
+  <body>
+    <button class="dark-mode-toggle" id="darkModeToggle">🌓</button>
+
+    <div class="container">
+      <header>
+        <h1>Value Added Tax Calculator</h1>
+        <p class="subtitle">Calculate Value Added Tax with ease for any country.</p>
+      </header>
+
+      <div class="tabs">
+        <div class="tab active" data-tab="calculator">Calculator</div>
+        <div class="tab" data-tab="rates">VAT Rates</div>
+        <div class="tab" data-tab="history">history</div>
+      </div>
+
+      <div class="tab-content active" id="calculator">
+        <div class="calculator-grid">
+          <div class="calculator-section">
+            <h3 class="section-title">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+              Calculation Type
+            </h3>
+            <div class="input-group">
+              <label for="calculationType">I want to:</label>
+              <select id="calculationType">
+                <option value="add">Add VAT to net amount</option>
+                <option value="remove">Remove VAT from gross amount</option>
+                <option value="difference">Calculate VAT difference</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label for="amount">Amount:</label>
+              <input type="number" id="amount" placeholder="Enter amount" step="0.01" min="0" />
+            </div>
+
+            <div class="input-group">
+              <label for="vatRate">VAT Rate (%):</label>
+              <input
+                type="number"
+                id="vatRate"
+                placeholder="Enter VAT rate"
+                step="0.1"
+                min="0"
+                max="100"
+                value="20" />
+            </div>
+
+            <button id="calculateBtn">Calculate</button>
+          </div>
+
+          <div class="calculator-section">
+            <h3 class="section-title">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              Country Selection
+            </h3>
+            <div class="input-group">
+              <label for="countrySelect">Select Country:</label>
+              <select id="countrySelect">
+                <option value="">Custom Rate</option>
+                <option value="PH" selected>Philippines (12%)</option>
+                <option value="AT">Austria (20%)</option>
+                <option value="BE">Belgium (21%)</option>
+                <option value="BG">Bulgaria (20%)</option>
+                <option value="HR">Croatia (25%)</option>
+                <option value="CY">Cyprus (19%)</option>
+                <option value="CZ">Czech Republic (21%)</option>
+                <option value="DK">Denmark (25%)</option>
+                <option value="EE">Estonia (20%)</option>
+                <option value="FI">Finland (24%)</option>
+                <option value="FR">France (20%)</option>
+                <option value="DE">Germany (19%)</option>
+                <option value="GR">Greece (24%)</option>
+                <option value="HU">Hungary (27%)</option>
+                <option value="IE">Ireland (23%)</option>
+                <option value="IT">Italy (22%)</option>
+                <option value="LV">Latvia (21%)</option>
+                <option value="LT">Lithuania (21%)</option>
+                <option value="LU">Luxembourg (17%)</option>
+                <option value="MT">Malta (18%)</option>
+                <option value="NL">Netherlands (21%)</option>
+                <option value="PL">Poland (23%)</option>
+                <option value="PT">Portugal (23%)</option>
+                <option value="RO">Romania (19%)</option>
+                <option value="SK">Slovakia (20%)</option>
+                <option value="SI">Slovenia (22%)</option>
+                <option value="ES">Spain (21%)</option>
+                <option value="SE">Sweden (25%)</option>
+                <option value="GB">United Kingdom (20%)</option>
+              </select>
+            </div>
+
+            <div class="country-flags" id="countryFlags">
+              <!-- Flags will be added dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <div class="results" id="results">
+          <h3 class="section-title">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+            </svg>
+            Calculation Results
+          </h3>
+          <div class="result-item">
+            <span class="result-label">Net Amount:</span>
+            <span class="result-value" id="netAmount">-</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">VAT Amount</span>
+            <span class="result-value" id="vatAmount">-</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Gross Amount:</span>
+            <span class="result-value" id="grossAmount">-</span>
+          </div>
+          <div class="result-item total">
+            <span class="result-label">Total:</span>
+            <span class="result-value" id="totalAmount">-</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="rates">
+        <h3 class="section-title">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round">
+            <path
+              d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+          </svg>
+          Standard VAT Rates by Country
+        </h3>
+        <div id="ratesTable">
+          <!-- Rates will be added dynamically -->
+        </div>
+      </div>
+
+      <div class="tab-content" id="history">
+        <h3 class="section-title">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          Calculation History
+        </h3>
+        <div id="historyList">
+          <!-- History items will be added dynamically -->
+          <p class="emptyHistory">No calculations saved yet.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="notification" id="notification"></div>
+  </body>
+</html>
