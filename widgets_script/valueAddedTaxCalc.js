@@ -91,8 +91,13 @@ document.addEventListener('DOMContentLoaded', function () {
       const selectedCountry = this.value;
       if (selectedCountry) {
         const country = countries.find((c) => c.code === selectedCountry);
-        vatRateInput.value = country.rate;
-        highlightSelectedFlag(selectedCountry);
+        if (country) {
+          vatRateInput.value = country.rate;
+          highlightSelectedFlag(selectedCountry);
+        } else {
+          vatRateInput.value = '';
+          highlightSelectedFlag('');
+        }
       }
     });
 
@@ -195,15 +200,10 @@ document.addEventListener('DOMContentLoaded', function () {
         vatAmount = grossAmount - netAmount;
         break;
       case 'difference':
-        // Calculate VAT difference between two amounts
+        // Calculate the VAT amount as the difference between gross and net values
         netAmount = amount;
-        grossAmount = amount;
-        vatAmount = grossAmount - netAmount;
-        // Calculate implied VAT rate
-        if (netAmount > 0) {
-          const impliedRate = (vatAmount / netAmount) * 100;
-          vatRateInput.value = impliedRate.toFixed(2);
-        }
+        vatAmount = (netAmount * vatRate) / 100;
+        grossAmount = grossAmount + vatAmount;
         break;
     }
 
@@ -222,12 +222,156 @@ document.addEventListener('DOMContentLoaded', function () {
     resultsSection.style.display = 'block';
   }
 
-  function formatCurrency() {
+  function formatCurrency(amount) {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     }).format(amount);
+  }
+
+  function saveToHistory(netAmount, vatAmount, grossAmount, vatRate, type) {
+    let history = JSON.parse(localStorage.getItem('vatHistory')) || [];
+
+    const calculation = {
+      id: Date.now(),
+      date: new Date().toLocaleString(),
+      netAmount,
+      vatAmount,
+      grossAmount,
+      vatRate,
+      type,
+      country: countrySelect.value || 'Custom',
+    };
+
+    history.unshift(calculation);
+    localStorage.setItem('vatHistory', JSON.stringify(history));
+    loadHistory();
+  }
+
+  function loadHistory() {
+    const history = JSON.parse(localStorage.getItem('vatHistory')) || [];
+
+    if (history.length === 0) {
+      emptyHistory.style.display = 'block';
+      historyList.innerHTML = '';
+      return;
+    }
+
+    emptyHistory.style.display = 'none';
+    historyList.innerHTML = '';
+
+    history.forEach((item) => {
+      const country = countries.find((c) => c.code === item.country) || { name: 'Custom', flag: '🌐' };
+
+      const historyItem = document.createElement('div');
+      historyItem.className = 'history-item';
+      historyItem.innerHTML = `
+        <div class="history-details">
+          <div>
+            <strong
+              >${country.flag}
+              ${item.type === 'add' ? 'Added' : item.type === 'remove' ? 'Removed' : 'Difference'} VAT</strong
+            >
+          </div>
+          <div>Rate: ${item.vatRate}% | ${formatCurrency(item.grossAmount)} total</div>
+          <div class="text-muted" style="font-size: 0.875rem; color: #6c757d;">${item.date}</div>
+        </div>
+        <div class="history-actions">
+          <button class="view-btn" data-id="${item.id}">View</button>
+          <button class="delete-btn" data-id="${item.id}">Delete</button>
+        </div>
+      `;
+      historyList.appendChild(historyItem);
+    });
+
+    // Add event listeners to action buttons
+    document.querySelectorAll('.view-btn').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        const id = parseInt(this.getAttribute('data-id'));
+        viewHistoryItem(id);
+      });
+    });
+
+    document.querySelectorAll('.delete-btn').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        const id = parseInt(this.getAttribute('data-id'));
+        deleteHistoryItem(id);
+      });
+    });
+  }
+
+  function viewHistoryItem(id) {
+    const history = JSON.parse(localStorage.getItem('vatHistory')) || [];
+    const item = history.find((i) => i.id === id);
+
+    if (item) {
+      // Switch to calculator tab
+      switchTab('calculator');
+
+      // Set form values
+      calculationType.value = item.type;
+      amountInput.value = item.type === 'remove' ? item.grossAmount : item.netAmount;
+      vatRateInput.value = item.vatRate;
+
+      // Find and select the country if it exist
+      if (item.country !== 'Custom') {
+        countrySelect.value = item.country;
+        highlightSelectedFlag(item.country);
+      } else {
+        countrySelect.value = '';
+        document.querySelectorAll('.flag-option').forEach((flag) => {
+          flag.classList.add('selected');
+        });
+      }
+
+      // Calculate and display results
+      calculateVAT();
+
+      showNotification('Calculation loaded from history');
+    }
+  }
+
+  function deleteHistoryItem(id) {
+    let history = JSON.parse(localStorage.getItem('vatHistory')) || [];
+    history = history.filter((i) => i.id !== id);
+    localStorage.setItem('vatHistory', JSON.stringify(history));
+    loadHistory();
+    showNotification('Calculation deleted from history');
+  }
+
+  function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+  }
+
+  function switchTab(tabId) {
+    // Update active tab
+    tabs.forEach((tab) => {
+      tab.classList.remove('active');
+      if (tab.getAttribute('data-tab') === tabId) {
+        tab.classList.add('active');
+      }
+    });
+
+    // Update active tab contact
+    tabContents.forEach((content) => {
+      content.classList.remove('active');
+      if (content.id === tabId) {
+        content.classList.add('active');
+      }
+    });
+  }
+
+  function showNotification(message, type = 'success') {
+    notification.textContent = message;
+    notification.className = 'notification';
+    notification.classList.add(type === 'success' ? 'success' : 'warning', 'show');
+
+    setTimeout(() => {
+      notification.classList.remove('show');
+    }, 3000);
   }
 });

@@ -155,7 +155,7 @@ option::checkmark {
   font-size: 1.5rem;
 }
 
-.calculate-btn {
+button {
     background-color: var(--primary);
     color: white;
     border: none;
@@ -266,9 +266,9 @@ option::checkmark {
     }
 }
 
-/* .tab-content {
+.tab-content {
     display: none;
-} */
+}
 
 .tab-content.active {
     display: block;
@@ -306,5 +306,82 @@ option::checkmark {
     span {
         margin-top: 5px;
         font-size: 0.875rem;
+    }
+}
+
+.dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--primary);
+    color: white;
+    font-size: 20px;
+    border: none;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgb(0 0 0 / 0.12);
+    z-index: 10;
+    transition: var(--transition);
+
+    &:hover {
+        transform: scale(1.05) rotate(180deg);
+    }
+    &:active {
+        transform: scale(1);
+    }
+}
+
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.dark-mode .container {
+    background-color: #1e1e1e;
+    box-shadow: 0 8px 20px rgb(0 0 0 / 0.3);
+}
+
+body.dark-mode .results {
+    background-color: #2d2d2d;
+}
+
+body.dark-mode .history-item {
+    background-color: #2d2d2d;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.2);
+}
+
+body.dark-mode .flag-option:hover {
+    background-color: #333;
+}
+
+body.dark-mode .flag-option.selected {
+    background-color: #3a3a3a;
+    border-color: var(--accent);
+}
+
+.notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--success);
+    color: var(--dark);
+    padding: 15px 30px;
+    border-radius: 25px;
+    corner-shape: bevel squircle squircle bevel;
+    box-shadow: var(--box-shadow);
+    transform: translateX(120%);
+    opacity: 0;
+    transition: var(--transition);
+    z-index: 10;
+
+    &.show {
+        transform: translateX(0);
+        opacity: 1;
     }
 }
