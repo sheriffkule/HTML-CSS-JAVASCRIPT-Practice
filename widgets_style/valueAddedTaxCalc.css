@@ -184,3 +184,127 @@ option::checkmark {
     border-radius: var(--border-radius);
     margin-top: 20px;
 }
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #bcc1c7;
+
+    &:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+}
+
+.result-label {
+    font-weight: 500;
+}
+
+.result-value {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.total {
+    font-size: 1.25rem;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 4px double var(--accent);
+}
+
+.history-section {
+    margin-top: 30px;
+}
+
+.history-item {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    margin-bottom: 10px;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.history-details {
+    flex: 1;
+}
+
+.history-actions button {
+    width: auto;
+    padding: 5px 10px;
+    margin-left: 10px;
+    background-color: var(--light);
+    color: var(--dark);
+
+    &:hover {
+        background-color: #dedede;
+    }
+}
+
+.tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #aca4a6;
+}
+
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: 500;
+    color: #6c757d;
+    border-bottom: 3px solid transparent;
+    transition: var(--transition);
+
+    &.active {
+        color: var(--primary);
+        border-bottom-color: var(--primary);
+    }
+}
+
+/* .tab-content {
+    display: none;
+} */
+
+.tab-content.active {
+    display: block;
+}
+
+.country-flags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.flag-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 8px;
+    transition: var(--transition);
+
+    &:hover {
+        background-color: #f1f3ff;
+    }
+    &.selected {
+        background-color: #e0e7ff;
+        border: 1px solid var(--accent);
+    }
+    img {
+        width: 40px;
+        height: 30px;
+        object-fit: cover;
+        border-radius: 4px;
+    }
+    span {
+        margin-top: 5px;
+        font-size: 0.875rem;
+    }
+}

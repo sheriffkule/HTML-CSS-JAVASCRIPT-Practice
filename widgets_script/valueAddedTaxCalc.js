@@ -117,4 +117,117 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
+
+  function renderCountryFlags() {
+    countryFlags.innerHTML = '';
+    countries.forEach((country) => {
+      const flagOption = document.createElement('div');
+      flagOption.className = 'flag-option';
+      flagOption.setAttribute('data-country', country.code);
+      flagOption.innerHTML = `
+        <span class="flag">${country.flag}</span>
+        <span>${country.code}</span>
+      `;
+      flagOption.addEventListener('click', function () {
+        countrySelect.value = country.code;
+        vatRateInput.value = country.rate;
+        highlightSelectedFlag(country.code);
+      });
+      countryFlags.appendChild(flagOption);
+    });
+  }
+
+  function highlightSelectedFlag(countryCode) {
+    document.querySelectorAll('.flag-option').forEach((flag) => {
+      flag.classList.remove('selected');
+      if (flag.getAttribute('data-country') === countryCode) {
+        flag.classList.add('selected');
+      }
+    });
+  }
+
+  function renderRatesTable() {
+    let html = '<div class="results">';
+    countries.forEach((country) => {
+      html += `
+        <div class="result-item">
+          <span class="result-label">${country.flag} ${country.name}</span>
+          <span class="result-value">${country.rate}</span>
+        </div>
+      `;
+    });
+    html += '</div>';
+    ratesTable.innerHTML = html;
+  }
+
+  function calculateVAT() {
+    const type = calculationType.value;
+    const amount = parseFloat(amountInput.value);
+    const vatRate = parseFloat(vatRateInput.value);
+
+    // Validate inputs
+    if (isNaN(amount)) {
+      showNotification('Please enter a valid amount', 'warning');
+      amountInput.focus();
+      return;
+    }
+
+    if (isNaN(vatRate)) {
+      showNotification('Please enter a valid VAT rate', 'warning');
+      vatRateInput.focus();
+      return;
+    }
+
+    let netAmount;
+    let vatAmount;
+    let grossAmount;
+
+    switch (type) {
+      case 'add':
+        // Add VAT to net amount
+        netAmount = amount;
+        vatAmount = (netAmount * vatRate) / 100;
+        grossAmount = netAmount + vatAmount;
+        break;
+      case 'remove':
+        grossAmount = amount;
+        netAmount = grossAmount / (1 + vatRate / 100);
+        vatAmount = grossAmount - netAmount;
+        break;
+      case 'difference':
+        // Calculate VAT difference between two amounts
+        netAmount = amount;
+        grossAmount = amount;
+        vatAmount = grossAmount - netAmount;
+        // Calculate implied VAT rate
+        if (netAmount > 0) {
+          const impliedRate = (vatAmount / netAmount) * 100;
+          vatRateInput.value = impliedRate.toFixed(2);
+        }
+        break;
+    }
+
+    // Display results
+    displayResults(netAmount, vatAmount, grossAmount);
+
+    // Save to history
+    saveToHistory(netAmount, vatAmount, grossAmount, vatRate, type);
+  }
+
+  function displayResults(netAmount, vatAmount, grossAmount) {
+    netAmountEl.textContent = formatCurrency(netAmount);
+    vatAmountEl.textContent = formatCurrency(vatAmount);
+    grossAmountEl.textContent = formatCurrency(grossAmount);
+    totalAmountEl.textContent = formatCurrency(grossAmount);
+    resultsSection.style.display = 'block';
+  }
+
+  function formatCurrency() {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(amount);
+  }
 });
