@@ -15,7 +15,13 @@ document.addEventListener('DOMContentLoaded', function () {
   let currentRecordType = 'A';
 
   // Initialize history from localStorage
-  let lookupHistory = JSON.parse(localStorage.getItem('dnsLookupHistory')) || [];
+  let lookupHistory = [];
+  try {
+    lookupHistory = JSON.parse(localStorage.getItem('dnsLookupHistory')) || [];
+  } catch (error) {
+    console.warn('Could not parse DNS lookup history:', error);
+    localStorage.removeItem('dnsLookupHistory');
+  }
   renderHistory();
 
   // Event listeners
@@ -197,17 +203,31 @@ document.addEventListener('DOMContentLoaded', function () {
     const createdDate = new Date(now.getFullYear() - 2, now.getMonth(), now.getDate());
     const expiresDate = new Date(now.getFullYear() + 1, now.getMonth(), now.getDate());
 
-    document.getElementById('domain-register').textContent =
-      `Registrar: ${registrars[Math.floor(Math.random() * registrars.length)]}`;
-    document.getElementById('domain-created').textContent = `Created: ${createdDate.toLocaleDateString()}`;
-    document.getElementById('domain-expires').textContent = `Expires: ${expiresDate.toLocaleDateString()}`;
+    const registrarElement = document.getElementById('domain-registar') || document.getElementById('domain-register');
+    const createdElement = document.getElementById('domain-created');
+    const expiresElement = document.getElementById('domain-expires');
+    const serverIpElement = document.getElementById('server-ip');
+    const serverLocationElement = document.getElementById('server-location');
+    const serverIspElement = document.getElementById('server-isp');
 
-    document.getElementById('server-ip').textContent =
-      `IP: ${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`;
-    document.getElementById('server-location').textContent =
-      `Location: ${locations[Math.floor(Math.random() * locations.length)]}`;
-    document.getElementById('server-isp').textContent =
-      `ISP: ${isps[Math.floor(Math.random() * isps.length)]}`;
+    if (registrarElement) {
+      registrarElement.textContent = `Registrar: ${registrars[Math.floor(Math.random() * registrars.length)]}`;
+    }
+    if (createdElement) {
+      createdElement.textContent = `Created: ${createdDate.toLocaleDateString()}`;
+    }
+    if (expiresElement) {
+      expiresElement.textContent = `Expires: ${expiresDate.toLocaleDateString()}`;
+    }
+    if (serverIpElement) {
+      serverIpElement.textContent = `IP: ${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`;
+    }
+    if (serverLocationElement) {
+      serverLocationElement.textContent = `Location: ${locations[Math.floor(Math.random() * locations.length)]}`;
+    }
+    if (serverIspElement) {
+      serverIspElement.textContent = `ISP: ${isps[Math.floor(Math.random() * isps.length)]}`;
+    }
   }
 
   function displayResults(results) {
@@ -344,4 +364,18 @@ document.addEventListener('DOMContentLoaded', function () {
       renderHistory();
     }
   }
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });

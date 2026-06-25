@@ -235,3 +235,150 @@ input[type="text"]:is(:focus, :focus-visible)::placeholder {
         color: var(--primary);
     }
 }
+
+.clear-history {
+    background: #f8f7d2;
+    color: var(--error);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+
+    &:hover {
+        background: #f1aeb5;
+        box-shadow: var(--box-shadow);
+        scale: 1.03;
+    }
+    &:active {
+        scale: 1;
+    }
+}
+
+.history-list {
+    list-style: none;
+}
+
+.history-item {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #bbb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: var(--transition);
+
+    &:hover {
+        background-color: #f8f9fa;
+    }
+    .domain {
+        font-weight: 600;
+    }
+    .time {
+        color: #555;
+        font-size: 0.875rem;
+    }
+}
+
+.loader {
+    display: none;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.loader i {
+    color: var(--primary);
+    font-size: 2rem;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+footer {
+    text-align: center;
+    color: #555;
+    font-size: 0.875rem;
+    margin-block: 1.5rem;
+
+    span {
+        color: red;
+        font-size: 1rem;
+    }
+    abbr {
+        letter-spacing: 0.5px;
+        text-underline-offset: 2px;
+        cursor: default;
+        color: var(--primary);
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: var(--light);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+.additional-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.info-card {
+    flex: 1;
+    max-width: 200px;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 1.5rem;
+
+    h3 {
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+    }
+    p {
+        color: #555;
+    }
+}
+
+.empty-history {
+    text-align: center;
+    color: #555;
+    padding: 2rem 0;
+}
+
+@media (width < 768px) {
+    .container {
+        padding: 1rem;
+    }
+    .input-group {
+        flex-direction: column;
+
+        input {
+            border-radius: var(--border-radius);
+            margin-bottom: 0.5rem;
+        }
+        button {
+            border-radius: var(--border-radius);
+            padding: .75rem;
+        }
+    }
+    .additional-info {
+        flex-direction: column;
+    }
+}
