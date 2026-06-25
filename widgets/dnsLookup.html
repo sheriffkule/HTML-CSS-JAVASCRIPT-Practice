@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DNS Lookup Tool</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/dnsLookup.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>DNS Lookup Tool</h1>
+        <p>Query DNS records for any domain with our free online tool.</p>
+      </header>
+
+      <section class="lookup-container">
+        <div class="input-group">
+          <input type="text" id="domain-input" placeholder="Enter domain (e.g., example.com)" autofocus />
+          <button id="lookup-btn">Lookup <i class="fas fa-arrow-right"></i></button>
+        </div>
+
+        <div class="record-type-selector">
+          <div class="record-type active" data-type="A">A (IPv4)</div>
+          <div class="record-type" data-type="AAAA">AAAA (IPv6)</div>
+          <div class="record-type" data-type="MX">MX (Mail)</div>
+          <div class="record-type" data-type="CNAME">CNAME</div>
+          <div class="record-type" data-type="TXT">TXT</div>
+          <div class="record-type" data-type="NS">NS (Nameserver)</div>
+          <div class="record-type" data-type="SOA">SOA</div>
+          <div class="record-type" data-type="PTR">PTR</div>
+        </div>
+
+        <div class="loader">
+          <i class="fas fa-spinner"></i>
+        </div>
+
+        <div class="error-message" id="error-message">Error Message</div>
+
+        <div class="results-container results-container">
+          <div class="results-header">
+            <h2>DNS Records</h2>
+            <button class="copy-btn" id="copy-results"><i class="far fa-copy"></i> Copy Results</button>
+          </div>
+          <table class="result-table" id="result-table">
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>name</th>
+                <th>Value</th>
+                <th>TTL</th>
+              </tr>
+            </thead>
+            <tbody id="results-body">
+              <!-- Results will be inserted here -->
+            </tbody>
+          </table>
+
+          <div class="additional-info">
+            <div class="info-card">
+              <h3>Domain Information</h3>
+              <p id="domain-registar">Registrar: N/A</p>
+              <p id="domain-created">Created: N/A</p>
+              <p id="domain-expires">Expires: N/A</p>
+            </div>
+            <div class="info-card">
+              <h3>Server Information</h3>
+              <p id="server-ip">IP: N/A</p>
+              <p id="server-location">Location: N/A</p>
+              <p id="server-isp">ISP: N/A</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="history-container">
+        <div class="history-header">
+          <h2>Lookup History</h2>
+          <button class="clear-history" id="clear-history">Clear History</button>
+        </div>
+        <ul class="history-list" id="history-list">
+          <li class="empty-history">No lookup history yet.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      © <time datetime="2026" id="year">2026</time> Made width <span>♥</span> by
+      <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+    </footer>
+
+    <script src="/widgets_script/dnsLookup.js"></script>
+  </body>
+</html>
