@@ -283,5 +283,122 @@ document.addEventListener('DOMContentLoaded', function () {
     showAlert('Items exported successfully!');
   }
 
+  // Import from csv
+  function importFromCSV(e) {
+    e.preventDefault();
+
+    const csvData = document.getElementById('csvData').value;
+    const overwrite = document.getElementById('overwrite');
+
+    if (!csvData) {
+      showAlert('Please paste CSV data!', 'error');
+      return;
+    }
+
+    try {
+      const lines = csvData.split('\n');
+      const headers = lines[0].split(',').map((h) => h.trim());
+
+      // Validate headers
+      if (
+        headers.length < 4 ||
+        headers[0].toLowerCase() !== 'upc' ||
+        headers[1].toLowerCase() !== 'product name' ||
+        headers[2].toLowerCase() !== 'category' ||
+        headers[3].toLowerCase() !== 'price'
+      ) {
+        showAlert('Invalid CSV format. Please correct format: UPC,Product Name,Category,Price', 'error');
+        return;
+      }
+
+      let importedItems = [];
+      let duplicates = 0;
+      let importedCount = 0;
+
+      for (let i = 1; i < lines.length; i++) {
+        if (!lines[i].trim()) continue;
+
+        const values = lines[i].split(',').map((v) => v.trim().replace(/^"|"$/g, ''));
+        if (values.length < 4) continue;
+
+        const upc = values[0];
+        const name = values[1];
+        const category = values[2];
+        const price = parseFloat(values[3]);
+
+        if (!upc || !name || isNaN(price)) continue;
+
+        const existingItemIndex = groceryForm.findIndex((item) => item.upc === upc);
+
+        if (existingItemIndex !== -1) {
+          if (overwrite) {
+            // Update existing item
+            groceryItems[existingItemIndex] = {
+              ...groceryItems[existingItemIndex],
+              upc,
+              name,
+              price,
+              category,
+            };
+            importedCount++;
+          } else {
+            duplicates++;
+          }
+        } else {
+          // Add new item
+          importedItems.push({
+            id: Date.now().toString() + i,
+            upc,
+            name,
+            price,
+            category,
+          });
+          importedCount++;
+        }
+      }
+
+      if (!overwrite) {
+        groceryItems = [...importedItems, ...groceryItems];
+      }
+
+      saveToLocalStorage();
+      renderGroceryItems();
+      updateCategories();
+      closeImportModal();
+
+      showAlert(
+        `Imported ${importedCount} items successfully! ${duplicates > 0 ? `${duplicates} duplicates skipped.` : ''}`,
+      );
+    } catch (error) {
+      showAlert('Error importing items: ', +error.message, 'error');
+    }
+  }
+
+  // Modal functions
+  function openModal() {
+    itemModal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    itemModal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+    groceryForm.reset();
+    document.getElementById('itemId').value = '';
+    document.getElementById('modalTitle').textContent = 'Add New Item';
+  }
+
+  function openImportModal() {
+    importModal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeImportModal() {
+    importModal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+    document.getElementById('csvData').value = '';
+    document.getElementById('overwrite').textContent = 'Add New Item';
+  }
+
   init();
 });
