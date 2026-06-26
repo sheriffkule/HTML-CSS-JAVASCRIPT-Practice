@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary: #4caf50;
+    --primary-hover: #45a049;
+    --secondary: #f44336;
+    --secondary-hover: #d32f2f;
+    --background: #eeeeee;
+    --text: #333333;
+    --card-bg: #d9d9d9;
+    --border: #c0c0c0;
+    --shadow: 0 4px 8px rgb(0 0 0 / 0.15);
+    --transition: all 0.3s ease;
+}
+
+.dark-mode {
+    --background: #151515;
+    --text: #f1f1f1;
+    --card-bg: #2e2e2e;
+    --border: #393939;
+    --shadow: 0 4px 8px rgb(255 255 255 / 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background);
+    color: var(--text);
+    transition: var(--transition);
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+h1 {
+    /* display: inline; */
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    color: transparent;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    background-clip: text;
+    text-wrap: balance;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.subtitle {
+    color: var(--text);
+    opacity: 0.8;
+    font-size: 1.1rem;
+}
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+
+    input {
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+}
+
+.switch:has(input:checked) ~ .fa-moon {
+    color: var(--primary);
+    transition: var(--transition);
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background-color: #ccc;
+    transition: .4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    border-radius: 34px;
+}
+
+.slider::before {
+    content: '';
+    position: absolute;
+    height: 26px;
+    width: 26px;
+    border-radius: 50%;
+    background-color: white;
+    top: 4px;
+    left: 4px;
+    transition: 0.4s;
+}
+
+input:checked + .slider {
+    background-color: var(--primary);
+}
+
+input:checked + .slider::before {
+    transform: translateX(26px);
+}

@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grocery Item Price Checker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/groceriesChecker.css" />
+  </head>
+  <body class="dark-mode">
+    <div class="container">
+      <header>
+        <div class="header-content">
+          <h1><i class="fas fa-shopping-basket"></i> Grocery Item Price Checker</h1>
+          <div class="theme-toggle">
+            <i class="fas fa-sun"></i>
+            <label class="switch">
+              <input type="checkbox" id="themeToggle" />
+              <span class="slider round"></span>
+            </label>
+            <i class="fas fa-moon"></i>
+          </div>
+        </div>
+        <p class="subtitle">Track and manage grocery item prices.</p>
+      </header>
+
+      <div class="alert alert-success" id="successAlert">Success Alert</div>
+      <div class="alert alert-error" id="errorAlert">Error Alert</div>
+
+      <main class="app-container">
+        <section class="controls">
+          <article class="search-filter">
+            <div class="search-box">
+              <i class="fas fa-search"></i>
+              <input type="text" id="searchInput" placeholder="Search items..." />
+            </div>
+            <select id="categoryFilter">
+              <option value="">All Categories</option>
+            </select>
+            <select id="sortBy">
+              <option value="name_asc">Name (A-Z)</option>
+              <option value="name_desc">Name (Z-A)</option>
+              <option value="price_asc">Price (Low to High)</option>
+              <option value="price_desc">Price (High to Low)</option>
+            </select>
+          </article>
+
+          <article class="action-buttons">
+            <button class="btn-primary" id="addItemBtn"><i class="fas fa-plus"></i> Add Item</button>
+            <button class="btn-secondary" id="exportBtn"><i class="fas fa-file-export"></i> Export</button>
+            <button class="btn-secondary" id="importBtn"><i class="fas fa-file-import"></i> Import</button>
+          </article>
+        </section>
+
+        <section class="grocery-list">
+          <article class="list-header">
+            <div class="header-item">UPC</div>
+            <div class="header-item">Product Name</div>
+            <div class="header-item">Category</div>
+            <div class="header-item">Price</div>
+            <div class="header-item">Actions</div>
+          </article>
+          <article class="items-container" id="groceryItems">
+            <div class="empty-state">No items found. Add some items to get started!</div>
+          </article>
+        </section>
+      </main>
+    </div>
+    <footer>
+      © <time datetime="2026" id="year">2026</time> Made width <span>♥</span> by
+      <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+    </footer>
+
+    <div class="modal" id="itemModal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2 id="modalTitle">Add New Item</h2>
+        <form id="groceryForm">
+          <input type="hidden" id="itemId" />
+          <div class="form-group">
+            <label for="upc">UPC</label>
+            <input type="text" id="upc" required />
+          </div>
+          <div class="form-group">
+            <label for="name">Product Name</label>
+            <input type="text" id="name" required />
+          </div>
+          <div class="form-group">
+            <label for="category">Category</label>
+            <input type="text" id="category" list="categories" />
+            <datalist id="categories"></datalist>
+          </div>
+          <div class="form-group">
+            <label for="price">Price ($)</label>
+            <input type="number" id="price" min="0" step="0.01" required />
+          </div>
+          <button type="submit" class="btn-primary">Save Item</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal" id="importModal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>Import Items from CSV</h2>
+        <form id="importForm">
+          <div class="form-group">
+            <label for="csvFile">Paste CSV Data (UPC, Product Name, Category, Price)</label>
+            <textarea
+              id="csvFile"
+              rows="10"
+              placeholder="UPC, Product Name, Category, Price &#10;123456789, Whole Milk, Dairy, 3.99 &#10;987654321, Whole Wheat Bread, Bakery, 2.50"></textarea>
+          </div>
+          <div class="form-group checkbox-group">
+            <input type="checkbox" id="overwrite" />
+            <label for="overwrite">Overwrite existing items with matching UPC</label>
+          </div>
+          <button type="submit" class="btn-primary">Import</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="/widgets_script/groceriesChecker.js"></script>
+  </body>
+</html>
