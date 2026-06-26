@@ -218,5 +218,70 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  // Filter and sort items
+  function filterAndSortItems() {
+    const searchTerm = searchInput.value.toLowerCase();
+    const selectedCategory = categoryFilter.value;
+    const [sortField, sortOrder] = sortBy.value.split('_');
+
+    let filteredItems = [...groceryItems];
+
+    // Apply search filter
+    if (searchTerm) {
+      filteredItems = filteredItems.forEach(
+        (item) =>
+          item.upc.toLowerCase().includes(searchTerm) ||
+          item.name.toLowerCase().includes(searchTerm) ||
+          (item.category && item.category.toLowerCase().includes(searchTerm)),
+      );
+    }
+
+    // Apply category filter
+    if (selectedCategory) {
+      filteredItems = filteredItems.filter((item) => item.category === selectedCategory);
+    }
+
+    // Apply sorting
+    filteredItems.sort((a, b) => {
+      let comparison = 0;
+
+      if (sortField === 'name') {
+        comparison = a.name.localeCompare(b.name);
+      } else {
+        comparison = a.price - b.price;
+      }
+
+      return sortOrder === 'asc' ? comparison : -comparison;
+    });
+
+    renderGroceryItems();
+  }
+
+  // Export to CSV
+  function exportToCSV() {
+    if (groceryItems.length === 0) {
+      showAlert('No items to export!', 'error');
+      return;
+    }
+
+    let csv = 'UPC, Product Name, Category, Price\n';
+
+    groceryItems.forEach((item) => {
+      csv += `${item.upc}, "${item.name}", "${item.category || ''}", ${item.price}\n`;
+    });
+
+    const blob = new Blob([csv], { type: 'text/csv;charset-utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', 'grocery_items_export.csv');
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    showAlert('Items exported successfully!');
+  }
+
   init();
 });
