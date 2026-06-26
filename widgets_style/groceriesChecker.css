@@ -124,3 +124,137 @@ input:checked + .slider {
 input:checked + .slider::before {
     transform: translateX(26px);
 }
+
+.app-container {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 15px;
+}
+
+.search-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    flex-grow: 1;
+}
+
+.search-box {
+    position: relative;
+    flex-grow: 1;
+    min-width: 200px;
+
+    i {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text);
+        opacity: 0.7;
+    }
+}
+
+.search-box input {
+    width: 100%;
+    padding: 10px 15px 10px 40px;
+    border-radius: 5px;
+    border: 1px solid var(--border);
+    background-color: var(--background);
+    color: var(--text);
+    transition: var(--transition);
+}
+
+.search-box input:is(:focus, :focus-visible) {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgb(76 175 80 / 0.2),
+    inset 0 0 3px rgb(76 175 80 / 0.2);
+}
+
+.search-box input::placeholder {
+    transform-origin: left bottom;
+    transition: var(--transition);
+}
+
+.search-box input:is(:focus, :focus-visible)::placeholder {
+    transform: translateX(110%) rotate(-5deg);
+}
+
+.search-box:has(input:is(:focus, :focus-visible)) i {
+    color: var(--primary);
+    transition: var(--transition);
+    transform: translateY(-50%) scale(1.1);
+}
+
+select {
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid var(--border);
+    background-color: var(--background);
+    color: var(--text);
+    cursor: pointer;
+    outline: none;
+    transition: var(--transition);
+}
+
+select,
+::picker(select) {
+  appearance: base-select;
+  cursor: pointer;
+}
+
+::picker(select) {
+  border-radius: 8px;
+  border: none;
+}
+
+select::picker-icon {
+  font-size: 16px;
+  color: var(--primary);
+  transition: 0.3s rotate;
+}
+
+select:open::picker-icon {
+  rotate: 180deg;
+  color: var(--primary-hover);
+}
+
+select:open {
+    border-color: var(--primary);
+}
+
+option {
+  border: 1px solid var(--border);
+  background: var(--primary);
+  padding: 2px 0 2px 12px;
+  color: var(--light);
+  padding-right: 18px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+option:is(:hover, :focus) {
+  background: var(--secondary);
+}
+
+option:checked {
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: var(--accent);
+  background-color: var(--secondary);
+}
+
+option::checkmark {
+  color: var(--primary);
+  font-size: 1.5rem;
+}

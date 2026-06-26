@@ -1,0 +1,120 @@
+document.addEventListener('DOMContentLoaded', function () {
+  // DOM Elements
+  const groceryForm = document.getElementById('groceryForm');
+  const groceryItemsContainer = document.getElementById('groceryItems');
+  const addItemBtn = document.getElementById('addItemBtn');
+  const exportBtn = document.getElementById('exportBtn');
+  const importBtn = document.getElementById('importBtn');
+  const itemModal = document.getElementById('itemModal');
+  const importModal = document.getElementById('importModal');
+  const closeBtns = document.querySelectorAll('.close-btn');
+  const searchInput = document.getElementById('searchInput');
+  const categoryFilter = document.getElementById('categoryFilter');
+  const sortBy = document.getElementById('sortBy');
+  const themeToggle = document.getElementById('themeToggle');
+  const successAlert = document.getElementById('successAlert');
+  const errorAlert = document.getElementById('errorAlert');
+  const emptyState = document.querySelector('.empty-state');
+
+  // Initialize with 10 dummy products
+  let groceryItems = (() => {
+    try {
+      return JSON.parse(localStorage.getItem('groceryItems'));
+    } catch {
+      localStorage.removeItem('groceryItems');
+      return null;
+    }
+  })() || [
+    { id: '1', upc: '123456789', name: 'Whole Milk', category: 'Dairy', price: 3.99 },
+    { id: '2', upc: '234567891', name: 'Whole Wheat Bread', category: 'Bakery', price: 2.5 },
+    { id: '3', upc: '345678912', name: 'Fresh Eggs', category: 'Dairy', price: 4.25 },
+    { id: '4', upc: '456789123', name: 'Bananas', category: 'Produce', price: 0.59 },
+    { id: '5', upc: '567891234', name: 'Ground Beef', category: 'Meat', price: 5.99 },
+    { id: '6', upc: '678912345', name: 'Cheddar Cheese', category: 'Dairy', price: 3.75 },
+    { id: '7', upc: '789123456', name: 'Tomatoes', category: 'Produce', price: 1.99 },
+    { id: '8', upc: '891234567', name: 'Chicken Breast', category: 'Meat', price: 7.49 },
+    { id: '9', upc: '901234567', name: 'Potatoes', category: 'Produce', price: 2.99 },
+    { id: '10', upc: '012345678', name: 'Orange Juice', category: 'Beverages', price: 3.25 },
+  ];
+  let categories = [];
+
+  // Initialize the app
+  function init() {
+    saveToLocalStorage();
+    renderGroceryItems();
+    updateCategories();
+    loadThemePreference();
+
+    // Show empty state if no items
+    groceryItems.length === 0 ? (emptyState.style.display = 'block') : (emptyState.style.display = 'none');
+  }
+
+  // Render grocery items to the DOM
+  function renderGroceryItems(items = null) {
+    const itemsToRender = items || groceryItems;
+    groceryItemsContainer.innerHTML = '';
+
+    if (itemsToRender.length === 0) {
+      emptyState.style.display = 'block';
+      return;
+    } else {
+      emptyState.style.display = 'none';
+    }
+
+    itemsToRender.forEach((item) => {
+      const groceryItem = document.createElement('div');
+      groceryItem.className = 'grocery-item';
+      groceryItem.innerHTML = `
+        <div class="item-upc">${item.upc}</div>
+        <div class="item-name">${item.name}</div>
+        <div class="item-category">${item.category || ''}</div>
+        <div class="item-price">${item.price.toFixed(2)}</div>
+        <div class="item-actions">
+          <button class="action-btn edit-btn" title="Edit">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="action-btn delete-btn" title="Delete">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </div>
+      `;
+
+      groceryItemsContainer.appendChild(groceryItem);
+    });
+
+    // Add event listeners to edit button
+    document.querySelectorAll('.edit-btn').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        const itemId = this.closest('.grocery-item').dataset.id;
+        editItem(itemId);
+      });
+    });
+
+    document.querySelectorAll('.delete-btn').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        const itemId = this.closest('.grocery-item').dataset.id;
+        deleteItem(itemId);
+      });
+    });
+  }
+
+  // Update categories list
+  function updateCategories() {
+    categories = [...new Set(groceryItems.map((item) => item.category).filter(Boolean))];
+    categoryFilter.innerHTML = '<option value="">All Categories</option>';
+    const categoriesDataList = document.getElementById('categories');
+    categoriesDataList.innerHTML = '';
+
+    categories.forEach((cat) => {
+      categoryFilter.innerHTML += `<option value="${cat}">${cat}</option>`;
+      categoriesDataList.innerHTML += `<option value="${cat}">`;
+    });
+  }
+
+  // Save to localStorage
+  function saveToLocalStorage() {
+    localStorage.setItem('groceryItems', JSON.stringify(groceryItems));
+  }
+
+  init();
+});
