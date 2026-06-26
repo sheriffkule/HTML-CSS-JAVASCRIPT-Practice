@@ -116,5 +116,107 @@ document.addEventListener('DOMContentLoaded', function () {
     localStorage.setItem('groceryItems', JSON.stringify(groceryItems));
   }
 
+  // Show alert message
+  function showAlert(message, type = 'success') {
+    const alert = type === 'success' ? successAlert : errorAlert;
+    alert.textContent = message;
+    alert.style.display = 'block';
+
+    setTimeout(() => {
+      alert.style.display = 'none';
+    }, 5000);
+  }
+
+  // Add new grocery item
+  function addItem(e) {
+    e.preventDefault();
+
+    const id = Date.now().toString();
+    const upc = document.getElementById('upc').value;
+    const name = document.getElementById('name').value;
+    const price = parseFloat(document.getElementById('price').value);
+    const category = document.getElementById('category').value;
+
+    // Validate UPC uniqueness
+    const upcExists = groceryItems.some((item) => item.upc === upc);
+
+    if (upcExists) {
+      showAlert('Item with this UPC already exists!', 'error');
+      return;
+    }
+
+    const newItem = { id, upc, name, price, category };
+
+    groceryItems.unshift(newItem);
+    saveToLocalStorage();
+    renderGroceryItems();
+    updateCategories();
+    closeModal();
+    showAlert('Item added successfully!');
+  }
+
+  // Edit an existing item
+  function editItem(itemId) {
+    const item = groceryItems.find((item) => item.id === itemId);
+    if (!item) return;
+
+    document.getElementById('modalTitle').textContent = 'Edit Item';
+    document.getElementById('itemId').value = item.id;
+    document.getElementById('upc').value = item.upc;
+    document.getElementById('name').value = item.name;
+    document.getElementById('category').value = item.category || '';
+    document.getElementById('price').value = item.price;
+
+    openModal();
+  }
+
+  // Update item
+  function updateItem(e) {
+    e.preventDefault();
+
+    const id = document.getElementById('itemId').value;
+    const upc = document.getElementById('upc').value;
+    const name = document.getElementById('name').value;
+    const price = parseFloat(document.getElementById('price').value);
+    const category = document.getElementById('category').value;
+
+    const itemIndex = groceryItems.findIndex((item) => item.id === id);
+
+    if (itemIndex !== -1) {
+      // Check if UPC already exists (excluding current item)
+      const upcExists = groceryItems.some((item) => item.upc === upc && item.id !== id);
+
+      if (upcExists) {
+        showAlert('Item with this UPC already exists!', 'error');
+        return;
+      }
+
+      groceryItems[itemIndex] = {
+        ...groceryItems[itemIndex],
+        upc,
+        name,
+        price,
+        category,
+      };
+
+      saveToLocalStorage();
+      renderGroceryItems();
+      updateCategories();
+      closeModal();
+      showAlert('Item updated successfully!');
+    }
+  }
+
+  // Delete an item
+  function deleteItem(itemId) {
+    if (confirm('Are you sure you want to delete this item?')) {
+      groceryItems = groceryItems.filter((item) => item.id !== itemId);
+      saveToLocalStorage();
+      renderGroceryItems();
+      updateCategories();
+      showAlert('Item deleted successfully!');
+    }
+  }
+
   init();
 });
