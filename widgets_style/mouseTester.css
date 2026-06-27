@@ -12,6 +12,11 @@
     --transition: all 0.3s ease;
 }
 
+::selection {
+    background-color: var(--primary);
+    color: white;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -99,6 +104,13 @@ h1::after {
         transform: translateY(-4px);
         box-shadow: 0 6px 14px rgb(0 0 0 / 0.2),
         inset var(--box-shadow);
+    }
+    &:nth-child(5) {
+        grid-column: span 2;
+
+        @media (width < 768px) {
+            grid-column: initial;
+    }
     }
 }
 
@@ -189,7 +201,7 @@ h1::after {
     height: 200px;
     border: 2px dashed var(--gray);
     border-radius: var(--border-radius);
-    overflow: hidden;
+    overflow: auto;
     position: relative;
 }
 
@@ -245,7 +257,7 @@ h1::after {
 
 .drag-drop-tester {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     height: 150px;
 }
@@ -284,4 +296,117 @@ h1::after {
         border-color: var(--primary);
         background: rgb(67 97 238 / 0.1);
     }
+}
+
+.stats-panel {
+    grid-column: 1 / -1;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.stat-card {
+    background: var(--light);
+    padding: 15px;
+    border: 1px solid #bbb;
+    border-radius: var(--border-radius);
+    corner-shape: scoop;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: var(--primary);
+    margin: 10px 0;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--gray);
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+button {
+    padding: 10px 25px;
+    border: none;
+    border-radius: var(--border-radius);
+    corner-shape: scoop;
+    background: var(--primary);
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: var(--transition);
+    font-weight: bold;
+
+    &:hover {
+        background: var(--secondary);
+        box-shadow: var(--box-shadow);
+        transform: translateY(-2px) scale(1.02);
+        corner-shape: initial;
+    }
+    &:active {
+        transform: translateY(0) scale(1);
+    }
+    &#resetBtn {
+        background: var(--danger);
+    }
+    &#resetBtn:hover {
+        background-color: #d1144a;
+    }
+}
+
+.pulse {
+    animation: pulse 0.5s ease;
+}
+
+@keyframes pulse {
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 10px;
+    color: var(--gray);
+    font-size: 0.875rem;
+    background-color: var(--light);
+    border-radius: var(--border-radius);
+    corner-shape: scoop;
+
+    span {
+        color: var(--danger);
+        font-size: 1rem;
+    }
+    abbr {
+        cursor: default;
+        letter-spacing: 0.5px;
+        text-underline-offset: 2px;
+        color: var(--primary);
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: var(--light);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--gray);
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover  {
+    background-color: var(--primary);
 }

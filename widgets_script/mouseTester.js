@@ -84,11 +84,11 @@ function setupClickTesters() {
 
     // Middle click
     button.addEventListener('mousedown', (e) => {
-      e.preventDefault();
-
-      if (button.classList.contains('middle-click')) {
+      // Only count middle-button presses (button === 1)
+      if (button.classList.contains('middle-click') && e.button === 1) {
+        e.preventDefault();
         stats.middleClicks++;
-        middleClickCount.textContent = stats.rightClicks;
+        middleClickCount.textContent = stats.middleClicks;
         button.classList.add('pulse');
         setTimeout(() => button.classList.remove('pulse'), 500);
       }
@@ -147,8 +147,14 @@ function setupMovementTester() {
 function setupScrollTester() {
   const scrollArea = document.getElementById('scrollArea');
   const scrollItems = document.querySelectorAll('.scroll-item');
-  let lastScrollTop = scrollArea.scrollTop;
-  let activeIndex = 2;
+  let lastScrollTop = scrollArea ? scrollArea.scrollTop : 0;
+  let activeIndex = 0;
+
+  // Ensure there is an initial active item
+  if (scrollItems.length > 0) {
+    scrollItems.forEach((it) => it.classList.remove('active'));
+    if (scrollItems[0]) scrollItems[0].classList.add('active');
+  }
 
   scrollArea.addEventListener('scroll', (e) => {
     const scrollTop = scrollArea.scrollTop;
@@ -164,8 +170,8 @@ function setupScrollTester() {
     const newActiveIndex = Math.min(Math.max(0, Math.floor(scrollTop / 200)), scrollItems.length - 1);
 
     if (newActiveIndex !== activeIndex) {
-      scrollItems[activeIndex].classList.remove('active');
-      scrollItems[newActiveIndex].classList.add('active');
+      if (scrollItems[activeIndex]) scrollItems[activeIndex].classList.remove('active');
+      if (scrollItems[newActiveIndex]) scrollItems[newActiveIndex].classList.add('active');
       activeIndex = newActiveIndex;
     }
   });
@@ -278,7 +284,94 @@ function resetAllTests() {
   doubleClickCount.textContent = '0';
   lastDoubleClickSpeed.textContent = '-';
   dragSuccessCount.textContent = '0';
+
+  // Clear movement points
+  const movementArea = document.getElementById('movementArea');
+  const points = movementArea.querySelectorAll('.movement-point');
+  points.forEach((point) => point.remove());
+
+  // Reset scroll position
+  const scrollArea = document.getElementById('scrollArea');
+  if (scrollArea) scrollArea.scrollTop = 0;
+
+  // Reset double click area
+  const doubleClickArea = document.getElementById('doubleClickArea');
+  doubleClickArea.style.background = '';
+  doubleClickArea.style.color = '';
+
+  // Update statistics
+  updateStatistics();
 }
+
+// Export results
+function exportResults() {
+  const duration = Math.floor((Date.now() - stats.startTime) / 1000);
+  const results = `
+Mouse Tester Tool = Test Results
+Generated on: ${new Date().toLocaleString()}
+Test duration: ${duration} seconds
+
+CLICK STATISTICS:
+- Left Clicks: ${stats.leftClicks}
+- Right Clicks: ${stats.rightClicks}
+- Middle Clicks: ${stats.middleClicks}
+- Total Clicks: ${stats.leftClicks + stats.rightClicks + stats.middleClicks}
+
+MOVEMENT STATISTICS:
+- Total Movements: ${stats.movements}
+
+SCROLL STATISTICS:
+- Total Scrolls: ${stats.scrolls}
+
+DOUBLE CLICKS STATISTICS:
+- Successful Double Clicks: ${stats.doubleClicks}
+- Attempted Double Clicks: ${stats.doubleClicksAttempts}
+- Success Rate: ${stats.doubleClicksAttempts > 0 ? Math.round((stats.doubleClicks / stats.doubleClicksAttempts) * 100) : 0}%
+
+DRAG & DROP STATISTICS:
+- Successful Drops: ${stats.dragSuccess}
+    `;
+
+  const blob = new Blob([results], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'mouse-tester-results.txt';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// Update statistics panel
+function updateStatistics() {
+  const duration = Math.floor((Date.now() - stats.startTime) / 1000);
+
+  totalClicks.textContent = stats.leftClicks + stats.rightClicks + stats.middleClicks;
+  totalMovements.textContent = stats.movements;
+  totalScrolls.textContent = stats.scrolls;
+
+  const rate =
+    stats.doubleClicksAttempts > 0 ? Math.round((stats.doubleClicks / stats.doubleClicksAttempts) * 100) : 0;
+  doubleClickRate.textContent = `${rate}%`;
+
+  dragSuccessRate.textContent = stats.dragSuccess;
+  testingDuration.textContent = `${duration}s`;
+}
+
+// Update year in footer
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+  yearElement.setAttribute('datetime', currentYear.toString());
+  yearElement.textContent = currentYear.toString();
+}
+updateYear();
 
 // Initialize the app when DOM is loaded
 document.addEventListener('DOMContentLoaded', init);
