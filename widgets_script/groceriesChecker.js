@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
     itemsToRender.forEach((item) => {
       const groceryItem = document.createElement('div');
       groceryItem.className = 'grocery-item';
+      groceryItem.dataset.id = item.id;
       groceryItem.innerHTML = `
         <div class="item-upc">${item.upc}</div>
         <div class="item-name">${item.name}</div>
@@ -228,7 +229,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Apply search filter
     if (searchTerm) {
-      filteredItems = filteredItems.forEach(
+      filteredItems = filteredItems.filter(
         (item) =>
           item.upc.toLowerCase().includes(searchTerm) ||
           item.name.toLowerCase().includes(searchTerm) ||
@@ -254,7 +255,7 @@ document.addEventListener('DOMContentLoaded', function () {
       return sortOrder === 'asc' ? comparison : -comparison;
     });
 
-    renderGroceryItems();
+    renderGroceryItems(filteredItems);
   }
 
   // Export to CSV
@@ -288,7 +289,7 @@ document.addEventListener('DOMContentLoaded', function () {
     e.preventDefault();
 
     const csvData = document.getElementById('csvData').value;
-    const overwrite = document.getElementById('overwrite');
+    const overwriteChecked = document.getElementById('overwrite').checked;
 
     if (!csvData) {
       showAlert('Please paste CSV data!', 'error');
@@ -328,11 +329,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (!upc || !name || isNaN(price)) continue;
 
-        const existingItemIndex = groceryForm.findIndex((item) => item.upc === upc);
+        const existingItemIndex = groceryItems.findIndex((item) => item.upc === upc);
 
         if (existingItemIndex !== -1) {
-          if (overwrite) {
-            // Update existing item
+          if (overwriteChecked) {
             groceryItems[existingItemIndex] = {
               ...groceryItems[existingItemIndex],
               upc,
@@ -345,7 +345,6 @@ document.addEventListener('DOMContentLoaded', function () {
             duplicates++;
           }
         } else {
-          // Add new item
           importedItems.push({
             id: Date.now().toString() + i,
             upc,
@@ -357,7 +356,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       }
 
-      if (!overwrite) {
+      if (importedItems.length > 0) {
         groceryItems = [...importedItems, ...groceryItems];
       }
 
@@ -370,7 +369,7 @@ document.addEventListener('DOMContentLoaded', function () {
         `Imported ${importedCount} items successfully! ${duplicates > 0 ? `${duplicates} duplicates skipped.` : ''}`,
       );
     } catch (error) {
-      showAlert('Error importing items: ', +error.message, 'error');
+      showAlert('Error importing items: ' + error.message, 'error');
     }
   }
 
@@ -397,8 +396,70 @@ document.addEventListener('DOMContentLoaded', function () {
     importModal.style.display = 'none';
     document.body.style.overflow = 'auto';
     document.getElementById('csvData').value = '';
-    document.getElementById('overwrite').textContent = 'Add New Item';
+    document.getElementById('overwrite').checked = false;
   }
+
+  // Theme toggle
+  function loadThemePreference() {
+    const savedTheme = localStorage.getItem('theme') || 'light-mode';
+    document.body.className = savedTheme;
+    themeToggle.checked = savedTheme === 'dark-mode';
+  }
+
+  function toggleTheme() {
+    if (themeToggle.checked) {
+      document.body.classList.add('dark-mode');
+      document.body.classList.remove('light-mode');
+      localStorage.setItem('theme', 'dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+      document.body.classList.add('light-mode');
+      localStorage.setItem('theme', 'light-mode');
+    }
+  }
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
+
+  // Event listeners
+  addItemBtn.addEventListener('click', openModal);
+  exportBtn.addEventListener('click', exportToCSV);
+  importBtn.addEventListener('click', openImportModal);
+
+  closeBtns.forEach((btn) => {
+    btn.addEventListener('click', function () {
+      if (itemModal.style.display === 'block') closeModal();
+      if (importModal.style.display === 'block') closeImportModal();
+    });
+  });
+
+  window.addEventListener('click', function (e) {
+    if (e.target === itemModal) closeModal();
+    if (e.target === importModal) closeImportModal();
+  });
+
+  groceryForm.addEventListener('submit', function (e) {
+    const itemId = document.getElementById('itemId').value;
+    itemId ? updateItem(e) : addItem(e);
+  });
+
+  document.getElementById('importForm').addEventListener('submit', importFromCSV);
+
+  searchInput.addEventListener('input', filterAndSortItems);
+  categoryFilter.addEventListener('change', filterAndSortItems);
+  sortBy.addEventListener('change', filterAndSortItems);
+  themeToggle.addEventListener('change', toggleTheme);
 
   init();
 });

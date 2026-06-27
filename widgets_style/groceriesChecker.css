@@ -59,7 +59,6 @@ header {
 }
 
 h1 {
-    /* display: inline; */
     font-size: clamp(1.5rem, 5vw, 2.5rem);
     color: transparent;
     background: linear-gradient(90deg, var(--primary), var(--secondary));
@@ -317,14 +316,19 @@ option::checkmark {
 
 .action-buttons {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
+
+    button {
+        max-width: fit-content;
+    }
 }
 
 .alert {
     padding: 15px;
     margin-bottom: 20px;
     border-radius: 5px;
-    /* display: none; */
+    display: none;
 }
 
 .alert-success {
@@ -362,21 +366,21 @@ option::checkmark {
     padding-right: 5px;
 }
 
-.items-container::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: 8px;
 }
 
-.items-container::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
     background: var(--card-bg);
     border: 1px solid var(--border);
 }
 
-.items-container::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background-color: var(--primary);
     border-radius: 20px;
 }
 
-.items-container::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
     background-color: var(--primary-hover);
 }
 
@@ -387,6 +391,7 @@ option::checkmark {
     padding: 15px 10px;
     margin-bottom: 10px;
     background: var(--background);
+    border: var(--border);
     border-radius: 8px;
     box-shadow: var(--shadow);
     transition: var(--transition);
@@ -397,7 +402,7 @@ option::checkmark {
         box-shadow: 0 6px 12px rgb(0 0 0 / 0.2);
     }
     &:nth-child(even) {
-        background: hsl(from var(--background) h s 5%);
+        background: var(--card-bg);
     }
 }
 
@@ -453,7 +458,7 @@ option::checkmark {
 }
 
 .modal {
-    /* display: none; */
+    display: none;
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -518,7 +523,18 @@ option::checkmark {
     background-color: var(--background);
     color: var(--text);
     font-size: 0.875rem;
+    caret-animation: manual;
+    caret-shape: block;
+    caret-color: var(--primary);
+    animation: caret-animation infinite linear 1.2s;
     transition: var(--transition);
+}
+
+@keyframes caret-animation {
+  50% {
+    caret-color: transparent;
+    caret-shape: bar;
+  }
 }
 
 .form-group :is(input, select, textarea):is(:focus, :focus-within) {
@@ -601,4 +617,95 @@ input[type="checkbox"]:checked::before {
 input[type="checkbox"]:focus {
   outline: max(2px, 0.15em) solid var(--primary);
   outline-offset: max(2px, 0.25em);
+}
+
+footer {
+    text-align: center;
+    font-size: 0.875rem;
+    opacity: 0.7;
+    background-color: var(--card-bg);
+    padding-block: 1rem;
+    margin-top: 1rem;
+
+    span {
+        color: red;
+        font-size: 1rem;
+    }
+    abbr {
+        letter-spacing: 0.5px;
+        cursor: default;
+        color: var(--primary-hover);
+        text-underline-offset: 2px;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(100px) scaleY(0);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scaleY(1);
+    }
+}
+
+@keyframes  modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(200px) scaleX(0.1);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scaleX(1);
+    }
+}
+
+@media (width < 1200px) {
+    .list-header, .grocery-item {
+        grid-template-columns: 1fr 2fr 1fr
+    }
+    .list-header .header-item:nth-child(4),
+    .grocery-item .item-price,
+    .list-header .header-item:nth-child(5),
+    .grocery-item .item-actions {
+        display: none;
+    }
+}
+
+@media (width < 768px) {
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .search-filter {
+        flex-direction: column;
+    }
+
+    .list-header, .grocery-item {
+        grid-template-columns: 1fr 2fr;
+    }
+    .list-header .header-item:nth-child(3),
+    .grocery-item .item-category,
+    .list-header .header-item:nth-child(4),
+    .grocery-item .item-price {
+        display: none;
+    }
+    .modal-content {
+        margin: 10%;
+        width: 95%;
+    }
+}
+
+@media (width < 576px) {
+    .list-header, .grocery-item {
+        grid-template-columns: 1fr;
+    }
+    .header-item:not(:first-child),
+    .grocery-item > div:not(:first-child) {
+        display: none;
+    }
+    .grocery-item {
+        padding: 10px;
+    }
 }
