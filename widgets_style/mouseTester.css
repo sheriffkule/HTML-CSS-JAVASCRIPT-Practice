@@ -115,3 +115,105 @@ h1::after {
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
 }
+
+.click-button {
+    padding: 15px;
+    text-align: center;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: bold;
+    user-select: none;
+    color: white;
+
+    &:hover {
+        opacity: 0.8;
+    }
+    &:active {
+        transform: scale(0.98);
+    }
+}
+
+.left-click {
+    background-color: var(--primary);
+}
+
+.right-click {
+    background-color: var(--secondary);
+}
+
+.middle-click {
+    background-color: var(--success);
+}
+
+.click-count{
+    font-size: 0.9rem;
+    margin-top: 5px;
+    opacity: 0.8;
+}
+
+.movement-tester {
+    height: 300px;
+    border: 2px dashed var(--gray);
+    border-radius: var(--border-radius);
+    position: relative;
+    overflow: hidden;
+    cursor: crosshair;
+}
+
+.movement-point {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    background-color: var(--danger);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+
+    &:nth-child(3n + 1) {
+        background-color: var(--primary);
+    }
+    &:nth-child(3n + 2) {
+        background-color: var(--success);
+    }
+}
+
+.movement-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+
+.scroll-tester {
+    height: 200px;
+    border: 2px dashed var(--gray);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    position: relative;
+}
+
+.scroll-content {
+    height: 1000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.scroll-item {
+    width: 90%;
+    padding: 10px;
+    text-align: center;
+    background: var(--light);
+    border: 1px solid var(--gray);
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+.scroll-stats {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
