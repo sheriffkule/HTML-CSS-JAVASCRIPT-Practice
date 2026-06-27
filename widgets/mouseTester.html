@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mouse Tester Tool</title>
+    <link rel="stylesheet" href="/widgets_style/mouseTester.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Mouse Tester Tool</h1>
+        <p class="description">
+          Test all aspects of your mouse functionality including clicks, scroll, movement, double-click speed,
+          and drag & drop. Use this tool to diagnose issues or simply familiarize yourself with your mouse's
+          performance.
+        </p>
+      </header>
+
+      <main class="main-content">
+        <section class="panel">
+          <h2 class="panel-title">Click Tester</h2>
+          <div class="click-tester">
+            <div class="click-button left-click">
+              Left Click
+              <div class="click-count">Count: <span id="leftClickCount">0</span></div>
+            </div>
+            <div class="click-button right-click">
+              Right Click
+              <div class="click-count">Count: <span id="rightClickCount">0</span></div>
+            </div>
+            <div class="click-button middle-click">
+              middle Click
+              <div class="click-count">Count: <span id="middleClickCount">0</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2 class="panel-title">Movement Tester</h2>
+          <div class="movement-tester" id="movementArea">
+            <div class="instructions">Move your mouse inside this area.</div>
+          </div>
+          <div class="movement-stats">
+            <div>Total Movements: <span id="movementCount">0</span></div>
+            <div>Current Position: <span id="currentPosition">(0, 0)</span></div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2 class="panel-title">Scroll Tester</h2>
+          <div class="scroll-tester" id="scrollArea">
+            <div class="scroll-content">
+              <div class="scroll-item">Scroll Down</div>
+              <div class="scroll-item">Keep Scrolling</div>
+              <div class="scroll-item active">Active Area</div>
+              <div class="scroll-item">Almost There</div>
+              <div class="scroll-item">Scroll Up</div>
+            </div>
+          </div>
+          <div class="scroll-stats">
+            <div>Scroll Direction: <span id="scrollDirection">None</span></div>
+            <div>Scroll Count: <span id="scrollCount">0</span></div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2 class="panel-title">Double Click Tester</h2>
+          <div class="double-click-tester" id="doubleClickArea">Double Click Here</div>
+          <div class="double-click-stats">
+            <div>Successful Double Clicks: <span id="doubleClickCount">0</span></div>
+            <div>Last Speed: <span id="lastDoubleClickSpeed">-</span> ms</div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2 class="panel-title">Drag & Drop Tester</h2>
+          <div class="drag-drop-tester">
+            <div class="drag-item" id="dragItem" draggable="true">Drag Me</div>
+            <div class="drop-zone" id="dropZone">Drop Here</div>
+          </div>
+          <div style="text-align: center; margin-top: 10px">
+            Success Count: <span id="dragSuccessCount">0</span>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2 class="panel-title">Statistics</h2>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-label">TotalClicks</div>
+              <div class="stat-value" id="totalClicks">0</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Total Movements</div>
+              <div class="stat-value" id="totalMovements">0</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Total Scrolls</div>
+              <div class="stat-value" id="totalScrolls">0</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Double Click Success Rate</div>
+              <div class="stat-value" id="doubleClickRate">0%</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Drag & Drop Success</div>
+              <div class="stat-value" id="dragSuccessRate">0</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Testing Duration</div>
+              <div class="stat-value" id="testingDuration">0s</div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <div class="controls">
+        <button id="resetBtn">Reset All Tests</button>
+        <button id="exportBtn">Export Results</button>
+      </div>
+
+      <footer>
+        © <time datetime="2026" id="year">2026</time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
+    </div>
+
+    <script src="/widgets_script/mouseTester.js"></script>
+  </body>
+</html>
