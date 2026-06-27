@@ -35,6 +35,10 @@ const testingDuration = document.getElementById('testingDuration');
 const resetBtn = document.getElementById('resetBtn');
 const exportBtn = document.getElementById('exportBtn');
 
+// Double click variables
+let lastClickTime = 0;
+let doubleClickThreshold = 500;
+
 // Initialize the application
 function init() {
   setupClickTesters();
@@ -124,6 +128,156 @@ function setupMovementTester() {
       }
     }
   });
+
+  // Clear instructions when user start moving
+  movementArea.addEventListener('mouseenter', () => {
+    const instructions = movementArea.querySelector('.instructions');
+    if (instructions) {
+      instructions.style.opacity = '0';
+      setTimeout(() => {
+        if (instructions.parentNode) {
+          instructions.parentNode.removeChild(instructions);
+        }
+      }, 500);
+    }
+  });
+}
+
+// Scroll Tester
+function setupScrollTester() {
+  const scrollArea = document.getElementById('scrollArea');
+  const scrollItems = document.querySelectorAll('.scroll-item');
+  let lastScrollTop = scrollArea.scrollTop;
+  let activeIndex = 2;
+
+  scrollArea.addEventListener('scroll', (e) => {
+    const scrollTop = scrollArea.scrollTop;
+    const direction = scrollTop > lastScrollTop ? 'Down' : 'Up';
+
+    scrollDirection.textContent = direction;
+    stats.scrolls++;
+    scrollCount.textContent = stats.scrolls;
+
+    lastScrollTop = scrollTop;
+
+    // Update active item based on scroll position
+    const newActiveIndex = Math.min(Math.max(0, Math.floor(scrollTop / 200)), scrollItems.length - 1);
+
+    if (newActiveIndex !== activeIndex) {
+      scrollItems[activeIndex].classList.remove('active');
+      scrollItems[newActiveIndex].classList.add('active');
+      activeIndex = newActiveIndex;
+    }
+  });
+}
+
+// Double Click Tester
+function setupDoubleClickTester() {
+  const doubleClickArea = document.getElementById('doubleClickArea');
+
+  doubleClickArea.addEventListener('click', (e) => {
+    stats.doubleClicksAttempts++;
+    const currentTime = new Date().getTime();
+
+    if (currentTime - lastClickTime < doubleClickThreshold) {
+      // Successful double click
+      stats.doubleClicks++;
+      doubleClickCount.textContent = stats.doubleClicks;
+      lastDoubleClickSpeed.textContent = currentTime - lastClickTime + ' ms';
+
+      doubleClickArea.style.background = 'var(--success)';
+      doubleClickArea.style.color = 'white';
+
+      setTimeout(() => {
+        doubleClickArea.style.background = '';
+        doubleClickArea.style.color = '';
+      }, 300);
+    }
+
+    lastClickTime = currentTime;
+  });
+}
+
+// Drag and Drop Tester
+function setupDragAndDropTester() {
+  const dragItem = document.getElementById('dragItem');
+  const dropZone = document.getElementById('dropZone');
+
+  dragItem.addEventListener('dragstart', (e) => {
+    e.dataTransfer.setData('text/plain', 'dragItem');
+    setTimeout(() => {
+      dragItem.style.opacity = '0.4';
+    }, 0);
+  });
+
+  dragItem.addEventListener('dragend', (e) => {
+    dragItem.style.opacity = '1';
+  });
+
+  dropZone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropZone.classList.add('active');
+  });
+
+  dropZone.addEventListener('dragleave', (e) => {
+    dropZone.classList.remove('active');
+  });
+
+  dropZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropZone.classList.remove('active');
+
+    const data = e.dataTransfer.getData('text/plain');
+    if (data === 'dragItem') {
+      stats.dragSuccess++;
+      dragSuccessCount.textContent = stats.dragSuccess;
+
+      // Visual feedback
+      dropZone.style.background = 'var(--success)';
+      dropZone.style.color = 'white';
+
+      setTimeout(() => {
+        dropZone.style.background = '';
+        dropZone.style.color = '';
+      }, 500);
+
+      // Reset drag item position
+      dragItem.style.position = 'static';
+    }
+  });
+}
+
+// Controls
+function setupControls() {
+  resetBtn.addEventListener('click', resetAllTests);
+  exportBtn.addEventListener('click', exportResults);
+}
+
+// Reset all tests
+function resetAllTests() {
+  // Reset statistics
+  stats = {
+    leftClicks: 0,
+    rightClicks: 0,
+    middleClicks: 0,
+    movements: 0,
+    scrolls: 0,
+    doubleClicks: 0,
+    doubleClicksAttempts: 0,
+    dragSuccess: 0,
+    startTime: Date.now(),
+  };
+
+  leftClickCount.textContent = '0';
+  rightClickCount.textContent = '0';
+  middleClickCount.textContent = '0';
+  movementCount.textContent = '0';
+  currentPosition.textContent = '(0, 0)';
+  scrollDirection.textContent = 'None';
+  scrollCount.textContent = '0';
+  doubleClickCount.textContent = '0';
+  lastDoubleClickSpeed.textContent = '-';
+  dragSuccessCount.textContent = '0';
 }
 
 // Initialize the app when DOM is loaded
