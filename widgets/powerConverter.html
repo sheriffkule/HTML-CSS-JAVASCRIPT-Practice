@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Power Converter Tool</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/powerConverter.css" />
+  </head>
+  <body>
+    <button class="dark-mode-toggle" id="darkModeToggle" title="Change Between Dark & Light Mode">
+      <i class="fas fa-moon"></i>
+    </button>
+
+    <main class="container">
+      <header>
+        <h1>Power Converter Tool </h1>
+        <p class="subtitle">Convert between different power units with ease.</p>
+      </header>
+
+      <div class="tabs">
+        <div class="tab active" data-tab="power">Power</div>
+        <div class="tab" data-tab="energy">Energy</div>
+        <div class="tab" data-tab="current">Current</div>
+      </div>
+
+      <section class="tab-content active" id="power-tab">
+        <div class="converter-container">
+          <article class="converter-card">
+            <div class="card-header">
+              <h2 class="card-title">Power Conversion</h2>
+              <i class="fas fa-bolt card-icon"></i>
+            </div>
+
+            <div class="input-group">
+              <label for="power-value">Value</label>
+              <input type="number" id="power-value" placeholder="Enter value" step="any" />
+            </div>
+
+            <div class="from-to">
+              <div class="input-group">
+                <label for="power-from">From Unit</label>
+                <select id="power-from">
+                  <option value="W">Watt (W)</option>
+                  <option value="kW">Kilowatt (kW)</option>
+                  <option value="MW">Megawatt (MW)</option>
+                  <option value="GW">Gigawatt (GW)</option>
+                  <option value="hp">Horsepower (hp)</option>
+                  <option value="BTU/h">BTU per hour (BTY/h)</option>
+                </select>
+              </div>
+              <button class="btn-swap" id="power-swap-btn" title="Swap units">
+                <i class="fas fa-exchange-alt"></i>
+              </button>
+              <div class="input-group">
+                <label for="power-to">From Unit</label>
+                <select id="power-to">
+                  <option value="hp">Horsepower (hp)</option>
+                  <option value="W">Watt (W)</option>
+                  <option value="kW">Kilowatt (kW)</option>
+                  <option value="MW">Megawatt (MW)</option>
+                  <option value="GW">Gigawatt (GW)</option>
+                  <option value="BTU/h">BTU per hour (BTY/h)</option>
+                </select>
+              </div>
+            </div>
+
+            <button class="btn" id="power-convert-btn">Convert</button>
+
+            <div class="result-container">
+              <p>Result</p>
+              <div class="result-value" id="power-result">0</div>
+              <p class="result-unit" id="power-result-unit">hp</p>
+            </div>
+          </article>
+
+          <article class="converter-card">
+            <div class="card-header">
+              <h2 class="card-title">Power Calculator</h2>
+              <i class="fas fa-calculator card-icon"></i>
+            </div>
+
+            <div class="input-group">
+              <label for="voltage">Voltage (V)</label>
+              <input type="number" id="voltage" placeholder="Enter voltage in volts" step="any" />
+            </div>
+
+            <div class="input-group">
+              <label for="current">Current (A)</label>
+              <input type="number" id="current" placeholder="Enter current in amperes" step="any" />
+            </div>
+
+            <button class="btn" id="calculate-power-btn">Calculate Power</button>
+
+            <div class="result-container">
+              <p>Power Result</p>
+              <div class="result-value" id="calculated-power">0</div>
+              <p class="result-unit">Watt (W)</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="tab-content" id="energy-tab">
+        <div class="converter-container">
+          <article class="converter-card">
+            <div class="card-header">
+              <h2 class="card-title">Energy Conversion</h2>
+              <i class="fas fa-battery-three-quarters card-icon"></i>
+            </div>
+
+            <div class="input-group">
+              <label for="energy-value">Value</label>
+              <input type="number" id="energy-value" placeholder="Enter value" step="any" />
+            </div>
+
+            <div class="from-to">
+              <div class="input-group">
+                <label for="energy-from">From Unit</label>
+                <select id="energy-from">
+                  <option value="J">Joule (J)</option>
+                  <option value="KJ">Kilojoule (kJ)</option>
+                  <option value="Wh">Watt-hour (Wh)</option>
+                  <option value="kWh">Kilowatt-hour (kWh)</option>
+                  <option value="MWh">Megawatt-hour (MWh)</option>
+                  <option value="cal">Calorie (cal)</option>
+                  <option value="kcal">Kilocalorie (kcal)</option>
+                </select>
+              </div>
+              <button class="btn-swap" id="energy-swap-btn" title="Swap units">
+                <i class="fas fa-exchange-alt"></i>
+              </button>
+              <div class="input-group">
+                <label for="energy-from">From Unit</label>
+                <select id="energy-from">
+                  <option value="kWh">Kilowatt-hour (kWh)</option>
+                  <option value="J">Joule (J)</option>
+                  <option value="KJ">Kilojoule (kJ)</option>
+                  <option value="Wh">Watt-hour (Wh)</option>
+                  <option value="MWh">Megawatt-hour (MWh)</option>
+                  <option value="cal">Calorie (cal)</option>
+                  <option value="kcal">Kilocalorie (kcal)</option>
+                </select>
+              </div>
+            </div>
+
+            <button class="btn" id="energy-convert-btn">Convert</button>
+
+            <div class="result-container">
+              <p>Result</p>
+              <div class="result-value" id="energy-result">0</div>
+              <div class="result-unit" id="energy-result-unit">kWh</div>
+            </div>
+          </article>
+
+          <article class="converter-card">
+            <div class="card-header">
+              <h2 class="card-title">Energy Calculator</h2>
+              <i class="fas fa-calculator card-icon"></i>
+            </div>
+
+            <div class="input-group">
+              <label for="power-input">Power (W)</label>
+              <input type="number" id="power-input" placeholder="Enter power in watts" step="any" />
+            </div>
+
+            <div class="input-group">
+              <label for="time-input">Time (hours)</label>
+              <input type="number" id="time-input" placeholder="Enter Time in hours" step="any" />
+            </div>
+
+            <button class="btn" id="calculate-energy-btn">Calculate Energy</button>
+
+            <div class="result-container">
+              <p>Energy Result</p>
+              <div class="result-value" id="calculated-energy">0</div>
+              <p class="result-unit">Watt-hour (Wh)</p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="/widgets_script/powerConverter.js"></script>
+  </body>
+</html>

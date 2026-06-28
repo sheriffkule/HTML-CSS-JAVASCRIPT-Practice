@@ -1,0 +1,92 @@
+:root {
+    --primary: #4361ee;
+    --secondary: #3f37c9;
+    --accent: #4cc9f0;
+    --dark: #1a1a2e;
+    --light: #f1f2fa;
+    --success: #4caf50;
+    --warning: #ff9800;
+    --error: #f44336;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 8px rgb(0 0 0 / 0.15);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--light);
+    color: var(--dark);
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: var(--light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+h1 {
+    font-size: clamp(1.5rem, 5vw, 2.25rem);
+    padding-bottom: 0.5rem;
+    color: transparent;
+    background: linear-gradient(90deg, var(--light), silver);
+    background-clip: text;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    bottom: 0.5rem;
+    left: 0;
+    border-radius: 2px;
+    background: linear-gradient(90deg, transparent, var(--light));
+    animation: move 10s linear infinite;
+}
+
+h1::before {
+    font-family: 'Font Awesome 7 Free';
+    position: absolute;
+    content: '\f072';
+    top: calc(100% - 1.5rem);
+    left: 50%;
+    width: 100%;
+    font-size: 1.25rem;
+    color: lightblue;
+    animation: move 10s linear infinite;
+    animation-delay: -2.4s;
+}
+
+@keyframes move {
+    from {
+        left: -110%;
+    }
+    to {
+        left: 110%;
+    }
+}
+
+.subtitle {
+    font-size: 1rem;
+    opacity: 0.9;
+}
