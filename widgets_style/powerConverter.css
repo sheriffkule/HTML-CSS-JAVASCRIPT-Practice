@@ -292,3 +292,111 @@ option::checkmark {
         transform: scale(1);
     }
 }
+
+.history-container {
+    margin-top: 2rem;
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow),
+    inset var(--box-shadow);
+}
+
+.history-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.history-list {
+    padding: 0.75rem;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.history-value {
+    font-weight: 600;
+}
+
+.history-delete {
+    color: var(--error);
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 1rem;
+}
+
+.tabs {
+    display: flex;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #bbb;
+}
+
+.tab {
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    color: #606060;
+    transition: var(--transition);
+    border-bottom: 3px solid transparent;
+
+    &.active {
+        color: var(--primary);
+        border-bottom: 3px solid var(--primary);
+        letter-spacing: 1px;
+        scale: 1.05;
+    }
+    &:hover:not(.active) {
+        color: var(--secondary);
+        border-bottom: 1px solid var(--secondary);
+    }
+}
+
+.tab-content {
+    display: none;
+
+    &.active {
+        display: block;
+    }
+}
+
+input[type="number"] {
+    caret-animation: manual;
+    caret-shape: block;
+    caret-color: var(--primary);
+    animation: caret-animation infinite linear 1.2s;
+}
+
+@keyframes caret-animation {
+  50% {
+    caret-color: transparent;
+    caret-shape: bar;
+  }
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    cursor: pointer;
+    scale: 2;
+    transition: .2s;
+}
+
+input[type="number"]::-webkit-inner-spin-button:hover,
+input[type="number"]::-webkit-outer-spin-button:hover {
+    box-shadow: 0 0 0 1px royalblue;
+}
+
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}

@@ -154,4 +154,97 @@ document.addEventListener('DOMContentLoaded', function () {
 
     addToHistory(`P = ${voltage}V × ${current}A = ${power.toFixed(6).replace(/\.?0+$/, '')}W`, 'calc');
   });
+
+  // Energy conversion
+  function convertEnergy() {
+    const value = parseFloat(energyValueInput.value);
+    if (isNaN(value)) {
+      alert('Please enter a valid number!');
+      return;
+    }
+
+    const fromUnit = energyFromSelect.value;
+    const toUnit = energyToSelect.value;
+
+    // Convert to jules first
+    const valueInJules = value * energyConversionFactors[fromUnit];
+    // Convert to target unit
+    const result = valueInJules / energyConversionFactors[toUnit];
+
+    energyResult.textContent = result.toFixed(6).replace(/\.?0+$/, '');
+    energyResultUnit.textContent = toUnit;
+
+    addToHistory(`${value} ${fromUnit} = ${result.toFixed(6).replace(/\.?0+$/, '')} ${toUnit}`, 'energy');
+  }
+
+  function swapEnergyUnits() {
+    const temp = energyFromSelect.value;
+    energyFromSelect.value = energyToSelect.value;
+    energyToSelect = temp;
+    convertEnergy();
+  }
+
+  // Energy calculator (E = P x t)
+  calculateEnergyBtn.addEventListener('click', function () {
+    const power = parseFloat(powerInput.value);
+    const time = parseFloat(timeInput.value);
+
+    if (isNaN(power) || isNaN(time)) {
+      alert('Please enter valid numbers for power and time!');
+      return;
+    }
+
+    const energy = power * time;
+    calculatedEnergy.textContent = energy.toFixed(6).replace(/\.?0+$/, '');
+
+    addToHistory(`E = ${power}W × ${time}h = ${energy.toFixed(6).replace(/\.?0+$/, '')}Wh`, 'calc');
+  });
+
+  // Current Conversion
+  currentConvertBtn.addEventListener('click', convertCurrent);
+  currentSwapBtn.addEventListener('click', swapCurrentUnits);
+
+  function convertCurrent() {
+    const value = parseFloat(currentValueInput.value);
+    if (isNaN(value)) {
+      alert('Please enter a valid number!');
+      return;
+    }
+
+    const fromUnit = currentFromSelect.value;
+    const toUnit = currentToSelect.value;
+
+    // Convert to amperes first
+    const valueInAmperes = value + currentConversionFactors[fromUnit];
+    // Convert to target unit
+    const result = valueInAmperes / currentConversionFactors[toUnit];
+
+    currentResult.textContent = result.toFixed(6).replace(/\.?0+$/, '');
+    currentResultUnit.textContent = toUnit;
+
+    addToHistory(`${value} ${fromUnit} = ${result.toFixed(6).replace(/\.?0+$/, '')} ${toUnit}`, 'current');
+  }
+
+  function swapCurrentUnits() {
+    const temp = currentFromSelect.value;
+    currentFromSelect.value = currentToSelect.value;
+    currentToSelect.value = temp;
+    convertCurrent();
+  }
+
+  // Current calculator (I = P / V)
+  calculateCurrentBtn.addEventListener('click', function () {
+    const power = parseFloat(calcPowerInput.value);
+    const voltage = parseFloat(calcVoltageInput.value);
+
+    if (isNaN(power) || isNaN(voltage)) {
+      alert('Please enter valid numbers for power and voltage (voltage cannot be zero)!');
+      return;
+    }
+
+    const current = power / voltage;
+    calculatedCurrent.textContent = current.toFixed(6).replace(/\.?0+$/, '');
+
+    addToHistory(`I = ${power}W / ${voltage}V = ${current.toFixed(6).replace(/\.?0+$/, '')}A`, '');
+  });
 });
