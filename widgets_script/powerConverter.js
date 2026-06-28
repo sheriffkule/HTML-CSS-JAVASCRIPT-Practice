@@ -78,4 +78,80 @@ document.addEventListener('DOMContentLoaded', function () {
     mA: 0.001,
     kA: 1000,
   };
+
+  // Dark mode toggle
+  darkModeToggle.addEventListener('click', function () {
+    document.body.classList.toggle('dark-mode');
+    const icon = this.querySelector('i');
+    if (document.body.classList.contains('dark-mode')) {
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+    } else {
+      icon.classList.remove('fa-sun');
+      icon.classList.add('fa-moon');
+    }
+  });
+
+  // Tab switching
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', function () {
+      const tabId = this.getAttribute('data-tab');
+
+      // Remove class list from all tabs and contents
+      tabs.forEach((t) => t.classList.remove('active'));
+      tabContent.forEach((c) => c.classList.remove('active'));
+
+      // Add active class to clicked tab and corresponding content
+      this.classList.add('active');
+      document.getElementById(`${tabId}-tab`).classList.add('active');
+    });
+  });
+
+  // Power Conversion
+  powerConvertBtn.addEventListener('click', convertPower);
+  powerSwapBtn.addEventListener('click', swapPowerUnits);
+
+  function convertPower() {
+    const value = parseFloat(powerValueInput.value);
+    if (isNaN(value)) {
+      alert('Please enter a valid number');
+      return;
+    }
+
+    const fromUnit = powerFromSelect.value;
+    const toUnit = powerToSelect.value;
+
+    // Convert to watts first
+    const valueInWatts = value * powerConversionFactors[fromUnit];
+    // Convert to target unit
+    const result = valueInWatts / powerConversionFactors[toUnit];
+
+    powerResult.textContent = result.toFixed(6).replace(/\?0+$/, '', '');
+    powerResultUnit.textContent = toUnit;
+
+    addToHistory(`${value} ${fromUnit} = $${result.toFixed(6).replace(/\.?0+$/, '')}`);
+  }
+
+  function swapPowerUnits() {
+    const temp = powerFromSelect.value;
+    powerFromSelect.value = powerToSelect.value;
+    powerToSelect.value = temp;
+    convertPower();
+  }
+
+  // Power Calculator (P= VI)
+  calculatePowerBtn.addEventListener('click', function () {
+    const voltage = parseFloat(voltageInput.value);
+    const current = parseFloat(currentInput.value);
+
+    if (isNaN(voltage) || isNaN(current)) {
+      alert('Please enter valid numbers for voltage and current!');
+      return;
+    }
+
+    const power = voltage * current;
+    calculatedPower.textContent = power.toFixed(6).replace(/\.?0+$/, '');
+
+    addToHistory(`P = ${voltage}V × ${current}A = ${power.toFixed(6).replace(/\.?0+$/, '')}W`, 'calc');
+  });
 });
