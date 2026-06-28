@@ -90,3 +90,56 @@ h1::before {
     font-size: 1rem;
     opacity: 0.9;
 }
+
+.converter-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    background-color: white;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow),
+    inset var(--box-shadow);
+
+    @media (width < 768px) {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.converter-card {
+    background: linear-gradient(135deg, white, #dddddd);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--box-shadow),
+    inset var(--box-shadow);
+    transition: var(--transition);
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 20px rgb(0 0 0 / 0.2),
+        inset 0 10px 20px rgb(0 0 0 / 0.2);
+    }
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #bbb;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: transparent;
+    background: linear-gradient(100deg, var(--primary), var(--secondary));
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+.card-icon {
+    font-size: 1.5rem;
+    color: var(--accent);
+}
