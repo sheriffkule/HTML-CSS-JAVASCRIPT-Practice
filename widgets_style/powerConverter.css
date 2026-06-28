@@ -12,6 +12,11 @@
     --transition: all 0.3s ease;
 }
 
+::selection {
+    background-color: var(--primary);
+    color: var(--light);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -23,6 +28,7 @@ body {
     background-color: var(--light);
     color: var(--dark);
     line-height: 1.5;
+    transition: var(--transition);
 }
 
 .container {
@@ -61,7 +67,7 @@ h1::after {
     left: 0;
     border-radius: 2px;
     background: linear-gradient(90deg, transparent, var(--light));
-    /* animation: move 10s linear infinite; */
+    animation: move 10s linear infinite;
 }
 
 h1::before {
@@ -73,7 +79,7 @@ h1::before {
     width: 100%;
     font-size: 1.25rem;
     color: lightblue;
-    /* animation: move 10s linear infinite; */
+    animation: move 10s linear infinite;
     animation-delay: -2.4s;
 }
 
@@ -101,7 +107,7 @@ h1::before {
     box-shadow: var(--box-shadow),
     inset var(--box-shadow);
 
-    @media (width < 768px) {
+    @media (width > 768px) {
         grid-template-columns: 1fr 1fr;
     }
 }
@@ -156,7 +162,7 @@ label {
 }
 
 select, input {
-    width: 100%;
+    width: max-content;
     padding: 0.75rem;
     border: 1px solid #ccc;
     border-radius: var(--border-radius);
@@ -313,6 +319,12 @@ option::checkmark {
 }
 
 .history-list {
+    list-style: none;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.history-item {
     padding: 0.75rem;
     border-bottom: 1px solid #ccc;
     display: flex;
@@ -321,6 +333,10 @@ option::checkmark {
 
     &:last-child {
         border-bottom: none;
+    }
+    span:nth-of-type(2) {
+        margin-left: auto;
+        margin-right: 2rem;
     }
 }
 
@@ -334,6 +350,12 @@ option::checkmark {
     background: none;
     border: none;
     font-size: 1rem;
+    transition: var(--transition);
+
+    &:hover {
+        filter: saturate(1.5);
+        scale: 1.1;
+    }
 }
 
 .tabs {
@@ -396,7 +418,99 @@ input[type="number"]::-webkit-outer-spin-button:hover {
     box-shadow: 0 0 0 1px royalblue;
 }
 
+footer {
+    text-align: center;
+    font-size: 0.875rem;
+    padding: 0.5rem;
+    margin-top: 2rem;
+    color: #555;
+    background-color: var(--accent);
+    border-radius: var(--border-radius);
+
+    span {
+        color: red;
+        font-size: 1rem;
+    }
+    abbr {
+        text-underline-offset: 2px;
+        cursor: default;
+        color: var(--primary);
+        letter-spacing: 0.5px;
+    }
+}
+
+.dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--primary);
+    color: var(--light);
+    border: 1px solid var(--accent);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    box-shadow: var(--box-shadow);
+    z-index: 10;
+    transition: var(--transition);
+
+    &:hover {
+        scale: 1.1;
+    }
+}
+
 body.dark-mode {
     background-color: #121212;
     color: #e0e0e0;
+}
+
+body.dark-mode :is(.converter-card, .history-container, .converter-container) {
+    background: #1e1e1e;
+    color: #e0e0e0;
+    transition: var(--transition);
+}
+
+body.dark-mode :is(select, input) {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+    border-color: #444;
+}
+
+body.dark-mode .result-container {
+    background-color: #2d2d2d;
+}
+
+body.dark-mode label {
+    color: #bbb;
+}
+
+body.dark-mode .history-list {
+    border-bottom-color: #444;
+}
+
+.from-to {
+    display: flex;
+}
+
+@media (width < 600) {
+    .converter-container {
+        padding: 1rem;
+    }
+}
+
+::-webkit-scrollbar {
+    background-color: var(--light);
+    border: 1px dotted #999;
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--accent);
+    border-radius: var(--border-radius);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary);
 }
