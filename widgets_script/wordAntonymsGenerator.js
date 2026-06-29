@@ -98,4 +98,75 @@ document.addEventListener('DOMContentLoaded', function () {
 
     resultsContainer.style.display = 'block';
   }
+
+  // Handle search
+  searchBtn.addEventListener('click', async function () {
+    const word = wordInput.value.trim();
+    if (!word) {
+      errorMessage.textContent = 'Please enter a word to search';
+      errorMessage.style.display = 'block';
+      return;
+    }
+
+    // Add to search history
+    if (!searchHistory.includes(word.toLowerCase())) {
+      searchHistory.unshift(word.toLowerCase());
+      localStorage.setItem('antonymSearchHistory', JSON.stringify(searchHistory));
+      displayHistory();
+    }
+
+    const antonymsData = await fetchAntonyms(word);
+    if (antonymsData.length > 0) {
+      displayAntonyms(word, antonymsData);
+    }
+  });
+
+  // Allow search on Enter key
+  wordInput.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      searchBtn.click();
+    }
+  });
+
+  // Copy antonyms to clipboard
+  copyBtn.addEventListener('click', function () {
+    const antonyms = Array.from(document.querySelectorAll('.antonym-card'))
+      .map((card) => card.textContent)
+      .join(', ');
+
+    if (!antonyms) return;
+
+    navigator.clipboard.writeText(`Antonyms for ${searchedWord.textContent}: ${antonyms}`).then(() => {
+      const originalText = copyBtn.innerHTML;
+      copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+      setTimeout(() => {
+        copyBtn.innerHTML = originalText;
+      }, 2000);
+    });
+  });
+
+  // Sample words suggestion on focus
+  wordInput.addEventListener('focus', function () {
+    if (!this.value) {
+      this.placeholder = 'e.g., happy, light, up, love, fast...';
+    }
+  });
+
+  wordInput.addEventListener('blur', function () {
+    this.placeholder = 'Enter a word (e.g., happy, light, up)...';
+  });
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
