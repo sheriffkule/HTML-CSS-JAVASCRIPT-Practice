@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SEO Meta Tag Generator</title>
+    <link rel="stylesheet" href="/widgets_style/seoMetaTagGenerator.css" />
+  </head>
+  <body class="dark-mode">
+    <div class="container">
+      <header>
+        <h1>SEO Meta Tag Generator</h1>
+        <button class="theme-toggle" id="themeToggle">🌙</button>
+      </header>
+
+      <div class="app-description">
+        <p>
+          Generate optimized meta tags for your website to improve search engine visibility and social media
+          sharing. Fill in the form and get the HTML code ready to copy and paste into your website's
+          &lt;head&gt; section.
+        </p>
+      </div>
+
+      <main class="main-content">
+        <section class="card">
+          <h2>Meta Tag Configuration</h2>
+
+          <div class="tabs">
+            <div class="tab active" data-tab="basic">Basic</div>
+            <div class="tab" data-tab="open-graph">Open Graph</div>
+            <div class="tab" data-tab="twitter">Twitter Cards</div>
+          </div>
+
+          <div class="ta-content active" id="basic-tab">
+            <article class="form-group">
+              <label for="pageTitle"
+                >Page Title
+                <span class="tooltip"
+                  >ℹ️
+                  <span class="tooltiptext"
+                    >Keep between 50-60 characters for optimal display in search results.</span
+                  >
+                </span></label
+              >
+              <input type="text" id="pageTitle" placeholder="Enter your page title" />
+              <div class="char-count" id="titleCount">0/60</div>
+            </article>
+
+            <article class="form-group">
+              <label for="pageDescription"
+                >Meta Description
+                <span class="tooltip"
+                  >ℹ️
+                  <span class="tooltiptext"
+                    >Keep between 150-160 characters for optimal display in search results.</span
+                  >
+                </span></label
+              >
+              <textarea id="pageDescription" placeholder="Enter your meta description"></textarea>
+              <div class="char-count" id="descriptionCount">0/160</div>
+            </article>
+
+            <article class="form-group">
+              <label for="pageKeywords"
+                >Keywords
+                <span class="tooltip"
+                  >ℹ️
+                  <span class="tooltiptext"
+                    >Separate keywords with commas. Modern SEO focuses less on keywords, but they can still be
+                    useful.</span
+                  >
+                </span></label
+              >
+              <input type="text" id="pageKeywords" placeholder="keyword1, keyword2, keyword3" />
+            </article>
+
+            <article class="form-group">
+              <label for="pageUrl">Canonical URL</label>
+              <input type="url" id="pageUrl" placeholder="https://example.com/page" />
+            </article>
+
+            <article class="form-group">
+              <label for="pagAuthor">Author</label>
+              <input type="text" id="pageAuthor" placeholder="Author name" />
+            </article>
+
+            <article class="checkbox-group">
+              <input type="checkbox" id="robotsIndex" checked />
+              <label for="robotsIndex">Allow search engines to index this page.</label>
+            </article>
+
+            <article class="checkbox-group">
+              <input type="checkbox" id="robotsFollow" checked />
+              <label for="robotsFollow">Allow search engines to follow links on this page</label>
+            </article>
+          </div>
+
+          <div class="tab-content" id="open-graph-tab">
+            <article class="form-group">
+              <label for="ogTitle">Open Graph Title</label>
+              <input type="text" id="ogTitle" placeholder="Title for social media sharing" />
+            </article>
+
+            <article class="form-group">
+              <label for="ogDescription">Open Graph Description</label>
+              <textarea id="ogDescription" placeholder="Description for social media sharing"></textarea>
+            </article>
+
+            <article class="form-group">
+              <label for="ogImage">Open Graph Image URL</label>
+              <input type="url" id="ogImage" placeholder="https://example.com/image.jpg" />
+            </article>
+
+            <article class="form-group">
+              <label for="ogUrl">Open Graph URL</label>
+              <input type="url" id="ogUrl" />
+            </article>
+
+            <article class="form-group">
+              <label for="ogType">Open Graph Type</label>
+              <select id="ogType">
+                <option value="website">Website</option>
+                <option value="article">Article</option>
+                <option value="product">Product</option>
+                <option value="profile">Profile</option>
+                <option value="video">Video</option>
+              </select>
+            </article>
+
+            <article class="form-group">
+              <label for="ogSiteName">Site Name</label>
+              <input type="text" id="ogSiteName" placeholder="Your website name" />
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/widgets_script/seoMetaTagGenerator.js"></script>
+  </body>
+</html>

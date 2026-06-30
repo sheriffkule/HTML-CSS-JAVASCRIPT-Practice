@@ -1,0 +1,36 @@
+:root {
+    --primary: #4361ee;
+    --secondary: #3f37c9;
+    --success: #4cc9f0;
+    --text: #333;
+    --bg: #f1f2fa;
+    --card-bg: #f0f0f0;
+    --border-color: #d0d0d0;
+    --shadow: 0 4px 8px rgb(0 0 0 / 0.15);
+    --radius: 8px;
+}
+
+.dark-mode {
+    --primary: #4895ef;
+    --secondary: #4361ee;
+    --success: #4cc9f0;
+    --text: #f1f1f1;
+    --bg: #121212;
+    --card-bg: #1e1e1e;
+    --border-color: #555;
+    --shadow: 0 4px 8px rgb(255 255 255 / 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.5;
+    color: var(--text);
+    background-color: var(--bg);
+    padding: 20px;
+}
