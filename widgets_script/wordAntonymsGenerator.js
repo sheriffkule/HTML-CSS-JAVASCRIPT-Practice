@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
       return data;
     } catch (error) {
       loading.style.display = 'none';
-      errorMessage.textContent = error.errorMessage;
+      errorMessage.textContent = error.message;
       errorMessage.style.display = 'block';
       return [];
     }
@@ -74,8 +74,8 @@ document.addEventListener('DOMContentLoaded', function () {
       wordType.textContent = ' (adjective)';
     } else if (firstAntonym.tags && firstAntonym.tags.includes('n')) {
       wordType.textContent = ' (noun)';
-    } else if (firstAntonym.tags && firstAntonym.tags.includes('adj')) {
-      wordType.textContent = '(verb)';
+    } else if (firstAntonym.tags && firstAntonym.tags.includes('v')) {
+      wordType.textContent = ' (verb)';
     } else {
       wordType.textContent = '';
     }
