@@ -132,8 +132,74 @@
               <input type="text" id="ogSiteName" placeholder="Your website name" />
             </article>
           </div>
+
+          <div class="tab-content" id="twitter-tab">
+            <article class="form-group">
+              <label for="twitterCard">Twitter Card Type</label>
+              <select id="twitterCard">
+                <option value="summary">Summary</option>
+                <option value="summary_large_image">Summary with Large Image</option>
+                <option value="app">App</option>
+                <option value="player">Player</option>
+              </select>
+            </article>
+
+            <article class="form-group">
+              <label for="twitterTitle">Twitter Title</label>
+              <input type="text" id="twitterTitle" placeholder="Title for Twitter" />
+            </article>
+
+            <article class="form-group">
+              <label for="twitterDescription">Twitter Description</label>
+              <textarea id="twitterDescription" placeholder="Description for Twitter"></textarea>
+            </article>
+
+            <article class="form-group">
+              <label for="twitterImage">Twitter Image URL</label>
+              <input type="url" id="twitterImage" placeholder="https://example.com/twitter-image.jpg" />
+            </article>
+
+            <article class="form-group">
+              <label for="twitterSite">Twitter Site (@username)</label>
+              <input type="text" id="twitterSite" placeholder="@username" />
+            </article>
+
+            <article class="form-group">
+              <label for="twitterCreator">Twitter Creator (@username)</label>
+              <input type="text" id="twitterCreator" placeholder="@username" />
+            </article>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Generated Meta Tags</h2>
+
+          <div class="preview-section">
+            <div class="preview-card">
+              <h3>HTML Meta Tags</h3>
+              <div class="preview-content" id="metaTagsPreview"></div>
+              <button class="copy-btn" data-target="metaTagsPreview">Copy</button>
+            </div>
+
+            <div class="preview-card">
+              <h3>Social Media Preview</h3>
+              <div class="social-preview" id="socialPreview">
+                <div id="socialPreviewImage"></div>
+                <div class="social-preview-content">
+                  <h4 id="socialPreviewTitle">Your page title will appear here</h4>
+                  <p id="socialPreviewDescription">Your page description will appear here</p>
+                  <div class="url" id="socialPreviewUrl">example.com</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
       </main>
+
+      <footer>
+        © <time datetime="2026" id="year">2026</time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
     </div>
 
     <script src="/widgets_script/seoMetaTagGenerator.js"></script>
