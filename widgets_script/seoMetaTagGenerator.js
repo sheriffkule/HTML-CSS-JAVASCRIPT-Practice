@@ -81,3 +81,38 @@ function setupEventListeners() {
     button.addEventListener('click', () => copyToClipboard(button.dataset.target));
   });
 }
+
+// Toggle between light and dark mode
+function toggleTheme() {
+  document.body.classList.toggle('dark-mode');
+  themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+}
+
+// Switch between tabs
+function switchTab(tabId) {
+  // Update active tab
+  tabs.forEach((tab) => {
+    tab.classList.toggle('active', tab.dataset.tab === tabId);
+  });
+
+  // Show active tab content
+  tabContents.forEach(content => {
+    content.classList.toggle('active', content.id === `${tabId}-tab`)
+  })
+}
+
+// Update character counters
+function updateCharacterCounts() {
+  const titleLength = pageTitle.value.length;
+  const descriptionLength = pageDescription.value.length;
+
+  titleCount.textContent = `${titleLength} / 60`;
+  descriptionCount.textContent = `${descriptionLength} / 160`;
+
+  // Add warning class if over recommended length
+  titleCount.classList.toggle('warning', titleLength > 60);
+  descriptionCount.classList.toggle('warning', descriptionLength > 160);
+
+  // Generate meta tags when these fields change
+  generateMetaTags();
+}
