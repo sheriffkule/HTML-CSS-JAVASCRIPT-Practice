@@ -9,8 +9,95 @@
     <link rel="stylesheet" href="steakhouseRestaurant.css" />
   </head>
   <body>
-    <header class="header" id="header"></header>
-    <main class="main"></main>
+    <header class="header" id="header">
+      <div class="nav container">
+        <a href="#" class="nav__logo">Steakhouse</a>
+
+        <div class="nav__menu" id="nav-menu">
+          <ul class="nav__list">
+            <li><a href="#home" class="nav__link">Home</a></li>
+            <li><a href="#about" class="nav__link">About Us</a></li>
+            <li><a href="#menu" class="nav__link">Menu</a></li>
+            <li><a href="#events" class="nav__link">Events</a></li>
+            <li><a href="#contacts" class="nav__link">Contact</a></li>
+            <li><a href="#reservation" class="nav__link">Reservation</a></li>
+          </ul>
+
+          <button class="nav__close" id="nav-close" aria-label="Close menu">
+            <i class="ri-close-large-line"></i>
+          </button>
+        </div>
+
+        <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu">
+          <i class="ri-menu-line"></i>
+        </button>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="home section" id="home">
+        <div class="home__container container grid">
+          <div class="home__data">
+            <h1 class="home__title">
+              A Premium <br />
+              And Authentic <br />
+              Steakhouse
+            </h1>
+
+            <a href="reservation" class="home__button button">Book a Table</a>
+          </div>
+
+          <div class="home__images">
+            <img
+              src="img/home-salt.png"
+              alt="Grilled steak and fresh vegetables"
+              class="home__salt-2"
+              loading="lazy" />
+            <img
+              src="img/home-salt.png"
+              alt="Grilled steak and fresh vegetables"
+              class="home__salt-1"
+              loading="lazy" />
+            <img
+              src="img/home-pepper.png"
+              alt="Grilled steak and fresh vegetables"
+              class="home__pepper"
+              loading="lazy" />
+            <img
+              src="img/home-tomato.png"
+              alt="Grilled steak and fresh vegetables"
+              class="home__tomato"
+              loading="lazy" />
+            <img
+              src="img/home-rosemary-1.png"
+              alt="Grilled steak and fresh vegetables"
+              class="home__rosemary-1"
+              loading="lazy" />
+            <img
+              src="img/home-onion.png"
+              alt="Grilled steak and fresh vegetables"
+              class="home__onion"
+              loading="lazy" />
+            <img
+              src="img/home-spoon.png"
+              alt="Grilled steak and fresh vegetables"
+              class="home__spoon"
+              loading="lazy" />
+            <img
+              src="img/home-rosemary-2.png"
+              alt="Grilled steak and fresh vegetables"
+              class="home__rosemary-2"
+              loading="lazy" />
+            <img
+              src="img/home-frying-pan.png"
+              alt="Grilled steak and fresh vegetables"
+              class="home__frying"
+              loading="lazy" />
+          </div>
+        </div>
+      </section>
+    </main>
+
     <footer class="footer"></footer>
 
     <script src="/scripts/scrollreveal.min.js"></script>
