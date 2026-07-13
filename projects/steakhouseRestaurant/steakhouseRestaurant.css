@@ -91,7 +91,6 @@ img {
   height: auto;
 }
 
-/*=============== REUSABLE CSS CLASSES ===============*/
 .container {
   max-width: 1120px;
   margin-inline: 1rem;
@@ -118,9 +117,9 @@ img {
   color: var(--first-color);
 }
 
-/* .main {
+.main {
   overflow: hidden;
-} */
+}
 
 .header {
     position: fixed;
@@ -195,4 +194,164 @@ img {
 
 .scroll-header {
     box-shadow: 0 2px 16px hsla(0, 0%, 80%, 0.2);
+    background-color: hsl(from var(--body-color) h s l / 0.6);
+    backdrop-filter: blur(5px);
+}
+
+.home__container {
+  row-gap: 5rem;
+  padding-top: 4.5rem;
+}
+
+.home__data {
+  text-align: center;
+}
+
+.home__title {
+  font-size: var(--biggest-font-size);
+  margin-bottom: 2rem;
+}
+
+.home__images {
+  position: relative;
+  justify-self: center;
+}
+
+.home__images img {
+  position: absolute;
+}
+
+.home__images .home__fryingpan {
+  position: relative;
+  width: 280px;
+  z-index: 10;
+}
+
+.home__rosemary-2 {
+  width: 100px;
+  right: -1rem;
+  bottom: 4rem;
+}
+
+.home__spoon {
+  width: 80px;
+  top: 1rem;
+  right: -1.5rem;
+}
+
+.home__onion {
+  width: 60px;
+  top: -1rem;
+  left: 0;
+}
+
+.home__rosemary-1 {
+  width: 60px;
+  left: -2rem;
+  bottom: 3rem;
+}
+
+.home__tomato {
+  width: 60px;
+  left: 0.5rem;
+  bottom: 1.5rem;
+}
+
+.home__pepper {
+  width: 100px;
+  right: 6rem;
+  bottom: 1rem;
+}
+
+.home__salt-1 {
+  width: 150px;
+  top: -1.5rem;
+  right: 1rem;
+}
+
+.home__salt-2 {
+  width: 150px;
+  left: -3rem;
+  top: 3.5rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  column-gap: .5rem;
+  background-color: transparent;
+  color: var(--white-color);
+  border: 2px solid var(--white-color);
+  padding: 1rem 2rem;
+  font-weight: var(--font-semi-bold);
+  transition: background-color 0.4s, border-color 0.4s, color 0.4s;
+
+  i {
+    font-size: 1.5rem;
+    font-weight: initial;
+  }
+  &:hover {
+    border-color: var(--first-color);
+    background-color: var(--first-color);
+    color: var(--dark-color);
+  }
+}
+
+.button__link {
+  display: inline-flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  color: var(--first-color);
+  font-weight: var(--font-semi-bold);
+  transition: color 0.4s;
+
+  i {
+    font-size: 1.5rem;
+    font-weight: initial;
+    transition: transform 0.4s;
+  }
+  &:hover {
+    color: var(--first-color-alt);
+  }
+  &:hover i {
+  transform: translateX(0.5rem);
+  }
+}
+
+.about__container {
+  position: relative;
+  row-gap: 0;
+  padding-bottom: 2rem;
+}
+
+.about__flour {
+  width: 200px;
+  position: absolute;
+  top: 0;
+  left: -3rem;
+}
+
+.about__img {
+  position: relative;
+}
+
+.about__data {
+  position: relative;
+  background-color: var(--white-color);
+  color: var(--dark-color);
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.about__description {
+  margin-bottom: 3rem;
+  color: var(--text-color);
+  text-wrap: pretty;
+}
+
+.about__rosemary {
+  width: 150px;
+  position: absolute;
+  right: -3.5rem;
+  bottom: -2.5rem;
 }
