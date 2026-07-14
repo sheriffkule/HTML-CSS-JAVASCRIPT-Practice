@@ -77,6 +77,10 @@ h1, h2, h3, h4 {
   font-weight: var(--font-bold);
 }
 
+p {
+  text-wrap: pretty;
+}
+
 ul {
   list-style: none;
 }
@@ -346,7 +350,6 @@ img {
 .about__description {
   margin-bottom: 3rem;
   color: var(--text-color);
-  text-wrap: pretty;
 }
 
 .about__rosemary {
@@ -354,4 +357,125 @@ img {
   position: absolute;
   right: -3.5rem;
   bottom: -2.5rem;
+}
+
+.menu__container {
+  row-gap: 4rem;
+}
+
+.menu__description {
+  text-align: center;
+}
+
+.menu__content {
+  display: grid;
+  row-gap: 2rem;
+}
+
+.menu__card {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu__name {
+  font: var(--font-bold) var(--h2-font-size) var(--second-font);
+  color: var(--first-color);
+  margin-bottom: 0.5rem;
+}
+
+.menu__summary {
+  font-size: var(--small-font-size);
+}
+
+.menu__images {
+  position: relative;
+}
+
+.menu__card:nth-child(even) .menu__info {
+  order: -1;
+}
+
+.menu__card:nth-child(odd) .menu__images {
+  justify-self: flex-start;
+}
+
+.menu__card:nth-child(even) .menu__images {
+  justify-self: flex-end;
+}
+
+.menu__dish-1 {
+  width: 100px;
+  position: relative;
+  z-index: 5;
+}
+
+.menu__rosemary {
+  position: absolute;
+  width: 80px;
+  left: -1rem;
+  bottom: -1rem;
+}
+
+.menu__flour-1 {
+  width: 100px;
+  position: absolute;
+  top: -2rem;
+  right: -1.5rem;
+}
+
+.menu__dish-2 {
+  width: 140px;
+  position: relative;
+  z-index: 5;
+}
+
+.menu__flour-2 {
+  width: 150px;
+  position: absolute;
+  top: -2rem;
+  left: -3rem;
+}
+
+.menu__pepper {
+  width: 100px;
+  position: absolute;
+  right: 0.5rem;
+  bottom: -2rem;
+}
+
+.menu__dish-3 {
+  width: 120px;
+  position: relative;
+  z-index: 5;
+}
+
+.menu__flour-3 {
+  max-width: initial;
+  width: 150px;
+  position: absolute;
+  top: -3rem;
+  r: -3rem;
+}
+
+.menu__tomato {
+  width: 50px;
+  position: absolute;
+  left: 0.5rem;
+  bottom: -1rem;
+}
+
+.menu__dish-4 {
+  width: 125px;
+  position: relative;
+  z-index: 5;
+}
+
+.menu__flour-4 {
+  max-width: initial;
+  width: 150px;
+  position: absolute;
+  top: -1.5rem;
+  left: -2rem;
 }
