@@ -821,3 +821,303 @@ img {
     justify-content: center;
   }
 }
+
+@media (width >= 768px) {
+  .contact__content,
+  .footer__container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 1150px) {
+  .container {
+    margin-inline: auto;
+  }
+  .section {
+    padding-block: 7rem 2rem;
+  }
+  .section__title {
+    margin-bottom: 1.5rem;
+  }
+  .nav {
+    height: calc(var(--header-height) + 2rem);
+  }
+  .nav__toggle,
+  .nav__close {
+    display: none;
+  }
+  .nav__list {
+    flex-direction: row;
+    column-gap: 3rem;
+  }
+  .home__container {
+    grid-template-columns: 460px 560px;
+    column-gap: 4rem;
+    align-items: center;
+    justify-content: center;
+    padding-block: 7rem 4rem;
+  }
+  .home__data {
+    text-align: initial;
+  }
+  .home__title {
+    margin-bottom: 3rem;
+  }
+  .home__images .home__fryingpan {
+    width: 560px;
+  }
+  .home__rosemary-2 {
+    width: 200px;
+    right: -3rem;
+    bottom: 8rem;
+  }
+  .home__spoon {
+    width: 160px;
+    top: 2rem;
+    right: -4rem;
+  }
+  .home__onion {
+    width: 120px;
+    top: 0;
+    left: -2rem;
+  }
+  .home__rosemary-1 {
+    width: 120px;
+    left: -4rem;
+    bottom: 5rem;
+  }
+  .home__tomato {
+    width: 120px;
+    left: 1rem;
+    bottom: 2rem;
+  }
+  .home__pepper {
+    width: 200px;
+    right: 12px;
+    bottom: 2rem;
+  }
+  .home__salt-1 {
+    width: 300px;
+    top: -3rem;
+    right: 2rem;
+  }
+  .home__salt-2 {
+    width: 300px;
+    left: -6rem;
+    bottom: 7rem;
+  }
+  .about__container {
+    width: initial;
+    grid-template-columns: 450px 670px;
+    column-gap: 0;
+    margin-block: 5rem 4rem;
+  }
+  .about__flour {
+    width: 450px;
+    left: 5.5rem;
+    top: -7rem;
+  }
+  .about__data {
+    padding: 0 6rem;
+    text-align: initial;
+    align-content: center;
+  }
+  .about__data :is(.section__subtitle, .section__title) {
+    text-align: initial;
+  }
+  .about__rosemary {
+    width: 220px;
+    right: -4rem;
+    bottom: -4rem;
+  }
+  .menu__container {
+    row-gap: 6.5rem;
+    grid-template-columns: 850px;
+  }
+  .menu__header {
+    display: grid;
+    grid-template-columns: max-content 500px;
+    column-gap: 9rem;
+    align-items: center;
+  }
+  .menu__header .section__subtitle {
+    text-align: center;
+  }
+  .menu__description {
+    text-align: initial;
+  }
+  .menu__dish-1 {
+    width: 240px;
+  }
+  .menu__rosemary {
+    width: 200px;
+    left: -3rem;
+    bottom: -3rem;
+  }
+  .menu__flour-1 {
+    width: 250px;
+    top: -5.5rem;
+    right: -4.5rem;
+  }
+  .menu__dish-2 {
+    width: 380px;
+  }
+  .menu__flour-2 {
+    width: 380px;
+    top: -5.5rem;
+    left: -8rem;
+  }
+  .menu__pepper {
+    width: 270px;
+    right: 1.5rem;
+    bottom: -6rem;
+  }
+  .menu__dish-3 {
+    width: 300px;
+  }
+  .menu__flour-3 {
+    width: 380px;
+    top: -8rem;
+    right: -8rem;
+  }
+  .menu__tomato {
+    width: 130px;
+    bottom: -3.5rem;
+  }
+  .menu__dish-4 {
+    width: 310px;
+  }
+  .menu__flour-4 {
+    width: 370px;
+    top: -3rem;
+    left: -8rem;
+  }
+  .menu__info {
+    width: 300px;
+  }
+  .menu__card:nth-child(odd) .menu__info {
+    justify-self: flex-end;
+  }
+  .menu__card:nth-child(even) .menu__info {
+    justify-self: flex-start;
+  }
+  .menu__summary {
+    font-size: var(--normal-font-size);
+  }
+  .events__container {
+    width: initial;
+    grid-template-columns: 450px 670px;
+    column-gap: 0;
+    margin-block: 5rem 4rem;
+  }
+  .events__flour {
+    width: 450px;
+    left: 5.5rem;
+    top: -7rem;
+  }
+  .events__data {
+    padding: 0 6rem;
+    text-align: initial;
+    align-content: center;
+  }
+  .events__data :is(.section__subtitle, .section__title) {
+    text-align: initial;
+  }
+  .events__info {
+    text-align: right;
+  }
+  .events__spoon {
+    width: 250px;
+    right: -2rem;
+    bottom: -2rem;
+  }
+  .ingredients__container {
+    grid-template-columns: 650px;
+    row-gap: 6rem;
+  }
+  .ingredients__images .ingredients__img-1 {
+    width: 280px;
+  }
+  .ingredients__img-2 {
+    width: 115px;
+    left: -9rem;
+  }
+  .ingredients__img-3 {
+    width: 95px;
+    right: -8rem;
+  }
+  .ingredients__img-4 {
+    width: 80px;
+    left: -18rem;
+    top: 6.5rem;
+  }
+  .ingredients__img-5 {
+    width: 140px;
+    left: -19rem;
+  }
+  .ingredients__img-6 {
+    width: 110px;
+    right: -9rem;
+    top: 1rem;
+  }
+  .ingredients__img-7 {
+    width: 110px;
+    right: -17rem;
+    top: 9rem;
+  }
+  .ingredients__img-8 {
+    width: 150px;
+    right: -20rem;
+  }
+  .contact .section__title {
+    margin-bottom: 4rem;
+  }
+  .contact__container {
+    grid-template-columns: 350px 450px;
+    align-items: center;
+    column-gap: 12rem;
+  }
+  .contact__map {
+    width: 450px;
+    height: 400px;
+    order: 1;
+  }
+  .contact__content {
+    gap: 5rem;
+  }
+  .reservation__container {
+    height: 480px;
+  }
+  .reservation__contact {
+    text-align: center;
+  }
+  .reservation__data {
+    margin-bottom: 4rem;
+  }
+  .reservation__data .section__subtitle {
+    font-size: 3rem;
+  }
+  .reservation__data .section__title {
+    font-size: 3.5rem;
+  }
+  .footer {
+    padding-top: 5rem;
+  }
+  .footer__container {
+    grid-template-columns: repeat(4, max-content);
+    justify-content: space-between;
+  }
+  .footer__title,
+  .footer__logo {
+    margin-bottom: 1rem;
+  }
+  .scrollUp {
+    right: 3rem;
+  }
+}
+
+@media (width >= 2048px) {
+  body {
+    zoom: 120%;
+  }
+}
