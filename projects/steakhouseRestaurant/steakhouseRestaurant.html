@@ -15,7 +15,7 @@
 
         <div class="nav__menu" id="nav-menu">
           <ul class="nav__list">
-            <li><a href="#home" class="nav__link">Home</a></li>
+            <li><a href="#home" class="nav__link active-link">Home</a></li>
             <li><a href="#about" class="nav__link">About Us</a></li>
             <li><a href="#menu" class="nav__link">Menu</a></li>
             <li><a href="#events" class="nav__link">Events</a></li>
@@ -373,7 +373,56 @@
       </section>
     </main>
 
-    <footer class="footer"></footer>
+    <footer class="footer">
+      <div class="footer__container container grid">
+        <div class="footer__data">
+          <h3 class="footer__title">Links</h3>
+
+          <ul class="footer__links">
+            <li>
+              <a href="#home" class="footer__link">Home</a>
+            </li>
+            <li>
+              <a href="#menu" class="footer__link">Menu</a>
+            </li>
+            <li>
+              <a href="#contact" class="footer__link">Contact</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer__data">
+          <h3 class="footer__title">Location</h3>
+
+          <address class="footer__address">
+            Fuente Osmeña Cir <br />
+            Cebu City - Philippines
+          </address>
+        </div>
+
+        <div class="footer__data">
+          <h3 class="footer__title">Working Hours</h3>
+
+          <p class="footer__address" itemscope itemtype="https://schema.org/LocalBusiness">
+            <span itemprop="openingHours" content="Mo-Sa 09:00-20:00">Monday - Saturday: 9am - 8pm</span>
+            <span itemprop="openingHours" content="Su 09:00-18:00">Sunday: 9am - 6pm</span>
+          </p>
+        </div>
+
+        <div class="footer__data">
+          <a href="#" class="footer__logo">Steakhouse</a>
+
+          <span class="footer__email">steakhouse@email.com</span>
+        </div>
+      </div>
+
+      <small class="footer__copy"
+        >&copy; All Rights Reserved By
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em></small
+      >
+    </footer>
+
+    <a href="#" class="scrollUp" id="scroll-up"><i class="ri-arrow-up-line"></i></a>
 
     <script src="/scripts/scrollreveal.min.js"></script>
     <script src="steakhouseRestaurant.js"></script>

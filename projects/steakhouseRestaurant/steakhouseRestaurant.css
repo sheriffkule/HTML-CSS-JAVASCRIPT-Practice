@@ -200,6 +200,27 @@ img {
     box-shadow: 0 2px 16px hsla(0, 0%, 80%, 0.2);
     background-color: hsl(from var(--body-color) h s l / 0.6);
     backdrop-filter: blur(5px);
+
+    .show-menu {
+      height: max-content;
+    }
+}
+
+.active-link {
+  color: var(--first-color);
+  position: relative;
+}
+
+.active-link::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -1rem;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--first-color);
 }
 
 .home__container {
@@ -688,5 +709,115 @@ img {
 
   .section__subtitle {
     color: var(--white-color);
+  }
+}
+
+.footer {
+  padding-block: 5rem 2rem;
+}
+
+.footer__container {
+  row-gap: 3rem;
+}
+
+.footer__title {
+  font-size: var(--normal-font-size);
+  color: var(--first-color);
+  margin-bottom: .5rem;
+}
+
+.footer__links {
+  display: flex;
+  column-gap: 1rem;
+}
+
+.footer__link {
+  color: var(--white-color);
+  transition: color .4s;
+
+  &:hover {
+    color: var(--first-color);
+  }
+}
+
+.footer__address {
+  font-style: normal;
+
+  span {
+    display: block;
+  }
+}
+
+.footer__logo {
+  display: inline-block;
+  color: var(--first-color);
+  font: var(--font-bold) var(--h1-font-size) var(--second-font);
+}
+
+.footer__email {
+  display: block;
+}
+
+.footer__copy {
+  display: block;
+  text-align: center;
+  margin-top: 5rem;
+  font-size: var(--smaller-font-size);
+
+  abbr {
+    color: var(--first-color);
+    text-underline-offset: 2px;
+    cursor: default;
+    letter-spacing: 0.5px;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 0.6rem;
+  background-color: hsl(0, 0%, 15%);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: hsl(0, 0%, 30%);
+  border-radius: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(0, 0%, 45%);
+}
+
+.scrollUp {
+  position: fixed;
+  right: 1rem;
+  bottom: -50%;
+  background-color: var(--body-color);
+  box-shadow: 0 4px 16px hsl(0 0% 0% / 0.3);
+  color: var(--white-color);
+  display: inline-flex;
+  padding: 6px;
+  font-size: 1.25rem;
+  z-index: var(--z-tooltip);
+  transition: bottom 0.4s, transform 0.4s;
+
+  &:hover {
+    transform: translateY(-0.5rem) scale(1.1);
+  }
+}
+
+.show-scroll {
+  bottom: 3rem;
+}
+
+@media (width >= 540px) {
+  .about__container,
+  .events__container {
+    width: 350px;
+    margin-inline: auto;
+  }
+  .menu__container,
+  .ingredients__container,
+  .contact__container {
+    grid-template-columns: 400px;
+    justify-content: center;
   }
 }
