@@ -32,5 +32,50 @@ document.addEventListener('DOMContentLoaded', function () {
       `;
       return;
     }
+
+    contactsArray.forEach((contact) => {
+      const firstLetter = contact.name.charAt(0).toUpperCase();
+      const categoryClass = `category-${contact.category}`;
+
+      const contactCard = document.createElement('div');
+      contactCard.classList.add('contact-card', categoryClass);
+      contactCard.innerHTML = `
+        <div class="contact-header">
+          <div class="contact-avatar">${firstLetter}</div>
+          <div>
+            <div class="contact-name">${contact.name}</div>
+            <div class="contact-title">${contact.title}</div>
+            <span class="category-badge ${categoryClass}">${contact.category}</span>
+          </div>
+        </div>
+        <div class="contact-details">
+          <div class="contact-detail">
+            <i class="fas fa-envelope"></i>
+            <span>${contact.email}</span>
+          </div>
+          <div class="contact-detail">
+            <i class="fas fa-phone"></i>
+            <span>${contact.phone} || 'Not provided'</span>
+          </div>
+          ${contact.notes
+            ? `
+                <div class="contact-detail">
+                  <i class="fas fa-sticky-note"></i>
+                  <span>${contact.notes}</span>
+                </div>
+              `
+            : ''}
+        </div>
+        <div class="contact-actions">
+          <button class="action-btn edit-btn" data-id="${contact.id}">
+            <i className="fas fa-edit"></i> Edit
+          </button>
+          <button class="action-btn delete-btn" data-id="${contact.id}">
+            <i className="fas fa-trash-alt"></i> Delete
+          </button>
+        </div>
+      `;
+      contactsContainer.appendChild(contactCard)
+    });
   }
 });
