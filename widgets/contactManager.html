@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Contact Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/contactManager.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="logo">
+          <i class="fas fa-address-book"></i>
+          <span>Modern Contact Manager</span>
+        </div>
+        <div class="search-container">
+          <i class="fas fa-search"></i>
+          <input type="text" id="searchInput" placeholder="Search contacts..." />
+        </div>
+      </header>
+
+      <main class="main-content">
+        <section class="contact-form">
+          <h2><i class="fas fa-plus-circle"></i> <span id="formTitle">Add New Contact</span></h2>
+          <form id="contactForm">
+            <input type="hidden" id="editId" value="" />
+            <div class="form-group">
+              <label for="name">Full Name *</label>
+              <input type="text" id="name" placeholder="John Doe" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" placeholder="john@example.com" required />
+            </div>
+          </form>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
