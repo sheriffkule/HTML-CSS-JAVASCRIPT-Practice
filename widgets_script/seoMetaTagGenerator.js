@@ -96,9 +96,9 @@ function switchTab(tabId) {
   });
 
   // Show active tab content
-  tabContents.forEach(content => {
-    content.classList.toggle('active', content.id === `${tabId}-tab`)
-  })
+  tabContents.forEach((content) => {
+    content.classList.toggle('active', content.id === `${tabId}-tab`);
+  });
 }
 
 // Update character counters
@@ -115,4 +115,103 @@ function updateCharacterCounts() {
 
   // Generate meta tags when these fields change
   generateMetaTags();
+}
+
+// Generate meta tags based on form inputs
+function generateMetaTags() {
+  const { pageTitle, pageDescription, pageKeywords, pageUrl, pageAuthor, robotsIndex, robotsFollow } =
+    formElements.basic;
+
+  const { ogTitle, ogDescription, ogImage, ogUrl, ogType, ogSiteName } = formElements.openGraph;
+
+  const { twitterTitle, twitterDescription, twitterImage, twitterCard, twitterSite, twitterCreator } =
+    formElements.twitter;
+
+  // Basic meta tags
+  let metaTags = `<!-- Basic Meta Tags -->\n`;
+  metaTags += `<title>${pageTitle.value || 'Your Page Title'}</title>\n`;
+  metaTags += `<meta name="description" content="${pageDescription.value || 'Your page description'}">\n`;
+
+  if (pageKeywords.value) {
+    metaTags += `<meta name="keywords" content="${pageKeywords.value}">\n`;
+  }
+
+  if (pageUrl.value) {
+    metaTags += `<link rel="canonical" href="${pageUrl.value}">\n`;
+  }
+
+  if (pageAuthor.value) {
+    metaTags += `<meta name="author" content="${pageAuthor.value}">\n`;
+  }
+
+  metaTags += `<meta name="robots" content="${robotsIndex.checked ? 'index' : 'noindex'}, ${robotsFollow.checked ? 'follow' : 'nofollow'}">\n\n`;
+
+  // Viewport and charset (always included)
+  metaTags += `\n<!-- Essential Meta Tags -->\n`;
+  metaTags += `<meta charset="UTF-8">\n`;
+  metaTags += `<meta name="viewport" content="width=device-width, initial-scale=1.0">\n\n`;
+
+  // Open Graph meta tags
+  if (ogTitle.value || ogDescription.value || ogImage.value) {
+    metaTags += `<!-- Open Graph Meta Tags -->\n`;
+    metaTags += `<meta property="og:type" content="${ogType.value}">\n`;
+
+    if (ogTitle.value) {
+      metaTags += `<meta property="og:title" content="${ogTitle.value}">\n`;
+    } else if (pageTitle.value) {
+      metaTags += `<meta property="og:title" content="${pageTitle.value}">\n`;
+    }
+
+    if (ogDescription.value) {
+      metaTags += `<meta property="og:description" content="${ogDescription.value}">\n`;
+    } else if (pageDescription.value) {
+      metaTags += `<meta property="og:description" content="${pageDescription.value}">\n`;
+    }
+
+    if (ogImage.value) {
+      metaTags += `<meta property="og:image" content="${ogImage.value}">\n`;
+    }
+
+    if (ogUrl.value) {
+      metaTags += `<meta property="og:url" content="${ogUrl.value}">\n`;
+    } else if (pageUrl.value) {
+      metaTags += `<meta property="og:url" content="${pageUrl.value}">\n`;
+    }
+
+    if (ogSiteName.value) {
+      metaTags += `<meta property="og:site_name" content="${ogSiteName.value}">\n`;
+    }
+  }
+
+  // Twitter Card meta tags
+  if (twitterCard.value || twitterTitle.value || twitterDescription.value) {
+    metaTags += `\n<!-- Twitter Card Meta Tags -->\n`;
+    metaTags += `<meta name="twitter:card" content="${twitterCard.value || 'summary_large_image'}">\n`;
+
+    if (twitterTitle.value) {
+      metaTags += `<meta name="twitter:title" content="${twitterTitle.value}">\n`;
+    } else if (pageTitle.value) {
+      metaTags += `<meta name="twitter:title" content="${pageTitle.value}">\n`;
+    }
+
+    if (twitterDescription.value) {
+      metaTags += `<meta name="twitter:description" content="${twitterDescription.value}">\n`;
+    } else if (pageDescription.value) {
+      metaTags += `<meta name="twitter:description" content="${pageDescription.value}">\n`;
+    }
+
+    if (twitterImage.value) {
+      metaTags += `<meta name="twitter:image" content="${twitterImage.value}">\n`;
+    } else if (ogImage.value) {
+      metaTags += `<meta name="twitter:image" content="${ogImage.value}">\n`;
+    }
+
+    if (twitterSite.value) {
+      metaTags += `<meta name="twitter:site" content="${twitterSite.value}">\n`;
+    }
+
+    if (twitterCreator.value) {
+      metaTags += `<meta name="twitter:creator" content="${twitterCreator.value}">\n`;
+    }
+  }
 }
