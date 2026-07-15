@@ -5,7 +5,7 @@
     --text: #333;
     --bg: #f1f2fa;
     --card-bg: #f0f0f0;
-    --border-color: #d0d0d0;
+    --border: #d0d0d0;
     --shadow: 0 4px 8px rgb(0 0 0 / 0.15);
     --radius: 8px;
 }
@@ -17,7 +17,7 @@
     --text: #f1f1f1;
     --bg: #121212;
     --card-bg: #1e1e1e;
-    --border-color: #555;
+    --border: #555;
     --shadow: 0 4px 8px rgb(255 255 255 / 0.15);
 }
 
@@ -48,7 +48,7 @@ header {
     align-items: center;
     margin-bottom: 30px;
     padding-bottom: 15px;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border);
 }
 
 .theme-toggle {
@@ -83,7 +83,7 @@ header {
     border-radius: var(--radius);
     padding: 25px;
     box-shadow: var(--shadow);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border);
 
     h2 {
         margin-bottom: 20px;
@@ -105,11 +105,77 @@ label {
 input, textarea, select {
     width: 100%;
     padding: 12px;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border);
     border-radius: var(--radius);
     background-color: var(--card-bg);
     color: var(--text);
     font-size: 1rem;
+}
+
+input[type="text"], input[type="url"], textarea {
+    outline: none;
+}
+
+:is(input[type="text"], input[type="url"], textarea)::placeholder {
+    transition: transform 0.3s;
+}
+
+:is(input[type="text"], input[type="url"], textarea):is(:focus, :focus-within)::placeholder {
+    transform: translateY(-160%);
+}
+
+select,
+::picker(select) {
+  appearance: base-select;
+  cursor: pointer;
+}
+
+::picker(select) {
+  border-radius: 8px;
+  border: none;
+}
+
+select::picker-icon {
+  font-size: 16px;
+  color: var(--primary);
+  transition: 0.3s rotate;
+}
+
+select:open::picker-icon {
+  rotate: 180deg;
+  color: var(--primary-hover);
+}
+
+select:open {
+    border: var(--primary);
+    box-shadow: 0 0 0 2px rgb(67 97 238 / 0.2),
+    inset 0 0 0 2px rgb(67 97 238 / 0.2);
+}
+
+option {
+  border: 1px solid var(--border);
+  background: var(--primary);
+  padding: 2px 0 2px 12px;
+  color: var(--light);
+  padding-right: 18px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+option:is(:hover, :focus) {
+  background: var(--secondary);
+}
+
+option:checked {
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: var(--success);
+  background-color: var(--secondary);
+}
+
+option::checkmark {
+  color: var(--success);
+  font-size: 1.5rem;
 }
 
 textarea {
@@ -136,7 +202,7 @@ textarea {
     background-color: var(--card-bg);
     border-radius: var(--radius);
     padding: 20px;
-    border: 1px slid var(--border-color);
+    border: 1px slid var(--border);
     margin-bottom: 20px;
     position: relative;
 
@@ -219,7 +285,7 @@ textarea {
 .tabs {
     display: flex;
     margin-bottom: 20px;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border);
 }
 
 .tab {
@@ -235,7 +301,7 @@ textarea {
 }
 
 .tab-content {
-    /* display: none; */
+    display: none;
 }
 
 .tab-content.active {
@@ -261,7 +327,7 @@ textarea {
 }
 
 .tooltip .tooltiptext {
-    /* visibility: hidden; */
+    visibility: hidden;
     width: 200px;
     background-color: var(--card-bg);
     color: var(--text);
@@ -270,13 +336,14 @@ textarea {
     padding: 10px;
     position: absolute;
     z-index: 1;
-    bottom: 125%;
+    bottom: 80%;
     left: 50%;
     margin-left: -100px;
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: opacity 0.3s, visibility 0.3s, bottom 0.3s;
+    transition-behavior: allow-discrete;
     box-shadow: var(--shadow);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border);
     font-size: 0.9rem;
     font-weight: normal;
 }
@@ -284,13 +351,21 @@ textarea {
 .tooltip:hover .tooltiptext {
     visibility: visible;
     opacity: 1;
+    bottom: 125%;
+    transition: opacity 0.3s, visibility 0.3s, bottom 0.3s;
+    transition-behavior: allow-discrete;
+
+    @starting-style {
+        opacity: 0;
+        visibility: hidden;
+    }
 }
 
 footer {
     margin-top: 30px;
     text-align: center;
     padding-top: 20px;
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--border);
     color: #555;
     font-size: 0.875rem;
 
@@ -327,7 +402,7 @@ footer {
 
 ::-webkit-scrollbar {
     width: 8px;
-    background-color: var(--border-color);
+    background-color: var(--border);
     border: 1px dotted white;
 }
 

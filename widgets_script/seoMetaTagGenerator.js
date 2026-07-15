@@ -8,6 +8,7 @@ const descriptionCount = document.getElementById('descriptionCount');
 const copyButtons = document.querySelectorAll('.copy-btn');
 const notification = document.getElementById('notification');
 const socialPreview = document.getElementById('socialPreview');
+const socialPreviewTitle = document.getElementById('socialPreviewTitle');
 const socialPreviewDescription = document.getElementById('socialPreviewDescription');
 const socialPreviewUrl = document.getElementById('socialPreviewUrl');
 const socialPreviewImage = document.getElementById('socialPreviewImage');
@@ -15,7 +16,7 @@ const socialPreviewImage = document.getElementById('socialPreviewImage');
 // Form elements
 const formElements = {
   basic: {
-    pageTitle: document.getElementById('basicPageTitle'),
+    pageTitle: document.getElementById('pageTitle'),
     pageDescription: document.getElementById('pageDescription'),
     pageKeywords: document.getElementById('pageKeywords'),
     pageUrl: document.getElementById('pageUrl'),
@@ -67,9 +68,11 @@ function setupEventListeners() {
   pageDescription.addEventListener('input', updateCharacterCount);
 
   // Form inputs for real-time updates
-  Object.value(formElements).forEach((tab) => {
+  Object.values(formElements).forEach((tab) => {
     Object.values(tab).forEach((element) => {
-      if (element.tagName === 'INPUT' || element.tagname === 'TEXTAREA' || element.tagName === 'SELECT') {
+      if (!element) return;
+      const tagName = element.tagName;
+      if (tagName === 'INPUT' || tagName === 'TEXTAREA' || tagName === 'SELECT') {
         element.addEventListener('input', generateMetaTags);
         element.addEventListener('change', generateMetaTags);
       }
@@ -85,7 +88,7 @@ function setupEventListeners() {
 // Toggle between light and dark mode
 function toggleTheme() {
   document.body.classList.toggle('dark-mode');
-  themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+  themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌓';
 }
 
 // Switch between tabs
@@ -102,7 +105,7 @@ function switchTab(tabId) {
 }
 
 // Update character counters
-function updateCharacterCounts() {
+function updateCharacterCount() {
   const titleLength = pageTitle.value.length;
   const descriptionLength = pageDescription.value.length;
 
@@ -214,4 +217,69 @@ function generateMetaTags() {
       metaTags += `<meta name="twitter:creator" content="${twitterCreator.value}">\n`;
     }
   }
+
+  // Update the preview
+  document.getElementById('metaTagsPreview').textContent = metaTags;
+
+  // Update social preview
+  updateSocialPreview();
 }
+
+// Update the social media preview
+function updateSocialPreview() {
+  const { pageTitle, pageDescription, pageUrl } = formElements.basic;
+
+  const { ogImage, ogDescription, ogTitle } = formElements.openGraph;
+
+  // Update social preview elements
+  socialPreviewTitle.textContent = ogTitle.value || pageTitle.value || 'Your Page Title';
+  socialPreviewDescription.textContent =
+    ogDescription.value || pageDescription.value || 'Your page description';
+
+  const url = pageUrl?.value || 'example.com';
+  socialPreviewUrl.textContent = url.replace(/^https?:\/\//, '');
+
+  // Update image preview
+  const imageUrl = ogImage.value;
+  if (imageUrl) {
+    socialPreviewImage.innerHTML = `<img src="${imageUrl}" alt="Preview image" onerror="this.style.display='none'">`;
+  } else {
+    socialPreviewImage.innerHTML = `<div
+      style="height: 260px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #999;">
+      No image provided
+    </div>`;
+  }
+}
+
+// Copy content to clipboard
+function copyToClipboard(targetId) {
+  const element = document.getElementById(targetId);
+  const text = element.textContent;
+
+  navigator.clipboard
+    .writeText(text)
+    .then(() => {
+      // Show notification
+      notification.classList.add('show');
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 2000);
+    })
+    .catch((err) => {
+      console.error('Failed to copy: ', err);
+    });
+}
+
+// Update year in footer
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+  yearElement.setAttribute('datetime', currentYear.toString());
+  yearElement.textContent = currentYear.toString();
+}
+updateYear();
