@@ -106,3 +106,67 @@ header {
 .search-container input:focus::placeholder {
     transform: translateX(110%);
 }
+
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+
+    @media (width <= 900px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.contact-form {
+    background: linear-gradient(135deg, var(--light), var(--success));
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: var(--card-shadow);
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+    border: 1px solid var(--gray);
+
+    h2 {
+        display: inline-block;
+        margin-bottom: 20px;
+        color: transparent;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        background-clip: text;
+        -webkit-background-clip: text;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+}
+
+.form-group {
+    margin-bottom: 20px;
+
+    label {
+        display: block;
+        margin-bottom: 4px;
+        font-weight: 500;
+        color: var(--dark);
+    }
+    textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+}
+
+.form-group :is(input, select, textarea) {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: var(--transition);
+}
+
+.form-group :is(input, select, textarea):is(:focus, :focus-within) {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgb(67 97 238 / 0.2),
+    inset 0 0 0 3px rgb(67 97 238 / 0.2);
+}

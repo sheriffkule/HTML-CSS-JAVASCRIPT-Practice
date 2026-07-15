@@ -33,9 +33,74 @@
               <label for="email">Email Address *</label>
               <input type="email" id="email" placeholder="john@example.com" required />
             </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" placeholder="+1 (555) 123-4567" />
+            </div>
+            <div class="form-group">
+              <label for="title">Job Title</label>
+              <input type="text" id="title" placeholder="Software Engineer" />
+            </div>
+            <div class="form-group">
+              <label for="category">Category</label>
+              <select id="category">
+                <option value="work">Work</option>
+                <option value="personal">Personal</option>
+                <option value="family">Family</option>
+                <option value="friends">Friends</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="notes">Notes</label>
+              <textarea id="notes" placeholder="Add any additional information..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+              <i class="fas fa-save"></i> <span id="submitText">Add Contact</span>
+            </button>
+            <button
+              type="button"
+              class="btn btn-block"
+              id="cancelEdit"
+              style="display: none; margin-top: 10px; background: #e9ecef">
+              <i class="fas fa-times"></i> Cancel Edit
+            </button>
           </form>
+        </section>
+
+        <section class="contacts-section">
+          <h2 class="section-title"><i class="fas fa-user"></i> My Contacts</h2>
+          <div class="contacts-container" id="contactsContainer">
+            <div class="empty-state">
+              <i class="fas fa-user-plus"></i>
+              <p>No contacts yet. Add your first contact!</p>
+            </div>
+          </div>
         </section>
       </main>
     </div>
+
+    <div class="modal" id="deleteModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title"><i class="fas fa-exclamation-triangle"></i> Confirm Delete</h3>
+          <button class="close-btn">&times;</button>
+        </div>
+        <p>
+          Are you sure you want to delete
+          <strong id="deleteContactName">? This action cannot be undone.</strong>
+        </p>
+        <div class="modal-footer">
+          <button class="btn" id="cancelDelete">Cancel</button>
+          <button class="btn btn-danger" id="confirmDelete"><i class="fas fa-trash"></i> Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="notification" id="notification">
+      <i class="fas fa-check-circle"></i>
+      <span id="notificationText">Contact added successfully!</span>
+    </div>
+
+    <script src="/widgets_script/contactManager.js"></script>
   </body>
 </html>
