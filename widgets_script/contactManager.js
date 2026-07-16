@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const categoryClass = `category-${contact.category}`;
 
       const contactCard = document.createElement('div');
-      contactCard.classList.add('contact-card', categoryClass);
+      contactCard.classList.add('contact-card');
       contactCard.innerHTML = `
         <div class="contact-header">
           <div class="contact-avatar">${firstLetter}</div>

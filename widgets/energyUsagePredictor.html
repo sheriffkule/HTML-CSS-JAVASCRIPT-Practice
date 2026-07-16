@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/energyUsagePredictor.css">
+    <title>Energy Usage Predictor</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="logo">
+          <i class="fas fa-bolt"></i>
+          <h1>Energy Usage Predictor</h1>
+        </div>
+        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+      </header>
+
+      <main class="app-container">
+        <section class="input-section">
+          <h2>Enter Your Details</h2>
+          <article class="form-group">
+            <label for="homeSize">Home Size</label>
+            <input type="number" id="homeSize" placeholder="Enter your home size" />
+            <span class="unit">sq ft</span>
+          </article>
+
+          <article class="form-group">
+            <label for="occupants">Number of Occupants</label>
+            <input type="number" id="occupants" placeholder="Enter number of people" />
+          </article>
+
+          <article class="form-group">
+            <label for="region">Region</label>
+            <select id="region">
+              <option value="">Select your region</option>
+              <option value="northeast">Northeast</option>
+              <option value="midwest">Midwest</option>
+              <option value="south">South</option>
+              <option value="west">West</option>
+            </select>
+          </article>
+
+          <article class="form-group">
+            <label for="heatingType">Heating Type</label>
+            <select id="headingType">
+              <option value="">Select heating type</option>
+              <option value="electric">Electric</option>
+              <option value="gas">Natural Gas</option>
+              <option value="oil">Oil</option>
+              <option value="heat_pump">Heat Pump</option>
+            </select>
+          </article>
+
+          <article class="form-group">
+            <label for="coolingType">Cooling Type</label>
+            <select id="coolingType">
+              <option value="">Select cooling type</option>
+              <option value="central_ac">Central AC</option>
+              <option value="window_units">Window Units</option>
+              <option value="none">None</option>
+            </select>
+          </article>
+
+          <article class="action-buttons">
+            <button class="btn" id="calculateBtn"><i class="fas fa-calculator"></i> Calculate</button>
+            <button class="btn btn-secondary" id="resetBtn"><i class="fas fa-redo"></i> Reset</button>
+          </article>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
