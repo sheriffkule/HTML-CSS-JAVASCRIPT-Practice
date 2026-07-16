@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
-    <link rel="stylesheet" href="/widgets_style/energyUsagePredictor.css">
+    <link rel="stylesheet" href="/widgets_style/energyUsagePredictor.css" />
     <title>Energy Usage Predictor</title>
   </head>
   <body>
@@ -68,7 +68,79 @@
             <button class="btn btn-secondary" id="resetBtn"><i class="fas fa-redo"></i> Reset</button>
           </article>
         </section>
+
+        <section class="result-section">
+          <article class="result-card">
+            <div class="prediction-result">
+              <h2>Your Energy Prediction</h2>
+              <div class="prediction-value" id="predictionValue">--</div>
+              <div class="prediction-unit">kWh per month</div>
+            </div>
+
+            <div class="comparison">
+              <h3>Comparison</h3>
+              <div class="comparison-item">
+                <span class="comparison-label">Similar Homes:</span>
+                <span id="similarHomes">-- kWh</span>
+              </div>
+              <div class="comparison-item">
+                <span class="comparison-label">Efficient Homes:</span>
+                <span class="efficientHomes">-- kWh</span>
+              </div>
+              <div class="comparison-item">
+                <span class="comparison-label">Your Prediction:</span>
+                <span id="yourPrediction">-- kWh</span>
+              </div>
+            </div>
+
+            <div class="chart-container" id="chartContainer">
+              <!-- Chart will be rendered here -->
+              <canvas id="energyChart"></canvas>
+            </div>
+          </article>
+        </section>
       </main>
+
+      <section class="tips-section">
+        <h2>Energy Saving Tips</h2>
+        <article class="tip-card">
+          <div class="tip-icon"><i class="fas fa-lightbulb"></i></div>
+          <div class="tip-content">
+            <h4>Switch to LED Lighting</h4>
+            <p>LED bulbs use at least 75% less energy than incandescent lighting and last 25 times longer.</p>
+          </div>
+        </article>
+        <article class="tip-card">
+          <div class="tip-icon"><i class="fas fa-thermometer-half"></i></div>
+          <div class="tip-content">
+            <h4>Optimize Thermostat Settings</h4>
+            <p>
+              Set your thermostat to 68&deg;F in winter and 78&deg;F in summer. Each degree adjustment can
+              save about 3% on energy costs.
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <section class="history-section">
+        <h2>Prediction History</h2>
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Home Size</th>
+              <th>Occupants</th>
+              <th>Prediction</th>
+            </tr>
+          </thead>
+          <tbody id="historyTableBody">
+            <!-- History rows will be added here -->
+          </tbody>
+        </table>
+      </section>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/widgets_script/energyUsagePredictor.js"></script>
   </body>
 </html>
