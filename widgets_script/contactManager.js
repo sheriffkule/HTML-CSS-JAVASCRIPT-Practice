@@ -1,7 +1,15 @@
 document.addEventListener('DOMContentLoaded', function () {
   // Initialize contacts array
-  let contacts = JSON.parse(localStorage.getItem('contacts')) || [];
+  let contacts = [];
   let currentDeleteId = null;
+
+  try {
+    const savedContacts = JSON.parse(localStorage.getItem('contacts') || '[]');
+    contacts = Array.isArray(savedContacts) ? savedContacts : [];
+  } catch (error) {
+    console.error('Failed to load contacts from localStorage:', error);
+    contacts = [];
+  }
 
   // DOM Elements
   const contactsContainer = document.getElementById('contactsContainer');
@@ -21,6 +29,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Render contacts
   function renderContacts(contactsArray) {
+    if (!contactsContainer) return;
+
     contactsContainer.innerHTML = '';
 
     if (contactsArray.length === 0) {
@@ -101,57 +111,80 @@ document.addEventListener('DOMContentLoaded', function () {
     return Date.now().toString(36) + Math.random().toString(36).substring(2);
   }
 
-  // Add new contact
-  contactForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
-    const title = document.getElementById('title').value;
-    const category = document.getElementById('category').value;
-    const notes = document.getElementById('notes').value;
-    const id = editId.value || generateId();
-
-    if (!name || !email) {
-      showNotification('Please fill in required fields', true);
-      return;
-    }
-
-    const contact = {
-      id,
-      name,
-      email,
-      phone,
-      title,
-      category,
-      notes,
+  function getFormValues() {
+    return {
+      name: document.getElementById('name').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      phone: document.getElementById('phone').value.trim(),
+      title: document.getElementById('title').value.trim(),
+      category: document.getElementById('category').value,
+      notes: document.getElementById('notes').value.trim(),
     };
+  }
 
-    if (editId.value) {
-      // Update existing contact
-      const index = contacts.findIndex((c) => c.id === editId.value);
-      if (index !== -1) {
-        contacts[index] = contact;
-        showNotification('Contact updated successfully!');
+  // Add new contact
+  if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const { name, email, phone, title, category, notes } = getFormValues();
+      const id = editId.value || generateId();
+
+      if (!contactForm.checkValidity()) {
+        contactForm.reportValidity();
+        return;
       }
-    } else {
-      // Add new contact
-      contacts.push(contact);
-      showNotification('Contact added successfully');
-    }
 
-    // Save to localStorage
-    localStorage.setItem('contacts', JSON.stringify(contacts));
+      const contact = {
+        id,
+        name,
+        email,
+        phone,
+        title,
+        category,
+        notes,
+      };
 
-    // Reset form and re-render contacts
-    contactForm.reset();
-    cancelEdit.style.display = 'none';
-    editId.value = '';
-    formTitle.innerHTML = '<i class="fas fa-plus-circle"></i> Add New Contact';
-    submitText.textContent = 'Add Contact';
-    renderContacts(contacts);
-  });
+      if (editId.value) {
+        // Update existing contact
+        const index = contacts.findIndex((c) => c.id === editId.value);
+        if (index !== -1) {
+          contacts[index] = contact;
+          showNotification('Contact updated successfully!');
+        }
+      } else {
+        // Add new contact
+        contacts.push(contact);
+        showNotification('Contact added successfully');
+      }
+
+      // Save to localStorage
+      localStorage.setItem('contacts', JSON.stringify(contacts));
+
+      // Reset form and re-render contacts
+      contactForm.reset();
+      cancelEdit.style.display = 'none';
+      editId.value = '';
+      formTitle.innerHTML = '<i class="fas fa-plus-circle"></i> Add New Contact';
+      submitText.textContent = 'Add Contact';
+      renderContacts(contacts);
+    });
+
+    contactForm.addEventListener('keydown', function (e) {
+      const isEnterKey = e.key === 'Enter';
+      const isTextArea = e.target && e.target.tagName === 'TEXTAREA';
+
+      if (isEnterKey && !e.shiftKey && !isTextArea) {
+        e.preventDefault();
+
+        if (contactForm.checkValidity()) {
+          contactForm.requestSubmit();
+        } else {
+          contactForm.reportValidity();
+        }
+      }
+    });
+  }
 
   // Edit contact
   function editContact(id) {
@@ -171,23 +204,28 @@ document.addEventListener('DOMContentLoaded', function () {
       cancelEdit.style.display = 'block';
 
       // Scroll to form
-      document.querySelector('.contact-form').scrollIntoView({ behavior: 'smooth' });
+      const formSection = document.querySelector('.contact-form');
+      if (formSection) {
+        formSection.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   }
 
   // Cancel edit
-  cancelEdit.addEventListener('click', function () {
-    contactForm.reset();
-    editId.value = '';
-    cancelEdit.style.display = 'none';
-    formTitle.innerHTML = '<i class="fas fa-plus-circle"></i> Add New Contact';
-    submitText.textContent = 'Add Contact';
-  });
+  if (cancelEdit) {
+    cancelEdit.addEventListener('click', function () {
+      contactForm.reset();
+      editId.value = '';
+      cancelEdit.style.display = 'none';
+      formTitle.innerHTML = '<i class="fas fa-plus-circle"></i> Add New Contact';
+      submitText.textContent = 'Add Contact';
+    });
+  }
 
   // Show delete confirmation modal
   function showDeleteModal(id) {
     const contact = contacts.find((c) => c.id === id);
-    if (contact) {
+    if (contact && deleteModal && deleteContactName) {
       currentDeleteId = id;
       deleteContactName.textContent = contact.name;
       deleteModal.classList.add('show');
@@ -195,49 +233,61 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Close modal functions
-  closeBtn.addEventListener('click', function () {
-    deleteModal.classList.remove('show');
-  });
+  if (closeBtn && deleteModal) {
+    closeBtn.addEventListener('click', function () {
+      deleteModal.classList.remove('show');
+    });
+  }
 
-  cancelDelete.addEventListener('click', function () {
-    deleteModal.classList.remove('show');
-  });
+  if (cancelDelete && deleteModal) {
+    cancelDelete.addEventListener('click', function () {
+      deleteModal.classList.remove('show');
+    });
+  }
 
   // Confirm delete
-  confirmDelete.addEventListener('click', function () {
-    if (currentDeleteId) {
-      contacts = contacts.filter((c) => c.id !== currentDeleteId);
-      localStorage.setItem('contacts', JSON.stringify(contacts));
-      renderContacts(contacts);
-      showNotification('Contact deleted successfully');
-      deleteModal.classList.remove('show');
-      currentDeleteId = null;
-    }
-  });
+  if (confirmDelete && deleteModal) {
+    confirmDelete.addEventListener('click', function () {
+      if (currentDeleteId) {
+        contacts = contacts.filter((c) => c.id !== currentDeleteId);
+        localStorage.setItem('contacts', JSON.stringify(contacts));
+        renderContacts(contacts);
+        showNotification('Contact deleted successfully');
+        deleteModal.classList.remove('show');
+        currentDeleteId = null;
+      }
+    });
+  }
 
   // Close modal when clicking outside
-  window.addEventListener('click', function (e) {
-    if (e.target === deleteModal) {
-      deleteModal.classList.remove('show');
-    }
-  });
+  if (deleteModal) {
+    window.addEventListener('click', function (e) {
+      if (e.target === deleteModal) {
+        deleteModal.classList.remove('show');
+      }
+    });
+  }
 
   // Search functionality
-  searchInput.addEventListener('input', function () {
-    const searchTerm = this.value.toLowerCase();
-    const filteredContacts = contacts.filter(
-      (contact) =>
-        contact.name.toLowerCase().includes(searchTerm) ||
-        contact.email.toLowerCase().includes(searchTerm) ||
-        (contact.title && contact.title.toLowerCase().includes(searchTerm)) ||
-        contact.category.toLowerCase().includes(searchTerm),
-    );
+  if (searchInput) {
+    searchInput.addEventListener('input', function () {
+      const searchTerm = this.value.toLowerCase();
+      const filteredContacts = contacts.filter(
+        (contact) =>
+          contact.name.toLowerCase().includes(searchTerm) ||
+          contact.email.toLowerCase().includes(searchTerm) ||
+          (contact.title && contact.title.toLowerCase().includes(searchTerm)) ||
+          contact.category.toLowerCase().includes(searchTerm),
+      );
 
-    renderContacts(filteredContacts);
-  });
+      renderContacts(filteredContacts);
+    });
+  }
 
   // Show notification
   function showNotification(message, isError = false) {
+    if (!notification || !notificationText) return;
+
     notificationText.textContent = message;
     notification.classList.remove('error');
 
