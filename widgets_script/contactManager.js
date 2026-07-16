@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   // Initialize contacts array
-  let contacts = JSON.parse(localStorage.getItem('contacts') || []);
+  let contacts = JSON.parse(localStorage.getItem('contacts')) || [];
   let currentDeleteId = null;
 
   // DOM Elements
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function renderContacts(contactsArray) {
     contactsContainer.innerHTML = '';
 
-    if (contactsArray === 0) {
+    if (contactsArray.length === 0) {
       contactsContainer.innerHTML = `
         <div class="empty-state">
           <i class="fas fa-user-plus"></i>
@@ -57,14 +57,16 @@ document.addEventListener('DOMContentLoaded', function () {
             <i class="fas fa-phone"></i>
             <span>${contact.phone} || 'Not provided'</span>
           </div>
-          ${contact.notes
-            ? `
+          ${
+            contact.notes
+              ? `
                 <div class="contact-detail">
                   <i class="fas fa-sticky-note"></i>
                   <span>${contact.notes}</span>
                 </div>
               `
-            : ''}
+              : ''
+          }
         </div>
         <div class="contact-actions">
           <button class="action-btn edit-btn" data-id="${contact.id}">
@@ -75,7 +77,150 @@ document.addEventListener('DOMContentLoaded', function () {
           </button>
         </div>
       `;
-      contactsContainer.appendChild(contactCard)
+      contactsContainer.appendChild(contactCard);
+    });
+
+    // Add event listeners to edit and delete buttons
+    document.querySelectorAll('.edit-btn').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        const id = this.getAttribute('data-id');
+        editContact(id);
+      });
+    });
+
+    document.querySelectorAll('.delete-btn').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        const id = this.getAttribute('data-id');
+        showDeleteModal(id);
+      });
     });
   }
+
+  // Generate a unique ID
+  function generateId() {
+    return Date.now().toString(36) + Math.random().toString(36).substring(2);
+  }
+
+  // Add new contact
+  contactForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const title = document.getElementById('title').value;
+    const category = document.getElementById('category').value;
+    const notes = document.getElementById('notes').value;
+    const id = editId.value || generateId();
+
+    if (!name || !email) {
+      showNotification('Please fill in required fields', true);
+      return;
+    }
+
+    const contact = {
+      id,
+      name,
+      email,
+      phone,
+      title,
+      category,
+      notes,
+    };
+
+    if (editId.value) {
+      // Update existing contact
+      const index = contacts.findIndex((c) => c.id === editId.value);
+      if (index !== -1) {
+        contacts[index] = contact;
+        showNotification('Contact updated successfully!');
+      }
+    } else {
+      // Add new contact
+      contacts.push(contact);
+      showNotification('Contact added successfully');
+    }
+
+    // Save to localStorage
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+
+    // Reset form and re-render contacts
+    contactForm.reset();
+    cancelEdit.style.display = 'none';
+    editId.value = '';
+    formTitle.innerHTML = '<i class="fas fa-plus-circle"></i> Add New Contact';
+    submitText.textContent = 'Add Contact';
+    renderContacts(contacts);
+  });
+
+  // Edit contact
+  function editContact(id) {
+    const contact = contacts.find((c) => c.id === id);
+    if (contact) {
+      document.getElementById('name').value = contact.name;
+      document.getElementById('email').value = contact.email;
+      document.getElementById('phone').value = contact.phone || '';
+      document.getElementById('title').value = contact.title || '';
+      document.getElementById('category').value = contact.category;
+      document.getElementById('notes').value = contact.notes || '';
+      editId.value = contact.id;
+
+      // Change form to edit mode
+      formTitle.innerHTML = '<i class="fas fa-edit"></i> Edit Contact';
+      submitText.textContent = 'Update Contact';
+      cancelEdit.style.display = 'block';
+
+      // Scroll to form
+      document.querySelector('.contact-form').scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  // Cancel edit
+  cancelEdit.addEventListener('click', function () {
+    contactForm.reset();
+    editId.value = '';
+    cancelEdit.style.display = 'none';
+    formTitle.innerHTML = '<i class="fas fa-plus-circle"></i> Add New Contact';
+    submitText.textContent = 'Add Contact';
+  });
+
+  // Show delete confirmation modal
+  function showDeleteModal(id) {
+    const contact = contacts.find((c) => c.id === id);
+    if (contact) {
+      currentDeleteId = id;
+      deleteContactName.textContent = contact.name;
+      deleteModal.classList.add('show');
+    }
+  }
+
+  // Close modal functions
+  closeBtn.addEventListener('click', function () {
+    deleteModal.classList.remove('show');
+  });
+
+  cancelDelete.addEventListener('click', function () {
+    deleteModal.classList.remove('show');
+  });
+
+  // Confirm delete
+  confirmDelete.addEventListener('click', function () {
+    if (currentDeleteId) {
+      contacts = contacts.filter((c) => c.id !== currentDeleteId);
+      localStorage.setItem('contacts', JSON.stringify(contacts));
+      renderContacts(contacts);
+      showNotification('Contact deleted successfully');
+      deleteModal.classList.remove('show');
+      currentDeleteId = null;
+    }
+  });
+
+  // Close modal when clicking outside
+  window.addEventListener('click', function (e) {
+    if (e.target === deleteModal) {
+      deleteModal.classList.remove('show');
+    }
+  });
+
+  renderContacts(contacts)
 });

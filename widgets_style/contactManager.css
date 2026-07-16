@@ -303,3 +303,23 @@ option::checkmark {
 .btn-block {
     width: 100%;
 }
+
+.contact-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.contact-card {
+    background: var(--light);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    position: relative;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgb(0 0 0 / 0.1);
+    }
+}
