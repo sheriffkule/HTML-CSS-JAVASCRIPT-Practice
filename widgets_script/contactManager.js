@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
           </div>
           <div class="contact-detail">
             <i class="fas fa-phone"></i>
-            <span>${contact.phone} || 'Not provided'</span>
+            <span>${contact.phone || 'Not provided'}</span>
           </div>
           ${
             contact.notes
@@ -70,10 +70,10 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
         <div class="contact-actions">
           <button class="action-btn edit-btn" data-id="${contact.id}">
-            <i className="fas fa-edit"></i> Edit
+            <i class="fas fa-edit"></i> Edit
           </button>
           <button class="action-btn delete-btn" data-id="${contact.id}">
-            <i className="fas fa-trash-alt"></i> Delete
+            <i class="fas fa-trash-alt"></i> Delete
           </button>
         </div>
       `;
@@ -222,5 +222,53 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  renderContacts(contacts)
+  // Search functionality
+  searchInput.addEventListener('input', function () {
+    const searchTerm = this.value.toLowerCase();
+    const filteredContacts = contacts.filter(
+      (contact) =>
+        contact.name.toLowerCase().includes(searchTerm) ||
+        contact.email.toLowerCase().includes(searchTerm) ||
+        (contact.title && contact.title.toLowerCase().includes(searchTerm)) ||
+        contact.category.toLowerCase().includes(searchTerm),
+    );
+
+    renderContacts(filteredContacts);
+  });
+
+  // Show notification
+  function showNotification(message, isError = false) {
+    notificationText.textContent = message;
+    notification.classList.remove('error');
+
+    if (isError) {
+      notification.classList.add('error');
+      notification.querySelector('i').className = 'fas fa-exclamation-circle';
+    } else {
+      notification.querySelector('i').className = 'fas fa-check-circle';
+    }
+
+    notification.classList.add('show');
+
+    setTimeout(() => {
+      notification.classList.remove('show');
+    }, 3000);
+  }
+
+  // Initial render
+  renderContacts(contacts);
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });

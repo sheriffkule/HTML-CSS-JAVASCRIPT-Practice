@@ -320,6 +320,139 @@ option::checkmark {
 
     &:hover {
         transform: translateY(-5px);
-        box-shadow: 0 8px 20px rgb(0 0 0 / 0.1);
+        box-shadow: 0 8px 20px rgb(0 0 0 / 0.1),
+        inset 0 8px 20px rgb(0 0 0 / 0.1);
+    }
+}
+
+.contact-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.contact-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--primary);
+    display: grid;
+    place-items: center;
+    color: white;
+    font-size: 24px;
+    font-weight: 700;
+    margin-right: 15px;
+}
+
+.contact-name {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.contact-title {
+    color: var(--gray);
+    font-size: 14px;
+}
+
+.contact-details {
+    margin-top: 15px;
+}
+
+.contact-detail {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 15px;
+
+    i {
+        width: 25px;
+        color: var(--primary);
+        margin-right: 6px;
+    }
+}
+
+.contact-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #ccc;
+}
+
+.action-btn {
+    background: none;
+    border: 1px solid var(--gray);
+    color: var(--gray);
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 12px;
+    border-radius: 6px;
+
+    &:hover {
+        background: #e3e3e3;
+        box-shadow: var(--card-shadow);
+    }
+}
+
+.edit-btn:hover {
+    color: var(--primary);
+}
+
+.delete-btn:hover {
+    color: var(--danger);
+}
+
+.section-title {
+    margin: 0 0 20px;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--gray);
+    grid-column: 1 / -1;
+
+    i {
+        font-size: 60px;
+        margin-bottom: 15px;
+        color: #999;
+    }
+    p {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 30px;
+    background: var(--success);
+    color: white;
+    border-radius: 26px 8px 8px 26px;
+    corner-shape: bevel;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.15);
+    transform: translateX(100vw);
+    transition: transform 0.3s ease-in;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &.show {
+        transform: translateX(0);
+    }
+    &.error {
+        background: var(--danger);
     }
 }
