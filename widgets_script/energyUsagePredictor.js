@@ -170,9 +170,20 @@ document.addEventListener('DOMContentLoaded', function () {
     historyTableBody.innerHTML = '';
     history.forEach((entry) => {
       const row = document.createElement('tr');
+      const d = new Date(entry.date);
+      const dateDisplay = !isNaN(d)
+        ? d.toLocaleString(undefined, {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric',
+            hour: 'numeric',
+            minute: '2-digit',
+          })
+        : entry.date;
+
       row.innerHTML = `
-        <td>${entry.date}</td>
-        <td>${entry.homeSize}</td>
+        <td>${dateDisplay}</td>
+        <td>${entry.homeSize} sq ft</td>
         <td>${entry.occupants}</td>
         <td>${Number(entry.prediction).toLocaleString()} kWh</td>
       `;
@@ -196,10 +207,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function addToHistory(homeSize, occupants, prediction) {
     const now = new Date();
-    const dateString = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
     if (!historyTableBody) return;
 
-    const entry = { date: dateString, homeSize, occupants, prediction };
+    const entry = { date: now.toISOString(), homeSize, occupants, prediction };
     history.unshift(entry);
     if (history.length > 5) history.length = 5;
     saveHistory();

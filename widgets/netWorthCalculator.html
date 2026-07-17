@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Net Worth Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/netWorthCalculator.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1><i class="fas fa-calculator"></i> Net Worth Calculator</h1>
+        <p class="subtitle">Track your financial health and set savings goals</p>
+      </header>
+
+      <article class="summary-card card">
+        <h2>Your Net Worth</h2>
+        <div class="net-worth-display positive">$0.00</div>
+        <div class="assets-liabilities">
+          <div class="assets">
+            <h3>Total Assets</h3>
+            <p class="amount">$0.00</p>
+          </div>
+          <div class="liabilities">
+            <h3>total Liabilities</h3>
+            <p class="amount">$0.00</p>
+          </div>
+        </div>
+        <div class="chart-container">
+          <canvas class="netWorthChart"></canvas>
+        </div>
+      </article>
+
+      <section class="app-container"></section>
+    </main>
+  </body>
+</html>
