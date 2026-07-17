@@ -178,3 +178,85 @@ option::checkmark {
   color: var(--success);
   font-size: 1.5rem;
 }
+
+.input-with-unit {
+    position: relative;
+}
+
+.unit {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gray);
+}
+
+.action-buttons {
+    margin-top: 1rem;
+    display: flex;
+    gap: .5rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    gap: 0.5rem;
+
+    &:hover {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 4px 12px rgb(67 97 238 / 0.3);
+        filter: saturate(1.2);
+    }
+    &:active {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.btn-secondary {
+    background: var(--gray-light);
+    color: var(--dark);
+
+    &:hover {
+        box-shadow: 0 4px 12px rgb(108 117 125 / 0.2);
+    }
+}
+
+.result-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.prediction-result {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.prediction-value {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-block: 1rem;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    display: inline-block;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.prediction-unit {
+    font-size: 1.25rem;
+    color: var(--gray);
+}
