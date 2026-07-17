@@ -32,7 +32,91 @@
         </div>
       </article>
 
-      <section class="app-container"></section>
+      <section class="app-container">
+        <article class="card">
+          <h2 class="card-title"><i class="fas fa-piggy-bank"></i> Assets</h2>
+          <div class="input-group">
+            <label for="cash">Cash & Savings</label>
+            <input type="number" id="cash" placeholder="Enter amount" />
+          </div>
+          <div class="input-group">
+            <label for="investments">Investments</label>
+            <input type="number" id="investments" placeholder="Enter amount" />
+          </div>
+          <div class="input-group">
+            <label for="realEstate">Real Estate</label>
+            <input type="number" id="realEstate" placeholder="Enter amount" />
+          </div>
+          <div class="input-group">
+            <label for="vehicles">Vehicles</label>
+            <input type="number" id="vehicles" placeholder="Enter amount" />
+          </div>
+          <div class="input-group">
+            <label for="otherAssets">Other Assets</label>
+            <input type="number" id="otherAssets" placeholder="Enter amount" />
+          </div>
+          <button class="btn btn-block" id="calculateBtn">Calculate Net Worth</button>
+        </article>
+
+        <article class="card">
+          <h2 class="card-title"><i class="fas fa-credit-card"></i> Liabilities</h2>
+          <div class="input-group">
+            <label for="mortage">Mortgage</label>
+            <input type="number" id="mortage" placeholder="Enter amount" />
+          </div>
+          <div class="input-group">
+            <label for="carLoans">Car Loans</label>
+            <input type="number" id="carLoans" placeholder="Enter amount" />
+          </div>
+          <div class="input-group">
+            <label for="studentLoans">Student Loans</label>
+            <input type="number" id="studentLoans" placeholder="Enter amount" />
+          </div>
+          <div class="input-group">
+            <label for="creditCards">Credit Card Debt</label>
+            <input type="number" id="creditCards" placeholder="Enter amount" />
+          </div>
+          <div class="input-group">
+            <label for="otherLiabilities">Other Liabilities</label>
+            <input type="number" id="otherLiabilities" placeholder="Enter amount" />
+          </div>
+
+          <div class="tabs">
+            <div class="tab active" data-tab="savings">Savings Goal</div>
+            <div class="tab" data-tab="history">History</div>
+          </div>
+
+          <div class="ta-content active" id="savings-tab">
+            <div class="input-group">
+              <label for="savingsGoal">Savings Goal Amount</label>
+              <input type="number" id="savingsGoal" placeholder="Enter your goal" />
+            </div>
+            <div class="savings-goal">
+              <h3>Goal Progress</h3>
+              <p>Current: $0.00 / Goal: $0.00</p>
+              <div class="progress-bar">
+                <div class="progress" style="width: 20%"></div>
+              </div>
+              <p class="progress-text">0% of goal achieved.</p>
+            </div>
+          </div>
+
+          <div class="tab-content" id="history-tab">
+            <div class="history-list">
+              <!-- History items will be generated here dynamically -->
+            </div>
+            <div class="action-buttons">
+              <button class="btn btn-secondary" id="saveBtn">Save Current</button>
+              <button class="btn" id="clearHistoryBtn">Clear History</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <footer>
+        © <time datetime="" id="year"></time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
     </main>
   </body>
 </html>
