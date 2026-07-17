@@ -260,3 +260,60 @@ option::checkmark {
     font-size: 1.25rem;
     color: var(--gray);
 }
+
+.comparison {
+    background: var(--gray-light);
+    padding: 1rem;
+    border-radius: 8px;
+    corner-shape: bevel;
+    margin-bottom: 2rem;
+}
+
+.comparison-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: .5rem;
+    border-bottom: 1px solid var(--light);
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.comparison-label {
+    font-weight: 500;
+}
+
+.chart-container {
+    height: 200px;
+    margin-top: auto;
+}
+
+.tips-section {
+    margin-top: 2rem;
+}
+
+.tip-card {
+    background: var(--gray-light);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.tip-icon {
+    color: var(--primary);
+    font-size: 1.5rem;
+    margin-top: .25rem;
+}
+
+.tip-content h4 {
+    margin-bottom: .5rem;
+    font-weight: 600;
+}
+
+.history-section {
+    margin-top: 2rem;
+}

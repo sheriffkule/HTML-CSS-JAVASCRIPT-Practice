@@ -22,8 +22,10 @@
           <h2>Enter Your Details</h2>
           <article class="form-group">
             <label for="homeSize">Home Size</label>
-            <input type="number" id="homeSize" placeholder="Enter your home size" />
-            <span class="unit">sq ft</span>
+            <div class="input-with-unit">
+              <input type="number" id="homeSize" placeholder="Enter your home size" />
+              <span class="unit">sq ft</span>
+            </div>
           </article>
 
           <article class="form-group">
@@ -50,7 +52,7 @@
 
           <article class="form-group">
             <label for="heatingType">Heating Type</label>
-            <select id="headingType">
+            <select id="heatingType">
               <option value="">Select heating type</option>
               <option value="electric">Electric</option>
               <option value="gas">Natural Gas</option>
@@ -91,7 +93,7 @@
               </div>
               <div class="comparison-item">
                 <span class="comparison-label">Efficient Homes:</span>
-                <span class="efficientHomes">-- kWh</span>
+                <span id="efficientHomes">-- kWh</span>
               </div>
               <div class="comparison-item">
                 <span class="comparison-label">Your Prediction:</span>
@@ -144,6 +146,11 @@
           </tbody>
         </table>
       </section>
+
+      <footer>
+        © <time datetime="" id="year"></time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
