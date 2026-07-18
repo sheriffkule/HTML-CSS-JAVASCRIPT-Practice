@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Net Worth Calculator</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="/widgets_style/netWorthCalculator.css" />
   </head>
   <body>
@@ -28,7 +29,7 @@
           </div>
         </div>
         <div class="chart-container">
-          <canvas class="netWorthChart"></canvas>
+          <canvas id="netWorthChart"></canvas>
         </div>
       </article>
 
@@ -86,7 +87,7 @@
             <div class="tab" data-tab="history">History</div>
           </div>
 
-          <div class="ta-content active" id="savings-tab">
+          <div class="tab-content active" id="savings-tab">
             <div class="input-group">
               <label for="savingsGoal">Savings Goal Amount</label>
               <input type="number" id="savingsGoal" placeholder="Enter your goal" />
@@ -119,7 +120,6 @@
       </footer>
     </main>
 
-    <script src="https://cdn/jsdelivr.net/npm/chart.js"></script>
     <script src="/widgets_script/netWorthCalculator.js"></script>
   </body>
 </html>

@@ -146,3 +146,23 @@ function calculateNetWorth() {
 
   return { totalAssets, totalLiabilities, netWorth };
 }
+
+// Update savings goal progress
+function updateSavingsGoal({ netWorth }) {
+  const savingsGoal = parseFloat(savingsGoalInput.value) || 0;
+
+  if (savingsGoal > 0) {
+    const progressPercentage = Math.min((netWorth / savingsGoal) * 100, 100);
+    progressBar.style.width = `${progressPercentage}%`;
+    progressText.textContent = `${progressPercentage.toFixed(1)}% of goal achieved.`;
+
+    // Update savings goal display
+    document.querySelector('.savings-goal p').textContent = `Current:
+    $${netWorth.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} / Goal:
+    $${savingsGoal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  } else {
+    progressBar.style.width = '0%';
+    progressBar.textContent = 'Set a savings goal to track progress.';
+    document.querySelector('.savings-goal p').textContent = 'Current: $0.00 / Goal: $0.00';
+  }
+}
