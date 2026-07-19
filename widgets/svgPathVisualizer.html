@@ -103,7 +103,90 @@
             </article>
           </section>
         </div>
+
+        <div class="visualization-panel">
+          <section class="viewer-container">
+            <svg id="svg-viewer" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+              <path
+                id="svg-path"
+                d="M10 10 L90 10 L90 90 L10 90 Z"
+                fill="#8338ec80"
+                stroke="#3a86ff"
+                stroke-width="2"></path>
+            </svg>
+            <div class="viewer-controls">
+              <button class="btn-icon" id="zoom-in" title="Zoom In">
+                <i class="fas fa-search-plus"></i>
+              </button>
+              <button class="btn-icon" id="zoom-out" title="Zoom Out">
+                <i class="fas fa-search-minus"></i>
+              </button>
+              <button class="btn-icon" id="reset-view" title="Reset View">
+                <i class="fas fa-expand"></i>
+              </button>
+              <button class="btn-icon" id="download-svg" title="Download SVG">
+                <i class="fas fa-download"></i>
+              </button>
+              <button class="btn-icon" id="copy-path" title="Copy Path">
+                <i class="fas fa-copy"></i>
+              </button>
+            </div>
+
+            <div class="path-info">
+              <h2><i class="fas fa-info-circle"></i> Path Information</h2>
+              <div class="info-grid">
+                <div class="info-item">
+                  <span class="info-label">Path Length:</span>
+                  <span id="path-length" class="info-value">320</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Bounding Box:</span>
+                  <span id="path-box" class="info-value">10,10 80x80</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Commands:</span>
+                  <span id="path-commands" class="info-value">5</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Points:</span>
+                  <span id="path-points" class="info-value">4</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="debug-panel">
+              <h2><i class="fas fa-bug"></i> Debug Tools</h2>
+              <div class="debug-options">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="show-points" checked />
+                  <span>Show Points</span>
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="show-handles" />
+                  <span>Show Handles</span>
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="show-box" />
+                  <span>Show Bounding Box</span>
+                </label>
+              </div>
+              <div class="command-breakdown" id="command-breakdown">
+                <!-- Command breakdown will be inserted here -->
+              </div>
+            </div>
+          </section>
+        </div>
       </main>
+
+      <div class="modal" id="help-modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3><i class="fas fa-question-circle"></i> SVG Path Visualizer Help</h3>
+            <button class="close-modal">&times;</button>
+          </div>
+          <div class="modal-body"></div>
+        </div>
+      </div>
     </div>
   </body>
 </html>
