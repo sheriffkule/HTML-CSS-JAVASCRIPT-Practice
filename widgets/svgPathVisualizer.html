@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/svgPathVisualizer.css" />
+    <title>SVG Path Visualizer</title>
+  </head>
+  <body>
+    <div class="app-container">
+      <header class="app-header">
+        <h1><i class="fas fa-project-diagram"></i> SVG Path Visualizer</h1>
+        <div class="header-actions">
+          <button class="btn-icon" id="theme-toggle" title="Toggle theme">
+            <i class="fas fa-moon"></i>
+          </button>
+          <button class="btn-icon" id="help-btn" title="Help">
+            <i class="fas fa-question-circle"></i>
+          </button>
+        </div>
+      </header>
+
+      <main class="app-main">
+        <div class="control-panel">
+          <section class="panel-section">
+            <h2><i class="fas fa-sliders-h"></i> Controls</h2>
+            <div class="form-group">
+              <label for="path-input">Path Data</label>
+              <textarea class="path-input" id="path-input" placeholder="M10 10 L90 10 L90 90 L10 90 Z">
+                M10 10 L90 10 L90 90 L10 90 Z
+              </textarea>
+            </div>
+            <div class="form-group">
+              <label for="stroke-width">Stroke Width</label>
+              <input type="range" id="stroke-width" min="0.1" max="10" step="0.1" value="2" />
+              <span id="stroke-width-value">2</span>
+            </div>
+            <div class="form-group">
+              <label for="stroke-olor">Stroke Color</label>
+              <input type="color" id="stroke-color" value="#3a86ff" />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fill-color">Fill Color</label>
+                <input type="color" id="fill-color" value="#8338ec80" />
+              </div>
+              <div class="form-group">
+                <label for="fill-opacity">Fill Opacity</label>
+                <input type="range" id="fill-opacity" min="0" max="1" step="0.1" value="0.5" />
+                <span id="fill-opacity-value">o.5</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel-section">
+            <h2><i class="fas fa-magic"></i> Effects</h2>
+            <div class="form-group">
+              <label for="animation-type">Animation</label>
+              <select id="animation-type">
+                <option value="none">None</option>
+                <option value="draw">Draw</option>
+                <option value="dash">Dashed</option>
+                <option value="pulse">Pulse</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="animation-duration">Duration (s)</label>
+                <input type="number" id="animation-duration" min="0.1" max="10" step="0.1" value="2" />
+              </div>
+              <div class="form-group">
+                <button class="btn-primary" id="animate-btn"><i class="fas fa-play"></i> Animate</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel-section">
+            <h2><i class="fas-fa-shapes"></i> Presets</h2>
+            <article class="presets-grid">
+              <button class="preset-btn" data-path="M10 10 L90 10 L90 90 L10 90 Z" data-name="Square">
+                Square
+              </button>
+              <button class="preset-btn" data-path="M50 L90 90 L10 90 Z" data-name="Triangle">
+                Triangle
+              </button>
+              <button
+                class="preset-btn"
+                data-path="M50 10 A40 40 0 1 1 50 90 A40 40 0 1 1 50 10 Z"
+                data-name="Circle">
+                Circle
+              </button>
+              <button class="preset-btn" data-path="M20 20 Q50 0 80 20 %140 20" data-name="Wave">Wave</button>
+              <button
+                class="preset-btn"
+                data-path="M30 30 C50 10, 70 10, 90 30 S130 50, 150 30"
+                data-name="Curve">
+                Curve
+              </button>
+              <button class="preset-btn" data-path="M20 50 H80 V20 H140 V80 H200" data-name="Zigzag">
+                Zigzag
+              </button>
+            </article>
+          </section>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
