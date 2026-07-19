@@ -12,7 +12,7 @@ const assetInputs = [
   document.getElementById('realEstate'),
   document.getElementById('vehicles'),
   document.getElementById('otherAssets'),
-];
+].filter((el) => el !== null);
 
 const liabilityInputs = [
   document.getElementById('mortgage'),
@@ -20,7 +20,7 @@ const liabilityInputs = [
   document.getElementById('studentLoans'),
   document.getElementById('creditCards'),
   document.getElementById('otherLiabilities'),
-];
+].filter((el) => el !== null);
 
 const savingsGoalInput = document.getElementById('savingsGoal');
 
@@ -80,9 +80,9 @@ function initializeChart() {
   const ctx = document.getElementById('netWorthChart').getContext('2d');
   netWorthChart = new Chart(ctx, {
     type: 'doughnut',
-    date: {
+    data: {
       labels: ['Assets', 'Liabilities'],
-      dataset: [
+      datasets: [
         {
           data: [0, 0],
           backgroundColor: ['#4cc9f0', '#f72585'],
@@ -127,19 +127,23 @@ function calculateNetWorth() {
   const netWorth = totalAssets - totalLiabilities;
 
   // Update displays
-  totalAssetsDisplay.textContent = `$${totalAssets.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-  totalLiabilitiesDisplay.textContent = `$${totalLiabilities.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  if (totalAssetsDisplay) totalAssetsDisplay.textContent = `$${totalAssets.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  if (totalLiabilitiesDisplay) totalLiabilitiesDisplay.textContent = `$${totalLiabilities.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
-  netWorthDisplay.textContent = `$${netWorth.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  if (netWorthDisplay) {
+    netWorthDisplay.textContent = `$${netWorth.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
-  // update color based on net worth
-  netWorth > 0
-    ? (netWorthDisplay.className = 'net-worth-display positive')
-    : (netWorthDisplay.className = 'net-worth-display negative');
+    // update color based on net worth
+    netWorth > 0
+      ? (netWorthDisplay.className = 'net-worth-display positive')
+      : (netWorthDisplay.className = 'net-worth-display negative');
+  }
 
   // Update chart
-  netWorthChart.data.dataset[0].data = [totalAssets, totalLiabilities];
-  netWorthChart.update();
+  if (netWorthChart) {
+    netWorthChart.data.datasets[0].data = [totalAssets, totalLiabilities];
+    netWorthChart.update();
+  }
 
   // Update savings goal progress without causing recursion
   updateSavingsGoal({ totalAssets, totalLiabilities, netWorth });
@@ -149,20 +153,144 @@ function calculateNetWorth() {
 
 // Update savings goal progress
 function updateSavingsGoal({ netWorth }) {
+  if (!savingsGoalInput) return;
+  
   const savingsGoal = parseFloat(savingsGoalInput.value) || 0;
 
   if (savingsGoal > 0) {
     const progressPercentage = Math.min((netWorth / savingsGoal) * 100, 100);
-    progressBar.style.width = `${progressPercentage}%`;
-    progressText.textContent = `${progressPercentage.toFixed(1)}% of goal achieved.`;
+    if (progressBar) progressBar.style.width = `${progressPercentage}%`;
+    if (progressText) progressText.textContent = `${progressPercentage.toFixed(1)}% of goal achieved.`;
 
     // Update savings goal display
-    document.querySelector('.savings-goal p').textContent = `Current:
+    const savingsGoalP = document.querySelector('.savings-goal p');
+    if (savingsGoalP) {
+      savingsGoalP.textContent = `Current:
     $${netWorth.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} / Goal:
     $${savingsGoal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    }
   } else {
-    progressBar.style.width = '0%';
-    progressBar.textContent = 'Set a savings goal to track progress.';
-    document.querySelector('.savings-goal p').textContent = 'Current: $0.00 / Goal: $0.00';
+    if (progressBar) progressBar.style.width = '0%';
+    if (progressText) progressText.textContent = 'Set a savings goal to track progress.';
+    const savingsGoalP = document.querySelector('.savings-goal p');
+    if (savingsGoalP) savingsGoalP.textContent = 'Current: $0.00 / Goal: $0.00';
   }
 }
+
+// Save current net worth to history
+function saveToHistory() {
+  const { totalAssets, totalLiabilities, netWorth } = calculateNetWorth();
+  const now = new Date();
+  const dateString =
+    now.toLocaleDateString() + ' ' + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+  // Create history item
+  const historyItem = document.createElement('div');
+  historyItem.className = 'history-item';
+  historyItem.innerHTML = `
+    <div>
+      <div class="history-date">${dateString}</div>
+      <div>
+        Net Worth:
+        $${netWorth.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+      </div>
+      <div>
+        Assets:
+        $${totalAssets.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+      </div>
+      Liabilities:
+      $${totalLiabilities.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+    </div>
+  `;
+
+  // Add to history list
+  historyList.prepend(historyItem);
+
+  // Save to local storage
+  saveHistoryToLocalStorage();
+}
+
+// Clear history
+function clearHistory() {
+  if (confirm('Are you sure you want to clear your history?')) {
+    historyList.innerHTML = '';
+    localStorage.removeItem('netWorthHistory');
+  }
+}
+
+// Save history to localStorage
+function saveHistoryToLocalStorage() {
+  const historyItems = [];
+  document.querySelectorAll('.history-item').forEach((item) => {
+    historyItems.push(item.innerHTML);
+  });
+  localStorage.setItem('netWorthHistory', JSON.stringify(historyItems));
+}
+
+// Load from localStorage
+function loadFromLocalStorage() {
+  // Load history
+  const savedHistory = localStorage.getItem('netWorthHistory');
+  if (savedHistory) {
+    const historyItems = JSON.parse(savedHistory);
+    historyItems.forEach((itemHTML) => {
+      const historyItem = document.createElement('div');
+      historyItem.className = 'history-item';
+      historyItem.innerHTML = itemHTML;
+      historyList.appendChild(historyItem);
+    });
+  }
+
+  // Load form values
+  const savedFormData = localStorage.getItem('netWorthFormData');
+  if (savedFormData) {
+    const formData = JSON.parse(savedFormData);
+
+    assetInputs.forEach((input, index) => {
+      const key = `asset${index}`;
+      if (formData[key]) input.value = formData[key];
+    });
+
+    liabilityInputs.forEach((input, index) => {
+      const key = `liability${index}`;
+      if (formData[key]) input.value = formData[key];
+    });
+
+    if (formData.savingsGoal) savingsGoalInput.value = formData.savingsGoal;
+  }
+}
+
+// Save form data to localStorage on input change
+[...assetInputs, ...liabilityInputs, savingsGoalInput]
+  .filter((el) => el !== null)
+  .forEach((input) => {
+    input.addEventListener('input', () => {
+      const formData = {};
+
+      assetInputs.forEach((input, index) => {
+        formData[`asset${index}`] = input.value;
+      });
+
+      liabilityInputs.forEach((input, index) => {
+        formData[`liability${index}`] = input.value;
+      });
+
+      formData.savingsGoal = savingsGoalInput.value;
+
+      localStorage.setItem('netWorthFormData', JSON.stringify(formData));
+    });
+  });
+
+// Update year in footer
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+  yearElement.setAttribute('datetime', currentYear.toString());
+  yearElement.textContent = currentYear.toString();
+}
+updateYear();
