@@ -99,4 +99,53 @@ document.addEventListener('DOMContentLoaded', function () {
       toggleDebugElements();
     }
   }
+
+  // Changing colors on input type range track
+  document.querySelectorAll('input[type="range"]').forEach((input) => {
+    const updateTrack = () => {
+      const val = ((input.value - input.min) / (input.max - input.min)) * 100;
+      const thumbWidth = 15; // match your thumb's actual width in px
+      const width = input.offsetWidth;
+      const ratio = (input.value - input.min) / (input.max - input.min);
+
+      input.style.backgroundImage = `linear-gradient(to right,var(--primary),var(--secondary)${val}%,var(--bg-color) ${val}%)`;
+    };
+    input.addEventListener('input', updateTrack);
+    updateTrack();
+  });
+
+  function updatePathName() {
+    // Could be used for saving paths of other features
+  }
+
+  function updateStrokeWidth() {
+    const strokeWidth = strokeWidthInput.value;
+    svgPath.setAttribute('stroke-width', width);
+    strokeWidthValue.textContent = width;
+  }
+
+  function updateStrokeColor() {
+    svgPath.setAttribute('stroke', strokeColorInput.value);
+  }
+
+  function updateFillColor() {
+    const color = fillColorInput.value;
+    const opacity = fillOpacityInput.value;
+    svgPath.setAttribute(
+      'fill',
+      `${color}${
+        opacity === '1'
+          ? ''
+          : Math.round(opacity * 255)
+              .toString(16)
+              .padStart(2, '0')
+      }`,
+    );
+  }
+
+  function updateFillOpacity() {
+    const opacity = fillOpacityInput.value;
+    fillOpacityValue.textContent = opacity
+    updateFillColor()
+  }
 });

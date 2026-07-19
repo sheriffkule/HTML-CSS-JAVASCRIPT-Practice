@@ -24,29 +24,33 @@
       <main class="app-main">
         <div class="control-panel">
           <section class="panel-section">
-            <h2><i class="fas fa-sliders-h"></i> Controls</h2>
+            <h2><i class="fas fa-sliders-h"></i> <span>Controls</span></h2>
             <div class="form-group">
-              <label for="path-input">Path Data</label>
+              <label for="path-input">Path Data:</label>
               <textarea class="path-input" id="path-input" placeholder="M10 10 L90 10 L90 90 L10 90 Z">
-M10 10 L90 10 L90 90 L10 90 Z
-              </textarea>
+M10 10 L90 10 L90 90 L10 90 Z</textarea
+              >
             </div>
             <div class="form-group">
-              <label for="stroke-width">Stroke Width</label>
+              <label for="path-name">Path Name:</label>
+              <input type="text" id="path-name" value="Square" placeholder="My Path" />
+            </div>
+            <div class="form-group">
+              <label for="stroke-width">Stroke Width:</label>
               <input type="range" id="stroke-width" min="0.1" max="10" step="0.1" value="2" />
               <span id="stroke-width-value">2</span>
             </div>
             <div class="form-group">
-              <label for="stroke-olor">Stroke Color</label>
+              <label for="stroke-olor">Stroke Color:</label>
               <input type="color" id="stroke-color" value="#3a86ff" />
             </div>
             <div class="form-row">
               <div class="form-group">
-                <label for="fill-color">Fill Color</label>
+                <label for="fill-color">Fill Color:</label>
                 <input type="color" id="fill-color" value="#8338ec80" />
               </div>
               <div class="form-group">
-                <label for="fill-opacity">Fill Opacity</label>
+                <label for="fill-opacity">Fill Opacity:</label>
                 <input type="range" id="fill-opacity" min="0" max="1" step="0.1" value="0.5" />
                 <span id="fill-opacity-value">0.5</span>
               </div>
@@ -56,7 +60,7 @@ M10 10 L90 10 L90 90 L10 90 Z
           <section class="panel-section">
             <h2><i class="fas fa-magic"></i> Effects</h2>
             <div class="form-group">
-              <label for="animation-type">Animation</label>
+              <label for="animation-type">Animation:</label>
               <select id="animation-type">
                 <option value="none">None</option>
                 <option value="draw">Draw</option>
@@ -66,7 +70,7 @@ M10 10 L90 10 L90 90 L10 90 Z
             </div>
             <div class="form-row">
               <div class="form-group">
-                <label for="animation-duration">Duration (s)</label>
+                <label for="animation-duration">Duration (s):</label>
                 <input type="number" id="animation-duration" min="0.1" max="10" step="0.1" value="2" />
               </div>
               <div class="form-group">
@@ -76,7 +80,7 @@ M10 10 L90 10 L90 90 L10 90 Z
           </section>
 
           <section class="panel-section">
-            <h2><i class="fas-fa-shapes"></i> Presets</h2>
+            <h2><i class="fas fa-shapes"></i> Presets</h2>
             <article class="presets-grid">
               <button class="preset-btn" data-path="M10 10 L90 10 L90 90 L10 90 Z" data-name="Square">
                 Square
