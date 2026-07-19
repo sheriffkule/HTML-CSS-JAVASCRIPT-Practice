@@ -28,7 +28,7 @@
             <div class="form-group">
               <label for="path-input">Path Data</label>
               <textarea class="path-input" id="path-input" placeholder="M10 10 L90 10 L90 90 L10 90 Z">
-                M10 10 L90 10 L90 90 L10 90 Z
+M10 10 L90 10 L90 90 L10 90 Z
               </textarea>
             </div>
             <div class="form-group">
@@ -48,7 +48,7 @@
               <div class="form-group">
                 <label for="fill-opacity">Fill Opacity</label>
                 <input type="range" id="fill-opacity" min="0" max="1" step="0.1" value="0.5" />
-                <span id="fill-opacity-value">o.5</span>
+                <span id="fill-opacity-value">0.5</span>
               </div>
             </div>
           </section>
@@ -177,6 +177,10 @@
           </section>
         </div>
       </main>
+      <footer>
+        © <time datetime="" id="year"></time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
 
       <div class="modal" id="help-modal">
         <div class="modal-content">
@@ -184,9 +188,36 @@
             <h3><i class="fas fa-question-circle"></i> SVG Path Visualizer Help</h3>
             <button class="close-modal">&times;</button>
           </div>
-          <div class="modal-body"></div>
+          <div class="modal-body">
+            <h4>SVG Path Commands</h4>
+            <ul class="command-list">
+              <li><strong>M/m (MoveTo)</strong>: Start a new sub-path at (x, y).</li>
+              <li><strong>L/l (LineTo)</strong>: Draw a line to (x, y).</li>
+              <li><strong>H/h (Horizontal LneTo)</strong>: Draw a horizontal line to x.</li>
+              <li><strong>V/v (Vertical LineTo)</strong>: Draw a vertical line to y.</li>
+              <li><strong>C/c (Cubic Bezier)</strong>: Draw a cubic Bezier curve to (x, y).</li>
+              <li><strong>S/s (Smooth Cubic Bezier)</strong>: Draw a smooth cubic Bezier to (x, y).</li>
+              <li><strong>Q/q (Quadratic Bezier)</strong>: Draw a quadratic Bezier to (x, y).</li>
+              <li>
+                <strong>T/t (Smooth Quadratic Bezier)</strong>: Draw a smooth quadratic Bezier to (x, y).
+              </li>
+              <li><strong>A/a (Elliptical Arc)</strong>: Draw an elliptical arc to (x, y).</li>
+              <li><strong>Z/z (ClosePath)</strong>: Close the current sub-path.</li>
+              <p>Uppercase commands use absolute coordinates, lowercase uses relative coordinates.</p>
+
+              <h4>Tips</h4>
+              <ul>
+                <li>Use presets to quickly see common path examples.</li>
+                <li>Debug tools help visualize control points and bounding boxes.</li>
+                <li>Animations can help understand how paths are constructed.</li>
+                <li>DOwnload your SVG or copy the path data for use in other applications.</li>
+              </ul>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
+
+    <script src="/widgets_script/svgPathVisualizer.js"></script>
   </body>
 </html>
