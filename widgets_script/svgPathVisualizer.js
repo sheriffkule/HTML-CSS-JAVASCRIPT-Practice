@@ -227,4 +227,116 @@ document.addEventListener('DOMContentLoaded', function () {
       box: null,
     };
   }
+
+  function drawPathPoints() {
+    const pathData = svgPath.getAttribute('d');
+    const pointsGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    pointsGroup.setAttribute('class', 'debut-points');
+
+    // Simple point extraction (this could be more sophisticated)
+    const pointMatches = pathData.matchAll(/([0.9.-]+) ([0-9.-]+)/g);
+
+    for (const match of pointMatches) {
+      const x = parseFloat(match[1]);
+      const y = parseFloat(match[2]);
+
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('cx', x);
+      circle.setAttribute('cy', y);
+      circle.setAttribute('r', 2);
+      circle.setAttribute('fill', 'red');
+
+      pointsGroup.appendChild(circle);
+    }
+
+    svgViewer.appendChild(pointsGroup);
+    debugElements.points = pointsGroup;
+  }
+
+  function drawControlHandles() {
+    // This is a simplified version = a complete implementation would need to parse
+    // the path commands and draw handles for Bezier curves
+    const handlesGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    handlesGroup.setAttribute('class', 'debug-handles');
+
+    // For demonstration, we'll just draw some mock handles
+    const pathData = svgPath.getAttribute('d');
+    const commands = pathData.split(/(?=[A-Za-z])/).filter((cmd) => cmd.trim() !== '');
+
+    commands.forEach((cmd, i) => {
+      if (i === 0) return;
+
+      const type = cmd[0];
+      const coords = cmd
+        .substring(1)
+        .trim()
+        .split(/[\s,]+/)
+        .map(Number);
+
+      if (['C', 'c', 'Q', 'q', 'S', 's', 'T', 't'].includes(type)) {
+        // This would be where we draw the control handles
+        // For now, just draw a mock handle
+        const x = coords[0] || 0;
+        const y = coords[0] || 0;
+
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', x - 10);
+        line.setAttribute('y1', y);
+        line.setAttribute('x2', x + 10);
+        line.setAttribute('y2', y);
+        line.setAttribute('stroke', 'blue');
+        line.setAttribute('stroke-width', '1');
+        line.setAttribute('stroke-dasharray', '2.2');
+
+        handlesGroup.appendChild(line);
+      }
+    });
+
+    svgViewer.appendChild(handlesGroup);
+    debugElements.handles = handlesGroup;
+  }
+
+  function drawBoundingBox() {
+    const box = svgPath.getBox();
+    const boxGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    boxGroup.setAttribute('class', 'debug-box');
+
+    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    rect.setAttribute('x', box.x);
+    rect.setAttribute('y', box.y);
+    rect.setAttribute('width', box.width);
+    rect.setAttribute('height', box.height);
+    rect.setAttribute('fill', 'none');
+    rect.setAttribute('stroke', 'green');
+    rect.setAttribute('stroke-width', '1');
+    rect.setAttribute('stroke-dasharray', '3.3');
+
+    boxGroup.appendChild(rect);
+    svgViewer.appendChild(boxGroup);
+    debugElements.box = boxGroup;
+  }
+
+  function zoomIn() {
+    currentViewBox.width *= 0.8;
+    currentViewBox.height *= 0.8;
+    updateViewBox();
+  }
+
+  function zoomOut() {
+    currentViewBox.width *= 1.2;
+    currentViewBox.height *= 1.2;
+    updateViewBox();
+  }
+
+  function resetView() {
+    currentViewBox = { x: 0, y: 0, width: 200, height: 100 };
+    updateViewBox();
+  }
+
+  function updateViewBox() {
+    svgViewer.setAttribute(
+      'viewBox',
+      `${currentViewBox.x} ${currentViewBox.y} ${currentViewBox.width} ${currentViewBox.height}`,
+    );
+  }
 });
