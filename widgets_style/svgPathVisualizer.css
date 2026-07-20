@@ -366,6 +366,7 @@ option::checkmark {
     cursor: pointer;
     transition: all 0.3s;
     font-size: 14px;
+    color: var(--text);
 
     &:hover {
         background-color: var(--primary);
@@ -450,4 +451,88 @@ option::checkmark {
     font-size: 14px;
     color: var(--text);
     opacity: 0.8;
+}
+
+.info-value {
+    font-size: 16px;
+    font-weight: 500;
+    font-family: monospace;
+}
+
+.debug-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* flex-direction: column; */
+    /* align-items: center; */
+    row-gap: 12px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.checkbox-label {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+
+    input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background-color: var(--accent);
+    transition: .4s;
+}
+
+.slider::before {
+    content: '';
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    top: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input[type="checkbox"]:checked + .slider {
+    background-color: var(--primary);
+}
+
+input[type="checkbox"]:checked + .slider::before {
+    transform: translateX(24px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round::before {
+    border-radius: 50%;
+}
+
+.command-breakdown {
+    font-size: 16px;
+    font-family: monospace;
+    background-color: var(--bg-color);
+    padding: 10px;
+    margin-top: 30px;
+    border-radius: var(--border-radius);
+    max-height: 200px;
+    overflow-y: auto;
+
+    div {
+        padding-block: 3px;
+        border-bottom: 1px solid var(--border-color);
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
 }

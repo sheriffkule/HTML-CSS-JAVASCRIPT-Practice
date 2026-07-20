@@ -339,4 +339,75 @@ document.addEventListener('DOMContentLoaded', function () {
       `${currentViewBox.x} ${currentViewBox.y} ${currentViewBox.width} ${currentViewBox.height}`,
     );
   }
+
+  function downloadSvg() {
+    const serializer = new XMLSerializer();
+    let svgStr = serializer.serializeToString(svgViewer);
+
+    // Add namespace if not present
+    if (!svgStr.match(/^<svg[&>]+xmlns="http:\/\/www\w3\.org\/2000\/svg"/)) {
+      svgStr = svgStr.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"', replaceValue);
+    }
+
+    // Add XML declaration
+    svgStr = '<?xml version="1.0" standalone="no"?>\n' + svgStr;
+
+    // Convert to blob and create download link
+    const blob = new Blob([svgStr], { type: 'image/svg+xml' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement(blob);
+    link.href = url;
+    link.download = `${pathNameInput.value || 'svg-path'}.svg`;
+    document.body.appendChild(link);
+    link.click();
+    setTimeout(() => {
+      document.body.removeChild(link);
+    }, 200);
+  }
+
+  function copyPathData() {
+    pathInput.select();
+    document.execCommand('copy');
+
+    // Show feedback
+    const originalText = copyPathBtn.innerHTML;
+    copyPathBtn.innerHTML = '<i class="fas fa-check"></i> Copied';
+    setTimeout(() => {
+      copyPathBtn.innerHTML = originalText;
+    }, 2000);
+  }
+
+  function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? null : 'dark';
+
+    document.documentElement.setAttribute('data-theme', newTheme);
+    themeToggleBtn.innerHTML =
+      newTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+
+    // Store preferences
+    localStorage.setItem('theme', newTheme);
+  }
+
+  // Check for saved theme preferences
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) {
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    themeToggleBtn.innerHTML =
+      savedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+  }
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
