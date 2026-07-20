@@ -92,7 +92,7 @@ function calculateStatistics() {
   // Add to history
   addToHistory(data, stats);
 
-  // Updata chart
+  // Update chart
   updateChart(data);
 
   showNotification('Statistics calculated successfully!');
@@ -246,7 +246,7 @@ function updateChart(data) {
           label: 'Data Values',
           data: data,
           backgroundColor: 'rgba(67,97,238,0.7)',
-          borderColor: 'rgb(67,97,238,1)',
+          borderColor: 'rgba(67,97,238,1)',
           borderWidth: 1,
         },
       ],

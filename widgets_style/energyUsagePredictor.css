@@ -133,6 +133,20 @@ input, select {
     0 0 0 3px rgb(67 97 238 / 0.2);
 }
 
+input[type="number"] {
+    caret-animation: manual;
+    caret-shape: block;
+    caret-color: var(--primary);
+    animation: caret-animation infinite linear 1.2s;
+}
+
+@keyframes caret-animation {
+  50% {
+    caret-color: transparent;
+    caret-shape: bar;
+  }
+}
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
     cursor: pointer;

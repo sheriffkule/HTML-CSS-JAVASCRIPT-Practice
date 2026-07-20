@@ -104,12 +104,23 @@ textarea {
     resize: vertical;
     font-size: 1rem;
     transition: var(--transition);
+    caret-animation: manual;
+    caret-shape: block;
+    caret-color: var(--primary);
+    animation: caret-animation infinite linear 1.2s;
 }
 
 textarea:is(:focus, :focus-within) {
     outline: none;
     border-color: var(--primary);
     box-shadow: 0 0 0 3px rgb(67 97 238 / 0.2);
+}
+
+@keyframes caret-animation {
+  50% {
+    caret-color: transparent;
+    caret-shape: bar;
+  }
 }
 
 .input-options {
@@ -269,6 +280,14 @@ textarea:is(:focus, :focus-within) {
     font-weight: 600;
 }
 
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
 .probability-calculator {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -420,4 +439,19 @@ footer {
 .tooltip:hover .tooltiptext {
     visibility: visible;
     opacity: 1;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    background-color: var(--gray);
+    border: 1px dotted var(--dark);
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background-color: var(--primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary-dark);
 }

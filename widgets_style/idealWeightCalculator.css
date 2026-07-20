@@ -100,6 +100,32 @@ input, select {
     background: azure;
 }
 
+input[type="number"] {
+    caret-animation: manual;
+    caret-shape: block;
+    caret-color: var(--primary);
+    animation: caret-animation infinite linear 1.2s;
+}
+
+@keyframes caret-animation {
+  50% {
+    caret-color: transparent;
+    caret-shape: bar;
+  }
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    cursor: pointer;
+    scale: 2;
+    transition: .2s;
+}
+
+input[type="number"]::-webkit-inner-spin-button:hover,
+input[type="number"]::-webkit-outer-spin-button:hover {
+    box-shadow: 0 0 0 1px royalblue;
+}
+
 input[type="number"]:not(:valid) ~ label sup {
     color: var(--warning);
 }
@@ -444,7 +470,7 @@ footer {
     font-size: 0.875rem;
 
     span {
-        color: var(--danger);
+        color: red;
         font-size: 1rem;
     }
     abbr {

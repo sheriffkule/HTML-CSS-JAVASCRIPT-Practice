@@ -175,6 +175,17 @@ input:checked + .slider::before {
     background-color: var(--background);
     color: var(--text);
     transition: var(--transition);
+    caret-animation: manual;
+    caret-shape: block;
+    caret-color: var(--primary);
+    animation: caret-animation infinite linear 1.2s;
+}
+
+@keyframes caret-animation {
+  50% {
+    caret-color: transparent;
+    caret-shape: bar;
+  }
 }
 
 .search-box input:is(:focus, :focus-visible) {

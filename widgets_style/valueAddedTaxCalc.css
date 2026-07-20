@@ -95,6 +95,20 @@ input, select {
     transition: var(--transition);
 }
 
+input[type="number"] {
+    caret-animation: manual;
+    caret-shape: block;
+    caret-color: var(--primary);
+    animation: caret-animation infinite linear 1.2s;
+}
+
+@keyframes caret-animation {
+  50% {
+    caret-color: transparent;
+    caret-shape: bar;
+  }
+}
+
 :is(input, select):is(:focus, :focus-visible) {
     outline: none;
     border-color: var(--accent);
@@ -384,4 +398,19 @@ body.dark-mode .flag-option.selected {
         transform: translateX(0);
         opacity: 1;
     }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: var(--dark);
+    border: 1px dotted white;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--success);
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
 }

@@ -63,6 +63,17 @@ form {
     color: #2c3e50;
     background-color: #f9f9f9;
     transition: border-color 0.3s ease;
+    caret-animation: manual;
+    caret-shape: block;
+    caret-color: var(--primary);
+    animation: caret-animation infinite linear 1.2s;
+}
+
+@keyframes caret-animation {
+  50% {
+    caret-color: transparent;
+    caret-shape: bar;
+  }
 }
 
 .input-group input:is(:focus, :focus-within) {

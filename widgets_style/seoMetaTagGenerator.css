@@ -114,6 +114,17 @@ input, textarea, select {
 
 input[type="text"], input[type="url"], textarea {
     outline: none;
+    caret-animation: manual;
+    caret-shape: block;
+    caret-color: var(--primary);
+    animation: caret-animation infinite linear 1.2s;
+}
+
+@keyframes caret-animation {
+  50% {
+    caret-color: transparent;
+    caret-shape: bar;
+  }
 }
 
 :is(input[type="text"], input[type="url"], textarea)::placeholder {
@@ -196,6 +207,52 @@ textarea {
     label {
         margin-bottom: 0;
     }
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    height: 16px;
+    width: 16px;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    background: #e3fefe;
+    cursor: pointer;
+    font-family: FontAwesome;
+}
+
+input[type="checkbox"]:checked {
+    background: var(--primary);
+    border-color: var(--secondary);
+    transition: all .25s;
+}
+
+input[type="checkbox"]::before {
+    content: '+';
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+    display: none;
+    transition: all .25s;
+}
+
+input[type="checkbox"]:checked::before {
+    display: block;
+    transition: all .25s;
+}
+
+input[type="checkbox"]:focus {
+  outline: max(2px, 0.15em) solid var(--primary);
+  outline-offset: max(2px, 0.15em);
+}
+
+.option-item:has(input[type="checkbox"]:checked) {
+    background-color: rgb(from var(--primary) r g b / 0.2);
+    border: 1px solid var(--gray);
 }
 
 .preview-card {
