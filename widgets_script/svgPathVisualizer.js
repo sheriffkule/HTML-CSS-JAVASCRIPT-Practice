@@ -145,7 +145,86 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function updateFillOpacity() {
     const opacity = fillOpacityInput.value;
-    fillOpacityValue.textContent = opacity
-    updateFillColor()
+    fillOpacityValue.textContent = opacity;
+    updateFillColor();
+  }
+
+  function animatePath() {
+    // Reset any previous animation
+    svgPath.style.animation = 'none';
+    svgPath.style.strokeDasharray = 'none';
+    svgPath.style.strokeDashoffset = 'none';
+
+    const animationType = animationTypeInput.value;
+    const duration = animationDurationInput.value;
+
+    if (animationType === 'none') return;
+
+    const pathLength = svgPath.getTotalLength();
+
+    switch (animationType) {
+      case 'draw':
+        svgPath.style.strokeDasharray = pathLength;
+        svgPath.style.strokeDashoffset = pathLength;
+        svgPath.style.animation = `draw ${duration}s linear forwards`;
+        break;
+      case 'dash':
+        svgPath.style.strokeDasharray = '10,5';
+        svgPath.style.animation = `dash ${duration}s linear infinite`;
+        break;
+      case 'pulse':
+        svgPath.style.animation = `pulse ${duration}s ease-in-out infinite`;
+        break;
+    }
+  }
+
+  function updatePathInfo() {
+    try {
+      const pathLength = Math.round(svgPath.getTotalLength());
+      pathLengthDisplay.textContent = pathLength;
+
+      const box = svgPath.getBox();
+      pathBoxDisplay.textContent = `${Math.round(box.x)},${Math.round(box.y)} ${Math.round(box.width)}x${Math.round(box.height)}`;
+
+      const commands = svgPath.getAttribute('d').match(/[A-Za-z]/g) || [];
+      pathCommandsDisplay.textContent = commands.length;
+
+      const points = svgPath.getAttribute('d').match(/[0-9.-]+[0-9.-]+/g) || [];
+      pathPointsDisplay.textContent = points.length;
+    } catch (e) {
+      console.error('Error calculating path info: ', e);
+    }
+  }
+
+  function updateCommandBreakdown() {
+    const pathData = svgPath.getAttribute('d');
+    const commands = pathData.split(/(?=[A-Za-z])/).filter((cmd) => cmd.trim() !== '');
+
+    let html = '';
+    commands.forEach((cmd) => {
+      html += `<div><strong>${cmd[0]}</strong>: ${cmd.substring(1).trim()}</div>`;
+    });
+
+    commandBreakdown.innerHTML = html || '<div>No commands found</div>';
+  }
+
+  function toggleDebugElements() {
+    clearDebugElements();
+
+    if (showPointsCheckbox.checked) drawPathPoints();
+    if (showHandlesCheckbox.checked) drawControlHandles();
+    if (showBoxCheckbox.checked) drawBoundingBox();
+  }
+
+  function clearDebugElements() {
+    Object.values(debugElements).forEach((element) => {
+      if (element && element.parentNode) element.parentNode.removeChild(element);
+    });
+
+    debugElements = {
+      points: null,
+      handles: null,
+      box: null,
+    };
   }
 });
