@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
     presetButtons.forEach((btn) => {
       btn.addEventListener('click', () => {
         const path = btn.getAttribute('data-path');
-        const name = btn.getAnimations('data-name');
+        const name = btn.getAttribute('data-name');
         pathInput.value = path;
         pathNameInput.value = name;
         updateSvgPath();
@@ -85,10 +85,10 @@ document.addEventListener('DOMContentLoaded', function () {
     themeToggleBtn.addEventListener('click', toggleTheme);
 
     // Help modal
-    helpBtn.addEventListener('click', () => (helpModal.style.display = 'flex'));
-    closeModalBtn.addEventListener('click', () => (helpModal.style.display = 'none'));
+    helpBtn.addEventListener('click', () => (helpModal.classList.add('active')));
+    closeModalBtn.addEventListener('click', () => (helpModal.classList.remove('active')));
     window.addEventListener('click', (e) => {
-      if (e.target === helpModal) helpModal.style.display = 'none';
+      if (e.target === helpModal) helpModal.classList.remove('active');
     });
 
     function updateSvgPath() {
@@ -120,8 +120,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function updateStrokeWidth() {
     const strokeWidth = strokeWidthInput.value;
-    svgPath.setAttribute('stroke-width', width);
-    strokeWidthValue.textContent = width;
+    svgPath.setAttribute('stroke-width', strokeWidth);
+    strokeWidthValue.textContent = strokeWidth;
   }
 
   function updateStrokeColor() {
@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const pathLength = Math.round(svgPath.getTotalLength());
       pathLengthDisplay.textContent = pathLength;
 
-      const box = svgPath.getBox();
+      const box = svgPath.getBBox();
       pathBoxDisplay.textContent = `${Math.round(box.x)},${Math.round(box.y)} ${Math.round(box.width)}x${Math.round(box.height)}`;
 
       const commands = svgPath.getAttribute('d').match(/[A-Za-z]/g) || [];
@@ -234,7 +234,7 @@ document.addEventListener('DOMContentLoaded', function () {
     pointsGroup.setAttribute('class', 'debut-points');
 
     // Simple point extraction (this could be more sophisticated)
-    const pointMatches = pathData.matchAll(/([0.9.-]+) ([0-9.-]+)/g);
+    const pointMatches = pathData.matchAll(/([0-9.-]+) ([0-9.-]+)/g);
 
     for (const match of pointMatches) {
       const x = parseFloat(match[1]);
@@ -277,7 +277,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // This would be where we draw the control handles
         // For now, just draw a mock handle
         const x = coords[0] || 0;
-        const y = coords[0] || 0;
+        const y = coords[1] || 0;
 
         const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
         line.setAttribute('x1', x - 10);
@@ -297,7 +297,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function drawBoundingBox() {
-    const box = svgPath.getBox();
+    const box = svgPath.getBBox();
     const boxGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
     boxGroup.setAttribute('class', 'debug-box');
 
@@ -345,8 +345,8 @@ document.addEventListener('DOMContentLoaded', function () {
     let svgStr = serializer.serializeToString(svgViewer);
 
     // Add namespace if not present
-    if (!svgStr.match(/^<svg[&>]+xmlns="http:\/\/www\w3\.org\/2000\/svg"/)) {
-      svgStr = svgStr.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"', replaceValue);
+    if (!svgStr.match(/^<svg[^>]*xmlns="http:\/\/www\.w3\.org\/2000\/svg"/)) {
+      svgStr = svgStr.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
     }
 
     // Add XML declaration
@@ -355,7 +355,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Convert to blob and create download link
     const blob = new Blob([svgStr], { type: 'image/svg+xml' });
     const url = URL.createObjectURL(blob);
-    const link = document.createElement(blob);
+    const link = document.createElement('a');
     link.href = url;
     link.download = `${pathNameInput.value || 'svg-path'}.svg`;
     document.body.appendChild(link);
