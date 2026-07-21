@@ -42,3 +42,51 @@ let snippets = JSON.parse(localStorage.getItem('codeSnippets')) || initialSnippe
 let currentCategory = 'all';
 let editingSnippetId = null;
 let searchQuery = '';
+
+// DOM Elements
+const snippetsContainer = document.getElementById('snippetsContainer');
+const categoriesList = document.getElementById('categoriesList');
+const snippetModal = document.getElementById('snippetModal');
+const viewSnippetModal = document.getElementById('viewSnippetModal');
+const addSnippetBtn = document.getElementById('addSnippetBtn');
+const closeModalBtn = document.getElementById('closeModal');
+const closeViewModalBtn = document.getElementById('closeViewModal');
+const cancelBtn = document.getElementById('cancelBtn');
+const saveSnippetBtn = document.getElementById('saveSnippetBtn');
+const snippetForm = document.getElementById('snippetForm');
+const searchInput = document.getElementById('searchInput');
+const snippetCategorySelect = document.getElementById('snippetCategory');
+const toast = document.getElementById('toast');
+const toastMessage = document.getElementById('toastMessage');
+const totalSnippetsEl = document.getElementById('totalSnippets');
+const totalLanguagesEl = document.getElementById('totalLanguages');
+const lastAddedEl = document.getElementById('lastAdded');
+const currentCategoryEl = document.getElementById('currentCategory');
+const copyCodeBtn = document.getElementById('copyCodeBtn');
+const closeViewBtn = document.getElementById('closeViewBtn');
+const editSnippetBtn = document.getElementById('editSnippetBtn');
+
+// Initialize the app\
+function initApp() {
+  renderCategories();
+  renderSnippets();
+  updateStats();
+  populateCategorySelect();
+
+  // Event listeners
+  addSnippetBtn.addEventListener('click', openAddModal);
+  closeModalBtn.addEventListener('click', closeModal);
+  closeViewModalBtn.addEventListener('click', closeViewModal);
+  cancelBtn.addEventListener('click', closeModal);
+  saveSnippetBtn.addEventListener('click', saveSnippet);
+  searchInput.addEventListener('input', handleSearch);
+  copyCodeBtn.addEventListener('click', copyCodeToClipboard);
+  closeViewBtn.addEventListener('click', closeViewModal);
+  editSnippetBtn.addEventListener('click', editCurrentSnippet);
+
+  // Close modal when clicking outside
+  window.addEventListener('click', (e) => {
+    if (e.target === snippetModal) closeModal();
+    if (e.target === viewSnippetModal) closeViewModal();
+  });
+}
