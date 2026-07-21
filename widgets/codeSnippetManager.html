@@ -22,6 +22,54 @@
           </button>
         </div>
       </header>
+
+      <div class="main-content">
+        <aside class="sidebar">
+          <h2><i class="fas fa-folder"></i> Categories</h2>
+          <ul class="categories-list" id="categoriesList">
+            <!-- Categories will be populated by JavaScript -->
+          </ul>
+
+          <article class="stats">
+            <h3><i class="fas fa-chart-bar"></i> Statistics</h3>
+            <div class="stat-item">
+              <span>Total Snippets</span>
+              <span class="stat-value" id="totalSnippets">0</span>
+            </div>
+            <div class="stat-item">
+              <span>Languages</span>
+              <span class="stat-value" id="">0</span>
+            </div>
+            <div class="stat-item">
+              <span>Last Added</span>
+              <span class="stat-value" id="lastAdded">----</span>
+            </div>
+          </article>
+        </aside>
+
+        <main class="content-area">
+          <div class="snippets-header">
+            <h2 id="currentCategory">All Snippets</h2>
+            <div class="search-box">
+              <i class="fas fa-search"></i>
+              <input type="text" id="searchInput" placeholder="Search snippets..." />
+            </div>
+          </div>
+
+          <div class="snippets-container" id="snippetsContainer">
+            <!-- Snippets will be populated by JavaScript -->
+          </div>
+        </main>
+      </div>
+
+      <footer>
+        © <time datetime="2026" id="year">2026</time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
     </div>
+
+    <section class="modal" id="snippetModal">
+        <div class="modal-content"></div>
+    </section>
   </body>
 </html>

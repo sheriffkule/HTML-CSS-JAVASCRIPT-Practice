@@ -102,7 +102,7 @@ header {
     position: absolute;
     top: -20px;
     left: -50%;
-    background: rgb(255 255 255 / 0.2);
+    background: linear-gradient(90deg, rgb(255 255 255 / 0.1), rgb(255 255 255 / 0.5), rgb(255 255 255 / 0.1));
     width: 40px;
     height: 100px;
     transform: skew(30deg);
@@ -152,7 +152,91 @@ header {
     grid-template-columns: 300px 1fr;
     gap: 30px;
 
-    @media (width <= 1024px) {
+    @media (width <= 768px) {
         grid-template-columns: 1fr;
     }
+}
+
+.sidebar {
+    background-color: rgb(255 255 255 / 0.05);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    height: fit-content;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgb(255 255 255 / 0.2);
+
+    h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        i {
+            font-size: 18px;
+        }
+    }
+}
+
+.categories-list {
+    list-style: none;
+    margin-bottom: 30px;
+}
+
+.category-item {
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &:hover {
+        background-color: rgb(255 255 255 / 0.1);
+    }
+    &.active {
+        background-color: rgb(255 255 255 / 0.2);
+        border-left: 4px solid var(--primary);
+    }
+}
+
+.category-count {
+    background-color: rgb(255 255 255 / 0.1);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.stats {
+    background-color: rgb(255 255 255 / 0.05);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-top: 20px;
+
+    h3 {
+        font-size: 16px;
+        margin-bottom: 15px;
+        color: var(--gray-300);
+    }
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.stat-value {
+    font-weight: 600;
+    color: var(--accent);
+}
+
+.content-area {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
