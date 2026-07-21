@@ -169,8 +169,138 @@ function renderSnippets() {
     if (!searchQuery) {
       document.getElementById('addFirstSnippetBtn').addEventListener('click', openAddModal);
     }
-    return
+    return;
   }
+
+  filteredSnippets.forEach((snippet) => {
+    const snippetCard = document.createElement('div');
+    snippetCard.className = 'snippet-card';
+    snippetCard.innerHTML = `
+      <div class="snippet-header">
+        <div>
+          <h3 class="snippet-title">${snippet.title}</h3>
+          <span class="snippet-language">${snippet.language}</span>
+        </div>
+        <div style="color: var(--gray-300); font-size: 14px">${formatDate(snippet.createdAt)}</div>
+      </div>
+      <p class="snippet-description">${snippet.description}</p>
+      <div class="snippet-code">${escapeHtml(snippet.code)}</div>
+      <div class="snippet-actions">
+        <button class="action-btn view" data-id="${snippet.id}"><i class="fas fa-eye"></i> View</button>
+        <button class="action-btn edit" data-id="${snippet.id}"><i class="fas fa-edit"></i> Edit</button>
+        <button class="action-btn delete" data-id="${snippet.id}"><i class="fas fa-trash"></i> Delete</button>
+      </div>
+    `;
+
+    snippetsContainer.appendChild(snippetCard);
+  });
+
+  // Add event listeners to action buttons
+  document.querySelectorAll('.action-btn.view').forEach((btn) => {
+    btn.addEventListener('click', (e) => viewSnippet(e.target.dataset.id));
+  });
+
+  document.querySelectorAll('.action-btn.edit').forEach((btn) => {
+    btn.addEventListener('click', (e) => openEditModal(e.target.dataset.id));
+  });
+
+  document.querySelectorAll('.action-btn.delete').forEach((btn) => {
+    btn.addEventListener('click', (e) => deleteSnippet(e.target.dataset.id));
+  });
+}
+
+// Update Statistics
+function updateStats() {
+  totalSnippetsEl.textContent = snippets.length;
+
+  // Count unique languages
+  const languages = new Set(snippets.map((snippet) => snippet.language));
+  totalLanguagesEl.textContent = languages.size;
+
+  // Get most recent snippet
+  if (snippets.length > 0) {
+    const latest = snippets.reduce((latest, snippet) =>
+      new Date(snippet.createdAt) > new Date(latest.createdAt) ? snippet : latest,
+    );
+    lastAddedEl.textContent = formatDate(latest.createdAt);
+  } else {
+    lastAddedEl.textContent = '';
+  }
+}
+
+// Populate category select in modal
+const categories = ['JavaScript', 'Python', 'CSS', 'HTML', 'Algorithms', 'Utilities'];
+snippetCategorySelect.innerHTML = '';
+
+categories.forEach((category) => {
+  const option = document.createElement('option');
+  option.value = category;
+  option.textContent = category;
+  snippetCategorySelect.appendChild(option);
+});
+
+// Open modal for adding a new snippet
+function openAddModal() {
+  editingSnippetId = null;
+  document.getElementById('modalTitle').textContent = 'Add New Snippet';
+  snippetForm.reset();
+  snippetModal.classList.add('active');
+  document.getElementById('snippetCode').value = '';
+}
+
+// Open modal for editing a snippet
+function openEditModal(id) {
+  editingSnippetId = id;
+  const snippet = snippets.find((s) => s.id == id);
+
+  if (!snippet) return;
+
+  document.getElementById('modalTitle').textContent = 'Edit Snippet';
+  document.getElementById('snippetTitle').value = snippet.title;
+  document.getElementById('snippetDescription').value = snippet.description;
+  document.getElementById('snippetCategory').value = snippet.category;
+  document.getElementById('snippetLanguage').value = snippet.language;
+  document.getElementById('snippetCode').value = snippet.code;
+
+  snippetModal.classList.add('active');
+}
+
+// View snippet details
+function viewSnippet(id) {
+  const snippet = snippets.find((s) => s.id == id);
+
+  if (!snippet) return;
+
+  document.getElementById('snippetTitle').textContent = snippet.title;
+  document.getElementById('snippetDescription').textContent = snippet.description;
+  document.getElementById('snippetCategory').textContent = snippet.category;
+  document.getElementById('snippetLanguage').textContent = snippet.language;
+
+  // Format and display code
+  const codeElement = document.getElementById('viewSnippetCode')
+  codeElement.textContent = snippet.code
+
+  // Store current snippet ID for edit button
+  editSnippetBtn.dataset.id = id;
+
+  viewSnippetModal.classList.add('active')
+}
+
+// Edit current viewer snippet
+function editCurrentSnippet() {
+    closeViewModal()
+    openEditModal(editSnippetBtn.dataset.id)
+}
+
+// Close add/edit modal
+function closeModal() {
+    snippetModal.classList.remove('active')
+    editingSnippetId = null
+}
+
+// Close view modal
+function closeViewModal() {
+    viewSnippetModal.classList.remove('active')
 }
 
 // Initialize the app when DOM is loaded
