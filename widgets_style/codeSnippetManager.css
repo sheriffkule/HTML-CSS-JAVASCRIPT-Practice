@@ -240,3 +240,84 @@ header {
     flex-direction: column;
     gap: 30px;
 }
+
+.snippets-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+        font-size: 24px;
+        color: var(--light);
+    }
+}
+
+.search-box {
+    position: relative;
+    width: 300px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 12px 20px 12px 45px;
+    background-color: rgb(255 255 255 / 0.1);
+    border: 1px solid rgb(255 255 255 / 0.2);
+    border-radius: var(--border-radius);
+    color: white;
+    font-size: 15px;
+    caret-color: var(--primary);
+    transition: var(--transition);
+}
+
+.search-box input:is(:focus, :focus-visible) {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgb(67 97 238 / 0.2),
+    inset 0 0 0 3px rgb(67 97 238 / 0.2);
+}
+
+.search-box i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gray-300);
+    transition: var(--transition);
+}
+
+.search-box:focus-within i {
+    color: var(--success);
+    scale: 1.2;
+}
+
+input {
+    caret-animation: manual;
+    caret-shape: block;
+    caret-color: var(--primary);
+    animation: caret-animation infinite linear 1.2s;
+}
+
+@keyframes caret-animation {
+  50% {
+    caret-color: transparent;
+    caret-shape: bar;
+  }
+}
+
+input::placeholder {
+    transition: var(--transition);
+}
+
+input:is(:focus, :focus-visible)::placeholder {
+    transform: translateX(110%);
+}
+
+.snippets-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+
+    @media (width <= 768px) {
+        grid-template-columns: 1fr;
+    }
+}

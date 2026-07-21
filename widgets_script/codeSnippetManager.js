@@ -90,3 +90,88 @@ function initApp() {
     if (e.target === viewSnippetModal) closeViewModal();
   });
 }
+
+// Render categories in sidebar
+function renderCategories() {
+  const categories = ['all', 'JavaScript', 'Python', 'CSS', 'HTML', 'Algorithms', 'Utilities'];
+  const categoryCounts = {};
+
+  // Counts snippets per category
+  snippets.forEach((snippet) => {
+    categoryCounts[snippet.category] = (categoryCounts[snippet.category] || 0) + 1;
+  });
+
+  categoriesList.innerHTML = '';
+
+  categories.forEach((category) => {
+    const count = category === 'all' ? snippets.length : categoryCounts[category] || 0;
+    const isActive = category === currentCategory ? 'active' : '';
+
+    const categoryItem = document.createElement('li');
+    categoryItem.className = `category-item ${isActive}`;
+    categoryItem.innerHTML = `
+      <span>${category === 'all' ? 'All Snippets' : category}</span>
+      <span class="category-count">${count}</span>
+    `;
+
+    categoryItem.addEventListener('click', () => {
+      currentCategory = category;
+      currentCategoryEl.textContent = category === 'all' ? 'All Snippets' : category;
+      document.querySelectorAll('.category-item').forEach((item) => item.classList.remove('active'));
+      categoryItem.classList.add('active');
+      renderSnippets();
+    });
+
+    categoriesList.appendChild(categoryItem);
+  });
+}
+
+// Render snippets based on current category and search
+function renderSnippets() {
+  let filteredSnippets = snippets;
+
+  // Filter by category
+  if (currentCategory !== 'all') {
+    filteredSnippets = filteredSnippets.filter((snippet) => snippet.category === currentCategory);
+  }
+
+  // Filter by search query
+  if (searchQuery) {
+    const query = searchQuery.toLowerCase();
+    filteredSnippets = filteredSnippets.filter(
+      (snippet) =>
+        snippet.title.toLowerCase().includes(query) ||
+        snippet.description.toLowerCase().includes(query) ||
+        snippet.code.toLowerCase().includes(query) ||
+        snippet.language.toLowerCase().includes(query),
+    );
+  }
+
+  snippetsContainer.innerHTML = '';
+
+  if (filteredSnippets.length === 0) {
+    snippetsContainer.innerHTML = `
+      <div class="empty-state">
+        <i class="fas fa-code"></i>
+        <h3>No snippets fond.</h3>
+        <p>
+          ${searchQuery} ? 'Try a different search term' : 'Click "Add Snippet" to create your first code
+          snippet.'
+        </p>
+        ${
+          !searchQuery
+            ? '<button class="btn btn-primary" id="addFirstSnippetBtn"><i class="addFirstSnippetBtn"></i> Add your First Snippet</button>'
+            : ''
+        }
+      </div>
+    `;
+
+    if (!searchQuery) {
+      document.getElementById('addFirstSnippetBtn').addEventListener('click', openAddModal);
+    }
+    return
+  }
+}
+
+// Initialize the app when DOM is loaded
+document.addEventListener('DOMContentLoaded', initApp);
