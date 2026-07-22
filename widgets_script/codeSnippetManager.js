@@ -6,7 +6,7 @@ const initialSnippets = [
     description: 'Generate Fibonacci sequence up to n terms',
     category: 'Algorithms',
     language: 'python',
-    code: 'def fibonacci(n):\n      sequence = [0, 1]\n     for i in range(2, n):\n     sequence.append(sequence[i-1] + sequence[i-2])      return sequence\n\n# Example usage\nprint(fibonacci(10))',
+    code: 'def fibonacci(n):\n    sequence = [0, 1]\n    for i in range(2, n):\n        sequence.append(sequence[i-1] + sequence[i-2])\n    return sequence\n\n# Example usage\nprint(fibonacci(10))',
     createdAt: '2026-10-15',
   },
   {
@@ -15,7 +15,7 @@ const initialSnippets = [
     description: 'Fisher-Yates algorithm for shuffling an array',
     category: 'JavaScript',
     language: 'javascript',
-    code: 'function shuffleArray(array) {\n     for (let i = array.length - 1; i > 0; i--) {\n      const j = Math.floor(Math.random() * (i + 1));\n        [array[i], array[j], array[i];\n    }\n     return array;\n}\n\n// Example usage\nconst myArray = [1, 2, 3, 4, 5];\nconsole.log(shuffleArray(myArray));',
+    code: 'function shuffleArray(array) {\n    for (let i = array.length - 1; i > 0; i--) {\n        const j = Math.floor(Math.random() * (i + 1));\n        [array[i], array[j]] = [array[j], array[i]];\n    }\n    return array;\n}\n\n// Example usage\nconst myArray = [1, 2, 3, 4, 5];\nconsole.log(shuffleArray(myArray));',
     createdAt: '2026-10-10',
   },
   {
@@ -24,7 +24,7 @@ const initialSnippets = [
     description: 'CSS for a responsive navigation bar',
     category: 'CSS',
     language: 'css',
-    code: '.navbar {\n      display: flex;\n        justify-content: space-between:\n       align-items: center;\n      padding: 1rem 2rem;\n       background-color: #333;\n       color: white;\n}\n\n.nav-links {\n      display: flex;\n    gap: 2rem;\n}\n\n@media (max-width: 768px) {\n      .nav-links {\n      display: none;\n    }\n     \n      .mobile-menu-btn {\n        display: block;\n   }/n}',
+    code: '.navbar {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    padding: 1rem 2rem;\n    background-color: #333;\n    color: white;\n}\n\n.nav-links {\n    display: flex;\n    gap: 2rem;\n}\n\n@media (max-width: 768px) {\n    .nav-links {\n        display: none;\n    }\n\n    .mobile-menu-btn {\n        display: block;\n    }\n}',
     createdAt: '2026-10-05',
   },
   {
@@ -33,7 +33,7 @@ const initialSnippets = [
     description: 'Helper function for fetching data from API with error handling',
     category: 'JavaScript',
     language: 'javascript',
-    code: "async function fetchData(url, options = {}) {\n      try {\n     const response = await fetch(url, {\n       headers: {\n        'Content-type': 'application/json',\n        ...options.headers\n        },\n        ...options\n        });\n       \n      if (!response.ok) {\n       throw new Error(`HTTP error! Status: ${response.status}`);\n        }\n     \n      return await response.json();\n     } catch (error) {\n     console.error('Fetch error:', error);\n     throw error;\n      }\n}\n\n// Example usage\nconst data = await fetchData('https://api.example.com/data');",
+    code: "async function fetchData(url, options = {}) {\n    try {\n        const response = await fetch(url, {\n            headers: {\n                'Content-Type': 'application/json',\n                ...options.headers\n            },\n            ...options\n        });\n\n        if (!response.ok) {\n            throw new Error(`HTTP error! Status: ${response.status}`);\n        }\n\n        return await response.json();\n    } catch (error) {\n        console.error('Fetch error:', error);\n        throw error;\n    }\n}\n\n// Example usage\nconst data = await fetchData('https://api.example.com/data');",
     createdAt: '2026-10-01',
   },
 ];
@@ -84,6 +84,7 @@ function initApp() {
   copyCodeBtn.addEventListener('click', copyCodeToClipboard);
   closeViewBtn.addEventListener('click', closeViewModal);
   editSnippetBtn.addEventListener('click', editCurrentSnippet);
+  snippetsContainer.addEventListener('click', handleSnippetAction);
 
   // Close modal when clicking outside
   window.addEventListener('click', (e) => {
@@ -154,16 +155,13 @@ function renderSnippets() {
     snippetsContainer.innerHTML = `
       <div class="empty-state">
         <i class="fas fa-code"></i>
-        <h3>No snippets fond.</h3>
-        <p>
-          ${searchQuery} ? 'Try a different search term' : 'Click "Add Snippet" to create your first code
-          snippet.'
-        </p>
-        ${
-          !searchQuery
-            ? '<button class="btn btn-primary" id="addFirstSnippetBtn"><i class="addFirstSnippetBtn"></i> Add your First Snippet</button>'
-            : ''
-        }
+        <h3>No snippets found.</h3>
+        ${searchQuery
+          ? 'Try a different search term'
+          : 'Click "Add Snippet" to create your first code snippet.'}
+        ${!searchQuery
+          ? '<button class="btn btn-primary" id="addFirstSnippetBtn"><i class="addFirstSnippetBtn"></i> Add your First Snippet</button>'
+          : ''}
       </div>
     `;
 
@@ -196,18 +194,21 @@ function renderSnippets() {
     snippetsContainer.appendChild(snippetCard);
   });
 
-  // Add event listeners to action buttons
-  document.querySelectorAll('.action-btn.view').forEach((btn) => {
-    btn.addEventListener('click', (e) => viewSnippet(e.target.dataset.id));
-  });
+  // Actions are handled by delegated click event on snippetsContainer.
+}
 
-  document.querySelectorAll('.action-btn.edit').forEach((btn) => {
-    btn.addEventListener('click', (e) => openEditModal(e.target.dataset.id));
-  });
+function handleSnippetAction(e) {
+  const button = e.target.closest('button[data-id]');
+  if (!button || !snippetsContainer.contains(button)) return;
 
-  document.querySelectorAll('.action-btn.delete').forEach((btn) => {
-    btn.addEventListener('click', (e) => deleteSnippet(e.target.dataset.id));
-  });
+  const id = button.dataset.id;
+  if (button.classList.contains('view')) {
+    viewSnippet(id);
+  } else if (button.classList.contains('edit')) {
+    openEditModal(id);
+  } else if (button.classList.contains('delete')) {
+    deleteSnippet(id);
+  }
 }
 
 // Update Statistics
@@ -274,10 +275,10 @@ function viewSnippet(id) {
 
   if (!snippet) return;
 
-  document.getElementById('snippetTitle').textContent = snippet.title;
-  document.getElementById('snippetDescription').textContent = snippet.description;
-  document.getElementById('snippetCategory').textContent = snippet.category;
-  document.getElementById('snippetLanguage').textContent = snippet.language;
+  document.getElementById('viewSnippetTitle').textContent = snippet.title;
+  document.getElementById('viewSnippetDescription').textContent = snippet.description;
+  document.getElementById('viewSnippetCategory').textContent = snippet.category;
+  document.getElementById('viewSnippetLanguage').textContent = snippet.language;
 
   // Format and display code
   const codeElement = document.getElementById('viewSnippetCode');
@@ -320,8 +321,13 @@ function saveSnippet() {
   }
 
   if (editingSnippetId) {
-    // Update existing snippet
-    const index = snippets.findIndex((s) => (s.id = editingSnippetId));
+    const editingId = Number(editingSnippetId);
+    const index = snippets.findIndex((s) => s.id === editingId);
+    if (index === -1) {
+      showToast('Snippet not found', 'error');
+      return;
+    }
+
     snippets[index] = {
       ...snippets[index],
       title,
@@ -412,7 +418,7 @@ function escapeHtml(text) {
 // Export and import functionality (simplified)
 document.getElementById('exportBtn').addEventListener('click', () => {
   const dataStr = JSON.stringify(snippets, null, 2);
-  const dataUri = 'data:application/json:charset=utf-8,' + encodeURIComponent(dataStr);
+  const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
 
   const exportFileDefaultName = 'code-snippets.json';
 
@@ -437,22 +443,25 @@ document.getElementById('importBtn').addEventListener('click', () => {
     reader.onload = (event) => {
       try {
         const importedSnippets = JSON.parse(event.target.result);
+        if (!Array.isArray(importedSnippets)) {
+          throw new Error('Imported file must be a JSON array.');
+        }
 
-        // Add imported snippets with new IDs
         const maxId = snippets.length > 0 ? Math.max(...snippets.map((s) => s.id)) : 0;
-        importedSnippets.forEach((snippet, index) => {
-          snippet.id = maxId + index + 1;
-          if (!snippet.createdAt) snippet.createdAt = new Date().toISOString().split('T')[0];
-        });
+        const normalizedSnippets = importedSnippets.map((snippet, index) => ({
+          ...snippet,
+          id: maxId + index + 1,
+          createdAt: snippet.createdAt || new Date().toISOString().split('T')[0],
+        }));
 
-        snippets = [...snippet, ...importedSnippets];
+        snippets = [...snippets, ...normalizedSnippets];
         localStorage.setItem('codeSnippets', JSON.stringify(snippets));
 
         renderCategories();
         renderSnippets();
         updateStats();
 
-        showToast(`${importedSnippets.length} snippets imported successfully`);
+        showToast(`${normalizedSnippets.length} snippets imported successfully`);
       } catch (error) {
         showToast('Failed to import snippets. Invalid file format.', 'error');
       }

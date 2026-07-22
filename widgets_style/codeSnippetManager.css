@@ -46,6 +46,11 @@ header {
     padding-block: 20px;
     margin-bottom: 30px;
     border-bottom: 1px solid rgb(255 255 255 / 0.2);
+
+    @media (width <= 768px) {
+        flex-direction: column;
+        gap: 20px;
+    }
 }
 
 .logo {
@@ -435,8 +440,9 @@ input:is(:focus, :focus-visible)::placeholder {
 }
 
 .modal {
-    display: none;
-    /* display: flex; */
+    display: flex;
+    opacity: 0;
+    visibility: hidden;
     position: fixed;
     top: 0;
     left: 0;
@@ -448,9 +454,16 @@ input:is(:focus, :focus-visible)::placeholder {
     justify-content: center;
     align-items: center;
     padding: 20px;
+    transition: opacity 0.4s ease-in, visibility 0.4s ease-in;
+    transition-behavior: allow-discrete;
 
+    @starting-style {
+        opacity: 0;
+        visibility: hidden;
+    }
     &.active {
-        display: flex;
+        opacity: 1;
+        visibility: visible;
     }
 }
 
@@ -462,6 +475,12 @@ input:is(:focus, :focus-visible)::placeholder {
     overflow-y: auto;
     border: 1px solid rgb(255 255 255 / 0.15);
     box-shadow: 0 20px 40px rgb(0 0 0 / 0.3);
+    transform: translateY(100px);
+    transition: transform 0.4s ease-in;
+}
+
+.modal.active .modal-content {
+    transform: translateY(0);
 }
 
 .modal-header {
@@ -635,4 +654,137 @@ option::checkmark {
     display: flex;
     justify-content: flex-end;
     gap: 15px;
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 60px 20px;
+    background-color: rgb(255 255 255 / 0.05);
+    border-radius: var(--border-radius);
+    border: 2px dashed rgb(255 255 255 / 0.1);
+
+    h3 {
+        font-size: 24px;
+        margin-bottom: 10px;
+        color: white;
+    }
+    i {
+        font-size: 60px;
+        color: rgb(255 255 255 / 0.2);
+        margin-bottom: 20px;
+    }
+    p {
+        color: var(--gray-300);
+        max-width: 500px;
+        margin: 0 auto 25px;
+    }
+    button {
+        margin-top: 20px;
+    }
+}
+
+.toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    padding: 15px 25px;
+    background-color: var(--success);
+    color: var(--dark);
+    border-radius: 20px 20px 0 0;
+    corner-shape: bevel;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 101;
+    transform: translateY(100px) scaleX(0.1);
+    opacity: 0;
+    transition: transform 0.4s ease-in, opacity 0.4s ease-in;
+
+    &.show {
+        transform: translateY(0) scaleX(1);
+        opacity: 1;
+    }
+    &.error {
+        background-color: var(--danger);
+    }
+    &.warning {
+        background-color: var(--warning);
+    }
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgb(255 255 255 / 0.1);
+    font-size: 14px;
+
+    span {
+        color: red;
+        font-size: 16px;
+    }
+    abbr {
+        cursor: default;
+        color: var(--primary);
+        letter-spacing: 0.5px;
+        text-underline-offset: 2px;
+    }
+}
+
+.view-snippet-modal .modal-content {
+    max-width: 900px;
+}
+
+.view-snippet-code {
+    background-color: #1e1e1e;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    overflow-x: auto;
+    font-family: 'Fira Code', monospace;
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background-color: rgb(255 255 255 / 0.1);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: var(--transition);
+
+    &:hover {
+        background-color: rgb(255 255 255 / 0.2);
+        scale: 1.03;
+    }
+    &:active {
+        scale: 1;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: var(--gray-600);
+    border: 1px dotted var(--gray-300);
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background-color: var(--primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--accent);
 }
