@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@100..900&display=swap');
+
+:root {
+    --first-color: hsl(20 82% 58%);
+    --first-color-light: hsl(20 96% 90%);
+    --white-color: hsl(0 0% 90%);
+    --black-color: hsl(0 0% 10%);
+    --body-color: hsl(220 2% 62%);
+    --container-color-dark: hsl(220 4% 34%);
+
+    --body-font: 'Montserrat', sans-serif;
+    --normal-font-size: 1.25rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+    background-color: var(--body-color);
+}
+
+.section {
+    min-height: 100dvh;
+    display: grid;
+    place-items: center;
+    margin-inline: 1rem;
+}
+
+.input {
+    position: relative;
+    width: 100%;
+    background-color: var(--body-color);
+    box-shadow: inset 0 -2px 2px hsl(0 0% 0% / 0.5),
+    inset 0 1px 2px hsl(0 0% 100%);
+    padding: 1rem;
+    border-radius: 4rem;
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    column-gap: 1rem;
+}
+
+.input__pass {
+    width: min(400px, 100%);
+    background-color: var(--container-color-dark);
+    color: var(--first-color-light);
+    border: none;
+    outline: none;
+    padding-inline: 1rem;
+    border-radius: 4rem;
+    box-shadow: inset 0 -1px 2px hsl(0 0% 100%),
+    inset 0 4px 6px hsl(0 0% 0%);
+    text-shadow: 0 0 5px var(--first-color);
+    font-size: var(--normal-font-size);
+    caret-color: var(--first-color);
+    caret-animation: manual;
+    caret-shape: bar;
+    animation: caretBlink 1.2s linear infinite;
+}
+
+@keyframes caretBlink {
+    from, to {
+        caret-color: transparent;
+    }
+    50% {
+        caret-shape: block;
+        caret-color: var(--first-color);
+    }
+}
+
+.input__btn {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--body-color);
+    box-shadow: -8px 12px 12px hsl(0 0% 0% / 0.6),
+    inset 0 1px 2px hsl(0 0% 100%),
+    inset 0 -1px 2px hsl(0 0% 0% / 0.5);
+    font-size: 2rem;
+    cursor: pointer;
+    transition: box-shadow 0.4s, transform 0.4s;
+
+    &:hover {
+        box-shadow: -8px 12px 12px hsl(0 0% 0% / 0.6),
+        inset 0 1px 4px hsl(0 0% 0% / 0.5),
+        inset 0 -1px 2px hsl(0 0% 100% / 0.5);
+    }
+    &:active {
+        transform: scale(0.95);
+    }
+}
+
+.input::after {
+    content: '';
+    position: absolute;
+    width: 95%;
+    height: 100%;
+    background-color: var(--first-color);
+    border-radius: 4rem;
+    top: 1.25rem;
+    box-shadow: -16px 16px 4px hsl(0 0% 0%);
+    filter: blur(28px);
+    z-index: -1;
+}
+
+@media (width >= 540px) {
+    .input {
+        width: 400px;
+    }
+}

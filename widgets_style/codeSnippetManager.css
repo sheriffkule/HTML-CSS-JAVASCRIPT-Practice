@@ -35,7 +35,7 @@ body {
 }
 
 .container {
-    max-width: 1400px;
+    max-width: min(1400px, 96%);
     margin: 0 auto;
 }
 
@@ -718,9 +718,11 @@ option::checkmark {
 
 footer {
     text-align: center;
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid rgb(255 255 255 / 0.1);
+    margin-top: 30px;
+    padding-block: 10px;
+    border-radius: var(--border-radius);
+    background-color: rgb(255 255 255 / 0.05);
+    border-top: 2px solid rgb(255 255 255 / 0.2);
     font-size: 14px;
 
     span {
