@@ -29,7 +29,8 @@ const initialSnippets = [
   },
   {
     id: 4,
-    title: 'Helper function for fetching data from API with error handling',
+    title: 'API Fetch Helper',
+    description: 'Helper function for fetching data from API with error handling',
     category: 'JavaScript',
     language: 'javascript',
     code: "async function fetchData(url, options = {}) {\n      try {\n     const response = await fetch(url, {\n       headers: {\n        'Content-type': 'application/json',\n        ...options.headers\n        },\n        ...options\n        });\n       \n      if (!response.ok) {\n       throw new Error(`HTTP error! Status: ${response.status}`);\n        }\n     \n      return await response.json();\n     } catch (error) {\n     console.error('Fetch error:', error);\n     throw error;\n      }\n}\n\n// Example usage\nconst data = await fetchData('https://api.example.com/data');",
@@ -277,31 +278,144 @@ function viewSnippet(id) {
   document.getElementById('snippetLanguage').textContent = snippet.language;
 
   // Format and display code
-  const codeElement = document.getElementById('viewSnippetCode')
-  codeElement.textContent = snippet.code
+  const codeElement = document.getElementById('viewSnippetCode');
+  codeElement.textContent = snippet.code;
 
   // Store current snippet ID for edit button
   editSnippetBtn.dataset.id = id;
 
-  viewSnippetModal.classList.add('active')
+  viewSnippetModal.classList.add('active');
 }
 
 // Edit current viewer snippet
 function editCurrentSnippet() {
-    closeViewModal()
-    openEditModal(editSnippetBtn.dataset.id)
+  closeViewModal();
+  openEditModal(editSnippetBtn.dataset.id);
 }
 
 // Close add/edit modal
 function closeModal() {
-    snippetModal.classList.remove('active')
-    editingSnippetId = null
+  snippetModal.classList.remove('active');
+  editingSnippetId = null;
 }
 
 // Close view modal
 function closeViewModal() {
-    viewSnippetModal.classList.remove('active')
+  viewSnippetModal.classList.remove('active');
 }
+
+// Save snippet (add or update)
+function saveSnippet() {
+  const title = document.getElementById('snippetTitle').value.trim();
+  const description = document.getElementById('snippetDescription').value.trim();
+  const category = document.getElementById('snippetCategory').value;
+  const language = document.getElementById('snippetLanguage').value;
+  const code = document.getElementById('snippetCode').value.trim();
+
+  if (!title || !description || !category || !language || !code) {
+    showToast('Please fill in all fields!', 'error');
+    return;
+  }
+
+  if (editingSnippetId) {
+    // Update existing snippet
+    const index = snippets.findIndex((s) => (s.id = editingSnippetId));
+    snippets[index] = {
+      ...snippets[index],
+      title,
+      description,
+      category,
+      language,
+      code,
+    };
+
+    showToast('Snippet updated successfully');
+  } else {
+    // Add new snippet
+    const newId = snippets.length > 0 ? Math.max(...snippets.map((s) => s.id)) + 1 : 1;
+    const newSnippet = {
+      id: newId,
+      title,
+      description,
+      category,
+      language,
+      code,
+      createdAt: new Date().toISOString().split('T')[0],
+    };
+
+    snippets.push(newSnippet);
+    showToast('Snippet added successfully');
+  }
+
+  // Save to localStorage
+  localStorage.setItem('codeSnippets', JSON.stringify(snippets));
+
+  // Update UI
+  renderCategories();
+  renderSnippets();
+  updateStats();
+  closeModal();
+}
+
+// Delete snippet
+function deleteSnippet(id) {
+  if (!confirm('Are you sure you want to delete this snippet?')) return;
+
+  snippets = snippets.filter((s) => s.id != id);
+  localStorage.setItem('codeSnippets', JSON.stringify(snippets));
+
+  renderCategories();
+  renderSnippets();
+  updateStats();
+  showToast('Snippet deleted successfully', 'warning');
+}
+
+// Handle search
+function copyCodeToClipboard() {
+  const code = document.getElementById('viewSnippetCode').textContent;
+  navigator.clipboard
+    .writeText(code)
+    .then(() => showToast('Code copied to clipboard'))
+    .catch((err) => showToast('Failed to copy code', 'error'));
+}
+
+// Show toast notification
+function showToast(message, type = 'success') {
+  toastMessage.textContent = message;
+  toast.className = 'toast';
+  toast.classList.add(type, 'show');
+
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3000);
+}
+
+// Utility functions
+function formatDate(dateString) {
+  const options = { year: 'numeric', month: 'short', day: 'numeric' };
+  return new Date(dateString).toLocaleDateString('en-US', options);
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+// Export and import functionality (simplified)
+document.getElementById('exportBtn').addEventListener('click', () => {
+  const dataStr = JSON.stringify(snippets, null, 2);
+  const dataUri = 'data:application/json:charset=utf-8,' + encodeURIComponent(dataStr);
+
+  const exportFileDefaultName = 'code-snippets.json';
+
+  const linkElement = document.createElement('a');
+  linkElement.setAttribute('href', dataUri);
+  linkElement.setAttribute('download', exportFileDefaultName);
+  linkElement.click();
+
+  showToast('Snippets exported successfully');
+});
 
 // Initialize the app when DOM is loaded
 document.addEventListener('DOMContentLoaded', initApp);
