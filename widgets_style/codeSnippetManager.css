@@ -389,3 +389,93 @@ input:is(:focus, :focus-visible)::placeholder {
     gap: 10px;
     margin-top: auto;
 }
+
+.action-btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    background-color: rgb(255 255 255 / 0.1);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 15px;
+    flex-grow: 1;
+    justify-content: center;
+
+    &:hover {
+        background-color: rgb(255 255 255 / 0.2);
+        box-shadow: inset var(--box-shadow);
+        corner-shape: scoop;
+    }
+    &:active {
+        corner-shape: bevel;
+        scale: 0.98;
+    }
+}
+
+.action-btn.edit {
+    background-color: rgb(245 158 11 / 0.2);
+    color: var(--warning);
+
+    &:hover {
+        background-color: rgb(245 158 11 / 0.3);
+    }
+}
+
+.action-btn.delete {
+    background-color: rgb(239 68 68 / 0.2);
+    color: var(--danger);
+
+    &:hover {
+        background-color: rgb(239 68 68 / 0.3)
+    }
+}
+
+.modal {
+    display: none;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0 0 0 / 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+
+    &.active {
+        display: flex;
+    }
+}
+
+.modal-content {
+    background-color: var(--dark);
+    border-radius: var(--border-radius);
+    width: min(800px, 100%);
+    max-height: 90dvh;
+    overflow-y: auto;
+    border: 1px solid rgb(255 255 255 / 0.15);
+    box-shadow: 0 20px 40px rgb(0 0 0 / 0.3);
+}
+
+.modal-header {
+    padding: 25px 30px;
+    border-bottom: 1px solid rgb(255 255 255 / 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h2 {
+        font-size: 24px;
+        color: transparent;
+        background: linear-gradient(90deg, var(--gray-100), var(--gray-300));
+        background-clip: text;
+        -webkit-background-clip: text;
+    }
+}

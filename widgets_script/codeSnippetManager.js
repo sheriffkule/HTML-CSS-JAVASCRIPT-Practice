@@ -230,15 +230,17 @@ function updateStats() {
 }
 
 // Populate category select in modal
-const categories = ['JavaScript', 'Python', 'CSS', 'HTML', 'Algorithms', 'Utilities'];
-snippetCategorySelect.innerHTML = '';
+function populateCategorySelect() {
+  const categories = ['JavaScript', 'Python', 'CSS', 'HTML', 'Algorithms', 'Utilities'];
+  snippetCategorySelect.innerHTML = '';
 
-categories.forEach((category) => {
-  const option = document.createElement('option');
-  option.value = category;
-  option.textContent = category;
-  snippetCategorySelect.appendChild(option);
-});
+  categories.forEach((category) => {
+    const option = document.createElement('option');
+    option.value = category;
+    option.textContent = category;
+    snippetCategorySelect.appendChild(option);
+  });
+}
 
 // Open modal for adding a new snippet
 function openAddModal() {
@@ -370,6 +372,11 @@ function deleteSnippet(id) {
   showToast('Snippet deleted successfully', 'warning');
 }
 
+function handleSearch(e) {
+  searchQuery = e.target.value.toLowerCase();
+  renderSnippets();
+}
+
 // Handle search
 function copyCodeToClipboard() {
   const code = document.getElementById('viewSnippetCode').textContent;
@@ -416,6 +423,61 @@ document.getElementById('exportBtn').addEventListener('click', () => {
 
   showToast('Snippets exported successfully');
 });
+
+document.getElementById('importBtn').addEventListener('click', () => {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = '.json';
+
+  input.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const importedSnippets = JSON.parse(event.target.result);
+
+        // Add imported snippets with new IDs
+        const maxId = snippets.length > 0 ? Math.max(...snippets.map((s) => s.id)) : 0;
+        importedSnippets.forEach((snippet, index) => {
+          snippet.id = maxId + index + 1;
+          if (!snippet.createdAt) snippet.createdAt = new Date().toISOString().split('T')[0];
+        });
+
+        snippets = [...snippet, ...importedSnippets];
+        localStorage.setItem('codeSnippets', JSON.stringify(snippets));
+
+        renderCategories();
+        renderSnippets();
+        updateStats();
+
+        showToast(`${importedSnippets.length} snippets imported successfully`);
+      } catch (error) {
+        showToast('Failed to import snippets. Invalid file format.', 'error');
+      }
+    };
+
+    reader.readAsText(file);
+  });
+
+  input.click();
+});
+
+// Update year in footer
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+
+  yearElement.setAttribute('datetime', currentYear.toString());
+  yearElement.textContent = currentYear.toString();
+}
+updateYear();
 
 // Initialize the app when DOM is loaded
 document.addEventListener('DOMContentLoaded', initApp);
