@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Running Pace Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/runningPaceCalculator.css" />
+  </head>
+  <body>
+    <button class="theme-toggle" id="themeToggle" title="Change Theme"><i class="fas fa-moon"></i></button>
+
+    <div class="container">
+      <header>
+        <h1>RunPace</h1>
+        <p class="subtitle">Running Pace Calculator</p>
+      </header>
+
+      <div class="calculator">
+        <article class="input-group">
+          <label for="distance">Distance</label>
+          <div class="distance-inputs">
+            <input type="number" id="distance" placeholder="Enter distance" min="0" step="0.01" />
+            <select id="distance-unit">
+              <option value="km">Kilometers</option>
+              <option value="mi">Miles</option>
+              <option value="m">Meters</option>
+            </select>
+          </div>
+        </article>
+        <article class="input-group">
+          <label for="time">Time</label>
+          <div class="time-inputs">
+            <input type="number" id="hours" placeholder="Hours" min="1" />
+            <input type="number" id="minutes" placeholder="Minutes" min="0" max="59" />
+            <input type="number" id="seconds" placeholder="Seconds" min="0" max="59" />
+          </div>
+        </article>
+        <button id="calculate">Calculate Pace</button>
+        <article class="result" id="result">
+          <h3>Pace Results</h3>
+          <div class="result-item">
+            <span class="result-label">Pace:</span>
+            <span class="result-value" id="pace-value">-</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Speed:</span>
+            <span class="result-value" id="speed-value">-</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Projected 5K Time:</span>
+            <span class="result-value" id="projected-5k">-</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Projected 10K Time:</span>
+            <span class="result-value" id="projected-10k">-</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Projected Half Marathon:</span>
+            <span class="result-value" id="projected-half">-</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Projected Marathon:</span>
+            <span class="result-value" id="projected-marathon">-</span>
+          </div>
+
+          <h4 style="margin-top: 20px">Training Paces</h4>
+          <div class="pace-bands">
+            <div class="pace-band" style="background-color: #f44336"><span id="easy-pace">-</span></div>
+            <div class="pace-band" style="background-color: #4caf50"><span id="tempo-pace">-</span></div>
+            <div class="pace-band" style="background-color: #2196f3"><span id="interval-pace">-</span></div>
+            <div class="pace-band" style="background-color: #9c27b0"><span id="speed-pace">-</span></div>
+          </div>
+        </article>
+      </div>
+
+      <footer>
+        © <time datetime="" id="year"></time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
+    </div>
+
+    <script src="/widgets_script/runningPaceCalculator.js"></script>
+  </body>
+</html>

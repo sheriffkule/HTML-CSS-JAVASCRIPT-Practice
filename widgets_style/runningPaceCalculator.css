@@ -1,0 +1,68 @@
+:root {
+    --primary: #4a6fa5;
+    --secondary: #166088;
+    --accent: #4fc3f7;
+    --background: #f1f2fa;
+    --card: #e0e0e0;
+    --text: #333;
+    --text-light: #777;
+    --success: #4caf50;
+    --warning: #ff9800;
+    --error: #f44336;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text);
+    line-height: 1.5;
+    padding: 20px;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    width: min(600px, 100%);
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    color: transparent;
+    margin-bottom: 10px;
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    background: linear-gradient(100deg, var(--primary), var(--secondary));
+    display: inline-block;
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+.subtitle {
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+.calculator {
+    background-color: var(--card);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgb(0 0 0 / 0.1);
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
