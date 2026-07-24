@@ -4,30 +4,34 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (localStorage.getItem('darkMode') === 'true') {
     document.body.classList.add('dark-mode');
-    icon.classList.replace('fa-moon', 'fa-sun');
+    if (icon) icon.classList.replace('fa-moon', 'fa-sun');
   }
 
-  themeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-    const isDark = document.body.classList.contains('dark-mode');
-    icon.classList.replace(isDark ? 'fa-moon' : 'fa-sun', isDark ? 'fa-sun' : 'fa-moon');
-    localStorage.setItem('darkMode', isDark);
-  });
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.classList.contains('dark-mode');
+      if (icon) icon.classList.replace(isDark ? 'fa-moon' : 'fa-sun', isDark ? 'fa-sun' : 'fa-moon');
+      localStorage.setItem('darkMode', isDark);
+    });
+  }
 
-  // Pease Calculator
-  document.getElementById('calculate').addEventListener('click', calculatePeace);
+  // Pace Calculator
+  const calculateBtn = document.getElementById('calculate');
+  if (calculateBtn) calculateBtn.addEventListener('click', calculatePace);
 
-  function calculatePeace() {
+  function calculatePace() {
     const distanceInput = document.getElementById('distance');
-    const distance = parseFloat(distanceInput.value);
-    const distanceUnit = document.getElementById('distance-unit').value;
+    const distance = distanceInput ? parseFloat(distanceInput.value) : NaN;
+    const distanceUnitEl = document.getElementById('distance-unit');
+    const distanceUnit = distanceUnitEl ? distanceUnitEl.value : 'km';
     const hours = parseInt(document.getElementById('hours').value) || 0;
     const minutes = parseInt(document.getElementById('minutes').value) || 0;
     const seconds = parseInt(document.getElementById('seconds').value) || 0;
 
     if (isNaN(distance) || distance <= 0) {
       alert('Please enter a valid distance (greater than 0)');
-      distanceInput.focus();
+      if (distanceInput) distanceInput.focus();
       return;
     }
 
@@ -46,6 +50,13 @@ document.addEventListener('DOMContentLoaded', function () {
       distanceInKm = distance * 1.60934;
     } else if (distanceUnit === 'm') {
       distanceInKm = distance / 1000;
+    } else {
+      distanceInKm = distance; // fallback assume km
+    }
+
+    if (!distanceInKm || distanceInKm <= 0) {
+      alert('Converted distance is invalid.');
+      return;
     }
 
     // Calculate pace in seconds per km
@@ -57,22 +68,28 @@ document.addEventListener('DOMContentLoaded', function () {
     const speedKmH = distanceInKm / (totalSeconds / 3600);
 
     // Display results
-    document.getElementById('pace-value').textContent =
-      `${paceMinutes}:${paceSeconds < 10 ? '0' + paceSeconds : paceSeconds} min/km`;
-    document.getElementById('speed-value').textContent = `${speedKmH.toFixed(2)} km/h`;
+    const paceElem = document.getElementById('pace-value');
+    const speedElem = document.getElementById('speed-value');
+    if (paceElem) {
+      paceElem.textContent = `${paceMinutes}:${paceSeconds < 10 ? '0' + paceSeconds : paceSeconds} min/km`;
+    }
+    if (speedElem) {
+      speedElem.textContent = `${speedKmH.toFixed(2)} km/h`;
+    }
 
     // Calculate projected race times
-    calculateProjectedTImes(paceSecondsPerKm);
+    calculateProjectedTimes(paceSecondsPerKm);
 
     // Calculate training paces
     calculateTrainingPaces(paceSecondsPerKm);
 
     // Show results
-    document.getElementById('result').style.display = 'block';
+    const resultEl = document.getElementById('result');
+    if (resultEl) resultEl.style.display = 'block';
   }
 
   function calculateProjectedTimes(paceSecondsPerKm) {
-    // Calculate projected times for standard distances
+    // Calculate projected times for standard distances (km)
     const distances = {
       '5k': 5,
       '10k': 10,
@@ -80,37 +97,43 @@ document.addEventListener('DOMContentLoaded', function () {
       marathon: 42.195,
     };
 
-    for (const [race, distance] of Object.entries(distance)) {
-      const totalSeconds = paceSecondsPerKm * distance;
+    for (const [race, distKm] of Object.entries(distances)) {
+      const totalSeconds = paceSecondsPerKm * distKm;
       const hours = Math.floor(totalSeconds / 3600);
-      const minutes = Math.floor(totalSeconds % 3600) / 60;
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
       const seconds = Math.floor(totalSeconds % 60);
 
       let timeStr = '';
-      if (hours > 0) timeStr += `${hours}h`;
+      if (hours > 0) timeStr += `${hours}h `;
       timeStr += `${minutes}m ${seconds}s`;
 
-      (document.getElementById(`projected-${race}`), (textContent = timeStr));
+      const el = document.getElementById(`projected-${race}`);
+      if (el) el.textContent = timeStr;
     }
   }
 
   function calculateTrainingPaces(paceSecondsPerKm) {
-    // Calculate various training paces based on VDOT principles
+    // Calculate various training paces based on simple multipliers
     const easyPace = paceSecondsPerKm * 1.2;
     const tempoPace = paceSecondsPerKm * 0.9;
     const intervalPace = paceSecondsPerKm * 0.85;
     const speedPace = paceSecondsPerKm * 0.8;
 
-    document.getElementById('easy-pace').textContent = formatPace(easyPace);
-    document.getElementById('tempo-pace').textContent = formatPace(tempoPace);
-    document.getElementById('interval-pace').textContent = formatPace(intervalPace);
-    document.getElementById('speed-pace').textContent = formatPace(speedPace);
+    const easyEl = document.getElementById('easy-pace');
+    const tempoEl = document.getElementById('tempo-pace');
+    const intervalEl = document.getElementById('interval-pace');
+    const speedEl = document.getElementById('speed-pace');
+
+    if (easyEl) easyEl.textContent = formatPace(easyPace);
+    if (tempoEl) tempoEl.textContent = formatPace(tempoPace);
+    if (intervalEl) intervalEl.textContent = formatPace(intervalPace);
+    if (speedEl) speedEl.textContent = formatPace(speedPace);
   }
 
   function formatPace(secondsPerKm) {
     const minutes = Math.floor(secondsPerKm / 60);
     const seconds = Math.round(secondsPerKm % 60);
-    return `%{minutes}:${seconds < 10 ? '0' + seconds : seconds} min/km`;
+    return `${minutes}:${seconds < 10 ? '0' + seconds : seconds} min/km`;
   }
 
   // Update year in footer
