@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calories Burned Calculator</title>
+    <link rel="stylesheet" href="/widgets_style/caloriesBurnedCalculator.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Calories Burned Calculator</h1>
+      <div class="calculator">
+        <label for="activity">Select Activity:</label>
+        <select id="activity">
+          <option value="running">Running</option>
+          <option value="cycling">Cycling</option>
+          <option value="swimming">Swimming</option>
+          <option value="walking">Walking</option>
+        </select>
+
+        <label for="duration">Duration (minutes):</label>
+        <input type="number" id="duration" placeholder="Enter duration" />
+
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" placeholder="Enter weight" />
+
+        <div class="buttons">
+          <button id="calculate-btn">Calculate</button>
+          <button id="clear-btn">Clear History</button>
+          <button id="toggle-history-btn">Hide History</button>
+        </div>
+
+        <div id="result" style="display: none"></div>
+        <div class="visible" id="history">
+          <h3>Calculate History</h3>
+          <ul id="history-list"></ul>
+        </div>
+      </div>
+    </div>
+
+    <script src="/widgets_script/caloriesBurnedCalculator.js"></script>
+  </body>
+</html>
