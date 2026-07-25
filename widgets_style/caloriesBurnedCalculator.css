@@ -1,3 +1,15 @@
+:root {
+    --primary: #3a86ff;
+    --secondary: #8338ec;
+    --accent: #ff006e;
+    --text: #2b2d42;
+    --bg-color: #e3e4ee;
+    --panel-bg: #f1f2fa;
+    --border-color: #9ebdc2;
+    --shadow: 0 4px 8px rgb(0 0 0 / 0.15);
+    --border-radius: 8px;
+}
+
 body {
     font-family: Arial, Helvetica, sans-serif;
     background-image: linear-gradient(120deg, #89f7fe, #66a6ff);
@@ -40,4 +52,65 @@ select, input {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1rem;
+    transition: 0.3s;
+}
+
+:is(input, select):is(:focus, :focus-visible) {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgb(58 134 255 / 0.2),
+    inset 0 0 0 2px rgb(58 134 255 / 0.2);
+}
+
+select,
+::picker(select) {
+  appearance: base-select;
+  cursor: pointer;
+}
+
+::picker(select) {
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+select::picker-icon {
+  font-size: 16px;
+  color: var(--primary);
+  transition: 0.3s rotate;
+}
+
+select:open::picker-icon {
+  rotate: 180deg;
+  color: var(--accent);
+}
+
+select:open {
+    border: var(--primary);
+    box-shadow: 0 0 0 2px rgb(67 97 238 / 0.2),
+    inset 0 0 0 2px rgb(67 97 238 / 0.2);
+}
+
+option {
+  border: 1px solid var(--border-color);
+  background: var(--primary);
+  padding: 2px 0 2px 12px;
+  color: var(--panel-bg);
+  padding-right: 18px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+option:is(:hover, :focus) {
+  background: var(--secondary);
+}
+
+option:checked {
+  font-weight: bold;
+  letter-spacing: 1px;
+  background-color: var(--secondary);
+}
+
+option::checkmark {
+  color: var(--accent);
+  font-size: 1.5rem;
 }
