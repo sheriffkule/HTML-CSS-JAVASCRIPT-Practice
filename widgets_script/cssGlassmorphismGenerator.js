@@ -135,3 +135,133 @@ function updateValueDisplays() {
   borderWidthValue.textContent = `${borderWidthSlider.value}px`;
   borderRadiusValue.textContent = `${borderRadiusSlider.value}px`;
 }
+
+// Updata background
+function updateBackground() {
+  const bgType = bgTypeSelect.value;
+
+  if (bgType === 'gradient') {
+    backgroundPreview.style.background = `linear-gradient(135deg, ${bgColor1.value} 0%, ${bgColor2.value} 100%)`;
+  } else if (bgType === 'solid') {
+    backgroundPreview.style.background = bgColor1.value;
+  } else if (bgType === 'image') {
+    backgroundPreview.style.background =
+      "url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80') center/cover";
+  }
+}
+
+// Update glass element
+function updateGlassElement() {
+  const blur = blurSlider.value;
+  const transparency = transparencySlider.value / 100;
+  const borderWidth = borderWidthSlider.value;
+  const borderRadius = borderRadiusSlider.value;
+  const glassColor = glassColorPicker.value;
+  const borderColor = borderColorPicker.value;
+
+  const rgb = hexToRgb(glassColor);
+
+  glassElement.style.backdropFilter = `blur(${blur}px)`;
+  glassElement.style.webkitBackdropFilter = `blur(${blur}px)`;
+  glassElement.style.background = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${transparency})`;
+  glassElement.style.border = `${borderWidth}px solid ${borderColor}`;
+  glassElement.style.borderRadius = `${borderRadius}px`;
+
+  updateCSSCode();
+}
+
+// Update CSS code
+function updateCSSCode() {
+  const blur = blurSlider.value;
+  const transparency = transparencySlider.value / 100;
+  const borderWidth = borderWidthSlider.value;
+  const borderRadius = borderRadiusSlider.value;
+  const glassColor = glassColorPicker.value;
+  const borderColor = borderColorPicker.value;
+
+  const rgb = hexToRgb(glassColor);
+
+  const css = `.glass-element {
+backdrop-filter: blur(${blur}px);
+-webkit-backdrop-filter: blur(${blur}px);
+background: rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${transparency});
+border: ${borderWidth}px solid ${borderColor};
+border-radius: ${borderRadius}px;
+}`;
+
+  cssCode.textContent = css;
+}
+
+// Copy CSS to clipboard
+function copyCSSToClipboard() {
+  const textArea = document.createElement('textarea');
+  textArea.value = cssCode.textContent;
+  document.body.appendChild(textArea);
+  textArea.select();
+  document.execCommand('copy');
+
+  setTimeout(() => {
+    document.body.removeChild(textArea);
+  }, 200);
+
+  // Show feedback
+  const originalText = copyBtn.innerHTML;
+  copyBtn.innerHTML = '<i class="fas fa-check"><i/> Copied!';
+  setTimeout(() => {
+    copyBtn.innerHTML = originalText;
+  }, 2000);
+}
+
+// Event listeners
+blurSlider.addEventListener('input', updateGlassElement);
+transparencySlider.addEventListener('input', updateGlassElement);
+borderWidthSlider.addEventListener('input', updateGlassElement);
+borderRadiusSlider.addEventListener('input', updateGlassElement);
+glassColorPicker.addEventListener('input', updateGlassElement);
+borderColorPicker.addEventListener('input', updateGlassElement);
+bgTypeSelect.addEventListener('change', updateBackground);
+bgColor1.addEventListener('input', updateBackground);
+bgColor2.addEventListener('input', updateBackground);
+copyBtn.addEventListener('click', copyCSSToClipboard);
+
+// Initialize
+function init() {
+  updateValueDisplays();
+  updateBackground();
+  updateGlassElement();
+  initPresets();
+}
+
+// Run initialization
+init();
+
+// Handle background type change
+bgTypeSelect.addEventListener('change', function () {
+  if (this.value === 'solid') {
+    bgColorContainer.innerHTML = `
+      <div class="color-picker">
+        <label for="bgColor1">Color:</label>
+        <input type="color" id="bgColor1" value="${bgColor1.value}" />
+      </div>
+    `;
+    // Re-attach event listener
+    document.getElementById('bgColor1').addEventListener('input', updateBackground);
+  } else if (this.value === 'gradient') {
+    bgColorContainer.innerHTML = `
+      <div class="color-picker">
+        <label for="bgColor1">Color 1:</label>
+        <input type="color" id="bgColor1" value="${bgColor1.value}" />
+      </div>
+      <div class="color-picker">
+        <label for="bgColor2">Color 2:</label>
+        <input type="color" id="bgColor2" value="${bgColor2.value}" />
+      </div>
+    `;
+    // Re-attach event listeners
+    document.getElementById('bgColor1').addEventListener('input', updateBackground);
+    document.getElementById('bgColor2').addEventListener('input', updateBackground);
+  } else {
+    bgColorContainer.innerHTML = '';
+  }
+  updateBackground();
+});
