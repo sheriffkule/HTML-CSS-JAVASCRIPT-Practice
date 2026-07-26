@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Glassmorphism Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/cssGlassmorphismGenerator.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>CSS Glassmorphism Generator</h1>
+        <p class="subtitle">Create beautiful glassmorphism effects with real-time preview.</p>
+      </header>
+
+      <main class="app-container">
+        <section class="preview-section">
+          <article class="preview-container">
+            <div class="background-preview" id="backgroundPreview"></div>
+            <div class="glass-element" id="glassElement">
+              <h2 class="glass-title">Glassmorphism Effect</h2>
+              <p class="glass-content">
+                This is a preview of your glassmorphism design. Adjust the controls to customize the effect.
+              </p>
+            </div>
+          </article>
+
+          <article class="presets-section">
+            <h3 class="presets-title">Quick Presets</h3>
+            <div class="presets-grid" id="presetsGrid">
+              <!-- Presets will be added via JavaScript -->
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+    <script src="/widgets_script/cssGlassmorphismGenerator.js"></script>
+  </body>
+</html>

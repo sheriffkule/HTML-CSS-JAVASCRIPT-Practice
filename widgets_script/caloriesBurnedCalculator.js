@@ -20,7 +20,7 @@ const historySection = document.getElementById('history');
 // Initialize history from localStorage
 function initializeHistory() {
   const savedHistory = JSON.parse(localStorage.getItem('caloriesHistory')) || [];
-  savedHistory.forEach(historyText => {
+  savedHistory.forEach((historyText) => {
     const historyItem = document.createElement('li');
     historyItem.textContent = historyText;
     historyList.appendChild(historyItem);
@@ -29,9 +29,7 @@ function initializeHistory() {
 
 // Save history to localStorage
 function saveHistoryToStorage() {
-  const historyItems = Array.from(historyList.querySelectorAll('li')).map(
-    item => item.textContent
-  );
+  const historyItems = Array.from(historyList.querySelectorAll('li')).map((item) => item.textContent);
   localStorage.setItem('caloriesHistory', JSON.stringify(historyItems));
 }
 
