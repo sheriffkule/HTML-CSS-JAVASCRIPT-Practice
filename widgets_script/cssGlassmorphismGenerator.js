@@ -90,7 +90,7 @@ function initPresets() {
     presetElement.className = 'preset';
     presetElement.textContent = preset.name;
     presetElement.style.background = `rgba(${hexToRgb(preset.glassColor).r},
-    ${hexToRgb(preset.glassColor).g}, ${hexToRgb(preset.borderColor).b}, ${preset.transparency / 100})`;
+    ${hexToRgb(preset.glassColor).g}, ${hexToRgb(preset.glassColor).b}, ${preset.transparency / 100})`;
     presetElement.style.backdropFilter = `blur(${preset.blur}px)`;
     presetElement.style.border = `${preset.borderWidth}px solid ${preset.borderColor}`;
     presetElement.style.borderRadius = `${preset.borderRadius}px`;
@@ -118,7 +118,7 @@ function applyPreset(preset) {
 
 // Convert hex to RGB
 function hexToRgb(hex) {
-  const result = /^#??([a-f/d]{2})([a-f/d]{2})([a-f/d]{2})$/i.exec(hex);
+  const result = /^#??([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result
     ? {
         r: parseInt(result[1], 16),
@@ -136,14 +136,16 @@ function updateValueDisplays() {
   borderRadiusValue.textContent = `${borderRadiusSlider.value}px`;
 }
 
-// Updata background
+// Update background
 function updateBackground() {
   const bgType = bgTypeSelect.value;
+  const color1 = document.getElementById('bgColor1');
+  const color2 = document.getElementById('bgColor2');
 
   if (bgType === 'gradient') {
-    backgroundPreview.style.background = `linear-gradient(135deg, ${bgColor1.value} 0%, ${bgColor2.value} 100%)`;
+    backgroundPreview.style.background = `linear-gradient(135deg, ${color1.value} 0%, ${color2.value} 100%)`;
   } else if (bgType === 'solid') {
-    backgroundPreview.style.background = bgColor1.value;
+    backgroundPreview.style.background = color1.value;
   } else if (bgType === 'image') {
     backgroundPreview.style.background =
       "url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80') center/cover";
@@ -167,6 +169,7 @@ function updateGlassElement() {
   glassElement.style.border = `${borderWidth}px solid ${borderColor}`;
   glassElement.style.borderRadius = `${borderRadius}px`;
 
+  updateValueDisplays();
   updateCSSCode();
 }
 
@@ -182,34 +185,23 @@ function updateCSSCode() {
   const rgb = hexToRgb(glassColor);
 
   const css = `.glass-element {
-backdrop-filter: blur(${blur}px);
--webkit-backdrop-filter: blur(${blur}px);
-background: rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${transparency});
-border: ${borderWidth}px solid ${borderColor};
-border-radius: ${borderRadius}px;
+  backdrop-filter: blur(${blur}px);
+  -webkit-backdrop-filter: blur(${blur}px);
+  background: rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${transparency});
+  border: ${borderWidth}px solid ${borderColor};
+  border-radius: ${borderRadius}px;
 }`;
 
   cssCode.textContent = css;
 }
 
 // Copy CSS to clipboard
-function copyCSSToClipboard() {
-  const textArea = document.createElement('textarea');
-  textArea.value = cssCode.textContent;
-  document.body.appendChild(textArea);
-  textArea.select();
-  document.execCommand('copy');
+async function copyCSSToClipboard() {
+  await navigator.clipboard.writeText(cssCode.textContent);
 
-  setTimeout(() => {
-    document.body.removeChild(textArea);
-  }, 200);
-
-  // Show feedback
-  const originalText = copyBtn.innerHTML;
-  copyBtn.innerHTML = '<i class="fas fa-check"><i/> Copied!';
-  setTimeout(() => {
-    copyBtn.innerHTML = originalText;
-  }, 2000);
+  const originalHTML = copyBtn.innerHTML;
+  copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+  setTimeout(() => (copyBtn.innerHTML = originalHTML), 2000);
 }
 
 // Event listeners
