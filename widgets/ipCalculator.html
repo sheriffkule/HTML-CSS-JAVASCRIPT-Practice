@@ -17,7 +17,7 @@
       </header>
 
       <button class="theme-toggle" id="themeToggle">
-        <span class="theme-icon"><i class="fas fa-moon"></i></span> Dark Mode
+        <span class="theme-icon"><i class="fas fa-moon"></i></span> 
       </button>
 
       <div class="card">
@@ -47,6 +47,65 @@
 
         <button class="btn" id="calculateBtn"><i class="fas fa-calculator"></i> Calculate</button>
       </div>
+
+      <div class="grid">
+        <div class="card">
+          <h2 class="card-title"><i class="fas fa-sitemap"></i> Network Information</h2>
+          <div class="result-item">
+            <span class="result-label"><i class="fas fa-project-diagram"></i> Network Address</span>
+            <span class="result-value" id="networkAddress">----</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label"><i class="fas fa-broadcast-tower"></i> Broadcast Address</span>
+            <span class="result-value" id="broadcastAddress">----</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label"><i class="fas fa-exchange-alt"></i> Wildcard Mask</span>
+            <span class="result-value" id="wildcardMask">----</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label"><i class="fas fa-not-equal"></i> CIDR Notation</span>
+            <span class="result-value" id="cidrNotation">----</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="card-title"><i class="fas fa-desktop"></i> Address Range</h2>
+          <div class="result-item">
+            <span class="result-label"><i class="fas fa-play-circle"></i> First Host</span>
+            <span class="result-value" id="firstHost">---</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label"><i class="fas fa-stop-circle"></i> Last Host</span>
+            <span class="result-value" id="lastHost">---</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label"><i class="fas fa-server"></i> Total Hosts</span>
+            <span class="result-value" id="totalHosts">---</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label"><i class="fas fa-laptop-code"></i> Usable Hosts</span>
+            <span class="result-value" id="usablehosts">---</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="card title"><i class="fas fa-chart-bar"></i> Subnet Visualization</h2>
+        <div class="subnet-visual" id="subnetVisual">
+          <div class="subnet-mask" id="subnetMaskVisual"></div>
+        </div>
+        <div class="ip-bits" id="ipBits"></div>
+      </div>
+
+      <div class="notification" id="notification">Please enter a valid IP address and subnet mask.</div>
     </div>
+
+    <footer>
+      © <time datetime="" id="year"></time> Made width <span>♥</span> by
+      <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+    </footer>
+
+    <script src="/widgets_script/ipCalculator.js"></script>
   </body>
 </html>
