@@ -265,3 +265,31 @@ bgTypeSelect.addEventListener('change', function () {
   }
   updateBackground();
 });
+
+// Changing colors on input type range track
+document.querySelectorAll('input[type="range"]').forEach((input) => {
+  const updateTrack = () => {
+    const val = ((input.value - input.min) / (input.max - input.min)) * 100;
+    const thumbWidth = 15; // match your thumb's actual width in px
+    const width = input.offsetWidth;
+    const ratio = (input.value - input.min) / (input.max - input.min);
+
+    input.style.backgroundImage = `linear-gradient(to right,var(--primary),var(--secondary)${val}%,var(--light) ${val}%)`;
+  };
+  input.addEventListener('input', updateTrack);
+  updateTrack();
+});
+
+// Update year in footer
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+  yearElement.setAttribute('datetime', currentYear.toString());
+  yearElement.textContent = currentYear.toString();
+}
+updateYear();
