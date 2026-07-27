@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IP Calculator App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/ipCalculator.css" />
+  </head>
+  <body class="dark-mode">
+    <div class="container">
+      <header>
+        <h1><i class="fas fa-calculator"></i> IP Calculator App</h1>
+        <p class="subtitle">
+          Calculate subnet information, validate IP addresses, and visualize network structures.
+        </p>
+      </header>
+
+      <button class="theme-toggle" id="themeToggle">
+        <span class="theme-icon"><i class="fas fa-moon"></i></span> Dark Mode
+      </button>
+
+      <div class="card">
+        <h2 class="card-title"><i class="fas fa-network-wired"></i> IP Address Information</h2>
+        <div class="grid">
+          <div class="input-group">
+            <label for="ipAddress"><i class="fas fa-laptop"></i> IP Address</label>
+            <input type="text" id="ipAddress" placeholder="e.g., 192.168.1.1" value="192.168.1.1" />
+          </div>
+          <div class="input-group">
+            <label for="subnetMask"><i class="fas fa-mask"></i> Subnet Mask</label>
+            <input
+              type="text"
+              id="subnetMask"
+              placeholder="e.g., 255.255.255.0 or /24"
+              value="255.255.255.0" />
+          </div>
+        </div>
+
+        <div class="examples">
+          <span>Quick examples:</span>
+          <button class="example-btn" data-ip="10.0.0.1" data-mask="255.0.0.0">Class A</button>
+          <button class="example-btn" data-ip="172.16.0.1" data-mask="255.255.0.0">Class B</button>
+          <button class="example-btn" data-ip="192.168.1.1" data-mask="/24">Class C</button>
+          <button class="example-btn" data-ip="192.168.1.50" data-mask="255.255.255.128">/25</button>
+        </div>
+
+        <button class="btn" id="calculateBtn"><i class="fas fa-calculator"></i> Calculate</button>
+      </div>
+    </div>
+  </body>
+</html>
