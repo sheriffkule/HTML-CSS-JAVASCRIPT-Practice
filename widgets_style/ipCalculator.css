@@ -215,3 +215,18 @@ input, select {
         border-bottom: none;
     }
 }
+
+.result-label {
+    font-weight: 500;
+    color: var(--gray);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.result-value {
+    font-weight: 600;
+    text-align: right;
+    font-family: 'Courier New', monospace;
+    color: var(--info);
+}
