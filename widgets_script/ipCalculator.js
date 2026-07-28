@@ -222,23 +222,37 @@ document.addEventListener('DOMContentLoaded', function () {
     usableHosts.textContent = result.usableHosts.toLocaleString();
 
     // Update visualization
-    const cidrValue = parseInt(result.cidr.substring(1), 10)
-    updateVisualization(cidrValue, ip)
+    const cidrValue = parseInt(result.cidr.substring(1), 10);
+    updateVisualization(cidrValue, ip);
   });
 
   // Auto-calculate when inputs change
-  ipAddressInput.addEventListener('input', function() {
+  ipAddressInput.addEventListener('input', function () {
     if (isValidIP(ipAddressInput.value) && isValidSubnetMask(subnetMaskInput.value)) {
-      calculateBtn.click()
+      calculateBtn.click();
     }
-  })
+  });
 
-  subnetMaskInput.addEventListener('input', function() {
+  subnetMaskInput.addEventListener('input', function () {
     if (isValidIP(ipAddressInput.value) && isValidSubnetMask(subnetMaskInput.value)) {
-      calculateBtn.click()
+      calculateBtn.click();
     }
-  })
+  });
 
   // Initialize with example values
-  calculateBtn.click()
+  calculateBtn.click();
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });

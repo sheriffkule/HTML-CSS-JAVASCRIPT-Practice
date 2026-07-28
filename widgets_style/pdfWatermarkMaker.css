@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
+
+:root {
+    --primary: #4361ee;
+    --primary-dark: #3a56d4;
+    --secondary: #3f37c9;
+    --text: #2b2d42;
+    --light-gray: #e2e3e9;
+    --medium-gray: #bfc5c5;
+    --dark-gray: #6c757d;
+    --white: #f8f9fa;
+    --shadow: 0 4px 8px rgb(0 0 0 / 0.15);
+    --border-radius: 8px
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text);
+    background-color: var(--light-gray);
+    line-height: 1.5;
+}
