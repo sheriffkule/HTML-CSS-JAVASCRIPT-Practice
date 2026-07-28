@@ -23,16 +23,19 @@ document.addEventListener('DOMContentLoaded', function () {
   // Theme toggle
   const isDarkMode = localStorage.getItem('darkMode') === 'true';
   document.body.classList.toggle('dark-mode', isDarkMode);
+  document.body.classList.toggle('light-mode', !isDarkMode);
   themeIcon.innerHTML = isDarkMode
     ? '<i class="fas fa-moon"></i> Dark Mode'
     : '<i class="fas fa-sun"></i> Light Mode';
 
   themeToggle.addEventListener('click', function () {
-    const dark = document.body.classList.toggle('dark-mode');
-    themeIcon.innerHTML = dark
+    const isNowDark = !document.body.classList.contains('dark-mode');
+    document.body.classList.toggle('dark-mode', isNowDark);
+    document.body.classList.toggle('light-mode', !isNowDark);
+    themeIcon.innerHTML = isNowDark
       ? '<i class="fas fa-moon"></i> Dark Mode'
       : '<i class="fas fa-sun"></i> Light Mode';
-    localStorage.setItem('darkMode', dark);
+    localStorage.setItem('darkMode', isNowDark);
   });
 
   // Example buttons
@@ -59,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Validate subnet mask
   function isValidSubnetMask(mask) {
     // Check for CIDR notation
-    if (mask.startsWidth('/')) {
+    if (mask.startsWith('/')) {
       const cidr = parseInt(mask.substring(1), 10);
       return cidr >= 0 && cidr <= 32;
     }
@@ -112,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Calculate network information
   function calculateNetwork(ip, mask) {
     // Convert mask to CIDR if needed
-    if (mask.startsWidth('/')) {
+    if (mask.startsWith('/')) {
       const cidr = parseInt(mask.substring(1), 10);
       mask = cidrToSubnetMask(cidr);
     }
@@ -190,4 +193,52 @@ document.addEventListener('DOMContentLoaded', function () {
       ipBits.appendChild(bit);
     }
   }
+
+  // Calculate button click handler
+  calculateBtn.addEventListener('click', function () {
+    const ip = ipAddressInput.value.trim();
+    const mask = subnetMaskInput.value.trim();
+
+    if (!isValidIP(ip)) {
+      showNotification('Please enter a valid IP address');
+      return;
+    }
+
+    if (!isValidSubnetMask(mask)) {
+      showNotification('Please enter a valid subnet mask or CIDR notation');
+      return;
+    }
+
+    const result = calculateNetwork(ip, mask);
+
+    // Update UI with results
+    networkAddress.textContent = result.network;
+    broadcastAddress.textContent = result.broadcast;
+    wildcardMask.textContent = result.wildcard;
+    cidrNotation.textContent = result.cidr;
+    firstHost.textContent = result.firstHost;
+    lastHost.textContent = result.lastHost;
+    totalHosts.textContent = result.totalHosts.toLocaleString();
+    usableHosts.textContent = result.usableHosts.toLocaleString();
+
+    // Update visualization
+    const cidrValue = parseInt(result.cidr.substring(1), 10)
+    updateVisualization(cidrValue, ip)
+  });
+
+  // Auto-calculate when inputs change
+  ipAddressInput.addEventListener('input', function() {
+    if (isValidIP(ipAddressInput.value) && isValidSubnetMask(subnetMaskInput.value)) {
+      calculateBtn.click()
+    }
+  })
+
+  subnetMaskInput.addEventListener('input', function() {
+    if (isValidIP(ipAddressInput.value) && isValidSubnetMask(subnetMaskInput.value)) {
+      calculateBtn.click()
+    }
+  })
+
+  // Initialize with example values
+  calculateBtn.click()
 });
