@@ -1,15 +1,111 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PDF Watermark Maker</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <link rel="stylesheet" href="/widgets_style/pdfWatermarkMaker.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/pdfWatermarkMaker.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body>
+    <div class="app-container">
+      <header class="app-header">
+        <h1><i class="fas fa-water"></i> PDF Watermark Maker</h1>
+        <p class="subtitle">Add customizable text watermarks to your PDF documents.</p>
+      </header>
+
+      <main class="app-content">
+        <section class="upload-section">
+          <article class="drop-zone" id="dropZone">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <h3>Upload PDF File</h3>
+            <p>Drag & drop your PDF here or click to browse</p>
+            <input type="file" id="fileInput" accept=".pdf" />
+          </article>
+          <div class="file-info" id="fileInfo"></div>
+        </section>
+
+        <section class="watermark-options">
+          <h2><i class="fas fa-sliders-h"></i> Watermark Settings</h2>
+
+          <article class="form-group">
+            <label for="watermarkText">Watermark Text</label>
+            <input type="text" id="watermarkText" />
+          </article>
+
+          <div class="form-row">
+            <article class="group">
+              <label for="textColor">Text Color</label>
+              <input type="color" id="textColor" value="#000000" />
+            </article>
+            <article class="form-group">
+              <label for="opacity">Opacity</label>
+              <input type="range" id="opacity" min="10" max="30" />
+              <span id="opacityValue">30%</span>
+            </article>
+          </div>
+
+          <div class="form-row">
+            <article class="form-group">
+              <label for="fontSize">Font Size</label>
+              <input type="range" id="fontSize" min="10" max="72" value="24" />
+              <span id="fontSizeValue">24px</span>
+            </article>
+            <article class="form-group">
+              <label for="rotation">Rotation</label>
+              <select id="rotation">
+                <option value="0">0</option>
+                <option value="45" selected>45&deg;</option>
+                <option value="90">90&deg:</option>
+              </select>
+            </article>
+          </div>
+
+          <article class="form-group">
+            <label for="position">Position</label>
+            <select id="position">
+              <option value="center">Center</option>
+              <option value="tiled">Tiled (Repeated)</option>
+              <option value="top-left">Top Left</option>
+              <option value="top-right">Top Right</option>
+              <option value="bottom-left">Bottom Left</option>
+              <option value="bottom-right">Bottom Right</option>
+            </select>
+          </article>
+
+          <article class="form-group">
+            <label for="fontFamily">Font Family</label>
+            <select id="fontFamily">
+              <option value="Helvetica">Helvetica</option>
+              <option value="TImes-Roman">TImes New Roman</option>
+              <option value="Courier">Courier</option>
+              <option value="Arial">Arial</option>
+            </select>
+          </article>
+
+          <article class="form-group checkbox-group">
+            <input type="checkbox" id="applyAllPages" checked />
+            <label for="applyAllPages">Apply to all pages</label>
+          </article>
+
+          <article class="form-group" id="pageRangeGroup">
+            <label for="pageRange">Page Range (e.g., 1-3,5,7-9)</label>
+            <input type="text" id="pageRange" placeholder="All pages" />
+          </article>
+
+          <button class="btn-primary" id="generateBtn" disabled>
+            <i class="fas fa-magic"></i> Generate Watermarked PDF
+          </button>
+          <div class="status-message" id="statusMessage"></div>
+        </section>
+      </main>
+
+      <footer>
+        © <time datetime="" id="year"></time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
+    </div>
+  </body>
 </html>
