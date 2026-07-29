@@ -164,6 +164,50 @@ select {
     transition: all 0.3s ease;
 }
 
+input[type="color"] {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: 1px solid var(--light-gray);
+  cursor: pointer;
+  height: 25px;
+  padding: 0;
+  transition: .3s ease-in;
+  transition-behavior: allow-discrete;
+
+  @starting-style  {
+    outline: 1px solid rgb(0 0 0 / 0.3);
+  }
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow);
+    border-radius: 6px;
+    corner-shape: bevel;
+    outline-offset: 12px;
+    outline: 1px solid transparent;
+  }
+}
+
+::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+::-webkit-color-swatch{
+  border: 1px solid var(--light-gray);
+  padding: 0;
+}
+
+::-moz-color-swatch,
+::-moz-focus-inner{
+  border: 0;
+}
+
+::-moz-focus-inner{
+  padding: 0;
+}
+
 :is(input[type="text"], select):is(:focus, :focus-visible) {
     outline: none;
     border-color: var(--primary);
