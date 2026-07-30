@@ -119,4 +119,88 @@ document.addEventListener('DOMContentLoaded', function () {
       trimOptions.style.display = 'none';
     }
   }
+
+  function startConversion() {
+    if (!selectedFile || conversionInProgress) return;
+
+    const outputFormat = document.getElementById('outputFormat').value;
+    const quality = document.getElementById('quality').value;
+    const resolution = document.getElementById('resolution').value;
+    const trimVideo = trimVideoCheckbox.checked;
+    const startTime = document.getElementById('startTime').value;
+    const endTime = document.getElementById('endTime').value;
+
+    // Validate trim times if enabled
+    if (trimVideo && (!isValidTimeFormat(startTime) || !isValidTimeFormat(endTime))) {
+      showError('Please enter a valid start and end times in HH:MM:SS format.');
+      return;
+    }
+
+    // Hide settings, show progress
+    settingsPanel.style.display = 'none';
+    progressContainer.style.display = 'block';
+    conversionInProgress = true;
+    conversionCancelled = false;
+
+    // Simulate conversion progress (in a real app, this would use Web Workers or FFmpeg.js)
+    let progress = 0;
+    const interval = setInterval(() => {
+      if (conversionCancelled) {
+        clearInterval(interval);
+        resetProgress();
+        return;
+      }
+
+      progress += Math.random() * 5;
+      if (progress > 100) progress = 100;
+
+      updateProgress(progress);
+
+      // Simulate time remaining
+      const remaining = Math.round((100 - progress) / 5);
+      timeRemaining.textContent = `Estimated time remaining: ${remaining} seconds`;
+
+      if (progress === 100) {
+        clearInterval(interval);
+        conversionComplete(outputFormat);
+      }
+    }, 500);
+  }
+
+  function updateProgress(percent) {
+    progressBar.style.width = `${percent}%`;
+    progressPercent.text = `${Math.round(percent)}%`;
+
+    if (percent < 30) {
+      progressStatus.textContent = 'Preparing video...';
+    } else if (percent < 70) {
+      progressStatus.textContent = 'Converting video...';
+    } else {
+      progressStatus.textContent = 'Finalizing conversion...';
+    }
+  }
+
+  function resetProgress() {
+    progressBar.style.width = '0%';
+    progressPercent.textContent = '0%';
+    progressStatus.textContent = 'Converting...';
+    timeRemaining.textContent = 'Estimated time remaining: --';
+  }
+
+  function conversionComplete(format) {
+    conversionInProgress = false;
+
+    // Hide progress, show result
+    progressContainer.style.display = 'none';
+    resultContainer.style.display = 'block';
+
+    // In a real app, this would be the actual converted file
+    // For demo purposes, we'll just simulate it
+    const convertedFileName = selectedFile.name.replace(/\.[^/.]+$/, '') + '.' + format;
+    resultInfo.textContent = `Your video has been converted to ${format.toUpperCase()} format.`;
+
+    // Set up download button (in a real app, this would be the actual converted file)
+    downloadBtn.setAttribute('download', convertedFileName);
+    downloadBtn.href = URL.createObjectURL(selectedFile); // In real app, use converted file
+  }
 });

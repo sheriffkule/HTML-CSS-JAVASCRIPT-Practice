@@ -149,3 +149,76 @@ header {
         transform: translateY(0) scale(1);
     }
 }
+
+.settings-panel {
+    background-color: var(--light);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--box-shadow),
+    inset var(--box-shadow);
+    /* display: none; */
+}
+
+.file-info {
+    margin-bottom: 2rem;
+}
+
+.thumbnail-container {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+#videoThumbnail {
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+    background-color: var(--light-gray);
+    /* display: none; */
+}
+
+.video-info h4 {
+        margin-bottom: 0.5rem;
+        color: var(--dark);
+    }
+.video-info p {
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+.conversion-settings {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.settings-group {
+    margin-bottom: 0.5rem;
+
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: var(--dark);
+    }
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--light-gray);
+    border-radius: var(--border-radius);
+    font-family: inherit;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.form-control:is(:focus, :focus-visible) {
+    outline: transparent;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgb(67 97 238 / 0.2),
+    inset 0 0 0 2px rgb(67 97 238 / 0.2);
+}
