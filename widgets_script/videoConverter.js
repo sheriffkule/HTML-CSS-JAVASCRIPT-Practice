@@ -203,4 +203,39 @@ document.addEventListener('DOMContentLoaded', function () {
     downloadBtn.setAttribute('download', convertedFileName);
     downloadBtn.href = URL.createObjectURL(selectedFile); // In real app, use converted file
   }
+
+  function cancelConversion() {
+    if (conversionInProgress) {
+      conversionCancelled = true;
+      conversionInProgress = false;
+      showError('Conversion cancelled!');
+      resetProgress();
+      progressContainer.style.display = 'none';
+      settingsPanel.style.display = 'none';
+    } else {
+      resetConverter();
+    }
+  }
+
+  function resetConverter() {
+    // Reset all elements
+    selectedFile = null;
+    fileInput.value = '';
+    fileName.textContent = 'No file selected';
+    fileSize.textContent = '--';
+    fileDuration.textContent = '--';
+    videoThumbnail.src = '';
+    videoThumbnail.style.display = 'none';
+    trimVideoCheckbox.checked = false;
+    trimOptions.style.display = 'none';
+    document.getElementById('startTime').value = '';
+    document.getElementById('endTime').value = '';
+
+    // Reset UI states
+    settingsPanel.style.display = 'none';
+    progressContainer.style.display = 'none';
+    resultContainer.style.display = 'none';
+    convertBtn.disabled = true;
+    cancelBtn.disabled = true;
+  }
 });
