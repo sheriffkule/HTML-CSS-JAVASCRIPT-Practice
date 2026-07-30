@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video Converter App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/videoConverter.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1><i class="fas fa-exchange-alt"></i> Video Converter App</h1>
+        <p class="subtitle">Convert videos between formats quickly and easily.</p>
+      </header>
+
+      <main>
+        <div class="upload-area" id="dropArea">
+          <div class="upload-content">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <h3>Drag & Drop Your Video Here</h3>
+            <p>or</p>
+            <button class="btn-primary" id="browseBtn">Browse Files</button>
+            <input type="file" id="fileInput" accept="video/*" style="display: none" />
+            <p class="file-types">Supported formats: MP4, AVI, MOV, MKV, WEBM, FLV, WMV</p>
+          </div>
+        </div>
+
+        <div class="settings-panel" id="settingsPanel">
+          <div class="file-info">
+            <div class="thumbnail-container">
+              <img src="" alt="Video thumbnail" id="videoThumbnail" />
+              <div class="video-info">
+                <h4 id="fileName">No file selected</h4>
+                <p id="fileSize">----</p>
+                <p id="fileDuration">----</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="conversion-settings">
+            <div class="settings-group">
+              <label for="outputFormat">Output Format:</label>
+              <select class="form-control" id="outputFormat">
+                <option value="mp4">MP4 (H.264)</option>
+                <option value="webm">WEBM (VP9)</option>
+                <option value="mov">MOV</option>
+                <option value="avi">AVI</option>
+                <option value="mkv">MKV</option>
+                <option value="gif">Animated GIF</option>
+              </select>
+            </div>
+
+            <div class="settings-group">
+              <label for="quality">Quality:</label>
+              <select class="form-control" id="quality">
+                <option value="high">High (Original)</option>
+                <option value="medium" selected>Medium</option>
+                <option value="low">Low</option>
+              </select>
+            </div>
+
+            <div class="settings-group">
+              <label for="resolution">Resolution:</label>
+              <select id="resolution" class="form-control">
+                <option value="original">Original</option>
+                <option value="1080">1080p</option>
+                <option value="720">720p</option>
+                <option value="480">480p</option>
+                <option value="360">360p</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
