@@ -70,9 +70,90 @@
                 <option value="360">360p</option>
               </select>
             </div>
+
+            <div class="setting-group checkbox-group">
+              <input type="checkbox" id="trimVideo" class="form-checkbox" />
+              <label for="trimVideo">Trim Video</label>
+            </div>
+
+            <div class="trim-options" id="trimOptions">
+              <div class="time-inputs">
+                <div>
+                  <label for="startTime">Start:</label>
+                  <input type="text" id="startTime" placeholder="00:00:00" />
+                </div>
+                <div>
+                  <label for="endTime">End:</label>
+                  <input type="text" id="endTime" placeholder="00:00:00" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-buttons">
+            <button class="btn-primary" id="convertBtn" disabled>
+              <i class="fas fa-cog"></i> Convert Now
+            </button>
+            <button class="btn-secondary" id="cancelBtn" disabled><i class="fas fa-times"></i> Cancel</button>
+          </div>
+        </div>
+
+        <div class="progress-container" id="progressContainer">
+          <div class="progress-info">
+            <span id="progressStatus">Converting...</span>
+            <span id="progressPercent">0%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+          </div>
+          <div class="time-remaining">
+            <span id="timeRemaining">Estimated time remaining: --</span>
+          </div>
+        </div>
+
+        <div class="result-container" id="resultContainer">
+          <div class="result-content">
+            <i class="fas fa-check-circle success-icon"></i>
+            <h3>Conversion Complete!</h3>
+            <p id="resultInfo">Your video has been successfully converted.</p>
+            <div class="result-actions">
+              <a href="#" class="btn-primary" id="downloadBtn" download="">
+                <i class="fas fa-download"></i> Download Video
+              </a>
+              <button class="btn-secondary" id="newConversionBtn">
+                <i class="fas fa-redo"></i> New Conversion
+              </button>
+            </div>
           </div>
         </div>
       </main>
+
+      <footer>
+        <div class="features">
+          <div class="feature">
+            <i class="fas fa-bolt"></i>
+            <h4>Fast Conversion</h4>
+            <p>Optimized algorithms for quick processing.</p>
+          </div>
+          <div class="feature">
+            <i class="fas fa-shield-alt"></i>
+            <h4>Secure</h4>
+            <p>Your files are processed locally in your browser.</p>
+          </div>
+          <div class="feature">
+            <i class="fas fa-tools"></i>
+            <h4>Advanced Options</h4>
+            <p>Customize quality, resolution and more.</p>
+          </div>
+        </div>
+
+        <p class="footer-copy">
+          © <time datetime="" id="year"></time> Made width <span>♥</span> by
+          <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+        </p>
+      </footer>
     </div>
+
+    <script src="/widgets_script/videoConverter.js"></script>
   </body>
 </html>

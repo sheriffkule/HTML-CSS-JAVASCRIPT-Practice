@@ -55,3 +55,24 @@ header {
         text-wrap: pretty;
     }
 }
+
+.upload-area {
+    background: var(--light);
+    border-radius: var(--border-radius);
+    padding: 3rem 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    box-shadow: var(--box-shadow),
+    inset var(--box-shadow);
+    border: 4px dashed var(--light-gray);
+    transition: var(--transition);
+    cursor: pointer;
+
+    &:hover {
+        border-color: var(--primary);
+    }
+    .drag-over {
+        border-color: var(--primary);
+        background-color: rgb(67 97 238 / 0.05);
+    }
+}
