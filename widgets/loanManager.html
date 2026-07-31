@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loan Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/loanManager.css" />
+  </head>
+  <body data-theme="dark">
+    <div class="app-container">
+      <header class="app-header">
+        <div class="header-content">
+          <h1><i class="fas fa-hand-holding-usd"></i> Loan Manager</h1>
+          <div class="theme-toggle">
+            <span class="toggle-label">Dark Mode</span>
+            <label class="switch">
+              <input type="checkbox" id="themeToggle" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+      </header>
+
+      <main class="app-main">
+        <section class="dashboard">
+          <article class="stats-card">
+            <div class="stat-card total-loans">
+              <h3>Total Loans</h3>
+              <p id="totalLoans">0</p>
+            </div>
+            <div class="stat-card total-balance">
+              <h3>Total Balance</h3>
+              <p id="totalBalance">$0</p>
+            </div>
+            <div class="stat-card upcoming-payment">
+              <h3>Upcoming Payment</h3>
+              <p id="upcomingPayment">$0</p>
+            </div>
+          </article>
+
+          <article class="loan-controls">
+            <button class="btn primary" id="addLoanBtn"><i class="fas fa-plus"></i> Add New Loan</button>
+
+            <div class="search-filter">
+              <input type="text" id="loanSearch" placeholder="Search loans..."/>
+              <select id="loanFilter">
+                <option value="all">All</option>
+                <option value="active">Active</option>
+                <option value="paid">Paid</option>
+              </select>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
