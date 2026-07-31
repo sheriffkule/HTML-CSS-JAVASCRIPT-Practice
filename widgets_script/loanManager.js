@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
   init();
 
   function init() {
-    // renderLoanTable();
+    renderLoanTable();
     // updateStats();
     setupEventListeners();
     checkThemePreferences();
@@ -65,8 +65,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // paymentForm.addEventListener('submit', handleMakePayment);
 
     // Search and filter
-    // loanSearch.addEventListener('input', renderLoanTable);
-    // loanFilter.addEventListener('change', renderLoanTable);
+    loanSearch.addEventListener('input', renderLoanTable);
+    loanFilter.addEventListener('change', renderLoanTable);
 
     // Theme toggle
     themeToggle.addEventListener('change', toggleTheme);
@@ -155,5 +155,78 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     return schedule;
+  }
+
+  function renderLoanTable() {
+    const searchTerm = loanSearch.value.toLowerCase();
+    const filterValue = loanFilter.value;
+
+    const filteredLoans = loans.filter((loan) => {
+      const matchesSearch = loan.name.toLowerCase().includes(searchTerm);
+      const matchesFilter =
+        filterValue === 'all' ||
+        (filterValue === 'active' && loan.status === 'active') ||
+        (filterValue === 'paid' && loan.status === 'paid');
+      return matchesSearch && matchesFilter;
+    });
+
+    loanTableBody.innerHTML = '';
+
+    if (filteredLoans.length === 0) {
+      loanTableBody.innerHTML = `
+        <tr>
+          <td colspan="7" class="no-loans">No loans found. Add a new loan to get started.</td>
+        </tr>
+      `;
+      return;
+    }
+
+    filteredLoans.forEach((loan) => {
+      const row = document.createElement('tr');
+      row.dataset.id = loan.id;
+
+      row.innerHTML = `
+        <td>${loan.name}</td>
+        <td>
+          ${loan.originalAmount.toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}
+        </td>
+        <td>
+          ${loan.remainingBalance.toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}
+        </td>
+        <td>${loan.interestRate}</td>
+        <td>
+          <span class="status-badge ${loan.status}">${loan.status === 'active' ? 'Active' : 'Paid Off'}</span>
+        </td>
+        <td>
+          <div class="action-btns">
+            <button class="action-btn view-loan" title="View Details"><i class="fas fa-eye"></i></button>
+            <button class="action-btn delete-loan" title="Delete Loan"><i class="fas fa-trash"></i></button>
+          </div>
+        </td>
+      `;
+
+      loanTableBody.appendChild(row);
+    });
+
+    // Add event listeners to action buttons
+    document.querySelectorAll('.view-loan').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const loanId = e.target.closest('tr').dataset.id;
+        viewLoanDetails(loanId);
+      });
+    });
+
+    document.querySelectorAll('.delete-loan').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const loanId = e.target.closest('tr').dataset.id;
+        deleteLoan(loanId);
+      });
+    });
   }
 });
