@@ -150,10 +150,96 @@ input:checked + .slider::before {
 }
 
 .stat-card {
-    background-color: var(--gray-light);
     color: var(--dark);
     padding: 20px;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     transition: var(--transition);
+
+    h3 {
+        font-size: 16px;
+        font-weight: 500;
+        margin-bottom: 10px;
+    }
+    p {
+        font-size: 26px;
+        font-weight: 600;
+    }
+    &:nth-child(1) {
+        background-color: var(--primary);
+    }
+    &:nth-child(2) {
+        background-color: var(--secondary);
+    }
+    &:last-child {
+        background-color: var(--accent);
+    }
+}
+
+.loan-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.search-filter {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 8px 16px;
+    border-radius: var(--border-radius);
+    border: none;
+    color: white;
+    font-family: inherit;
+    font-size: 15px;
+    word-spacing: 2px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition);
+
+    i {
+        transition: var(--transition);
+    }
+    &:hover i {
+        transform: scale(1.1);
+    }
+    &:hover {
+        transform: translateY(-2px) scale(1.02);
+    }
+    &:active {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.btn.primary {
+    background-color: var(--primary);
+
+    &:hover {
+        background-color: var(--secondary);
+    }
+}
+
+.btn.danger {
+    background-color: var(--danger);
+
+    &:hover {
+        filter: saturate(1.5);
+    }
+}
+
+.search-filter :is(input, select) {
+    padding: 8px 12px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--gray-light);
+    background-color: var(--light);
+    color: var(--dark);
+    font-family: inherit;
 }
