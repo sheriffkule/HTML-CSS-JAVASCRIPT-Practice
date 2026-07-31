@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const fileSize = document.getElementById('fileSize');
   const fileDuration = document.getElementById('fileDuration');
   const videoThumbnail = document.getElementById('videoThumbnail');
-  const trimVideoCheckbox = document.getElementById('trimVideoCheckbox');
+  const trimVideoCheckbox = document.getElementById('trimVideo');
   const trimOptions = document.getElementById('trimOptions');
   const progressBar = document.getElementById('progressBar');
   const progressPercent = document.getElementById('progressPercent');
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Variables
   let selectedFile = null;
-  let conversionProgress = false;
+  let conversionInProgress = false;
   let conversionCancelled = false;
 
   // Event listeners
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function processFile(file) {
     // Check if file is a video
-    if (!file.type.startsWidth('video/') && !file.name.match(/\.(mp4|avi|mov|webm|flv|wmv)$/i)) {
+    if (!file.type.startsWith('video/') && !file.name.match(/\.(mp4|avi|mov|webm|flv|wmv)$/i)) {
       showError('Please select a valid video file!');
       return;
     }
@@ -78,15 +78,15 @@ document.addEventListener('DOMContentLoaded', function () {
     selectedFile = file;
 
     // Display file info
-    fileName.textContent = file.name;
-    fileSize.textContent = formatFileSize(file.size);
+    fileName.textContent = `Name: ${file.name}`;
+    fileSize.textContent = `Size: ${formatFileSize(file.size)}`;
 
     // Create a video element to get duration and thumbnail
     const video = document.createElement('video');
     video.preload = 'metadata';
 
     video.onloadedmetadata = function () {
-      fileDuration.textContent = formatDuration(video.duration);
+      fileDuration.textContent = `Duration: ${formatDuration(video.duration)}`;
 
       // Create thumbnail
       const canvas = document.createElement('canvas');
@@ -104,6 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Show settings panel
         settingsPanel.style.display = 'block';
+        settingsPanel.classList.add('active')
         convertBtn.disabled = false;
         cancelBtn.disabled = false;
       };
@@ -138,6 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Hide settings, show progress
     settingsPanel.style.display = 'none';
+    settingsPanel.classList.remove('active')
     progressContainer.style.display = 'block';
     conversionInProgress = true;
     conversionCancelled = false;
@@ -169,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function updateProgress(percent) {
     progressBar.style.width = `${percent}%`;
-    progressPercent.text = `${Math.round(percent)}%`;
+    progressPercent.textContent = `${Math.round(percent)}%`;
 
     if (percent < 30) {
       progressStatus.textContent = 'Preparing video...';
@@ -238,4 +240,41 @@ document.addEventListener('DOMContentLoaded', function () {
     convertBtn.disabled = true;
     cancelBtn.disabled = true;
   }
+
+  function showError(message) {
+    alert(message);
+  }
+
+  function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  }
+
+  function formatDuration(seconds) {
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = Math.floor(seconds % 60);
+    return [h, m > 9 ? m : h ? '0' + m : m || '0', s > 9 ? s : '0' + s].filter(Boolean).join(':');
+  }
+
+  function isValidTimeFormat(time) {
+    return /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/.test(time);
+  }
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
