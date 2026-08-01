@@ -304,9 +304,81 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function handleMakePayment(e) {
     e.preventDefault();
+
+    const paymentAmount = parseFloat(document.getElementById('paymentAmount').value);
+    const paymentDate = document.getElementById('paymentDate').value;
+    const paymentNote = document.getElementById('paymentNote').value;
+
+    const loanIndex = loans.findIndex((l) => l.id === currentLoanId);
+    if (loanIndex === -1) return;
+
+    const loan = loans[loanIndex];
+
+    // Record payment
+    loan.payments.push({
+      amount: paymentAmount,
+      date: paymentDate,
+      note: paymentNote,
+    });
+
+    // Update remaining balance
+    loan.remainingBalance = Math.max(0, loan.remainingBalance - paymentAmount);
+
+    // Update status if paid off
+    if (loan.remainingBalance <= 0) {
+      loan.status = 'paid';
+    }
+
+    // Save and update UI
+    saveLoans();
+    renderLoanTable();
+    updateStats();
+
+    // Reset form and close modal
+    paymentForm.reset();
+    makePaymentModal.style.display = 'none';
+    loanDetailsModal.style.display = 'block';
+    viewLoanDetails(currentLoanId);
+  }
+
+  function deleteLoan(loanId) {
+    loans = loans.filter((loan) => loan.id !== loanId);
+    saveLoans();
+    renderLoanTable();
+    updateStats();
+  }
+
+  function updateStats() {
+    const totalLoans = loans.length;
+    const totalBalance = loans.reduce((sum, loan) => sum + loan.remainingBalance, 0);
+
+    // Find the next payment date (simplified = in a real app, you'd want more complex logic)
+    let upcomingPayment = 0;
+    const activeLoans = loans.filter((loan) => loan.status === 'active');
+    if (activeLoans.length > 0) {
+      upcomingPayment = activeLoans[0].monthlyPayment;
+    }
+
+    totalLoansEl.textContent = totalLoans;
+    totalBalanceEl.textContent = `$${totalBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    upcomingPaymentEl.textContent = `$${upcomingPayment.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
   }
 
   function saveLoans() {
     localStorage.setItem('loans', JSON.stringify(loans));
   }
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
