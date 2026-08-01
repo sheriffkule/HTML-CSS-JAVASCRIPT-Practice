@@ -72,7 +72,12 @@
           </article>
 
           <article class="chart-container">
-            <canvas id="loansChart"></canvas>
+            <div class="chart-item" style="height:300px;">
+              <canvas id="loansChart"></canvas>
+            </div>
+            <div class="chart-item" style="height:300px;">
+              <canvas id="loansStatusChart"></canvas>
+            </div>
           </article>
         </section>
       </main>
@@ -82,7 +87,6 @@
         <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
       </footer>
     </div>
-
     <!-- Add Loan Modal -->
     <section class="modal" id="addLoanModal" style="display: none;">
       <article class="modal-content">
@@ -122,7 +126,7 @@
     </section>
 
     <!-- Loan Details Modal -->
-    <section class="modal" id="loanDetailsModal" style="display: block;">
+    <section class="modal" id="loanDetailsModal" style="display: none;">
       <div class="modal-content wide">
         <span class="close-modal">&times;</span>
         <header class="loan-details-header">
