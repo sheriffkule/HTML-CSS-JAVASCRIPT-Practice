@@ -65,7 +65,7 @@
                   <th>Actions</th>
                 </tr>
               </thead>
-              <tbody id="loadTableBody">
+              <tbody id="loanTableBody">
                 <!-- Loans will be inserted here by JavaScript -->
               </tbody>
             </table>
@@ -86,7 +86,7 @@
     <!-- Add Loan Modal -->
     <section class="modal" id="addLoanModal">
       <article class="modal-content">
-        <span class="close-modal">&times:</span>
+        <span class="close-modal">&times;</span>
         <h2>Add New Loan</h2>
         <form id="loanForm">
           <div class="form-group">
@@ -122,7 +122,7 @@
     </section>
 
     <!-- Loan Details Modal -->
-    <section class="modal" id="loanDetailsModal">
+    <section class="modal" id="loanDetailsModal" style="display: none;">
       <div class="modal-content wide">
         <span class="close-modal">&times;</span>
         <header class="loan-details-header">
@@ -190,7 +190,7 @@
     </section>
 
     <!-- Make Payment Modal -->
-    <section class="modal" id="makePaymentModal">
+    <section class="modal" id="makePaymentModal" style="display: none;">
       <article class="modal-content">
         <span class="close-modal">&times;</span>
         <h2>Record Payment</h2>
@@ -201,7 +201,7 @@
           </div>
           <div class="form-group">
             <label for="paymentDate">Payment Date: <sup>*</sup></label>
-            <input type="number" id="paymentDate" required />
+            <input type="date" id="paymentDate" required />
           </div>
           <div class="form-group">
             <label for="paymentNote">Notes (Optional):</label>

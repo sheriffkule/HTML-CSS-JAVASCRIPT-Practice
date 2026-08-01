@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     // Form submission
     loanForm.addEventListener('submit', handleAddLoan);
-    // paymentForm.addEventListener('submit', handleMakePayment);
+    paymentForm.addEventListener('submit', handleMakePayment);
 
     // Search and filter
     loanSearch.addEventListener('input', renderLoanTable);
@@ -112,9 +112,9 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     loans.push(newLoan);
-    // saveLoans()
-    // renderLoanTable()
-    // updateStats()
+    saveLoans();
+    renderLoanTable();
+    updateStats();
 
     // Reset form and close modal
     loanForm.reset();
@@ -228,5 +228,85 @@ document.addEventListener('DOMContentLoaded', function () {
         deleteLoan(loanId);
       });
     });
+  }
+
+  function viewLoanDetails(loanId) {
+    currentLoanId = loanId;
+    const loan = loans.find((l) => l.id === loanId);
+
+    if (!loan) return;
+
+    // Update modal header
+    document.getElementById('detailLoanName').textContent = loan.name;
+    document.getElementById('detailLoanStatus').className = `loan-status-badge ${loan.status}`;
+    document.getElementById('detailLoanStatus').textContent =
+      loan.status === 'active' ? 'Active' : 'Paid Off';
+
+    // Update summary
+    document.getElementById('detailOriginalAmount').textContent = `$${loan.originalAmount.toLocaleString(
+      'en-US',
+      {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      },
+    )}`;
+    document.getElementById('detailRemainingBalance').textContent = `$${loan.remainingBalance.toLocaleString(
+      'en-US',
+      {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      },
+    )}`;
+    document.getElementById('detailInterestRate').textContent = `${loan.interestRate}%`;
+    document.getElementById('detailMonthlyPayment').textContent = `$${loan.monthlyPayment.toLocaleString(
+      'en-US',
+      {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      },
+    )}`;
+    document.getElementById('detailLoanTerm').textContent = `${loan.term} months`;
+    document.getElementById('detailStartDate').textContent = new Date(loan.startDate).toLocaleDateString();
+
+    // Update payment schedule
+    const paymentScheduleBody = document.getElementById('paymentScheduleBody');
+    paymentScheduleBody.innerHTML = '';
+
+    loan.paymentSchedule.forEach((payment) => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${payment.paymentNumber}</td>
+        <td>${new Date(payment.date).toLocaleDateString()}</td>
+        <td>$${payment.payment.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+        <td>$${payment.principal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+        <td>$${payment.interest.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+        <td>$${payment.remainingBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+      `;
+      paymentScheduleBody.appendChild(row);
+    });
+
+    // Set up action buttons
+    document.getElementById('makePaymentBtn').addEventListener('click', () => {
+      loanDetailsModal.style.display = 'none';
+      makePaymentModal.style.display = 'block';
+    });
+
+    document.getElementById('deleteLoanBtn').addEventListener('click', () => {
+      if (confirm('Are you sure you want to delete this loan? This cannot be undone.')) {
+        deleteLoan(loanId);
+        loanDetailsModal.style.display = 'none';
+      }
+    });
+
+    // Show the modal
+    loanDetailsModal.style.display = 'block';
+  }
+
+  function handleMakePayment(e) {
+    e.preventDefault();
+  }
+
+  function saveLoans() {
+    localStorage.setItem('loans', JSON.stringify(loans));
   }
 });
