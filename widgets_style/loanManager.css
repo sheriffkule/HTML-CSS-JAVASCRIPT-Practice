@@ -412,14 +412,41 @@ tr:hover {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgb(0 0 0 / 0.3);
     overflow-y: auto;
-    backdrop-filter: blur(3px);
+    backdrop-filter: blur(5px);
     align-items: center;
     justify-content: center;
+    opacity: 0;
+    transform: translateY(100px);
+    transition: opacity, visibility, display, backdrop-filter, overlay, transform;
+    transition-behavior: allow-discrete;
+    transition-duration: 0.5s;
 
     h2 {
         color: var(--primary);
+    }
+}
+
+.modal.active {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+
+    @starting-style {
+        opacity: 0;
+        transform: translateY(-100px);
+    }
+}
+
+.modal.closing {
+    display: none;
+    opacity: 0;
+    transform: translateY(-100px);
+    pointer-events: none;
+
+    @starting-style {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
@@ -432,12 +459,12 @@ tr:hover {
     max-width: 600px;
     max-height: fit-content;
     position: relative;
+}
 
-    &.wide {
-        max-width: 900px;
-        min-height: fit-content;
-        align-self: flex-start;
-    }
+.modal-content.wide {
+    max-width: 900px;
+    min-height: fit-content;
+    align-self: flex-start;
 }
 
 .close-modal {

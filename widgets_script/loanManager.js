@@ -36,10 +36,40 @@ document.addEventListener('DOMContentLoaded', function () {
     const modals = [addLoanModal, loanDetailsModal, makePaymentModal];
     modals.forEach((m) => {
       if (m) {
+        clearTimeout(m._closeTimeout);
         m.style.display = 'none';
-        m.classList.remove('active');
+        m.classList.remove('active', 'closing');
       }
     });
+  }
+
+  function openModal(modal) {
+    if (!modal) return;
+    clearTimeout(modal._closeTimeout);
+    modal.classList.remove('closing');
+    modal.style.display = 'flex';
+    // Force a reflow so the browser registers the display change and
+    // animates from the @starting-style state.
+    void modal.offsetWidth;
+    modal.classList.add('active');
+  }
+
+  function closeModal(modal, onDone) {
+    if (!modal) return;
+    // If the modal is already hidden, nothing to animate.
+    if (modal.style.display === 'none') {
+      if (typeof onDone === 'function') onDone();
+      return;
+    }
+    modal.classList.remove('active');
+    modal.classList.add('closing');
+    // Keep it rendered while the closing transition plays, then hide it.
+    clearTimeout(modal._closeTimeout);
+    modal._closeTimeout = setTimeout(() => {
+      modal.classList.remove('closing');
+      modal.style.display = 'none';
+      if (typeof onDone === 'function') onDone();
+    }, 500);
   }
   
   // Chart functions (uses Chart.js included in the page)
@@ -137,37 +167,22 @@ document.addEventListener('DOMContentLoaded', function () {
     // Modal open/close
     if (addLoanBtn) {
       addLoanBtn.addEventListener('click', () => {
-        if (addLoanModal) {
-          addLoanModal.style.display = 'flex';
-          addLoanModal.classList.add('active');
-        }
+        openModal(addLoanModal);
       });
     }
     document.querySelectorAll('.close-modal').forEach((btn) => {
       btn.addEventListener('click', () => {
-        addLoanModal.style.display = 'none';
-        addLoanModal.classList.remove('active');
-        loanDetailsModal.style.display = 'none';
-        loanDetailsModal.classList.remove('active');
-        makePaymentModal.style.display = 'none';
-        makePaymentModal.classList.remove('active');
+        closeModal(addLoanModal);
+        closeModal(loanDetailsModal);
+        closeModal(makePaymentModal);
       });
     });
 
     // Close modal when clicking outside
     window.addEventListener('click', (e) => {
-      if (e.target === addLoanModal) {
-        addLoanModal.style.display = 'none';
-        addLoanModal.classList.remove('active');
-      }
-      if (e.target === loanDetailsModal) {
-        loanDetailsModal.style.display = 'none';
-        loanDetailsModal.classList.remove('active');
-      }
-      if (e.target === makePaymentModal) {
-        makePaymentModal.style.display = 'none';
-        makePaymentModal.classList.remove('active');
-      }
+      if (e.target === addLoanModal) closeModal(addLoanModal);
+      if (e.target === loanDetailsModal) closeModal(loanDetailsModal);
+      if (e.target === makePaymentModal) closeModal(makePaymentModal);
     });
     // Form submission
     if (loanForm) loanForm.addEventListener('submit', handleAddLoan);
@@ -227,8 +242,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Reset form and close modal
     loanForm.reset();
-    addLoanModal.style.display = 'none';
-    addLoanModal.classList.remove('active');
+    closeModal(addLoanModal);
   }
 
   function calculateMonthlyPayment(amount, rate, term) {
@@ -408,8 +422,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const makePaymentBtnEl = document.getElementById('makePaymentBtn');
     if (makePaymentBtnEl) {
       makePaymentBtnEl.onclick = () => {
-        loanDetailsModal.style.display = 'none';
-        makePaymentModal.style.display = 'flex';
+        closeModal(loanDetailsModal, () => {
+          openModal(makePaymentModal);
+        });
       };
     }
 
@@ -418,13 +433,13 @@ document.addEventListener('DOMContentLoaded', function () {
       deleteLoanBtnEl.onclick = () => {
         if (confirm('Are you sure you want to delete this loan? This cannot be undone.')) {
           deleteLoan(loanId);
-          loanDetailsModal.style.display = 'none';
+          closeModal(loanDetailsModal);
         }
       };
     }
 
     // Show the modal
-    loanDetailsModal.style.display = 'flex';
+    openModal(loanDetailsModal);
   }
 
   function handleMakePayment(e) {
@@ -459,11 +474,12 @@ document.addEventListener('DOMContentLoaded', function () {
     renderLoanTable();
     updateStats();
 
-    // Reset form and close modal
+    // Reset form and close modal (reopen Details only after the exit finishes)
     paymentForm.reset();
-    makePaymentModal.style.display = 'none';
-    loanDetailsModal.style.display = 'flex';
-    viewLoanDetails(currentLoanId);
+    closeModal(makePaymentModal, () => {
+      openModal(loanDetailsModal);
+      viewLoanDetails(currentLoanId);
+    });
   }
 
   function deleteLoan(loanId) {
