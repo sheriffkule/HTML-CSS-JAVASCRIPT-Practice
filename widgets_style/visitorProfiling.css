@@ -61,6 +61,11 @@ body {
 .header-actions {
     display: flex;
     gap: 10px;
+
+    .btn:hover {
+        box-shadow: inset 0 0 5px 4px rgb(0 0 0 / 0.15);
+        outline: 1px solid var(--gray);
+    }
 }
 
 .app-content {
@@ -129,4 +134,57 @@ input, select, textarea {
     border-color: var(--accent);
     box-shadow: 0 0 0 2px rgb(72 149 239 / 0.2),
     inset 0 0 0 2px rgb(72 149 239 / 0.2);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 60px;
+    overflow-x: hidden;
+}
+
+:is(input, textarea)::placeholder {
+    transition: var(--transition);
+}
+
+:is(input, textarea):is(:focus, :focus-visible)::placeholder {
+    transform: translateX(20%) scaleX(0);
+}
+
+.form-actions {
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: var(--border-radius);
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    outline: transparent;
+
+    i {
+        transition: var(--transition);
+    }
+    &:hover {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: var(--box-shadow);
+    }
+    &:active {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+
+    &:hover {
+        background-color: var(--primary-dark);
+    }
 }
