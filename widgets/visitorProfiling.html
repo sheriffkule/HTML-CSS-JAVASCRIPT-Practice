@@ -16,6 +16,135 @@
           <button class="btn" id="stats-btn"><i class="fas fa-chart-bar"></i> Stats</button>
         </div>
       </header>
+
+      <main class="app-content">
+        <section class="visitor-form">
+          <h2><i class="fas fa-user-plus"></i> Register New Visitor</h2>
+          <form id="visitor-form">
+            <article class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" placeholder="John Doe" />
+            </article>
+
+            <div class="form-row">
+              <article class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" placeholder="+1234567890" />
+              </article>
+              <article class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="john@example.com" />
+              </article>
+            </div>
+
+            <article class="form-group">
+              <label for="company">Company/Organization</label>
+              <input type="text" id="company" placeholder="Acme Inc." />
+            </article>
+
+            <div class="form-row">
+              <article class="form-group">
+                <label for="purpose">Purpose of Visit</label>
+                <select id="purpose">
+                  <option value="">Select purpose</option>
+                  <option value="meeting">Meeting</option>
+                  <option value="delivery">Delivery</option>
+                  <option value="interview">Interview</option>
+                  <option value="maintenance">Maintenance</option>
+                  <option value="other">Other</option>
+                </select>
+              </article>
+              <article class="form-group">
+                <label for="host">Host/Contact Person</label>
+                <input type="text" id="host" placeholder="John Smith" />
+              </article>
+            </div>
+
+            <article class="form-group">
+              <label for="notes">Additional Notes</label>
+              <textarea id="notes" rows="2" placeholder="Any special instructions..."></textarea>
+            </article>
+
+            <article class="form-actions">
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-user-plus"></i> Register Visitor
+              </button>
+            </article>
+          </form>
+        </section>
+
+        <section class="visitor-list">
+          <article class="list-header">
+            <h2><i class="fas fa-users"></i> Current Visitors</h2>
+            <div class="search-filter">
+              <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="search" placeholder="Search visitors..." />
+              </div>
+              <select id="filter-purpose">
+                <option value="">All Purposes</option>
+                <option value="meeting">Meeting</option>
+                <option value="delivery">Delivery</option>
+                <option value="interview">Interview</option>
+                <option value="maintenance">Maintenance</option>
+                <option value="other">Other</option>
+              </select>
+              <select id="filter-status">
+                <option value="checked-in">Checked In</option>
+                <option value="all">All Visitors</option>
+                <option value="checked-out">Checked Out</option>
+              </select>
+            </div>
+          </article>
+
+          <article class="visitor-table-container">
+            <table id="visitor-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Company</th>
+                  <th>Purpose</th>
+                  <th>Host</th>
+                  <th>Check-In</th>
+                  <th>Check-Out</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="visitor-table-body">
+                <!-- Visitor data will be inserted here by JavaScript -->
+              </tbody>
+            </table>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <!-- Stats Modal -->
+    <div class="modal" id="stats-modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2><i class="fas fa-chart-pie"></i> Visitor Statistics</h2>
+        <article class="stats-container">
+          <div class="stat-card">
+            <h3>Today's Visitors</h3>
+            <p id="today-count">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Currently Checked In</h3>
+            <p class="current-count">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>TotalVisitors</h3>
+            <p class="total-count">0</p>
+          </div>
+        </article>
+        <article class="chart-container">
+          <canvas id="purposeChart"></canvas>
+        </article>
+        <article class="chart-container">
+          <canvas id="timeChart"></canvas>
+        </article>
+      </div>
     </div>
   </body>
 </html>
