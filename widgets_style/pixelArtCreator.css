@@ -119,3 +119,113 @@ h1 {
         box-shadow: 0 0 15px rgb(255 255 255 / 0.5);
     }
 }
+
+.current-color {
+    width: 100%;
+    height: 60px;
+    border-radius: 10px;
+    margin: 15px 0;
+    box-shadow: 0 4px 10px rgb(255 255 255 / 0.2);
+}
+
+.tool-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+}
+
+button {
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    color: white;
+    border: none;
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.25s;
+    box-shadow: 0 4px 10px rgb(255 255 255 / 0.1);
+
+    &:hover {
+        transform: translateY(-2px) scale(1.03);
+        filter: brightness(1.5) saturate(1.5);
+    }
+    &:active {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.secondary {
+    background: linear-gradient(90deg, #485563, #29323c);
+}
+
+.canvas-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.pixel-canvas {
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    gap: 1px;
+    background-color: #2a2a4a;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgb(255 255 255 / 0.1);
+}
+
+.pixel {
+    width: 25px;
+    height: 25px;
+    background-color: #333355;
+    cursor: pointer;
+    transition: transform 0.1s;
+
+    &:hover {
+        transform: scale(1.1);
+        z-index: 1;
+        box-shadow: 0 0 5px rgb(255 255 255 / 0.5);
+    }
+}
+
+.size-control {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.export-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.tool-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+input[type="number"] {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #4a4a8a;
+    background: #1e1e3e;
+    color: white;
+    width: 70px;
+}
+
+label {
+    color: #c0c0e0;
+    font-size: 20px;
+}
+
+#applyPixelSize {
+    padding: 10px 26px;
+}

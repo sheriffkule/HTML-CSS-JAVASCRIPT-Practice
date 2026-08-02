@@ -122,8 +122,123 @@ document.addEventListener('DOMContentLoaded', function () {
       sizeValueEl.textContent = `${size}x${size}`;
       canvasSize = parseInt(size);
     });
+
+    // Resize canvas
+    resizeBtn.addEventListener('click', createCanvas);
+
+    // Clear canvas
+    clearBtn.addEventListener('click', function () {
+      if (confirm('Are you sure you want to clear the canvas?')) {
+        document.querySelectorAll('.pixel').forEach((pixel) => {
+          pixel.style.backgroundColor = '#333355';
+        });
+      }
+    });
+
+    // Save canvas as image
+    saveBtn.addEventListener('click', function () {
+      const canvas = document.createElement('canvas');
+      canvas.width = canvasSize * pixelSize;
+      canvas.height = canvasSize * pixelSize;
+      const ctx = canvas.getContext('2d');
+
+      document.querySelectorAll('.pixel').forEach((pixel, index) => {
+        const x = (index % canvasSize) * pixelSize;
+        const y = Math.floor(index / canvasSize) * pixelSize;
+        ctx.fillStyle = pixel.style.backgroundColor || '#333355';
+        ctx.fillRect(x, y, pixelSize, pixelSize);
+      });
+
+      const link = document.createElement('a');
+      link.download = 'pixel-art.png';
+      link.href = canvas.toDataURL();
+      link.click();
+    });
+
+    // Apply pixel size
+    applyPixelSizeBtn.addEventListener('click', function () {
+      const newSize = parseInt(pixelSizeInput.value);
+      if (newSize > 0) {
+        pixelSize = newSize;
+        createCanvas();
+      } else {
+        alert('Pixel size must be a positive number.');
+      }
+    });
+
+    // Add custom color
+    addColorBtn.addEventListener('click', function () {
+      const customColor = prompt('Enter a hex color code (e.g., #ff5733):');
+      if (customColor && /^#([0-9A-F]{3}){1,2}$/i.test(customColor)) {
+        defaultColors.push(customColor);
+        renderColorPalette();
+      } else {
+        alert('Invalid color code. Please enter a valid hex color.');
+      }
+    });
+  }
+
+  // Drawing function
+  function startDrawing(e) {
+    if (e.button !== 0) return; // Only respond to left mouse button
+    isDrawing = true;
+    draw(e);
+  }
+
+  function draw(e) {
+    if (!isDrawing) return;
+
+    const pixel = e.target;
+    if (!pixel.classList.contains('pixel')) return;
+
+    if (currentTool === 'pencil') {
+      pixel.style.backgroundColor = currentColor;
+    } else if (currentTool === 'eraser') {
+      pixel.style.backgroundColor = '#333355';
+    } else if (currentTool === 'fill') {
+      const targetColor = pixel.style.backgroundColor;
+      if (targetColor !== currentColor) {
+        floodFill(pixel, targetColor, currentColor);
+      }
+    } else if (currentTool === 'lighten') {
+      const currentColorValue = pixel.style.backgroundColor;
+      const newColor = lightenColor(currentColorValue, 20);
+      pixel.style.backgroundColor = newColor;
+    }
+  }
+
+  function stopDrawing() {
+    isDrawing = false;
   }
 
   // Initialize the app
   init();
+
+  // Changing colors on input type range track
+  document.querySelectorAll('input[type="range"]').forEach((input) => {
+    const updateTrack = () => {
+      const val = ((input.value - input.min) / (input.max - input.min)) * 100;
+      const thumbWidth = 15; // match your thumb's actual width in px
+      const width = input.offsetWidth;
+      const ratio = (input.value - input.min) / (input.max - input.min);
+
+      input.style.backgroundImage = `linear-gradient(to right,var(--primary),var(--secondary)${val}%,var(--light) ${val}%)`;
+    };
+    input.addEventListener('input', updateTrack);
+    updateTrack();
+  });
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
