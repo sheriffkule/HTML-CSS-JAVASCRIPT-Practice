@@ -146,7 +146,8 @@ button {
     transition: all 0.25s;
     box-shadow: 0 4px 10px rgb(255 255 255 / 0.1);
 
-    &:hover {
+    &:hover,
+    &.tool-btn.active {
         transform: translateY(-2px) scale(1.03);
         filter: brightness(1.5) saturate(1.5);
     }
@@ -219,6 +220,13 @@ input[type="number"] {
     background: #1e1e3e;
     color: white;
     width: 70px;
+    outline: transparent;
+    transition: all 0.25s ease-in-out;
+
+    &:focus {
+        border-color: #2575fc;
+        box-shadow: 0 0 0 3px rgba(99, 136, 255, 0.2);
+    }
 }
 
 label {
@@ -228,4 +236,78 @@ label {
 
 #applyPixelSize {
     padding: 10px 26px;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    -moz-apperance: none;
+    flex: 1;
+    appearance: none;
+    border-radius: 6px;
+    height: 8px;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    background: rgb(255 255 255 / 0.2);
+    cursor: ew-resize;
+}
+
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #2575fc;
+    border-radius: 50%;
+    border: 1px solid #a0a0c0;
+    height: 16px;
+    width: 16px;
+    transition: .25s;
+}
+
+input[type='range']::-webkit-slider-thumb:hover {
+    background-color: #0034cf;
+    scale: 1.1;
+    box-shadow: 0 0 6px rgb(255 255 255 / 0.5);
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    margin-top: 25px;
+    font-size: 0.875rem;
+
+    span {
+        font-size: 1rem;
+        color: red;
+    }
+    abbr {
+        letter-spacing: 0.5px;
+        text-underline-offset: 2px;
+        cursor: default;
+        color: #2575fc;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    background-color: #4a4a8a;
+    border: 1px dashed #c0c0e0;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background-color: #2575fc;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #6a11cb;
+}
+
+@media (width <= 768px) {
+    .app-container {
+        flex-direction: column;
+    }
+    .pixel {
+        width: 20px;
+        height: 20px;
+    }
 }

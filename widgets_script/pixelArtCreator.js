@@ -60,6 +60,9 @@ document.addEventListener('DOMContentLoaded', function () {
       colorCell.className = 'color-cell';
       colorCell.style.backgroundColor = color;
       colorCell.dataset.color = color;
+      if (color.toLowerCase() === currentColor.toLowerCase()) {
+        colorCell.classList.add('active');
+      }
       colorPaletteEl.appendChild(colorCell);
     });
   }
@@ -112,9 +115,13 @@ document.addEventListener('DOMContentLoaded', function () {
       btn.addEventListener('click', function () {
         toolButtons.forEach((b) => b.classList.remove('active'));
         this.classList.add('active');
-        currentTool = this.dataset.color;
+        currentTool = this.dataset.tool;
       });
     });
+
+    // Ensure drawing stops if mouse is released outside canvas
+    document.addEventListener('mouseup', stopDrawing);
+    pixelCanvasEl.addEventListener('mouseleave', stopDrawing);
 
     // Canvas size slider
     canvasSizeSlider.addEventListener('input', function () {
@@ -196,12 +203,13 @@ document.addEventListener('DOMContentLoaded', function () {
     } else if (currentTool === 'eraser') {
       pixel.style.backgroundColor = '#333355';
     } else if (currentTool === 'fill') {
-      const targetColor = pixel.style.backgroundColor;
-      if (targetColor !== currentColor) {
-        floodFill(pixel, targetColor, currentColor);
+      const targetColor = getPixelColor(pixel);
+      const fillColor = normalizeColor(currentColor);
+      if (targetColor !== fillColor) {
+        floodFill(pixel, targetColor, fillColor);
       }
     } else if (currentTool === 'lighten') {
-      const currentColorValue = pixel.style.backgroundColor;
+      const currentColorValue = getPixelColor(pixel);
       const newColor = lightenColor(currentColorValue, 20);
       pixel.style.backgroundColor = newColor;
     }
@@ -211,18 +219,83 @@ document.addEventListener('DOMContentLoaded', function () {
     isDrawing = false;
   }
 
+  function getPixelColor(pixel) {
+    const color = pixel.style.backgroundColor;
+    if (color) return normalizeColor(color);
+    return normalizeColor(window.getComputedStyle(pixel).backgroundColor || '#333355');
+  }
+
+  function normalizeColor(color) {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#000';
+    ctx.fillStyle = color;
+    const computed = ctx.fillStyle;
+    if (computed.startsWith('rgb')) {
+      return computed.replace(/\s+/g, '');
+    }
+    // Force a stable rgb string when canvas returns hex values
+    const imageData = ctx.getImageData(0, 0, 1, 1).data;
+    return `rgb(${imageData[0]},${imageData[1]},${imageData[2]})`;
+  }
+
+  function lightenColor(color, percent) {
+    const normalized = normalizeColor(color);
+    const match = normalized.match(/rgb\((\d+),(\d+),(\d+)\)/i);
+    if (!match) return color;
+
+    const r = parseInt(match[1], 10);
+    const g = parseInt(match[2], 10);
+    const b = parseInt(match[3], 10);
+    const lighten = (value) => Math.min(255, Math.round(value + (255 - value) * (percent / 100)));
+
+    return `rgb(${lighten(r)},${lighten(g)},${lighten(b)})`;
+  }
+
+  function floodFill(startPixel, targetColor, fillColor) {
+    const pixels = Array.from(document.querySelectorAll('.pixel'));
+    const width = canvasSize;
+    const visited = new Set();
+    const startIndex = pixels.indexOf(startPixel);
+    if (startIndex === -1) return;
+
+    const normalizedTarget = normalizeColor(targetColor);
+    const normalizedFill = normalizeColor(fillColor);
+    if (normalizedTarget === normalizedFill) return;
+
+    const stack = [startIndex];
+
+    while (stack.length) {
+      const index = stack.pop();
+      if (visited.has(index)) continue;
+      visited.add(index);
+
+      const pixel = pixels[index];
+      if (normalizeColor(getPixelColor(pixel)) !== normalizedTarget) continue;
+      pixel.style.backgroundColor = normalizedFill;
+
+      const row = Math.floor(index / width);
+      const col = index % width;
+      if (col > 0) stack.push(index - 1);
+      if (col < width - 1) stack.push(index + 1);
+      if (row > 0) stack.push(index - width);
+      if (row < width - 1) stack.push(index + width);
+    }
+  }
+
   // Initialize the app
   init();
 
   // Changing colors on input type range track
   document.querySelectorAll('input[type="range"]').forEach((input) => {
     const updateTrack = () => {
-      const val = ((input.value - input.min) / (input.max - input.min)) * 100;
-      const thumbWidth = 15; // match your thumb's actual width in px
-      const width = input.offsetWidth;
-      const ratio = (input.value - input.min) / (input.max - input.min);
+      const min = parseFloat(input.min) || 0;
+      const max = parseFloat(input.max) || 100;
+      const value = parseFloat(input.value);
+      const ratio = Math.min(Math.max((value - min) / (max - min), 0), 1);
+      const val = ratio * 100;
 
-      input.style.backgroundImage = `linear-gradient(to right,var(--primary),var(--secondary)${val}%,var(--light) ${val}%)`;
+      input.style.backgroundImage = `linear-gradient(to right, #2575fc 0%, #0034cf ${val}%, #a0a0c0 ${val}%, #a0a0c0 100%)`;
     };
     input.addEventListener('input', updateTrack);
     updateTrack();
