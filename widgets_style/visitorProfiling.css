@@ -113,3 +113,20 @@ label {
     font-weight: 500;
     color: var(--gray);
 }
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--light-gray);
+    border-radius: var(--border-radius);
+    font-family: inherit;
+    font-size: 14px;
+    transition: var(--transition);
+}
+
+:is(input, select, textarea):is(:focus, :focus-visible) {
+    outline: transparent;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgb(72 149 239 / 0.2),
+    inset 0 0 0 2px rgb(72 149 239 / 0.2);
+}

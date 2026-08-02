@@ -120,7 +120,7 @@
     </div>
 
     <!-- Stats Modal -->
-    <div class="modal" id="stats-modal">
+    <section class="modal" id="stats-modal">
       <div class="modal-content">
         <span class="close">&times;</span>
         <h2><i class="fas fa-chart-pie"></i> Visitor Statistics</h2>
@@ -145,6 +145,57 @@
           <canvas id="timeChart"></canvas>
         </article>
       </div>
-    </div>
+    </section>
+
+    <!-- Visitor Details Modal -->
+    <section class="modal" id="details-modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="detail-name"><i class="fas fa-user"></i> Visitor Details</h2>
+        <article class="visitor-details">
+          <div class="detail-row">
+            <span class="detail-label">Company:</span>
+            <span class="detail-value" id="detail-company"></span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Phone:</span>
+            <span class="detail-value" id="detail-phone"></span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Email</span>
+            <span class="detail-value" id="detail-email"></span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Purpose:</span>
+            <span class="detail-value" id="detail-purpose"></span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Host:</span>
+            <span class="detail-value" id="detail-host"></span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Check-In</span>
+            <span class="detail-value" id="detail-checkin"></span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Check-Out</span>
+            <span class="detail-value" id="detail-checkout"></span>
+          </div>
+          <div class="detail-row full-width">
+            <span class="detail-label">Notes:</span>
+            <span class="detail-value" id="detail-notes"></span>
+          </div>
+        </article>
+        <article class="modal-actions">
+          <button class="btn" id="print-details"><i class="fas fa-print"></i> Print</button>
+          <button class="btn btn-primary" id="checkout-btn">
+            <i class="fas fa-sign-out-alt"></i> Check Out
+          </button>
+        </article>
+      </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/widgets_script/visitorProfiling.js"></script>
   </body>
 </html>
