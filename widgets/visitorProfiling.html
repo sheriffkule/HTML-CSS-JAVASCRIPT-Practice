@@ -22,8 +22,8 @@
           <h2><i class="fas fa-user-plus"></i> Register New Visitor</h2>
           <form id="visitor-form">
             <article class="form-group">
-              <label for="name">Full Name</label>
-              <input type="text" id="name" placeholder="John Doe" />
+              <label for="name">Full Name <sup>*</sup></label>
+              <input type="text" id="name" placeholder="John Doe" required />
             </article>
 
             <div class="form-row">
@@ -44,8 +44,8 @@
 
             <div class="form-row">
               <article class="form-group">
-                <label for="purpose">Purpose of Visit</label>
-                <select id="purpose">
+                <label for="purpose">Purpose of Visit <sup>*</sup></label>
+                <select id="purpose" required>
                   <option value="">Select purpose</option>
                   <option value="meeting">Meeting</option>
                   <option value="delivery">Delivery</option>
@@ -117,6 +117,11 @@
           </article>
         </section>
       </main>
+
+      <footer>
+        © <time datetime="" id="year"></time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
     </div>
 
     <!-- Stats Modal -->
@@ -162,7 +167,7 @@
             <span class="detail-value" id="detail-phone"></span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Email</span>
+            <span class="detail-label">Email:</span>
             <span class="detail-value" id="detail-email"></span>
           </div>
           <div class="detail-row">
@@ -174,11 +179,11 @@
             <span class="detail-value" id="detail-host"></span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Check-In</span>
+            <span class="detail-label">Check-In:</span>
             <span class="detail-value" id="detail-checkin"></span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Check-Out</span>
+            <span class="detail-label">Check-Out:</span>
             <span class="detail-value" id="detail-checkout"></span>
           </div>
           <div class="detail-row full-width">

@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const filteredVisitors = visitors.filter((visitor) => {
       const matchesSearch =
         visitor.name.toLowerCase().includes(searchTerm) ||
-        visitor.company.toLowerCase().includes(searchTerm) ||
+        (visitor.company || '').toLowerCase().includes(searchTerm) ||
         visitor.host.toLowerCase().includes(searchTerm) ||
         visitor.purpose.toLowerCase().includes(searchTerm);
 
@@ -160,14 +160,14 @@ document.addEventListener('DOMContentLoaded', function () {
       const checkOutTime = visitor.checkOut ? formatDateTime(visitor.checkOut) : 'N/A';
 
       const statusBadge = visitor.checkOut
-        ? `<span class="badge checked-out">Checked Out</span>`
-        : `<span class="badge checked-in">Checked In</span>`;
+        ? `<span class="status-badge status-checked-out">Checked Out</span>`
+        : `<span class="status-badge status-checked-in">Checked In</span>`;
 
       row.innerHTML = `
         <td>${visitor.name}</td>
-        <td>${visitor.company}</td>
-        <td>${visitor.purpose}</td>
-        <td>${visitor.host}</td>
+        <td>${visitor.company || 'N/A'}</td>
+        <td>${visitor.purpose || 'N/A'}</td>
+        <td>${visitor.host || 'N/A'}</td>
         <td>${checkInTime}</td>
         <td>${checkOutTime}</td>
         <td>
@@ -177,13 +177,13 @@ document.addEventListener('DOMContentLoaded', function () {
           ${
             !visitor.checkOut
               ? `
-                <button className="action-btn checkout-btn" data-id="${visitor.id}" title="Check Out">
+                <button class="action-btn checkout-btn" data-id="${visitor.id}" title="Check Out">
                   <i class="fas fa-sign-out-alt"></i>
                 </button>
               `
               : ''
           }
-          <button className="action-btn delete-btn" data-id="${visitor.id}" title="Delete">
+          <button class="action-btn delete-btn" data-id="${visitor.id}" title="Delete">
             <i class="fas fa-trash"></i>
           </button>
         </td>
@@ -193,21 +193,21 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Add event listeners to action buttons
-    document.querySelectorAll('view-btn').forEach((btn) => {
+    document.querySelectorAll('.view-btn').forEach((btn) => {
       btn.addEventListener('click', function () {
         const id = parseInt(this.getAttribute('data-id'));
         showVisitorDetails(id);
       });
     });
 
-    document.querySelectorAll('checkout-btn').forEach((btn) => {
+    document.querySelectorAll('.checkout-btn').forEach((btn) => {
       btn.addEventListener('click', function () {
         const id = parseInt(this.getAttribute('data-id'));
         checkOutVisitor(id);
       });
     });
 
-    document.querySelectorAll('delete-btn').forEach((btn) => {
+    document.querySelectorAll('.delete-btn').forEach((btn) => {
       btn.addEventListener('click', function () {
         const id = parseInt(this.getAttribute('data-id'));
         deleteVisitor(id);
@@ -289,7 +289,7 @@ document.addEventListener('DOMContentLoaded', function () {
       type: 'doughnut',
       data: {
         labels: purposes,
-        dataset: [
+        datasets: [
           {
             data: counts,
             backgroundColor: ['#4361ee', '#3f37c9', '#4895ef', '#4cc9f0', '#f72585', '#b5179e', '#7209b7'],
@@ -336,10 +336,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     window.timeChart = new Chart(ctx, {
-      type: bar,
+      type: 'bar',
       data: {
         labels: hours.map((h) => `${h}:00`),
-        dataset: [
+        datasets: [
           {
             label: 'Visitors per hour',
             data: hourCounts,
@@ -393,7 +393,56 @@ document.addEventListener('DOMContentLoaded', function () {
     localStorage.setItem('visitors', JSON.stringify(visitors));
   }
 
-  function formatDateTime() {}
+  function formatDateTime(dateString, full = false) {
+    const date = new Date(dateString);
 
-  function showToast(message) {}
+    if (full) return date.toLocaleString();
+
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+
+    const timeStr = date.toLocaleDateString([], { hour: '2-digit', minute: '2-digit' });
+
+    if (date >= today) {
+      return `Today, ${timeStr}`;
+    } else if (date >= yesterday) {
+      return `Yesterday, ${timeStr}`;
+    } else {
+      return date.toLocaleDateString() + ', ' + timeStr;
+    }
+  }
+
+  function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+      toast.classList.add('show');
+    }, 10);
+
+    setTimeout(() => {
+      toast.classList.remove('show');
+      setTimeout(() => {
+        document.body.removeChild(toast);
+      }, 300);
+    }, 3000);
+  }
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
