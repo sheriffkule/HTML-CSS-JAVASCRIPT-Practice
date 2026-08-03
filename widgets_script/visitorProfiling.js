@@ -178,13 +178,13 @@ document.addEventListener('DOMContentLoaded', function () {
             !visitor.checkOut
               ? `
                 <button className="action-btn checkout-btn" data-id="${visitor.id}" title="Check Out">
-                  <i className="fas fa-sign-out-alt"></i>
+                  <i class="fas fa-sign-out-alt"></i>
                 </button>
               `
               : ''
           }
           <button className="action-btn delete-btn" data-id="${visitor.id}" title="Delete">
-            <i className="fas fa-trash"></i>
+            <i class="fas fa-trash"></i>
           </button>
         </td>
       `;
@@ -315,4 +315,85 @@ document.addEventListener('DOMContentLoaded', function () {
       },
     });
   }
+
+  function renderTimeChart() {
+    const ctx = document.getElementById('timeChart').getContext('2d');
+
+    // Group visitors by hour of check-in
+    const hours = Array(24)
+      .fill(0)
+      .map((_, i) => i);
+    const hourCounts = Array(24).fill(0);
+
+    visitors.forEach((v) => {
+      const hour = new Date(v.checkIn).getHours();
+      hourCounts[hour]++;
+    });
+
+    // Destroy previous chart if it exist
+    if (window.timeChart) {
+      window.timeChart.destroy();
+    }
+
+    window.timeChart = new Chart(ctx, {
+      type: bar,
+      data: {
+        labels: hours.map((h) => `${h}:00`),
+        dataset: [
+          {
+            label: 'Visitors per hour',
+            data: hourCounts,
+            backgroundColor: '#4361ee',
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: true,
+            text: 'VIsitors by Check In Time',
+            font: {
+              size: 16,
+            },
+          },
+          legend: {
+            display: false,
+          },
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              precision: 0,
+            },
+          },
+        },
+      },
+    });
+  }
+
+  function exportVisitors() {
+    const dataStr = JSON.stringify(visitors, null, 2);
+    const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+
+    const exportFileDefaultName = `visitors_${new Date().toISOString().split('T')[0]}.json`;
+
+    const linkElement = document.createElement('a');
+    linkElement.setAttribute('href', dataUri);
+    linkElement.setAttribute('download', exportFileDefaultName);
+    linkElement.click();
+
+    showToast('Export started!');
+  }
+
+  function saveVisitors() {
+    localStorage.setItem('visitors', JSON.stringify(visitors));
+  }
+
+  function formatDateTime() {}
+
+  function showToast(message) {}
 });
