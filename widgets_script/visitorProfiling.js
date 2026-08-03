@@ -44,18 +44,18 @@ document.addEventListener('DOMContentLoaded', function () {
     // Close modals
     closeButtons.forEach((btn) => {
       btn.addEventListener('click', function () {
-        statsModal.style.display = 'none';
-        detailsModal.style.display = 'none';
+        const modal = this.closest('.modal');
+        closeModal(modal);
       });
     });
 
     // Close modals when clicking outside
     window.addEventListener('click', function (e) {
       if (e.target === statsModal) {
-        statsModal.style.display = 'none';
+        closeModal(statsModal);
       }
       if (e.target === detailsModal) {
-        detailsModal.style.display = 'none';
+        closeModal(detailsModal);
       }
     });
 
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
     checkoutBtn.addEventListener('click', function () {
       if (currentVisitorId) {
         checkoutVisitor(currentVisitorId);
-        detailsModal.style.display = 'none';
+        closeModal(detailsModal);
       }
     });
 
@@ -123,12 +123,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const filteredVisitors = visitors.filter((visitor) => {
       const matchesSearch =
-        visitor.name.toLowerCase().includes(searchTerm) ||
+        (visitor.name || '').toLowerCase().includes(searchTerm) ||
         (visitor.company || '').toLowerCase().includes(searchTerm) ||
-        visitor.host.toLowerCase().includes(searchTerm) ||
-        visitor.purpose.toLowerCase().includes(searchTerm);
+        (visitor.host || '').toLowerCase().includes(searchTerm) ||
+        (visitor.purpose || '').toLowerCase().includes(searchTerm);
 
-      const matchesPurpose = purposeFilter ? visitor.purpose === purposeFilter : true;
+      const matchesPurpose = purposeFilter ? (visitor.purpose || '') === purposeFilter : true;
 
       const matchesStatus =
         statusFilter === 'all'
@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (filteredVisitors.length === 0) {
       const row = document.createElement('tr');
-      row.innerHTML = `<td colspan="8" style="text-align: center; padding: 30px;color: var(--gray-color)">
+      row.innerHTML = `<td colspan="8" style="text-align: center; padding: 30px;color: var(--gray)">
         No visitors found.
       </td>`;
       visitorTableBody.appendChild(row);
@@ -170,6 +170,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <td>${visitor.host || 'N/A'}</td>
         <td>${checkInTime}</td>
         <td>${checkOutTime}</td>
+        <td>${statusBadge}</td>
         <td>
           <button class="action-btn view-btn" data-id="${visitor.id}" title="View Details">
             <i class="fas fa-eye"></i>
@@ -203,7 +204,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.checkout-btn').forEach((btn) => {
       btn.addEventListener('click', function () {
         const id = parseInt(this.getAttribute('data-id'));
-        checkOutVisitor(id);
+        checkoutVisitor(id);
       });
     });
 
@@ -227,6 +228,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('detail-email').textContent = visitor.email || 'N/A';
     document.getElementById('detail-purpose').textContent = visitor.purpose;
     document.getElementById('detail-host').textContent = visitor.host || 'N/A';
+    document.getElementById('detail-status').textContent = visitor.checkOut ? 'Checked Out' : 'Checked In';
     document.getElementById('detail-checkin').textContent = formatDateTime(visitor.checkIn, true);
     document.getElementById('detail-checkout').textContent = visitor.checkOut
       ? formatDateTime(visitor.checkOut, true)
@@ -236,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Show/Hide checkout button based on status
     checkoutBtn.style.display = visitor.checkOut ? 'none' : 'flex';
 
-    detailsModal.style.display = 'block';
+    openModal(detailsModal);
   }
 
   function deleteVisitor(id) {
@@ -253,7 +255,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function showStatsModal() {
     // Calculate stats
     const today = new Date().toISOString().split('T')[0];
-    const todayVisitors = visitors.filter((v) => v.checkIn.split('T')[0] === today).length;
+    const todayVisitors = visitors.filter((v) => v.checkIn && v.checkIn.split('T')[0] === today).length;
     const currentVisitors = visitors.filter((v) => !v.checkOut).length;
     const totalVisitors = visitors.length;
 
@@ -265,10 +267,9 @@ document.addEventListener('DOMContentLoaded', function () {
     renderPurposeChart();
     renderTimeChart();
 
-    statsModal.style.display = 'block';
-  }
-
-  function renderPurposeChart() {
+    openModal(statsModal);
+  
+    function renderPurposeChart() {
     const ctx = document.getElementById('purposeChart').getContext('2d');
 
     // Group visitors by purpose
@@ -281,11 +282,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const counts = Object.values(purposeCounts);
 
     // Destroy previous chart if it exists
-    if (window.purposeChart) {
-      window.purposeChart.destroy();
+    if (window._purposeChart) {
+      window._purposeChart.destroy();
     }
 
-    window.purposeChart = new Chart(ctx, {
+    window._purposeChart = new Chart(ctx, {
       type: 'doughnut',
       data: {
         labels: purposes,
@@ -315,6 +316,7 @@ document.addEventListener('DOMContentLoaded', function () {
       },
     });
   }
+}
 
   function renderTimeChart() {
     const ctx = document.getElementById('timeChart').getContext('2d');
@@ -331,11 +333,11 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Destroy previous chart if it exist
-    if (window.timeChart) {
-      window.timeChart.destroy();
+    if (window._timeChart) {
+      window._timeChart.destroy();
     }
 
-    window.timeChart = new Chart(ctx, {
+    window._timeChart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: hours.map((h) => `${h}:00`),
@@ -395,6 +397,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function formatDateTime(dateString, full = false) {
     const date = new Date(dateString);
+    if (Number.isNaN(date.getTime())) {
+      return 'N/A';
+    }
 
     if (full) return date.toLocaleString();
 
@@ -412,6 +417,47 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
       return date.toLocaleDateString() + ', ' + timeStr;
     }
+  }
+
+  function hideAllModals() {
+    const modals = [statsModal, detailsModal];
+    modals.forEach((m) => {
+      if (m) {
+        clearTimeout(m._closeTimeout);
+        m.style.display = 'none';
+        m.classList.remove('active', 'closing');
+      }
+    });
+  }
+
+  function openModal(modal) {
+    if (!modal) return;
+    hideAllModals();
+    clearTimeout(modal._closeTimeout);
+    modal.classList.remove('closing');
+    modal.style.display = 'flex';
+    // Force a reflow so the browser registers the display change and
+    // animates from the current state.
+    void modal.offsetWidth;
+    modal.classList.add('active');
+  }
+
+  function closeModal(modal, onDone) {
+    if (!modal) return;
+    // If the modal is already hidden, nothing to animate.
+    if (modal.style.display === 'none') {
+      if (typeof onDone === 'function') onDone();
+      return;
+    }
+    modal.classList.remove('active');
+    modal.classList.add('closing');
+    // Keep it rendered while the closing transition plays, then hide it.
+    clearTimeout(modal._closeTimeout);
+    modal._closeTimeout = setTimeout(() => {
+      modal.classList.remove('closing');
+      modal.style.display = 'none';
+      if (typeof onDone === 'function') onDone();
+    }, 500);
   }
 
   function showToast(message) {
