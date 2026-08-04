@@ -193,7 +193,36 @@ function createMedicineCard(medicine) {
 }
 
 // Render upcoming reminders
-function renderUpcomingReminders() {}
+function renderUpcomingReminders() {
+  upcomingReminders.innerHTML = '';
+
+  const now = new Date();
+  const currentTime = now.getHours() * 60 + now.getMinutes();
+
+  // Get active medicines with upcoming doses
+  const upcoming = medicines
+    .filter((medicine) => medicine.status === 'active')
+    .map((medicine) => {
+      const reminderTime = medicine.time.split(':');
+      const reminderMinutes = parseInt(reminderTIme[0]) * 60 + parseInt(reminderTime[1]);
+
+      return { ...medicine, reminderMinutes };
+    })
+    .filter((medicine) => medicine.reminderMinutes >= currentTime)
+    .sort((a, b) => a.reminderMinutes - b.reminderMinutes)
+    .slice(0, 3); // Show only next 3 reminders
+
+  if (upcoming.length === 0) {
+    upcomingReminders.innerHTML = `
+      <div class="empty-state">
+        <i class="fas fa-bell-slash"></i>
+        <h3>no upcoming reminders</h3>
+        <p>All reminders for today are completed.</p>
+      </div>
+    `;
+    return;
+  }
+}
 
 // Utility functions
 function formatDate(dateString) {

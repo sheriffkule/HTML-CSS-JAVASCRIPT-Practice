@@ -183,3 +183,128 @@ header {
 :is(input[type="text"], textarea):is(:focus, :focus-visible)::placeholder {
     transform: translateX(10%) scaleX(0);
 }
+
+select,
+::picker(select) {
+  appearance: base-select;
+  cursor: pointer;
+}
+
+:open::picker(select) {
+    opacity: 1;
+    height: auto;
+    overflow: clip;
+
+    @starting-style {
+        opacity: 0;
+        height: 0;
+    }
+}
+
+::picker(select) {
+  border-radius: 8px;
+  border: 2px solid var(--primary);
+  opacity: 0;
+  height: 0;
+  overflow: clip;
+  interpolate-size: allow-keywords;
+  transition: height 0.5s, opacity 0.5s, display 0.5s, overlay .5s;
+  transition-behavior: allow-discrete;
+}
+
+select::picker-icon {
+  font-size: 16px;
+  color: var(--primary);
+  transition: 0.3s rotate;
+}
+
+select:open::picker-icon {
+  rotate: 180deg;
+  color: var(--success);
+}
+
+select:open {
+    border: var(--primary);
+    box-shadow: 0 0 0 2px rgb(67 97 238 / 0.2),
+    inset 0 0 0 2px rgb(67 97 238 / 0.2);
+}
+
+option {
+  border: 1px solid var(--light);
+  background: var(--primary);
+  padding: 2px 0 2px 12px;
+  color: var(--light);
+  padding-right: 18px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+
+  &:nth-child(1) {
+    border-radius: 8px 8px 0 0;
+  }
+  &:last-child {
+    border-radius: 0 0 8px 8px;
+  }
+}
+
+option:is(:hover, :focus) {
+  background: var(--secondary);
+}
+
+option:checked {
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: var(--success);
+  background-color: var(--secondary);
+}
+
+option::checkmark {
+  color: var(--success);
+  font-size: 1.5rem;
+}
+
+:is(input[type="time"], input[type="date"]) {
+  box-shadow: var(--shadow),
+  inset var(--shadow);
+  transition: var(--transition);
+}
+
+:is(input[type="time"], input[type="date"])::-webkit-calendar-picker-indicator {
+    background-color: var(--gray);
+    border-radius: 50%;
+    padding: 5px;
+    opacity: 0.6;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+:is(input[type="time"], input[type="date"])::-webkit-calendar-picker-indicator:hover {
+    scale: 1.4;
+    background-color: var(--success);
+    opacity: 1;
+}
+
+:is(input[type="time"], input[type="date"])::-webkit-calendar-picker-indicator:active {
+    scale: 1.2;
+}
+
+:is(input[type="time"], input[type="date"])::-webkit-datetime-edit-fields-wrapper {
+  display: flex;
+  box-shadow: inset 0 0 2px 2px rgb(0 0 0 / 0.15);
+  padding: 2px 4px;
+  border-radius: var(--border-radius);
+}
+:is(input[type="time"], input[type="date"])::-webkit-datetime-edit-text {
+  padding-inline: 2px;
+  color: var(--dark);
+}
+
+:is(input[type="time"], input[type="date"])::-webkit-datetime-edit-ampm-field {
+  color: var(--primary);
+  padding: 2px 4px;
+}
+
+:is(input[type="time"], input[type="date"]):open {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgb(67 97 238 / 0.2),
+    inset 0 0 0 2px rgb(67 97 238 / 0.2);
+}
