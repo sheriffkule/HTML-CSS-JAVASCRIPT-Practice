@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Medicine Reminder App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/medicineReminder.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="logo">
+          <i class="fas fa-pills"></i>
+          <h1>Medicine Reminder</h1>
+        </div>
+      </header>
+
+      <section class="dashboard">
+        <article class="card">
+          <div class="card-header">
+            <h2 class="card-title">Upcoming Reminder</h2>
+            <span id="currentTime">10:30 AM</span>
+          </div>
+          <div class="upcoming-reminders" id="upcomingReminders">
+            <!-- Reminders will be populated by Javascript -->
+          </div>
+          <div class="stats">
+            <div class="stat-item">
+              <div class="stat-value" id="totalMedicines">0</div>
+              <div class="stat-label">Total Medicines</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value" id="totalReminders">0</div>
+              <div class="stat-label">Today's Reminders</div>
+            </div>
+          </div>
+        </article>
+
+        <article>
+          <card-header>
+            <h2 class="card-title">Add New Reminder</h2>
+          </card-header>
+        </article>
+      </section>
+    </div>
+  </body>
+</html>

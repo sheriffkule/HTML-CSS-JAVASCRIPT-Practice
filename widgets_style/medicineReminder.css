@@ -1,0 +1,110 @@
+:root {
+    --primary: #4361ee;
+    --secondary: #3a0ca3;
+    --success: #4cc9f0;
+    --warning: #f72585;
+    --light: #f1f2fa;
+    --dark: #212529;
+    --gray: #6c757d;
+    --border-radius: 12px;
+    --shadow: 0 4px 8px rgb(0 0 0 / 0.15);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #f1f6fd, #8bade4);
+    color: var(--dark);
+    min-height: 100dvh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 20px;
+    margin-bottom: 30px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    i {
+        font-size: 2rem;
+        color: var(--primary);
+    }
+    h1 {
+        font-size: 1.875rem;
+        font-weight: 700;
+        color: var(--secondary);
+    }
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+    margin-bottom: 30px;
+
+    @media (width <= 768px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.card {
+    background-color: var(--light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow),
+    inset var(--shadow);
+    padding: 25px;
+    transition: var(--transition);
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgb(0 0 0 / 0.15),
+        inset 0 -10px 20px rgb(0 0 0 / 0.15);
+    }
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--secondary);
+}
+
+.upcoming-reminders .reminder-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    background: var(--light);
+    margin-bottom: 15px;
+    transition: var(--transition);
+
+    &:hover {
+        background: #dddfe2;
+    }
+}
