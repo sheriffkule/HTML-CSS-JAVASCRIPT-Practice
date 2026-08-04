@@ -47,7 +47,7 @@ const medicineGrid = document.getElementById('medicineGrid');
 const activeMedicineGrid = document.getElementById('activeMedicineGrid');
 const completedMedicineGrid = document.getElementById('completedMedicineGrid');
 const upcomingReminders = document.getElementById('upcomingReminders');
-const totalMedicineEl = document.getElementById('totalMedicine');
+const totalMedicinesEl = document.getElementById('totalMedicines');
 const todayRemindersEl = document.getElementById('todayReminders');
 const currentTimeEl = document.getElementById('currentTime');
 const notification = document.getElementById('notification');
@@ -69,3 +69,134 @@ document.addEventListener('DOMContentLoaded', function () {
   // Set today's date as default for start date
   document.getElementById('startDate').valueAsDate = new Date();
 });
+
+// Update current time
+function updateCurrentTime() {
+  const now = new Date();
+  currentTimeEl.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+
+// Form submission
+medicineForm.addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  const medicine = {
+    id: medicines.length > 0 ? Math.max(...medicines.map((m) => m.id)) + 1 : 1,
+    name: document.getElementById('medicineName').value,
+    type: document.getElementById('medicineType').value,
+    dosage: document.getElementById('dosage').value,
+    frequency: document.getElementById('frequency').value,
+    time: document.getElementById('time').value,
+    startDate: document.getElementById('startDate').value,
+    endDate: document.getElementById('endDate').value,
+    notes: document.getElementById('notes').value,
+    status: 'active',
+    nextDose: document.getElementById('time').value,
+  };
+
+  medicines.push(medicine);
+  saveToLocalStorage();
+  renderMedicines();
+  renderUpcomingReminders();
+  updateStats();
+
+  // Show success notification
+  showNotification('Medicine Added', `${medicine.name} has been added successfully!`, 'success');
+
+  // Reset form
+  medicineForm.reset();
+  document.getElementById('startDate').valueAsDate = new Date();
+});
+
+// Render medicine
+function renderMedicines() {
+  // Clear existing content
+  medicineGrid.innerHTML = '';
+  activeMedicineGrid.innerHTML = '';
+  completedMedicineGrid.innerHTML = '';
+
+  if (medicines.length === 0) {
+    medicineGrid.innerHTML = `
+      <div class="">
+        <i class="fas fa-pills"></i>
+        <h3>No medicines added yer</h3>
+        <p>Click the "Add Medicine" button to get started</p>
+      </div>
+    `;
+    return;
+  }
+
+  medicines.forEach((medicine) => {
+    const medicineCard = createMedicineCard(medicine);
+
+    // Add to all medicines tab
+    medicineGrid.appendChild(medicineCard.cloneNode(true));
+
+    // Add to appropriate status bar
+    if (medicine.status === 'active') {
+      activeMedicineGrid.appendChild(medicineCard.cloneNode(true));
+    } else if (medicine.status === 'completed') {
+      completedMedicineGrid.appendChild(medicineCard.cloneNode(true));
+    }
+  });
+}
+
+function createMedicineCard(medicine) {
+  const card = document.createElement('div');
+  card.className = 'medicine-card';
+  card.dataset.id = medicine.id;
+
+  card.innerHTML = `
+    <div class="medicine-header">
+      <div class="medicine-name">${medicine.name}</div>
+      <div class="medicine-type">${medicine.type}</div>
+    </div>
+    <div class="medicine-details">
+      <div class="medicine-detail">
+        <i class="fas fa-prescription-bottle-alt"></i>
+        <span>Dosage: ${medicine.dosage}</span>
+      </div>
+      <div class="medicine-detail">
+        <i class="fas fa-clock"></i>
+        <span>Frequency: ${medicine.frequency}</span>
+      </div>
+      <div class="medicine-detail">
+        <i class="fas fa-calendar-day"></i>
+        <span>Time: ${formatDate(medicine.time)}</span>
+      </div>
+      <div class="medicine-detail">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Start: ${formatDate(medicine.startDate)}</span>
+      </div>
+      ${
+        medicine.endDate
+          ? `
+            <div class="medicine-detail">
+              <i class="fas fa-calendar-times"></i>
+              <span>End: ${formatDate(medicine.endDate)}</span>
+            </div>
+          `
+          : ''
+      }
+    </div>
+    <div class="medicine-actions">
+      <button class="btn-edit" onclick="editMedicine(${medicine.id})">
+        <i class="fas fa-edit"></i> Edit
+      </button>
+      <button class="btn-delete" onclick="deleteMedicine(${medicine.id})">
+        <i class="fas fa-trash"></i>
+      </button>
+    </div>
+  `;
+
+  return card;
+}
+
+// Render upcoming reminders
+function renderUpcomingReminders() {}
+
+// Utility functions
+function formatDate(dateString) {
+  const options = { year: 'numeric', month: 'short', day: 'numeric' };
+  return new Date(dateString).toLocaleDateString(undefined, options);
+}
