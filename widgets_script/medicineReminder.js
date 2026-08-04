@@ -51,6 +51,7 @@ const totalMedicinesEl = document.getElementById('totalMedicines');
 const todayRemindersEl = document.getElementById('todayReminders');
 const currentTimeEl = document.getElementById('currentTime');
 const notification = document.getElementById('notification');
+const notificationTitle = document.getElementById('notificationTitle');
 const notificationMessage = document.getElementById('notificationMessage');
 const closeNotification = document.getElementById('closeNotification');
 const tabs = document.querySelectorAll('.tab');
@@ -204,7 +205,7 @@ function renderUpcomingReminders() {
     .filter((medicine) => medicine.status === 'active')
     .map((medicine) => {
       const reminderTime = medicine.time.split(':');
-      const reminderMinutes = parseInt(reminderTIme[0]) * 60 + parseInt(reminderTime[1]);
+      const reminderMinutes = parseInt(reminderTime[0]) * 60 + parseInt(reminderTime[1]);
 
       return { ...medicine, reminderMinutes };
     })
@@ -221,6 +222,104 @@ function renderUpcomingReminders() {
       </div>
     `;
     return;
+  }
+
+  upcoming.forEach((medicine) => {
+    const reminderItem = document.createElement('div');
+    reminderItem.className = 'reminder-item';
+
+    reminderItem.innerHTML = `
+      <div class="reminder-time">${formatTime(medicine.time)}</div>
+      <div class="reminder-details">
+        <h3>${medicine.name}</h3>
+        <p>${medicine.dosage} • ${medicine.type}</p>
+      </div>
+      <div class="reminder-actions">
+        <button onclick="markAsTaken(${medicine.id})" title="Mark as taken">
+          <i class="fas fa-check"></i>
+        </button>
+        <button onclick="snoozeReminder(${medicine.id})" title="Snooze for 10 minutes">
+          <i class="fas fa-clock"></i>
+        </button>
+      </div>
+    `;
+
+    upcomingReminders.appendChild(reminderItem);
+  });
+}
+
+// Update statistics
+function updateStats() {
+  const total = medicines.length;
+  const today = medicines.filter(
+    (medicine) => medicine.status === 'active' && isToday(new Date(medicine.startDate), new Date()),
+  ).length;
+
+  totalMedicinesEl.textContent = total;
+  todayRemindersEl.textContent = today;
+}
+
+// Check for due reminders
+function checkReminders() {
+  const now = new Date();
+  const currentTime = now.getHours() * 60 + now.getMinutes();
+
+  medicines.forEach((medicine) => {
+    if (medicine.status === 'active') {
+      const reminderTime = medicine.time.split(':');
+      const reminderMinutes = parseInt(reminderTime[0]) * 60 + parseInt(reminderTime[1]);
+
+      // If it's time for the medicine (within a 1 minute window)
+      if (Math.abs(currentTime - reminderMinutes) <= 1) {
+        showNotification(
+          'Medicine Reminder',
+          `It's time to take your ${medicine.name} (${medicine.dosage})`,
+          'warning',
+        );
+      }
+    }
+  });
+}
+
+function showNotification(title, message, type) {
+  notificationTitle.textContent = title;
+  notificationMessage.textContent = message;
+  notification.className = `notification ${type}`;
+  notification.classList.add('show');
+
+  // Auto hide after 5 seconds
+  setTimeout(() => {
+    notification.classList.remove('show');
+  }, 5000);
+}
+
+// Close notification
+closeNotification.addEventListener('click', function () {
+  notification.classList.remove('show');
+});
+
+// Mark medicine as taken
+function markAsTaken(id) {
+  const medicine = medicines.find((m) => m.id === id);
+  if (medicine) {
+    // For demonstration, we'll just update the next dose time
+    // In a real app, it should be able to track each dose taken
+    showNotification('Medicine Taken', `You've marked ${medicine.name} as taken.`, 'success');
+
+    // Remove from upcoming reminders for today
+    renderUpcomingReminders();
+  }
+}
+
+// Snooze reminder
+function snoozeReminder(id) {
+  const medicine = medicines.find((m) => m.id === id);
+  if (medicine) {
+    showNotification('Reminder Snoozed', `${medicine.name} reminder snoozed for 10 minutes.`, 'success');
+
+    // In a rall app, you would adjust the next reminder time
+    // For this demo, it will be just removed from the list
+    renderUpcomingReminders();
   }
 }
 
