@@ -31,18 +31,122 @@
               <div class="stat-label">Total Medicines</div>
             </div>
             <div class="stat-item">
-              <div class="stat-value" id="totalReminders">0</div>
+              <div class="stat-value" id="todayReminders">0</div>
               <div class="stat-label">Today's Reminders</div>
             </div>
           </div>
         </article>
 
         <article>
-          <card-header>
+          <div class="card-header">
             <h2 class="card-title">Add New Reminder</h2>
-          </card-header>
+          </div>
+          <form class="add-reminder-form" id="medicineForm">
+            <div class="form-group">
+              <label for="medicineName">Medicine name <sup>*</sup></label>
+              <input
+                type="text"
+                id="medicineName"
+                class="form-control"
+                placeholder="e.g., Paracetamol"
+                required />
+            </div>
+            <div class="form-group">
+              <label for="medicineType">Medicine Type <sup>*</sup></label>
+              <select id="medicineType" class="form-control" required>
+                <option value="">Select Type</option>
+                <option value="Tablet">Tablet</option>
+                <option value="Capsule">Capsule</option>
+                <option value="Syrup">Syrup</option>
+                <option value="Injection">Injection</option>
+                <option value="Cream">Cream</option>
+                <option value="Drops">Drops</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="frequency">Frequency <sup>*</sup></label>
+              <select id="frequency" class="form-control" required>
+                <option value="">Select Frequency</option>
+                <option value="Once daily">Once Daily</option>
+                <option value="Twice daily">Twice Daily</option>
+                <option value="Three times daily">Three Times Daily</option>
+                <option value="Four times daily">Four Times Daily</option>
+                <option value="As needed">As Needed</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="time">Time <sup>*</sup></label>
+              <input type="time" id="time" class="form-control" requiredI />
+            </div>
+            <div class="form-group">
+              <label for="startDate">Start Date <sup>*</sup></label>
+              <input type="date" id="startDate" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label for="endDate">End Date (Optional)</label>
+              <input type="date" id="endDate" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="notes">Notes (Optional)</label>
+              <textarea
+                id="notes"
+                class="form-control"
+                rows="3"
+                placeholder="Any additional instructions..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+              <i class="fas fa-save"></i> Save Reminder
+            </button>
+          </form>
         </article>
       </section>
+
+      <section class="medicines-list">
+        <div class="tabs">
+          <div class="tab active" data-tab="all">All</div>
+          <div class="tab" data-tab="active">Active</div>
+          <div class="tab" data-tab="completed">Completed</div>
+        </div>
+
+        <div class="tab-content active" id="all-tab">
+          <h2>Your Medicine</h2>
+          <div class="medicine-grid" id="medicineGrid">
+            <!-- Medicine cards will be populated by JavaScript -->
+          </div>
+        </div>
+
+        <div class="tab-content" id="active-tab">
+          <h2>Active Medicines</h2>
+          <div class="medicineGrid" id="activeMedicineGrid">
+            <!-- Active medicine cards will be populated by JavaScript -->
+          </div>
+        </div>
+
+        <div class="tab-content" id="completed-tab">
+          <h2>Completed Medicines</h2>
+          <div class="medicine-grid" id="completedMedicineGrid">
+            <!-- Completed medicine cards will be populated by JavaScript -->
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        © <time datetime="" id="year"></time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
+
+      <div class="notification" id="notifica">
+        <div class="notification-icon">
+          <i class="fas fa-bell"></i>
+        </div>
+        <div class="notification-content">
+          <h4 id="notificationTitle">Reminder</h4>
+          <p id="notificationMessage">It's time to take your medicine!</p>
+        </div>
+        <button class="close-notification" id="closeNotification">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
     </div>
   </body>
 </html>
