@@ -77,12 +77,14 @@ function updateCurrentTime() {
   currentTimeEl.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
 
+let editingId = null;
+
 // Form submission
 medicineForm.addEventListener('submit', function (e) {
   e.preventDefault();
 
   const medicine = {
-    id: medicines.length > 0 ? Math.max(...medicines.map((m) => m.id)) + 1 : 1,
+    id: editingId ?? (medicines.length > 0 ? Math.max(...medicines.map((m) => m.id)) + 1 : 1),
     name: document.getElementById('medicineName').value,
     type: document.getElementById('medicineType').value,
     dosage: document.getElementById('dosage').value,
@@ -95,14 +97,20 @@ medicineForm.addEventListener('submit', function (e) {
     nextDose: document.getElementById('time').value,
   };
 
-  medicines.push(medicine);
+  if (editingId !== null) {
+    medicines = medicines.map((m) => (m.id === editingId ? medicine : m));
+    editingId = null;
+    document.querySelector('#medicineForm button[type="submit"]').textContent = 'Save Reminder';
+    showNotification('Medicine Updated', `${medicine.name} has been updated successfully!`, 'success');
+  } else {
+    medicines.push(medicine);
+    showNotification('Medicine Added', `${medicine.name} has been added successfully!`, 'success');
+  }
+
   saveToLocalStorage();
   renderMedicines();
   renderUpcomingReminders();
   updateStats();
-
-  // Show success notification
-  showNotification('Medicine Added', `${medicine.name} has been added successfully!`, 'success');
 
   // Reset form
   medicineForm.reset();
@@ -142,6 +150,12 @@ function renderMedicines() {
   });
 }
 
+function sanitize(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
 function createMedicineCard(medicine) {
   const card = document.createElement('div');
   card.className = 'medicine-card';
@@ -149,50 +163,59 @@ function createMedicineCard(medicine) {
 
   card.innerHTML = `
     <div class="medicine-header">
-      <div class="medicine-name">${medicine.name}</div>
-      <div class="medicine-type">${medicine.type}</div>
+      <div class="medicine-name">${sanitize(medicine.name)}</div>
+      <div class="medicine-type">${sanitize(medicine.type)}</div>
     </div>
-    <div className="medicine-details">
+    <div class="medicine-details">
       <div class="medicine-detail">
         <i class="fas fa-prescription-bottle-alt"></i>
-        <span>Dosage: ${formatTime(medicine.dosage)}</span>
+        <span>Dosage: ${sanitize(medicine.dosage)}</span>
       </div>
       <div class="medicine-detail">
         <i class="fas fa-clock"></i>
-        <span>Frequency: ${medicine.frequency}</span>
+        <span>Frequency: ${sanitize(medicine.frequency)}</span>
       </div>
       <div class="medicine-detail">
         <i class="fas fa-calendar-day"></i>
-        <span>Time: ${formatDate(medicine.time)}</span>
+        <span>Time: ${sanitize(formatTime(medicine.time))}</span>
       </div>
       <div class="medicine-detail">
         <i class="fas fa-calendar-alt"></i>
-        <span>Start: ${formatDate(medicine.startDate)}</span>
+        <span>Start: ${sanitize(formatDate(medicine.startDate))}</span>
       </div>
-      ${medicine.endDate
-        ? `
+      ${
+        medicine.endDate
+          ? `
             <div class="medicine-detail">
               <i class="fas fa-calendar-times"></i>
-              <span>End: ${formatDate(medicine.endDate)}</span>
+              <span>End: ${sanitize(formatDate(medicine.endDate))}</span>
             </div>
           `
-        : ''}
-      ${medicine.notes
-        ? `
+          : ''
+      }
+      ${
+        medicine.notes
+          ? `
             <div class="medicine-detail">
               <i class="fas fa-sticky-note"></i>
-              <span>Notes: ${medicine.notes}</span>
+              <span>Notes: ${sanitize(medicine.notes)}</span>
             </div>
           `
-        : ''}
+          : ''
+      }
     </div>
     <div class="medicine-actions">
       <button class="btn-edit" onclick="editMedicine(${medicine.id})">
         <i class="fas fa-edit"></i> Edit
       </button>
-      <button class="btn-delete" onclick="deleteMedicine(${medicine.id})">
+      <button class="btn-delete" onclick="deleteMedicine(${medicine.id}, this)">
         <i class="fas fa-trash"></i> Delete
       </button>
+      <div class="delete-confirm" style="display:none">
+        <span>Are you sure?</span>
+        <button class="btn-confirm-yes" onclick="confirmDelete(${medicine.id})">Yes</button>
+        <button class="btn-confirm-no" onclick="cancelDelete(this)">No</button>
+      </div>
     </div>
   `;
 
@@ -221,7 +244,7 @@ function renderUpcomingReminders() {
 
   if (upcoming.length === 0) {
     upcomingReminders.innerHTML = `
-      <div class="empty-state">
+      <div class="empty-state">s
         <i class="fas fa-bell-slash"></i>
         <h3>No upcoming reminders</h3>
         <p>All reminders for today are completed.</p>
@@ -235,14 +258,14 @@ function renderUpcomingReminders() {
     reminderItem.className = 'reminder-item';
 
     reminderItem.innerHTML = `
-      <div class="reminder-time">${formatTime(medicine.time)}</div>
+      <div class="reminder-time">${sanitize(formatTime(medicine.time))}</div>
       <div class="reminder-details">
-        <h3>${medicine.name}</h3>
-        <p>${medicine.dosage} • ${medicine.type}</p>
+        <h3>${sanitize(medicine.name)}</h3>
+        <p>${sanitize(medicine.dosage)} • ${sanitize(medicine.type)}</p>
       </div>
       <div class="reminder-actions">
         <button onclick="markAsTaken(${medicine.id})" title="Mark as taken">
-          <i class="fas fa-check"></i>
+          <i class="fas fa-circle-check"></i>
         </button>
         <button onclick="snoozeReminder(${medicine.id})" title="Snooze for 10 minutes">
           <i class="fas fa-clock"></i>
@@ -307,48 +330,82 @@ closeNotification.addEventListener('click', function () {
 // Mark medicine as taken
 function markAsTaken(id) {
   const medicine = medicines.find((m) => m.id === id);
-  if (medicine) {
-    // For demonstration, we'll just update the next dose time
-    // In a real app, it should be able to track each dose taken
-    showNotification('Medicine Taken', `You've marked ${medicine.name} as taken.`, 'success');
+  if (!medicine) return;
 
-    // Remove from upcoming reminders for today
-    renderUpcomingReminders();
-  }
+  const now = new Date();
+  const takenAt = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const takenDate = now.toISOString().split('T')[0];
+
+  if (!medicine.doseHistory) medicine.doseHistory = [];
+  medicine.doseHistory.push({ date: takenDate, time: takenAt });
+
+  saveToLocalStorage();
+  renderUpcomingReminders();
+  showNotification('Medicine Taken', `You've marked ${medicine.name} as taken at ${takenAt}.`, 'success');
 }
 
 // Snooze reminder
 function snoozeReminder(id) {
   const medicine = medicines.find((m) => m.id === id);
   if (medicine) {
-    showNotification('Reminder Snoozed', `${medicine.name} reminder snoozed for 10 minutes.`, 'success');
+    const [hours, minutes] = medicine.time.split(':').map(Number);
+    const snoozeDate = new Date();
+    snoozeDate.setHours(hours, minutes + 10, 0, 0);
 
-    // In a rall app, you would adjust the next reminder time
-    // For this demo, it will be just removed from the list
+    const newHours = String(snoozeDate.getHours()).padStart(2, '0');
+    const newMinutes = String(snoozeDate.getMinutes()).padStart(2, '0');
+    medicine.time = `${newHours}:${newMinutes}`;
+    medicine.nextDose = medicine.time;
+
+    saveToLocalStorage();
     renderUpcomingReminders();
+    showNotification(
+      'Reminder Snoozed',
+      `${medicine.name} snoozed until ${formatTime(medicine.time)}.`,
+      'success',
+    );
   }
 }
 
 // Delete medicine
-function deleteMedicine(id) {
-  if (confirm('Are you sure you want to delete this medicine?')) {
-    medicines = medicines.filter((m) => m.id !== id);
-    saveToLocalStorage();
-    renderMedicines();
-    renderUpcomingReminders();
-    updateStats();
-    showNotification('Medicine Deleted', 'The medicine has been removed from your list.', 'success');
-  }
+function deleteMedicine(id, btn) {
+  const card = btn.closest('.medicine-actions');
+  card.querySelector('.btn-delete').style.display = 'none';
+  card.querySelector('.delete-confirm').style.display = 'flex';
+}
+
+function confirmDelete(id) {
+  medicines = medicines.filter((m) => m.id !== id);
+  saveToLocalStorage();
+  renderMedicines();
+  renderUpcomingReminders();
+  updateStats();
+  showNotification('Medicine Deleted', 'The medicine has been removed from your list.', 'success');
+}
+
+function cancelDelete(btn) {
+  const actions = btn.closest('.medicine-actions');
+  actions.querySelector('.btn-delete').style.display = '';
+  actions.querySelector('.delete-confirm').style.display = 'none';
 }
 
 // Edit medicine (simplified for this demo)
 function editMedicine(id) {
   const medicine = medicines.find((m) => m.id === id);
-  if (medicine) {
-    // In a real app, form with would be populated with medicine data
-    // For this demo, it will just show a message
-    alert(`Edit functionality for ${medicine.name} would go here.`);
-  }
+  if (!medicine) return;
+
+  document.getElementById('medicineName').value = medicine.name;
+  document.getElementById('medicineType').value = medicine.type;
+  document.getElementById('dosage').value = medicine.dosage;
+  document.getElementById('frequency').value = medicine.frequency;
+  document.getElementById('time').value = medicine.time;
+  document.getElementById('startDate').value = medicine.startDate;
+  document.getElementById('endDate').value = medicine.endDate;
+  document.getElementById('notes').value = medicine.notes;
+
+  editingId = id;
+  document.querySelector('#medicineForm button[type="submit"]').textContent = 'Update Reminder';
+  medicineForm.scrollIntoView({ behavior: 'smooth' });
 }
 
 // Tab switching
@@ -396,3 +453,17 @@ function isToday(date1, date2 = new Date()) {
 function saveToLocalStorage() {
   localStorage.setItem('medicines', JSON.stringify(medicines));
 }
+
+// Update year in footer
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+  yearElement.setAttribute('datetime', currentYear.toString());
+  yearElement.textContent = currentYear.toString();
+}
+updateYear();
