@@ -377,3 +377,162 @@ option::checkmark {
     box-shadow: 0 0 0 2px rgb(67 97 238 / 0.2),
     inset 0 0 0 2px rgb(67 97 238 / 0.2);
 }
+
+.btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+
+    &:hover {
+        background: var(--secondary);
+        box-shadow: var(--shadow);
+    }
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.medicines-list {
+    margin-top: 30px;
+
+    h2 {
+        margin-bottom: 20px;
+        color: var(--secondary);
+    }
+}
+
+.medicine-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.medicine-card {
+    background: var(--light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow),
+    inset var(--shadow);
+    padding: 20px;
+    transition: var(--transition);
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgb(0 0 0 / 0.15),
+        inset 0 10px 20px rgb(0 0 0 / 0.15);
+    }
+}
+
+.medicine-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.medicine-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.medicine-type {
+    background: #e9ecef;
+    padding: 4px 10px;
+    border-radius: var(--border-radius);
+    font-size: 0.8rem;
+    color: var(--gray);
+}
+
+.medicine-details {
+    margin-bottom: 15px;
+}
+
+.medicine-detail {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+
+    i {
+        width: 20px;
+        color: var(--primary);
+        margin-right: 10px;
+    }
+}
+
+.medicine-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.medicine-actions button {
+    flex: 1;
+    padding: 8px 15px;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-edit {
+    background: #fff3cd;
+    color: #856404;
+
+    &:hover {
+        background: #ffeaa7;
+        box-shadow: var(--shadow);
+    }
+}
+
+.btn-delete {
+    background: #f8d7da;
+    color: #721c24;
+
+    &:hover {
+        background: #f1aeb5;
+        box-shadow: var(--shadow);
+    }
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--light);
+    padding: 15px 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 100;
+    transform-origin: right;
+    transform: translateX(0%) scaleX(0.1);
+    transition: transform 0.5s ease-in;
+
+    &.show {
+        transform: translateX(0) scaleX(1);
+    }
+}
+
+.notification.success .notification-icon {
+    background: var(--success);
+}
+
+.notification.warning .notification-icon {
+    background: var(--warning);
+}
