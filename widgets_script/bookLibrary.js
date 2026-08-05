@@ -85,3 +85,113 @@ let books = [
     rating: 4.4,
   },
 ];
+
+// DOM Elements
+const booksContainer = document.getElementById('booksContainer');
+const bookCount = document.getElementById('bookCount');
+const searchInput = document.getElementById('searchInput');
+const searchBtn = document.getElementById('searchBtn');
+const filterBtns = document.querySelectorAll('.filter-btn');
+const addBookBtn = document.getElementById('addBookBtn');
+const bookModal = document.getElementById('bookModal');
+const detailsModal = document.getElementById('detailsModal');
+const bookForm = document.getElementById('bookForm');
+const cancelBtn = document.getElementById('cancelBtn');
+const closeModalBtns = document.querySelectorAll('.close-modal');
+const borrowReturnBtn = document.getElementById('borrowReturnBtn');
+const editBookBtn = document.getElementById('editBookBtn');
+const deleteBookBtn = document.getElementById('deleteBookBtn');
+
+// Current filter and search term
+let currentFilter = 'all';
+let currentSearchTerm = '';
+let currentBookId = null;
+
+// Initialize the app
+function init() {
+  renderBooks();
+  setupEventListeners();
+  updateBookCount();
+}
+
+// Set up event listeners
+function setupEventListeners() {
+  // Filter buttons
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.dataset.filter;
+      renderBooks();
+    });
+  });
+
+  // Search functionality
+  searchBtn.addEventListener('click', performSearch);
+  searchInput.addEventListener('keyup', (e) => {
+    if (e.key === 'Enter') performSearch();
+  });
+
+  // Modal controls
+  addBookBtn.addEventListener('click', openAddBookModal);
+  cancelBtn.addEventListener('click', closeBookModal);
+  closeModalBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      bookModal.style.display = 'none';
+      detailsModal.style.display = 'none';
+    });
+  });
+
+  // Book form submission
+  bookForm.addEventListener('submit', handleBookSubmit);
+
+  // Book actions
+  borrowReturnBtn.addEventListener('click', toggleBookStatus);
+  editBookBtn.addEventListener('click', openEditBookModal);
+  deleteBookBtn.addEventListener('click', deleteBook);
+
+  // Close modal when clicking outside
+  window.addEventListener('click', (e) => {
+    if (e.target === bookModal) bookModal.style.display = 'none';
+    if (e.target === detailsModal) detailsModal.style.display = 'none';
+  });
+}
+
+// Render books based on current filter and search
+function renderBooks() {
+  booksContainer.innerHTML = '';
+
+  let filteredBooks = books;
+
+  // Apply filter
+  if (currentSearchTerm) {
+    const term = currentSearchTerm.toLowerCase();
+    filteredBooks = filteredBooks.filter(
+      (book) =>
+        book.title.toLowerCase().includes(term) ||
+        book.author.toLowerCase().includes(term) ||
+        book.genre.toLowerCase().includes(term),
+    );
+  }
+
+  if (filteredBooks.length === 0) {
+    booksContainer.innerHTML = `
+      <div class="empty-state">
+        <i className="fas-fa-book-open"></i><i class="fa-regular fa-face-frown-open"></i>
+        <h3>No books found!</h3>
+        <p>Try adjusting your search or filter criteria.</p>
+      </div>
+    `;
+    return;
+  }
+
+  filteredBooks.forEach((book) => {
+    const bookElement = createBookElement(book);
+    booksContainer.appendChild(bookElement);
+  });
+
+  updateBookCount()
+}
+
+// Initialize the app when DOM is loaded
+document.addEventListener('DOMContentLoaded', init);
