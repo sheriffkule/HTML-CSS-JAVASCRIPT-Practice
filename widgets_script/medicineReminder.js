@@ -120,7 +120,7 @@ function renderMedicines() {
     medicineGrid.innerHTML = `
       <div class="">
         <i class="fas fa-pills"></i>
-        <h3>No medicines added yer</h3>
+        <h3>No medicines added yet</h3>
         <p>Click the "Add Medicine" button to get started</p>
       </div>
     `;
@@ -152,10 +152,10 @@ function createMedicineCard(medicine) {
       <div class="medicine-name">${medicine.name}</div>
       <div class="medicine-type">${medicine.type}</div>
     </div>
-    <div class="medicine-details">
+    <div className="medicine-details">
       <div class="medicine-detail">
         <i class="fas fa-prescription-bottle-alt"></i>
-        <span>Dosage: ${medicine.dosage}</span>
+        <span>Dosage: ${formatTime(medicine.dosage)}</span>
       </div>
       <div class="medicine-detail">
         <i class="fas fa-clock"></i>
@@ -169,16 +169,22 @@ function createMedicineCard(medicine) {
         <i class="fas fa-calendar-alt"></i>
         <span>Start: ${formatDate(medicine.startDate)}</span>
       </div>
-      ${
-        medicine.endDate
-          ? `
+      ${medicine.endDate
+        ? `
             <div class="medicine-detail">
               <i class="fas fa-calendar-times"></i>
               <span>End: ${formatDate(medicine.endDate)}</span>
             </div>
           `
-          : ''
-      }
+        : ''}
+      ${medicine.notes
+        ? `
+            <div class="medicine-detail">
+              <i class="fas fa-sticky-note"></i>
+              <span>Notes: ${medicine.notes}</span>
+            </div>
+          `
+        : ''}
     </div>
     <div class="medicine-actions">
       <button class="btn-edit" onclick="editMedicine(${medicine.id})">
@@ -217,7 +223,7 @@ function renderUpcomingReminders() {
     upcomingReminders.innerHTML = `
       <div class="empty-state">
         <i class="fas fa-bell-slash"></i>
-        <h3>no upcoming reminders</h3>
+        <h3>No upcoming reminders</h3>
         <p>All reminders for today are completed.</p>
       </div>
     `;
@@ -323,8 +329,70 @@ function snoozeReminder(id) {
   }
 }
 
+// Delete medicine
+function deleteMedicine(id) {
+  if (confirm('Are you sure you want to delete this medicine?')) {
+    medicines = medicines.filter((m) => m.id !== id);
+    saveToLocalStorage();
+    renderMedicines();
+    renderUpcomingReminders();
+    updateStats();
+    showNotification('Medicine Deleted', 'The medicine has been removed from your list.', 'success');
+  }
+}
+
+// Edit medicine (simplified for this demo)
+function editMedicine(id) {
+  const medicine = medicines.find((m) => m.id === id);
+  if (medicine) {
+    // In a real app, form with would be populated with medicine data
+    // For this demo, it will just show a message
+    alert(`Edit functionality for ${medicine.name} would go here.`);
+  }
+}
+
+// Tab switching
+tabs.forEach((tab) => {
+  tab.addEventListener('click', function () {
+    const tabId = this.dataset.tab;
+
+    // Update active tab
+    tabs.forEach((t) => t.classList.remove('active'));
+    this.classList.add('active');
+
+    // Show corresponding content
+    tabContents.forEach((content) => {
+      content.classList.remove('active');
+      if (content.id === `${tabId}-tab`) {
+        content.classList.add('active');
+      }
+    });
+  });
+});
+
 // Utility functions
+function formatTime(timeString) {
+  const [hours, minutes] = timeString.split(':');
+  const hour = parseInt(hours);
+  const ampm = hour >= 12 ? 'PM' : 'AM';
+  const displayHour = hour % 12 || 12;
+  return `${displayHour}:${minutes} ${ampm}`;
+}
+
 function formatDate(dateString) {
   const options = { year: 'numeric', month: 'short', day: 'numeric' };
   return new Date(dateString).toLocaleDateString(undefined, options);
+}
+
+function isToday(date1, date2 = new Date()) {
+  if (!(date1 instanceof Date) || isNaN(date1)) return false;
+  return (
+    date1.getDate() === date2.getDate() &&
+    date1.getMonth() === date2.getMonth() &&
+    date1.getFullYear() === date2.getFullYear()
+  );
+}
+
+function saveToLocalStorage() {
+  localStorage.setItem('medicines', JSON.stringify(medicines));
 }

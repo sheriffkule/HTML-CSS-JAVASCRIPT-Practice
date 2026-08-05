@@ -521,11 +521,38 @@ option::checkmark {
     gap: 15px;
     z-index: 100;
     transform-origin: right;
-    transform: translateX(0%) scaleX(0.1);
+    transform: translateX(110%) scaleX(0.1);
     transition: transform 0.5s ease-in;
 
     &.show {
         transform: translateX(0) scaleX(1);
+    }
+}
+
+.notification-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: white;
+    background-color: var(--success);
+    animation: bell 1s linear infinite;
+}
+
+@keyframes bell {
+    from {
+        outline: 1px solid transparent;
+        outline-offset: 0;
+    }
+    10% {
+        outline-color: var(--dark);
+    }
+    to {
+        outline: 1px solid transparent;
+        outline-offset: 16px;
     }
 }
 
@@ -535,4 +562,75 @@ option::checkmark {
 
 .notification.warning .notification-icon {
     background: var(--warning);
+}
+
+.notification-content {
+    h4 {
+        margin-bottom: 5px;
+    }
+    p {
+        font-size: 0.9rem;
+        color: var(--gray);
+    }
+}
+
+.close-notification {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    color: var(--gray);
+    transition: 0.2s;
+
+    &:hover {
+        color: var(--warning);
+        scale: 1.1;
+    }
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--gray);
+
+    i {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        color: #cdd4db;
+    }
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid var(--gray);
+    color: var(--dark);
+    font-size: 0.875rem;
+
+    span {
+        color: red;
+        font-size: 1rem;
+    }
+    abbr {
+        text-align: center;
+        color: var(--primary);
+        letter-spacing: 0.5px;
+        cursor: default;
+        text-underline-offset: 2px;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: var(--gray);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary);
 }
