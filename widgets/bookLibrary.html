@@ -20,7 +20,9 @@
             <button id="searchBtn"><i class="fas fa-search"></i></button>
           </div>
           <div class="user-actions">
-            <button class="btn btn-outline" id="addBookBtn"><i class="fas fa-plus"></i> Add Book</button>
+            <button class="btn btn-outline" id="addBookBtn" commandfor="bookModal" command="show-modal">
+              <i class="fas fa-plus"></i> Add Book
+            </button>
           </div>
         </div>
       </div>
@@ -44,5 +46,132 @@
         <!-- Books will be dynamically added here -->
       </div>
     </main>
+
+    <!-- Add/Edit Book Modal-->
+    <dialog class="modal" id="bookModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="modalTitle">Add New Book</h3>
+          <button class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="bookForm">
+            <input type="hidden" id="bookId" />
+            <div class="form-group">
+              <label for="bookTitle">Title</label><sup>*</sup>
+              <input type="text" id="bookTitle" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label for="bookAuthor">Author</label><sup>*</sup>
+              <input type="text" id="bookAuthor" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label for="bookGenre">Genre</label><sup>*</sup>
+              <select id="bookGenre" class="form-control" required>
+                <option value="">Select Genre</option>
+                <option value="Fiction">Fiction</option>
+                <option value="Non-Fiction">Non-Fiction</option>
+                <option value="Science Fiction">Science Fiction</option>
+                <option value="Fantasy">Fantasy</option>
+                <option value="Mystery">Mystery</option>
+                <option value="Romance">Romance</option>
+                <option value="Biography">Biography</option>
+                <option value="History">History</option>
+                <option value="Self-Help">Self-Help</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="bookYear">Publication Year</label><sup>*</sup>
+              <input
+                type="number"
+                id="bookYear"
+                class="form-control"
+                min="1000"
+                max="2026"
+                inputmode="numeric"
+                required />
+            </div>
+            <div class="form-group">
+              <label for="bookPages">Pages</label><sup>*</sup>
+              <input type="number" id="bookPages" class="form-control" min="1" required />
+            </div>
+            <div class="form-group">
+              <label for="bookDescription">Description</label><sup>*</sup>
+              <textarea id="bookDescription" class="form-control" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="bookCover"></label><sup>*</sup>
+              <input type="url" id="bookCover" class="form-control" required />
+            </div>
+            <div class="form-actions">
+              <button type="button" class="btn btn-outline" id="cancelBtn">
+                <i class="fas fa-circle-xmark"></i> Cancel
+              </button>
+              <button type="button" class="btn btn-primary">
+                <i class="fa-solid fa-save"></i> Save Book
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Book Details Modal -->
+    <dialog class="modal" id="detailsModal" style="display: block">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="detailsTitle">Book Details</h3>
+          <button class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="book-detail">
+            <div class="book-detail-cover" id="detailsCover"></div>
+            <div class="book-detail-info">
+              <h2 class="book-detail-title" id="detailsBookTitle"></h2>
+              <p class="book-detail-author" id="detailsAuthor"></p>
+
+              <div class="book-detail-meta">
+                <div class="meta-item">
+                  <span class="meta-label">Genre</span>
+                  <span class="meta-value" id="detailsGenre"></span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Year</span>
+                  <span class="meta-value" id="detailsYear"></span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Pages</span>
+                  <span class="meta-value" id="detailsPages"></span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Status</span>
+                  <span class="meta-value" id="detailsStatus"></span>
+                </div>
+              </div>
+
+              <p class="book-detail-description" id="detailsDescription"></p>
+
+              <div class="book-actions" style="margin-top: 20px">
+                <button class="btn-borrow" id="borrowReturnBtn">Borrow</button>
+                <button class="btn-details" id="editBookBtn">Edit</button>
+                <button
+                  class="btn-details"
+                  id="deleteBookBtn"
+                  style="background: var(--danger); color: white">
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <footer class="footer__copy">
+      © <time datetime="" id="year"></time> Made width <span>♥</span> by
+      <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+    </footer>
+
+    <script src="/widgets_script/bookLibrary.js"></script>
   </body>
 </html>

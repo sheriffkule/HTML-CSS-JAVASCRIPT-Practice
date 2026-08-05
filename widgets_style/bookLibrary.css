@@ -17,3 +17,34 @@
     --shadow: 0 4px 8px rgb(0 0 0 / 0.15);
     --transition: all 0.3s ease;
 }
+
+body {
+    background: linear-gradient(135deg, #e8ebf1, #8bb0f8);
+    color: var(--dark);
+    line-height: 1.5;
+    min-height: 100dvh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-inline: 20px;
+}
+
+header {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: var(--light);
+    padding-block: 1.5rem;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.875rem;
+    font-weight: 700;
+}
