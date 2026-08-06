@@ -137,8 +137,8 @@ function setupEventListeners() {
   cancelBtn.addEventListener('click', closeBookModal);
   closeModalBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
-      bookModal.style.display = 'none';
-      detailsModal.style.display = 'none';
+      bookModal.close();
+      detailsModal.close();
     });
   });
 
@@ -152,8 +152,8 @@ function setupEventListeners() {
 
   // Close modal when clicking outside
   window.addEventListener('click', (e) => {
-    if (e.target === bookModal) bookModal.style.display = 'none';
-    if (e.target === detailsModal) detailsModal.style.display = 'none';
+    if (e.target === bookModal) bookModal.close();
+    if (e.target === detailsModal) detailsModal.close();
   });
 }
 
@@ -210,6 +210,17 @@ function renderBooks() {
     booksContainer.appendChild(bookElement);
   });
 
+  requestAnimationFrame(() => {
+    booksContainer.querySelectorAll('.book-card').forEach((card) => {
+      const desc = card.querySelector('.book-description');
+      const btn = card.querySelector('.btn-read-more');
+      const lineHeight = parseFloat(getComputedStyle(desc).lineHeight);
+      const clampedHeight = lineHeight * 2;
+      desc.style.maxHeight = `${clampedHeight}px`;
+      if (desc.scrollHeight <= clampedHeight) btn.style.display = 'none';
+    });
+  });
+
   updateBookCount();
 }
 
@@ -236,7 +247,7 @@ function createBookElement(book) {
         <button class="btn-borrow" data-id="${book.id}">
           ${book.status === 'available' ? 'Borrow' : 'Return'}
         </button>
-        <button class="btn-details" commandfor="detailsModal" command="show-modal" data-id="${book.id}">Details</button>
+        <button class="btn-details" data-id="${book.id}">Details</button>
       </div>
     </div>
   `;
@@ -247,13 +258,14 @@ function createBookElement(book) {
   const borrowBtn = bookElement.querySelector('.btn-borrow');
   const detailsBtn = bookElement.querySelector('.btn-details');
 
-  // Hide button if text is not clamped
-  if (description.scrollHeight <= description.clientHeight) {
-    readMoreBtn.style.display = 'none';
-  }
-
   readMoreBtn.addEventListener('click', () => {
     const isExpanded = description.classList.toggle('expanded');
+    if (isExpanded) {
+      description.style.maxHeight = `${description.scrollHeight}px`;
+    } else {
+      const lineHeight = parseFloat(getComputedStyle(description).lineHeight);
+      description.style.maxHeight = `${lineHeight * 2}px`;
+    }
     readMoreBtn.textContent = isExpanded ? 'Read less' : 'Read more';
   });
 
@@ -294,10 +306,8 @@ function openAddBookModal() {
   document.getElementById('modalTitle').textContent = 'Add New Book';
   bookForm.reset();
   document.getElementById('bookId').value = '';
-  bookModal.style.display = 'flex';
+  bookModal.showModal();
 }
-
-// Open edit book modal
 function openEditBookModal() {
   const book = books.find((b) => b.id === currentBookId);
   if (!book) return;
@@ -312,13 +322,13 @@ function openEditBookModal() {
   document.getElementById('bookDescription').value = book.description;
   document.getElementById('bookCover').value = book.cover;
 
-  detailsModal.style.display = 'none';
-  bookModal.style.display = 'flex';
+  detailsModal.close();
+  bookModal.showModal();
 }
 
 // Close book modal
 function closeBookModal() {
-  bookModal.style.display = 'none';
+  bookModal.close();
 }
 
 // Handle book form submission
@@ -386,11 +396,11 @@ function openBookDetails(id) {
   document.getElementById('detailsStatus').textContent =
     book.status === 'available' ? 'Available' : 'Borrowed';
   document.getElementById('detailsDescription').textContent = book.description;
-  document.getElementById('detailsCover').style.backgroundImage = `url('${book.cover}')`;
+  document.getElementById('detailsCover').setAttribute('style', `background-image: url('${book.cover}')`);
 
   borrowReturnBtn.textContent = book.status === 'available' ? 'Borrow' : 'Return';
 
-  detailsModal.style.display = 'flex';
+  detailsModal.showModal();
 }
 
 // Toggle book status (borrow/return)
@@ -402,7 +412,7 @@ function toggleBookStatus(id = null) {
   book.status = book.status === 'available' ? 'borrowed' : 'available';
 
   // If we're in the details modal, update the button text
-  if (detailsModal.style.display === 'flex') {
+  if (detailsModal.open) {
     borrowReturnBtn.textContent = book.status === 'available' ? 'Borrow' : 'Return';
     document.getElementById('detailsStatus').textContent =
       book.status === 'available' ? 'Available' : 'Borrowed';
@@ -416,7 +426,7 @@ function deleteBook() {
   if (!confirm('Are you sure you want to delete this book?')) return;
 
   books = books.filter((b) => b.id !== currentBookId);
-  detailsModal.style.display = 'none';
+  detailsModal.close();
   renderBooks();
 }
 
