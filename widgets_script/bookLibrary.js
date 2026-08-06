@@ -367,10 +367,51 @@ function openBookDetails(id) {
   document.getElementById('detailsDescription').textContent = book.description;
   document.getElementById('detailsCover').style.backgroundImage = `url('${book.cover}')`;
 
-  borrowReturnBtn.textContent = book.status === 'available' ? 'Borrow' : 'Return'
+  borrowReturnBtn.textContent = book.status === 'available' ? 'Borrow' : 'Return';
 
-  detailsModal.style.display = 'flex'
+  detailsModal.style.display = 'flex';
 }
+
+// Toggle book status (borrow/return)
+function toggleBookStatus(id = null) {
+  const bookId = id || currentBookId;
+  const book = books.find((b) => b.id === bookId);
+  if (!book) return;
+
+  book.status = book.status === 'available' ? 'borrowed' : 'available';
+
+  // If we're in the details modal, update the button text
+  if (detailsModal.style.display === 'flex') {
+    borrowReturnBtn.textContent = book.status === 'available' ? 'Borrow' : 'Return';
+    document.getElementById('detailsStatus').textContent =
+      book.status === 'available' ? 'Available' : 'Borrowed';
+  }
+
+  renderBooks();
+}
+
+// Delete book
+function deleteBook() {
+  if (!confirm('Are you sure you want to delete this book?')) return;
+
+  books = books.filter((b) => b.id !== currentBookId);
+  detailsModal.style.display = 'none';
+  renderBooks();
+}
+
+// Update year in footer
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+  yearElement.setAttribute('datetime', currentYear.toString());
+  yearElement.textContent = currentYear.toString();
+}
+updateYear();
 
 // Initialize the app when DOM is loaded
 document.addEventListener('DOMContentLoaded', init);
