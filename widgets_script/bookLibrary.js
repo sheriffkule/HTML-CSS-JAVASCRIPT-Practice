@@ -190,7 +190,101 @@ function renderBooks() {
     booksContainer.appendChild(bookElement);
   });
 
-  updateBookCount()
+  updateBookCount();
+}
+
+// Create book card element
+function createBookElement(book) {
+  const bookElement = document.createElement('div');
+  bookElement.className = 'book-card';
+  bookElement.innerHTML = `
+    <div class="book-cover" style="background-image: url('${book.cover}')">
+      <span class="book-status ${book.status === 'available' ? 'status-available' : 'status-borrowed'}">
+        ${book.status === 'available' ? 'Available' : 'Borrowed'}
+      </span>
+    </div>
+    <div class="book-info">
+      <h3 class="book-title">${book.title}</h3>
+      <p class="book-author">${book.author}</p>
+      <p class="book-description">${book.description}</p>
+      <div class="book-meta">
+        <span>${book.year} • ${book.pages}</span>
+        <span class="book-rating"> <i class="fas fa-star"></i> ${book.rating} </span>
+      </div>
+      <div class="book-actions">
+        <button class="btn-borrow" data-id="book.id">
+          ${book.status === 'available' ? 'Borrow' : 'Return'}
+        </button>
+        <button class="btn-details" data-id="${book.id}">Details</button>
+      </div>
+    </div>
+  `;
+
+  // Add event listeners to action buttons
+  const borrowBtn = bookElement.querySelector('.btn-borrow');
+  const detailsBtn = bookElement.querySelector('.btn-details');
+
+  borrowBtn.addEventListener('click', () => {
+    toggleBookStatus(book.id);
+  });
+
+  detailsBtn.addEventListener('click', () => {
+    openBookDetails(book.id);
+  });
+
+  return bookElement;
+}
+
+// Update book count display
+function updateBookCount() {
+  const totalBooks = books.length;
+  let displayedBooks = 0;
+
+  if (currentFilter === 'all' && !currentSearchTerm) {
+    displayedBooks = totalBooks;
+  } else {
+    displayedBooks = booksContainer.querySelectorAll('.book-card').length;
+  }
+
+  bookCount.textContent = `${displayedBooks} of ${totalBooks} books`;
+}
+
+// Perform search
+function performSearch() {
+  currentSearchTerm = searchInput.value.trim();
+  renderBooks();
+}
+
+// Open add book modal
+function openAddBookModal() {
+  document.getElementById('modalTitle').textContent = 'Add New Book';
+  bookForm.reset();
+  document.getElementById('bookId').value = '';
+  bookModal.style.display = 'flex';
+}
+
+// Open edit book modal
+function openEditBookModal() {
+  const book = books.find((b) => b.id === currentBookId);
+  if (!book) return;
+
+  document.getElementById('modalTitle').textContent = 'Edit Book';
+  document.getElementById('bookId').value = book.id;
+  document.getElementById('bookTitle').value = book.title;
+  document.getElementById('bookAuthor').value = book.author;
+  document.getElementById('bookGenre').value = book.genre;
+  document.getElementById('bookYear').value = book.year;
+  document.getElementById('bookPages').value = book.pages;
+  document.getElementById('bookDescription').value = book.description;
+  document.getElementById('bookCover').value = book.cover;
+
+  detailsModal.style.display = 'none';
+  bookModal.style.display = 'flex';
+}
+
+// Close book modal
+function closeBookModal() {
+  bookModal.style.display = 'none'
 }
 
 // Initialize the app when DOM is loaded
