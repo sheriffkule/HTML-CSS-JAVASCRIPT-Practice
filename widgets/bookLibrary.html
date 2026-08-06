@@ -52,7 +52,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h3 id="modalTitle">Add New Book</h3>
-          <button class="close-modal">&times;</button>
+          <button class="close-modal" comandfor="bookModal" command="close">&times;</button>
         </div>
         <div class="modal-body">
           <form id="bookForm">
@@ -100,14 +100,19 @@
               <textarea id="bookDescription" class="form-control" rows="4" required></textarea>
             </div>
             <div class="form-group">
-              <label for="bookCover"></label><sup>*</sup>
+              <label for="bookCover">Cover Image URL</label><sup>*</sup>
               <input type="url" id="bookCover" class="form-control" required />
             </div>
             <div class="form-actions">
-              <button type="button" class="btn btn-outline" id="cancelBtn">
+              <button
+                type="button"
+                class="btn btn-outline"
+                id="cancelBtn"
+                comandfor="bookModal"
+                command="close">
                 <i class="fas fa-circle-xmark"></i> Cancel
               </button>
-              <button type="button" class="btn btn-primary">
+              <button type="submit" class="btn btn-primary">
                 <i class="fa-solid fa-save"></i> Save Book
               </button>
             </div>
@@ -153,7 +158,9 @@
 
               <div class="book-actions" style="margin-top: 20px">
                 <button class="btn-borrow" id="borrowReturnBtn">Borrow</button>
-                <button class="btn-details" id="editBookBtn">Edit</button>
+                <button class="btn-details" id="editBookBtn" commandfor="bookModal" command="show-modal">
+                  Edit
+                </button>
                 <button
                   class="btn-details"
                   id="deleteBookBtn"

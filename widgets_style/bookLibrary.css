@@ -374,27 +374,55 @@ main {
 }
 
 .modal {
-    /* display: none; */
-    display: flex;
-    position: fixed;
-    top: 0;
-    left: 0;
+    display: none;
+    /* display: flex; */
+    /* position: fixed; */
+    /* top: 0; */
+    /* left: 0; */
     width: 100%;
     height: 100%;
-    background: rgb(0 0 0 / 0.2);
-    backdrop-filter: blur(5px);
+    margin: 0 auto;
+    /* background: rgb(0 0 0 / 0.2); */
+    /* backdrop-filter: blur(5px); */
     z-index: 100;
+    border: none;
+    background-color: transparent;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity, display, overlay, transform;
+    transition-behavior: allow-discrete;
+    transition-duration: 1s;
 
-    &:nth-of-type(1) {
-        display: none;
+    &::backdrop {
+        transition: opacity 1s;
+        opacity: 0;
+        backdrop-filter: blur(5px);
+    }
+}
+
+.modal[open] {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+
+    &::backdrop {
+        opacity: 1;
+    }
+    @starting-style {
+        opacity: 0;
+        transform: translateY(-50px);
+
+        &::backdrop {
+            opacity: 0;
+        }
     }
 }
 
 .modal-content {
     background: rgb(255 255 255 / 0.9);
-    width: min(600px, 90%);
+    width: min(600px, 90%) !important;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: inset 0 0 16px rgb(0 0 0 / 0.3),
@@ -430,7 +458,7 @@ main {
 
 .modal-body {
     padding: 1.5rem;
-    max-height: 70dvh;
+    max-height: fit-content;
     overflow-y: auto;
 }
 
@@ -462,4 +490,143 @@ main {
     color: var(--gray);
     margin-bottom: 15px;
     font-size: 1.125rem;
+}
+
+.book-detail-meta {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.meta-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.meta-label {
+    font-size: 1rem;
+    color: var(--gray);
+}
+
+.meta-value {
+    font-weight: 600;
+}
+
+.book-detail-description {
+    line-height: 1.5;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+
+    label {
+        display: inline-block;
+        margin-bottom: 5px;
+        font-weight: 600;
+    }
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: var(--transition);
+
+    &:is(:focus, :focus-visible) {
+        outline: transparent;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgb(67 97 238 / 0.2),
+        inset 0 0 0 3px rgb(67 97 238 / 0.2);
+    }
+}
+
+textarea {
+    font-family: initial;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+
+    button {
+        color: var(--dark);
+        border: 1px solid var(--gray);
+    }
+}
+
+footer {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--gray);
+    color: var(--dark);
+    font-size: 0.875rem;
+
+    span {
+        color: red;
+        font-size: 1rem;
+    }
+    abbr {
+        text-align: center;
+        color: var(--primary);
+        letter-spacing: 0.5px;
+        cursor: default;
+        text-underline-offset: 2px;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: var(--gray);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary);
+}
+
+:is(input, select):required:user-invalid {
+    border-color: var(--danger);
+}
+
+label:has(~ :is(input, select):required:user-invalid) + sup {
+    color: var(--danger);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: var(--gray);
+    grid-column: span 2;
+
+    i {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        color: var(--danger);
+    }
+}
+
+@media (width <= 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .search-bar {
+        width: 100%;
+    }
+    .book-detail {
+        flex-direction: column;
+    }
+    .book-detail-cover {
+        align-self: center;
+    }
 }

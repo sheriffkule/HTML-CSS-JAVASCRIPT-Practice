@@ -146,7 +146,7 @@ function setupEventListeners() {
   bookForm.addEventListener('submit', handleBookSubmit);
 
   // Book actions
-  borrowReturnBtn.addEventListener('click', toggleBookStatus);
+  borrowReturnBtn.addEventListener('click', () => toggleBookStatus());
   editBookBtn.addEventListener('click', openEditBookModal);
   deleteBookBtn.addEventListener('click', deleteBook);
 
@@ -164,6 +164,24 @@ function renderBooks() {
   let filteredBooks = books;
 
   // Apply filter
+  if (currentFilter !== 'all') {
+    filteredBooks = filteredBooks.filter((book) => {
+      const normalizedGenre = book.genre.toLowerCase();
+      switch (currentFilter) {
+        case 'available':
+          return book.status === 'available';
+        case 'borrowed':
+          return book.status === 'borrowed';
+        case 'fiction':
+          return normalizedGenre === 'fiction';
+        case 'non-fiction':
+          return normalizedGenre === 'non-fiction' || normalizedGenre === 'nonfiction';
+        default:
+          return true;
+      }
+    });
+  }
+
   if (currentSearchTerm) {
     const term = currentSearchTerm.toLowerCase();
     filteredBooks = filteredBooks.filter(
@@ -177,11 +195,13 @@ function renderBooks() {
   if (filteredBooks.length === 0) {
     booksContainer.innerHTML = `
       <div class="empty-state">
-        <i className="fas-fa-book-open"></i><i class="fa-regular fa-face-frown-open"></i>
+        <i class="fas fa-book-open"></i>
+        <i class="fa-regular fa-face-frown-open"></i>
         <h3>No books found!</h3>
         <p>Try adjusting your search or filter criteria.</p>
       </div>
     `;
+    updateBookCount();
     return;
   }
 
@@ -213,10 +233,10 @@ function createBookElement(book) {
         <span class="book-rating"> <i class="fas fa-star"></i> ${book.rating} </span>
       </div>
       <div class="book-actions">
-        <button class="btn-borrow" data-id="book.id">
+        <button class="btn-borrow" data-id="${book.id}">
           ${book.status === 'available' ? 'Borrow' : 'Return'}
         </button>
-        <button class="btn-details" data-id="${book.id}">Details</button>
+        <button class="btn-details" commandfor="detailsModal" command="show-modal" data-id="${book.id}">Details</button>
       </div>
     </div>
   `;
@@ -270,6 +290,7 @@ function performSearch() {
 
 // Open add book modal
 function openAddBookModal() {
+  currentBookId = null;
   document.getElementById('modalTitle').textContent = 'Add New Book';
   bookForm.reset();
   document.getElementById('bookId').value = '';
@@ -340,7 +361,7 @@ function handleBookSubmit(e) {
       description,
       cover,
       status: 'available',
-      rating: (4 + Math.random()).toFixed(1), // Random rating between 4.0 and 5.0
+      rating: parseFloat((4 + Math.random()).toFixed(1)), // Random rating between 4.0 and 5.0
     };
     books.push(newBook);
   }
