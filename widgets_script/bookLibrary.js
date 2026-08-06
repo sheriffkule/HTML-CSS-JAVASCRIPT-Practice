@@ -205,10 +205,11 @@ function createBookElement(book) {
     </div>
     <div class="book-info">
       <h3 class="book-title">${book.title}</h3>
-      <p class="book-author">${book.author}</p>
+      <address class="book-author">${book.author}</address>
       <p class="book-description">${book.description}</p>
+      <button class="btn-read-more">Read more</button>
       <div class="book-meta">
-        <span>${book.year} • ${book.pages}</span>
+        <span>Year: ${book.year} • Pages: ${book.pages}</span>
         <span class="book-rating"> <i class="fas fa-star"></i> ${book.rating} </span>
       </div>
       <div class="book-actions">
@@ -221,8 +222,20 @@ function createBookElement(book) {
   `;
 
   // Add event listeners to action buttons
+  const readMoreBtn = bookElement.querySelector('.btn-read-more');
+  const description = bookElement.querySelector('.book-description');
   const borrowBtn = bookElement.querySelector('.btn-borrow');
   const detailsBtn = bookElement.querySelector('.btn-details');
+
+  // Hide button if text is not clamped
+  if (description.scrollHeight <= description.clientHeight) {
+    readMoreBtn.style.display = 'none';
+  }
+
+  readMoreBtn.addEventListener('click', () => {
+    const isExpanded = description.classList.toggle('expanded');
+    readMoreBtn.textContent = isExpanded ? 'Read less' : 'Read more';
+  });
 
   borrowBtn.addEventListener('click', () => {
     toggleBookStatus(book.id);
@@ -284,7 +297,79 @@ function openEditBookModal() {
 
 // Close book modal
 function closeBookModal() {
-  bookModal.style.display = 'none'
+  bookModal.style.display = 'none';
+}
+
+// Handle book form submission
+function handleBookSubmit(e) {
+  e.preventDefault();
+
+  const id = document.getElementById('bookId').value;
+  const title = document.getElementById('bookTitle').value;
+  const author = document.getElementById('bookAuthor').value;
+  const genre = document.getElementById('bookGenre').value;
+  const year = parseInt(document.getElementById('bookYear').value);
+  const pages = parseInt(document.getElementById('bookPages').value);
+  const description = document.getElementById('bookDescription').value;
+  const cover = document.getElementById('bookCover').value;
+
+  if (id) {
+    // Edit existing book
+    const bookIndex = books.findIndex((b) => b.id === parseInt(id));
+    if (bookIndex !== -1) {
+      books[bookIndex] = {
+        ...books[bookIndex],
+        title,
+        author,
+        genre,
+        year,
+        pages,
+        description,
+        cover,
+      };
+    }
+  } else {
+    // Add new book
+    const newBook = {
+      id: books.length > 0 ? Math.max(...books.map((b) => b.id)) + 1 : 1,
+      title,
+      author,
+      genre,
+      year,
+      pages,
+      description,
+      cover,
+      status: 'available',
+      rating: (4 + Math.random()).toFixed(1), // Random rating between 4.0 and 5.0
+    };
+    books.push(newBook);
+  }
+
+  renderBooks();
+  closeBookModal();
+}
+
+// Open book details modal
+function openBookDetails(id) {
+  const book = books.find((b) => b.id === id);
+  if (!book) return;
+
+  currentBookId = id;
+
+  document.getElementById('detailsTitle').textContent = book.title;
+  document.getElementById('detailsBookTitle').textContent = book.title;
+  document.getElementById('detailsAuthor').textContent = `by ${book.author}`;
+  document.getElementById('detailsGenre').textContent = book.genre;
+  document.getElementById('detailsYear').textContent = book.year;
+  document.getElementById('detailsPages').textContent = `${book.pages} pages`;
+  document.getElementById('detailsStatus').textContent =
+    book.status === 'available' ? 'Available' : 'Borrowed';
+  document.getElementById('detailsDescription').textContent = book.description;
+  document.getElementById('detailsCover').style.backgroundImage = `url('${book.cover}')`;
+
+  borrowReturnBtn.textContent = book.status === 'available' ? 'Borrow' : 'Return'
+
+  detailsModal.style.display = 'flex'
 }
 
 // Initialize the app when DOM is loaded
