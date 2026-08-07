@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pregnancy Due Date Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/pregnancyDueDate.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1><i class="fas fa-baby"></i> Pregnancy Due Date</h1>
+        <p class="subtitle">Calculate your estimated due date and track important pregnancy milestones.</p>
+      </header>
+
+      <section class="card">
+        <h2 class="card-title"><i class="fas fa-calculator"></i> Calculate Your Due Date</h2>
+
+        <article class="method-toggle">
+          <button class="active" id="lmpMethodBtn">Last Menstrual Period</button>
+          <button id="conceptionMethodBtn">Conception Date</button>
+          <button id="ultrasoundMethodBtn">Ultrasound Date</button>
+        </article>
+
+        <article class="calculation-method" id="lmpMethod">
+          <div class="form-group">
+            <label for="lmp-date">First day of last menstrual period</label><sup>*</sup>
+            <input type="date" id="lmp-date" required />
+          </div>
+          <div class="form-group">
+            <label for="cycle-length">Average cycle length (days)</label>
+            <select id="cycle-length">
+              <option value="21">21 days</option>
+              <option value="22">22 days</option>
+              <option value="23">23 days</option>
+              <option value="24">24 days</option>
+              <option value="25">25 days</option>
+              <option value="26">26 days</option>
+              <option value="27">27 days</option>
+              <option value="28" selected>28 days</option>
+              <option value="29">29 days</option>
+              <option value="30">30 days</option>
+              <option value="31">31 days</option>
+              <option value="32">32 days</option>
+              <option value="33">33 days</option>
+              <option value="34">34 days</option>
+              <option value="35">35 days</option>
+            </select>
+          </div>
+        </article>
+
+        <article class="calculation-method hidden" id="conceptionMethod">
+          <div class="form-group">
+            <label for="conception-date">Conception date (estimated)</label>
+            <input type="date" id="conception-date" />
+          </div>
+          <p class="tip-content" style="margin-top: -0.5rem; margin-bottom: 1rem; font-size: 0.9rem">
+            <i class="fas fa-info-circle" style="color: var(--info)"></i> Conception typically occurs about
+            11-21 days after the first day of your last period.
+          </p>
+        </article>
+
+        <article class="calculation-method hidden" id="ultrasoundMethod">
+          <div class="form-group">
+            <label for="ultrasound-date">Ultrasound date</label>
+            <input type="date" id="ultrasound-date" />
+          </div>
+          <div class="form-group">
+            <label for="ultrasound-weeks">Weeks at ultrasound</label>
+            <input type="number" id="ultrasound-weeks" min="6" max="40" placeholder="e.g., 8" />
+          </div>
+          <div class="form-group">
+            <label for="ultrasound-days">Additional day</label>
+            <input type="number" id="ultrasound-days" min="0" max="6" placeholder="e.g., 3" />
+          </div>
+        </article>
+
+        <button class="btn" id="calculate-btn"><i class="fas fa-calculator"></i> Calculate Due Date</button>
+        <button class="btn btn-secondary" id="reset-btn" style="margin-left: 1rem">
+          <i class="fas fa-redo"></i> Reset
+        </button>
+      </section>
+    </main>
+  </body>
+</html>
