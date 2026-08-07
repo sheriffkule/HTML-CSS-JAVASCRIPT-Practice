@@ -43,9 +43,9 @@ document.addEventListener('DOMContentLoaded', function () {
   resetBtn.addEventListener('click', resetCalculator);
 
   // Set default date to today
-  document.getElementById('lmp-date').valueAdDate = new Date();
-  document.getElementById('conception-date').valueAdDate = new Date();
-  document.getElementById('ultrasound-date').valueAdDate = new Date();
+  document.getElementById('lmp-date').valueAsDate = new Date();
+  document.getElementById('conception-date').valueAsDate = new Date();
+  document.getElementById('ultrasound-date').valueAsDate = new Date();
 
   function calculateDueDate() {
     let dueDate;
@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function () {
     generateTips(currentWeek, trimester);
 
     // Show results
-    resultContainer.style.display = block;
+    resultContainer.style.display = 'block';
   }
 
   function formatDate(date) {
@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function () {
       { days: 84, title: 'End of first trimester (12 weeks)', icon: 'fas fa-flag' },
       { days: 98, title: 'Second trimester begins (14 weeks)', icon: 'fas fa-baby' },
       { days: 140, title: 'Anatomy scan (20 weeks)', icon: 'fas fa-ultrasound' },
-      { days: 168, title: 'Third trimester begins (24 weeks)', icon: 'fas fa-running' },
+      { days: 168, title: 'Third trimester begins (24 weeks)', icon: 'fas fa-ear-listen' },
       { days: 252, title: 'Full-term (36 weeks)', icon: 'fas fa-check-circle' },
       { days: 280, title: 'Estimated due date (40 weeks)', icon: 'fas fa-birthday-cake' },
     ];
@@ -257,5 +257,27 @@ document.addEventListener('DOMContentLoaded', function () {
     tipsContainer.appendChild(generalTipEl);
   }
 
-  function resetCalculator() {}
+  function resetCalculator() {
+    document.getElementById('lmp-date').valueAsDate = new Date();
+    document.getElementById('conception-date').valueAsDate = new Date();
+    document.getElementById('ultrasound-date').valueAsDate = new Date();
+    document.getElementById('ultrasound-weeks').value = '';
+    document.getElementById('ultrasound-days').value = '';
+    document.getElementById('cycle-length').value = '28';
+    resultContainer.style.display = 'none';
+    lmpMethodBtn.click();
+  }
+
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
