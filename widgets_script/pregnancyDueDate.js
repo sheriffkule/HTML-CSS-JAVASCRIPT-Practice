@@ -153,5 +153,109 @@ document.addEventListener('DOMContentLoaded', function () {
     return date.toLocaleDateString('en-US', options);
   }
 
+  function generateMilestones(dueDate, conceptionDate, today) {
+    const milestonesList = document.getElementById('milestones-list');
+    milestonesList.innerHTML = '';
+
+    const milestones = [
+      { days: 0, title: 'First day of last menstrual period', icon: 'fas fa-calendar' },
+      { days: 14, title: 'Ovulation likely occurred', icon: 'fas fa-egg' },
+      { days: 21, title: 'Possible implantation', icon: 'fas fa-heart' },
+      { days: 28, title: 'Missed period = pregnancy test possible', icon: 'fas fa-vial' },
+      { days: 42, title: 'First prenatal visit (6 weeks)', icon: 'fas fa-stethoscope' },
+      { days: 84, title: 'End of first trimester (12 weeks)', icon: 'fas fa-flag' },
+      { days: 98, title: 'Second trimester begins (14 weeks)', icon: 'fas fa-baby' },
+      { days: 140, title: 'Anatomy scan (20 weeks)', icon: 'fas fa-ultrasound' },
+      { days: 168, title: 'Third trimester begins (24 weeks)', icon: 'fas fa-running' },
+      { days: 252, title: 'Full-term (36 weeks)', icon: 'fas fa-check-circle' },
+      { days: 280, title: 'Estimated due date (40 weeks)', icon: 'fas fa-birthday-cake' },
+    ];
+
+    const todayDays = Math.floor((today - conceptionDate) / (1000 * 60 * 60 * 24)) + 14;
+
+    milestones.forEach((milestone) => {
+      const milestoneDate = new Date(conceptionDate);
+      milestoneDate.setDate(milestoneDate.getDate() + milestone.days);
+
+      let status;
+      if (milestone.days < todayDays - 7) status = 'completed';
+      else if (milestone.days <= todayDays + 7) status = 'current';
+      else status = 'upcoming';
+
+      const milestoneEl = document.createElement('div');
+      milestoneEl.className = `milestone ${status}`;
+      milestoneEl.innerHTML = `
+        <div class="milestone-icon"><i class="${milestone.icon}"></i></div>
+        <div class="milestone-content">
+          <div class="milestone-date">${formatDate(milestoneDate)}</div>
+          <div class="milestone-title">${milestone.title}</div>
+        </div>
+      `;
+
+      milestonesList.appendChild(milestoneEl);
+    });
+  }
+
+  function generateTips(currentWeek, trimester) {
+    const tipsContainer = document.getElementById('pregnancy-tips');
+    tipsContainer.innerHTML = '';
+
+    const tips = {
+      first: [
+        'Take prenatal vitamins with folic acid daily.',
+        'Avoid alcohol, tobacco, and limit caffeine.',
+        'Schedule your first prenatal appointment.',
+        'Be aware of early pregnancy symptoms like fatigue and nausea.',
+        'Start researching childbirth classes and healthcare providers.',
+      ],
+      second: [
+        'You may start feeling baby movements (quickening).',
+        'Consider prenatal genetic testing if recommended.',
+        'Stay active with pregnancy-safe exercises',
+        'Begin planning for maternity leave',
+        'Start sleeping on your side to improve circulation',
+      ],
+      third: [
+        'Prepare your hospital bag and birth plan.',
+        'Install car seat at least 4 weeks before due date',
+        'Watch for signs of preterm labor',
+        'Practice relaxation and breathing techniques',
+        'Finalize childcare arrangements for older siblings.',
+      ],
+    };
+
+    let currentTips = [];
+    if (trimester === '1st') currentTips = tips.first;
+    else if (trimester === '2nd') currentTips = tips.second;
+    else currentTips = tips.third;
+
+    currentTips.forEach((tip) => {
+      const tipEl = document.createElement('div');
+      tipEl.className = 'tip-card';
+      tipEl.innerHTML = `
+        <div class="tip-title">
+          <i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> ${tip}
+        </div>
+      `;
+      tipsContainer.append(tipEl);
+    });
+
+    // Add general tips
+    const generalTipEl = document.createElement('div');
+    generalTipEl.className = 'tip-card';
+    generalTipEl.innerHTML = `
+      <div class="tip-title">
+        <i class="fas fa-info-circle" style="color: var(--info); margin-right: 0.5rem"></i> General Pregnancy Advice
+      </div>
+      <ul class="tip-content">
+        <li>Stay hydrated and eat a balanced diet with plenty of fruits, vegetables, and protein.</li>
+        <li>Get regular moderate exercise as approved by your doctor.</li>
+        <li>Attend all scheduled prenatal appointments.</li>
+        <li>Don't hesitate to call your healthcare provider with any concerns.</li>
+      </ul>
+    `;
+    tipsContainer.appendChild(generalTipEl);
+  }
+
   function resetCalculator() {}
 });

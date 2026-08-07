@@ -105,13 +105,15 @@ select,
   border-radius: 8px;
   border: 2px solid var(--primary);
   overflow: clip;
+  opacity: 0;
   interpolate-size: allow-keywords;
-  transition: height 0.5s, display 0s 0.4s, overlay 0s 0.5s;
+  transition: height 0.5s, opacity 0.5s, display 0.5s, overlay 0.5s;
   transition-behavior: allow-discrete;
 }
 
 :open::picker(select) {
     height: auto;
+    opacity: 1;
     overflow: clip;
 
     @starting-style {
@@ -171,6 +173,13 @@ option::checkmark {
   font-size: 1.5rem;
 }
 
+.action-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
 .btn {
     background-color: var(--primary);
     color: white;
@@ -186,6 +195,7 @@ option::checkmark {
     justify-content: center;
     gap: 0.5rem;
     width: 220px;
+    white-space: nowrap;
     position: relative;
     overflow: hidden;
 
@@ -259,7 +269,7 @@ option::checkmark {
         background: linear-gradient(135deg, rgba(245, 247, 250, 0.8), rgba(212, 215, 219, 0.8));
         border-radius: inherit;
         z-index: -1;
-        animation: float 5s linear infinite;
+        /* animation: float 5s linear infinite; */
     }
 }
 
@@ -282,5 +292,80 @@ option::checkmark {
     width: 100%;
     z-index: -2;
     border-radius: inherit;
-    animation: float 4s 1s linear infinite;
+    /* animation: float 4s 1s linear infinite; */
+}
+
+.result-title {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.result-value {
+    display: inline-block;
+    font-size: 2rem;
+    font-weight: 600;
+    color: transparent;
+    background: 
+    repeating-linear-gradient(135deg, 
+        var(--primary) 20px, 
+        hsl(from var(--primary) 240 90% 50%) 20px 40px, 
+        var(--primary) 40px 60px);
+    background-size: 200%;
+    margin-bottom: 1rem;
+    -webkit-background-clip: text;
+    background-clip: text;
+    /* animation: bgMove 4s linear infinite; */
+}
+
+@keyframes bgMove {
+    to {
+        background-position: -100% 0;
+    }
+}
+
+.result-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.detail-item {
+    text-align: center;
+    background: var(--light);
+    padding: 1rem;
+    border-radius: 8px;
+    corner-shape: scoop;
+    box-shadow: inset 0 4px 8px rgb(0 0 0 / 0.15),
+    inset 0 -4px 8px rgb(0 0 0 / 0.15);
+    border: 1px solid rgb(0 0 0 / 0.2);
+}
+
+.detail-value {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.pregnancy-progress {
+    margin-top: 2rem;
+}
+
+.progress-container {
+    height: 12px;
+    background: #e2e8f0;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 6px;
+    transition: width 0.5s ease-in;
 }
