@@ -104,8 +104,6 @@ select,
 ::picker(select) {
   border-radius: 8px;
   border: 2px solid var(--primary);
-  /* opacity: 0; */
-  height: 0;
   overflow: clip;
   interpolate-size: allow-keywords;
   transition: height 0.5s, display 0s 0.4s, overlay 0s 0.5s;
@@ -113,7 +111,6 @@ select,
 }
 
 :open::picker(select) {
-    /* opacity: 1; */
     height: auto;
     overflow: clip;
 
@@ -172,4 +169,118 @@ option:checked {
 option::checkmark {
   color: var(--success);
   font-size: 1.5rem;
+}
+
+.btn {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 220px;
+    position: relative;
+    overflow: hidden;
+
+    &:hover {
+        background-color: #5a52e0;
+        transform: translateY(-2px) scaleY(1.05);
+    }
+    &:active {
+        transform: translateY(0) scaleY(1);
+    }
+}
+
+.btn-secondary {
+    background-color: var(--secondary);
+
+    &:hover {
+        background-color: #e04e6d;
+    }
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 0;
+    height: 200%;
+    width: 3rem;
+    background: linear-gradient(90deg, transparent, rgba(255, 239, 186, 0.5), transparent);
+    opacity: 0;
+    transform: translateX(-50px) skew(40deg);
+    transition: transform 0.3s;
+}
+
+.btn:hover::before {
+    transform: translateX(250px) skew(45deg);
+    opacity: 1;
+}
+
+.result-container {
+    /* display: none; */
+    /* animation: fadeIn 0.5s ease-in; */
+    transform-origin: bottom;
+    
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(50px) scaleY(0);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scaleY(1);
+    }
+}
+
+.result-card {
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    transition: transform 0.2s ease-in;
+
+    &:hover {
+        transform: translateY(-5px);
+    }
+    &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(245, 247, 250, 0.8), rgba(212, 215, 219, 0.8));
+        border-radius: inherit;
+        z-index: -1;
+        animation: float 5s linear infinite;
+    }
+}
+
+@keyframes float {
+    from, to {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(-10px, -10px);
+    }
+}
+
+.result-card::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    background: var(--primary);
+    height: 100%;
+    width: 100%;
+    z-index: -2;
+    border-radius: inherit;
+    animation: float 4s 1s linear infinite;
 }
