@@ -81,6 +81,71 @@
           <i class="fas fa-redo"></i> Reset
         </button>
       </section>
+
+      <section class="result-container" id="result-container">
+        <article class="result-card">
+          <h3 class="result-title"><i class="fas fa-calendar-check"></i> Estimated Due Date</h3>
+          <div class="result-value" id="due-date">May 15, 2027</div>
+
+          <div class="pregnancy-progress">
+            <div class="progress-container">
+              <div class="progress-bar" id="progress-bar" style="width: 50%"></div>
+            </div>
+            <div class="progress-text">
+              <span id="current-week">Week 20</span>
+              <span id="progress-percent">50%</span>
+            </div>
+          </div>
+
+          <div class="result-details">
+            <div class="detail-item">
+              <div class="detail-label">Current trimester</div>
+              <div class="detail-value" id="trimester">2nd</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Days remaining</div>
+              <div class="detail-value" id="days-remaining">140</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Conception date</div>
+              <div class="detail-value" id="conception-date-result">Aug 30, 2026</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Current fetal age</div>
+              <div class="detail-value" id="fetal-age">18 weeks</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="milestones">
+          <h3 class="card-title"><i class="fas fa-flag-checkered"></i> Pregnancy Milestones</h3>
+
+          <div id="milestones-list">
+            <!-- Milestones will be added here by JavaScript -->
+          </div>
+        </article>
+
+        <article class="tips-section">
+          <h3 class="tips-title"><i class="fas fa-lightbulb"></i> Tips for Your Current Stage</h3>
+
+          <div id="pregnancy-tips">
+            <!-- Tips will be added here by JavaScript -->
+          </div>
+        </article>
+      </section>
+
+      <div class="footer"></div>
+      <p>
+        This calculator provides an estimate only and is not a substitute for professional medical advice.
+      </p>
+      <p>Always consult your healthcare provider about your pregnancy.</p>
     </main>
+
+    <footer class="footer__copy">
+      © <time datetime="" id="year"></time> Made width <span>♥</span> by
+      <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+    </footer>
+
+    <script src="/widgets_script/pregnancyDueDate.js"></script>
   </body>
 </html>
