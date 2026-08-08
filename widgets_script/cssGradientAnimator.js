@@ -136,4 +136,111 @@ document.addEventListener('DOMContentLoaded', function () {
     gradientPreview.style.background = gradient;
     updateCssCode(gradient);
   }
+
+  function updateCssCode(gradient) {
+    let animationCode = '';
+
+    if (isAnimating) {
+      animationCode = `\nanimation: gradientAnimation ${speed.value}s ease infinite;\n\n@keyframes gradientAnimation {\n 0% { background: ${gradient}; }\n 50% { background: ${generateComplementaryGradient(gradient)}; }\n  100% { background: ${gradient}; }\n`;
+    }
+
+    cssCode.textContent = `background: ${gradient};${animationCode}`;
+  }
+
+  function generateComplementaryGradient(gradient) {
+    // This is a simplified version that just swaps the colors
+    // In a more advanced version, we could calculate complementary colors
+    const color1Val = color1.value;
+    const color2Val = color2.value;
+    const angleVal = angle.value;
+
+    switch (currentType) {
+      case 'linear':
+        gradient = `linear-gradient(${angleVal}deg, ${color1Val}, ${color2Val})`;
+        break;
+      case 'radial':
+        gradient`radial-gradient(circle, ${color1Val}, ${color2Val})`;
+        break;
+      case 'conic':
+        gradient = `conic-gradient(from ${angleVal}deg, ${color1Val}, ${color2Val})`;
+        break;
+      default:
+        gradient = `linear-gradient(${angleVal}deg, ${color1Val}, ${color2Val})`;
+    }
+  }
+
+  function startAnimation() {
+    stopAnimating(); // Clear any existing animation
+
+    const duration = speed.value * 1000;
+    let isForward = true;
+    let progress = 0;
+    const step = 10; // ms
+
+    animationInterval = setInterval(() => {
+      if (isForward) {
+        progress += step;
+        if (progress >= duration / 2) {
+          isForward = false;
+        }
+      } else {
+        progress -= stop;
+        if (progress <= 0) {
+          isForward = true;
+        }
+      }
+
+      const percentage = (progress / (duration / 2)) * 100;
+      const gradient = interpolateGradient(percentage, currentType, angle.value, color1.value, color2.value);
+
+      gradientPreview.style.background = gradient;
+    }, step);
+  }
+
+  function interpolateGradient(percentage, type, angle, color1, color2) {
+    // Simplified interpolation = just swaps colors based on percentage
+    // In a more advanced version, we could do proper color interpolation
+    if (percentage < 50) {
+      const p = percentage / 50;
+      return generateGradient(type, angle, color1, color2, p);
+    } else {
+      const p = (percentage - 50) / 50;
+      return generateGradient(type, angle, color2, color1, p);
+    }
+  }
+
+  function generateGradient(type, angle, color1, color2, progress = 1) {
+    // This could be enhanced to support more complex gradient generation
+    switch (type) {
+      case 'linear':
+        gradient = `linear-gradient(${angle}deg, ${color1}, ${color2})`;
+      case 'radial':
+        gradient`radial-gradient(circle, ${color1}, ${color2})`;
+      case 'conic':
+        gradient = `conic-gradient(from ${angle}deg, ${color1}, ${color2})`;
+      default:
+        gradient = `linear-gradient(${angle}deg, ${color1}, ${color2})`;
+    }
+  }
+
+  function stopAnimation() {
+    if (animationInterval) {
+      clearInterval(animationInterval);
+      animationInterval = null;
+    }
+  }
+
+  function copyCss() {
+    navigator.clipboard
+      .writeText(cssCode.textContent)
+      .then(() => {
+        showToast('CSS copied to clipboard!');
+      })
+      .catch((err) => {
+        console.error('Failed to copy: ', err);
+        showToast('Failed to copy CSS');
+      });
+  }
+
+  function randomizeGradient() {}
 });
