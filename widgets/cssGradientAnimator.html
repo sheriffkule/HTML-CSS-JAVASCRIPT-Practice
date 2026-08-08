@@ -9,7 +9,7 @@
   </head>
   <body>
     <header>
-      <h1>CSS Gradient Animator</h1>
+      <h1><i class="fa-brands fa-css3"></i>CSS Gradient Animator</h1>
       <p class="subtitle">Create beautiful animated gradients with ease.</p>
     </header>
 
@@ -43,10 +43,101 @@
           </article>
 
           <article class="control-group">
-            <h3><i class="fas fa-sliders-h"></i> Gradient Settins</h3>
+            <h3><i class="fas fa-sliders-h"></i> Gradient Settings</h3>
+            <div class="slider-control">
+              <label for="angle">Angle: <span id="angleValue">135</span>deg</label>
+              <input type="range" id="angle" min="0" max="360" value="135" />
+            </div>
+            <div class="gradient-type">
+              <button class="active" data-type="">Linear</button>
+              <button data-type="radial">Radial</button>
+              <button data-type="conic">Conic</button>
+            </div>
+          </article>
+
+          <article class="article control-group">
+            <h3><i class="fas fa-magic"></i> Animation</h3>
+            <div class="animation-controls">
+              <label for="animation-toggle">
+                <input type="checkbox" id="animation-toggle" />
+                <span class="slider"></span>
+              </label>
+              <span>Animation Gradient</span>
+            </div>
+            <div class="slider-control" id="animationControls">
+              <label for="speed">Speed: <span id="speedValue">5</span>s</label>
+              <input type="range" id="speed" min="1" max="20" value="5" />
+            </div>
+          </article>
+
+          <article class="control-group">
+            <h3><i class="fas fa-star"></i> Presets</h3>
+            <div class="presets">
+              <div
+                class="preset"
+                style="background: linear-gradient(135deg, #4361ee, #3a0ca3)"
+                data-colors="#4361ee,#3a0ca3"
+                data-type="linear"
+                data-angle="135"></div>
+              <div
+                class="preset"
+                style="background: linear-gradient(135deg, #7209b7, #f72585)"
+                data-colors="#7209b7,#f72585"
+                data-type="linear"
+                data-angle="135"></div>
+              <div
+                class="preset"
+                style="background: linear-gradient(135deg, #4cc9f0, #4895ef)"
+                data-colors="#4cc9f0,#4895ef"
+                data-type="linear"
+                data-angle="135"></div>
+              <div
+                class="preset"
+                style="background: radial-gradient(circle, #4361ee, #3a0ca3)"
+                data-colors="#4361ee,#3a0ca3"
+                data-type="radial"
+                data-angle="0"></div>
+              <div
+                class="preset"
+                style="background: conic-gradient(from 135deg, #4361ee, #3a0ca3)"
+                data-colors="#4361ee,#3a0ca3"
+                data-type="conic"
+                data-angle="135"></div>
+              <div
+                class="preset"
+                style="background: linear-gradient(135deg, #f72585, #7209b7, #3a0ca3)"
+                data-colors="#f72585,#7209b7,#3a0ca3"
+                data-type="linear"
+                data-angle="135"></div>
+            </div>
+          </article>
+
+          <article class="buttons">
+            <button class="btn btn-primary" id="copyCss"><i class="fas fa-copy"></i> Copy CSS</button>
+            <button class="btn btn-outline" id="randomize"><i class="fas fa-random"></i> Randomize</button>
+            <button class="btn btn-danger" id="reset"><i class="fas fa-undo"></i> Reset</button>
           </article>
         </section>
       </div>
+
+      <div class="code-container">
+        <div class="code-header">
+          <h3><i class="fas fa-code"></i> CSS Code</h3>
+          <button class="copy-btn" id="copyCodeBtn"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <div class="code-content">
+          <pre id="cssCode">background: linear-gradient(135deg, #4361ee, #3a0ca3);</pre>
+        </div>
+      </div>
     </div>
+
+    <div class="toast" id="toast"></div>
+
+    <footer>
+      © <time datetime="" id="year"></time> Made width <span>♥</span> by
+      <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+    </footer>
+
+    <script src="/widgets_script/cssGradientAnimator.js"></script>
   </body>
 </html>
