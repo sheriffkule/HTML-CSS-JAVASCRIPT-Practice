@@ -94,3 +94,36 @@ h1 {
     font-weight: 600;
     backdrop-filter: blur(5px);
 }
+
+.controls-container {
+    background-color: var(--light);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 0.15),
+    inset 0 8px 24px rgb(0 0 0 / 0.15);
+}
+
+.control-group {
+    margin-bottom: 1.5rem;
+
+    h3 {
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+        color: var(--secondary);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+}
+
+.color-pickers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.color-picker {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
