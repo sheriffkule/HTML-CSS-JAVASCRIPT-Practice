@@ -6,6 +6,7 @@
     --light: #f1f2fa;
     --dark: #212529;
     --gray: #6c757d;
+    --medium-gray: #bfc5c5;
     --border-radius: 12px;
     --shadow: 0 4px 8px rgb(0 0 0 / 0.15);
     --transition: all 0.3s ease;
@@ -210,4 +211,64 @@ input[type="text"] {
     border-radius: 8px;
     font-size: 1rem;
     margin-top: 0.5rem;
+    transition: var(--transition);
+
+    &:is(:focus, :focus-visible) {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgb(67 97 238 / 0.2),
+        inset 0 0 0 3px rgb(67 97 238 / 0.2);
+    }
+}
+
+.slider-control {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    label {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--dark);
+    }
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    -moz-apperance: none;
+    appearance: none;
+    border-radius: 6px;
+    height: 8px;
+    outline: transparent;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    margin-right: 10px;
+    border: 1px solid var(--medium-gray);
+}
+
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: var(--primary);
+    border-radius: 50%;
+    corner-shape: bevel scoop scoop bevel;
+    border: 1px solid var(--dark-gray);
+    height: 26px;
+    width: 26px;
+    cursor: pointer;
+    transition: .25s;
+}
+
+input[type='range']::-webkit-slider-thumb:hover {
+    background-color: var(--secondary);
+    box-shadow: 0 0 5px var(--secondary);
+    clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
+    corner-shape: unset;
+}
+
+.gradient-type {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
 }

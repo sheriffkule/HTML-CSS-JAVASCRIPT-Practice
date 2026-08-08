@@ -30,35 +30,45 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function setupEventListeners() {
     // Color picker
-    color1.addEventListener('input', function () {
-      color1Text.value = color1.value;
-      updateGradient();
-    });
-
-    color2.addEventListener('input', function () {
-      color1Text.value = color2.value;
-      updateGradient();
-    });
-
-    color1Text.addEventListener('input', function () {
-      if (isValidHex(this.value)) {
-        color1.value = this.value;
+    if (color1) {
+      color1.addEventListener('input', function () {
+        if (color1Text) color1Text.value = color1.value;
         updateGradient();
-      }
-    });
+      });
+    }
 
-    color2Text.addEventListener('input', function () {
-      if (isValidHex(this.value)) {
-        color2.value = this.value;
+    if (color2) {
+      color2.addEventListener('input', function () {
+        if (color2Text) color2Text.value = color2.value;
         updateGradient();
-      }
-    });
+      });
+    }
+
+    if (color1Text) {
+      color1Text.addEventListener('input', function () {
+        if (isValidHex(this.value) && color1) {
+          color1.value = this.value;
+          updateGradient();
+        }
+      });
+    }
+
+    if (color2Text) {
+      color2Text.addEventListener('input', function () {
+        if (isValidHex(this.value) && color2) {
+          color2.value = this.value;
+          updateGradient();
+        }
+      });
+    }
 
     // Angle slider
-    angle.addEventListener('input', function () {
-      angleValue.textContent = this.value;
-      updateGradient();
-    });
+    if (angle) {
+      angle.addEventListener('input', function () {
+        if (angleValue) angleValue.textContent = this.value;
+        updateGradient();
+      });
+    }
 
     // Gradient type buttons
     gradientTypeButtons.forEach((button) => {
@@ -71,42 +81,46 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Animation toggle
-    animateToggle.addEventListener('change', function () {
-      isAnimating = this.checked;
-      animationControls.style.display = isAnimating ? 'block' : 'none';
+    if (animateToggle && animationControls) {
+      animateToggle.addEventListener('change', function () {
+        isAnimating = this.checked;
+        animationControls.style.display = isAnimating ? 'block' : 'none';
 
-      isAnimating ? startAnimation() : stopAnimating();
-    });
+        isAnimating ? startAnimation() : stopAnimation();
+      });
+    }
 
-    // Speed slider
-    copyCssBtn.addEventListener('click', copyCss);
-    copyCodeBtn.addEventListener('click', copyCss);
+    // Copy buttons
+    if (copyCssBtn) copyCssBtn.addEventListener('click', copyCss);
+    if (copyCodeBtn) copyCodeBtn.addEventListener('click', copyCss);
 
     // Randomize button
-    randomizeBtn.addEventListener('click', randomizeGradient);
+    if (randomizeBtn) randomizeBtn.addEventListener('click', randomizeGradient);
+    if (resetBtn) resetBtn.addEventListener('click', resetGradient);
 
     // Presets
     presets.forEach((preset) => {
       preset.addEventListener('click', function () {
-        const color = this.dataset.colors.split(',');
+        const colors = this.dataset.colors.split(',');
         const type = this.dataset.type;
-        const angle = this.dataset.angle;
+        const presetAngle = this.dataset.angle;
 
         // Update UI
-        color1.value = colors[0];
-        color1Text = colors[0];
+        if (color1) color1.value = colors[0] || '#000000';
+        if (color1Text) color1Text.value = colors[0] || '#000000';
 
-        color2.value = colors[1] || colors[2];
-        color2Text = colors[1] || colors[2];
+        if (color2) color2.value = colors[1] || colors[0] || '#ffffff';
+        if (color2Text) color2Text.value = colors[1] || colors[0] || '#ffffff';
 
         if (colors[2]) {
           // For gradients with more than with more than 2 colors
           // In a more advanced version, we could add support for multiple colors
         }
 
-        document.querySelector(`.gradient-type button[data-type="${type}"]`).click();
-        document.getElementById('angle').value = angle;
-        angleValue.textContent = angle;
+        const typeButton = document.querySelector(`.gradient-type button[data-type="${type}"]`);
+        if (typeButton) typeButton.click();
+        if (angle) angle.value = presetAngle;
+        if (angleValue) angleValue.textContent = presetAngle;
 
         updateGradient();
       });
@@ -114,6 +128,8 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function updateGradient() {
+    if (!color1 || !color2 || !angle) return;
+
     let gradient;
     const color1Val = color1.value;
     const color2Val = color2.value;
@@ -124,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function () {
         gradient = `linear-gradient(${angleVal}deg, ${color1Val}, ${color2Val})`;
         break;
       case 'radial':
-        gradient`radial-gradient(${angleVal}deg, ${color1Val}, ${color2Val})`;
+        gradient = `radial-gradient(${angleVal}deg, ${color1Val}, ${color2Val})`;
         break;
       case 'conic':
         gradient = `conic-gradient(from ${angleVal}deg, ${color1Val}, ${color2Val})`;
@@ -133,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function () {
         gradient = `linear-gradient(${angleVal}deg, ${color1Val}, ${color2Val})`;
     }
 
-    gradientPreview.style.background = gradient;
+    if (gradientPreview) gradientPreview.style.background = gradient;
     updateCssCode(gradient);
   }
 
@@ -141,38 +157,40 @@ document.addEventListener('DOMContentLoaded', function () {
     let animationCode = '';
 
     if (isAnimating) {
-      animationCode = `\nanimation: gradientAnimation ${speed.value}s ease infinite;\n\n@keyframes gradientAnimation {\n 0% { background: ${gradient}; }\n 50% { background: ${generateComplementaryGradient(gradient)}; }\n  100% { background: ${gradient}; }\n`;
+      const speedValueSec = speed ? Number(speed.value) || 5 : 5;
+      animationCode = `\nanimation: gradientAnimation ${speedValueSec}s ease infinite;\n\n@keyframes gradientAnimation {\n  0% { background: ${gradient}; }\n  50% { background: ${generateComplementaryGradient(gradient)}; }\n  100% { background: ${gradient}; }\n}\n`;
     }
 
-    cssCode.textContent = `background: ${gradient};${animationCode}`;
+    if (cssCode) cssCode.textContent = `background: ${gradient};${animationCode}`;
   }
 
   function generateComplementaryGradient(gradient) {
     // This is a simplified version that just swaps the colors
     // In a more advanced version, we could calculate complementary colors
-    const color1Val = color1.value;
-    const color2Val = color2.value;
-    const angleVal = angle.value;
+    const color1Val = color1 ? color1.value : '#000000';
+    const color2Val = color2 ? color2.value : '#ffffff';
+    const angleVal = angle ? angle.value : 0;
 
     switch (currentType) {
       case 'linear':
-        gradient = `linear-gradient(${angleVal}deg, ${color1Val}, ${color2Val})`;
+        gradient = `linear-gradient(${angleVal}deg, ${color2Val}, ${color1Val})`;
         break;
       case 'radial':
-        gradient`radial-gradient(circle, ${color1Val}, ${color2Val})`;
+        gradient = `radial-gradient(circle, ${color2Val}, ${color1Val})`;
         break;
       case 'conic':
-        gradient = `conic-gradient(from ${angleVal}deg, ${color1Val}, ${color2Val})`;
+        gradient = `conic-gradient(from ${angleVal}deg, ${color2Val}, ${color1Val})`;
         break;
       default:
-        gradient = `linear-gradient(${angleVal}deg, ${color1Val}, ${color2Val})`;
+        gradient = `linear-gradient(${angleVal}deg, ${color2Val}, ${color1Val})`;
     }
+    return gradient;
   }
 
   function startAnimation() {
-    stopAnimating(); // Clear any existing animation
+    stopAnimation(); // Clear any existing animation
 
-    const duration = speed.value * 1000;
+    const duration = Number(speed?.value) * 1000 || 5000;
     let isForward = true;
     let progress = 0;
     const step = 10; // ms
@@ -184,16 +202,22 @@ document.addEventListener('DOMContentLoaded', function () {
           isForward = false;
         }
       } else {
-        progress -= stop;
+        progress -= step;
         if (progress <= 0) {
           isForward = true;
         }
       }
 
       const percentage = (progress / (duration / 2)) * 100;
-      const gradient = interpolateGradient(percentage, currentType, angle.value, color1.value, color2.value);
+      const gradient = interpolateGradient(
+        percentage,
+        currentType,
+        angle ? angle.value : 0,
+        color1 ? color1.value : '#000000',
+        color2 ? color2.value : '#ffffff'
+      );
 
-      gradientPreview.style.background = gradient;
+      if (gradientPreview) gradientPreview.style.background = gradient;
     }, step);
   }
 
@@ -213,13 +237,13 @@ document.addEventListener('DOMContentLoaded', function () {
     // This could be enhanced to support more complex gradient generation
     switch (type) {
       case 'linear':
-        gradient = `linear-gradient(${angle}deg, ${color1}, ${color2})`;
+        return `linear-gradient(${angle}deg, ${color1}, ${color2})`;
       case 'radial':
-        gradient`radial-gradient(circle, ${color1}, ${color2})`;
+        return `radial-gradient(circle, ${color1}, ${color2})`;
       case 'conic':
-        gradient = `conic-gradient(from ${angle}deg, ${color1}, ${color2})`;
+        return `conic-gradient(from ${angle}deg, ${color1}, ${color2})`;
       default:
-        gradient = `linear-gradient(${angle}deg, ${color1}, ${color2})`;
+       return `linear-gradient(${angle}deg, ${color1}, ${color2})`;
     }
   }
 
@@ -242,5 +266,112 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   }
 
-  function randomizeGradient() {}
+  function randomizeGradient() {
+    // Random colors
+    color1.value = getRandomColor();
+    color1Text.value = color1.value;
+
+    color2.value = getRandomColor();
+    color2Text.value = color2.value;
+
+    // Random angle
+    const randomAngle = Math.floor(Math.random() * 360);
+    angle.value = randomAngle;
+    angleValue.textContent = randomAngle;
+
+    // Random type
+    const types = ['linear', 'radial', 'conic'];
+    const randomType = types[Math.floor(Math.random() * types.length)];
+    const randomTypeButton = document.querySelector(`.gradient-type button[data-type="${randomType}"]`);
+    if (randomTypeButton) randomTypeButton.click();
+
+    // Random animation
+    const shouldAnimate = Math.random() > 0.5;
+    animateToggle.checked = shouldAnimate;
+    isAnimating = shouldAnimate;
+    animationControls.style.display = shouldAnimate ? 'block' : 'none';
+
+    if (shouldAnimate) {
+      const randomSpeed = Math.floor(Math.random() * 15 + 5);
+      speed.value = randomSpeed;
+      speedValue.textContent = randomSpeed;
+      startAnimation();
+    } else {
+      stopAnimation();
+    }
+
+    updateGradient();
+  }
+
+  function resetGradient() {
+    // Reset to default values
+    color1.value = '#4361ee';
+    color1Text.value = '#4361ee';
+
+    color2.value = '#3a0ca3';
+    color2Text.value = '#3a0ca3';
+
+    angle.value = 135;
+    angleValue.textContent = 135;
+
+    document.querySelector('.gradient-type button[data-type="linear"]').click();
+
+    animateToggle.checked = false;
+    isAnimating = false;
+    animationControls.style.display = 'none';
+    stopAnimation();
+
+    updateGradient();
+  }
+
+  function showToast(message) {
+    if (!toast) return;
+    toast.textContent = message;
+    toast.classList.add('show');
+
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3000);
+  }
+
+  function isValidHex(color) {
+    return /^#([0-9A-F]{3}){1,2}$/i.test(color);
+  }
+
+  function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
+  // Changing colors on input type range track
+  document.querySelectorAll('input[type="range"]').forEach((input) => {
+    const updateTrack = () => {
+      const val = ((input.value - input.min) / (input.max - input.min)) * 100;
+      const thumbWidth = 15; // match your thumb's actual width in px
+      const width = input.offsetWidth;
+      const ratio = (input.value - input.min) / (input.max - input.min);
+
+      input.style.backgroundImage = `linear-gradient(to right,var(--success),var(--primary)${val}%,var(--medium-gray) ${val}%)`;
+    };
+    input.addEventListener('input', updateTrack);
+    updateTrack();
+  });
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
