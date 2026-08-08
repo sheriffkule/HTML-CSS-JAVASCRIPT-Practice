@@ -7,40 +7,43 @@ document.addEventListener('DOMContentLoaded', function () {
   const conceptionMethod = document.getElementById('conceptionMethod');
   const ultrasoundMethod = document.getElementById('ultrasoundMethod');
 
-  lmpMethodBtn.addEventListener('click', () => {
-    lmpMethodBtn.classList.add('active');
-    conceptionMethodBtn.classList.remove('active');
-    ultrasoundMethodBtn.classList.remove('active');
-    lmpMethod.classList.remove('hidden');
-    conceptionMethod.classList.add('hidden');
-    ultrasoundMethod.classList.add('hidden');
-  });
+  if (lmpMethodBtn)
+    lmpMethodBtn.addEventListener('click', () => {
+      lmpMethodBtn.classList.add('active');
+      conceptionMethodBtn.classList.remove('active');
+      ultrasoundMethodBtn.classList.remove('active');
+      lmpMethod.classList.remove('hidden');
+      conceptionMethod.classList.add('hidden');
+      ultrasoundMethod.classList.add('hidden');
+    });
 
-  conceptionMethodBtn.addEventListener('click', () => {
-    lmpMethodBtn.classList.remove('active');
-    conceptionMethodBtn.classList.add('active');
-    ultrasoundMethodBtn.classList.remove('active');
-    lmpMethod.classList.add('hidden');
-    conceptionMethod.classList.remove('hidden');
-    ultrasoundMethod.classList.add('hidden');
-  });
+  if (conceptionMethodBtn)
+    conceptionMethodBtn.addEventListener('click', () => {
+      lmpMethodBtn.classList.remove('active');
+      conceptionMethodBtn.classList.add('active');
+      ultrasoundMethodBtn.classList.remove('active');
+      lmpMethod.classList.add('hidden');
+      conceptionMethod.classList.remove('hidden');
+      ultrasoundMethod.classList.add('hidden');
+    });
 
-  ultrasoundMethodBtn.addEventListener('click', () => {
-    lmpMethodBtn.classList.remove('active');
-    conceptionMethodBtn.classList.remove('active');
-    ultrasoundMethodBtn.classList.add('active');
-    lmpMethod.classList.add('hidden');
-    conceptionMethod.classList.add('hidden');
-    ultrasoundMethod.classList.remove('hidden');
-  });
+  if (ultrasoundMethodBtn)
+    ultrasoundMethodBtn.addEventListener('click', () => {
+      lmpMethodBtn.classList.remove('active');
+      conceptionMethodBtn.classList.remove('active');
+      ultrasoundMethodBtn.classList.add('active');
+      lmpMethod.classList.add('hidden');
+      conceptionMethod.classList.add('hidden');
+      ultrasoundMethod.classList.remove('hidden');
+    });
 
   // Calculate button functionality
   const calculateBtn = document.getElementById('calculate-btn');
   const resetBtn = document.getElementById('reset-btn');
   const resultContainer = document.getElementById('result-container');
 
-  calculateBtn.addEventListener('click', calculateDueDate);
-  resetBtn.addEventListener('click', resetCalculator);
+  if (calculateBtn) calculateBtn.addEventListener('click', calculateDueDate);
+  if (resetBtn) resetBtn.addEventListener('click', resetCalculator);
 
   // Set default date to today
   document.getElementById('lmp-date').valueAsDate = new Date();
@@ -59,16 +62,19 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
-      const cycleLength = parseInt(document.getElementById('cycle-length').value);
+      let cycleLength = parseInt(document.getElementById('cycle-length').value, 10);
+      if (isNaN(cycleLength) || cycleLength < 20 || cycleLength > 45) {
+        cycleLength = 28; // sane default
+      }
       const ovulationDay = cycleLength - 14; // Typically ovulation occurs 14 days before next period
 
-      // Due date is 280days (40 weeks) from LMP (Naegele's rule)
+      // Due date is 280 days (40 weeks) from LMP (Naegele's rule)
       dueDate = new Date(lmpDate);
       dueDate.setDate(dueDate.getDate() + 280);
 
-      // Conception date is approximately ovulation day + 1 day (sperm can live 3-5 days)
+      // Conception date is approximately ovulation day after LMP
       conceptionDate = new Date(lmpDate);
-      conceptionDate.setDate(dueDate.getDate() + ovulationDay + 1);
+      conceptionDate.setDate(conceptionDate.getDate() + ovulationDay + 1);
     } else if (conceptionMethodBtn.classList.contains('active')) {
       // Conception date method
       conceptionDate = new Date(document.getElementById('conception-date').value);
@@ -114,9 +120,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Calculate pregnancy progress
     const totalDays = 280;
-    const daysPassed = Math.floor((today - conceptionDate) / (1000 * 60 * 60 * 24)) + 14;
-    const daysRemaining = totalDays - daysPassed;
-    const progressPercent = Math.min(100, Math.max(0, Math.round(daysPassed / totalDays)));
+    const msPerDay = 1000 * 60 * 60 * 24;
+    let daysPassed = Math.floor((today - conceptionDate) / msPerDay) + 14;
+    if (isNaN(daysPassed) || daysPassed < 0) daysPassed = 0;
+    const daysRemaining = Math.max(0, totalDays - daysPassed);
+    const progressPercent = Math.min(100, Math.max(0, Math.round((daysPassed / totalDays) * 100)));
 
     // Calculate weeks and days
     const currentWeek = Math.floor(daysPassed / 7);
@@ -133,7 +141,11 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('conception-date-result').textContent = conceptionDateStr;
     document.getElementById('current-week').textContent = `Week ${currentWeek} (Day ${currentDay})`;
     document.getElementById('progress-percent').textContent = `${progressPercent}% complete`;
-    document.getElementById('progress-bar').textContent = `${progressPercent}%`;
+    const progressBarEl = document.getElementById('progress-bar');
+    if (progressBarEl) {
+      progressBarEl.textContent = `${progressPercent}%`;
+      progressBarEl.style.width = `${progressPercent}%`;
+    }
     document.getElementById('trimester').textContent = trimester;
     document.getElementById('days-remaining').textContent = daysRemaining > 0 ? daysRemaining : 0;
     document.getElementById('fetal-age').textContent = `${currentWeek} weeks`;
@@ -149,12 +161,14 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function formatDate(date) {
+    if (!date || isNaN(date.getTime())) return '—';
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return date.toLocaleDateString('en-US', options);
   }
 
   function generateMilestones(dueDate, conceptionDate, today) {
     const milestonesList = document.getElementById('milestones-list');
+    if (!milestonesList) return;
     milestonesList.innerHTML = '';
 
     const milestones = [
@@ -165,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function () {
       { days: 42, title: 'First prenatal visit (6 weeks)', icon: 'fas fa-stethoscope' },
       { days: 84, title: 'End of first trimester (12 weeks)', icon: 'fas fa-flag' },
       { days: 98, title: 'Second trimester begins (14 weeks)', icon: 'fas fa-baby' },
-      { days: 140, title: 'Anatomy scan (20 weeks)', icon: 'fas fa-ultrasound' },
+      { days: 140, title: 'Anatomy scan (20 weeks)', icon: 'fas fa-person-rays' },
       { days: 168, title: 'Third trimester begins (24 weeks)', icon: 'fas fa-ear-listen' },
       { days: 252, title: 'Full-term (36 weeks)', icon: 'fas fa-check-circle' },
       { days: 280, title: 'Estimated due date (40 weeks)', icon: 'fas fa-birthday-cake' },
@@ -198,6 +212,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function generateTips(currentWeek, trimester) {
     const tipsContainer = document.getElementById('pregnancy-tips');
+    if (!tipsContainer) return;
     tipsContainer.innerHTML = '';
 
     const tips = {
@@ -244,8 +259,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const generalTipEl = document.createElement('div');
     generalTipEl.className = 'tip-card';
     generalTipEl.innerHTML = `
-      <div class="tip-title">
-        <i class="fas fa-info-circle" style="color: var(--info); margin-right: 0.5rem"></i> General Pregnancy Advice
+      <div class="tips-title">
+        <i
+          class="fas fa-info-circle"
+          style="color: var(--info); margin-right: 0.5rem; margin-top: 1.5rem;"></i>
+        General Pregnancy Advice
       </div>
       <ul class="tip-content">
         <li>Stay hydrated and eat a balanced diet with plenty of fruits, vegetables, and protein.</li>
@@ -264,8 +282,8 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('ultrasound-weeks').value = '';
     document.getElementById('ultrasound-days').value = '';
     document.getElementById('cycle-length').value = '28';
-    resultContainer.style.display = 'none';
-    lmpMethodBtn.click();
+    if (resultContainer) resultContainer.style.display = 'none';
+    if (lmpMethodBtn) lmpMethodBtn.click();
   }
 
   function updateYear() {

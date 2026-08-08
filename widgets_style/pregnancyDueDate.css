@@ -25,6 +25,7 @@ body {
     background: linear-gradient(135deg, #f1f2fa, #78a7ff);
     color: var(--dark);
     line-height: 1.5;
+    min-height: 100dvh;
 }
 
 .container {
@@ -83,6 +84,56 @@ label {
     color: #4a5568;
 }
 
+.method-toggle {
+    display: flex;
+    background: #d9e9fa;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.method-toggle button {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 6px;
+    transform-origin: bottom;
+    transition: var(--transition);
+
+    &:hover {
+        background: white;
+        box-shadow: 0 1px 3px rgb(0 0 0 / 0.15),
+        0 -1px 3px rgb(0 0 0 / 0.15);
+        transform: scaleY(1.1);
+    }
+    &:active {
+        transform: scaleY(1);
+    }
+    &.active {
+        background: white;
+        box-shadow: 0 1px 3px rgb(0 0 0 / 0.15),
+        0 -1px 3px rgb(0 0 0 / 0.15);
+        color: var(--primary);
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+@media (width <= 768px) {
+    .container {
+        padding: 1rem;
+    }
+    .result-details {
+        grid-template-columns: 1fr;
+    }
+}
+
 input, select {
     width: 100%;
     padding: 0.75rem 1rem;
@@ -130,7 +181,7 @@ input[type="date"]::-webkit-datetime-edit-fields-wrapper {
   gap: 2px;
   box-shadow: inset 0 0 2px 2px rgb(0 0 0 / 0.15);
   padding: 2px 4px 2px 12px;
-  border-radius: var(--border-radius);
+  border-radius: 6px;
   background-color: azure;
 }
 input[type="date"]::-webkit-datetime-edit-text {
@@ -303,7 +354,7 @@ input[type="number"]::-webkit-outer-spin-button:hover {
 
 .result-container {
     display: none;
-    /* animation: fadeIn 0.5s ease-in; */
+    animation: fadeIn 0.5s ease-in;
     transform-origin: bottom;
     
 }
@@ -336,7 +387,7 @@ input[type="number"]::-webkit-outer-spin-button:hover {
         background: linear-gradient(135deg, rgba(245, 247, 250, 0.8), rgba(212, 215, 219, 0.8));
         border-radius: inherit;
         z-index: -1;
-        /* animation: float 5s linear infinite; */
+        animation: float 5s linear infinite;
     }
 }
 
@@ -359,7 +410,7 @@ input[type="number"]::-webkit-outer-spin-button:hover {
     width: 100%;
     z-index: -2;
     border-radius: inherit;
-    /* animation: float 4s 1s linear infinite; */
+    animation: float 4s 1s linear infinite;
 }
 
 .result-title {
@@ -385,7 +436,7 @@ input[type="number"]::-webkit-outer-spin-button:hover {
     margin-bottom: 1rem;
     -webkit-background-clip: text;
     background-clip: text;
-    /* animation: bgMove 4s linear infinite; */
+    animation: bgMove 4s linear infinite;
 }
 
 @keyframes bgMove {
@@ -423,7 +474,7 @@ input[type="number"]::-webkit-outer-spin-button:hover {
 }
 
 .progress-container {
-    height: 12px;
+    height: 18px;
     background: #e2e8f0;
     border-radius: 6px;
     margin-bottom: 1rem;
@@ -434,6 +485,9 @@ input[type="number"]::-webkit-outer-spin-button:hover {
     height: 100%;
     background: linear-gradient(90deg, var(--primary), var(--secondary));
     border-radius: 6px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     transition: width 0.5s ease-in;
 }
 
@@ -452,9 +506,10 @@ input[type="number"]::-webkit-outer-spin-button:hover {
     content: '';
     position: absolute;
     left: 0.75rem;
-    top: 0;
+    top: 24px;
     bottom: 0;
     width: 2px;
+    height: 100%;
     background: #e2e8f0;
 }
 
@@ -518,7 +573,11 @@ input[type="number"]::-webkit-outer-spin-button:hover {
 
 .tip-content {
     color: #4a5568;
-    font-size: 0.95;
+    font-size: 0.95rem;
+
+    li {
+        margin-left: 1.5rem;
+    }
 }
 
 .footer {
@@ -536,7 +595,7 @@ footer {
     text-align: center;
     margin-bottom: 20px;
     padding-top: 20px;
-    border-top: 1px solid var(--gray);
+    border-top: 1px solid var(--info);
     color: var(--dark);
     font-size: 0.875rem;
     text-wrap: pretty;

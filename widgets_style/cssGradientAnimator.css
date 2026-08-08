@@ -1,0 +1,26 @@
+:root {
+    --primary: #4361ee;
+    --secondary: #3a0ca3;
+    --success: #4cc9f0;
+    --danger: #f72585;
+    --light: #f1f2fa;
+    --dark: #212529;
+    --gray: #6c757d;
+    --border-radius: 12px;
+    --shadow: 0 4px 8px rgb(0 0 0 / 0.15);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #d0d0d0;
+    color: var(--dark);
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
