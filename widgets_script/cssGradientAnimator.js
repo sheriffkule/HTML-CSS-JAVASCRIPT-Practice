@@ -83,6 +83,96 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
+    if (color3) {
+      color3.addEventListener('input', function () {
+        if (color3Text) color3Text.value = color3.value;
+        updateGradient();
+      });
+    }
+
+    if (color4) {
+      color4.addEventListener('input', function () {
+        if (color4Text) color4Text.value = color4.value;
+        updateGradient();
+      });
+    }
+
+    if (color5) {
+      color5.addEventListener('input', function () {
+        if (color5Text) color5Text.value = color5.value;
+        updateGradient();
+      });
+    }
+
+    if (color3Text) {
+      color3Text.addEventListener('input', function () {
+        if (isValidHex(this.value) && color3) {
+          color3.value = this.value;
+          updateGradient();
+        }
+      });
+    }
+
+    if (color4Text) {
+      color4Text.addEventListener('input', function () {
+        if (isValidHex(this.value) && color4) {
+          color4.value = this.value;
+          updateGradient();
+        }
+      });
+    }
+
+    if (color5Text) {
+      color5Text.addEventListener('input', function () {
+        if (isValidHex(this.value) && color5) {
+          color5.value = this.value;
+          updateGradient();
+        }
+      });
+    }
+
+    if (color1Opacity) {
+      color1Opacity.addEventListener('input', function () {
+        if (opacity1Value) opacity1Value.textContent = this.value;
+        updateGradient();
+      });
+    }
+
+    if (color2Opacity) {
+      color2Opacity.addEventListener('input', function () {
+        if (opacity2Value) opacity2Value.textContent = this.value;
+        updateGradient();
+      });
+    }
+
+    if (color3Opacity) {
+      color3Opacity.addEventListener('input', function () {
+        if (opacity3Value) opacity3Value.textContent = this.value;
+        updateGradient();
+      });
+    }
+
+    if (color4Opacity) {
+      color4Opacity.addEventListener('input', function () {
+        if (opacity4Value) opacity4Value.textContent = this.value;
+        updateGradient();
+      });
+    }
+
+    if (color5Opacity) {
+      color5Opacity.addEventListener('input', function () {
+        if (opacity5Value) opacity5Value.textContent = this.value;
+        updateGradient();
+      });
+    }
+
+    if (colorCountSelect) {
+      colorCountSelect.addEventListener('change', function () {
+        updateColorInputsVisibility();
+        updateGradient();
+      });
+    }
+
     // Angle slider
     if (angle) {
       angle.addEventListener('input', function () {
@@ -264,7 +354,7 @@ document.addEventListener('DOMContentLoaded', function () {
         currentType,
         angle ? angle.value : 0,
         color1 ? color1.value : '#000000',
-        color2 ? color2.value : '#ffffff'
+        color2 ? color2.value : '#ffffff',
       );
 
       if (gradientPreview) gradientPreview.style.background = gradient;
