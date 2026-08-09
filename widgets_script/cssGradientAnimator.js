@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function () {
         gradient = `linear-gradient(${angleVal}deg, ${color1Val}, ${color2Val})`;
         break;
       case 'radial':
-        gradient = `radial-gradient(${angleVal}deg, ${color1Val}, ${color2Val})`;
+        gradient = `radial-gradient(circle, ${color1Val}, ${color2Val})`;
         break;
       case 'conic':
         gradient = `conic-gradient(from ${angleVal}deg, ${color1Val}, ${color2Val})`;
@@ -173,16 +173,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     switch (currentType) {
       case 'linear':
-        gradient = `linear-gradient(${angleVal}deg, ${color2Val}, ${color1Val})`;
+        return `linear-gradient(${angleVal}deg, ${color2Val}, ${color1Val})`;
         break;
       case 'radial':
-        gradient = `radial-gradient(circle, ${color2Val}, ${color1Val})`;
+        return `radial-gradient(circle, ${color2Val}, ${color1Val})`;
         break;
       case 'conic':
-        gradient = `conic-gradient(from ${angleVal}deg, ${color2Val}, ${color1Val})`;
+        return `conic-gradient(from ${angleVal}deg, ${color2Val}, ${color1Val})`;
         break;
       default:
-        gradient = `linear-gradient(${angleVal}deg, ${color2Val}, ${color1Val})`;
+        return `linear-gradient(${angleVal}deg, ${color2Val}, ${color1Val})`;
     }
     return gradient;
   }
@@ -278,6 +278,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const randomAngle = Math.floor(Math.random() * 360);
     angle.value = randomAngle;
     angleValue.textContent = randomAngle;
+    angle.dispatchEvent(new Event('input'));
 
     // Random type
     const types = ['linear', 'radial', 'conic'];
@@ -295,6 +296,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const randomSpeed = Math.floor(Math.random() * 15 + 5);
       speed.value = randomSpeed;
       speedValue.textContent = randomSpeed;
+      speed.dispatchEvent(new Event('input'));
       startAnimation();
     } else {
       stopAnimation();
@@ -313,6 +315,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     angle.value = 135;
     angleValue.textContent = 135;
+    angle.dispatchEvent(new Event('input'));
 
     document.querySelector('.gradient-type button[data-type="linear"]').click();
 
@@ -355,7 +358,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const width = input.offsetWidth;
       const ratio = (input.value - input.min) / (input.max - input.min);
 
-      input.style.backgroundImage = `linear-gradient(to right,var(--success),var(--primary)${val}%,var(--medium-gray) ${val}%)`;
+      input.style.backgroundImage = `linear-gradient(to right, var(--success) 0%, var(--primary) ${val}%, var(--medium-gray) ${val}%, var(--medium-gray) 100%)`;
     };
     input.addEventListener('input', updateTrack);
     updateTrack();
