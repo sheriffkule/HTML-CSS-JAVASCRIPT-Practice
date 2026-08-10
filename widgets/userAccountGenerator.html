@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern User Account Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/userAccountGenerator.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1><i class="fas fa-user-plus"></i> User Account Generator</h1>
+        <p>Create and manage user accounts with ease.</p>
+      </header>
+
+      <main class="app-container">
+        <section class="card">
+          <h2 class="card-title"><i class="fas fa-cogs"></i> Account Settings</h2>
+
+          <article class="form-group">
+            <label for="accountType">Account Type</label>
+            <select id="accountType">
+              <option value="standard">Standard User</option>
+              <option value="admin">Administrator</option>
+              <option value="developer">Developer</option>
+              <option value="guest">Guest User</option>
+            </select>
+          </article>
+
+          <article class="form-group">
+            <label for="usernamePrefix">Username Prefix</label>
+            <input type="text" id="usernamePrefix" placeholder="e.g., user" />
+          </article>
+
+          <article class="form-group">
+            <label for="accountCount">Number of Accounts</label>
+            <input type="number" id="accountCount" min="1" max="50" value="5" />
+          </article>
+
+          <article class="form-group">
+            <label>Password Options</label>
+            <div class="checkbox-group">
+              <input type="checkbox" id="includeNumbers" checked />
+              <label for="includeNumbers">Include Numbers</label>
+            </div>
+            <div class="checkbox-group">
+              <input type="checkbox" id="includeSymbols" />
+              <label for="includeSymbols">Include Symbols</label>
+            </div>
+            <div class="checkbox-group">
+              <input type="checkbox" id="excludeSimilar" checked />
+              <label for="excludeSimilar">Exclude Similar Characters (i, l, 1, etc.)</label>
+            </div>
+          </article>
+
+          <article class="form-group">
+            <label for="passwordLength">Password Length</label>
+            <input type="range" id="passwordLength" min="8" max="20" value="12" />
+            <div class="input-group">
+              <span>8</span>
+              <span id="lengthValue" style="margin: 0 auto">12</span>
+              <span>20</span>
+            </div>
+            <div class="password-strength">
+              <div class="strength-meter" id="passwordStrength"></div>
+            </div>
+          </article>
+
+          <button class="btn btn-primary btn-block" id="generateBtn">
+            <i class="fas fa-bolt"></i> Generate Accounts
+          </button>
+        </section>
+
+        <section class="card">
+          <h2 class="card-title"><i class="fas fa-user"></i> Generated Accounts</h2>
+
+          <article class="accounts-list" id="accountsList">
+            <!-- Accounts will be displayed here -->
+            <div class="empty-state">
+              <p>No accounts generated yet. Click the generate button to create accounts.</p>
+            </div>
+          </article>
+
+          <article class="export-options">
+            <button class="btn btn-secondary" id="copyBtn"><i class="fas fa-copy"></i> Copy All</button>
+            <button class="btn btn-success" id="exportCSV"><i class="fas fa-file-csv"></i> Export CSV</button>
+            <button class="btn btn-danger" id="clearBtn"><i class="fas fa-trash"></i> Clear All</button>
+          </article>
+
+          <article class="stats">
+            <div class="stat-card">
+              <div class="stat-value" id="totalAccounts">0</div>
+              <div class="stat-label">Total Accounts</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="adminAccounts">0</div>
+              <div class="stat-label">Admin Accounts</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="strongPasswords">0</div>
+              <div class="stat-label">Strong Passwords</div>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <div class="notification" id="notification">
+      <i class="fas fa-check-circle"></i>
+      <span id="notificationText">Accounts copied to clipboard!</span>
+    </div>
+
+    <footer>
+      © <time datetime="" id="year"></time> Made width <span>♥</span> by
+      <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+    </footer>
+
+    <script src="/widgets_script/userAccountGenerator.js"></script>
+  </body>
+</html>
