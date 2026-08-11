@@ -114,3 +114,9 @@ h1 > i::after {
         scale: 1;
     }
 }
+
+.app0controls {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
