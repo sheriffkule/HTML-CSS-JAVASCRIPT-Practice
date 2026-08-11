@@ -260,5 +260,101 @@ input[type="checkbox"]:focus {
 
 .checkbox-group:has(input[type="checkbox"]:checked) {
     background-color: rgb(from var(--success) r g b / 0.1);
-    border: 1px solid var(--gray);
+    border: 1px solid rgb(0 0 0 / 0.2);
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--light);
+    transform-origin: bottom;
+
+    &:hover {
+        box-shadow: var(--shadow);
+        transform: translateY(-2px) scaleY(1.08);
+    }
+    &:active {
+        transform: translateY(0) scaleY(1);
+    }
+}
+
+.btn-primary {
+    background: var(--primary);
+
+    &:hover {
+        background: var(--primary-dark);
+    }
+}
+
+.btn-secondary {
+    background: var(--secondary);
+
+    &:hover {
+        background: #5a08a0;
+    }
+}
+
+.btn-success {
+    background: var(--success);
+
+    &:hover {
+        background: #3ab3d6;
+    }
+}
+
+.btn-danger {
+    background: var(--danger);
+
+    &:hover {
+        background: #e11d74;
+    }
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.accounts-list {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 20px;
+}
+
+.account-item {
+    padding: 15px;
+    border-radius: var(--border-radius);
+    background: var(--light);
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 4px solid var(--primary);
+}
+
+.account-info {
+    flex: 1;
+}
+
+.account-username {
+    font-weight: 600;
+}
+
+.account-password {
+    font-family: monospace;
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+.account-actions {
+    display: flex;
+    gap: 10px;
 }

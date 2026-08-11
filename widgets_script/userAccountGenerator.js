@@ -32,15 +32,11 @@ function init() {
   generateBtn.addEventListener('click', generateAccounts);
   copyBtn.addEventListener('click', copyAccounts);
   exportCSV.addEventListener('click', exportToCSV);
-  clearBtn
-    .addEventListener('click', clearAccounts)
+  clearBtn.addEventListener('click', clearAccounts);
 
-    [
-      // Update password strength when options change
-      (includeNumbers, includeSymbols, excludeSimilar)
-    ].forEach((el) => {
-      el.addEventListener('change', updatePasswordStrength);
-    });
+  [includeNumbers, includeSymbols, excludeSimilar].forEach((el) => {
+    el.addEventListener('change', updatePasswordStrength);
+  });
 }
 
 // Update password length display
@@ -117,7 +113,7 @@ function generatePassword() {
   let charset = lowercase + uppercase;
 
   if (includeNumbers.checked) charset += numbers;
-  if (includeSymbols.checked) charset += numbers;
+  if (includeSymbols.checked) charset += symbols;
   if (excludeSimilar.checked) {
     charset = charset.replace(/[il1LoO0]/g, '');
   }
@@ -201,3 +197,127 @@ function copyPassword(e) {
       });
   }
 }
+
+// Regenerate a specific password
+function regeneratePassword(e) {
+  const id = parseInt(e.currentTarget.getAttribute('data-id'));
+  const accountIndex = accounts.findIndex((acc) => acc.id === id);
+
+  if (accountIndex !== -1) {
+    accounts[accountIndex].password = generatePassword();
+    displayAccounts();
+    updateStats();
+    showNotification('Password regenerated!', 'success');
+  }
+}
+
+// Delete a specific account
+function deleteAccount(e) {
+  const id = parseInt(e.currentTarget.getAttribute('data-id'));
+  accounts = accounts.filter((acc) => acc.id !== id);
+  displayAccounts();
+  updateStats();
+  showNotification('Account deleted!', 'success');
+}
+
+// Copy all accounts to clipboard
+function copyAccounts() {
+  if (accounts.length === 0) {
+    showNotification('No accounts to copy', 'error');
+    return;
+  }
+
+  let text = 'Username,Password,Type\n';
+  accounts.forEach((account) => {
+    text += `${account.username},${account.password},${account.type}\n`;
+  });
+
+  navigator.clipboard
+    .writeText(text)
+    .then(() => {
+      showNotification('All accounts copied to clipboard!', 'success');
+    })
+    .catch((err) => {
+      console.error('Failed to copy accounts: ', err);
+      showNotification('Failed to copy accounts: ', 'error');
+    });
+}
+
+// Export accounts to CSV
+function exportToCSV() {
+  if (accounts.length === 0) {
+    showNotification('No accounts to export!', 'error');
+    return;
+  }
+
+  let csv = 'Username,Password,Type\n';
+  accounts.forEach((account) => {
+    csv += `${account.username},${account.password},${account.type}\n`;
+  });
+
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'user_accounts.csv';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => {
+    document.body.removeChild(a);
+  }, 100);
+  URL.revokeObjectURL(url);
+
+  showNotification('Accounts exported to CSV!', 'success');
+}
+
+// Clear all accounts
+function clearAccounts() {
+  if (accounts.length === 0) {
+    showNotification('No accounts to clear', 'error');
+    return;
+  }
+
+  if (confirm('Are you sure you want to clear all accounts?')) {
+    accounts = [];
+    displayAccounts();
+    updateStats();
+    showNotification('All accounts cleared!', 'success');
+  }
+}
+
+// Update statistics
+function updateStats() {
+  totalAccounts.textContent = accounts.length;
+
+  const adminCount = accounts.filter((acc) => acc.type === 'admin').length;
+  adminAccounts.textContent = adminCount;
+
+  // Count strong passwords (at least 12 characters with numbers and symbols)
+  const strongCount = accounts.filter((acc) => {
+    return (
+      acc.password.length >= 12 &&
+      /[0-9]/.test(acc.password) &&
+      /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>?]/.test(acc.password)
+    );
+  }).length;
+
+  strongPasswords.textContent = strongCount;
+}
+
+// Show notification
+function showNotification(message, type) {
+  notificationText.textContent = message;
+  notification.className = `notification ${type}`;
+  notification.classList.add('show');
+
+  // Update icon based on type
+  const icon = notification.querySelector('i');
+  icon.className = type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
+
+  setTimeout(() => {
+    notification.classList.remove('show');
+  }, 3000);
+}
+
+// Initialize the app when DOM is loaded
+document.addEventListener('DOMContentLoaded', init);
