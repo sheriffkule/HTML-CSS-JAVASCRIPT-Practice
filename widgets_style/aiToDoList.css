@@ -1,0 +1,116 @@
+:root {
+    --primary: #4361ee;
+    --primary-light: #4895ef;
+    --secondary: #3f37c9;
+    --success: #4cc9f0;
+    --danger: #f72585;
+    --warning: #f8961e;
+    --light: #f1f2fa;
+    --gray: #6c757d;
+    --gray-light: #d9dcdf;
+    --border-radius: 12px;
+    --shadow: 0 4px 12px rgb(0 0 0 / 0.15);
+    --transition: all 0.3s ease;
+}
+
+.dark-mode {
+    --primary: #4cc9f0;
+    --primary-light: #4895ef;
+    --secondary: #4361ee;
+    --dark: #f1f2fa;
+    --light: #1a1a2e;
+    --gray: #adb5bd;
+    --gray-light: #2d3047;
+    --shadow: 0 4px 12px rgb(255 255 255 / 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--light);
+    color: var(--dark);
+    transition: var(--transition);
+    min-height: 100dvh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    padding-block: 20px;
+    border-bottom: 1px solid var(--gray-light);
+}
+
+h1 {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+h1 > i {
+    color: var(--primary);
+    animation: float 3s ease-in-out infinite;
+    position: relative;
+}
+
+h1 > i::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    left: 0;
+    bottom: -3px;
+    background: var(--primary);
+    animation: iconScale 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    from, to {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px) scale(1.1);
+    }
+}
+
+@keyframes iconScale {
+    from, to {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1);
+    }
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--dark);
+    cursor: pointer;
+    transition: var(--transition);
+
+    &:hover {
+        color: var(--primary);
+        scale: 1.1;
+    }
+    &:active {
+        scale: 1;
+    }
+}

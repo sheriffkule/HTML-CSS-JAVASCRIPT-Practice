@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI-Powered To-Do List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/aiToDoList.css" />
+  </head>
+  <body class="dark-mode">
+    <main class="container">
+      <header>
+        <h1><i class="fas fa-robot"></i> AI-Powered To-Do List</h1>
+        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+      </header>
+
+      <section class="app-controls">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" id="searchInput" placeholder="Search tasks..." />
+        </div>
+        <select class="filter-select" id="filterSelect">
+          <option value="all">All Tasks</option>
+          <option value="active">Active</option>
+          <option value="completed">Completed</option>
+          <option value="high">High Priority</option>
+          <option value="work">Work</option>
+          <option value="personal">Personal</option>
+          I
+        </select>
+      </section>
+
+      <section class="add-task-form">
+        <article class="form-row">
+          <div class="form-group">
+            <label for="taskTitle">Task Title</label>
+            <input type="text" id="taskTitle" placeholder="What needs to be done?" />
+          </div>
+          <div class="form-group">
+            <label for="taskCategory">Category</label>
+            <select id="taskCategory">
+              <option value="personal">Personal</option>
+              <option value="work">Work</option>
+              <option value="shopping">Shopping</option>
+              <option value="health">Health</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </article>
+        <article class="form-row">
+          <div class="form-group">
+            <label for="taskPriority">Priority</label>
+            <select id="taskPriority">
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="taskDue">Due Date</label>
+            <input type="date" id="taskDue" />
+          </div>
+        </article>
+        <div class="form-group">
+          <label for="taskDescription">Description (Optional)</label>
+          <textarea id="taskDescription" placeholder="Add more details about this task..."></textarea>
+        </div>
+        <button class="btn btn-primary" id="addTaskBtn"><i class="fas fa-plus"></i> Add Task</button>
+        <article class="ai-actions">
+          <button class="btn btn-outline" id="aiCategorizeBtn">
+            <i class="fas fa-magic"></i> AI Categorize
+          </button>
+          <button class="btn btn-outline" id="aiSuggestDateBtn">
+            <i class="fas fa-calendar-check"></i> AI Suggest Date
+          </button>
+        </article>
+        <div class="ai-processing hidden" id="aiProcessing">
+          <div class="spinner"></div>
+          <span>AI is processing your request...</span>
+        </div>
+      </section>
+
+      <section class="tasks-container">
+        <div class="tasks-header">
+          <h2>Your Tasks</h2>
+          <span id="taskCount">0 tasks</span>
+        </div>
+        <article class="tasks-list" id="tasksList">
+          <!-- Tasks will be dynamically added here -->
+          <div class="empty-state">
+            <i class="fas fa-clipboard-list"></i>
+            <h3>No tasks yet.</h3>
+            <p>Add a task to get started!</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="ai-features">
+        <article class="ai-suggestions">
+          <h3><i class="fas fa-lightbulb"></i> AI Task Suggestion</h3>
+          <div class="suggestions-list" id="suggestionsList">
+            <!-- AI suggestions will be dynamically added here -->
+          </div>
+          <button class="btn btn-outline" id="generateSuggestionsBtn">
+            <i class="fas fa-sync-alt"></i> Generate new Suggestions
+          </button>
+        </article>
+
+        <article class="ai-insights">
+          <h3><i class="fas fa-chart-line"></i> AI Productivity Insights</h3>
+          <div class="insights-content" id="insightsContent">
+            <!-- AI insights will be dynamically added here -->
+          </div>
+          <button class="btn btn-outline" id="generateInsightsBtn">
+            <i class="fas fa-brain"></i> Generate Insights
+          </button>
+        </article>
+      </section>
+
+      <footer class="footer__copy">
+        © <time datetime="" id="year"></time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
+    </main>
+
+    <script src="/widgets_script/aiToDoList.js"></script>
+  </body>
+</html>
