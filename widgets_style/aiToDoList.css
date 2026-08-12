@@ -255,3 +255,97 @@ option::checkmark {
   color: var(--success);
   font-size: 1.5rem;
 }
+
+.add-task-form {
+    background-color: var(--light);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow),
+    inset var(--shadow);
+    margin-bottom: 30px;
+    transition: var(--transition);
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    flex: 1;
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: var(--dark);
+    }
+    textarea {
+        resize: vertical;
+        min-height: 80px;
+        outline: transparent;
+    }
+}
+
+.form-group :is(input, select, textarea) {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--gray-light);
+    background-color: var(--light);
+    color: var(--dark);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.btn {
+    padding: 12px 25px;
+    border-radius: var(--border-radius);
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transform-origin: bottom;
+
+    &:hover {
+        transform: translateY(-2px) scaleY(1.1);
+        box-shadow: var(--shadow);
+    }
+    &:active {
+        transform: translateY(0) scaleY(1);
+    }
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+
+    &:hover {
+        background-color: var(--secondary);
+    }
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+
+    &:hover {
+        background-color: var(--primary);
+        color: white;
+    }
+}
+
+.btn-danger {
+    background-color: var(--danger);
+    color: white;
+
+    &:hover {
+        background-color: #d90429;
+    }
+}

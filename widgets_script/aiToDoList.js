@@ -198,3 +198,83 @@ function toggleTaskCompletion(taskId) {
   renderTasks();
   updateTaskCount();
 }
+
+// Edit task
+function editTask(taskId) {
+  const task = task.find((t) => t.id === taskId);
+  if (!task) return;
+
+  // For simplicity, it will just populate with task data
+  taskTitle.value = task.title;
+  taskCategory.value = task.category;
+  taskPriority.value = task.priority;
+  taskDue.value = task.dueDate;
+  taskDescription.value = task.description || '';
+
+  // Remove the task and update UI
+  tasks = tasks.filter((t) => t.id !== taskId);
+  saveTasks();
+  renderTasks();
+  updateTaskCount();
+
+  // Scroll to form
+  document.querySelector('.add-task-form').scrollIntoView({ behavior: 'smooth' });
+}
+
+// Delete task
+function deleteTask(taskId) {
+  if (confirm('Are you sure you want to delete this task?')) {
+    tasks = tasks.filter((task) => task.id !== taskId);
+    saveTasks();
+    renderTasks();
+    updateTaskCount();
+  }
+}
+
+// Update task count
+function updateTaskCount() {
+  const totalTasks = tasks.length;
+  const completedTasks = tasks.filter((task) => task.completed).length;
+  taskCount.textContent = `${completedTasks}/${totalTasks} completed`;
+}
+
+// Format date
+function formatDate(dateString) {
+  const options = { year: 'numeric', month: 'short', day: 'numeric' };
+  return new Date(dateString).toLocaleDateString(undefined, options);
+}
+
+// Filter tasks
+filterSelect.addEventListener('change', (e) => {
+  currentFilter = e.target.value;
+  renderTasks();
+});
+
+// Search tasks
+searchInput.addEventListener('input', (e) => {
+  currentSearch = e.target.value;
+  renderTasks();
+});
+
+// AI categorize task
+aiCategorizeBtn.addEventListener('click', () => {
+  const title = taskTitle.value.trim();
+  if (!title) {
+    alert('Please enter a task title first.');
+    return;
+  }
+
+  showAIProcessing();
+  // Simulate AI processing with a timeout
+  setTimeout(() => {
+    const category = categorizeTask(title);
+    taskCategory.value = category;
+    hideAIProcessing();
+
+    // Show notification
+    showAIMessage(`AI categorized your task as: ${category}`);
+  }, 1500);
+});
+
+// Initialize the app
+init();
