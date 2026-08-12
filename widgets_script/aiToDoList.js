@@ -276,5 +276,65 @@ aiCategorizeBtn.addEventListener('click', () => {
   }, 1500);
 });
 
+// AI suggest due
+aiSuggestDateBtn.addEventListener('click', () => {
+  const title = taskTitle.value.trim();
+  if (!title) {
+    alert('Please enter a task title first');
+    return;
+  }
+
+  showAIProcessing();
+
+  // Simulate AI processing with a timeout
+  setTimeout(() => {
+    const dueDate = suggestDueDate(title);
+    taskDue.value = dueDate;
+    hideAIProcessing();
+
+    // Show notification
+    showAIMessage(`AI suggested due date: ${formatDate(dueDate)}`);
+  }, 1500);
+});
+
+// Show AI processing
+function showAIProcessing() {
+  aiProcessing.classList.remove('hidden');
+}
+
+// Hide AI Processing
+function hideAIProcessing() {
+  aiProcessing.classList.add('hidden');
+}
+
+// Show AI Message
+function showAIMessage(message) {
+  // Create a temporary notification
+  const notification = document.createElement('div');
+  notification.textContent = message;
+  notification.style.cssText = `
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--primary);
+  color: white;
+  padding: 12px 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  z-index: 100;
+  transition: var(--transition);
+  `;
+
+  document.body.appendChild(notification);
+
+  // Remove after 3 seconds
+  setTimeout(() => {
+    notification.style.opacity = '0';
+    setTimeout(() => {
+      document.body.removeChild(notification);
+    }, 300);
+  }, 3000);
+}
+
 // Initialize the app
 init();

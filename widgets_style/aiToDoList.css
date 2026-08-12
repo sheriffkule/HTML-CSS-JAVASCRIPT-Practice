@@ -466,3 +466,64 @@ input[type="date"]:open {
 .task-content {
     flex: 1;
 }
+
+.task-title {
+    font-weight: 600;
+    margin-bottom: 5px;
+    transition: var(--transition);
+}
+
+.task-completed .task-title {
+    text-decoration: line-through;
+    color: var(--gray);
+}
+
+.task-meta {
+    display: flex;
+    gap: 15px;
+    font-size: 0.875rem;
+    color: var(--gray);
+}
+
+.task-category, .task-priority, .task-due {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.priority-high {
+    color: var(--danger);
+}
+
+.priority-medium {
+    color: var(--warning);
+}
+
+.priority-low {
+    color: var(--success);
+}
+
+.task-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.task-actions button {
+    background: none;
+    border: none;
+    color: var(--gray);
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 1rem;
+
+    &:hover {
+        color: var(--primary);
+        scale: 1.1;
+    }
+}
+
+.empty-state {
+    padding: 40px 20px;
+    text-align: center;
+    
+}
