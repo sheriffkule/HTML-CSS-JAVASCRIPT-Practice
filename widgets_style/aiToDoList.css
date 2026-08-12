@@ -349,3 +349,120 @@ option::checkmark {
         background-color: #d90429;
     }
 }
+
+input[type="date"] {
+  box-shadow: var(--shadow),
+  inset var(--shadow);
+  transition: var(--transition);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-color: var(--dark);
+    border-radius: 50%;
+    padding: 5px;
+    margin-left: 8px;
+    opacity: 0.6;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    scale: 1.4;
+    background-color: var(--success);
+    opacity: 1;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:active {
+    scale: 1.2;
+}
+
+input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+  display: flex;
+  gap: 2px;
+  box-shadow: inset 0 0 2px 2px rgb(0 0 0 / 0.15);
+  padding: 2px 4px 2px 12px;
+  border-radius: 6px;
+  background-color: var(--light);
+}
+input[type="date"]::-webkit-datetime-edit-text {
+  padding-inline: 2px;
+  color: var(--primary);
+}
+
+input[type="date"]::-webkit-datetime-edit-ampm-field {
+  color: var(--primary);
+  padding: 2px 4px;
+}
+
+input[type="date"]:open {
+    border-color: var(--primary);
+    background-color: var(--light);
+    box-shadow: 0 0 0 2px rgb(67 97 238 / 0.2),
+    inset 0 0 0 2px rgb(67 97 238 / 0.2);
+}
+
+.tasks-container {
+    background-color: var(--light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow)
+    inset var(--shadow);
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.tasks-header {
+    padding: 20px;
+    background-color: var(--primary);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tasks-list {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.task-item {
+    padding: 20px;
+    border-bottom: 1px solid var(--gray-light);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: var(--transition);
+
+    &:last-child {
+        border-bottom: none;
+    }
+    &:hover {
+        background-color: var(--gray-light);
+    }
+}
+
+.task-checkbox {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--gray);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.task-checkbox.checked {
+    background-color: var(--success);
+    border-color: var(--success);
+}
+
+.task-checkbox.checked i {
+    color: white;
+    font-size: 0.8rem;
+    display: block;
+}
+
+.task-content {
+    flex: 1;
+}
