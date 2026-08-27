@@ -559,6 +559,10 @@ input[type="date"]:open {
         align-items: center;
         gap: 10px;
         color: var(--dark);
+
+        i {
+            color: var(--primary);
+        }
     }
 }
 
@@ -566,6 +570,7 @@ input[type="date"]:open {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-bottom: 16px;
 }
 
 .suggestion-item, .insight-item {
@@ -604,5 +609,105 @@ input[type="date"]:open {
 
     button {
         flex: 1;
+    }
+}
+
+.ai-processing {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: var(--gray-light);
+    border-radius: var(--border-radius);
+    margin-top: 10px;
+}
+
+.ai-processing.hidden {
+    display: none;
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border-width: 3px;
+    border-style: dotted;
+    border-color: var(--primary);
+    animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+.insight-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.insight-title {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    i {
+        color: var(--primary);
+    }
+}
+
+.insight-details {
+    color: var(--gray);
+    text-wrap: pretty;
+}
+
+footer {
+    margin-top: 30px;
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--gray-light);
+    color: var(--dark-gray);
+    font-size: 0.875rem;
+
+    span {
+        color: red;
+        font-size: 1rem;
+    }
+    abbr {
+        color: var(--success);
+        letter-spacing: 0.5px;
+        cursor: default;
+        text-underline-offset: 2px;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: var(--gray);
+    border: 1px dotted var(--gray-light);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-light);
+}
+
+@media (width < 768px) {
+    .form-row, .app-controls {
+        flex-direction: column;
+    }
+    .task-meta {
+        flex-direction: column;
+        gap: 5px;
+    }
+    .ai-features {
+        grid-template-columns: 1fr;
     }
 }

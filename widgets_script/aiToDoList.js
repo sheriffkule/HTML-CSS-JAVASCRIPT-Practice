@@ -70,6 +70,7 @@ addTaskBtn.addEventListener('click', () => {
   tasks.unshift(newTask);
   saveTasks();
   renderTasks();
+  generateAIInsights();
   updateTaskCount();
   resetForm();
 });
@@ -88,6 +89,12 @@ function saveTasks() {
   localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
+function escapeHtml(value) {
+  const element = document.createElement('div');
+  element.textContent = value;
+  return element.innerHTML;
+}
+
 // Render Tasks
 function renderTasks() {
   let filteredTasks = tasks;
@@ -100,9 +107,9 @@ function renderTasks() {
   } else if (currentFilter === 'high') {
     filteredTasks = tasks.filter((task) => task.priority === 'high');
   } else if (currentFilter === 'work') {
-    filteredTasks = tasks.filter((task) => task.priority === 'work');
+    filteredTasks = tasks.filter((task) => task.category === 'work');
   } else if (currentFilter === 'personal') {
-    filteredTasks = tasks.filter((task) => task.priority === 'personal');
+    filteredTasks = tasks.filter((task) => task.category === 'personal');
   }
 
   // Apply search
@@ -129,13 +136,13 @@ function renderTasks() {
     .map(
       (task) => `
       <div class="task-item ${task.completed ? 'task-completed' : ''}" data-id="${task.id}">
-        <div class="task checkbox ${task.completed ? 'checked' : ''}" data-id="${task.id}">
+        <div class="task-checkbox ${task.completed ? 'checked' : ''}" data-id="${task.id}">
           ${task.completed ? '<i class="fas fa-check"></i>' : ''}
         </div>
         <div class="task-content">
-          <div class="task-title">${task.title}</div>
+          <div class="task-title">${escapeHtml(task.title)}</div>
           <div class="task-meta">
-            <span class="task-category"><i class="fas fa-tag"></i> ${task.category}</span>
+            <span class="task-category"><i class="fas fa-tag"></i> ${escapeHtml(task.category)}</span>
             <span
               class="task-priority ${
                 task.priority === 'high'
@@ -147,16 +154,16 @@ function renderTasks() {
             ${
               task.dueDate
                 ? `<span class="task-due"
-                  ><i class="fas fa-calendar"></i> ${formatDate(task.dueDate)}</span
+                  ><i class="fas fa-calendar"></i> ${escapeHtml(formatDate(task.dueDate))}</span
                 >`
                 : ''
             }
           </div>
-          ${task.description ? `<div class="task-description">${task.description}</div>` : ''}
+          ${task.description ? `<div class="task-description">${escapeHtml(task.description)}</div>` : ''}
         </div>
         <div class="task-actions">
-          <button class="edit-btn" data-id="$task.id"><i class="fas fa-edit"></i></button>
-          <button class="delete-btn" data-id="$task.id"><i class="fas fa-trash"></i></button>
+          <button class="edit-btn" data-id="${task.id}" aria-label="Edit task"><i class="fas fa-edit"></i></button>
+          <button class="delete-btn" data-id="${task.id}" aria-label="Delete task"><i class="fas fa-trash"></i></button>
         </div>
       </div>
     `,
@@ -196,12 +203,13 @@ function toggleTaskCompletion(taskId) {
   });
   saveTasks();
   renderTasks();
+  generateAIInsights();
   updateTaskCount();
 }
 
 // Edit task
 function editTask(taskId) {
-  const task = task.find((t) => t.id === taskId);
+  const task = tasks.find((t) => t.id === taskId);
   if (!task) return;
 
   // For simplicity, it will just populate with task data
@@ -215,6 +223,7 @@ function editTask(taskId) {
   tasks = tasks.filter((t) => t.id !== taskId);
   saveTasks();
   renderTasks();
+  generateAIInsights();
   updateTaskCount();
 
   // Scroll to form
@@ -227,6 +236,7 @@ function deleteTask(taskId) {
     tasks = tasks.filter((task) => task.id !== taskId);
     saveTasks();
     renderTasks();
+    generateAIInsights();
     updateTaskCount();
   }
 }
@@ -483,8 +493,60 @@ function generateAIInsights() {
         Your completion rate is ${completionRate}% (${completedTasks}/${totalTasks} tasks completed)
       </div>
     </div>
+    <div class="insight-item">
+      <div class="insight-title"><i class="fas fa-tags"></i> Most Common Category</div>
+      <div class="insight-details">You have the most tasks in the "${mostCommonCategory}" category</div>
+    </div>
+    <div class="insight-item">
+      <div class="insight-title"><i class="fas fa-exclamation-triangle"></i> Overdue Tasks</div>
+      <div class="insight-details">
+        You have ${overdueTasks} overdue task${overdueTasks !== 1 ? 's' : ''} that need attention
+      </div>
+    </div>
+    <div class="insight-item">
+      <div class="insight-title"><i class="fas fa-bolt"></i> AI Recommendation</div>
+      <div class="insight-details">
+        ${
+          completionRate < 50
+            ? 'Try breaking down larger tasks into smaller, manageable steps'
+            : 'Great job! Consider setting more challenging goals to maintain momentum'
+        }
+      </div>
+    </div>
   `;
 }
+
+// Generate new insights
+generateInsightsBtn.addEventListener('click', () => {
+  showAIProcessing();
+
+  // Simulate AI processing with a timeout
+  setTimeout(() => {
+    generateAIInsights();
+    hideAIProcessing();
+    showAIMessage('AI generated new productivity insights!');
+  }, 1500);
+});
+
+// Add suggestion as task
+function addSuggestionAsTask(suggestion) {
+  taskTitle.value = suggestion;
+  document.querySelector('.add-task-form').scrollIntoView({ behavior: 'smooth' });
+}
+
+// Update year in footer
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+  yearElement.setAttribute('datetime', currentYear.toString());
+  yearElement.textContent = currentYear.toString();
+}
+updateYear();
 
 // Initialize the app
 init();
