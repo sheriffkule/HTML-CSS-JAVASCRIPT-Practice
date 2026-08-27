@@ -404,7 +404,7 @@ function suggestDueDate(title) {
 }
 
 // Generate AI suggestions
-function generateSuggestions() {
+function generateAISuggestions() {
   const suggestions = [
     'Plan your week ahead.',
     'Review your goals for the month.',
@@ -437,6 +437,53 @@ function generateSuggestions() {
       addSuggestionAsTask(suggestion);
     });
   });
+}
+
+// Generate New Suggestions
+generateSuggestionsBtn.addEventListener('click', () => {
+  showAIProcessing();
+
+  // Simulate AI processing width timeout
+  setTimeout(() => {
+    generateAISuggestions();
+    hideAIProcessing();
+    showAIMessage('AI generated new task suggestions!');
+  }, 1500);
+});
+
+// Generate AI insights
+function generateAIInsights() {
+  const totalTasks = tasks.length;
+  const completedTasks = tasks.filter((task) => task.completed).length;
+  const completionRate = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+
+  // Find most common category
+  const categoryCounts = {};
+  tasks.forEach((task) => {
+    categoryCounts[task.category] = (categoryCounts[task.category] || 0) + 1;
+  });
+
+  let mostCommonCategory = 'None';
+  let maxCount = 0;
+  for (const category in categoryCounts) {
+    if (categoryCounts[category] > maxCount) {
+      mostCommonCategory = category;
+      maxCount = categoryCounts[category];
+    }
+  }
+
+  // Find overdue tasks
+  const today = new Date().toISOString().split('T')[0];
+  const overdueTasks = tasks.filter((task) => task.dueDate && !task.completed && task.dueDate < today).length;
+
+  insightsContent.innerHTML = `
+    <div class="insight-item">
+      <div class="insight-title"><i class="fas fa-tachometer-alt"></i> Productivity Score</div>
+      <div class="insight-details">
+        Your completion rate is ${completionRate}% (${completedTasks}/${totalTasks} tasks completed)
+      </div>
+    </div>
+  `;
 }
 
 // Initialize the app
