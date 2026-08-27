@@ -384,6 +384,7 @@ input[type="date"]::-webkit-datetime-edit-fields-wrapper {
   border-radius: 6px;
   background-color: var(--light);
 }
+
 input[type="date"]::-webkit-datetime-edit-text {
   padding-inline: 2px;
   color: var(--primary);
@@ -525,5 +526,14 @@ input[type="date"]:open {
 .empty-state {
     padding: 40px 20px;
     text-align: center;
-    
+    color: var(--gray);
+
+    i {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        color: var(--gray-light);
+    }
+    h3 {
+        margin-bottom: 5px;
+    }
 }

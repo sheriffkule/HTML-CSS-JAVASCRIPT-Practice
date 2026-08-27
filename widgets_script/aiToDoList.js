@@ -336,5 +336,108 @@ function showAIMessage(message) {
   }, 3000);
 }
 
+// Categorize task using AI (simulated)
+function categorizeTask(title) {
+  const titleLower = title.toLowerCase();
+
+  // Simple keyword-based categorization
+  if (
+    titleLower.includes('meeting') ||
+    titleLower.includes('call') ||
+    titleLower.includes('client') ||
+    titleLower.includes('project') ||
+    titleLower.includes('report') ||
+    titleLower.includes('work')
+  ) {
+    return 'work';
+  } else if (
+    titleLower.includes('buy') ||
+    titleLower.includes('shop') ||
+    titleLower.includes('grocery') ||
+    titleLower.includes('purchase')
+  ) {
+    return 'shopping';
+  } else if (
+    titleLower.includes('exercise') ||
+    titleLower.includes('gym') ||
+    titleLower.includes('run') ||
+    titleLower.includes('walk') ||
+    titleLower.includes('doctor') ||
+    titleLower.includes('health')
+  ) {
+    return 'health';
+  } else if (
+    titleLower.includes('family') ||
+    titleLower.includes('friend') ||
+    titleLower.includes('party') ||
+    titleLower.includes('movie') ||
+    titleLower.includes('read') ||
+    titleLower.includes('hobby')
+  ) {
+    return 'personal';
+  }
+
+  return 'other';
+}
+
+// Suggest due date using AI (simulated)
+function suggestDueDate(title) {
+  const today = new Date();
+  const titleLower = title.toLowerCase();
+
+  // Simple logic for due date suggestions
+  if (titleLower.includes('urgent') || titleLower.includes('asap') || titleLower.includes('important')) {
+    // Tomorrow for urgent tasks
+    today.setDate(today.getDate() + 1);
+  } else if (titleLower.includes('meeting') || titleLower.includes('call')) {
+    // In 3 days for meetings
+    today.setDate(today.getDate() + 3);
+  } else if (titleLower.includes('project') || titleLower.includes('report')) {
+    // In 1 week for projects
+    today.setDate(today.getDate() + 7);
+  } else {
+    // Default: 2 days from now
+    today.setDate(today.getDate() + 2);
+  }
+
+  return today.toISOString().split('T')[0];
+}
+
+// Generate AI suggestions
+function generateSuggestions() {
+  const suggestions = [
+    'Plan your week ahead.',
+    'Review your goals for the month.',
+    'Organize your workspace.',
+    'Schedule time for exercise.',
+    'Read for 30 minutes.',
+    'Call a family member or friend.',
+    'Learn a new skill for 15 minutes.',
+    'Clean out your email inbox.',
+    'Review your budget and expenses.',
+  ];
+
+  suggestionsList.innerHTML = suggestions
+    .map(
+      (suggestion) => `
+      <div class="suggestion-item">
+        <span>${suggestion}</span>
+        <button class="add-suggestion-btn" data-suggestion="${suggestion}">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+    `,
+    )
+    .join('');
+
+  // Add event listeners to suggestion button
+  document.querySelectorAll('.add-suggestion-btn').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      const suggestion = e.currentTarget.getAttribute('data-suggestion');
+      addSuggestionAsTask(suggestion);
+    });
+  });
+}
+
 // Initialize the app
 init();
