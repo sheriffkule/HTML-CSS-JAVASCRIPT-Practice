@@ -40,3 +40,35 @@ function initApp() {
   // Initial preview update
   updateInvoicePreview();
 }
+
+function toggleTheme() {
+  const newTheme = this.checked ? 'dark' : 'light'
+  document.documentElement.setAttribute('data-theme', newTheme)
+  localStorage.setItem('theme', newTheme)
+}
+
+function setupFormListeners() {
+  // Company info
+  document.getElementById('companyName').addEventListener('input', updateInvoicePreview)
+  document.getElementById('companyEmail').addEventListener('input', updateInvoicePreview)
+  document.getElementById('companyAddress').addEventListener('input', updateInvoicePreview)
+  document.getElementById('companyPhone').addEventListener('input', updateInvoicePreview)
+
+  // Client info
+  document.getElementById('clientName').addEventListener('input', updateInvoicePreview)
+  document.getElementById('clientEmail').addEventListener('input', updateInvoicePreview)
+  document.getElementById('clientAddress').addEventListener('input', updateInvoicePreview)
+  document.getElementById('clientPhone').addEventListener('input', updateInvoicePreview)
+
+  // Invoice details
+  document.getElementById('invoiceNumber').addEventListener('input', updateInvoicePreview)
+  document.getElementById('invoiceDate').addEventListener('input', updateInvoicePreview)
+  document.getElementById('dueDate').addEventListener('input', updateInvoicePreview)
+
+  // Notes
+  document.getElementById('notes').addEventListener('input', updateInvoicePreview)
+
+  // Totals
+  document.getElementById('taxRate').addEventListener('input', calculateTotals)
+  document.getElementById('discount').addEventListener('input', calculateTotals)
+}

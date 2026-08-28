@@ -152,6 +152,56 @@
           </div>
         </div>
       </div>
+
+      <div class="invoice-preview-container" id="invoicePreview">
+        <div class="invoice-paper">
+          <div class="invoice-header">
+            <div class="company-info">
+              <h2 id="previewCompanyName">Your Company LLC</h2>
+              <p id="previewCompanyAddress">123 Business St, City, Country</p>
+              <p id="previewCompanyContact">contact@company.com | +1 (555) 123-4567</p>
+            </div>
+            <div class="invoice-title">
+              <h1>INVOICE</h1>
+              <div class="invoice-meta">
+                <div class="meta-row">
+                  <span>Invoice #:</span>
+                  <span id="previewInvoiceNumber">INV-001</span>
+                </div>
+                <div class="meta-row">
+                  <span>Date:</span>
+                  <span id="previewInvoiceDate">Jan 1, 2027</span>
+                </div>
+                <div class="meta-row">
+                  <span>Due Date:</span>
+                  <span id="previewDueDate">Jan 15, 2027</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="client-info">
+            <h3>Bill To:</h3>
+            <p id="previewClientName">Your Company LLc</p>
+            <p id="previewClientAddress">123 Client St, City, Country</p>
+            <p id="previewClientContact">contact@client.com | +1 (555) 987-6543</p>
+          </div>
+
+          <div class="invoice-items">
+            <div class="items-header">
+              <div class="col-desc">Description</div>
+              <div class="col-qty">Qty</div>
+              <div class="col-price">Unit Price</div>
+              <div class="col-tax">Tax</div>
+              <div class="col-total">Amount</div>
+            </div>
+            <div id="previewItemsContainer">
+              <!-- Preview items will be added here -->
+              <div class="item-row empty-message">No items added yet.</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>
