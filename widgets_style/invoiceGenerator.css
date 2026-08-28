@@ -1,0 +1,80 @@
+:root {
+    --primary: #4361ee;
+    --secondary: #3f37c9;
+    --accent: #4895ef;
+    --light: #f1f2fa;
+    --dark: #212529;
+    --success: #4cc9f0;
+    --danger: #f72585;
+    --warning: #f8961e;
+    --info: #43aa8b;
+    --text-primary: #333;
+    --text-secondary: #707070;
+    --text-light: #f8f9fa;
+    --bg-color: #eee;
+    --card-bg: #f8f9fa;
+    --border-color: #cee2e6;
+    --shadow-sm: 0 1px 3px rgb(0 0 0 / 0.15), 0 1px 2px rgb(0 0 0 / 0.3);
+    --shadow-md: 0 4px 6px rgb(0 0 0 / 0.12), 0 1px 3px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 25px rgb(0 0 0 / 0.1), 0 5px 10px rgb(0 0 0 / 0.8);
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+}
+
+[data-theme="dark"] {
+    --primary-color: #4895ef;
+    --secondary: #4361ee;
+    --accent: #3f37c9;
+    --light: #343a40;
+    --dark: #f1f2fa;
+    --text-primary: #f8f9fa;
+    --text-secondary: #e9ecef;
+    --bg-color: #212529;
+    --card-bg: #343a40;
+    --border-color: #495057;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.5;
+    color: var(--text-primary);
+    background-color: var(--bg-color);
+}
+
+.app-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+h1, h2, h3, h4 {
+    color: var(--primary-color);
+    /* margin-bottom: 15px; */
+}
+
+h1 {
+    font-size: 2.25rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

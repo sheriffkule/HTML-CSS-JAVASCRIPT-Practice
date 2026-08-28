@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Invoice Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/invoiceGenerator.css" />
+  </head>
+  <body data-theme="dark">
+    <div class="app-container">
+      <header>
+        <h1>Invoice Generator</h1>
+        <div class="theme-toggle">
+          <i class="fas fa-sun"></i>
+          <label class="switch">
+            <input type="checkbox" id="themeToggle" />
+            <span class="slider round"></span>
+          </label>
+          <i class="fas fa-moon"></i>
+        </div>
+      </header>
+      <div class="controls">
+        <button id="generatePdf" class="btn"><i class="fas fa-file-pdf"></i> Save as PDF</button>
+        <button id="printInvoice" class="btn"><i class="fas fa-print"></i> Print Invoice</button>
+        <button id="clearAll" class="btn btn-danger"><i class="fas fa-trash"></i> Clear All</button>
+      </div>
+      <div class="invoice-container">
+        <div class="invoice-form">
+          <div class="form-section">
+            <h2><i class="fas fa-info-circle"></i> Invoice Details</h2>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="invoiceNumber">Invoice #</label>
+                <input type="text" id="invoiceNumber" placeholder="INV-001" />
+              </div>
+              <div class="form-group">
+                <label for="invoiceDate">Date</label>
+                <input type="date" id="invoiceDate" />
+              </div>
+              <div class="form-group">
+                <label for="dueDate">Due Date</label>
+                <input type="date" id="dueDate" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h2><i class="fas fa-building"></i> Your Company Info</h2>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="companyName">Company Name</label>
+                <input type="text" id="companyName" placeholder="Your Company LLc" />
+              </div>
+              <div class="form-group">
+                <label for="companyEmail">Email</label>
+                <input type="email" id="companyEmail" placeholder="contact@company.com" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="companyAddress">Address</label>
+                <textarea
+                  id="companyAddress"
+                  rows="2"
+                  placeholder="123 Business St, City, Country"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="companyPhone">Phone</label>
+                <input type="tel" id="companyPhone" placeholder="+1 (555) 123-4567" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
