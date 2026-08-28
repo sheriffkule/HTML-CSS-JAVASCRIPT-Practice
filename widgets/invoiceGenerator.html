@@ -200,8 +200,41 @@
               <div class="item-row empty-message">No items added yet.</div>
             </div>
           </div>
+
+          <div class="invoice-summary">
+            <div class="summary-notes">
+              <h4>Notes:</h4>
+              <p id="previewNotes">Thank you for your business!</p>
+            </div>
+            <div class="summary-totals">
+              <div class="total-row">
+                <span>Subtotal:</span>
+                <span id="previewSubtotal">$0.00</span>
+              </div>
+              <div class="total-row">
+                <span>Tax:</span>
+                <span id="previewTax">$0.00</span>
+              </div>
+              <div class="total-row">
+                <span>Discount:</span>
+                <span id="previewDiscount">$0.00</span>
+              </div>
+              <div class="total-row">
+                <span>Total:</span>
+                <span id="previewTotal">$0.00</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="invoice-footer">
+            <p>Thank you for your business</p>
+          </div>
         </div>
       </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/4.2.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="/widgets_script/invoiceGenerator.js"></script>
   </body>
 </html>

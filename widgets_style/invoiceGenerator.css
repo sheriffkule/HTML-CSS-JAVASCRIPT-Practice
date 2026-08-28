@@ -23,7 +23,7 @@
 }
 
 [data-theme="dark"] {
-    --primary-color: #4895ef;
+    --primary: #4895ef;
     --secondary: #4361ee;
     --accent: #3f37c9;
     --light: #343a40;
@@ -64,7 +64,7 @@ header {
 }
 
 h1, h2, h3, h4 {
-    color: var(--primary-color);
+    color: var(--primary);
     /* margin-bottom: 15px; */
 }
 
@@ -214,4 +214,44 @@ input:checked + .slider::before {
         font-weight: 500;
         color: var(--text-secondary);
     }
+}
+
+.form-group :is(input, textarea, select), textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+}
+
+.form-group textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.items-table {
+    width: 100%;
+}
+
+.items-header {
+    display: flex;
+    background-color: var(--primary);
+    color: white;
+    padding: 10px;
+    border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+    font-weight: 500;
+}
+
+.item-col {
+    padding-inline: 5px;
+}
+
+.description {
+    flex: 3;
+}
+
+.quantity, .price, .tax, .amount {
+    flex: 1;
+    text-align: center;
 }
