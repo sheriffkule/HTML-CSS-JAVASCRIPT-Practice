@@ -71,6 +71,85 @@
               </div>
             </div>
           </div>
+
+          <div class="form-section">
+            <h2><i class="fas fa-user-tie"></i> Client Info</h2>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="clientName">Client Name</label>
+                <input type="text" id="clientName" placeholder="Client Company LLC" />
+              </div>
+              <div class="form-group">
+                <label for="clientEmail">Client Email</label>
+                <input type="email" id="clientEmail" placeholder="contact@client.com" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="clientAddress">Client Address</label>
+                <textarea id="clientAddress" rows="2" placeholder="123 Client St, City, Country"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="clientPhone">Client Phone</label>
+                <input type="tel" id="clientPhone" placeholder="+1 (555) 987-6543" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h2><i class="fas fa-receipt"></i> Items</h2>
+            <div class="items-table">
+              <div class="items-header">
+                <div class="item-col description">Description</div>
+                <div class="item-col quantity">Qty</div>
+                <div class="item-col price">Unit Price</div>
+                <div class="item-col tax">Tax</div>
+                <div class="item-col amount">Amount</div>
+                <div class="item-col action"></div>
+              </div>
+              <div id="itemsContainer">
+                <!-- Items will be added here dynamically -->
+              </div>
+              <button class="btn" id="addItem"><i class="fas fa-plus"></i> Add Item</button>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h2><i class="fas fa-calculator"></i> Totals</h2>
+            <div class="totals-row">
+              <div class="form-group">
+                <label for="taxRate">Tax Rate (%)</label>
+                <input type="number" id="taxRate" value="10" min="0" step="0.1" />
+              </div>
+              <div class="form-group">
+                <label for="discount">Discount ($)</label>
+                <input type="number" id="discount" value="0" min="0" step="0.01" />
+              </div>
+            </div>
+            <div class="summary">
+              <div class="summary-row">
+                <span>Subtotal:</span>
+                <span id="subtotal">$0.00</span>
+              </div>
+              <div class="summary-row">
+                <span>Tax:</span>
+                <span id="taxAmount">$0.00</span>
+              </div>
+              <div class="summary-row">
+                <span>Discount:</span>
+                <span id="discountAmount">$0.00</span>
+              </div>
+              <div class="summary-row">
+                <span>Total:</span>
+                <span id="totalAmount">$0.00</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h2><i class="fas fa-sticky-note"></i> Notes</h2>
+            <textarea id="notes" rows="5" placeholder="Payment terms, thank you note, etc."></textarea>
+          </div>
         </div>
       </div>
     </div>

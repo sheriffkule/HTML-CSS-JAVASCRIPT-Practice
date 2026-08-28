@@ -78,3 +78,51 @@ h2 {
     align-items: center;
     gap: 10px;
 }
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+
+    input {
+        opacity: 0;
+        height: 0;
+        width: 0;
+    }
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background-color: var(--light);
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider::before {
+    content: '';
+    position: absolute;
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background-color: var(--primary);
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--dark);
+}
+
+input:checked + .slider::before {
+    transform: translateX(30px);
+}
