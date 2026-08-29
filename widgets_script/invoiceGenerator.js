@@ -270,6 +270,74 @@ function formatCurrency(amount) {
 }
 
 function formatDate(dateString) {
-  const options = {year: 'numeric', month: 'short', day: 'numeric'}
-  return new Date(dateString).toLocaleDateString('en-US', options)
+  const options = { year: 'numeric', month: 'short', day: 'numeric' };
+  return new Date(dateString).toLocaleDateString('en-US', options);
+}
+
+async function generatePdf() {
+  // Show loading state
+  const btn = document.getElementById('generatePdf');
+  const originalText = btn.innerHTML;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating PDF...';
+  btn.disabled = true;
+
+  try {
+    // Import jsPDF dynamically
+    const { jsPDF } = window.jsPDF;
+
+    // Create a new PDF instance
+    const doc = new jsPDF({
+      orientation: 'portrait',
+      unit: 'mm',
+      format: 'a4',
+    });
+
+    // Capture the invoice preview as an image
+    const invoicePreview = document.getElementById('invoicePreview');
+
+    // Use html2canvas to capture the preview
+    const canvas = await html2canvas(invoicePreview, {
+      scale: 2,
+      logging: false,
+      useCORS: true,
+      allowTaint: true,
+    });
+
+    // Convert canvas to image data
+    const imgData = canvas.toDataURL('image/png');
+
+    // Calculate dimensions to fit PDF
+    const imgWidth = 210; // A4 width in mm
+    const pageHeight = 297; // A4 height in mm
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+    // Add the image to the PDF
+    doc.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+
+    // Add a new page if the content is too long
+    let heightLeft = imgHeight;
+    let position = 0;
+
+    while (heightLeft >= pageHeight) {
+      position = heightLeft - pageHeight;
+      doc.addPage();
+      doc.addImage(imgData, 'PNG', 0, -position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+    }
+
+    // Save the PDF
+    const invoiceNumber = document.getElementById('invoiceNumber').value || 'invoice';
+    doc.save(`${invoiceNumber}.pdf`);
+  } catch (error) {
+    console.error('Error generating PDF: ', error)
+    alert('Failed to generate PDF. Please try again.')
+  } finally {
+    // Restore button state
+    btn.innerHTML = originalText
+    btn.disabled = false;
+  }
+}
+
+function printInvoice() {
+  window.print();
 }
