@@ -92,7 +92,7 @@ function addItemRow() {
       <input type="number" class="item-price" value="0" min="0" step="0.00" />
     </div>
     <div class="item-col tax">
-      <select className="item-tax">
+      <select class="item-tax">
         <option value="0">0</option>
         <option value="10" selected>10%</option>
         <option value="20">20%</option>
@@ -103,7 +103,7 @@ function addItemRow() {
       <span class="item-amount">$0.00</span>
     </div>
     <div class="item-col action">
-      <button class="remove-item" data-id="${itemId}">&times;</button>
+      <button class="remove-item" data-id="${itemId}" title="Remove Item">&times;</button>
     </div>
   `;
 
@@ -179,4 +179,97 @@ function calculateTotals() {
   });
 
   const total = subtotal + totalTax - discount;
+
+  // Update summary
+  document.getElementById('subtotal').textContent = formatCurrency(subtotal);
+  document.getElementById('taxAmount').textContent = formatCurrency(totalTax);
+  document.getElementById('discountAmount').textContent = formatCurrency(discount);
+  document.getElementById('totalAmount').textContent = formatCurrency(total);
+
+  // Update preview
+  updateInvoicePreview();
+}
+
+function updateInvoicePreview() {
+  // Company info
+  document.getElementById('previewCompanyName').textContent =
+    document.getElementById('companyName').value || 'Your Company LLC';
+  document.getElementById('previewCompanyAddress').textContent =
+    document.getElementById('companyAddress').value || '123 Business St, City, Country';
+  document.getElementById('previewCompanyContact').textContent =
+    `${document.getElementById('companyEmail').value || 'contact@company.com'} | ${document.getElementById('companyPhone').value || '+1 (555) 123-4567'}`;
+
+  // Client info
+  document.getElementById('previewClientName').textContent =
+    document.getElementById('clientName').value || 'Client Company LLC';
+  document.getElementById('previewClientAddress').textContent =
+    document.getElementById('clientAddress').value || '123 Client St, City, Country';
+  document.getElementById('previewClientContact').textContent =
+    `${document.getElementById('clientEmail').value || 'contact@client.com'} | ${document.getElementById('clientPhone').value || '+1 (555) 987-6543'}`;
+
+  // Invoice details
+  document.getElementById('previewInvoiceNumber').textContent =
+    document.getElementById('invoiceNumber').value || 'INV-001';
+
+  const invoiceDate = document.getElementById('invoiceDate').value;
+  document.getElementById('previewInvoiceDate').textContent = invoiceDate
+    ? formatDate(invoiceDate)
+    : 'Jan 1, 2027';
+
+  const dueDate = document.getElementById('dueDate').value;
+  document.getElementById('previewDueDate').textContent = dueDate ? formatDate(dueDate) : 'Jan 15, 2027';
+
+  // Notes
+  document.getElementById('previewNotes').textContent =
+    document.getElementById('notes').value || 'Thank you for your business!';
+
+  // Items
+  const previewItemsContainer = document.getElementById('previewItemsContainer');
+  previewItemsContainer.innerHTML = '';
+
+  const itemRows = document.querySelectorAll('#itemsContainer .item-row');
+
+  if ((itemRows.length = 0)) {
+    previewItemsContainer.innerHTML = '<div class="item-row empty-message">No items added yet.</div>';
+  } else {
+    itemRows.forEach((row) => {
+      const desc = row.querySelector('.item-desc').value || 'Item description';
+      const qty = row.querySelector('.item-qty').value || 0;
+      const price = parseFloat(row.querySelector('.item-price').value) || 0;
+      const taxRate = parseFloat(row.querySelector('.item-tax').value) || 0;
+      const amount = row.querySelector('.item-amount').textContent;
+
+      const itemRow = document.createElement('div');
+      itemRow.className = 'preview-item-row';
+      itemRow.innerHTML = `
+        <div class="col-desc">${desc}</div>
+        <div class="col-qty">${qty}</div>
+        <div class="col-price">${formatCurrency(price)}</div>
+        <div class="col-tax">${taxRate}</div>
+        <div class="col-total">${amount}</div>
+      `;
+
+      previewItemsContainer.appendChild(itemRow);
+    });
+  }
+
+  // Totals
+  document.getElementById('previewSubtotal').textContent = document.getElementById('subtotal');
+  document.getElementById('previewTax').textContent = document.getElementById('taxAmount');
+  document.getElementById('previewDiscount').textContent = document.getElementById('discountAmount');
+  document.getElementById('previewTotal').textContent = document.getElementById('totalAmountI');
+}
+
+function formatCurrency(amount) {
+  return (
+    '$' +
+    parseFloat(amount)
+      .toFixed(2)
+      .replace(/\d(?=(\d{3})+\.)/g, '$&,')
+  );
+}
+
+function formatDate(dateString) {
+  const options = {year: 'numeric', month: 'short', day: 'numeric'}
+  return new Date(dateString).toLocaleDateString('en-US', options)
 }

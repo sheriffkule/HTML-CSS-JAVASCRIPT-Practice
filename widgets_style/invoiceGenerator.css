@@ -244,9 +244,9 @@ input:checked + .slider::before {
     font-weight: 500;
 }
 
-.item-col {
+/* .item-col {
     padding-inline: 5px;
-}
+} */
 
 .description {
     flex: 3;
@@ -257,8 +257,60 @@ input:checked + .slider::before {
     text-align: center;
 }
 
+.action {
+    width: 40px;
+    text-align: center;
+}
+
+#itemsContainer {
+    margin-bottom: 10px;
+}
+
+.item-row {
+    display: flex;
+    align-items: center;
+    padding-block: 10px;
+    border-bottom: 1px solid var(--border-color);
+    gap: 5px;
+
+    input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-sm);
+        background-color: var(--bg-color);
+        color: var(--text-primary);
+    }
+    select  {
+        width: 100%;
+        padding-inline: 5px;
+    }
+}
+
+.remove-item {
+    background: none;
+    border: none;
+    color: var(--danger);
+    cursor: pointer;
+    font-size: 1.5rem;
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+
+    &:hover {
+        background-color: rgb(247 37 133 / 0.2);
+    }
+}
+
+#addItem {
+    margin-top: 10px;
+}
+
 input[type="text"], textarea,
-input[type="tel"], input[type="email"] {
+input[type="tel"], input[type="email"],
+input[type="number"] {
     outline: transparent;
     caret-animation: manual;
     caret-shape: block;
@@ -413,4 +465,38 @@ option:checked {
 option::checkmark {
   color: var(--success);
   font-size: 1.5rem;
+}
+
+.totals-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.summary {
+    background-color: var(--card-bg);
+    padding: 15px;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm),
+    inset var(--shadow-lg);
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--border-color);
+
+    &:nth-last-child(2) {
+        border-bottom: none;
+    }
+
+    &.total {
+        font-weight: bold;
+        font-size: 1.125rem;
+        border-bottom: none;
+        padding-top: 10px;
+        border-top: 6px double var(--border-color);
+    }
 }
