@@ -18,7 +18,7 @@ function initApp() {
 
   // Theme toggle functionality
   const themeToggle = document.getElementById('themeToggle');
-  themeToggle.addEventListener('change', themeToggle);
+  themeToggle.addEventListener('change', toggleTheme);
 
   // Check for saved theme preferences
   const savedTheme = localStorage.getItem('theme') || 'light';
@@ -140,9 +140,6 @@ function addItemRow() {
     calculateTotals();
     updateInvoicePreview();
   });
-
-  // Focus on the description field
-  descInput.focus();
 }
 
 function calculateItemTotal(itemRow) {
@@ -229,7 +226,7 @@ function updateInvoicePreview() {
 
   const itemRows = document.querySelectorAll('#itemsContainer .item-row');
 
-  if ((itemRows.length = 0)) {
+  if ((itemRows.length === 0)) {
     previewItemsContainer.innerHTML = '<div class="item-row empty-message">No items added yet.</div>';
   } else {
     itemRows.forEach((row) => {
@@ -245,7 +242,7 @@ function updateInvoicePreview() {
         <div class="col-desc">${desc}</div>
         <div class="col-qty">${qty}</div>
         <div class="col-price">${formatCurrency(price)}</div>
-        <div class="col-tax">${taxRate}</div>
+        <div class="col-tax">${taxRate}%</div>
         <div class="col-total">${amount}</div>
       `;
 
@@ -254,10 +251,10 @@ function updateInvoicePreview() {
   }
 
   // Totals
-  document.getElementById('previewSubtotal').textContent = document.getElementById('subtotal');
-  document.getElementById('previewTax').textContent = document.getElementById('taxAmount');
-  document.getElementById('previewDiscount').textContent = document.getElementById('discountAmount');
-  document.getElementById('previewTotal').textContent = document.getElementById('totalAmountI');
+  document.getElementById('previewSubtotal').textContent = document.getElementById('subtotal').textContent;
+  document.getElementById('previewTax').textContent = document.getElementById('taxAmount').textContent;
+  document.getElementById('previewDiscount').textContent = document.getElementById('discountAmount').textContent;
+  document.getElementById('previewTotal').textContent = document.getElementById('totalAmount').textContent;
 }
 
 function formatCurrency(amount) {
@@ -282,11 +279,18 @@ async function generatePdf() {
   btn.disabled = true;
 
   try {
-    // Import jsPDF dynamically
-    const { jsPDF } = window.jsPDF;
+    const jsPDFLib = window.jspdf && window.jspdf.jsPDF ? window.jspdf.jsPDF : window.jsPDF;
+
+    if (!jsPDFLib) {
+      throw new Error('jsPDF library failed to load. Please refresh the page and try again.');
+    }
+
+    if (!window.html2canvas) {
+      throw new Error('html2canvas library failed to load. Please refresh the page and try again.');
+    }
 
     // Create a new PDF instance
-    const doc = new jsPDF({
+    const doc = new jsPDFLib({
       orientation: 'portrait',
       unit: 'mm',
       format: 'a4',
@@ -296,7 +300,7 @@ async function generatePdf() {
     const invoicePreview = document.getElementById('invoicePreview');
 
     // Use html2canvas to capture the preview
-    const canvas = await html2canvas(invoicePreview, {
+    const canvas = await window.html2canvas(invoicePreview, {
       scale: 2,
       logging: false,
       useCORS: true,
@@ -329,11 +333,11 @@ async function generatePdf() {
     const invoiceNumber = document.getElementById('invoiceNumber').value || 'invoice';
     doc.save(`${invoiceNumber}.pdf`);
   } catch (error) {
-    console.error('Error generating PDF: ', error)
-    alert('Failed to generate PDF. Please try again.')
+    console.error('Error generating PDF: ', error);
+    alert('Failed to generate PDF. Please try again.');
   } finally {
     // Restore button state
-    btn.innerHTML = originalText
+    btn.innerHTML = originalText;
     btn.disabled = false;
   }
 }
@@ -341,3 +345,59 @@ async function generatePdf() {
 function printInvoice() {
   window.print();
 }
+
+function clearAll() {
+  if (confirm('Are you sure you want to clear all invoice data?')) {
+    // Reset form inputs
+    document.querySelectorAll('input, textarea').forEach((input) => {
+      if (input.id !== 'themeToggle') {
+        input.value = '';
+      }
+    });
+
+    // Reset tax and discount
+    document.getElementById('taxRate').value = '10';
+    document.getElementById('discount').value = '0';
+
+    // Clear items
+    document.getElementById('itemsContainer').innerHTML = '';
+
+    // Set current date as default
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('invoiceDate').value = today;
+
+    // Set due date to 15 days from now
+    const dueDate = new Date();
+    dueDate.setDate(dueDate.getDate() + 15);
+    document.getElementById('dueDate').value = dueDate.toISOString().split('T')[0];
+
+    // Generate a new random invoice number
+    document.getElementById('invoiceNumber').value = 'INV-' + Math.floor(1000 + Math.random() * 9000);
+
+    // Reset totals
+    document.getElementById('subtotal').textContent = '$0.00';
+    document.getElementById('taxAmount').textContent = '$0.00';
+    document.getElementById('discountAmount').textContent = '$0.00';
+    document.getElementById('totalAmount').textContent = '$0.00';
+
+    // Add first item row
+    addItemRow();
+
+    // Update item preview
+    updateInvoicePreview();
+  }
+}
+
+// Update year in footer
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+  yearElement.setAttribute('datetime', currentYear.toString());
+  yearElement.textContent = currentYear.toString();
+}
+updateYear();
