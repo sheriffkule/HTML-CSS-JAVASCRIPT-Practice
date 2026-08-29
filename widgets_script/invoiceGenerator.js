@@ -157,3 +157,26 @@ function calculateItemTotal(itemRow) {
 
   itemRow.querySelector('.item-amount').textContent = formatCurrency(total);
 }
+
+function calculateTotals() {
+  const itemRows = document.querySelectorAll('#itemsContainer .item-row');
+  const taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
+  const discount = parseFloat(document.getElementById('discount').value) || 0;
+
+  let subtotal = 0;
+  let totalTax = 0;
+
+  itemRows.forEach((row) => {
+    const qty = parseFloat(row.querySelector('.item-qty').value) || 0;
+    const price = parseFloat(row.querySelector('.item-price').value) || 0;
+    const rowTaxRate = parseFloat(row.querySelector('.item-tax').value) || 0;
+
+    const rowSubtotal = qty * price;
+    subtotal += rowSubtotal;
+
+    const rowTax = rowSubtotal * (rowTaxRate / 100);
+    totalTax += rowTax;
+  });
+
+  const total = subtotal + totalTax - discount;
+}
