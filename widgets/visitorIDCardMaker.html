@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visitor ID Card Maker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/visitorIDCardMaker.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Visitor ID Card Maker</h1>
+        <p class="subtitle">Create professional visitorID cards in seconds.</p>
+      </header>
+
+      <main class="app-container">
+        <section class="form-section fade-in">
+          <h2>Card Details</h2>
+
+          <article class="template-selector">
+            <div class="template template-1 selected" data-template="1">
+              <div class="template-header"></div>
+              <div class="template-body">
+                <div class="template-photo"></div>
+              </div>
+            </div>
+            <div class="template template-2" data-template="2">
+              <div class="template-header"></div>
+              <div class="template-body">
+                <div class="template-photo"></div>
+              </div>
+            </div>
+            <div class="template template-3" data-template="3">
+              <div class="template-header"></div>
+              <div class="template-body">
+                <div class="template-photo"></div>
+              </div>
+            </div>
+            <div class="template template-4" data-template="4">
+              <div class="template-header"></div>
+              <div class="template-body">
+                <div class="template-photo"></div>
+              </div>
+            </div>
+            <div class="template template-5" data-template="5">
+              <div class="template-header"></div>
+              <div class="template-body">
+                <div class="template-photo"></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="form-group">
+            <label for="cardTitle">Card Title</label>
+            <input type="text" id="cardTitle" placeholder="e.g., Visitor Pass" value="VISITOR PASS" />
+          </article>
+
+          <article class="form-group">
+            <label for="headerColor">Header Color</label>
+            <div class="color-options">
+              <div class="color-option" style="background-color: #4361ee" data-color="#4361ee"></div>
+              <div class="color-option" style="background-color: #3f37c9" data-color="#3f37c9"></div>
+              <div class="color-option" style="background-color: #4895ef" data-color="#4895ef"></div>
+              <div class="color-option" style="background-color: #4cc9f0" data-color="#4cc9f0"></div>
+              <div class="color-option" style="background-color: #f72585" data-color="#f72585"></div>
+              <div class="color-option" style="background-color: #7209b7" data-color="#7209b7"></div>
+            </div>
+          </article>
+
+          <article class="form-group">
+            <label for="name">Visitor Name</label>
+            <input type="text" id="name" placeholder="John Doe" />
+          </article>
+
+          <article class="form-group">
+            <label for="company">Company/Organization</label>
+            <input type="text" id="company" placeholder="ABC Corporation" />
+          </article>
+
+          <article class="form-group">
+            <label for="purpose">Purpose of Visit</label>
+            <input type="text" id="purpose" placeholder="Meeting, Delivery, etc" />
+          </article>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
