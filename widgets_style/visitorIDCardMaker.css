@@ -10,6 +10,7 @@
     --warning: #f72585;
     --card-width: 350px;
     --card-height: 220px;
+    --transition: all 0.3s ease;
 }
 
 * {
@@ -67,4 +68,68 @@ h1 {
     border-radius: 10px;
     box-shadow: 0 5px 15px rgb(0 0 0 / 0.1),
     inset 0 5px 15px rgb(0 0 0 / 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #555;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    transition: var(--transition);
+}
+
+:is(input, select, textarea):is(:focus, :focus-visible) {
+    border-color: var(--accent);
+    outline: transparent;
+    box-shadow: 0 0 0 3px rgb(67 97 238 / 0.2),
+    0 0 0 3px rgb(67 97 238 / 0.2);
+    background: rgb(67 97 238 / 0.05)
+}
+
+:is(input, select, textarea)::placeholder {
+    transition: var(--transition);
+    transform-origin: bottom;
+}
+
+:is(input, select, textarea):is(:focus, :focus-visible)::placeholder {
+    transform: scaleY(0);
+}
+
+.color-options {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.color-option {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: var(--transition);
+    outline: 0px solid var(--dark);
+
+    &:hover {
+        transform: scale(1.1);
+        outline: 1px solid transparent;
+        outline-offset: 10px;
+    }
+    &.selected {
+        border-color: var(--dark);
+    }
 }

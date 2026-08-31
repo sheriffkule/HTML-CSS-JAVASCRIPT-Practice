@@ -59,7 +59,7 @@
           <article class="form-group">
             <label for="headerColor">Header Color</label>
             <div class="color-options">
-              <div class="color-option" style="background-color: #4361ee" data-color="#4361ee"></div>
+              <div class="color-option selected" style="background-color: #4361ee" data-color="#4361ee"></div>
               <div class="color-option" style="background-color: #3f37c9" data-color="#3f37c9"></div>
               <div class="color-option" style="background-color: #4895ef" data-color="#4895ef"></div>
               <div class="color-option" style="background-color: #4cc9f0" data-color="#4cc9f0"></div>
@@ -82,8 +82,89 @@
             <label for="purpose">Purpose of Visit</label>
             <input type="text" id="purpose" placeholder="Meeting, Delivery, etc" />
           </article>
+
+          <article class="form-group">
+            <label for="contact">Contact Person</label>
+            <input type="text" id="contact" placeholder="Sarah Johnson" />
+          </article>
+
+          <article class="form-group">
+            <label for="validUntil">Valid Until</label>
+            <input type="date" id="validUntil" />
+          </article>
+
+          <article class="form-group">
+            <label for="photo">Upload Photo</label>
+            <input type="file" id="photo" accept="image/*" />
+          </article>
+
+          <article class="form-group">
+            <label for="logo">Upload Logo (optional)</label>
+            <input type="file" id="logo" accept="image/*" />
+          </article>
+
+          <article class="form-group">
+            <label for="additionalInfo">Additional Information</label>
+            <textarea id="additionalInfo" rows="3" placeholder="Any other details to include..."></textarea>
+          </article>
+
+          <article class="form-group">
+            <label>Include QR Code</label>
+            <div>
+              <input type="checkbox" id="includeQR" checked />
+              <label for="includeQR" style="display: inline; margin-left: 5px">Yes</label>
+            </div>
+          </article>
+
+          <article class="btn-group">
+            <button class="btn btn-block" id="generateBtn">Generate Card</button>
+            <button class="btn btn-outline" id="resetBtn">Reset</button>
+          </article>
+        </section>
+
+        <section class="preview-section fade-in" style="animation-delay: 0.2s">
+          <h2>Card Preview</h2>
+          <article class="card-container" id="card">
+            <div class="card-header">
+              <h2 id="cardTitleDisplay">VISITOR PASS</h2>
+            </div>
+            <div class="card-body">
+              <div class="card-photo">
+                <div class="photo-placeholder">
+                  <i class="fas fa-user"></i>
+                </div>
+              </div>
+              <div class="card-details">
+                <p class="name">John Doe</p>
+                <p class="company">ABC Corporation</p>
+                <p><strong>Purpose:</strong> <span id="purposeDisplay">Meeting</span></p>
+                <p><strong>Contact:</strong> <span id="contactDisplay">Sarah Johnson</span></p>
+                <p><strong>Valid Until:</strong> <span id="purposeDisplay">31/12/2026.</span></p>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span id="additionalInfoDisplay">Authorized personnel only</span>
+              <img src="" alt="Logo" class="card-logo" id="logoDisplay" style="display: none" />
+            </div>
+            <div class="qr-code" id="qrCodeDisplay">
+              <img
+                src="https://api.qrserver.com/v1/create-qr-code?size=150x150&data=https://example.com/visitor/123"
+                alt="QR Code" />
+            </div>
+            <div class="signature" id="signatureDisplay">Authorized Sign</div>
+          </article>
+
+          <article class="action-buttons">
+            <button class="btn" id="downloadBtn"><i class="fas fa-download"></i> Save as Image</button>
+            <button class="btn-outline" id="saveTemplateBtn">
+              <i class="fas fa-save"></i> Save Templates
+            </button>
+          </article>
         </section>
       </main>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="/widgets_script/visitorIDCardMaker.js"></script>
   </body>
 </html>
