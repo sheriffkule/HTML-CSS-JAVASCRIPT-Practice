@@ -10,6 +10,7 @@
     --warning: #f72585;
     --card-width: 350px;
     --card-height: 220px;
+    --shadow: 0 4px 12px rgb(0 0 0 / 0.15);
     --transition: all 0.3s ease;
 }
 
@@ -132,6 +133,73 @@ input, select, textarea {
     &.selected {
         border-color: var(--dark);
     }
+}
+
+input[type="text"], textarea {
+    outline: transparent;
+    caret-animation: manual;
+    caret-shape: block;
+    caret-color: var(--primary);
+    animation: caret-animation infinite linear 1.2s;
+}
+
+@keyframes caret-animation {
+  50% {
+    caret-color: transparent;
+    caret-shape: bar;
+  }
+}
+
+input[type="date"] {
+  box-shadow: var(--shadow),
+  inset var(--shadow);
+  transition: var(--transition);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-color: var(--primary);
+    border-radius: 50%;
+    padding: 5px;
+    margin-left: 8px;
+    opacity: 0.6;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    scale: 1.4;
+    background-color: var(--success);
+    opacity: 1;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:active {
+    scale: 1.2;
+}
+
+input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+  display: flex;
+  gap: 2px;
+  box-shadow: inset 0 0 2px 2px rgb(0 0 0 / 0.15);
+  padding: 2px 4px 2px 12px;
+  border-radius: 6px;
+  background-color: var(--light);
+}
+
+input[type="date"]::-webkit-datetime-edit-text {
+  padding-inline: 2px;
+  color: var(--primary);
+}
+
+input[type="date"]::-webkit-datetime-edit-ampm-field {
+  color: var(--primary);
+  padding: 2px 4px;
+}
+
+input[type="date"]:open {
+    border-color: var(--primary);
+    background-color: var(--light);
+    box-shadow: 0 0 0 2px rgb(67 97 238 / 0.2),
+    inset 0 0 0 2px rgb(67 97 238 / 0.2);
 }
 
 .btn {

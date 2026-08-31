@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function toggleQRCode() {
-    qrCodeDisplay.textContent = includeQRCheckbox.checked ? 'block' : 'none';
+    qrCodeDisplay.style.display = includeQRCheckbox.checked ? 'block' : 'none';
   }
 
   function handlePhotoUpload(e) {
@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function () {
         cardHeader.style.backgroundColor = '#3f37c9';
         break;
       case '4':
-        cardHeader.style.background = 'linear-gradient(45deg, #4895ef, #4361ee';
+        cardHeader.style.background = 'linear-gradient(45deg, #4895ef, #4361ee)';
         break;
       case '5':
         cardHeader.style.backgroundColor = '#4cc9f0';
@@ -173,11 +173,11 @@ document.addEventListener('DOMContentLoaded', function () {
     if (rgb.includes('gradient')) return null;
 
     const rgbValues = rgb.match(/\d+/g);
-    if (!rgbValues || rgbValues < 3) return null;
+    if (!rgbValues || rgbValues.length < 3) return null;
 
-    const r = parseInt(rgbValues(0));
-    const g = parseInt(rgbValues(1));
-    const b = parseInt(rgbValues(2));
+    const r = parseInt(rgbValues[0]);
+    const g = parseInt(rgbValues[1]);
+    const b = parseInt(rgbValues[2]);
 
     return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
   }
@@ -232,7 +232,86 @@ document.addEventListener('DOMContentLoaded', function () {
     signatureDisplay.style.display = 'none';
   }
 
-  function downloadCard() {}
+  function downloadCard() {
+    // Use html2canvas with higher quality settins
+    html2canvas(card, {
+      scale: 3,
+      logging: false,
+      useCORS: true,
+      allowTaint: true,
+      backgroundColor: null,
+    }).then((canvas) => {
+      // Create temporary link to download the image
+      const link = document.createElement('a');
+      link.download = `visitor-card-${nameInput.value || 'visitor'}.png`;
 
-  function saveTemplate() {}
+      // Convert canvas to blob for better quality
+      canvas.toBlob(
+        function (blob) {
+          const url = URL.createObjectURL(blob);
+          link.href = url;
+          link.click();
+
+          // Clean up
+          setTimeout(() => {
+            URL.revokeObjectURL(url);
+          }, 100);
+        },
+        'image/png',
+        1,
+      ); // Highest quality
+    });
+  }
+
+  function saveTemplate() {
+    const templateData = {
+      title: cardTitleInput.value,
+      name: nameInput.value,
+      company: companyInput.value,
+      purpose: purposeInput.value,
+      contact: contactInput.value,
+      validUntil: validUntilInput.value,
+      additionalInfo: additionalInfoInput.value,
+      includeQR: window.getComputedStyle(cardHeader).backgroundColor,
+      template: document.querySelector('.template.selected').dataset.template,
+    };
+
+    localStorage.setItem('visitorCardTemplate', JSON.stringify(templateData));
+    alert('Template saved successfully! You can load it next time.');
+  }
+
+  // Check for saved templates on load
+  function loadTemplate() {
+    const savedTemplate = localStorage.getItem('visitorCardTemplate');
+    if (savedTemplate) {
+      const templateData = JSON.parse(savedTemplate);
+
+      cardTitleInput.value = templateData.title;
+      nameInput.value = templateData.name;
+      companyInput.value = templateData.company;
+      purposeInput.value = templateData.purpose;
+      contactInput.value = templateData.contact;
+      validUntilInput.value = templateData.validUntil;
+      additionalInfoInput.value = templateData.additionalInfo;
+      includeQRCheckbox.checked = templateData.includeQR;
+
+      // Apply template design
+      document.querySelector('.template.selected').classList.remove('selected');
+      document.querySelector(`.template-${templateData.template}`).classList.add('selected');
+      applyTemplate(templateData.template);
+
+      // Update all displays
+      updateCardTitle();
+      updateName();
+      updateCompany();
+      updatePurpose();
+      updateContact();
+      updateValidUntilDisplay();
+      updateAdditionalInfo();
+      toggleQRCode();
+    }
+  }
+
+  // Load any saved template when page loads
+  loadTemplate();
 });
