@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const photoInput = document.getElementById('photo');
   const photoPlaceholder = document.querySelector('.photo-placeholder');
   const logoInput = document.getElementById('logo');
+  const logoDisplay = document.getElementById('logoDisplay');
   const additionalInfoInput = document.getElementById('additionalInfo');
   const additionalInfoDisplay = document.getElementById('additionalInfoDisplay');
   const includeQRCheckbox = document.getElementById('includeQR');
@@ -118,4 +119,120 @@ document.addEventListener('DOMContentLoaded', function () {
       reader.readAsDataURL(file);
     }
   }
+
+  function handleLogoUpload(e) {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        logoDisplay.src = event.target.result;
+        logoDisplay.style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  function applyTemplate(templateNumber) {
+    // Reset all styles first
+    cardHeader.style.background = '';
+
+    switch (templateNumber) {
+      case '1':
+        cardHeader.style.backgroundColor = '#4361ee';
+        break;
+      case '2':
+        cardHeader.style.background = 'linear-gradient(45deg, #4361ee, #3a0ca3)';
+        break;
+      case '3':
+        cardHeader.style.backgroundColor = '#3f37c9';
+        break;
+      case '4':
+        cardHeader.style.background = 'linear-gradient(45deg, #4895ef, #4361ee';
+        break;
+      case '5':
+        cardHeader.style.backgroundColor = '#4cc9f0';
+        break;
+    }
+
+    // Update selected color option to match template
+    const headerColor = window.getComputedStyle(cardHeader).backgroundColor;
+    colorOptions.forEach((option) => {
+      option.classList.remove('selected');
+      if (
+        option.dataset.color === rgbToHex(headerColor) ||
+        (templateNumber === '2' && option.dataset.color === '#4361ee') ||
+        (templateNumber === '4' && option.dataset.color === '#4895ef')
+      ) {
+        option.classList.add('selected');
+      }
+    });
+  }
+
+  function rgbToHex(rgb) {
+    // This is simplified version that works for solid colors
+    if (rgb.includes('gradient')) return null;
+
+    const rgbValues = rgb.match(/\d+/g);
+    if (!rgbValues || rgbValues < 3) return null;
+
+    const r = parseInt(rgbValues(0));
+    const g = parseInt(rgbValues(1));
+    const b = parseInt(rgbValues(2));
+
+    return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+  }
+
+  function generateCard() {
+    // Generate QR code with visitor data
+    const qrData = `Visitor: ${nameInput.value || 'John Doe'} Company:
+    ${companyInput.value || 'ABC Corporation'} Purpose: ${purposeInput.value || 'Meeting'} Valid Until:
+    ${validUntilDisplay.textContent}`;
+    const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrData)}`;
+    qrCodeDisplay.querySelector('img').src = qrCodeUrl;
+
+    // Show signature if name is entered
+    signatureDisplay.style.display = nameInput.value ? 'block' : 'none';
+
+    // Add slight animation to show card was updated
+    card.classList.add('fade-in');
+    setTimeout(() => {
+      card.classList.remove('fade-in');
+    }, 500);
+  }
+
+  function resetForm() {
+    // Reset all inputs
+    cardTitleInput.value = 'VISITOR PASS';
+    nameInput.value = '';
+    companyInput.value = '';
+    purposeInput.value = '';
+    contactInput.value = '';
+    validUntilInput.valueAsDate = tomorrow;
+    photoInput.value = '';
+    logoInput.value = '';
+    additionalInfoInput.value = '';
+    includeQRCheckbox.checked = true;
+
+    // Reset preview
+    updateCardTitle();
+    updateName();
+    updateCompany();
+    updatePurpose();
+    updateContact();
+    updateValidUntilDisplay();
+    updateAdditionalInfo();
+    toggleQRCode();
+
+    // Reset photo and logo
+    photoPlaceholder.innerHTML = '<i class="fas fa-user"></i>';
+    logoDisplay.src = '';
+    logoDisplay.style.display = 'none';
+
+    // Hide signature
+    signatureDisplay.style.display = 'none';
+  }
+
+  function downloadCard() {}
+
+  function saveTemplate() {}
 });

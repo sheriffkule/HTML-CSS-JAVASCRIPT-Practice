@@ -188,3 +188,47 @@ input, select, textarea {
         background-color: #d91a6d;
     }
 }
+
+.card-container {
+    width: var(--card-width);
+    background-color: var(--light);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgb(0 0 0 / 0.2);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 50px;
+}
+
+.card-header {
+    height: 70px;
+    background-color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    position: relative;
+
+    h2 {
+        font-size: 18px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+}
+
+.card-body {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.card-photo {
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
