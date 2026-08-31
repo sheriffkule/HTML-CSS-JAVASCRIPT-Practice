@@ -57,18 +57,27 @@ h1 {
 .app-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
-    justify-content: center;
+    gap: 30px !important;
+    justify-content: space-evenly;
 }
 
 .form-section {
     flex: 1;
-    min-width: 300px;
+    max-width: 540px;
     background: var(--light);
     padding: 25px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgb(0 0 0 / 0.1),
     inset 0 5px 15px rgb(0 0 0 / 0.1);
+}
+
+.preview-section {
+    flex: 1;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
 .form-group {
@@ -80,6 +89,21 @@ label {
     margin-bottom: 6px;
     font-weight: 500;
     color: #555;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    input {
+        width: 20px;
+        height: 20px;
+        accent-color: var(--success);
+    }
+    label {
+        margin-bottom: 0px;
+    }
 }
 
 input, select, textarea {
@@ -229,7 +253,8 @@ input[type="date"]:open {
 
 .btn-block {
     display: block;
-    flex-grow: 1;
+    width: 100%;
+    /* flex-grow: 1; */
 }
 
 .btn-group {
@@ -300,3 +325,161 @@ input[type="date"]:open {
     align-items: center;
     justify-content: center;
 }
+
+.photo-placeholder {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #e4e4e4;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border: 3px solid white;
+    box-shadow: 0 4px 10px rgb(0 0 0 / 0.1);
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    i {
+        font-size: 30px;
+        color: #999;
+    }
+}
+
+.card-details {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 10px;
+
+    p {
+        margin-block-start: 3px;
+        font-size: 12px;
+    }
+    .company {
+        font-weight: 500;
+        color: #555;
+        margin-bottom: 8px;
+    }
+}
+
+.card-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 8px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    color: #666;
+    border-top: 1px solid #ccc;
+}
+
+.card-logo {
+    max-height: 20px;
+    max-width: 80px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.qr-code {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    padding: 3px;
+    border-radius: 5px;
+    box-shadow: 0 3px 5px rgb(0 0 0 / 0.1);
+
+    img {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.signature {
+    position: absolute;
+    bottom: 15px;
+    right: 130px;
+    width: 80px;
+    height: 30px;
+    border-top: 1px solid #333;
+    text-align: center;
+    font-size: 10px;
+}
+
+.template-selector {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.template {
+    width: 60px;
+    height: 40px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: var(--transition);
+    overflow: hidden;
+    position: relative;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+    &.selected {
+        border-color: var(--primary);
+    }
+    .template-header {
+        height: 30%;
+        width: 100%;
+    }
+    .template-body {
+        height: 70%;
+        width: 100%;
+        background-color: white;
+        position: relative;
+    }
+    .template-photo {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: #e9e9e9;
+        top: 10px;
+        left: 10px;
+    }
+}
+
+.template-1 .template-header {
+    background-color: var(--primary);
+}
+
+.template-2 .template-header {
+    background: linear-gradient(45deg, var(--primary), #3a0ca3);
+}
+
+.template-3 .template-header {
+    background-color: #3f37c9;
+}
+
+.template-4 .template-header {
+    background: linear-gradient(45deg, #4895ef, var(--primary));
+}
+
+.template-5 .template-header {
+    background-color: var(--success);
+}
+
