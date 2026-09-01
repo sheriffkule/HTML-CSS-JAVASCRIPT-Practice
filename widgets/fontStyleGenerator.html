@@ -194,8 +194,122 @@
 
               <div class="control-group">
                 <label for="gradient-direction">Direction (deg):</label>
-                <input type="range" id="gradient-direction" min="0" max="360" value="90" step="1">
+                <input type="range" id="gradient-direction" min="0" max="360" value="90" step="1" />
                 <span id="gradient-direction-value">90&deg;</span>
+              </div>
+
+              <div class="control-group">
+                <label>Gradient Colors:</label>
+                <div class="gradient-colors" id="gradient-colors">
+                  <div class="gradient-color">
+                    <input type="color" class="gradient-color-input" value="#ff0000" />
+                    <button class="remove-gradient-color">
+                      <span class="material-symbols-outlined">close</span>
+                    </button>
+                  </div>
+                  <div class="gradient-color">
+                    <input type="color" class="gradient-color-input" value="#0000ff" />
+                    <button class="remove-gradient-color">
+                      <span class="material-symbols-outlined">close</span>
+                    </button>
+                  </div>
+                </div>
+                <button class="btn-security" id="add-gradient-color">
+                  <span class="material-symbols-outlined">add</span> Add Color
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="tab-content" id="background-tab">
+            <div class="control-group">
+              <label for="bg-color">Background Color</label>
+              <input type="color" id="bg-color" value="#ffffff" />
+            </div>
+
+            <div class="control-group">
+              <label><input type="checkbox" id="bg-gradient-toggle" /> Background Gradient:</label>
+            </div>
+
+            <div class="control-group bg-gradient-controls" id="bg-gradient-controls">
+              <div class="control-group">
+                <label for="bg-gradient-type">Gradient Type:</label>
+                <select id="bg-gradient-type">
+                  <option value="linear">Linear</option>
+                  <option value="radial">Radial</option>
+                </select>
+              </div>
+
+              <div class="control-group">
+                <label for="bg-gradient-direction">Direction (deg):</label>
+                <input type="range" id="bg-gradient-direction" min="0" max="360" value="90" />
+                <span id="bg-gradient-direction-value">90&deg;</span>
+              </div>
+
+              <div class="control-group">
+                <label>Gradient Colors:</label>
+                <div class="gradient-colors" id="bg-gradient-colors">
+                  <div class="gradient-color">
+                    <input type="color" class="bg-gradient-color-input" value="#ffffff" />
+                    <button class="remove-bg-gradient-color">
+                      <span class="material-symbols-outlined">close</span>
+                    </button>
+                  </div>
+                  <div class="gradient-color">
+                    <input type="color" class="bg-gradient-color-input" value="#dddddd" />
+                    <button class="remove-bg-gradient-color">
+                      <span class="material-symbols-outlined">close</span>
+                    </button>
+                  </div>
+                </div>
+                <button class="btn-secondary" id="add-bg-gradient-color">
+                  <span class="material-symbols-outlined">add</span> Add Color
+                </button>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label for="bg-padding">Padding (px):</label>
+              <input type="range" id="bg-padding" min="0" max="100" value="20" />
+              <span id="bt-padding-value">20px</span>
+            </div>
+
+            <div class="control-group">
+              <label for="bg-border-radius">Border Radius (px):</label>
+              <input type="range" id="bg-border-radius" min="0" max="50" value="0" />
+              <span id="bg-border-radius-value">0px</span>
+            </div>
+
+            <div class="control-group">
+              <label><input type="checkbox" id="bg-border-toggle" /> Border</label>
+            </div>
+
+            <div class="control-group border-controls" id="border-controls">
+              <div class="control-row">
+                <div class="control-group">
+                  <label for="border-width">Width (px):</label>
+                  <input type="range" id="border-width" min="0" max="20" value="1" />
+                  <span id="border-width-value">1px</span>
+                </div>
+
+                <div class="control-group">
+                  <label for="border-color">Border Color:</label>
+                  <input type="color" id="border-color" value="#000000" />
+                </div>
+              </div>
+
+              <div class="control-group">
+                <label for="border-style">Border Style:</label>
+                <select id="border-style">
+                  <option value="solid">Solid</option>
+                  <option value="dashed">Dashed</option>
+                  <option value="dotted">Dotted</option>
+                  <option value="double">Double</option>
+                  <option value="groove">Groove</option>
+                  <option value="ridge">Ridge</option>
+                  <option value="inset">Inset</option>
+                  <option value="outset">Outset</option>
+                </select>
               </div>
             </div>
           </article>
