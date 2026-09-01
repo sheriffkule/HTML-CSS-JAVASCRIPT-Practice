@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Font Style Generator</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="/widgets_style/fontStyleGenerator.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <header>
+        <h1>Font Style Generator</h1>
+        <div class="theme-toggle">
+          <span class="material-symbols-outlined" id="theme-icon">dark_mode</span>
+        </div>
+      </header>
+
+      <main>
+        <section class="preview-section">
+          <div class="preview-container" id="preview-container">
+            <div class="preview-text" id="preview-text">Your Styled Text</div>
+          </div>
+        </section>
+
+        <section class="controls-section">
+          <div class="controls-tabs">
+            <button class="tab-btn active" data-tab="text">Text</button>
+            <button class="tab-btn" data-tab="effects">Effects</button>
+            <button class="tab-btn" data-tab="background">Background</button>
+            <button class="tab-btn" data-tab="presets">Presets</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/widgets_script/fontStyleGenerator.js"></script>
+    <script src="ajax.gogleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+  </body>
+</html>
