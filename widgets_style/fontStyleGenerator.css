@@ -135,3 +135,32 @@ main {
     height: 2px;
     background-color: var(--primary);
 }
+
+/* .tab-content {
+    display: none;
+} */
+
+.tab-content.active {
+    display: block;
+}
+
+.control-group {
+    margin-bottom: 1.25rem;
+}
+
+.control-row {
+    display: flex;
+    gap: 1.5rem;
+
+    .control-group {
+        flex: 1;
+        margin-bottom: 0;
+    }
+}
+
+label {
+    display: block;
+    margin-bottom: .5rem;
+    font-weight: 500;
+    color: var(--text);
+}

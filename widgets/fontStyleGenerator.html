@@ -54,6 +54,150 @@
                 <option value="'Montserrat', sans-serif">Montserrat</option>
               </select>
             </div>
+
+            <div class="control-row">
+              <div class="control-group">
+                <label for="font-size">Font Size (px):</label>
+                <input type="range" id="font-size" min="8" max="120" value="32" />
+                <span id="font-size-value">32px</span>
+              </div>
+
+              <div class="control-group">
+                <label for="font-weight">Font Weight:</label>
+                <input type="range" id="font-weight" min="100" max="900" step="100" value="400" />
+                <span id="font-weight-value">400</span>
+              </div>
+            </div>
+
+            <div class="control-row">
+              <div class="control-group">
+                <label for="line-height">Line Height:</label>
+                <input type="range" id="line-height" min="0.8" max="3" step="0.1" value="1.2" />
+                <span id="line-height-value">1.2</span>
+              </div>
+
+              <div class="control-group">
+                <label for="letter-spacing">Letter Spacing (px):</label>
+                <input type="range" id="letter-spacing" min="-5" max="20" value="0" step="1" />
+                <span id="letter-spacing-value">0px</span>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label for="text-color">Text Color:</label>
+              <input type="color" id="text-color" value="#333333" />
+            </div>
+
+            <div class="control-group">
+              <label for="text-align">Text Alignment:</label>
+              <div class="btn-group" id="text-align">
+                <button class="align-btn" value="left" title="Left">
+                  <span class="material-symbols-outlined">format_align_left</span>
+                </button>
+                <button class="align-btn" value="center" title="Center">
+                  <span class="material-symbols-outlined">format_align_center</span>
+                </button>
+                <button class="align-btn" value="right" title="Right">
+                  <span class="material-symbols-outlined">format_align_right</span>
+                </button>
+                <button class="align-btn" value="justify" title="Justify">
+                  <span class="material-symbols-outlined">format_align_justify</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label for="text-transform">Text Transform</label>
+              <select id="text-transform">
+                <option value="none">None</option>
+                <option value="uppercase">UPPERCASE</option>
+                <option value="lowercase">lowercase</option>
+                <option value="capitalize">Capitalize</option>
+              </select>
+            </div>
+
+            <div class="control-group">
+              <label for="font-style">Font Style</label>
+              <select id="font-style">
+                <option value="normal">Normal</option>
+                <option value="italic">Italic</option>
+                <option value="oblique">Oblique</option>
+              </select>
+            </div>
+          </article>
+
+          <article class="tab-content" id="effects-tab">
+            <div class="control-group">
+              <label><input type="checkbox" id="text-shadow-toggle" /> Text Shadow</label>
+            </div>
+
+            <div class="control-group shadow-controls" id="shadow-controls">
+              <div class="control-row">
+                <div class="control-group">
+                  <label for="shadow-h">Horizontal (px)</label>
+                  <input type="range" id="shadow-h" min="-20" max="20" value="2" step="1" />
+                  <span id="shadow-h-value">2px</span>
+                </div>
+
+                <div class="control-group">
+                  <label for="shadow-v">Vertical (px)</label>
+                  <input type="range" id="shadow-v" min="-20" max="20" value="2" step="1" />
+                  <span id="shadow-v-value">2px</span>
+                </div>
+              </div>
+
+              <div class="control-row">
+                <div class="control-group">
+                  <label for="shadow-blur">Blur (px):</label>
+                  <input type="range" id="shadow-blur" min="0" max="20" value="4" step="1" />
+                  <span class="shadow-blur-range">4px</span>
+                </div>
+
+                <div class="control-group">
+                  <label for="shadow-color">Shadow Color:</label>
+                  <input type="color" id="shadow-color" value="#000000" />
+                </div>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label><input type="checkbox" id="text-outline-toggle" /> Text Outline</label>
+            </div>
+
+            <div class="control-group outline-controls" id="outline-controls">
+              <div class="control-row">
+                <div class="control-group">
+                  <label for="outline-width">Width (px):</label>
+                  <input type="range" id="outline-width" min="0" max="10" value="1" step="1" />
+                  <span id="outline-width-value">1px</span>
+                </div>
+
+                <div class="control-group">
+                  <label for="outline-color">Outline Color:</label>
+                  <input type="color" id="outline-color" value="#000000" />
+                </div>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label><input type="checkbox" id="text-gradient-toggle" /> Text Gradient</label>
+            </div>
+
+            <div class="control-group gradient-controls" id="gradient-controls">
+              <div class="control-group">
+                <label for="gradient-type">Gradient Type</label>
+                <select id="gradient-type">
+                  <option value="linear">Linear</option>
+                  <option value="radial">Radial</option>
+                </select>
+              </div>
+
+              <div class="control-group">
+                <label for="gradient-direction">Direction (deg):</label>
+                <input type="range" id="gradient-direction" min="0" max="360" value="90" step="1">
+                <span id="gradient-direction-value">90&deg;</span>
+              </div>
+            </div>
           </article>
         </section>
       </main>
