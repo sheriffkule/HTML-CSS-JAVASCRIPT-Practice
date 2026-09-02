@@ -313,6 +313,33 @@
               </div>
             </div>
           </article>
+
+          <article class="tab-content" id="preset-tab">
+            <div class="control-group">
+              <label for="preset-name">Preset Name:</label>
+              <input type="text" id="preset-name" placeholder="Enter preset name" />
+            </div>
+
+            <div class="control-group">
+              <button class="btn-primary" id="save-preset">
+                <span class="material-symbols-outlined">save</span> Save Preset
+              </button>
+            </div>
+
+            <div class="presets-list" id="presets-list">
+              <p>No presets saved yet</p>
+            </div>
+          </article>
+        </section>
+
+        <section class="code-section">
+          <div class="code-header">
+            <h3>Generated CSS</h3>
+            <button class="btn-primary" id="copy-css">
+              <span class="material-symbols-outlined">content_copy</span> Copy CSS
+            </button>
+          </div>
+          <pre id="generated-css"><code>/* Your CSS will appear here */</code></pre>
         </section>
       </main>
     </div>
