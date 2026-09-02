@@ -117,26 +117,168 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  textTransform.addEventListener('change', updatePreview)
-  fontStyle.addEventListener('change', updatePreview)
+  textTransform.addEventListener('change', updatePreview);
+  fontStyle.addEventListener('change', updatePreview);
 
   // Effects
-  textShadowToggle.addEventListener('change', updatePreview)
-  shadowH.addEventListener('input', function() {
-    shadowHValue.textContent = `${this.value}px`
-    updatePreview()
-  })
+  textShadowToggle.addEventListener('change', updatePreview);
+  shadowH.addEventListener('input', function () {
+    shadowHValue.textContent = `${this.value}px`;
+    updatePreview();
+  });
 
-  shadowV.addEventListener('input', function() {
-    shadowVValue.textContent = `${this.value}px`
-    updatePreview()
-  })
+  shadowV.addEventListener('input', function () {
+    shadowVValue.textContent = `${this.value}px`;
+    updatePreview();
+  });
 
-  shadowBlur.addEventListener('input', function() {
-    shadowBlurValue.textContent = `${this.value}px`
-    updatePreview()
-  })
+  shadowBlur.addEventListener('input', function () {
+    shadowBlurValue.textContent = `${this.value}px`;
+    updatePreview();
+  });
 
-  shadowColor.addEventListener('input', updatePreview)
-  textOutlineToggle.addEventListener('change', updatePreview)
+  shadowColor.addEventListener('input', updatePreview);
+  textOutlineToggle.addEventListener('change', updatePreview);
+
+  outlineWidth.addEventListener('input', function () {
+    outlineWidthValue.textContent = `${this.value}px`;
+    updatePreview();
+  });
+
+  outlineColor.addEventListener('input', updatePreview);
+  textGradientToggle.addEventListener('change', updatePreview);
+  gradientType.addEventListener('change', updatePreview);
+
+  gradientDirection.addEventListener('input', function () {
+    gradientDirectionValue.textContent = `${this.value}°`;
+    updatePreview();
+  });
+
+  // Gradient color management
+  addGradientColor.addEventListener('click', function () {
+    const colorDiv = document.createElement('div');
+    colorDiv.className = 'gradient-color';
+    colorDiv.innerHTML = `
+      <input type="color" class="gradient-color-input" value="#00ff00" />
+      <button class="remove-gradient-color">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    `;
+    gradientColors.appendChild(colorDiv);
+
+    const colorInput = colorDiv.querySelector('.gradient-color-input');
+    const removeBtn = colorDiv.querySelector('.remove-gradient-color');
+
+    colorInput.addEventListener('input', updatePreview);
+    removeBtn.addEventListener('click', function () {
+      gradientColors.removeChild(colorDiv);
+      updatePreview();
+    });
+  });
+
+  // Initialize gradient color event listeners
+  document.querySelectorAll('.gradient-color-input').forEach((input) => {
+    input.addEventListener('input', updatePreview);
+  });
+
+  document.querySelectorAll('.remove-gradient-color').forEach((btn) => {
+    btn.addEventListener('click', function () {
+      if (gradientColors.children.length > 1) {
+        gradientColors.removeChild(this.parentElement);
+        updatePreview();
+      }
+    });
+  });
+
+  // Background controls
+  bgColor.addEventListener('input', updatePreview);
+  bgGradientToggle.addEventListener('change', updatePreview);
+  bgGradientType.addEventListener('change', updatePreview);
+
+  bgGradientDirection.addEventListener('input', function () {
+    bgGradientDirectionValue.textContent = `${this.value}°`;
+    updatePreview();
+  });
+
+  bgPadding.addEventListener('input', function () {
+    bgPaddingValue.textContent = `${this.value}px`;
+    updatePreview();
+  });
+
+  bgBorderRadius.addEventListener('input', function () {
+    bgBorderRadius.textContent = `${this.value}px`;
+    updatePreview();
+  });
+
+  bgBorderToggle.addEventListener('change', updatePreview);
+
+  borderWidth.addEventListener('input', function () {
+    borderWidthValue.textContent = `${this.value}px`;
+    updatePreview();
+  });
+
+  borderColor.addEventListener('input', updatePreview);
+  borderStyle.addEventListener('change', updatePreview);
+
+  // Background gradient color management
+  addBgGradientColor.addEventListener('click', function () {
+    const colorDiv = document.createElement('div');
+    colorDiv.className = 'gradient-color';
+    colorDiv.innerHTML = `
+      <input type="color" class="bg-gradient-color-input" value="#cccccc" />
+      <button class="remove-bg-gradient-color">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    `;
+    gradientColors.appendChild(colorDiv);
+
+    const colorInput = colorDiv.querySelector('.bg-gradient-color-input');
+    const removeBtn = colorDiv.querySelector('.remove-bg-gradient-color');
+
+    colorInput.addEventListener('input', updatePreview);
+    removeBtn.addEventListener('click', function () {
+      if (bgGradientColors.children.length > 1) {
+        bgGradientColors.removeChild(colorDiv);
+        updatePreview();
+      }
+    });
+  });
+
+  // Initialize background gradient color event listeners
+  document.querySelectorAll('.bg-gradient-color-input').forEach((input) => {
+    input.addEventListener('input', updatePreview);
+  });
+
+  document.querySelectorAll('.remove-bg-gradient-color').forEach((btn) => {
+    btn.addEventListener('click', function () {
+      if (bgGradientColors.children.length > 1) {
+        bgGradientColors.removeChild(this.parentElement);
+        updatePreview();
+      }
+    });
+  });
+
+  // Presets
+  savePreset.addEventListener('click', saveCurrentPreset);
+
+  // Code
+  copyCss.addEventListener('click', copyCssToClipboard);
+
+  // Theme
+  themeToggle.addEventListener('click', toggleTheme);
+
+  // Tabs
+  tabBtns.forEach((btn) => {
+    btn.addEventListener('click', function () {
+      const tabId = this.getAttribute('data-tab');
+
+      // Update active tab button
+      tabBtns.forEach((btn) => btn.classList.remove('active'));
+      this.classList.add('active');
+
+      // Show corresponding content
+      tabContent.forEach((content) => content.classList.remove('active'));
+      document.getElementById(`${tabId}-tab`).classList.add('active');
+    });
+  });
 });
