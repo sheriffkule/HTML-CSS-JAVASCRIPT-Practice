@@ -119,20 +119,20 @@ document.addEventListener('DOMContentLoaded', function () {
   textTransform.addEventListener('change', updatePreview);
   fontStyle.addEventListener('change', updatePreview);
 
-  // Effects - toggle control panels visibility
-  [
-    [textShadowToggle, shadowControls],
-    [textOutlineToggle, outlineControls],
-    [textGradientToggle, gradientControls],
-    [bgGradientToggle, bgGradientControls],
-    [bgBorderToggle, borderControls],
-  ].forEach(([toggle, panel]) => {
-    panel.style.display = toggle.checked ? 'block' : 'none';
-    toggle.addEventListener('change', function () {
-      panel.style.display = this.checked ? 'block' : 'none';
-      updatePreview();
-    });
-  });
+  //   // Effects - toggle control panels visibility
+  //   [
+  //     [textShadowToggle, shadowControls],
+  //     [textOutlineToggle, outlineControls],
+  //     [textGradientToggle, gradientControls],
+  //     [bgGradientToggle, bgGradientControls],
+  //     [bgBorderToggle, borderControls],
+  //   ].forEach(([toggle, panel]) => {
+  //     panel.style.display = toggle.checked ? 'block' : 'none';
+  //     toggle.addEventListener('change', function () {
+  //       panel.style.display = this.checked ? 'block' : 'none';
+  //       updatePreview();
+  //     });
+  //   });
 
   textShadowToggle.addEventListener('change', updatePreview);
   shadowH.addEventListener('input', function () {
@@ -390,5 +390,84 @@ document.addEventListener('DOMContentLoaded', function () {
     updateCssCode();
   }
 
-  function updateCssCode() {}
+  function updateCssCode() {
+    let cssCode = `/* Text Styles */\n`;
+    cssCode += `.your-text {\n`;
+    cssCode += `  font-family: ${fontFamily.value};\n`;
+    cssCode += `  font-size: ${fontSize.value}px;\n`;
+    cssCode += `  font-weight: ${fontWeight.value};\n`;
+    cssCode += `  line-height: ${lineHeight.value};\n`;
+    cssCode += `  letter-spacing: ${letterSpacing.value}px'\n`;
+
+    if (textGradientToggle.checked) {
+      const colors = Array.from(document.querySelectorAll('.gradient-color-input')).map(
+        (input) => input.value,
+      );
+      if (colors.length > 1) {
+        let gradient;
+        if (gradientType.value === 'linear') {
+          gradient = `linear-gradient(${gradientDirection.value}deg, ${colors.join(', ')})`;
+        } else {
+          gradient = `radial-gradient(${colors.join(', ')})`;
+        }
+        cssCode += `  background: ${gradient};\n`;
+        cssCode += `  -webkit-background-clip: text;\n`;
+        cssCode += `  background-clip: text;\n`;
+        cssCode += `  color: transparent;\n`;
+      }
+    } else {
+      cssCode += `  color: ${textColor.value}`;
+    }
+
+    const activeAlignBtn = document.querySelector('.align-btn.active');
+    if (activeAlignBtn) {
+      cssCode += `  text-align: ${activeAlignBtn.value};\n`;
+    }
+
+    cssCode += `  text-transform: ${textTransform.value};\n`;
+    cssCode += `  font-style: ${fontStyle.value};\n`;
+
+    if (textShadowToggle.checked) {
+      cssCode += ` text-shadow: ${shadowH.value}px ${shadowV.value}px ${shadowBlur.value}px
+      ${shadowColor.value}`;
+    }
+
+    if (textOutlineToggle.checked) {
+      cssCode += `  -webkit-text-stroke: ${outlineWidth.value}px ${outlineColor.value};\n`;
+      cssCode += `  text-stroke: ${outlineWidth.value}px ${outlineColor.value};\n`;
+    }
+
+    cssCode += `}\n\n`;
+
+    cssCode += `/* Container Styles */\n`;
+    cssCode += `.your-container {\n`;
+
+    if (bgGradientToggle.checked) {
+      const colors = Array.from(document.querySelectorAll('.bg-gradient-color-input')).map(
+        (input) => input.value,
+      );
+      if (colors.length > 1) {
+        let gradient;
+        if (bgGradientType.value === 'linear') {
+          gradient = `linear-gradient(${bgGradientDirection.value}deg, ${colors.join(', ')})`;
+        } else {
+          gradient = `radial-gradient(${colors.join(', ')})`;
+        }
+        cssCode += `  background: ${gradient};\n`;
+      }
+    } else {
+      cssCode += `  color: ${bgColor.value}`;
+    }
+
+    cssCode += `  padding: ${bgPadding.value}px;\n`;
+    cssCode += `  border-radius: ${bgBorderRadius.value}px;\n`;
+
+    if (bgBorderToggle.checked) {
+      cssCode += `  border: ${borderWidth.value}px ${borderStyle.value} ${borderColor.value};\n`;
+    }
+
+    cssCode += `}`;
+
+    generatedCss.textContent = cssCode;
+  }
 });
