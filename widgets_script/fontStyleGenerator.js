@@ -82,7 +82,6 @@ document.addEventListener('DOMContentLoaded', function () {
   // Initialize
   updatePreview();
   updateCssCode();
-  loadPresets();
 
   // Event Listeners
   // Text controls
@@ -120,7 +119,21 @@ document.addEventListener('DOMContentLoaded', function () {
   textTransform.addEventListener('change', updatePreview);
   fontStyle.addEventListener('change', updatePreview);
 
-  // Effects
+  // Effects - toggle control panels visibility
+  [
+    [textShadowToggle, shadowControls],
+    [textOutlineToggle, outlineControls],
+    [textGradientToggle, gradientControls],
+    [bgGradientToggle, bgGradientControls],
+    [bgBorderToggle, borderControls],
+  ].forEach(([toggle, panel]) => {
+    panel.style.display = toggle.checked ? 'block' : 'none';
+    toggle.addEventListener('change', function () {
+      panel.style.display = this.checked ? 'block' : 'none';
+      updatePreview();
+    });
+  });
+
   textShadowToggle.addEventListener('change', updatePreview);
   shadowH.addEventListener('input', function () {
     shadowHValue.textContent = `${this.value}px`;
@@ -281,4 +294,101 @@ document.addEventListener('DOMContentLoaded', function () {
       document.getElementById(`${tabId}-tab`).classList.add('active');
     });
   });
+
+  // Functions
+  function updatePreview() {
+    // Update text content
+    previewText.textContent = textInput.value;
+
+    // Text styles
+    previewText.style.fontFamily = fontFamily.value;
+    previewText.style.fontSize = `${fontSize.value}px`;
+    previewText.style.fontWeight = fontWeight.value;
+    previewText.style.lineHeight = lineHeight.value;
+    previewText.style.letterSpacing = `${letterSpacing.value}px`;
+    previewText.style.color = textColor.value;
+
+    // Text alignment
+    const activeAlignBtn = document.querySelector('.align-btn.active');
+    if (activeAlignBtn) previewText.style.textAlign = activeAlignBtn.value;
+
+    // Text transform
+    previewText.style.textTransform = textTransform.value;
+
+    // Font style
+    previewText.style.fontStyle = fontStyle.value;
+
+    // Text shadow
+    if (textShadowToggle.checked) {
+      previewText.style.textShadow = `${shadowH.value}px ${shadowV.value}px ${shadowBlur.value}px
+      ${shadowColor.value}`;
+    } else {
+      previewText.style.textShadow = 'none';
+    }
+
+    // Text outline
+    if (textOutlineToggle.checked) {
+      previewText.style.webkitTextStroke = `${outlineWidth.value}px ${outlineColor.value}`;
+      previewText.style.textStroke = `${outlineWidth.value}px ${outlineColor.value}`;
+    } else {
+      previewText.style.webkitTextStroke = '';
+      previewText.style.textStroke = '';
+    }
+
+    // Text gradient
+    if (textGradientToggle.checked) {
+      const colors = Array.from(document.querySelectorAll('.gradient-color-input')).map(
+        (input) => input.value,
+      );
+      if (colors.length > 1) {
+        let gradient;
+        if (gradientType.value === 'linear') {
+          gradient = `linear-gradient(${gradientDirection.value}deg, ${colors.join(', ')})`;
+        } else {
+          gradient = `radial-gradient(${colors.join(', ')})`;
+        }
+        previewText.style.background = gradient;
+        previewText.style.webkitBackgroundClip = 'text';
+        previewText.style.backgroundClip = 'text';
+        previewText.style.color = 'transparent';
+      }
+    } else {
+      previewText.style.background = '';
+      previewText.style.webkitBackgroundClip = '';
+      previewText.style.backgroundClip = '';
+      previewText.style.color = textColor.value;
+    }
+
+    // Background styles
+    if (bgGradientToggle.checked) {
+      const colors = Array(document.querySelectorAll('.bg-gradient-color-input')).map((input) => input.value);
+      if (colors.length > 1) {
+        let gradient;
+        if (bgGradientType.value === 'linear') {
+          gradient = `linear-gradient(${bgGradientDirection.value}deg, ${colors.join(', ')})`;
+        } else {
+          gradient = `radial-gradient(${colors.join(', ')})`;
+        }
+        previewContainer.style.background = gradient;
+      }
+    } else {
+      previewContainer.style.background = bgColor.value;
+    }
+
+    // Container styles
+    previewContainer.style.padding = `${bgPadding.value}pg`;
+    previewContainer.style.borderRadius = `${bgBorderRadius.value}px`;
+
+    // Border styles
+    if (bgBorderToggle.checked) {
+      previewContainer.style.border = `${borderWidth.value}px ${borderStyle.value} ${borderColor.value}`;
+    } else {
+      previewContainer.style.border = '';
+    }
+
+    // Update CSS code
+    updateCssCode();
+  }
+
+  function updateCssCode() {}
 });
