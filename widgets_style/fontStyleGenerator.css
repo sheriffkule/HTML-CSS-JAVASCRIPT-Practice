@@ -89,6 +89,17 @@ main {
     inset 4px 4px 8px var(--shadow-color);
 }
 
+.preview-container {
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    border-radius: .5rem;
+    background-color: white;
+    border: 1px solid var(--border-color);
+}
+
 .preview-text {
     max-width: 100%;
     word-wrap: break-word;
@@ -337,6 +348,41 @@ input[type="range"] {
     min-height: 100px;
 }
 
+.preset-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.preset-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.preset-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: var(--transition);
+
+    &:hover {
+        color: var(--primary);
+        transform: scale(1.03);
+        box-shadow: 0 4px 8px var(--shadow-color),
+        inset 0 4px 6px var(--shadow-color);
+    }
+    &:active {
+        transform: scale(1);
+    }
+}
+
 input[type="text"], textarea {
     outline: transparent;
     caret-animation: manual;
@@ -491,4 +537,18 @@ input[type='checkbox']:focus {
 .checkbox-group:has(input[type='checkbox']:checked) {
   background-color: rgb(from var(--success) r g b / 0.1);
   border: 1px solid rgb(0 0 0 / 0.2);
+}
+
+@media (width < 768px) {
+    .app-container {
+        padding: 1rem;
+    }
+    .control-row {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .preview-container {
+        min-height: 150px;
+        padding: 1rem;
+    }
 }

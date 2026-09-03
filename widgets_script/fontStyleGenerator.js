@@ -470,4 +470,87 @@ document.addEventListener('DOMContentLoaded', function () {
 
     generatedCss.textContent = cssCode;
   }
+
+  function copyCssToClipboard() {
+    const cssText = generatedCss.textContent;
+    navigator.clipboard
+      .writeText(cssText)
+      .then(() => {
+        const originalText = copyCss.innerHTML;
+        copyCss.innerHTML = '<span class="material-symbols-outlined">check</span> Copied!';
+        setTimeout(() => {
+          copyCss.innerHTML = originalText;
+        }, 2000);
+      })
+      .catch((err) => {
+        console.error('Failed to copy CSS: ', err);
+        alert('Failed to copy CSS: ', err);
+      });
+  }
+
+  function saveCurrentPreset() {
+    const name = presetName.value.trim();
+    if (!name) {
+      alert('Please enter a name for your preset.');
+      return;
+    }
+
+    const preset = {
+      name,
+      text: textInput.value,
+      fontFamily: fontFamily.value,
+      fontSize: fontSize.value,
+      fontWeight: fontWeight.value,
+      lineHeight: lineHeight.value,
+      letterSpacing: letterSpacing.value,
+      textColor: textColor.value,
+      textAlign: document.querySelector('.align-btn.active')?.value || 'left',
+      textTransform: textTransform.value,
+      fontStyle: fontStyle.value,
+      textShadow: {
+        enabled: textShadowToggle.checked,
+        h: shadowH.value,
+        v: shadowV.value,
+        blur: shadowBlur.value,
+        color: shadowColor.value,
+      },
+      textOutline: {
+        enabled: textOutlineToggle.checked,
+        width: outlineWidth.value,
+        color: outlineColor.value,
+      },
+      textGradient: {
+        enabled: textGradientToggle.checked,
+        type: gradientType.value,
+        direction: gradientDirection.value,
+        colors: Array.from(document.querySelectorAll('.gradient-color-input')).map((input) => input.value),
+      },
+      background: {
+        color: bgColor.value,
+        gradient: {
+          enabled: bgGradientToggle.checked,
+          type: bgGradientType.value,
+          direction: bgGradientDirection.value,
+          colors: Array.from(document.querySelectorAll('.bg-gradient-color-input')).map(
+            (input) => input.value,
+          ),
+        },
+        padding: bgPadding.value,
+        borderRadius: bgBorderRadius.value,
+        border: {
+          enabled: bgBorderToggle.checked,
+          width: borderWidth.value,
+          color: borderColor.value,
+          style: borderStyle.value,
+        },
+      },
+    };
+
+    let presets = JSON.parse(localStorage.getItem('fontPresets') || '[]');
+    presets.push(preset);
+    localStorage.setItem('fontPresets', JSON.stringify(presets));
+
+    presetName.value = '';
+    loadPresets();
+  }
 });
