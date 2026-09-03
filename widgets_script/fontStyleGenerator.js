@@ -74,12 +74,15 @@ document.addEventListener('DOMContentLoaded', function () {
   // Theme
   const themeToggle = document.querySelector('.theme-toggle');
   const themeIcon = document.getElementById('theme-icon');
+  const themeStorageKey = 'fontStyleGeneratorTheme';
 
   // Tabs
   const tabBtns = document.querySelectorAll('.tab-btn');
   const tabContent = document.querySelectorAll('.tab-content');
 
   // Initialize
+  applySavedTheme();
+  loadPresets();
   updatePreview();
   updateCssCode();
 
@@ -94,16 +97,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
   fontWeight.addEventListener('input', function () {
     fontWeightValue.textContent = this.value;
-    updatePreview;
+    updatePreview();
   });
 
   lineHeight.addEventListener('input', function () {
     lineHeightValue.textContent = this.value;
-    updatePreview;
+    updatePreview();
   });
 
   letterSpacing.addEventListener('input', function () {
     letterSpacingValue.textContent = `${this.value}px`;
+    updatePreview();
   });
 
   textColor.addEventListener('input', updatePreview);
@@ -119,20 +123,23 @@ document.addEventListener('DOMContentLoaded', function () {
   textTransform.addEventListener('change', updatePreview);
   fontStyle.addEventListener('change', updatePreview);
 
-  //   // Effects - toggle control panels visibility
-  //   [
-  //     [textShadowToggle, shadowControls],
-  //     [textOutlineToggle, outlineControls],
-  //     [textGradientToggle, gradientControls],
-  //     [bgGradientToggle, bgGradientControls],
-  //     [bgBorderToggle, borderControls],
-  //   ].forEach(([toggle, panel]) => {
-  //     panel.style.display = toggle.checked ? 'block' : 'none';
-  //     toggle.addEventListener('change', function () {
-  //       panel.style.display = this.checked ? 'block' : 'none';
-  //       updatePreview();
-  //     });
-  //   });
+  // Effects - toggle control panels visibility
+  [
+    [textShadowToggle, shadowControls],
+    [textOutlineToggle, outlineControls],
+    [textGradientToggle, gradientControls],
+    [bgGradientToggle, bgGradientControls],
+    [bgBorderToggle, borderControls],
+  ].forEach(([toggle, panel]) => {
+    const updatePanelVisibility = () => {
+      panel.style.display = toggle.checked ? 'block' : 'none';
+    };
+    updatePanelVisibility();
+    toggle.addEventListener('change', function () {
+      updatePanelVisibility();
+      updatePreview();
+    });
+  });
 
   textShadowToggle.addEventListener('change', updatePreview);
   shadowH.addEventListener('input', function () {
@@ -219,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   bgBorderRadius.addEventListener('input', function () {
-    bgBorderRadius.textContent = `${this.value}px`;
+    bgBorderRadiusValue.textContent = `${this.value}px`;
     updatePreview();
   });
 
@@ -243,7 +250,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <span class="material-symbols-outlined">close</span>
       </button>
     `;
-    gradientColors.appendChild(colorDiv);
+    bgGradientColors.appendChild(colorDiv);
 
     const colorInput = colorDiv.querySelector('.bg-gradient-color-input');
     const removeBtn = colorDiv.querySelector('.remove-bg-gradient-color');
@@ -361,7 +368,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Background styles
     if (bgGradientToggle.checked) {
-      const colors = Array(document.querySelectorAll('.bg-gradient-color-input')).map((input) => input.value);
+      const colors = Array.from(document.querySelectorAll('.bg-gradient-color-input')).map(
+        (input) => input.value,
+      );
       if (colors.length > 1) {
         let gradient;
         if (bgGradientType.value === 'linear') {
@@ -376,7 +385,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Container styles
-    previewContainer.style.padding = `${bgPadding.value}pg`;
+    previewContainer.style.padding = `${bgPadding.value}px`;
     previewContainer.style.borderRadius = `${bgBorderRadius.value}px`;
 
     // Border styles
@@ -397,7 +406,7 @@ document.addEventListener('DOMContentLoaded', function () {
     cssCode += `  font-size: ${fontSize.value}px;\n`;
     cssCode += `  font-weight: ${fontWeight.value};\n`;
     cssCode += `  line-height: ${lineHeight.value};\n`;
-    cssCode += `  letter-spacing: ${letterSpacing.value}px';\n`;
+    cssCode += `  letter-spacing: ${letterSpacing.value}px;\n`;
 
     if (textGradientToggle.checked) {
       const colors = Array.from(document.querySelectorAll('.gradient-color-input')).map(
@@ -428,8 +437,7 @@ document.addEventListener('DOMContentLoaded', function () {
     cssCode += `  font-style: ${fontStyle.value};\n`;
 
     if (textShadowToggle.checked) {
-      cssCode += ` text-shadow: ${shadowH.value}px ${shadowV.value}px ${shadowBlur.value}px
-      ${shadowColor.value}`;
+      cssCode += `  text-shadow: ${shadowH.value}px ${shadowV.value}px ${shadowBlur.value}px ${shadowColor.value};\n`;
     }
 
     if (textOutlineToggle.checked) {
@@ -456,7 +464,7 @@ document.addEventListener('DOMContentLoaded', function () {
         cssCode += `  background: ${gradient};\n`;
       }
     } else {
-      cssCode += `  color: ${bgColor.value};\n`;
+      cssCode += `  background: ${bgColor.value};\n`;
     }
 
     cssCode += `  padding: ${bgPadding.value}px;\n`;
@@ -640,6 +648,123 @@ document.addEventListener('DOMContentLoaded', function () {
     outlineWidth.value = preset.textOutline.width;
     outlineWidthValue.textContent = `${preset.textOutline.width}px`;
     outlineColor.value = preset.textOutline.color;
+
+    // Text gradient
+    textGradientToggle.checked = preset.textGradient.enabled;
+    gradientType.value = preset.textGradient.type;
+    gradientDirection.value = preset.textGradient.direction;
+    gradientDirectionValue.textContent = `${preset.textGradient.direction}°`;
+
+    // Clear existing gradient colors
+    gradientColors.innerHTML = '';
+
+    // Add new gradient colors
+    preset.textGradient.colors.forEach((color, i) => {
+      const colorDiv = document.createElement('div');
+      colorDiv.className = 'gradient-color';
+      colorDiv.innerHTML = `
+        <input type="color" class="gradient-color-input" value="${color}" />
+        <button class="remove-gradient-color">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      `;
+      gradientColors.appendChild(colorDiv);
+
+      const colorInput = colorDiv.querySelector('.gradient-color-input');
+      const removeBtn = colorDiv.querySelector('.remove-gradient-color');
+
+      colorInput.addEventListener('input', updatePreview);
+      removeBtn.addEventListener('click', function () {
+        if (gradientColors.children.length > 1) {
+          gradientColors.removeChild(colorDiv);
+          updatePreview();
+        }
+      });
+    });
+
+    // Background properties
+    bgColor.value = preset.background.color;
+    bgGradientToggle.checked = preset.background.gradient.enabled;
+    bgGradientType.value = preset.background.gradient.type;
+    bgGradientDirection.value = preset.background.gradient.direction;
+    bgGradientDirectionValue.textContent = `${preset.background.gradient.direction}°`;
+
+    // Clear existing background gradient colors
+    bgGradientColors.innerHTML = '';
+
+    // Add new background gradient color
+    preset.background.gradient.colors.forEach((color, i) => {
+      const colorDiv = document.createElement('div');
+      colorDiv.className = 'gradient-color';
+      colorDiv.innerHTML = `
+        <input type="color" class="bg-gradient-color-input" value="${color}" />
+        <button class="remove-bg-gradient-color">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      `;
+      bgGradientColors.appendChild(colorDiv);
+
+      const colorInput = colorDiv.querySelector('.bg-gradient-color-input');
+      const removeBtn = colorDiv.querySelector('.remove-bg-gradient-color');
+
+      colorInput.addEventListener('input', updatePreview);
+      removeBtn.addEventListener('click', function () {
+        if (bgGradientColors.children.length > 1) {
+          bgGradientColors.removeChild(colorDiv);
+          updatePreview();
+        }
+      });
+    });
+
+    bgPadding.value = preset.background.padding;
+    bgPaddingValue.textContent = `${preset.background.padding}px`;
+    bgBorderRadius.value = preset.background.borderRadius;
+    bgBorderRadiusValue.textContent = `${preset.background.borderRadius}px`;
+    bgBorderToggle.checked = preset.background.border.enabled;
+    borderWidth.value = preset.background.border.width;
+    borderWidthValue.textContent = `${preset.background.border.width}px`;
+    borderColor.value = preset.background.border.color;
+    borderStyle.value = preset.background.border.style;
+
+    // Update preview
+    updatePreview();
+  }
+
+  function deletePreset(index) {
+    let presets = JSON.parse(localStorage.getItem('fontPresets') || '[]');
+    if (index < 0 || index >= presets.length) return;
+
+    if (confirm('Are you sure you want to delete this preset?')) {
+      presets.splice(index, 1);
+      localStorage.setItem('fontPresets', JSON.stringify(presets));
+      loadPresets();
+    }
+  }
+
+  function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    if (currentTheme === 'dark') {
+      document.documentElement.removeAttribute('data-theme');
+      themeIcon.textContent = 'dark_mode';
+      localStorage.setItem(themeStorageKey, 'light');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      themeIcon.textContent = 'light_mode';
+      localStorage.setItem(themeStorageKey, 'dark');
+    }
+  }
+
+  function applySavedTheme() {
+    const savedTheme = localStorage.getItem(themeStorageKey);
+    const theme = savedTheme === 'dark' ? 'dark' : 'light';
+
+    if (theme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      themeIcon.textContent = 'light_mode';
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+      themeIcon.textContent = 'dark_mode';
+    }
   }
 
   // Changing colors on input type range track

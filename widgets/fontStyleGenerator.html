@@ -36,12 +36,12 @@
 
           <article class="tab-content active" id="text-tab">
             <div class="control-group">
-              <label for="text-input">Your Text</label>
+              <label for="text-input">Your Text:</label>
               <input type="text" id="text-input" value="Your Styled Text" />
             </div>
 
             <div class="control-group">
-              <label for="font-family">Font Family</label>
+              <label for="font-family">Font Family:</label>
               <select id="font-family">
                 <option value="Arial, sans-serif">Arial</option>
                 <option value="'Helvetica Neue', sans-serif">Helvetica</option>
@@ -108,7 +108,7 @@
             </div>
 
             <div class="control-group">
-              <label for="text-transform">Text Transform</label>
+              <label for="text-transform">Text Transform:</label>
               <select id="text-transform">
                 <option value="none">None</option>
                 <option value="uppercase">UPPERCASE</option>
@@ -118,7 +118,7 @@
             </div>
 
             <div class="control-group">
-              <label for="font-style">Font Style</label>
+              <label for="font-style">Font Style:</label>
               <select id="font-style">
                 <option value="normal">Normal</option>
                 <option value="italic">Italic</option>
@@ -136,13 +136,13 @@
             <div class="control-group shadow-controls" id="shadow-controls">
               <div class="control-row">
                 <div class="control-group">
-                  <label for="shadow-h">Horizontal (px)</label>
+                  <label for="shadow-h">Horizontal (px):</label>
                   <input type="range" id="shadow-h" min="-20" max="20" value="2" step="1" />
                   <span id="shadow-h-value">2px</span>
                 </div>
 
                 <div class="control-group">
-                  <label for="shadow-v">Vertical (px)</label>
+                  <label for="shadow-v">Vertical (px):</label>
                   <input type="range" id="shadow-v" min="-20" max="20" value="2" step="1" />
                   <span id="shadow-v-value">2px</span>
                 </div>
@@ -152,7 +152,7 @@
                 <div class="control-group">
                   <label for="shadow-blur">Blur (px):</label>
                   <input type="range" id="shadow-blur" min="0" max="20" value="4" step="1" />
-                  <span class="shadow-blur-range">4px</span>
+                  <span id="shadow-blur-value">4px</span>
                 </div>
 
                 <div class="control-group">
@@ -189,7 +189,7 @@
 
             <div class="control-group gradient-controls" id="gradient-controls">
               <div class="control-group">
-                <label for="gradient-type">Gradient Type</label>
+                <label for="gradient-type">Gradient Type:</label>
                 <select id="gradient-type">
                   <option value="linear">Linear</option>
                   <option value="radial">Radial</option>
@@ -227,7 +227,7 @@
 
           <article class="tab-content" id="background-tab">
             <div class="control-group">
-              <label for="bg-color">Background Color</label>
+              <label for="bg-color">Background Color:</label>
               <input type="color" id="bg-color" value="#ffffff" />
             </div>
 
@@ -276,7 +276,7 @@
             <div class="control-group">
               <label for="bg-padding">Padding (px):</label>
               <input type="range" id="bg-padding" min="0" max="100" value="20" />
-              <span id="bt-padding-value">20px</span>
+              <span id="bg-padding-value">20px</span>
             </div>
 
             <div class="control-group">
@@ -320,7 +320,7 @@
             </div>
           </article>
 
-          <article class="tab-content" id="preset-tab">
+          <article class="tab-content" id="presets-tab">
             <div class="control-group">
               <label for="preset-name">Preset Name:</label>
               <input type="text" id="preset-name" placeholder="Enter preset name" />
@@ -356,6 +356,5 @@
     </div>
 
     <script src="/widgets_script/fontStyleGenerator.js"></script>
-    <script src="ajax.gogleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
   </body>
 </html>
