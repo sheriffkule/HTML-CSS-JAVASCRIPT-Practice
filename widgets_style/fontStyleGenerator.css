@@ -539,6 +539,95 @@ input[type='checkbox']:focus {
   border: 1px solid rgb(0 0 0 / 0.2);
 }
 
+input[type="color"] {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+input[type="color"] {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: 1px solid var(--light-gray);
+  cursor: pointer;
+  height: 25px;
+  padding: 0;
+  transform-origin: bottom;
+  transition: .3s ease-in;
+  transition-behavior: allow-discrete;
+
+  @starting-style  {
+    outline: 1px solid rgb(0 0 0 / 0.3);
+  }
+
+  &:hover {
+    transform: scaleY(1.1);
+    box-shadow: var(--shadow);
+    border-radius: 6px;
+    corner-shape: bevel;
+    outline-offset: 12px;
+    outline: 1px solid transparent;
+  }
+}
+
+::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+::-webkit-color-swatch{
+  border: 1px solid var(--light-gray);
+  padding: 0;
+}
+
+::-moz-color-swatch,
+::-moz-focus-inner{
+  border: 0;
+}
+
+::-moz-focus-inner{
+  padding: 0;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    -moz-apperance: none;
+    appearance: none;
+    border-radius: 6px;
+    height: 8px;
+    outline: transparent;
+    padding: 0;
+    margin-block: 0.75rem;
+    width: 100%;
+    margin-right: 10px;
+    border: 1px solid var(--border-color);
+}
+
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: var(--primary);
+    border-radius: 50%;
+    corner-shape: bevel scoop scoop bevel;
+    border: 1px solid var(--border-color);
+    height: 26px;
+    width: 26px;
+    cursor: pointer;
+    transition: .25s;
+}
+
+input[type='range']::-webkit-slider-thumb:hover {
+    background-color: var(--secondary);
+    box-shadow: 0 0 5px var(--secondary);
+    clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
+    corner-shape: unset;
+}
+
 @media (width < 768px) {
     .app-container {
         padding: 1rem;
