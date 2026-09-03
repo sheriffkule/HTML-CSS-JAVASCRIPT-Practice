@@ -397,7 +397,7 @@ document.addEventListener('DOMContentLoaded', function () {
     cssCode += `  font-size: ${fontSize.value}px;\n`;
     cssCode += `  font-weight: ${fontWeight.value};\n`;
     cssCode += `  line-height: ${lineHeight.value};\n`;
-    cssCode += `  letter-spacing: ${letterSpacing.value}px'\n`;
+    cssCode += `  letter-spacing: ${letterSpacing.value}px';\n`;
 
     if (textGradientToggle.checked) {
       const colors = Array.from(document.querySelectorAll('.gradient-color-input')).map(
@@ -416,7 +416,7 @@ document.addEventListener('DOMContentLoaded', function () {
         cssCode += `  color: transparent;\n`;
       }
     } else {
-      cssCode += `  color: ${textColor.value}`;
+      cssCode += `  color: ${textColor.value};\n`;
     }
 
     const activeAlignBtn = document.querySelector('.align-btn.active');
@@ -456,7 +456,7 @@ document.addEventListener('DOMContentLoaded', function () {
         cssCode += `  background: ${gradient};\n`;
       }
     } else {
-      cssCode += `  color: ${bgColor.value}`;
+      cssCode += `  color: ${bgColor.value};\n`;
     }
 
     cssCode += `  padding: ${bgPadding.value}px;\n`;
@@ -552,6 +552,94 @@ document.addEventListener('DOMContentLoaded', function () {
 
     presetName.value = '';
     loadPresets();
+  }
+
+  function loadPresets() {
+    const presets = JSON.parse(localStorage.getItem('fontPresets') || '[]');
+    if (presets.length === 0) {
+      presetsList.innerHTML = '<p>No presets saved yet</p>';
+      return;
+    }
+
+    presetsList.innerHTML = '';
+    presets.forEach((preset, index) => {
+      const presetItem = document.createElement('div');
+      presetItem.className = 'preset-item';
+      presetItem.innerHTML = `
+        <span>${preset.name}</span>
+        <div class="preset-actions">
+          <button class="preset-btn load-preset" data-index="${index}" title="Load Preset">
+            <span class="material-symbols-outlined">download</span>
+          </button>
+          <button class="preset-btn delete-preset" data-index="${index}" title="Delete Preset">
+            <span class="material-symbols-outlined">delete</span>
+          </button>
+        </div>
+      `;
+      presetsList.appendChild(presetItem);
+    });
+
+    // Add event listeners to preset buttons
+    document.querySelectorAll('.load-preset').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        const index = parseInt(this.getAttribute('data-index'));
+        loadPreset(index);
+      });
+    });
+
+    document.querySelectorAll('.delete-preset').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        const index = parseInt(this.getAttribute('data-index'));
+        deletePreset(index);
+      });
+    });
+  }
+
+  function loadPreset(index) {
+    const presets = JSON.parse(localStorage.getItem('fontPresets') || '[]');
+    if (index < 0 || index >= presets.length) return;
+
+    const preset = presets[index];
+
+    // Text properties
+    textInput.value = preset.text;
+    fontFamily.value = preset.fontFamily;
+    fontSize.value = preset.fontSize;
+    fontSizeValue.textContent = `${preset.fontSize}px`;
+    fontWeight.value = preset.fontWeight;
+    fontWeightValue.textContent = preset.fontWeight;
+    lineHeight.value = preset.lineHeight;
+    lineHeightValue.textContent = preset.lineHeight;
+    letterSpacing.value = preset.letterSpacing;
+    letterSpacingValue.textContent = `${preset.letterSpacing}px`;
+    textColor.value = preset.textColor;
+
+    // Text alignment
+    textAlignBtns.forEach((btn) => {
+      btn.classList.remove('active');
+      if (btn.value === preset.textAlign) {
+        btn.classList.add('active');
+      }
+    });
+
+    textTransform.value = preset.textTransform;
+    fontStyle.value = preset.fontStyle;
+
+    // Text shadow
+    textShadowToggle.checked = preset.textShadow.enabled;
+    shadowH.value = preset.textShadow.h;
+    shadowHValue.textContent = `${preset.textShadow.h}px`;
+    shadowV.value = preset.textShadow.v;
+    shadowVValue.textContent = `${preset.textShadow.v}px`;
+    shadowBlur.value = preset.textShadow.blur;
+    shadowBlurValue.textContent = `${preset.textShadow.blur}px`;
+    shadowColor.value = preset.textShadow.color;
+
+    // Text outline
+    textOutlineToggle.checked = preset.textOutline.enabled;
+    outlineWidth.value = preset.textOutline.width;
+    outlineWidthValue.textContent = `${preset.textOutline.width}px`;
+    outlineColor.value = preset.textOutline.color;
   }
 
   // Changing colors on input type range track
