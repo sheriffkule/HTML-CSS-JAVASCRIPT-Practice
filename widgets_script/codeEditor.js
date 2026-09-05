@@ -62,4 +62,44 @@ button:hover {
     alert('Hello from NeonCode!');        
 });`,
   };
+
+  // Current file management
+  let currentFile = 'index.html';
+  const fileList = document.getElementById('file-list');
+  const fileTabs = document.getElementById('file-tabs');
+  const consoleOutput = document.getElementById('console-output');
+  const previewOutput = document.getElementById('preview-output');
+  const cursorPosition = document.getElementById('cursor-position');
+  const themeSwitch = document.getElementById('theme-switch');
+  const currentTheme = document.getElementById('current-theme');
+
+  // Initialize file list and tabs
+  function initializeFiles() {
+    // Clear existing items
+    fileList.innerHTML = '';
+    fileTabs.innerHTML = '';
+
+    // Create file items and tabs
+    Object.keys(files).forEach((fileName) => {
+      createFileItem(fileName);
+      createFileTab(fileName);
+    });
+
+    // Set active file
+    setActiveFile(currentFile);
+  }
+
+  // Create file item in sidebar
+  function createFileItem(fileName) {
+    const fileItem = document.createElement('li')
+    fileItem.className = 'file-item'
+    fileItem.textContent = fileName
+    fileItem.setAttribute('data-file', fileName)
+
+    fileItem.addEventListener('click', () => {
+        setActiveFile(fileName)
+    })
+
+    fileList.appendChild(fileItem)
+  }
 });

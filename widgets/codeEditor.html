@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/widgets_style/codeEditor.css" />
   </head>
   <body class="dark-theme">
-    <div class="app-container">
+    <ai class="app-container">
       <header class="app-header">
         <div class="logo">
           <i class="fas fa-code"></i>
@@ -29,7 +29,7 @@
         </div>
       </header>
 
-      <div class="main-content">
+      <main class="main-content">
         <aside class="sidebar">
           <div class="file-explorer">
             <div class="file-header">
@@ -43,7 +43,42 @@
             </ul>
           </div>
         </aside>
-      </div>
+
+        <section class="editor-container">
+            <article class="editor-toolbar">
+                <div class="file-tabs" id="file-tabs">
+                    <div class="file-tab active" data-file="index.html">
+                        index.html
+                        <button class="close-tab"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+            </article>
+            <div class="code-editor" id="editor"></div>
+        </section>
+
+        <section class="output-container">
+            <div class="output-tabs">
+                <button class="output-tab active" data-tab="console">Console</button>
+                <button class="output-tab" data-tab="preview">Preview</button>
+            </div>
+            <div class="output-content">
+                <div class="console-output active-tab" id="console-output"></div>
+                <div class="preview-output" id="preview-output"></div>
+            </div>
+        </section>
+    </main>
+
+    <section class="status-bar">
+        <div class="status-item">
+            <span id="cursor-position">Ln 1, Col 1</span>
+        </div>
+        <div class="status-item">
+            <span id="indent-mode">Spaces: 2</span>
+        </div>
+        <div class="status-item">
+            <span id="current-theme">Light Theme</span>
+        </div>
+    </section>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.44.0/ace.js"></script>
