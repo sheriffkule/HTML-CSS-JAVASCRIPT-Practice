@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Browser-based Code Editor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/codeEditor.css" />
+  </head>
+  <body class="dark-theme">
+    <div class="app-container">
+      <header class="app-header">
+        <div class="logo">
+          <i class="fas fa-code"></i>
+          <h1>Browser-based Code Editor</h1>
+        </div>
+        <div class="controls">
+          <button class="btn run-btn" id="run-btn"><i class="fas fa-play"></i> Run</button>
+          <button class="btn save-btn" id="save-btn"><i class="fas fa-save"></i> Save</button>
+          <button class="btn new-btn" id="new-file-btn"><i class="fas fa-file"></i> New</button>
+          <div class="theme-toggle">
+            <input type="checkbox" id="theme-switch" class="theme-switch" />
+            <label for="theme-switch" class="theme-label">
+              <i class="fas fa-sun"></i>
+              <i class="fas fa-moon"></i>
+              <span class="theme-ball"></span>
+            </label>
+          </div>
+        </div>
+      </header>
+
+      <div class="main-content">
+        <aside class="sidebar">
+          <div class="file-explorer">
+            <div class="file-header">
+              <h3>Files</h3>
+              <button class="icon-btn" id="add-file-btn" title="Add File"><i class="fas fa-plus"></i></button>
+            </div>
+            <ul class="file-list" id="file-list">
+              <li class="file-item active" data-file="index.html">index.html</li>
+              <li class="file-item" data-file="style.css">style.css</li>
+              <li class="file-item" data-file="script.js">script.js</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.44.0/ace.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.44.0/mode-html.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.44.0/theme-monokai.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.44.0/theme-chrome.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.44.0/ext-language_tools.js"></script>
+    <script src=""></script>
+  </body>
+</html>
