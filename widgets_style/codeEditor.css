@@ -172,3 +172,48 @@ body.dark-theme {
 .theme-switch:checked + .theme-label .theme-ball {
     transform: translateX(2rem);
 }
+
+.main-content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: var(--light);
+    border-right: 1px solid rgb(0 0 0 / 0.3);
+    padding: 1rem;
+    overflow-y: auto;
+    transition: var(--transition);
+}
+
+.file-explorer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.file-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.file-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.file-item {
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+}

@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Browser-based Code Editor</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
     <link rel="stylesheet" href="/widgets_style/codeEditor.css" />
   </head>
   <body class="dark-theme">
-    <ai class="app-container">
+    <div class="app-container">
       <header class="app-header">
         <div class="logo">
           <i class="fas fa-code"></i>
@@ -29,7 +29,7 @@
         </div>
       </header>
 
-      <main class="main-content">
+      <div class="main-content">
         <aside class="sidebar">
           <div class="file-explorer">
             <div class="file-header">
@@ -44,41 +44,41 @@
           </div>
         </aside>
 
-        <section class="editor-container">
-            <article class="editor-toolbar">
-                <div class="file-tabs" id="file-tabs">
-                    <div class="file-tab active" data-file="index.html">
-                        index.html
-                        <button class="close-tab"><i class="fas fa-times"></i></button>
-                    </div>
-                </div>
-            </article>
-            <div class="code-editor" id="editor"></div>
-        </section>
-
-        <section class="output-container">
-            <div class="output-tabs">
-                <button class="output-tab active" data-tab="console">Console</button>
-                <button class="output-tab" data-tab="preview">Preview</button>
+        <div class="editor-container">
+          <article class="editor-toolbar">
+            <div class="file-tabs" id="file-tabs">
+              <div class="file-tab active" data-file="index.html">
+                index.html
+                <button class="close-tab"><i class="fas fa-times"></i></button>
+              </div>
             </div>
-            <div class="output-content">
-                <div class="console-output active-tab" id="console-output"></div>
-                <div class="preview-output" id="preview-output"></div>
-            </div>
-        </section>
-    </main>
+          </article>
+          <div class="code-editor" id="editor"></div>
+        </div>
 
-    <section class="status-bar">
+        <div class="output-container">
+          <div class="output-tabs">
+            <button class="output-tab active" data-tab="console">Console</button>
+            <button class="output-tab" data-tab="preview">Preview</button>
+          </div>
+          <div class="output-content">
+            <div class="console-output active-tab" id="console-output"></div>
+            <div class="preview-output" id="preview-output"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="status-bar">
         <div class="status-item">
-            <span id="cursor-position">Ln 1, Col 1</span>
+          <span id="cursor-position">Ln 1, Col 1</span>
         </div>
         <div class="status-item">
-            <span id="indent-mode">Spaces: 2</span>
+          <span id="indent-mode">Spaces: 2</span>
         </div>
         <div class="status-item">
-            <span id="current-theme">Light Theme</span>
+          <span id="current-theme">Light Theme</span>
         </div>
-    </section>
+      </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.44.0/ace.js"></script>
@@ -86,6 +86,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.44.0/theme-monokai.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.44.0/theme-chrome.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.44.0/ext-language_tools.js"></script>
-    <script src=""></script>
+    <script src="/widgets_script/codeEditor.js"></script>
   </body>
 </html>
