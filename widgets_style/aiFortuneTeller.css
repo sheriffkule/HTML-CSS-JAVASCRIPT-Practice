@@ -72,3 +72,32 @@ p {
         grid-template-columns: 1fr;
     }
 }
+
+.fortune-section {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgb(138 43 226 / 0.3);
+    }
+}
+
+.section-title {
+    font-family: 'Playfair Display', 'Segoe UI', sans-serif;
+    font-size: 1.75rem;
+    margin-bottom: 20px;
+    color: var(--secondary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    i {
+        color: var(--accent);
+    }
+}
