@@ -1,7 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
   // Initialize editor
   const editor = ace.edit('editor');
-  editor.setTheme('ace/theme/chrome');
+  const themeStorageKey = 'code-editor-theme';
+  const savedTheme = localStorage.getItem(themeStorageKey);
+  const isDarkTheme = savedTheme === 'dark';
+  editor.setTheme(isDarkTheme ? 'ace/theme/monokai' : 'ace/theme/chrome');
   editor.session.setMode('ace/mode/html');
   editor.setFontSize(14);
   editor.setOptions({
@@ -50,14 +53,14 @@ button {
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
-    cursor: pointer:
-    transition: background-color: 0.3s
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
-        
+
 button:hover {
     background-color: #5649c0;
 }`,
-    'script.js': `document.getElementById('demo-btn).addEventListener('click', function() {
+    'script.js': `document.getElementById('demo-btn').addEventListener('click', function() {
     console.log('Button clicked!');
     alert('Hello from NeonCode!');        
 });`,
@@ -151,8 +154,8 @@ button:hover {
     // Set appropriate mode based on file extension
     let mode = 'text';
     if (fileName.endsWith('.html')) mode = 'html';
-    else if (fileName.endsWidth('.css')) mode = 'css';
-    else if (fileName.endsWidth('.js')) mode = 'js';
+    else if (fileName.endsWith('.css')) mode = 'css';
+    else if (fileName.endsWith('.js')) mode = 'javascript';
 
     editor.session.setMode(`ace/mode/${mode}`);
 
@@ -198,7 +201,7 @@ button:hover {
 
     // Set default content based on file type
     let content = '';
-    if (!fileName.endsWith('.html')) {
+    if (fileName.endsWith('.html')) {
       content = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -228,6 +231,9 @@ button:hover {
       const html = files['index.html'];
       const css = files['styles.css'] || '';
       const js = files['script.js'] || '';
+      const htmlWithoutExternalAssets = html
+        .replace(/<link\s+[^>]*href=["']styles\.css["'][^>]*>/i, '')
+        .replace(/<script\s+[^>]*src=["']script\.js["'][^>]*><\/script>/i, `<script>${js}</script>`);
 
       const preview = `
         <!DOCTYPE html>
@@ -238,7 +244,7 @@ button:hover {
             </style>
           </head>
           <body>
-            ${html.replace('<script src="script.js"></script>', `<script>${js}</script>`)}
+            ${htmlWithoutExternalAssets}
           </body>
         </html>
       `;
@@ -305,4 +311,69 @@ button:hover {
   function showMessage(message) {
     appendToConsole(`> ${message}`, 'info');
   }
+
+  // Tab switching
+  document.querySelectorAll('.output-tab').forEach((tab) => {
+    tab.addEventListener('click', function () {
+      const tabName = this.getAttribute('data-tab');
+
+      // Update active tab
+      document.querySelectorAll('.output-tab').forEach((t) => t.classList.toggle('active', t === this));
+
+      // Update active content
+      document.querySelectorAll('.output-content > div').forEach((content) => {
+        content.classList.toggle('active-tab', content.id === `${tabName}-output`);
+      });
+
+      // Refresh preview when switching to it
+      if (tabName === 'preview' && currentFile === 'index.html') {
+        updatePreview();
+      }
+    });
+  });
+
+  // Theme switching
+  function applyTheme(isDark) {
+    document.body.classList.toggle('dark-theme', isDark);
+    themeSwitch.checked = isDark;
+    editor.setTheme(isDark ? 'ace/theme/monokai' : 'ace/theme/chrome');
+    currentTheme.textContent = isDark ? 'Dark Theme' : 'Light Theme';
+  }
+
+  themeSwitch.addEventListener('change', function () {
+    const isDark = this.checked;
+    localStorage.setItem(themeStorageKey, isDark ? 'dark' : 'light');
+    applyTheme(isDark);
+  });
+
+  // Cursor position tracking
+  editor.session.selection.on('changeCursor', function () {
+    const cursor = editor.selection.getCursor();
+    cursorPosition.textContent = `Ln ${cursor.row + 1}, Col ${cursor.column + 1}`;
+  });
+
+  // Save file on Ctrl+S or Cmd+S
+  editor.commands.addCommand({
+    name: 'saveFile',
+    bindKey: { win: 'Ctrl-S', mac: 'Command-S' },
+    exec: saveCurrentFile,
+  });
+
+  // Button event listeners
+  document.getElementById('run-btn').addEventListener('click', runCode);
+  document.getElementById('save-btn').addEventListener('click', saveCurrentFile);
+  document.getElementById('new-file-btn').addEventListener('click', createNewFile);
+  document.getElementById('add-file-btn').addEventListener('click', createNewFile);
+
+  applyTheme(isDarkTheme);
+  initializeFiles();
+
+  // Save file when editor content changes (debounced)
+  let saveTimeout;
+  editor.session.on('change', function () {
+    clearTimeout(saveTimeout);
+    saveTimeout = setTimeout(() => {
+      files[currentFile] = editor.getValue();
+    }, 1000);
+  });
 });

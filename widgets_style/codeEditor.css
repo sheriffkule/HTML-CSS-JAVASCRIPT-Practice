@@ -344,3 +344,119 @@ body.dark-theme {
     display: flex;
     border-bottom: 1px solid rgb(0 0 0 / 0.1);
 }
+
+.output-tab {
+    padding: 0.5rem 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    color: rgb(0 0 0 / 0.6);
+    transition: var(--transition);
+
+    &.active {
+        color: var(--primary);
+        border-bottom: 2px solid var(--primary);
+    }
+}
+
+.dark-theme .output-tab {
+    color: rgb(255 255 255 / 0.6);
+}
+
+.output-content {
+    flex: 1;
+    overflow: auto;
+    position: relative;
+}
+
+.console-output, .preview-output {
+    position: absolute;
+    inset: 0;
+    padding: 1rem;
+    overflow: auto;
+    display: none;
+}
+
+:is(.console-output, .preview-output).active-tab {
+    display: block;
+}
+
+.console-output {
+    font-family: monospace;
+    white-space: pre-wrap;
+    background-color: var(--light);
+    color: var(--dark);
+}
+
+.preview-output {
+    background-color: white;
+}
+
+.dark-theme .preview-output {
+    background-color: #1e272e;
+}
+
+.status-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.3rem 1rem;
+    background-color: var(--primary);
+    color: white;
+    font-size: 0.875rem;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+@media (width <= 768px) {
+    .main-content {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        height: auto;
+        max-height: 150px;
+        border-right: none;
+        border-bottom: 1px solid rgb(0 0 0 / 0.2);
+    }
+    .editor-container {
+        height: 60%;
+    }
+    .output-container {
+        height: 30%;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgb(0 0 0 / 0.15);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(0 0 0 / 0.3);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(0 0 0 / 0.4);
+}
+
+.dark-theme ::-webkit-scrollbar-track {
+    background: rgb(255 255 255 / 0.1);
+}
+
+.dark-theme ::-webkit-scrollbar-thumb {
+    background: rgb(255 255 255 / 0.2);
+}
+
+.dark-theme ::-webkit-scrollbar-thumb:hover {
+    background: rgb(255 255 255 / 0.3);
+}
