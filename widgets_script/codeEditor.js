@@ -252,4 +252,57 @@ button:hover {
       previewOutput.appendChild(iframe);
     }
   }
+
+  // Run code
+  function runCode() {
+    saveCurrentFile();
+    clearConsole();
+
+    if (currentFile === 'index.html') {
+      updatePreview();
+      showMessage('HTML preview updated.');
+    } else if (currentFile.endsWith('.js')) {
+      try {
+        // Capture console.log output
+        const originalConsoleLog = console.log;
+        console.log = function () {
+          originalConsoleLog.apply(console, arguments);
+          const args = Array.from(arguments)
+            .map((arg) => (typeof arg === 'object' ? JSON.stringify(arg) : arg))
+            .join(' ');
+          appendToConsole(args);
+        };
+
+        // Execute the code
+        const code = files[currentFile];
+        new Function(code)();
+
+        showMessage('JavaScript executed successfully.');
+      } catch (error) {
+        appendToConsole(`Error: ${error.message}`, 'error');
+      } finally {
+        // Restore original console.log
+        console.log = originalConsoleLog;
+      }
+    } else {
+      showMessage('Run is only supported for HTML and JavaScript files.');
+    }
+  }
+
+  // Console function
+  function appendToConsole(message, type = 'log') {
+    const line = document.createElement('div');
+    line.className = `console-${type}`;
+    line.textContent = message;
+    consoleOutput.appendChild(line);
+    consoleOutput.scrollTop = consoleOutput.scrollHeight;
+  }
+
+  function clearConsole() {
+    consoleOutput.innerHTML = '';
+  }
+
+  function showMessage(message) {
+    appendToConsole(`> ${message}`, 'info');
+  }
 });
