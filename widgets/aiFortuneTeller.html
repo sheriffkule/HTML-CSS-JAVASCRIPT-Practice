@@ -21,6 +21,7 @@
             personalized insights about your future based on your questions, mood, and the mystical energies
             of the universe.
           </p>
+          <p>Remember: The future is not set in stone. You have the power to shape your own destiny</p>
         </div>
       </header>
 
@@ -75,7 +76,73 @@
             <button class="btn btn-secondary" id="clearCrystalBtn"><i class="fas fa-redo"></i> Clear</button>
           </div>
         </section>
+
+        <section class="fortune-section">
+          <h2 class="section-title"><i class="fas fa-star-and-crescent"></i> Tarot Reading</h2>
+          <p>
+            Select three tarot cards to receive a past, present, and future reading. Each card holds unique
+            wisdom for your journey.
+          </p>
+
+          <div class="tarot-cards">
+            <div class="tarot-card" data-card="past">
+              <i class="fas fa-moon"></i>
+            </div>
+            <div class="tarot-card" data-card="preset">
+              <i class="fas fa-sun"></i>
+            </div>
+            <div class="tarot-card" data-card="future">
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+
+          <p class="tarot-hing" id="tarotHint">Click each card to reveal its meaning</p>
+
+          <div class="loading" id="tarotLoading">
+            <div class="spinner"></div>
+            <p>Shuffling tarot deck...</p>
+          </div>
+
+          <div class="fortune-result" id="tarotFortune">
+            <div class="fortune-text" id="tarotFortuneText"></div>
+            <span class="fortune-category" id="tarotCategory"></span>
+          </div>
+
+          <div class="buttons">
+            <button class="btn btn-primary" id="drawTarotBtn">
+              <i class="fas fa-random"></i> Draw Tarot Cards
+            </button>
+            <button class="btn btn-secondary" id="clearTarotBtn">
+              <i class="fas fa-redo"></i> Clear Reading
+            </button>
+          </div>
+        </section>
       </main>
+
+      <section class="fortune-section history-section">
+        <h2 class="section-title"><i class="fas fa-history"></i> Fortune History</h2>
+        <p>
+          Review your previous readings and insights. Past predictions may reveal patterns in your life's
+          journey.
+        </p>
+
+        <div class="history-list" id="fortuneHistory">
+          <!-- History items will be added here by JavaScript -->
+        </div>
+
+        <div class="buttons">
+          <button class="btn btn-secondary" id="clearHistoryBtn">
+            <i class="fas fa-trash-alt"></i> Clear History
+          </button>
+        </div>
+      </section>
+
+      <footer class="footer__copy">
+        © <time datetime="" id="year"></time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
     </div>
+
+    <script src="/widgets_script/aiFortuneTeller.js"></script>
   </body>
 </html>
