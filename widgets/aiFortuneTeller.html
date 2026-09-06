@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Fortune Teller | Glimpse Into Your Future</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/aiFortuneTeller.css" />
+  </head>
+  <body>
+    <div class="container">
+      <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+
+      <header>
+        <h1><i class="fas fa-crystal-ball"></i> AI Fortune Teller</h1>
+        <p class="tagline">Unlock the mysteries of your future with advanced AI divination.</p>
+
+        <div class="app-description">
+          <p>
+            Welcome to AI Fortune Teller, where ancient divination meets modern artificial intelligence. Get
+            personalized insights about your future based on your questions, mood, and the mystical energies
+            of the universe.
+          </p>
+        </div>
+      </header>
+
+      <main class="main-content">
+        <section class="fortune-section">
+          <h2><i class="fas fa-crystal-ball"></i> Crustal Ball</h2>
+          <p>
+            Gaze into the mystical crystal ball and ask a question about your future. Concentrate on your
+            question while touching the crystal ball.
+          </p>
+
+          <div class="crystal-ball-container">
+            <div class="crystal-ball" id="crystalBall">
+              <div class="crystal-ball-text" id="crystalBallText">
+                Touch the crystal ball to see your future...
+              </div>
+            </div>
+          </div>
+
+          <div class="user-input">
+            <div class="input-group">
+              <label for="userQuestion"><i class="fas fa-question-circle"></i> Your Question</label>
+              <input type="text" id="userQuestion" placeholder="What does my future hold regarding..." />
+            </div>
+
+            <div class="input-group">
+              <label for="userMood"><i class="fas fa-smile"></i></label>
+              <select id="userMood">
+                <option value="happy">😊 Happy & Optimistic</option>
+                <option value="curious">🤔 Curious & Reflective</option>
+                <option value="anxious">😟 Anxious & Concerned</option>
+                <option value="excited">😄 Excited & Energetic</option>
+                <option value="neutral">😐 Neutral & Calm</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="loading" id="crystalLoading">
+            <div class="spinner"></div>
+            <p>Reading cosmic energies...</p>
+          </div>
+
+          <div class="fortune-result" id="crystalFortune">
+            <div class="fortune-text" id="crystalFortuneText"></div>
+            <span class="fortune-category" id="crystalCategory"></span>
+          </div>
+
+          <div class="buttons">
+            <button class="btn btn-primary" id="askCrustalBtn">
+              <i class="fas fa-hand-sparkles"></i> Ask Crystal Ball
+            </button>
+            <button class="btn btn-secondary" id="clearCrystalBtn"><i class="fas fa-redo"></i> Clear</button>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

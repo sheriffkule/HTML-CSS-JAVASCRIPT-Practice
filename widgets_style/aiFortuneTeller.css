@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=Playfair:opsz,wght@5..1200,300..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #8a2be2;
+    --secondary: #da70d6;
+    --accent: #ffd700;
+    --dark: #1a0933;
+    --light: #f8f4ff;
+    --card-bg: rgb(255 255 255 / 0.1);
+    --border-radius: 20px;
+    --box-shadow: 0 10px 30px rgb(138 43 226 / 0.2);
+    --transition: all 0.3s ease;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, var(--dark), #3a0a5e);
+    color: var(--light);
+    min-height: 100vh;
+    line-height: 1.5;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+p {
+    text-wrap: pretty;
+}
+
+.tagline {
+    font-size: 1.2rem;
+    color: #d4b3ff;
+    margin-bottom: 30px;
+}
+
+.app-description {
+    max-width: 800px;
+    margin: 0 auto 40px;
+    text-align: center;
+    font-size: 1.1rem;
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgb(255 255 255 / 0.1);
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 40px;
+
+    @media (width <= 992px) {
+        grid-template-columns: 1fr;
+    }
+}
