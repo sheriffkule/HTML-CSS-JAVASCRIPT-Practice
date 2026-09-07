@@ -99,12 +99,25 @@ const fortuneData = {
 };
 
 // History array to store past readings
-let history = JSON.parse(localStorage.getItem('fortuneHistory'));
+let history = loadHistory();
+
+function loadHistory() {
+  try {
+    const storedHistory = JSON.parse(localStorage.getItem('fortuneHistory'));
+    return Array.isArray(storedHistory) ? storedHistory : [];
+  } catch {
+    return [];
+  }
+}
 
 // Initialize the app
 function initApp() {
   // Load history from localStorage
   renderHistory();
+
+  applyTheme(localStorage.getItem('fortuneTheme') || 'dark');
+
+  document.getElementById('year').textContent = new Date().getFullYear();
 
   // Set up event listeners
   setupEventListeners();
@@ -224,7 +237,7 @@ function generateCrystalFortune() {
         neutral: 'Your balanced perspective will serve you well in this situation.',
       };
 
-      fortune = moodPhrases[mood] + fortune;
+      fortune = `${moodPhrases[mood]} ${fortune}`;
 
       // Display the fortune
       crystalFortuneText.textContent = fortune;
@@ -272,3 +285,170 @@ function updateTarotHint() {
     tarotHint.textContent = 'All cards selected! Click "Draw Tarot Cards" for your reading';
   }
 }
+
+// Generate tarot reading
+function generateTarotReading() {
+  // Reset all cards
+  tarotCards.forEach((card) => card.classList.remove('active'));
+
+  // Show loading
+  tarotLoading.classList.add('active');
+  tarotFortune.classList.remove('active');
+
+  // Animate card selection
+  let delay = 0;
+  tarotCards.forEach((card, index) => {
+    setTimeout(() => {
+      card.classList.add('selected');
+
+      // Add visual effect
+      card.style.transform = `translateY(-15px) rotate(${index % 2 === 0 ? '5deg' : '-5deg'})`;
+
+      // Update hint
+      updateTarotHint();
+    }, 500 + delay);
+    delay += 400;
+  });
+
+  // Generate reading after animation
+  setTimeout(() => {
+    // Hide loading
+    tarotLoading.classList.remove('active');
+
+    // Get random meanings for each position
+    const pastReading =
+      fortuneData.tarotMeanings.past[Math.floor(Math.random() * fortuneData.tarotMeanings.past.length)];
+    const presentReading =
+      fortuneData.tarotMeanings.present[Math.floor(Math.random() * fortuneData.tarotMeanings.present.length)];
+    const futureReading =
+      fortuneData.tarotMeanings.future[Math.floor(Math.random() * fortuneData.tarotMeanings.future.length)];
+
+    // Construct the full reading
+    const reading = `
+      <p><strong>Past:</strong> ${pastReading}</p>
+      <p><strong>Present:</strong> ${presentReading}</p>
+      <p><strong>Future:</strong> ${futureReading}</p>
+      <p style="margin-top: 15px;">
+        <em>The cards reveal a journey from reflection to action, leading toward fulfillment.</em>
+      </p>
+    `;
+
+    // Display the reading
+    tarotFortuneText.innerHTML = reading;
+    tarotCategory.textContent = 'Tarot Reading';
+    tarotFortune.classList.add('active');
+
+    // Update hint
+    tarotHint.textContent = 'Your three-card spread is complete.';
+
+    // Add to history
+    addToHistory({
+      type: 'Tarot Reading',
+      question: 'Three-card past, present, future reading',
+      fortune: `${pastReading}, ${presentReading}, ${futureReading}`,
+      category: 'Tarot',
+      date: new Date().toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      }),
+    });
+  }, 2000);
+}
+
+// Clear tarot reading
+function clearTarotReading() {
+  tarotCards.forEach((card) => {
+    card.classList.remove('selected');
+    card.style.transform = '';
+  });
+
+  tarotFortune.classList.remove('active');
+  tarotHint.textContent = 'Click each card to reveal its meaning.';
+}
+
+// Add fortune to history
+function addToHistory(fortuneItem) {
+  history.unshift(fortuneItem);
+
+  // Keep only last 10 items
+  if (history.length > 10) history = history.slice(0, 10);
+
+  // Save to localStorage
+  localStorage.setItem('fortuneHistory', JSON.stringify(history));
+
+  // Update UI
+  renderHistory();
+}
+
+// Render history to UI
+function renderHistory() {
+  if (history.length === 0) {
+    fortuneHistory.innerHTML =
+      '<p style="text-align: center; padding: 30px;">No Fortunes yet. Get your first reading!</p>';
+    return;
+  }
+
+  fortuneHistory.innerHTML = history
+    .map(
+      (item) => `
+      <div class="history-item">
+        <div class="history-date">${escapeHtml(item.date)} • ${escapeHtml(item.type)}</div>
+        <p><strong>Q:</strong> ${escapeHtml(item.question)}</p>
+        <p><strong>A:</strong> ${escapeHtml(item.fortune.substring(0, 120))}${item.fortune.length > 120 ? '...' : ''}</p>
+        <span class="fortune-category">${escapeHtml(item.category)}</span>
+      </div>
+    `,
+    )
+    .join('');
+}
+
+function escapeHtml(value) {
+  const element = document.createElement('div');
+  element.textContent = value;
+  return element.innerHTML;
+}
+
+function clearHistory() {
+  if (history.length === 0) return;
+
+  if (confirm('Are you sure you want to clear your fortune history?')) {
+    history = [];
+    localStorage.removeItem('fortuneHistory');
+    renderHistory();
+  }
+}
+
+// Apply and persist the selected theme
+function applyTheme(theme) {
+  document.body.classList.toggle('light-theme', theme === 'light');
+
+  if (theme === 'light') {
+    // Light theme colors
+    document.documentElement.style.setProperty('--dark', '#f8f4ff');
+    document.documentElement.style.setProperty('--light', '#1a0933');
+    document.documentElement.style.setProperty('--card-bg', 'rgba(255, 255, 255, 0.9)');
+    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+  } else {
+    // Dark theme colors (default)
+    document.documentElement.style.setProperty('--dark', '#1a0933');
+    document.documentElement.style.setProperty('--light', '#f8f4ff');
+    document.documentElement.style.setProperty('--card-bg', 'rgba(255, 255, 255, 0.1)');
+    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+  }
+
+  themeToggle.setAttribute('aria-label', `Switch to ${theme === 'light' ? 'dark' : 'light'} theme`);
+  themeToggle.setAttribute('title', `Switch to ${theme === 'light' ? 'dark' : 'light'} theme`);
+}
+
+// Toggle between light and dark theme
+function toggleTheme() {
+  const nextTheme = document.body.classList.contains('light-theme') ? 'dark' : 'light';
+  applyTheme(nextTheme);
+  localStorage.setItem('fortuneTheme', nextTheme);
+}
+
+// Initialize the app when DOM is loaded
+document.addEventListener('DOMContentLoaded', initApp);

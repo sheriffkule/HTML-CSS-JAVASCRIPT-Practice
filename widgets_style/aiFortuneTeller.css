@@ -122,11 +122,18 @@ p {
     place-items: center;
     cursor: pointer;
     transition: var(--transition);
+    /* animation: ballFloat 5s linear infinite both; */
 
     &:hover {
         transform: scale(1.05);
         box-shadow: inset 0 0 50px rgb(138 43 226 / 0.8),
         0 0 80px rgb(123 104 238 / 0.8);
+    }
+}
+
+@keyframes ballFloat {
+    50% {
+        transform: translateY(-10px);
     }
 }
 
@@ -149,7 +156,7 @@ p {
     text-shadow: 0 0 10px rgb(0 0 0 / 0.8);
     z-index: 2;
     position: relative;
-    animation: textFade 5s linear infinite both;
+    /* animation: textFade 5s linear infinite both; */
 }
 
 @keyframes textFade {
@@ -303,4 +310,19 @@ option:checked {
 option::checkmark {
   color: var(--dark);
   font-size: 1.5rem;
+}
+
+.fortune-result {
+    background: rgb(0 0 0 / 0.3);
+    border-radius: 15px;
+    padding: 25px;
+    margin-top: 25px;
+    min-height: 180px;
+    border-left: 4px solid var(--secondary);
+    display: none;
+
+    &.active {
+        display: block;
+        animation: fadeIn 0.8s ease-in;
+    }
 }
