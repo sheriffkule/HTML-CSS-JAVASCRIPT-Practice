@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payback Period Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/paybackPeriodCalculator.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Payback Period Calculator</h1>
+        <p class="subtitle">Calculate how long it will take to recover your investment.</p>
+      </header>
+
+      <main class="calculator-container">
+        <section class="input-section">
+          <h2>Investment Details</h2>
+          <article class="form-group">
+            <label for="initialInvestment">Initial Investment Amount ($)</label>
+            <input type="number" id="initialInvestment" placeholder="e.g., 10000" min="0" step="100" />
+            <div class="error-message" id="initialInvestmentError">
+              Please enter a valid investment amount.
+            </div>
+          </article>
+
+          <article class="form-group">
+            <label for="discountRate"
+              >Discount Rate (Annual, %)
+              <span class="tooltip">
+                <i class="fas fa-info-circle"></i>
+                <span class="tooltip-text"
+                  >The rate used to discount future cash flows to present value. Set to 0 for simple payback
+                  period.</span
+                >
+              </span>
+            </label>
+            <input
+              type="number"
+              id="discountRate"
+              placeholder="e.g., 5"
+              min="0"
+              max="100"
+              step="0.1"
+              value="0" />
+          </article>
+
+          <h2 style="margin-top: 2rem">Cash Flows</h2>
+          <article class="form-group">
+            <label for="cashFlowType">Cash Flow Type</label>
+            <select id="cashFlowType">
+              <option value="equal">Equal Annual Cash Flows</option>
+              <option value="unequal">Unequal Annual Cash Flows</option>
+            </select>
+          </article>
+
+          <article class="form-group" id="equalCashFlowSection">
+            <label for="annualCashFlow">Annual Cash Flow ($)</label>
+            <input type="number" id="annualCashFlow" placeholder="e.g., 2000" step="100" />
+            <div class="error-message" id="annualCashFlowError">Please enter a valid cash flow amount.</div>
+          </article>
+
+          <article class="form-group" id="unequalCashFlowSection">
+            <label>Yearly Cash Flows ($)</label>
+            <div id="cashFlowInput">
+              <div class="yearly-cashflow">
+                <div style="display: flex; align-items: center; margin-bottom: 0.5rem">
+                  <input
+                    type="number"
+                    class="yearly-cashflow-input"
+                    placeholder="Year 1"
+                    data-year="1"
+                    step="100"
+                    style="flex: 1" />
+                </div>
+              </div>
+            </div>
+            <button type="button" class="add-year-btn" id="addYearBtn"><i class="fas fa-plus"></i></button>
+            <div class="error-message" id="yearlyCashFlowError">Please enter valid cash flow amounts.</div>
+          </article>
+
+          <article class="action-buttons">
+            <button type="button" id="calculateBtn"><i class="fas fa-calculator"></i> Calculate</button>
+            <button type="button" id="resetBtn" class="secondary-btn">
+              <i class="fas fa-redo"></i> Reset
+            </button>
+          </article>
+        </section>
+
+        <section class="result-section">
+          <h2>Results</h2>
+          <article class="result-card">
+            <div class="result-label">Payback Period</div>
+            <div class="result-value" id="paybackPeriodResult">--</div>
+            <div id="paybackPeriodDescription">Enter your investment details to calculate.</div>
+          </article>
+
+          <article class="result-card">
+            <div class="result-label">Payback Period</div>
+            <div class="result-value" id="discountedPaybackPeriodResult">--</div>
+            <div id="discountedPaybackPeriodDescription">Appears when discount rate > 0</div>
+          </article>
+
+          <h3 style="margin-top: 1.5rem">Cash Flow Summary</h3>
+          <article style="overflow-x: auto">
+            <table class="cashflow-table">
+              <thead>
+                <tr>
+                  <th>Year</th>
+                  <th>Cash FLow</th>
+                  <th>Cumulative</th>
+                  <th>Discounted CF</th>
+                  <th>Cumulative (disc.)</th>
+                </tr>
+              </thead>
+              <tbody id="cashFlowTableBody">
+                <tr>
+                  <td colspan="5" style="text-align: center">No Data available</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+        </section>
+      </main>
+
+      <section class="visualization">
+        <h2>Payback Period Visualization</h2>
+        <article class="chart-container" id="paybackChart">
+          <canvas id="chartCanvas" width="100%" height="300"></canvas>
+        </article>
+      </section>
+
+      <section class="info-section">
+        <article class="tabs">
+          <div class="tab active" data-tab="about">About Payback Period</div>
+          <div class="tab" data-tab="how-to-use">How to Use</div>
+          <div class="tab" data-tab="limitations">Limitations</div>
+        </article>
+
+        <div class="tab-content active" id="about-tab"></div>
+
+        <div class="tab-content" id="how-to-use-tab"></div>
+
+        <div class="tab-content" id="limitations-tab"></div>
+      </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/widgets_script/paybackPeriodCalculator.js"></script>
+  </body>
+</html>
