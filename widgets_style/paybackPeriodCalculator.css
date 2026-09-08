@@ -2,7 +2,7 @@
     --primary: #4361ee;
     --secondary: #3f37c9;
     --accent: #4895ef;
-    --light: #f1f2fa;
+    --light: #e0e1e9;
     --dark: #212529;
     --success: #4cc9f0;
     --warning: #f72585;
@@ -48,4 +48,84 @@ h1 {
 .subtitle {
     font-size: 1rem;
     opacity: 0.8;
+}
+
+.calculator-container {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+
+    @media (width <= 768px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.input-section, .result-section {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow),
+    inset var(--box-shadow);
+}
+
+:is(.input-section, .result-section) h2 {
+    color: var(--primary);;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    border-bottom: 2px solid var(--light);
+    padding-bottom: 0.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+input, select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: var(--transition);
+
+    &:focus {
+        outline: transparent;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 2px rgb(67 97 238 / 0.2),
+        inset 0 0 0 2px rgb(67 97 238 / 0.2);
+    }
+}
+
+input {
+    caret-animation: manual;
+    caret-shape: block;
+    caret-color: var(--primary);
+    animation: caret-animation infinite linear 1.2s;
+}
+
+@keyframes caret-animation {
+  50% {
+    caret-color: transparent;
+    caret-shape: bar;
+  }
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    cursor: pointer;
+    scale: 1.8;
+    transition: .2s;
+}
+
+input[type="number"]::-webkit-inner-spin-button:hover,
+input[type="number"]::-webkit-outer-spin-button:hover {
+    box-shadow: 0 0 0 1px royalblue;
 }
