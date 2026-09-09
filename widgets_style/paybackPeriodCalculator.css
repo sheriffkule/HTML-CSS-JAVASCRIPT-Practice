@@ -347,3 +347,127 @@ button {
         display: block;
     }
 }
+
+.add-year-btn, .remove-year-btn {
+    background-color: transparent;
+    color: var(--primary);
+    padding: 0.5rem;
+    border: 1px solid var(--primary);
+    border-radius: 50%;
+    height: 32px;
+    width: 32px;
+    display: grid;
+    place-items: center;
+    margin-left: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.remove-year-btn {
+    color: var(--warning);
+    border-color: var(--warning);
+
+    &:hover {
+        background-color: rgb(247 37 133 / 0.2);
+    }
+}
+
+.add-year-btn:hover {
+    background-color: rgb(67 97 238 / 0.2);
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.secondary-btn {
+    background-color: white;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+
+    &:hover {
+        background-color: rgb(67 97 238 / 0.2);
+    }
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    margin-left: 0.5rem;
+    cursor: pointer;
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background-color: var(--dark);
+    color: white;
+    text-align: center;
+    border-radius: var(--border-radius);
+    padding: 0.5rem;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    height: 0;
+    interpolate-size: allow-keywords;
+    transition: opacity 0.3s, visibility 0.3s, height 0.3s;
+    font-size: 0.875rem;
+    font-weight: normal;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+    height: auto;
+}
+
+.error-message {
+    color: var(--warning);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    display: none;
+}
+
+.has-error input {
+    border-color: var(--warning);
+}
+
+footer {
+    margin-top: 30px;
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgb(0 0 0 / 0.15);
+    color: var(--dark);
+    font-size: 0.875rem;
+
+    span {
+        color: red;
+        font-size: 1rem;
+    }
+    abbr {
+        color: var(--primary);
+        letter-spacing: 0.5px;
+        cursor: default;
+        text-underline-offset: 2px;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: var(--text-light);
+    border: 0.5px dotted var(--dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary);
+}
