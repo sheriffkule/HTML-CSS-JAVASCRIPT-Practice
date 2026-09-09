@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Display results
     if (paybackPeriod !== null) {
-      paybackPeriodResult.textContent = paybackPeriod.toFixed(2) + 'years';
+      paybackPeriodResult.textContent = paybackPeriod.toFixed(2) + ' years';
       paybackPeriodDescription.textContent = `The investment will be recovered in approximately
       ${Math.floor(paybackPeriod)} years and ${Math.round((paybackPeriod % 1) * 12)} months.`;
     } else {
@@ -257,7 +257,129 @@ document.addEventListener('DOMContentLoaded', function () {
         <td>${item.discountedCashFlow.toLocalString('en-US', { maximumFractionDigits: 2 })}</td>
         <td>${item.discountedCumulative.toLocalString('en-US', { maximumFractionDigits: 2 })}</td>
       `;
-      cashFlowTableBody.appendChild(row)
+      cashFlowTableBody.appendChild(row);
+    });
+  }
+
+  function updateChart(data, initialInvestment, paybackPeriod, discountPaybackPeriod) {
+    const ctx = chartCanvas.getContext('2d');
+
+    // Destroy previous chart if it exist
+    if (paybackChart) paybackChart.destroy();
+
+    const years = data.map((item) => item.year);
+    const cumulative = data.map((item) => item.cumulative);
+    const discountedCumulative = data.map((item) => item.discountedCumulative);
+
+    // Find the index where payback occurs for annotation
+    let paybackIndex = null;
+    let discountedPaybackIndex = null;
+
+    if (paybackPeriod !== null) paybackIndex = Math.floor(paybackPeriod);
+
+    if (discountPaybackPeriod !== null) discountedPaybackIndex = Math.floor(discountPaybackPeriod);
+
+    paybackChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: years,
+        dataset: [
+          {
+            label: 'Cumulative Cash Flow',
+            data: cumulative,
+            borderColor: '#4361ee',
+            backgroundColor: 'rgba(67, 97, 238, 0.1)',
+            borderWidth: 2,
+            fill: true,
+            tension: 0.1,
+          },
+          {
+            label: 'Discounted Cumulative Cash Flow',
+            data: discountedCumulative,
+            borderColor: '#f72585',
+            backgroundColor: 'rgba(247, 37, 133, 0.1)',
+            borderWidth: 2,
+            fill: true,
+            tension: 0.1,
+            hidden: parseFloat(discountRateInput.value) === 0,
+          },
+          {
+            label: 'Initial Investment',
+            data: Array(years.length).fill(initialInvestment),
+            borderColor: 2,
+            borderWidth: 2,
+            borderDash: [5, 5],
+            fill: false,
+            pointRadius: 0,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                let label = context.dataset.label || '';
+                if (label) label += ': ';
+                if (context.parsed.y !== null) {
+                  label += '$' + context.parsed.y.toLocalString('en-US', { maximumFractionDigits: 2 });
+                }
+                return label;
+              },
+            },
+          },
+          annotation: {
+            annotations: [
+              paybackIndex !== null
+                ? {
+                    type: 'line',
+                    mode: 'vertical',
+                    scaleID: 'x',
+                    value: paybackIndex,
+                    borderColor: '#4361ee',
+                    borderWidth: 2,
+                    label: {
+                      content: 'Payback',
+                      enabled: true,
+                      position: 'top',
+                      backgroundColor: 'rgba(67, 97, 238, 0.7)',
+                      color: 'white',
+                    },
+                  }
+                : {},
+              discountedPaybackIndex !== null && parseFloat(discountRateInput.value) > 0
+                ? {
+                    type: 'line',
+                    mode: 'vertical',
+                    scaleID: 'x',
+                    value: discountedPaybackIndex,
+                    borderColor: '#f72585',
+                    borderWidth: 2,
+                    label: {
+                      content: 'Discounted Payback',
+                      enabled: true,
+                      position: 'top',
+                      backgroundColor: 'rgba(247, 37, 133, 0.7)',
+                      color: 'white',
+                    },
+                  }
+                : {},
+            ],
+          },
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              callback: function (value) {
+                return '$' + value.toLocalString('en-US');
+              },
+            },
+          },
+        },
+      },
     });
   }
 });

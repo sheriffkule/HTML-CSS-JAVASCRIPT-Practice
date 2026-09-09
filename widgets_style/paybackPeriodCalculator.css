@@ -207,3 +207,88 @@ option::checkmark {
   color: var(--success);
   font-size: 1.5rem;
 }
+
+button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    &:hover {
+        background-color: var(--secondary);
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: var(--box-shadow);
+    }
+    &:active {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.result-card {
+    background-color: var(--light);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.result-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-block: 0.5rem;
+}
+
+.result-label {
+    font-size: 1rem;
+    color: var(--dark);
+    opacity: 0.8;
+}
+
+.cashflow-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.cashflow-table :is(th, td) {
+    padding: 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+.cashflow-table th {
+    background-color: var(--light);
+    font-weight: 600;
+}
+
+.cashflow-table tr:hover {
+    background-color: rgb(67 97 238 / 0.1);
+}
+
+.visualization {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow),
+    inset var(--box-shadow);
+
+    h2 {
+        color: var(--primary);
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+        border-bottom: 2px solid var(--light);
+        padding-bottom: 0.5rem;
+    }
+}
