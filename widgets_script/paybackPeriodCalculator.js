@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const annualCashFlowInput = document.getElementById('annualCashFlow');
   const unequalCashFlowSection = document.getElementById('unequalCashFlowSection');
   const equalCashFlowSection = document.getElementById('equalCashFlowSection');
-  const cashFLowInputs = document.getElementById('cashFLowInputs');
+  const cashFLowInputs = document.getElementById('cashFlowInputs');
   const addYearBtn = document.getElementById('addYearBtn');
   const calculateBtn = document.getElementById('calculateBtn');
   const resetBtn = document.getElementById('resetBtn');
@@ -22,10 +22,13 @@ document.addEventListener('DOMContentLoaded', function () {
   // Error elements
   const initialInvestmentError = document.getElementById('initialInvestmentError');
   const annualCashFlowError = document.getElementById('annualCashFlowError');
-  const yearCashFlowError = document.getElementById('yearCashFlowError');
+  const yearlyCashFlowError = document.getElementById('yearlyCashFlowError');
 
   // Chart variables
   let paybackChart = null;
+
+  // Initialize display state
+  toggleCashFlowType();
 
   // Event listeners
   cashFlowTypeSelect.addEventListener('change', toggleCashFlowType);
@@ -89,9 +92,10 @@ document.addEventListener('DOMContentLoaded', function () {
     let isValid = true;
 
     // Validate initial investment
-    if (!initialInvestmentInput.value || parseFloat(initialInvestmentInput) <= 0) {
+    if (!initialInvestmentInput.value || parseFloat(initialInvestmentInput.value) <= 0) {
       initialInvestmentInput.parentElement.classList.add('has-error');
       initialInvestmentError.style.display = 'block';
+      isValid = false;
     } else {
       initialInvestmentInput.parentElement.classList.remove('has-error');
       initialInvestmentError.style.display = 'none';
@@ -102,6 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!annualCashFlowInput.value || parseFloat(annualCashFlowInput.value) <= 0) {
         annualCashFlowInput.parentElement.classList.add('has-error');
         annualCashFlowError.style.display = 'block';
+        isValid = false;
       } else {
         annualCashFlowInput.parentElement.classList.remove('has-error');
         annualCashFlowError.style.display = 'none';
@@ -120,10 +125,10 @@ document.addEventListener('DOMContentLoaded', function () {
       });
 
       if (hasError || yearlyInputs.length === 0) {
-        yearCashFlowError.style.display = 'block';
+        yearlyCashFlowError.style.display = 'block';
         isValid = false;
       } else {
-        yearCashFlowError.style.display = 'none';
+        yearlyCashFlowError.style.display = 'none';
       }
     }
 
@@ -211,6 +216,12 @@ document.addEventListener('DOMContentLoaded', function () {
       if (discountPaybackPeriod !== null) {
         discountedPaybackPeriodResult.textContent = discountPaybackPeriod.toFixed(2) + ' years';
         discountedPaybackPeriodDescription.textContent =
+          'The investment is recovered in approximately ' +
+          discountPaybackPeriod.toFixed(2) +
+          ' years when considering the time value of money.';
+      } else {
+        discountedPaybackPeriodResult.textContent = 'Not Reached';
+        discountedPaybackPeriodDescription.textContent =
           'The investment is not recovered within the specified time frame when considering the time value of money.';
       }
     } else {
@@ -246,25 +257,27 @@ document.addEventListener('DOMContentLoaded', function () {
         item.discountedCumulative - item.discountedCashFlow < initialInvestment;
 
       if (isPaybackYear || isDiscountedPaybackYear) {
-        row.style.backgroundColor;
+        row.style.backgroundColor = '#eef2ff';
         row.style.fontWeight = 'bold';
       }
 
       row.innerHTML = `
         <td>${item.year}</td>
-        <td>${item.cashFlow.toLocalString('en-US', { maximumFractionDigits: 2 })}</td>
-        <td>${item.cumulative.toLocalString('en-US', { maximumFractionDigits: 2 })}</td>
-        <td>${item.discountedCashFlow.toLocalString('en-US', { maximumFractionDigits: 2 })}</td>
-        <td>${item.discountedCumulative.toLocalString('en-US', { maximumFractionDigits: 2 })}</td>
+        <td>${item.cashFlow.toLocaleString('en-US', { maximumFractionDigits: 2 })}</td>
+        <td>${item.cumulative.toLocaleString('en-US', { maximumFractionDigits: 2 })}</td>
+        <td>${item.discountedCashFlow.toLocaleString('en-US', { maximumFractionDigits: 2 })}</td>
+        <td>${item.discountedCumulative.toLocaleString('en-US', { maximumFractionDigits: 2 })}</td>
       `;
       cashFlowTableBody.appendChild(row);
     });
   }
 
   function updateChart(data, initialInvestment, paybackPeriod, discountPaybackPeriod) {
+    if (!chartCanvas || typeof Chart === 'undefined') return;
+
     const ctx = chartCanvas.getContext('2d');
 
-    // Destroy previous chart if it exist
+    // Destroy previous chart if it exists
     if (paybackChart) paybackChart.destroy();
 
     const years = data.map((item) => item.year);
@@ -283,7 +296,7 @@ document.addEventListener('DOMContentLoaded', function () {
       type: 'line',
       data: {
         labels: years,
-        dataset: [
+        datasets: [
           {
             label: 'Cumulative Cash Flow',
             data: cumulative,
@@ -306,7 +319,7 @@ document.addEventListener('DOMContentLoaded', function () {
           {
             label: 'Initial Investment',
             data: Array(years.length).fill(initialInvestment),
-            borderColor: 2,
+            borderColor: '#777777',
             borderWidth: 2,
             borderDash: [5, 5],
             fill: false,
@@ -324,7 +337,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 let label = context.dataset.label || '';
                 if (label) label += ': ';
                 if (context.parsed.y !== null) {
-                  label += '$' + context.parsed.y.toLocalString('en-US', { maximumFractionDigits: 2 });
+                  label += '$' + context.parsed.y.toLocaleString('en-US', { maximumFractionDigits: 2 });
                 }
                 return label;
               },
@@ -366,7 +379,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                   }
                 : {},
-            ],
+            ].filter(Boolean),
           },
         },
         scales: {
@@ -374,7 +387,7 @@ document.addEventListener('DOMContentLoaded', function () {
             beginAtZero: true,
             ticks: {
               callback: function (value) {
-                return '$' + value.toLocalString('en-US');
+                return '$' + Number(value).toLocaleString('en-US');
               },
             },
           },
@@ -382,4 +395,61 @@ document.addEventListener('DOMContentLoaded', function () {
       },
     });
   }
+
+  function resetCalculator() {
+    initialInvestmentInput.value = '';
+    discountRateInput.value = '0';
+    cashFlowTypeSelect.value = 'equal';
+    annualCashFlowInput.value = '';
+
+    // Clear unequal cash flows (keep first one)
+    const yearlyInputs = document.querySelectorAll('.yearly-cashflow');
+    for (let i = 1; i < yearlyInputs.length; i++) {
+      cashFLowInputs.removeChild(yearlyInputs[i]);
+    }
+    if (yearlyInputs.length > 0) yearlyInputs[0].querySelector('input').value = '';
+
+    // Result results
+    paybackPeriodResult.textContent = '--';
+    discountedPaybackPeriodResult.textContent = '--';
+    paybackPeriodDescription.textContent = 'Enter your investment details to calculate';
+    discountedPaybackPeriodDescription.textContent = 'Appears when discount rate > 0';
+    cashFlowTableBody.innerHTML =
+      '<tr><td colspan="5" style="text-align: center;">No data available</td></tr>';
+
+    // Reset errors
+    initialInvestmentInput.parentElement.classList.remove('has-error');
+    annualCashFlowInput.parentElement.classList.remove('has-error');
+    initialInvestmentError.style.display = 'none';
+    annualCashFlowError.style.display = 'none';
+    yearlyCashFlowError.style.display = 'none';
+
+    // Reset chart
+    if (paybackChart) {
+      paybackChart.destroy();
+      paybackChart = null;
+    }
+
+    // Show equal cash flow section by default
+    equalCashFlowSection.style.display = 'block';
+    unequalCashFlowSection.style.display = 'none';
+  }
+
+  // Initialize with 3 year inputs for unequal cash flows
+  addYearInput();
+  addYearInput();
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });

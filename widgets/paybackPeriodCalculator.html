@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Payback Period Calculator</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" />
-    <link rel="stylesheet" href="/widgets_style/paybackPeriodCalculator.css" />
+    <link rel="stylesheet" href="../widgets_style/paybackPeriodCalculator.css" />
   </head>
   <body>
     <div class="container">
@@ -63,7 +63,7 @@
 
           <article class="form-group" id="unequalCashFlowSection">
             <label>Yearly Cash Flows ($)</label>
-            <div id="cashFlowInput">
+            <div id="cashFlowInputs">
               <div class="yearly-cashflow">
                 <div style="display: flex; align-items: center; margin-bottom: 0.5rem">
                   <input
@@ -140,15 +140,76 @@
           <div class="tab" data-tab="limitations">Limitations</div>
         </article>
 
-        <div class="tab-content active" id="about-tab"></div>
+        <div class="tab-content active" id="about-tab">
+          <p>
+            The payback period is the time it takes for an investment to generate enough cash flows to recover
+            the initial investment cost.
+          </p>
+          <p>There are two main types:</p>
+          <ul>
+            <li><strong>Simple Payback Period:</strong> Doesn't consider the time value of money.</li>
+            <li>
+              <strong>Discounted Payback Period:</strong> Accounts for the time value of money by discounting
+              future cash flows.
+            </li>
+          </ul>
+          <p>Key characteristics:</p>
+          <ul>
+            <li>
+              Shorter payback periods are generally preferred as they indicate faster recovery of investment.
+            </li>
+            <li>Often used as a preliminary screening tool before more sophisticated analysis.</li>
+            <li>Doesn't consider cash flows beyond the paybacks period.</li>
+          </ul>
+        </div>
 
-        <div class="tab-content" id="how-to-use-tab"></div>
+        <div class="tab-content" id="how-to-use-tab">
+          <p>To use this calculator:</p>
+          <ol>
+            <li>Enter your initial investment amount.</li>
+            <li>
+              If you want to calculate discounted payback period, enter a discount rate (set to 0 for simple
+              payback)
+            </li>
+            <li>Select whether your annual cash flows are equal or vary each year.</li>
+            <li>Enter your cash flow amounts.</li>
+            <li>Click "Calculate" to see result.</li>
+          </ol>
+          <p>Tips:</p>
+          <ul>
+            <li>For unequal cash flows, use the "+" button to add more years.</li>
+            <li>You can click "Reset" to clear all inputs.</li>
+            <li>Hover over information icons for additional explanations.</li>
+          </ul>
+        </div>
 
-        <div class="tab-content" id="limitations-tab"></div>
+        <div class="tab-content" id="limitations-tab">
+          <p>While useful, payback period has several limitations:</p>
+          <ul>
+            <li><strong>Ignores time value of money</strong> (except in discounted version).</li>
+            <li>
+              <strong>Doesn't consider cash flows after payback</strong>, potentially favoring short-term
+              projects over more profitable long-term nes.
+            </li>
+            <li><strong>No clear decision criterion</strong>, only recovery time.</li>
+            <li><strong>Doesn't measure profitability</strong>, only recovery time.</li>
+          </ul>
+          <p>For better investment decisions, consider using payback period alongside other metrics like:</p>
+          <ul>
+            <li>Net Present Value (NPV)</li>
+            <li>Internal Rate of Return (IRR)</li>
+            <li>Profitability Index</li>
+          </ul>
+        </div>
       </section>
+
+      <footer class="footer__copy">
+        © <time datetime="" id="year"></time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/widgets_script/paybackPeriodCalculator.js"></script>
+    <script src="../widgets_script/paybackPeriodCalculator.js"></script>
   </body>
 </html>
