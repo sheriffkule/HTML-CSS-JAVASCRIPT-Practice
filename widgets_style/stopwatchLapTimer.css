@@ -61,6 +61,18 @@ h1 {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+
+    i {
+        transition: var(--transition);
+    }
+}
+
+.theme-toggle:not(:has(.switch input:checked)) i:first-child {
+    color: var(--primary);
+}
+
+.theme-toggle:has(.switch input:checked) i:last-child {
+    color: var(--primary);
 }
 
 .switch {
@@ -106,7 +118,7 @@ input:checked + .slider::before {
 }
 
 .timer-display {
-    font-size: 4rem;
+    font-size: clamp(3rem, 5vw, 4rem);
     font-weight: 700;
     text-align: center;
     margin: 2rem 0;
@@ -229,5 +241,112 @@ input:checked + .slider::before {
 
     &:last-child {
         border-bottom: none;
+    }
+}
+
+.lap-number {
+    font-weight: 600;
+    color: var(--secondary);
+}
+
+.lap-time {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
+}
+
+.lap-difference {
+    color: var(--secondary);
+    font-size: 0.875rem;
+}
+
+.fastest {
+    color: var(--success);
+}
+
+.slowest {
+    color: var(--danger);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 2rem;
+    color: var(--secondary);
+
+    i {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        opacity: 0.5;
+    }
+}
+
+kbd {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 0.2rem 0.4rem;
+    font-size: 0.75rem;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 0.2);
+}
+
+footer {
+    margin-top: 30px;
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+    color: var(--text);
+    font-size: 0.875rem;
+
+    span {
+        color: red;
+        font-size: 1rem;
+    }
+    abbr {
+        color: var(--primary);
+        letter-spacing: 0.5px;
+        cursor: default;
+        text-underline-offset: 2px;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: var(--border-color);
+    border: 0.5px dotted var(--text);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (width <= 768px) {
+    .container {
+        padding: 1rem;
+    }
+    .controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    .stats {
+        grid-template-columns: 1fr;
     }
 }

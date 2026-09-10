@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Check for saved theme preferences
-  const savedTheme = localStorage.getItem('data-theme');
+  const savedTheme = localStorage.getItem('theme');
   if (savedTheme) {
     themeSwitch.checked = savedTheme === 'dark';
     setTheme(savedTheme === 'dark');
@@ -47,26 +47,25 @@ document.addEventListener('DOMContentLoaded', function () {
   // Timer functions
   function startTimer() {
     if (!isRunning) {
-      startTime = new Date.now() - elapsedTime;
-      lapStartTime = Date.now() - (elapsedTime - lapStartTime);
+      startTime = Date.now() - elapsedTime;
       timerInterval = setInterval(updateTimer, 10);
       isRunning = true;
-      startStopBtn.innerHTML = '<i class="fas fa-pause></i> Pause';
+      startStopBtn.innerHTML = '<i class="fas fa-pause"></i> Pause';
       lapBtn.disabled = false;
     } else {
       clearInterval(timerInterval);
       isRunning = false;
-      startStopBtn.innerHTML = '<i class="fas fa-play></i> Resume';
+      startStopBtn.innerHTML = '<i class="fas fa-play"></i> Resume';
     }
   }
 
   function updateTimer() {
-    const currentTIme = Date.now();
-    elapsedTime = currentTIme - startTime;
+    const currentTime = Date.now();
+    elapsedTime = currentTime - startTime;
 
     const totalMilliseconds = elapsedTime;
     const totalSeconds = Math.floor(totalMilliseconds / 1000);
-    const totalMinutes = Math.floor((totalSeconds = 60));
+    const totalMinutes = Math.floor(totalSeconds / 60);
     const totalHours = Math.floor(totalMinutes / 60);
 
     const milliseconds = Math.floor((totalMilliseconds % 1000) / 10);
@@ -82,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function resetTimer() {
     clearInterval(timerInterval);
+    timerInterval = null;
     isRunning = false;
     elapsedTime = 0;
     lapStartTime = 0;
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
     secondsDisplay.textContent = '00';
     millisecondsDisplay.textContent = '00';
 
-    startStopBtn.innerHTML = '<i class="fas fa-play></i> Play';
+    startStopBtn.innerHTML = '<i class="fas fa-play"></i> Play';
     lapBtn.disabled = true;
 
     updateLapsList();
@@ -103,13 +103,14 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!isRunning) return;
 
     const currentTime = Date.now();
-    const lapTime = currentTime - lapStartTime;
-    lapStartTime = currentTime;
+    const currentElapsedTime = currentTime - startTime;
+    const lapTime = currentElapsedTime - lapStartTime;
+    lapStartTime = currentElapsedTime;
 
     const lapObj = {
       number: laps.length + 1,
       time: lapTime,
-      totalTime: elapsedTime,
+      totalTime: currentElapsedTime,
     };
 
     laps.unshift(lapObj);
@@ -118,8 +119,17 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function updateLapsList() {
+    const lapsListHeader = `
+      <div class="lap-item lap-header">
+        <span class="lap-number">Lap Num</span>
+        <span class="lap-time">Lap Time</span>
+        <span class="lap-difference">Difference</span>
+        <span class="lap-total">Total Time</span>
+      </div>
+    `;
+
     if (laps.length === 0) {
-      lapsList.innerHTML = `
+      lapsList.innerHTML = lapsListHeader + `
         <div class="empty-state">
           <i class="fas fa-flag"></i>
           <p>Your lap times will appear here.</p>
@@ -131,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let fastestLap = Math.min(...laps.map((lap) => lap.time));
     let slowestLap = Math.max(...laps.map((lap) => lap.time));
 
-    lapsList.innerHTML = laps
+    lapsList.innerHTML = lapsListHeader + laps
       .map((lap) => {
         const lapTimeFormatted = formatTime(lap.time);
         const totalTimeFormatted = formatTime(lap.totalTime);
@@ -151,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const isSlowest = lap.time === slowestLap;
 
         return `
-        <div class="lap-time ${isFastest ? 'fastest' : ''} ${isSlowest ? 'slowest' : ''}">
+        <div class="lap-item ${isFastest ? 'fastest' : ''} ${isSlowest ? 'slowest' : ''}">
           <span class="lap-number">Lap ${lap.number}</span>
           <span class="lap-time">${lapTimeFormatted}</span>
           <span class="lap-difference">${difference}</span>
@@ -161,4 +171,89 @@ document.addEventListener('DOMContentLoaded', function () {
       })
       .join('');
   }
+
+  function updateLapStats() {
+    if (laps.length === 0) {
+      fastestLapDisplay.textContent = '--:--:--,--';
+      slowestLapDisplay.textContent = '--:--:--,--';
+      averageLapDisplay.textContent = '--:--:--,--';
+      return;
+    }
+
+    const lapTimes = laps.map((lap) => lap.time);
+    const fastest = Math.min(...lapTimes);
+    const slowest = Math.max(...lapTimes);
+    const average = lapTimes.reduce((sum, time) => sum + time, 0) / lapTimes.length;
+
+    fastestLapDisplay.textContent = formatTime(fastest);
+    slowestLapDisplay.textContent = formatTime(slowest);
+    averageLapDisplay.textContent = formatTime(average);
+  }
+
+  function formatTime(milliseconds) {
+    const totalSeconds = Math.floor(milliseconds / 1000);
+    const totalMinutes = Math.floor(totalSeconds / 60);
+    const totalHours = Math.floor(totalMinutes / 60);
+
+    const ms = Math.floor((milliseconds % 1000) / 10);
+    const sec = totalSeconds % 60;
+    const min = totalMinutes % 60;
+    const hrs = totalHours % 24;
+
+    return `${hrs.toString().padStart(2, '0')}:${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')},${ms.toString().padStart(2, '0')}`;
+  }
+
+  function exportToCSV() {
+    if (laps.length === 0) return;
+
+    let csvContent = 'Lap Number, Lap Time, Total Time\n';
+
+    laps.forEach((lap) => {
+      csvContent += `${lap.number}, ${formatTime(lap.time)}, ${formatTime(lap.totalTime)}\n`;
+    });
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', 'lap_times.csv');
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    setTimeout(() => {
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }, 200);
+  }
+
+  // Event listeners
+  startStopBtn.addEventListener('click', startTimer);
+  lapBtn.addEventListener('click', recordLap);
+  resetBtn.addEventListener('click', resetTimer);
+  exportBtn.addEventListener('click', exportToCSV);
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', function (e) {
+    if (e.code === 'Space') {
+      e.preventDefault();
+      startTimer();
+    } else if (e.code === 'KeyL' && !e.ctrlKey && !e.metaKey) {
+      e.preventDefault();
+      recordLap();
+    }
+  });
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
