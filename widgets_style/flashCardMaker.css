@@ -84,3 +84,33 @@ header {
         box-shadow: var(--shadow);
     }
 }
+
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+
+    &:hover {
+        background-color: var(--primary);
+        color: white;
+    }
+}
+
+.btn-danger {
+    background-color: var(--danger);
+    color: white;
+
+    &:hover {
+        background-color: #d31667;
+    }
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+
+    @media(width <= 768px) {
+        grid-template-columns: 1fr;
+    }
+}
