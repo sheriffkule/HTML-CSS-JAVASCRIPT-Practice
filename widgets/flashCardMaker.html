@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flashcard Maker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/flashCardMaker.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="logo">
+          <i class="fas fa-layer-group"></i>
+          <span>Flashcard Maker</span>
+        </div>
+        <button class="btn btn-primary" id="studyAllBtn">
+          <i class="fas fa-graduation-cap"></i> Study All
+        </button>
+      </header>
+
+      <main class="main-content">
+        <section class="flashcard-form">
+          <h2>Create New Flashcard</h2>
+          <article class="form-group">
+            <label for="flashcardTitle">Title:</label>
+            <input type="text" id="flashcardTitle" class="form-control" placeholder="Enter title..." />
+          </article>
+          <article class="form-group">
+            <label for="flashcardFront">Front Content:</label>
+            <textarea
+              id="flashcardFront"
+              class="form-control"
+              placeholder="Enter front content..."></textarea>
+          </article>
+          <article class="form-group">
+            <label for="flashcardBack">Back Content:</label>
+            <textarea id="flashcardBack" class="form-control" placeholder="Enter back content..."></textarea>
+          </article>
+          <article class="form-group">
+            <label for="flashcardTags">Tags (comma separated):</label>
+            <input
+              type="text"
+              id="flashcardTags"
+              class="form-control"
+              placeholder="e.g., math, science, history" />
+          </article>
+          <article class="form-actions">
+            <button class="btn btn-primary" id="saveFlashcardBtn"><i class="fas fa-save"></i> Save</button>
+            <button class="btn btn-outline" id="clearFormBtn"><i class="fas fa-eraser"></i> Clear</button>
+          </article>
+        </section>
+
+        <section class="flashcards-section">
+          <article class="actions-bar">
+            <div class="stats" id="statsDisplay">0 flashcards</div>
+            <div class="import-export">
+              <button class="btn btn-outline" id="importBtn" style="padding: 0.5rem">
+                <i class="fas fa-file-import"></i> Import
+              </button>
+              <button class="btn btn-outline" id="exportBtn" style="padding: 0.5rem">
+                <i class="fas fa-file-export"></i> Export
+              </button>
+              <input type="file" id="importFile" style="display: none" accept=".json" />
+            </div>
+          </article>
+
+          <article class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search flashcards..." />
+            <button id="searchBtn"><i class="fas fa-search"></i></button>
+          </article>
+
+          <article class="tag-filter" id="tagFilter">
+            <!-- Tags will be added here dynamically -->
+          </article>
+
+          <article class="flashcards-container" id="flashcardsContainer">
+            <div class="empty-state">
+              <i class="fas fa-layer-group"></i>
+              <h3>No Flashcards Yet.</h3>
+              <p>Create your first flashcard to get started!</p>
+              <button class="btn btn-primary"><i class="fas fa-plus"></i> Create Flashcard</button>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <section class="study-mode" id="studyMode">
+      <div class="study-card" id="studyCard">
+        <button class="close-study" id="closeStudy"><i class="fas fa-times"></i></button>
+        <div class="progress-indicator" id="progressIndicator">1/10</div>
+        <div class="study-card-front">
+          <h2 id="studyFrontTitle">Front Title</h2>
+          <p id="studyFrontContent">Front content goes here...</p>
+          <button class="btn btn-primary" id="flipStudyCardBtn"><i class="fas fa-redo"></i> Flip Card</button>
+        </div>
+        <div class="study-card-back">
+          <h2>Answer</h2>
+          <p id="studyBackContent">Back content goes here...</p>
+          <div class="study-nav">
+            <button class="btn btn-outline" id="prevCardBtn">
+              <i class="fas fa-arrow-left"></i> Previous
+            </button>
+            <div>
+              <button class="btn btn-primary" id="nextCardBtn">
+                Next <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="toast" id="toast"></div>
+  </body>
+</html>
