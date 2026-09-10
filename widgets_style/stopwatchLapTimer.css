@@ -199,3 +199,35 @@ input:checked + .slider::before {
     font-size: 0.875rem;
     color: var(--secondary);
 }
+
+.laps-container {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.laps-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.laps-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.lap-item {
+    display: flex;
+    justify-content: space-between;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    animation: fadeIn 0.3s ease-in;
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
