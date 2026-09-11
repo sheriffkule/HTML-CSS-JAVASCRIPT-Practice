@@ -177,4 +177,99 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
   }
+
+  function editCard(id) {
+    const cardIndex = flashcards.findIndex((card) => card.id === id);
+    if (cardIndex === -1) return;
+
+    const card = flashcards[cardIndex];
+    document.getElementById('flashcardTitle').value = card.title;
+    document.getElementById('flashcardFront').value = card.front;
+    document.getElementById('flashcardBack').value = card.back;
+    document.getElementById('flashcardTags').value = card.tags.join(', ');
+
+    // Remove the card being edited
+    flashcards.splice(cardIndex, 1);
+    saveToLocalStorage();
+    updateFlashcardDisplay();
+    updateTagFilter();
+
+    // Scroll to form
+    document.querySelector('.flashcard-form').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function deleteFlashcard(id) {
+    if (confirm('Are you sure you want to delete this flashcard?')) {
+      flashcards = flashcards.filter((card) => card.id !== id);
+      saveToLocalStorage();
+      updateFlashcardDisplay();
+      updateTagFilter();
+      showToast('Flashcard deleted', 'info');
+    }
+  }
+
+  function startStudySession(ids = null) {
+    if (flashcards.length === 0) {
+      showToast('No flashcards to study', 'error');
+      return;
+    }
+
+    // Prepare cards for study session
+    studyFlashcards = ids ? flashcards.filter((card) => ids.includes(card.id)) : [...flashcards];
+
+    if (studyFlashcards.length === 0) {
+      showToast('No flashcards match your selection', 'error');
+      return;
+    }
+
+    // Shuffle cards for study session
+    studyFlashcards = shuffleArray(studyFlashcards);
+    currentStudyIndex = 0;
+
+    // Start study session
+    studyMode.classList.add('active');
+    updateStudyCard();
+  }
+
+  function closeStudySession() {
+    studyMode.classList.remove('active');
+    studyCard.classList.remove('flipped');
+  }
+
+  function flipStudyCard() {
+    studyCard.classList.toggle('flipped');
+  }
+
+  function updateStudyCard() {
+    const card = studyFlashcards[currentStudyIndex];
+    document.getElementById('studyFrontTitle').textContent = card.title;
+    document.getElementById('studyFrontContent').textContent = card.front;
+    document.getElementById('studyBackContent').textContent = card.back;
+    document.getElementById('progressIndicator').textContent =
+      `${currentStudyIndex + 1}/${studyFlashcards.length}`;
+  }
+
+  function showPrevCard() {
+    if (currentStudyIndex > 0) {
+      currentStudyIndex--;
+      studyCard.classList.remove('flipped')
+      updateStudyCard()
+    }
+  }
+
+  function showNextCard() {
+    if (currentStudyIndex < studyFlashcards.length - 1) {
+      currentStudyIndex++;
+      studyCard.classList.remove('flipped')
+      updateStudyCard()
+    } else {
+      closeStudySession()
+      showToast('Study session completed!', 'success')
+    }
+  }
+
+  function searchFlashcards() {
+    currentSearchTerm = searchInput.value.trim()
+    updateFlashcardDisplay()
+  }
 });

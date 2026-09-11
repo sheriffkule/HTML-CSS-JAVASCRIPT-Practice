@@ -37,6 +37,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 2rem;
 }
 
 .logo {
@@ -113,4 +114,91 @@ header {
     @media(width <= 768px) {
         grid-template-columns: 1fr;
     }
+}
+
+.flashcard-form {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow),
+    inset var(--shadow);
+    height: fit-content;
+    position: sticky;
+    top: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius);
+    font-family: inherit;
+    transition: var(--transition);
+}
+
+.form-control:is(:focus, :focus-visible) {
+    outline: transparent;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgb(67 97 238 / 0.2),
+    inset 0 0 0 2px rgb(67 97 238 / 0.2);
+}
+
+textarea.form-control {
+    min-height: 100px;
+    resize: vertical;
+}
+
+:is(input[type="text"], textarea)::placeholder {
+ transition: var(--transition);
+ transform-origin: top;
+}
+
+:is(input[type="text"], textarea):is(:focus, :focus-visible)::placeholder {
+    transform: scaleY(0);
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.flashcards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.flashcard {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: var(--transition);
+    cursor: pointer;
+    position: relative;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgb(0 0 0 / 0.15);
+    }
+}
+
+.flashcard-content {
+    padding: 1.5rem;
+    position: relative;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
