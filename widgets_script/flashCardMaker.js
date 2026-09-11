@@ -252,24 +252,115 @@ document.addEventListener('DOMContentLoaded', function () {
   function showPrevCard() {
     if (currentStudyIndex > 0) {
       currentStudyIndex--;
-      studyCard.classList.remove('flipped')
-      updateStudyCard()
+      studyCard.classList.remove('flipped');
+      updateStudyCard();
     }
   }
 
   function showNextCard() {
     if (currentStudyIndex < studyFlashcards.length - 1) {
       currentStudyIndex++;
-      studyCard.classList.remove('flipped')
-      updateStudyCard()
+      studyCard.classList.remove('flipped');
+      updateStudyCard();
     } else {
-      closeStudySession()
-      showToast('Study session completed!', 'success')
+      closeStudySession();
+      showToast('Study session completed!', 'success');
     }
   }
 
   function searchFlashcards() {
-    currentSearchTerm = searchInput.value.trim()
-    updateFlashcardDisplay()
+    currentSearchTerm = searchInput.value.trim();
+    updateFlashcardDisplay();
+  }
+
+  function updateTagFilter() {
+    // Get all unique tags
+    const allTags = new Set();
+    flashcards.forEach((card) => {
+      card.tags.forEach((tag) => allTags.add(tag));
+    });
+
+    tagFilter.innerHTML = '';
+
+    // Add "All" button
+    const allButton = document.createElement('button');
+    allButton.textContent = 'All';
+    allButton.className = !activeTagFilter ? 'active' : '';
+    allButton.addEventListener('click', () => {
+      activeTagFilter = null;
+      updateTagFilterButtons();
+      updateFlashcardDisplay();
+    });
+    tagFilter.appendChild(allButton);
+
+    // Add tag buttons
+    Array.from(allTags)
+      .sort()
+      .forEach((tag) => {
+        const tagButton = document.createElement('button');
+        tagButton.textContent = tag;
+        tagButton.className = activeTagFilter === tag ? 'active' : '';
+        tagButton.addEventListener('click', () => {
+          activeTagFilter = activeTagFilter === tag ? null : tag;
+          updateTagFilterButtons();
+          updateFlashcardDisplay();
+        });
+        tagFilter.appendChild(tagButton);
+      });
+  }
+
+  function updateTagFilterButtons() {
+    const buttons = tagFilter.querySelectorAll('button');
+    buttons.forEach((button) => {
+      button.classList.remove('active');
+      if ((!activeTagFilter && button.textContent === 'All') || button.textContent === activeTagFilter) {
+        button.classList.add('active');
+      }
+    });
+  }
+
+  function clearFilters() {
+    activeTagFilter = null;
+    currentSearchTerm = '';
+    searchInput.value = '';
+    updateTagFilterButtons();
+    updateFlashcardDisplay();
+  }
+
+  function exportFlashcards() {
+    if (flashcards.length === 0) {
+      showToast('No flashcards to export', 'error');
+      return;
+    }
+
+    const data = JSON.stringify(flashcards, null, 2);
+    const blob = new Blob([data], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `flashcards-${new Date().toISOString().slice(0, 10)}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    showToast('Flashcards exported successfully', 'error');
+  }
+
+  function importFlashcards(event) {}
+
+  function updateStats() {
+    const count = flashcards.length;
+    statsDisplay.textContent = `${count} flashcard${count !== 1 ? 's' : ''}`;
+  }
+
+  function showToast(message, type = '') {
+    toast.textContent = message;
+    toast.className = `toast ${type}`;
+    toast.classList.add('show');
+
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3000);
   }
 });
