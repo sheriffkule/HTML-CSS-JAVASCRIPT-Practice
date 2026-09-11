@@ -19,8 +19,49 @@ document.addEventListener('DOMContentLoaded', function () {
   const statsDisplay = document.getElementById('statsDisplay');
   const toast = document.getElementById('toast');
 
+  function normalizeFlashcard(card, index = 0) {
+    if (!card || typeof card !== 'object') return null;
+
+    const title = typeof card.title === 'string' ? card.title.trim() : '';
+    const front = typeof card.front === 'string' ? card.front.trim() : '';
+    const back = typeof card.back === 'string' ? card.back.trim() : '';
+    if (!title || !front || !back) return null;
+
+    const rawTags = Array.isArray(card.tags)
+      ? card.tags
+      : typeof card.tags === 'string'
+        ? card.tags.split(',')
+        : [];
+    const tags = rawTags.filter((tag) => typeof tag === 'string').map((tag) => tag.trim()).filter(Boolean);
+
+    return {
+      id: String(card.id || `${Date.now()}-${index}`),
+      title,
+      front,
+      back,
+      tags,
+      createdAt: card.createdAt || new Date().toISOString(),
+    };
+  }
+
+  function loadFlashcards() {
+    try {
+      const storedCards = JSON.parse(localStorage.getItem('flashcards') || '[]');
+      return Array.isArray(storedCards) ? storedCards.map(normalizeFlashcard).filter(Boolean) : [];
+    } catch (error) {
+      console.error('Unable to load flashcards', error);
+      return [];
+    }
+  }
+
+  function escapeHTML(value) {
+    const element = document.createElement('div');
+    element.textContent = value;
+    return element.innerHTML;
+  }
+
   // State
-  let flashcards = JSON.parse(localStorage.getItem('flashcards')) || [];
+  let flashcards = loadFlashcards();
   let currentStudyIndex = 0;
   let studyFlashcards = [];
   let activeTagFilter = null;
@@ -34,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Event listeners
   saveFlashcardBtn.addEventListener('click', saveFlashcard);
   clearFormBtn.addEventListener('click', clearForm);
-  studyAllBtn.addEventListener('click', startStudySession);
+  studyAllBtn.addEventListener('click', () => startStudySession());
   closeStudyBtn.addEventListener('click', closeStudySession);
   flipStudyCardBtn.addEventListener('click', flipStudyCard);
   prevCardBtn.addEventListener('click', showPrevCard);
@@ -43,16 +84,16 @@ document.addEventListener('DOMContentLoaded', function () {
   searchInput.addEventListener('keyup', function (e) {
     if (e.key === 'Enter') searchFlashcards();
   });
-  importBtn.addEventListener('click', () => importFIle.click());
+  importBtn.addEventListener('click', () => importFile.click());
   exportBtn.addEventListener('click', exportFlashcards);
-  importFile.addEventListener('click', importFlashcards);
+  importFile.addEventListener('change', importFlashcards);
 
   // Functions
   function saveFlashcard() {
-    const title = document.getElementById('flashcardTitle').title.trim();
-    const front = document.getElementById('flashcardFront').title.trim();
-    const back = document.getElementById('flashcardBack').title.trim();
-    const tags = document.getElementById('flashcardTags').title.trim();
+    const title = document.getElementById('flashcardTitle').value.trim();
+    const front = document.getElementById('flashcardFront').value.trim();
+    const back = document.getElementById('flashcardBack').value.trim();
+    const tags = document.getElementById('flashcardTags').value.trim();
 
     if (!title || !front || !back) {
       showToast('Please fill in all required fields', 'error');
@@ -126,19 +167,19 @@ document.addEventListener('DOMContentLoaded', function () {
     filteredFlashcards.forEach((card) => {
       const flashcardElement = document.createElement('div');
       flashcardElement.className = 'flashcard';
-      flashcardElement.dataset = card.id;
+      flashcardElement.dataset.id = card.id;
 
       flashcardElement.innerHTML = `
         <div class="flashcard-content">
           <div class="flashcard-front">
-            <h3 class="flashcard-title">${card.title}</h3>
-            <p class="flashcard-body">${card.front}</p>
-            ${card.tags.map((tag) => `<span class="tag">${tag}</span>`).join('')}
+            <h3 class="flashcard-title">${escapeHTML(card.title)}</h3>
+            <p class="flashcard-body">${escapeHTML(card.front)}</p>
+            ${card.tags.map((tag) => `<span class="tag">${escapeHTML(tag)}</span>`).join('')}
           </div>
           <div class="flashcard-back">
-            <h3 class="flashcard-title">${card.title}</h3>
-            <p class="flashcard-body">${card.back}</p>
-            ${card.tags.map((tag) => `<span class="tag">${tag}</span>`).join('')}
+            <h3 class="flashcard-title">${escapeHTML(card.title)}</h3>
+            <p class="flashcard-body">${escapeHTML(card.back)}</p>
+            ${card.tags.map((tag) => `<span class="tag">${escapeHTML(tag)}</span>`).join('')}
           </div>
           <div class="flashcard-actions">
             <button class="edit-btn" title="Edit"><i class="fas fa-edit"></i></button>
@@ -156,14 +197,14 @@ document.addEventListener('DOMContentLoaded', function () {
       const studyBtn = flashcardElement.querySelector('.study-btn');
 
       flashcardElement.addEventListener('click', function (e) {
-        if (!editBtn.contains(e.target) && !deleteBtn.contains(e.target)) {
+        if (!editBtn.contains(e.target) && !deleteBtn.contains(e.target) && !studyBtn.contains(e.target)) {
           this.classList.toggle('flipped');
         }
       });
 
       editBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        editFlashcard(card.id);
+        editCard(card.id);
       });
 
       deleteBtn.addEventListener('click', (e) => {
@@ -215,7 +256,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Prepare cards for study session
-    studyFlashcards = ids ? flashcards.filter((card) => ids.includes(card.id)) : [...flashcards];
+    const selectedIds = ids === null ? null : Array.isArray(ids) ? ids : [ids];
+    studyFlashcards = selectedIds ? flashcards.filter((card) => selectedIds.includes(card.id)) : [...flashcards];
 
     if (studyFlashcards.length === 0) {
       showToast('No flashcards match your selection', 'error');
@@ -344,24 +386,38 @@ document.addEventListener('DOMContentLoaded', function () {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 
-    showToast('Flashcards exported successfully', 'error');
+    showToast('Flashcards exported successfully', 'success');
   }
 
   function importFlashcards(event) {
-    const file = event.target.file[0];
+    const file = event.target.files[0];
     if (!file) return;
 
     const reader = new FileReader();
     reader.onload = function (e) {
       try {
-        const importedCards = JSON.parse(e.target.result);
-        if (!Array.isArray(importedCards)) {
-          throw new Error('Invalid file format!');
+        const importedData = JSON.parse(e.target.result);
+        const importedCards = Array.isArray(importedData)
+          ? importedData
+          : Array.isArray(importedData?.flashcards)
+            ? importedData.flashcards
+            : importedData && typeof importedData === 'object'
+              ? [importedData]
+              : [];
+
+        const validCards = importedCards.map(normalizeFlashcard).filter(Boolean);
+        if (validCards.length === 0) {
+          throw new Error('No valid flashcards found in the selected file.');
         }
 
         // Merge with existing cards, avoiding duplicates
         const existingIds = new Set(flashcards.map((card) => card.id));
-        const newCards = importedCards.filter((card) => !existingIds.has(card.id));
+        const importedIds = new Set();
+        const newCards = validCards.filter((card) => {
+          if (existingIds.has(card.id) || importedIds.has(card.id)) return false;
+          importedIds.add(card.id);
+          return true;
+        });
 
         if (newCards.length === 0) {
           showToast('No new flashcards to import', 'error');
@@ -400,10 +456,8 @@ document.addEventListener('DOMContentLoaded', function () {
   function shuffleArray(array) {
     const newArray = [...array];
     for (let i = newArray.length - 1; i > 0; i--) {
-      const j = (Math.floor(Math.random() * (i + 1))[(newArray[i], newArray[j])] = [
-        newArray[j],
-        newArray[i],
-      ]);
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
     }
     return newArray;
   }

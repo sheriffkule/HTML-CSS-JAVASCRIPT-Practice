@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Flashcard Maker</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" />
-    <link rel="stylesheet" href="/widgets_style/flashCardMaker.css" />
+    <link rel="stylesheet" href="../widgets_style/flashCardMaker.css" />
   </head>
   <body>
     <div class="container">
       <header>
         <div class="logo">
           <i class="fas fa-layer-group"></i>
+          <div class="icon-scale"></div>
           <span>Flashcard Maker</span>
         </div>
         <button class="btn btn-primary" id="studyAllBtn">
@@ -66,7 +67,7 @@
           </article>
 
           <article class="search-bar">
-            <input type="text" id="searchInput" placeholder="Search flashcards..." />
+            <input type="text" id="searchInput" class="form-control" placeholder="Search flashcards..." />
             <button id="searchBtn"><i class="fas fa-search"></i></button>
           </article>
 
@@ -119,6 +120,6 @@
 
     <div class="toast" id="toast"></div>
 
-    <script src="/widgets_script/flashCardMaker.js"></script>
+    <script src="../widgets_script/flashCardMaker.js"></script>
   </body>
 </html>
