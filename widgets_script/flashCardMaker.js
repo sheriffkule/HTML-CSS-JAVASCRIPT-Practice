@@ -347,7 +347,40 @@ document.addEventListener('DOMContentLoaded', function () {
     showToast('Flashcards exported successfully', 'error');
   }
 
-  function importFlashcards(event) {}
+  function importFlashcards(event) {
+    const file = event.target.file[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      try {
+        const importedCards = JSON.parse(e.target.result);
+        if (!Array.isArray(importedCards)) {
+          throw new Error('Invalid file format!');
+        }
+
+        // Merge with existing cards, avoiding duplicates
+        const existingIds = new Set(flashcards.map((card) => card.id));
+        const newCards = importedCards.filter((card) => !existingIds.has(card.id));
+
+        if (newCards.length === 0) {
+          showToast('No new flashcards to import', 'error');
+          return;
+        }
+
+        flashcards = [...flashcards, ...newCards];
+        saveToLocalStorage();
+        updateFlashcardDisplay();
+        updateTagFilter();
+        showToast(`Imported ${newCards.length} flashcards`, 'success');
+      } catch (error) {
+        showToast('Error importing flashcards', 'error');
+        console.error(error);
+      }
+    };
+    reader.readAsText(file);
+    event.target.value = ''; // Reset input
+  }
 
   function updateStats() {
     const count = flashcards.length;
@@ -363,4 +396,32 @@ document.addEventListener('DOMContentLoaded', function () {
       toast.classList.remove('show');
     }, 3000);
   }
+
+  function shuffleArray(array) {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = (Math.floor(Math.random() * (i + 1))[(newArray[i], newArray[j])] = [
+        newArray[j],
+        newArray[i],
+      ]);
+    }
+    return newArray;
+  }
+
+  // Make clearFilters available globally for the empty state button
+  window.clearFilters = clearFilters;
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
