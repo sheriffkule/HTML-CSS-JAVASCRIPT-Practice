@@ -137,6 +137,7 @@ button {
     cursor: pointer;
     transition: var(--transition);
     display: flex;
+    justify-content: center;
     align-items: center;
     gap: 5px;
 
@@ -191,5 +192,35 @@ button {
 }
 
 input[type="range"] {
+    -webkit-appearance: none;
+    -moz-apperance: none;
+    appearance: none;
+    border-radius: 6px;
+    height: 10px;
+    outline: transparent;
+    padding: 0;
+    margin-block: 0.75rem;
     width: 100%;
+    margin-right: 10px;
+    border: 1px solid var(--gray);
+}
+
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: var(--primary);
+    border-radius: 50%;
+    corner-shape: bevel scoop scoop bevel;
+    border: 1px solid var(--dark);
+    height: 26px;
+    width: 26px;
+    cursor: pointer;
+    transition: .25s;
+}
+
+input[type='range']::-webkit-slider-thumb:hover {
+    background-color: var(--secondary);
+    box-shadow: 0 0 5px var(--secondary);
+    clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
+    corner-shape: unset;
 }
