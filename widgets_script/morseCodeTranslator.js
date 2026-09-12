@@ -78,6 +78,13 @@ document.addEventListener('DOMContentLoaded', function () {
   const speedValue = document.getElementById('speedValue');
   const morseTable = document.getElementById('morseTable');
   const historyList = document.getElementById('historyList');
+  const HISTORY_STORAGE_KEY = 'morseTranslatorHistory';
+  let flashTimers = [];
+
+  function clearFlashTimers() {
+    flashTimers.forEach((timer) => clearTimeout(timer));
+    flashTimers = [];
+  }
 
   // Generate Morse code table
   for (const [char, code] of Object.entries(morseCode)) {
@@ -98,30 +105,37 @@ document.addEventListener('DOMContentLoaded', function () {
     let morse = '';
 
     for (const char of text) {
-      morse = morseCode[char] ? morseCode[char] + ' ' : '# ';
+      if (char === ' ') {
+        morse += '/ ';
+      } else if (morseCode[char]) {
+        morse += morseCode[char] + ' ';
+      } else {
+        morse += '? ';
+      }
     }
 
-    morseOutput.textContent = morse.trim();
-    addToHistory(`Text to Morse: ${text} → ${morse.trim()}`);
+    const translatedMorse = morse.trim();
+    morseOutput.textContent = translatedMorse;
+    addToHistory(`Text to Morse: ${text} → ${translatedMorse}`);
   });
 
   // Convert Morse code to text
   toTextBtn.addEventListener('click', () => {
     const morse = inputText.value.trim();
-    const morseChars = morse.split(' ');
+    const morseChars = morse.split(/\s+/).filter(Boolean);
     let text = '';
 
     for (const morseChar of morseChars) {
-      if (textCode[morseChar]) {
+      if (morseChar === '/') {
+        text += ' ';
+      } else if (textCode[morseChar]) {
         text += textCode[morseChar];
-      } else if (morseChar === '') {
-        continue;
       } else {
-        text += '?'; // Use ? for unsupported Morse code
+        text += '?';
       }
     }
 
-    morseOutput.text = text;
+    morseOutput.textContent = text;
     addToHistory(`Morse to Text: ${morse} → ${text}`);
   });
 
@@ -133,12 +147,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Copy Morse code to clipboard
   copyBtn.addEventListener('click', () => {
-    navigator.clipboard.writeText(morseOutput.textContent).then(() => {
-      copyBtn.innerHTML = '<i class="fas fa-check></i> Copied!';
-      setTimeout(() => {
-        copyBtn.innerHTML = '<i class="fas fa-copy></i> Copy';
-      }, 2000);
-    });
+    const textToCopy = morseOutput.textContent.trim();
+    if (!textToCopy || textToCopy === 'Your Morse code will appear here...') {
+      return;
+    }
+
+    navigator.clipboard
+      .writeText(textToCopy)
+      .then(() => {
+        copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        setTimeout(() => {
+          copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+        }, 2000);
+      })
+      .catch(() => {
+        copyBtn.innerHTML = '<i class="fas fa-times"></i> Copy Failed';
+        setTimeout(() => {
+          copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+        }, 2000);
+      });
   });
 
   // Play Morse code as sound
@@ -197,66 +224,144 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Flash Morse code visually
   function flashMorseCode(morse) {
-    // Reset flash element
+    clearFlashTimers();
     flashElement.style.opacity = 0;
 
-    const speed = parseInt(speedSlider.value);
-    const dotLength = 1200 / speed;
+    const speed = parseInt(speedSlider.value, 10) || 5;
+    const dotLength = Math.max(80, 1200 / speed);
     let delay = 0;
+
+    flashBtn.innerHTML = '<i class="fas fa-lightbulb"></i> Flashing...';
 
     for (const char of morse) {
       if (char === '.') {
-        setInterval(() => {
-          flashElement.style.opacity = 1;
-        }, delay);
-
-        setTimeout(
-          () => {
-            flashElement.style.opacity = 0;
-          },
-          delay + dotLength / 2,
-        );
-
-        delay += dotLength;
-      } else if (char === '-') {
-        setTimeout(() => {
-          flashElement.style.opacity = 0;
-        }, delay);
-
-        setTimeout(
-          () => {
+        flashTimers.push(
+          setTimeout(() => {
             flashElement.style.opacity = 1;
-          },
-          delay + dotLength * 1.5,
+          }, delay),
         );
-
-        delay += dotLength * 1.5;
-      } else if (char === ' ') {
+        flashTimers.push(
+          setTimeout(() => {
+            flashElement.style.opacity = 0;
+          }, delay + dotLength),
+        );
+        delay += dotLength + dotLength / 2;
+      } else if (char === '-') {
+        flashTimers.push(
+          setTimeout(() => {
+            flashElement.style.opacity = 1;
+          }, delay),
+        );
+        flashTimers.push(
+          setTimeout(
+            () => {
+              flashElement.style.opacity = 0;
+            },
+            delay + dotLength * 3,
+          ),
+        );
+        delay += dotLength * 3 + dotLength / 2;
+      } else if (char === ' ' || char === '/') {
+        flashTimers.push(
+          setTimeout(() => {
+            flashElement.style.opacity = 0;
+          }, delay),
+        );
         delay += dotLength * 2;
       }
-
-      // Add gap between symbols
-      delay += dotLength / 2;
     }
 
-    // Reset button text after completion
-    setTimeout(() => {
-      flashBtn.innerHTML = '<i class="fas fa-lightbulb></i> Start Flashing';
-    }, delay);
+    flashTimers.push(
+      setTimeout(() => {
+        flashBtn.innerHTML = '<i class="fas fa-lightbulb"></i> Start Flashing';
+        flashElement.style.opacity = 0;
+      }, delay + 200),
+    );
   }
 
-  // Add to translation history
+  // History persistence
+  function loadHistory() {
+    try {
+      const savedHistory = JSON.parse(localStorage.getItem(HISTORY_STORAGE_KEY) || '[]');
+      return Array.isArray(savedHistory) ? savedHistory.slice(0, 10) : [];
+    } catch (error) {
+      console.error('Failed to load history:', error);
+      return [];
+    }
+  }
+
+  function saveHistory(entries) {
+    try {
+      localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(entries.slice(0, 10)));
+    } catch (error) {
+      console.error('Failed to save history:', error);
+    }
+  }
+
+  function renderHistory(entries) {
+    historyList.innerHTML = '';
+
+    entries.forEach((entry) => {
+      const historyItem = document.createElement('div');
+      historyItem.className = 'history-item';
+
+      const text = document.createElement('span');
+      text.className = 'history-text';
+      text.textContent = entry;
+
+      const actions = document.createElement('div');
+      actions.className = 'history-actions';
+
+      const copyHistoryBtn = document.createElement('button');
+      copyHistoryBtn.type = 'button';
+      copyHistoryBtn.className = 'history-copy-btn';
+      copyHistoryBtn.textContent = 'Copy';
+      copyHistoryBtn.addEventListener('click', () => {
+        navigator.clipboard
+          .writeText(entry)
+          .then(() => {
+            const originalText = copyHistoryBtn.textContent;
+            copyHistoryBtn.textContent = 'Copied!';
+            setTimeout(() => {
+              copyHistoryBtn.textContent = originalText;
+            }, 1200);
+          })
+          .catch(() => {
+            copyHistoryBtn.textContent = 'Failed';
+            setTimeout(() => {
+              copyHistoryBtn.textContent = 'Copy';
+            }, 1200);
+          });
+      });
+
+      const deleteHistoryBtn = document.createElement('button');
+      deleteHistoryBtn.type = 'button';
+      deleteHistoryBtn.className = 'history-delete-btn';
+      deleteHistoryBtn.textContent = 'Delete';
+      deleteHistoryBtn.addEventListener('click', () => {
+        const currentHistory = loadHistory();
+        const updatedHistory = currentHistory.filter((item) => item !== entry);
+        saveHistory(updatedHistory);
+        renderHistory(updatedHistory);
+      });
+
+      actions.appendChild(copyHistoryBtn);
+      actions.appendChild(deleteHistoryBtn);
+      historyItem.appendChild(text);
+      historyItem.appendChild(actions);
+      historyList.appendChild(historyItem);
+    });
+  }
+
   function addToHistory(entry) {
-    const historyItem = document.createElement('div');
-    historyItem.className = 'history-item';
-    historyItem.textContent = entry;
-    historyList.appendChild(historyItem);
-
-    // Keep only last 10 history items
-    if (historyList.children.length > 10) {
-      historyList.removeChild(historyList.lastChild);
-    }
+    const currentHistory = loadHistory();
+    const updatedHistory = [entry, ...currentHistory.filter((item) => item !== entry)].slice(0, 10);
+    saveHistory(updatedHistory);
+    renderHistory(updatedHistory);
   }
+
+  renderHistory(loadHistory());
+  window.scrollTo({ top: 0, behavior: 'instant' });
 
   // Changing colors on input type range track
   document.querySelectorAll('input[type="range"]').forEach((input) => {
