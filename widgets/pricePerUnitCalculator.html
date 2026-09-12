@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Price Per Unit Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/pricePerUnitCalculator.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1><i class="fas fa-calculator"></i> Price Per Unit Calculator</h1>
+        <p class="subtitle">Compare products and find the best value for your money.</p>
+      </header>
+
+      <article class="tabs">
+        <div class="tab active" data-tab="calculator">Calculator</div>
+        <div class="tab" data-tab="comparison">Comparison</div>
+        <div class="tab" data-tab="history">History</div>
+      </article>
+
+      <section class="tab-content active" id="calculator-tab">
+        <article class="calculator-grid">
+          <div>
+            <div class="input-group">
+              <label for="product-name">Product Name:</label>
+              <div class="input-container">
+                <i class="fas fa-tag"></i>
+                <input type="text" id="product-name" placeholder="e.g. Milk, Apples, Bananas, Bread" />
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="product-price">Price:</label>
+              <div class="input-container">
+                <i class="fas fa-dollar-sign"></i>
+                <input type="number" id="product-price" placeholder="0.00" step="0.01" min="0" />
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="input-group">
+              <label for="product-quantity">Quantity:</label>
+              <div class="input-container">
+                <i class="fas fa-weight-hanging"></i>
+                <input type="number" id="product-quantity" placeholder="0" step="0.01" min="0" />
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="unit-type">Unit Type:</label>
+              <div class="input-container">
+                <i class="fas fa-ruler"></i>
+                <select id="unit-type">
+                  <option value="each">Each</option>
+                  <option value="g">Grams (g)</option>
+                  <option value="kg">Kilograms (kg)</option>
+                  <option value="ml">Milliliters (ml)</option>
+                  <option value="l">Liters (l)</option>
+                  <option value="oz">Ounces (oz)</option>
+                  <option value="lb">Pounds (lb)</option>
+                  <option value="fl-oz">Fluid Ounces (fl oz)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="actions">
+          <button id="calculate-btn"><i class="fas fa-calculator"></i> Calculate</button>
+          <button id="add-to-list-btn"><i class="fas fa-plus"></i> Add to List</button>
+          <button id="reset-btn"><i class="fas fa-trash"></i> Reset</button>
+        </article>
+
+        <article class="result" id="result">
+          <h2><i class="fas fa-chart-line"></i> Results</h2>
+          <div class="result-item">
+            <span class="result-label">Price Per Unit:</span>
+            <span class="result-value" id="price-per-unit">$0.00</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Unit Type:</span>
+            <span class="result-value" id="result-unit-type">--</span>
+          </div>
+        </article>
+      </section>
+
+      <section class="tab-content" id="comparison-tab">
+        <div class="comparison-results">
+          <article class="empty-state" id="empty-comparison">
+            <i class="fas fa-balance-scale"></i>
+            <h3>No products to compare</h3>
+            <p>Add products using the calculator to compare them here.</p>
+          </article>
+
+          <article id="comparison-content">
+            <h2><i class="fas fa-balance-scale"></i> Product Comparison</h2>
+            <div class="comparison-chart" id="comparison-chart"></div>
+            <div class="results">
+              <div class="result-item">
+                <span class="result-label">Best Value:</span>
+                <span class="result-value best-value" id="best-value">--</span>
+              </div>
+              <div class="result-item">
+                <span class="result-label">Savings Compared to Worst:</span>
+                <span class="result-value best-value" id="savings-value">--</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="tab-content" id="history-tab">
+        <h2><i class="fas fa-history"></i> Calculation History</h2>
+        <article id="history-content">
+          <div class="empty-state" id="empty-history">
+            <i class="fas fa-clock"></i>
+            <h3>No history yet</h3>
+            <p>Your calculations will appear here.</p>
+          </div>
+          <ul class="history-list" id="history-list"></ul>
+        </article>
+        <article class="actions">
+          <button class="btn-danger" id="clear-history-btn">
+            <i class="fas fa-trash"></i> Clear History
+          </button>
+        </article>
+      </section>
+
+      <footer class="footer__copy">
+        © <time datetime="" id="year"></time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
+    </div>
+
+    <script src="/widgets_script/pricePerUnitCalculator.js"></script>
+  </body>
+</html>
