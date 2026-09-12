@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
   for (const [char, code] of Object.entries(morseCode)) {
     const div = document.createElement('div');
     div.className = 'morse-item';
-    div.innerHTML = `<div class="char">${char}</div><div class="code"></div>`;
+    div.innerHTML = `<div class="char">${char}</div><div class="code">${code}</div>`;
     morseTable.appendChild(div);
   }
 
@@ -104,4 +104,30 @@ document.addEventListener('DOMContentLoaded', function () {
     morseOutput.textContent = morse.trim();
     addToHistory(`Text to Morse: ${text} → ${morse.trim()}`);
   });
+
+  // Convert Morse code to text
+  toTextBtn.addEventListener('click', () => {
+    const morse = inputText.value.trim();
+    const morseChars = morse.split(' ');
+    let text = '';
+
+    for (const morseChar of morseChars) {
+      if (textCode[morseChar]) {
+        text += textCode[morseChar];
+      } else if (morseChar === '') {
+        continue;
+      } else {
+        text += '?'; // Use ? for unsupported Morse code
+      }
+    }
+
+    morseOutput.text = text;
+    addToHistory(`Morse to Text: ${morse} → ${text}`);
+  });
+
+  // Clear input and output
+  clearBtn.addEventListener('click', () => {
+    inputText.value = ''
+    morseOutput.textContent = 'Your Morse code will appear here...'
+  })
 });
