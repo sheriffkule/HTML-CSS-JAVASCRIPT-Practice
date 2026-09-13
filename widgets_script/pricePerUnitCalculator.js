@@ -152,9 +152,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     const savings = worstProduct.pricePerUnit - bestProduct.pricePerUnit;
-    const savingsPercentage = worstProduct.pricePerUnit > 0
-      ? ((savings / worstProduct.pricePerUnit) * 100).toFixed(2)
-      : '0.00';
+    const savingsPercentage =
+      worstProduct.pricePerUnit > 0 ? ((savings / worstProduct.pricePerUnit) * 100).toFixed(2) : '0.00';
 
     bestValueSpan.textContent = `${bestProduct.name} (${bestProduct.pricePerUnit.toFixed(2)} per ${getUnitSymbol(bestProduct.unitType)})`;
     savingsValueSpan.textContent = `${savings.toFixed(2)} (${savingsPercentage}%)`;
@@ -259,4 +258,18 @@ document.addEventListener('DOMContentLoaded', function () {
     };
     return units[unitType] || 'unit';
   }
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
