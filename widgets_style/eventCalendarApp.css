@@ -89,3 +89,52 @@ button {
         background-color: var(--light-gray);
     }
 }
+
+.view-options {
+    display: flex;
+    background-color: var(--secondary);
+    border-radius: 0.35rem;
+    overflow: hidden;
+}
+
+.view-option {
+    background-color: transparent;
+    color: var(--text);
+    border-radius: 0;
+    padding: 0.5rem 1.25rem;
+
+    &.active {
+        background-color: var(--primary);
+        color: white;
+    }
+}
+
+.view-option:not(.active):hover {
+    background-color: var(--light-gray);
+}
+
+.date-navigation {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    
+    h2 {
+        font-size: 1.25rem;
+        min-width: 120px;
+        text-align: center;
+    }
+    button {
+        padding: 0.5rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        display: grid;
+        place-items: center;
+    }
+}
+
+.app-main {
+    display: flex;
+    flex: 1;
+    padding: 1.5rem;
+    gap: 1.5rem;
+}
