@@ -23,9 +23,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // State
   let products = [];
-  let history = JSON.parse(localStorage.getItem('pricePerUnitHistory')) || [];
+  let history = [];
+
+  try {
+    const savedHistory = JSON.parse(localStorage.getItem('pricePerUnitHistory') || '[]');
+    history = Array.isArray(savedHistory) ? savedHistory : [];
+  } catch (error) {
+    history = [];
+    localStorage.removeItem('pricePerUnitHistory');
+  }
 
   // Initialize
+  resetCalculator();
   updateHistoryList();
   updateComparison();
 
@@ -38,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
   tabs.forEach((tab) => {
     tab.addEventListener('click', () => {
       tabs.forEach((t) => t.classList.remove('active'));
-      tabContents.forEach((c = c.classList.remove('active')));
+      tabContents.forEach((c) => c.classList.remove('active'));
 
       tab.classList.add('active');
       document.getElementById(`${tab.dataset.tab}-tab`).classList.add('active');
@@ -51,8 +60,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const quantity = parseFloat(productQuantityInput.value);
     const unitType = unitTypeSelect.value;
 
-    if (isNaN(price) || isNaN(quantity) || quantity <= 0) {
-      alert('Please enter a valid price and quantity values.');
+    if (!Number.isFinite(price) || !Number.isFinite(quantity) || price < 0 || quantity <= 0) {
+      alert('Please enter a valid non-negative price and a quantity greater than zero.');
       return;
     }
 
@@ -85,13 +94,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const quantity = parseFloat(productQuantityInput.value);
     const unitType = unitTypeSelect.value;
 
-    if (isNaN(price) || isNaN(quantity) || quantity <= 0) {
-      alert('Please enter a valid price and quantity values.');
+    if (!Number.isFinite(price) || !Number.isFinite(quantity) || price < 0 || quantity <= 0) {
+      alert('Please enter a valid non-negative price and a quantity greater than zero.');
       return;
     }
 
     const pricePerUnit = price / quantity;
-    const name = productNameInput.value || `Product ${products.length + 1}`;
+    const name = productNameInput.value.trim() || `Product ${products.length + 1}`;
 
     products.push({
       name,
@@ -111,6 +120,8 @@ document.addEventListener('DOMContentLoaded', function () {
     productPriceInput.value = '';
     productQuantityInput.value = '';
     unitTypeSelect.value = 'each';
+    pricePerUnitSpan.textContent = '$0.00';
+    resultUnitTypeSpan.textContent = '--';
     resultsDiv.style.display = 'none';
   }
 
@@ -118,6 +129,9 @@ document.addEventListener('DOMContentLoaded', function () {
     if (products.length === 0) {
       emptyComparison.style.display = 'block';
       comparisonContent.style.display = 'none';
+      bestValueSpan.textContent = '--';
+      savingsValueSpan.textContent = '--';
+      comparisonChart.innerHTML = '';
       return;
     }
 
@@ -138,7 +152,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     const savings = worstProduct.pricePerUnit - bestProduct.pricePerUnit;
-    const savingsPercentage = ((savings / worstProduct) * 100).toFixed(2);
+    const savingsPercentage = worstProduct.pricePerUnit > 0
+      ? ((savings / worstProduct.pricePerUnit) * 100).toFixed(2)
+      : '0.00';
 
     bestValueSpan.textContent = `${bestProduct.name} (${bestProduct.pricePerUnit.toFixed(2)} per ${getUnitSymbol(bestProduct.unitType)})`;
     savingsValueSpan.textContent = `${savings.toFixed(2)} (${savingsPercentage}%)`;
@@ -147,18 +163,21 @@ document.addEventListener('DOMContentLoaded', function () {
     comparisonChart.innerHTML = '';
 
     // Find max value for scaling
-    const maxPricePerUnit = Math.max(...products.map((p) => p.pricePerUnit));
+    const maxPricePerUnit = Math.max(...products.map((p) => p.pricePerUnit), 0);
+    const safeMax = maxPricePerUnit > 0 ? maxPricePerUnit : 1;
 
     products.forEach((product) => {
       const isBest = product === bestProduct;
-      const barHeight = (product.pricePerUnit / maxPricePerUnit) * 100;
+      const chartHeight = 160;
+      const rawHeight = (product.pricePerUnit / safeMax) * chartHeight;
+      const barHeight = Math.max(rawHeight, 8);
 
       const barContainer = document.createElement('div');
       barContainer.className = 'bar-container';
 
       const bar = document.createElement('div');
       bar.className = `bar ${isBest ? 'best-bar' : ''}`;
-      bar.style.height = `${100 - barHeight}%`;
+      bar.style.height = `${barHeight}px`;
 
       const barValue = document.createElement('div');
       barValue.className = 'bar-value';
@@ -173,5 +192,71 @@ document.addEventListener('DOMContentLoaded', function () {
       barContainer.appendChild(barLabel);
       comparisonChart.appendChild(barContainer);
     });
+  }
+
+  function updateHistoryList() {
+    historyList.innerHTML = '';
+
+    if (history.length === 0) {
+      emptyHistory.style.display = 'block';
+      return;
+    }
+
+    emptyHistory.style.display = 'none';
+
+    history.forEach((item, index) => {
+      const li = document.createElement('li');
+      li.className = 'history-item';
+
+      const unitSymbol = getUnitSymbol(item.unitType);
+      const date = new Date(item.date).toLocaleString();
+
+      li.innerHTML = `
+        <div>
+          <strong>${item.name}</strong>
+          <div class="text-muted" style="font-size: 0.875rem">${date}</div>
+        </div>
+        <div>
+          <span>$${item.pricePerUnit.toFixed(2)}/${unitSymbol}</span>
+          <button class="history-delete" data-index="${index}">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      `;
+
+      historyList.appendChild(li);
+    });
+
+    // Add event listeners to delete buttons
+    document.querySelectorAll('.history-delete').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const index = parseInt(e.currentTarget.dataset.index);
+        history.splice(index, 1);
+        localStorage.setItem('pricePerUnitHistory', JSON.stringify(history));
+        updateHistoryList();
+      });
+    });
+  }
+
+  function clearHistory() {
+    if (confirm('Are you sure you want to clear your calculation history?')) {
+      history = [];
+      localStorage.setItem('pricePerUnitHistory', JSON.stringify(history));
+      updateHistoryList();
+    }
+  }
+
+  function getUnitSymbol(unitType) {
+    const units = {
+      each: 'each',
+      g: 'g',
+      kg: 'kg',
+      ml: 'ml',
+      l: 'l',
+      oz: 'oz',
+      lb: 'lb',
+      'fl-oz': 'fl oz',
+    };
+    return units[unitType] || 'unit';
   }
 });
