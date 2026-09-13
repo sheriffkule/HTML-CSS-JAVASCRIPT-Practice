@@ -113,4 +113,65 @@ document.addEventListener('DOMContentLoaded', function () {
     unitTypeSelect.value = 'each';
     resultsDiv.style.display = 'none';
   }
+
+  function updateComparison() {
+    if (products.length === 0) {
+      emptyComparison.style.display = 'block';
+      comparisonContent.style.display = 'none';
+      return;
+    }
+
+    emptyComparison.style.display = 'none';
+    comparisonContent.style.display = 'block';
+
+    // Find best and worst values
+    let bestProduct = products[0];
+    let worstProduct = products[0];
+
+    products.forEach((product) => {
+      if (product.pricePerUnit < bestProduct.pricePerUnit) {
+        bestProduct = product;
+      }
+      if (product.pricePerUnit > worstProduct.pricePerUnit) {
+        worstProduct = product;
+      }
+    });
+
+    const savings = worstProduct.pricePerUnit - bestProduct.pricePerUnit;
+    const savingsPercentage = ((savings / worstProduct) * 100).toFixed(2);
+
+    bestValueSpan.textContent = `${bestProduct.name} (${bestProduct.pricePerUnit.toFixed(2)} per ${getUnitSymbol(bestProduct.unitType)})`;
+    savingsValueSpan.textContent = `${savings.toFixed(2)} (${savingsPercentage}%)`;
+
+    // Update chart
+    comparisonChart.innerHTML = '';
+
+    // Find max value for scaling
+    const maxPricePerUnit = Math.max(...products.map((p) => p.pricePerUnit));
+
+    products.forEach((product) => {
+      const isBest = product === bestProduct;
+      const barHeight = (product.pricePerUnit / maxPricePerUnit) * 100;
+
+      const barContainer = document.createElement('div');
+      barContainer.className = 'bar-container';
+
+      const bar = document.createElement('div');
+      bar.className = `bar ${isBest ? 'best-bar' : ''}`;
+      bar.style.height = `${100 - barHeight}%`;
+
+      const barValue = document.createElement('div');
+      barValue.className = 'bar-value';
+      barValue.textContent = `$${product.pricePerUnit.toFixed(2)}`;
+
+      const barLabel = document.createElement('div');
+      barLabel.className = 'bar-label';
+      barLabel.textContent = product.name.length > 12 ? `${product.name.substring(0, 10)}...` : product.name;
+
+      bar.appendChild(barValue);
+      barContainer.appendChild(bar);
+      barContainer.appendChild(barLabel);
+      comparisonChart.appendChild(barContainer);
+    });
+  }
 });
