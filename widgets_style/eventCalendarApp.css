@@ -59,3 +59,33 @@ body {
     gap: 1.5rem;
     flex-wrap: wrap;
 }
+
+button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.35rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 4px 8px rgb(0 0 0 / 0.15);
+    }
+    &:active {
+        transform: translateY(0) scale(1);
+    }
+}
+
+#today-btn {
+    background-color: var(--secondary);
+    color: var(--text);
+
+    &:hover {
+        background-color: var(--light-gray);
+    }
+}
