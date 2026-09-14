@@ -37,6 +37,9 @@ document.addEventListener('DOMContentLoaded', function () {
   init();
 
   function init() {
+    viewOptions.forEach((option) => {
+      option.classList.toggle('active', option.dataset.view === currentView);
+    });
     renderCalendar();
     renderEventsList();
     setupEventListeners();
@@ -97,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
     const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
     const daysInMonth = lastDay.getDate();
-    const startingDay = firstDay.getDate(1);
+    const startingDay = (firstDay.getDay() + 6) % 7;
 
     // Month header
     const monthHeader = document.createElement('div');
@@ -132,10 +135,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add cells for each day of the month
     const today = new Date();
     for (let i = 1; i <= daysInMonth; i++) {
-      const dayDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+      const dayDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), i);
       const isToday =
         dayDate.getDate() === today.getDate() &&
-        dayDate.getMonth === today.getMonth() &&
+        dayDate.getMonth() === today.getMonth() &&
         dayDate.getFullYear() === today.getFullYear();
       const dayCell = createDayCell(dayDate, false, isToday);
       daysGrid.appendChild(dayCell);
@@ -250,20 +253,20 @@ document.addEventListener('DOMContentLoaded', function () {
     const today = new Date();
     for (let i = 0; i < 7; i++) {
       const dayDate = new Date(startOfWeek);
-      dayDate.setDate(startOfWeek.getDate() + 1);
+      dayDate.setDate(startOfWeek.getDate() + i);
 
       const dayHeader = document.createElement('div');
       dayHeader.className = 'week-day-header';
 
       const isToday =
         dayDate.getDate() === today.getDate() &&
-        dayDate.getMonth === today.getMonth() &&
+        dayDate.getMonth() === today.getMonth() &&
         dayDate.getFullYear() === today.getFullYear();
 
       if (isToday) dayHeader.classList.add('current-day');
 
       dayHeader.innerHTML = `
-        <div>${['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']}</div>
+        <div>${['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i]}</div>
         <div>${dayDate.getDate()}</div>
       `;
       weekHeader.appendChild(dayHeader);
@@ -374,7 +377,7 @@ document.addEventListener('DOMContentLoaded', function () {
       eventsForHour.forEach((event) => {
         const eventElement = document.createElement('div');
         eventElement.className = 'day-event';
-        eventElement.textContent = `${formaTime(new Date(event.startTime))} - ${event.title}`;
+        eventElement.textContent = `${formatTime(new Date(event.startTime))} - ${event.title}`;
         eventElement.style.backgroundColor = event.color;
 
         // Calculate position and height based on event duration
@@ -399,7 +402,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       timeBlock.addEventListener('click', () => {
         // Create a new event at this time
-        openEventModalWithTime();
+        openEventModalWithTime(hour);
       });
     }
 
@@ -460,7 +463,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function getEventsForDateAndHour(date, hour) {
-    const dateStr = date.toISOString().split('T');
+    const dateStr = date.toISOString().split('T')[0];
     return events.filter((event) => {
       const eventDate = new Date(event.startTime).toISOString().split('T')[0];
       const eventHour = new Date(event.startTime).getHours();
@@ -523,7 +526,7 @@ document.addEventListener('DOMContentLoaded', function () {
         currentDate.setDate(currentDate.getDate() - 7);
         break;
       case 'month':
-        currentDate.setDate(currentDate.getMonth() - 1);
+        currentDate.setMonth(currentDate.getMonth() - 1);
         break;
     }
     renderCalendar();
@@ -538,7 +541,7 @@ document.addEventListener('DOMContentLoaded', function () {
         currentDate.setDate(currentDate.getDate() + 7);
         break;
       case 'month':
-        currentDate.setDate(currentDate.getMonth() + 1);
+        currentDate.setMonth(currentDate.getMonth() + 1);
         break;
     }
     renderCalendar();
@@ -558,16 +561,19 @@ document.addEventListener('DOMContentLoaded', function () {
     eventColorInput.value = '#4e73df';
 
     // Show modal
+    eventModal.setAttribute('open', 'open');
     eventModal.style.display = 'flex';
   }
 
   function openEventModalWithTime(hour) {
     openEventModal();
     eventStartTimeInput.value = `${hour.toString().padStart(2, '0')}:00`;
-    eventEndTimeInput.value = `${(hour + 1).toString().padStart(2, 0)}:00`;
+    eventEndTimeInput.value = `${(hour + 1).toString().padStart(2, '0')}:00`;
   }
 
   function closeModals() {
+    eventModal.removeAttribute('open');
+    eventDetailsModal.removeAttribute('open');
     eventModal.style.display = 'none';
     eventDetailsModal.style.display = 'none';
   }
@@ -623,10 +629,11 @@ document.addEventListener('DOMContentLoaded', function () {
       year: 'numeric',
     });
 
-    detailsTime.textContent = `${formaTime(new Date(event.startTime))} j- ${formaTime(new Date(event.endTime))}`;
+    detailsTime.textContent = `${formatTime(new Date(event.startTime))} - ${formatTime(new Date(event.endTime))}`;
     detailsDescription.textContent = event.description || 'No description';
 
     // Show modal
+    eventDetailsModal.setAttribute('open', 'open');
     eventDetailsModal.style.display = 'flex';
   }
 
@@ -683,6 +690,88 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Show edit modal
     closeModals();
+    eventModal.setAttribute('open', 'open');
     eventModal.style.display = 'flex';
+  }
+
+  function deleteEvent() {
+    if (!selectedEventId) return;
+
+    if (confirm('Are you sure you want to delete this event?')) {
+      events = events.filter((event) => event.id !== selectedEventId);
+      selectedEventId = null;
+      saveEventsToStorage();
+
+      // Update UI
+      renderCalendar();
+      renderEventsList();
+      closeModals();
+    }
+  }
+
+  function saveEventsToStorage() {
+    localStorage.setItem('events', JSON.stringify(events));
+  }
+
+  function setReminder(event) {
+    const reminderTime = new Date(event.startTime);
+    reminderTime.setMinutes(reminderTime.getMinutes() - 15); // 15 minutes before
+
+    const now = new Date();
+    const timeUntilReminder = reminderTime - now;
+
+    if (timeUntilReminder > 0) {
+      setTimeout(() => {
+        showReminderNotification(event);
+      }, timeUntilReminder);
+    }
+  }
+
+  function showReminderNotification(event) {
+    if (Notification.permission === 'granted') {
+      new Notification(`Reminder: ${event.title}`, {
+        body: `Your event starts at ${formaTime(new Date(event.startTime))}`,
+        icon: 'https://cdn-icons-png.flaticon.com/512/3652/3652191.png',
+      });
+    } else if (Notification.permission !== 'denied') {
+      Notification.requestPermission().then((permission) => {
+        if (permission === 'granted') showReminderNotification(event);
+      });
+    }
+  }
+
+  // Helper function
+  function formatTime(date) {
+    return date.toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true,
+    });
+  }
+
+  const formaTime = formatTime;
+
+  function formatDateTime(startDate, endDate) {
+    const isSameDay = startDate.toDateString() === endDate.toDateString();
+
+    if (isSameDay) {
+      return `${startDate.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+      })} ● ${formatTime(startDate)} - ${formatTime(endDate)}`;
+    } else {
+      return `${startDate.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+      })} ${formatTime(startDate)} - ${endDate.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+      })} ${formatTime(endDate)}`;
+    }
+  }
+
+  // Request notification permission on page load
+  if ('Notification' in window) {
+    Notification.requestPermission();
   }
 });
