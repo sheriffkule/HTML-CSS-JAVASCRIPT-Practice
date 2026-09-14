@@ -264,7 +264,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       dayHeader.innerHTML = `
         <div>${['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']}</div>
-        <div>${dayDate.getDate}</div>
+        <div>${dayDate.getDate()}</div>
       `;
       weekHeader.appendChild(dayHeader);
     }
@@ -304,7 +304,7 @@ document.addEventListener('DOMContentLoaded', function () {
           // Calculate position and height based on event duration
           const startMinutes =
             new Date(event.startTime).getHours() * 60 + new Date(event.startTime).getMinutes();
-          const endMinutes = new Date(event.endTime).getHours() * 60 + new Date(event.endTIme).getMinutes();
+          const endMinutes = new Date(event.endTime).getHours() * 60 + new Date(event.endTime).getMinutes();
           const duration = endMinutes - startMinutes;
           const height = (duration / 60) * 60; // 60px per hour
 
@@ -380,7 +380,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Calculate position and height based on event duration
         const startMinutes =
           new Date(event.startTime).getHours() * 60 + new Date(event.startTime).getMinutes();
-        const endMinutes = new Date(event.endTime).getHours() * 60 + new Date(event.endTIme).getMinutes();
+        const endMinutes = new Date(event.endTime).getHours() * 60 + new Date(event.endTime).getMinutes();
         const duration = endMinutes - startMinutes;
         const height = (duration / 60) * 60; // 60px per hour
 
@@ -570,5 +570,119 @@ document.addEventListener('DOMContentLoaded', function () {
   function closeModals() {
     eventModal.style.display = 'none';
     eventDetailsModal.style.display = 'none';
+  }
+
+  function saveEvent(e) {
+    e.preventDefault();
+
+    // Create event object
+    const eventId = Date.now().toString();
+    const startDateTime = new Date(eventDateInput.value);
+    const startTimeParts = eventStartTimeInput.value.split(':');
+    startDateTime.setHours(parseInt(startTimeParts[0]), parseInt(startTimeParts[1]));
+
+    const endDateTime = new Date(eventDateInput.value);
+    const endTImeParts = eventEndTimeInput.value.split(':');
+    endDateTime.setHours(parseInt(endTImeParts[0]), parseInt(endTImeParts[1]));
+
+    const newEvent = {
+      id: eventId,
+      title: eventTitleInput.value,
+      startTime: startDateTime.toISOString(),
+      endTime: endDateTime.toISOString(),
+      description: eventDescriptionInput.value,
+      color: eventColorInput.value,
+      reminder: eventReminderInput.checked,
+    };
+
+    // Add to events array
+    events.push(newEvent);
+    saveEventsToStorage();
+
+    // Update UI
+    renderCalendar();
+    renderEventsList();
+    closeModals();
+
+    // Set reminder if needed
+    if (newEvent.reminder) setReminder(newEvent);
+  }
+
+  function showEventDetails(eventId) {
+    const event = events.find((e) => e.id === eventId);
+    if (!event) return;
+
+    selectedEventId = eventId;
+
+    // Populate details
+    detailsTitle.textContent = event.title;
+    detailsDate.textContent = new Date(event.startTime).toLocaleDateString('en-US', {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    });
+
+    detailsTime.textContent = `${formaTime(new Date(event.startTime))} j- ${formaTime(new Date(event.endTime))}`;
+    detailsDescription.textContent = event.description || 'No description';
+
+    // Show modal
+    eventDetailsModal.style.display = 'flex';
+  }
+
+  function editEvent() {
+    if (!selectedEventId) return;
+
+    const event = events.find((e) => e.id === selectedEventId);
+    if (!event) return;
+
+    // Populate form with event data
+    eventTitleInput.value = event.title;
+    eventDateInput.valueAsDate = new Date(event.startTime);
+
+    const startDate = new Date(event.startTime);
+    eventStartTimeInput.value = `${startDate.getHours().toString().padStart(2, '0')}:${startDate.getMinutes().toString().padStart(2, '0')}`;
+
+    const endDate = new Date(event.endTime);
+    eventEndTimeInput.value = `${endDate.getHours().toString().padStart(2, '0')}:${endDate.getMinutes().toString().padStart(2, '0')}`;
+
+    eventDescriptionInput.value = event.description || '';
+    eventColorInput.value = event.color;
+    eventReminderInput.checked = event.reminder || false;
+
+    // Change form submit to update instead of create
+    eventForm.onsubmit = function (e) {
+      e.preventDefault();
+
+      // Update event
+      const startDateTime = new Date(eventDateInput.value);
+      const startTimeParts = eventStartTimeInput.value.split(':');
+      startDateTime.setHours(parseInt(startTimeParts[0]), parseInt(startTimeParts[1]));
+
+      const endDateTime = new Date(eventDateInput.value);
+      const endTimeParts = eventEndTimeInput.value.split(':');
+      endDateTime.setHours(parseInt(endTimeParts[0]), parseInt(endTimeParts[1]));
+
+      event.title = eventTitleInput.value;
+      event.startTime = startDateTime.toISOString();
+      event.endTime = endDateTime.toISOString();
+      event.description = eventDescriptionInput.value;
+      event.color = eventColorInput.value;
+      event.reminder = eventReminderInput.checked;
+
+      saveEventsToStorage();
+
+      // Update UI
+      renderCalendar();
+      renderEventsList();
+      closeModals();
+
+      // Reset form submit handler
+      eventForm.onsubmit = saveEvent;
+    };
+
+    // Show edit modal
+    closeModals();
+    eventModal.style.display = 'flex';
   }
 });
