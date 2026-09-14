@@ -3,6 +3,7 @@
     --primary-dark: #2e59d9;
     --secondary: #f1f2fc;
     --text: #303138;
+    --gray: #6c757d;
     --light-gray: #d1d3e2;
     --border-color: #c1c9e2;
     --danger: #e74a3b;
@@ -137,4 +138,102 @@ button {
     flex: 1;
     padding: 1.5rem;
     gap: 1.5rem;
+}
+
+.calendar-view {
+    flex: 1;
+    background-color: white;
+    border-radius: 0.35rem;
+    box-shadow: 0 0.15rem 1.75rem rgb(58 59 69 / 0.2);
+    padding: 1.5rem;
+    overflow: auto;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+
+    h3 {
+        font-size: 1.125rem;
+        color: var(--text);
+    }
+}
+
+#add-event-btn {
+    padding: 0.5rem;
+    height: 2.5rem;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    i {
+        transition: 0.2s ease-out;
+    }
+    &:hover i {
+        scale: 1.5;
+    }
+}
+
+.event-list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.event-item {
+    padding: 1rem;
+    border-left: 4px solid var(--primary);
+    background-color: var(--secondary);
+    border-radius: 0.35rem;
+    margin-bottom: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        transform: translateX(5px);
+        box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 0.1);
+    }
+}
+
+.event-title {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.event-time {
+    font-size: 0.875rem;
+    color: var(--gray);
+}
+
+.event-description {
+    font-size: 0.875rem;
+    margin-top: 0.75rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.month-view {
+    width: 100%;
+}
+
+.month-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.month-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
 }

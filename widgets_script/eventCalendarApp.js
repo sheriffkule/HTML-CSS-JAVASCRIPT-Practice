@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
   // DOM Elements
   const calendarView = document.getElementById('calendar-view');
-  const eventList = document.getElementById('event-list');
+  const eventsList = document.getElementById('event-list');
   const currentDateElement = document.getElementById('current-date');
   const todayBtn = document.getElementById('today-btn');
   const prevBtn = document.getElementById('prev-btn');
@@ -367,6 +367,103 @@ document.addEventListener('DOMContentLoaded', function () {
       const timeBlock = document.createElement('div');
       timeBlock.className = 'day-time-block day-hour';
       dayGrid.appendChild(timeBlock);
+
+      // Add events to this time slot
+      const eventsForHour = getEventsForDateAndHour(currentDate, hour);
+      eventsForHour.forEach((event) => {
+        const eventElement = document.createElement('div');
+        eventElement.className = 'day-event';
+        eventElement.textContent = `${formaTime(new Date(event.startTime))} - ${event.title}`;
+        eventElement.style.backgroundColor = event.color;
+
+        // Calculate position and height based on event duration
+        const startMinutes =
+          new Date(event.startTime).getHours() * 60 + new Date(event.startTime).getMinutes();
+        const endMinutes = new Date(event.endTime).getHours() * 60 + new Date(event.endTIme).getMinutes();
+        const duration = endMinutes - startMinutes;
+        const height = (duration / 60) * 60; // 60px per hour
+
+        const position = ((startMinutes % 60) / 60) * 60;
+
+        eventElement.style.top = `${position}px`;
+        eventElement.style.height = `${height}px`;
+
+        timeBlock.appendChild(eventElement);
+
+        eventElement.addEventListener('click', (e) => {
+          e.stopPropagation();
+          showEventDetails(event.id);
+        });
+      });
+
+      timeBlock.addEventListener('click', () => {
+        // Create a new event at this time
+        openEventModalWithTime();
+      });
     }
+
+    dayContainer.appendChild(dayGrid);
+    calendarView.appendChild(dayContainer);
+  }
+
+  function renderEventList() {
+    eventsList.innerHTML = '';
+
+    // Get upcoming events (today and future)
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const upcomingEvents = events
+      .filter((event) => new Date(event.startTime) >= today)
+      .sort((a, b) => new Date(a.startTime) - new Date(b.startTime));
+
+    if (upcomingEvents.length === 0) {
+      const noEvents = document.createElement('div');
+      noEvents.className = 'no-events';
+      noEvents.textContent = 'No upcoming events. Add one!';
+      eventsList.appendChild(noEvents);
+      return;
+    }
+
+    upcomingEvents.forEach((event) => {
+      const eventElement = document.createElement('div');
+      eventElement.className = 'event-item';
+      eventElement.style.borderLeftColor = event.color;
+
+      const startDate = new Date(event.startTime);
+      const endDate = new Date(event.endTime);
+
+      eventElement.innerHTML = `
+        <div class="event-title">
+          <span>${event.title}</span>
+          <span style="color: ${event.color}">●</span>
+        </div>
+        <div class="event-time">${formatDateTime(startDate, endDate)}</div>
+        ${event.description ? `<div class="event-description">${event.description}</div>` : ''}
+      `;
+
+      eventsList.appendChild(eventElement);
+
+      eventElement.addEventListener('click', () => {
+        showEventDetails(event.id);
+      });
+    });
+  }
+
+  function getEventsForDate(date) {
+    const dateStr = date.toISOString().split('T')[0];
+    return events.filter((event) => {
+      const eventDate = new Date(event.startTime).toISOString().split('T')[0];
+      return eventDate === dateStr;
+    });
+  }
+
+  function getEventsForDateAndHour(date, hour) {
+    const dateStr = date.toISOString().split('T');
+    return events.filter((event) => {
+      const eventDate = new Date(event.startTime).toISOString().split('T')[0];
+      const eventHour = new Date(event.startTime).getHours();
+      return eventDate === dateStr && eventHour === hour;
+    });
   }
 });
