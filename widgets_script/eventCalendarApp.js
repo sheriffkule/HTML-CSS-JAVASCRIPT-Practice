@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
   // DOM Elements
   const calendarView = document.getElementById('calendar-view');
-  const eventsList = document.getElementById('event-list');
+  const eventsList = document.getElementById('events-list');
   const currentDateElement = document.getElementById('current-date');
   const todayBtn = document.getElementById('today-btn');
   const prevBtn = document.getElementById('prev-btn');
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // App state
   let currentView = 'month';
   let currentDate = new Date();
-  let event = JSON.parse(localStorage.getItem('events')) || [];
+  let events = JSON.parse(localStorage.getItem('events')) || [];
   let selectedEventId = null;
 
   // Initialize the app
@@ -146,6 +146,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const remainingCells = totalCells - (startingDay + daysInMonth);
     for (let i = 1; i <= remainingCells; i++) {
       const nextMonthDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, i);
+      const dayCell = createDayCell(nextMonthDay, true);
       daysGrid.appendChild(dayCell);
     }
 
@@ -173,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let eventsShown = 0;
     let spaceUsed = 0;
 
-    for (const events of dayEvents) {
+    for (const event of dayEvents) {
       if (eventsShown >= maxEventsToShow || spaceUsed >= maxEventsToShow) break;
 
       const eventElement = document.createElement('div');
@@ -406,7 +407,7 @@ document.addEventListener('DOMContentLoaded', function () {
     calendarView.appendChild(dayContainer);
   }
 
-  function renderEventList() {
+  function renderEventsList() {
     eventsList.innerHTML = '';
 
     // Get upcoming events (today and future)
@@ -465,5 +466,109 @@ document.addEventListener('DOMContentLoaded', function () {
       const eventHour = new Date(event.startTime).getHours();
       return eventDate === dateStr && eventHour === hour;
     });
+  }
+
+  function updateCurrentDateDisplay() {
+    switch (currentView) {
+      case 'day':
+        currentDateElement.textContent = currentDate.toLocaleDateString('en-US', {
+          weekday: 'long',
+          month: 'long',
+          day: 'numeric',
+          year: 'numeric',
+        });
+        break;
+      case 'week':
+        const startOfWeek = new Date(currentDate);
+        startOfWeek.setDate(currentDate.getDate() - currentDate.getDay());
+
+        const endOfWeek = new Date(startOfWeek);
+        endOfWeek.setDate(startOfWeek.getDate() + 6);
+
+        currentDateElement.textContent = `
+          ${startOfWeek.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} -
+          ${endOfWeek.toLocaleDateString('en-US', {
+            month: endOfWeek.getMonth() !== startOfWeek.getMonth() ? 'short' : undefined,
+            day: 'numeric',
+            year: endOfWeek.getFullYear() !== startOfWeek.getFullYear() ? 'numeric' : undefined,
+          })}
+        `;
+        break;
+      case 'month':
+        currentDateElement.textContent = currentDate.toLocaleDateString('en-US', {
+          month: 'long',
+          year: 'numeric',
+        });
+        break;
+    }
+  }
+
+  function switchView(view) {
+    currentView = view;
+
+    // Update active view button
+    viewOptions.forEach((option) => {
+      option.classList.toggle('active', option.dataset.view === view);
+    });
+
+    renderCalendar();
+  }
+
+  function navigatePrevious() {
+    switch (currentView) {
+      case 'day':
+        currentDate.setDate(currentDate.getDate() - 1);
+        break;
+      case 'week':
+        currentDate.setDate(currentDate.getDate() - 7);
+        break;
+      case 'month':
+        currentDate.setDate(currentDate.getMonth() - 1);
+        break;
+    }
+    renderCalendar();
+  }
+
+  function navigateNext() {
+    switch (currentView) {
+      case 'day':
+        currentDate.setDate(currentDate.getDate() + 1);
+        break;
+      case 'week':
+        currentDate.setDate(currentDate.getDate() + 7);
+        break;
+      case 'month':
+        currentDate.setDate(currentDate.getMonth() + 1);
+        break;
+    }
+    renderCalendar();
+  }
+
+  function goToToday() {
+    currentDate = new Date();
+    renderCalendar();
+  }
+
+  function openEventModal() {
+    // Reset form
+    eventForm.reset();
+    eventDateInput.valueAsDate = currentDate;
+    eventStartTimeInput.value = '09:00';
+    eventEndTimeInput.value = '10:00';
+    eventColorInput.value = '#4e73df';
+
+    // Show modal
+    eventModal.style.display = 'flex';
+  }
+
+  function openEventModalWithTime(hour) {
+    openEventModal();
+    eventStartTimeInput.value = `${hour.toString().padStart(2, '0')}:00`;
+    eventEndTimeInput.value = `${(hour + 1).toString().padStart(2, 0)}:00`;
+  }
+
+  function closeModals() {
+    eventModal.style.display = 'none';
+    eventDetailsModal.style.display = 'none';
   }
 });

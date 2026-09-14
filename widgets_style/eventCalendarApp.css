@@ -1,7 +1,7 @@
 :root {
     --primary: #4e73df;
     --primary-dark: #2e59d9;
-    --secondary: #f1f2fc;
+    --secondary: #e8e9f7;
     --text: #303138;
     --gray: #6c757d;
     --light-gray: #d1d3e2;
@@ -236,4 +236,101 @@ button {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 0.5rem;
+}
+
+.day-header {
+    padding: 0.5rem;
+    text-align: center;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.day-cell {
+    aspect-ratio: 1;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.35rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+
+    &:hover {
+        background-color: var(--secondary);
+    }
+}
+
+.day-number {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.day-events {
+    overflow-y: auto;
+    max-height: calc(100% - 1.5rem);
+}
+
+.day-event {
+    font-size: 0.75rem;
+    padding: 0.15rem 0.25rem;
+    border-radius: 0.15rem;
+    margin-bottom: 0.15rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: white;
+}
+
+.other-month {
+    opacity: 0.5;
+    background-color: var(--secondary);
+}
+
+.current-day {
+    background-color: rgb(78 115 223 / 0.1);
+    border-color: var(--primary);
+}
+
+.week-view {
+    width: 100%;
+}
+
+.week-header {
+    display: grid;
+    grid-template-columns: 80px repeat(7, 1fr);
+    margin-bottom: 1rem;
+}
+
+.week-day-header {
+    text-align: center;
+    font-weight: 600;
+    padding: 0.5rem;
+
+    &.current-day {
+        color: var(--primary);
+    }
+}
+
+.week-grid {
+    display: grid;
+    grid-template-columns: 80px repeat(7, 1fr);
+    grid-template-rows: repeat(24, 60px);
+}
+
+.hour-label {
+    font-size: 0.8rem;
+    color: var(--gray);
+    text-align: center;
+    padding-right: 0.5rem;
+    position: relative;
+    top: -0.5rem;
+}
+
+.week-cell {
+    border-top: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    position: relative;
+
+    &:last-child {
+        border-right: none;
+    }
 }
