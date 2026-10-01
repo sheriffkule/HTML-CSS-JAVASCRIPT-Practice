@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loading Effects Maker</title>
+    <link rel="stylesheet" href="/widgets_style/loadingEffectsMaker.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1><i class="fas fa-spinner"></i> Loading Effects Maker</h1>
+        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+      </header>
+
+      <main class="app-container">
+        <section class="controls-panel">
+          <h2 class="panel-title"><i class="fas fa-sliders-h"></i> Controls</h2>
+
+          <article class="control-group">
+            <label for="loaderType" class="control-label">Loader Type</label>
+            <select id="loaderType">
+              <option value="spinner">Spinner</option>
+              <option value="dots">Dots</option>
+              <option value="bars">Bars</option>
+              <option value="progress">Progress Bar</option>
+              <option value="pulse">Pulse</option>
+              <option value="flip">Flip</option>
+            </select>
+          </article>
+
+          <article class="control-group">
+            <label for="colorPicker" class="control-label">Color</label>
+            <div class="color-picker">
+              <input type="color" id="colorPicker" value="#4361ee" class="color-input" />
+              <div class="color-preview" id="colorPreview" style="background-color: #4361ee"></div>
+            </div>
+          </article>
+
+          <article class="control-group">
+            <label for="loaderSize" class="control-label">Size</label>
+            <input type="range" id="loaderSize" min="20" max="100" value="50" />
+          </article>
+
+          <article class="control-group">
+            <label for="loaderSpeed" class="control-label">Speed</label>
+            <input type="range" id="loaderSpeed" min="0.5" max="3" step="0.1" value="1" />
+          </article>
+
+          <article class="control-group">
+            <label for="bgColor" class="control-label">Background Color</label>
+            <div class="color-picker">
+              <input type="color" id="bgColor" value="#ffffff" class="color-input" />
+              <div class="color-preview" id="bgColorPreview" style="background-color: #ffffff"></div>
+            </div>
+          </article>
+        </section>
+
+        <section class="preview-panel">
+          <h2 class="panel-title"><i class="fas fa-eye"></i> Preview</h2>
+          <article class="preview-container" id="previewContainer">
+            <div class="spinner" id="loader"></div>
+          </article>
+
+          <h2 class="panel-title"><i class="fas fa-code"></i> Generated Code</h2>
+          <article class="code-container">
+            <button class="copy-btn" id="copyBtn"><i class="far fa-copy"></i> Copy</button>
+            <pre id="codeOutput"><cede id="htmlCode"></cede></pre>
+          </article>
+
+          <article class="export-options">
+            <button class="export-btn" id="exportCss"><i class="fab fa-css3-alt"></i> CSS</button>
+            <button class="export-btn" id="exportHtml"><i class="fab fa-html5"></i> HTML</button>
+            <button class="export-btn" id="exportJs"><i class="fab fa-js"></i> JS</button>
+          </article>
+        </section>
+      </main>
+
+      <footer class="footer__copy">
+        © <time datetime="" id="year"></time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
+    </div>
+
+    <div class="success-message" id="successMessage">
+      <i class="fas fa-check-circle"></i> Copied to clipboard!
+    </div>
+
+    <script src="/widgets_script/loadingEffectsMaker.js"></script>
+  </body>
+</html>

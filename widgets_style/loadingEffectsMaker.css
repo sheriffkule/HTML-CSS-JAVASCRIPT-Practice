@@ -1,0 +1,34 @@
+:root {
+    --primary: #4361ee;
+    --secondary: #3f37c9;
+    --text: #2b2d42;
+    --bg: #f1f2fa;
+    --card: #ffffff;
+    --border: #d9ecef;
+    --shadow: 0 4px 8px rgb(0 0 0 / 0.15);
+    --transition: all 0.3s ease;
+}
+
+.dark-mode {
+    --primary: #4895ef;
+    --secondary: #4361ee;
+    --text: #f1f2fa;
+    --bg: #121212;
+    --card: #1e1e1e;
+    --border: #333;
+    --shadow: 0 4px 8px rgb(255 255 255 / 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    transition: var(--transition);
+    min-height: 100vh;
+}
