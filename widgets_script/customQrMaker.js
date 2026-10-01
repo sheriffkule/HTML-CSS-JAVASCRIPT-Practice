@@ -23,6 +23,25 @@ document.addEventListener('DOMContentLoaded', function () {
   const detailLength = document.getElementById('detail-length');
   const detailError = document.getElementById('detail-error');
 
+  if (!qrCodeContainer || !qrContentInput || !qrSizeInput || !qrColorInput || !qrBgColorInput || !qrErrorInput || !qrMarginInput || !qrShapeInput || !qrLogoInput || !generateBtn || !downloadPngBtn || !downloadSvgBtn || !downloadJpgBtn || !detailSize || !detailLength || !detailError) {
+    return;
+  }
+
+  const qrPlaceholder = qrCodeContainer.querySelector('.placeholder');
+
+  function togglePlaceholder(isVisible) {
+    if (qrPlaceholder) {
+      qrPlaceholder.style.display = isVisible ? 'block' : 'none';
+    }
+  }
+
+  togglePlaceholder(true);
+
+  if (!window.QRCodeStyling) {
+    qrCodeContainer.innerHTML = '<div class="placeholder"><i class="fa fa-exclamation-triangle"></i><p>QR Code library failed to load.</p></div>';
+    return;
+  }
+
   // QR Code instance
   const qrCode = new QRCodeStyling({
     width: 300,
@@ -47,9 +66,6 @@ document.addEventListener('DOMContentLoaded', function () {
       color: qrBgColorInput.value,
     },
   });
-
-  // Initialize QR code
-  qrCode.append(qrCodeContainer);
 
   // Event listeners
   qrSizeInput.addEventListener('input', updateSizeValue);
@@ -112,6 +128,12 @@ document.addEventListener('DOMContentLoaded', function () {
       },
     };
 
+    if (!qrCodeContainer.querySelector('canvas, svg')) {
+      qrCode.append(qrCodeContainer);
+    }
+
+    togglePlaceholder(false);
+
     if (qrLogoInput.files && qrLogoInput.files[0]) {
       const reader = new FileReader();
       reader.onload = function (event) {
@@ -169,6 +191,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
+
+    if (!ctx) {
+      return;
+    }
 
     canvas.width = qrCanvas.width;
     canvas.height = qrCanvas.height;
