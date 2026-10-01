@@ -32,3 +32,26 @@ body {
     transition: var(--transition);
     min-height: 100vh;
 }
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(100deg, var(--primary), var(--secondary));
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-shadow: var(--shadow);
+}
