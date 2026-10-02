@@ -129,3 +129,108 @@ function updateLoader() {
 
   updateCode();
 }
+
+// Update generated code
+function updateCode() {
+  let cssCode = '';
+  let htmlCode = '';
+
+  switch (currentSettings.type) {
+    case 'spinner':
+      cssCode = `.loader {
+width: ${currentSettings.size}px;
+height: ${currentSettings.size}px;
+border: ${Math.max(3, currentSettings / 10)}px solid rgba(0, 0, 0, 0.1);
+border-radius: 50%;
+border-top-color: ${currentSettings.color};
+animation: spin ${currentSettings.speed}s linear infinite;      
+}
+
+@keyframes spin {
+to { transform: rotate(360deg);}
+}`;
+      htmlCode = `<div class="loader"></div>`;
+      break;
+    case 'dots':
+      cssCode = `.loader {
+display: flex;
+gap: 10px;
+}
+
+.loader .dot {
+width: ${currentSettings.size / 3}px;
+height: ${currentSettings.size / 3}px;
+border-radius: 50%;
+background-color: ${currentSettings.color};
+animation: bounce ${currentSettings.speed * 1.4}s infinite ease-in-out;
+}
+
+.loader .dot:nth-child(1) {
+animation-delay: -0.32s;
+}
+
+.loader .dot:nth-child(2) {
+animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+0%, 80%, 100% { transform: scale(0); }
+40% { transform: scale(1); }
+}`;
+      htmlCode = `<div class="loader">
+<div class="dot"></div>      
+<div class="dot"></div>      
+<div class="dot"></div>      
+</div>`;
+      break;
+
+    case 'bars':
+      cssCode = `.loader {
+display: flex;
+height: ${currentSettings.size}px;
+justify-content: center;
+align-items: flex-end;        
+}
+
+.loader .bar {
+width: ${currentSettings.size / 8}px;
+height: ${currentSettings.size}px;
+background-color: ${currentSettings.color};
+margin: 0 3px;
+animation: stretch ${currentSettings.speed * 1.2}s infinite ease-in-out;
+}
+
+.loader .bar:nth-child(1) {
+animation-delay: -1.2s;
+}
+
+.loader .bar:nth-child(2) {
+animation-delay: -1.1s;
+}
+
+.loader .bar:nth-child(3) {
+animation-delay: -1s;
+}
+
+.loader .bar:nth-child(4) {
+animation-delay: -0.9s;
+}
+
+.loader .bar:nth-child(5) {
+animation-delay: -0.8s;
+}
+
+@keyframes stretch {
+0%, 40%, 100% { transform: scaleY(0.4); }
+20% { transform: scaleY(1); }
+}`;
+      htmlCode = `<div class="loader">
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+</div>`;
+      break;
+  }
+}
