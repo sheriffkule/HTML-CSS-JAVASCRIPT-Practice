@@ -232,5 +232,80 @@ animation-delay: -0.8s;
 <div class="bar"></div>
 </div>`;
       break;
+    case 'progress':
+      cssCode = `.loader {
+width: ${currentSettings.size * 2}px;
+height: ${currentSettings.size / 5}px;
+background-color: rgba(0, 0, 0, 0.1);
+border-radius: 5px;
+overflow: hidden;        
+}
+
+.loader .progress-bar {
+height: 100%;
+width: 0%;
+background-color: ${currentSettings.color};
+animation: progress ${currentSettings.speed * 2}s linear infinite;
+}
+
+@keyframes progress {
+0% { width: 0%; margin-left: 0; }
+50% { width: 100%; margin-left: 0; }
+100% { width: 0%; margin-left: 100%; }
+}`;
+      htmlCode = `<div class="loader">
+<div class="progress-bar"></div>
+</div>`;
+      break;
+    case 'pulse':
+      cssCode = `.loader {
+width: ${currentSettings.size}px;
+height: ${currentSettings.size}px;
+border-radius: 50%;
+background-color: ${currentSettings.color};
+animation: ${currentSettings.speed * 1.5}s infinite ease-out;
+}
+
+@keyframes pulse {
+0% { transform: scale(0); opacity: 1; }
+100% { transform: scale(1.5); opacity: 0; }
+}`;
+      htmlCode = `<div class="loader"></div>`;
+      break;
+    case 'flip':
+      cssCode = `.loader {
+width: ${currentSettings.size}px;        
+height: ${currentSettings.size}px;        
+animation: flip ${currentSettings.speed * 2}s infinite ease;
+background-color: ${currentSettings.color};
+}
+
+@keyframes flip {
+0% { transform: perspective(200px) rotateX(0) rotateY(0); }
+50% { transform: perspective(200px) rotateX(-180deg) rotateY(0); }
+100% { transform: perspective(200px) rotateX(-180deg) rotateY(-180deg); }
+}`;
+      htmlCode = `<div class="loader"></div>`;
+      break;
   }
+
+  // Update code display
+  document.getElementById('codeOutput').textContent =
+    `<!-- HTML -->\n${htmlCode}\n\n<!-- CSS -->\n${cssCode}`;
+}
+
+// Copy to clipboard
+copyBtn.addEventListener('click', () => {
+  const code = document.getElementById('codeOutput').textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    showSuccessMessage();
+  });
+});
+
+// Show success message
+function showSuccessMessage() {
+  successMessage.classList.add('show');
+  setTimeout(() => {
+    successMessage.classList.remove('show');
+  }, 2000);
 }
