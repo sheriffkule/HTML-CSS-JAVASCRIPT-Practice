@@ -22,20 +22,31 @@ let currentSettings = {
   color: '#4361ee',
   size: 50,
   speed: 1,
-  bgColor: '#ffffff',
+  bgColor: '#cccccc',
 };
+
+const themeStorageKey = 'loadingEffectsMakerTheme';
+const themeIcon = themeToggle.querySelector('i');
+
+function applyTheme(isDark) {
+  document.body.classList.toggle('dark-mode', isDark);
+  themeIcon.classList.toggle('fa-sun', isDark);
+  themeIcon.classList.toggle('fa-moon', !isDark);
+}
+
+try {
+  applyTheme(localStorage.getItem(themeStorageKey) === 'dark');
+} catch {
+  applyTheme(false);
+}
 
 // Theme toggle
 themeToggle.addEventListener('click', () => {
-  document.body.classList.toggle('dark-mode');
-  const icon = themeToggle.querySelector('i');
-  if (document.body.classList.contains('dark-mode')) {
-    icon.classList.remove('fa-moon');
-    icon.classList.add('fa-sun');
-  } else {
-    icon.classList.remove('fa-sun');
-    icon.classList.add('fa-moon');
-  }
+  const isDark = !document.body.classList.contains('dark-mode');
+  applyTheme(isDark);
+  try {
+    localStorage.setItem(themeStorageKey, isDark ? 'dark' : 'light');
+  } catch {}
 });
 
 // Update color preview
@@ -90,11 +101,12 @@ function updateLoader() {
       break;
     case 'dots':
       loader.classList.add('dots');
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < 3; i++) {
         const dot = document.createElement('div');
         dot.classList.add('dot');
-        dot.style.width = `${currentSettings.size / 3}px`;
-        dot.style.height = `${currentSettings.size / 3}px`;
+        dot.style.width = `${(currentSettings.size / 3).toFixed(2)}px`;
+        dot.style.height = `${(currentSettings.size / 3).toFixed(2)}px`;
+        dot.style.animationDuration = `${currentSettings.speed * 1.4}s`;
         loader.appendChild(dot);
       }
       break;
@@ -105,6 +117,7 @@ function updateLoader() {
         bar.classList.add('bar');
         bar.style.width = `${currentSettings.size / 8}px`;
         bar.style.height = `${currentSettings.size}px`;
+        bar.style.animationDuration = `${currentSettings.speed * 1.2}s`;
         loader.appendChild(bar);
       }
       break;
@@ -112,6 +125,7 @@ function updateLoader() {
       loader.classList.add('progress');
       const progressBar = document.createElement('div');
       progressBar.classList.add('progress-bar');
+      progressBar.style.animationDuration = `${currentSettings.speed * 2}s`;
       loader.appendChild(progressBar);
       loader.style.width = `${currentSettings.size * 2}px`;
       break;
@@ -119,11 +133,13 @@ function updateLoader() {
       loader.classList.add('pulse');
       loader.style.width = `${currentSettings.size}px`;
       loader.style.height = `${currentSettings.size}px`;
+      loader.style.animationDuration = `${currentSettings.speed * 1.5}s`;
       break;
     case 'flip':
       loader.classList.add('flip');
       loader.style.width = `${currentSettings.size}px`;
       loader.style.height = `${currentSettings.size}px`;
+      loader.style.animationDuration = `${currentSettings.speed * 2}s`;
       break;
   }
 
@@ -140,10 +156,10 @@ function updateCode() {
       cssCode = `.loader {
   width: ${currentSettings.size}px;
   height: ${currentSettings.size}px;
-  border: ${Math.max(3, currentSettings.size / 10)}px solid rgba(0, 0, 0, 0.1);
+  border: ${Math.max(3, currentSettings.size / 10)}px solid rgba(0, 0, 0, 0.15);
   border-radius: 50%;
   border-top-color: ${currentSettings.color};
-  animation: spin ${currentSettings.speed}s linear infinite;      
+  animation: spin ${currentSettings.speed}s linear infinite;
 }
 
 @keyframes spin {
@@ -158,11 +174,11 @@ function updateCode() {
 }
 
 .loader .dot {
-  width: ${currentSettings.size / 3}px;
-  height: ${currentSettings.size / 3}px;
+  width: ${(currentSettings.size / 3).toFixed(2)}px;
+  height: ${(currentSettings.size / 3).toFixed(2)}px;
   border-radius: 50%;
   background-color: ${currentSettings.color};
-  animation: bounce ${currentSettings.speed * 1.4}s infinite ease-in-out;
+  animation: bounce ${(currentSettings.speed * 1.4).toFixed(2)}s infinite ease-in-out;
 }
 
 .loader .dot:nth-child(1) {
@@ -196,12 +212,17 @@ function updateCode() {
   align-items: flex-end;        
 }
 
+.bars {
+  display: flex;
+  gap: 0.5rem;
+}
+
 .loader .bar {
-  width: ${currentSettings.size / 8}px;
+  width: ${(currentSettings.size / 8).toFixed(2)}px;
   height: ${currentSettings.size}px;
   background-color: ${currentSettings.color};
   margin: 0 3px;
-  animation: stretch ${currentSettings.speed * 1.2}s infinite ease-in-out;
+  animation: stretch ${(currentSettings.speed * 1.2).toFixed(2)}s infinite ease-in-out;
 }
 
 .loader .bar:nth-child(1) {
@@ -238,8 +259,8 @@ function updateCode() {
       break;
     case 'progress':
       cssCode = `.loader {
-  width: ${currentSettings.size * 2}px;
-  height: ${currentSettings.size / 5}px;
+  width: ${(currentSettings.size * 2).toFixed(2)}px;
+  height: ${(currentSettings.size / 5).toFixed(2)}px;
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   overflow: hidden;        
@@ -267,7 +288,7 @@ function updateCode() {
   height: ${currentSettings.size}px;
   border-radius: 50%;
   background-color: ${currentSettings.color};
-  animation: ${currentSettings.speed * 1.5}s infinite ease-out;
+  animation: pulse ${(currentSettings.speed * 1.5).toFixed(2)}s infinite ease-out;
 }
 
 @keyframes pulse {
@@ -334,7 +355,7 @@ exportHtml.addEventListener('click', () => {
 });
 
 exportJs.addEventListener('click', () => {
-  const jsCode = `// To implement the loader with JavaScript/n\\ Add this to your JS file\n\nconst loader = document.createElement('div');\nloader.className = 'loader';\ndocument.body.appendChild(loader);`;
+  const jsCode = `// Add this to your JavaScript file\n\nconst loader = document.createElement('div');\nloader.className = 'loader';\ndocument.body.appendChild(loader);`;
   navigator.clipboard.writeText(jsCode).then(() => {
     showSuccessMessage();
   });
