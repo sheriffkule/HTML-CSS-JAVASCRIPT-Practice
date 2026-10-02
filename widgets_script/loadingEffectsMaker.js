@@ -90,7 +90,7 @@ function updateLoader() {
       break;
     case 'dots':
       loader.classList.add('dots');
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < 4; i++) {
         const dot = document.createElement('div');
         dot.classList.add('dot');
         dot.style.width = `${currentSettings.size / 3}px`;
@@ -140,7 +140,7 @@ function updateCode() {
       cssCode = `.loader {
   width: ${currentSettings.size}px;
   height: ${currentSettings.size}px;
-  border: ${Math.max(3, currentSettings / 10)}px solid rgba(0, 0, 0, 0.1);
+  border: ${Math.max(3, currentSettings.size / 10)}px solid rgba(0, 0, 0, 0.1);
   border-radius: 50%;
   border-top-color: ${currentSettings.color};
   animation: spin ${currentSettings.speed}s linear infinite;      
@@ -166,10 +166,14 @@ function updateCode() {
 }
 
 .loader .dot:nth-child(1) {
-  animation-delay: -0.32s;
+  animation-delay: -0.48s;
 }
 
 .loader .dot:nth-child(2) {
+  animation-delay: -0.32s;
+}
+
+.loader .dot:nth-child(3) {
   animation-delay: -0.16s;
 }
 
@@ -329,6 +333,17 @@ exportHtml.addEventListener('click', () => {
   });
 });
 
+exportJs.addEventListener('click', () => {
+  const jsCode = `// To implement the loader with JavaScript/n\\ Add this to your JS file\n\nconst loader = document.createElement('div');\nloader.className = 'loader';\ndocument.body.appendChild(loader);`;
+  navigator.clipboard.writeText(jsCode).then(() => {
+    showSuccessMessage();
+  });
+});
+
+// Initialize
+previewContainer.style.backgroundColor = currentSettings.bgColor;
+updateLoader();
+
 // Changing colors on input type range track
 document.querySelectorAll('input[type="range"]').forEach((input) => {
   const updateTrack = () => {
@@ -343,3 +358,17 @@ document.querySelectorAll('input[type="range"]').forEach((input) => {
   input.addEventListener('input', updateTrack);
   updateTrack();
 });
+
+// Update year in footer
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+  yearElement.setAttribute('datetime', currentYear.toString());
+  yearElement.textContent = currentYear.toString();
+}
+updateYear();
