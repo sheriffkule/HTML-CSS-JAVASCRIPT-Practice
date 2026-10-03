@@ -100,3 +100,128 @@ function updateFormulaAndExplanation() {
         'The binomial distribution calculates the probability of exactly k successes in n independent trials.';
   }
 }
+
+// Update formula for multiple events based on event type
+function updateMultipleEventsFormula(eventType) {
+  switch (eventType) {
+    case 'independent':
+      formulaText.textContent = 'P(A and B) = P(A) * P(B)';
+      explanationText.textContent =
+        'For independent events, the probability of both occurring is the product of their individual probabilities.';
+      break;
+    case 'mutually-exclusive':
+      formulaText.textContent = 'P(A or B) = P(A) * P(B)';
+      explanationText.textContent =
+        'For mutually exclusive events, the probability of either occurring is the sum of their individual probabilities.';
+      break;
+    case 'non-mutually-exclusive':
+      formulaText.textContent = 'P(A or B) = P(A) * P(B) - P(A and B)';
+      explanationText.textContent =
+        'For non-mutually exclusive events, we subtract the probability of both occurring to avoid double counting.';
+      break;
+  }
+}
+
+// Calculate probability based on current calculation type
+function calculateProbability() {
+  let probability = 0;
+  let description = '';
+  let isValid = true;
+
+  // Reset errors
+  document.querySelectorAll('.error').forEach((error) => {
+    error.classList.remove('visible');
+  });
+
+  switch (currentCalcType) {
+    case 'single':
+      isValid = calculateSingleEvent();
+      break;
+    case 'multiple':
+      isValid = calculateMultipleEvents();
+      break;
+    case 'conditional':
+      isValid = calculateConditionalProbability();
+      break;
+    case 'binomial':
+      isValid = calculateBinomialDistribution();
+      break;
+  }
+
+  if (isValid) {
+    // Add to history
+    addToHistory(probability, description);
+  }
+}
+
+// Calculate probability for a single event
+function calculateSingleEvent() {
+  const favorable = parseInt(document.getElementById('favorable-outcomes').value);
+  const total = parseInt(document.getElementById('total-outcomes').value);
+
+  // Validate inputs
+  if (isNaN(favorable) || favorable <= 0) {
+    favorableError.classList.add('visible');
+    return false;
+  }
+
+  if (isNaN(total) || total <= 0) {
+    totalError.classList.add('visible');
+    return false;
+  }
+
+  if (favorable > total) {
+    favorableError.textContent = 'Favorable outcomes cannot exceed total outcomes';
+    favorableError.classList.add('visible');
+    return false;
+  } else {
+    favorableError.textContent = 'Please enter a valid number greater than 0';
+  }
+
+  const probability = favorable / total;
+  displayResult(probability, `Probability of ${favorable} out of ${total} outcomes`);
+  return true;
+}
+
+// Calculate probability for multiple events
+function calculateMultipleEvents() {
+  const eventType = document.getElementById('event-type').value;
+  const probA = parseFloat(document.getElementById('probability-a').value);
+  const probB = parseFloat(document.getElementById('probability-b').value);
+
+  // Validate inputs
+  if (isNaN(probA) || probA < 0 || probA > 1) {
+    probAError.classList.add('visible');
+    return false;
+  }
+
+  if (isNaN(probB) || probB < 0 || probB > 1) {
+    probBError.classList.add('visible');
+    return false;
+  }
+
+  let probability = 0;
+  let description = '';
+
+  switch (eventType) {
+    case 'independent':
+      probability = probA * probB;
+      description = `Probability of both both independent events A (${probA}) and B (${probB}) occurring`;
+      break;
+    case 'mutually-exclusive':
+      probability = probA + probB;
+      description = `Probability of either mutually exclusive event A (${probA}) or B (${probB}) occurring`;
+      break;
+    case 'non-mutually-exclusive':
+      const probAAndB = probA * probB;
+      probability = probA + probB - probAAndB;
+      description = `Probability of either non-mutually exclusive event A (${probA}) or B(${probB}) occurring`;
+      break;
+  }
+
+  // Ensure probability doesn't exceed 1
+  probability = Math.min(probability, 1)
+
+  displayResult(probability, description)
+  return true;
+}
