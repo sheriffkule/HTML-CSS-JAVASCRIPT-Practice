@@ -46,3 +46,57 @@ function init() {
   // Calculate initial probability
   calculateProbability();
 }
+
+// Switch between calculation types
+function switchCalcType(type) {
+  currentCalcType = type;
+
+  // Update active button
+  calcTypeButtons.forEach((button) => {
+    if (button.dataset.type === type) {
+      button.classList.add('active');
+    } else {
+      button.classList.remove('active');
+    }
+  });
+
+  // Show the correct form
+  calcForms.forEach((form) => {
+    if (
+      form.id === `${type}-event` ||
+      form.id === `${type}.probability` ||
+      form.id === `${type}-distribution`
+    ) {
+      form.style.display = 'block';
+    } else {
+      form.style.display = 'none';
+    }
+  });
+
+  // Update formula and explanation
+  updateFormulaAndExplanation();
+}
+
+// Update formula and explanation based on current calculation type
+function updateFormulaAndExplanation() {
+  switch (currentCalcType) {
+    case 'single':
+      formulaText.textContent = 'P(A) = Favorable Outcomes / Total Outcomes';
+      explanationText.textContent =
+        'The Probability of an event is calculated by dividing the number of favorable outcomes by the total number of possible outcomes.';
+      break;
+    case 'multiple':
+      const eventType = document.getElementById('event-type').value;
+      updateMultipleEventsFormula(eventType);
+      break;
+    case 'conditional':
+      formulaText.textContent = 'P(A|B) = P(AnB) / P(B)';
+      explanationText.textContent =
+        'Conditional probability is the probability of event A occurring given that even B has already occurred.';
+      break;
+    case 'binomial':
+      formulaText.textContent = 'P(X=k) = C(n,k) * p^k * (1-p)^(n-k)';
+      explanationText.textContent =
+        'The binomial distribution calculates the probability of exactly k successes in n independent trials.';
+  }
+}
