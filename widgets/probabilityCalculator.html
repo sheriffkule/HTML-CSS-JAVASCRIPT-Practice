@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Probability Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/probabilityCalculator.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1><i class="fas fa-calculator"></i> Probability Calculator</h1>
+        <p class="subtitle">
+          Calculate probabilities for various scenarios with this interactive tool. Perfect for students,
+          researchers, and anyone working with statistics.
+        </p>
+      </header>
+
+      <main class="app-container">
+        <section class="calculator-section">
+          <article class="section-title">
+            <i class="fas fa-sliders-h"></i>
+            <h2>Calculator Settings</h2>
+          </article>
+
+          <article class="calc-type-calculator">
+            <div class="calc-btn active" data-type="single">Single Event</div>
+            <div class="calc-btn" data-type="multiple">Multiple Events</div>
+            <div class="calc-btn" data-type="conditional">Conditional</div>
+            <div class="calc-btn" data-type="binomial">Binomial</div>
+          </article>
+
+          <article class="calc-form" id="single-event">
+            <div class="input-group">
+              <label for="favorable-outcomes">Favorable Outcomes</label>
+              <input type="number" id="favorable-outcomes" min="1" value="1" inputmode="numeric" />
+              <div class="error" id="favorable-error">Please enter a valid number greater than 0.</div>
+            </div>
+            <div class="input-group">
+              <label for="total-outcomes">Total Possible Outcomes</label>
+              <input type="number" id="total-outcomes" min="1" value="6" inputmode="numeric" />
+              <div class="error" id="total-error">Please enter a valid number greater than 0.</div>
+            </div>
+          </article>
+
+          <article class="calc-form" id="multiple-events">
+            <div class="input-group">
+              <label for="event-type">Event Type</label>
+              <select id="event-type">
+                <option value="independent">Independent Events</option>
+                <option value="mutually-exclusive">Mutually Exclusive Events</option>
+                <option value="non-mutually-exclusive">Non-Mutually Exclusive Events</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label for="probability-a">Probability of Event A (0-1)</label>
+              <input
+                type="number"
+                id="probability-a"
+                min="0"
+                max="1"
+                step="0.01"
+                value="0.5"
+                inputmode="numeric" />
+              <div class="error" id="prob-a-error">Please enter a value between 0 and 1.</div>
+            </div>
+            <div class="input-group">
+              <label for="probability-b">Probability of Event B (0-1)</label>
+              <input
+                type="number"
+                id="probability-a"
+                min="0"
+                max="1"
+                step="0.01"
+                value="0.5"
+                inputmode="numeric" />
+              <div class="error" id="prob-b-error">Please enter a value between 0 and 1.</div>
+            </div>
+          </article>
+
+          <article class="calc-form" id="conditional-probability">
+            <div class="input-group">
+              <label for="prob-a-and-b">Probability of A and B (0-1)</label>
+              <input
+                type="number"
+                id="prob-a-and-b"
+                min="0"
+                max="1"
+                step="0.01"
+                value="0.25"
+                inputmode="numeric" />
+              <div class="error" id="prob-a-and-b-error">Please enter a value between 0 and 1.</div>
+            </div>
+            <div class="input-group">
+              <label for="prob-b-given">Probability of B (0-1)</label>
+              <input
+                type="number"
+                id="prob-b-given"
+                min="0"
+                max="1"
+                step="0.01"
+                value="0.5"
+                inputmode="numeric" />
+              <div class="error" id="prob-b-given-error">Please enter a value between 0 and 1.</div>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
