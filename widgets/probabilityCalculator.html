@@ -44,7 +44,7 @@
             </div>
           </article>
 
-          <article class="calc-form" id="multiple-events">
+          <article class="calc-form" id="multiple-events" style="display: none;">
             <div class="input-group">
               <label for="event-type">Event Type</label>
               <select id="event-type">
@@ -69,7 +69,7 @@
               <label for="probability-b">Probability of Event B (0-1)</label>
               <input
                 type="number"
-                id="probability-a"
+                id="probability-b"
                 min="0"
                 max="1"
                 step="0.01"
@@ -79,7 +79,7 @@
             </div>
           </article>
 
-          <article class="calc-form" id="conditional-probability">
+          <article class="calc-form" id="conditional-probability" style="display: none;">
             <div class="input-group">
               <label for="prob-a-and-b">Probability of A and B (0-1)</label>
               <input
@@ -106,7 +106,7 @@
             </div>
           </article>
 
-          <article class="calc-form" id="binomial-distribution">
+          <article class="calc-form" id="binomial-distribution" style="display: none;">
             <div class="input-group">
               <label for="trials">Number of Trials</label>
               <input type="number" id="trials" min="1" value="10" inputmode="numeric" />
@@ -140,6 +140,16 @@
           <div class="formula-display">
             <strong>Formula:</strong>
             <span id="formula-text">P(A) = Favorable Outcomes / Total Outcomes</span>
+          </div>
+
+          <div class="explanation">
+            <strong
+              >Explanation:
+              <span id="explanation-text"
+                >The probability of an event is calculated by dividing the number of favorable outcomes by the
+                total number of possible outcomes.</span
+              ></strong
+            >
           </div>
         </section>
 

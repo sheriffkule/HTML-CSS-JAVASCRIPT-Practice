@@ -72,6 +72,23 @@ h1 {
     }
 }
 
+section {
+    animation: fadeIn 0.8s linear forwards;
+    transform: translateY(100px) scaleX(0);
+    opacity: 0;
+
+    &:nth-of-type(2) {
+        animation-delay: 0.8s;
+    }
+}
+
+@keyframes  fadeIn {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
 .calculator-section,
 .result-section {
     background: var(--light);
@@ -98,6 +115,17 @@ h1 {
 
     i {
         font-size: 1.5rem;
+    }
+}
+
+.calc-form {
+    opacity: 1;
+    transform: translateY(0) scaleX(1);
+    transition: opacity 0.35s ease-in, transform 0.35s ease-in;
+
+    @starting-style {
+        opacity: 0;
+        transform: translateY(25px) scaleX(0.5);
     }
 }
 
@@ -345,7 +373,7 @@ input[type="number"]::-webkit-outer-spin-button:hover {
 }
 
 .history-list {
-    max-width: 200px;
+    max-height: 200px;
     overflow-y: auto;
 }
 
@@ -378,4 +406,69 @@ input[type="number"]::-webkit-outer-spin-button:hover {
     &:active {
         transform: scaleX(1);
     }
+}
+
+.formula-display {
+    background: #e0e0e0;
+    border-radius: var(--border-radius);
+    padding: 15px;
+    margin-top: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+}
+
+.explanation {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: var(--gray);
+    line-height: 1.5;
+}
+
+footer {
+    margin-top: 20px;
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--light);
+    color: var(--gray);
+    font-size: 0.875rem;
+
+    span {
+        color: red;
+        font-size: 1rem;
+    }
+    abbr {
+        color: var(--primary);
+        letter-spacing: 0.5px;
+        cursor: default;
+        text-underline-offset: 2px;
+    }
+}
+
+.error {
+    color: var(--danger);
+    background: rgb(from var(--danger) r g b / 0.05);
+    font-size: 0.9rem;
+    margin-top: 5px;
+    height: 0;
+    opacity: 0;
+    interpolate-size: allow-keywords;
+    transition: height 0.3s, opacity 0.3s;
+}
+
+.visible {
+    height: auto;
+    opacity: 1;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: var(--gray);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary);
 }

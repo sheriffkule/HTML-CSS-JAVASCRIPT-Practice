@@ -62,15 +62,13 @@ function switchCalcType(type) {
 
   // Show the correct form
   calcForms.forEach((form) => {
-    if (
+    const isActiveForm =
       form.id === `${type}-event` ||
-      form.id === `${type}.probability` ||
-      form.id === `${type}-distribution`
-    ) {
-      form.style.display = 'block';
-    } else {
-      form.style.display = 'none';
-    }
+      form.id === `${type}-events` ||
+      form.id === `${type}-probability` ||
+      form.id === `${type}-distribution`;
+
+    form.style.display = isActiveForm ? 'block' : 'none';
   });
 
   // Update formula and explanation
@@ -85,10 +83,11 @@ function updateFormulaAndExplanation() {
       explanationText.textContent =
         'The Probability of an event is calculated by dividing the number of favorable outcomes by the total number of possible outcomes.';
       break;
-    case 'multiple':
+    case 'multiple': {
       const eventType = document.getElementById('event-type').value;
       updateMultipleEventsFormula(eventType);
       break;
+    }
     case 'conditional':
       formulaText.textContent = 'P(A|B) = P(AnB) / P(B)';
       explanationText.textContent =
@@ -98,6 +97,9 @@ function updateFormulaAndExplanation() {
       formulaText.textContent = 'P(X=k) = C(n,k) * p^k * (1-p)^(n-k)';
       explanationText.textContent =
         'The binomial distribution calculates the probability of exactly k successes in n independent trials.';
+      break;
+    default:
+      break;
   }
 }
 
@@ -110,12 +112,12 @@ function updateMultipleEventsFormula(eventType) {
         'For independent events, the probability of both occurring is the product of their individual probabilities.';
       break;
     case 'mutually-exclusive':
-      formulaText.textContent = 'P(A or B) = P(A) * P(B)';
+      formulaText.textContent = 'P(A or B) = P(A) + P(B)';
       explanationText.textContent =
         'For mutually exclusive events, the probability of either occurring is the sum of their individual probabilities.';
       break;
     case 'non-mutually-exclusive':
-      formulaText.textContent = 'P(A or B) = P(A) * P(B) - P(A and B)';
+      formulaText.textContent = 'P(A or B) = P(A) + P(B) - P(A and B)';
       explanationText.textContent =
         'For non-mutually exclusive events, we subtract the probability of both occurring to avoid double counting.';
       break;
@@ -124,9 +126,7 @@ function updateMultipleEventsFormula(eventType) {
 
 // Calculate probability based on current calculation type
 function calculateProbability() {
-  let probability = 0;
-  let description = '';
-  let isValid = true;
+  let result = { isValid: false, probability: 0, description: '' };
 
   // Reset errors
   document.querySelectorAll('.error').forEach((error) => {
@@ -135,22 +135,22 @@ function calculateProbability() {
 
   switch (currentCalcType) {
     case 'single':
-      isValid = calculateSingleEvent();
+      result = calculateSingleEvent();
       break;
     case 'multiple':
-      isValid = calculateMultipleEvents();
+      result = calculateMultipleEvents();
       break;
     case 'conditional':
-      isValid = calculateConditionalProbability();
+      result = calculateConditionalProbability();
       break;
     case 'binomial':
-      isValid = calculateBinomialDistribution();
+      result = calculateBinomialDistribution();
       break;
   }
 
-  if (isValid) {
+  if (result.isValid) {
     // Add to history
-    addToHistory(probability, description);
+    addToHistory(result.probability, result.description);
   }
 }
 
@@ -162,25 +162,26 @@ function calculateSingleEvent() {
   // Validate inputs
   if (isNaN(favorable) || favorable <= 0) {
     favorableError.classList.add('visible');
-    return false;
+    return { isValid: false, probability: 0, description: '' };
   }
 
   if (isNaN(total) || total <= 0) {
     totalError.classList.add('visible');
-    return false;
+    return { isValid: false, probability: 0, description: '' };
   }
 
   if (favorable > total) {
     favorableError.textContent = 'Favorable outcomes cannot exceed total outcomes';
     favorableError.classList.add('visible');
-    return false;
+    return { isValid: false, probability: 0, description: '' };
   } else {
     favorableError.textContent = 'Please enter a valid number greater than 0';
   }
 
   const probability = favorable / total;
-  displayResult(probability, `Probability of ${favorable} out of ${total} outcomes`);
-  return true;
+  const description = `Probability of ${favorable} out of ${total} outcomes`;
+  displayResult(probability, description);
+  return { isValid: true, probability, description };
 }
 
 // Calculate probability for multiple events
@@ -192,12 +193,12 @@ function calculateMultipleEvents() {
   // Validate inputs
   if (isNaN(probA) || probA < 0 || probA > 1) {
     probAError.classList.add('visible');
-    return false;
+    return { isValid: false, probability: 0, description: '' };
   }
 
   if (isNaN(probB) || probB < 0 || probB > 1) {
     probBError.classList.add('visible');
-    return false;
+    return { isValid: false, probability: 0, description: '' };
   }
 
   let probability = 0;
@@ -206,24 +207,25 @@ function calculateMultipleEvents() {
   switch (eventType) {
     case 'independent':
       probability = probA * probB;
-      description = `Probability of both both independent events A (${probA}) and B (${probB}) occurring`;
+      description = `Probability of both independent events A (${probA}) and B (${probB}) occurring`;
       break;
     case 'mutually-exclusive':
       probability = probA + probB;
       description = `Probability of either mutually exclusive event A (${probA}) or B (${probB}) occurring`;
       break;
-    case 'non-mutually-exclusive':
+    case 'non-mutually-exclusive': {
       const probAAndB = probA * probB;
       probability = probA + probB - probAAndB;
-      description = `Probability of either non-mutually exclusive event A (${probA}) or B(${probB}) occurring`;
+      description = `Probability of either non-mutually exclusive event A (${probA}) or B (${probB}) occurring`;
       break;
+    }
   }
 
   // Ensure probability doesn't exceed 1
   probability = Math.min(probability, 1);
 
   displayResult(probability, description);
-  return true;
+  return { isValid: true, probability, description };
 }
 
 // Calculate conditional probability
@@ -232,27 +234,29 @@ function calculateConditionalProbability() {
   const probB = parseFloat(document.getElementById('prob-b-given').value);
 
   // Validate inputs
-  if (isNaN(probAAndB) || probAAndB < 0 || probAAndB) {
+  if (isNaN(probAAndB) || probAAndB < 0 || probAAndB > 1) {
+    probAAndBError.textContent = 'Please enter a value between 0 and 1';
     probAAndBError.classList.add('visible');
-    return false;
+    return { isValid: false, probability: 0, description: '' };
   }
 
-  if (isNaN(probB) || probB < 0 || probB) {
+  if (isNaN(probB) || probB <= 0 || probB > 1) {
+    probBGivenError.textContent =
+      probB <= 0 ? 'P(B) must be greater than 0' : 'Please enter a value between 0 and 1';
     probBGivenError.classList.add('visible');
-    return false;
+    return { isValid: false, probability: 0, description: '' };
   }
 
   if (probAAndB > probB) {
     probAAndBError.textContent = 'P(AnB) cannot be greater than P(B)';
     probAAndBError.classList.add('visible');
-    return false;
-  } else {
-    probAAndBError.textContent = 'Please enter a value between 0 and 1';
+    return { isValid: false, probability: 0, description: '' };
   }
 
   const probability = probAAndB / probB;
-  displayResult(probability, `Probability of A given B has occurred`);
-  return true;
+  const description = 'Probability of A given B has occurred';
+  displayResult(probability, description);
+  return { isValid: true, probability, description };
 }
 
 // Calculate binomial distribution probability
@@ -264,7 +268,7 @@ function calculateBinomialDistribution() {
   // Validate inputs
   if (isNaN(n) || n <= 0) {
     trialsError.classList.add('visible');
-    return false;
+    return { isValid: false, probability: 0, description: '' };
   }
 
   if (isNaN(k) || k < 0 || k > n) {
@@ -273,14 +277,14 @@ function calculateBinomialDistribution() {
         ? 'Number of successes cannot exceed number of trials'
         : 'Please enter a valid number greater than or equal to 0';
     successesError.classList.add('visible');
-    return false;
+    return { isValid: false, probability: 0, description: '' };
   } else {
     successesError.textContent = 'Please enter a valid number greater than or equal to 0';
   }
 
   if (isNaN(p) || p < 0 || p > 1) {
     successProbError.classList.add('visible');
-    return false;
+    return { isValid: false, probability: 0, description: '' };
   }
 
   // Calculate binomial coefficient: C(n, k) = n! / (k! * (n-k)!)
@@ -288,9 +292,10 @@ function calculateBinomialDistribution() {
 
   // Calculate probability: P(X=k) = C(n,k) * p^k * (1-p)^(n-k)
   const probability = binomialCoefficient * Math.pow(p, k) * Math.pow(1 - p, n - k);
+  const description = `Probability of exactly ${k} successes in ${n} trials`;
 
-  displayResult(probability, `Probability of exactly ${k} successes in ${n} trials`);
-  return true;
+  displayResult(probability, description);
+  return { isValid: true, probability, description };
 }
 
 // Helper function to calculate factorial
@@ -317,3 +322,81 @@ function displayResult(probability, description) {
 
   resultDescription.textContent = description;
 }
+
+// Add calculation to history
+function addToHistory(probability, description) {
+  const historyItem = {
+    type: currentCalcType,
+    probability: probability,
+    description: description,
+    timestamp: new Date().toLocaleString(),
+  };
+
+  calculationHistory.unshift(historyItem);
+
+  // Keep only the last 10 calculations
+  if (calculationHistory.length > 10) {
+    calculationHistory = calculationHistory.slice(0, 10);
+  }
+
+  // Save to localStorage
+  localStorage.setItem('probabilityHistory', JSON.stringify(calculationHistory));
+
+  // Update the display
+  renderHistory();
+}
+
+// Render calculation history
+function renderHistory() {
+  historyList.innerHTML = '';
+
+  if (calculationHistory.length === 0) {
+    historyList.innerHTML = '<div class="history-item">No calculations yet</div>';
+    return;
+  }
+
+  calculationHistory.forEach((item) => {
+    const historyItem = document.createElement('div');
+    historyItem.className = 'history-item';
+
+    historyItem.innerHTML = `
+      <div>
+        <strong>${item.description}</strong>
+        <div style="font-size: 0.8rem; color: var(--gray);">${item.timestamp}</div>
+      </div>
+      <div style="font-weight: bold; color: var(--primary);">${item.probability.toFixed(4)}</div>
+    `;
+
+    historyList.appendChild(historyItem);
+  });
+}
+
+// Clear calculation history
+function clearHistory() {
+  calculationHistory = [];
+  localStorage.setItem('probabilityHistory', JSON.stringify(calculationHistory));
+  renderHistory();
+}
+
+// Event listener for multiple events type change
+document.getElementById('event-type').addEventListener('change', function () {
+  updateMultipleEventsFormula(this.value);
+  calculateProbability();
+});
+
+// Update year in footer
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+  yearElement.setAttribute('datetime', currentYear.toString());
+  yearElement.textContent = currentYear.toString();
+}
+updateYear();
+
+// Initialize the app when DOM is loaded
+document.addEventListener('DOMContentLoaded', init);
