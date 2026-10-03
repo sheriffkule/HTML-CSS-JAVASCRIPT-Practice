@@ -61,3 +61,41 @@ h1 {
     margin: 0 auto;
     text-wrap: pretty;
 }
+
+.app-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+
+    @media (width <= 768px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.calculator-section {
+    background: var(--light);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    box-shadow: var(--box-shadow),
+    inset var(--box-shadow);
+    transition: var(--transition);
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 30px rgb(0 0 0 / 0.2);
+    }
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgb(0 0 0 / 0.1);
+    color: var(--primary);
+
+    i {
+        font-size: 1.5rem;
+    }
+}

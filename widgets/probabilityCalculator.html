@@ -105,8 +105,80 @@
               <div class="error" id="prob-b-given-error">Please enter a value between 0 and 1.</div>
             </div>
           </article>
+
+          <article class="calc-form" id="binomial-distribution">
+            <div class="input-group">
+              <label for="trials">Number of Trials</label>
+              <input type="number" id="trials" min="1" value="10" inputmode="numeric" />
+              <div class="error" id="trials-error">Please enter a valid number greater than 0.</div>
+            </div>
+            <div class="input-group">
+              <label for="successes">Number of Successes</label>
+              <input type="number" id="successes" min="0" value="5" inputmode="numeric" />
+              <div class="error" id="successes-error">
+                Please enter a valid number greater than or equal to 0
+              </div>
+            </div>
+            <div class="input-group">
+              <label for="success-prob">Probability of Success (0-1)</label>
+              <input
+                type="number"
+                id="success-prob"
+                min="0"
+                max="1"
+                step="0.01"
+                value="0.5"
+                inputmode="numeric" />
+              <div class="error" id="success-prob-error">Please enter a value between 0 and 1.</div>
+            </div>
+          </article>
+
+          <button class="btn" id="calculate-btn">
+            <i class="fas fa-calculator"></i> Calculate Probability
+          </button>
+
+          <div class="formula-display">
+            <strong>Formula:</strong>
+            <span id="formula-text">P(A) = Favorable Outcomes / Total Outcomes</span>
+          </div>
+        </section>
+
+        <section class="result-section">
+          <article class="section-title">
+            <i class="fas fa-chart-bar"></i>
+            <h2>Result</h2>
+          </article>
+
+          <article class="result-display">
+            <div class="probability-text">Probability</div>
+            <div class="probability-value" id="probability-result">0.00</div>
+            <div class="probability-text" id="percentage-result">0.00</div>
+
+            <div class="probability-bar">
+              <div class="probability-fill" id="probability-bar"></div>
+            </div>
+
+            <div class="probability-text" id="result-description">Enter values and click calculate.</div>
+          </article>
+
+          <article class="history-section">
+            <div class="history-title">
+              <h3>Calculation History</h3>
+              <button class="clear-history" id="clear-history">Clear</button>
+            </div>
+            <div class="history-list" id="history-list">
+              <!-- History items will be added here -->
+            </div>
+          </article>
         </section>
       </main>
+
+      <footer class="footer__copy">
+        © <time datetime="" id="year"></time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
     </div>
+
+    <script src="/widgets_script/probabilityCalculator.js"></script>
   </body>
 </html>
