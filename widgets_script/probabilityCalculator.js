@@ -220,8 +220,100 @@ function calculateMultipleEvents() {
   }
 
   // Ensure probability doesn't exceed 1
-  probability = Math.min(probability, 1)
+  probability = Math.min(probability, 1);
 
-  displayResult(probability, description)
+  displayResult(probability, description);
   return true;
+}
+
+// Calculate conditional probability
+function calculateConditionalProbability() {
+  const probAAndB = parseFloat(document.getElementById('prob-a-and-b').value);
+  const probB = parseFloat(document.getElementById('prob-b-given').value);
+
+  // Validate inputs
+  if (isNaN(probAAndB) || probAAndB < 0 || probAAndB) {
+    probAAndBError.classList.add('visible');
+    return false;
+  }
+
+  if (isNaN(probB) || probB < 0 || probB) {
+    probBGivenError.classList.add('visible');
+    return false;
+  }
+
+  if (probAAndB > probB) {
+    probAAndBError.textContent = 'P(AnB) cannot be greater than P(B)';
+    probAAndBError.classList.add('visible');
+    return false;
+  } else {
+    probAAndBError.textContent = 'Please enter a value between 0 and 1';
+  }
+
+  const probability = probAAndB / probB;
+  displayResult(probability, `Probability of A given B has occurred`);
+  return true;
+}
+
+// Calculate binomial distribution probability
+function calculateBinomialDistribution() {
+  const n = parseInt(document.getElementById('trials').value);
+  const k = parseInt(document.getElementById('successes').value);
+  const p = parseFloat(document.getElementById('success-prob').value);
+
+  // Validate inputs
+  if (isNaN(n) || n <= 0) {
+    trialsError.classList.add('visible');
+    return false;
+  }
+
+  if (isNaN(k) || k < 0 || k > n) {
+    successesError.textContent =
+      k > n
+        ? 'Number of successes cannot exceed number of trials'
+        : 'Please enter a valid number greater than or equal to 0';
+    successesError.classList.add('visible');
+    return false;
+  } else {
+    successesError.textContent = 'Please enter a valid number greater than or equal to 0';
+  }
+
+  if (isNaN(p) || p < 0 || p > 1) {
+    successProbError.classList.add('visible');
+    return false;
+  }
+
+  // Calculate binomial coefficient: C(n, k) = n! / (k! * (n-k)!)
+  const binomialCoefficient = factorial(n) / (factorial(k) * factorial(n - k));
+
+  // Calculate probability: P(X=k) = C(n,k) * p^k * (1-p)^(n-k)
+  const probability = binomialCoefficient * Math.pow(p, k) * Math.pow(1 - p, n - k);
+
+  displayResult(probability, `Probability of exactly ${k} successes in ${n} trials`);
+  return true;
+}
+
+// Helper function to calculate factorial
+function factorial(n) {
+  if (n === 0 || n === 1) return 1;
+  let result = 1;
+  for (let i = 2; i <= n; i++) {
+    result *= i;
+  }
+  return result;
+}
+
+// Display the result
+function displayResult(probability, description) {
+  // Format probability to 4 decimal places
+  const formattedProbability = probability.toFixed(4);
+  const percentage = (probability * 100).toFixed(2);
+
+  probabilityResult.textContent = formattedProbability;
+  percentageResult.textContent = `${percentage}%`;
+
+  // Animate the probability bar
+  probabilityBar.style.width = `${percentage}%`;
+
+  resultDescription.textContent = description;
 }

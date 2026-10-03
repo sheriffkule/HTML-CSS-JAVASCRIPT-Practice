@@ -298,3 +298,84 @@ input[type="number"]::-webkit-outer-spin-button:hover {
     align-items: center;
     justify-content: center;
 }
+
+.probability-value {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-block: 10px;
+}
+
+.probability-text {
+    font-size: 1.25rem;
+    color: var(--gray);
+}
+
+.probability-bar {
+    width: 100%;
+    height: 20px;
+    background: #e9ecef;
+    border-radius: 10px;
+    margin-block: 20px;
+    overflow: hidden;
+}
+
+.probability-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    border-radius: 10px;
+    width: 0%;
+    transition: width 1s ease-in;
+}
+
+.history-section {
+    margin-top: 30px;
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 25px;
+    box-shadow: var(--box-shadow),
+    inset var(--box-shadow);
+}
+
+.history-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.history-list {
+    max-width: 200px;
+    overflow-y: auto;
+}
+
+.history-item {
+    padding: 10px 15px;
+    border-bottom: 1px solid #d0d0d0;
+    display: flex;
+    justify-content: space-between;
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.clear-history {
+    background: hsl(from var(--light) h s 92%);
+    color: var(--gray);
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: var(--transition);
+
+    &:hover {
+        background: hsl(from var(--light) h s 88%);
+        transform: scaleX(1.06);
+    }
+    &:active {
+        transform: scaleX(1);
+    }
+}
