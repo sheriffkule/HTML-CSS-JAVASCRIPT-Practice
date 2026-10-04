@@ -82,7 +82,74 @@
         </div>
       </div>
 
-      <div class="card viewer"></div>
+      <div class="card viewer">
+        <div class="toolbar" style="justify-content: space-between">
+          <div style="display: flex; gap: 8px; align-items: center">
+            <div class="badge" id="status">No image</div>
+            <div class="info">Preview & Controls</div>
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center">
+            <button class="btn small" id="toggle-compare">Compare</button>
+            <button class="btn primary small" id="download">Download</button>
+          </div>
+        </div>
+
+        <div class="canvas-wrap">
+          <div class="preview">
+            <div style="display: flex; gap: 8px; align-items: center; width: 100%; justify-content: center">
+              <strong>Original</strong>
+              <div class="info">Drag to reposition (in canvas)</div>
+            </div>
+            <div
+              id="orig-container"
+              style="width: 100%; display: flex; align-items: center; justify-content: center">
+              <img
+                src=""
+                alt="original preview"
+                id="orig-img"
+                style="
+                  display: none;
+                  max-width: 100%;
+                  height: auto;
+                  object-fit: contain;
+                  border-radius: 8px;
+                " />
+              <video
+                id="webcam"
+                autoplay
+                playsinline
+                style="display: none; border-radius: 8px; max-width: 100%; height: auto"></video>
+            </div>
+          </div>
+
+          <div class="preview">
+            <div
+              style="
+                display: flex;
+                gap: 8px;
+                align-items: center;
+                width: 100%;
+                justify-content: space-between;
+              ">
+              <strong>Cartoonized</strong>
+              <div class="info">Adjust sliders to tweak</div>
+            </div>
+            <canvas id="result-canvas"></canvas>
+          </div>
+        </div>
+
+        <footer class="actions">
+          <div style="display: flex; gap: 8px; align-items: center">
+            <button class="btn primary" id="apply-local">Apply Cartoon Effect</button>
+            <button class="btn" id="clear-canvas">Clear</button>
+          </div>
+          <div style="margin-left: auto; color: var(--muted); font-size: 14px">
+            Made with ❤ by <em>SheriffKule</em> - Client-side filters only.
+          </div>
+        </footer>
+      </div>
     </div>
+
+    <script src="/widgets_script/imageCartonizer.js"></script>
   </body>
 </html>

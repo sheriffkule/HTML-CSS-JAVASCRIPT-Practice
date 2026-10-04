@@ -30,6 +30,10 @@ body {
     display: grid;
     grid-template-columns: 420px 1fr;
     gap: 28px;
+
+    @media (width < 980px) {
+        grid-template-columns: 1fr;
+    }
 }
 
 .card {
