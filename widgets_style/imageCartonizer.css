@@ -80,3 +80,36 @@ h1 {
     flex-direction: column;
     gap: 12px;
 }
+
+.dropzone {
+    height: 220px;
+    border-radius: 12px;
+    border: 2px dashed rgb(255 255 255 / 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    background: linear-gradient(rgb(255 255 255 / 0.2), rgb(255 255 255 / 0));
+    cursor: pointer;
+    transition: transform 0.2s ease-in;
+    position: relative;
+    overflow: hidden;
+
+    &.drag {
+        transform: scale(1.02);
+        border-color: rgb(124 58 237 / 0.6);
+    }
+    input {
+        display: none;
+    }
+}
+
+.dz-note {
+    color: var(--muted);
+    font-size: 14px;
+}
+.controls {
+    display: flex;
+    gap: 8px;
+}
