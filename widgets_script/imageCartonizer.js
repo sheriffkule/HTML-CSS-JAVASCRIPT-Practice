@@ -236,7 +236,118 @@ applyLocal.addEventListener('click', () => {
   applyCartoon();
 });
 
+// Download
+downloadBtn.addEventListener('click', () => {
+  if (!loadedImage) return alert('No image!');
+  const a = document.createElement('a');
+  a.download = 'cartoon.png';
+  a.href = resultCanvas.toDataURL('image/png');
+  a.click();
+});
+
 clearCanvasBtn.addEventListener('click', () => {
   ctx.clearRect(0, 0, resultCanvas.width, resultCanvas.height);
   setStatus('Cleared');
 });
+
+// Compare
+toggleCompare.addEventListener('click', () => {
+  compareMode = !compareMode;
+  if (!loadedImage) return alert('No image loaded!');
+  if (compareMode) {
+    // overlay original and result as split view
+    showCompare();
+    toggleCompare.textContent = 'Exit Compare';
+  } else {
+    // redraw result
+    applyCartoon();
+    toggleCompare.textContent = 'Compare';
+  }
+});
+
+function showCompare() {
+  // Create split overlay
+  const overlay = document.createElement('div');
+  overlay.style.position = 'absolute';
+  overlay.style.left = 0;
+  overlay.style.top = 0;
+  overlay.style.width = '100%';
+  overlay.style.height = '100%';
+  overlay.style.pointerEvents = 'none';
+  // we'll draw on canvas: left half original, right half cartoon
+  const w = resultCanvas.width;
+  const h = resultCanvas.height;
+  const temp = document.createElement('canvas');
+  temp.width = w;
+  temp.height = h;
+  const tctx = temp.getContext('2d');
+  // Draw original
+  tctx.drawImage(loadedImage, 0, 0, w, h);
+  const origData = tctx.getImageData(0, 0, w, h);
+  // draw cartoon onto existing canvas to get result
+  applyCartoon();
+  const cartoonData = ctx.getImageData(0, 0, w, h);
+  // compose a split image
+  const splitX = Math.floor(w / 2);
+  const final = ctx.createImageData(w, h);
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      const idx = y * w + x;
+      if (x < splitX) {
+        final.data[idx] = origData.data[idx];
+        final.data[idx + 1] = origData.data[idx + 1];
+        final.data[idx + 2] = origData.data[idx + 2];
+        final.data[idx + 3] = 255;
+      } else {
+        final.data[idx] = cartoonData.data[idx];
+        final.data[idx + 1] = cartoonData.data[idx + 1];
+        final.data[idx + 2] = cartoonData.data[idx + 2];
+        final.data[idx + 3] = 255;
+      }
+    }
+  }
+  ctx.putImageData(final, 0, 0);
+  setStatus('Compare mode - left: original, right: cartoon');
+}
+
+// simple image processing helpers
+function posterize(imageData, levels) {
+  const d = imageData.data;
+  const step = 255 / (levels - 1);
+  for (let i = 0; i < d.length; i += 4) {
+    d[i] = Math.round(d[i] / step) * step;
+    d[i + 1] = Math.round(d[i + 1] / step) * step;
+    d[i + 2] = Math.round(d[i + 2] / step) * step;
+  }
+}
+
+function boxBlur(imageData, w, h) {
+  const src = imageData.data;
+  const out = new Uint8ClampedArray(src.length);
+  const radius = 1; // small kernel
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      let r = 0;
+      let g = 0;
+      let b = 0;
+      let c = 0;
+      for (let ky = -radius; ky <= radius; ky++) {
+        for (let kx = -radius; kx <= radius; kx++) {
+          const nx = Math.min(w - 1, Math.max(0, x + kx));
+          const ny = Math.min(h - 1, Math.max(0, x + ky));
+          const idx = [ny * w + nx] * 4;
+          r += src[idx];
+          g += src[idx + 1];
+          b += src[idx + 2];
+          c++;
+        }
+      }
+      const idx = (y * w + x) * 4;
+      out[idx] = r / c;
+      out[idx + 1] = g / c;
+      out[idx + 2] = b / c;
+      out[idx + 3] = 255;
+    }
+  }
+  imageData.data.set(out);
+}

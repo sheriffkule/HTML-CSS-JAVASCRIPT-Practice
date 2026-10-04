@@ -109,7 +109,84 @@ h1 {
     color: var(--muted);
     font-size: 14px;
 }
+
 .controls {
     display: flex;
     gap: 8px;
+}
+
+.btn {
+    background: var(--glass);
+    border: 1px solid rgb(255 255 255 / 0.2);
+    padding: 10px 16px;
+    border-radius: 10px;
+    color: inherit;
+    font-size: 0.875rem;
+    flex-grow: 1;
+    cursor: pointer;
+    transition: all .3s ease;
+
+    &.primary {
+        background: linear-gradient(90deg, var(--accent), #4f46e5);
+        border: none;
+        font-weight: bold;
+        letter-spacing: 0.5px;
+    }
+    &.small {
+        font-size: 12px;
+    }
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgb(255 255 255 / 0.1),
+        inset 30px 0 0 rgb(255 255 255 / 0.1),
+        inset -30px 0 0 rgb(255 255 255 / 0.1);
+    }
+}
+
+label.range {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.range input {
+    width: 100%;
+}
+
+.preset-list {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
+
+.preset {
+    background: rgb(255 255 255 / 0.1);
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    border: 1px solid rgb(255 255 255 / 0.2);
+    cursor: pointer;
+    flex-grow: 1;
+    text-align: center;
+    transition: 0.3s ease;
+
+    &:hover {
+        background: rgb(255 255 255 / 0.2);
+        box-shadow: 2px 2px 6px rgb(255 255 255 / 0.2);
+    }
+}
+
+.viewer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 16px;
+}
+
+.canvas-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    align-self: start;
 }
