@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
+
+:root {
+    --bg: #0f1724;
+    --card: #0b1220;
+    --muted: #9aa4b2;
+    --accent: #7c3aed;
+    --glass: rgb(255 255 255 / 0.05);
+    --success: #10b981;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', system-ui, Segoe UI;
+    background: linear-gradient(#071226 0%, #071229 60%, #07122f 100%);
+    color: #e6eef8;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 32px;
+}
+
+.app {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 28px;
+}
+
+.card {
+    background: linear-gradient(rgb(255 255 255 / 0.05), rgb(255 255 255 / 0.02));
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 6px 30px rgb(2 6 23 / 0.7);
+    border: 1px solid rgb(255 255 255 / 0.1);
+}
+
+header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+.logo {
+    width: 56px;
+    height: 56px;
+    padding-inline: 16px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--accent), #4f46e5);
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    font-size: 20px;
+    color: white;
+    box-shadow: 0 6px 20px rgb(124 58 237 / 0.2);
+}
+
+h1 {
+    font-size: 18px;
+}
+
+.lead {
+    margin: 6px 0 18px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.uploader {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}

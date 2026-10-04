@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="AI Image Cartoonizer - upload a photo and cartoonize it with client-side filters. Modern UI, drag & drop, webcam, presets, and download." />
+    <title>Image Cartoonizer</title>
+    <link rel="stylesheet" href="/widgets_style/imageCartonizer.css" />
+  </head>
+  <body>
+    <div class="app">
+      <div class="card">
+        <header>
+          <div class="logo">AI</div>
+          <div>
+            <h1>Image Cartoonizer</h1>
+            <p class="lead">
+              Upload a photo - caartoonize it locally using client-side filters. Fast, private, and no data
+              leaves your device.
+            </p>
+          </div>
+        </header>
+
+        <div class="uploader">
+          <div class="dropzone" id="dropzone">
+            <div style="text-align: center">
+              <div style="font-size: 26px; font-weight: 700">Drop image here</div>
+              <div class="dz-note">PNG, JPG, WEBP - up to 8 MB</div>
+            </div>
+            <input type="file" id="file-input" accept="image/*" />
+          </div>
+
+          <div class="controls">
+            <button class="btn small" id="open-file">Chose File</button>
+            <button class="btn small" id="use-webcam">Use Webcam</button>
+            <button class="btn small" id="reset">Reset</button>
+          </div>
+
+          <div style="margin-top: 12px">
+            <label class="range">
+              <div style="display: flex; justify-content: space-between; align-items: center">
+                <span>Posterize</span><span id="posterize-val" class="badge">8</span>
+              </div>
+              <input type="range" id="posterize" min="2" max="32" value="8" />
+            </label>
+            <label class="range">
+              <div style="display: flex; justify-content: space-between; align-items: center">
+                <span>Edge Strength</span> <span id="edge-val" class="badge">1.2</span>
+              </div>
+              <input type="range" id="edge" min="0" max="3" step="0.1" value="1.2" />
+            </label>
+            <label class="range">
+              <div style="display: flex; justify-content: space-between; align-items: center">
+                <span>Smooth (bilateral)</span><span id="smooth-val" class="badge">3</span>
+              </div>
+              <input type="range" id="smooth" min="0" max="8" value="3" />
+            </label>
+          </div>
+
+          <div style="margin-top: 12px">
+            <div
+              style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px">
+              <strong>Presets</strong><span class="info">Quick styles</span>
+            </div>
+            <div class="preset-list">
+              <div class="preset" data-p="toon">Toon</div>
+              <div class="preset" data-p="sketch">Sketch</div>
+              <div class="preset" data-p="watercolor">Watercolor</div>
+              <div class="preset" data-p="high-contrast">High Contrast</div>
+            </div>
+          </div>
+
+          <div style="margin-top: 14px">
+            <strong>Privacy First</strong>
+            <p class="help">
+              All processing happens locally in your browser. Your images never leave your device, ensuring
+              complete privacy and security.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card viewer"></div>
+    </div>
+  </body>
+</html>
