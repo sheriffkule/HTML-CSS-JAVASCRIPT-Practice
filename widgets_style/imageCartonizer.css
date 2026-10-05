@@ -147,6 +147,7 @@ label.range {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    margin-bottom: 8px;
 }
 
 .range input {
@@ -188,5 +189,86 @@ label.range {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
-    align-self: start;
+    align-items: start;
+
+    @media (width <= 980px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.preview {
+    background: linear-gradient(rgb(255 255 255 / 0.1), rgb(255 255 255 / 0));
+    border-radius: 12px;
+    padding: 10px;
+    border: 1px solid rgb(255 255 255 / 0.02);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    min-height: 320px;
+    position: relative;
+
+    div {
+        align-self: self-start;
+    }
+    img {
+        max-width: 100%;
+        max-height: 480px;
+        border-radius: 10px;
+    }
+    canvas {
+        max-width: 100%;
+        max-height: 277px;
+        border-radius: 10px;
+        object-fit: contain;
+    }
+}
+
+.toolbar {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.info {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+footer.actions {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+}
+
+.badge {
+    background: rgb(255 255 255 / 0.1);
+    padding: 6px 8px;
+    border-radius: 90px;
+    font-size: 12px;
+    color: var(--muted);
+    border: 1px solid rgb(255 255 255 / 0.2);
+}
+
+.help {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.4;
+    text-wrap: pretty;
+    margin-top: 8px;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: rgb(0 0 0 / 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(0 0 0 / 0.5);
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(0 0 0 / 0.66);
 }

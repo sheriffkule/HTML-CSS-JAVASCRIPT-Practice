@@ -49,13 +49,13 @@ function setStatus(text) {
 
 dropzone.addEventListener('drop', (e) => {
   const f = e.dataTransfer.files && e.dataTransfer.files[0];
-  if (f) handleFile();
+  if (f) handleFile(f);
 });
 
 openFileBtn.addEventListener('click', () => fileInput.click());
 fileInput.addEventListener('change', () => {
   const f = fileInput.files[0];
-  if (f) handleFile();
+  if (f) handleFile(f);
 });
 
 resetBtn.addEventListener('click', () => {
@@ -111,7 +111,7 @@ function captureWebcamFrame() {
 }
 
 function handleFile(file) {
-  if (!file.type.startsWidth('image/')) {
+  if (!file || !file.type || !file.type.startsWith('image/')) {
     alert('Please upload an image file');
     return;
   }
@@ -334,8 +334,8 @@ function boxBlur(imageData, w, h) {
       for (let ky = -radius; ky <= radius; ky++) {
         for (let kx = -radius; kx <= radius; kx++) {
           const nx = Math.min(w - 1, Math.max(0, x + kx));
-          const ny = Math.min(h - 1, Math.max(0, x + ky));
-          const idx = [ny * w + nx] * 4;
+          const ny = Math.min(h - 1, Math.max(0, y + ky));
+          const idx = (ny * w + nx) * 4;
           r += src[idx];
           g += src[idx + 1];
           b += src[idx + 2];
@@ -351,3 +351,59 @@ function boxBlur(imageData, w, h) {
   }
   imageData.data.set(out);
 }
+
+function sobelEdges(ctxLocal, w, h) {
+  // get grayscale
+  const id = ctxLocal.getImageData(0, 0, w, h);
+  const gray = new Float32Array(w * h);
+  for (let i = 0; i < w * h; i++) {
+    const idx = i * 4;
+    gray[i] = id.data[idx] * 0.2989 + id.data[idx + 1] * 0.587 + id.data[idx + 2] * 0.114;
+  }
+  const gx = [-1, 0, 1, -2, 0, 2, -1, 0, 1];
+  const gy = [-1, -2, -1, 0, 0, 0, 1, 2, 1];
+  const out = new Float32Array(w * h);
+  for (let y = 1; y < h - 1; y++) {
+    for (let x = 1; x < w - 1; x++) {
+      let sx = 0;
+      let sy = 0;
+      let k = 0;
+      for (let ky = -1; ky <= 1; ky++) {
+        for (let kx = -1; kx <= 1; kx++) {
+          const val = gray[(y + ky) * w + (x + kx)];
+          sx += gx[k] * val;
+          sy += gy[k] * val;
+          k++;
+        }
+      }
+      out[y * w + x] = Math.hypot(sx, sy);
+    }
+  }
+  return out;
+}
+
+function applyEdges(imageData, edges, strength) {
+  const d = imageData.data;
+  const w = resultCanvas.width;
+  const h = resultCanvas.height;
+  // normalize edges
+  let max = 0;
+  for (let i = 0; i < edges.length; i++) {
+    if (edges[i] > max) max = edges[i];
+  }
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      const idx = y * w + x;
+      const e = edges[idx] / (max || 1);
+      const idx4 = idx * 4;
+      // Darken by edge
+      const shade = Math.max(0, 1 - e * strength);
+      d[idx4] = Math.round(d[idx4] * shade);
+      d[idx4 + 1] = Math.round(d[idx4 + 1] * shade);
+      d[idx4 + 2] = Math.round(d[idx4 + 2] * shade);
+    }
+  }
+}
+
+// Initial
+setStatus('Ready - upload an image');
