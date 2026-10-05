@@ -110,4 +110,113 @@ document.addEventListener('DOMContentLoaded', function () {
       citationOutput.innerHTML = `<strong>${currentStyle.toUpperCase()} Citation:</strong><br>${citation}`;
     }
   }
+
+  function generateBookCitation() {
+    const author = document.getElementById('author').value.trim();
+    const title = document.getElementById('title').value.trim();
+    const publisher = document.getElementById('publisher').value.trim();
+    const year = document.getElementById('year').value.trim();
+
+    // Basic validation
+    if (!author || !title || !publisher || !year) {
+      alert('Please fill in all required fields(Author, Title, Publisher, Year)');
+      return;
+    }
+
+    // Process authors
+    const authors = processAuthors(author);
+
+    switch (currentStyle) {
+      case 'apa':
+        return `${authors} (${year}). <i>${title}</i>. ${publisher}.`;
+      case 'mla':
+        return `${authors}. <i>${title}, ${publisher}, ${year}`;
+
+      case 'chicago':
+        return `${authors}. ${year}, <i>${title}</i>. ${publisher}`;
+      default:
+        return '';
+    }
+  }
+
+  function generateWebsiteCitation() {
+    const author = document.getElementById('web-author').value.trim();
+    const title = document.getElementById('web-title').value.trim();
+    const siteName = document.getElementById('site-name').value.trim();
+    const url = document.getElementById('url').value.trim();
+    const accessDate = document.getElementById('access-date').value;
+
+    if (!title || !siteName || !url || !accessDate) {
+      alert('Please fill in all required fields (Title, Website Name, URL, Access, Date)');
+      return;
+    }
+
+    // Format data
+    const formattedAccessDate = formatDate(accessDate, currentStyle);
+
+    // Process authors if available
+    const authors = author ? processAuthors(author) + '.' : '';
+
+    switch (currentStyle) {
+      case 'apa':
+        return `${authors} (n.d.). ${title}. <i>${siteName}</i>. Retrieved ${formattedAccessDate}, from ${url}`;
+      case 'mla':
+        return `${authors} "${title}." <i>${siteName}</i>, n.d., ${url}. Accessed ${formattedAccessDate}.`;
+      case 'chicago':
+        return `${authors} "${title}." ${siteName}, ${url} (accessed ${formattedAccessDate})`;
+      default:
+        return '';
+    }
+  }
+
+  // Helper functions
+  function processAuthors(authorStr) {
+    const authors = authorStr.split(',').map((a) => a.trim());
+
+    if (authors.length === 0) return '';
+    if (authors.length === 1) return authors[0];
+
+    switch (currentStyle) {
+      case 'apa':
+        if (authors.length <= 20) {
+          return authors.slice(0, -1).join(', ') + ' & ' + authors.slice(-1);
+        } else {
+          return authors[0] + ' et all.';
+        }
+      case 'mla':
+        if (authors.length <= 2) {
+          return authors.join(' and ');
+        } else {
+          return authors[0] + ' et al.';
+        }
+      case 'chicago':
+        if (authors.length <= 10) {
+          return authors.slice(0, -1).join(', ') + ' , and ' + authors.slice(-1);
+        } else {
+          return authors[0] + ' et al.';
+        }
+      default:
+        return authors.join(', ');
+    }
+  }
+
+  function formatDate(dateStr, style) {
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return '';
+
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDay();
+
+    switch (style) {
+      case 'apa':
+        return `${monthToString(month)} ${day}, ${year}`;
+      case 'mla':
+        return `${day} ${monthToString(month, true)} ${year}`;
+      case 'chicago':
+        return `${monthToString(month)} ${day}, ${year}`;
+      default:
+        return `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+    }
+  }
 });
