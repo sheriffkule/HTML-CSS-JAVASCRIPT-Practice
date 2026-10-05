@@ -317,26 +317,41 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  function copyCitation() {
-    if (!citationOutput.textContent.includes('formatted citation here')) {
-      if (!navigator.clipboard?.writeText) {
-        alert('Clipboard access is not available in this browser.');
-        return;
+  async function copyCitation() {
+    if (!currentCitation) return;
+
+    const text = citationOutput.innerText.trim();
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        copyWithSelection(text);
       }
 
-      navigator.clipboard
-        .writeText(citationOutput.innerText)
-        .then(() => {
-          const originalText = copyBtn.innerHTML;
-          copyBtn.innerHTML = '<i class="fas fa-check"></i>';
-          setTimeout(() => {
-            copyBtn.innerHTML = originalText;
-          }, 2000);
-        })
-        .catch((err) => {
-          console.error('Failed to copy citation: ', err);
-          alert('Failed to copy the citation.');
-        });
+      const originalText = copyBtn.innerHTML;
+      copyBtn.innerHTML = '<i class="fas fa-check"></i>';
+      setTimeout(() => {
+        copyBtn.innerHTML = originalText;
+      }, 2000);
+    } catch (error) {
+      console.error('Failed to copy citation: ', error);
+      alert('Failed to copy the citation. Please try again.');
+    }
+  }
+
+  function copyWithSelection(text) {
+    const temporaryInput = document.createElement('textarea');
+    temporaryInput.value = text;
+    temporaryInput.setAttribute('readonly', '');
+    temporaryInput.style.position = 'fixed';
+    temporaryInput.style.opacity = '0';
+    document.body.append(temporaryInput);
+    temporaryInput.select();
+
+    const copied = document.execCommand('copy');
+    temporaryInput.remove();
+    if (!copied) {
+      throw new Error('The browser did not allow copying to the clipboard.');
     }
   }
 
@@ -428,4 +443,18 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     renderCitation(currentCitation);
   }
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('footerYear');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });

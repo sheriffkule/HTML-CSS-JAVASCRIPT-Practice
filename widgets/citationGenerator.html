@@ -77,9 +77,11 @@
             <article class="style-options">
               <fieldset>
                 <legend>Citation Style:</legend>
-                <button class="style-btn active" data-style="apa">APA</button>
-                <button class="style-btn" data-style="mla">MLA</button>
-                <button class="style-btn" data-style="chicago">Chicago</button>
+                <div class="style-buttons">
+                  <button class="style-btn active" data-style="apa">APA</button>
+                  <button class="style-btn" data-style="mla">MLA</button>
+                  <button class="style-btn" data-style="chicago">Chicago</button>
+                </div>
               </fieldset>
             </article>
 
@@ -106,6 +108,11 @@
           </article>
         </section>
       </main>
+
+      <footer class="footer__copy">
+        © <time datetime="" id="footerYear"></time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
     </div>
 
     <script src="/widgets_script/citationGenerator.js"></script>
