@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Citation Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/citationGenerator.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="logo">
+          <i class="fas fa-book-open"></i>
+          <h1>Citation Generator</h1>
+        </div>
+        <nav>
+          <button id="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
+        </nav>
+      </header>
+
+      <main>
+        <section class="citation-form">
+          <div class="form-container">
+            <article class="tabs">
+              <button class="tab active" data-tab="book">Book</button>
+              <button class="tab" data-tab="website">Website</button>
+            </article>
+
+            <article class="tab-content active" id="book-tab">
+              <form id="book-form">
+                <fieldset class="form-group">
+                  <label for="author">Author(s): <sup>*</sup></label>
+                  <input type="text" id="author" placeholder="Last name, First name" required />
+                  <small>Separate multiple authors with commas</small>
+                </fieldset>
+                <fieldset class="form-group">
+                  <label for="title">Book Title: <sup>*</sup></label>
+                  <input type="text" id="title" placeholder="Title of the book" required />
+                </fieldset>
+                <fieldset class="form-group">
+                  <label for="publisher">Publisher <sup>*</sup></label>
+                  <input type="text" id="publisher" placeholder="Publisher name" required />
+                </fieldset>
+                <fieldset class="form-group">
+                  <label for="year">Publication Year: <sup>*</sup></label>
+                  <input type="number" id="year" placeholder="YYYY" required />
+                </fieldset>
+              </form>
+            </article>
+
+            <article class="tab-content" id="website-tab">
+              <form id="website-form">
+                <fieldset class="form-group">
+                  <label for="web-author">Author(s):</label>
+                  <input type="text" id="web-author" placeholder="Last name, First name or Organization" />
+                </fieldset>
+                <fieldset class="form-group">
+                  <label for="web-title">Page Title: <sup>*</sup></label>
+                  <input type="text" id="web-title" placeholder="Title of the webpage" required />
+                </fieldset>
+                <fieldset class="form-group">
+                  <label for="site-name">Website Name: <sup>*</sup></label>
+                  <input type="text" id="site-name" placeholder="Name of the website" required />
+                </fieldset>
+                <fieldset class="form-group">
+                  <label for="url">URL: <sup>*</sup></label>
+                  <input type="url" id="url" placeholder="https://example.com" required />
+                </fieldset>
+                <fieldset class="form-group">
+                  <label for="access-date">Access Date: <sup>*</sup></label>
+                  <input type="date" id="access-date" required />
+                </fieldset>
+              </form>
+            </article>
+
+            <article class="style-options">
+              <fieldset>
+                <legend>Citation Style:</legend>
+                <button class="style-btn active" data-style="apa">APA</button>
+                <button class="style-btn" data-style="mla">MLA</button>
+                <button class="style-btn" data-style="chicago">Chicago</button>
+              </fieldset>
+            </article>
+
+            <article class="form-actions">
+              <button class="primary-btn" id="generate-btn">
+                <i class="fas fa-magic"></i> Generate Citation
+              </button>
+              <button class="secondary-btn" id="clear-btn"><i class="fas fa-broom"></i> Clear Form</button>
+            </article>
+          </div>
+        </section>
+
+        <section class="results-section">
+          <article class="results-header">
+            <h3>Your Citation</h3>
+            <button class="icon-btn" id="copy-btn" title="Copy to clipboard">
+              <i class="far fa-copy"></i>
+            </button>
+          </article>
+          <article class="citation-result">
+            <p id="citation-output">
+              Fill out the form and click <q>Generate Citation</q> to see your formatted citation here.
+            </p>
+          </article>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

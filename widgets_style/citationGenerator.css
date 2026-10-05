@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+    --primary: #4361ee;
+    --primary-light: #4895ef;
+    --secondary: #3f37c9;
+    --accent: #f72585;
+    --light: #f9f8fa;
+    --dark: #212529;
+    --gray: #6c757d;
+    --light-gray: #dee1e4;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 8px rgb(0 0 0 / 0.15);
+    --transition: all 0.3s ease;
+}
+
+[data-theme="dark"] {
+    --light: #212529;
+    --dark: #f8f9fa;
+    --light-gray: #343a40;
+    --gray: #adb5bd;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+    background-color: var(--light);
+    color: var(--dark);
+    line-height: 1.5;
+    transition: var(--transition);
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 20px;
+    border-bottom: 2px solid var(--light-gray);
+}
