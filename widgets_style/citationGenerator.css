@@ -19,6 +19,7 @@
     --dark: #f8f9fa;
     --light-gray: #343a40;
     --gray: #adb5bd;
+    --box-shadow: 0 4px 8px rgb(255 255 255 / 0.15);
 }
 
 * {
@@ -47,4 +48,57 @@ header {
     align-items: center;
     padding-block: 20px;
     border-bottom: 2px solid var(--light-gray);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    i {
+        font-size: 2rem;
+        color: var(--primary);
+    }
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--primary);
+}
+
+nav {
+    display: flex;
+    gap: 15px;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: inherit;
+    transition: var(--transition);
+}
+
+#theme-toggle {
+    font-size: 1.25rem;
+    color: var(--gray);
+    background: none;
+    padding: 5px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+
+    &:hover {
+        background-color: var(--light-gray);
+        color: var(--primary);
+    } 
 }
