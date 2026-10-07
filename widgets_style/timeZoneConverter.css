@@ -1,9 +1,12 @@
 :root {
     --primary: #4361ee;
+    --primary-dark: #2e59d9;
     --secondary: #3f37c9;
     --accent: #4cc9f0;
     --dark: #1a1a2e;
     --light: #f8f9fa;
+    --light-gray: #d1d3e2;
+    --border-color: #c1c9e2;
     --success: #4bb543;
     --warning: #fca311;
     --error: #e63946;
@@ -104,4 +107,173 @@ select, input, button {
     border-color: var(--primary);
     box-shadow: 0 0 0 2px rgb(67 97 238 / 0.2),
     inset 0 0 0 2px rgb(67 97 238 / 0.2);
+}
+
+select,
+::picker(select) {
+  appearance: base-select;
+  cursor: pointer;
+}
+
+:open::picker(select) {
+    opacity: 1;
+    height: auto;
+    overflow: clip;
+
+    @starting-style {
+        opacity: 0;
+        height: 0;
+    }
+}
+
+::picker(select) {
+  border-radius: 8px;
+  border: 2px solid var(--primary);
+  opacity: 0;
+  height: 0;
+  overflow: clip;
+  interpolate-size: allow-keywords;
+  transition: height 0.5s, opacity 0.5s, display 0.5s, overlay .5s;
+  transition-behavior: allow-discrete;
+}
+
+select::picker-icon {
+  font-size: 16px;
+  color: var(--primary);
+  transition: 0.3s rotate;
+}
+
+select:open::picker-icon {
+  rotate: 180deg;
+  color: var(--success);
+}
+
+select:open {
+    border: var(--primary);
+    box-shadow: 0 0 0 2px rgb(67 97 238 / 0.2),
+    inset 0 0 0 2px rgb(67 97 238 / 0.2);
+}
+
+option {
+  border: 1px solid var(--border-color);
+  background: var(--primary);
+  padding: 2px 0 2px 12px;
+  color: var(--light);
+  padding-right: 18px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+
+  &:nth-child(1) {
+    border-radius: 8px 8px 0 0;
+  }
+  &:last-child {
+    border-radius: 0 0 8px 8px;
+  }
+}
+
+option:is(:hover, :focus) {
+  background: var(--primary-dark);
+}
+
+option:checked {
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: var(--success);
+  background-color: var(--primary-dark);
+}
+
+option::checkmark {
+  color: var(--success);
+  font-size: 1.5rem;
+}
+
+input[type="date"], input[type="time"] {
+  box-shadow: 2px 6px 10px rgb(0 0 0 / 0.15),
+  inset 2px 6px 10px rgb(0 0 0 / 0.15);
+  transition: all 0.3s;
+}
+
+:is(input[type="date"], input[type="time"])::-webkit-calendar-picker-indicator {
+    background-color: var(--light-gray);
+    border-radius: 50%;
+    padding: 5px;
+    margin-left: 8px;
+    opacity: 0.6;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+:is(input[type="date"], input[type="time"])::-webkit-calendar-picker-indicator:hover {
+    scale: 1.4;
+    background-color: var(--success);
+    opacity: 1;
+}
+
+:is(input[type="date"], input[type="time"])::-webkit-calendar-picker-indicator:active {
+    scale: 1.2;
+}
+
+:is(input[type="date"], input[type="time"])::-webkit-datetime-edit-fields-wrapper {
+  display: flex;
+  gap: 2px;
+  box-shadow: inset 0 0 2px 2px rgb(0 0 0 / 0.15);
+  padding: 2px 4px 2px 12px;
+  border-radius: 6px;
+  background-color: var(--light-gray);
+}
+
+:is(input[type="date"], input[type="time"])::-webkit-datetime-edit-text {
+  padding-inline: 2px;
+  color: var(--primary);
+}
+
+:is(input[type="date"], input[type="time"])::-webkit-datetime-edit-ampm-field {
+  color: var(--primary);
+  padding: 2px 4px;
+}
+
+:is(input[type="date"], input[type="time"]):open {
+    border-color: var(--primary);
+    background-color: var(--light-gray);
+    box-shadow: 0 0 0 2px rgb(67 97 238 / 0.2),
+    inset 0 0 0 2px rgb(67 97 238 / 0.2);
+}
+
+input[type="text"] {
+    caret-animation: manual;
+    caret-shape: block;
+    caret-color: var(--primary);
+    animation: caret-animation infinite linear 1.2s;
+}
+
+@keyframes caret-animation {
+  50% {
+    caret-color: transparent;
+    caret-shape: bar;
+  }
+}
+
+button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    &:hover {
+        background-color: var(--secondary);
+        box-shadow: var(--card-shadow);
+    }
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+
+    &:hover {
+        background-color: #5a6268;
+    }
 }
