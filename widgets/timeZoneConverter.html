@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Time Zone Converter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/timeZoneConverter.css" />
+  </head>
+  <body>
+    <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+
+    <main class="container">
+      <header>
+        <h1><i class="fas fa-globe-americas"></i> Time Zone Converter</h1>
+        <p class="subtitle">Convert between time zones and compare times worldwide.</p>
+      </header>
+
+      <article class="tabs">
+        <div class="tab active" data-tab="converter">Converter</div>
+        <div class="tab" data-tab="comparison">Comparison</div>
+        <div class="tab" data-tab="world-clock">World Clock</div>
+      </article>
+
+      <section class="tab-content active" id="converter">
+        <article class="card">
+          <h2 class="card-title"><i class="fas fa-exchange-alt"></i> Convert Time</h2>
+
+          <fieldset class="form-group">
+            <label for="dateInput">Date:</label>
+            <input type="date" id="dateInput" />
+          </fieldset>
+
+          <fieldset class="form-group">
+            <label for="timeInput">Time:</label>
+            <input type="time" id="timeInput" />
+          </fieldset>
+
+          <fieldset class="form-group">
+            <label for="fromTimezone">From Time Zone</label>
+            <select id="fromTimezone"></select>
+          </fieldset>
+
+          <fieldset class="form-group">
+            <label for="toTimezone">To Time Zone:</label>
+            <select id="toTimezone"></select>
+          </fieldset>
+
+          <button id="convertBtn"><i class="fas fa-sync-alt"></i> Convert</button>
+          <button class="btn-secondary" id="addFavoriteBtn" style="margin-top: 0.5rem">
+            <i class="fas fa-star"></i> Add to Favorite
+          </button>
+        </article>
+
+        <article class="card" id="resultCard">
+          <h2 class="card-title"><i class="fas fa-clock"></i> Converted Time</h2>
+
+          <div class="time-display" id="convertedTime"></div>
+          <div class="timezone-info" id="convertedTimezone"></div>
+
+          <div class="time-difference" id="timeDifference"></div>
+
+          <button class="copy-btn" id="copyResultBtn"><i class="fas fa-copy"></i> Copy to Clipboard</button>
+        </article>
+
+        <article class="card favorites-container">
+          <h2 class="card-title"><i class="fas fa-heart"></i> Favorite Time Zones</h2>
+          <p>Save your frequently used time zones for quick access.</p>
+
+          <div class="favorites-list" id="favoritesList"></div>
+        </article>
+      </section>
+
+      <section class="tab-content" id="comparison">
+        <article class="card">
+          <h2 class="card-title"><i class="fas fa-columns"></i> Compare Time Zones</h2>
+
+          <div class="compare-grid">
+            <div>
+              <fieldset class="form-group">
+                <label for="baseDate">Date:</label>
+                <input type="date" id="baseDate" />
+              </fieldset>
+
+              <fieldset class="form-group">
+                <label for="baseTime">Time:</label>
+                <input type="time" id="baseTime" />
+              </fieldset>
+
+              <fieldset class="form-group">
+                <label for="baseTimezone">Time Zone:</label>
+                <select id="baseTimezone"></select>
+              </fieldset>
+            </div>
+
+            <div>
+              <fieldset class="form-group">
+                <label for="compareTimezone1">Time Zone 1:</label>
+                <select id="compareTimezone1"></select>
+              </fieldset>
+
+              <fieldset class="form-group">
+                <label for="compareTimezone2">Time Zone 2:</label>
+                <select id="compareTimezone2"></select>
+              </fieldset>
+
+              <fieldset class="form-group">
+                <label for="compareTimezone3">Time Zone 3:</label>
+              </fieldset>
+            </div>
+          </div>
+
+          <button id="compareBtn"><i class="fas fa-search"></i> Compare</button>
+        </article>
+
+        <article class="card" id="comparisonResults">
+          <h2 class="card-title"><i class="fas fa-chart-bar"></i> Comparison Results</h2>
+
+          <div class="results-container" id="comparisonResultsContainer"></div>
+        </article>
+      </section>
+
+      <section class="tab-content" id="world-clock">
+        <article class="card">
+          <h2 class="card-title"><i class="fas fa-globe"></i> World Clock</h2>
+          <p>View current times in major cities around the world.</p>
+
+          <fieldset class="form-group">
+            <label for="searchCity">Search City:</label>
+            <input type="text" id="searchCity" placeholder="Type to search for a city..." />
+          </fieldset>
+
+          <div class="results-container" id="worldClockContainer">
+            <div class="spinner" id="worldClockSpinner"></div>
+          </div>
+        </article>
+      </section>
+
+      <footer class="footer__copy">
+        © <time datetime="" id="year"></time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
+    </main>
+
+    <script src="/widgets_script/timeZoneConverter.js"></script>
+  </body>
+</html>
