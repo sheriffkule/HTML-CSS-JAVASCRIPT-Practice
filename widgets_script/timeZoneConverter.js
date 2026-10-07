@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const dateInput = document.getElementById('dateInput');
   const timeInput = document.getElementById('timeInput');
   const fromTimezone = document.getElementById('fromTimezone');
-  const toTimezone = document.getElementById('toTImezone');
+  const toTimezone = document.getElementById('toTimezone');
   const convertBtn = document.getElementById('convertBtn');
   const resultCard = document.getElementById('resultCard');
   const convertedTime = document.getElementById('convertedTime');
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Comparison elements
   const baseDate = document.getElementById('baseDate');
   const baseTime = document.getElementById('baseTime');
-  const basTimezone = document.getElementById('basTimezone');
+  const basTimezone = document.getElementById('baseTimezone');
   const compareTimezone1 = document.getElementById('compareTimezone1');
   const compareTimezone2 = document.getElementById('compareTimezone2');
   const compareTimezone3 = document.getElementById('compareTimezone3');
@@ -45,6 +45,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Populate timezone dropdowns
   populateTimezones();
+
+  // Load favorites from localStorage
+  loadFavorites();
 
   // Set default timezones
   const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -100,9 +103,6 @@ document.addEventListener('DOMContentLoaded', function () {
   // Search city in world clock
   searchCity.addEventListener('input', debounce(searchCityHandler, 300));
 
-  // Load favorites from localStorage
-  loadFavorites();
-
   // Functions to populate timezone dropdown
   function populateTimezones() {
     const timezones = Intl.supportedValuesOf('timeZone');
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const option = document.createElement('option');
       option.value = tz;
       option.textContent = tz.replace(/_/g, ' ');
-      [(fromTimezone, toTimezone, basTimezone, compareTimezone1, compareTimezone2, compareTimezone3)].forEach(
+      [fromTimezone, toTimezone, basTimezone, compareTimezone1, compareTimezone2, compareTimezone3].forEach(
         (select) => {
           const clone = option.cloneNode(true);
           select.appendChild(clone);
@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Function to set default timezone
-  function setDefaultTimezone() {
+  function setDefaultTimezone(timezone) {
     [fromTimezone, basTimezone].forEach((select) => {
       const options = Array.from(select.options);
       const index = options.findIndex((opt) => opt.value === timezone);
@@ -154,9 +154,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Set common timezones for comparison
-    const commonZones = ['America/Los_Angeles', 'Europe/London', 'Asia/Tokyo'][
-      (compareTimezone1, compareTimezone2, compareTimezone3)
-    ].forEach((select, i) => {
+    const commonZones = ['America/Los_Angeles', 'Europe/London', 'Asia/Tokyo'];
+    [compareTimezone1, compareTimezone2, compareTimezone3].forEach((select, i) => {
       const options = Array.from(select.options);
       const index = options.findIndex((opt) => opt.value === commonZones[i]);
       if (index !== -1) select.selectedIndex = index;
@@ -196,9 +195,9 @@ document.addEventListener('DOMContentLoaded', function () {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
-      hour: '2-digits',
-      minute: '2-digits',
-      second: '2-digits',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
       timeZoneName: 'long',
     };
 
@@ -211,9 +210,9 @@ document.addEventListener('DOMContentLoaded', function () {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
-      hour: '2-digits',
-      minute: '2-digits',
-      second: '2-digits',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
       timeZoneName: 'long',
     };
 
@@ -222,10 +221,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // Calculate time difference
     const fromOffset = fromDate
       .toLocaleDateString('en-US', { timeZone: fromTz, timeZoneName: 'longOffset' })
-      .split(' ')[2];
+      .split(', ')[1];
     const toOffset = fromDate
       .toLocaleDateString('en-US', { timeZone: toTz, timeZoneName: 'longOffset' })
-      .split(' ')[2];
+      .split(', ')[1];
 
     // Display results
     convertedTime.textContent = toFormatted.split(', ')[1];
@@ -245,5 +244,92 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     resultCard.style.display = 'block';
+  }
+
+  // Function to add current conversion to favorites
+  function addToFavorites() {
+    if (!resultCard.style.display || resultCard.style.display === 'none') {
+      alert('Please convert a time first!');
+      return;
+    }
+
+    const fromTz = fromTimezone.value;
+    const toTz = toTimezone.value;
+
+    const favorites = JSON.parse(localStorage.getItem('timezoneFavorites')) || [];
+
+    // Check if this pair already exist
+    const exists = favorites.some(
+      (fav) => (fav.fromTz === fromTz && fav.toTz === toTz) || (fav.fromTz === toTz && fav.toTz === fromTz),
+    );
+
+    if (exists) {
+      alert('This timezone pair is already in your favorites!');
+      return;
+    }
+
+    favorites.push({
+      fromTz,
+      toTz,
+      fromTzDisplay: fromTimezone.options[fromTimezone.selectedIndex].text,
+      toTzDisplay: toTimezone.options[toTimezone.selectedIndex].text,
+    });
+
+    localStorage.setItem('timezoneFavorites', JSON.stringify(favorites));
+    loadFavorites();
+
+    alert('Added to favorites!');
+  }
+
+  // Function to load favorites from localStorage
+  function loadFavorites() {
+    const favorites = JSON.parse(localStorage.getItem('timezoneFavorites')) || [];
+    favoritesList.innerHTML = '';
+
+    if (favorites.length === 0) {
+      favoritesList.innerHTML = '<p> No favorites yet. convert a time and click "Add to Favorites".</p>';
+      return;
+    }
+
+    favorites.forEach((fav, index) => {
+      const favoriteItem = document.createElement('div');
+      favoriteItem.className = 'favorite-item';
+      favoriteItem.innerHTML = `
+        <span>${fav.fromTzDisplay} → ${fav.toTzDisplay}</span>
+        <button class="remove-btn" data-index="${index}" title="Remove Item">
+          <i class="fas fa-times"></i>
+        </button>
+      `;
+
+      favoriteItem.addEventListener('click', (e) => {
+        if (!e.target.closest('.remove-btn')) {
+          // Set the from and to timezone
+          fromTimezone.value = fav.fromTz;
+          toTimezone.value = fav.toTz;
+
+          // Trigger conversion
+          convertBtn.click();
+
+          // Switch to converter tab if not already there
+          document.querySelector('.tab[data-tab="converter"]').click();
+        }
+      });
+
+      const removeBtn = favoriteItem.querySelector('.remove-btn');
+      removeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        removeFavorite(index);
+      });
+
+      favoritesList.appendChild(favoriteItem);
+    });
+  }
+
+  // Function to remove favorite
+  function removeFavorite(index) {
+    const favorites = JSON.parse(localStorage.getItem('timezoneFavorites')) || [];
+    favorites.splice(index, 1);
+    localStorage.setItem('timezoneFavorites', JSON.stringify(favorites));
+    loadFavorites();
   }
 });
