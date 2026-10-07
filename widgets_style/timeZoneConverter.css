@@ -277,3 +277,18 @@ button {
         background-color: #5a6268;
     }
 }
+
+.time-display {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-block: 1rem;
+    color: var(--dark);
+}
+
+.timezone-info {
+    font-size: 1rem;
+    color: #696969;
+    text-align: center;
+    margin-bottom: 1rem;
+}
