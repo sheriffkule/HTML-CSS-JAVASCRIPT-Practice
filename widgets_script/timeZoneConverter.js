@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Comparison elements
   const baseDate = document.getElementById('baseDate');
   const baseTime = document.getElementById('baseTime');
-  const basTimezone = document.getElementById('baseTimezone');
+  const baseTimezone = document.getElementById('baseTimezone');
   const compareTimezone1 = document.getElementById('compareTimezone1');
   const compareTimezone2 = document.getElementById('compareTimezone2');
   const compareTimezone3 = document.getElementById('compareTimezone3');
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const option = document.createElement('option');
       option.value = tz;
       option.textContent = tz.replace(/_/g, ' ');
-      [fromTimezone, toTimezone, basTimezone, compareTimezone1, compareTimezone2, compareTimezone3].forEach(
+      [fromTimezone, toTimezone, baseTimezone, compareTimezone1, compareTimezone2, compareTimezone3].forEach(
         (select) => {
           const clone = option.cloneNode(true);
           select.appendChild(clone);
@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Function to set default timezone
   function setDefaultTimezone(timezone) {
-    [fromTimezone, basTimezone].forEach((select) => {
+    [fromTimezone, baseTimezone].forEach((select) => {
       const options = Array.from(select.options);
       const index = options.findIndex((opt) => opt.value === timezone);
       if (index !== -1) select.selectedIndex = index;
@@ -331,5 +331,90 @@ document.addEventListener('DOMContentLoaded', function () {
     favorites.splice(index, 1);
     localStorage.setItem('timezoneFavorites', JSON.stringify(favorites));
     loadFavorites();
+  }
+
+  // function to copy result to clipboard
+  function copyResultToClipboard() {
+    const textToCopy = `${convertedTime.textContent}\n${convertedTimezone.textContent}\n${timeDifference.textContent}`;
+
+    navigator.clipboard
+      .writeText(textToCopy)
+      .then(() => {
+        const originalText = copyResultBtn.innerHTML;
+        copyResultBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+
+        setTimeout(() => {
+          copyResultBtn.innerHTML = originalText;
+        }, 2000);
+      })
+      .catch((err) => {
+        console.error('Failed to copy: ', err);
+        alert('Failed to copy to clipboard!');
+      });
+  }
+
+  // Function to compare multiple timezones
+  function compareTimezones() {
+    const date = baseDate.value;
+    const time = baseTime.value;
+
+    if (!date || !time) {
+      alert('Please select both date and time!');
+      return;
+    }
+
+    const baseTz = baseTimezone.value;
+    const tz1 = compareTimezone1.value;
+    const tz2 = compareTimezone2.value;
+    const tz3 = compareTimezone3.value;
+
+    const timezones = [baseTz, tz1, tz2, tz3].filter((tz, i, arr) => tz && arr.indexOf(tz) === i);
+
+    if (timezones.length < 2) {
+      alert('Please select at least two different timezones!');
+      return;
+    }
+
+    const datetimeString = `${date}T${time}`;
+    const baseDateObj = new Date(datetimeString);
+
+    if (isNaN(baseDateObj.getTime())) {
+      alert('Invalid date of time!');
+      return;
+    }
+
+    comparisonResultsContainer.innerHTML = '';
+
+    timezones.forEach((tz) => {
+      const options = {
+        timeZone: tz,
+        weekday: 'short',
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        timeZoneName: 'short',
+      };
+
+      const formatted = new Intl.DateTimeFormat('en-US', options).format(baseDateObj);
+      const offset = baseDateObj
+        .toLocaleDateString('en-US', { timeZone: tz, timeZoneName: 'longOffset' })
+        .split(', ')[1];
+
+      const timezoneCard = document.createElement('div');
+      timezoneCard.className = 'timezone-card';
+      timezoneCard.innerHTML = `
+          <h3><i class="fas fa-clock"></i> ${tz.replace(/_/g, ' ')}</h3>
+          <p class="time">${formatted.split(', ')[1]}</p>
+          <p class="date">${formatted.split(', ')[0]}, ${formatted.split(', ')[2]}</p>
+          <p class="offset">${offset}</p>
+        `;
+
+      comparisonResultsContainer.appendChild(timezoneCard);
+    });
+
+    comparisonResults.style.display = 'block';
   }
 });

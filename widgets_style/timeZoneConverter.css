@@ -35,6 +35,10 @@ p {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
+
+    @media (width <= 768px) {
+        padding: 1rem;
+    }
 }
 
 header {
@@ -268,6 +272,9 @@ button {
         background-color: var(--secondary);
         box-shadow: var(--card-shadow);
     }
+    &:active {
+        scale: 0.98;
+    }
 }
 
 .btn-secondary {
@@ -365,5 +372,77 @@ button {
 
     &:hover {
         background: #f0f4ff;
+    }
+
+    .remove-btn {
+        color: var(--error);
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        width: auto;
+        transition: var(--transition);
+
+        &:hover {
+            scale: 1.1;
+            filter: saturate(1.5);
+            filter: drop-shadow(var(--card-shadow));
+        }
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+.tabs {
+    display: flex;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #c9c9c9;
+}
+
+.tab {
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    font-weight: 600;
+    color: #606060;
+    transition: var(--transition);
+
+    &.active {
+        color: var(--primary);
+        border-bottom-color: var(--primary);
+    }
+}
+
+.tab-content {
+    /* display: none; */
+
+    &.active {
+        display: block;
+    }
+}
+
+.compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+
+    @media (width <= 768px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.time-difference {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: var(--light);
+    border-radius: 6px;
+    text-align: center;
+
+    &.highlight {
+        background: #e3f2fd;
+        color: var(--primary);
+        font-weight: 600;
     }
 }
