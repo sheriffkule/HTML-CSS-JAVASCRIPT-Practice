@@ -417,4 +417,161 @@ document.addEventListener('DOMContentLoaded', function () {
 
     comparisonResults.style.display = 'block';
   }
+
+  // Function to load world clock
+  function loadWorldClock() {
+    worldClockContainer.innerHTML = '';
+    worldClockSpinner.style.display = 'block';
+
+    // Major cities around the world
+    const majorCities = [
+      'America/New_York',
+      'America/Chicago',
+      'America/Denver',
+      'America/Los_Angeles',
+      'Europe/London',
+      'Europe/Paris',
+      'Europe/Berlin',
+      'Europe/Moscow',
+      'Asia/Tokyo',
+      'Asia/Shanghai',
+      'Asia/Hong_Kong',
+      'Asia/Singapore',
+      'Australia/Sydney',
+      'Australia/Melbourne',
+      'Pacific/Auckland',
+      'Africa/Cairo',
+      'Africa/Johannesburg',
+      'America/Sao_Paulo',
+      'America/Mexico_City',
+      'Asia/Dubai',
+      'Asia/Kolkata',
+    ];
+
+    setTimeout(() => {
+      worldClockSpinner.style.display = 'none';
+
+      majorCities.forEach((tz) => {
+        const now = new Date();
+        const options = {
+          timeZone: tz,
+          weekday: 'short',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          timeZoneName: 'short',
+        };
+
+        const formatted = new Intl.DateTimeFormat('en-US', options).format(now);
+        const dateOptions = {
+          timeZone: tz,
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+        };
+
+        const dateFormatted = new Intl.DateTimeFormat('en-US', dateOptions).format(now);
+        const offset = now
+          .toLocaleDateString('en-US', { timeZone: tz, timeZoneName: 'longOffset' })
+          .split(', ')[1];
+
+        const timezoneCard = document.createElement('div');
+        timezoneCard.className = 'timezone-card';
+        timezoneCard.innerHTML = `
+            <h3><i class="fas fa-city"></i> ${city.split('/')[1].replace(/_/g, ' ')}</h3>
+            <p class="time">${formatted}</p>
+            <p class="date">${dateFormatted}</p>
+            <p class="offset">${offset}</p>
+          `;
+
+        worldClockContainer.appendChild(cityCard);
+      });
+    }, 500);
+  }
+
+  // Function to search cities in world clock
+  function searchCityHandler() {
+    const searchTerm = searchCity.value.toLowerCase();
+
+    if (!searchTerm) {
+      loadWorldClock();
+      return;
+    }
+
+    const timezones = Intl.supportedValuesOf('timeZone');
+    const filtered = timezones.filter((tz) => tz.toLowerCase().includes(searchTerm));
+
+    worldClockContainer.innerHTML = '';
+
+    if (filtered.length === 0) {
+      worldClockContainer.innerHTML = '<p>No matching cities found.</p>';
+      return;
+    }
+
+    // Limit to first 20 results
+    filtered.slice(0, 20).forEach((tz) => {
+      const now = new Date();
+      const options = {
+        timeZone: tz,
+        weekday: 'short',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        timeZoneName: 'short',
+      };
+
+      const formatted = new Intl.DateTimeFormat('en-US', options).format(now);
+      const dateOptions = {
+        timeZone: tz,
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      };
+
+      const dateFormatted = new Intl.DateTimeFormat('en-US', dateOptions).format(now);
+      const offset = now
+        .toLocaleTimeString('en-US', {
+          timeZone: tz,
+          timeZoneName: 'longOffset',
+        })
+        .split(' ')[1];
+
+      const timezoneCard = document.createElement('div');
+      timezoneCard.className = 'timezone-card';
+      timezoneCard.innerHTML = `
+            <h3><i class="fas fa-city"></i> ${tz.replace(/_/g, ' ')}</h3>
+            <p class="time">${formatted}</p>
+            <p class="date">${dateFormatted}</p>
+            <p class="offset">${offset}</p>
+          `;
+
+      worldClockContainer.appendChild(timezoneCard);
+    });
+  }
+
+  // Debounce function for search input
+  function debounce(func, wait) {
+    let timeout;
+    return function () {
+      const context = this;
+      const args = arguments;
+      timeout = setTimeout(() => {
+        func.apply(context, args);
+      }, wait);
+    };
+  }
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
