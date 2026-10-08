@@ -162,6 +162,69 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  function getTimeZoneOffsetMinutes(date, timeZone) {
+    const formatter = new Intl.DateTimeFormat('en-US', {
+      timeZone,
+      timeZoneName: 'shortOffset',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+    });
+
+    const tzName = formatter.formatToParts(date).find((part) => part.type === 'timeZoneName')?.value || 'GMT';
+    if (tzName === 'GMT' || tzName === 'UTC') return 0;
+
+    const match = tzName.match(/GMT([+-])(\d{1,2})(?::?(\d{2}))?/);
+    if (!match) return 0;
+
+    const sign = match[1] === '-' ? -1 : 1;
+    const hours = Number(match[2]);
+    const minutes = Number(match[3] || 0);
+
+    return sign * (hours * 60 + minutes);
+  }
+
+  function formatOffsetMinutes(totalMinutes) {
+    const sign = totalMinutes >= 0 ? '+' : '-';
+    const absoluteMinutes = Math.abs(totalMinutes);
+    const hours = String(Math.floor(absoluteMinutes / 60)).padStart(2, '0');
+    const minutes = String(absoluteMinutes % 60).padStart(2, '0');
+    return `GMT${sign}${hours}:${minutes}`;
+  }
+
+  function formatTimeInZone(date, timeZone) {
+    return new Intl.DateTimeFormat('en-US', {
+      timeZone,
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true,
+    }).format(date);
+  }
+
+  function formatDateInZone(date, timeZone) {
+    return new Intl.DateTimeFormat('en-US', {
+      timeZone,
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }).format(date);
+  }
+
+  function getUtcInstantForTimeInZone(dateString, timeString, timeZone) {
+    const [year, month, day] = dateString.split('-').map(Number);
+    const [hour, minute] = timeString.split(':').map(Number);
+    const utcMilliseconds = Date.UTC(year, month - 1, day, hour, minute, 0, 0);
+    const timezoneOffsetMinutes = getTimeZoneOffsetMinutes(new Date(utcMilliseconds), timeZone);
+
+    return utcMilliseconds - timezoneOffsetMinutes * 60 * 1000;
+  }
+
   // Function to convert time between timezones
   function convertTime() {
     const date = dateInput.value;
@@ -180,59 +243,23 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    const datetimeString = `${date}T${time}`;
-    const fromDate = new Date(datetimeString);
+    const utcInstant = getUtcInstantForTimeInZone(date, time, fromTz);
+    const fromDate = new Date(utcInstant);
 
-    if (isNaN(fromDate.getTime())) {
+    if (Number.isNaN(fromDate.getTime())) {
       alert('Invalid date or time!');
       return;
     }
 
-    // Format the date in the "from" timezone
-    const fromOptions = {
-      timeZone: fromTz,
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      timeZoneName: 'long',
-    };
+    const fromFormatted = formatDateInZone(fromDate, fromTz);
+    const toFormatted = formatDateInZone(fromDate, toTz);
+    const fromOffset = getTimeZoneOffsetMinutes(fromDate, fromTz);
+    const toOffset = getTimeZoneOffsetMinutes(fromDate, toTz);
 
-    const fromFormatted = new Intl.DateTimeFormat('en-US', fromOptions).format(fromDate);
+    convertedTime.textContent = formatTimeInZone(fromDate, toTz);
+    convertedTimezone.textContent = `${toTz.replace(/_/g, ' ')} (${formatOffsetMinutes(toOffset)})`;
+    timeDifference.textContent = `Time difference: ${formatOffsetMinutes(fromOffset)} (${fromTz.replace(/_/g, ' ')}) → ${formatOffsetMinutes(toOffset)} (${toTz.replace(/_/g, ' ')})`;
 
-    // Convert to the "to" timezone
-    const toOptions = {
-      timeZone: toTz,
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      timeZoneName: 'long',
-    };
-
-    const toFormatted = new Intl.DateTimeFormat('en-US', toOptions).format(fromDate);
-
-    // Calculate time difference
-    const fromOffset = fromDate
-      .toLocaleDateString('en-US', { timeZone: fromTz, timeZoneName: 'longOffset' })
-      .split(', ')[1];
-    const toOffset = fromDate
-      .toLocaleDateString('en-US', { timeZone: toTz, timeZoneName: 'longOffset' })
-      .split(', ')[1];
-
-    // Display results
-    convertedTime.textContent = toFormatted.split(', ')[1];
-    convertedTimezone.textContent = `${toTz.replace(/_/g, ' ')} (${toOffset})`;
-
-    timeDifference.textContent = `Time difference: ${fromOffset} (${fromTz.replace(/_/g, ' ')}) → ${toOffset} (${toTz.replace(/_/g, ' ')})`;
-
-    // Highlight if the date changes
     const fromDatePart = fromFormatted.split(', ')[0];
     const toDatePart = toFormatted.split(', ')[0];
 
@@ -375,10 +402,9 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    const datetimeString = `${date}T${time}`;
-    const baseDateObj = new Date(datetimeString);
+    const baseDateObj = new Date(getUtcInstantForTimeInZone(date, time, baseTz));
 
-    if (isNaN(baseDateObj.getTime())) {
+    if (Number.isNaN(baseDateObj.getTime())) {
       alert('Invalid date of time!');
       return;
     }
@@ -386,29 +412,16 @@ document.addEventListener('DOMContentLoaded', function () {
     comparisonResultsContainer.innerHTML = '';
 
     timezones.forEach((tz) => {
-      const options = {
-        timeZone: tz,
-        weekday: 'short',
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        timeZoneName: 'short',
-      };
-
-      const formatted = new Intl.DateTimeFormat('en-US', options).format(baseDateObj);
-      const offset = baseDateObj
-        .toLocaleDateString('en-US', { timeZone: tz, timeZoneName: 'longOffset' })
-        .split(', ')[1];
+      const formattedTime = formatTimeInZone(baseDateObj, tz);
+      const formattedDate = formatDateInZone(baseDateObj, tz);
+      const offset = formatOffsetMinutes(getTimeZoneOffsetMinutes(baseDateObj, tz));
 
       const timezoneCard = document.createElement('div');
       timezoneCard.className = 'timezone-card';
       timezoneCard.innerHTML = `
           <h3><i class="fas fa-clock"></i> ${tz.replace(/_/g, ' ')}</h3>
-          <p class="time">${formatted.split(', ')[1]}</p>
-          <p class="date">${formatted.split(', ')[0]}, ${formatted.split(', ')[2]}</p>
+          <p class="time">${formattedTime}</p>
+          <p class="date">${formattedDate}</p>
           <p class="offset">${offset}</p>
         `;
 
@@ -478,13 +491,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const timezoneCard = document.createElement('div');
         timezoneCard.className = 'timezone-card';
         timezoneCard.innerHTML = `
-            <h3><i class="fas fa-city"></i> ${city.split('/')[1].replace(/_/g, ' ')}</h3>
+            <h3><i class="fas fa-city"></i> ${tz.split('/')[1].replace(/_/g, ' ')}</h3>
             <p class="time">${formatted}</p>
             <p class="date">${dateFormatted}</p>
             <p class="offset">${offset}</p>
           `;
 
-        worldClockContainer.appendChild(cityCard);
+        worldClockContainer.appendChild(timezoneCard);
       });
     }, 500);
   }
@@ -555,6 +568,7 @@ document.addEventListener('DOMContentLoaded', function () {
     return function () {
       const context = this;
       const args = arguments;
+      clearTimeout(timeout);
       timeout = setTimeout(() => {
         func.apply(context, args);
       }, wait);
