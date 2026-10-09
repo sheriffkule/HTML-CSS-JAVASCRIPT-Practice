@@ -49,3 +49,26 @@ header {
         font-size: 1.125rem;
     }
 }
+
+.app-container {
+    background: linear-gradient(135deg, white, #c0c0c0);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow),
+    inset var(--box-shadow);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.color-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.color-picker-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
