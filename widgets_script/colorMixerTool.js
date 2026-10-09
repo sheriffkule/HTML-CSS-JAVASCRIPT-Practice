@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const mixRatioValue = document.getElementById('mixRatioValue');
   const mixMethodSelect = document.getElementById('mixMethod');
   const mixBtn = document.getElementById('mixBtn');
-  const resultColorDisplay = document.querySelected('.color-display');
+  const resultColorDisplay = document.querySelector('.color-display');
   const hexValue = document.getElementById('hexValue');
   const rgbValue = document.getElementById('rgbValue');
   const hslValue = document.getElementById('hslValue');
@@ -37,23 +37,22 @@ document.addEventListener('DOMContentLoaded', function () {
   generatePalette(mixedColor);
 
   // Event listeners
-  color1Picker.addEventListener('input', updateSlidersFromColorInput(1));
-  color2Picker
-    .addEventListener('input', updateSlidersFromColorInput(2))
+  color1Picker.addEventListener('input', () => updateSlidersFromColorInput(1));
+  color2Picker.addEventListener('input', () => updateSlidersFromColorInput(2));
 
-    [(r1Slider, g1Slider, b1Slider)].forEach((slider) => {
-      slider.addEventListener('input', () => {
-        updateColorInputFromSliders(1);
-        updateColorValues(1);
-      });
-    })
-
-    [(r2Slider, g2Slider, b2Slider)].forEach((slider) => {
-      slider.addEventListener('input', () => {
-        updateColorInputFromSliders(2);
-        updateColorValues(2);
-      });
+  [r1Slider, g1Slider, b1Slider].forEach((slider) => {
+    slider.addEventListener('input', () => {
+      updateColorInputFromSliders(1);
+      updateColorValues(1);
     });
+  });
+
+  [r2Slider, g2Slider, b2Slider].forEach((slider) => {
+    slider.addEventListener('input', () => {
+      updateColorInputFromSliders(2);
+      updateColorValues(2);
+    });
+  });
 
   mixRatioSlider.addEventListener('input', updateMixRatioValue);
   mixBtn.addEventListener('click', mixColors);
@@ -92,7 +91,9 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function updateMixRatioValue() {
-    mixRatioValue.textContent = `${mixRatioSlider.value}%`;
+    if (mixRatioValue) {
+      mixRatioValue.textContent = `${mixRatioSlider.value}%`;
+    }
   }
 
   function mixColors() {
@@ -114,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
         resultHex = mixColorsLab(color1, color2, ratio);
         break;
       default:
-        resultHex.mixColorsRGB(color1, color2, ratio);
+        resultHex = mixColorsRGB(color1, color2, ratio);
     }
 
     mixedColor = resultHex;
@@ -169,5 +170,245 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const rgb = labToRgb(l, a, b);
     return rgbToHex(...rgb);
+  }
+
+  function updateResultDisplay(hex) {
+    // Update the display color
+    resultColorDisplay.style.backgroundColor = hex;
+    document.documentElement.style.setProperty('--result-color', hex);
+
+    // Update the color values
+    const rgb = hexToRgb(hex);
+    const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+
+    hexValue.value = hex.toUpperCase();
+    rgbValue.value = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+    hslValue.value = `hsl(${Math.round(hsl[0])}, ${Math.round(hsl[1] * 100)}%, ${Math.round(hsl[2] * 100)}%)`;
+
+    // Generate palette
+    generatePalette(hex);
+  }
+
+  function generatePalette(baseColor) {
+    paletteGrid.innerHTML = '';
+    const rgb = hexToRgb(baseColor);
+    const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+
+    // Generate analogous colors
+    const analogous1 = hslToRgb((hsl[0] + 30) % 360, hsl[1], hsl[2]);
+    const analogous2 = hslToRgb((hsl[0] + 30 + 360) % 360, hsl[1], hsl[2]);
+
+    // Generate complementary
+    const complementary = hslToRgb((hsl[0] + 180) % 360, hsl[1], hsl[2]);
+
+    // Generate triadic
+    const triadic1 = hslToRgb((hsl[0] + 120) % 360, hsl[1], hsl[2]);
+    const triadic2 = hslToRgb((hsl[0] + 240) % 360, hsl[1], hsl[2]);
+
+    // Create shades and tints
+    const shade = hslToRgb(hsl[0], hsl[1], Math.max(0, hsl[2] - 0.2));
+    const tint = hslToRgb(hsl[0], hsl[1], Math.min(1, hsl[2] + 0.2));
+
+    // Generate saturated and desaturated
+    const saturated = hslToRgb(hsl[0], Math.min(1, hsl[1] + 0.3), hsl[2]);
+    const desaturated = hslToRgb(hsl[0], Math.max(0, hsl[1] - 0.3), hsl[2]);
+
+    const paletteColors = [
+      baseColor,
+      rgbToHex(...analogous1),
+      rgbToHex(...analogous2),
+      rgbToHex(...complementary),
+      rgbToHex(...triadic1),
+      rgbToHex(...triadic2),
+      rgbToHex(...shade),
+      rgbToHex(...tint),
+      rgbToHex(...saturated),
+      rgbToHex(...desaturated),
+    ];
+
+    paletteColors.forEach((color) => {
+      const colorDiv = document.createElement('div');
+      colorDiv.className = 'palette-color';
+      colorDiv.style.backgroundColor = color;
+      colorDiv.setAttribute('data-hex', color.toUpperCase());
+      colorDiv.addEventListener('click', () => {
+        navigator.clipboard.writeText(color.toUpperCase());
+        showTooltip(colorDiv, 'Copied');
+      });
+      paletteGrid.appendChild(colorDiv);
+    });
+  }
+
+  function showTooltip(element, message) {
+    const tooltip = document.createElement('div');
+    tooltip.className = 'tooltip';
+    tooltip.textContent = message;
+    element.appendChild(tooltip);
+
+    setTimeout(() => {
+      tooltip.remove();
+    }, 1000);
+  }
+
+  function addToHistory(color) {
+    if (colorHistory.includes(color)) {
+      colorHistory = colorHistory.filter((c) => c !== color);
+    }
+
+    colorHistory.unshift(color);
+    if (colorHistory.length > 12) {
+      colorHistory.pop();
+    }
+
+    updateHistoryDisplay();
+  }
+
+  function updateHistoryDisplay() {
+    historyGrid.innerHTML = '';
+
+    colorHistory.forEach((color) => {
+      const historyItem = document.createElement('div');
+      historyItem.className = 'history-item';
+      historyItem.style.backgroundColor = color;
+      historyItem.addEventListener('click', () => {
+        // Set as color1 when clicked
+        color1Picker.value = color;
+        updateSlidersFromColorInput(1);
+      });
+      historyGrid.appendChild(historyItem);
+    });
+  }
+
+  function copyHexToClipboard() {
+    navigator.clipboard.writeText(hexValue.value);
+
+    // Change button text temporarily
+    const originalText = copyHexBtn.textContent;
+    copyHexBtn.textContent = '<i class="fas fa-check"></i> Copied!';
+
+    setTimeout(() => {
+      copyHexBtn.innerHTML = originalText;
+    }, 2000);
+  }
+
+  // Helper functions
+  function hexToRgb(hex) {
+    const r = parseInt(hex.substring(1, 3), 16);
+    const g = parseInt(hex.substring(3, 5), 16);
+    const b = parseInt(hex.substring(5, 7), 16);
+    return { r, g, b };
+  }
+
+  function hexToRgbArray(hex) {
+    const r = parseInt(hex.substring(1, 3), 16);
+    const g = parseInt(hex.substring(3, 5), 16);
+    const b = parseInt(hex.substring(5, 7), 16);
+    return [r, g, b];
+  }
+
+  function rgbToHex(r, g, b) {
+    const toHex = (value) => value.toString(16).padStart(2, '0');
+    return `#${toHex(r)}${toHex(g)}${toHex(b)}`.toUpperCase();
+  }
+
+  function rgbToHsl(r, g, b) {
+    ((r /= 255), (g /= 255), (b /= 255));
+    const max = Math.max(r, g, b),
+      min = Math.min(r, g, b);
+    let h,
+      s,
+      l = (max + min) / 2;
+
+    if (max === min) {
+      h = s = 0; // achromatic
+    } else {
+      const d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch (max) {
+        case r:
+          h = (g - b) / d + (g < b ? 6 : 0);
+          break;
+        case g:
+          h = (b - r) / d + 2;
+          break;
+        case b:
+          h = (r - g) / d + 4;
+          break;
+      }
+      h *= 60;
+    }
+
+    return [h, s, l];
+  }
+
+  function hslToRgb(h, s, l) {
+    let r, g, b;
+
+    if (s === 0) {
+      r = g = b = l; // achromatic
+    } else {
+      const hue2rgb = (p, q, t) => {
+        if (t < 0) t += 1;
+        if (t > 1) t -= 1;
+        if (t < 1 / 6) return p + (q - p) * 6 * t;
+        if (t < 1 / 2) return q;
+        if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+        return p;
+      };
+
+      const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+      const p = 2 * l - q;
+      r = hue2rgb(p, q, h / 360 + 1 / 3);
+      g = hue2rgb(p, q, h / 360);
+      b = hue2rgb(p, q, h / 360 - 1 / 3);
+    }
+
+    return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+  }
+
+  function rgbToLab(r, g, b) {
+    const srgb = [r / 255, g / 255, b / 255].map((channel) => {
+      const value = channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4;
+      return value;
+    });
+
+    const x = srgb[0] * 0.4124 + srgb[1] * 0.3576 + srgb[2] * 0.1805;
+    const y = srgb[0] * 0.2126 + srgb[1] * 0.7152 + srgb[2] * 0.0722;
+    const z = srgb[0] * 0.0193 + srgb[1] * 0.1192 + srgb[2] * 0.9505;
+
+    const xRef = 0.95047;
+    const yRef = 1;
+    const zRef = 1.08883;
+
+    const fx = x / xRef > 0.008856 ? (x / xRef) ** (1 / 3) : 7.787 * (x / xRef) + 16 / 116;
+    const fy = y / yRef > 0.008856 ? (y / yRef) ** (1 / 3) : 7.787 * (y / yRef) + 16 / 116;
+    const fz = z / zRef > 0.008856 ? (z / zRef) ** (1 / 3) : 7.787 * (z / zRef) + 16 / 116;
+
+    return [116 * fy - 16, 500 * (fx - fy), 200 * (fy - fz)];
+  }
+
+  function labToRgb(l, a, b) {
+    const fy = (l + 16) / 116;
+    const fx = fy + a / 500;
+    const fz = fy - b / 200;
+
+    const x = fx ** 3 > 0.008856 ? fx ** 3 : (116 * fx - 16) / 903.3;
+    const y = l > 8 ? fy ** 3 : l / 903.3;
+    const z = fz ** 3 > 0.008856 ? fz ** 3 : (116 * fz - 16) / 903.3;
+
+    const xRgb = x * 3.2406 + y * -1.5372 + z * -0.4986;
+    const yRgb = x * -0.9689 + y * 1.8758 + z * 0.0415;
+    const zRgb = x * 0.0557 + y * -0.2040 + z * 1.0570;
+
+    const toSrgb = (value) => {
+      const linear = value <= 0.0031308 ? 12.92 * value : 1.055 * value ** (1 / 2.4) - 0.055;
+      return Math.min(1, Math.max(0, linear));
+    };
+
+    const r = toSrgb(xRgb) * 255;
+    const g = toSrgb(yRgb) * 255;
+    const bChannel = toSrgb(zRgb) * 255;
+
+    return [Math.round(r), Math.round(g), Math.round(bChannel)];
   }
 });

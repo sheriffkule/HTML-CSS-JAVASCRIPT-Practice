@@ -29,34 +29,34 @@
                 <div class="slider-group">
                   <label for="g1">G</label>
                   <input type="range" id="g1" min="0" max="255" value="0" />
-                  <span id="g1-value"></span>
+                  <span id="g1-value">0</span>
                 </div>
                 <div class="slider-group">
                   <label for="b1">B</label>
                   <input type="range" id="b1" min="0" max="255" value="0" />
-                  <span id="b1-value"></span>
+                  <span id="b1-value">0</span>
                 </div>
               </div>
             </fieldset>
 
             <fieldset class="color-picker">
               <legend>Color 2</legend>
-              <input type="color" id="color1" value="#0000ff" />
+              <input type="color" id="color2" value="#0000ff" />
               <div class="sliders">
                 <div class="slider-group">
                   <label for="r2">R</label>
-                  <input type="range" id="r2" min="0" max="255" value="255" />
-                  <span id="r2-value">255</span>
+                  <input type="range" id="r2" min="0" max="255" value="0" />
+                  <span id="r2-value">0</span>
                 </div>
                 <div class="slider-group">
                   <label for="g2">G</label>
                   <input type="range" id="g2" min="0" max="255" value="0" />
-                  <span id="g2-value"></span>
+                  <span id="g2-value">0</span>
                 </div>
                 <div class="slider-group">
-                  <label for="b3">B</label>
-                  <input type="range" id="b3" min="0" max="255" value="0" />
-                  <span id="b3-value"></span>
+                  <label for="b2">B</label>
+                  <input type="range" id="b2" min="0" max="255" value="255" />
+                  <span id="b2-value">255</span>
                 </div>
               </div>
             </fieldset>
@@ -64,7 +64,7 @@
 
           <article class="mix-controls">
             <fieldset class="mix-ratio">
-              <label for="mixRatio">Mix Ratio</label>
+              <label for="mixRatio">Mix Ratio <span id="mixRatioValue">50%</span></label>
               <input type="range" id="mixRatio" min="0" max="100" value="50" />
             </fieldset>
 
