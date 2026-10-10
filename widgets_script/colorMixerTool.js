@@ -174,8 +174,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function updateResultDisplay(hex) {
     // Update the display color
-    resultColorDisplay.style.backgroundColor = hex;
-    document.documentElement.style.setProperty('--result-color', hex);
+    resultColorDisplay.style.setProperty('--result-color', hex);
 
     // Update the color values
     const rgb = hexToRgb(hex);
@@ -398,7 +397,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const xRgb = x * 3.2406 + y * -1.5372 + z * -0.4986;
     const yRgb = x * -0.9689 + y * 1.8758 + z * 0.0415;
-    const zRgb = x * 0.0557 + y * -0.2040 + z * 1.0570;
+    const zRgb = x * 0.0557 + y * -0.204 + z * 1.057;
 
     const toSrgb = (value) => {
       const linear = value <= 0.0031308 ? 12.92 * value : 1.055 * value ** (1 / 2.4) - 0.055;
@@ -411,4 +410,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
     return [Math.round(r), Math.round(g), Math.round(bChannel)];
   }
+
+  // Changing colors on input type range track
+  document.querySelectorAll('input[type="range"]').forEach((input) => {
+    const updateTrack = () => {
+      const min = Number.parseFloat(input.min) || 0;
+      const max = Number.parseFloat(input.max) || 100;
+      const value = Number.parseFloat(input.value);
+      const ratio = Math.min(Math.max((value - min) / (max - min), 0), 1);
+      const val = ratio * 100;
+
+      input.style.backgroundImage = `linear-gradient(to right, var(--success) 0%, var(--primary) ${val}%, #a0a0c0 ${val}%, #a0a0c0 100%)`;
+    };
+
+    input.addEventListener('mousedown', updateTrack);
+    input.addEventListener('input', updateTrack);
+    updateTrack();
+  });
 });
