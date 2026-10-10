@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reaction Time Tester</title>
+    <link rel="stylesheet" href="/clickEffect_style/clickEffect71.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>Reaction Time Tester</h1>
+        <p class="subtitle">Text your reaction speed to color changes.</p>
+      </header>
+
+      <section class="app-container">
+        <article class="test-area waiting" id="testArea">
+          <div class="instruction" id="instruction">Click to start test</div>
+          <div class="reaction-time" id="reactionTime"></div>
+        </article>
+
+        <article class="controls">
+          <button class="btn" id="startBtn">Start Test</button>
+          <button class="btn btn-secondary" id="resetBtn">Reset Stats</button>
+        </article>
+
+        <article class="stats-container">
+          <fieldset class="stat-card">
+            <div class="stat-value" id="lastTime">--</div>
+            <label class="stat-label">Last Time</label>
+          </fieldset>
+          <fieldset class="stat-card">
+            <div class="stat-value" id="bestTIme">--</div>
+            <label class="stat-label">Best Time</label>
+          </fieldset>
+          <fieldset class="stat-card">
+            <div class="stat-value" id="avgTime">--</div>
+            <label class="stat-label">Average</label>
+          </fieldset>
+          <fieldset class="stat-card">
+            <div class="stat-value" id="totalTests">--</div>
+            <label class="stat-label">Tests Completed</label>
+          </fieldset>
+        </article>
+      </section>
+
+      <section class="history">
+        <h2>your Results History</h2>
+        <ul class="history-list" id="historyList">
+          <!-- History items will be added here -->
+        </ul>
+      </section>
+
+      <footer class="footer__copy">
+        © <time datetime="" id="year"></time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
+    </main>
+
+    <script src="/clickEffect_script/clickEffect71.js"></script>
+  </body>
+</html>

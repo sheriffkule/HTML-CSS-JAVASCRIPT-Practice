@@ -1,0 +1,92 @@
+:root {
+    --primary: #4361ee;
+    --secondary: #3f37c9;
+    --accent: #4895ef;
+    --light:#f8f9fa;
+    --dark: #212529;
+    --gray: #6c757d;
+    --success: #4cc9f0;
+    --danger: #f72585;
+    --warning: #f89061;
+    --border-radius: 12px;
+    --box-shadow: 0 8px 20px rgb(0 0 0 / 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, var(--light), var(--success));
+    color: var(--dark);
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+}
+
+.container {
+    width: min(900px, 100%);
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+
+    h1 {
+        font-size: clamp(1.75rem, 5vw, 2.5rem);
+        display: inline-block;
+        margin-bottom: 0.5rem;
+        color: transparent;
+        background: linear-gradient(100deg, var(--primary), var(--secondary));
+        font-weight: 700;
+        background-clip: text;
+        -webkit-background-clip: text;
+    }
+    .subtitle {
+        font-size: 1.125rem;
+        color: var(--gray);
+        margin-bottom: 1.5rem;
+    }
+}
+
+.app-container {
+    background-color: var(--light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.test-area {
+    background-color: #e4e9ee;
+    border-radius: var(--border-radius);
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+
+    &.waiting {
+        background-color: var(--accent);
+    }
+    &.ready {
+        background-color: var(--warning);
+    }
+    &.too-soon {
+        background-color: var(--danger);
+    }
+    &.success {
+        background-color: var(--success);
+    }
+}
