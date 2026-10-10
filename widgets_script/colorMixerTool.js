@@ -28,13 +28,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // State
   let mixedColor = '#7f00ff';
-  let colorHistory = [];
+  let colorHistory = loadColorHistory();
 
   // Initialize
   updateColorInputsFromSliders(1);
   updateColorInputsFromSliders(2);
   updateMixRatioValue();
   generatePalette(mixedColor);
+  updateHistoryDisplay();
 
   // Event listeners
   color1Picker.addEventListener('input', () => updateSlidersFromColorInput(1));
@@ -259,7 +260,40 @@ document.addEventListener('DOMContentLoaded', function () {
       colorHistory.pop();
     }
 
+    saveColorHistory();
     updateHistoryDisplay();
+  }
+
+  function loadColorHistory() {
+    try {
+      const savedHistory = localStorage.getItem('colorMixerHistory');
+      if (savedHistory === null) {
+        return [];
+      }
+
+      const parsedHistory = JSON.parse(savedHistory);
+      if (!Array.isArray(parsedHistory)) {
+        console.warn('Saved color history is not an array; ignoring it.');
+        return [];
+      }
+
+      const validColors = parsedHistory
+        .filter((color) => typeof color === 'string' && /^#[\da-f]{6}$/i.test(color))
+        .map((color) => color.toUpperCase());
+
+      return [...new Set(validColors)].slice(0, 12);
+    } catch (error) {
+      console.warn('Unable to load saved color history from localStorage.', error);
+      return [];
+    }
+  }
+
+  function saveColorHistory() {
+    try {
+      localStorage.setItem('colorMixerHistory', JSON.stringify(colorHistory));
+    } catch (error) {
+      console.error('Unable to save color history to localStorage.', error);
+    }
   }
 
   function updateHistoryDisplay() {
@@ -283,7 +317,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Change button text temporarily
     const originalText = copyHexBtn.textContent;
-    copyHexBtn.textContent = '<i class="fas fa-check"></i> Copied!';
+    copyHexBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
 
     setTimeout(() => {
       copyHexBtn.innerHTML = originalText;
@@ -427,4 +461,18 @@ document.addEventListener('DOMContentLoaded', function () {
     input.addEventListener('input', updateTrack);
     updateTrack();
   });
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
