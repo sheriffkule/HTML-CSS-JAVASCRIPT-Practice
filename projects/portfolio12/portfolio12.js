@@ -34,3 +34,35 @@ const scrollHeader = () => {
   this.scrollY >= 50 ? header.classList.add('scroll-header') : header.classList.remove('scroll-header');
 };
 window.addEventListener('scroll', scrollHeader);
+
+// Swiper cases
+const swiperCase = new Swiper('.case__swiper', {
+  loop: true,
+  grabCursor: true,
+  slidesPerView: 'auto',
+  centeredSlides: 'auto',
+  spaceBetween: 16,
+  speed: 600,
+  effect: 'creative',
+  creativeEffect: {
+    limitProgress: 2,
+    prev: {
+      translate: ['-100%', 0, 0],
+      scale: 0.85,
+    },
+    next: {
+      translate: ['100%', 0, 0],
+      scale: 0.85,
+    },
+  },
+
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+
+  autoplay: {
+    delay: 3000,
+    disableOnInteraction: false,
+  },
+});
