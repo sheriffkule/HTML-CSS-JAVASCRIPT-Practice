@@ -725,3 +725,113 @@ img {
     row-gap: 1.5rem;
   }
 }
+
+.process__container {
+    row-gap: 3rem;
+    margin-top: 2rem;
+}
+
+.process__img {
+    width: 280px;
+    justify-self: center;
+}
+
+.process__card {
+    display: flex;
+    column-gap: 0.5rem;
+    background-color: var(--container-color);
+    box-shadow: 0 4px 24px hsl(0 0% 0% / 0.15),
+    inset 0 4px 24px hsl(0 0% 0% / 0.15);
+    padding: 0.75rem 0.75rem 1rem;
+    border-radius: 1.25rem;
+    cursor: default;
+    transition: background-color 0.4s, box-shadow 0.4s;
+}
+
+.process__number {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--gray-color);
+    flex-shrink: 0;
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+    font: var(--font-semi-bold) var(--h2-font-size) var(--second-font);
+    color: var(--title-color);
+}
+
+.process__title {
+    font-size: var(--h2-font-size);
+    margin-block: 0.25rem 1rem;
+}
+
+.process__content:has(.process__card:hover) .process__card {
+    background-color: var(--body-color);
+    box-shadow: none;
+}
+
+.process__content:has(.process__card:hover) .process__card:hover {
+    background-color: var(--container-color);
+    box-shadow: 0 4px 24px hsl(0 0% 0% / 0.15),
+    inset 0 4px 24px hsl(0 0% 0% / 0.15);
+}
+
+.services {
+    position: relative;
+    margin-top: 3rem;
+}
+
+.services__bg, .services__shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.services__bg {
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;
+}
+
+.services__shadow {
+    background-color: hsl(35 50% 8% / 0.85);
+    box-shadow: inset 0 -96px 48px -40px var(--body-color),
+    inset 0 96px 48px -40px var(--body-color);
+    z-index: 5;
+}
+
+.services .section__header {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding-top: 2rem;
+}
+
+.services :is(.section__subtitle, .section__title) {
+    color: var(--white-color);
+}
+
+.services__container {
+    position: relative;
+    z-index: 10;
+    padding-block: 3rem 7rem;
+}
+
+.services__card {
+    background-color: hsl(0 0% 100% / 0.1);
+    backdrop-filter: blur(16px);
+    padding: 1rem;
+    border-radius: 1.25rem;
+    border: 1px solid var(--gray-color);
+    display: grid;
+    row-gap: 1rem;
+    transition: background-color 0.4s;
+}
+
+.services__number {
+    font: var(--font-italic) var(--font-semi-bold) var(--big-font-size) var(--second-font);
+    color: var(--white-color);
+    transition: color 0.4s;
+}
