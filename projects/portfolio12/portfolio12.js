@@ -85,3 +85,22 @@ questionsButton.forEach((button) => {
     if (!isOpen) currentCard.classList.replace('questions-close', 'questions-open');
   });
 });
+
+// Swiper clients
+const swiperClients = new Swiper('.clients__swiper', {
+  loop: true,
+  grabCursor: true,
+  slidesPerView: 'auto',
+  centeredSlides: 'auto',
+  spaceBetween: 16,
+  speed: 600,
+
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  // autoplay: {
+  //   delay: 3000,
+  //   disableOnInteraction: false,
+  // },
+})
