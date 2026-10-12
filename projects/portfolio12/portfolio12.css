@@ -828,10 +828,248 @@ img {
     display: grid;
     row-gap: 1rem;
     transition: background-color 0.4s;
+
+    &:hover {
+        background-color: var(--container-color);
+    }
 }
 
 .services__number {
     font: var(--font-italic) var(--font-semi-bold) var(--big-font-size) var(--second-font);
     color: var(--white-color);
     transition: color 0.4s;
+}
+
+.services__title {
+    font-size: var(--h2-font-size);
+    color: var(--white-color);
+    transition: color 0.4s;
+}
+
+.services__status {
+    display: flex;
+    column-gap: 0.5rem;
+    align-items: center;
+}
+
+.services__text {
+    background-color: var(--white-color);
+    color: var(--title-color);
+    padding: 0.25rem 0.5rem;
+    font-size: var(--smaller-font-size);
+    font-weight: var(--font-semi-bold);
+    text-transform: uppercase;
+    border-radius: 2rem;
+    transition: background-color 0.4s, color 0.4s;
+}
+
+.services__circle {
+    width: 16px;
+    height: 16px;
+    background-color: var(--white-color);
+    border-radius: 50%;
+    transition: background-color 0.4s;
+}
+
+.services__description {
+    color: var(--white-color);
+    margin-bottom: 1.25rem;
+    transition: color 0.4s;
+}
+
+.services__button {
+    width: 40px;
+    height: 40px;
+    background-color: var(--white-color);
+    color: var(--first-color);
+    font-size: 1.75rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    transition: background-color 0.4s, color 0.4s, box-shadow 0.4s;
+
+    &:hover {
+        box-shadow: 0 8px 24px hsl(41 54% 55% / 0.3);
+    }
+}
+
+.services__card:hover :is(.services__number, .services__title) {
+    color: var(--title-color);
+}
+
+.services__card:hover :is(.services__circle, .services__text, .services__button) {
+    background-color: var(--first-color);
+    color: var(--white-color);
+}
+
+.services__card:hover .services__description {
+    color: var(--text-color);
+}
+
+.service {
+  padding-block: 5rem 3rem;
+}
+
+.service .section__header {
+  text-align: center;
+}
+
+.service__header {
+  padding-block: 3rem 2rem;
+}
+
+.service__tag {
+  display: flex;
+  column-gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.service__circle {
+  width: 16px;
+  height: 16px;
+  background-color: var(--first-color);
+  border-radius: 50%;
+}
+
+.service__text {
+  border: 1px solid var(--first-color);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4rem;
+  font-size: var(--small-font-size);
+}
+
+.service__title {
+  font-size: var(--h2-font-size);
+  margin-bottom: 1rem;
+}
+
+.service__subtitle {
+  font-size: var(--h3-font-size);
+  margin-bottom: 1rem;
+}
+
+.service__card {
+  display: grid;
+  row-gap: 1rem;
+}
+
+.service__card-article {
+  background-color: var(--body-color);
+  padding: 1rem;
+  border: 1px solid var(--gray-color);
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px hsla(0, 0%, 0%, 0.1);
+}
+
+.service__card-data {
+  display: flex;
+  column-gap: 0.5rem;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.service__card i {
+  font-size: 1rem;
+  color: var(--first-color);
+}
+
+.service__card-name {
+  font-size: var(--small-font-size);
+  font-family: var(--body-font);
+}
+
+.service__card-description {
+  font-size: var(--small-font-size);
+  padding-left: 1.5rem;
+}
+
+.service__corp {
+  background-color: var(--second-color);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  color: var(--white-color);
+}
+
+.service__corp .service__subtitle {
+  color: var(--white-color);
+}
+
+.service__corp .button {
+  margin-top: 2rem;
+}
+
+.service__scope {
+  background-color: var(--body-color);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid var(--gray-color);
+  box-shadow: 0 4px 8px hsla(0, 0%, 0%, 0.1);
+}
+
+.service__list {
+  display: grid;
+  row-gap: 1rem;
+}
+
+.service__item {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  font-size: var(--small-font-size);
+  font-weight: var(--font-medium);
+}
+
+.service__item i {
+  font-size: 1rem;
+  color: var(--first-color);
+}
+
+@media (width >= 1150px) {
+  .service {
+    padding-block: 5rem;
+  }
+  .service .section__header {
+    align-items: flex-start;
+  }
+  .service__header {
+    padding-block: 3rem;
+  }
+  .service__title {
+    font-size: var(--big-font-size);
+  }
+  .service__description {
+    max-width: 850px;
+  }
+  .service__container {
+    grid-template-columns: 630px 435px;
+    column-gap: 4rem;
+    align-items: flex-start;
+  }
+  .service__subtitle {
+    font-size: var(--h1-font-size);
+    margin-bottom: 1.5rem;
+  }
+  .service__card-article {
+    padding: 2rem;
+  }
+  .service__card i {
+    font-size: 1.5rem;
+  }
+  .service__card-name {
+    font-size: var(--h3-font-size);
+    margin-bottom: 1rem;
+  }
+  .service__card-description {
+    font-size: var(--normal-font-size);
+  }
+  .service__corp, .service__scope {
+    padding: 2rem;
+  }
+  :is(.service__corp, .service__scope) .service__subtitle {
+    font-size: var(--h2-font-size);
+  }
+  .service__item {
+    font-size: var(--normal-font-size);
+  }
 }
