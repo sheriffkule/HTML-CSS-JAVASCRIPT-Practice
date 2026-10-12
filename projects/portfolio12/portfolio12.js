@@ -103,26 +103,62 @@ const swiperClients = new Swiper('.clients__swiper', {
     delay: 3000,
     disableOnInteraction: false,
   },
-})
+});
 
 // Contact email js
-const contactForm = document.getElementById('contact-form')
-const contactMessage =document.getElementById('contact-message')
+const contactForm = document.getElementById('contact-form');
+const contactMessage = document.getElementById('contact-message');
 
 const sendEmail = async (e) => {
-  e.preventDefault()
+  e.preventDefault();
 
   try {
-    await emailjs.sendForm('service_8ii265', 'template_85g6ftk', '#contact-form', 'VQaq6RG_bXgUd7BNm')
+    await emailjs.sendForm('service_8ii265', 'template_85g6ftk', '#contact-form', 'VQaq6RG_bXgUd7BNm');
 
-    contactMessage.textContent = 'Message sent successfully ✅'
+    contactMessage.textContent = 'Message sent successfully ✅';
 
-    contactForm.reset()
+    contactForm.reset();
   } catch (error) {
-    contactMessage.textContent = 'Message not sent (service error) ❌'
-    console.error(error)
+    contactMessage.textContent = 'Message not sent (service error) ❌';
+    console.error(error);
   } finally {
-    setTimeout(() => contactMessage.textContent = '', 5000)
+    setTimeout(() => (contactMessage.textContent = ''), 5000);
   }
-}
-contactForm.addEventListener('submit', sendEmail)
+};
+contactForm.addEventListener('submit', sendEmail);
+
+// Current year of the footer
+const textYear = document.getElementById('footer-date');
+const currentYear = new Date().getFullYear();
+
+// Each year it is updated to the current year
+textYear.textContent = currentYear;
+
+// Scroll up
+const scrollUp = () => {
+  const scrollUp = document.getElementById('scroll-up');
+  // When the scroll is higher than 350 viewport height, add the show-scroll class to the a tag with the scroll-up id
+  this.scrollY >= 350 ? scrollUp.classList.add('show-scroll') : scrollUp.classList.remove('show-scroll');
+};
+window.addEventListener('scroll', scrollUp);
+
+// Scroll sections active link
+const sections = document.querySelectorAll('section[id]');
+
+// Link the ID of each section (section id="home") to each link (a href="home")
+// and activate the link with the class .active-link
+const scrollActive = () => {
+  const scrollY = window.scrollY;
+
+  sections.forEach((section) => {
+    const id = section.id;
+    const top = section.offsetTop - 58;
+    const height = section.offsetHeight;
+    const link = document.querySelector('.nav__menu a[href*=' + id + ']');
+
+    if (!link) return;
+
+    link.classList.toggle('active-link', scrollY > top && scrollY <= top + height);
+  });
+};
+window.addEventListener('scroll', scrollActive);
