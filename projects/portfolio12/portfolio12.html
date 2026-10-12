@@ -692,8 +692,166 @@
           </div>
         </div>
       </section>
+
+      <section class="contact section" id="contact">
+        <div class="section__header container">
+          <div>
+            <span class="section__subtitle">
+              <div></div>
+              CONTACT ME
+            </span>
+
+            <h2 class="section__title">
+              Start Your <br />
+              <span>Case Today</span>
+            </h2>
+          </div>
+        </div>
+
+        <div class="contact__container container grid">
+          <form action="" class="contact__form grid" id="contact-form">
+            <div class="contact__group">
+              <input
+                type="text"
+                name="user_name"
+                required
+                autocomplete="name"
+                class="contact__input"
+                id="name"
+                placeholder="Your Name" />
+              <label for="name" class="contact__label"></label>
+            </div>
+
+            <div class="contact__group">
+              <input
+                type="email"
+                name="user_email"
+                required
+                autocomplete="email"
+                class="contact__input"
+                id="email"
+                placeholder="Your Email" />
+              <label for="email" class="contact__label"></label>
+            </div>
+
+            <div class="contact__group">
+              <textarea
+                name="user_message"
+                id="message"
+                required
+                placeholder="Message: (legal service & phone)"
+                class="contact__input contact__area"></textarea>
+              <label for="message" class="contact__label"></label>
+            </div>
+
+            <button type="submit" class="contact__button button">
+              <div>
+                <i class="ri-arrow-right-up-long-line"></i>
+              </div>
+
+              <span>Send Message</span>
+            </button>
+
+            <p class="contact__message" id="contact-message"></p>
+          </form>
+
+          <div class="contact__map">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3925.395777684927!2d123.89218558822269!3d10.310176700819058!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a9990079c32d4b%3A0x6ec9775dbdc6e240!2sFuente%20osmena%20cebu%20city!5e0!3m2!1sen!2srs!4v1791809898366!5m2!1sen!2srs"
+              width="600"
+              height="450"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+        </div>
+      </section>
     </main>
 
+    <footer class="footer">
+      <img src="img/footer-bg.png" alt="" class="footer__bg" />
+      <div class="footer__shadow"></div>
+
+      <div class="footer__container container grid">
+        <div class="footer__group">
+          <div class="footer__social">
+            <a href="https://www.facebook.com/" target="_blank" class="footer__social-link">
+              <i class="ri-facebook-fill"></i>
+            </a>
+            <a href="https://www.instagram.com/" target="_blank" class="footer__social-link">
+              <i class="ri-instagram-fill"></i>
+            </a>
+            <a href="https://www.linkedin.com/" target="_blank" class="footer__social-link">
+              <i class="ri-linkedin-box-fill"></i>
+            </a>
+          </div>
+
+          <h3 class="footer__title">
+            Your Trusted <br />
+            Legal Guidance
+          </h3>
+          <p class="footer__description">
+            Expert legal advice for personal and business matters; build a stronger case.
+          </p>
+        </div>
+
+        <div class="footer__content">
+          <div class="footer__data">
+            <h3 class="footer__subtitle">Quick Links</h3>
+
+            <div class="footer__links">
+              <a href="#about" class="footer__link">About</a>
+              <a href="#case" class="footer__link">Cases</a>
+              <a href="#services" class="footer__link">Services</a>
+              <a href="#contact" class="footer__link">Contact</a>
+            </div>
+          </div>
+
+          <div class="footer__data">
+            <h3 class="footer__subtitle">Write Message</h3>
+
+            <div class="footer__links">
+              <a
+                href="https://api.whatsapp.com/send?phone=51123456789&text=Hello, more information!"
+                target="_blank"
+                class="footer__link"
+                >Whatsapp</a
+              >
+              <a href="https://m.me/" target="_blank" class="footer__link">Messenger</a>
+              <a href="https://t.me/telegram" target="_blank" class="footer__link">Telegram</a>
+            </div>
+          </div>
+
+          <div class="footer__data">
+            <h3 class="footer__subtitle">Connect with Me</h3>
+
+            <div class="footer__links">
+              <div class="footer__conect">
+                <i class="ri-mail-fill"></i>
+                <span>paul@email.com</span>
+              </div>
+
+              <div class="footer__conect">
+                <i class="ri-phone-fill"></i>
+                <address><a href="tel:+0123456789">0123456789</a></address>
+              </div>
+
+              <div class="footer__conect">
+                <i class="ri-map-pin-2-fill"></i>
+                <address>Philippines, Cebu City, Fuente Osmeña Circle</address>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer__info container"></div>
+    </footer>
+
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@5/dist/email.min.js"></script>
     <script src="/scripts/swiper-bundle.min.js"></script>
     <script src="portfolio12.js"></script>
   </body>

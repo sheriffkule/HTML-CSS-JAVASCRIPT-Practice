@@ -99,8 +99,30 @@ const swiperClients = new Swiper('.clients__swiper', {
     nextEl: '.swiper-button-next',
     prevEl: '.swiper-button-prev',
   },
-  // autoplay: {
-  //   delay: 3000,
-  //   disableOnInteraction: false,
-  // },
+  autoplay: {
+    delay: 3000,
+    disableOnInteraction: false,
+  },
 })
+
+// Contact email js
+const contactForm = document.getElementById('contact-form')
+const contactMessage =document.getElementById('contact-message')
+
+const sendEmail = async (e) => {
+  e.preventDefault()
+
+  try {
+    await emailjs.sendForm('service_8ii265', 'template_85g6ftk', '#contact-form', 'VQaq6RG_bXgUd7BNm')
+
+    contactMessage.textContent = 'Message sent successfully ✅'
+
+    contactForm.reset()
+  } catch (error) {
+    contactMessage.textContent = 'Message not sent (service error) ❌'
+    console.error(error)
+  } finally {
+    setTimeout(() => contactMessage.textContent = '', 5000)
+  }
+}
+contactForm.addEventListener('submit', sendEmail)

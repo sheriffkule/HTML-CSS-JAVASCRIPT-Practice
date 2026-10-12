@@ -1281,3 +1281,96 @@ img {
     font-size: 2rem;
     transition: background-color 0.4s, color 0.4s;
 }
+
+.clients :is(.swiper-button-prev, .swiper-button-next):hover {
+    background-color: var(--first-color);
+    color: var(--white-color);
+}
+
+.clients .swiper-button-prev {
+    left: calc(50% - 3rem);
+}
+
+.clients .swiper-button-next {
+    right: calc(50% - 3rem);
+}
+
+.clients .swiper-slide-active .clients__gradient,
+.clients .swiper-slide-duplicate-active .clients__gradient {
+    background-color: hsl(35 50% 8% / 0.8);
+}
+
+.clients .swiper-slide-active :is(.clients__point, .clients__description, .clients__name, .clients__city) {
+    color: var(--white-color);
+}
+
+.contact__container {
+    row-gap: 3rem;
+    margin-top: 2rem;
+}
+
+.contact__map iframe {
+    width: 100%;
+    height: 100%;
+}
+
+.contact__map {
+    height: 380px;
+    justify-self: center;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.contact__form {
+    position: relative;
+    row-gap: 1rem;
+    background-color: var(--container-color);
+    padding: 1rem 0.75rem;
+    box-shadow: 0 4px 24px hsl(0 0% 0% / 0.1);
+    border: 1px solid var(--gray-color);
+    border-radius: 1rem;
+}
+
+.contact__group {
+    position: relative;
+}
+
+.contact__input {
+    width: 100%;
+    background: var(--container-color);
+    color: var(--title-color);
+    padding: 1.25rem;
+    border-radius: 1rem;
+    border: 1px solid var(--gray-color);
+}
+
+.contact__label {
+    display: none;
+}
+
+.contact__input:focus ~ .contact__label {
+    opacity: 0;
+}
+
+.contact__input:autofill {
+    transition: background-color 6000s, color 6000s;
+}
+
+.contact__area {
+    height: 14rem;
+    resize: none;
+}
+
+.contact__button {
+    margin-top: 1rem;
+    justify-self: center;
+    cursor: pointer;
+}
+
+.contact__message {
+    position: absolute;
+    left: 0.75rem;
+    bottom: 5rem;
+    color: var(--title-color);
+    font-size: var(--small-font-size);
+}
