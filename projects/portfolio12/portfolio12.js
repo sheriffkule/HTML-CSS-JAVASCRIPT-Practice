@@ -66,3 +66,22 @@ const swiperCase = new Swiper('.case__swiper', {
     disableOnInteraction: false,
   },
 });
+
+// Questions FAQS
+const questionsCards = document.querySelectorAll('.questions__card');
+const questionsButton = document.querySelectorAll('.questions__button');
+
+questionsButton.forEach((button) => {
+  button.addEventListener('click', () => {
+    const currentCard = button.closest('.questions__card');
+    const isOpen = currentCard.classList.contains('questions-open');
+
+    // Close all other services data
+    questionsCards.forEach((card) => {
+      card.classList.replace('questions-open', 'questions-close');
+    });
+
+    // If clicked card was closed, it opens it.
+    if (!isOpen) currentCard.classList.replace('questions-close', 'questions-open');
+  });
+});
