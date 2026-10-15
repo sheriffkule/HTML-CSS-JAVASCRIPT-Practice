@@ -78,3 +78,28 @@ h1 {
     flex-direction: column;
     gap: 25px;
 }
+
+.preview-section {
+    background-color: white;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.panel-title {
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+    color: var(--primary-light);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    i {
+        font-size: 1.125rem;
+    }
+}
+
+.form-group {
+    margin-bottom: 20px;
+    border: none;
+}
