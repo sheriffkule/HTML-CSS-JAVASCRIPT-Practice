@@ -51,3 +51,30 @@ h1 {
     font-size: 1.125rem;
     opacity: 0.8;
 }
+
+.app-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+
+    @media (width <= 768px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.controls-panel {
+    background-color: white;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow),
+    inset var(--shadow);
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+}
+
+.preview-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}

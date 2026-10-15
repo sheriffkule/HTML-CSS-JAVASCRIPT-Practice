@@ -99,7 +99,73 @@
             <button class="btn" id="generate-btn"><i class="fas fa-magic"></i> Generate</button>
           </article>
         </section>
+
+        <section class="preview-panel">
+          <article class="preview-section">
+            <h2 class="panel-title"><i class="fas fa-eye"></i> Live Preview</h2>
+            <fieldset class="preview-form">
+              <div class="form-row">
+                <label for="preview-input">Username</label>
+                <input
+                  type="text"
+                  id="preview-input"
+                  class="input-preview"
+                  placeholder="Enter your username" />
+              </div>
+            </fieldset>
+          </article>
+
+          <article class="code-panels-container">
+            <fieldset class="code-panel-wrapper">
+              <h2 class="panel-title"><i class="fab fa-html5"></i> HTML Code</h2>
+              <div class="code-panel">
+                <div class="code-header">
+                  <span>HTML</span>
+                  <button class="copy-btn" data-target="html-code"><i class="far fa-copy"></i> Copy</button>
+                </div>
+                <pre id="html-code"><code>&lt;div class="form-group"&gt;
+    &lt;label for="username"&gt;Username&lt;/label&gt;
+    &lt;input type="text" id="username" class="custom-input" placeholder="Enter your username" required&gt;
+&lt;/div&gt;</code></pre>
+              </div>
+            </fieldset>
+
+            <fieldset class="code-panel-wrapper">
+              <h2 class="panel-title"><i class="fab fa-css3-alt"></i>CSS Code</h2>
+              <div class="code-panel">
+                <div class="code-header">
+                  <span>CSS</span>
+                  <button class="copy-btn" data-target="css-code"><i class="far fa-copy"></i> Copy</button>
+                </div>
+                <pre id="css-code"><code>.custom-input {
+    width: 100%;
+    padding: 12px 15px;
+    border 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #1a1a2e;
+    background-color: #ffffff;
+    transition: all 0.3s ease;    
+}
+.custom-input:focus {
+    outline: none;
+    border-color: #4361ee;
+    box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);    
+}</code></pre>
+              </div>
+            </fieldset>
+          </article>
+        </section>
       </main>
+
+      <footer class="footer__copy">
+        © <time datetime="" id="year"></time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
     </div>
+
+    <div class="toast" id="toast">Code Copied to clipboard!</div>
+
+    <script src="/widgets_script/inputDesignGenerator.js"></script>
   </body>
 </html>
