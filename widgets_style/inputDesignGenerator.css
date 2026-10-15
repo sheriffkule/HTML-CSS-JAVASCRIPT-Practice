@@ -1,0 +1,53 @@
+:root {
+    --primary: #4361ee;
+    --primary-light: #3f37c9;
+    --secondary: #3a0ca3;
+    --dark: #1a1a2e;
+    --light: #f1f2fa;
+    --danger: #f72585;
+    --warning: #f8961e;
+    --border-radius: 8px;
+    --shadow: 0 4px 8px rgb(0 0 0 / 0.15);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #f5f7ff, #c0c1c7);
+    color: var(--dark);
+    line-height: 1.5;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-block: 20px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+h1 {
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+    margin-bottom: 10px;
+    text-shadow: 1px 1px #999,
+    2px 2px #999,
+    3px 3px #999;
+}
+
+.subtitle {
+    font-size: 1.125rem;
+    opacity: 0.8;
+}

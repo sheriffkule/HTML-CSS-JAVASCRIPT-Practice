@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Input Design Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/inputDesignGenerator.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Input Design Generator</h1>
+        <p class="subtitle">Create beautiful, customizable form inputs with real-time preview.</p>
+      </header>
+
+      <main class="app-container">
+        <section class="controls-panel">
+          <h2 class="panel-title"><i class="fas fa-sliders-h"></i></h2>
+
+          <fieldset class="form-group">
+            <label for="input-type">Input Type</label>
+            <select id="input-type">
+              <option value="text">Text</option>
+              <option value="email">Email</option>
+              <option value="password">Password</option>
+              <option value="number">Number</option>
+              <option value="tel">Phone</option>
+              <option value="url">URL</option>
+              <option value="date">Date</option>
+              <option value="time">Time</option>
+              <option value="datetime-local">Date & Time</option>
+              <option value="color">Color Picker</option>
+              <option value="range">Range Slider</option>
+              <option value="file">File Upload</option>
+              <option value="textarea">Textarea</option>
+              <option value="select">Select Dropdown</option>
+              <option value="radio">Radio Buttons</option>
+              <option value="checkbox">Checkboxes</option>
+            </select>
+          </fieldset>
+
+          <fieldset class="form-group">
+            <label for="input-label"></label>
+            <input type="text" id="input-label" placeholder="Enter label text" value="Username" />
+          </fieldset>
+
+          <fieldset class="form-group">
+            <label for="placeholder"></label>
+            <input
+              type="text"
+              id="placeholder"
+              placeholder="Enter placeholder text"
+              value="Enter your username" />
+          </fieldset>
+
+          <fieldset class="form-group">
+            <legend>Appearance</legend>
+            <div class="checkbox-group">
+              <input type="checkbox" id="required" checked />
+              <label for="required">Required</label>
+            </div>
+            <div class="checkbox-group">
+              <input type="checkbox" id="disabled" />
+              <label for="disabled">Disabled</label>
+            </div>
+            <div class="checkbox-group">
+              <input type="checkbox" id="icon" />
+              <label for="icon">Add Icon <span class="badge badge-new">New</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-group">
+            <label for="border-radius">Border Radius (px)</label>
+            <input type="range" id="border-radius" min="0" max="20" value="8" />
+          </fieldset>
+
+          <fieldset class="form-group">
+            <div>
+              <label for="text-color">Text Color</label>
+              <input type="color" id="text-color" value="#1a1a2e" />
+            </div>
+            <div>
+              <label for="bg-color">Background Color</label>
+              <input type="color" id="bg-color" value="#ffffff" />
+            </div>
+            <div>
+              <label for="border-color">Border Color</label>
+              <input type="color" id="border-color" value="#dddddd" />
+            </div>
+            <div>
+              <label for="focus-color">Focus Color</label>
+              <input type="color" id="focus-color" value="#4361ee" />
+            </div>
+          </fieldset>
+
+          <article class="btn-group">
+            <button class="btn btn-secondary" id="rest-btn"><i class="fas fa-redo"></i> Reset</button>
+            <button class="btn" id="generate-btn"><i class="fas fa-magic"></i> Generate</button>
+          </article>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
