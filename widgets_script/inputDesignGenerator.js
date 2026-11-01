@@ -229,4 +229,154 @@ document.addEventListener('DOMContentLoaded', function () {
     // Generate code preview
     generateCodePreview();
   }
+
+  // Generate HTML and CSS code preview
+  function generateCodePreview() {
+    const type = inputType.value;
+    const labelText = inputLabel.value || 'Label';
+    const placeholderText = placeholder.value || 'Enter text';
+    const isRequired = required.checked;
+    const isDisabled = disabled.checked;
+    const hasIcon = addIcon.checked;
+    const radius = borderRadius.value + 'px';
+    const textColor = textColor.value;
+    const bg = bgColor.value;
+    const border = borderColor.value;
+    const focus = focusColor.value;
+
+    // Generate HTML code
+    let html = '';
+    let css = '';
+
+    if (type === 'radio') {
+      html = `<div class="form-group">\n    <label>${labelText}</label>\n   <div class="radio-group">`;
+      sampleOptions.forEach((option, index) => {
+        html += `\n    <div class="radio-option">\n        <input type="radio" id="radio-${index}" name="radio-group" ${isDisabled ? 'disabled' : ''} ${isRequired ? 'required' : ''} />\n        <label for="radio-${index}">${option.label}</label>\n    </div>`;
+      });
+      html += `\n   </div>\n</div>`;
+
+      css = `.radio-group {
+display: flex;
+gap: 15px;
+margin-top: 8px;
+}
+
+.radio-option {
+display: flex;
+align-items: center;
+gap: 5px;
+}
+
+.radio-option input[type="radio"] {
+accent-color: ${focus};
+width: 16px;
+height: 16px;
+}`;
+    } else if (type === 'checkbox') {
+      html = `<div class="form-group">\n    <label>${labelText}</label>\n   <div class="checkbox-group">`;
+      sampleOptions.forEach((option, index) => {
+        html += `\n    <div class="checkbox-option">\n        <input type="checkbox" id="checkbox-${index}" ${isDisabled ? 'disabled' : ''} ${isRequired ? 'required' : ''} />\n        <label for="checkbox-${index}">${option.label}</label>\n    </div>`;
+      });
+      html += `\n   </div>\n</div>`;
+
+      css = `.checkbox-group {
+display: flex;
+gap: 15px;
+margin-top: 8px;
+}
+
+.checkbox-option {
+display: flex;
+align-items: center;
+gap: 5px;
+}
+
+.checkbox-option input[type="checkbox"] {
+accent-color: ${focus};
+width: 16px;
+height: 16px;
+}`;
+    } else if (type === 'select') {
+      html = `<div class="form-group">\n    <label for="custom-select">${labelText}</label>\n    <select id="custom-select" class="custom-input" ${isDisabled ? 'disabled' : ''} ${isRequired ? 'required' : ''}>\n        <option value="" disabled selected>${placeholderText || 'Select an option'}</option>`;
+      sampleOptions.forEach((option) => {
+        html += `\n        <option value="${option.value}">${option.label}</option>`;
+      });
+      html += `\n    </select>\n</div>`;
+
+      css = `.custom-input {
+width: 100%;
+padding: 12px 15px;
+border: 1px solid ${border};
+border-radius: ${radius};
+font-size: 1rem;
+color: ${textColor};
+background-color: ${bg};
+transition: all 0.3s ease;
+}
+
+.custom-input:focus {
+border-color: ${focus};
+box-shadow: 0 0 0 2px ${hexToRgba(focus, 0.2)};
+outline: none;
+}`;
+    } else if (type === 'textarea') {
+      html = `<div class="form-group">\n    <label for="custom-textarea">${labelText}</label>\n    <textarea id="custom-textarea" class="custom-input" placeholder="${placeholderText}" ${isDisabled ? 'disabled' : ''} ${isRequired ? 'required' : ''}></textarea>\n</div>`;
+
+      css = `.custom-input {
+width: 100%;
+padding: 12px 15px;
+border: 1px solid ${border};
+border-radius: ${radius};
+font-size: 1rem;
+color: ${textColor};
+background-color: ${bg};
+transition: all 0.3s ease;
+min-height: 100px;
+resize: vertical;
+}
+
+.custom-input:focus {
+border-color: ${focus};
+box-shadow: 0 0 0 2px ${hexToRgba(focus, 0.2)};
+outline: none;
+}`;
+    } else {
+      let inputHtml = ''
+      let iconCss = ''
+
+      if (hasIcon) {
+        const icon = type === 'password'
+          ? 'fa-lock'
+          : type === 'email'
+            ? 'fa-envelope'
+            : type === 'number'
+              ? 'fa-hashtag'
+              : type === 'tel'
+                ? 'fa-phone'
+                : type === 'date'
+                  ? 'fa-calendar'
+                  : type === 'time'
+                    ? 'fa-clock'
+                    : 'fa-user';
+
+        inputHtml = `<div class="input-icon">\n    <i class="fas ${icon}"></i>\n    <input type="${type}" id="custom-input" class="custom-input" placeholder="${placeholderText}" ${isDisabled ? 'disabled' : ''} ${isRequired ? 'required' : ''} />\n</div>`;
+
+        iconCss = `.input-icon {
+position: relative;
+}
+
+.input-icon i {
+position: absolute;
+top: 50%;
+left: 10px;
+transform: translateY(-50%);
+color: #6c757d;
+}
+
+.input-icon .custom-input {
+padding-left: 35px;
+}`;
+      }
+    }
+  }
 });
