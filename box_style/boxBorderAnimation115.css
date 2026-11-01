@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Poppins:wght@400;500;600&display=swap');
+
+:root {
+    --first: hsl(23 56% 51%);
+    --gradient: linear-gradient(180deg,
+                      hsl(20 18% 3%) 0%,
+                      hsl(20 45% 9%) 30%,
+                      hsl(23 56% 51%) 72%,
+                      hsl(26 67% 73%) 100%);
+    --title: hsl(26 30% 95%);
+    --text: hsl(23 11% 69%);
+    --text-light: hsl(20 7% 41%);
+    --body: hsl(20 18% 3%);
+    --container: hsl(15 20% 8%);
+    --body-font: 'Poppins', sans-serif;
+    --second-font: 'Instrument Serif', serif;
+    --biggest-font-size: 2.5rem;
+    --h1-font-size: 1.5rem;
+    --h3-font-size: 1rem;
+    --normal-font-size: 0.938rem;
+    --small-font-size: 0.813rem;
+    --smaller-font-size: 0.75rem;
+}
+
+@media (width >= 1150px) {
+    :root {
+    --biggest-font-size: 5rem;
+    --h1-font-size: 3.5rem;
+    --h3-font-size: 2.5rem;
+    --normal-font-size: 1rem;
+    --small-font-size: 0.875rem;
+    --smaller-font-size: 0.813rem;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+    background-color: var(--body);
+    color: var(--text);
+}
+
+a {
+    text-decoration: none;
+}
