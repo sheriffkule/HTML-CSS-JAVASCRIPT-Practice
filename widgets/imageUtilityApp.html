@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Utility App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/imageUtilityApp.css" />
+  </head>
+  <body>
+    <div id="preloader">
+      <p>Loading...</p>
+    </div>
+
+    <header>
+      <h1>Image Utility App | Upload image you want to edit.</h1>
+      <input type="file" id="image-input" accept="image/jpeg, image/png, image/jpb" />
+    </header>
+
+    <main>
+      <section id="controls-section">
+        <article id="controls-container">
+          <fieldset>
+            <label for="grayscale">Grayscale:</label>
+            <input
+              type="range"
+              class="filters-input"
+              id="grayscale"
+              value="0"
+              min="0"
+              max="100"
+              data-sizing="%" />
+          </fieldset>
+
+          <fieldset>
+            <label for="contrast">Contrast:</label>
+            <input
+              type="range"
+              class="filters-input"
+              id="contrast"
+              value="100"
+              min="0"
+              max="500"
+              data-sizing="%" />
+          </fieldset>
+
+          <fieldset>
+            <label for="blur">Blur:</label>
+            <input type="range" class="filters-input" id="blur" value="0" min="0" max="10" data-sizing="px" />
+          </fieldset>
+
+          <fieldset>
+            <label for="brightness">Brightness:</label>
+            <input
+              type="range"
+              class="filters-input"
+              id="brightness"
+              value="100"
+              min="0"
+              max="500"
+              data-sizing="%" />
+          </fieldset>
+
+          <fieldset>
+            <label for="invert">Invert:</label>
+            <input
+              type="range"
+              class="filters-input"
+              id="invert"
+              value="0"
+              min="0"
+              max="100"
+              data-sizing="%" />
+          </fieldset>
+
+          <fieldset>
+            <label for="hue-rotate">Hue Rotate:</label>
+            <input
+              type="range"
+              class="filters-input"
+              id="hue-rotate"
+              value="0"
+              min="0"
+              max="360"
+              data-sizing="deg" />
+          </fieldset>
+
+          <fieldset>
+            <label for="opacity">Opacity:</label>
+            <input
+              type="range"
+              class="filters-input"
+              id="opacity"
+              value="100"
+              min="0"
+              max="100"
+              data-sizing="%" />
+          </fieldset>
+
+          <fieldset>
+            <label for="saturate">Saturate:</label>
+            <input
+              type="range"
+              class="filters-input"
+              id="saturate"
+              value="1"
+              min="0"
+              max="10"
+              data-sizing="" />
+          </fieldset>
+
+          <fieldset>
+            <label for="sepia">Sepia:</label>
+            <input
+              type="range"
+              class="filters-input"
+              id="sepia"
+              value="0"
+              min="0"
+              max="100"
+              data-sizing="%" />
+          </fieldset>
+
+          <fieldset>
+            <label for="border-radius"
+              >Border Radius: &nbsp; Px &nbsp;<label class="toggle"
+                ><input type="checkbox" />
+                <div></div> </label
+              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%
+            </label>
+            <input
+              type="range"
+              class="filters-input"
+              id="border-radius"
+              value="0"
+              min="0"
+              max="250"
+              data-sizing="px" />
+          </fieldset>
+        </article>
+
+        <article id="btn-container">
+          <button id="reset-btn">Reset <i class="fa-solid fa-rotate-left"></i></button>
+          <button id="download-now-btn">Download <i class="fa-solid fa-download"></i></button>
+        </article>
+      </section>
+
+      <section id="image-section">
+        <figure><img src="" alt="" id="display-image" /></figure>
+        <button title="Expand"><i class="fa-solid fa-expand"></i></button>
+      </section>
+
+      <div class="popup" id="popup">
+        <div class="popup-content">
+          <span id="close-btn">&times;</span>
+          <p id="popup-content-heading">Looks Great, Right!!</p>
+          <hr />
+          <div id="img-container"></div>
+          <hr />
+          <div id="share-btns">
+            <i class="fa-solid fa-download" title="Download" id="download-btn"></i>
+            <i class="fa-solid fa-share-nodes" title="Share" id="share-btn"></i>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+    <script src="/widgets_script/imageUtilityApp.js"></script>
+  </body>
+</html>
