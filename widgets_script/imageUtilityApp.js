@@ -107,3 +107,51 @@ resetBtn.addEventListener('dblclick', () => {
   displayImageContainer.style.border = '4px dashed lightgrey';
   displayImageContainer.style.background = 'transparent';
 });
+
+imageInput.addEventListener('change', (e) => {
+  const reader = new FileReader();
+  reader.addEventListener('load', () => {
+    const uploadedImage = reader.result;
+    displayImage.src = uploadedImage;
+    displayImage.style.cursor = 'move';
+    displayImageContainer.style.border = '4px dotted lightgrey';
+    displayImageContainer.style.background = 'transparent';
+    reset();
+    setTimeout(() => {
+      console.log(displayImage.width, displayImage.height);
+    }, 100);
+    activateOnImageLoad();
+  });
+
+  reader.readAsDataURL(e.target.files[0]);
+});
+
+const downloadNowBtn = document.querySelector('#download-now-btn');
+const closeBtn = document.querySelector('#close-btn');
+const popup = document.querySelector('#popup');
+const imgContainer = document.querySelector('#img-container');
+const downloadBtn = document.querySelector('#download-btn');
+const shareBtn = document.querySelector('#share-btn');
+
+const convertDivToPNG = async () => {
+  const node = displayImage;
+  const dataUrl = await domtoimage.toPng(node, { backgroundColor: null });
+  const response = await fetch(dataUrl);
+  const blob = await response.blob();
+  return new File([blob], 'edited.png', { type: 'image/png' });
+};
+
+// Changing colors on input type range track
+document.querySelectorAll('input[type="range"]').forEach((input) => {
+  const updateTrack = () => {
+    const min = parseFloat(input.min) || 0;
+    const max = parseFloat(input.max) || 100;
+    const value = parseFloat(input.value);
+    const ratio = Math.min(Math.max((value - min) / (max - min), 0), 1);
+    const val = ratio * 100;
+
+    input.style.backgroundImage = `linear-gradient(to right, var(--primary) 0%, var(--success) ${val}%, var(--surface) ${val}%, var(--surface) 100%)`;
+  };
+  input.addEventListener('input', updateTrack);
+  updateTrack();
+});

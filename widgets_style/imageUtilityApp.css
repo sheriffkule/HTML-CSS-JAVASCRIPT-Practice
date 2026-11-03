@@ -16,6 +16,11 @@
     overflow-x: hidden;
     position: relative;
     height: auto;
+    --primary: #4361ee;
+    --secondary: #3f37c9;
+    --surface: #efefef;
+    --border-color: #cdd6df;
+    --success: #4bb543;
 }
 
 :root::-webkit-scrollbar {
@@ -169,7 +174,9 @@ section {
     bottom: 14px;
     right: 14px;
     background-color: #007bff;
-    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 5px;
     cursor: pointer;
 
@@ -217,4 +224,113 @@ label {
     display: block;
     font-weight: 500;
     margin-bottom: 5px;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    -moz-apperance: none;
+    appearance: none;
+    border-radius: 6px;
+    height: 8px;
+    outline: transparent;
+    padding: 0;
+    margin-block: 0.75rem;
+    width: 100%;
+    margin-right: 10px;
+    border: 1px solid var(--border-color);
+}
+
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: var(--primary);
+    border-radius: 50%;
+    corner-shape: bevel scoop scoop bevel;
+    border: 1px solid var(--border-color);
+    height: 26px;
+    width: 26px;
+    cursor: pointer;
+    transition: .25s;
+}
+
+input[type='range']::-webkit-slider-thumb:hover {
+    background-color: var(--secondary);
+    box-shadow: 0 0 5px var(--secondary);
+    clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
+    corner-shape: unset;
+}
+
+#btn-container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 -1px 4px rgb(0 0 0 / 0.2),
+    inset 0 1px 4px rgb(0 0 0 / 0.2);
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    i {
+        color: inherit;
+        margin-left: 4%;
+    }
+    &:hover {
+        background-color: #0056b3;
+    }
+}
+
+.toggle {
+    position: relative;
+    display: inline-block;
+    top: -15px;
+
+    input {
+        display: none;
+    }
+    div {
+        position: absolute;
+        cursor: pointer;
+        inset: 0;
+        background-color: #fff;
+        transition: .4s;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+    }
+    div::before {
+        position: absolute;
+        content: '';
+        height: 100%;
+        width: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: grid;
+        place-items: center;
+        background: whitesmoke;
+        transition: 0.4s;
+        border-radius: 50%;
+    }
+}
+
+.toggle div:hover::before {
+    outline: 1px solid gray;
+}
+
+.toggle input:checked + div::before {
+    background: var(--success);
 }
