@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="/widgets_style/imageUtilityApp.css" />
   </head>
   <body>
-    <div id="preloader">
+    <!-- <div id="preloader">
       <p>Loading...</p>
-    </div>
+    </div> -->
 
     <header>
       <h1>Image Utility App | Upload image you want to edit.</h1>
@@ -30,6 +30,7 @@
               min="0"
               max="100"
               data-sizing="%" />
+            <span id="grayscale-value">0%</span>
           </fieldset>
 
           <fieldset>
@@ -42,11 +43,13 @@
               min="0"
               max="500"
               data-sizing="%" />
+            <span id="contrast-value">100%</span>
           </fieldset>
 
           <fieldset>
             <label for="blur">Blur:</label>
             <input type="range" class="filters-input" id="blur" value="0" min="0" max="10" data-sizing="px" />
+            <span id="blur-value">0px</span>
           </fieldset>
 
           <fieldset>
@@ -59,6 +62,7 @@
               min="0"
               max="500"
               data-sizing="%" />
+            <span id="brightness-value">100%</span>
           </fieldset>
 
           <fieldset>
@@ -71,6 +75,7 @@
               min="0"
               max="100"
               data-sizing="%" />
+            <span id="invert-value">0%</span>
           </fieldset>
 
           <fieldset>
@@ -83,6 +88,7 @@
               min="0"
               max="360"
               data-sizing="deg" />
+            <span id="hue-rotate-value">0deg</span>
           </fieldset>
 
           <fieldset>
@@ -95,6 +101,7 @@
               min="0"
               max="100"
               data-sizing="%" />
+            <span id="opacity-value">100%</span>
           </fieldset>
 
           <fieldset>
@@ -107,6 +114,7 @@
               min="0"
               max="10"
               data-sizing="" />
+            <span id="saturate-value">1</span>
           </fieldset>
 
           <fieldset>
@@ -119,6 +127,7 @@
               min="0"
               max="100"
               data-sizing="%" />
+            <span id="sepia-value">0%</span>
           </fieldset>
 
           <fieldset>
@@ -136,6 +145,7 @@
               min="0"
               max="250"
               data-sizing="px" />
+            <span id="border-radius-value">0px</span>
           </fieldset>
         </article>
 

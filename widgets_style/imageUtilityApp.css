@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+* {
+    border: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato', sans-serif;
+    color: gray;
+    scroll-behavior: smooth;
+    transition: all 0.3s ease-in-out;
+    -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+    overflow-x: hidden;
+    position: relative;
+    height: auto;
+}
+
+:root::-webkit-scrollbar {
+    width: 6px;
+    border: 0.5px solid gray;
+}
+
+:root::-webkit-scrollbar-thumb {
+    background-color: lightgray;
+}
+
+:root::-webkit-scrollbar-thumb:hover {
+    background-color: lightslategray;
+}
+
+body {
+    background-color: #f1f2fa;
+    color: #333;
+    height: auto;
+    width: 100vw;
+}
+
+#preloader {
+    position: fixed;
+    display: grid;
+    justify-items: center;
+    top: 0px;
+    left: 0;
+    z-index: 100;
+    height: 100dvh;
+    width: 100vw;
+    overflow-y: none;
+    background-attachment: fixed;
+    transition: transform 0.5s ease-out;
+}
+
+#preloader p {
+    position: absolute;
+    bottom: 30%;
+    color: lightslategray;
+    font-weight: bold;
+    font-family: sans-serif;
+    font-size: 30px;
+    animation: pulse 1s linear infinite alternate;
+}
+
+@keyframes pulse {
+    to {
+        opacity: 0.1;
+    }
+}
+
+header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    min-height: min(60px, 100dvh);
+    padding-block: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    background-color: rgb(255 255 255 / 0.5);
+    box-shadow: 0 2px 4px rgb(0 0 0 / 0.2),
+    inset 0 0 10px rgb(0 0 0 / 0.2);
+    z-index: 10;
+    backdrop-filter: blur(6px);
+}
+
+h1 {
+    font-size: 24px;
+    text-align: center;
+    color: #007bff;
+    min-width: 60%;
+    max-width: 100%;
+}
+
+input[type="file"]::file-selector-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+input[type="file"]::file-selector-button:hover {
+    filter: brightness(1.1);
+    transform: scale(1.03);
+}
+
+#ld-mode {
+    width: 24px;
+    fill: gray;
+    cursor: pointer;
+}
+
+main {
+    height: min(90vh, 900px);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+section {
+    display: block;
+    height: 100%;
+    flex: 1 1 0;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgb(0 0 0 / 0.2);
+}
+
+#image-section {
+    position: relative;
+    min-width: 75%;
+    max-width: 100%;
+    padding: 10px;
+
+    figure {
+        height: 100%;
+        width: 100%;
+        overflow: auto;
+        border: 4px dashed lightgray;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: none;
+        background: transparent;
+    }
+    figure::-webkit-scrollbar {
+        display: none;
+        width: 0;
+        height: 0;
+    }
+}
