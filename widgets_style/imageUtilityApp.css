@@ -157,3 +157,64 @@ section {
         height: 0;
     }
 }
+
+#display-image {
+    object-fit: contain;
+}
+
+#image-section button {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    bottom: 14px;
+    right: 14px;
+    background-color: #007bff;
+    backdrop-filter: blur(4px);
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+        scale: 1.08;
+        filter: brightness(0.9);
+    }
+    &:active {
+        scale: 1;
+    }
+    i {
+        color: white;
+    }
+}
+
+@media (width <= 850px) {
+    header {
+        position: static;
+    }
+    section {
+        min-width: 100%;
+    }
+    #image-section {
+        height: 60%;
+    }
+    #controls-section {
+        height: 40%;
+    }
+}
+
+#controls-section {
+    position: relative;
+}
+
+#controls-container {
+    height: calc(100% - 80px);
+    overflow: auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
