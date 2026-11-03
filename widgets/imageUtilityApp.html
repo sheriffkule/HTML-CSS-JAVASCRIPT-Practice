@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="/widgets_style/imageUtilityApp.css" />
   </head>
   <body>
-    <!-- <div id="preloader">
+    <div id="preloader">
       <p>Loading...</p>
-    </div> -->
+    </div>
 
     <header>
       <h1>Image Utility App | Upload image you want to edit.</h1>
-      <input type="file" id="image-input" accept="image/jpeg, image/png, image/jpb" />
+      <input type="file" id="image-input" accept="image/*" />
     </header>
 
     <main>
@@ -156,7 +156,10 @@
       </section>
 
       <section id="image-section">
-        <figure><img src="" alt="" id="display-image" /></figure>
+        <div>
+          <p id="image-status">Choose an image or drag it here.</p>
+          <img alt="Uploaded image preview" id="display-image" />
+        </div>
         <button title="Expand"><i class="fa-solid fa-expand"></i></button>
       </section>
 

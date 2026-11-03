@@ -48,12 +48,12 @@ body {
     display: grid;
     justify-items: center;
     top: 0px;
-    left: 0;
+    left: 0px;
     z-index: 100;
     height: 100dvh;
     width: 100vw;
     overflow-y: none;
-    background-attachment: fixed;
+    background: whitesmoke;
     transition: transform 0.5s ease-out;
 }
 
@@ -115,6 +115,11 @@ input[type="file"]::file-selector-button:hover {
     transform: scale(1.03);
 }
 
+#selected-file-name {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+}
+
 #ld-mode {
     width: 24px;
     fill: gray;
@@ -124,16 +129,16 @@ input[type="file"]::file-selector-button:hover {
 main {
     height: min(90vh, 900px);
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: minmax(240px, 1fr) minmax(0, 3fr);
+    align-items: stretch;
 }
 
 section {
     display: block;
     height: 100%;
-    flex: 1 1 0;
+    min-width: 0;
+    min-height: 0;
     background-color: #e0e0e0;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgb(0 0 0 / 0.2);
@@ -141,11 +146,10 @@ section {
 
 #image-section {
     position: relative;
-    min-width: 75%;
-    max-width: 100%;
+    min-width: 0;
     padding: 10px;
 
-    figure {
+    > div {
         height: 100%;
         width: 100%;
         overflow: auto;
@@ -156,15 +160,32 @@ section {
         transition: none;
         background: transparent;
     }
-    figure::-webkit-scrollbar {
+    > div::-webkit-scrollbar {
         display: none;
         width: 0;
         height: 0;
     }
 }
 
+#image-section > div.drag-over {
+    border-color: var(--primary);
+    background-color: rgb(67 97 238 / 0.08);
+}
+
 #display-image {
+    display: block;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
+}
+
+#display-image:not([src]) {
+    display: none;
+}
+
+#image-status {
+    padding: 1rem;
+    text-align: center;
 }
 
 #image-section button {
@@ -196,19 +217,24 @@ section {
     header {
         position: static;
     }
+    main {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: minmax(0, 2fr) minmax(0, 3fr);
+    }
     section {
-        min-width: 100%;
+        min-width: 0;
     }
     #image-section {
-        height: 60%;
+        height: 100%;
     }
     #controls-section {
-        height: 40%;
+        height: 100%;
     }
 }
 
 #controls-section {
     position: relative;
+    min-width: 0;
 }
 
 #controls-container {
@@ -333,4 +359,84 @@ button {
 
 .toggle input:checked + div::before {
     background: var(--success);
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 11;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0 0 0 / 0.6);
+    backdrop-filter: blur(5px);
+}
+
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #e0e0e0;
+    border: 2px solid #888;
+    border-radius: 8px;
+    width: min(90vw, 500px);
+    max-height: 400px;
+    box-shadow: 0 5px 15px rgb(0 0 0 / 0.3);
+}
+
+#close-btn {
+    position: absolute;
+    color: #888;
+    top: 10px;
+    right: 20px;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+
+    &:hover {
+        color: black;
+    }
+}
+
+#popup-content-heading {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: gray;
+}
+
+#img-container {
+    display: grid;
+    place-items: center;
+    padding-block: 10px;
+    background-color: aliceblue;
+    max-height: 200px;
+    overflow: auto;
+}
+
+hr {
+    border: none;
+    height: 2px;
+    margin-block: 10px;
+    background-color: whitesmoke;
+}
+
+#share-btns {
+    display: grid;
+    place-items: center;
+    grid-auto-flow: column;
+
+    i {
+        font-size: 24px;
+        color: gray;
+        cursor: pointer;
+
+        &:hover {
+            color: black;
+        }
+    }
 }
