@@ -103,4 +103,81 @@ document.addEventListener('DOMContentLoaded', function () {
       suggestionsContainer.style.display = 'none';
     }
   }
+
+  function calculateHeatmap(password) {
+    const heatmapData = [];
+
+    for (let i = 0; i < password.length; i++) {
+      const char = password[i];
+      let score = 0;
+
+      // Score based on character type
+      if (/[a-z]/.test(char)) score += 10; // lowercase
+      if (/[A-Z]/.test(char)) score += 20; // uppercase
+      if (/[0-9]/.test(char)) score += 15; // number
+      if (/[^a-zA-Z0-9]/.test(char)) score += 25; // special char
+
+      // Bonus for being not in common patterns
+      if (!isInCommonPattern(char, i, password)) score += 10;
+
+      // Bonus for being unique in the password
+      if (password.indexOf(char) === i) score += 5;
+
+      heatmapData.push(Math.min(100, score));
+    }
+  }
+
+  function isInCommonPattern(char, position, password) {
+    // Check for sequential characters (apc, 123, etc.)
+    if (position > 0 && position < password.length - 1) {
+      const prevCharCode = password.charCodeAt(position - 1);
+      const nextCharCode = password.charCodeAt(position + 1);
+      const currentCharCode = char.charCodeAt(0);
+
+      if (
+        (currentCharCode === prevCharCode + 1 && currentCharCode === nextCharCode - 1) ||
+        (currentCharCode === prevCharCode - 1 && currentCharCode === nextCharCode + 1)
+      ) {
+        return true;
+      }
+    }
+
+    // Check for repeated characters (aaa, 111, etc.)
+    if (position > 0 && position < password.length - 1) {
+      if (char === password[position - 1] && char === password[position + 1]) {
+        return true;
+      }
+    }
+
+    // Check for keyboard patterns (qwerty, asdf, etc)
+    const keyboardPatterns = [
+      'qwertyuiop',
+      'asdfghjkl',
+      'zxcvbnm',
+      '1234567890',
+      '!@#$%^&*()',
+      'qazwsxedcrfvtgbyhnujmikolp',
+    ];
+
+    for (const pattern of keyboardPatterns) {
+      if (pattern.includes(char.toLowerCase())) {
+        const patternPos = pattern.indexOf(char.toLowerCase());
+        if (position > 0 && position < password.length - 1) {
+          const prevInPattern = pattern.indexOf(password[position - 1].toLowerCase());
+          const nextInPattern = pattern.indexOf(password[position + 1].toLowerCase());
+
+          if (
+            prevInPattern !== -1 &&
+            nextInPattern !== -1 &&
+            Math.abs(prevInPattern - patternPos) <= 1 &&
+            Math.abs(nextInPattern - patternPos) <= 1
+          ) {
+            return true;
+          }
+        }
+      }
+    }
+
+    return false;
+  }
 });
