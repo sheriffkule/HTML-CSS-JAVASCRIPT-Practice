@@ -180,4 +180,99 @@ document.addEventListener('DOMContentLoaded', function () {
 
     return false;
   }
+
+  function renderHeatmap(heatmapData, length) {
+    heatmap.innerHTML = '';
+
+    for (let i = 0; i < length; i++) {
+      const score = heatmapData[i];
+      let color;
+      let strengthText;
+
+      if (score < 30) {
+        color = '#ef4444';
+        strengthText = 'Weak';
+      } else if (score < 60) {
+        color = '#f59e0b';
+        strengthText = 'Medium';
+      } else {
+        color = '#10b981';
+        strengthText = 'Strong';
+      }
+
+      const item = document.createElement('div');
+      item.className = 'heatmap-item';
+      item.style.backgroundColor = 'color';
+      item.textContent = strengthText.charAt(0);
+      item.setAttribute('data-pos', i + 1);
+      item.setAttribute('title', `Position ${i + 1}: ${strengthText} (${score}%)`);
+
+      heatmap.appendChild(item);
+    }
+  }
+
+  function calculateOverallStrength(password, heatmapData) {
+    if (password.length === 0) return { score: 0, label: 'Empty' };
+
+    let score = 0;
+    const length = password.length;
+
+    // Base score from heatmap (average)
+    const heatmapAvg = heatmapData.reduce((sum, val) => sum + val, 0) / length;
+    score += heatmapAvg * 0.7; // 70 % weight
+
+    // Uniqueness bonus
+    const uniqueChars = new Set(password).size;
+    const uniquenessBonus = (uniqueChars / length) * 100;
+    score += uniquenessBonus * 0.1; // 10% weight
+
+    // Cap at 100
+    score = Math.min(100, Math.round(score));
+
+    // Determine label
+    let label;
+    if (score < 30) label = 'Very Weak';
+    else if (score < 50) label = 'Weak';
+    else if (score < 70) label = 'Moderate';
+    else if (score < 85) label = 'Strong';
+    else label = 'Very Strong';
+
+    return { score, label };
+  }
+
+  function updateStrengthMeter(score, label) {
+    strengthMeter.style.width = `${score}%`;
+
+    if (score < 30) {
+      strengthMeter.style.backgroundColor = '#ef4444';
+    } else if (score < 60) {
+      strengthMeter.style.backgroundColor = '#f59e0b';
+    } else {
+      strengthMeter.style.backgroundColor = '#10b981';
+    }
+
+    strengthStat.textContent = label;
+  }
+
+  function countCharacterTypes(password) {
+    let types = 0;
+    if (/[a-z]/.test(password)) types++;
+    if (/[A-Z]/.test(password)) types++;
+    if (/[0-9]/.test(password)) types++;
+    if (/[^a-zA-Z0-9]/.test(password)) types++;
+    return types;
+  }
+
+  function estimateCrackTime(score, length) {
+    // Very rough estimation based on password strength and length
+    const baseTime = Math.pow(10, score / 20) * length;
+
+    if (baseTime < 1000) return 'Instant';
+    if (baseTime < 60000) return 'Seconds';
+    if (baseTime < 3600000) return 'Minutes';
+    if (baseTime < 86400000) return 'Hours';
+    if (baseTime < 2592000000) return 'Days';
+    if (baseTime < 31536000000) return 'Months';
+    return 'Years'
+  }
 });
