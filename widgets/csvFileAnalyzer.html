@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSV File Analyzer | Powerful CSV Insights</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/csvFileAnalyzer.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="logo">
+          <i class="fas fa-file-csv"></i>
+          <h1>CSV File Analyzer</h1>
+        </div>
+        <p class="subtitle">Upload your CSV file to get detailed insights, statistics, and data preview.</p>
+      </header>
+
+      <section class="upload-container" id="uploadContainer">
+        <article class="upload-area" id="uploadArea">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <h2>Drat & Drop your CSV file here</h2>
+          <p>or click to browse files.</p>
+          <input type="file" id="fileInput" accept=".csv" />
+          <button class="btn" id="browseBtn">Browse FIlesI</button>
+        </article>
+        <div class="file-info" id="fileInfo"></div>
+      </section>
+
+      <div class="loading" id="loadingIndicator">
+        <div class="spinner"></div>
+        <p>Analyzing your CSV file...</p>
+      </div>
+
+      <section class="results-container" id="resultsContainer">
+        <div class="results-header">
+          <h2 class="results-title">CSV Analysis Results</h2>
+          <div class="tooltip">
+            <i class="fas fa-info-circle" style="color: var(--accent); font-size: 1.25rem"></i>
+            <span class="tooltiptext"
+              >The analysis shows basic statistics about your CSV file. Hover over column cards for more
+              details.</span
+            >
+          </div>
+        </div>
+
+        <article class="stats-grid" id="statsGrid">
+          <!-- Stats cards will be inserted here by JavaScript -->
+        </article>
+
+        <article class="columns-container">
+          <h3 class="section-title">
+            Columns Overview <span class="badge badge-primary" id="columnsCount">0</span>
+          </h3>
+          <div class="columns-grid" id="columnsGrid">
+            <!-- Column cards will be inserted here by JavaScript -->
+          </div>
+        </article>
+
+        <article class="preview-container">
+          <h3 class="section-title">
+            Data Preview <span class="badge badge-primary" id="previewCount">0 rows</span>
+          </h3>
+          <div class="table-responsive">
+            <table id="previewTable">
+              <!-- Table content will be inserted here by JavaScript -->
+            </table>
+          </div>
+        </article>
+
+        <article class="actions">
+          <button class="btn btn-outline" id="downloadStatsBtn">
+            <i class="fas fa-download"></i> Download Stats as JSON
+          </button>
+          <button class="btn" id="analyzeAnotherBtn"><i class="fas fa-redo"></i> Analyze Another File</button>
+        </article>
+      </section>
+    </div>
+
+    <footer class="footer__copy">
+      © <time datetime="" id="year"></time> Made width <span>♥</span> by
+      <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+    </footer>
+
+    <script src="/widgets_script/csvFileAnalyzer.js"></script>
+  </body>
+</html>
