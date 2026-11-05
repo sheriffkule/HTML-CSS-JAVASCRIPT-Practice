@@ -139,4 +139,131 @@ document.addEventListener('DOMContentLoaded', function () {
     loadingIndicator.style.display = 'none';
     resultsContainer.style.display = 'block';
   }
+
+  function parseCSVLine(line) {
+    const values = [];
+    let currentValue = '';
+    let inQuotes = false;
+
+    for (let i = 0; i < line.length; i++) {
+      const char = line[i];
+
+      if (char === '"') {
+        if (inQuotes && i + 1 < line.length && line[i + 1] === '"') {
+          currentValue += '"';
+          i++;
+        } else {
+          inQuotes = !inQuotes;
+        }
+      } else if (char === ',' && !inQuotes) {
+        values.push(currentValue.trim());
+        currentValue = '';
+      } else {
+        currentValue += char;
+      }
+    }
+
+    values.push(currentValue.trim());
+    return values;
+  }
+
+  function analyzeData() {
+    analysisResults = {
+      rowCount: csvData.length,
+      columnCount: columnHeaders.length,
+      fileSize: fileInput.files[0].size,
+      fileName: fileInput.files[0].name,
+      columns: {},
+    };
+
+    // Column analysis
+    columnHeaders.forEach((header) => {
+      const columnValues = csvData.map((row) => row[header]);
+      const numericValues = columnValues.filter((val) => !isNaN(parseFloat(val))).map(Number);
+      const isNumeric = numericValues > 0;
+      const emptyValues = columnValues.filter(
+        (val) => val === '' || val === null || val === undefined,
+      ).length;
+
+      analysisResults.columns[header] = {
+        isNumeric: isNumeric,
+        sampleData: columnValues.slice(0, 5),
+        isEmpty: emptyValues === columnValues.length,
+        emptyPercentage: (emptyValues / columnValues.length) * 100,
+        name: header,
+        type: isNumeric ? 'numeric' : 'text',
+        totalValues: columnValues.length,
+        emptyValues: emptyValues,
+        nonEmptyValues: columnValues.length - emptyValues,
+        uniqueValues: [...new Set(columnValues)].length,
+        numericValues: isNumeric ? numericValues : [],
+        maxValue: isNumeric ? Math.max(...numericValues) : null,
+        minValue: isNumeric ? Math.min(...numericValues) : null,
+        average: isNumeric ? numericValues.reduce((a, b) => a + b, 0) / numericValues.length : null,
+      };
+
+      if (isNumeric) {
+        analysisResults.columns[header].min = Math.min(...numericValues);
+        analysisResults.columns[header].max = Math.max(...numericValues);
+        analysisResults.columns[header].avg = numericValues.reduce((a, b) => a + b, 0) / numericValues.length;
+      }
+    });
+  }
+
+  function displayResults() {
+    // Update stats grid
+    statsGrid.innerHTML = `
+      <div class="stat-card">
+        <div class="stat-value">${analysisResults.rowCount}</div>
+        <div class="stat-label">Total Rows</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">${analysisResults.columnCount}</div>
+        <div class="stat-label">Total Columns</div>
+        <div class="stat-card">
+          <div class="stat-value">${formatFileSize(analysisResults.fileSize)}</div>
+          <div class="stat-label">File Size</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">${new Date().toLocaleDateString()}</div>
+          <div class="stat-label">Analysis Date</div>
+        </div>
+      </div>
+    `;
+
+    // Display column info
+    columnsGrid.innerHTML = '';
+    columnsCount.textContent = columnHeaders.length;
+
+    columnHeaders.forEach((header) => {
+      const columnInfo = analysisResults.columns[header];
+      const columnCard = document.createElement('div');
+      columnCard.className = 'column-card';
+      columnCard.innerHTML = `
+        <div class="column-name">${header}</div>
+        <div class="column-stats">
+          <div>Type: ${columnInfo.isNumeric ? 'Numeric' : 'Text'}</div>
+          <div>Unique values: ${columnInfo.uniqueValues}</div>
+          ${
+            columnInfo.isNumeric
+              ? `
+                <div>Min: ${columnInfo.min.toFixed(2)}</div>
+                <div>Max: ${columnInfo.max.toFixed(2)}</div>
+                <div>Avg: ${columnInfo.avg.toFixed(2)}</div>
+              `
+              : ''
+          }
+          <div>
+            Empty: ${columnInfo.emptyValues}
+            (${((columnInfo.emptyValues / analysisResults.rowCount) * 100).toFixed(1)}%)
+          </div>
+        </div>
+      `;
+      columnCard.title = `Sample values: ${columnInfo.sampleData.join(', ')}`;
+      columnsGrid.appendChild(columnCard);
+    });
+
+    // Display data preview (first 10 rows)
+    displayDataPreview(10);
+  }
 });
