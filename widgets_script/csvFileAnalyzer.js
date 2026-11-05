@@ -266,4 +266,67 @@ document.addEventListener('DOMContentLoaded', function () {
     // Display data preview (first 10 rows)
     displayDataPreview(10);
   }
+
+  function displayDataPreview(rowCount) {
+    previewTable.innerHTML = '';
+    previewCount.textContent = `${Math.min(rowCount, csvData.length)} of ${csvData.length} rows`;
+
+    // Create table header
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    columnHeaders.forEach((header) => {
+      const th = document.createElement('th');
+      th.textContent = header;
+      headerRow.appendChild(th);
+    });
+
+    thead.appendChild(headerRow);
+    previewTable.appendChild(thead);
+
+    // Create table body
+    const tbody = document.createElement('tbody');
+    const displayCount = Math.min(rowCount, csvData.length);
+
+    for (let i = 0; i < displayCount; i++) {
+      const row = document.createElement('tr');
+      columnHeaders.forEach((header) => {
+        const td = document.createElement('td');
+        td.textContent = csvData[i][header] || 'NULL';
+        row.appendChild(td);
+      });
+      tbody.appendChild(row);
+    }
+
+    previewTable.appendChild(tbody);
+  }
+
+  function downloadStats() {
+    const dataStr = JSON.stringify(analysisResults, null, 2);
+    const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+
+    const exportFileDefaultName = `${analysisResults.fileName.replace('.csv', '')}_analysis.json`;
+
+    const linkElement = document.createElement('a');
+    linkElement.setAttribute('href', dataUri);
+    linkElement.setAttribute('download', exportFileDefaultName);
+    linkElement.click();
+  }
+
+  function resetAnalyzer() {
+    fileInput.value = '';
+    fileInfo.style.display = 'none';
+    fileInfo.textContent = '';
+    resultsContainer.style.display = 'none';
+    uploadContainer.style.display = 'block';
+    loadingIndicator.style.display = 'none';
+  }
+
+  function showFileError(message) {
+    fileInfo.style.display = 'block';
+    fileInfo.innerHTML = `<span style="color: var(--warning);"><i class="fas fa-exclamation-triangle"></i> ${message}</span>`;
+    setTimeout(() => {
+      fileInfo.style.display = 'none';
+      uploadContainer.style.borderColor = 'var(--light-gray)';
+    }, 3000);
+  }
 });
