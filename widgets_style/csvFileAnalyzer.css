@@ -8,7 +8,7 @@
     --success: #4cc9f0;
     --warning: #f72585;
     --gray: #6c757d;
-    --light-gray: #e9ecef;
+    --light-gray: #e0e3e6;
 }
 
 * {
@@ -65,4 +65,36 @@ header {
     color: var(--gray);
     font-size: 1.125rem;
     text-wrap: pretty;
+}
+
+.upload-container {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgb(0 0 0 / 0.1);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+    border: 4px dashed var(--light-gray);
+
+    &:hover {
+        border-color: var(--accent);
+    }
+}
+
+.upload-area {
+    text-align: center;
+    padding: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    i {
+        font-size: 3rem;
+        color: var(--accent);
+        margin-bottom: 1rem;
+        -webkit-text-stroke: 1px var(--primary-dark);
+    }
+    h2 {
+        margin-bottom: 0.5rem;
+        color: var(--dark);
+    }
 }
