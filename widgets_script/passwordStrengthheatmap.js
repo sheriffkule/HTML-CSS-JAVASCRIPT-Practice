@@ -13,12 +13,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   let isVisible = false;
 
-  // Toggle password visibility
-  toggleVisibility.addEventListener('click', function () {
-    isVisible = !isVisible;
-    if (isVisible) {
-      passwordInput.type = 'text';
-      this.innerHTML = `<svg
+  function setToggleVisibilityIcon(visible) {
+    const eyeIcon = visible
+      ? `<svg
         xmlns="http://www.w3.org/2000/svg"
         width="20"
         height="20"
@@ -31,10 +28,8 @@ document.addEventListener('DOMContentLoaded', function () {
         <path
           d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
         <line x1="1" y1="1" x2="23" y2="23"></line>
-      </svg>`;
-    } else {
-      passwordInput.type = 'password';
-      this.innerHTML = `<svg
+      </svg>`
+      : `<svg
         xmlns="http://www.w3.org/2000/svg"
         width="20"
         height="20"
@@ -47,7 +42,15 @@ document.addEventListener('DOMContentLoaded', function () {
         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
         <circle cx="12" cy="12" r="3"></circle>
       </svg>`;
-    }
+
+    toggleVisibility.innerHTML = eyeIcon;
+  }
+
+  // Toggle password visibility
+  toggleVisibility.addEventListener('click', function () {
+    isVisible = !isVisible;
+    passwordInput.type = isVisible ? 'text' : 'password';
+    setToggleVisibilityIcon(isVisible);
   });
 
   // Analyze password on input
@@ -62,20 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
     passwordInput.value = strongPassword;
     passwordInput.type = 'text';
     isVisible = true;
-    toggleVisibility.innerHTML = html`<svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round">
-      <path
-        d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-      <line x1="1" y1="1" x2="23" y2="23"></line>
-    </svg>`;
+    setToggleVisibilityIcon(true);
     analyzePassword(strongPassword);
   });
 
@@ -125,6 +115,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
       heatmapData.push(Math.min(100, score));
     }
+
+    return heatmapData;
   }
 
   function isInCommonPattern(char, position, password) {
@@ -202,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       const item = document.createElement('div');
       item.className = 'heatmap-item';
-      item.style.backgroundColor = 'color';
+      item.style.backgroundColor = color;
       item.textContent = strengthText.charAt(0);
       item.setAttribute('data-pos', i + 1);
       item.setAttribute('title', `Position ${i + 1}: ${strengthText} (${score}%)`);
@@ -214,20 +206,21 @@ document.addEventListener('DOMContentLoaded', function () {
   function calculateOverallStrength(password, heatmapData) {
     if (password.length === 0) return { score: 0, label: 'Empty' };
 
-    let score = 0;
     const length = password.length;
-
-    // Base score from heatmap (average)
     const heatmapAvg = heatmapData.reduce((sum, val) => sum + val, 0) / length;
-    score += heatmapAvg * 0.7; // 70 % weight
-
-    // Uniqueness bonus
     const uniqueChars = new Set(password).size;
-    const uniquenessBonus = (uniqueChars / length) * 100;
-    score += uniquenessBonus * 0.1; // 10% weight
-
-    // Cap at 100
-    score = Math.min(100, Math.round(score));
+    const lengthScore = Math.min(length / 20, 1) * 40;
+    const varietyScore = (countCharacterTypes(password) / 4) * 25;
+    const uniquenessScore = (uniqueChars / length) * 20;
+    const patternScore = (heatmapAvg / 55) * 15;
+    const commonPasswordPenalty = isCommonPassword(password) ? 40 : 0;
+    const score = Math.max(
+      0,
+      Math.min(
+        100,
+        Math.round(lengthScore + varietyScore + uniquenessScore + patternScore - commonPasswordPenalty),
+      ),
+    );
 
     // Determine label
     let label;
@@ -273,6 +266,113 @@ document.addEventListener('DOMContentLoaded', function () {
     if (baseTime < 86400000) return 'Hours';
     if (baseTime < 2592000000) return 'Days';
     if (baseTime < 31536000000) return 'Months';
-    return 'Years'
+    return 'Years';
   }
+
+  function showSuggestions(password, score) {
+    suggestionsList.innerHTML = '';
+    const suggestions = [];
+
+    if (password.length < 12) {
+      suggestions.push('Make your password at least 12 characters long.');
+    }
+
+    if (!/[A-Z]/.test(password)) {
+      suggestions.push('Add uppercase letters to your password.');
+    }
+
+    if (!/[0-9]/.test(password)) {
+      suggestions.push('Add numbers to your password.');
+    }
+
+    if (!/[^a-zA-Z0-9]/.test(password)) {
+      suggestions.push('Add special characters to your password.');
+    }
+
+    if (isCommonPassword(password)) {
+      suggestions.push('Avoid common passwords. Try a random combination instead.');
+    }
+
+    if (score < 50 && password.length >= 8) {
+      suggestions.push('Try mixing character types more (e.g., S7r0ngP@ss).');
+    }
+
+    if (suggestions.length === 0) {
+      suggestions.push('Your password is strong! Keep up the good work.');
+    }
+
+    suggestions.forEach((suggestion) => {
+      const li = document.createElement('li');
+      li.textContent = suggestion;
+      suggestionsList.appendChild(li);
+    });
+  }
+
+  function isCommonPassword(password) {
+    const commonPasswords = [
+      'password',
+      '123456',
+      '123456789',
+      '12345678',
+      '12345',
+      '1234567',
+      '1234567890',
+      'qwerty',
+      'admin',
+      'welcome',
+      'letmein',
+      'abc123',
+      'password123',
+      'sunshine',
+    ];
+    return commonPasswords.includes(password.toLowerCase());
+  }
+
+  function generateStrongPassword(length = 16) {
+    const charset =
+      'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
+    let password = '';
+
+    // Ensure at least one character from each category
+    password += getRandomChar('abcdefghijklmnopqrstuvwxyz');
+    password += getRandomChar('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+    password += getRandomChar('0123456789');
+    password += getRandomChar('!@#$%^&*()_+-=[]{}|;:,.<>?');
+
+    // Fill the rest
+    for (let i = 4; i < length; i++) {
+      password += getRandomChar(charset);
+    }
+
+    // Shuffle the password
+    return shuffleString(password);
+  }
+
+  function getRandomChar(charset) {
+    const randomIndex = Math.floor(Math.random() * charset.length);
+    return charset[randomIndex];
+  }
+
+  function shuffleString(str) {
+    const array = str.split('');
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array.join('');
+  }
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
