@@ -22,6 +22,7 @@ body {
     background: linear-gradient(135deg, #f5f7ff, #d8dae4);
     color: var(--dark);
     line-height: 1.5;
+    min-height: 100dvh;
 }
 
 .container {
@@ -166,7 +167,7 @@ header {
 }
 
 .stat-card {
-    background-color: var(--light);
+    background-color: var(--light-gray);
     border-radius: 10px;
     padding: 1.5rem;
     text-align: center;
@@ -204,12 +205,12 @@ header {
 
 .columns-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
     gap: 1rem;
 }
 
 .column-card {
-    background-color: var(--light);
+    background-color: var(--light-gray);
     border-radius: 8px;
     padding: 1rem;
     box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
@@ -276,4 +277,121 @@ tr:hover {
     height: 40px;
     margin: 0 auto 1rem;
     animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+footer {
+    margin-top: 30px;
+    text-align: center;
+    padding-block: 20px;
+    border-top: 1px solid var(--gray);
+    color: var(--gray);
+    font-size: 0.875rem;
+
+    span {
+        color: red;
+        font-size: 1rem;
+    }
+    abbr {
+        color: var(--primary);
+        letter-spacing: 0.5px;
+        cursor: default;
+        text-underline-offset: 2px;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: rgb(0 0 0 / 0.2);
+    border: 0.5px dotted var(--dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary);
+}
+
+@media (width <= 768px) {
+    .container {
+        padding: 1rem;
+    }
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .actions {
+        flex-direction: column;
+    }
+    .btn {
+        width: 100%;
+    }
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    height: 0;
+    background-color: var(--dark);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: -100px;
+    transform: translateX(-50%) scaleX(0);
+    transform-origin: bottom right;
+    opacity: 0;
+    interpolate-size: allow-keywords;
+    transition: opacity 0.3s, height 0.3s, visibility 0.3s, transform 0.3s;
+    font-size: 0.875rem;
+    font-weight: normal;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+    height: auto;
+    padding: 0.5rem;
+    transform: translateX(-50%) scaleX(1);
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+    color: white;
+}
+
+.badge-primary {
+    background-color: var(--primary);
+}
+
+.badge-success {
+    background-color: var(--success);
+}
+
+.badge-warning {
+    background-color: var(--warning);
 }

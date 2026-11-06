@@ -14,9 +14,37 @@ document.addEventListener('DOMContentLoaded', function () {
   const downloadStatsBtn = document.getElementById('downloadStatsBtn');
   const analyzeAnotherBtn = document.getElementById('analyzeAnotherBtn');
 
+  if (!fileInput || !browseBtn || !uploadArea || !uploadContainer || !fileInfo || !loadingIndicator || !resultsContainer || !statsGrid || !columnsGrid || !previewTable || !columnsCount || !previewCount || !downloadStatsBtn || !analyzeAnotherBtn) {
+    return;
+  }
+
   let csvData = [];
   let columnHeaders = [];
   let analysisResults = {};
+  let selectedFile = null;
+
+  function isNumericValue(value) {
+    if (value === null || value === undefined) {
+      return false;
+    }
+
+    const trimmed = String(value).trim();
+    return trimmed !== '' && /^[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?$/.test(trimmed);
+  }
+
+  function formatFileSize(bytes) {
+    if (!bytes || Number(bytes) === 0) {
+      return '0 Bytes';
+    }
+
+    const units = ['Bytes', 'KB', 'MB', 'GB'];
+    const size = Number(bytes);
+    const index = Math.min(Math.floor(Math.log(size) / Math.log(1024)), units.length - 1);
+    const value = size / 1024 ** index;
+    const decimals = value >= 10 || index === 0 ? 0 : 1;
+
+    return `${value.toFixed(decimals)} ${units[index]}`;
+  }
 
   // Handle drag and drop events
   uploadArea.addEventListener('dragover', (e) => {
@@ -37,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (e.dataTransfer.files.length) {
       const file = e.dataTransfer.files[0];
-      if (file.name.endsWith('.csv')) {
+      if (/\.csv$/i.test(file.name)) {
         handleFileSelection(file);
       } else {
         showFileError('Please upload a CSV file!');
@@ -46,13 +74,22 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // Handle click events
-  browseBtn.addEventListener('click', () => fileInput.click());
-  uploadArea.addEventListener('click', () => fileInput.click());
+  browseBtn.addEventListener('click', (event) => {
+    event.stopPropagation();
+    fileInput.value = '';
+    fileInput.click();
+  });
+  uploadArea.addEventListener('click', (event) => {
+    if (!browseBtn.contains(event.target) && event.target !== fileInput) {
+      fileInput.value = '';
+      fileInput.click();
+    }
+  });
 
   fileInput.addEventListener('change', (e) => {
     if (e.target.files.length) {
       const file = e.target.files[0];
-      if (file.name.endsWith('.csv')) {
+      if (/\.csv$/i.test(file.name)) {
         handleFileSelection(file);
       } else {
         showFileError('Please upload a CSV file!');
@@ -64,27 +101,18 @@ document.addEventListener('DOMContentLoaded', function () {
   analyzeAnotherBtn.addEventListener('click', resetAnalyzer);
 
   function handleFileSelection(file) {
-    // Validate file type
-    if (!file.name.endsWith('.csv')) {
+    if (!file || !/\.csv$/i.test(file.name)) {
       showFileError('Please upload a CSV file!');
       return;
     }
 
-    // Show file info
+    selectedFile = file;
+    fileInfo.textContent = `Selected file: ${file.name} (File size: ${formatFileSize(file.size)})`;
     fileInfo.style.display = 'block';
-    fileInfo.innerHTML = `
-      <strong>Selected file: </strong> ${file.name}
-      <span class="tooltip">
-        <i class="fas fa-info-circle"></i>
-        <span class="tooltiptext">File size: ${(formatFileSize(file.size) / 1024).toFixed(2)} KB</span>
-      </span>
-    `;
 
-    // Show loading indicator
     loadingIndicator.style.display = 'block';
     uploadContainer.style.display = 'none';
 
-    // Read and parse the CSV file
     const reader = new FileReader();
     reader.onload = function (e) {
       try {
@@ -95,33 +123,34 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error(error);
       }
     };
+    reader.onerror = function () {
+      showFileError('Unable to read the selected file. Please try again.');
+    };
 
     reader.readAsText(file);
   }
 
   function parseCSV(csvContent) {
-    // Reset previous data
     csvData = [];
     columnHeaders = [];
-    analysisResults = [];
+    analysisResults = {};
 
-    // Split content into lines
-    const lines = csvContent.split('\/r|n|\n/').filter((line) => line.trim() !== '');
+    const normalizedContent = String(csvContent || '').replace(/^\uFEFF/, '');
+    const lines = normalizedContent.split(/\r\n|\n|\r/).filter((line) => line.trim() !== '');
 
-    if (lines.length === 2) {
+    if (lines.length < 2) {
       showFileError('CSV file must have at least one header row and one data row.');
       return;
     }
 
-    // Get headers from first line
     columnHeaders = parseCSVLine(lines[0]);
 
-    // Process data rows
     for (let i = 1; i < lines.length; i++) {
       const values = parseCSVLine(lines[i]);
       if (values.length !== columnHeaders.length) {
         continue;
       }
+
       const row = {};
       columnHeaders.forEach((header, index) => {
         row[header] = values[index];
@@ -129,13 +158,13 @@ document.addEventListener('DOMContentLoaded', function () {
       csvData.push(row);
     }
 
-    // Analyze the data
+    if (!csvData.length) {
+      showFileError('CSV file must include at least one valid data row.');
+      return;
+    }
+
     analyzeData();
-
-    // Display results
     displayResults();
-
-    // Hide loading indicator and show results
     loadingIndicator.style.display = 'none';
     resultsContainer.style.display = 'block';
   }
@@ -171,47 +200,45 @@ document.addEventListener('DOMContentLoaded', function () {
     analysisResults = {
       rowCount: csvData.length,
       columnCount: columnHeaders.length,
-      fileSize: fileInput.files[0].size,
-      fileName: fileInput.files[0].name,
+      fileSize: selectedFile ? selectedFile.size : 0,
+      fileName: selectedFile ? selectedFile.name : 'unknown.csv',
       columns: {},
     };
 
-    // Column analysis
     columnHeaders.forEach((header) => {
       const columnValues = csvData.map((row) => row[header]);
-      const numericValues = columnValues.filter((val) => !isNaN(parseFloat(val))).map(Number);
-      const isNumeric = numericValues > 0;
-      const emptyValues = columnValues.filter(
-        (val) => val === '' || val === null || val === undefined,
-      ).length;
+      const nonEmptyValues = columnValues.filter((value) => value !== '' && value !== null && value !== undefined);
+      const numericValues = nonEmptyValues.filter((value) => isNumericValue(value)).map((value) => Number(value));
+      const isNumeric = nonEmptyValues.length > 0 && numericValues.length === nonEmptyValues.length;
+      const emptyValues = columnValues.filter((value) => value === '' || value === null || value === undefined).length;
+      const emptyPercentage = columnValues.length ? (emptyValues / columnValues.length) * 100 : 0;
+      const minValue = isNumeric && numericValues.length ? Math.min(...numericValues) : null;
+      const maxValue = isNumeric && numericValues.length ? Math.max(...numericValues) : null;
+      const avgValue = isNumeric && numericValues.length ? numericValues.reduce((a, b) => a + b, 0) / numericValues.length : null;
 
       analysisResults.columns[header] = {
-        isNumeric: isNumeric,
-        sampleData: columnValues.slice(0, 5),
+        isNumeric,
+        sampleData: columnValues.slice(0, 5).map((value) => value ?? ''),
         isEmpty: emptyValues === columnValues.length,
-        emptyPercentage: (emptyValues / columnValues.length) * 100,
+        emptyPercentage,
         name: header,
         type: isNumeric ? 'numeric' : 'text',
         totalValues: columnValues.length,
-        emptyValues: emptyValues,
+        emptyValues,
         nonEmptyValues: columnValues.length - emptyValues,
         uniqueValues: [...new Set(columnValues)].length,
         numericValues: isNumeric ? numericValues : [],
-        maxValue: isNumeric ? Math.max(...numericValues) : null,
-        minValue: isNumeric ? Math.min(...numericValues) : null,
-        average: isNumeric ? numericValues.reduce((a, b) => a + b, 0) / numericValues.length : null,
+        maxValue,
+        minValue,
+        average: avgValue,
+        min: minValue,
+        max: maxValue,
+        avg: avgValue,
       };
-
-      if (isNumeric) {
-        analysisResults.columns[header].min = Math.min(...numericValues);
-        analysisResults.columns[header].max = Math.max(...numericValues);
-        analysisResults.columns[header].avg = numericValues.reduce((a, b) => a + b, 0) / numericValues.length;
-      }
     });
   }
 
   function displayResults() {
-    // Update stats grid
     statsGrid.innerHTML = `
       <div class="stat-card">
         <div class="stat-value">${analysisResults.rowCount}</div>
@@ -220,18 +247,17 @@ document.addEventListener('DOMContentLoaded', function () {
       <div class="stat-card">
         <div class="stat-value">${analysisResults.columnCount}</div>
         <div class="stat-label">Total Columns</div>
-        <div class="stat-card">
-          <div class="stat-value">${formatFileSize(analysisResults.fileSize)}</div>
-          <div class="stat-label">File Size</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value">${new Date().toLocaleDateString()}</div>
-          <div class="stat-label">Analysis Date</div>
-        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">${formatFileSize(analysisResults.fileSize)}</div>
+        <div class="stat-label">File Size</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">${new Date().toLocaleDateString()}</div>
+        <div class="stat-label">Analysis Date</div>
       </div>
     `;
 
-    // Display column info
     columnsGrid.innerHTML = '';
     columnsCount.textContent = columnHeaders.length;
 
@@ -263,7 +289,6 @@ document.addEventListener('DOMContentLoaded', function () {
       columnsGrid.appendChild(columnCard);
     });
 
-    // Display data preview (first 10 rows)
     displayDataPreview(10);
   }
 
@@ -271,7 +296,6 @@ document.addEventListener('DOMContentLoaded', function () {
     previewTable.innerHTML = '';
     previewCount.textContent = `${Math.min(rowCount, csvData.length)} of ${csvData.length} rows`;
 
-    // Create table header
     const thead = document.createElement('thead');
     const headerRow = document.createElement('tr');
     columnHeaders.forEach((header) => {
@@ -283,7 +307,6 @@ document.addEventListener('DOMContentLoaded', function () {
     thead.appendChild(headerRow);
     previewTable.appendChild(thead);
 
-    // Create table body
     const tbody = document.createElement('tbody');
     const displayCount = Math.min(rowCount, csvData.length);
 
@@ -291,7 +314,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const row = document.createElement('tr');
       columnHeaders.forEach((header) => {
         const td = document.createElement('td');
-        td.textContent = csvData[i][header] || 'NULL';
+        td.textContent = csvData[i][header] ?? 'NULL';
         row.appendChild(td);
       });
       tbody.appendChild(row);
@@ -301,10 +324,14 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function downloadStats() {
+    if (!analysisResults.fileName) {
+      showFileError('Please analyze a CSV file before downloading the report.');
+      return;
+    }
+
     const dataStr = JSON.stringify(analysisResults, null, 2);
     const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
-
-    const exportFileDefaultName = `${analysisResults.fileName.replace('.csv', '')}_analysis.json`;
+    const exportFileDefaultName = `${analysisResults.fileName.replace(/\.csv$/i, '')}_analysis.json`;
 
     const linkElement = document.createElement('a');
     linkElement.setAttribute('href', dataUri);
@@ -319,14 +346,34 @@ document.addEventListener('DOMContentLoaded', function () {
     resultsContainer.style.display = 'none';
     uploadContainer.style.display = 'block';
     loadingIndicator.style.display = 'none';
+    csvData = [];
+    columnHeaders = [];
+    analysisResults = {};
+    selectedFile = null;
   }
 
   function showFileError(message) {
     fileInfo.style.display = 'block';
-    fileInfo.innerHTML = `<span style="color: var(--warning);"><i class="fas fa-exclamation-triangle"></i> ${message}</span>`;
+    fileInfo.textContent = message;
+    loadingIndicator.style.display = 'none';
+    uploadContainer.style.display = 'block';
     setTimeout(() => {
       fileInfo.style.display = 'none';
       uploadContainer.style.borderColor = 'var(--light-gray)';
     }, 3000);
   }
+
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+
+  updateYear();
 });

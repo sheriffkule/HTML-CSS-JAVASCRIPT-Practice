@@ -22,11 +22,11 @@
           <i class="fas fa-cloud-upload-alt"></i>
           <h2>Drat & Drop your CSV file here</h2>
           <p>or click to browse files.</p>
-          <input type="file" id="fileInput" accept=".csv" />
+          <input type="file" id="fileInput" accept=".csv" style="display: none;" />
           <button class="btn" id="browseBtn">Browse FIlesI</button>
         </article>
-        <div class="file-info" id="fileInfo"></div>
       </section>
+      <div class="file-info" id="fileInfo"></div>
 
       <div class="loading" id="loadingIndicator">
         <div class="spinner"></div>
@@ -51,7 +51,7 @@
 
         <article class="columns-container">
           <h3 class="section-title">
-            Columns Overview <span class="badge badge-primary" id="columnsCount">0</span>
+            Columns Overview: <span class="badge badge-primary" id="columnsCount">0</span>
           </h3>
           <div class="columns-grid" id="columnsGrid">
             <!-- Column cards will be inserted here by JavaScript -->
@@ -60,7 +60,7 @@
 
         <article class="preview-container">
           <h3 class="section-title">
-            Data Preview <span class="badge badge-primary" id="previewCount">0 rows</span>
+            Data Preview: <span class="badge badge-primary" id="previewCount">0</span>
           </h3>
           <div class="table-responsive">
             <table id="previewTable">
