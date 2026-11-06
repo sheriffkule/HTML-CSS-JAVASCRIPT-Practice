@@ -1,0 +1,161 @@
+@import url("https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=DM+Sans:wght@400;500;600&display=swap");
+
+:root {
+  --header-height: 3.5rem;
+
+  --first-color: hsl(342, 61%, 30%);
+  --first-color-alt: hsl(344, 63%, 23%);
+  --first-color-light: hsl(30, 49%, 58%);
+  --first-color-lighten: hsl(36, 58%, 87%);
+  --title-color: hsl(17, 43%, 16%);
+  --text-color: hsl(22, 22%, 35%);
+  --text-color-light: hsl(27, 17%, 55%);
+  --body-color: hsl(38, 61%, 92%);
+  --container-color: hsl(36, 100%, 96%);
+
+  --body-font: "DM Sans", sans-serif;
+  --second-font: "Bagel Fat One", sans-serif;
+  --biggest-font-size: 3.5rem;
+  --bigger-font-size: 2rem;
+  --big-font-size: 1.5rem;
+  --h1-font-size: 1.5rem;
+  --h2-font-size: 1.25rem;
+  --h3-font-size: 1rem;
+  --normal-font-size: 0.938rem;
+  --small-font-size: 0.813rem;
+  --smaller-font-size: 0.75rem;
+
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semi-bold: 600;
+
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+
+@media (width >= 1150px) {
+  :root {
+    --biggest-font-size: 7rem;
+    --bigger-font-size: 3.5rem;
+    --big-font-size: 2.25rem;
+    --h1-font-size: 2.25rem;
+    --h2-font-size: 1.5rem;
+    --h3-font-size: 1.25rem;
+    --normal-font-size: 1rem;
+    --small-font-size: 0.875rem;
+    --smaller-font-size: 0.813rem;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body, input, button {
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+}
+
+body {
+    background-color: var(--body-color);
+    color: var(--text-color);
+}
+
+input, button {
+    background: none;
+    border: none;
+    outline: none;
+}
+
+h1, h2, h3, h4 {
+    color: var(--title-color);
+    font-family: var(--second-font);
+    font-weight: var(--font-regular);
+    line-height: 100%;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.container {
+    max-width: 1120px;
+    margin-inline: 1rem;
+}
+
+.grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.section {
+    padding-block: 5rem 1rem;
+}
+
+.section__title {
+    text-align: center;
+    font-size: var(--bigger-font-size);
+    line-height: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.section__subtitle {
+    display: block;
+    text-align: center;
+    font-size: var(--small-font-size);
+    color: var(--first-color);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: var(--body-color);
+    z-index: var(--z-fixed);
+    transition: box-shadow 0.4s;
+}
+
+.nav {
+    position: relative;
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav__logo {
+    display: inline-flex;
+    align-items: center;
+    column-gap: 0.5rem;
+    font: 400 var(--h1-font-size) var(--second-font);
+    color: var(--first-color);
+
+    i {
+        font-size: 1.5rem;
+    }
+}
+
+.nav__toggle, .nav__close {
+    font-size: 1.5rem;
+    color: var(--title-color);
+    cursor: pointer;
+}
