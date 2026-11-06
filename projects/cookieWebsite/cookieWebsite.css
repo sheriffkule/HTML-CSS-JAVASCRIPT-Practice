@@ -6,12 +6,12 @@
   --first-color: hsl(342, 61%, 30%);
   --first-color-alt: hsl(344, 63%, 23%);
   --first-color-light: hsl(30, 49%, 58%);
-  --first-color-lighten: hsl(36, 58%, 87%);
+  --first-color-lighten: hsl(36, 58%, 85%);
   --title-color: hsl(17, 43%, 16%);
   --text-color: hsl(22, 22%, 35%);
   --text-color-light: hsl(27, 17%, 55%);
   --body-color: hsl(38, 61%, 92%);
-  --container-color: hsl(36, 100%, 96%);
+  --container-color: hsl(36, 100%, 92%);
 
   --body-font: "DM Sans", sans-serif;
   --second-font: "Bagel Fat One", sans-serif;
@@ -158,4 +158,173 @@ img {
     font-size: 1.5rem;
     color: var(--title-color);
     cursor: pointer;
+}
+
+@media (width <= 1150px) {
+    .nav__menu {
+        position: fixed;
+        top: 0;
+        right: -120%;
+        width: 80%;
+        height: max-content;
+        background-color: var(--container-color);
+        box-shadow: -2px 0 16px hsl(38 60% 15% / 0.15);
+        padding: 6.5rem 2rem 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: right 0.4s;
+
+        .nav__logo {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+        }
+    }
+}
+
+.nav__list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+}
+
+.nav__link {
+    display: inline-flex;
+    align-items: center;
+    column-gap: 0.5rem;
+    font: 400 var(--h1-font-size) var(--second-font);
+    color: var(--title-color);
+    transition: color 0.4s;
+
+    color: var(--first-color);
+}
+
+.nav__link::before {
+    content: '';
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: var(--first-color-lighten);
+    border-radius: 50%;
+    transition: background-color 0.4s;
+}
+
+.nav__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.nav__data {
+    display: grid;
+    justify-items: start;
+    row-gap: 0.75rem;
+}
+
+.nav__social-link {
+    width: 45px;
+    height: 45px;
+    background-color: var(--first-color-lighten);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 1.25rem;
+    color: var(--first-color);
+    transition: background-color 0.4s, color 0.4s;
+
+    &:hover {
+        background-color: var(--first-color);
+        color: var(--first-color-lighten);
+    }
+}
+
+.nav__button {
+    width: 100%;
+    justify-content: center;
+}
+
+.show-menu {
+    right: 0;
+}
+
+.home__container {
+    padding-top: 0.5rem;
+    row-gap: 3rem;
+}
+
+.home__data {
+    text-align: center;
+}
+
+.home__rating {
+    display: inline-flex;
+    align-items: center;
+    column-gap: 0.5rem;
+    background-color: var(--first-color-lighten);
+    color: var(--title-color);
+    font-size: var(--smaller-font-size);
+    font-weight: var(--font-medium);
+    padding: 0.5rem 1rem;
+    border-radius: 4rem;
+    margin-bottom: 1rem;
+
+    i {
+        font-size: 1.25rem;
+        color: var(--first-color-light);
+    }
+}
+
+.home__title {
+    font-size: var(--biggest-font-size);
+    margin-bottom: 2rem;
+
+    span {
+        color: var(--first-color);
+    }
+}
+
+.home__description {
+    margin-bottom: 2rem;
+}
+
+.home__buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    column-gap: 0.5rem;
+    background-color: var(--first-color);
+    color: var(--first-color-lighten);
+    font-weight: var(--font-semi-bold);
+    padding: 1rem 1.5rem;
+    border-radius: 4rem;
+    transition: background-color 0.4s, color 0.4s;
+
+    i {
+        font-size: 1.25rem;
+        font-weight: initial;
+        transition: transform 0.4s;
+    }
+    &:hover {
+        background-color: var(--first-color-alt);
+    }
+    &:hover .ri-arrow-right-line {
+        transform: translateX(0.5rem);
+    }
+}
+
+.button-ghost {
+    background-color: transparent;
+    color: var(--first-color);
+    border: 2px solid var(--first-color);
+
+    &:hover {
+        background-color: var(--first-color);
+        color: var(--first-color-lighten);
+    }
 }

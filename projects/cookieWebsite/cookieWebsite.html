@@ -11,14 +11,10 @@
   <body>
     <header class="header" id="header">
       <nav class="nav container">
-        <a href="#" class="nav__logo">
-          <i class="ri-cookie-fill"></i> Cookie
-        </a>
+        <a href="#" class="nav__logo"> <i class="ri-cookie-fill"></i> Cookie </a>
 
         <div class="nav__menu" id="nav-menu">
-          <a href="#" class="nav__logo">
-            <i class="ri-cookie-fill"></i> Cookie
-          </a>
+          <a href="#" class="nav__logo"> <i class="ri-cookie-fill"></i> Cookie </a>
 
           <ul class="nav__list">
             <li><a href="#home" class="nav__link active-link">Home</a></li>
@@ -56,5 +52,52 @@
         </button>
       </nav>
     </header>
+
+    <main class="main">
+      <section class="home section" id="home">
+        <div class="home__container container grid">
+          <div class="home__data">
+            <div class="home__rating">
+              <i class="ri-star-fill"></i>
+              <span>4.9 · +2k Happy Customers</span>
+            </div>
+
+            <h1 class="home__title">
+              Made with <br />
+              <span>love</span>, baked <br />
+              for you
+            </h1>
+
+            <p class="home__description">
+              Handcrafted cookies made with authentic, top-quality ingredients, plenty of chocolate, and all
+              the care and dedication of our kitchen.
+            </p>
+
+            <div class="home__buttons">
+              <a href="#products" class="button"> View Menu <i class="ri-arrow-right-line"></i> </a>
+              <a href="#" class="button button-ghost"> Contact us <i class="ri-chat-3-line"></i> </a>
+            </div>
+          </div>
+
+          <div class="home__image">
+            <img src="img/cookie-1.png" loading="lazy" class="home__cookie home__cookie-1" />
+            <img src="img/cookie-2.png" loading="lazy" class="home__cookie home__cookie-2" />
+            <img src="img/cookie-3.png" loading="lazy" class="home__cookie home__cookie-3" />
+            <img src="img/cookie-4.png" loading="lazy" class="home__cookie home__cookie-4" />
+            <img src="img/cookie-5.png" loading="lazy" class="home__cookie home__cookie-5" />
+
+            <img
+              src="img/home-bag.png"
+              alt="Cookie paper bag filled with handcrafted cookies"
+              class="home__bag" />
+          </div>
+        </div>
+      </section>
+    </main>
   </body>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/matter-js@0.20.0/build/matter.min.js"></script>
+  <script src="cookieWebsite.js"></script>
 </html>
