@@ -88,6 +88,10 @@ a {
     text-decoration: none;
 }
 
+p {
+    text-wrap: pretty;
+}
+
 img {
     display: block;
     max-width: 100%;
@@ -571,4 +575,108 @@ img {
 
 .products__card:nth-child(odd):hover .products__img {
     rotate: -30deg;
+}
+
+.products__name {
+    font-size: var(--h3-font-size);
+    margin-bottom: 0.5rem;
+}
+
+.products__data {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.products__price {
+    font: var(--font-regular) var(--h3-font-size) var(--second-font);
+    color: var(--first-color);
+}
+
+.products__add {
+    width: 32px;
+    height: 32px;
+    background-color: var(--first-color);
+    color: var(--first-color-lighten);
+    font-size: 1.5rem;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: background-color 0.4s, transform 0.4s;
+
+    &:hover {
+        background-color: var(--first-color-alt);
+        transform: scale(1.1) rotate(180deg);
+    }
+}
+
+.products__more {
+    width: 100%;
+    justify-content: center;
+}
+
+.contact__container {
+    row-gap: 3rem;
+}
+
+.contact__map {
+    height: 372px;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.contact__map iframe {
+    width: 100%;
+    height: 100%;
+}
+
+.contact__content {
+    display: grid;
+    row-gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.contact__card {
+    display: flex;
+    align-items: center;
+    column-gap: 1rem;
+    background-color: var(--container-color);
+    border-radius: 1.5rem;
+}
+
+.contact__icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    background-color: var(--first-color-lighten);
+    color: var(--first-color);
+    font-size: 1.5rem;
+    border-radius: 1rem;
+    display: grid;
+    place-items: center;
+}
+
+.contact__title {
+    font-size: var(--h3-font-size);
+    margin-bottom: 0.25;
+}
+
+.contact__info {
+    font-size: var(--small-font-size);
+    font-style: initial;
+
+    a {
+        color: var(--text-color);
+        transition: color 0.4s;
+
+        &:hover {
+            color: var(--first-color);
+        }
+    }
+}
+
+.contact__button {
+    width: 100%;
+    justify-content: center;
 }
