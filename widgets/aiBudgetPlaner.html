@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI-Powered Budget Planner | Smart Finance Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/aiBudgetPlaner.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>AI-Powered Budget Planner <span class="ai-badge">AI</span></h1>
+        <p class="tagline">Smart financial management with AI-driven insights and recommendations.</p>
+      </header>
+
+      <main class="main-content">
+        <section class="left-panel">
+          <article class="card">
+            <h2 class="card-title"><i class="fas fa-plus-circle"></i> Add Income / Expense</h2>
+
+            <fieldset class="input-group">
+              <label for="type">Type:</label>
+              <select name="type" id="type">
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+              </select>
+            </fieldset>
+
+            <fieldset class="input-group">
+              <label for="category">Category:</label>
+              <select name="category" id="category">
+                <option value="salary">Salary</option>
+                <option value="freelance">Freelance</option>
+                <option value="investment">Investment</option>
+                <option value="food">Food</option>
+                <option value="transportation">Transportation</option>
+                <option value="housing">Housing</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="shopping">Shopping</option>
+                <option value="healthcare">Healthcare</option>
+                <option value="other">Other</option>
+              </select>
+            </fieldset>
+
+            <fieldset class="input-group">
+              <label for="description">Description:</label>
+              <input type="text" id="description" placeholder="e.g., Monthly salary, Groceries, etc." />
+            </fieldset>
+
+            <fieldset class="input-group">
+              <label for="amount">Amount:</label>
+              <input type="number" id="amount" placeholder="0.00" min="0" step="0.01" />
+            </fieldset>
+
+            <button class="btn btn-full" id="addTransaction">Add Transaction</button>
+            <button class="btn btn-full btn-ai" id="aiSuggest">
+              <i class="fas fa-robot"></i> Get AI Suggestions
+            </button>
+          </article>
+
+          <article class="card">
+            <h2 class="card-title"><i class="fas fa-chart-pie"></i> Spending by Category</h2>
+            <ul class="category-list" id="categoryList">
+              <!-- Category items will be added here dynamically -->
+            </ul>
+
+            <div class="empty-state" id="categoryEmptyState">
+              <i class="fas fa-chart-pie"></i>
+              <p>No expenses yet. Add some transactions to see category breakdown.</p>
+            </div>
+          </article>
+        </section>
+
+        <section class="right-panel">
+          <article class="card">
+            <h2 class="card-title"><i class="fas fa-wallet"></i> Financial Overview</h2>
+
+            <div class="income-expense-container">
+              <fieldset class="income-card">
+                <p>Total Income</p>
+                <div class="amount income-amount" id="totalIncome">$0.00</div>
+                <p>This month</p>
+              </fieldset>
+
+              <fieldset class="expense-card">
+                <p>Total Expenses</p>
+                <div class="amount expense-amount" id="totalExpense">$0.00</div>
+                <p>This month</p>
+              </fieldset>
+            </div>
+
+            <fieldset class="balance-card">
+              <p>Current Balance</p>
+              <div class="amount balance-amount" id="currentBalance">$0.00</div>
+              <p>Available to spend</p>
+            </fieldset>
+
+            <h3 class="card-title"><i class="fas fa-history"></i> Recent Transactions</h3>
+            <div id="transactionsList">
+              <!-- Transaction items will be added here dynamically -->
+            </div>
+
+            <div class="empty-state" id="transactionEmptyState">
+              <i class="fas fa-receipt"></i>
+              <p>No transactions yet. Add your first income or expense.</p>
+            </div>
+          </article>
+        </section>
+      </main>
+
+      <article class="ai-insights card">
+        <h2 class="ai-title"><i class="fas fa-lightbulb"></i>AI-Powered Insights & Recommendations</h2>
+        <div id="insightsContent">
+          <div class="insight-item">
+            <div class="insight-icon">
+              <i class="fas fa-robot"></i>
+            </div>
+            <div class="insight-text">
+              <h4>Welcome to Your AI Budget Planner!</h4>
+              <p>
+                Start adding your income and expenses to receive personalized AI insights and recommendations
+                for better financial management.
+              </p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <footer class="footer__copy">
+        © <time datetime="" id="year"></time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+        <p>Disclaimer: This is a demo application. For actual financial advice, consult a professional</p>
+      </footer>
+    </div>
+
+    <div class="notification" id="notification">
+      <i class="fas fa-check-circle"></i>
+      <div>
+        <h4>Success!</h4>
+        <p id="notificationMessage">Transaction added successfully.</p>
+      </div>
+    </div>
+
+    <script src="/widgets_script/aiBudgetPlaner.js"></script>
+  </body>
+</html>
