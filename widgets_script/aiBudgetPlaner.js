@@ -219,3 +219,118 @@ function updateCategoryBreakdown() {
     categoryList.appendChild(categoryEl);
   });
 }
+
+// Generate AI Suggestions
+function generateInsights() {
+  insightsContent.innerHTML = '';
+
+  if (transactions.length === 0) {
+    insightsContent.innerHTML = `
+      <div class="insight-item">
+        <div class="insight-icon">
+          <i class="fas fa-robot"></i>
+        </div>
+        <div class="insight-text">
+          <h4>Welcome to Your AI Budget Planner!</h4>
+          <p>
+            Start adding your income and expenses to receive personalized AI insights and recommendations for
+            better financial management.
+          </p>
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  const income = transactions.filter((t) => t.type === 'income').reduce((sum, t) => sum + t.amount, 0);
+  const expenses = transactions.filter((t) => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0);
+  const balance = income - expenses;
+
+  // Insight 1: Balance status
+  let balanceInsight = '';
+  let balanceIcon = 'fa-smile';
+  let balanceColor = '#4cc9f0';
+
+  if (balance > income * 0.3) {
+    balanceInsight = 'Excellent! You have a healthy balance. Consider investing some of your savings';
+    balanceIcon = 'fa-gem';
+    balanceColor = '#4cc9f0';
+  } else if (balance > 0) {
+    balanceInsight = "Good Job! You're spending less than you earn. Try to maintain this positive balance.";
+    balanceIcon = 'fa-thumbs-up';
+    balanceColor = '#3a0ca3';
+  } else {
+    balanceInsight = 'Warning: Your expenses exceed your income. Review your spending habits!';
+    balanceIcon = 'fa-exclamation-triangle';
+    balanceColor = '#f72585';
+  }
+
+  // Insight 2: Spending by category
+  const largestCategory = Object.entries(categories).sort((a, b) => b[1] - a[0])[0];
+  let categoryInsight = '';
+
+  if (largestCategory) {
+    const [category, amount] = largestCategory;
+    const percentage = ((amount / expenses) * 100).toFixed(1);
+    categoryInsight = `You spend the most on <strong>${category}</strong> (${percentage}% of total
+      expenses). Consider reviewing this category for potential savings.`;
+  }
+
+  // Insight 3: Savings rate
+  const savingsRate = income > 0 ? (((income - expenses) / income) * 100).toFixed(1) : 0;
+  let savingsInsight = '';
+  let savingsIcon = 'fa-piggy-bank';
+
+  if (savingsRate > 20) {
+    savingsInsight = `Great job! Excellent savings rate of ${savingsRate} You are saving more than 20% of
+    your income. Keep up the excellent work!`;
+  } else if (savingsRate > 10) {
+    savingsInsight = `Good effort! Your savings rate is ${savingsRate}%. Consider increasing this to build a stronger financial cushion.`;
+  } else if (savingsRate > 0) {
+    savingsInsight = `Your savings rate is ${savingsRate}%. It's important to aim for at least 10-20% savings to ensure financial stability.`;
+  } else {
+    savingsInsight =
+      'Your expenses exceed your income. Focus on reducing spending or increasing income to achieve positive savings.';
+    savingsIcon = 'fa-exclamation-circle';
+  }
+
+  /// Add insights to the DOM
+  const insights = [
+    {
+      title: 'Financial Health',
+      text: balanceInsight,
+      icon: balanceIcon,
+      color: balanceColor,
+    },
+    {
+      title: 'Spending Analysis',
+      text: categoryInsight || 'Add more expenses to see category analysis.',
+      icon: 'fa-chart-pie',
+      color: '#7209b7',
+    },
+    {
+      title: 'Savings Rate',
+      text: savingsInsight,
+      icon: savingsIcon,
+      color: savingsRate > 20 ? '#4cc9f0' : savingsRate > 10 ? '#3a0ca3' : '#f72585',
+    },
+  ]
+
+  insights.forEach((insight) => {
+    if (!insight.text) return;
+
+    const insightEl = document.createElement('div');
+    insightEl.className = 'insight-item';
+    insightEl.innerHTML = `
+      <div class="insight-icon" style="background-color: ${insight.color}20; color: ${insight.color}">
+        <i class="fas ${insight.icon}"></i>
+      </div>
+      <div class="insight-text">
+        <h4>${insight.title}</h4>
+        <p>${insight.text}</p>
+      </div>
+    `;
+    
+    insightsContent.appendChild(insightEl);
+  });
+}

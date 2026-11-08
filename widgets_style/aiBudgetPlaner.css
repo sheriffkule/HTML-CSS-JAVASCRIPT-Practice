@@ -283,3 +283,56 @@ input[type="number"]::-webkit-outer-spin-button:hover {
     border-radius: var(--border-radius);
     text-align: center;
 }
+
+.income-card {
+    background-color: rgb(76 201 240 / 0.1);
+    border-left: 5px solid var(--success);
+}
+
+.expense-card {
+    background-color: rgb(247 37 133 / 0.1);
+    border-left: 5px solid var(--warning);
+}
+
+.amount {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-block: 10px;
+}
+
+.income-amount {
+    color: var(--success);
+}
+
+.balance-card {
+    background-color: rgb(67 97 238 / 0.1);
+    border-left: 5px solid var(--primary);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.balance-amount {
+    color: var(--primary);
+}
+
+.category-list {
+    list-style: none;
+    margin-top: 15px;
+}
+
+.category-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    background-color: var(--light);
+    border-radius: 8px;
+    transition: var(--transition);
+
+    &:hover {
+        background-color: #e1e8ee;
+    }
+}
