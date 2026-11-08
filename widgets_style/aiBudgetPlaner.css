@@ -55,3 +55,117 @@ h1 {
     font-weight: 400;
     text-wrap: pretty;
 }
+
+.ai-badge {
+    display: inline-block;
+    background: linear-gradient(90deg, #f72585, #7209b7);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 40px;
+
+    @media (width <= 992px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.card {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow),
+    inset var(--box-shadow);
+    padding: 25px;
+    transition: var(--transition);
+
+    &:hover {
+        box-shadow: 0 12px 30px rgb(0 0 0 / 0.2);
+    }
+}
+
+.card-title {
+    font-size: 1.5rem;
+    color: var(--secondary);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    i {
+        color: var(--primary);
+    }
+}
+
+fieldset {
+    border: none;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--dark);
+}
+
+input, select {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #e2e8f0;
+    border-radius: var(--border-radius);
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+:is(input, select):is(:focus, :focus-visible) {
+    outline: transparent;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgb(67 97 238 / 0.2),
+    inset 0 0 0 3px rgb(67 97 238 / 0.2);
+}
+
+.btn {
+    display: inline-block;
+    padding: 14px 24px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+
+    &:hover {
+        background-color: var(--secondary);
+        box-shadow: var(--box-shadow);
+        transform: translateY(-2px);
+        corner-shape: scoop;
+    }
+}
+
+.income-expense-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.income-card, .expense-card {
+    padding: 20px;
+    border-radius: var(--border-radius);
+    text-align: center;
+}

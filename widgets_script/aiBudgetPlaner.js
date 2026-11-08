@@ -112,3 +112,58 @@ aiSuggestBtn.addEventListener('click', function () {
     showNotification('AI suggestions generated based on your spending patterns!', 'success');
   }, 1500);
 });
+
+// Update UI with transactions
+function updateUI() {
+  // Calculate totals
+  const income = transactions.filter((t) => t.type === 'income').reduce((sum, t) => sum + t.amount, 0);
+  const expenses = transactions.filter((t) => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0);
+  const balance = income - expenses;
+
+  // Update totals display
+  totalIncomeEl.textContent = `$${income.toFixed(2)}`;
+  totalExpenseEl.textContent = `$${expenses.toFixed(2)}`;
+  currentBalanceEl.textContent = `$${balance.toFixed(2)}`;
+
+  // Update transactions list
+  transactionsList.innerHTML = '';
+
+  if (transactions.length === 0) {
+    transactionEmptyState.style.display = 'block';
+  } else {
+    transactionEmptyState.style.display = 'none';
+
+    // Show only the last 10 transactions
+    const recentTransactions = transactions.slice(0, 10);
+
+    recentTransactions.forEach((transaction) => {
+      const transactionEl = document.createElement('div');
+      transactionEl.className = `expense-item ${transaction.type === 'income' ? 'income-item' : ''}`;
+
+      transactionEl.innerHTML = `
+        <div class="expense-details">
+          <h4>${transaction.description}</h4>
+          <p>${transaction.category} • ${transaction.date}</p>
+        </div>
+        <div class="expense-amount ${transaction.type === 'income' ? 'income-amount' : 'expense-amount'}">
+          ${transaction.type === 'income' ? '+' : '-'}$${transaction.amount.toFixed(2)}
+        </div>
+        <div class="expense-actions">
+          <button class="action-btn delete-btn" data-id="${transaction.id}" title="Delete Item">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      `;
+
+      transactionsList.appendChild(transactionEl);
+    });
+
+    // Add event listeners to delete buttons
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const id = parseInt(this.getAttribute('data-id'));
+        deleteTransaction(id);
+      })
+    })
+  }
+}
