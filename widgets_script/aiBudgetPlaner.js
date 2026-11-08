@@ -159,11 +159,63 @@ function updateUI() {
     });
 
     // Add event listeners to delete buttons
-    document.querySelectorAll('.delete-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
+    document.querySelectorAll('.delete-btn').forEach((btn) => {
+      btn.addEventListener('click', function () {
         const id = parseInt(this.getAttribute('data-id'));
         deleteTransaction(id);
-      })
-    })
+      });
+    });
   }
+}
+
+// Update category breakdown
+function updateCategoryBreakdown() {
+  categoryList.innerHTML = '';
+  categories = {};
+
+  // Calculate expenses by category
+  transactions
+    .filter((t) => t.type === 'expense')
+    .forEach((transaction) => {
+      if (!categories[transaction.category]) {
+        categories[transaction.category] = 0;
+      }
+      categories[transaction.category] += transaction.amount;
+    });
+
+  // Get total expenses
+  const totalExpenses = Object.values(categories).reduce((sum, amount) => sum + amount, 0);
+
+  // Display categories
+  if (totalExpenses === 0) {
+    categoryEmptyState.style.display = 'block';
+    return;
+  } else {
+    categoryEmptyState.style.display = 'none';
+  }
+
+  // Sort categories by amount (descending)
+  const sortedCategories = Object.entries(categories).sort((a, b) => b[1] - a[1]);
+
+  sortedCategories.forEach(([category, amount]) => {
+    const percentage = totalExpenses > 0 ? ((amount / totalExpenses) * 100).toFixed(1) : 0;
+    const config = categoryConfig[category] || categoryConfig.other;
+
+    const categoryEl = document.createElement('li');
+    categoryEl.className = 'category-item';
+    categoryEl.innerHTML = `
+      <div class="category-name">
+        <div class="category-icon" style="background-color: ${config.color}">
+          <i class="fas ${config.icon}" style="color: ${config.color}"></i>
+        </div>
+        <span>${category.charAt(0).toUpperCase() + category.slice(1)}</span>
+      </div>
+      <div>
+        <span>$${amount.toFixed(2)}</span>
+        <span style="color: var(--gray); margin-left: 10px;">${percentage}%</span>
+      </div>
+    `;
+
+    categoryList.appendChild(categoryEl);
+  });
 }
