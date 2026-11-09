@@ -34,6 +34,19 @@ const categoryConfig = {
   other: { icon: 'fa-circle-dot', color: '#6c757d' },
 };
 
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, (character) => {
+    const entities = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;',
+    };
+    return entities[character];
+  });
+}
+
 // Initialize the app
 function init() {
   updateUI();
@@ -47,8 +60,8 @@ function init() {
 
 // Add transaction
 addTransactionBtn.addEventListener('click', function () {
-  const type = typeSelect.ariaValueMax;
-  const category = categorySelect.ariaValueMax;
+  const type = typeSelect.value;
+  const category = categorySelect.value;
   const description = descriptionInput.value.trim();
   const amount = parseFloat(amountInput.value);
 
@@ -58,7 +71,7 @@ addTransactionBtn.addEventListener('click', function () {
     return;
   }
 
-  if (!amount || amount <= 0) {
+  if (!Number.isFinite(amount) || amount <= 0) {
     showNotification('Please enter a valid amount', 'warning');
     amountInput.focus();
     return;
@@ -86,7 +99,7 @@ addTransactionBtn.addEventListener('click', function () {
   generateInsights();
 
   // Clear form
-  description.value = '';
+  descriptionInput.value = '';
   amountInput.value = '';
   descriptionInput.focus();
 
@@ -134,7 +147,7 @@ function updateUI() {
     transactionEmptyState.style.display = 'none';
 
     // Show only the last 10 transactions
-    const recentTransactions = transactions.slice(0, 10);
+    const recentTransactions = transactions.slice(-10).reverse();
 
     recentTransactions.forEach((transaction) => {
       const transactionEl = document.createElement('div');
@@ -142,8 +155,8 @@ function updateUI() {
 
       transactionEl.innerHTML = `
         <div class="expense-details">
-          <h4>${transaction.description}</h4>
-          <p>${transaction.category} • ${transaction.date}</p>
+          <h4>${escapeHTML(transaction.description)}</h4>
+          <p>${escapeHTML(transaction.category)} • ${escapeHTML(transaction.date)}</p>
         </div>
         <div class="expense-amount ${transaction.type === 'income' ? 'income-amount' : 'expense-amount'}">
           ${transaction.type === 'income' ? '+' : '-'}$${transaction.amount.toFixed(2)}
@@ -206,9 +219,9 @@ function updateCategoryBreakdown() {
     categoryEl.innerHTML = `
       <div class="category-name">
         <div class="category-icon" style="background-color: ${config.color}">
-          <i class="fas ${config.icon}" style="color: ${config.color}"></i>
+          <i class="fas ${config.icon}"></i>
         </div>
-        <span>${category.charAt(0).toUpperCase() + category.slice(1)}</span>
+        <span>${escapeHTML(category.charAt(0).toUpperCase() + category.slice(1))}</span>
       </div>
       <div>
         <span>$${amount.toFixed(2)}</span>
@@ -266,13 +279,13 @@ function generateInsights() {
   }
 
   // Insight 2: Spending by category
-  const largestCategory = Object.entries(categories).sort((a, b) => b[1] - a[0])[0];
+  const largestCategory = Object.entries(categories).sort((a, b) => b[1] - a[1])[0];
   let categoryInsight = '';
 
   if (largestCategory) {
     const [category, amount] = largestCategory;
     const percentage = ((amount / expenses) * 100).toFixed(1);
-    categoryInsight = `You spend the most on <strong>${category}</strong> (${percentage}% of total
+    categoryInsight = `You spend the most on <strong>${escapeHTML(category)}</strong> (${percentage}% of total
       expenses). Consider reviewing this category for potential savings.`;
   }
 
@@ -282,7 +295,7 @@ function generateInsights() {
   let savingsIcon = 'fa-piggy-bank';
 
   if (savingsRate > 20) {
-    savingsInsight = `Great job! Excellent savings rate of ${savingsRate} You are saving more than 20% of
+    savingsInsight = `Great job! Excellent savings rate of ${savingsRate}%. You are saving more than 20% of
     your income. Keep up the excellent work!`;
   } else if (savingsRate > 10) {
     savingsInsight = `Good effort! Your savings rate is ${savingsRate}%. Consider increasing this to build a stronger financial cushion.`;
@@ -346,7 +359,7 @@ function generateAISuggestions() {
   const income = transactions.filter((t) => t.type === 'income').reduce((sum, t) => sum + t.amount, 0);
 
   // Suggestion 1: Based on highest spending category
-  const highestCategory = Object.entries(expensesByCategory).sort((a, b) => b[1] - a[0])[0];
+  const highestCategory = Object.entries(expensesByCategory).sort((a, b) => b[1] - a[1])[0];
 
   if (highestCategory) {
     const [category, amount] = highestCategory;
@@ -354,20 +367,24 @@ function generateAISuggestions() {
 
     const suggestion1 = document.createElement('div');
     suggestion1.className = 'insight-item';
+    const incomePercentage = income > 0 ? ((amount / income) * 100).toFixed(1) : null;
     suggestion1.innerHTML = `
       <div class="insight-icon" style="background-color: #f7258520; color: #f72585">
         <i class="fas fa-lightbulb"></i>
       </div>
       <div class="insight-text">
-        <h4>AI Recommendation: Reduce ${category} spending.</h4>
+        <h4>AI Recommendation: Reduce ${escapeHTML(category)} spending.</h4>
         <p>
-          You're spending ${percentage}% your income on <strong>${category}</strong>. Consider reviewing this
-          category for potential savings or reallocation. Consider setting a monthly limit for this category
+          ${
+            incomePercentage === null
+              ? `Your highest expense category is <strong>${escapeHTML(category)}</strong> at $${amount.toFixed(2)}.`
+              : `You're spending ${incomePercentage}% of your income on <strong>${escapeHTML(category)}</strong>.`
+          } Consider reviewing this category for potential savings or reallocation. Consider setting a monthly limit for this category
           to save more money.
         </p>
         <div class="progress-container">
           <div class="progress-bar">
-            <div class="progress-fill expense-progress" style="width= ${Math.min(percentage, 100)}%"></div>
+            <div class="progress-fill expense-progress" style="width: ${Math.min(parseFloat(percentage), 100)}%"></div>
           </div>
         </div>
       </div>
@@ -394,7 +411,7 @@ function generateAISuggestions() {
         Adjust your spending to match these guidelines for better financial health. For optimal budgeting,
         allocate 50% to needs, 30% to wants, and 20% to savings.
       </p>
-      <div className="progress-container">
+      <div class="progress-container">
         <p>Needs (50%): $${suggestedBudget.needs.toFixed(2)}</p>
         <div class="progress-bar">
           <div class="progress-fill budget-progress" style="width: 50%"></div>
@@ -405,7 +422,7 @@ function generateAISuggestions() {
         </div>
         <p>Savings (20%): $${suggestedBudget.savings.toFixed(2)}</p>
         <div class="progress-bar">
-          <div class="progress-fill" style="20%; background-color: #4cc9f0"></div>
+          <div class="progress-fill" style="width: 20%; background-color: #4cc9f0"></div>
         </div>
       </div>
     </div>
@@ -413,13 +430,13 @@ function generateAISuggestions() {
   insightsContent.appendChild(suggestion2);
 
   // Suggestion 3: Based on recent spending trends
-  const lastWeekExpenses = transactions
+  const recentExpenses = transactions
     .filter((t) => t.type === 'expense')
-    .slice(0, 7)
+    .slice(-7)
     .reduce((sum, t) => sum + t.amount, 0);
 
-  if (lastWeekExpenses > 0) {
-    const dailyAverage = lastWeekExpenses / 7;
+  if (recentExpenses > 0) {
+    const dailyAverage = recentExpenses / 7;
     const monthlyProjection = dailyAverage * 30;
 
     const suggestion3 = document.createElement('div');

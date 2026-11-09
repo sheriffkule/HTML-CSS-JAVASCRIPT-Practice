@@ -336,3 +336,157 @@ input[type="number"]::-webkit-outer-spin-button:hover {
         background-color: #e1e8ee;
     }
 }
+
+.category-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.expense-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: var(--light);
+    border-radius: 8px;
+    border-left: 4px solid var(--warning);
+}
+
+.expense-item.income-item {
+    border-left-color: var(--success);
+}
+
+.expense-details {
+    flex-grow: 1;
+}
+
+.expense-actions {
+    display: flex;
+    gap: 10px;
+    margin-left: 6px;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    color: var(--gray);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: var(--transition);
+
+    &:hover {
+        color: var(--primary);
+    }
+}
+
+.delete-btn:hover {
+    color: var(--warning);
+}
+
+.ai-insights {
+    margin-top: 30px;
+    padding: 25px;
+    background: linear-gradient(135deg, #f5f7ff, #e3e9ff);
+}
+
+.ai-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    color: var(--secondary);
+}
+
+.insight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+}
+
+.insight-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgb(67 97 238 / 0.1);
+    display: grid;
+    place-items: center;
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.insight-text {
+    flex-grow: 1;
+    text-wrap: pretty;
+}
+
+.progress-container {
+    margin-top: 10px;
+}
+
+.progress-bar {
+    height: 8px;
+    background-color: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease-in;
+}
+
+.budget-progress {
+    background-color: var(--success);
+}
+
+.expenses-progress {
+    background-color: var(--warning);
+}
+
+footer {
+    margin-top: 20px;
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--light);
+    color: var(--gray);
+    font-size: 0.875rem;
+
+    span {
+        color: red;
+        font-size: 1rem;
+    }
+    abbr {
+        color: var(--primary);
+        letter-spacing: 0.5px;
+        cursor: default;
+        text-underline-offset: 2px;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: var(--gray);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary);
+}
