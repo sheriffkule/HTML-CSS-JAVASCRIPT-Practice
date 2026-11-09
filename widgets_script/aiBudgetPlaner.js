@@ -314,7 +314,7 @@ function generateInsights() {
       icon: savingsIcon,
       color: savingsRate > 20 ? '#4cc9f0' : savingsRate > 10 ? '#3a0ca3' : '#f72585',
     },
-  ]
+  ];
 
   insights.forEach((insight) => {
     if (!insight.text) return;
@@ -330,7 +330,163 @@ function generateInsights() {
         <p>${insight.text}</p>
       </div>
     `;
-    
+
     insightsContent.appendChild(insightEl);
   });
 }
+
+// Generate AI Suggestions
+function generateAISuggestions() {
+  // Clear previous insights
+  insightsContent.innerHTML = '';
+
+  // Analyze spending patterns
+  const expensesByCategory = { ...categories };
+  const totalExpenses = Object.values(expensesByCategory).reduce((sum, amount) => sum + amount, 0);
+  const income = transactions.filter((t) => t.type === 'income').reduce((sum, t) => sum + t.amount, 0);
+
+  // Suggestion 1: Based on highest spending category
+  const highestCategory = Object.entries(expensesByCategory).sort((a, b) => b[1] - a[0])[0];
+
+  if (highestCategory) {
+    const [category, amount] = highestCategory;
+    const percentage = ((amount / totalExpenses) * 100).toFixed(1);
+
+    const suggestion1 = document.createElement('div');
+    suggestion1.className = 'insight-item';
+    suggestion1.innerHTML = `
+      <div class="insight-icon" style="background-color: #f7258520; color: #f72585">
+        <i class="fas fa-lightbulb"></i>
+      </div>
+      <div class="insight-text">
+        <h4>AI Recommendation: Reduce ${category} spending.</h4>
+        <p>
+          You're spending ${percentage}% your income on <strong>${category}</strong>. Consider reviewing this
+          category for potential savings or reallocation. Consider setting a monthly limit for this category
+          to save more money.
+        </p>
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div class="progress-fill expense-progress" style="width= ${Math.min(percentage, 100)}%"></div>
+          </div>
+        </div>
+      </div>
+    `;
+    insightsContent.appendChild(suggestion1);
+  }
+
+  // Suggestion 2: Budget allocation
+  const suggestedBudget = {
+    needs: income * 0.5,
+    wants: income * 0.3,
+    savings: income * 0.2,
+  };
+
+  const suggestion2 = document.createElement('div');
+  suggestion2.className = 'insight-item';
+  suggestion2.innerHTML = `
+    <div class="insight-icon" style="background-color: #3a0ca320; color: #3a0ca3">
+      <i class="fas fa-chart-line"></i>
+    </div>
+    <div class="insight-text">
+      <h4>AI Recommendation: Optimize your budget allocation, try the 50/30/20 rule.</h4>
+      <p>
+        Adjust your spending to match these guidelines for better financial health. For optimal budgeting,
+        allocate 50% to needs, 30% to wants, and 20% to savings.
+      </p>
+      <div className="progress-container">
+        <p>Needs (50%): $${suggestedBudget.needs.toFixed(2)}</p>
+        <div class="progress-bar">
+          <div class="progress-fill budget-progress" style="width: 50%"></div>
+        </div>
+        <p>Wants (30%): $${suggestedBudget.wants.toFixed(2)}</p>
+        <div class="progress-bar">
+          <div class="progress-fill expense-progress" style="width: 30%"></div>
+        </div>
+        <p>Savings (20%): $${suggestedBudget.savings.toFixed(2)}</p>
+        <div class="progress-bar">
+          <div class="progress-fill" style="20%; background-color: #4cc9f0"></div>
+        </div>
+      </div>
+    </div>
+  `;
+  insightsContent.appendChild(suggestion2);
+
+  // Suggestion 3: Based on recent spending trends
+  const lastWeekExpenses = transactions
+    .filter((t) => t.type === 'expense')
+    .slice(0, 7)
+    .reduce((sum, t) => sum + t.amount, 0);
+
+  if (lastWeekExpenses > 0) {
+    const dailyAverage = lastWeekExpenses / 7;
+    const monthlyProjection = dailyAverage * 30;
+
+    const suggestion3 = document.createElement('div');
+    suggestion3.className = 'insight-item';
+    suggestion3.innerHTML = `
+      <div class="insight-icon" style="background-color: #4361ee20; color: #4361ee">
+        <i class="fas fa-calendar-alt"></i>
+      </div>
+      <div class="insight-text">
+        <h4>AI Prediction: Monthly expenses projection.</h4>
+        <p>
+          Based on your recent spending, you might spend around $${monthlyProjection.toFixed(2)} this month.
+          Consider setting a monthly spending limit to avoid overspending.
+          ${
+            monthlyProjection > income
+              ? 'This exceeds your income. Consider reducing daily expenses.'
+              : 'This is within your income. Good job!'
+          }
+        </p>
+      </div>
+    `;
+    insightsContent.appendChild(suggestion3);
+  }
+}
+
+// Delete transaction
+function deleteTransaction(id) {
+  transactions = transactions.filter((t) => t.id !== id);
+  saveTransactions();
+  updateUI();
+  updateCategoryBreakdown();
+  generateInsights();
+  showNotification('Transaction deleted successfully', 'info');
+}
+
+// Save transactions to localStorage
+function saveTransactions() {
+  localStorage.setItem('budgetTransactions', JSON.stringify(transactions));
+}
+
+// Show notification
+function showNotification(message, type) {
+  let icon = 'fa-info-circle';
+  if (type === 'success') icon = 'fa-check-circle';
+  if (type === 'warning') icon = 'fa-exclamation-triangle';
+
+  notification.className = `notification ${type} show`;
+  notification.innerHTML = `<i class="fas ${icon}"></i> ${message}`;
+
+  setTimeout(() => {
+    notification.classList.remove('show');
+  }, 3000);
+}
+
+// Update year in footer
+function updateYear() {
+  const currentYear = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+
+  if (!yearElement) {
+    console.error('Year element not found');
+    return;
+  }
+  yearElement.setAttribute('datetime', currentYear.toString());
+  yearElement.textContent = currentYear.toString();
+}
+updateYear();
+
+// Initialize the app
+init();
