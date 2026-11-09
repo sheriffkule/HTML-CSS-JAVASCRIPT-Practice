@@ -25,8 +25,102 @@
               <button class="btn" data-style="neumorphic">Neumorphic</button>
             </fieldset>
           </article>
+
+          <article class="control-group">
+            <h3><i class="fas fa-palette"></i> Colors</h3>
+            <fieldset class="color-options">
+              <div
+                class="color-option selected"
+                style="background-color: '#4361ee'"
+                data-color="#4361ee"></div>
+              <div class="color-option" style="background-color: '#f72585'" data-color="#f72585"></div>
+              <div class="color-option" style="background-color: '#4cc9f0'" data-color="#4cc9f0"></div>
+              <div class="color-option" style="background-color: '#7209b7'" data-color="#7209b7"></div>
+              <div class="color-option" style="background-color: '#3a0ca3'" data-color="#3a0ca3"></div>
+              <div class="color-option" style="background-color: '#4895ef'" data-color="#4895ef"></div>
+              <div class="color-option" style="background-color: '#f8961e'" data-color="#f8961e"></div>
+              <div class="color-option" style="background-color: '#43aa8b'" data-color="#43aa8b"></div>
+            </fieldset>
+          </article>
+
+          <article class="control-group">
+            <h3><i class="fas fa-sliders-h"></i> Animation Settings</h3>
+            <fieldset class="slider-container">
+              <label for="duration">Duration: <span id="duration-value">0.6</span>s</label>
+              <input type="range" id="duration" class="slider" min="0.1" max="2" step="0.1" value="0.6" />
+            </fieldset>
+            <fieldset class="slider-container">
+              <label for="perspective">Perspective<span id="perspective-value">1000</span>px</label>
+              <input
+                type="range"
+                id="perspective"
+                class="slider"
+                min="500"
+                max="2000"
+                step="100"
+                value="1000" />
+            </fieldset>
+            <fieldset class="toggle-label">
+              <span>3D Effect:</span>
+              <label class="toggle-switch">
+                <input type="checkbox" id="3d-effect" checked />
+                <span class="toggle-slider"></span>
+              </label>
+            </fieldset>
+            <fieldset class="toggle-label">
+              <span>Shadow:</span>
+              <label class="toggle-switch">
+                <input type="checkbox" id="shadow" checked />
+                <span class="toggle-slider"></span>
+              </label>
+            </fieldset>
+          </article>
+
+          <article class="control-group">
+            <h3><i class="fas fa-magic"></i> Presets</h3>
+            <fieldset class="preset-cards">
+              <div class="preset-card" data-preset="business">Business</div>
+              <div class="preset-card" data-preset="social">Social</div>
+              <div class="preset-card" data-preset="gaming">Gaming</div>
+              <div class="preset-card" data-preset="creative">Creative</div>
+            </fieldset>
+          </article>
+
+          <article class="action-buttons">
+            <button class="action-btn" id="copy-css"><i class="fas fa-copy"></i> Copy CSS</button>
+            <button class="action-btn reset" id="reset"><i class="fas fa-undo"></i> Reset</button>
+          </article>
+        </section>
+
+        <section class="card-display">
+          <div class="card-wrapper" id="card">
+            <article class="card-face card-front" id="card-front">
+              <fieldset class="card-content">
+                <div class="card-icon">
+                  <i class="fas fa-credit-card"></i>
+                </div>
+                <h2 class="card-title">Front Side</h2>
+                <p class="card-desc">Click to flip the card</p>
+              </fieldset>
+            </article>
+            <article class="card-face card-back" id="card-back">
+              <fieldset class="card-content">
+                <div class="card-icon">
+                  <i class="fas fa-info-circle"></i>
+                </div>
+                <h2 class="card-title">Back Side</h2>
+                <p class="card-desc">This is the back side of the card with some additional information.</p>
+              </fieldset>
+            </article>
+          </div>
+          <button class="btn btn-accent" id="flip-btn"><i class="fas fa-sync-alt"></i> Flip Card</button>
         </section>
       </main>
+
+      <footer class="footer__copy">
+        © <time datetime="" id="year"></time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
     </div>
     <script src="/widgets_script/cardFlipAnimation.js"></script>
   </body>
