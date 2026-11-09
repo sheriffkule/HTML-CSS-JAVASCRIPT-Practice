@@ -37,6 +37,30 @@ header {
     text-align: center;
     margin-bottom: 30px;
     padding: 20px;
+    box-shadow: var(--box-shadow),
+    inset var(--box-shadow);
+    border-radius: var(--border-radius);
+}
+
+header, section {
+    animation: fadeIn .7s linear forwards;
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+@keyframes fadeIn {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+section:nth-child(1) {
+    animation-delay: 0.5s;
+}
+
+section:nth-child(2) {
+    animation-delay: 1s;
 }
 
 h1 {
@@ -89,6 +113,10 @@ h1 {
     &:hover {
         box-shadow: 0 12px 30px rgb(0 0 0 / 0.2);
     }
+}
+
+.category-spending {
+    margin-top: 20px;
 }
 
 .card-title {
@@ -337,6 +365,12 @@ input[type="number"]::-webkit-outer-spin-button:hover {
     }
 }
 
+.category-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .category-icon {
     width: 36px;
     height: 36px;
@@ -346,6 +380,12 @@ input[type="number"]::-webkit-outer-spin-button:hover {
     justify-content: center;
     color: white;
     font-size: 0.9rem;
+}
+
+#transactionsList {
+    margin-top: 20px;
+    box-shadow: var(--box-shadow),
+    inset var(--box-shadow);
 }
 
 .expense-item {
@@ -489,4 +529,58 @@ footer {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--secondary);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--gray);
+
+    i {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        color: #cbd5e0;
+    }
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    background-color: var(--light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow),
+    inset var(--box-shadow);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 100;
+    transform: translateX(150%) scaleY(0.1);
+    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+
+    &.show {
+        transform: translateX(0) scaleY(1);
+    }
+    &.success {
+        border-left: 4px solid var(--success);
+    }
+    &.warning {
+        border-left: 4px solid var(--warning);
+    }
+    &.info {
+        border-left: 4px solid var(--primary);
+    }
+}
+
+@media (width <= 768px) {
+    .main-content {
+        gap: 20px;
+    }
+    .card {
+        padding: 20px;
+    }
+    .income-expense-container {
+        grid-template-columns: 1fr;
+    }
 }
