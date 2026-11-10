@@ -77,35 +77,146 @@ document.addEventListener('DOMContentLoaded', function () {
         .toString(16)
         .slice(1)
     );
+  }
 
-    // Update animation duration
-    durationSlider.addEventListener('input', function () {
-      const duration = this.value;
-      durationValue.textContent = duration;
-      card.style.transition = `transform ${duration}s`;
-    });
+  // Update animation duration
+  durationSlider.addEventListener('input', function () {
+    const duration = this.value;
+    durationValue.textContent = duration;
+    card.style.transition = `transform ${duration}s`;
+  });
 
-    // Update perspective
-    perspectiveSlider.addEventListener('input', function () {
-      const perspective = this.value;
-      perspectiveValue.textContent = perspective;
-      document.querySelector('.card-display').style.perspective = `${perspective}px`;
-    });
+  // Update perspective
+  perspectiveSlider.addEventListener('input', function () {
+    const perspective = this.value;
+    perspectiveValue.textContent = perspective;
+    document.querySelector('.card-display').style.perspective = `${perspective}px`;
+  });
 
-    // Toggle 3D effect
-    threeDEffect.addEventListener('change', function () {
-      this.checked ? (card.style.transformStyle = 'preserve-3d') : (card.style.transformStyle = 'flat');
-    });
+  // Toggle 3D effect
+  threeDEffect.addEventListener('change', function () {
+    this.checked ? (card.style.transformStyle = 'preserve-3d') : (card.style.transformStyle = 'flat');
+  });
 
-    // Toggle shadow
-    shadowToggle.addEventListener('change', function () {
-      if (this.checked) {
-        cardFront.style.boxShadow = '0 5px 15px rgb(0 0 0 / 0.2)';
-        cardBack.style.boxShadow = '0 5px 15px rgb(0 0 0 / 0.2)';
-      } else {
-        cardFront.style.boxShadow = 'none';
-        cardBack.style.boxShadow = 'none';
+  // Toggle shadow
+  shadowToggle.addEventListener('change', function () {
+    if (this.checked) {
+      cardFront.style.boxShadow = '0 5px 15px rgb(0 0 0 / 0.2)';
+      cardBack.style.boxShadow = '0 5px 15px rgb(0 0 0 / 0.2)';
+    } else {
+      cardFront.style.boxShadow = 'none';
+      cardBack.style.boxShadow = 'none';
+    }
+  });
+
+  // Apply presets
+  presetCards.forEach((preset) => {
+    preset.addEventListener('click', function () {
+      presetCards.forEach((p) => p.classList.remove('active'));
+      this.classList.add('active');
+
+      const presetType = this.dataset.preset;
+      resetToDefault();
+
+      switch (presetType) {
+        case 'business':
+          // Business preset
+          cardFront.style.background = 'linear-gradient(135deg, #3a0ca3, #4361ee)';
+          cardFront.querySelector('.card-icon i').className = 'fas fa-briefcase';
+          cardFront.querySelector('.card-title').textContent = 'Business Card';
+          cardBack.querySelector('.card-icon i').className = 'fas fa-address-card';
+          cardBack.querySelector('card-title').textContent = 'Contact Info';
+          cardBack.querySelector('.card-desc').innerHTML =
+            'John Doe<br>CEO, Company Inc.<br>john@example.com<br>(123) 456-7890';
+          break;
+        case 'social':
+          // Social preset
+          cardFront.style.background = 'linear-gradient(135deg, #f72585, #7209b7)';
+          cardFront.querySelector('.card-icon i').className = 'fas fa-user-friends';
+          cardFront.querySelector('.card-title').textContent = 'Social Profile';
+          cardBack.querySelector('.card-icon i').className = 'fas fa-instagram';
+          cardBack.querySelector('card-title').textContent = '@username';
+          cardBack.querySelector('.card-desc').innerHTML =
+            'Follow me for daily updates!<br><br><i class="fab fa-twitter"></i> @username<br><i class="fab fa-facebook"></i> /username';
+          break;
+        case 'gaming':
+          // Gaming preset
+          cardFront.style.background = 'linear-gradient(135deg, #4361ee, #4cc9f0)';
+          cardFront.querySelector('.card-icon i').className = 'fas fa-gamepad';
+          cardFront.querySelector('.card-title').textContent = 'Gamer Tag';
+          cardBack.querySelector('.card-icon i').className = 'fas fa-trophy';
+          cardBack.querySelector('card-title').textContent = 'Achievements';
+          cardBack.querySelector('.card-desc').innerHTML =
+            'Level: 99<br>Rank: Master<br>K/D Ratio: 3.5<br>Top 1% Players<br>Main: Support';
+          break;
+        case 'creative':
+          // Creative preset
+          cardFront.style.background = 'linear-gradient(135deg, #f8961e, #f94144)';
+          cardFront.querySelector('.card-icon i').className = 'fas fa-palette';
+          cardFront.querySelector('.card-title').textContent = 'Creative Portfolio';
+          cardBack.querySelector('.card-icon i').className = 'fas fa-link';
+          cardBack.querySelector('card-title').textContent = 'My Work';
+          cardBack.querySelector('.card-desc').innerHTML =
+            'Check out my portfolio: <br><br>www.myportfolio.com<br><br>Available for freelance work!';
+          break;
       }
     });
-  }
+  });
+
+  // Copy CSS to clipboard
+  copyCssBtn.addEventListener('click', function () {
+    const cardStyles = window.getComputedStyle(card);
+    const fontStyles = window.getComputedStyle(cardFront)
+    const backStyle = window.getComputedStyle(cardBack)
+    const cssCode = `
+/* Card Container */
+.card-wrapper {
+  width: 300px;
+  height: 400px;
+  position: relative;
+  transform-style: ${cardStyles.transformStyle};
+  transition: transform ${cardStyles.transitionDuration}
+  cursor: pointer;
+}
+
+.card-wrapper.flipped {
+transform: rotateY(180deg);
+}
+
+/* Card Faces */
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: ${frontStyles.boxShadow};
+}
+
+.card-front {
+background: ${frontStyles.background};
+color: white;
+transform: rotateY(0deg);
+}
+
+.card-back {
+background: ${backStyles.background};
+color: 212529;
+transform: rotateY(180deg);
+padding: 1.5rem;
+}
+
+/* Perspective Container*/
+.card-display {
+  perspective: ${document.querySelector('.card-display').style.perspective};
+}
+    `;
+
+    navigator.clipboard.writeText(css).then(() => {
+      alert('CSS copied to clipboard!');
+    });
+  });
 });
