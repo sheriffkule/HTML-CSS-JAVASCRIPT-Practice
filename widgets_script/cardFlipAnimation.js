@@ -166,8 +166,8 @@ document.addEventListener('DOMContentLoaded', function () {
   // Copy CSS to clipboard
   copyCssBtn.addEventListener('click', function () {
     const cardStyles = window.getComputedStyle(card);
-    const fontStyles = window.getComputedStyle(cardFront)
-    const backStyle = window.getComputedStyle(cardBack)
+    const fontStyles = window.getComputedStyle(cardFront);
+    const backStyle = window.getComputedStyle(cardBack);
     const cssCode = `
 /* Card Container */
 .card-wrapper {
@@ -216,7 +216,57 @@ padding: 1.5rem;
     `;
 
     navigator.clipboard.writeText(css).then(() => {
-      alert('CSS copied to clipboard!');
+      const originalText = this.innerHTML;
+      this.innerHTML = '<i class="fas fa-check"></i> Copied!';
+
+      setTimeout(() => {
+        this.innerHTML = originalText;
+      }, 2000);
     });
   });
+
+  // Reset to default
+  function resetDefault() {
+    // Reset styles
+    card.style = '';
+    cardFront.style = '';
+    cardBack.style = '';
+    document.querySelector('.card-display').style.perspective = '1000px';
+
+    // Reset controls
+    styleButtons[0].click();
+    colorOptions[0].click();
+    durationSlider.value = 0.6;
+    durationValue.textContent = '0.6';
+    perspectiveSlider.value = 1000;
+    perspectiveValue.textContent = '1000';
+    threeDEffect.checked = true;
+    shadowToggle.checked = true;
+
+    // Reset card content
+    cardFront.querySelector('.card-icon i').className = 'fas fa-credit-card';
+    cardFront.querySelector('.card-title').textContent = 'Front Side';
+    cardBack.querySelector('.card-icon i').textContent = 'Click to flip the card';
+    cardBack.querySelector('.card-icon i').className = 'fas fa info-circle';
+    cardBack.querySelector('.card-title').textContent = 'Back Side';
+    cardBack.querySelector('.card-desc').textContent =
+      'This is the back side of the card with some additional information.';
+
+    // Reset presets
+    presetCards.forEach((p) => p.classList.remove('active'));
+  }
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });
