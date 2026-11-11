@@ -101,6 +101,138 @@ h1 {
     overflow: hidden;
 }
 
+.card-front {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    transform: rotateY(0deg);
+}
+
+.card-back {
+    background: white;
+    color: var(--dark);
+    transform: rotateY(180deg);
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.card-content {
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.card-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.card-desc {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.control-panel {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgb(0 0 0 / 0.15);
+    padding: 1.5rem;
+    height: fit-content;
+}
+
+.control-group {
+    margin-bottom: 1.5rem;
+
+    h3 {
+        margin-bottom: 1rem;
+        color: var(--primary);
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        i {
+            font-size: 1rem;
+        }
+    }
+}
+
+.btn-group {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #e9ecef;
+    color: var(--dark);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-family: inherit;
+    font-size: 0.9rem;
+
+    &:hover {
+        background-color: #dee2e6;
+    }
+    &.active {
+        background-color: var(--primary);
+        color: white;
+    }
+}
+
+.btn-accent {
+    background-color: var(--accent);
+    color: white;
+
+    &:hover {
+        background-color: #e51774;
+    }
+}
+
+.slider-container {
+    margin-bottom: 1rem;
+
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-size: 0.8rem;
+    }
+}
+
+.slider {
+    width: 100%;
+    height: 8px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #e9ecef;
+    border-radius: 4px;
+    outline: transparent;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    cursor: pointer;
+}
+
 @media (width <= 768px) {
     .app-container {
         grid-template-columns: 1fr;
