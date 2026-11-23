@@ -1,0 +1,5 @@
+const shapeSelector = document.getElementById('shape')
+const inputFields = document.getElementById('inputFields')
+const calculateBtn = document.getElementById('calculateBtn')
+const resultDiv = document.getElementById('result')
+const shapeFormula = document.getElementById('shapeFormula')

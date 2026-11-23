@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Volume Calculator App</title>
+    <link rel="stylesheet" href="/widgets_style/volumeCalculator.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Volume Calculator</h1>
+      <p>Calculate the volume of various 3D shapes.</p>
+
+      <article class="shape-selector">
+        <label for="shape">Select a shape:</label>
+        <select name="shape" id="shape">
+          <option value="sphere">Sphere</option>
+          <option value="cone">Cone</option>
+          <option value="cube">Cube</option>
+          <option value="cylinder">Cylinder</option>
+          <option value="rectangular-tank">Rectangular Tank</option>
+          <option value="capsule">Capsule</option>
+          <option value="spherical-cap">Spherical Cap</option>
+          <option value="conical-frustum">Conical Frustum</option>
+          <option value="ellipsoid">Ellipsoid</option>
+          <option value="square-pyramid">Square Pyramid</option>
+          <option value="tube">Tube</option>
+        </select>
+      </article>
+
+      <article class="shape-formula" id="shapeFormula">
+        <!-- Formula will be dynamically inserted here -->
+      </article>
+
+      <article class="input-fields" id="inputFields">
+        <!-- Input fields will be dynamically generated here -->
+      </article>
+
+      <button id="calculateBtn">Calculate Volume</button>
+
+      <article class="result" id="result">
+        <!-- Result will be displayed here -->
+      </article>
+    </div>
+
+    <script src="/widgets_script/volumeCalculator.js"></script>
+  </body>
+</html>
