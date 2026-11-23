@@ -31,8 +31,10 @@ document.addEventListener('DOMContentLoaded', function () {
       this.classList.add('active');
 
       const style = this.dataset.style;
-      cardFront.className = 'card-face card-front';
-      cardBack.className = 'card-face card-back';
+      ['minimal', 'gradient', 'neumorphic'].forEach((name) => {
+        cardFront.classList.remove(name);
+        cardBack.classList.remove(name);
+      });
 
       switch (style) {
         case 'minimal':
@@ -60,23 +62,24 @@ document.addEventListener('DOMContentLoaded', function () {
       this.classList.add('selected');
 
       const color = this.dataset.color;
-      cardFront.style.backgroundColor = `linear-gradient(135deg, ${color}, ${darkenColor(color, 20)})`;
+      cardFront.style.background = `linear-gradient(135deg, ${color}, ${darkenColor(color, 20)})`;
     });
   });
 
   function darkenColor(color, percentage) {
-    // Simple color darkening function
+    if (!/^#[0-9a-f]{6}$/i.test(color)) {
+      return color;
+    }
+
     const num = parseInt(color.replace('#', ''), 16);
-    const amt = Math.round(2.55 * percent);
+    const amt = Math.round(2.55 * percentage);
     const R = (num >> 16) - amt;
     const G = ((num >> 8) & 0x00ff) - amt;
     const B = (num & 0x0000ff) - amt;
-    return (
-      '#' +
-      (0x1000000 + (R < 0 ? 0 : R) * 0x10000 + (G < 0 ? 0 : G) * 0x100 + (B < 0 ? 0 : B))
-        .toString(16)
-        .slice(1)
-    );
+    const clamp = (channel) => Math.max(0, Math.min(255, channel));
+    return `#${[clamp(R), clamp(G), clamp(B)]
+      .map((channel) => channel.toString(16).padStart(2, '0'))
+      .join('')}`;
   }
 
   // Update animation duration
@@ -116,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
       this.classList.add('active');
 
       const presetType = this.dataset.preset;
-      resetToDefault();
+      resetDefault();
 
       switch (presetType) {
         case 'business':
@@ -125,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
           cardFront.querySelector('.card-icon i').className = 'fas fa-briefcase';
           cardFront.querySelector('.card-title').textContent = 'Business Card';
           cardBack.querySelector('.card-icon i').className = 'fas fa-address-card';
-          cardBack.querySelector('card-title').textContent = 'Contact Info';
+          cardBack.querySelector('.card-title').textContent = 'Contact Info';
           cardBack.querySelector('.card-desc').innerHTML =
             'John Doe<br>CEO, Company Inc.<br>john@example.com<br>(123) 456-7890';
           break;
@@ -135,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
           cardFront.querySelector('.card-icon i').className = 'fas fa-user-friends';
           cardFront.querySelector('.card-title').textContent = 'Social Profile';
           cardBack.querySelector('.card-icon i').className = 'fas fa-instagram';
-          cardBack.querySelector('card-title').textContent = '@username';
+          cardBack.querySelector('.card-title').textContent = '@username';
           cardBack.querySelector('.card-desc').innerHTML =
             'Follow me for daily updates!<br><br><i class="fab fa-twitter"></i> @username<br><i class="fab fa-facebook"></i> /username';
           break;
@@ -145,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
           cardFront.querySelector('.card-icon i').className = 'fas fa-gamepad';
           cardFront.querySelector('.card-title').textContent = 'Gamer Tag';
           cardBack.querySelector('.card-icon i').className = 'fas fa-trophy';
-          cardBack.querySelector('card-title').textContent = 'Achievements';
+          cardBack.querySelector('.card-title').textContent = 'Achievements';
           cardBack.querySelector('.card-desc').innerHTML =
             'Level: 99<br>Rank: Master<br>K/D Ratio: 3.5<br>Top 1% Players<br>Main: Support';
           break;
@@ -155,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function () {
           cardFront.querySelector('.card-icon i').className = 'fas fa-palette';
           cardFront.querySelector('.card-title').textContent = 'Creative Portfolio';
           cardBack.querySelector('.card-icon i').className = 'fas fa-link';
-          cardBack.querySelector('card-title').textContent = 'My Work';
+          cardBack.querySelector('.card-title').textContent = 'My Work';
           cardBack.querySelector('.card-desc').innerHTML =
             'Check out my portfolio: <br><br>www.myportfolio.com<br><br>Available for freelance work!';
           break;
@@ -166,8 +169,9 @@ document.addEventListener('DOMContentLoaded', function () {
   // Copy CSS to clipboard
   copyCssBtn.addEventListener('click', function () {
     const cardStyles = window.getComputedStyle(card);
-    const fontStyles = window.getComputedStyle(cardFront);
-    const backStyle = window.getComputedStyle(cardBack);
+    const frontStyles = window.getComputedStyle(cardFront);
+    const backStyles = window.getComputedStyle(cardBack);
+    const perspective = window.getComputedStyle(document.querySelector('.card-display')).perspective;
     const cssCode = `
 /* Card Container */
 .card-wrapper {
@@ -175,12 +179,12 @@ document.addEventListener('DOMContentLoaded', function () {
   height: 400px;
   position: relative;
   transform-style: ${cardStyles.transformStyle};
-  transition: transform ${cardStyles.transitionDuration}
+  transition: transform ${cardStyles.transitionDuration};
   cursor: pointer;
 }
 
 .card-wrapper.flipped {
-transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
 
 /* Card Faces */
@@ -197,25 +201,38 @@ transform: rotateY(180deg);
 }
 
 .card-front {
-background: ${frontStyles.background};
-color: white;
-transform: rotateY(0deg);
+  background: ${frontStyles.background};
+  color: white;
+  transform: rotateY(0deg);
 }
 
 .card-back {
-background: ${backStyles.background};
-color: 212529;
-transform: rotateY(180deg);
-padding: 1.5rem;
+  background: ${backStyles.background};
+  color: ${backStyles.color};
+  transform: rotateY(180deg);
+  padding: 1.5rem;
 }
 
-/* Perspective Container*/
+/* Perspective Container */
 .card-display {
-  perspective: ${document.querySelector('.card-display').style.perspective};
+  perspective: ${perspective};
 }
     `;
 
-    navigator.clipboard.writeText(css).then(() => {
+    const copyText = navigator.clipboard
+      ? navigator.clipboard.writeText(cssCode)
+      : Promise.reject(new Error('Clipboard API unavailable'));
+
+    copyText.catch(() => {
+      const textarea = document.createElement('textarea');
+      textarea.value = cssCode;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      textarea.remove();
+    }).then(() => {
       const originalText = this.innerHTML;
       this.innerHTML = '<i class="fas fa-check"></i> Copied!';
 
@@ -228,9 +245,10 @@ padding: 1.5rem;
   // Reset to default
   function resetDefault() {
     // Reset styles
-    card.style = '';
-    cardFront.style = '';
-    cardBack.style = '';
+    card.classList.remove('flipped');
+    card.style.cssText = '';
+    cardFront.style.cssText = '';
+    cardBack.style.cssText = '';
     document.querySelector('.card-display').style.perspective = '1000px';
 
     // Reset controls
@@ -238,16 +256,18 @@ padding: 1.5rem;
     colorOptions[0].click();
     durationSlider.value = 0.6;
     durationValue.textContent = '0.6';
+    card.style.transition = 'transform 0.6s';
     perspectiveSlider.value = 1000;
     perspectiveValue.textContent = '1000';
     threeDEffect.checked = true;
+    card.style.transformStyle = 'preserve-3d';
     shadowToggle.checked = true;
 
     // Reset card content
     cardFront.querySelector('.card-icon i').className = 'fas fa-credit-card';
     cardFront.querySelector('.card-title').textContent = 'Front Side';
-    cardBack.querySelector('.card-icon i').textContent = 'Click to flip the card';
-    cardBack.querySelector('.card-icon i').className = 'fas fa info-circle';
+    cardFront.querySelector('.card-desc').textContent = 'Click to flip the card';
+    cardBack.querySelector('.card-icon i').className = 'fas fa-info-circle';
     cardBack.querySelector('.card-title').textContent = 'Back Side';
     cardBack.querySelector('.card-desc').textContent =
       'This is the back side of the card with some additional information.';
@@ -255,6 +275,8 @@ padding: 1.5rem;
     // Reset presets
     presetCards.forEach((p) => p.classList.remove('active'));
   }
+
+  resetBtn.addEventListener('click', resetDefault);
 
   // Update year in footer
   function updateYear() {
