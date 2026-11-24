@@ -112,3 +112,86 @@ function animateMessageAppearance() {
 
 // Reset button handler
 resetButton.addEventListener('click', resetAnimation);
+
+function resetAnimation() {
+  counts = 0;
+  isOpen = false;
+  clickCountElement.textContent = counts;
+  present.classList.remove('open', 'animate');
+  successMessage.style.opacity = '0';
+
+  // Hide the present message
+  document.querySelector('.present-message-container').style.opacity = '0';
+
+  updateSnowflakes(50); // Reset snowflake density
+}
+
+function showSuccessMessage() {
+  const messages = [
+    '🎉 Present opened! 🎉',
+    '🎁 You found the gift! 🎁',
+    '✨ Surprise inside! ✨',
+    '🌟 Christmas magic! 🌟',
+  ];
+
+  successMessage.textContent = messages[Math.floor(Math.random() * messages.length)];
+  successMessage.style.opacity = '1';
+
+  // Hide message after 5 seconds
+  setTimeout(() => {
+    successMessage.style.opacity = '0';
+  }, 5000);
+}
+
+function createConfetti() {
+  const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ff9900', '#ff66cc'];
+  const confettiCount = 100;
+
+  for (let i = 0; i < confettiCount; i++) {
+    const confetti = document.createElement('div');
+    confetti.className = 'confetti';
+    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.left = `${Math.random() * 100}%`;
+    confetti.style.top = `${Math.random() * 100}%`;
+    confetti.style.width = `${Math.random() * 10 + 5}px`;
+    confetti.style.height = `${Math.random() * 10 + 5}px`;
+    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+    document.appendChild(confetti);
+
+    // Animate confetti
+    const angle = Math.random() * Math.PI * 2;
+    const velocity = Math.random() * 3 + 2;
+    const angleX = Math.cos(angle) * velocity;
+    const angleY = Math.sin(angle) * velocity;
+
+    let opacity = 1;
+    let posX = parseFloat(confetti.style.left);
+    let posY = parseFloat(confetti.style.top);
+
+    const animateConfetti = () => {
+      opacity -= 0.02;
+      posX += angleX;
+      posY += angleY + 0.1;
+
+      confetti.style.opacity = opacity;
+      confetti.style.left = `${posX}%`;
+      confetti.style.top = `${posY}%`;
+
+      opacity > 0 ? requestAnimationFrame(animateConfetti) : confetti.remove();
+    };
+
+    // Start animation
+    requestAnimationFrame(animateConfetti);
+  }
+}
+
+// Snowflake animation
+const canvas = document.querySelector('canvas');
+const ctx = canvas.getContext('2d');
+let width;
+let height;
+let lastNow;
+let snowflakes;
+let maxSnowflakes = 50;
+
+const rand = (min, max) => min + Math.random() * (max - min);
