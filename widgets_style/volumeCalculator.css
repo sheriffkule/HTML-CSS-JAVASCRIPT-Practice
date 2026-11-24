@@ -66,3 +66,30 @@ select {
 .input-fields {
     margin-bottom: 1.5rem;
 }
+
+input {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    padding: 0.5rem;
+    margin-block: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+button {
+    background: #1c1c1c;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.3s;
+
+    &:hover {
+        background: #323232;
+    }
+}
