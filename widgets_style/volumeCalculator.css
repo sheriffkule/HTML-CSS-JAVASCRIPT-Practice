@@ -54,13 +54,13 @@ select {
 }
 
 .shape-formula {
-    font-size: 1rem;
+    font-size: 1.25rem;
     font-family: 'Courier New', Courier, monospace;
-    background-color: #d9d9d9;
+    background-color: #f8f9fa;
     padding: 0.5rem;
     border-radius: 5px;
     border: 1px solid #ddd;
-    margin-bottom: 1.5rem;
+    margin-block: 0.5rem 1.5rem;
 }
 
 .input-fields {
@@ -76,6 +76,36 @@ input {
     border-radius: 5px;
     border: 1px solid #ccc;
     font-size: 1rem;
+    transition: 0.25s;
+    caret-animation: manual;
+    caret-shape: block;
+    caret-color: royalblue;
+    animation: caret-animation infinite linear 1.2s;
+
+    &:focus {
+        outline: transparent;
+        box-shadow: 0 0 2px 2px royalblue;
+    }
+}
+
+@keyframes caret-animation {
+  50% {
+    caret-color: transparent;
+    caret-shape: bar;
+  }
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    cursor: pointer;
+    scale: 1.8;
+    transition: .2s;
+    box-shadow: -1px 0 0 royalblue;
+}
+
+input[type="number"]::-webkit-inner-spin-button:hover,
+input[type="number"]::-webkit-outer-spin-button:hover {
+    box-shadow: 0 0 0 1px royalblue;
 }
 
 button {
@@ -92,4 +122,11 @@ button {
     &:hover {
         background: #323232;
     }
+}
+
+.result {
+    margin-top: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #007bff;
 }
