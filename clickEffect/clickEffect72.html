@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Christmas Box Animation</title>
+    <link rel="stylesheet" href="/clickEffect_style/clickEffect72.css" />
+  </head>
+  <body>
+    <canvas></canvas>
+
+    <div class="headline">MERRY CHRISTMAS</div>
+    <div class="instructions">CHRISTMAS BOX</div>
+    <div class="click-counter">Click the present: <span id="clickCount">0</span>/20</div>
+    <div class="message" id="successMessage">🎉 Merry Christmas! 🎉</div>
+
+    <div class="present">
+      <div class="wiggle-container">
+        <div class="rotate-container">
+          <div class="bottom"></div>
+          <div class="front"></div>
+          <div class="left"></div>
+          <div class="back"></div>
+          <div class="right"></div>
+
+          <div class="lid">
+            <div class="lid-top"></div>
+            <div class="lid-front"></div>
+            <div class="lid-left"></div>
+            <div class="lid-back"></div>
+            <div class="lid-right"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="present-message-container">
+        <div class="present-message-glow"></div>
+        <div class="present-message">
+          <div class="present-message-icon">🎁</div>
+          <div class="present-message-text" id="presentMessage">Merry Christmas!</div>
+          <div class="present-message-subtext" id="presentSubMessage">Wishing you joy & happiness</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="reset-button" id="resetButton">RESET</button>
+
+    <script src="/clickEffect_script/clickEffect72.js"></script>
+  </body>
+</html>
