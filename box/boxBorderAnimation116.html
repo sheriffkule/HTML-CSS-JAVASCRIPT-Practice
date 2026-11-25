@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pricing Plan Section</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" />
+    <link rel="stylesheet" href="/box_style/boxBorderAnimation116.css" />
+  </head>
+  <body>
+    <div class="pricing-section">
+      <div class="container">
+        <header>
+          <h1 class="section-title">Choose Your Perfect Plan</h1>
+          <p class="section-subtitle">Flexible pricing options for tams of all sizes.</p>
+        </header>
+
+        <section class="controls">
+          <fieldset class="currency-selector">
+            <label for="currency">Currency:</label>
+            <select id="currency">
+              <option value="usd">USD ($)</option>
+              <option value="eur">EUR (&euro;)</option>
+              <option value="gbp">GBP (&pound;)</option>
+              <option value="jpy">JPY (&yen;)</option>
+            </select>
+          </fieldset>
+
+          <fieldset class="billing-toggle">
+            <span>Monthly</span>
+            <label for="switch">
+              <input type="checkbox" id="billing-toggle" />
+              <span class="slider round"></span>
+            </label>
+            <span>Annual <span class="discount-badge">(Save 20%)</span></span>
+          </fieldset>
+        </section>
+
+        <section class="pricing-cards">
+          <article class="pricing-card" data-plan="basic">
+            <header class="card-header">
+              <h3>Basic</h3>
+              <div class="price">
+                <span class="currency">$</span>
+                <span class="amount">9</span>
+                <span class="period">/month</span>
+              </div>
+              <p class="annual-price">$7.20/month billed annually</p>
+            </header>
+            <div class="card-body">
+              <ul>
+                <li><i class="fas fa-check"></i> 10 projects</li>
+                <li><i class="fas fa-check"></i> 5 team members</li>
+                <li><i class="fas fa-check"></i> 10GB storage</li>
+                <li><i class="fas fa-check"></i> Basic analytics</li>
+                <li><i class="fas fa-times"></i> <span class="disabled">Priority support</span></li>
+                <li><i class="fas fa-times"></i> <span class="disabled">API access</span></li>
+              </ul>
+            </div>
+            <div class="card-footer">
+              <button class="btn secondary">Get Started</button>
+            </div>
+            <div class="popular-tag" style="display: none">Popular</div>
+          </article>
+
+          <article class="pricing-card" data-plan="pro">
+            <header class="card-header">
+              <h3>Professional</h3>
+              <div class="price">
+                <span class="currency">$</span>
+                <span class="amount">29</span>
+                <span class="period">/month</span>
+              </div>
+              <p class="annual-price">$23.20/month billed annually</p>
+            </header>
+            <div class="card-body">
+              <ul>
+                <li><i class="fas fa-check"></i> Unlimited projects</li>
+                <li><i class="fas fa-check"></i> 20 team members</li>
+                <li><i class="fas fa-check"></i> 50GB storage</li>
+                <li><i class="fas fa-check"></i> Advanced analytics</li>
+                <li><i class="fas fa-check"></i> Priority support</li>
+                <li><i class="fas fa-times"></i> <span class="disabled">API access</span></li>
+              </ul>
+            </div>
+            <div class="card-footer">
+              <button class="btn secondary">Get Started</button>
+            </div>
+          </article>
+
+          <article class="pricing-card" data-plan="enterprise">
+            <header class="card-header">
+              <h3>Enterprise</h3>
+              <div class="price">
+                <span class="currency">$</span>
+                <span class="amount">99</span>
+                <span class="period">/month</span>
+              </div>
+              <p class="annual-price">$79.20/month billed annually</p>
+            </header>
+            <div class="card-body">
+              <ul>
+                <li><i class="fas fa-check"></i> Unlimited projects</li>
+                <li><i class="fas fa-check"></i> Unlimited members</li>
+                <li><i class="fas fa-check"></i> 1TB storage</li>
+                <li><i class="fas fa-check"></i> Advanced analytics</li>
+                <li><i class="fas fa-times"></i> 24/7 support</li>
+                <li><i class="fas fa-times"></i> Full API access</li>
+              </ul>
+            </div>
+            <div class="card-footer">
+              <button class="btn secondary">Contact Sales</button>
+            </div>
+            <div class="popular-tag" style="display: none">Best Value</div>
+          </article>
+        </section>
+
+        <div class="custom-plan">
+          <p>Need a custom solution for your team?</p>
+          <button class="btn outline">Request Custom Plan</button>
+        </div>
+
+        <section class="faq-section">
+          <h3>Frequently Asked Questions</h3>
+          <article class="faq-item">
+            <div class="faq-question">
+              <span>Can I switch plans latter?</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Yes, you can upgrade or downgrade your plan at any time. When you upgrade, you'll only pay the
+                prorated difference for the remaining billing period.
+              </p>
+            </div>
+          </article>
+          <article class="faq-item">
+            <div class="faq-question">
+              <span>Is there a free trial available?</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Yes! All plans come with a 14-day free trial. No credit card required to start your trial.
+              </p>
+            </div>
+          </article>
+          <article class="faq-item">
+            <div class="faq-question">
+              <span>What payment methods do you accept?</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and bank
+                transfers for annual plans.
+              </p>
+            </div>
+          </article>
+        </section>
+      </div>
+    </div>
+
+    <script src="/box_script/boxBorderAnimation116.js"></script>
+  </body>
+</html>
