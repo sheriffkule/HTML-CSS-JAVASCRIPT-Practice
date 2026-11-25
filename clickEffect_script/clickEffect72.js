@@ -2,6 +2,8 @@
 const countsNeeded = 20;
 let counts = 0;
 let isOpen = false;
+let successMessageTimeout;
+let messageAppearanceTimeout;
 
 // DOM Elements
 const present = document.querySelector('.present');
@@ -25,7 +27,7 @@ const christmasMessages = [
   },
   {
     message: "Season's Greetings!",
-    subMessage: 'Pease, love & laughter',
+    subMessage: 'Peace, love & laughter',
     icon: '🕊️',
   },
   {
@@ -99,11 +101,12 @@ function animateMessageAppearance() {
   const message = document.querySelector('.present-message');
 
   // Reset any previous animations
+  clearTimeout(messageAppearanceTimeout);
   messageContainer.style.opacity = '0';
   message.style.transform = 'translate(-50%, -50%) scale(0.5)';
 
   // Animate in
-  setTimeout(() => {
+  messageAppearanceTimeout = setTimeout(() => {
     messageContainer.style.opacity = '1';
     message.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
     message.style.transform = 'translate(-50%, -50%) scale(1)';
@@ -117,11 +120,17 @@ function resetAnimation() {
   counts = 0;
   isOpen = false;
   clickCountElement.textContent = counts;
+  present.style.setProperty('--count', '0');
   present.classList.remove('open', 'animate');
+  clearTimeout(successMessageTimeout);
+  clearTimeout(messageAppearanceTimeout);
   successMessage.style.opacity = '0';
 
   // Hide the present message
-  document.querySelector('.present-message-container').style.opacity = '0';
+  const messageContainer = document.querySelector('.present-message-container');
+  messageContainer.style.opacity = '0';
+  document.querySelector('.present-message').style.transform =
+    'translate(-50%, -50%) scale(0.5)';
 
   updateSnowflakes(50); // Reset snowflake density
 }
@@ -138,7 +147,8 @@ function showSuccessMessage() {
   successMessage.style.opacity = '1';
 
   // Hide message after 5 seconds
-  setTimeout(() => {
+  clearTimeout(successMessageTimeout);
+  successMessageTimeout = setTimeout(() => {
     successMessage.style.opacity = '0';
   }, 5000);
 }
@@ -156,7 +166,7 @@ function createConfetti() {
     confetti.style.width = `${Math.random() * 10 + 5}px`;
     confetti.style.height = `${Math.random() * 10 + 5}px`;
     confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-    document.appendChild(confetti);
+    document.body.appendChild(confetti);
 
     // Animate confetti
     const angle = Math.random() * Math.PI * 2;
@@ -193,6 +203,7 @@ let height;
 let lastNow;
 let snowflakes;
 let maxSnowflakes = 50;
+let snowflakeAnimationFrame;
 
 const rand = (min, max) => min + Math.random() * (max - min);
 
@@ -225,8 +236,117 @@ class Snowflake {
     this.angle += this.xVel * 0.05 * elapsed;
     this.wobble += this.wobbleSpeed;
 
-    if (this.y - this.size > height || this.x + this.size < 0 || this.x - this.size > width) this.spawn;
+    if (this.y - this.size > height || this.x + this.size < 0 || this.x - this.size > width) {
+      this.spawn();
+    }
 
     this.render(now);
   }
+
+  render(now) {
+    ctx.save();
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.angle);
+
+    // Create snowflake shape
+    ctx.fillStyle = this.color;
+    ctx.strokeStyle = this.color;
+    ctx.lineWidth = 1;
+
+    ctx.beginPath();
+    for (let i = 0; i < 6; i++) {
+      const angle = (Math.PI * 2 * i) / 6;
+      ctx.moveTo(0, 0);
+      ctx.lineTo(Math.cos(angle) * this.size, Math.sin(angle) * this.size);
+
+      // Add branches
+      const branchAngle = angle + Math.PI / 6;
+      ctx.moveTo(Math.cos(angle) * this.size * 0.5, Math.sin(angle) * this.size * 0.5);
+      ctx.lineTo(Math.cos(branchAngle) * this.size * 0.3, Math.sin(branchAngle) * this.size * 0.3);
+
+      const branchAngle2 = angle - Math.PI / 6;
+      ctx.moveTo(Math.cos(angle) * this.size * 0.5, Math.sin(angle) * this.size * 0.5);
+      ctx.lineTo(Math.cos(branchAngle2) * this.size * 0.3, Math.sin(branchAngle2) * this.size * 0.3);
+    }
+    ctx.stroke();
+
+    // Center dot
+    ctx.beginPath();
+    ctx.arc(0, 0, this.size * 0.2, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.restore();
+  }
 }
+
+function render(now) {
+  snowflakeAnimationFrame = requestAnimationFrame(render);
+  const elapsed = now - lastNow;
+  lastNow = now;
+
+  // Clear with a slight fade effect for trails
+  ctx.fillStyle = 'rgba(10, 41, 31, 0.1)';
+  ctx.fillRect(0, 0, width, height);
+
+  if (snowflakes.length < maxSnowflakes) {
+    snowflakes.push(new Snowflake());
+  }
+
+  snowflakes.forEach((snowflake) => snowflake.update(elapsed, now));
+}
+
+function updateSnowflakes(count) {
+  maxSnowflakes = count;
+  if (snowflakes && snowflakes.length > maxSnowflakes) {
+    snowflakes.length = maxSnowflakes;
+  }
+}
+
+function resize() {
+  width = window.innerWidth;
+  height = window.innerHeight;
+  canvas.width = width;
+  canvas.height = height;
+}
+
+function pause() {
+  cancelAnimationFrame(snowflakeAnimationFrame);
+}
+
+function resume() {
+  cancelAnimationFrame(snowflakeAnimationFrame);
+  lastNow = performance.now();
+  snowflakeAnimationFrame = requestAnimationFrame(render);
+}
+
+function initSnowflakes() {
+  snowflakes = [];
+  resize();
+  render((lastNow = performance.now()));
+}
+
+// Window event listeners
+window.addEventListener('resize', resize);
+window.addEventListener('blur', pause);
+window.addEventListener('focus', resume);
+
+// Initialize everything
+initSnowflakes();
+
+// URL hash animation (decorative)
+const stuff = ['🎅', '🎄', '🎁', '❄️', '🤶', '⛄', '🕯️', '🎊', '🔔', '🌟'];
+
+function updateUrlHash() {
+  const randomStuff = [...stuff].sort(() => Math.random() - 0.5).slice(0, 5);
+  window.location.hash = randomStuff.join('');
+}
+
+// Update URL hash every 30 seconds
+setInterval(updateUrlHash, 30000);
+updateUrlHash();
+
+// Initialize with random message
+const initialMessage = getRandomChristmasMessage();
+presentMessage.textContent = initialMessage.message;
+presentSubMessage.textContent = initialMessage.subMessage;
+document.querySelector('.present-message-icon').textContent = initialMessage.icon;

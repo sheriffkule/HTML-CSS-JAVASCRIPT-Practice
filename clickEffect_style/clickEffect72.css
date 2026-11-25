@@ -24,9 +24,9 @@ body::after {
     height: 100%;
     background: linear-gradient(135deg, #0a291f 0%, #0c3b2e 50%, #1a472a 100%);
     background-image: 
-        radial-gradient(circle at 20% 80%, rgb(255 215 0 / 0.1) 0%, transparent 20%),
-        radial-gradient(circle at 80% 20%, rgb(220 20 60 / 0.1) 0%, transparent 20%),
-        radial-gradient(circle at 40% 40%, rgb(30 144 255 / 0.1) 0%, transparent 30%);
+        radial-gradient(circle at 20% 80%, rgb(255 215 0 / 0.3) 0%, transparent 20%),
+        radial-gradient(circle at 80% 20%, rgb(220 20 60 / 0.3) 0%, transparent 20%),
+        radial-gradient(circle at 40% 40%, rgb(30 144 255 / 0.3) 0%, transparent 30%);
     opacity: 0.9;
 }
 
@@ -109,15 +109,16 @@ canvas {
     transition: all 0.3s ease-out;
     backdrop-filter: blur(5px);
     border: 2px solid rgb(0 0 0 / 0.3);
+}
 
-    &:hover {
-        background: rgb(229 57 53 / 0.9);
-        transform: translateY(-3px) scaleX(1.1);
-        box-shadow: 0 5px 15px rgb(198 40 40 / 0.4);
-    }
-    &:active {
-        transform: translateY(-1px) scaleX(1);
-    }
+.reset-button:hover {
+    background: rgb(229 57 53 / 0.9);
+    transform: translateY(-3px) scaleX(1.1);
+    box-shadow: 0 5px 15px rgb(198 40 40 / 0.4);
+}
+
+.reset-button:active {
+    transform: translateY(-1px) scaleX(1);
 }
 
 .message {
@@ -239,7 +240,6 @@ canvas {
     height: 200px;
     margin: 0 auto;
     cursor: pointer;
-    perspective: 600;
     transform: translateY(-50%);
     -webkit-tap-highlight-color: transparent;
     z-index: 2;
@@ -268,7 +268,7 @@ canvas {
     height: 100%;
     transform: rotateY(170deg);
     transform-style: preserve-3d;
-    animation: present-rotate 30s linear infinite;
+    animation: present-rotate 10s linear infinite;
 }
 
 @keyframes present-rotate {
@@ -320,7 +320,7 @@ canvas {
 }
 
 .left {
-    transform: translateX(-50%) rotateY(-90%);
+    transform: translateX(-50%) rotateY(-90deg);
 }
 
 .back {
@@ -431,10 +431,10 @@ canvas {
     z-index: 1;
 }
 
-@media (width <= 768px) {
+@media (max-width: 768px) {
     .instructions {
         font-size: 10vw;
-        top: 15%;
+        top: 10%;
     }
     .click-counter {
         font-size: 6vw;
@@ -449,7 +449,7 @@ canvas {
     }
     .present-message {
         width: 130px;
-        height: 130px;
+        height: 140px;
     }
     .present-message-icon {
         font-size: 2rem;
@@ -460,11 +460,29 @@ canvas {
     .present-message-subtext {
         font-size: 0.8rem;
     }
+    .back {
+        transform: translateZ(-75px) rotateY(180deg) rotateX(0);
+    }
+    .front {
+        transform: translateZ(75px);
+    }
     .lid-top, .lid-left, .lid-back, .lid-right, .lid-front {
         width: 160px;
     }
+    .lid-top {
+        height: 160px;
+    }
+    .lid-left, .lid-back, .lid-right, .lid-front {
+        left: -5px;
+    }
+    .lid-left {
+        transform: translateX(-50%) rotateY(-90deg);
+    }
     .lid-back {
         transform: translateZ(-80px) rotateY(180deg);
+    }
+    .lid-right {
+        transform: translateX(50%) rotateY(90deg);
     }
     .lid-front {
         transform: translateZ(80px);
