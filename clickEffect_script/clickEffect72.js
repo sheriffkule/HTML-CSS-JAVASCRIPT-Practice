@@ -195,3 +195,38 @@ let snowflakes;
 let maxSnowflakes = 50;
 
 const rand = (min, max) => min + Math.random() * (max - min);
+
+class Snowflake {
+  constructor() {
+    this.spawn(true);
+  }
+
+  spawn(anyY = false) {
+    this.x = rand(0, width);
+    this.y = anyY === true ? rand(-50, height + 50) : rand(-50, -10);
+    this.xVel = rand(-0.05, 0.05);
+    this.yVel = rand(0.02, 0.1);
+    this.angle = rand(0, Math.PI * 2);
+    this.angleVel = rand(-0.001, 0.001);
+    this.size = rand(3, 12);
+    this.sizeOsc = rand(0.01, 0.5);
+    this.wobble = rand(0, Math.PI * 2);
+    this.wobbleSpeed = rand(0.01, 0.05);
+    this.color = `rgba(255, 255, 255, ${rand(0.5, 0.9)})`;
+  }
+
+  update(elapsed, now) {
+    const xForce = rand(-0.001, 0.001);
+
+    if (Math.abs(this.xVel + xForce) < 0.075) this.xVel += xForce;
+
+    this.x += this.xVel * elapsed;
+    this.y += this.yVel * elapsed;
+    this.angle += this.xVel * 0.05 * elapsed;
+    this.wobble += this.wobbleSpeed;
+
+    if (this.y - this.size > height || this.x + this.size < 0 || this.x - this.size > width) this.spawn;
+
+    this.render(now);
+  }
+}
