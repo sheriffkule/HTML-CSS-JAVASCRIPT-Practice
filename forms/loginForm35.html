@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Input Wave Form</title>
+    <link rel="stylesheet" href="/forms_style/loginForm35.css" />
+  </head>
+  <body>
+    <div class="main">
+      <div class="container">
+        <form id="loginForm">
+          <h1>Login Form</h1>
+          <p>Please enter your login details.</p>
+          <div class="form-control">
+            <input type="text" required />
+            <label>Email</label>
+          </div>
+
+          <div class="form-control">
+            <input type="password" required />
+            <label>Password</label>
+          </div>
+
+          <button class="btn">Register</button>
+
+          <p class="text">Don't have an account? <a href="#" onclick="register()">Register</a></p>
+        </form>
+
+        <form id="registerForm" style="display: none">
+          <h1>Registration Form</h1>
+          <p>Please enter your personal details.</p>
+          <div class="form-control">
+            <input type="text" required />
+            <label>Name</label>
+          </div>
+
+          <div class="form-control">
+            <input type="text" required />
+            <label>Username</label>
+          </div>
+
+          <div class="form-control">
+            <input type="password" required />
+            <label>Password</label>
+          </div>
+
+          <button class="btn">Login</button>
+
+          <p class="text">Already have an account? <a href="#" onclick="login()">Login</a></p>
+        </form>
+      </div>
+    </div>
+
+    <script src="/forms_script/loginForm35.js"></script>
+  </body>
+</html>
