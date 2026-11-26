@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Right Click Menu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" />
+    <link rel="stylesheet" href="/clickEffect_style/clickEffect73.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Right Click Menu</h1>
+      <p>Right click anywhere!</p>
+    </div>
+    <div id="pulse"></div>
+    <div id="contextMenu">
+      <ul>
+        <li>
+          <i class="fa fa-folder-open" aria-hidden="true"></i>
+          <div class="name">Open</div>
+        </li>
+        <li class="disabled">
+          <i></i>
+          <div class="name">Open in new tab</div>
+        </li>
+        <li class="break" aria-hidden="true"></li>
+        <li>
+          <i class="fa fa-scissors" aria-hidden="true"></i>
+          <div class="name">Cut</div>
+        </li>
+        <li>
+          <i class="fa fa-clone" aria-hidden="true"></i>
+          <div class="name">Copy</div>
+        </li>
+        <li>
+          <i class="fa fa-clipboard" aria-hidden="true"></i>
+          <div class="name">Paste</div>
+        </li>
+        <li class="break" aria-hidden="true"></li>
+        <li>
+          <i class="fa fa-refresh" aria-hidden="true"></i>
+          <div class="name">Reload</div>
+        </li>
+        <li>
+          <i class="fa fa-paint-brush" aria-hidden="true"></i>
+          <div class="name">Print</div>
+        </li>
+        <li class="break" aria-hidden="true"></li>
+        <li class="share">
+          <div class="name">Share:</div>
+          <div class="icons">
+            <i class="fa-brands fa-facebook"></i>
+            <i class="fa-brands fa-twitter"></i>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-google-plus"></i>
+            <i class="fa-brands fa-pinterest"></i>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <script src="/clickEffect_script/clickEffect73.js"></script>
+  </body>
+</html>

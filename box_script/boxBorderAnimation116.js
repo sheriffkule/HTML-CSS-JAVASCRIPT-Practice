@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Initialize
   updatePrices();
+  toggleAnnualPriceDisplay();
 
   // Event listeners
   currencySelect.addEventListener('change', (e) => {
@@ -88,13 +89,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     pricingCards.forEach((card) => {
       const plan = card.dataset.plan;
+      if (!pricingData[plan]) return;
+
       const priceElement = card.querySelector('.amount');
       const currencyElement = card.querySelector('.currency');
       const annualPriceElement = card.querySelector('.annual-price');
 
-      // Updata displayed prices
+      // Update the displayed prices
       const basePrice = isAnnual ? pricingData[plan].annual : pricingData[plan].monthly;
       const convertedPrice = Math.round(basePrice * rate * 100) / 100;
+      const annualPrice = Math.round(pricingData[plan].annual * rate * 100) / 100;
 
       // Format price display
       Number.isInteger(convertedPrice)
@@ -102,20 +106,17 @@ document.addEventListener('DOMContentLoaded', function () {
         : (priceElement.textContent = convertedPrice.toFixed(2));
 
       currencyElement.textContent = symbol;
+      if (annualPriceElement) {
+        annualPriceElement.textContent = `${symbol}${Number.isInteger(annualPrice) ? annualPrice.toFixed(0) : annualPrice.toFixed(2)}/month billed annually`;
+      }
     });
   }
 
   function toggleAnnualPriceDisplay() {
     const annualPriceElement = document.querySelectorAll('.annual-price');
-    const periodicElements = document.querySelectorAll('.period')
-
-    if (isAnnual) {
-      annualPriceElement.forEach(el => el.style.display = 'none')
-      periodicElements.forEach(el => el.textContent = '/month')
-    } else {
-      annualPriceElement.forEach(el => el.style.display = 'block')
-      periodicElements.forEach(el => el.textContent = '/month')
-    }
+    annualPriceElement.forEach((element) => {
+      element.style.display = isAnnual ? 'block' : 'none';
+    });
   }
 
   // Add animation on scroll
@@ -125,21 +126,23 @@ document.addEventListener('DOMContentLoaded', function () {
     scrollMargin: "100px",
   }
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.style.opacity = 1;
           entry.target.style.transform = 'translateY(0) scale(1)';
         }
+      })
+    }, observerOptions)
+
+    // Animate pricing cards on scroll
+    pricingCards.forEach((card, index) => {
+      card.style.opacity = 0;
+      card.style.transform = 'translateY(100px) scale(0.1)';
+      card.style.transition = `opacity 0.5s ease-out, transform 0.5s ease-out ${index * 0.1}s`;
+
+      observer.observe(card);
     })
-  }, observerOptions)
-
-  // Animate pricing cards on scroll
-  pricingCards.forEach(card => {
-    card.style.opacity = 0;
-    card.style.transform = 'translateY(100px) scale(0.1)';
-    card.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out ${index * 0.1}s';
-
-    observer.observe(card);
-  })
+  }
 });
