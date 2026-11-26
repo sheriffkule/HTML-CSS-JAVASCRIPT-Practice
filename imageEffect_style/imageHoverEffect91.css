@@ -33,6 +33,14 @@ body {
     -webkit-background-clip: text;
     text-align: center;
     text-shadow: 0 2px 4px rgb(0 0 0 / 0.3);
+    animation: move 3s linear infinite;
+    background-size: 200% 100%;
+}
+
+@keyframes move {
+    to {
+        background-position: -200% 0;
+    }
 }
 
 .container {
@@ -53,6 +61,96 @@ body {
     box-shadow: 0 5px 15px rgb(0 0 0 / 0.2);
 
     &.active {
-        flex: 5;
+        flex: 7;
+    }
+}
+
+.panel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    interpolate-size: allow-keywords;
+    transition: transform var(--transition-speed) ease-in-out, ;
+    mask-image: linear-gradient(to bottom, rgb(0 0 0 / 0.9) 50%, rgb(0 0 0 / 0.1) 80%);
+}
+
+.panel.active img {
+    transform: scale(1.1);
+    mask-image: linear-gradient(to bottom, rgb(0 0 0 / 1) 0%, rgb(0 0 0 / 1) 100%);
+}
+
+.panel .content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem;
+    background: linear-gradient(to top, rgb(0 0 0 / 0.8), transparent);
+    transform: translateY(100%) scaleX(0);
+    transform-origin: left bottom;
+    transition: transform var(--transition-speed) ease-in-out;
+    color: white;
+}
+
+.panel.active .content {
+    transform: translateY(0) scaleX(1);
+}
+
+.panel h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    transition: opacity var(--transition-speed) ease-in-out;
+}
+
+.panel.active h3 {
+    opacity: 1;
+}
+
+.panel .description {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    opacity: 0;
+    transition: opacity var(--transition-speed) ease-in-out;
+}
+
+.panel.active .description {
+    opacity: 1;
+}
+
+.panel.active .tags {
+    opacity: 1;
+}
+
+.tags {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tag {
+    background-color: var(--accent);
+    color: var(--dark);
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+@media (width <= 768px) {
+    .gallery-title {
+        margin-bottom: 1.5rem;
+    }
+    .container {
+        flex-direction: column;
+        height: auto;
+    }
+    .panel {
+        width: 100%;
+        height: 120px;
+    }
+    .panel.active {
+        height: 350px;
     }
 }

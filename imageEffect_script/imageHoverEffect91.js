@@ -82,4 +82,41 @@ document.addEventListener('DOMContentLoaded', function () {
       tags: ['Beach', 'Tropical', 'Paradise'],
     },
   ];
+
+  // Render images
+  function renderImages() {
+    const container = document.getElementById('imageContainer');
+
+    imageData.forEach((item) => {
+      const panel = document.createElement('div');
+      panel.className = 'panel';
+      panel.dataset.id = item.id;
+
+      panel.innerHTML = `
+        <img src="${item.imageUrl}" alt="${item.title}" loading="lazy" />
+        <div class="content">
+          <h3>${item.title}</h3>
+          <p class="description">${item.description}</p>
+          <div class="tags">${item.tags.map((tag) => `<span class="tag">${tag}</span>`).join('')}</div>
+        </div>
+      `;
+
+      panel.addEventListener('click', function () {
+        // If this panel is already active, collapse it
+        if (this.classList.contains('active')) {
+          this.classList.remove('active');
+        } else {
+          // Remove active class from all panels
+          document.querySelectorAll('.panel').forEach((p) => p.classList.remove('active'));
+          // Add active class to clicked panel
+          this.classList.add('active');
+        }
+      });
+
+      container.appendChild(panel);
+    });
+  }
+
+  // Initialize the app
+  renderImages();
 });
