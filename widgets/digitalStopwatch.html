@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Stopwatch</title>
+    <link rel="stylesheet" href="/widgets_style/digitalStopwatch.css" />
+  </head>
+  <body>
+    <header>
+      <h1 class="title">Digital Stopwatch</h1>
+      <span class="question">?</span>
+      <div class="info">
+        <ul>
+          <li>Space key to start/pause.</li>
+          <li>L key for lap.</li>
+          <li>R key to reset.</li>
+        </ul>
+      </div>
+    </header>
+    <div class="panel">
+      <div class="mode-bar">
+        <select id="mode" onchange="changeMode()">
+          <option value="stopwatch">STOPWATCH</option>
+          <option value="countdown">COUNTDOWN</option>
+        </select>
+
+        <div id="cdInput" style="display: none">
+          <input type="number" id="min" placeholder="Min" min="0" />
+          <input type="number" id="sec" placeholder="Sec" min="0" />
+        </div>
+      </div>
+
+      <div class="ring">
+        <svg viewBox="0 0 220 220" aria-hidden="true">
+          <circle class="bg" cx="110" cy="110" r="100"></circle>
+          <g id="progressTicks"></g>
+        </svg>
+        <div class="display" id="display">00:00:00.00</div>
+      </div>
+
+      <fieldset class="controls">
+        <button onclick="start()">START</button>
+        <button onclick="pause()">PAUSE</button>
+        <button onclick="resume()">RESUME</button>
+        <button onclick="lap()">LAP</button>
+        <button onclick="reset()">RESET</button>
+      </fieldset>
+
+      <div class="laps" id="laps"></div>
+    </div>
+
+    <script src="/widgets_script/digitalStopwatch.js"></script>
+  </body>
+</html>

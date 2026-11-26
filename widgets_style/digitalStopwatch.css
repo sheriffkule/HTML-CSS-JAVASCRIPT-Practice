@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+
+:root {
+    --bg: #050505;
+    --hud: #00ffcc;
+    --danger: #ff3b3b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Orbitron', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: radial-gradient(circle at center, #1d2138, #000);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--hud);
+    padding: 1.5rem;
+    background-attachment: fixed;
+}
+
+header {
+    margin-block: 3rem;
+    display: flex;
+    position: relative;
+}
+
+.info {
+    position: absolute;
+    background-color: rgb(0 0 0 / 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    corner-shape: bevel;
+    height: 0;
+    opacity: 0;
+    pointer-events: none;
+    bottom: -100px;
+    right: -110px;
+    z-index: 1;
+    line-height: 1.5;
+    interpolate-size: allow-keywords;
+    transition-property: opacity, height;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+
+    li {
+        list-style: none;
+    }
+}
+
+.question {
+    margin-left: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    background: rgb(from var(--hud) r g b / 0.3);
+    padding: 8px 12px;
+    border-radius: 50px;
+}
+
+.question:hover + .info {
+    height: auto;
+    opacity: 1;
+}
+
+.panel {
+    background: rgb(0 0 0 / 0.5);
+    backdrop-filter: blur(10px);
+    border: 3px solid var(--hud);
+    box-shadow: 0 0 30px rgb(from var(--hud) r g b / 0.5);
+    padding: 20px;
+    border-radius: 14px;
+    corner-shape: bevel;
+    width: min(430px, 90%);
+    text-align: center;
+}
+
+.mode-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+select, input {
+    background: #000;
+    color: var(--hud);
+    border: 1px solid var(--hud);
+    padding: 4px;
+    outline: transparent;
+}
+
+select {
+    cursor: pointer;
+}
+
+.ring {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin: 30px auto;
+}
+
+.ring svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+circle {
+    fill: none;
+    stroke-width: 10;
+}
+
+.bg {
+    stroke: rgb(255 255 255 / 0.1);
+}
+
+#progressTicks .progress-tick {
+    stroke: var(--hud);
+    stroke-width: 6;
+    stroke-linecap: round;
+    opacity: 0.16;
+    transition: opacity 0.12s ease;
+}
+
+#progressTicks .progress-tick.active {
+    opacity: 1;
+}
+
+.display {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    text-shadow: 0 0 12px rgb(from var(--hud) r g b / 0.5);
+}
+
+.controls {
+    border: 1px solid var(--hud);
+    padding-block: 8px;
+    border-radius: 8px;
+    corner-shape: bevel;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.controls button {
+    flex: 0.5;
+    margin: 4px;
+    padding: 6px 12px;
+    background: var(--hud);
+    border: none;
+    border-radius: 4px;
+    corner-shape: bevel;
+    cursor: pointer;
+    color: #000;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    transition: all 0.25s;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+    &:active {
+        transform: scale(1);
+    }
+}
+
+.laps {
+    margin-top: 15px;
+    max-height: 200px;
+    overflow-y: auto;
+    font-size: 0.85rem;
+
+    div {
+        border-bottom: 1px solid rgb(255 255 255 / 0.2);
+        padding: 6px;
+        letter-spacing: 1px;
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.warning {
+    color: var(--danger);
+    text-shadow: 0 0 10px var(--danger);
+}
