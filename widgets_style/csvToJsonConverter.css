@@ -189,3 +189,56 @@ textarea {
 :is(textarea, input[type="text"]):focus::placeholder {
     transform: scaleX(0);
 }
+
+.options-container {
+    margin-top: 2rem;
+    background: linear-gradient(135deg, #f5f7ff, #b6bcd1);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow),
+    inset var(--box-shadow);
+    padding: 1.5rem;
+}
+
+.options-title {
+    font-size: 1.25rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.option-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.option-label {
+    font-weight: 600;
+    color: #49757d;
+}
+
+.option-description {
+    font-size: 0.85rem;
+    color: var(--gray);
+    text-wrap: pretty;
+}
+
+select, input {
+    padding: 0.5rem;
+    border: 1px solid #cdd2d8;
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+}
+
+:is(select, input):focus {
+    outline: transparent;
+    border-color: var(--accent);
+}

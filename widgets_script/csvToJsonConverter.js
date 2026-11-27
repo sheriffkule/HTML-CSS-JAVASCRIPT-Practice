@@ -178,4 +178,153 @@ Alice Williams,28,alice@example.com,false`;
       return JSON.stringify(data);
     }
   }
+
+  function convertTransposedCsv(lines, delimiter, quoteChar, hasHeader, parseNumbers, outputFormat) {
+    // Transpose the matrix first
+    const matrix = lines.map((line) => parseCsvLine(line, delimiter, quoteChar));
+    const transposed = matrix[0].map((_, colIndex) => matrix.map((row) => row[colIndex]));
+
+    const headers = hasHeader
+      ? transposed[0].map((h) => h.trim().replace(new RegExp(quoteChar, 'g'), ''))
+      : Array.from({ length: transposed.length }, (_, i) => `column_${i + 1}`);
+
+    const data = [];
+
+    const startRow = hasHeader ? 1 : 0;
+    for (let i = startRow; i < transposed.length; i++) {
+      const currentLine = transposed[i];
+      const obj = {};
+
+      for (let j = 0; j < headers.length; j++) {
+        let value = currentLine[j];
+        if (parseNumbers && !isNaN(value) && value.trim() !== '') {
+          value = value.includes('.') ? parseFloat(value) : parseInt(value);
+        } else if (value === 'true') {
+          value = true;
+        } else if (value === 'false') {
+          value = false;
+        }
+        obj[headers[j]] = value;
+      }
+      data.push(obj);
+    }
+
+    if (outputFormat === 'array') {
+      return JSON.stringify(data, null, 2);
+    } else if (outputFormat === 'object') {
+      const resultObj = {};
+      data.forEach((item, index) => {
+        resultObj[`item_${index + 1}`] = item;
+      });
+      return JSON.stringify(resultObj, null, 2);
+    } else {
+      return JSON.stringify(data);
+    }
+  }
+
+  function parseCsvLine(line, delimiter, quoteChar) {
+    const pattern = new RegExp(
+      `(?:${quoteChar}([^${quoteChar}]*)(${quoteChar}|([^${delimiter}]+))(?=${delimiter}\$)`,
+      'g',
+    );
+    const matches = line.matchAll(pattern);
+    const values = [];
+
+    for (const match of matches) {
+      values.push(match[1] !== undefined ? match[1] : match[2]);
+    }
+
+    // Handle case where line ends with delimiter
+    if (line.endsWith(delimiter)) {
+      values.push('');
+    }
+
+    return values;
+  }
+
+  function clearCsv() {
+    csvInput.value = '';
+    jsonOutput.value = '';
+    updateCharCounts();
+    statusText.textContent = 'Cleared input and output.';
+    showToast('Input cleared!');
+  }
+
+  function loadExample() {
+    csvInput.value = exampleCsv;
+    updateCharCounts();
+    convertCsvToJson();
+    statusText.textContent = 'Loaded example CSV data.';
+    showToast('Loaded example CSV!');
+  }
+
+  function copyJsonToClipboard() {
+    if (!jsonOutput.value.trim()) {
+      showToast('Nothing to copy!', 'warning');
+      return;
+    }
+
+    navigator.clipboard
+      .writeText(jsonOutput.value)
+      .then(() => {
+        showToast('JSON copied to clipboard!');
+        statusText.textContent = 'JSON copied to clipboard!';
+      })
+      .catch((err) => {
+        console.error('Failed to copy: ', err);
+        showToast('Failed to copy JSON!', 'error');
+      });
+  }
+
+  function downloadJson() {
+    if (!jsonOutput.value.trim()) {
+      showToast('Nothing to download!', 'warning');
+      return;
+    }
+
+    const blob = new Blob([jsonOutput.value], { type: 'application/json' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'converted_data.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    showToast('JSON file downloaded!');
+    statusText.textContent = 'File downloaded!';
+  }
+
+  function updateCharCounts() {
+    csvCharCount.textContent = csvInput.value.length;
+    jsonCharCount.textContent = jsonOutput.value.length;
+  }
+
+  function showToast(message, type = 'success') {
+    toastMessage.textContent = message;
+
+    toast.className = 'toast';
+    toast.classList.add('show');
+
+    // Add type-specific class
+    if (type === 'success') {
+      toast.style.backgroundColor = 'var(--success)';
+    } else if (type === 'warning') {
+      toast.style.backgroundColor = 'var(--warning)';
+    } else if (type === 'error') {
+      toast.style.backgroundColor = '#dc3545';
+    }
+
+    // Hide after 3 seconds
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3000);
+  }
+
+  function handleDragOver(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    dragDropArea.classList.add('dragover');
+  }
 });
