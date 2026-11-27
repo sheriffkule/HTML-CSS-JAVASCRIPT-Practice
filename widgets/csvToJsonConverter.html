@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSV to JSON Converter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" />
+    <link rel="stylesheet" href="/widgets_style/csvToJsonConverter.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>CSV to JSON Converter</h1>
+        <p class="subtitle">
+          Convert your CSV to JSON format instantly with this powerful tool. Supports custom delimiters,
+          headers, and advanced formatting options.
+        </p>
+      </header>
+
+      <main class="app-container">
+        <section class="panel">
+          <article class="panel-header">
+            <h2 class="panel-title"><i class="fas fa-file-csv"></i> CSV Input</h2>
+            <fieldset class="panel-actions">
+              <button class="btn btn-outline" id="clearCsvBtn"><i class="fas fa-trash-alt"></i> Clear</button>
+              <button class="btn btn-outline" id="exampleCsvBtn">
+                <i class="fas fa-lightbulb"></i> Example
+              </button>
+            </fieldset>
+          </article>
+
+          <article class="tab-container">
+            <fieldset class="tabs">
+              <div class="tab active" data-tab="input-text">Text Input</div>
+              <div class="tab" data-tab="input-file">File Upload</div>
+            </fieldset>
+          </article>
+
+          <article class="tab-content active" id="input-text">
+            <textarea
+              id="csvInput"
+              placeholder="Paste your CSV data here or upload a file...&#10;Example:&#10;name, age, email&#10;John Doe,30,john@example.com&#10;Jane Smith,25,jane@example.com"></textarea>
+          </article>
+
+          <article class="tab-content" id="input-file">
+            <fieldset class="drag-drop-area" id="dragDropArea">
+              <div class="drag-drop-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+              <div class="drag-drop-text">Drag & Drop CSV File Here</div>
+              <div class="drag-drop-hint">or click to browse files.</div>
+              <input type="file" id="fileInput" class="file-input" accept=".csv,.txt" />
+            </fieldset>
+
+            <fieldset id="fileInfo">
+              <div style="display: flex; justify-content: space-between; align-items: center">
+                <span><i class="fas fa-file-alt"></i> <span id="fileName">No file selected</span></span>
+                <button class="btn btn-warning btn-sm" id="removeFileBtn"></button>
+              </div>
+              <div class="preview-container" id="filePreview"></div>
+            </fieldset>
+          </article>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
