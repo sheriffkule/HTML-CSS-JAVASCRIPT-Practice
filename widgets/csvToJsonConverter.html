@@ -59,7 +59,110 @@
             </fieldset>
           </article>
         </section>
+
+        <section class="panel">
+          <article class="panel-header">
+            <h2 class="panel-title"><i class="fab fa-js-square"></i> JSON Output</h2>
+            <fieldset class="panel-actions">
+              <button class="btn btn-success" id="copyJsonBtn"><i class="far fa-copy"></i> Copy</button>
+              <button class="btn" id="downloadJsonBtn"><i class="fas fa-download"></i> Download</button>
+            </fieldset>
+          </article>
+
+          <textarea
+            id="jsonOutput"
+            placeholder="JSON output will appear here..."
+            readonly
+            aria-readonly="true"></textarea>
+          <div class="error-message" id="errorMessage"></div>
+        </section>
       </main>
+
+      <div class="options-container">
+        <h3 class="options-title"><i class="fas fa-cog"></i> Conversion Options</h3>
+        <section class="options-grid">
+          <article class="option-group">
+            <label class="option-label">Delimiter:</label>
+            <select id="delimiter">
+              <option value="," selected>Comma ( , )</option>
+              <option value=":">Semicolon ( ; )</option>
+              <option value="\t">Tab ( \t )</option>
+              <option value="|">Pipe ( | )</option>
+              <option value="custom">Custom...</option>
+            </select>
+            <input
+              type="text"
+              id="customDelimiter"
+              style="margin-top: 0.5rem"
+              placeholder="Enter custom delimiter" />
+            <p class="option-description">Character that separates values in your CSV.</p>
+          </article>
+
+          <article class="option-group">
+            <label class="option-label">Header Row</label>
+            <fieldset class="checkbox-container">
+              <input type="checkbox" id="hasHeader" checked />
+              <label>First row contains headers</label>
+            </fieldset>
+            <p class="option-description">Use first row as property names.</p>
+          </article>
+
+          <article class="option-group">
+            <label class="option-label">Output Format</label>
+            <select id="outputFormat">
+              <option value="array" selected>Array of Objects</option>
+              <option value="object">Object with Keys</option>
+              <option value="minified">Minified JSON</option>
+            </select>
+            <p class="option-description">How to structure the JSON output.</p>
+          </article>
+
+          <article class="option-group">
+            <label class="option-label">Quote Character</label>
+            <select id="quoteChar">
+              <option value='"' selected>Double Quote ( " )</option>
+              <option value="'">Single Quote ( ' )</option>
+            </select>
+            <p class="option-description">Character used to quote values.</p>
+          </article>
+
+          <article class="option-group">
+            <label class="option-label">Transpose Data</label>
+            <fieldset class="checkbox-container">
+              <input type="checkbox" id="transpose" />
+              <label>Swap rows and columns</label>
+            </fieldset>
+            <p class="option-description">Convert columns to rows and vice versa.</p>
+          </article>
+
+          <article class="option-group">
+            <label class="option-label">Parse Numbers</label>
+            <fieldset class="checkbox-container">
+              <input type="checkbox" id="parseNumbers" checked />
+              <label>Convert numeric values.</label>
+            </fieldset>
+            <p class="option-description">Detect and convert number strings.</p>
+          </article>
+        </section>
+      </div>
     </div>
+
+    <div class="status-bar">
+      <div class="status-message">
+        <i class="fas fa-info-circle"></i>
+        <span id="statusText">Ready to convert CSV to JSON</span>
+      </div>
+      <div class="char-count">
+        <span><i class="fas fa-file-alt"></i> <span id="csvCharCount">0</span> characters</span>
+        <span><i class="fab fa-js-square"></i> <span id="jsonCharCount">0</span> characters</span>
+      </div>
+    </div>
+
+    <div class="toast" id="toast">
+      <i class="fas fa-check-circle"></i>
+      <span id="toastMessage">JSON copied to clipboard!</span>
+    </div>
+
+    <script src="/widgets_script/csvToJsonConverter.js"></script>
   </body>
 </html>

@@ -100,3 +100,8 @@ h1 {
         transform: translateX(10px);
     }
 }
+
+.panel-actions {
+    display: flex;
+    gap: 0.5rem;
+}
