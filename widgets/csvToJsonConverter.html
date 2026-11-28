@@ -50,7 +50,7 @@
               <input type="file" id="fileInput" class="file-input" accept=".csv,.txt" />
             </fieldset>
 
-            <fieldset id="fileInfo">
+            <fieldset id="fileInfo" style="display: none;">
               <div style="display: flex; justify-content: space-between; align-items: center">
                 <span><i class="fas fa-file-alt"></i> <span id="fileName">No file selected</span></span>
                 <button class="btn btn-warning btn-sm" id="removeFileBtn"><i class="fas fa-times"></i> Remove</button>
@@ -93,7 +93,7 @@
             <input
               type="text"
               id="customDelimiter"
-              style="margin-top: 0.5rem"
+              style="display: none; margin-top: 0.5rem"
               placeholder="Enter custom delimiter" />
             <p class="option-description">Character that separates values in your CSV.</p>
           </article>
