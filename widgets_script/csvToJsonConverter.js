@@ -289,15 +289,18 @@ Alice Williams,28,alice@example.com,false`;
     }
 
     const copied = () => {
-        showToast('JSON copied to clipboard!');
-        statusText.textContent = 'JSON copied to clipboard!';
+      showToast('JSON copied to clipboard!');
+      statusText.textContent = 'JSON copied to clipboard!';
     };
 
     if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(jsonOutput.value).then(copied).catch((err) => {
-        console.error('Failed to copy: ', err);
-        showToast('Failed to copy JSON!', 'error');
-      });
+      navigator.clipboard
+        .writeText(jsonOutput.value)
+        .then(copied)
+        .catch((err) => {
+          console.error('Failed to copy: ', err);
+          showToast('Failed to copy JSON!', 'error');
+        });
       return;
     }
 
@@ -436,4 +439,18 @@ Alice Williams,28,alice@example.com,false`;
       }
     });
   }
+
+  // Update year in footer
+  function updateYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElement = document.getElementById('year');
+
+    if (!yearElement) {
+      console.error('Year element not found');
+      return;
+    }
+    yearElement.setAttribute('datetime', currentYear.toString());
+    yearElement.textContent = currentYear.toString();
+  }
+  updateYear();
 });

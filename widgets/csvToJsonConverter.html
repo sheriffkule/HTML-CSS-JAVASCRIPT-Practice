@@ -78,7 +78,7 @@
         </section>
       </main>
 
-      <div class="options-container">
+      <section class="options-container">
         <h3 class="options-title"><i class="fas fa-cog"></i> Conversion Options</h3>
         <section class="options-grid">
           <article class="option-group">
@@ -102,7 +102,7 @@
             <label class="option-label">Header Row</label>
             <fieldset class="checkbox-container">
               <input type="checkbox" id="hasHeader" checked />
-              <label>First row contains headers</label>
+              <label for="hasHeader">First row contains headers</label>
             </fieldset>
             <p class="option-description">Use first row as property names.</p>
           </article>
@@ -130,7 +130,7 @@
             <label class="option-label">Transpose Data</label>
             <fieldset class="checkbox-container">
               <input type="checkbox" id="transpose" />
-              <label>Swap rows and columns</label>
+              <label for="transpose">Swap rows and columns</label>
             </fieldset>
             <p class="option-description">Convert columns to rows and vice versa.</p>
           </article>
@@ -139,12 +139,17 @@
             <label class="option-label">Parse Numbers</label>
             <fieldset class="checkbox-container">
               <input type="checkbox" id="parseNumber" checked />
-              <label>Convert numeric values.</label>
+              <label for="parseNumber">Convert numeric values.</label>
             </fieldset>
             <p class="option-description">Detect and convert number strings.</p>
           </article>
         </section>
-      </div>
+      </section>
+
+      <footer class="footer__copy">
+        © <time datetime="" id="year"></time> Made width <span>♥</span> by
+        <em><abbr title="Web Developer Frontend Master">SheriffKule</abbr></em> from XXIII century
+      </footer>
     </div>
 
     <div class="status-bar">
