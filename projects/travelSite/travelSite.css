@@ -151,3 +151,210 @@ img {
         transform: translateX(0.5rem);
     }
  }
+
+header {
+   position: fixed;
+   width: 100%;
+   top: 0;
+   left: 0;
+   background-color: #000;
+   z-index: var(--z-fixed);
+   transition: background-color 0.4s, box-shadow 0.4s;
+}
+
+.nav {
+    position: relative;
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav__logo {
+    color: var(--white-color);
+    font-size: var(--h3-font-size);
+    font-weight: var(--font-medium);
+    transition: 0.4s;
+}
+
+.nav__toggle {
+    color: var(--white-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.4s;
+}
+
+@media (width <= 1150px) {
+    .nav__menu {
+        position: fixed;
+        top: 0;
+        right: 0;
+        clip-path: polygon(100% 0, 100% 0%, 100% 0, 100% 0);
+        background-color: var(--body-color);
+        box-shadow: -2px 0 16px hsl(0 0% 0% / 0.2),
+        inset 2px 4px 16px hsl(0 0% 0% / 0.2);
+        width: 80%;
+        height: 100%;
+        padding: 7rem 1.5rem 1.5rem;
+        z-index: var(--z-fixed);
+        transition: clip-path 0.4s;
+    }
+}
+
+.nav__menu-logo {
+    position: absolute;
+    top: 1.25rem;
+    left: 1.5rem;
+    color: var(--title-color);
+    font-size: var(--h3-font-size);
+    font-weight: var(--font-medium);
+}
+
+.nav__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid hsl(75, 4%, 72%);
+    margin-bottom: 2rem;
+}
+
+.nav__link {
+    color: var(--text-color);
+    font-size: var(--h1-font-size);
+    font-weight: var(--font-medium);
+    transition: all 0.4s;
+
+    &:hover {
+        color: var(--first-color);
+    }
+}
+
+.nav__button {
+    width: 100%;
+    justify-content: center;
+}
+
+.nav__social {
+    position: absolute;
+    left: 1.5rem;
+    bottom: 1.5rem;
+}
+
+.nav__social-title {
+    display: block;
+    font-size: var(--smaller-font-size);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.nav__social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav__social-link {
+    width: 40px;
+    height: 40px;
+    background-color: var(--container-color);
+    color: var(--title-color);
+    font-size: 1.5rem;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    transition: background-color 0.4s, color 0.4s;
+
+    &:hover {
+        background-color: var(--first-color);
+        color: var(--white-color);
+    }
+}
+
+.nav__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: var(--title-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.show-menu {
+    clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.scroll-header {
+    background-color: var(--body-color);
+    box-shadow: 0 2px 16px hsl(0 0% 0% / 0.2);
+}
+
+.scroll-header :is(.nav__logo, .nav__toggle) {
+    color: var(--title-color);
+}
+
+.active-link {
+    color: var(--first-color);
+}
+
+@media (width >= 1150px) {
+    .container {
+        margin-inline: start;
+    }
+    .section {
+        padding-block: 7rem 3rem;
+    }
+    .section__subtitle {
+        font-size: var(--h3-font-size);
+        margin-bottom: 1rem;
+    }
+    .scrollup {
+        right: 3rem;
+    }
+    .nav__toggle, .nav__close, .nav__menu-logo, .nav__social {
+        display: none;
+    }
+    .nav__menu {
+        width: initial;
+    }
+    .nav__list {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        flex-direction: row;
+        column-gap: 2rem;
+        padding: 0;
+        border: none;
+        margin: 0;
+    }
+    .nav__link {
+        color: var(--white-color);
+        font-size: var(--normal-font-size);
+
+        &:hover {
+            color: var(--text-color-light);
+        }
+    }
+    .nav__button {
+        width: initial;
+        background-color: var(--white-color);
+    }
+    .scroll-header .nav__link {
+        color: var(--text-color);
+
+        &:hover {
+            color: var(--first-color);
+        }
+    }
+    .scroll-header .active-link {
+        color: var(--first-color);
+    }
+    .scroll-header .nav__button {
+        background-color: var(--first-color);
+        color: var(--white-color);
+
+        &:hover {
+            background-color: var(--first-color-alt);
+        }
+    }
+}
